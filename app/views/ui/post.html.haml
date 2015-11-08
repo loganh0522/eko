@@ -1,0 +1,174 @@
+%section.container
+  .row
+    .bhoechie-tab-container.col-md-11
+      .bhoechie-tab-menu.col-md-2
+        .list-group
+          %a.list-group-item.active.text-center(href="")
+            %h4.glyphicon.glyphicon-plane 
+            %br Job Information
+          %a.list-group-item.text-center(href="")
+            %h4.glyphicon.glyphicon-plane 
+            %br Hiring Process
+          %a.list-group-item.text-center(href="")
+            %h4.glyphicon.glyphicon-plane 
+            %br Screening Questions 
+          %a.list-group-item.text-center(href="")
+            %h4.glyphicon.glyphicon-plane 
+            %br Hiring Team
+          %a.list-group-item.text-center(href="")
+            %h4.glyphicon.glyphicon-plane 
+            %br Advertise Job
+
+      .bhoechie-tab.col-md-10
+        .bhoechie-tab-content.active
+          .container.well.col-md-12
+            %form    
+              %fieldset
+                .row
+                  .form-group.col-md-6
+                    %label.control-label Job Title
+                    %input.form-control(type="text")
+                .row
+                  .form-group.col-md-6
+                    %label.control-label Industry
+                    %input.form-control(type="text")
+                  .form-group.col-md-6
+                    %label.control-label Job Function
+                    %input.form-control(type="text")
+                .row
+                  .form-group.col-md-4
+                    %label.control-label Country
+                    %input.form-control(type="text")
+                  .form-group.col-md-4
+                    %label.control-label Province
+                    %input.form-control(type="text")
+                  .form-group.col-md-4
+                    %label.control-label City
+                    %input.form-control(type="text")
+                .row
+                  .form-group.col-md-12
+                    %label.control-label Job Description
+                    %textarea.form-control(rows="12")
+                .row
+                  .form-group.col-md-12
+                    %label.control-label Benefits
+                    %textarea.form-control(rows="12")           
+                .row
+                  .col-md-1.col-md-offset-10
+                    %input(type="submit" value="Next" class="btn btn-primary")       
+        
+        .bhoechie-tab-content
+          %section#hiring-process 
+            .row 
+              .col-md-3
+                %ul.nav.nav-pill.nav-stacked.admin-menu
+                  %li 
+                    %a All Applicants
+                  %li 
+                    %a Screened Applicants
+                  %li 
+                    %a Phone Interview
+                  %li 
+                    %a Interview 
+                  %li 
+                    %a Panel Interview 
+                  %li 
+                    %a Offer 
+                  %li 
+                    %a Hired 
+                  %input(type="submit" value="Add Stage" class="btn btn-primary")
+
+        .bhoechie-tab-content
+          %section#hiring-team
+            .row.well.col-md-8.col-md-offset-2
+              %h2 Build the Hiring Team 
+              .row
+                .col-md-10 
+                  %input.form-control(type="text")
+                .col-md-2
+                  %input(type="submit" value="Add Member" class="btn btn-primary")
+              
+              .row#members.well.col-md-6
+                .media-list.col-md-4
+                  %li.media
+                    .media-left
+                      %img(src= "/tmp/man.jpg")
+                .col-md-8
+                  %h4.text-left Logan Houston
+                  %br
+                  %span Location Manager 
+              .row#members.well.col-md-6
+                .media-list.col-md-4
+                  %li.media
+                    .media-left
+                      %img(src= "/tmp/man.jpg")
+                .col-md-8
+                  %h4.text-left Logan Houston
+                  %br
+                  %span Location Manager
+        
+        .bhoechie-tab-content
+          %section#application-form
+            .well.col-md-6.col-md-offset-2
+              .row
+              %ul.list-inline
+                %li
+                  %h4 Question 1 
+                %li
+                  %input(type="checkbox")  Required
+              .row
+                %input.form-control(type="text")
+              %br
+              .row 
+                %p Question Type: 
+                %select.form-control
+                  %option Multiple Choice
+                  %option Text
+                  %option Text Area
+              %br
+              .row
+                %p Answers: 
+                .form-inline
+                  .form-group.col-md-offset-1
+                    %input(type="checkbox") 
+                    %input.form-control(type="text")
+                %br
+                .form-inline
+                  .form-group.col-md-offset-1
+                    %input(type="checkbox") 
+                    %input.form-control(type="text")
+              %br
+              .row
+                %h4 Question 2
+                %input(type="checkbox")  Required
+              .row
+                %input.form-control(type="text")
+              %br
+              .row 
+                %p Question Type: 
+                %select.form-control
+                  %option Multiple Choice
+                  %option Text
+                  %option Text Area
+              %br
+              .row
+                %p Answers: 
+                .form-inline
+                  .form-group.col-md-offset-1
+                    %input(type="checkbox") 
+                    %input.form-control(type="text")
+                %br
+                .form-inline
+                  .form-group.col-md-offset-1
+                    %input(type="checkbox") 
+                    %input.form-control(type="text")
+              %br
+              .row 
+                .col-md-2.col-md-offset-9
+                  %input(type="submit" value="Add Question" class="btn btn-primary")  
+
+        
+
+               
+
+
