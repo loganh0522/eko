@@ -4,10 +4,8 @@
     %header
       %h1 Register
     %fieldset.col-md-8
-      = f.text_field :first_name, label: "First Name"
-      = f.text_field :last_name, label: "Last Name"
-      = f.email_field :email, label: "Email Address"
-      = f.password_field :password
+      = f.text_field :name, label: "Company Name"
+      = f.text_field :website, label: "Company Website"
     %fieldset.actions.control-group.col-md-8.col-md-offset-6
       .controls
         %input(type="submit" value="Sign Up" class="btn")
