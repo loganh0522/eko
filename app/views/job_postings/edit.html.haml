@@ -1,0 +1,31 @@
+.col-md-10.col-md-offset-1
+  = render '/shared/errors', type: @job_posting
+
+.container.well.col-md-10.col-md-offset-1
+  = form_for @job_posting do |f|
+    .fieldset
+      .row
+        .form-group.col-md-6
+          = f.label :Job_Title
+          = f.text_field :title, class: "form-control"
+      .row
+        .form-group.col-md-4
+          = f.label :Country
+          = f.text_field :country, class: "form-control"
+        .form-group.col-md-4
+          = f.label :Province
+          = f.text_field :province, class: "form-control"
+        .form-group.col-md-4
+          = f.label :City
+          = f.text_field :city, class: "form-control"
+      .row
+        .form-group.col-md-12
+          = f.label :Description
+          = f.text_area :description, rows: 12, class: "form-control"
+      .row
+        .form-group.col-md-12
+          = f.label :Benefits
+          = f.text_area :benefits, rows: 12, class: "form-control"
+      .row
+        .col-md-1.col-md-offset-10
+          = f.submit "Post Job", class: "btn btn-primary"
