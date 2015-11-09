@@ -1,0 +1,8 @@
+- if type.errors.any? 
+  .row
+    .alert.alert-danger.col-md-8
+      %h5 
+        Please fix the following errors: 
+      %ul
+        - type.errors.full_messages.each do |msg|
+          %li= msg

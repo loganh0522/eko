@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108200250) do
+ActiveRecord::Schema.define(version: 20151108210608) do
 
-  create_table "job_posting", force: :cascade do |t|
+  create_table "job_postings", force: :cascade do |t|
     t.string   "title"
     t.string   "country"
     t.string   "province"
