@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   get 'ui/home', to: 'ui#home'
 
   resources :job_postings
+  resources :users
+  resources :companies 
 end
