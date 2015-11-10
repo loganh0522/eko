@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'ui(/:action)', controller: 'ui'
   get 'ui/home', to: 'ui#home'
 
+  get '/account/new', to: 'companies#new'
+
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
 
