@@ -3,12 +3,11 @@
   %navbar.navbar-fixed-top.navbar-inverse
     %a.navbar-brand TalentWiz
     %ul.nav.navbar-nav
-      %li= link_to "Pricing", :root
+      %li= link_to "Pricing"
       %li= link_to "Blog"
-      %li= link_to "Activity"
     %ul.nav.navbar-nav.navbar-right
       %li= link_to "Login"
-      %li= link_to "SIGN UP"
+      %li= link_to "SIGN UP", new_user_path
 
   - if logged_in? 
   %navbar.navbar-fixed-top.navbar-inverse
