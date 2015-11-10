@@ -7,7 +7,10 @@ class ApplicationController < ActionController::Base
 
 
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id] #memoization
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+
+  def current_company
+    @current_company ||= Company.find(session[:company_id]) if session[:company_id]
   end
 
   def logged_in? 
