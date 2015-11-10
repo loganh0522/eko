@@ -7,7 +7,8 @@ class CompaniesController < ApplicationController
   def create 
     @company = Company.new(company_params)
 
-    if @company.save? 
+    if @company.save
+      set_user(@company)
       flash[:notice] = "Thanks for joining #{@company.name}"
       redirect_to root_path
     else
@@ -20,4 +21,8 @@ class CompaniesController < ApplicationController
   def company_params 
     params.require(:company).permit(:name, :website)
   end 
+
+  def set_user(company)
+    current_user.update_attribute(:company_id, company.id)
+  end
 end
