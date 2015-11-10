@@ -9,7 +9,7 @@ class CompaniesController < ApplicationController
 
     if @company.save? 
       flash[:notice] = "Thanks for joining #{@company.name}"
-      redirect_to backend_path
+      redirect_to root_path
     else
       render :new
     end
