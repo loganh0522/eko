@@ -16,4 +16,8 @@ class SessionsController < ApplicationController
       redirect_to register_path
     end
   end
+
+  def destroy 
+
+  end
 end
