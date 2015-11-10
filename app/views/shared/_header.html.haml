@@ -1,4 +1,16 @@
 %section#top-header.row
+  - if !logged_in?
+  %navbar.navbar-fixed-top.navbar-inverse
+    %a.navbar-brand TalentWiz
+    %ul.nav.navbar-nav
+      %li= link_to "Pricing", :root
+      %li= link_to "Blog"
+      %li= link_to "Activity"
+    %ul.nav.navbar-nav.navbar-right
+      %li= link_to "Login"
+      %li= link_to "SIGN UP"
+
+  - if logged_in? 
   %navbar.navbar-fixed-top.navbar-inverse
     %a.navbar-brand TalentWiz
     %ul.nav.navbar-nav
