@@ -15,6 +15,7 @@
               = job.city 
               ,
               = job.country |
+              = link_to "Edit", edit_job_posting_path(job)
               Delete
             .row
               .well.col-md-2

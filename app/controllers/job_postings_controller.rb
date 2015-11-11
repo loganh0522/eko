@@ -25,7 +25,7 @@ class JobPostingsController < ApplicationController
   end
 
   def update
-    @job_posting = JobPosting.new(job_params)
+    @job_posting = JobPosting.find(params[:id])
 
     if @job_posting.update(job_params)
       flash[:notice] = "#{@job_posting.title} has been updated"
