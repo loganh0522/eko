@@ -10,7 +10,7 @@ class JobPostingsController < ApplicationController
 
   def create 
     @job_posting = JobPosting.new(job_params)
-    @job_posting.company_id = current_company
+    @job_posting.company = current_company
 
     if @job_posting.save 
       flash[:notice] = "Your job posting #{@job_posting.title}, was created"

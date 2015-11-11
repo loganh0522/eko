@@ -15,7 +15,6 @@
               = job.city 
               ,
               = job.country |
-              = link_to 'Edit', edit_job_posting_path(@job)
               Delete
             .row
               .well.col-md-2
@@ -36,7 +35,7 @@
               .well.col-md-2
                 %h2.text-center 1 
                 %p.text-center Hired
-                
+
     %section.col-md-1.col-md-offest-9
       = link_to "Post a Job", new_job_posting_path, class: 'btn btn-primary'
      
