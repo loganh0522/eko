@@ -1,8 +1,7 @@
 class JobPostingsController < ApplicationController
 
   def index
-    @jobs = JobPosting.all
-    @job = JobPosting.find_by(params[:id])
+    @jobs = current_company.job_postings
   end
 
   def new
