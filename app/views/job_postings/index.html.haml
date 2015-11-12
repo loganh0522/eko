@@ -1,42 +1,43 @@
-.container
-  .row
-    %br
-    %section.dashboard.col-md-offset-1.col-md-8
-      %h3 Job Opening Details
-      %p Active | Closed | On Hold | 
-      %h4 Active Job Openings
+- if logged_in? 
+  .container
+    .row
       %br
-      - @jobs.each do |job|
-        .row 
-          .well 
-            %a
-              = job.title
-            %p
-              = job.city 
-              ,
-              = job.country |
-              = link_to "Edit", edit_job_posting_path(job)
-              Delete
-            .row
-              .well.col-md-2
-                %h2.text-center 58 
-                %p.text-center All Applicants
-              .well.col-md-2
-                %h2.text-center 10
-                %p.text-center Screened
-              .well.col-md-2
-                %h2.text-center 5
-                %p.text-center Phone Interview
-              .well.col-md-2
-                %h2.text-center 4 
-                %p.text-center Interview
-              .well.col-md-2
-                %h2.text-center 1 
-                %p.text-center Offer
-              .well.col-md-2
-                %h2.text-center 1 
-                %p.text-center Hired
+      %section.dashboard.col-md-offset-1.col-md-8
+        %h3 Job Opening Details
+        %p Active | Closed | On Hold | 
+        %h4 Active Job Openings
+        %br
+        - @jobs.each do |job|
+          .row 
+            .well 
+              %a
+                = job.title
+              %p
+                = job.city 
+                ,
+                = job.country |
+                = link_to "Edit", edit_job_posting_path(job)
+                Delete
+              .row
+                .well.col-md-2
+                  %h2.text-center 58 
+                  %p.text-center All Applicants
+                .well.col-md-2
+                  %h2.text-center 10
+                  %p.text-center Screened
+                .well.col-md-2
+                  %h2.text-center 5
+                  %p.text-center Phone Interview
+                .well.col-md-2
+                  %h2.text-center 4 
+                  %p.text-center Interview
+                .well.col-md-2
+                  %h2.text-center 1 
+                  %p.text-center Offer
+                .well.col-md-2
+                  %h2.text-center 1 
+                  %p.text-center Hired
 
-    %section.col-md-1.col-md-offest-9
-      = link_to "Post a Job", new_job_posting_path, class: 'btn btn-primary'
+      %section.col-md-1.col-md-offest-9
+        = link_to "Post a Job", new_job_posting_path, class: 'btn btn-primary'
      
