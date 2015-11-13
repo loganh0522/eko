@@ -8,14 +8,16 @@ describe UsersController do
     end
   end 
 
-  describe 'POST create' do 
-    
+  describe 'POST create' do    
     context "With valid input" do
       before do 
         post :create, user: Fabricate.attributes_for(:user)
       end
       it "saves the new user to the database" do    
         expect(User.count).to eq(1)
+      end
+      it "sets the session[user_id]" do 
+        session[:user_id] = Fabricate(:user).id
       end
       it "redirects the new user to the new company route" do 
         expect(response).to redirect_to new_company_path
