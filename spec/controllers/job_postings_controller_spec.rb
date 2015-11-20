@@ -108,6 +108,16 @@ describe JobPostingsController do
       let(:action) {get :index}
     end
 
-    it "sets @job_posting to the correct job posting"
+    it "sets @job_posting to the correct job posting" do 
+      company = Fabricate(:company)
+      alice = Fabricate(:user, company: company)
+      set_current_user(alice)
+      set_current_company(company)
+      job = Fabricate(:job_posting)
+      get :edit, id: job.id
+      expect(assigns(:job_posting)).to eq(job)
+    end
   end
+
+
 end
