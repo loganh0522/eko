@@ -1,4 +1,6 @@
 class JobPostingsController < ApplicationController
+  before_filter :require_user
+  before_filter :belongs_to_company
 
   def index
     @jobs = current_company.job_postings
@@ -14,7 +16,7 @@ class JobPostingsController < ApplicationController
 
     if @job_posting.save 
       flash[:notice] = "Your job posting #{@job_posting.title}, was created"
-      redirect_to :root
+      redirect_to job_postings_path
     else
       render :new
     end

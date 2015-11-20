@@ -39,10 +39,21 @@ describe CompaniesController do
         alice = Fabricate(:user)
         session[:user_id] = alice.id
         current_user = User.find(session[:user_id])
-        post :create, 
+        post :create, company: {website: "www.example.com"}
       end
 
-      it "does not create the company"
+      it "does not create the company" do 
+        expect(Company.count).to eq(0)
+      end
+
+      it "renders to the create_company_path" do 
+        expect(response).to render_template :new
+      end
+
+      it "sets the @company instance" do 
+        expect(assigns(:company)).to be_instance_of(Company) 
+      end
+    end
   end
 end
 

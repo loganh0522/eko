@@ -21,7 +21,14 @@ class ApplicationController < ActionController::Base
   def require_user
     if !logged_in? 
       flash[:error] = "Must be logged in."
-      redirect_user root_path
+      redirect_to login_path
+    end
+  end
+
+  def belongs_to_company
+    if current_user.company != current_company
+      flash[:error] = "Sorry, you do not have permission to access that!"
+      redirect_to login_path
     end
   end
 
