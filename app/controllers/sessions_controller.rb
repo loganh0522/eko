@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController 
 
   def new 
-
+    redirect_to business_root_path if current_user
   end
 
   def create 
