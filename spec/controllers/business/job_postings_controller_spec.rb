@@ -26,11 +26,11 @@ describe Business::JobPostingsController do
 
   describe "GET new" do 
     it_behaves_like "requires sign in" do
-      let(:action) {get :index}
+      let(:action) {get :new}
     end
 
     it_behaves_like "user does not belong to company" do 
-      let(:action) {get :index}
+      let(:action) {get :new}
     end
 
     it "sets the @job_posting instance" do 
@@ -45,11 +45,11 @@ describe Business::JobPostingsController do
 
   describe "POST create" do 
     it_behaves_like "requires sign in" do
-      let(:action) {get :index}
+      let(:action) {post :create}
     end
 
     it_behaves_like "user does not belong to company" do 
-      let(:action) {get :index}
+      let(:action) {post :create}
     end
     
     context "with valid inputs" do 
@@ -101,11 +101,11 @@ describe Business::JobPostingsController do
 
   describe "GET edit" do 
     it_behaves_like "requires sign in" do
-      let(:action) {get :index}
+      let(:action) {get :edit, id: 4}
     end
 
     it_behaves_like "user does not belong to company" do 
-      let(:action) {get :index}
+      let(:action) {get :edit, id: 4}
     end
 
     it "sets @job_posting to the correct job posting" do 
@@ -121,11 +121,11 @@ describe Business::JobPostingsController do
 
   describe "PUT update" do 
     it_behaves_like "requires sign in" do
-      let(:action) {get :index}
+      let(:action) {put :update, id: 4}
     end
 
     it_behaves_like "user does not belong to company" do 
-      let(:action) {get :index}
+      let(:action) {put :update, id: 4}
     end
 
     context "with valid inputs" do
@@ -138,7 +138,6 @@ describe Business::JobPostingsController do
         job1 = Fabricate(:job_posting, company: company)
         put :update, id: job1.id, job_posting: Fabricate.attributes_for(:job_posting, title: "new title")
       end
-
 
       it "save the updates made on the object" do 
         expect(JobPosting.first.title).to eq("new title")
