@@ -11,7 +11,12 @@ describe Business::SubsidiariesController do
     end
 
     it "sets the @subsidiary instance variable" do 
-
+      company = Fabricate(:company)
+      alice = Fabricate(:user, company: company)
+      set_current_user(alice)
+      set_current_company(company)
+    end
+    
     it "renders the :new template"
 
   end
