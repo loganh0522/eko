@@ -11,7 +11,7 @@ class CompaniesController < ApplicationController
       set_user(@company)
       session[:company_id] = @company.id
       flash[:notice] = "Thanks for joining #{@company.name}"
-      redirect_to root_path
+      redirect_to business_root
     else
       render :new
     end

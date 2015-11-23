@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   namespace :business do 
     root to: "job_postings#index"
-    resources :job_postings, only: [:new, :edit]
+    resources :job_postings
     resources :locations 
 
     resources :subsidiaries do 
