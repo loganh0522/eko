@@ -1,0 +1,18 @@
+.row.col-md-12
+  %section.col-md-2.col-md-offset-1
+    %h4 TalentWiz
+  .col-md-1
+    = link_to "New Subsidiary", new_business_subsidiary_path, class: 'btn btn-primary'
+    
+.row
+  %section.col-md-2.col-md-offset-1
+    %ul.nav.nav-pills.nav-stacked 
+      %li
+        = link_to '#' do 
+          %span.glyphicon.glyphicon-plane
+          Company Profile
+      %li= link_to 'Company Structure'
+      %li= link_to 'Hiring Team'
+      %li= link_to 'Templates' 
+      %li= link_to 'Subscription' 
+      %li= link_to 'Billing'

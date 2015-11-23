@@ -5,15 +5,28 @@ Rails.application.routes.draw do
   get 'ui/home', to: 'ui#home'
 
   resources :users
+
+  namespace :business do 
+    root to: "job_postings#index"
+    resources :job_postings, only: [:new, :edit]
+    resources :locations 
+
+    resources :subsidiaries do 
+      resources :locations
+    end
+
+    get '/signout', to: 'sessions#destroy'
+  end
+
   get '/account/new', to: 'companies#new'
 
 
-
+  resources :job_postings
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/signout', to: 'sessions#destroy'
 
-  resources :job_postings
+  
   
   resources :companies 
 end

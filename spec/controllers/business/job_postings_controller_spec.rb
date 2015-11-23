@@ -1,6 +1,6 @@
 require 'spec_helper' 
 
-describe JobPostingsController do 
+describe Business::JobPostingsController do 
   describe "GET index" do 
     context "when user belongs to current_company" do
       it_behaves_like "requires sign in" do
@@ -119,5 +119,54 @@ describe JobPostingsController do
     end
   end
 
+  describe "PUT update" do 
+    it_behaves_like "requires sign in" do
+      let(:action) {get :index}
+    end
 
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {get :index}
+    end
+
+    context "with valid inputs" do
+      let(:company) {Fabricate(:company)}
+      let(:alice) {Fabricate(:user, company: company)}
+
+      before do  
+        set_current_user(alice)
+        set_current_company(company)
+        job1 = Fabricate(:job_posting, company: company)
+        put :update, id: job1.id, job_posting: Fabricate.attributes_for(:job_posting, title: "new title")
+      end
+
+
+      it "save the updates made on the object" do 
+        expect(JobPosting.first.title).to eq("new title")
+      end
+
+      it "redirects_to the index page" do 
+        expect(flash[:notice]).to be_present
+      end
+    end
+
+    context "with invalid inputs" do
+      let(:company) {Fabricate(:company)}
+      let(:alice) {Fabricate(:user, company: company)}
+
+      before do  
+        set_current_user(alice)
+        set_current_company(company)
+        job1 = Fabricate(:job_posting, title: "old title", company: company)
+        put :update, id: job1.id, job_posting: Fabricate.attributes_for(:job_posting, title: nil)
+      end
+
+      it "doesn't save the updates if fields invalid" do
+        expect(JobPosting.first.title).to eq("old title") 
+      end
+
+      it "renders the edit template" do
+        expect(response).to render_template :edit
+      end
+    end
+  end
 end

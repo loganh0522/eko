@@ -1,4 +1,4 @@
-class JobPostingsController < ApplicationController
+class Business::JobPostingsController < ApplicationController
   before_filter :require_user
   before_filter :belongs_to_company
 
