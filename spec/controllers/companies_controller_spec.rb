@@ -30,7 +30,7 @@ describe CompaniesController do
       end
 
       it 'redirects the user to the root path' do
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to business_root_path
       end
     end
 
