@@ -11,8 +11,7 @@
             %li= link_to subsidiary.name, business_subsidiary_locations_path(subsidiary)
       %li.new-sub
         = link_to "New Subsidiary", new_business_subsidiary_path, class: 'btn btn-primary'
-    
-   
+  
 .row.col-md-12
   %section.col-md-2.col-md-offset-1
     %ul.nav.nav-pills.nav-stacked
@@ -20,14 +19,12 @@
         = link_to '#' do 
           %span.glyphicon.glyphicon-plane
           Company Profile
-      %li= link_to 'Locations'
+      %li= link_to 'Company Structure'
       %li= link_to 'Hiring Team'
-      %li= link_to 'E-mail Templates' 
-      %li= link_to 'Job Templates' 
+      %li= link_to 'Templates' 
       %li= link_to 'Subscription' 
       %li= link_to 'Billing'
   
-
   %section.locations.col-md-8
     .panel.panel-primary
       .panel-heading
@@ -36,36 +33,23 @@
       %table.table
         %thead
           %tr
-            %th Location #
-            %th Location Name
-            %th Address
-            %th Number of Users
+            %th User Name
+            %th User Email 
+            %th User Level 
+            %th 
             %th
         %tbody
           %tr
             %td
-              %p 1239
+              %p Logan Houston
             %td
-              %p Yonge & Sheppard
+              %p Loganh@talentwiz.com
             %td
-              %p 2134 Sheppard Ave, Toronto, On
-            %td
-              %p 4
-            %td
-              = link_to "", method: :post do
-                %i.glyphicon.glyphicon-remove
-        %tbody
+              %p Super Admin
           %tr
             %td
-              %p 1239
+              %p Georgia Banks
             %td
-              %p Yonge & Sheppard
+              %p gbanks@talentwiz.com
             %td
-              %p 2134 Sheppard Ave, Toronto, On
-            %td
-              %p 4
-            %td
-              = link_to "", method: :post do
-                %i.glyphicon.glyphicon-remove
-  
-
+              %p Location Manager

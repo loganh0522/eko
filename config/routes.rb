@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     root to: "job_postings#index"
     resources :job_postings
     resources :locations 
+    resources :hiring_members
 
     resources :subsidiaries do 
       resources :locations

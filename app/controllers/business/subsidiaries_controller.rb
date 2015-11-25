@@ -16,7 +16,7 @@ class Business::SubsidiariesController < ApplicationController
 
     if @subsidiary.save 
       flash[:notice] = "Your subsidiary has been created"
-      redirect_to new_business_location_path
+      redirect_to business_locations_path
     else
       render :new
     end
