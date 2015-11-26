@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :hiring_members
 
     resources :subsidiaries do 
-      resources :locations
+        resources :locations
     end
 
     get '/signout', to: 'sessions#destroy'
