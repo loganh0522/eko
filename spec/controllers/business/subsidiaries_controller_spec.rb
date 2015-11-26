@@ -40,7 +40,7 @@ describe Business::SubsidiariesController do
       end
 
       it "redirects to the business/location page" do 
-        expect(response).to redirect_to new_business_location_path
+        expect(response).to redirect_to business_locations_path
       end
 
       it "creates the subsidiary" do 
