@@ -27,7 +27,20 @@ describe Business::LocationsController do
     end
 
     context "with valid inputs" do 
-      it "redirects to the business/subsidiary locations path"
+      let(:company) {Fabricate(:company)}
+      let(:subsidiary) {Fabricate(:subsidiary)}
+      let(:alice) {Fabricate(:user, company: company)}
+
+      before do  
+        set_current_user(alice)
+        set_current_company(company)
+        post :create, location: Fabricate.attributes_for(:location), company: company
+      end
+
+      it "redirects to the business/subsidiary locations path" do 
+        
+      end
+
       it "saves the new location" 
       it "associates the location with the correct business"
     end
