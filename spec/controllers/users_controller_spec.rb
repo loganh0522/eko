@@ -17,9 +17,11 @@ describe UsersController do
       it "saves the new user to the database" do    
         expect(User.count).to eq(1)
       end
+
       it "sets the session[user_id]" do 
         session[:user_id] = Fabricate(:user).id
       end
+      
       it "redirects the new user to the new company route" do 
         expect(response).to redirect_to new_company_path
       end
