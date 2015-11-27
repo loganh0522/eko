@@ -3,11 +3,11 @@ require 'spec_helper'
 describe Business::LocationsController do 
   describe "GET new" do 
     it_behaves_like "requires sign in" do
-        let(:action) {get :index}
+        let(:action) {get :new}
     end
 
     it_behaves_like "user does not belong to company" do 
-      let(:action) {get :index}
+      let(:action) {get :new}
     end
 
     it "sets the @locations instance varliable" do
@@ -17,7 +17,26 @@ describe Business::LocationsController do
     end 
   end
 
-  describe "POST create"
+  describe "POST create" do 
+    it_behaves_like "requires sign in" do
+      let(:action) {post :create}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {post :create}
+    end
+
+    context "with valid inputs" do 
+      it "redirects to the business/subsidiary locations path"
+      it "saves the new location" 
+      it "associates the location with the correct business"
+    end
+
+    context "with invalid inputs" do 
+      it "does not create the location" 
+      it "renders the location show page"
+    end
+  end
 
 
   describe "GET delete"
