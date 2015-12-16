@@ -3,7 +3,7 @@ class Business::SubsidiariesController < ApplicationController
   before_filter :belongs_to_company
 
   def index
-
+    subsidiary = Subsidiary.find(params[:id])
   end
 
   def new
@@ -21,6 +21,12 @@ class Business::SubsidiariesController < ApplicationController
       render :new
     end
   end
+
+  def show
+    @subsidiary = Subsidiary.find(params[:id])
+    @location = Subsidiary.find(params[:id]).locations
+  end
+
 
   private 
 

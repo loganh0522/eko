@@ -59,7 +59,7 @@ describe Business::JobPostingsController do
       before do  
         set_current_user(alice)
         set_current_company(company)
-        get :create, job_posting: Fabricate.attributes_for(:job_posting), company: company
+        post :create, job_posting: Fabricate.attributes_for(:job_posting), company: company
       end
 
       it "redirects to the index" do   
@@ -86,7 +86,7 @@ describe Business::JobPostingsController do
       before do      
         set_current_user(alice)
         set_current_company(company)
-        get :create, job_posting: {title: "Sales Rep"}
+        post :create, job_posting: {title: "Sales Rep"}
       end
 
       it "does not create a job posting" do     

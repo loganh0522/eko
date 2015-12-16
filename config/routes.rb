@@ -10,10 +10,13 @@ Rails.application.routes.draw do
     root to: "job_postings#index"
     resources :job_postings
     resources :locations 
-    resources :hiring_members
+    resources :users
+    resources :invitations
+    get 'invite_user', to: 'invitations#new'
 
     resources :subsidiaries do 
-        resources :locations
+      resources :locations
+      get 'location/new', to: 'locations#new_for_subsidiary', as: 'new_location'
     end
 
     get '/signout', to: 'sessions#destroy'

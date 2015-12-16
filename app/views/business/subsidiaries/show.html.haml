@@ -1,0 +1,41 @@
+   
+.row.col-md-12
+  %section.col-md-2.col-md-offset-1
+    %ul.nav.nav-pills.nav-stacked
+      %li
+        = link_to '#' do 
+          %span.glyphicon.glyphicon-plane
+          Company Profile
+      %li= link_to 'Locations'
+      %li= link_to 'Hiring Team'
+      %li= link_to 'E-mail Templates' 
+      %li= link_to 'Job Templates' 
+
+  %section.locations.col-md-8
+    .panel.panel-primary
+      .panel-heading
+        .panel-title  Locations
+        = link_to "New Location", business_subsidiary_new_location_path(@subsidiary), class: 'btn btn-default'
+      %table.table
+        %thead
+          %tr
+            %th Location #
+            %th Location Name
+            %th Country
+            %th Address
+            %th Number of Users
+            %th
+        %tbody
+          - @location.each do |location|
+            %tr
+              %td
+                %p= location.number
+              %td
+                %p= location.name
+              %td
+                %p= location.address
+              %td
+                %p
+                  = location.city
+                  , 
+                  = location.state

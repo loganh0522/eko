@@ -29,27 +29,23 @@
     .panel.panel-primary
       .panel-heading
         .panel-title #{@company.name} Locations
-        = link_to "New Location", new_business_location_path, class: 'btn btn-default'
+        = link_to "Invite a User", business_invite_user_path, class: 'btn btn-default'
       %table.table
         %thead
           %tr
-            %th User Name
-            %th User Email 
-            %th User Level 
-            %th 
+            %th First Name
+            %th Last Name
+            %th Email
             %th
         %tbody
-          %tr
-            %td
-              %p Logan Houston
-            %td
-              %p Loganh@talentwiz.com
-            %td
-              %p Super Admin
-          %tr
-            %td
-              %p Georgia Banks
-            %td
-              %p gbanks@talentwiz.com
-            %td
-              %p Location Manager
+          - @users.each do |user|
+            %tr
+              %td
+                %p= user.first_name
+              %td
+                %p= user.last_name
+              %td
+                %p= user.email
+              %td
+                = link_to "", method: :post do
+                  %i.glyphicon.glyphicon-remove

@@ -8,7 +8,7 @@
           %b.caret
         %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
           - @subsidiaries.each do |subsidiary| 
-            %li= link_to subsidiary.name, business_subsidiary_locations_path(subsidiary)
+            %li= link_to subsidiary.name, business_subsidiary_path(subsidiary)
       %li.new-sub
         = link_to "New Subsidiary", new_business_subsidiary_path, class: 'btn btn-primary'
     
@@ -20,8 +20,14 @@
         = link_to '#' do 
           %span.glyphicon.glyphicon-plane
           Company Profile
-      %li= link_to 'Locations'
-      %li= link_to 'Hiring Team'
+      %li
+        = link_to business_locations_path do 
+          %span.glyphicon.glyphicon-plane
+          Locations
+      %li
+        = link_to business_users_path do 
+          %span.glyphicon.glyphicon-plane
+          Hiring Team
       %li= link_to 'E-mail Templates' 
       %li= link_to 'Job Templates' 
       %li= link_to 'Subscription' 
@@ -38,34 +44,30 @@
           %tr
             %th Location #
             %th Location Name
+            %th Country
             %th Address
             %th Number of Users
             %th
         %tbody
-          %tr
-            %td
-              %p 1239
-            %td
-              %p Yonge & Sheppard
-            %td
-              %p 2134 Sheppard Ave, Toronto, On
-            %td
-              %p 4
-            %td
-              = link_to "", method: :post do
-                %i.glyphicon.glyphicon-remove
-        %tbody
-          %tr
-            %td
-              %p 1239
-            %td
-              %p Yonge & Sheppard
-            %td
-              %p 2134 Sheppard Ave, Toronto, On
-            %td
-              %p 4
-            %td
-              = link_to "", method: :post do
-                %i.glyphicon.glyphicon-remove
-  
+          - @location.each do |location|
+            %tr
+              %td
+                %p= location.number
+              %td
+                %p= location.name
+              %td
+                %p= location.address
+              %td
+                %p
+                  = location.city
+                  , 
+                  = location.state
+              
+                  
+              %td
+                %p 4
+              %td
+                = link_to "", method: :post do
+                  %i.glyphicon.glyphicon-remove
+          
 

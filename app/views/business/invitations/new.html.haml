@@ -1,0 +1,16 @@
+.container.col-md-6.col-md-offset-3
+  %h3 Invite a new user
+  %hr
+  = bootstrap_form_for [:business, @invitation] do |f|    
+    .fieldset
+      .row
+        %fieldset
+          .form-group.col-md-6
+            = f.text_field :recipient_name, class: "form-control", label: "Name"
+          .form-group.col-md-6
+            = f.text_field :recipient_email, class: "form-control", label: "Email"
+          .form_group.col-md-12
+            = f.text_area :message, label: "Message", class: 'form-control', rows: '6', placeholder: "Please join this really cool app"
+        %fieldset.form-group.action
+          %input(type="submit" value="Send Invitation" class="btn btn-default")
+      

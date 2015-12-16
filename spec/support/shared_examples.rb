@@ -7,20 +7,20 @@ shared_examples "requires sign in" do
 end
 
 shared_examples "user does not belong to company" do 
-  it "redirects user" do 
-    alice = Fabricate(:user)
+  let(:alice) {Fabricate(:user)}
+  let(:company) {Fabricate(:company)}
+  
+  before do 
     set_current_user(alice)
-    company = (Fabricate(:company))
     set_current_company(company)
+  end
+
+  it "redirects user" do    
     action
     expect(response).to redirect_to login_path
   end
 
   it "sets the flash message " do 
-    alice = Fabricate(:user)
-    set_current_user(alice)
-    company = (Fabricate(:company))
-    set_current_company(company)
     action
     expect(flash[:error]).to be_present   
   end   

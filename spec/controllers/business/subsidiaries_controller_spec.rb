@@ -36,7 +36,7 @@ describe Business::SubsidiariesController do
       before do      
         set_current_user(alice)
         set_current_company(company)
-        get :create, subsidiary: Fabricate.attributes_for(:subsidiary), company: company
+        post :create, subsidiary: Fabricate.attributes_for(:subsidiary), company: company
       end
 
       it "redirects to the business/location page" do 
@@ -47,7 +47,7 @@ describe Business::SubsidiariesController do
         expect(Subsidiary.count).to eq(1)
       end
 
-      it "accociates the subsidiary to the current_company" do 
+      it "associates the subsidiary to the current_company" do 
         expect(Subsidiary.first.company).to eq(company)
       end
 
@@ -63,7 +63,7 @@ describe Business::SubsidiariesController do
       before do      
         set_current_user(alice)
         set_current_company(company)
-        get :create, subsidiary: {name: nil}
+        post :create, subsidiary: {name: nil}
       end
 
       it "renders the :new template" do 
@@ -73,6 +73,26 @@ describe Business::SubsidiariesController do
       it "does not create the subsidiary" do 
         expect(Subsidiary.count).to eq(0)
       end
+    end
+  end
+
+  describe "GET show" do 
+    it_behaves_like "requires sign in" do
+      let(:action) {get :show, id: 4}
+    end
+
+    let(:company) {Fabricate(:company)}
+    let(:subsidiary) {Fabricate(:subsidiary, company: company)}
+    let(:alice) {Fabricate(:user, company: company)}
+
+    before do      
+      set_current_user(alice)
+      set_current_company(company)
+      get :show, id: subsidiary.id
+    end
+
+    it "sets the @subsidiary to the active subsidiary" do
+      expect(assigns(:subsidiary)).to eq(subsidiary)
     end
   end
 end

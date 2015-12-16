@@ -1,0 +1,24 @@
+.container.col-md-6.col-md-offset-3
+  %h3 Create Location
+  %hr
+  = bootstrap_form_for [:business, @location] do |f|    
+    .fieldset
+      .row
+        .form-group.col-md-6
+          = f.text_field :name, class: "form-control", label: "Name"
+        .form-group.col-md-6
+          = f.text_field :number, class: "form-control", label: "Location Number"
+      .row
+        .form-group.col-md-6
+          = f.text_field :address, class: "form-control", label: "Address"
+      .row
+        .form-group.col-md-4
+          = f.text_field :country, class: "form-control", label: "Country"
+        .form-group.col-md-4
+          = f.text_field :state, class: "form-control", label: "Province"
+        .form-group.col-md-4
+          = f.text_field :city, class: "form-control", label: "City"
+          = hidden_field_tag :subsidiary_id, @subsidiary 
+      .row
+        .col-md-1
+          = f.submit "Create Subsidiary", class: "btn btn-primary"

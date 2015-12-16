@@ -14,12 +14,13 @@ describe UsersController do
       before do 
         post :create, user: Fabricate.attributes_for(:user)
       end
+
       it "saves the new user to the database" do    
         expect(User.count).to eq(1)
       end
 
       it "sets the session[user_id]" do 
-        session[:user_id] = Fabricate(:user).id
+        expect(session[:user_id]).to eq(User.first.id)
       end
       
       it "redirects the new user to the new company route" do 
