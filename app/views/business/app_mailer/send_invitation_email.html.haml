@@ -1,0 +1,5 @@
+!!!5
+%html(lang='en-US')
+  %body
+    %p You are invited by #{@invitation.user.first_name} #{@invitation.user.last_name} to join 
+    %p= link_to "Accept this invitation", register_with_token_url(@invitation.token)
