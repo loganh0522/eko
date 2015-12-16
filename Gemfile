@@ -17,16 +17,19 @@ gem 'bcrypt'
 gem 'fabrication'
 gem 'faker'
 
+
 group :development do
   gem 'thin'
   gem "better_errors"
   gem "binding_of_caller"
+  gem 'letter_opener'
 end
 
 group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'rspec-rails', '3.1'
+
 end
 
 group :test do
