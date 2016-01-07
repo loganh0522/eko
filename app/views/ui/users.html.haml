@@ -1,0 +1,22 @@
+.container
+  .sidebar
+    %ul
+      %li Company Profile 
+      %li Team Members
+      %li Job Templates
+      %li Locations
+      %li Subscription 
+      %li Billing 
+      %li My Profile
+
+  %main 
+    %h1 Team Members 
+    %p These are the team members that are involved in recruitment activities at your company. Admin's have full access to the system. Managers only have access to the jobs that they are a part of. 
+    %form.invite
+      %fieldset
+        .row
+          .form-group.col-md-6
+            %input.form-control(type="text" placeholder="Invite a user by E-mail")
+            %input(type="submit" value="Invite" class="btn btn-primary") 
+
+          

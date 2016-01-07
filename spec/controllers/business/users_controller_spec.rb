@@ -24,12 +24,9 @@ describe Business::UsersController do
       expect(assigns(:users)).to eq([alice])
     end
 
-    it "sets the @company to the current company" do 
-      expect(assigns(:company)).to eq(company)
-    end
-
-    it "sets the @subsidiaries that belong to the current company" do 
-      expect(assigns(:subsidiaries)).to eq([subsidiary])
+    it "sets the invitation to a new instance" do
+      expect(assigns(:invitation)).to be_instance_of(Invitation)
+      expect(assigns(:invitation)).to be_new_record 
     end
   end
 end

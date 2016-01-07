@@ -10,12 +10,16 @@ gem 'turbolinks'
 gem 'haml-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+
 gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'bootstrap_form'
 gem 'autoprefixer-rails'
 gem 'bcrypt'
 gem 'fabrication'
 gem 'faker'
+gem 'figaro'
+gem 'stripe'
+gem 'stripe_event'
 
 
 group :development do
@@ -29,12 +33,13 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'rspec-rails', '3.1'
-
 end
 
 group :test do
   gem 'database_cleaner', '1.2.0'
   gem 'shoulda-matchers'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :production do

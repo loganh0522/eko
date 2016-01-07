@@ -1,0 +1,41 @@
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+<script type="text/javascript">
+Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
+</script>
+
+= javascript_include_tag 'payment'
+
+.container
+  .sidebar
+    %ul
+      %li Company Profile 
+      %li Team Members
+      %li Job Templates
+      %li Locations
+      %li Subscription 
+      %li Billing 
+      %li My Profile
+
+  .billing
+    %h1 Billing Information 
+    = form_for [:business, @customer], html: {id: "payment-form" } do |f|
+      %fieldset.credit_card
+        %span.payment-errors
+        .row
+          .form-group.col-sm-6
+            %label.control-label(for="credit-card-number") Credit Card Number
+            %input.form-control#credit-card-number(type="text" data-stripe="number")
+        .row
+          .form-group.col-sm-6
+            %label.control-label(for="security-code") Security Code
+            %input.form-control#security-code(type="text" data-stripe="cvc")
+        .row
+          %label.control-label.col-sm-2 Expiration
+        .row
+          .col-sm-3
+            = select_month(Date.today, {add_month_numbers: true},  class: 'form-control', data: {stripe: "exp-month"})
+          .col-sm-3
+            = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, class: 'form-control', data: {stripe: "exp-year"})
+      %fieldset.form-group.action
+      = f.submit "Add Payment Method", class: "btn btn-primary" 
