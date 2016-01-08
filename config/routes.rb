@@ -9,11 +9,15 @@ Rails.application.routes.draw do
   resources :companies
 
   namespace :business do 
-    root to: "job_postings#index"
-    resources :job_postings
-    resources :locations 
+    root to: "job_postings#index"    
     resources :users
     resources :invitations
+
+
+
+    resources :job_postings
+    resources :locations 
+    
     resources :customers
     get 'invite_user', to: 'invitations#new'
 
