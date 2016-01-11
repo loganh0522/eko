@@ -1,6 +1,6 @@
 require 'spec_helper' 
 
-describe Business::JobPostingsController do 
+describe Business::JobsController do 
   describe "GET index" do 
     context "when user belongs to current_company" do
       it_behaves_like "requires sign in" do
@@ -16,8 +16,8 @@ describe Business::JobPostingsController do
         alice = Fabricate(:user, company: company)
         set_current_user(alice)
         set_current_company(company)
-        sales_rep1 = Fabricate(:job_posting, company: company) 
-        sales_rep2 = Fabricate(:job_posting) 
+        sales_rep1 = Fabricate(:job, company: company) 
+        sales_rep2 = Fabricate(:job) 
         get :index
         expect(assigns(:jobs)).to eq([sales_rep1])
       end
@@ -39,7 +39,7 @@ describe Business::JobPostingsController do
       set_current_user(alice)
       set_current_company(company)
       get :new 
-      expect(assigns(:job_posting)).to be_instance_of(JobPosting)
+      expect(assigns(:job)).to be_instance_of(Job)
     end
   end 
 
@@ -55,23 +55,28 @@ describe Business::JobPostingsController do
     context "with valid inputs" do 
       let(:company) {Fabricate(:company)}
       let(:alice) {Fabricate(:user, company: company)}
+      let(:job) {Fabricate.attributes_for(:job)}
 
       before do  
         set_current_user(alice)
         set_current_company(company)
-        post :create, job_posting: Fabricate.attributes_for(:job_posting), company: company
+        post :create, job: job , company: company, user_ids: alice.id
       end
 
-      it "redirects to the index" do   
-        expect(response).to redirect_to job_postings_path
+      it "redirects to the edit Hiring team path" do   
+        expect(response).to redirect_to new_business_job_hiring_team_path(job.id)
       end
       
       it "creates the job posting" do
-        expect(JobPosting.count).to eq(1)
+        expect(Job.count).to eq(1)
       end
 
       it "associates the job posting with the current_company" do
-        expect(JobPosting.first.company).to eq(company)
+        expect(Job.first.company).to eq(company)
+      end
+
+      it "creates a HiringTeam association with the current user" do 
+        expect(Job.first.user_ids).to eq([alice.id])
       end
 
       it "sets the flash message" do 
@@ -86,11 +91,11 @@ describe Business::JobPostingsController do
       before do      
         set_current_user(alice)
         set_current_company(company)
-        post :create, job_posting: {title: "Sales Rep"}
+        post :create, job: {title: "Sales Rep"}
       end
 
       it "does not create a job posting" do     
-        expect(JobPosting.count).to eq(0)
+        expect(Job.count).to eq(0)
       end
 
       it "renders the new action" do 
@@ -108,14 +113,14 @@ describe Business::JobPostingsController do
       let(:action) {get :edit, id: 4}
     end
 
-    it "sets @job_posting to the correct job posting" do 
+    it "sets @job to the correct job posting" do 
       company = Fabricate(:company)
       alice = Fabricate(:user, company: company)
       set_current_user(alice)
       set_current_company(company)
-      job = Fabricate(:job_posting)
-      get :edit, id: job.id
-      expect(assigns(:job_posting)).to eq(job)
+      job1 = Fabricate(:job)
+      get :edit, id: job1.id
+      expect(assigns(:job)).to eq(job1)
     end
   end
 
@@ -135,12 +140,12 @@ describe Business::JobPostingsController do
       before do  
         set_current_user(alice)
         set_current_company(company)
-        job1 = Fabricate(:job_posting, company: company)
-        put :update, id: job1.id, job_posting: Fabricate.attributes_for(:job_posting, title: "new title")
+        job1 = Fabricate(:job, company: company)
+        put :update, id: job1.id, job: Fabricate.attributes_for(:job, title: "new title")
       end
 
       it "save the updates made on the object" do 
-        expect(JobPosting.first.title).to eq("new title")
+        expect(Job.first.title).to eq("new title")
       end
 
       it "redirects_to the index page" do 
@@ -155,12 +160,12 @@ describe Business::JobPostingsController do
       before do  
         set_current_user(alice)
         set_current_company(company)
-        job1 = Fabricate(:job_posting, title: "old title", company: company)
-        put :update, id: job1.id, job_posting: Fabricate.attributes_for(:job_posting, title: nil)
+        job1 = Fabricate(:job, title: "old title", company: company)
+        put :update, id: job1.id, job: Fabricate.attributes_for(:job, title: nil)
       end
 
       it "doesn't save the updates if fields invalid" do
-        expect(JobPosting.first.title).to eq("old title") 
+        expect(Job.first.title).to eq("old title") 
       end
 
       it "renders the edit template" do

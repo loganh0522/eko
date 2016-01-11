@@ -15,7 +15,7 @@
               = job.city 
               ,
               = job.country |
-              = link_to "Edit", edit_business_job_posting_path(job)
+              = link_to "Edit", edit_business_job_path(job)
               Delete
             .row
               .well.col-md-2
@@ -38,4 +38,4 @@
                 %p.text-center Hired
 
     %section.col-md-1.col-md-offest-9
-      = link_to "Post a Job", new_business_job_posting_path, class: 'btn btn-primary'
+      = link_to "Post a Job", new_business_job_path, class: 'btn btn-primary'

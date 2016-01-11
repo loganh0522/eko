@@ -1,4 +1,4 @@
-Fabricator(:job_posting) do 
+Fabricator(:job) do 
   title "Title"
   country "Country"
   province "province"

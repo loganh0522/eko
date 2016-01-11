@@ -1,0 +1,37 @@
+.container
+  .sidebar
+    %ul
+      %li= link_to "Job Details", edit_business_job_path(@job)
+      %li Hiring Team
+      %li Recruitment Process
+      %li Questionairre
+      %li Scorecard
+      %li Post Job 
+
+
+  %main.col-md-8    
+    %h1 Team Members 
+    %p Add Team Members to this job opening. Providing a team member to a job provides them with access to applicants, and will allow you to easily collaborate with them. 
+    = form_for [:business, @invitation], html: {class: 'invite'} do |f|    
+      %fieldset
+        .row
+          .form-group.col-md-7
+            = f.text_field :recipient_email, class: "form-control", placeholder: "Add a member with their name"
+            = f.submit "Invite Colleague", class: "submit btn btn-primary"
+
+    .user-list
+      %table.table
+        %thead
+          %tr
+            %th First Name
+            %th Last Name
+            %th E-mail
+        %tbody
+          - @users.each do |user|
+            %tr
+              %td
+                %p= user.first_name
+              %td
+                %p= user.last_name
+              %td
+                %p= user.email

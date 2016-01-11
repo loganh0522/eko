@@ -5,32 +5,33 @@ Rails.application.routes.draw do
   get 'ui/home', to: 'ui#home'
 
   resources :users
-  resources :job_postings
+  resources :jobs
   resources :companies
 
   namespace :business do 
-    root to: "job_postings#index"    
+    root to: "jobs#index"    
     resources :users
     resources :invitations
 
-
-
-    resources :job_postings
-    resources :locations 
+    resources :jobs do 
+      resources :hiring_team
+    end
     
+
+    
+    resources :locations   
     resources :customers
+
     get 'invite_user', to: 'invitations#new'
+    get '/signout', to: 'sessions#destroy'
 
     resources :subsidiaries do 
       resources :locations
       get 'location/new', to: 'locations#new_for_subsidiary', as: 'new_location'
-    end
-
-    get '/signout', to: 'sessions#destroy'
+    end  
   end
 
   get '/account/new', to: 'companies#new'
-
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/signout', to: 'sessions#destroy'
