@@ -64,7 +64,7 @@ describe Business::JobsController do
       end
 
       it "redirects to the edit Hiring team path" do   
-        expect(response).to redirect_to new_business_job_hiring_team_path(job.id)
+        expect(response).to redirect_to new_business_job_hiring_team_path(job)
       end
       
       it "creates the job posting" do
