@@ -17,7 +17,7 @@ class Business::JobsController < ApplicationController
     if @job.save 
       @job.user_ids = params[:user_ids]
       flash[:notice] = "Your job posting #{@job.title}, was created"
-      redirect_to new_business_job_hiring_team_path(@job)
+      redirect_to edit_business_job_hiring_team_path(@job)
     else
       render :new
     end

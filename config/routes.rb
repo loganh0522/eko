@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :invitations
 
     resources :jobs do 
-      resources :hiring_team
+      resources :hiring_teams
     end
     
 
