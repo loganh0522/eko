@@ -2,15 +2,19 @@ class Business::HiringTeamsController < ApplicationController
   
   def new
     @job = Job.find(params[:job_id])
-    @users =  @job.users 
+    @users =  @job.users
+    @company_users =  current_company.users
     @invitation = Invitation.new
+    
+    # respond_to do |format| 
+    #   format.html 
+    #   format.json { render json: @company_users }
+    # end
   end
 
   def create
-    binding.pry
     @job = Job.find(params[:job_id])
     @job.users.append(User.find(params[:user][:id]))
-
     redirect_to new_business_job_hiring_team_path(@job)
   end 
 

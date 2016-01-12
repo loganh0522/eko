@@ -5,4 +5,11 @@ class Job < ActiveRecord::Base
   has_many :users, through: :hiring_teams
 
   validates_presence_of :title, :benefits, :description, :country, :city, :province
+
+  attr_reader :user_tokens
+
+  def user_tokens=(ids)
+    self.user_ids = ids.split(',') 
+  end
+
 end
