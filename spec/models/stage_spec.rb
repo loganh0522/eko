@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Job do 
+describe Stage do 
   it { should belong_to(:job) }
 end

@@ -2,7 +2,7 @@
   .sidebar
     %ul
       %li= link_to "Job Details", edit_business_job_path(@job)
-      %li Hiring Team
+      %li= link_to "Hiring Team", new_business_job_hiring_team_path(@job)
       %li Recruitment Process
       %li Questionairre
       %li Scorecard
@@ -10,11 +10,11 @@
 
 
   %main.col-md-8    
-    %h1 Team Members 
-    %p Add Team Members to this job opening. Providing a team member to a job provides them with access to applicants, and will allow you to easily collaborate with them. 
+    %h1 Recruitment Process
+    %p These are the stages that an applicant will go through during the recruitment process. You can set ToDo's for each stage to remind team members what must be done in each stage. You will be able to cross off ToDo's for individual applicants in order to track their individual progress. 
     = form_for [:business, @job, @stage], html: {class: 'invite'} do |f|
       %fieldset
         .row
-          .form-group.col-md-7
+          .form-group.col-md-8
             = f.text_field :name, class: "form-control", placeholder: "Name"
             = f.submit "Create New Stage", class: "submit btn btn-primary"
