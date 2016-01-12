@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
     resources :jobs do 
       resources :hiring_teams
+      resources :stages
     end
     
 
