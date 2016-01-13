@@ -15,11 +15,16 @@ Rails.application.routes.draw do
 
     resources :jobs do 
       resources :hiring_teams
-      resources :stages
+      
+      resources :stages do 
+        collection do
+          post :sort
+        end 
+      end
+
     end
     
 
-    
     resources :locations   
     resources :customers
 

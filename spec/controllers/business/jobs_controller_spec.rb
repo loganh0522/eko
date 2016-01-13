@@ -86,7 +86,7 @@ describe Business::JobsController do
 
     context "with invalid inputs" do 
       let(:company) {Fabricate(:company)}
-      let(:alice ) {Fabricate(:user, company: company)}
+      let(:alice) {Fabricate(:user, company: company)}
 
       before do      
         set_current_user(alice)
