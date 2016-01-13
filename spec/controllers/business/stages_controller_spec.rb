@@ -68,8 +68,28 @@ describe Business::StagesController do
     end
   end
 
-  describe "POST sort" do 
-    it "reorders the items in the queue"
-    it "does not render anything"
+  describe "POST sort" do
+    let(:company) {Fabricate(:company)}
+    let(:alice) {Fabricate(:user, company: company)}
+    let(:job) {Fabricate(:job, company: company)}
+
+    it_behaves_like "requires sign in" do
+      let(:action) {post :sort, job_id: job.id}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {post :sort, job_id: job.id}
+    end
+
+    it "reorders the items in the queue" do 
+      stage1 = Fabricate(:stage, position: 1, job_id: job.id)
+      stage2 = Fabricate(:stage, position: 2, job_id: job.id)
+      post :sort, job_id: job.id, stage: [stage2.id, stage1.id]
+      expect(stage1.position).to eq(2)
+    end
+
+    it "does not render anything" 
+
+    context " with stages that do not belong to job"
   end
 end
