@@ -5,3 +5,5 @@ end
 def set_current_company(company=nil)
   session[:company_id] = (company || Fabricate(:company)).id
 end
+
+

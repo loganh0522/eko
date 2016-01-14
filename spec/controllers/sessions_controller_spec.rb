@@ -15,9 +15,9 @@ describe SessionsController do
   end
 
   describe "POST create" do 
-    context "with valid inputs" do 
+    context "with valid inputs and user is a business user" do 
       let(:company) {Fabricate(:company)}
-      let(:alice) {Fabricate(:user, company: company)}
+      let(:alice) {Fabricate(:user, kind: 'business', company: company)}
 
       before do 
         post :create, email: alice.email, password: alice.password 
@@ -35,6 +35,26 @@ describe SessionsController do
         expect(response).to redirect_to business_root_path
       end
 
+      it "sets the flash notice" do
+        expect(flash[:notice]).to be_present
+      end
+    end
+
+    context "with user is a job seeker" do 
+      let(:alice) {Fabricate(:user, kind: 'job seeker')}
+      
+      before do 
+        post :create, email: alice.email, password: alice.password
+      end
+
+      it "puts the signed in user into the session" do 
+        expect(session[:user_id]).to eq(alice.id)
+      end
+
+      it "redirects the user to the job_seeker_jobs_path" do
+        expect(response).to redirect_to job_seeker_jobs_path
+      end
+      
       it "sets the flash notice" do
         expect(flash[:notice]).to be_present
       end

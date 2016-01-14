@@ -1,3 +1,4 @@
+
 require 'spec_helper'
 
 describe UsersController do 
@@ -24,6 +25,27 @@ describe UsersController do
       
       it "redirects the new user to the new company route" do 
         expect(response).to redirect_to new_company_path
+      end
+    end
+
+    context "With valid input and is a job seeker" do 
+      before do 
+        post :create, user: {first_name: "logan", last_name: 'houston', email: 'houston@example.com', password: 'password', kind: 'job seeker' }
+      end
+
+      it "saves the new user to the database" do    
+        expect(User.count).to eq(1)
+      end
+
+      it "sets the user kind to job seeker" do
+        expect(User.first.kind).to eq('job seeker')
+      end
+      it "sets the session[user_id]" do 
+        expect(session[:user_id]).to eq(User.first.id)
+      end
+      
+      it "redirects the new user to the job seeker home page" do 
+        expect(response).to redirect_to job_seeker_jobs_path
       end
     end
 

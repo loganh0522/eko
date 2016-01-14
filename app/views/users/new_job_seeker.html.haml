@@ -8,8 +8,7 @@
       = f.text_field :last_name, label: "Last Name"
       = f.email_field :email, label: "Email Address"
       = f.password_field :password
-      = f.hidden_field :kind, :value => 'business'
-      = hidden_field_tag :invitation_token, @invitation_token
+      = f.hidden_field :kind, :value => 'job seeker'
     %fieldset.actions.control-group.col-md-8.col-md-offset-6
       .controls
         %input(type="submit" value="Sign Up" class="btn")
