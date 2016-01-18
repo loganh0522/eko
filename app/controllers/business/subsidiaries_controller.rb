@@ -1,7 +1,7 @@
 class Business::SubsidiariesController < ApplicationController 
   before_filter :require_user
   before_filter :belongs_to_company
-
+  
   def index
     subsidiary = Subsidiary.find(params[:id])
   end

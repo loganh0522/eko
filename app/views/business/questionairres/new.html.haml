@@ -1,0 +1,73 @@
+.container
+  .sidebar
+    %ul
+      %li= link_to "Job Details", edit_business_job_path(@job)
+      %li= link_to "Hiring Team", new_business_job_hiring_team_path(@job)
+      %li Recruitment Process
+      %li Questionairre
+      %li Scorecard
+      %li Post Job 
+
+
+  %main.col-md-8    
+    %h1 Application Form
+    %p These are the stages that an applicant will go through during the recruitment process. You can set ToDo's for each stage to remind team members what must be done in each stage. You will be able to cross off ToDo's for individual applicants in order to track their individual progress. 
+
+    %section#application-form
+      .well.col-md-6.col-md-offset-2
+        .row
+        %ul.list-inline
+          %li
+            %h4 Question 1 
+          %li
+            %input(type="checkbox")  Required
+        .row
+          %input.form-control(type="text")
+        %br
+        .row 
+          %p Question Type: 
+          %select.form-control
+            %option Multiple Choice
+            %option Text
+            %option Text Area
+        %br
+        .row
+          %p Answers: 
+          .form-inline
+            .form-group.col-md-offset-1
+              %input(type="checkbox") 
+              %input.form-control(type="text")
+          %br
+          .form-inline
+            .form-group.col-md-offset-1
+              %input(type="checkbox") 
+              %input.form-control(type="text")
+        %br
+        .row
+          %h4 Question 2
+          %input(type="checkbox")  Required
+        .row
+          %input.form-control(type="text")
+        %br
+        .row 
+          %p Question Type: 
+          %select.form-control
+            %option Multiple Choice
+            %option Text
+            %option Text Area
+        %br
+        .row
+          %p Answers: 
+          .form-inline
+            .form-group.col-md-offset-1
+              %input(type="checkbox") 
+              %input.form-control(type="text")
+          %br
+          .form-inline
+            .form-group.col-md-offset-1
+              %input(type="checkbox") 
+              %input.form-control(type="text")
+        %br
+        .row 
+          .col-md-2.col-md-offset-9
+            %input(type="submit" value="Add Question" class="btn btn-primary")   

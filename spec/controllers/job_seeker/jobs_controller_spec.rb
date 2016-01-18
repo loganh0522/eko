@@ -11,6 +11,8 @@ describe JobSeeker::JobsController do
     end
 
     it "sets the @jobs instance, to all the jobs in database" do
+      alice = Fabricate(:user, kind: 'job seeker')
+      set_current_user(alice)
       job1 = Fabricate(:job)
       job2 = Fabricate(:job)
       get :index
@@ -28,6 +30,8 @@ describe JobSeeker::JobsController do
     end
 
     it "sets the @job instance to the specific job posting" do
+      alice = Fabricate(:user, kind: 'job seeker')
+      set_current_user(alice)
       job = Fabricate(:job)
       get :show, id: job.id
       expect(assigns(:job)).to eq(job)

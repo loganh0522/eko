@@ -1,5 +1,6 @@
 class Business::CustomersController < ApplicationController
-
+  before_filter :belongs_to_company
+  
   def index 
 
   end

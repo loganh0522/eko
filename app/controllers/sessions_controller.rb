@@ -1,19 +1,23 @@
 class SessionsController < ApplicationController 
 
   def new 
-    redirect_to business_root_path if current_user
+    if current_user && current_kind == 'business'
+      redirect_to business_root_path 
+    elsif current_user && current_kind == 'job seeker'
+      redirect_to job_seeker_jobs_path
+    end
   end
 
   def create 
-    user = User.find_by(email: params[:email])
+    @user = User.find_by(email: params[:email])
 
-    if user && user.authenticate(params[:password]) && user.kind == 'business'
-      session[:user_id] = user.id
-      session[:company_id] = user.company.id
+    if @user && @user.authenticate(params[:password]) && @user.kind == 'business'
+      session[:user_id] = @user.id
+      session[:company_id] = @user.company.id
       flash[:notice] = "You've logged in!"
       redirect_to business_root_path
-    elsif user && user.authenticate(params[:password]) && user.kind == 'job seeker'
-      session[:user_id] = user.id
+    elsif @user.kind == 'job seeker'
+      session[:user_id] = @user.id
       flash[:notice] = "You've logged in!"
       redirect_to job_seeker_jobs_path
     else 

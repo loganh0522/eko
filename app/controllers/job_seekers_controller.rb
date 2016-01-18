@@ -1,12 +1,10 @@
-class JobSeekerController < ApplicationController 
+class JobSeekersController < ApplicationController 
   before_filter :ensure_job_seeker
 
-  def ensure_job_seeker
-    flash[:error] = "You do not have access to this page."    
+  def ensure_job_seeker  
     if logged_in? && current_user.kind == "business"
-      redirect_to business_jobs_path
-    else
-      redirect_to login_path
+      flash[:error] = "You do not have access to this page."   
+      redirect_to business_root_path
     end
   end
 end

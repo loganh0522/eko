@@ -10,11 +10,6 @@ shared_examples "user is not a job seeker" do
   let(:company){Fabricate(:company)}
   let(:alice){Fabricate(:user, kind: 'business', company: company)}
   
-  it "redirects the user to the login_path if not logged in" do  
-    action
-    expect(response).to redirect_to login_path
-  end
-
   it "redirects the user to the business_root_path if logged in" do 
     set_current_user(alice)
     set_current_company(company)
@@ -24,7 +19,7 @@ shared_examples "user is not a job seeker" do
 end
 
 shared_examples "user does not belong to company" do 
-  let(:alice) {Fabricate(:user)}
+  let(:alice) {Fabricate(:user, kind: 'business')}
   let(:company) {Fabricate(:company)}
   
   before do 
@@ -34,7 +29,7 @@ shared_examples "user does not belong to company" do
 
   it "redirects user" do    
     action
-    expect(response).to redirect_to login_path
+    expect(response).to redirect_to business_root_path
   end
 
   it "sets the flash message " do 

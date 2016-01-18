@@ -1,7 +1,6 @@
 class Business::InvitationsController < ApplicationController
   before_filter :require_user
   before_filter :belongs_to_company
-
   def create
     @invitation = Invitation.create(invitation_params.merge!(inviter_id: current_user.id, company_id: current_company.id))
     

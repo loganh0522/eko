@@ -7,10 +7,18 @@ describe SessionsController do
       expect(response).to render_template :new
     end
 
-    it "redirects to the business root path for authenticated users"  do 
-      set_current_user 
+    it "redirects to the business root path for authenticated business users"  do 
+      alice = Fabricate(:user, kind: 'business')
+      set_current_user(alice)
       get :new 
       expect(response).to redirect_to business_root_path
+    end
+
+    it "redirects to the job seeker root path for authenticated job seekers"  do 
+      alice = Fabricate(:user, kind: 'job seeker')
+      set_current_user(alice)
+      get :new 
+      expect(response).to redirect_to job_seeker_jobs_path
     end
   end
 

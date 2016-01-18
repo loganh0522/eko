@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   namespace :job_seeker do 
     resources :jobs
+    resources :profiles
+    resources :work_experiences
   end
 
   namespace :business do 
@@ -25,6 +27,7 @@ Rails.application.routes.draw do
         collection do
           post :sort
         end 
+      resources :questionairres
       end
     end
     

@@ -14,7 +14,7 @@ describe Business::InvitationsController do
     context "with valid inputs" do 
       before do 
         company = Fabricate(:company)
-        alice = Fabricate(:user, company: company)
+        alice = Fabricate(:user, kind: 'business', company: company)
         set_current_user(alice)
         set_current_company(company)
         post :create, invitation: { recipient_email: "Joe@example.com" }
@@ -42,7 +42,7 @@ describe Business::InvitationsController do
       
       before do 
         company = Fabricate(:company)
-        alice = Fabricate(:user, company: company)
+        alice = Fabricate(:user, kind: 'business', company: company)
         set_current_user(alice)
         set_current_company(company)
         post :create, invitation: {recipient_email: nil}

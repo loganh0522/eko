@@ -1,7 +1,7 @@
 class Business::JobsController < ApplicationController
   before_filter :require_user
   before_filter :belongs_to_company
-
+  
   def index
     @jobs = current_company.jobs
   end

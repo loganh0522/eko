@@ -32,8 +32,7 @@ class ApplicationController < ActionController::Base
   def belongs_to_company
     if current_user.company != current_company 
       flash[:error] = "Sorry, you do not have permission to access that!"
-      redirect_to login_path
+      redirect_to business_root_path
     end
   end
-
 end
