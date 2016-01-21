@@ -13,5 +13,7 @@ class User < ActiveRecord::Base
 
   # Job Seeker User relationships 
 
+  has_many :applications 
+  has_many :applications, class_name: "Job", through: :applications
   has_many :work_experiences
 end
