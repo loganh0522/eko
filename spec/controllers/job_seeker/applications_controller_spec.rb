@@ -53,11 +53,16 @@ describe JobSeeker::ApplicationsController do
       end
       
       it "does not create a new application" do 
-        
+        expect(Application.count).to eq(1)
       end
 
-      it "sets the flash message" 
-      it "redirects to the show job action"
+      it "sets the flash message" do 
+        expect(flash[:error]).to be_present
+      end
+
+      it "redirects to the show job action" do 
+        expect(response).to redirect_to job_seeker_jobs_path
+      end
     end
   end
 end
