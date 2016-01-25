@@ -5,4 +5,5 @@ describe Job do
   it { should have_many(:hiring_teams) }
   it { should have_many(:users).through(:hiring_teams) }
   it { should have_many(:stages) }
+  it { should have_many(:applications)}
 end

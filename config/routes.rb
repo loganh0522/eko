@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :jobs
     resources :profiles
     resources :work_experiences
+    resources :applications, only: [:create]
   end
 
   namespace :business do 
