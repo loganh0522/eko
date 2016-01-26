@@ -16,7 +16,6 @@ class Business::CustomersController < ApplicationController
       :company => @company,
       :card => params[:stripeToken]
       )   
-    binding.pry
     if customer.successful? 
       @customer.save
     end

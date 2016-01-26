@@ -14,7 +14,8 @@ class User < ActiveRecord::Base
   # Job Seeker User relationships 
   
   has_many :applications
-  has_many :jobs, through: :applications
-  
+  has_many :apps, through: :applications, class_name: "Job", foreign_key: :job_id
+
+
   has_many :work_experiences
 end

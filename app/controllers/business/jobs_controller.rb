@@ -23,6 +23,12 @@ class Business::JobsController < ApplicationController
     end
   end
 
+  def show 
+    @job = Job.find(params[:id])
+    @applicants = @job.applicants
+    @stages = @job.stages
+  end
+
   def edit
     @job = Job.find(params[:id], @job)
   end
