@@ -1,0 +1,10 @@
+<% if @work_experience.save %>
+  $('.new_work_experience').remove();
+  $('.new_experience').show();
+  $('.experience').html('<%= j render "job_seeker/profiles/experience" %>');
+<%else%>
+  alert("Something went wrong");
+<%end%>
+
+
+

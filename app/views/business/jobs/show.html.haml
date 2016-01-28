@@ -34,7 +34,7 @@
     / %input(type="submit" value="Add Comment" class="btn btn-primary")
 .job-applicants.col-md-10.col-md-offset-1
   %h1 Applicants  
-  = form_tag edit_business_job_application_path(@job.id, @applications) do 
+  %form_tag   
     %input(type="submit" value="Move Stages" class="btn btn-primary")
     %table.table
       %thead
@@ -51,7 +51,7 @@
             %td{:data => {:id => applicant.id}}
               = check_box_tag "applicant_id[]", applicant.id
             %td
-              %h4= "#{applicant.first_name} #{applicant.last_name}"
+              %h4= link_to "#{applicant.first_name} #{applicant.last_name}", business_job_application_path(@job, applicant)
               %h6 CEO - TalentWiz 
             %td
               %h4 Sales Manager

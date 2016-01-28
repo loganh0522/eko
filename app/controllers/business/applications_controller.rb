@@ -1,4 +1,7 @@
 class Business::ApplicationsController < ApplicationController
+  def show 
+
+  end
 
   def edit
 
