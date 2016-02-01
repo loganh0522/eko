@@ -23,10 +23,13 @@ Rails.application.routes.draw do
     resources :customers
 
     resources :jobs do 
-      resources :applications
+      resources :applications do
+        post :move_stages
+      end
       resources :applicants
       resources :hiring_teams
       resources :questionairres
+      
       resources :stages do 
         collection do
           post :sort
