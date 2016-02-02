@@ -21,7 +21,6 @@ class JobSeeker::ApplicationsController < JobSeekersController
     # redirect_to job_seeker_jobs_path
   end
 
-
   private 
 
   def application_params 
