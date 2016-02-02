@@ -16,7 +16,8 @@ Rails.application.routes.draw do
   end
 
   namespace :business do 
-    root to: "jobs#index"    
+    root to: "jobs#index"  
+    resources :comments  
     resources :users
     resources :invitations
     resources :locations   
@@ -34,9 +35,6 @@ Rails.application.routes.draw do
         collection do
           post :sort
         end 
-      end
-      collection do 
-        
       end
     end
     

@@ -14,10 +14,23 @@
     .applicant-nav-bar  
       .ul 
         .li Profile
-        .li Message 
+        .li Messages 
         .li Notes
         .li Assessments 
         .li Scorecard
+
+    .add-comment-on-applicant
+      = form_for [:business, @comment] do |f|
+        = f.text_area :body, rows: 2, class: "form-control", label: "Add Feedback", placeholder: "Add a note about #{@user.first_name} #{@user.last_name}"
+        = f.hidden_field :user_id, value: current_user.id
+        = f.hidden_field :application_id, value: @application.id
+        = f.submit "+ Add", class: "btn btn-primary"
+
+
+      - @comments.each do |comment|
+        %p= comment.body
+
+
 
     .applicant-experience
       .header
@@ -42,7 +55,11 @@
       = form_tag do
         = text_area_tag(:q)
 
-
-    
+    .send-applicant-message
+      %h4 Send a Message 
+      %p Create a task for this applicant. Tag a team member using @name to notify them of the task.
+      = form_tag do
+        = text_area_tag(:q)
 
 .footer 
+

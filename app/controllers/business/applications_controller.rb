@@ -5,6 +5,8 @@ class Business::ApplicationsController < ApplicationController
     @application = Application.where(user_id: params[:id], job_id: params[:job_id]).first
     @stage = @application.stage
     @positions = @user.work_experiences
+    @comment = Comment.new
+    @comments = @application.comments
   end
 
   def edit
