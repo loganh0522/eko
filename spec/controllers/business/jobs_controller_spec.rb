@@ -60,11 +60,11 @@ describe Business::JobsController do
       before do  
         set_current_user(alice)
         set_current_company(company)
-        post :create, job: job , company: company, user_ids: alice.id
+        post :create, job: job, company: company, user_ids: alice.id
       end
 
-      it "redirects to the edit Hiring team path" do   
-        expect(response).to redirect_to new_business_job_hiring_team_path(job)
+      it "redirects to the new Hiring team path" do   
+        expect(response).to redirect_to new_business_job_hiring_team_path(Job.first.id)
       end
       
       it "creates the job posting" do

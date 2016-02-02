@@ -45,14 +45,14 @@ describe JobSeeker::ApplicationsController do
       let(:alice) {Fabricate(:user, kind: 'job seeker')}
       let(:company) {Fabricate(:company)}
       let(:job1) {Fabricate(:job, company: company)}
-
-      before do 
+      
+      before do  
         set_current_user(alice)
-        Fabricate(:application, user: alice, job: job1)
+        Fabricate(:application, user_id: alice.id, job_id: job1.id)
         post :create, application: {user_id: alice.id, job_id: job1.id}
       end
       
-      it "does not create a new application" do 
+      it "does not create a new application" do  
         expect(Application.count).to eq(1)
       end
 

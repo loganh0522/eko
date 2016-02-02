@@ -2,8 +2,8 @@ class JobSeeker::ApplicationsController < JobSeekersController
   before_filter :require_user
 
   def create 
-    job = Job.find(params[:application][:job_id]) 
-    
+    job = Job.find(params[:application][:job_id])  
+
     if !current_user_applied?(job)
       @application = Application.new(application_params)    
       if @application.save 
@@ -33,6 +33,6 @@ class JobSeeker::ApplicationsController < JobSeekersController
   end
 
   def current_user_applied?(job)
-    current_user.applications.map(&:job).include?(job)
+    current_user.applications.map(&:job_id).include?(job.id)
   end
 end
