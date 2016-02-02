@@ -6,8 +6,8 @@ describe User do
   it { should have_many(:hiring_teams) }
   it { should have_many(:jobs).through(:hiring_teams) }
 
+
   # Job Seeker user relationships 
-
+  it { should have_many(:applications)}
   it { should have_many(:work_experiences) }
-
 end

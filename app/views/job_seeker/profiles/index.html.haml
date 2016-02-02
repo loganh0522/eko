@@ -1,39 +1,23 @@
-.profile
-  .user-general-info 
-    .user-picture
-      %p Picture
-    .user-details
-      %h4 Logan Houston 
-      %p.location Toronto, Ontario, CA
-      %ul
-        %li Email: loganh0522@gmail.com
-        %li Phone Number: 416-322-3829
-        %li Mobile Number: 416-806-6907 
+.user-general-info
+  .user-image
+    %img.circle(src="/tmp/man.jpg")
+  .info 
+    %h3 Logan Houston
+    %h4 CEO Talent Wiz 
+    %h5 Toronto, On
+  .contact-info 
+    %h3 Contact Info
+    %h5 E-mail: loganh0522@gmail.com
+    %h5 Mobile: 416-806-6907
+    %h5 Skype: logz.houston
 
-
-  .user-work-experience
-    %h3 Experience 
-    %input(type="submit" value="Add a Work Experience " class="btn add-new-position")
-    .add-new-position-form
-      = bootstrap_form_for [:job_seeker, @work_experience] do |f|
-        .fieldset
-          .row
-            .form-group.col-md-6
-              = f.text_field :company_name, class: "form-control", label: "Company Name"
-            .form-group.col-md-6
-              = f.text_field :title, class: "form-control", label: "Job Title"
-          .row
-            .form-group.col-md-12
-              = f.text_area :description, rows: 12, class: "form-control", label: "Description"
-          .row 
-            .form-group.col-md-12
-              = f.submit "Add Position", class: "btn btn-primary"
-
-    .experience 
-      - @positions.each do |position| 
-        %h4= "#{position.title} - #{position.company_name}"
-        %p= "#{position.start_date} - #{position.end_date}"
-        %p= position.description
+.work-experience
+  .header
+    %h3 Experience
+    %p.new_experience= link_to "+ Add Work Experience", new_job_seeker_work_experience_path, :data => {:remote => true}
+  
+  .experience
+    = render 'experience'
 
 
 

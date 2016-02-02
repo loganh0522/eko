@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
   has_secure_password validations: false 
 
   # Job Seeker User relationships 
+  
+  has_many :applications
+  has_many :apps, through: :applications, class_name: "Job", foreign_key: :job_id
+
 
   has_many :applications 
   has_many :applications, class_name: "Job", through: :applications

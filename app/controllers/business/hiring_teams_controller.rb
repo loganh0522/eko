@@ -1,6 +1,7 @@
 class Business::HiringTeamsController < ApplicationController
   before_filter :require_user
   before_filter :belongs_to_company
+  
   def new
     @job = Job.find(params[:job_id])
     @users =  @job.users

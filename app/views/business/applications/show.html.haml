@@ -1,0 +1,65 @@
+
+.applicant-view
+  .applicant-main-container
+    .applicant-header
+      .user-image
+        %img.circle(src="/tmp/man.jpg")
+      
+      .applicant-details
+        %h3 Logan Houston 
+        %p.location Toronto, Ontario, CA
+        %p loganh0522@gmail.com
+        %p 416-806-6907 
+      
+    .applicant-nav-bar  
+      .ul 
+        .li Profile
+        .li Messages 
+        .li Notes
+        .li Assessments 
+        .li Scorecard
+
+    .add-comment-on-applicant
+      = form_for [:business, @comment] do |f|
+        = f.text_area :body, rows: 2, class: "form-control", label: "Add Feedback", placeholder: "Add a note about #{@user.first_name} #{@user.last_name}"
+        = f.hidden_field :user_id, value: current_user.id
+        = f.hidden_field :application_id, value: @application.id
+        = f.submit "+ Add", class: "btn btn-primary"
+
+
+      - @comments.each do |comment|
+        %p= comment.body
+
+
+
+    .applicant-experience
+      .header
+        %h3 Experience
+      
+      .experience
+        = render 'job_seeker/profiles/experience'
+
+  .applicant-side-container
+    .current-stage
+      %h4= "Current Stage: #{@stage.name}"
+
+      = form_tag business_job_application_move_stages_path(@job.id, @application) do
+        %input(type="submit" value="Move to Next Stage" class="btn btn-success")
+
+      = form_tag sort_business_job_stages_path do
+        %input(type="submit" value="X Reject" class="btn btn-danger")
+
+    .add-task
+      %h4 Add a Task
+      %p Create a task for this applicant. Tag a team member using @name to notify them of the task.
+      = form_tag do
+        = text_area_tag(:q)
+
+    .send-applicant-message
+      %h4 Send a Message 
+      %p Create a task for this applicant. Tag a team member using @name to notify them of the task.
+      = form_tag do
+        = text_area_tag(:q)
+
+.footer 
+

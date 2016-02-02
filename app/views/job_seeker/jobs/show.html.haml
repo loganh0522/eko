@@ -1,6 +1,18 @@
-.container.job-description
+.job-description
   .job-header
+    %h1= @job.title
+  .job-body
+    %h3 Job Description
+    %p= simple_format(@job.description)
+    %h3 Benefits
+    %p= simple_format(@job.benefits)
+  .apply 
+    = bootstrap_form_for [:job_seeker, @application] do |f|
+      .fieldset
+        .form-group.col-md-12
+        = f.hidden_field :user_id, value: current_user.id
+        = f.hidden_field  :job_id, value: @job.id
+        = f.submit "Apply to Job", class: "btn btn-primary"
 
 
-%p= @job.description
 

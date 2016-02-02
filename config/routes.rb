@@ -12,22 +12,29 @@ Rails.application.routes.draw do
     resources :jobs
     resources :profiles
     resources :work_experiences
+    resources :applications, only: [:create]
   end
 
   namespace :business do 
-    root to: "jobs#index"    
+    root to: "jobs#index"  
+    resources :comments  
     resources :users
     resources :invitations
     resources :locations   
     resources :customers
 
     resources :jobs do 
-      resources :hiring_teams  
+      resources :applications do
+        post :move_stages
+      end
+      resources :applicants
+      resources :hiring_teams
+      resources :questionairres
+      
       resources :stages do 
         collection do
           post :sort
         end 
-      resources :questionairres
       end
     end
     

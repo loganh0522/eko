@@ -1,0 +1,65 @@
+.job-show-header
+  %h2= @job.title
+  %h6= "#{@job.city}, #{@job.province}, #{@job.country}"
+
+.job-stages  
+  %ul 
+    %li 
+      %h6 All applicants
+      %h4 50 
+    - @stages.each do |stage| 
+      %li 
+        %h6= stage.name
+        %h4= stage.applicants.count 
+
+
+
+      / .modal.col-md-6.col-md-offset-4
+      /   .panel.panel-primary
+      /     .panel-heading 
+      /       %h4 Move Applicants 
+      /     .panel-body
+      /       %p Move the selected applicants to a new stage, by selecting the stage below. 
+            
+      /       = form_for @job do |f|
+      /         %fieldset
+      /           / = f.hidden_field :job_id, value: @job.id
+      /           / = f.label :stage_id 
+      /           / = f.collection_select :stage_id, @stages.all, :id, :name
+      /     .panel-footer
+      /       %input(type="submit" value="Sign Up" class="btn btn-primary")
+      / .modal-layer
+
+    / %input(type="submit" value="Message" class="btn btn-primary")
+    / %input(type="submit" value="Add Comment" class="btn btn-primary")
+.job-applicants.col-md-10.col-md-offset-1
+  %h1 Applicants  
+  %form_tag   
+    %input(type="submit" value="Move Stages" class="btn btn-primary")
+    %table.table
+      %thead
+        %tr
+          %th(width="5%") 
+          %th(width="20%") Name 
+          %th(width="20%") Job Title
+          %th(width="20%") Stage 
+          %th(width="15%") Rating
+          %th(width="15%") Remove
+      %tbody
+        - @applicants.each do |applicant|
+          %tr
+            %td{:data => {:id => applicant.id}}
+              = check_box_tag "applicant_id[]", applicant.id
+            %td
+              %h4= link_to "#{applicant.first_name} #{applicant.last_name}", business_job_application_path(@job, applicant)
+              %h6 CEO - TalentWiz 
+            %td
+              %h4 Sales Manager
+              %h6 May 22, 2015
+            %td
+              %h4 New Applicant
+
+
+
+
+
