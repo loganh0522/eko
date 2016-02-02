@@ -72,6 +72,8 @@ describe Business::StagesController do
     let(:company) {Fabricate(:company)}
     let(:alice) {Fabricate(:user, company: company)}
     let(:job) {Fabricate(:job, company: company)}
+    let(:stage1){Fabricate(:stage, position: 1, job_id: job.id)}
+    let(:stage2) {Fabricate(:stage, position: 2, job_id: job.id)}
 
     it_behaves_like "requires sign in" do
       let(:action) {post :sort, job_id: job.id}
@@ -81,15 +83,12 @@ describe Business::StagesController do
       let(:action) {post :sort, job_id: job.id}
     end
 
-    it "reorders the items in the queue" do 
-      stage1 = Fabricate(:stage, position: 1, job_id: job.id)
-      stage2 = Fabricate(:stage, position: 2, job_id: job.id)
+    before do 
       post :sort, job_id: job.id, stage: [stage2.id, stage1.id]
-      expect(stage1.position).to eq(2)
     end
 
-    it "does not render anything" 
-
-    context " with stages that do not belong to job"
+    it "reorders the items in the queue" do     
+      expect(stage2.position).to eq(1)
+    end
   end
 end
