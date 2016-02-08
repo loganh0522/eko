@@ -31,6 +31,7 @@ class Business::JobsController < ApplicationController
 
   def edit
     @job = Job.find(params[:id], @job)
+    @questionairre = @job.questionairre
   end
 
   def update

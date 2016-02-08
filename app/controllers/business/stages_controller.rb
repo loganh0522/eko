@@ -6,6 +6,7 @@ class Business::StagesController < ApplicationController
     @job = Job.find(params[:job_id])
     @stages = @job.stages.order("position")
     @stage = Stage.new 
+    @questionairre = @job.questionairre
   end
 
   def create 

@@ -15,10 +15,13 @@
 
     .col-md-10
       = form_for [:business, @job, @questionairre] do |f|
-        %h4 Application Form
-        = link_to_add_fields "Add Question", f, :questions
+        %h4 Application Form 
+
         = f.fields_for :questions do |q| 
-          = render 'question_fields', f: q
+          = render 'question_fields', f: q 
+  
+        = link_to_add_fields "Add Question", f, :questions    
+
         = f.hidden_field :job_id, value: @job.id
-      
         = f.submit "Create Form", class: "submit btn btn-primary"
+

@@ -2,9 +2,9 @@
   .sidebar
     %ul
       %li= link_to "Job Details", edit_business_job_path(@job)
-      %li Hiring Team
-      %li Recruitment Process
-      %li Questionairre
+      %li= link_to "Hiring Team", new_business_job_hiring_team_path(@job)
+      %li= link_to "Recruitment Process", new_business_job_stage_path(@job)
+      %li= link_to "Questionairre", edit_business_job_questionairre_path(@job, @questionairre.id)
       %li Scorecard
       %li Post Job 
 

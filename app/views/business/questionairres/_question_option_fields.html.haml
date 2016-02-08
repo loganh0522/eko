@@ -1,5 +1,7 @@
 %fieldset.answers
   = f.label :Answer
+  = link_to "remove", '#', class: "remove_fields"
   = f.text_field :body, class: "form-control"
   = f.hidden_field :_destroy
-  = link_to "remove", '#', class: "remove_fields"
+  
+

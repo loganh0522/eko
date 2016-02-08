@@ -7,6 +7,7 @@ class Business::HiringTeamsController < ApplicationController
     @users =  @job.users
     @company_users =  current_company.users
     @invitation = Invitation.new
+    @questionairre = @job.questionairre
     
     # respond_to do |format| 
     #   format.html 
