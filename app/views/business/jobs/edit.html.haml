@@ -1,9 +1,9 @@
 .container
   .sidebar
     %ul
-      %li Job Details
-      %li= link_to 'Hiring Team', new_business_job_hiring_team_path(@job)
-      %li Recruitment Process
+      %li= link_to "Job Details", edit_business_job_path(@job)
+      %li= link_to "Hiring Team", new_business_job_hiring_team_path(@job)
+      %li= link_to "Recruitment Process", new_business_job_stage_path(@job)
       %li Questionairre
       %li Scorecard
       %li Post Job 

@@ -1,0 +1,24 @@
+.container
+  .sidebar
+    %ul
+      %li= link_to "Job Details", edit_business_job_path(@job)
+      %li= link_to "Hiring Team", new_business_job_hiring_team_path(@job)
+      %li= link_to "Recruitment Process", new_business_job_stage_path(@job)
+      %li Questionairre
+      %li Scorecard
+      %li Post Job 
+
+
+  %main.col-md-8    
+    %h1 Application Form
+    %p These are the stages that an applicant will go through during the recruitment process. You can set ToDo's for each stage to remind team members what must be done in each stage. You will be able to cross off ToDo's for individual applicants in order to track their individual progress. 
+
+    .col-md-10
+      = form_for [:business, @job, @questionairre] do |f|
+        %h4 Application Form
+        = link_to_add_fields "Add Question", f, :questions
+        = f.fields_for :questions do |q| 
+          = render 'question_fields', f: q
+        = f.hidden_field :job_id, value: @job.id
+      
+        = f.submit "Create Form", class: "submit btn btn-primary"

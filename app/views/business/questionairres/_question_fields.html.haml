@@ -1,0 +1,11 @@
+%fieldset.questions
+  = f.label :Question
+  = f.text_field :body, class: "form-control questions", placeholder: "Question"
+  = f.hidden_field :_destroy
+  = link_to "remove", '#', class: "remove_question"
+
+
+= f.fields_for :question_options, class: "options" do |a|
+  = render 'question_option_fields', f: a
+
+= link_to_add_fields "Add Answer", f, :question_options

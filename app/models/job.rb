@@ -1,6 +1,8 @@
 class Job < ActiveRecord::Base
   belongs_to :company
 
+  has_one :questionairre
+
   has_many :hiring_teams
   has_many :users, through: :hiring_teams
   has_many :stages, -> {order(:position)}
