@@ -19,13 +19,27 @@
             = f.text_field :recipient_email, class: "form-control", placeholder: "Add a member with their name"
             = f.submit "Invite Colleague", class: "submit btn btn-primary"
 
-    = form_tag business_job_hiring_teams_path html: {id: 'job_user_tokens'} do
-      %fieldset.form-group
-        = collection_select(:user, :id, current_company.users, :id, :first_name)
-        / = label_tag :user_tokens, "Add a User"
-        / = text_field_tag :user_tokens 
-      %fieldset.form-group.action
-        %input(type="submit" value="Add User" class="btn btn-default")
+    
+    = form_for [:business, @job, @hiring_team] do |f| 
+      .fieldset
+        = f.label :user_tokens, "Add a User" 
+        %br
+        = f.text_field :user_tokens 
+      .fieldset
+        %br
+        = f.hidden_field :job_id, value: @job.id
+        = f.submit "Create Job Opening", class: "btn btn-primary"
+
+      
+    
+
+
+
+
+
+ 
+
+
 
     .user-list
       %table.table

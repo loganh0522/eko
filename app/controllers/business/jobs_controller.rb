@@ -17,7 +17,7 @@ class Business::JobsController < ApplicationController
     if @job.save 
       @job.user_ids = params[:user_ids]
       flash[:notice] = "Your job posting #{@job.title}, was created"
-      redirect_to  new_business_job_hiring_team_path(@job)
+      redirect_to new_business_job_hiring_team_path(@job)
     else
       render :new
     end
@@ -30,7 +30,7 @@ class Business::JobsController < ApplicationController
   end
 
   def edit
-    @job = Job.find(params[:id], @job)
+    @job = Job.find(params[:id])
     @questionairre = @job.questionairre
   end
 
@@ -45,8 +45,9 @@ class Business::JobsController < ApplicationController
   end
 
   private 
-    def job_params
-      params.require(:job).permit(:description, :title, :city, :country, 
-        :province, :benefits, user_ids: [])
-    end
+
+  def job_params
+    params.require(:job).permit(:description, :title, :city, :country, 
+      :province, :benefits, user_ids: [])
+  end
 end 
