@@ -12,24 +12,23 @@
   %main.col-md-8    
     %h1 Recruitment Process
     %p These are the stages that an applicant will go through during the recruitment process. You can set ToDo's for each stage to remind team members what must be done in each stage. You will be able to cross off ToDo's for individual applicants in order to track their individual progress. 
-    = form_for [:business, @job, @stage], html: {class: 'invite'}  do |f|
-      %fieldset
-        .row
-          .form-group.col-md-8
-            = f.text_field :name, class: "form-control", placeholder: "Name"
-            = f.hidden_field :position, value: 1
-            = f.submit "Create New Stage", class: "submit btn btn-primary"
+    = render "form"
 
-    .user-list.col-md-10 
+    .stages.col-md-10 
       %div{:id => 'stages', :data => {:update_url => sort_business_job_stages_path(@job)}}    
-        - @stages.each do |stage|
-          %div{:class => "panel panel-default", :id => "stage_#{stage.id}"}
-            .panel-heading
-              .panel-title
-                %h4= stage.name
-            .panel-body
+        = render "create_stages", stages: @stages
 
-    
+    .modal
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+            %h3.modal-title Edit Stage 
+          .modal-body
+
+            
+
+
     %input(type="submit" value="Save and Continue" class="btn btn-default")
 
       

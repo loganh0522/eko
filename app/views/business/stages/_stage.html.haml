@@ -1,0 +1,7 @@
+%div{:class => "panel panel-default", :id => "stage_#{stage.id}"}
+  .panel-heading
+    .panel-title
+      %h4= stage.name
+      %p= link_to 'Edit', edit_business_job_stage_path(@job.id, stage.id), :data => {:remote => true }
+      %p= link_to 'Delete', business_job_stage_path(@job.id, stage.id), remote: true, :method => :delete
+  .panel-body

@@ -12,15 +12,53 @@ class Business::StagesController < ApplicationController
   def create 
     @stage = Stage.new(stage_params)
     @job = Job.find(params[:job_id])  
-    @stage.job = @job
+    @stages = @job.stages.order("position")
 
-    if @stage.save
-      @stage.update_attribute(:position, new_stage_position(@job) )
-      redirect_to new_business_job_stage_path(@job)
-    else
+    respond_to do |format| 
+      if @stage.save & @stage.update_attribute(:position, new_stage_position(@job))
+        format.html {redirect_to new_business_job_stage_path(@job)}
+        format.js
+      else
+        flash[:error] = "Sorry, something went wrong. Please try again."
+        render :new
+      end
+    end
+  end
 
-      flash[:error] = "Sorry, something went wrong. Please try again."
-      render :new
+  def edit 
+    @stage = Stage.find(params[:id])
+    @job = Job.find(params[:job_id])
+
+    # respond_to do |format| 
+    #   format.html 
+    #   format.js 
+    # end
+  end
+
+  def update
+    @stage = Stage.find(params[:id])
+    @job = Job.find(params[:job_id])
+
+    respond_to do |format|
+      if @stage.update(stage_params)
+        format.json { head :no_content }
+        format.js
+      else
+        format.json { render json: @stage.errors.full_messages,
+                                   status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @stage = Stage.find(params[:id])
+    @job = Job.find(params[:job_id])
+
+    @stage.destroy
+    respond_to do |format|
+      format.js
+      format.html { redirect_to posts_url }
+      format.json { head :no_content }
     end
   end
 
@@ -35,7 +73,7 @@ class Business::StagesController < ApplicationController
   private 
 
   def stage_params
-    params.require(:stage).permit(:name, :position)
+    params.require(:stage).permit(:name, :position, :job_id)
   end
 
   def new_stage_position(job)
