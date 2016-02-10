@@ -27,7 +27,7 @@
             = f.text_field :city, class: "form-control", label: "City"
         .row
           .form-group.col-md-12
-            = f.text_area :description, rows: 12, class: "form-control", label: "Description"
+            = f.text_area :description, rows: 12, class: "form-control", label: "Description", :data => {:provider => "summernote" } , id: "summmernote"
         .row
           .form-group.col-md-12
             = f.text_area :benefits, rows: 12, class: "form-control", label: "Benefits"

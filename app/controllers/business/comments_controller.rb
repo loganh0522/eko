@@ -1,4 +1,14 @@
 class Business::CommentsController < ApplicationController 
+  def index
+    @job = Job.find(params[:job_id])
+    @comment = Comment.new
+    @application = Application.find(params[:application_id])
+    @user = @application.applicant
+    @positions = @user.work_experiences
+    @comments = @application.comments
+    @stage = @application.stage
+  end
+
   def create 
     @comment = Comment.new(comment_params)
 
@@ -9,6 +19,7 @@ class Business::CommentsController < ApplicationController
       redirect_to :back
     end
   end
+
 
   private 
 

@@ -13,6 +13,10 @@ gem 'haml-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'summernote-rails', '~> 0.7.1.0'
+gem 'font-awesome-rails' 
+
+
 gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'bootstrap_form'
 gem 'autoprefixer-rails'

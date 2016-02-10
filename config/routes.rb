@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
     resources :jobs do 
       resources :applications do
+        resources :comments
         post :move_stages
       end
       resources :applicants

@@ -10,7 +10,7 @@
         .row 
           .well 
             %a
-              = job.title
+              =link_to job.title, business_job_path(job)
             %p
               = job.city 
               ,
