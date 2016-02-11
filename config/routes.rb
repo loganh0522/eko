@@ -24,7 +24,8 @@ Rails.application.routes.draw do
     resources :invitations
     resources :locations   
     resources :customers
-
+    resources :job_boards
+    
     resources :jobs do 
       resources :applications do
         resources :comments

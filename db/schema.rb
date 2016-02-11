@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160210175655) do
+ActiveRecord::Schema.define(version: 20160211134455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,13 @@ ActiveRecord::Schema.define(version: 20160210175655) do
     t.integer  "subsidiary_id"
     t.integer  "location_id"
     t.integer  "user_id"
+  end
+
+  create_table "job_boards", force: :cascade do |t|
+    t.string  "subdomain"
+    t.string  "logo"
+    t.integer "company_id"
+    t.text    "description"
   end
 
   create_table "job_functions", force: :cascade do |t|

@@ -6,6 +6,7 @@ class Company < ActiveRecord::Base
   has_many :subsidiaries
   has_many :locations
   has_one :customer
+  has_one :job_board
  
   validates_presence_of :name, :website
 end
