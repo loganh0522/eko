@@ -3,22 +3,31 @@
     %navbar.navbar-fixed-top.navbar-inverse
       %a.navbar-brand TalentWiz
       %ul.nav.navbar-nav
+        %li= link_to "Features"
         %li= link_to "Pricing"
         %li= link_to "Blog"
       %ul.nav.navbar-nav.navbar-right
         %li= link_to "Login", login_path
         %li= link_to "SIGN UP", new_user_path
+
   - if logged_in? && current_kind == 'business'
-    %navbar.navbar-fixed-top.navbar-inverse  
-      %a.navbar-brand TalentWiz
-      %ul.nav.navbar-nav
-        %li= link_to "Dashboard", business_jobs_path 
-        %li= link_to "Applicants"
-        %li= link_to "Activity"
-      %ul.nav.navbar-nav.navbar-right
-        %li= link_to "Admin", business_users_path
-        %li= link_to "Profile"
-        %li= link_to "Sign Out", signout_path
+    .navbar-fixed-top 
+      .business_nav
+        .content
+          = link_to business_jobs_path do
+            %img(src="/tmp/logo.jpg")
+          %ul
+            %li= link_to "JOBS", business_jobs_path 
+            %li= link_to "APPLICANTS"
+            %li= link_to "ACTIVITY"
+          %ul
+            %li= link_to "Admin", business_users_path
+            %li= link_to "Profile"
+            %li= link_to "Sign Out", signout_path
+
+
+
+        
   - if logged_in? && current_kind == 'job seeker'
     %navbar.navbar-fixed-top.navbar-inverse  
       %a.navbar-brand TalentWiz

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  root to: "sessions#new"
+  root to: 'pages#home'
+  
+  get 'login', to: "sessions#new"
 
   get 'ui(/:action)', controller: 'ui'
   get 'ui/home', to: 'ui#home'
