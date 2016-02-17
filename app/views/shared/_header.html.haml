@@ -1,42 +1,59 @@
-%section#top-header.row
-  - if !logged_in?
+- if !request.subdomain.present? 
+  %section#top-header.row
+    - if !logged_in?
+      %navbar.navbar-fixed-top.navbar-inverse
+        %a.navbar-brand TalentWiz
+        %ul.nav.navbar-nav
+          %li= link_to "Features"
+          %li= link_to "Pricing"
+          %li= link_to "Blog"
+        %ul.nav.navbar-nav.navbar-right
+          %li= link_to "Login", login_path
+          %li= link_to "SIGN UP", new_user_path
+
+    - if logged_in? && current_kind == 'business'
+      .navbar-fixed-top 
+        .business_nav
+          .content
+            = link_to business_jobs_path do
+              %img(src="/tmp/logo.jpg")
+            %ul
+              %li= link_to "JOBS", business_jobs_path 
+              %li= link_to "APPLICANTS"
+              %li= link_to "ACTIVITY"
+
+          .dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Dropdown
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                %a{:href => "#"} Action
+              %li
+                %a{:href => "#"} Another action
+       
+    - if logged_in? && current_kind == 'job seeker'
+      %navbar.navbar-fixed-top.navbar-inverse  
+        %a.navbar-brand TalentWiz
+        %ul.nav.navbar-nav
+          %li= link_to "Jobs"
+          %li= link_to "CareerBubble"
+        %ul.nav.navbar-nav.navbar-right
+          %li= link_to "Profile"
+          %li= link_to "Sign Out", signout_path
+- else
+  - if logged_in? && current_kind == 'job seeker'
     %navbar.navbar-fixed-top.navbar-inverse
-      %a.navbar-brand TalentWiz
-      %ul.nav.navbar-nav
-        %li= link_to "Features"
-        %li= link_to "Pricing"
-        %li= link_to "Blog"
+      %a.navbar-brand #{@company.name}
+      %ul.nav.navbar-nav.navbar-right
+        %li= link_to "Profile", profile_path
+        %li= link_to "Sign Out", signout_path
+  - else
+    %navbar.navbar-fixed-top.navbar-inverse
+      %a.navbar-brand #{@company.name}
       %ul.nav.navbar-nav.navbar-right
         %li= link_to "Login", login_path
-        %li= link_to "SIGN UP", new_user_path
-
-  - if logged_in? && current_kind == 'business'
-    .navbar-fixed-top 
-      .business_nav
-        .content
-          = link_to business_jobs_path do
-            %img(src="/tmp/logo.jpg")
-          %ul
-            %li= link_to "JOBS", business_jobs_path 
-            %li= link_to "APPLICANTS"
-            %li= link_to "ACTIVITY"
-          %ul
-            %li= link_to "Admin", business_users_path
-            %li= link_to "Profile"
-            %li= link_to "Sign Out", signout_path
-
-
-
-        
-  - if logged_in? && current_kind == 'job seeker'
-    %navbar.navbar-fixed-top.navbar-inverse  
-      %a.navbar-brand TalentWiz
-      %ul.nav.navbar-nav
-        %li= link_to "Jobs"
-        %li= link_to "CareerBubble"
-      %ul.nav.navbar-nav.navbar-right
-        %li= link_to "Profile"
-        %li= link_to "Sign Out", signout_path
+        %li= link_to "Register", register_path
 
 
 

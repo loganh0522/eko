@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.4'
 gem 'pg'
+gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'sass-rails', '~> 5.0.1'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -12,12 +13,6 @@ gem 'turbolinks'
 gem 'haml-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-
-gem 'summernote-rails', '~> 0.7.1.0'
-gem 'font-awesome-rails' 
-
-
-gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'bootstrap_form'
 gem 'autoprefixer-rails'
 gem 'bcrypt'
@@ -26,6 +21,10 @@ gem 'faker'
 gem 'figaro'
 gem 'stripe'
 gem 'stripe_event'
+gem 'bootstrap-wysihtml5-rails'
+gem 'country_state_select', "3.0.0"
+gem 'chosen-rails'
+
 
 
 group :development do

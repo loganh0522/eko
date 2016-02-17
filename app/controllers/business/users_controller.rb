@@ -5,7 +5,7 @@ class Business::UsersController < ApplicationController
   def index 
     @invitation = Invitation.new
     @users = current_company.users.order(:first_name)
-
+    @job_board = current_company.job_board
     respond_to do |format| 
       format.html 
       format.json { render json: @users.where("first_name like ?", "%#{params[:q]}%") }

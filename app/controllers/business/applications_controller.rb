@@ -1,4 +1,5 @@
 class Business::ApplicationsController < ApplicationController
+  
   def show 
     @user = User.find(params[:id])
     @job = Job.find(params[:job_id])

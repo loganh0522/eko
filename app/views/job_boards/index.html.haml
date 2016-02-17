@@ -1,0 +1,8 @@
+%description_area
+
+
+%job_board
+  %h1 Current Opportunities 
+  - @jobs.each do |job|
+    %h4= link_to "#{job.company.name} - #{job.title}", job_seeker_job_path(job)
+    %p= job.description

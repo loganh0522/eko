@@ -13,25 +13,4 @@
     = render '/shared/errors', type: @job
     %p This is the information that job seekers will first see when they view the job posting on your Job Board, or external job boards.
     %br
-    = bootstrap_form_for [:business, @job] do |f|
-      .fieldset
-        .row
-          .form-group.col-md-6
-            = f.text_field :title, class: "form-control", label: "Job Title"
-        .row
-          .form-group.col-md-4
-            = f.text_field :country, class: "form-control", label: "Country"
-          .form-group.col-md-4
-            = f.text_field :province, class: "form-control", label: "Province"
-          .form-group.col-md-4
-            = f.text_field :city, class: "form-control", label: "City"
-        .row
-          .form-group.col-md-12
-            = f.text_area :description, rows: 12, class: "form-control", label: "Description"
-        .row
-          .form-group.col-md-12
-            = f.text_area :benefits, rows: 12, class: "form-control", label: "Benefits"
-        = hidden_field_tag :user_ids, current_user.id
-        .row
-          .col-md-1.col-md-offset-10
-            = f.submit "Create Job Opening", class: "btn btn-primary"
+    = render 'form'

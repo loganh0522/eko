@@ -6,7 +6,6 @@ class Business::QuestionairresController < ApplicationController
   def new
     @job = Job.find(params[:job_id])
     @questionairre = Questionairre.new
-
   end 
 
   def create 

@@ -148,6 +148,10 @@ describe Business::JobsController do
         expect(Job.first.title).to eq("new title")
       end
 
+      it "render's the edit page" do 
+        expect(response).to redirect_to new_business_job_hiring_team_path(Job.first.id)
+      end
+
       it "redirects_to the index page" do 
         expect(flash[:notice]).to be_present
       end

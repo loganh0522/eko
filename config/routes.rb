@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
-  root to: 'pages#home'
   
+  
+  resources :job_boards
+  
+  match '/', to: "job_boards#index", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
+  match 'login', to: "sessions#subdomain_new", constraints: {subdomain: /.+/}, via: [:get]
+  match 'login', to: "sessions#create", constraints: {subdomain: /.+/}, via: [:post]
+  match 'register', to: "users#sub_new_job_seeker", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
+  match 'profile', to: "profiles#index", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
+
   get 'login', to: "sessions#new"
 
   get 'ui(/:action)', controller: 'ui'
@@ -9,6 +17,10 @@ Rails.application.routes.draw do
   resources :users
   get '/job_seekers/new', to: 'users#new_job_seeker'
   get '/account/new', to: 'companies#new'
+  
+  root to: 'pages#home'
+
+  
 
   namespace :job_seeker do 
     resources :jobs
@@ -18,13 +30,16 @@ Rails.application.routes.draw do
   end
 
   namespace :business do 
-    root to: "jobs#index"  
+    root to: "jobs#index" 
+
     resources :comments  
     resources :users
     resources :invitations
     resources :locations   
     resources :customers
     resources :job_boards
+    
+
     
     resources :jobs do 
       resources :applications do
@@ -40,6 +55,7 @@ Rails.application.routes.draw do
           post :sort
         end 
       end
+
     end
     
     get 'invite_user', to: 'invitations#new'

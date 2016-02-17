@@ -19,11 +19,20 @@ class SessionsController < ApplicationController
     elsif @user.kind == 'job seeker'
       session[:user_id] = @user.id
       flash[:notice] = "You've logged in!"
-      redirect_to job_seeker_jobs_path
+      if request.subdomain.present? 
+        redirect_to root_path
+      else
+        redirect_to job_seeker_jobs_path
+      end
     else 
       flash[:error] = "Either your Username or Password is incorrect."
       render :new
     end
+  end
+
+  def subdomain_new
+    @job_board = JobBoard.find_by_subdomain!(request.subdomain)
+    @company = @job_board.company
   end
 
   def destroy 

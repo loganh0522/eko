@@ -6,9 +6,14 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)    
     if @user.save 
+
       if @user.kind == 'job seeker'
         session[:user_id] = @user.id 
-        redirect_to job_seeker_jobs_path
+        if request.subdomain.present? 
+          redirect_to profile_path
+        else
+          redirect_to job_seeker_jobs_path
+        end
       else
         if params[:invitation_token].present?
           invitation = Invitation.where(token: params[:invitation_token]).first
@@ -25,7 +30,12 @@ class UsersController < ApplicationController
   end
 
   def new_job_seeker
-    binding.pry
+    @user = User.new
+  end
+
+  def sub_new_job_seeker
+    @job_board = JobBoard.find_by_subdomain!(request.subdomain)
+    @company = @job_board.company
     @user = User.new
   end
 

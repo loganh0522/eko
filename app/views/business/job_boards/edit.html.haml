@@ -1,0 +1,35 @@
+.container
+  .sidebar
+    %ul
+      %li= link_to "Career Portal", edit_business_job_board_path(@job_board)
+      %li= link_to "Team Members", business_users_path
+      %li Job Templates
+      %li= link_to "Locations", business_locations_path
+      %li Subscription 
+      %li Billing 
+      %li My Profile
+
+
+  %main 
+    %h1 Career Portal 
+    %p These are the team members that are involved in recruitment activities at your company. Admin's have full access to the system. Managers only have access to the jobs that they are a part of. 
+    
+    = form_for [:business, @job_board] do |f|    
+      %fieldset
+        .row
+          .form-group.col-md-12
+            %h4 Logo 
+            %p Add a logo that will go in the header, so applicants feel more attached to your brand. It is best if you use a transparent logo. 
+            = f.file_field :logo, class: "btn btn-file"
+
+            %h4 Header Background
+            %p This description is added above the job board. The purpose of the description is to provide a job seeker with an idea of the company culture. It should be 2 - 3 paragraphs, but is totally up to you.
+            = f.text_area :description, class: "form-control", placeholder: "Add a company description" 
+
+            %h4 Description 
+            %p This description is added above the job board. The purpose of the description is to provide a job seeker with an idea of the company culture. It should be 2 - 3 paragraphs, but is totally up to you.
+            = f.text_area :description, class: "form-control", placeholder: "Add a company description"
+            %br
+            = f.submit "Update Career Portal", class: "submit btn btn-primary"
+
+

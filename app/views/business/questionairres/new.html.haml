@@ -15,72 +15,80 @@
 
     .col-md-10
       = form_for [:business, @job, @questionairre] do |f|
-        %h4 Application Form
-        = link_to_add_fields "Add Question", f, :questions
-        
+
         = f.fields_for :questions do |q| 
-          = render 'question_fields', f: q
-        
-        = f.hidden_field :job_id, value: @job.id 
-      %br
-      = f.submit "Save and Continue", class: "submit btn btn-primary"
+          = render 'question_fields', f: q 
+  
+        = link_to_add_fields "Add Question", f, :questions    
+
+        = f.hidden_field :job_id, value: @job.id
+        = f.submit "Create Form", class: "submit btn btn-primary"
 
 
-    %section#application-form
-      .well.col-md-10
-        .row
-        %ul.list-inline
-          %li
-            %h4 Question 1 
-          %li
-            %input(type="checkbox")  Required
-        .row
-          %input.form-control(type="text")
-        %br
-        .row 
-          %p Question Type: 
-          %select.form-control
-            %option Multiple Choice
-            %option Text
-            %option Text Area
-        %br
-        .row
-          %p Answers: 
-          .form-inline
-            .form-group.col-md-offset-1
-              %input(type="checkbox") 
-              %input.form-control(type="text")
-          %br
-          .form-inline
-            .form-group.col-md-offset-1
-              %input(type="checkbox") 
-              %input.form-control(type="text")
-        %br
-        .row
-          %h4 Question 2
-          %input(type="checkbox")  Required
-        .row
-          %input.form-control(type="text")
-        %br
-        .row 
-          %p Question Type: 
-          %select.form-control
-            %option Multiple Choice
-            %option Text
-            %option Text Area
-        %br
-        .row
-          %p Answers: 
-          .form-inline
-            .form-group.col-md-offset-1
-              %input(type="checkbox") 
-              %input.form-control(type="text")
-          %br
-          .form-inline
-            .form-group.col-md-offset-1
-              %input(type="checkbox") 
-              %input.form-control(type="text")
-        %br
-        .row 
-          .col-md-2.col-md-offset-9
-            %input(type="submit" value="Add Question" class="btn btn-primary")   
+
+
+
+
+
+
+
+
+
+    / %section#application-form
+    /   .well.col-md-10
+    /     .row
+    /     %ul.list-inline
+    /       %li
+    /         %h4 Question 1 
+    /       %li
+    /         %input(type="checkbox")  Required
+    /     .row
+    /       %input.form-control(type="text")
+    /     %br
+    /     .row 
+    /       %p Question Type: 
+    /       %select.form-control
+    /         %option Multiple Choice
+    /         %option Text
+    /         %option Text Area
+    /     %br
+    /     .row
+    /       %p Answers: 
+    /       .form-inline
+    /         .form-group.col-md-offset-1
+    /           %input(type="checkbox") 
+    /           %input.form-control(type="text")
+    /       %br
+    /       .form-inline
+    /         .form-group.col-md-offset-1
+    /           %input(type="checkbox") 
+    /           %input.form-control(type="text")
+    /     %br
+    /     .row
+    /       %h4 Question 2
+    /       %input(type="checkbox")  Required
+    /     .row
+    /       %input.form-control(type="text")
+    /     %br
+    /     .row 
+    /       %p Question Type: 
+    /       %select.form-control
+    /         %option Multiple Choice
+    /         %option Text
+    /         %option Text Area
+    /     %br
+    /     .row
+    /       %p Answers: 
+    /       .form-inline
+    /         .form-group.col-md-offset-1
+    /           %input(type="checkbox") 
+    /           %input.form-control(type="text")
+    /       %br
+    /       .form-inline
+    /         .form-group.col-md-offset-1
+    /           %input(type="checkbox") 
+    /           %input.form-control(type="text")
+    /     %br
+    /     .row 
+    /       .col-md-2.col-md-offset-9
+    /         %input(type="submit" value="Add Question" class="btn btn-primary")   

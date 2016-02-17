@@ -1,7 +1,7 @@
 .container
   .sidebar
     %ul
-      %li Company Profile 
+      %li= link_to "Career Portal", edit_business_job_board_path(@job_board)
       %li= link_to "Team Members", business_users_path
       %li Job Templates
       %li= link_to "Locations", business_locations_path
