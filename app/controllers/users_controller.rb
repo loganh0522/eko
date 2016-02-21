@@ -4,9 +4,9 @@ class UsersController < ApplicationController
   end
 
   def create
+    binding.pry
     @user = User.new(user_params)    
     if @user.save 
-
       if @user.kind == 'job seeker'
         session[:user_id] = @user.id 
         if request.subdomain.present? 
@@ -18,7 +18,12 @@ class UsersController < ApplicationController
         if params[:invitation_token].present?
           invitation = Invitation.where(token: params[:invitation_token]).first
           @user.update_attribute(:company_id, invitation.company_id)
-          redirect_to login_path
+          if invitation.job.present? 
+            HiringTeam.create(user_id: @user.id, job_id: invitation.job)
+            redirect_to login_path
+          else
+            redirect_to login_path
+          end
         else
           session[:user_id] = @user.id 
           redirect_to new_company_path

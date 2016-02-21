@@ -44,4 +44,7 @@ class ApplicationController < ActionController::Base
       redirect_to edit_business_job_questionairre_path(@job.id, @questionairre.id)
     end
   end
+
+ 
+
 end

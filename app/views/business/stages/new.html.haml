@@ -1,22 +1,23 @@
 .container
   .sidebar
     %ul
-      %li= link_to "Job Details", edit_business_job_path(@job)
-      %li= link_to "Hiring Team", new_business_job_hiring_team_path(@job)
-      %li= link_to "Recruitment Process", new_business_job_stage_path(@job)
-      %li= link_to "Questionairre", @job.questionairre.present? ? edit_business_job_questionairre_path(@job, @questionairre.id) : new_business_job_questionairre_path(@job.id)
+      %li{:class => is_active?(edit_business_job_path(@job))}
+        = link_to "Job Details", edit_business_job_path(@job)
+      %li{:class => is_active?(new_business_job_hiring_team_path(@job))}
+        = link_to "Hiring Team", new_business_job_hiring_team_path(@job)
+      %li{:class => is_active?(new_business_job_stage_path(@job))}
+        = link_to "Recruitment Process", new_business_job_stage_path(@job)
+      %li{:class => is_active?(@job.questionairre.present? ? edit_business_job_questionairre_path(@job, @questionairre.id) : new_business_job_questionairre_path(@job.id))}
+        = link_to "Questionairre", @job.questionairre.present? ? edit_business_job_questionairre_path(@job, @questionairre.id) : new_business_job_questionairre_path(@job.id)
       %li Scorecard
       %li Post Job 
 
-
   %main.col-md-8    
-    %h1 Recruitment Process
-    %p These are the stages that an applicant will go through during the recruitment process. You can set ToDo's for each stage to remind team members what must be done in each stage. You will be able to cross off ToDo's for individual applicants in order to track their individual progress. 
-    = render "form"
-
-    .stages.col-md-10 
-      %div{:id => 'stages', :data => {:update_url => sort_business_job_stages_path(@job)}}    
-        = render "create_stages", stages: @stages
+    %h3 Recruitment Process
+    %p Create the stages for your recruitment process, add ToDo's and Interview templates for each stage. 
+    
+    = render "form" 
+    = render "create_stages", stages: @stages
 
     .modal
       .modal-dialog
@@ -25,6 +26,10 @@
             %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
             %h3.modal-title Edit Stage 
           .modal-body
+              
+
+              
+
 
             
 
