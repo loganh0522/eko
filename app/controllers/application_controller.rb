@@ -45,6 +45,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def has_a_scorecard
+    @job = Job.find(params[:job_id])
+    @scorecard = Scorecard.where(job_id: @job.id).first
+
+    if @job.scorecard.present? 
+      redirect_to edit_business_job_scorecard_path(@job.id, @scorecard.id)
+    end
+  end
+
  
 
 end

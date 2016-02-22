@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222114516) do
+ActiveRecord::Schema.define(version: 20160222130141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,21 @@ ActiveRecord::Schema.define(version: 20160222114516) do
     t.integer "questionairre_id"
     t.integer "required"
     t.integer "position"
+  end
+
+  create_table "scorecard_sections", force: :cascade do |t|
+    t.integer "scorecard_id"
+    t.string  "body"
+  end
+
+  create_table "scorecards", force: :cascade do |t|
+    t.integer "job_id"
+    t.integer "application_id"
+  end
+
+  create_table "section_options", force: :cascade do |t|
+    t.integer "scorecard_section_id"
+    t.string  "body"
   end
 
   create_table "sent_messages", force: :cascade do |t|

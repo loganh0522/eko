@@ -1,0 +1,11 @@
+.question-area 
+  .fieldset.questions 
+    = f.label :Section      
+    = link_to "Remove", '#', class: "remove_question"
+    = f.text_field :body, class: "form-control questions", placeholder: "Add your Question"
+    = f.hidden_field :_destroy
+    
+  = f.fields_for :section_options, class: "options" do |a|
+    = render 'section_option_fields', f: a
+  
+  = link_to_add_fields("Add Criteria", f, :section_options)

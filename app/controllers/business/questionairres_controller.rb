@@ -1,7 +1,7 @@
 class Business::QuestionairresController < ApplicationController 
   before_filter :require_user
   before_filter :belongs_to_company
-  before_filter :has_a_questionairre, only: [:new]
+  before_filter :has_a_questionairre, only: [:new, :create]
 
   def new
     @job = Job.find(params[:job_id])

@@ -15,7 +15,8 @@
 
   %main.col-md-8    
     %h1 Application Form
-    %p These are the stages that an applicant will go through during the recruitment process. You can set ToDo's for each stage to remind team members what must be done in each stage. You will be able to cross off ToDo's for individual applicants in order to track their individual progress. 
+    %p Create an application form that job seekers have to complete upon applying to the job. 
+    %p You do not need to ask for things like name, email, resume and contact info, these are already included in an application.
 
     .col-md-10
       = form_for [:business, @job, @questionairre] do |f|
@@ -26,5 +27,7 @@
         = link_to_add_fields "Add Question", f, :questions    
 
         = f.hidden_field :job_id, value: @job.id
+        %br
+        %br
         = f.submit "Create Form", class: "submit btn btn-primary"
 

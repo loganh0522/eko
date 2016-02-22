@@ -19,9 +19,10 @@
     .col-md-10
       = form_for [:business, @job, @questionairre] do |f|
 
-        = f.fields_for :questions do |q| 
-          = render 'question_fields', f: q 
-  
+        = f.fields_for :questions, Question.new do |q| 
+          = render "question_fields", f: q
+
+        %br
         = link_to_add_fields "Add Question", f, :questions    
 
         = f.hidden_field :job_id, value: @job.id

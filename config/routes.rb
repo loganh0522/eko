@@ -49,7 +49,7 @@ Rails.application.routes.draw do
       resources :applicants
       resources :hiring_teams
       resources :questionairres
-      
+      resources :scorecards
       resources :stages do 
         collection do
           post :sort
