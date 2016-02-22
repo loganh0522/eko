@@ -1,7 +1,10 @@
 .question-area 
   .fieldset.questions 
-    = f.label :Question
+    = f.label :Question      
     = link_to "Remove", '#', class: "remove_question"
+    %br
+    = f.check_box :required, checked_value: 1, unchecked_value: 0
+    = f.label :required, "Required"
     = f.text_field :body, class: "form-control questions", placeholder: "Add your Question"
     = f.select :kind, ['Text', 'Paragraph', 'Checkbox', 'Multiple Choice'],{}, {:class => 'question-type'}
     = f.hidden_field :_destroy

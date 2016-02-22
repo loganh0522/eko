@@ -13,8 +13,9 @@
       %li Post Job 
 
 
-  %main.col-md-8    
+  .hiring_team    
     %h3 Team Members 
+    .details
     %p Add Team Members to this job opening. 
     
     = form_for [:business, @job, @hiring_team] do |f| 
@@ -25,26 +26,28 @@
         = f.hidden_field :job_id, value: @job.id
         = f.submit "+ Add Member", class: "btn btn-primary"
 
-    = link_to "Invite Colleague", new_business_invitation_path, {:data => {:toggle => "modal", :target => "#myModal"}}
+    = link_to "+ Invite Colleague", new_business_invitation_path,  {:class => "invite", :data => {:toggle => "modal", :target => "#myModal"}}
       
     = render "invitation_form"
 
     .user-list
-      %table.table
+      %table
         %thead
           %tr
-            %th First Name
-            %th Last Name
-            %th E-mail
+            %th(width="1%")
+            %th(width="20%")
+            %th(width="20%")
+            %th.delete(width="20%")
         %tbody
           - @users.each do |user|
             %tr
               %td
-                %p= user.first_name
+                %img.circle(src="/tmp/man.jpg")
               %td
-                %p= user.last_name
+                %p.name= "#{user.first_name} #{user.last_name}"
+                %p.email= user.email
               %td
-                %p= user.email
+                %p.permissions Hiring Manager
               %td
-                %p= link_to 'Delete', business_job_hiring_team_path(@job.id, user.id), remote: true, :method => :delete
-
+                = link_to business_job_hiring_team_path(@job.id, user.id), remote: true, :method => :delete do
+                  %i.glyphicon.glyphicon-remove

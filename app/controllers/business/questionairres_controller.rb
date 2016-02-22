@@ -41,6 +41,6 @@ class Business::QuestionairresController < ApplicationController
   private
 
   def q_params 
-    params.require(:questionairre).permit(:job_id, questions_attributes: [:id, :body, :_destroy, question_options_attributes: [:id, :body, :_destroy]])
+    params.require(:questionairre).permit(:job_id, questions_attributes: [:id, :body, :required, :kind, :_destroy, question_options_attributes: [:id, :body, :_destroy]])
   end
 end

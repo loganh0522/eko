@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218192613) do
+ActiveRecord::Schema.define(version: 20160222114516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(version: 20160218192613) do
     t.text    "kind"
     t.integer "questionairre_id"
     t.integer "required"
+    t.integer "position"
   end
 
   create_table "sent_messages", force: :cascade do |t|
