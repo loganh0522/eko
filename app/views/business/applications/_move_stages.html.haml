@@ -1,0 +1,14 @@
+.modal#stageModal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title Move Applicants  
+      = form_tag move_multiple_business_job_applications_path(@job), html: {class: 'invite'} do |f|
+        .modal-body
+          %fieldset
+            .form-group.col-md-10
+               
+        .modal-footer
+        %input(type="submit" value="Move to Next Stage" class="btn btn-success")
+          

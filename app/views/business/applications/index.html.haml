@@ -15,9 +15,9 @@
 .job-applicants
   %h1 Applicants  
   %form_tag   
-    = link_to "Move Stages", business_job_move_stages_path, {:data => {:toggle => "modal", :target => "#stageModal"}}
-    = render "move_stages"
+    = link_to "Move Stages", move_multiple_business_job_applications_path(@job), {:data => {:toggle => "modal", :target => "#stageModal"}}
 
+    = render "move_stages"
     %table.table
       %thead
         %tr
@@ -43,26 +43,3 @@
               %h6 May 22, 2015
             %td
               %h4 New Applicant
-
-
-      / .modal.col-md-6.col-md-offset-4
-      /   .panel.panel-primary
-      /     .panel-heading 
-      /       %h4 Move Applicants 
-      /     .panel-body
-      /       %p Move the selected applicants to a new stage, by selecting the stage below. 
-            
-      /       = form_for @job do |f|
-      /         %fieldset
-      /           / = f.hidden_field :job_id, value: @job.id
-      /           / = f.label :stage_id 
-      /           / = f.collection_select :stage_id, @stages.all, :id, :name
-      /     .panel-footer
-      /       %input(type="submit" value="Sign Up" class="btn btn-primary")
-      / .modal-layer
-
-    / %input(type="submit" value="Message" class="btn btn-primary")
-    / %input(type="submit" value="Add Comment" class="btn btn-primary")
-
-
-

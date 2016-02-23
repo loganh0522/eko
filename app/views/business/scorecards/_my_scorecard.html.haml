@@ -1,0 +1,32 @@
+.modal#scorecardModal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title My Scorecard
+
+      .modal-body
+          
+        - @sections.each do |section|
+          %table.table
+            %thead
+              %tr
+                %th(width="20%")= section.body
+                %th(width="80%")
+            - section.section_options.each do |criteria|
+              %tbody
+                %tr
+                  %td= criteria.body
+                  %td 
+                    = form_for [:business, @job, @application, @rating] do |f|
+                      = f.check_box :rating do 
+                        %i.glyphicon.glyphicon-ok
+                      = f.check_box :rating 
+                      = f.check_box :rating 
+                      = f.check_box :rating 
+                    
+                    
+
+
+
+      

@@ -17,20 +17,32 @@
         .li= link_to "Notes", business_job_application_comments_path(@job.id, @application.id)
         .li Assessments 
         .li= link_to "Scorecard", business_job_application_scorecards_path(@job.id, @application.id)
-
-    .add-comment-on-applicant
-      = form_for [:business, @job, @application, @comment] do |f|
-        = f.text_area :body, rows: 2, class: "form-control", label: "Add Feedback", placeholder: "Add a note about #{@user.first_name} #{@user.last_name}"
-        = f.hidden_field :user_id, value: current_user.id
-        = f.hidden_field :application_id, value: @application.id
-        = f.submit "+ Add", class: "btn btn-primary"
-
+      
     .applicant-experience
       .header
-        %h3 Experience
-      
+        %h3 Scorecard
+        = link_to "My Scorecard", new_business_job_application_scorecard_rating_path(@job, @application), {:data => {:toggle => "modal", :target => "#scorecardModal"}}
+        = render "my_scorecard"
+        
       .experience
-        = render 'job_seeker/profiles/experience'
+
+
+        %h4 Overall Rating 
+        - @sections.each do |section|
+          %table.table
+            %thead
+              %tr
+                %th(width="20%")= section.body
+                %th(width="80%")
+            - section.section_options.each do |criteria|
+              %tbody
+                %tr
+                  %td= criteria.body
+                  %td 100
+
+
+
+        
 
   .applicant-side-container
     .current-stage
@@ -54,5 +66,4 @@
       = form_tag do
         = text_area_tag(:q)
 
-.footer 
-
+.footer

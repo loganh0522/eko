@@ -3,6 +3,23 @@ class Business::ScorecardsController < ApplicationController
   before_filter :belongs_to_company
   before_filter :has_a_scorecard, only: [:new, :create]
 
+  def index 
+    @rating = ScorecardRating.new
+    @job = Job.find(params[:job_id])
+    @comment = Comment.new
+    @application = Application.find(params[:application_id])
+    @user = @application.applicant
+    @positions = @user.work_experiences
+    @comments = @application.comments
+    @stage = @application.stage
+
+
+    @scorecard = Scorecard.where(job_id: params[:job_id]).first
+    @sections = @scorecard.scorecard_sections
+
+
+  end
+
   def new 
     @job = Job.find(params[:job_id])
     @questionairre = @job.questionairre
@@ -38,6 +55,12 @@ class Business::ScorecardsController < ApplicationController
       flash[:error] = "Something went wrong"
       render :edit
     end
+  end
+
+  def my_scorecard
+    @job = Job.find(params[:job_id])
+    @application = Application.find(params[:application_id])
+    @rating = SectionOptionRating.new
   end
 
   private

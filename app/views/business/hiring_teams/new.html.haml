@@ -26,7 +26,7 @@
         = f.hidden_field :job_id, value: @job.id
         = f.submit "+ Add Member", class: "btn btn-primary"
 
-    = link_to "+ Invite Colleague", new_business_invitation_path,  {:class => "invite", :data => {:toggle => "modal", :target => "#myModal"}}
+    = link_to "+ Invite Colleague", new_business_invitation_path, {:class => "invite", :data => {:toggle => "modal", :target => "#myModal"}}
       
     = render "invitation_form"
 

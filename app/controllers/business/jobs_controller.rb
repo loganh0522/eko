@@ -44,6 +44,10 @@ class Business::JobsController < ApplicationController
     end
   end
 
+  def move_stages
+
+  end
+
   private 
 
   def job_params

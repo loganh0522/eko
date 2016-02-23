@@ -27,26 +27,35 @@ Rails.application.routes.draw do
     resources :profiles
     resources :work_experiences
     resources :applications, only: [:create]
+    resources :question_answers
   end
 
   namespace :business do 
     root to: "jobs#index" 
 
-    resources :comments  
     resources :users
     resources :invitations
     resources :locations   
     resources :customers
     resources :job_boards
     
-
-    
     resources :jobs do 
       resources :applications do
         resources :comments
+        resources :scorecard_ratings
+        
+        resources :scorecards do 
+          collection do 
+            post :my_scorecard
+          end
+        end
+        
         post :move_stages
+        collection do 
+          post :move_multiple
+        end
       end
-      resources :applicants
+      
       resources :hiring_teams
       resources :questionairres
       resources :scorecards

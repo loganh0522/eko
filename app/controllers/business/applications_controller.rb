@@ -1,15 +1,18 @@
 class Business::ApplicationsController < ApplicationController
   
-  def show 
-    @user = User.find(params[:id])
+  def index
     @job = Job.find(params[:job_id])
-    @application = Application.where(user_id: params[:id], job_id: params[:job_id]).first
+    @applicants = @job.applicants
+    @stages = @job.stages
+  end
+
+  def show 
+    @application = Application.find(params[:id])
+    @user = @application.applicant
+    @job = Job.find(params[:job_id])
     @stage = @application.stage
     @positions = @user.work_experiences
-
-
-    @comment = Comment.new
-    
+    @comment = Comment.new 
   end
 
   def edit
@@ -18,6 +21,10 @@ class Business::ApplicationsController < ApplicationController
 
   def update
 
+  end
+
+  def move_multiple
+    @applications = Application.find(params[:application_ids])
   end
 
   def move_stages 

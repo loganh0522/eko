@@ -19,7 +19,7 @@
         .li Scorecard
 
     .add-comment-on-applicant
-      = form_for [:business, @comment] do |f|
+      = form_for [:business, @job, @application, @comment] do |f|
         = f.text_area :body, rows: 2, class: "form-control", label: "Add Feedback", placeholder: "Add a note about #{@user.first_name} #{@user.last_name}"
         = f.hidden_field :user_id, value: current_user.id
         = f.hidden_field :application_id, value: @application.id
