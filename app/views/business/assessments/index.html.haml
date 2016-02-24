@@ -18,23 +18,32 @@
         .li= link_to "Assessments", business_job_application_assessments_path(@job.id, @application.id)
         .li= link_to "Scorecard", business_job_application_scorecards_path(@job.id, @application.id)
 
-    .add-comment-on-applicant
-      = form_for [:business, @job, @application, @comment] do |f|
-        = f.text_area :body, rows: 2, class: "form-control", label: "Add Feedback", placeholder: "Add a note about #{@user.first_name} #{@user.last_name}"
-        = f.hidden_field :user_id, value: current_user.id
-        = f.hidden_field :application_id, value: @application.id
-        = f.submit "+ Add", class: "btn btn-primary"
+    / .add-comment-on-applicant
+    /   = form_for [:business, @job, @application, @comment] do |f|
+    /     = f.text_area :body, rows: 2, class: "form-control", label: "Add Feedback", placeholder: "Add a note about #{@user.first_name} #{@user.last_name}"
+    /     = f.hidden_field :user_id, value: current_user.id
+    /     = f.hidden_field :application_id, value: @application.id
+    /     = f.submit "+ Add", class: "btn btn-primary"
 
     .applicant-experience
       .header
-        %h3 Experience
+        %h3 Assessments
       
       .experience
-        = render 'job_seeker/profiles/experience'
-
+        - @questions.each do |question|
+          %h4= question.body
+          - if question.kind == 'Text' || question.kind == 'Paragraph'
+            %p= question.question_answer.body
+          - if question.kind == 'Checkbox'
+            - question.question_options.each do |option|
+              - if question.question_answer.question_option_id == option.id
+                %b= option.body
+              - else 
+                %p= option.body
+            
   .applicant-side-container
     .current-stage
-      %h4= "Current Stage: "
+      %h4= "Current Stage: #{stage.name}"
 
       = form_tag business_job_application_move_stages_path(@job.id, @application) do
         %input(type="submit" value="Move to Next Stage" class="btn btn-success")
@@ -55,4 +64,3 @@
         = text_area_tag(:q)
 
 .footer 
-

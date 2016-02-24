@@ -42,8 +42,8 @@ Rails.application.routes.draw do
     resources :jobs do 
       resources :applications do
         resources :comments
-        resources :scorecard_ratings
-        
+        resources :application_scorecards
+        resources :assessments
         resources :scorecards do 
           collection do 
             post :my_scorecard

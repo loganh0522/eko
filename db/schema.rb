@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160223161547) do
+ActiveRecord::Schema.define(version: 20160224153728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "application_scorecards", force: :cascade do |t|
+    t.integer "scorecard_id"
+    t.integer "user_id"
+    t.integer "job_id"
+    t.text    "feedback"
+    t.integer "application_id"
+  end
 
   create_table "applications", force: :cascade do |t|
     t.integer "job_id"
@@ -174,9 +182,9 @@ ActiveRecord::Schema.define(version: 20160223161547) do
 
   create_table "scorecard_ratings", force: :cascade do |t|
     t.integer "section_option_id"
-    t.integer "user_id"
-    t.integer "application_id"
     t.integer "rating"
+    t.integer "user_id"
+    t.integer "application_scorecard_id"
   end
 
   create_table "scorecard_sections", force: :cascade do |t|

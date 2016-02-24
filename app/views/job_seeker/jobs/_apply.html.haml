@@ -14,7 +14,7 @@
                   = q.text_area :body
                 - if question.kind == 'Checkbox'
                   = q.hidden_field  :question_id, value: question.id
-                  = q.collection_check_boxes(:question_option_id, question.question_options.all, :id, :body)
+                  = q.collection_radio_buttons(:question_option_id, question.question_options.all, :id, :body)
 
             .fieldset
               .form-group.col-md-12

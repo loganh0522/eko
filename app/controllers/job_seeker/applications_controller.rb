@@ -25,7 +25,7 @@ class JobSeeker::ApplicationsController < JobSeekersController
   private 
 
   def application_params 
-    params.require(:application).permit(:user_id, :job_id, question_answers_attributes: [:id, :body, :question_id, question_option_id: [1]])
+    params.require(:application).permit(:user_id, :job_id, question_answers_attributes: [:id, :body, :question_id, :question_option_id])
   end
 
   def create_application

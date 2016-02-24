@@ -4,26 +4,40 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
         %h4.modal-title My Scorecard
-
-      .modal-body
-          
-        - @sections.each do |section|
-          %table.table
-            %thead
-              %tr
-                %th(width="20%")= section.body
-                %th(width="80%")
-            - section.section_options.each do |criteria|
-              %tbody
+      
+      .modal-body    
+        = form_for [:business, @job, @application, @application_scorecard] do |f|
+          - @sections.each do |section|
+            %table.table
+              %thead
                 %tr
-                  %td= criteria.body
-                  %td 
-                    = form_for [:business, @job, @application, @rating] do |f|
-                      = f.check_box :rating do 
-                        %i.glyphicon.glyphicon-ok
-                      = f.check_box :rating 
-                      = f.check_box :rating 
-                      = f.check_box :rating 
+                  %th(width="20%")= section.body
+                  %th(width="80%")
+              - section.section_options.each do |criteria|
+                %tbody
+                  %tr
+                    %td= criteria.body
+                    %td 
+                      = f.fields_for :scorecard_ratings, ScorecardRating.new do |q|
+                        = q.hidden_field :section_option_id, value: criteria.id
+                        = q.hidden_field :user_id, value: current_user.id
+                        %label 
+                          = q.radio_button :rating, 1
+                          %i.glyphicon.glyphicon-remove
+                        %label 
+                          = q.radio_button :rating, 2
+                          %i.glyphicon.glyphicon-thumbs-down
+                        %label 
+                          = q.radio_button :rating, 3
+                          %i.glyphicon.glyphicon-thumbs-up
+                        %label 
+                          = q.radio_button :rating, 4
+                          %i.glyphicon.glyphicon-star
+            = f.hidden_field :application_id, value: @application.id
+            = f.hidden_field :user_id, value: current_user.id
+            = f.hidden_field :scorecard_id, value: @scorecard.id
+          = f.submit "Submit", class: "btn btn-primary"
+                      
                     
                     
 

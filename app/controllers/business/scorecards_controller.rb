@@ -4,20 +4,17 @@ class Business::ScorecardsController < ApplicationController
   before_filter :has_a_scorecard, only: [:new, :create]
 
   def index 
-    @rating = ScorecardRating.new
+    @application_scorecard = ApplicationScorecard.new
     @job = Job.find(params[:job_id])
-    @comment = Comment.new
     @application = Application.find(params[:application_id])
-    @user = @application.applicant
-    @positions = @user.work_experiences
-    @comments = @application.comments
     @stage = @application.stage
-
 
     @scorecard = Scorecard.where(job_id: params[:job_id]).first
     @sections = @scorecard.scorecard_sections
+      
+    @application_scorecards = @application.application_scorecards
 
-
+    @current_user_scorecard = current_user.application_scorecards.where(application_id: params[:application_id], user_id: current_user.id).first
   end
 
   def new 

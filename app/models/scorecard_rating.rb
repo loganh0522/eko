@@ -1,3 +1,3 @@
 class ScorecardRating < ActiveRecord::Base 
-  belongs_to :section_options
+  belongs_to :application_scorecard
 end

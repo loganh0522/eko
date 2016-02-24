@@ -15,18 +15,22 @@
         .li Profile
         .li Messages 
         .li= link_to "Notes", business_job_application_comments_path(@job.id, @application.id)
-        .li Assessments 
+        .li= link_to "Assessments", business_job_application_assessments_path(@job.id, @application.id) 
         .li= link_to "Scorecard", business_job_application_scorecards_path(@job.id, @application.id)
       
     .applicant-experience
       .header
         %h3 Scorecard
-        = link_to "My Scorecard", new_business_job_application_scorecard_rating_path(@job, @application), {:data => {:toggle => "modal", :target => "#scorecardModal"}}
-        = render "my_scorecard"
+        - if @current_user_scorecard.present? 
+          = link_to "My Scorecard", edit_business_job_application_application_scorecard_path(@job, @application, @current_user_scorecard), {:data => {:toggle => "modal", :target => "#edit_scorecardModal"}} 
+          = render "edit_my_scorecard" 
+        - else 
+          = link_to "My Scorecard", new_business_job_application_application_scorecard_path(@job, @application), {:data => {:toggle => "modal", :target => "#scorecardModal"}} 
+          = render "my_scorecard"
+        
+        
         
       .experience
-
-
         %h4 Overall Rating 
         - @sections.each do |section|
           %table.table
@@ -38,11 +42,17 @@
               %tbody
                 %tr
                   %td= criteria.body
-                  %td 100
-
-
-
-        
+                  %td
+                    - @application_scorecards.each do |scorecard| 
+                      - scorecard.scorecard_ratings.each do |rating|
+                        - if rating.rating == 1 && rating.section_option_id == criteria.id
+                          %i.glyphicon.glyphicon-remove
+                        - elsif rating.rating == 2 && rating.section_option_id == criteria.id
+                          %i.glyphicon.glyphicon-thumbs-down
+                        - elsif rating.rating == 3 && rating.section_option_id == criteria.id
+                          %i.glyphicon.glyphicon-thumbs-up
+                        - elsif rating.rating == 4 && rating.section_option_id == criteria.id
+                          %i.glyphicon.glyphicon-star
 
   .applicant-side-container
     .current-stage

@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :hiring_teams
   has_many :jobs, through: :hiring_teams
-
+  has_many :application_scorecards
   has_many :invitations
 
   validates_presence_of :first_name, :last_name, :email, :password
