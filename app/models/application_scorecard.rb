@@ -3,5 +3,5 @@ class ApplicationScorecard < ActiveRecord::Base
   belongs_to :application
   belongs_to :user
 
-  accepts_nested_attributes_for :scorecard_ratings
+  accepts_nested_attributes_for :scorecard_ratings, allow_destroy: :true
 end

@@ -6,5 +6,6 @@ class Business::AssessmentsController < ApplicationController
     @questionairre = @job.questionairre
     @questions = @questionairre.questions
     @answers = @application.question_answers
+    @stage = @application.stage
   end
 end

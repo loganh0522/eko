@@ -12,7 +12,7 @@
       
     .applicant-nav-bar  
       .ul 
-        .li Profile
+        .li= link_to "Profile", business_job_application_path(@job.id, @application.id)
         .li Messages 
         .li= link_to "Notes", business_job_application_comments_path(@job.id, @application.id)
         .li= link_to "Assessments", business_job_application_assessments_path(@job.id, @application.id) 

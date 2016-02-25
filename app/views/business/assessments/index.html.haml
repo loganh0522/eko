@@ -12,10 +12,10 @@
       
     .applicant-nav-bar  
       .ul 
-        .li Profile
+        .li= link_to "Profile", business_job_application_path(@job.id, @application.id)
         .li Messages 
         .li= link_to "Notes", business_job_application_comments_path(@job.id, @application.id)
-        .li= link_to "Assessments", business_job_application_assessments_path(@job.id, @application.id)
+        .li= link_to "Assessments", business_job_application_assessments_path(@job.id, @application.id) 
         .li= link_to "Scorecard", business_job_application_scorecards_path(@job.id, @application.id)
 
     / .add-comment-on-applicant
@@ -43,7 +43,7 @@
             
   .applicant-side-container
     .current-stage
-      %h4= "Current Stage: #{stage.name}"
+      %h4= "Current Stage: #{@stage.name}"
 
       = form_tag business_job_application_move_stages_path(@job.id, @application) do
         %input(type="submit" value="Move to Next Stage" class="btn btn-success")

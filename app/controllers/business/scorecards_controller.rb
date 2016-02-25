@@ -14,7 +14,7 @@ class Business::ScorecardsController < ApplicationController
       
     @application_scorecards = @application.application_scorecards
 
-    @current_user_scorecard = current_user.application_scorecards.where(application_id: params[:application_id], user_id: current_user.id).first
+    @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first
   end
 
   def new 

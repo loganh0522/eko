@@ -20,12 +20,20 @@ class Business::ApplicationScorecardsController < ApplicationController
   end
 
   def update
-    binding.pry
+    @job = Job.find(params[:job_id])
+    @application = Application.find(params[:application_id])
+    @application_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first
+
+    if @application_scorecard.update(application_scorecard_params)
+      redirect_to business_job_application_scorecards_path(@job.id, @application.id)
+    else
+      redirect_to business_job_application_scorecards_path(@job.id, @application.id), {:data => {:toggle => "modal", :target => "#edit_scorecardModal"}}
+    end
   end
 
   private 
 
   def application_scorecard_params 
-    params.require(:application_scorecard).permit(:application_id, :user_id, :scorecard_id, :job_id, scorecard_ratings_attributes: [:id, :section_option_id, :user_id, :rating])
+    params.require(:application_scorecard).permit(:id, :application_id, :user_id, :scorecard_id, :job_id, :_destroy, scorecard_ratings_attributes: [:id, :section_option_id, :user_id, :rating, :_destroy])
   end
 end
