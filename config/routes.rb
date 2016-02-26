@@ -41,6 +41,10 @@ Rails.application.routes.draw do
     
     resources :jobs do 
       resources :applications do
+        collection do 
+          post :update_multiple, to: "applications#update_multiple"
+        end
+        
         resources :comments
         resources :application_scorecards
         resources :assessments
@@ -48,12 +52,7 @@ Rails.application.routes.draw do
           collection do 
             post :my_scorecard
           end
-        end
-        
-        post :move_stages
-        collection do 
-          post :move_multiple
-        end
+        end      
       end
       
       resources :hiring_teams

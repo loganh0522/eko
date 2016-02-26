@@ -23,8 +23,14 @@ class Business::ApplicationsController < ApplicationController
 
   end
 
-  def move_multiple
-    @applications = Application.find(params[:application_ids])
+  def update_multiple
+    @job = Job.find(params[:job_id])
+    applicant_ids = params[:applicant_ids].split(',')
+    applicant_ids.each do |id| 
+      @application = Application.where(user_id: id, job_id: params[:job_id]).first
+      @application.update_attribute(:stage_id, params[:stage][:stage_id])
+    end
+    redirect_to business_job_path(@job)
   end
 
   def move_stages 

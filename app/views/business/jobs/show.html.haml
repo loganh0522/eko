@@ -15,8 +15,13 @@
 .job-applicants
   %h1 Applicants  
   %form_tag   
-    = link_to "Move Stages", business_job_move_stages_path, {:data => {:toggle => "modal", :target => "#stageModal"}}
-    = render "move_stages"
+    = render "business/applications/move_stages"
+    = render "business/comments/add_comment"
+    %input(type= "submit" value= "Move Stages" class= "move_action btn btn-primary" data-toggle = "modal" data-target = "#stageModal")
+    %input(type= "submit" value= "Add Note" class= "btn btn-primary" data-toggle = "modal" data-target = "#add_commentModal")
+    %input(type= "submit" value= "Message" class= "btn btn-primary")
+    %input(type= "submit" value= "Delete" class= "btn btn-primary")
+    
 
     %table.table
       %thead
