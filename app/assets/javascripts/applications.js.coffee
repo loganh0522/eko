@@ -11,9 +11,17 @@ jQuery ->
       console.log($(n).find('input').is(':checked'))
       if $(n).find('input').is(':checked') == true
         applicants.push($(n).data('id'))
-        console.log("is check")
 
-    console.log(applicants)
     $('#stageModal').find('form').find('#applicant_ids').val(applicants)
 
+  $('form_tag').on 'click', '.add_note_action', (event) ->
+    checkbox = $('.checkbox')
+    applicants = []
+
+    for n in checkbox 
+      console.log($(n).find('input').is(':checked'))
+      if $(n).find('input').is(':checked') == true
+        applicants.push($(n).data('id'))
+
+    $('#add_commentModal').find('form').find('#applicant_ids').val(applicants)
       

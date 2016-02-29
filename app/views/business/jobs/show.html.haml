@@ -18,7 +18,7 @@
     = render "business/applications/move_stages"
     = render "business/comments/add_comment"
     %input(type= "submit" value= "Move Stages" class= "move_action btn btn-primary" data-toggle = "modal" data-target = "#stageModal")
-    %input(type= "submit" value= "Add Note" class= "btn btn-primary" data-toggle = "modal" data-target = "#add_commentModal")
+    %input(type= "submit" value= "Add Note" class= "add_note_action btn btn-primary" data-toggle = "modal" data-target = "#add_commentModal")
     %input(type= "submit" value= "Message" class= "btn btn-primary")
     %input(type= "submit" value= "Delete" class= "btn btn-primary")
     
@@ -26,7 +26,7 @@
     %table.table
       %thead
         %tr
-          %th(width="1%") 
+          %th(width="1%")= check_box_tag "select_all"
           %th(width="5%")
           %th(width="20%") Name 
           %th(width="20%") Job Title

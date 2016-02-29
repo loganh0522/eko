@@ -33,6 +33,19 @@ class Business::ApplicationsController < ApplicationController
     redirect_to business_job_path(@job)
   end
 
+  def add_note_multiple 
+    binding.pry
+    @job = Job.find(params[:job_id])  
+    applicant_ids = params[:applicant_ids].split(',')
+    
+    applicant_ids.each do |id| 
+      @application = Application.where(user_id: id, job_id: params[:job_id]).first
+      Comment.create(body: params[:comment], user_id: current_user.id, application_id: @application.id)
+    end
+
+    redirect_to business_job_path(@job)
+  end
+
   def move_stages 
     app = Application.find(params[:application_id])
     current_stage = app.stage

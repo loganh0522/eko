@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       resources :applications do
         collection do 
           post :update_multiple, to: "applications#update_multiple"
+          post :add_note_multiple, to: "applications#add_note_multiple"
         end
         
         resources :comments
@@ -52,7 +53,9 @@ Rails.application.routes.draw do
           collection do 
             post :my_scorecard
           end
-        end      
+        end  
+
+        post :move_stages    
       end
       
       resources :hiring_teams
