@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224153728) do
+ActiveRecord::Schema.define(version: 20160229175256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,15 @@ ActiveRecord::Schema.define(version: 20160224153728) do
     t.integer "subsidiary_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text     "body"
+    t.string   "subject"
+    t.integer  "application_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "question_answers", force: :cascade do |t|
     t.text    "body"
     t.integer "question_id"
@@ -200,13 +209,6 @@ ActiveRecord::Schema.define(version: 20160224153728) do
   create_table "section_options", force: :cascade do |t|
     t.integer "scorecard_section_id"
     t.string  "body"
-  end
-
-  create_table "sent_messages", force: :cascade do |t|
-    t.text    "body"
-    t.string  "subject"
-    t.integer "application_id"
-    t.integer "user_id"
   end
 
   create_table "stages", force: :cascade do |t|

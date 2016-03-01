@@ -9,10 +9,10 @@ Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
 .container
   .sidebar
     %ul
-      %li Company Profile 
-      %li Team Members
+      %li= link_to "Career Portal"
+      %li= link_to "Team Members", business_users_path
       %li Job Templates
-      %li Locations
+      %li= link_to "Locations", business_locations_path
       %li Subscription 
       %li Billing 
       %li My Profile

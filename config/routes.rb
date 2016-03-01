@@ -43,9 +43,11 @@ Rails.application.routes.draw do
       resources :applications do
         collection do 
           post :update_multiple, to: "applications#update_multiple"
-          post :add_note_multiple, to: "applications#add_note_multiple"
+          post :add_note_multiple, to: "comments#add_note_multiple"
+          post :send_multiple_messages, to: "messages#send_multiple_messages"
         end
         
+        resources :messages
         resources :comments
         resources :application_scorecards
         resources :assessments

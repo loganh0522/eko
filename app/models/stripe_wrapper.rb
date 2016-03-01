@@ -1,5 +1,4 @@
 module StripeWrapper 
-
   class Charge 
     attr_reader :error_message, :response
     

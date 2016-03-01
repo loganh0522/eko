@@ -5,6 +5,7 @@ class Application < ActiveRecord::Base
   
   has_many :comments
   has_many :application_scorecards
+  has_many :messages
 
   has_many :question_answers, dependent: :destroy
   accepts_nested_attributes_for :question_answers, allow_destroy: true

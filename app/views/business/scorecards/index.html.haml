@@ -13,7 +13,7 @@
     .applicant-nav-bar  
       .ul 
         .li= link_to "Profile", business_job_application_path(@job.id, @application.id)
-        .li Messages 
+        .li= link_to "Messages", business_job_application_messages_path(@job.id, @application.id) 
         .li= link_to "Notes", business_job_application_comments_path(@job.id, @application.id)
         .li= link_to "Assessments", business_job_application_assessments_path(@job.id, @application.id) 
         .li= link_to "Scorecard", business_job_application_scorecards_path(@job.id, @application.id)

@@ -1,4 +1,5 @@
 class Business::CommentsController < ApplicationController 
+  
   def index
     @job = Job.find(params[:job_id])
     @comment = Comment.new
@@ -20,6 +21,17 @@ class Business::CommentsController < ApplicationController
     end
   end
 
+  def add_note_multiple 
+    binding.pry
+    @job = Job.find(params[:job_id])  
+    applicant_ids = params[:applicant_ids].split(',')
+    
+    applicant_ids.each do |id| 
+      @application = Application.where(user_id: id, job_id: params[:job_id]).first
+      Comment.create(body: params[:comment], user_id: current_user.id, application_id: @application.id)
+    end
+    redirect_to business_job_path(@job)
+  end
 
   private 
 
