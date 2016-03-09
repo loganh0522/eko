@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   
   
   resources :job_boards
-  
+  resources :jobs
+  resources :companies
+
   match '/', to: "job_boards#index", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
   match 'login', to: "sessions#subdomain_new", constraints: {subdomain: /.+/}, via: [:get]
   match 'login', to: "sessions#create", constraints: {subdomain: /.+/}, via: [:post]
@@ -35,9 +37,19 @@ Rails.application.routes.draw do
 
     resources :users
     resources :invitations
-    resources :locations   
-    resources :customers
+    resources :locations 
+    get "plan", to: "customers#plan"  
+    resources :customers do
+
+      collection do 
+        get 'cancel', to: "customers#cancel"
+        post "update_plan", to: "customers#update_plan"
+        post "cancel_subscription", to: "customers#cancel_subscription"
+      end
+    end
     resources :job_boards
+    resources :applications
+
     
     resources :jobs do 
       resources :applications do
@@ -65,19 +77,13 @@ Rails.application.routes.draw do
       resources :scorecards
       resources :stages do 
         collection do
-          post :sort
+          post :sort, to: "stages#sort"
         end 
       end
-
     end
     
     get 'invite_user', to: 'invitations#new'
     get '/signout', to: 'sessions#destroy'
-
-    resources :subsidiaries do 
-      resources :locations
-      get 'location/new', to: 'locations#new_for_subsidiary', as: 'new_location'
-    end  
   end
 
   get '/login', to: 'sessions#new'
@@ -85,10 +91,5 @@ Rails.application.routes.draw do
   get '/signout', to: 'sessions#destroy'
   
   get 'register/:token', to: 'users#new_with_invitation_token', as: 'register_with_token'
-  get 'expired_token', to: "password_resets#expired_token" 
-  
-
-  
-  resources :jobs
-  resources :companies
+  get 'expired_token', to: "password_resets#expired_token"   
 end

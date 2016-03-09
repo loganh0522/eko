@@ -1,0 +1,9 @@
+%ul
+  %li= link_to "Career Portal", edit_business_job_board_path(current_company.job_board.id)
+  %li= link_to "Team Members", business_users_path
+  %li= link_to "Subscription", business_plan_path 
+  %li= link_to "Billing", current_company.customer.present? ? business_customers_path : new_business_customer_path
+  %li My Profile
+
+/ %li Job Templates
+/ %li= link_to "Locations", business_locations_path

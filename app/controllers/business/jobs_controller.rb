@@ -16,7 +16,6 @@ class Business::JobsController < ApplicationController
 
     if @job.save && @job.company == current_company
       @job.user_ids = params[:user_ids]
-      flash[:notice] = "Your job posting #{@job.title}, was created"
       redirect_to new_business_job_hiring_team_path(@job)
     else
       render :new
@@ -32,20 +31,18 @@ class Business::JobsController < ApplicationController
   def edit
     @job = Job.find(params[:id])
     @questionairre = @job.questionairre
+    @scorecard = @job.scorecard
   end
 
   def update
     @job = Job.find(params[:id])
+    
     if @job.update(job_params)
       flash[:notice] = "#{@job.title} has been updated"
       redirect_to new_business_job_hiring_team_path(@job)
     else
       render :edit
     end
-  end
-
-  def move_stages
-
   end
 
   private 

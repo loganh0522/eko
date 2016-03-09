@@ -19,11 +19,12 @@ class Business::HiringTeamsController < ApplicationController
   def destroy
     @job = Job.find(params[:job_id])
     @hiring_member = HiringTeam.where(user_id: params[:id], job_id: params[:job_id]).first
-    @hiring_member.destroy
+    if @job.hiring_teams.include?(@hiring_member)
+      @hiring_member.destroy 
+    end
     
     redirect_to new_business_job_hiring_team_path(@job)
   end
-
 
   private 
 

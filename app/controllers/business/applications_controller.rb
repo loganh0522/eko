@@ -1,9 +1,7 @@
 class Business::ApplicationsController < ApplicationController
   
   def index
-    @job = Job.find(params[:job_id])
-    @applicants = @job.applicants
-    @stages = @job.stages
+    @applicants = current_company.applicants
   end
 
   def show 

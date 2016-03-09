@@ -1,27 +1,19 @@
-.job-show-header
-  %h2= @job.title
-  %h6= "#{@job.city}, #{@job.province}, #{@job.country}"
-
-  .job-stages  
-    %ul 
-      %li 
-        %h6 All applicants
-        %h4 50 
-      - @stages.each do |stage| 
-        %li 
-          %h6= stage.name
-          %h4= stage.applicants.count 
-
 .job-applicants
   %h1 Applicants  
   %form_tag   
-    = link_to "Move Stages", move_multiple_business_job_applications_path(@job), {:data => {:toggle => "modal", :target => "#stageModal"}}
+    / = render "business/applications/move_stages"
+    / = render "business/comments/add_comment"
+    / = render "business/messages/send_message"
+    %input(type= "submit" value= "Move Stages" class= "move_action btn btn-primary" data-toggle = "modal" data-target = "#stageModal")
+    %input(type= "submit" value= "Add Note" class= "add_note_action btn btn-primary" data-toggle = "modal" data-target = "#add_commentModal")
+    %input(type= "submit" value= "Message" class= "send_message btn btn-primary" data-toggle = "modal" data-target = "#send_messageModal")
+    %input(type= "submit" value= "Delete" class= "btn btn-primary")
+    
 
-    = render "move_stages"
     %table.table
       %thead
         %tr
-          %th(width="1%") 
+          %th(width="1%")= check_box_tag "select_all"
           %th(width="5%")
           %th(width="20%") Name 
           %th(width="20%") Job Title
@@ -36,7 +28,7 @@
             %td
               %img.circle(src="/tmp/man.jpg")
             %td
-              %h4= link_to "#{applicant.first_name} #{applicant.last_name}", business_job_application_path(@job, Application.where(user_id: applicant.id, job_id: @job).first.id)
+              %h4= link_to "#{applicant.first_name} #{applicant.last_name}", business_application_path(applicant)
               %h6 CEO - TalentWiz 
             %td
               %h4 Sales Manager

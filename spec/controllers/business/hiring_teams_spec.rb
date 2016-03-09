@@ -87,9 +87,9 @@ describe Business::HiringTeamsController do
       before do 
         set_current_user(alice)
         set_current_company(company)
-        Fabricate.build(:hiring_team, job_id: job.id, user_id: alice.id)
-        Fabricate.build(:hiring_team, job_id: job.id, user_id: joe.id)
-        post :create, job_id: job.id
+        Fabricate.create(:hiring_team, job_id: job.id, user_id: alice.id)
+        Fabricate.create(:hiring_team, job_id: job.id, user_id: joe.id)
+        post :create, hiring_team: { user_tokens: alice.id}, job_id: job.id
       end
 
       it "does not add user" do 
@@ -99,6 +99,32 @@ describe Business::HiringTeamsController do
       it "redirects to the new page" do 
         expect(response).to redirect_to new_business_job_hiring_team_path(job.id)
       end
+    end
+  end
+
+  describe "DELETE destroy" do 
+    let(:company) {Fabricate(:company)}
+    let(:alice) {Fabricate(:user, company: company)}
+    let(:joe) {Fabricate(:user, company: company)}
+    let(:job) {Fabricate(:job, company: company)}
+
+    it_behaves_like "requires sign in" do
+      let(:action) {delete :destroy, job_id: 4, id: 4}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {delete :destroy, job_id: 4, id: 4}
+    end
+
+    before do 
+      set_current_user(alice)
+      set_current_company(company)
+    end
+
+    it "deletes the selected user from the hiring team" do  
+      member = Fabricate(:hiring_team, job_id: job.id, user_id: alice.id)
+      delete :destroy, job_id: job.id, id: alice.id
+      expect(HiringTeam.count).to eq(0)
     end
   end
 end

@@ -1,0 +1,3 @@
+Fabricator(:scorecard) do 
+  
+end

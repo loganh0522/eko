@@ -1,0 +1,97 @@
+.container
+  .sidebar
+    = render 'business/shared/admin_sidebar'
+
+  .billing
+    %h1 Subscription
+    = form_tag update_plan_business_customers_path do
+      %table.table
+        %thead
+          %tr
+            %th(width="20%") Name 
+            %th(width="20%") Open Positions
+            %th(width="20%") Monthly Plan
+            %th(width="20%") Yearly Plan
+            %th(width="20%") 
+          %tr
+            %td
+              %h4 Start-up
+            %td
+              %h4 1 Active Jobs
+            %td
+              = radio_button_tag(:plan, "free", checked: (@plan == 'free' ? {checked: true} : false)) 
+              %h4 $19 / month
+            %td
+              = radio_button_tag(:plan, "free_year")
+              %h4 $190 / year
+            %td
+              %input(type="submit" value="Select Plan" class="btn btn-success")
+          %tr
+            %td
+              %h4 Basic
+            %td
+              %h4 3 Active Jobs
+            %td
+              = radio_button_tag(:plan, "growth", (@plan == 'growth' ? {checked: true} : false))
+              %h4 $39 / month
+            %td
+              = radio_button_tag(:plan, "growth_year")
+              %h4 $390 / year
+            %td
+              %input(type="submit" value="Select Plan" class="btn btn-success")
+          %tr
+            %td
+              %h4 Team
+            %td
+              %h4 5 Active Jobs
+            %td
+              = radio_button_tag(:plan, "team")
+              %h4 $99 / month
+            %td
+              = radio_button_tag(:plan, "team_year")
+              %h4 $990 / year
+            %td
+              %button Select Plan
+          %tr
+            %td
+              %h4 Plus
+            %td
+              %h4 10 Active Jobs
+            %td
+              = radio_button_tag(:plan, "plus")
+              %h4 $199 / month
+            %td
+              = radio_button_tag(:plan, "plus_year")
+              %h4 $1990 / year
+            %td
+              %button Select Plan
+          %tr
+            %td
+              %h4 Growth
+            %td
+              %h4 20 Active Jobs
+            %td
+              = radio_button_tag(:plan, "growth")
+              %h4 $299 / month
+            %td
+              = radio_button_tag(:plan, "growth_year")
+              %h4 $2990 / year
+            %td
+              %button Select Plan
+          %tr
+            %td
+              %h4 Enterprise
+            %td
+              %h4 Unlimited
+            %td
+              = radio_button_tag(:plan, "enterprise")
+              %h4 $399 / month
+            %td
+              = radio_button_tag(:plan, "enterprise_year")
+              %h4 $3990 / year
+            %td
+              %button Select Plan
+
+
+    = link_to "Cancel your subscription", cancel_business_customers_path 
+

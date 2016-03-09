@@ -25,14 +25,9 @@ class Business::StagesController < ApplicationController
     end
   end
 
-  def edit 
+  def edit
     @stage = Stage.find(params[:id])
     @job = Job.find(params[:job_id])
-
-    # respond_to do |format| 
-    #   format.html 
-    #   format.js 
-    # end
   end
 
   def update
@@ -41,7 +36,6 @@ class Business::StagesController < ApplicationController
 
     respond_to do |format|
       if @stage.update(stage_params)
-        format.json { head :no_content }
         format.js
       else
         format.json { render json: @stage.errors.full_messages,
@@ -53,12 +47,10 @@ class Business::StagesController < ApplicationController
   def destroy
     @stage = Stage.find(params[:id])
     @job = Job.find(params[:job_id])
-
     @stage.destroy
+
     respond_to do |format|
       format.js
-      format.html { redirect_to posts_url }
-      format.json { head :no_content }
     end
   end
 

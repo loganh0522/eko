@@ -1,0 +1,11 @@
+.container
+  .sidebar
+    = render 'business/shared/admin_sidebar'
+    
+  .billing
+    %h1 Billing Information
+    %h4 Credit Card 
+    %p= "xxxx xxxx xxxx #{@customer.last_four}"
+    %h4 Expires 
+    %p Mar 2016
+    = link_to 'Edit', edit_business_customer_path(@customer.id), class: 'btn btn-primary'

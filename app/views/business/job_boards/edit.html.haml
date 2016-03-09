@@ -1,13 +1,6 @@
 .container
   .sidebar
-    %ul
-      %li= link_to "Career Portal", edit_business_job_board_path(@job_board)
-      %li= link_to "Team Members", business_users_path
-      %li Job Templates
-      %li= link_to "Locations", business_locations_path
-      %li Subscription 
-      %li Billing 
-      %li My Profile
+    = render 'business/shared/admin_sidebar'
 
 
   %main 

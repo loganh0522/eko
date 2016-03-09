@@ -53,7 +53,4 @@ class ApplicationController < ActionController::Base
       redirect_to edit_business_job_scorecard_path(@job.id, @scorecard.id)
     end
   end
-
- 
-
 end

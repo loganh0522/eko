@@ -22,7 +22,6 @@ class Business::CommentsController < ApplicationController
   end
 
   def add_note_multiple 
-    binding.pry
     @job = Job.find(params[:job_id])  
     applicant_ids = params[:applicant_ids].split(',')
     

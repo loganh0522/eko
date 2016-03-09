@@ -2,7 +2,6 @@ class JobSeeker::ApplicationsController < JobSeekersController
   before_filter :require_user
 
   def create 
-    binding.pry
     job = Job.find(params[:application][:job_id])  
 
     if !current_user_applied?(job)
