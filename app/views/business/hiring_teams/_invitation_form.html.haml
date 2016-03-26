@@ -3,12 +3,13 @@
     .modal-content
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title Invite Colleague 
+        %h4.modal-title Invite Colleague       
       = form_for [:business, @invitation], html: {class: 'invite'} do |f|
         .modal-body
+          %p Invite a user to join TalentWiz as a member of your business.
           %fieldset
             .form-group.col-md-10
-              = f.text_field :recipient_email, class: "form-control", placeholder: "Add a member with their name"
+              = f.text_field :recipient_email, class: "form-control", placeholder: "Add a member by using their e-mail" 
               = f.hidden_field :job, value: @job.id
         .modal-footer
           = f.submit "Invite Colleague", class: "submit btn btn-primary"

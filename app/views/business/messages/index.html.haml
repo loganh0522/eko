@@ -1,31 +1,78 @@
 .applicant-view
   .applicant-main-container
+    
     .applicant-header
       .user-image
-        %img.circle(src="/tmp/man.jpg")
+        %img.profile_picture(src="/tmp/man.jpg")
       
       .applicant-details
-        %h3 Logan Houston 
-        %p.location Toronto, Ontario, CA
-        %p loganh0522@gmail.com
-        %p 416-806-6907 
+        %h3 Logan Houston
+        %span.glyphicon.glyphicon-map-marker  
+        Toronto, Ontario, CA
+        %br
+        %span.glyphicon.glyphicon-envelope 
+        loganh0522@gmail.com
+        %span.glyphicon.glyphicon-earphone 
+        416-806-6907 
       
-    .applicant-nav-bar  
-      .ul 
-        .li= link_to "Profile", business_job_application_path(@job.id, @application.id)
-        .li Messages 
-        .li= link_to "Notes", business_job_application_comments_path(@job.id, @application.id)
-        .li= link_to "Assessments", business_job_application_assessments_path(@job.id, @application.id) 
-        .li= link_to "Scorecard", business_job_application_scorecards_path(@job.id, @application.id)
+      .applicant-nav-bar  
+        = render "business/shared/applicant_nav"
 
-    .applicant-experience
+    .add-comment-on-applicant
+      %table   
+        = form_for [:business, @job, @application, @comment] do |f| 
+          %tr
+            %td(width="10%")
+              %img.circle(src="/tmp/man.jpg")
+            %td(width="80%")
+              = f.text_field :body, rows: 2, class: "form-control", label: "Add Feedback", placeholder: "Add a note about #{@user.first_name} #{@user.last_name}"
+              = f.hidden_field :user_id, value: current_user.id
+              = f.hidden_field :application_id, value: @application.id
+            %td(width="10%")
+              = f.submit "+ Add", class: "btn btn-primary"
+    
+    .applicant-messages
       .header
-        %h3 Messages
+        %h4 Messages
+        %p.send_message Send a Message
+
+      .message
+        .message-header 
+          %img.circle(src="/tmp/man.jpg")
+          %p.name Logan Houston
+          %p.sent sent a message (2 min ago)
+        .body
+          %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus enim, tincidunt ut felis quis, interdum blandit nulla. Duis at facilisis elit, eu tincidunt massa. Sed lobortis justo sed tellus ullamcorper semper.
+
+      .message
+        .message-header 
+          %img.circle(src="/tmp/man.jpg")
+          %p.name Logan Houston
+          %p.sent sent a message (2 min ago)
+        .body
+          %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus enim, tincidunt ut felis quis, interdum blandit nulla. Duis at facilisis elit, eu tincidunt massa. Sed lobortis justo sed tellus ullamcorper semper.
+            
+            
+
       
-      .notes
-        - @messages.each do |message| 
-          %p= message.user.first_name
-          %p= message.body
+     
+      
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   .applicant-side-container
     .current-stage

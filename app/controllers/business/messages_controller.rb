@@ -6,6 +6,7 @@ class Business::MessagesController < ApplicationController
     @user = @application.applicant
     @messages = @application.messages
     @stage = @application.stage
+    @comment = Comment.new
   end
 
   def create 

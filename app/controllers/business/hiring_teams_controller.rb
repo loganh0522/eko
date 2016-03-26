@@ -6,6 +6,7 @@ class Business::HiringTeamsController < ApplicationController
     @hiring_team = HiringTeam.new  
     @job = Job.find(params[:job_id])
     @users =  @job.users
+    @scorecard = @job.scorecard
     @company_users =  current_company.users
     @invitation = Invitation.new
     @questionairre = @job.questionairre

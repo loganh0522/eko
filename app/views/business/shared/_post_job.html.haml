@@ -1,0 +1,13 @@
+%ul
+  .content
+    %li{:class => is_active?(edit_business_job_path(@job))}
+      = link_to "Job Details", edit_business_job_path(@job)
+    %li{:class => is_active?(new_business_job_hiring_team_path(@job))}
+      = link_to "Hiring Team", new_business_job_hiring_team_path(@job)
+    %li{:class => is_active?(new_business_job_stage_path(@job))}
+      = link_to "Recruitment Process", new_business_job_stage_path(@job)
+    %li{:class => is_active?(@job.questionairre.present? ? edit_business_job_questionairre_path(@job, @questionairre.id) : new_business_job_questionairre_path(@job.id))}
+      = link_to "Questionairre", @job.questionairre.present? ? edit_business_job_questionairre_path(@job, @questionairre.id) : new_business_job_questionairre_path(@job.id)
+    %li{:class => is_active?(@job.scorecard.present? ? edit_business_job_scorecard_path(@job, @scorecard.id) : new_business_job_scorecard_path(@job.id))}
+      = link_to "Scorecard", @job.scorecard.present? ? edit_business_job_scorecard_path(@job, @scorecard.id) : new_business_job_scorecard_path(@job.id)
+    %li Post Job 

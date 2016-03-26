@@ -1,9 +1,10 @@
 .job-applicants
   %h1 Applicants  
   %form_tag   
-    / = render "business/applications/move_stages"
-    / = render "business/comments/add_comment"
-    / = render "business/messages/send_message"
+    = render "business/applications/move_stages"
+    = render "business/comments/add_comment"
+    = render "business/messages/send_message"
+
     %input(type= "submit" value= "Move Stages" class= "move_action btn btn-primary" data-toggle = "modal" data-target = "#stageModal")
     %input(type= "submit" value= "Add Note" class= "add_note_action btn btn-primary" data-toggle = "modal" data-target = "#add_commentModal")
     %input(type= "submit" value= "Message" class= "send_message btn btn-primary" data-toggle = "modal" data-target = "#send_messageModal")
@@ -34,4 +35,4 @@
               %h4 Sales Manager
               %h6 May 22, 2015
             %td
-              %h4 New Applicant
+              %h4 applicant.application

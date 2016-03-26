@@ -1,29 +1,39 @@
 .job-show-header
-  %h2= @job.title
-  %h6= "#{@job.city}, #{@job.province}, #{@job.country}"
+  .header
+    %h1= @job.title
+    %p= "#{@job.city}, #{@job.province}, #{@job.country}"
 
   .job-stages  
     %ul 
       %li 
-        %h6 All applicants
-        %h4 50 
+        %h6 All Applicants
+        %h4 50
+      %li 
+        %h6 New Applicants
+        %h4 10
       - @stages.each do |stage| 
         %li 
           %h6= stage.name
           %h4= stage.applicants.count 
+      %li
+        %h6 Rejected 
+        %h4 5
+
+
 
 .job-applicants
-  %h1 Applicants  
-  %form_tag   
-    = render "business/applications/move_stages"
-    = render "business/comments/add_comment"
-    = render "business/messages/send_message"
-    %input(type= "submit" value= "Move Stages" class= "move_action btn btn-primary" data-toggle = "modal" data-target = "#stageModal")
-    %input(type= "submit" value= "Add Note" class= "add_note_action btn btn-primary" data-toggle = "modal" data-target = "#add_commentModal")
-    %input(type= "submit" value= "Message" class= "send_message btn btn-primary" data-toggle = "modal" data-target = "#send_messageModal")
-    %input(type= "submit" value= "Delete" class= "btn btn-primary")
-    
-
+  .header
+    %h1 Applicants  
+    %form_tag.actions
+      = render "business/applications/move_stages"
+      = render "business/comments/add_comment"
+      = render "business/messages/send_message"
+      %input(type= "submit" value= "Move Stages" class= "move_action btn btn-primary" data-toggle = "modal" data-target = "#stageModal")
+      %input(type= "submit" value= "Add Note" class= "add_note_action btn btn-primary" data-toggle = "modal" data-target = "#add_commentModal")
+      %input(type= "submit" value= "Message" class= "send_message btn btn-primary" data-toggle = "modal" data-target = "#send_messageModal")
+      %input(type= "submit" value= "Delete" class= "btn btn-primary")
+  
+  .applicants
     %table.table
       %thead
         %tr

@@ -8,8 +8,11 @@ Rails.application.routes.draw do
   match '/', to: "job_boards#index", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
   match 'login', to: "sessions#subdomain_new", constraints: {subdomain: /.+/}, via: [:get]
   match 'login', to: "sessions#create", constraints: {subdomain: /.+/}, via: [:post]
+  match 'job', to: "jobs#show", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
   match 'register', to: "users#sub_new_job_seeker", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
   match 'profile', to: "profiles#index", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
+
+
 
   get 'login', to: "sessions#new"
 
@@ -39,14 +42,15 @@ Rails.application.routes.draw do
     resources :invitations
     resources :locations 
     get "plan", to: "customers#plan"  
+    
     resources :customers do
-
       collection do 
         get 'cancel', to: "customers#cancel"
         post "update_plan", to: "customers#update_plan"
         post "cancel_subscription", to: "customers#cancel_subscription"
       end
     end
+
     resources :job_boards
     resources :applications
 
@@ -54,7 +58,7 @@ Rails.application.routes.draw do
     resources :jobs do 
       resources :applications do
         collection do 
-          post :update_multiple, to: "applications#update_multiple"
+          post :update_multiple, to: "stages#update_multiple"
           post :add_note_multiple, to: "comments#add_note_multiple"
           post :send_multiple_messages, to: "messages#send_multiple_messages"
         end
@@ -63,6 +67,7 @@ Rails.application.routes.draw do
         resources :comments
         resources :application_scorecards
         resources :assessments
+        
         resources :scorecards do 
           collection do 
             post :my_scorecard

@@ -1,28 +1,15 @@
 .container
   .sidebar
-    %ul
-      %li{:class => is_active?(edit_business_job_path(@job))}
-        = link_to "Job Details", edit_business_job_path(@job)
-      %li{:class => is_active?(new_business_job_hiring_team_path(@job))}
-        = link_to "Hiring Team", new_business_job_hiring_team_path(@job)
-      %li{:class => is_active?(new_business_job_stage_path(@job))}
-        = link_to "Recruitment Process", new_business_job_stage_path(@job) 
-      %li{:class => is_active?(@job.questionairre.present? ? edit_business_job_questionairre_path(@job, @questionairre.id) : new_business_job_questionairre_path(@job.id))}
-        = link_to "Questionairre", @job.questionairre.present? ? edit_business_job_questionairre_path(@job, @questionairre.id) : new_business_job_questionairre_path(@job.id)  
-      %li{:class => is_active?(@job.scorecard.present? ? edit_business_job_scorecard_path(@job, @scorecard.id) : new_business_job_questionairre_path(@job.id))}  
-        = link_to "Scorecard", @job.scorecard.present? ? edit_business_job_scorecard_path(@job, @scorecard.id) : new_business_job_questionairre_path(@job.id)
-      %li Post Job 
-
-  %main.col-md-8    
-    %h1 Scorecard
-    %p Create a scorecard to easily assess a candidates skills, personality and fit.
+    = render 'business/shared/post_job'
+  
+  .job_scorecard
+    .header   
+      %h1 Scorecard
 
     .col-md-10
       = form_for [:business, @job, @scorecard] do |f|
-
         = f.fields_for :scorecard_sections do |q| 
-          = render "scorecard_section_fields", f: q
-         
+          = render "scorecard_section_fields", f: q       
         %br
         = link_to_add_fields "Add Section", f, :scorecard_sections  
         = f.hidden_field :job_id, value: @job.id

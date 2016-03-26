@@ -1,0 +1,9 @@
+
+- @positions.each do |position| 
+  .position
+    .job-header
+      %h4.title=  "#{position.title}"
+      %p.date June 2015 - Present
+    .job-body       
+      %h5= "#{position.company_name}"
+      %p= position.description

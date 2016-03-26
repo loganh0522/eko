@@ -23,6 +23,7 @@ class Business::QuestionairresController < ApplicationController
   def edit 
     @job = Job.find(params[:job_id])
     @questionairre = Questionairre.where(job_id: @job.id).first
+    @scorecard = @job.scorecard
   end
 
   def update

@@ -1,33 +1,21 @@
 .container
   .sidebar
-    %ul
-      %li{:class => is_active?(edit_business_job_path(@job))}
-        = link_to "Job Details", edit_business_job_path(@job)
-      %li{:class => is_active?(new_business_job_hiring_team_path(@job))}
-        = link_to "Hiring Team", new_business_job_hiring_team_path(@job)
-      %li{:class => is_active?(new_business_job_stage_path(@job))}
-        = link_to "Recruitment Process", new_business_job_stage_path(@job)
-      %li{:class => is_active?(@job.questionairre.present? ? edit_business_job_questionairre_path(@job, @questionairre.id) : new_business_job_questionairre_path(@job.id))}
-        = link_to "Questionairre", @job.questionairre.present? ? edit_business_job_questionairre_path(@job, @questionairre.id) : new_business_job_questionairre_path(@job.id)
-      %li Scorecard
-      %li Post Job 
+    = render 'business/shared/post_job'
 
 
-  %main.col-md-8    
-    %h1 Application Form
-    %p Create an application form that job seekers have to complete upon applying to the job. 
-    %p You do not need to ask for things like name, email, resume and contact info, these are already included in an application.
+  .job_scorecard 
+    .header   
+      %h1 Application Form
 
-    .col-md-10
-      = form_for [:business, @job, @questionairre] do |f|
+    = form_for [:business, @job, @questionairre] do |f|
 
-        = f.fields_for :questions do |q| 
-          = render 'question_fields', f: q 
-  
-        = link_to_add_fields "Add Question", f, :questions    
+      = f.fields_for :questions do |q| 
+        = render 'question_fields', f: q 
 
-        = f.hidden_field :job_id, value: @job.id
-        %br
-        %br
-        = f.submit "Create Form", class: "submit btn btn-primary"
+      = link_to_add_fields "Add Question", f, :questions    
+
+      = f.hidden_field :job_id, value: @job.id
+      %br
+      %br
+      = f.submit "Create Form", class: "submit btn btn-primary"
 

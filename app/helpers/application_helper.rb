@@ -12,4 +12,8 @@ module ApplicationHelper
     current_page?(link_path) ? "active" : ""
   end
 
+  def is_current_stage?(stage, application)
+    application.stage.id == stage.id ? "active" : ""
+  end
+
 end

@@ -151,7 +151,12 @@ describe Business::StagesController do
     let(:company) {Fabricate(:company)}
     let(:alice) {Fabricate(:user, company: company)}
     let(:job) {Fabricate(:job, company: company)}
-   
+    
+    before do 
+      set_current_user(alice)
+      set_current_company(company)      
+    end
+
     it_behaves_like "requires sign in" do
       let(:action) {post :sort, job_id: job.id}
     end
@@ -161,10 +166,10 @@ describe Business::StagesController do
     end
 
     it "reorders the items in the queue" do
-      stage1 = Fabricate.create(:stage, position: 1, job_id: job.id) 
-      stage2 = Fabricate.create(:stage, position: 2, job_id: job.id)
-      post :sort, stage: [stage2.id, stage1.id], job_id: job.id
-      expect(Stage.last.position).to eq(1)
+      stage1 = Fabricate(:stage, position: 1, job_id: job.id) 
+      stage2 = Fabricate(:stage, position: 2, job_id: job.id)
+      post :sort, job_id: job.id, stage: [stage2.id, stage1.id]
+      expect(stage2.reload.position).to eq(1)
     end
   end
 end

@@ -1,8 +1,8 @@
-%div{:class => "panel panel-default", :id => "stage_#{stage.id}"}
+%div{:class => "stages", :id => "stage_#{stage.id}"}
   .panel-heading
-    .panel-title
-      .row
-        %p.col-md-1= stage.name
+    .row
+      .stage= stage.name
+      .icons
         = link_to edit_business_job_stage_path(@job.id, stage.id), :data => {:remote => true } do
           %i.glyphicon.glyphicon-pencil
         = link_to business_job_stage_path(@job.id, stage.id), remote: true, :method => :delete do

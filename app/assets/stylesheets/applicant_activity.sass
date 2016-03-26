@@ -1,0 +1,109 @@
+.applicant-activity
+  margin: 15px 0px 0px 75px
+  padding: 5px 0px 15px 0px
+  background-color: white
+  width: 700px
+  border: solid 2px #E4E5E9 
+  
+  $vertical: true
+  $bg: #48b379
+  $white: #eee9dc
+  $red: #f98262
+  
+  #timeline
+    list-style: none
+    margin: 50px 0 30px 120px
+    padding-left: 30px
+    border-left: 8px solid $white
+
+    li
+      margin: 40px 0
+      position: relative
+      
+    p
+      margin: 0 0 15px
+      
+  .circle
+    
+    margin-top: -10px
+    top: 50%
+    left: -44px
+    
+    width: 20px
+    height: 20px
+    background: red
+    border: 5px solid $white
+    border-radius: 50%
+    display: block
+    position: absolute
+
+  .content
+    max-height: 20px
+    padding: 50px 20px 0
+    border-color: transparent
+   
+    border-width: 2px
+    border-style: solid
+    border-radius: 0.5em
+    position: relative
+    
+    &:before, &:after
+      content: ""
+      width: 0
+      height: 0
+      border: solid transparent
+      position: absolute
+      pointer-events: none
+      right: 100%
+
+    &:before
+      border-right-color: inherit
+      border-width: 20px
+      top: 50%
+      margin-top: -20px
+    &:after
+      border-right-color: $bg
+      border-width: 17px
+      top: 50%
+      margin-top: -17px
+
+    p
+      max-height: 0
+      color: transparent
+      text-align: justify
+      word-break: break-word
+      hyphens: auto
+      overflow: hidden
+
+  label
+    font-size: 1.3em
+    position: absolute
+    z-index: 100
+    cursor: pointer
+    top: 20px
+    
+    
+  .radio
+    
+  .radio
+    & + .relative
+      label
+        cursor: auto
+       
+        transform: translateX(42px)
+
+      .circle
+        background: $red
+
+    & ~ .content
+      max-height: 180px
+      border-color: $white
+
+      margin-right: 20px
+      transform: translateX(20px)
+      
+
+      p
+        max-height: 200px
+        color: $white
+        

@@ -24,7 +24,11 @@ describe Business::JobsController do
     end
   end
 
-  describe "GET show" do 
+  describe "GET show" do
+    let(:company) {Fabricate(:company)}
+    let(:alice) {Fabricate(:user, company: company)}
+    let(:job) {Fabricate(:job)}
+ 
     it_behaves_like "requires sign in" do
       let(:action) {get :show, id: 4}
     end
@@ -32,11 +36,7 @@ describe Business::JobsController do
     it_behaves_like "user does not belong to company" do 
       let(:action) {get :show, id: 4}
     end
-
-    let(:company) {Fabricate(:company)}
-    let(:alice) {Fabricate(:user, company: company)}
-    let(:job) {Fabricate(:job)}
-
+   
     before do 
       set_current_user(alice)
       set_current_company(company)

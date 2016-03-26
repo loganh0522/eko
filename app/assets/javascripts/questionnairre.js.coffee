@@ -17,11 +17,10 @@ jQuery ->
     $(this).before($(this).data('fields').replace(regexp, time))
     event.preventDefault()
 
-  $('form').on 'change', '.question-type', (event) -> 
-    val = $(this).val()
+  $('form').on 'change', '.answer-type', (event) -> 
+    val = $(this).find('.question-type').val()
 
-    if val == "Checkbox" 
-      console.log("checkbox")   
+    if val == "Checkbox" || val == "Multiple Choice"  
       time = new Date().getTime()
       regexp = new RegExp($(this).data('id'), 'g')
       $(this).parent().after($(this).parent().next().data('fields'))
@@ -31,12 +30,27 @@ jQuery ->
       event.preventDefault()
 
     if val == "Text" || val == "Paragraph"
-      console.log("text")
       $(this).parent().nextAll('.answers').hide()
       $(this).parent().nextAll('.answers').find('input[type=hidden]').val('1')
       $(this).parent().nextAll('.add_fields').hide()
 
+  $(document).ready ->
+    val = $('form').find('.answer-type').find('.question-type')
+    len = val.length
 
+    i = 0
+    while i < len
+      if $(val[i]).val() == "Checkbox" || $(val[i]).val() == "Multiple Choice"  
+        time = new Date().getTime()
+        regexp = new RegExp($(this).data('id'), 'g')
+        $(val[i]).parent().parent().nextAll('.add_fields').show()
+        event.preventDefault() 
+      else 
+        $(val[i]).parent().parent().nextAll('.add_fields').hide()
+        event.preventDefault() 
+      i++
 
+    
+      
 
     

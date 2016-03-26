@@ -1,31 +1,17 @@
 .container
   .sidebar
-    %ul
-      %li{:class => is_active?(edit_business_job_path(@job))}
-        = link_to "Job Details", edit_business_job_path(@job)
-      %li{:class => is_active?(new_business_job_hiring_team_path(@job))}
-        = link_to "Hiring Team", new_business_job_hiring_team_path(@job)
-      %li{:class => is_active?(new_business_job_stage_path(@job))}
-        = link_to "Recruitment Process", new_business_job_stage_path(@job)
-      %li{:class => is_active?(@job.questionairre.present? ? edit_business_job_questionairre_path(@job, @questionairre.id) : new_business_job_questionairre_path(@job.id))}
-        = link_to "Questionairre", @job.questionairre.present? ? edit_business_job_questionairre_path(@job, @questionairre.id) : new_business_job_questionairre_path(@job.id)
-      %li Scorecard
-      %li Post Job 
+    = render 'business/shared/post_job'
 
-  .hiring_team    
-    %h3 Team Members 
-    .details
-    %p Add Team Members to this job opening. 
+  .hiring_team 
+    .header   
+      %h1 Hiring Team  
     
-    = form_for [:business, @job, @hiring_team] do |f| 
-      .fieldset
-        = f.label :user_tokens, "Add a User" 
-        %br
+      = form_for [:business, @job, @hiring_team] do |f| 
         = f.text_field :user_tokens, placeholder: "Type a users name to find them" 
         = f.hidden_field :job_id, value: @job.id
         = f.submit "+ Add Member", class: "btn btn-primary"
 
-    = link_to "+ Invite Colleague", new_business_invitation_path, {:class => "invite", :data => {:toggle => "modal", :target => "#myModal"}}
+      = link_to "+ Invite Colleague", new_business_invitation_path, {:class => "invite", :data => {:toggle => "modal", :target => "#myModal"}}
       
     = render "invitation_form"
 

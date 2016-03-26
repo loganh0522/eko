@@ -25,6 +25,10 @@ gem 'bootstrap-wysihtml5-rails'
 gem 'country_state_select', "3.0.0"
 gem 'chosen-rails'
 
+gem 'mini_magick'
+gem 'carrierwave'
+gem 'carrierwave-aws'
+
 
 
 group :development do

@@ -1,3 +1,3 @@
 Fabricator(:questionairre) do 
-  
+
 end

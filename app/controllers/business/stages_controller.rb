@@ -7,6 +7,7 @@ class Business::StagesController < ApplicationController
     @stages = @job.stages.order("position")
     @stage = Stage.new 
     @questionairre = @job.questionairre
+    @scorecard = @job.scorecard
   end
 
   def create 
@@ -57,9 +58,28 @@ class Business::StagesController < ApplicationController
   def sort
     @job = Job.find(params[:job_id])
     params[:stage].each_with_index do |id, index|
-      Stage.update(id, {position: index +1})
+      Stage.update(id, {position: index + 1})
     end
     render nothing: true
+  end
+
+  def update_multiple
+    @job = Job.find(params[:job_id])
+    
+    applicant_ids = params[:applicant_ids].split(',')
+    applicant_ids.each do |id| 
+      @application = Application.where(user_id: id, job_id: params[:job_id]).first
+      @application.update_attribute(:stage_id, params[:stage][:stage_id])
+    end
+    redirect_to business_job_path(@job)
+  end
+
+  def move_stages 
+    app = Application.find(params[:application_id])
+    current_stage = app.stage
+    next_stage = Stage.where(position: current_stage.position + 1, job_id: params[:job_id]).first
+    app.update_attribute(:stage_id, next_stage.id)
+    redirect_to :back
   end
 
   private 

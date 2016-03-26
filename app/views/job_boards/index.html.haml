@@ -1,8 +1,16 @@
-%description_area
-
-
-%job_board
-  %h1 Current Opportunities 
-  - @jobs.each do |job|
-    %h4= link_to "#{job.company.name} - #{job.title}", job_seeker_job_path(job)
-    %p= job.description
+.career-portal
+  .container
+    .header
+      %h1= "About #{@company.name}"
+    .body
+      %p= simple_format(@company.job_board.description)
+    .header
+      %h1 Current Opportunities 
+    .jobs  
+      - @jobs.each do |job|
+        .job
+          .details
+            %h4= "#{job.title}"
+            %p Toronto, On, Canada
+          
+            = link_to "Apply", job_path(job), class: "btn btn-primary"

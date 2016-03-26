@@ -1,22 +1,13 @@
 .container
   .sidebar
-    %ul
-      %li{:class => is_active?(edit_business_job_path(@job))}
-        = link_to "Job Details", edit_business_job_path(@job)
-      %li{:class => is_active?(new_business_job_hiring_team_path(@job))}
-        = link_to "Hiring Team", new_business_job_hiring_team_path(@job)
-      %li{:class => is_active?(new_business_job_stage_path(@job))}
-        = link_to "Recruitment Process", new_business_job_stage_path(@job)
-      %li{:class => is_active?(@job.questionairre.present? ? edit_business_job_questionairre_path(@job, @questionairre.id) : new_business_job_questionairre_path(@job.id))}
-        = link_to "Questionairre", @job.questionairre.present? ? edit_business_job_questionairre_path(@job, @questionairre.id) : new_business_job_questionairre_path(@job.id)
-      %li Scorecard
-      %li Post Job 
+    = render 'business/shared/post_job' 
 
-  %main.col-md-8    
-    %h3 Recruitment Process
-    %p Create the stages for your recruitment process, add ToDo's and Interview templates for each stage. 
-    
-    = render "form" 
+  .stages
+    .header    
+      %h1 Recruitment Process
+      = render "form" 
+
+ 
     = render "create_stages", stages: @stages
 
     .modal
@@ -27,13 +18,6 @@
             %h3.modal-title Edit Stage 
           .modal-body
               
-
-              
-
-
-            
-
-
     %input(type="submit" value="Save and Continue" class="btn btn-default")
 
       
