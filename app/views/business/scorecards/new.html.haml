@@ -1,28 +1,18 @@
-.container
+.contain
   .sidebar
-    = render 'business/shared/post_job'
+    .nav
+      = render 'business/shared/post_job'
 
-  %main.col-md-8    
-    %h1 Scorecard
-    %p Create a scorecard to easily assess a candidates skills, personality and fit.
+  .main-container 
+    .header  
+      %h1 Scorecard
+    .body
+      .job_scorecard
+        = form_for [:business, @job, @scorecard] do |f|
+          = f.fields_for :scorecard_sections, ScorecardSection.new do |q| 
+            = render "scorecard_section_fields", f: q       
+          %br
+          = link_to_add_fields "+ Add Section", f, :scorecard_sections  
+          = f.hidden_field :job_id, value: @job.id
 
-    .col-md-10
-      = form_for [:business, @job, @scorecard] do |f|
-
-        = f.fields_for :scorecard_sections, ScorecardSection.new do |q| 
-          = q.label :Section      
-          = link_to "Remove", '#', class: "remove_question"
-          = q.text_field :body, class: "form-control questions", placeholder: "Add your Question"
-          = q.hidden_field :_destroy
-              
-          = q.fields_for :section_options, SectionOption.new, class: "options" do |a|
-            = render 'section_option_fields', f: a
-            
-          = link_to_add_fields("Add Criteria", q, :section_options)
-        %br
-        = link_to_add_fields "Add Section", f, :scorecard_sections  
-
-        = f.hidden_field :job_id, value: @job.id
-        %br
-        %br
-        = f.submit "Create Scorecard", class: "submit btn btn-primary"
+          = f.submit "Create Scorecard", class: "submit btn btn-primary"

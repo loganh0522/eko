@@ -1,17 +1,18 @@
-.container
+.contain
   .sidebar
-    %ul
-      %li{:class => is_active?(new_business_job_path)} 
-        Job Details
-      %li Hiring Team
-      %li Recruitment Process
-      %li Questionairre
-      %li Scorecard
-      %li Post Job 
+    .nav
+      %ul
+        %li{:class => is_active?(new_business_job_path)} 
+          Job Details
+        %li Hiring Team
+        %li Recruitment Process
+        %li Questionairre
+        %li Scorecard
+        %li Post Job 
 
-  .main
+  .main-container
     .header
       = render '/shared/errors', type: @job
       %h1 Job Details
-    
-    = render 'form'
+    .body
+      = render 'form'

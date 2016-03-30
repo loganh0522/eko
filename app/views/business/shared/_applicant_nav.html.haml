@@ -12,6 +12,6 @@
     = link_to "Assessments", business_job_application_assessments_path(@job.id, @application.id)
 
   %li{:class => is_active?(business_job_application_scorecards_path(@job.id, @application.id))}
-    = link_to "Scorecards", business_job_application_scorecards_path(@job.id, @application.id)
+    = link_to "Scorecards", business_job_application_application_scorecards_path(@job, @application.id)
   %li
     = link_to "Activity", '#'

@@ -6,10 +6,13 @@ Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
 
 = javascript_include_tag 'payment'
 
-.container
+.contain
   .sidebar
-    = render 'business/shared/admin_sidebar'
+    .nav
+      = render 'business/shared/admin_sidebar'
 
-  .billing
-    %h1 Billing Information 
-    = render 'form'
+  .main-container
+    .header
+      %h1 Billing Information 
+    .body
+      = render 'form'

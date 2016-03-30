@@ -1,38 +1,40 @@
-.container
+.contain
   .sidebar
-    = render 'business/shared/post_job'
+    .nav
+      = render 'business/shared/post_job'
 
-  .hiring_team 
-    .header   
-      %h1 Hiring Team  
+
+  .main-container
+    .header
+      .hiring-team 
+        %h1 Hiring Team
+        = link_to "+ Invite New User", new_business_invitation_path, {:class => "invite", :data => {:toggle => "modal", :target => "#myModal"}}
+        = render "invitation_form"
     
+    .body
       = form_for [:business, @job, @hiring_team] do |f| 
         = f.text_field :user_tokens, placeholder: "Type a users name to find them" 
         = f.hidden_field :job_id, value: @job.id
         = f.submit "+ Add Member", class: "btn btn-primary"
 
-      = link_to "+ Invite Colleague", new_business_invitation_path, {:class => "invite", :data => {:toggle => "modal", :target => "#myModal"}}
-      
-    = render "invitation_form"
-
-    .user-list
-      %table
-        %thead
-          %tr
-            %th(width="1%")
-            %th(width="20%")
-            %th(width="20%")
-            %th.delete(width="20%")
-        %tbody
-          - @users.each do |user|
+      .user-list
+        %table
+          %thead
             %tr
-              %td
-                %img.circle(src="/tmp/man.jpg")
-              %td
-                %p.name= "#{user.first_name} #{user.last_name}"
-                %p.email= user.email
-              %td
-                %p.permissions Hiring Manager
-              %td
-                = link_to business_job_hiring_team_path(@job.id, user.id), remote: true, :method => :delete do
-                  %i.glyphicon.glyphicon-remove
+              %th(width="1%")
+              %th(width="20%")
+              %th(width="20%")
+              %th.delete(width="20%")
+          %tbody
+            - @users.each do |user|
+              %tr
+                %td
+                  %img.circle(src="/tmp/man.jpg")
+                %td
+                  %p.name= "#{user.first_name} #{user.last_name}"
+                  %p.email= user.email
+                %td
+                  %p.permissions Hiring Manager
+                %td
+                  = link_to business_job_hiring_team_path(@job.id, user.id), remote: true, :method => :delete do
+                    %i.glyphicon.glyphicon-remove

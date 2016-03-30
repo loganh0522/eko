@@ -1,7 +1,8 @@
 .question-area 
   .fieldset.questions 
-    .section-title Question      
-    = link_to "Remove", '#', class: "remove_question"
+    .question-header
+      .section-title Question      
+      = link_to "Remove", '#', class: "remove_question"
     .answer-type
       Answer Type:
       = f.select :kind, ['Text', 'Paragraph', 'Checkbox', 'Multiple Choice'],{}, {:class => 'question-type'}

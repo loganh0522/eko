@@ -4,16 +4,9 @@ class Business::ScorecardsController < ApplicationController
   before_filter :has_a_scorecard, only: [:new, :create]
 
   def index 
-    @application_scorecard = ApplicationScorecard.new
-    @job = Job.find(params[:job_id])
-    @application = Application.find(params[:application_id])
-    @stage = @application.stage
-    @comment = Comment.new
-    @user = @application.applicant
-    @scorecard = Scorecard.where(job_id: params[:job_id]).first
-    @sections = @scorecard.scorecard_sections    
-    @application_scorecards = @application.application_scorecards
-    @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first
+   @job = Job.find(params[:job_id])
+    @questionairre = @job.questionairre
+    @scorecard = Scorecard.where(job_id: @job.id).first
   end
 
   def new 
@@ -58,6 +51,20 @@ class Business::ScorecardsController < ApplicationController
     @application = Application.find(params[:application_id])
     @rating = SectionOptionRating.new
   end
+
+  def applicant_scorecard
+    @application_scorecard = ApplicationScorecard.new
+    @job = Job.find(params[:job_id])
+    @application = Application.find(params[:application_id])
+    @stage = @application.stage
+    @comment = Comment.new
+    @user = @application.applicant
+    @scorecard = Scorecard.where(job_id: params[:job_id]).first
+    @sections = @scorecard.scorecard_sections    
+    @application_scorecards = @application.application_scorecards
+    @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first
+  end
+
 
   private
 

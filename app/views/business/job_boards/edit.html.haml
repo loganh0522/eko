@@ -1,20 +1,28 @@
-.container
+.contain
   .sidebar
-    = render 'business/shared/admin_sidebar'
+    .nav
+      = render 'business/shared/admin_sidebar'
 
-  .edit-career-portal
-    .header   
-      %h4 Career Portal 
+  .main-container
+    .header
+      %h1 Career Portal     
     .body
-      = form_for [:business, @job_board] do |f|    
-        %fieldset 
-          %h4 Logo 
-          %p Add a logo that will go in the header, so applicants feel more attached to your brand. It is best if you use a transparent logo. 
+      .edit-career-portal
+        = form_for [:business, @job_board] do |f|  
+          .sub-domain 
+            %h4 Sub-domain
+            %p This is the domain that job seekers will use to access your Career Portal. Embed this link in your website to provide applicants with access through your website.
+            = f.text_field :subdomain, class: "form-control subdomain-field"
+            %p.domain .talentwiz.com
           
-          = f.file_field :logo, class: "btn btn-file"
+          .logo
+            %h4 Logo 
+            %p Add a logo that will go in the header of your Career Portal. It is best if you use a logo with a white background. 
+            
+            = f.file_field :logo, class: "btn btn-file"
 
           %h4 Description 
-          %p This description is added to your career portal. The purpose of the description is to provide a job seeker with an idea of the company culture. 
+          %p Tell applicants about your company, tell them why they should apply, and what makes you awesome.
           = f.text_area :description, rows: 10, class: "form-control", placeholder: "Add a company description"
           %br
           = f.submit "Update Career Portal", class: "submit btn btn-primary"

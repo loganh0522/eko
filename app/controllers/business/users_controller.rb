@@ -12,4 +12,8 @@ class Business::UsersController < ApplicationController
       format.json { render json: @users.where("first_name like ?", "%#{params[:q]}%")}
     end
   end
+
+  def edit
+    @user = current_user
+  end
 end

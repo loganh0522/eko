@@ -16,16 +16,17 @@
         .business_nav
           .content
             = link_to business_jobs_path do
-              %img(src="/tmp/logo.jpg")
+              %img.logo(src="/tmp/logo.jpg")
+            
             %ul
               %li= link_to "JOBS", business_jobs_path 
               %li= link_to "APPLICANTS", business_applications_path
               %li= link_to "ACTIVITY"
-              %li= link_to "ADMIN", business_users_path
 
           .dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              Dropdown
+              %img.dropdown-img(src="/tmp/man.jpg")
+              Logan
               %b.caret
             %ul.dropdown-menu.dropdown-menu-right
               %li

@@ -1,23 +1,22 @@
-.container
+.contain
   .sidebar
-    = render 'business/shared/post_job'
+    .nav
+      = render 'business/shared/post_job'
 
-  %main.col-md-8    
-    %h1 Application Form
-    %p These are the stages that an applicant will go through during the recruitment process. You can set ToDo's for each stage to remind team members what must be done in each stage. You will be able to cross off ToDo's for individual applicants in order to track their individual progress. 
+  .main-container
+    .header   
+      %h1 Application Form
+    .body
+      .job_scorecard
+        = form_for [:business, @job, @questionairre] do |f|
 
-    .col-md-10
-      = form_for [:business, @job, @questionairre] do |f|
+          = f.fields_for :questions, Question.new do |q| 
+            = render "question_fields", f: q
 
-        = f.fields_for :questions, Question.new do |q| 
-          = render "question_fields", f: q
-
-        %br
-        = link_to_add_fields "Add Question", f, :questions    
-
-        = f.hidden_field :job_id, value: @job.id
-        = f.submit "Create Form", class: "submit btn btn-primary"
-
+          %br
+          = link_to_add_fields "+ Add Question", f, :questions    
+          = f.hidden_field :job_id, value: @job.id
+          = f.submit "Create Form", class: "submit btn btn-primary"
 
 
 

@@ -56,6 +56,7 @@ Rails.application.routes.draw do
 
     
     resources :jobs do 
+      
       resources :applications do
         collection do 
           post :update_multiple, to: "stages#update_multiple"

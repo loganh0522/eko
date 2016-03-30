@@ -3,6 +3,12 @@ class Business::QuestionairresController < ApplicationController
   before_filter :belongs_to_company
   before_filter :has_a_questionairre, only: [:new, :create]
 
+  def index 
+    @job = Job.find(params[:job_id])
+    @questionairre = Questionairre.where(job_id: @job.id).first
+    @scorecard = @job.scorecard
+  end
+  
   def new
     @job = Job.find(params[:job_id])
     @questionairre = Questionairre.new

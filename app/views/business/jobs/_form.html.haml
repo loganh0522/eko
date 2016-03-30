@@ -9,7 +9,7 @@
       .form-group.col-md-4
         = f.select :country, country: CountryStateSelect.countries_collection, label: "Country"
       .form-group.col-md-4
-        - options = { form: f, field_names: { :country => :country, :state => :province } }  
+        - options = { form: f, field_names: {:country => :country, :state => :province } }  
         = f.select :province, CountryStateSelect.state_options(options)
       .form-group.col-md-4
         = f.text_field :city, class: "form-control", label: "City"

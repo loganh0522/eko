@@ -1,29 +1,30 @@
-.container
+.contain
   .sidebar
-    = render 'business/shared/admin_sidebar'
+    .nav
+      = render 'business/shared/admin_sidebar'
 
-  %main 
-    %h1 Team Members 
-    %p These are the team members that are involved in recruitment activities at your company. Admin's have full access to the system. Managers only have access to the jobs that they are a part of. 
-    = form_for [:business, @invitation], html: {class: 'invite'} do |f|    
-      %fieldset
-        .row
-          .form-group.col-md-7
-            = f.text_field :recipient_email, class: "form-control", placeholder: "Invite a colleague by Email"
-            = f.submit "Invite User", class: "submit btn btn-primary"
-    .user-list
-      %table.table
-        %thead
-          %tr
-            %th First Name
-            %th Last Name
-            %th E-mail
-        %tbody
-          - @users.each do |user|
-            %tr
-              %td
-                %p= user.first_name
-              %td
-                %p= user.last_name
-              %td
-                %p= user.email
+  .main-container
+    .header
+      %h1 Team Members 
+    .body
+      .company-users
+        = form_for [:business, @invitation], html: {class: 'invite'} do |f|    
+          = f.text_field :recipient_email, class: "form-control", placeholder: "Invite a colleague by Email"
+          = f.submit "Invite User", class: "submit btn btn-primary"
+        
+        .user-list
+          %table.table
+            %thead
+              %tr
+                %th First Name
+                %th Last Name
+                %th E-mail
+            %tbody
+              - @users.each do |user|
+                %tr
+                  %td
+                    %p= user.first_name
+                  %td
+                    %p= user.last_name
+                  %td
+                    %p= user.email
