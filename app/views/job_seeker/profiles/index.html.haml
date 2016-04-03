@@ -11,13 +11,24 @@
     %h5 Mobile: 416-806-6907
     %h5 Skype: logz.houston
 
-.work-experience
+.main-container
   .header
-    %h3 Experience
-    %p.new_experience= link_to "+ Add Work Experience", new_job_seeker_work_experience_path, :data => {:remote => true}
-  
-  .experience
+    %h1 Experience
+    .new_experience
+      = link_to "+ Add Work Experience", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}
+      = render 'job_seeker/work_experiences/form'
+       
+  .body
+
+    .not-present-container
+      %p You currently do not have any listed work experiences. 
+      = link_to "+ Add Work Experience", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}, class: "add-object"
+    
     = render 'experience'
+
+
+
+            
 
 
 

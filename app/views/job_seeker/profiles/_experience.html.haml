@@ -3,3 +3,29 @@
     %h4= "#{position.company_name} - #{position.title}"
     %p June 2015 - Present
     %p= position.description
+
+
+.job-position
+  .experience-header 
+    .title Sales Representative 
+    .date June 2015 - Present
+  .experience-body
+    .company Salesforce.com
+    .description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus enim, tincidunt ut felis quis, interdum blandit nulla. Duis at facilisis elit, eu tincidunt massa. Sed lobortis justo sed tellus ullamcorper semper. Duis at facilisis elit, eu tincidunt massa. Sed lobortis justo sed tellus ullamcorper semper.
+    
+    .accomplishments 
+      Accomplishments
+      %ul
+        %li 
+          %p Lipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus enim, tincidunt ut felis quis, interdum blandit nulla.
+        %li 
+          %p Lipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus enim, tincidunt ut felis quis, interdum blandit nulla.
+
+    .actions
+      %ul
+        %li
+          = link_to "+ Add Accomplishment", new_job_seeker_work_experience_path, :data => {:toggle => "modal", :target => "#work-experience-modal"}
+        %li
+          = link_to "+ Add Skills", new_job_seeker_work_experience_path, :data => {:toggle => "modal", :target => "#work-experience-modal"}
+        %li
+          = link_to "+ Get a Reference", new_job_seeker_work_experience_path, :data => {:toggle => "modal", :target => "#work-experience-modal"}

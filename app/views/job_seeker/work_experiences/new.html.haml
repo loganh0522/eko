@@ -1,14 +1,22 @@
-.col-md-8.col-md-offset-2
-  = bootstrap_form_for [:job_seeker, @work_experience] do |f|
-    .fieldset
-      .row
-        .form-group.col-md-6
-          = f.text_field :company_name, class: "form-control", label: "Company Name"
-        .form-group.col-md-6
-          = f.text_field :title, class: "form-control", label: "Job Title"
-      .row
-        .form-group.col-md-12
-          = f.text_area :description, rows: 12, class: "form-control", label: "Description"
-      .row 
-        .form-group.col-md-12
-          = f.submit "Add Position", class: "btn btn-primary"
+.modal#work-experience-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title Add Work Experience 
+      = bootstrap_form_for [:job_seeker, @work_experience] do |f|
+        .modal-body
+          .fieldset
+            .row
+              .form-group.col-md-6
+                = f.text_field :company_name, class: "form-control", label: "Company Name"
+              .form-group.col-md-6
+                = f.text_field :title, class: "form-control", label: "Job Title"
+            .row
+              .form-group.col-md-12
+                = f.text_area :description, rows: 12, class: "form-control", label: "Description"
+            .row 
+              .form-group.col-md-12
+                = f.submit "Add Position", class: "btn btn-primary"
+        .modal-footer
+          = f.submit "Invite Colleague", class: "submit btn btn-primary"

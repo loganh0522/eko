@@ -25,6 +25,6 @@ class JobSeeker::WorkExperiencesController < JobSeekersController
   private 
   
   def position_params
-    params.require(:work_experience).permit(:title, :company_name, :description, :start_date, :end_date, :current_position)
+    params.require(:work_experience).permit(:title, :company_name, :description, :start_date, :end_date, :current_position, :industry_ids, :function_ids)
   end
 end

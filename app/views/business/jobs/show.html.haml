@@ -41,24 +41,29 @@
           %th(width="5%")
           %th(width="20%") Name 
           %th(width="20%") Job Title
-          %th(width="20%") Stage 
-          %th(width="20%") Rating
-          %th(width="5%") Remove
+          %th(width="15%") Stage 
+          %th(width="15%") Rating
+          %th(width="24%")
       %tbody
         - @applicants.each do |applicant|
+          - stage = @job.applications.where(user_id: applicant.id).first.stage.name
           %tr
-            %td.checkbox{:data => {:id => applicant.id}}
-              = check_box_tag "applicant_ids[]", applicant.id
+            %td
+              .checkbox{:data => {:id => applicant.id}}
+                = check_box_tag "applicant_ids[]", applicant.id
             %td
               %img.circle(src="/tmp/man.jpg")
             %td
-              %h4= link_to "#{applicant.first_name} #{applicant.last_name}", business_job_application_path(@job, Application.where(user_id: applicant.id, job_id: @job).first.id)
-              %h6 CEO - TalentWiz 
+              .name= link_to "#{applicant.first_name} #{applicant.last_name}", business_job_application_path(@job, Application.where(user_id: applicant.id, job_id: @job).first.id)
+              .current-position CEO - TalentWiz 
             %td
-              %h4 Sales Manager
-              %h6 May 22, 2015
+              .position= @job.title
+              .date-applied May 22, 2015
             %td
-              %h4 New Applicant
+              .stage= stage
+            %td
+              .rating 5 stars
+            %td
 
 
       / .modal.col-md-6.col-md-offset-4

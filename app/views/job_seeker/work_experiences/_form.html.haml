@@ -1,13 +1,46 @@
-= bootstrap_form_for [:job_seeker, @work_experience], :data => {:remote => true} do |f|
-  .fieldset
-    .row
-      .form-group.col-md-6
-        = f.text_field :company_name, class: "form-control", label: "Company Name"
-      .form-group.col-md-6
-        = f.text_field :title, class: "form-control", label: "Job Title"
-    .row
-      .form-group.col-md-12
-        = f.text_area :description, rows: 12, class: "form-control", label: "Description"
-    .row 
-      .form-group.col-md-12
-        = f.submit "Add Position", class: "btn btn-primary"
+.modal#work-experience-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title Add Work Experience 
+      = bootstrap_form_for [:job_seeker, @work_experience] do |f|
+        .modal-body
+          .fieldset
+            .row
+              .form-group.col-md-12
+                = f.text_field :title, class: "form-control", label: "Job Title"
+            .row
+              .form-group.col-md-12
+                = f.text_field :company_name, class: "form-control", label: "Company Name"
+            .row
+              .form-group.col-md-6
+                = f.collection_select(:industry, Industry.all, :id, :name, label: "Industry")
+              .form-group.col-md-6
+                = f.collection_select(:job_function, Function.all, :id, :name, label: "Job Function")
+            .row
+              / .form-group.col-md-4
+              /   = f.select :country, country: CountryStateSelect.countries_collection, label: "Country"
+              / .form-group.col-md-4
+              /   - options = { form: f, field_names: {:country => :country, :state => :province } }  
+              /   = f.select :province, CountryStateSelect.state_options(options)
+              / .form-group.col-md-4
+              /   = f.text_field :city, class: "form-control", label: "City"
+            .row
+              .col-sm-3
+                = select_month(Date.today, class: 'form-control')
+              .col-sm-3
+                = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year - 20}, class: 'form-control')
+              .col-sm-3
+                = select_month(Date.today, class: 'form-control')
+              .col-sm-3
+                = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year - 20}, class: 'form-control')
+            .row 
+              .col-sm-6.col-md-offset-6
+                = f.check_box :current_position, checked_value: 1, unchecked_value: 0
+              
+            .row
+              .form-group.col-md-12
+                = f.text_area :description, rows: 12, class: "form-control", label: "Description"
+        .modal-footer
+          = f.submit "Add Experience", class: "submit btn btn-primary"

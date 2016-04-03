@@ -17,8 +17,10 @@ class SessionsController < ApplicationController
       flash[:notice] = "You've logged in!"
       redirect_to business_root_path
     elsif @user.kind == 'job seeker'
+      
       session[:user_id] = @user.id
       flash[:notice] = "You've logged in!"
+      
       if request.subdomain.present? 
         redirect_to root_path
       else
