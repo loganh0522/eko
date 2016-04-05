@@ -103,12 +103,9 @@ GEM
       compass (~> 1.0.0)
       sass-rails (< 5.1)
       sprockets (< 2.13)
-    country_state_select (3.0.0)
-      chosen-rails (~> 1.4)
+    country_state_select (2.0.0)
       city-state
-      compass-rails (~> 2.0.4)
-      rails
-      simple_form (~> 3.2)
+      rails (>= 3.0)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     daemons (1.2.3)
@@ -256,9 +253,6 @@ GEM
     sexp_processor (4.6.1)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
-    simple_form (3.2.1)
-      actionpack (> 4, < 5.1)
-      activemodel (> 4, < 5.1)
     slop (3.6.0)
     sprockets (2.12.4)
       hike (~> 1.2)
@@ -314,7 +308,7 @@ DEPENDENCIES
   chosen-rails
   coffee-rails (~> 4.1.0)
   coffee_routes
-  country_state_select (= 3.0.0)
+  country_state_select (= 2.0.0)
   database_cleaner (= 1.2.0)
   fabrication
   faker

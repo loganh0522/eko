@@ -11,10 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309123211) do
+ActiveRecord::Schema.define(version: 20160405092932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accomplishments", force: :cascade do |t|
+    t.integer "work_experience_id"
+    t.text    "body"
+  end
 
   create_table "application_scorecards", force: :cascade do |t|
     t.integer "scorecard_id"
@@ -46,6 +51,10 @@ ActiveRecord::Schema.define(version: 20160309123211) do
     t.string "website"
   end
 
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+  end
+
   create_table "customers", force: :cascade do |t|
     t.integer  "company_id"
     t.string   "plan"
@@ -62,6 +71,16 @@ ActiveRecord::Schema.define(version: 20160309123211) do
 
   create_table "education_levels", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "exp_functions", force: :cascade do |t|
+    t.integer "function_id"
+    t.integer "work_experience_id"
+  end
+
+  create_table "exp_industries", force: :cascade do |t|
+    t.integer "industry_id"
+    t.integer "work_experience_id"
   end
 
   create_table "experience_levels", force: :cascade do |t|
@@ -109,6 +128,12 @@ ActiveRecord::Schema.define(version: 20160309123211) do
     t.integer "career_level_id"
   end
 
+  create_table "job_countries", force: :cascade do |t|
+    t.integer "country_id"
+    t.integer "job_id"
+    t.integer "work_experience_id"
+  end
+
   create_table "job_education_levels", force: :cascade do |t|
     t.integer "job_id"
     t.integer "education_level_id"
@@ -131,6 +156,12 @@ ActiveRecord::Schema.define(version: 20160309123211) do
 
   create_table "job_kinds", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "job_states", force: :cascade do |t|
+    t.integer "state_id"
+    t.integer "job_id"
+    t.integer "work_experience_id"
   end
 
   create_table "job_types", force: :cascade do |t|
@@ -226,6 +257,11 @@ ActiveRecord::Schema.define(version: 20160309123211) do
     t.datetime "updated_at"
   end
 
+  create_table "states", force: :cascade do |t|
+    t.string  "name"
+    t.integer "country_id"
+  end
+
   create_table "subsidiaries", force: :cascade do |t|
     t.string  "name"
     t.integer "company_id"
@@ -244,13 +280,18 @@ ActiveRecord::Schema.define(version: 20160309123211) do
   create_table "work_experiences", force: :cascade do |t|
     t.string   "title"
     t.string   "company_name"
-    t.string   "start_date"
-    t.string   "end_date"
     t.text     "description"
     t.integer  "current_position"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "start_month"
+    t.string   "start_year"
+    t.string   "end_month"
+    t.string   "end_year"
+    t.string   "country"
+    t.string   "state"
+    t.string   "city"
   end
 
 end

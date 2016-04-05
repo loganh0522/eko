@@ -1,31 +1,26 @@
 - @positions.each do |position| 
-  .experiences
-    %h4= "#{position.company_name} - #{position.title}"
-    %p June 2015 - Present
-    %p= position.description
+  .job-position
+    .experience-header 
+      .title= position.title  
+      .date= "#{position.start_month} #{position.start_year} - #{position.start_month} #{position.start_year}"
+    .experience-body
+      .company= position.company_name
+      .location= "#{position.countries.first.name}, #{position.states.first.name}, #{position.city}"
+      .description= position.description
+      
+      .accomplishments 
+        Accomplishments
+        %ul
+          %li 
+            %p Lipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus enim, tincidunt ut felis quis, interdum blandit nulla.
+          %li 
+            %p Lipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus enim, tincidunt ut felis quis, interdum blandit nulla.
 
-
-.job-position
-  .experience-header 
-    .title Sales Representative 
-    .date June 2015 - Present
-  .experience-body
-    .company Salesforce.com
-    .description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus enim, tincidunt ut felis quis, interdum blandit nulla. Duis at facilisis elit, eu tincidunt massa. Sed lobortis justo sed tellus ullamcorper semper. Duis at facilisis elit, eu tincidunt massa. Sed lobortis justo sed tellus ullamcorper semper.
-    
-    .accomplishments 
-      Accomplishments
-      %ul
-        %li 
-          %p Lipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus enim, tincidunt ut felis quis, interdum blandit nulla.
-        %li 
-          %p Lipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus enim, tincidunt ut felis quis, interdum blandit nulla.
-
-    .actions
-      %ul
-        %li
-          = link_to "+ Add Accomplishment", new_job_seeker_work_experience_path, :data => {:toggle => "modal", :target => "#work-experience-modal"}
-        %li
-          = link_to "+ Add Skills", new_job_seeker_work_experience_path, :data => {:toggle => "modal", :target => "#work-experience-modal"}
-        %li
-          = link_to "+ Get a Reference", new_job_seeker_work_experience_path, :data => {:toggle => "modal", :target => "#work-experience-modal"}
+      .actions
+        %ul
+          %li
+            = link_to "+ Add Accomplishment", new_job_seeker_accomplishment_path(id: position.id), :data => {:toggle => "modal", :target => "#accomplishments", :id => position.id}
+          %li
+            = link_to "+ Add Skills", new_job_seeker_work_experience_path, :data => {:toggle => "modal", :target => "#work-experience-modal"}
+          %li
+            = link_to "+ Get a Reference", new_job_seeker_work_experience_path, :data => {:toggle => "modal", :target => "#work-experience-modal"}

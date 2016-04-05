@@ -17,14 +17,15 @@
     .new_experience
       = link_to "+ Add Work Experience", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}
       = render 'job_seeker/work_experiences/form'
-       
+      = render 'job_seeker/accomplishments/form', :locals => {@exp_id => params[:id]}
+      
   .body
-
-    .not-present-container
-      %p You currently do not have any listed work experiences. 
-      = link_to "+ Add Work Experience", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}, class: "add-object"
-    
-    = render 'experience'
+    - if current_user.work_experiences.nil? 
+      .not-present-container
+        %p You currently do not have any listed work experiences. 
+        = link_to "+ Add Work Experience", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}, class: "add-object"
+    - else
+      = render 'experience'
 
 
 

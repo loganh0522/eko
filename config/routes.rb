@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     resources :jobs
     resources :profiles
     resources :work_experiences
+    resources :accomplishments
     resources :applications, only: [:create]
     resources :question_answers
   end

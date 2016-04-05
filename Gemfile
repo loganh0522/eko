@@ -22,8 +22,10 @@ gem 'figaro'
 gem 'stripe'
 gem 'stripe_event'
 gem 'bootstrap-wysihtml5-rails'
-gem 'country_state_select', "3.0.0"
+
+gem 'country_state_select', "2.0.0"
 gem 'chosen-rails'
+
 
 gem 'mini_magick'
 gem 'carrierwave'
