@@ -1,35 +1,81 @@
-.user-general-info
-  .user-image
-    %img(src="/tmp/man.jpg")
-  .info 
-    %h3 Logan Houston
-    %h4 CEO Talent Wiz 
-    %h5 Toronto, On
-  .contact-info 
-    %h3 Contact Info
-    %h5 E-mail: loganh0522@gmail.com
-    %h5 Mobile: 416-806-6907
-    %h5 Skype: logz.houston
-
-.main-container
-  .header
-    %h1 Experience
-    .new_experience
-      = link_to "+ Add Work Experience", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}
-      = render 'job_seeker/work_experiences/form'
-      = render 'job_seeker/accomplishments/form', :locals => {@exp_id => params[:id]}
+.job-seeker
+  .sidebar
+    .user-general-info
+      .user-image
+        %img(src="/tmp/man.jpg")
+      .info 
+        %p.name= "#{current_user.first_name} #{current_user.last_name}"
+        %h4 CEO Talent Wiz 
+        %h5 Toronto, On
+        .current-company Current Company Name
+        .last-education Education Queen's University
+      .contact-info 
+        .glyphicon.glyphicon-envelope 
+        .email= current_user.email
+        %h5 Mobile: 416-806-6907
+        %h5 Skype: logz.houston
       
-  .body
-    - if current_user.work_experiences.nil? 
-      .not-present-container
-        %p You currently do not have any listed work experiences. 
-        = link_to "+ Add Work Experience", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}, class: "add-object"
-    - else
-      = render 'experience'
+    .user-profile-nav
+      %ul
+        %li.experience-tab.active Experience 
+        %li.education-tab Education      
+        %li.skills-tab Skills & Certifications
+        %li.career-prefs-tab Career Preferences
+        %li.my-apps-tab My Applications
+
+  .main-container
+    .experience-container.showing
+      .header
+        %h1 Experience
+        .new_experience
+          = link_to "+ Add Work Experience", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}
+          = render 'job_seeker/work_experiences/form'
+          = render 'job_seeker/accomplishments/form', :locals => {@exp_id => params[:id]}
+      .body
+        - if current_user.work_experiences.nil? 
+          .not-present-container
+            %p You currently do not have any listed work experiences. 
+            = link_to "+ Add Work Experience", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}, class: "add-object"
+        - else
+          = render 'experience'
+
+    .education-container
+      .header
+        %h1 Education
+        .new_experience
+          = link_to "+ Add Education", '#', :data => {:toggle => "modal", :target => "#education-modal"}
+          = render 'job_seeker/educations/form'
+      .body
+        - if current_user.educations.nil?        
+          .not-present-container
+            %p You currently do not have any listed work experiences. 
+            = link_to "+ Add Education", '#', :data => {:toggle => "modal", :target => "#education-modal"}, class: 'add-object'
+        - else 
+          = render 'education'
+
+    .skills-container
+      .header
+        %h1 Skills
+        .new_experience
+          = link_to "+ Add Skills", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}
+
+      .body
+        .not-present-container
+          %p You currently do not have any skills listed. 
+          = link_to "+ Add Skill", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}, class: 'add-object'
+
+      .header
+        %h1 Certifications
+        .new_experience
+          = link_to "+ Add Certification", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}
+      .body
+        .not-present-container
+          %p You currently do not have any certifications listed. 
+          = link_to "+ Add Certification", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}, class: 'add-object'
 
 
 
-            
+              
 
 
 

@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   
   has_many :applications
   has_many :apps, through: :applications, class_name: "Job", foreign_key: :job_id
-
+  has_many :educations
 
   has_many :work_experiences
 end

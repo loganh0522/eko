@@ -29,7 +29,8 @@ Rails.application.routes.draw do
 
   namespace :job_seeker do 
     resources :jobs
-    resources :profiles
+    resources :profiles 
+    resources :educations
     resources :work_experiences
     resources :accomplishments
     resources :applications, only: [:create]
