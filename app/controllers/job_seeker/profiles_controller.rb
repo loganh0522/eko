@@ -6,6 +6,7 @@ class JobSeeker::ProfilesController < JobSeekersController
     @education = Education.new
     @positions = current_user.work_experiences
     @degrees = current_user.educations
+    @user = current_user
   end
 
 end

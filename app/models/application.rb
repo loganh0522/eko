@@ -4,7 +4,7 @@ class Application < ActiveRecord::Base
   belongs_to :stage
   belongs_to :company
 
-  has_many :comments
+  has_many :comments, -> {order("created_at DESC")}
   has_many :application_scorecards
   has_many :messages
 

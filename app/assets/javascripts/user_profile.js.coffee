@@ -1,7 +1,6 @@
 jQuery -> 
   $('.active').css background: 'rgb(239, 122, 43)'
 
-
   changeContainer = ($targetContainer) -> 
     $('.main-container').find('.showing').hide()
     $('.main-container').find('.showing').removeClass 'showing'
@@ -9,7 +8,6 @@ jQuery ->
     $($targetContainer).addClass 'showing'
 
     return
-
 
   $('.user-profile-nav').on 'click', 'li', (event) -> 
     if $(this).attr('class') == 'experience-tab'
@@ -31,6 +29,11 @@ jQuery ->
     console.log($targetContainer)
     changeContainer $targetContainer
     return
+
+
+  $('.add-accomplishment').on 'click', (event) ->
+    exp = $(this).data('id')
+    $("#accomplishment_work_experience_id").val(exp)
 
     
 

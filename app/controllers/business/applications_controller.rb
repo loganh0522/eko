@@ -16,6 +16,7 @@ class Business::ApplicationsController < ApplicationController
     @job = Job.find(params[:job_id])
     @stage = @application.stage
     @positions = @user.work_experiences
+    @education = @user.educations
     @comment = Comment.new 
   end
 

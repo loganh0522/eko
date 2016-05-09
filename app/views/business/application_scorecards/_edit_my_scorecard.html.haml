@@ -3,10 +3,36 @@
     .modal-content
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title My Scorecard
+        %h3.modal-title My Scorecard
       
-      .modal-body   
-        = form_for [:business, @job, @application, @current_user_scorecard] do |f|                   
+      .modal-body 
+        = form_for [:business, @job, @application, @current_user_scorecard] do |f|
+          = f.fields_for :overall_ratings do |k|
+            %table.table
+              %thead
+                %tr
+                  %th Overall Rating
+                %tr
+                  %label 
+                    %td Recommened
+                    %td
+                      = k.radio_button :rating, 1 
+                %tr              
+                  %label
+                    %td Looks Good
+                    %td
+                      = k.radio_button :rating, 2 
+                %tr              
+                  %label
+                    %td Not Great 
+                    %td
+                      = k.radio_button :rating, 3 
+                %tr             
+                  %label 
+                    %td Do not Recommend 
+                    %td
+                      = k.radio_button :rating, 4
+
           - @sections.each do |section|
             %table.table
               %thead

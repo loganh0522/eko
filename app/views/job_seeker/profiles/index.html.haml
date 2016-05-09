@@ -3,6 +3,8 @@
     .user-general-info
       .user-image
         %img(src="/tmp/man.jpg")
+        = link_to "Change Photo", '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"}
+        = render 'profile_picture'
       .info 
         %p.name= "#{current_user.first_name} #{current_user.last_name}"
         %h4 CEO Talent Wiz 
@@ -47,11 +49,12 @@
           = render 'job_seeker/educations/form'
       .body
         - if current_user.educations.nil?        
+          = render 'education'
+        - else 
           .not-present-container
             %p You currently do not have any listed work experiences. 
             = link_to "+ Add Education", '#', :data => {:toggle => "modal", :target => "#education-modal"}, class: 'add-object'
-        - else 
-          = render 'education'
+          
 
     .skills-container
       .header
@@ -73,7 +76,17 @@
           %p You currently do not have any certifications listed. 
           = link_to "+ Add Certification", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}, class: 'add-object'
 
-
+    / .career-prefs-container
+    /   .header
+    /     %h1 Career Preferences
+    /   .body
+    /     - if current_user.educations.nil?        
+    /       = render 'education'
+    /     - else 
+    /       .not-present-container
+    /         %p You currently do not have any career preferences. 
+    /         = link_to "+ Add Education", '#', :data => {:toggle => "modal", :target => "#education-modal"}, class: 'add-object'
+          
 
               
 

@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :accomplishments
     resources :applications, only: [:create]
     resources :question_answers
+    resources :users
   end
 
   namespace :business do 

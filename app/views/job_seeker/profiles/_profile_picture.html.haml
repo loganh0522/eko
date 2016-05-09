@@ -1,0 +1,17 @@
+.modal#profile-picture-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title Edit Profile Picture
+      .modal-body
+        .row
+          .image.col-md-6
+            = form_for [:job_seeker, @user] do |f| 
+              %p Add a photo and crop it below. 
+              = f.file_field :profile_picture
+            %img(src="/tmp/man.jpg")
+          .preview.col-md-6
+            %p Preview
+      .modal-footer
+

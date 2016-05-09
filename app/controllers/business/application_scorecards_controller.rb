@@ -17,7 +17,7 @@ class Business::ApplicationScorecardsController < ApplicationController
 
   end
 
-  def create 
+  def create
     @job = Job.find(params[:job_id])
     @application_scorecard = ApplicationScorecard.new(application_scorecard_params)
     @application = Application.find(params[:application_id])
@@ -48,6 +48,6 @@ class Business::ApplicationScorecardsController < ApplicationController
   private 
 
   def application_scorecard_params 
-    params.require(:application_scorecard).permit(:id, :application_id, :user_id, :scorecard_id, :job_id, :_destroy, scorecard_ratings_attributes: [:id, :section_option_id, :user_id, :rating, :_destroy])
+    params.require(:application_scorecard).permit(:id, :application_id, :user_id, :scorecard_id, :job_id, :_destroy, scorecard_ratings_attributes: [:id, :section_option_id, :user_id, :rating, :_destroy], overall_ratings_attributes: [:id, :rating, :user_id, :_destroy])
   end
 end

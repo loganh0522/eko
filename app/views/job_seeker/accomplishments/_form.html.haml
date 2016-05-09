@@ -7,6 +7,6 @@
       = bootstrap_form_for [:job_seeker, @accomplishment] do |f|
         .modal-body
           = f.text_area :body, class: "form-control", label: "Accomplishment"
-          = f.hidden_field :work_experience_id, value: @exp_id
+          = f.hidden_field :work_experience_id, value: nil
         .modal-footer
           = f.submit "Add Experience", class: "submit btn btn-primary"

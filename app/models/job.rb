@@ -21,6 +21,12 @@ class Job < ActiveRecord::Base
 
   has_many :job_career_level
   has_many :career_level, through: :job_career_level
+
+  has_many :job_countries
+  has_many :countries, through: :job_countries
+
+  has_many :job_states
+  has_many :states, through: :job_states
   
   
   validates_presence_of :title, :benefits, :description, :country, :city, :province

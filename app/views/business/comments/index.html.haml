@@ -33,21 +33,16 @@
     .applicant-notes
       .header
         %h4 Notes
-      .notes
-        .notes-header 
-          %img.circle(src="/tmp/man.jpg")
-          %p.name Logan Houston
-          %p.sent 2 min ago
-        .body
-          %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus enim, tincidunt ut felis quis, interdum blandit nulla. Duis at facilisis elit, eu tincidunt massa. Sed lobortis justo sed tellus ullamcorper semper.
-
-      .notes
-        .notes-header 
-          %img.circle(src="/tmp/man.jpg")
-          %p.name Logan Houston
-          %p.sent 5 min ago
-        .body
-          %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus enim, tincidunt ut felis quis, interdum blandit nulla. 
+      - @comments.each do |comment|
+        - user = User.find(comment.user_id)
+        .notes   
+          .notes-header 
+            %img.circle(src="/tmp/man.jpg")
+            %p.name= user.first_name 
+            %p.name= user.last_name
+            %p.sent= time_ago_in_words(comment.created_at) unless comment.created_at.blank?
+          .body
+            %p= comment.body
 
   .applicant-side-container
     .current-stage
@@ -61,12 +56,4 @@
 
         = form_tag business_job_application_move_stages_path(@job.id, @application) do
           %input(type="submit" value="Next Stage" class="btn btn-success")
-
-    .add-task
-      %h4 Tasks 
-      = form_tag do
-        = text_area_tag(:q)
-
-    .send-applicant-message
-      %h4 Send a Message 
 .footer 

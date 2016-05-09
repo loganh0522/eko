@@ -13,6 +13,8 @@ class WorkExperience < ActiveRecord::Base
   has_many :job_states
   has_many :states, through: :job_states
 
+  has_many :accomplishments
+
 
   validates_presence_of :title, :company_name, :description
 end 

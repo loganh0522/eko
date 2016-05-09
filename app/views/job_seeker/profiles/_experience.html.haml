@@ -11,15 +11,16 @@
       .accomplishments 
         Accomplishments
         %ul
-          %li 
-            %p Lipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus enim, tincidunt ut felis quis, interdum blandit nulla.
-          %li 
-            %p Lipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus enim, tincidunt ut felis quis, interdum blandit nulla.
+          - position.accomplishments.each do |accomplishment|
+            %li
+              %p= accomplishment.body
+            %li 
+              %p Lipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus enim, tincidunt ut felis quis, interdum blandit nulla.
 
       .actions
         %ul
           %li
-            = link_to "+ Add Accomplishment", new_job_seeker_accomplishment_path(id: position.id), :data => {:toggle => "modal", :target => "#accomplishments", :id => position.id}
+            = link_to "+ Add Accomplishment", new_job_seeker_accomplishment_path(id: position.id), :data => {:toggle => "modal", :target => "#accomplishments", :id => position.id}, class: 'add-accomplishment'
           %li
             = link_to "+ Add Skills", new_job_seeker_work_experience_path, :data => {:toggle => "modal", :target => "#work-experience-modal"}
           %li
