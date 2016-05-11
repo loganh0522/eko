@@ -37,32 +37,39 @@
             %td(width="10%")
               = f.submit "+ Add", class: "btn btn-primary"
     
+
     .applicant-assessments
       .header
         %h4 Assessments
 
       .assessment
-        .panel-group#accordian{"role"=>"tablist", "aria-multiselectable"=>"true"}
-          .panel.panel-default{"role"=>"tab", "id"=>"headingOne"}
-            .panel-heading
-              %h4.panel-title
-                %a.accordion-toggle{"role" => "button", "data-toggle" => "collapse", "data-parent" => "#accordion", :href => "#collapseOne", "aria-expanded" => "true", "aria-controls" => "collapseOne"} Application Form
-            #collapseOne.panel-collapse.collapse.in{"role"=>"tabpanel", "aria-labelledby"=>"headingOne"}
-              .panel-body
-                .application-form
-                  - @questions.each do |question|
-                    %p.question
-                      = question.position
-                      = question.body
-                    .answer
-                      - if question.kind == 'Text' || question.kind == 'Paragraph'
-                        %p= question.question_answer.body
-                      - if question.kind == 'Checkbox'
-                        - question.question_options.each do |option|
-                          - if question.question_answer.question_option_id == option.id
-                            %b= option.body
-                          - else 
-                            %p= option.body
+        - if @questionairre.nil?
+          .not-present-container
+            %p You currently do not have any listed work experiences. 
+            
+        - else 
+          .panel-group#accordian{"role"=>"tablist", "aria-multiselectable"=>"true"}
+            .panel.panel-default{"role"=>"tab", "id"=>"headingOne"}
+              .panel-heading
+                %h4.panel-title
+                  %a.accordion-toggle{"role" => "button", "data-toggle" => "collapse", "data-parent" => "#accordion", :href => "#collapseOne", "aria-expanded" => "true", "aria-controls" => "collapseOne"} Application Form
+              #collapseOne.panel-collapse.collapse.in{"role"=>"tabpanel", "aria-labelledby"=>"headingOne"}
+                .panel-body         
+                  .application-form
+                    - @questionairre.questions.each do |question|
+                      %p.question
+                        = question.position
+                        = question.body
+                      .answer
+                        - if question.kind == 'Text' || question.kind == 'Paragraph'
+                          %p= question.question_answer.body
+                        - if question.kind == 'Checkbox'
+                          - question.question_options.each do |option|
+                            - if question.question_answer.question_option_id == option.id
+                              %b= option.body
+                            - else 
+                              %p= option.body
+          
               
   .applicant-side-container
     .current-stage
