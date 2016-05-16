@@ -34,7 +34,9 @@
     .applicant-messages
       .header
         %h4 Messages
-        %p.send_message Send a Message
+        %p.send_messages
+          = link_to "Send a Message", '#', {:data => {:toggle => "modal", :target => "#send_messageModal"}} 
+          = render "send_message" 
 
       .message
         .message-header 

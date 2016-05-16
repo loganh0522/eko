@@ -3,11 +3,11 @@
     .modal-content
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title Add Note 
+        %h4.modal-title Send Message 
         = form_tag send_multiple_messages_business_job_applications_path(@job.id) do
           .modal-body
             %fieldset
             = text_area_tag :body
             = hidden_field_tag :applicant_ids
           .modal-footer
-          %input(type="submit" value="Send Message" class="btn btn-success")
+            %input(type="submit" value="Send Message" class="btn btn-success")

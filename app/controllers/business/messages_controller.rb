@@ -21,9 +21,11 @@ class Business::MessagesController < ApplicationController
       @application = Application.where(user_id: id, job_id: params[:job_id]).first
       @message = Message.create(body: params[:body], application_id: @application.id, user_id: current_user.id)
       @recipient = User.find(id)
+      @token = @application.token
 
-      AppMailer.send_applicant_message(@message, @job, @recipient, current_company).deliver
+      AppMailer.send_applicant_message(@token, @message, @job, @recipient, current_company).deliver
     end
+
     redirect_to business_job_path(@job)
   end
   
