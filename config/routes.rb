@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  root '/' to: 'pages#home'
+  root to: 'pages#home'
   resources :job_boards
   resources :jobs
   resources :companies
