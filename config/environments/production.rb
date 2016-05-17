@@ -15,6 +15,8 @@ Rails.application.configure do
 
   config.i18n.fallbacks = true
 
+  config.assets.compile = false
+
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
