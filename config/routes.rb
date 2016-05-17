@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  
+  root '/' to: 'pages#home'
   resources :job_boards
   resources :jobs
   resources :companies
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get '/job_seekers/new', to: 'users#new_job_seeker'
   get '/account/new', to: 'companies#new'
   
-  root to: 'pages#home'
+  
 
   
 
