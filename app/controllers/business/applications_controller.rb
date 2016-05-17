@@ -1,12 +1,23 @@
 class Business::ApplicationsController < ApplicationController
+  
+  def index
+    @applicants = current_company.applicants
+    @jobs = current_company.jobs
+    @applications = current_company.applications
+    
+    @applications.each do |application| 
+      @job = Job.find(application.job_id)
+    end
+  end
+
   def show 
-    @user = User.find(params[:id])
+    @application = Application.find(params[:id])
+    @user = @application.applicant
     @job = Job.find(params[:job_id])
-    @application = Application.where(user_id: params[:id], job_id: params[:job_id]).first
     @stage = @application.stage
     @positions = @user.work_experiences
-    @comment = Comment.new
-    @comments = @application.comments
+    @education = @user.educations
+    @comment = Comment.new 
   end
 
   def edit
@@ -14,18 +25,6 @@ class Business::ApplicationsController < ApplicationController
   end
 
   def update
-
-  end
-
-  def move_stages 
-    app = Application.find(params[:application_id])
-    current_stage = app.stage
-    next_stage = Stage.where(position: current_stage.position + 1, job_id: params[:job_id]).first
-    app.update_attribute(:stage_id, next_stage.id)
-    redirect_to :back
-  end
-
-  def reject
 
   end
 end

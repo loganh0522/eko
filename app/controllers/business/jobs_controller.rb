@@ -11,13 +11,12 @@ class Business::JobsController < ApplicationController
   end
 
   def create 
-    @job = Job.new(job_params)
+    @job = Job.new(job_params)  
     @job.company = current_company
 
-    if @job.save 
+    if @job.save && @job.company == current_company
       @job.user_ids = params[:user_ids]
-      flash[:notice] = "Your job posting #{@job.title}, was created"
-      redirect_to  new_business_job_hiring_team_path(@job)
+      redirect_to new_business_job_hiring_team_path(@job)
     else
       render :new
     end
@@ -30,22 +29,27 @@ class Business::JobsController < ApplicationController
   end
 
   def edit
-    @job = Job.find(params[:id], @job)
+    @job = Job.find(params[:id])
+    @questionairre = @job.questionairre
+    @scorecard = @job.scorecard
   end
 
   def update
     @job = Job.find(params[:id])
+    
     if @job.update(job_params)
       flash[:notice] = "#{@job.title} has been updated"
-      redirect_to :root
+      redirect_to new_business_job_hiring_team_path(@job)
     else
       render :edit
     end
   end
 
   private 
-    def job_params
-      params.require(:job).permit(:description, :title, :city, :country, 
-        :province, :benefits, user_ids: [])
-    end
+
+  def job_params
+    params.require(:job).permit(:description, :title, :city, :country, :province, :benefits, 
+      :industry_ids, :function_ids, :education_level_ids, :job_kind_ids, :career_level_ids)
+  end
+
 end 

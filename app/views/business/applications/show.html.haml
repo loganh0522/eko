@@ -1,65 +1,70 @@
-
 .applicant-view
-  .applicant-main-container
+  .applicant-main-container   
     .applicant-header
       .user-image
-        %img.circle(src="/tmp/man.jpg")
+        %img.profile_picture(src="/tmp/man.jpg")
       
       .applicant-details
-        %h3 Logan Houston 
-        %p.location Toronto, Ontario, CA
-        %p loganh0522@gmail.com
-        %p 416-806-6907 
-      
-    .applicant-nav-bar  
-      .ul 
-        .li Profile
-        .li Messages 
-        .li Notes
-        .li Assessments 
-        .li Scorecard
+        %p.name Logan Houston
+        .contact
+          %span.glyphicon.glyphicon-map-marker  
+          Toronto, Ontario, CA
+          %br
+          %span.glyphicon.glyphicon-envelope 
+          loganh0522@gmail.com
+          %br
+          %span.glyphicon.glyphicon-earphone 
+          416-806-6907 
+
+      .applicant-actions 
+        .action 
+          %p Send Message 
+        .action 
+          %p Schedule Meeting
+      .applicant-nav-bar  
+        = render "business/shared/applicant_nav"
 
     .add-comment-on-applicant
-      = form_for [:business, @comment] do |f|
-        = f.text_area :body, rows: 2, class: "form-control", label: "Add Feedback", placeholder: "Add a note about #{@user.first_name} #{@user.last_name}"
-        = f.hidden_field :user_id, value: current_user.id
-        = f.hidden_field :application_id, value: @application.id
-        = f.submit "+ Add", class: "btn btn-primary"
-
-
-      - @comments.each do |comment|
-        %p= comment.body
-
-
+      %table   
+        = form_for [:business, @job, @application, @comment] do |f| 
+          %tr
+            %td(width="10%")
+              %img.circle(src="/tmp/man.jpg")
+            %td(width="80%")
+              = f.text_field :body, rows: 2, class: "form-control", label: "Add Feedback", placeholder: "Add a note about #{@user.first_name} #{@user.last_name}"
+              = f.hidden_field :user_id, value: current_user.id
+              = f.hidden_field :application_id, value: @application.id
+            %td(width="10%")
+              = f.submit "+ Add", class: "btn btn-primary"
 
     .applicant-experience
       .header
-        %h3 Experience
+        %h4 Experience
       
-      .experience
-        = render 'job_seeker/profiles/experience'
+      .applicant-positions
+        = render 'business/applications/application_experience'
+
+    .applicant-education
+      .header
+        %h4 Education
+      
+      .applicant-positions
+        = render 'business/applications/application_education'
+
+
 
   .applicant-side-container
     .current-stage
-      %h4= "Current Stage: #{@stage.name}"
+      %h4= "Current Stage: "
+      - @job.stages.each do |stage|
+        %p.stage{:class => is_current_stage?(stage, @application)}
+          = stage.name
+      .stage-actions
+        = form_tag sort_business_job_stages_path do
+          %input(type="submit" value="X Reject" class="btn btn-danger")
 
-      = form_tag business_job_application_move_stages_path(@job.id, @application) do
-        %input(type="submit" value="Move to Next Stage" class="btn btn-success")
-
-      = form_tag sort_business_job_stages_path do
-        %input(type="submit" value="X Reject" class="btn btn-danger")
-
-    .add-task
-      %h4 Add a Task
-      %p Create a task for this applicant. Tag a team member using @name to notify them of the task.
-      = form_tag do
-        = text_area_tag(:q)
-
-    .send-applicant-message
-      %h4 Send a Message 
-      %p Create a task for this applicant. Tag a team member using @name to notify them of the task.
-      = form_tag do
-        = text_area_tag(:q)
+        = form_tag business_job_application_move_stages_path(@job.id, @application) do
+          %input(type="submit" value="Next Stage" class="btn btn-success")
 
 .footer 
 

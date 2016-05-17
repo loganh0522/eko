@@ -1,0 +1,14 @@
+%section.well.col-md-8.col-md-offset-2
+  .row
+  = bootstrap_form_for @user, html: {class: 'form-horizontal'} do |f|
+    %header
+      %h1 Register
+    %fieldset.col-md-8
+      = f.text_field :first_name, label: "First Name"
+      = f.text_field :last_name, label: "Last Name"
+      = f.email_field :email, label: "Email Address"
+      = f.password_field :password
+      = f.hidden_field :kind, :value => 'job seeker'
+    %fieldset.actions.control-group.col-md-8.col-md-offset-6
+      .controls
+        %input(type="submit" value="Sign Up" class="btn")

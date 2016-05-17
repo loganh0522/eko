@@ -1,3 +1,4 @@
 jQuery -> 
-  $('#user_tokens').tokenInput '/business/jobs/:job_id/hiring_teams.new.json', 
+  $('#hiring_team_user_tokens').tokenInput '/business/users.json', 
     theme: 'facebook'
+    propertyToSearch: 'first_name'

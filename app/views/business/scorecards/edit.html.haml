@@ -1,0 +1,18 @@
+.contain
+  .sidebar
+    .nav
+      = render 'business/shared/post_job'
+  
+  .main-container 
+    .header   
+      %h1 Scorecard
+    .body
+      .job_scorecard
+        = form_for [:business, @job, @scorecard] do |f|
+          = f.fields_for :scorecard_sections do |q| 
+            = render "scorecard_section_fields", f: q       
+          %br
+          = link_to_add_fields "+ Add Section", f, :scorecard_sections  
+          = f.hidden_field :job_id, value: @job.id
+
+          = f.submit "Create Scorecard", class: "submit btn btn-primary"

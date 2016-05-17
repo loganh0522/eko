@@ -11,21 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160201152757) do
+ActiveRecord::Schema.define(version: 20160513112705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accomplishments", force: :cascade do |t|
+    t.integer "work_experience_id"
+    t.text    "body"
+  end
+
+  create_table "application_scorecards", force: :cascade do |t|
+    t.integer "scorecard_id"
+    t.integer "user_id"
+    t.integer "job_id"
+    t.text    "feedback"
+    t.integer "application_id"
+  end
 
   create_table "applications", force: :cascade do |t|
     t.integer "job_id"
     t.integer "user_id"
     t.integer "stage_id"
+    t.integer "company_id"
+    t.string  "token"
+  end
+
+  create_table "career_levels", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "application_id"
-    t.text    "body"
+    t.integer  "user_id"
+    t.integer  "application_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -33,17 +54,65 @@ ActiveRecord::Schema.define(version: 20160201152757) do
     t.string "website"
   end
 
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+  end
+
   create_table "customers", force: :cascade do |t|
     t.integer  "company_id"
-    t.integer  "stripe_id"
     t.string   "plan"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "stripe_customer_id"
+    t.string   "last_four"
+    t.string   "stripe_subscription_id"
+    t.string   "full_name"
+    t.string   "postal_code"
+    t.integer  "exp_month"
+    t.integer  "exp_year"
+  end
+
+  create_table "education_levels", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "educations", force: :cascade do |t|
+    t.integer "user_id"
+    t.string  "start_month"
+    t.string  "start_year"
+    t.string  "end_month"
+    t.string  "end_year"
+    t.string  "school"
+    t.string  "degree"
+    t.text    "description"
+  end
+
+  create_table "exp_functions", force: :cascade do |t|
+    t.integer "function_id"
+    t.integer "work_experience_id"
+  end
+
+  create_table "exp_industries", force: :cascade do |t|
+    t.integer "industry_id"
+    t.integer "work_experience_id"
+  end
+
+  create_table "experience_levels", force: :cascade do |t|
+    t.text "name"
+  end
+
+  create_table "functions", force: :cascade do |t|
+    t.text "name"
   end
 
   create_table "hiring_teams", force: :cascade do |t|
     t.integer "user_id"
     t.integer "job_id"
+  end
+
+  create_table "industries", force: :cascade do |t|
+    t.text    "name"
+    t.integer "work_experience_id"
   end
 
   create_table "invitations", force: :cascade do |t|
@@ -58,6 +127,60 @@ ActiveRecord::Schema.define(version: 20160201152757) do
     t.integer  "subsidiary_id"
     t.integer  "location_id"
     t.integer  "user_id"
+    t.integer  "job"
+  end
+
+  create_table "job_boards", force: :cascade do |t|
+    t.string  "subdomain"
+    t.string  "logo"
+    t.integer "company_id"
+    t.text    "description"
+  end
+
+  create_table "job_career_levels", force: :cascade do |t|
+    t.integer "job_id"
+    t.integer "career_level_id"
+  end
+
+  create_table "job_countries", force: :cascade do |t|
+    t.integer "country_id"
+    t.integer "job_id"
+    t.integer "work_experience_id"
+  end
+
+  create_table "job_education_levels", force: :cascade do |t|
+    t.integer "job_id"
+    t.integer "education_level_id"
+  end
+
+  create_table "job_experience_levels", force: :cascade do |t|
+    t.integer "job_id"
+    t.integer "experience_level_id"
+  end
+
+  create_table "job_functions", force: :cascade do |t|
+    t.integer "job_id"
+    t.integer "function_id"
+  end
+
+  create_table "job_industries", force: :cascade do |t|
+    t.integer "job_id"
+    t.integer "industry_id"
+  end
+
+  create_table "job_kinds", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "job_states", force: :cascade do |t|
+    t.integer "state_id"
+    t.integer "job_id"
+    t.integer "work_experience_id"
+  end
+
+  create_table "job_types", force: :cascade do |t|
+    t.integer "job_id"
+    t.integer "job_kind_id"
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -84,12 +207,83 @@ ActiveRecord::Schema.define(version: 20160201152757) do
     t.integer "subsidiary_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text     "body"
+    t.string   "subject"
+    t.integer  "application_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "overall_ratings", force: :cascade do |t|
+    t.integer "rating"
+    t.integer "user_id"
+    t.integer "application_scorecard_id"
+  end
+
+  create_table "question_answers", force: :cascade do |t|
+    t.text    "body"
+    t.integer "question_id"
+    t.integer "application_id"
+    t.integer "question_option_id"
+  end
+
+  create_table "question_options", force: :cascade do |t|
+    t.text    "body"
+    t.integer "question_id"
+  end
+
+  create_table "questionairres", force: :cascade do |t|
+    t.integer "job_id"
+    t.integer "application_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.text    "body"
+    t.text    "kind"
+    t.integer "questionairre_id"
+    t.integer "required"
+    t.integer "position"
+  end
+
+  create_table "scorecard_ratings", force: :cascade do |t|
+    t.integer "section_option_id"
+    t.integer "rating"
+    t.integer "user_id"
+    t.integer "application_scorecard_id"
+  end
+
+  create_table "scorecard_sections", force: :cascade do |t|
+    t.integer "scorecard_id"
+    t.string  "body"
+  end
+
+  create_table "scorecards", force: :cascade do |t|
+    t.integer "job_id"
+    t.integer "application_id"
+  end
+
+  create_table "section_options", force: :cascade do |t|
+    t.integer "scorecard_section_id"
+    t.string  "body"
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.integer "name"
+  end
+
   create_table "stages", force: :cascade do |t|
     t.string   "name"
     t.integer  "position"
     t.integer  "job_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string  "name"
+    t.integer "country_id"
   end
 
   create_table "subsidiaries", force: :cascade do |t|
@@ -110,13 +304,18 @@ ActiveRecord::Schema.define(version: 20160201152757) do
   create_table "work_experiences", force: :cascade do |t|
     t.string   "title"
     t.string   "company_name"
-    t.string   "start_date"
-    t.string   "end_date"
     t.text     "description"
     t.integer  "current_position"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "start_month"
+    t.string   "start_year"
+    t.string   "end_month"
+    t.string   "end_year"
+    t.string   "country"
+    t.string   "state"
+    t.string   "city"
   end
 
 end

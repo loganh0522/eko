@@ -1,0 +1,21 @@
+.contain
+  .sidebar
+    .nav
+      = render 'business/shared/post_job'
+
+  .main-container  
+    .header   
+      %h1 Application Form
+    .body
+      .job_scorecard 
+        = form_for [:business, @job, @questionairre] do |f|
+
+          = f.fields_for :questions do |q| 
+            = render 'question_fields', f: q 
+
+          = link_to_add_fields "+ Add Question", f, :questions    
+
+          = f.hidden_field :job_id, value: @job.id
+
+          = f.submit "Update Form", class: "submit btn btn-primary"
+

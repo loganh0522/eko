@@ -21,11 +21,10 @@ class JobSeeker::ApplicationsController < JobSeekersController
     # redirect_to job_seeker_jobs_path
   end
 
-
   private 
 
   def application_params 
-    params.require(:application).permit(:user_id, :job_id)
+    params.require(:application).permit(:user_id, :job_id, question_answers_attributes: [:id, :body, :question_id, :question_option_id])
   end
 
   def create_application

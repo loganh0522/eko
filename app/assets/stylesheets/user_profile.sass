@@ -1,54 +1,152 @@
-.user-general-info
-  float: left
-  margin: 15px 0px 0px 75px
-  width: 275px
-  height: 580px 
-  background-color: #ff8000
-  padding: 30px 15px 30px 15px
-  
-  .user-image 
-    text-align: center
-    .circle
-      border-radius: 50%
-      background-color: #ff9933
-      padding: 10px
-      width: 150px 
-      height: 150px
-
-  .info
-    text-align: center
-    text-color: rgba(0, 0, 0, .5)
-    padding-bottom: 20px
-    border-bottom: 1px solid rgba(0, 0, 0, 2)
-
-  .contact-info
-    text-align: center
-
-.work-experience 
-  float: left
-  margin: 15px 0px 0px 15px
-  background-color: white
-  width: 850px
-  height: 1200px
-
-  .header 
-    margin: 0 0 15px 0
-    border-bottom: 1px solid rgba(0, 0, 0, 2)
+.job-seeker
+  .sidebar
+    float: left
+    margin: 15px 0px 0px 10%
+    width: 250px
     
-    h3 
-      display: inline-block
-      width: 200px
-      margin: 0 0 0 15px
-      font-weight: normal    
-    p  
-      display: inline-block
-      width: 200px
-      margin-left: 430px
+    .user-general-info   
+      border: solid 1px #c6c8ca 
+      background-color: #ffffff
+      padding: 30px 15px 30px 15px
       
-  
-  .experiences
-    width: 650px
-    margin: 25px 100px 25px 100px 
+      .user-image 
+        text-align: center
+        width: 200px
+        height: 200px
+        background: grey
+
+      .info
+        text-align: center
+        text-color: rgba(0, 0, 0, .5)
+        padding-bottom: 20px
+        border-bottom: 1px solid rgba(0, 0, 0, 2)
+
+      .contact-info
+        text-align: center
+
+    .user-profile-nav
+      border: 1px solid #c6c8ca
+      background: #ffffff
+      overflow: hidden
+      
+      ul 
+        list-style: none
+        text-decoration: none
+        margin-left: -42px
+        margin-bottom: 0px
+
+        
+        li 
+          font-weight: bold
+          font-size: 15px
+          height: 50px
+          padding: 10px 20px 10px 5px
+          border-top: 1px solid #c6c8ca
+
+          a
+            display: block
+            color: black
+            text-decoration: none
+            margin-left: 15px
+            height: 50px
+
+
+  .main-container
+    float: left
+    margin: 15px 0px 0px 15px
+    background-color: white
+    border: solid 1px #c6c8ca 
+    padding: 0 40px 50px 40px
+    width: 750px
+    height: 1200px
+
+    .header 
+      border-bottom: 2px solid rgba(239, 122, 43, .25) 
+      overflow: hidden
+      
+      h1
+        float: left
+      
+      .new_experience
+        float: right
+        margin: 15px 0 0 0
+        a
+          color: #EF7B2B  
+        
+    .body
+      .not-present-container
+        width: 650px
+        height: 200px 
+        margin: 25px 30px 0 30px
+        border: 2px dashed #c6c8ca
+        text-align: center
+
+        p 
+          margin: 85px 0 0 70px
+          float: left
+          color: #c6c8ca
+        .add-object
+          margin: 85px 0 0 10px
+          float: left
+          color: #EF7B2B
+          font-weight: bold 
+    
+    .job-position
+      .experience-header
+        border-bottom: 1px solid rgba(0, 0, 0, .25)
+        overflow: hidden
+        padding-bottom: 5px
+        margin: 10px 0
+        .title
+          float: left
+          
+          font-size: 16px
+        .date
+          float: right
+          font-size: 12px
+      .experience-body 
+        font-size: 15px
+        .company
+          font-size: 16px
+      .accomplishments
+        margin-top: 10px
+        ul 
+          color: #EF7B2B
+
+          li
+            p
+              color: black
+      .actions
+        ul
+          display: inline-block
+          list-style: none
+          margin: 10px -40px
+          
+          li
+            float: left
+            margin-right: 30px
+            a
+              color: #EF7B2B
+
+    .experiences
+      width: 650px
+      margin: 25px 100px 25px 100px 
+
+
+    .education-container
+      display: none
+
+    .skills-container 
+      display: none
+
+
+  #profile-picture-modal
+    .image
+      height: 200px
+    .preview
+      height: 200px
+
+
 
    
      

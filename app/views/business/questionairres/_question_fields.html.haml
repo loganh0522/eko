@@ -1,0 +1,21 @@
+.question-area 
+  .fieldset.questions 
+    .question-header
+      .section-title Question      
+      = link_to "Remove", '#', class: "remove_question"
+    .answer-type
+      Answer Type:
+      = f.select :kind, ['Text', 'Paragraph', 'Checkbox', 'Multiple Choice'],{}, {:class => 'question-type'}
+      = f.check_box :required, checked_value: 1, unchecked_value: 0
+      = f.label :required, "Required"       
+
+    = f.text_field :body, class: "form-control questions", placeholder: "Add your Question"
+    = f.hidden_field :_destroy
+  
+
+  = f.fields_for :question_options, class: "options" do |a|
+    = render 'question_option_fields', f: a
+  
+  = link_to_add_fields("+ Add Answer", f, :question_options)
+
+

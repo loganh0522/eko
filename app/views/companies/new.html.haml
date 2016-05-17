@@ -1,11 +1,9 @@
-%section.well.col-md-8.col-md-offset-2
-  .row
-  = bootstrap_form_for @company, html: {class: 'form-horizontal'} do |f|
-    %header
-      %h1 Register
-    %fieldset.col-md-8
-      = f.text_field :name, label: "Company Name"
-      = f.text_field :website, label: "Company Website"
-    %fieldset.actions.control-group.col-md-8.col-md-offset-6
-      .controls
-        %input(type="submit" value="Sign Up" class="btn")
+.business-registration
+  .header
+    %img.logo(src="/tmp/logo.jpg")
+    %h2 Sign Up Today
+  .body
+    = bootstrap_form_for @company, html: {class: 'form-horizontal'} do |f|
+      = f.text_field :name, label: false, placeholder: "Company Name"
+      = f.text_field :website, label: false, placeholder: "Website"
+      %input(type="submit" value="Sign Up" class="btn")

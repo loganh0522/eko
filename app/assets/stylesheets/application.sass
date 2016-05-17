@@ -1,0 +1,84 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_self
+ *= require token-input-facebook
+ *= require jquery-ui
+ *= require bootstrap-wysihtml5
+ *= require chosen
+ *= require_tree .
+
+ */
+ 
+@import url(http://fonts.googleapis.com/css?family=Open+Sans)
+@import "bootstrap-sprockets"
+@import "bootstrap"
+@import "bootstrap-wysihtml5/bootstrap3-wysihtml5"
+
+body 
+  margin-top: 50px
+  font-family: Open Sans, sans-serif, Helvetica, Arial, sans-serif
+  
+  h1, h2, h3, h4, h5, h6
+    font: Open Sans
+  
+  p 
+    font-size: 14px
+    color: rgba(0, 0, 0, .75)
+          
+
+  background-color: #f7f8f9
+
+h1 
+  font-weight: 500
+  font-size: 24px
+  font: Open Sans
+  color: #EF7A2B
+  margin: 12px 0 10px 0
+
+
+.button
+  display: block
+  height: 40px
+  width: 195px
+  background: #EF7A2B
+  color: #ffffff
+  font: bold Open Sans
+  font-size: 16px 
+  text-align: center
+  padding: 8px 0 10px 0
+
+a.button
+  text-decoration: none
+  color: #ffffff
+
+.button-mid
+  display: block
+  height: 35px
+  width: 125px
+  background: #EF7A2B
+  color: #ffffff
+  font: bold Open Sans
+  font-size: 12px 
+  text-align: center
+  padding: 8px 0 10px 0
+
+a.button-mid
+  text-decoration: none
+  color: #ffffff
+
+.glyphicon-remove
+  font-size: 15px
+
+
+
+

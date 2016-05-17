@@ -24,6 +24,38 @@ describe Business::JobsController do
     end
   end
 
+  describe "GET show" do
+    let(:company) {Fabricate(:company)}
+    let(:alice) {Fabricate(:user, company: company)}
+    let(:job) {Fabricate(:job)}
+ 
+    it_behaves_like "requires sign in" do
+      let(:action) {get :show, id: 4}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {get :show, id: 4}
+    end
+   
+    before do 
+      set_current_user(alice)
+      set_current_company(company)
+      get :show, id: job.id
+    end
+
+    it "sets the @job to the correct job posting" do      
+      expect(assigns(:job)).to eq(job)
+    end
+
+    it "sets @applicants to the applicants that belong to the job" do 
+      expect(assigns(:applicants)).to eq(job.applicants)
+    end
+
+    it "sets @stages to the stages that belong to the job" do 
+      expect(assigns(:stages)).to eq(job.stages)
+    end
+  end
+
   describe "GET new" do 
     it_behaves_like "requires sign in" do
       let(:action) {get :new}
@@ -78,10 +110,6 @@ describe Business::JobsController do
       it "creates a HiringTeam association with the current user" do 
         expect(Job.first.user_ids).to eq([alice.id])
       end
-
-      it "sets the flash message" do 
-        expect(flash[:notice]).to be_present
-      end
     end
 
     context "with invalid inputs" do 
@@ -112,15 +140,28 @@ describe Business::JobsController do
     it_behaves_like "user does not belong to company" do 
       let(:action) {get :edit, id: 4}
     end
+    let(:company) {Fabricate(:company)}
+    let(:alice) {Fabricate(:user, company: company)}
+    let(:job1) {Fabricate(:job)}
+    let(:questionairre) {Fabricate(:questionairre, job_id: job1.id)}
+    let(:scorecard) {Fabricate(:scorecard, job_id: job1.id)}
+    
+    before do      
+      set_current_user(alice)
+      set_current_company(company)   
+      get :edit, id: job1.id   
+    end
 
     it "sets @job to the correct job posting" do 
-      company = Fabricate(:company)
-      alice = Fabricate(:user, company: company)
-      set_current_user(alice)
-      set_current_company(company)
-      job1 = Fabricate(:job)
-      get :edit, id: job1.id
       expect(assigns(:job)).to eq(job1)
+    end
+
+    it "sets @questionairre to the correct job posting" do 
+      expect(assigns(:questionairre)).to eq(job1.questionairre)
+    end
+
+    it "sets @questionairre to the correct job posting" do 
+      expect(assigns(:scorecard)).to eq(job1.scorecard)
     end
   end
 
@@ -146,6 +187,10 @@ describe Business::JobsController do
 
       it "save the updates made on the object" do 
         expect(Job.first.title).to eq("new title")
+      end
+
+      it "render's the edit page" do 
+        expect(response).to redirect_to new_business_job_hiring_team_path(Job.first.id)
       end
 
       it "redirects_to the index page" do 

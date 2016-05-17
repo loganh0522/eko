@@ -1,0 +1,8 @@
+.container
+  .sidebar
+
+  .billing
+    %h4 Are you sure you want to cancel your subscription
+    = form_tag cancel_subscription_business_customers_path do
+      %input(type="submit" value="Yes, Cancel Subscription" class="btn btn-success")
+    = link_to "No", business_plan_path, class: "btn btn-primary"

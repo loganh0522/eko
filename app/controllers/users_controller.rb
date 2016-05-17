@@ -8,12 +8,21 @@ class UsersController < ApplicationController
     if @user.save 
       if @user.kind == 'job seeker'
         session[:user_id] = @user.id 
-        redirect_to job_seeker_jobs_path
+        if request.subdomain.present? 
+          redirect_to profile_path
+        else
+          redirect_to job_seeker_jobs_path
+        end
       else
         if params[:invitation_token].present?
           invitation = Invitation.where(token: params[:invitation_token]).first
           @user.update_attribute(:company_id, invitation.company_id)
-          redirect_to login_path
+          if invitation.job.present? 
+            HiringTeam.create(user_id: @user.id, job_id: invitation.job)
+            redirect_to login_path
+          else
+            redirect_to login_path
+          end
         else
           session[:user_id] = @user.id 
           redirect_to new_company_path
@@ -25,7 +34,12 @@ class UsersController < ApplicationController
   end
 
   def new_job_seeker
-    binding.pry
+    @user = User.new
+  end
+
+  def sub_new_job_seeker
+    @job_board = JobBoard.find_by_subdomain!(request.subdomain)
+    @company = @job_board.company
     @user = User.new
   end
 

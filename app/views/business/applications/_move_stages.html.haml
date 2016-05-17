@@ -1,0 +1,14 @@
+.modal#stageModal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title Move Applicants 
+        = form_tag update_multiple_business_job_applications_path(@job.id) do
+          .modal-body
+            %fieldset
+            = collection_select(:stage, :stage_id, @job.stages, :id, :name)
+            = hidden_field_tag :applicant_ids
+          .modal-footer
+          %input(type="submit" value="Move Applicants" class="btn btn-success")
+   

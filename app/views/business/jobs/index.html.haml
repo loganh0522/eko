@@ -1,41 +1,103 @@
-- if logged_in? 
-  .row
-    %br
-    .col-md-offset-1.col-md-8
-      %h3 Job Opening Details
-      %p Active | Closed | On Hold | 
-      %h4 Active Job Openings
-      %br
-      - @jobs.each do |job|
-        .row 
-          .well 
-            %a
-              = job.title
-            %p
-              = job.city 
-              ,
-              = job.country |
-              = link_to "Edit", edit_business_job_path(job)
-              Delete
-            .row
-              .well.col-md-2
-                %h2.text-center 58 
-                %p.text-center All Applicants
-              .well.col-md-2
-                %h2.text-center 10
-                %p.text-center Screened
-              .well.col-md-2
-                %h2.text-center 5
-                %p.text-center Phone Interview
-              .well.col-md-2
-                %h2.text-center 4 
-                %p.text-center Interview
-              .well.col-md-2
-                %h2.text-center 1 
-                %p.text-center Offer
-              .well.col-md-2
-                %h2.text-center 1 
-                %p.text-center Hired
+.contain 
+  .sidebar    
+    = link_to "Post a Job", new_business_job_path, class: 'button post-a-job'
+    .nav 
+      %ul 
+        %li 
+          .content
+            %i.glyphicon.glyphicon-briefcase
+            My Jobs 
+        .body
+          %ul
+            %li Open Job Postings
+            %li Closed Job Postings
+            %li Archived Job Postings
+        %li 
+          .content
+            %i.glyphicon.glyphicon-list-alt
+            Company Jobs
+        %li 
+          .content
+            %i.glyphicon.glyphicon-user
+            My Profile
+    
 
-    %section.col-md-1.col-md-offest-9
-      = link_to "Post a Job", new_business_job_path, class: 'btn btn-primary'
+  .main-container
+    .header 
+      %h1 Open Job Postings
+
+    .body 
+      - @jobs.each do |job|
+        .job 
+          .job-header 
+            .title 
+              = link_to job.title, business_job_path(job)
+            .location Toronto, On
+            .posted-time Posted 10 minutes ago
+            .actions
+              = link_to edit_business_job_path(job.id) do
+                %i.glyphicon.glyphicon-pencil
+              = link_to '#' do
+                %i.glyphicon.glyphicon-remove
+          .job-body
+            .btns
+              = link_to 'Post to Job Boards', '#', class: 'button-mid'
+              .btn2
+                = link_to 'Actions', '#', class: 'button-mid'
+            
+            .left-scroll.glyphicon.glyphicon-chevron-left
+             
+            
+            %ul.job-stage-area
+              .job-gallery
+                %li.job_list_stage
+                  .number 53
+                  .name All Applicants
+                - job.stages.each do |stage|  
+                  %li.job_list_stage
+                    .number 
+                      = stage.applications.count
+                    .name
+                      = stage.name
+                %li.job_list_stage
+                  .number 53
+                  .name All Applicants
+
+            .right-scroll
+              .glyphicon.glyphicon-chevron-right
+            
+
+                
+
+
+    / - @jobs.each do |job|
+    /   .row 
+    /     .well 
+    /       %a
+    /         =link_to job.title, business_job_path(job)
+    /       %p
+    /         = job.city 
+    /         ,
+    /         = job.country |
+    /         = link_to "Edit", edit_business_job_path(job)
+    /         Delete
+    /       .row
+    /         .well.col-md-2
+    /           %h2.text-center 58 
+    /           %p.text-center All Applicants
+    /         .well.col-md-2
+    /           %h2.text-center 10
+    /           %p.text-center Screened
+    /         .well.col-md-2
+    /           %h2.text-center 5
+    /           %p.text-center Phone Interview
+    /         .well.col-md-2
+    /           %h2.text-center 4 
+    /           %p.text-center Interview
+    /         .well.col-md-2
+    /           %h2.text-center 1 
+    /           %p.text-center Offer
+    /         .well.col-md-2
+    /           %h2.text-center 1 
+    /           %p.text-center Hired
+

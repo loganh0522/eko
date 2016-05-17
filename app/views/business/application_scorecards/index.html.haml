@@ -1,0 +1,105 @@
+.applicant-view
+  .applicant-main-container   
+    .applicant-header
+      .user-image
+        %img.profile_picture(src="/tmp/man.jpg")
+      
+      .applicant-details
+        %p.name Logan Houston
+        .contact
+          %span.glyphicon.glyphicon-map-marker  
+          Toronto, Ontario, CA
+          %br
+          %span.glyphicon.glyphicon-envelope 
+          loganh0522@gmail.com
+          %br
+          %span.glyphicon.glyphicon-earphone 
+          416-806-6907 
+
+      .applicant-actions 
+        .action 
+          %p Send Message 
+        .action 
+          %p Schedule Meeting
+      .applicant-nav-bar  
+        = render "business/shared/applicant_nav"
+
+    .add-comment-on-applicant
+      %table   
+        = form_for [:business, @job, @application, @comment] do |f| 
+          %tr
+            %td(width="10%")
+              %img.circle(src="/tmp/man.jpg")
+            %td(width="80%")
+              = f.text_field :body, rows: 2, class: "form-control", label: "Add Feedback", placeholder: "Add a note about #{@user.first_name} #{@user.last_name}"
+              = f.hidden_field :user_id, value: current_user.id
+              = f.hidden_field :application_id, value: @application.id
+            %td(width="10%")
+              = f.submit "+ Add", class: "btn btn-primary"
+
+
+    .applicant-scorecard
+      .header
+        %h4 Scorecard
+
+        .my-scorecard
+          - if @current_user_scorecard.present? 
+            = link_to "My Scorecard", edit_business_job_application_application_scorecard_path(@job, @application, @current_user_scorecard), {:data => {:toggle => "modal", :target => "#edit_scorecardModal"}} 
+            = render "edit_my_scorecard" 
+          - else 
+            = link_to "My Scorecard", new_business_job_application_application_scorecard_path(@job, @application), {:data => {:toggle => "modal", :target => "#scorecardModal"}} 
+            = render "my_scorecard"      
+        
+      .scorecard
+        %h4 Overall Rating 
+        .overall-rating 
+          %table.table
+            %tbody
+              %tr
+                %td(width="30%") Recommended 
+                %td(width="70%")
+              %tr
+                %td(width="30%") Good
+                %td(width="70%")
+              %tr
+                %td(width="30%") Bad
+                %td(width="70%")
+              %tr
+                %td(width="30%") Do not Recommend 
+                %td(width="70%")
+
+        %h4 Scorecard
+        .sections
+          - @sections.each do |section|
+            %p= section.body
+            %table.table
+              %tbody
+                - section.section_options.each do |criteria|
+                  %tr
+                    %td(width="30%")= criteria.body
+                    %td(width="70%")
+                      - @application_scorecards.each do |scorecard| 
+                        - scorecard.scorecard_ratings.each do |rating|
+                          - if rating.rating == 1 && rating.section_option_id == criteria.id
+                            %i.glyphicon.glyphicon-remove
+                          - elsif rating.rating == 2 && rating.section_option_id == criteria.id
+                            %i.glyphicon.glyphicon-thumbs-down
+                          - elsif rating.rating == 3 && rating.section_option_id == criteria.id
+                            %i.glyphicon.glyphicon-thumbs-up
+                          - elsif rating.rating == 4 && rating.section_option_id == criteria.id
+                            %i.glyphicon.glyphicon-star
+
+  .applicant-side-container
+    .current-stage
+      %h4= "Current Stage: "
+      - @job.stages.each do |stage|
+        %p.stage{:class => is_current_stage?(stage, @application)}
+          = stage.name
+      .stage-actions
+        = form_tag sort_business_job_stages_path do
+          %input(type="submit" value="X Reject" class="btn btn-danger")
+
+        = form_tag business_job_application_move_stages_path(@job.id, @application) do
+          %input(type="submit" value="Next Stage" class="btn btn-success")
+
+.footer

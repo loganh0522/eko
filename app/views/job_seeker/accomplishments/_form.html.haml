@@ -1,0 +1,12 @@
+.modal#accomplishments
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title Add Accomplishment 
+      = bootstrap_form_for [:job_seeker, @accomplishment] do |f|
+        .modal-body
+          = f.text_area :body, class: "form-control", label: "Accomplishment"
+          = f.hidden_field :work_experience_id, value: nil
+        .modal-footer
+          = f.submit "Add Experience", class: "submit btn btn-primary"

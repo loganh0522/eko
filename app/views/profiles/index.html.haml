@@ -1,0 +1,20 @@
+.user-general-info
+  .user-image
+    %img.circle(src="/tmp/man.jpg")
+  .info 
+    %h3 Logan Houston
+    %h4 CEO Talent Wiz 
+    %h5 Toronto, On
+  .contact-info 
+    %h3 Contact Info
+    %h5 E-mail: loganh0522@gmail.com
+    %h5 Mobile: 416-806-6907
+    %h5 Skype: logz.houston
+
+.work-experience
+  .header
+    %h3 Experience
+    %p.new_experience= link_to "+ Add Work Experience", new_job_seeker_work_experience_path, :data => {:remote => true}
+  
+  .experience
+    = render 'job_seeker/profiles/experience'

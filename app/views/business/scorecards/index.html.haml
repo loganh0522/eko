@@ -1,0 +1,12 @@
+.contain
+  .sidebar
+    .nav
+      = render 'business/shared/post_job'
+
+  .main-container
+    .header   
+      %h1 Application Form
+    .body
+      .not-present-container
+        %p There currently is no application form for this job. 
+        = link_to "Create Scorecard", new_business_job_scorecard_path(@job.id), class: "add-object"

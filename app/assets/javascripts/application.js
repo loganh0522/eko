@@ -10,12 +10,17 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
-
-//= require jquery.tokeninput
-//= require turbolinks
 //= require bootstrap-sprockets
+//= require jquery.tokeninput
+//= require bootstrap-wysihtml5
+//= require chosen-jquery
 //= require_tree .
+
+
+
+
 

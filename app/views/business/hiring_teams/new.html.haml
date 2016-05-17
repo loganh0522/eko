@@ -1,45 +1,40 @@
-.container
+.contain
   .sidebar
-    %ul
-      %li= link_to "Job Details", edit_business_job_path(@job)
-      %li Hiring Team
-      %li Recruitment Process
-      %li Questionairre
-      %li Scorecard
-      %li Post Job 
+    .nav
+      = render 'business/shared/post_job'
 
 
-  %main.col-md-8    
-    %h1 Team Members 
-    %p Add Team Members to this job opening. Providing a team member to a job provides them with access to applicants, and will allow you to easily collaborate with them. 
-    = form_for [:business, @invitation], html: {class: 'invite'} do |f|
-      %fieldset
-        .row
-          .form-group.col-md-7
-            = f.text_field :recipient_email, class: "form-control", placeholder: "Add a member with their name"
-            = f.submit "Invite Colleague", class: "submit btn btn-primary"
+  .main-container
+    .header
+      .hiring-team 
+        %h1 Hiring Team
+        = link_to "+ Invite New User", new_business_invitation_path, {:class => "invite", :data => {:toggle => "modal", :target => "#myModal"}}
+        = render "invitation_form"
+    
+    .body
+      = form_for [:business, @job, @hiring_team] do |f| 
+        = f.text_field :user_tokens, placeholder: "Type a users name to find them" 
+        = f.hidden_field :job_id, value: @job.id
+        = f.submit "+ Add Member", class: "btn btn-primary"
 
-    = form_tag business_job_hiring_teams_path html: {id: 'job_user_tokens'} do
-      %fieldset.form-group
-        = collection_select(:user, :id, current_company.users, :id, :first_name)
-        / = label_tag :user_tokens, "Add a User"
-        / = text_field_tag :user_tokens 
-      %fieldset.form-group.action
-        %input(type="submit" value="Add User" class="btn btn-default")
-
-    .user-list
-      %table.table
-        %thead
-          %tr
-            %th First Name
-            %th Last Name
-            %th E-mail
-        %tbody
-          - @users.each do |user|
+      .user-list
+        %table
+          %thead
             %tr
-              %td
-                %p= user.first_name
-              %td
-                %p= user.last_name
-              %td
-                %p= user.email
+              %th(width="1%")
+              %th(width="20%")
+              %th(width="20%")
+              %th.delete(width="20%")
+          %tbody
+            - @users.each do |user|
+              %tr
+                %td
+                  %img.circle(src="/tmp/man.jpg")
+                %td
+                  %p.name= "#{user.first_name} #{user.last_name}"
+                  %p.email= user.email
+                %td
+                  %p.permissions Hiring Manager
+                %td
+                  = link_to business_job_hiring_team_path(@job.id, user.id), remote: true, :method => :delete do
+                    %i.glyphicon.glyphicon-remove

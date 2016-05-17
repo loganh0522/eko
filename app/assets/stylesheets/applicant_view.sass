@@ -1,105 +1,208 @@
-
 .applicant-view
   .applicant-main-container
     float: left
     margin: 0px 15px 0px 0
     .applicant-header
+      border: solid 2px #E4E5E9
       margin: 15px 0px 0px 75px
       width: 700px
-      height: 200px
-      padding: 30px 15px 30px 15px
+      height: 208px
+      padding: 15px 15px 15px 15px
       background-color: white
       
       .user-image 
         display: inline-block
-        .circle
+        img
+          width: 125px 
+          height: 125px
           border-radius: 50%
-          width: 100px 
-          height: 100px
 
       .applicant-details
         display: inline-block
+        margin-left: 15px
         vertical-align: top
-        h3 
-          margin-top: 5px
-        p 
-          margin-left: 5px
+        .name 
+          font-size: 24px
+          font-weight: 300
 
-    .applicant-nav-bar 
-      margin: 0px 0px 0px 75px
-      width: 700px
+        .contact
+          margin-left: 15px 
+          .glyphicon
+            margin-right: 10px   
 
-      .ul 
-        list-style: none
-        text-decoration: none
-        background-color: black
-        .li
-          display: inline-block
-          height: 50px 
-          width: 112px
-          padding: 15px 10px
-          border-right: 1px solid white
-          text-align: center 
-          color: white
+          h3 
+            font-size: 20px
+            margin-top: 5px
+          p  
+            margin-left: 5px
+
+      .applicant-actions
+        float: right
+        margin: 15px 15px 0 0 
+        .action
+          padding: 5px
+          text-align: center
+          border: solid 2px #E4E5E9
+          border-radius: 99px
+
+      .applicant-nav-bar 
+        margin: 15px 0 0 -50px
+        ul 
+          list-style: none
+          text-decoration: none
+          li
+            display: inline-block
+            height: 50px 
+            padding: 15px 15px 0 15px 
+            text-align: center 
+            color: white
+
+            a
+              color: black
+              text-decoration: none
+          
+          li.active
+            border-bottom: solid 3px #EF7B2B
+
+            a 
+              font-weight: bold
     
     .add-comment-on-applicant
-      margin: 5px 0px 0px 75px
+      background-color: #ffffff
+      border: solid 2px #E4E5E9
+      padding: 10px 10px 10px 10px
+      margin: 10px 0px 0px 75px
       width: 700px
+      
+      table 
+        tr
+          td
+            padding: 5px
+      form
+        display: inline-block
+        
+        textarea
+          width: 500px
+          overflow: hidden
+
+        input
+          float: right
+
+      .circle
+        border-radius: 50%
+        width: 50px 
+        height: 50px
 
     .applicant-experience
       margin: 15px 0px 0px 75px
-      padding: 15px 0px 15px 0px
+      padding: 5px 0px 15px 0px
       background-color: white
       width: 700px
+      border: solid 2px #E4E5E9
 
       .header 
-        margin: 0 0 15px 0
-        
-        h3 
+        margin: 0 0 15px 25px
+        border-bottom: solid 1px #EF7B2B
+        width: 650px
+        h4
           display: inline-block
           width: 200px
-          margin: 0 0 0 15px
-          font-weight: normal    
-          
-      .experiences
-        width: 620px
-        margin: 25px 40px 25px 40px 
+          font-weight: 500
+          font-size: 16px
 
+        p
+          font-size: 14px
+
+      .applicant-positions       
+        margin: 25px 25px 25px 25px           
+
+      .position
+        clear: both
+        .job-header
+          border-bottom: solid 1px black
+          overflow: hidden
+          .title 
+            float: left
+          .date
+            float: right
+            width: 140px
+            margin: 10px 0 0 0 
+        .job-body
+          clear: both
+
+    .applicant-education
+      margin: 15px 0px 0px 75px
+      padding: 5px 0px 15px 0px
+      background-color: white
+      width: 700px
+      border: solid 2px #E4E5E9
+
+      .header 
+        margin: 0 0 15px 25px
+        border-bottom: solid 1px #EF7B2B
+        width: 650px
+        h4
+          display: inline-block
+          width: 200px
+          font-weight: 500
+          font-size: 16px
+
+        p
+          font-size: 14px
+      
+    
   .applicant-side-container
     float: left
     width: 350px
     height: auto
     margin: 15px 75px 0px 15px
-
+    
     .current-stage
       padding-bottom: 15px
-      
+      background-color: white
+      border: solid 2px #E4E5E9
+      border-radius: 3px
       h4 
-        padding-bottom: 15px
-        border-bottom: 1px solid black
+        padding: 0 0 15px 15px
+
+      .stage 
+        width: 300px
+        border: solid 1px #EF7B2B
+        text-align: center
+        margin-left: 26px
+      .active
+        background-color: #EF7B2B
+        color: white
+      .stage-actions
+        margin-left: 12px
       .btn
-        width: 200px 
-        height: 50px
+        width: 150px 
+        height: 30px
         margin: 5px 0 0 10px 
+      .btn-danger
+        float: left
+      .btn-success
+        float:left
 
     .add-task
+      padding-bottom: 15px
+      background-color: white
+      border: solid 2px #E4E5E9
+      border-radius: 3px
+      
       h4 
-        padding-bottom: 15px
-        border-bottom: 1px solid black
-      p
-        margin: 0 0 10px 10px
-      form
-        margin: 0 0 0 10px
+        padding: 0 0 15px 15px
+        
 
     .send-applicant-message
-      margin: 20px 0 0 0 
+      padding-bottom: 15px
+      background-color: white
+      border: solid 2px #E4E5E9
+      border-radius: 3px
+      
       h4 
-        padding-bottom: 15px
-        border-bottom: 1px solid black
-      p
-        margin: 0 0 10px 10px 
-      form
-        margin: 0 0 0 10px
+        padding: 0 0 15px 15px
+        
 
 .footer 
   clear: both

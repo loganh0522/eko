@@ -35,4 +35,22 @@ class ApplicationController < ActionController::Base
       redirect_to business_root_path
     end
   end
+
+  def has_a_questionairre 
+    @job = Job.find(params[:job_id])
+    @questionairre = Questionairre.where(job_id: @job.id).first
+
+    if @job.questionairre.present? 
+      redirect_to edit_business_job_questionairre_path(@job.id, @questionairre.id)
+    end
+  end
+
+  def has_a_scorecard
+    @job = Job.find(params[:job_id])
+    @scorecard = Scorecard.where(job_id: @job.id).first
+
+    if @job.scorecard.present? 
+      redirect_to edit_business_job_scorecard_path(@job.id, @scorecard.id)
+    end
+  end
 end
