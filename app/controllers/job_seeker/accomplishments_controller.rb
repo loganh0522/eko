@@ -6,7 +6,6 @@ class JobSeeker::AccomplishmentsController < JobSeekersController
   end
   
   def create
-    binding.pry 
     @accomplishment = Accomplishment.new(accomplishment_params)   
     if @accomplishment.save
       flash[:error] = "Your new work experience was successfully added."
