@@ -1,4 +1,3 @@
-
 require 'spec_helper'
 
 describe UsersController do 
@@ -40,6 +39,7 @@ describe UsersController do
       it "sets the user kind to job seeker" do
         expect(User.first.kind).to eq('job seeker')
       end
+
       it "sets the session[user_id]" do 
         expect(session[:user_id]).to eq(User.first.id)
       end
@@ -70,7 +70,7 @@ describe UsersController do
       end
     end
 
-    context "Without valid input" do 
+    context "With Invalid input" do 
       before do 
         post :create, user: {first_name: "logan"}
       end

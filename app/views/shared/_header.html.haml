@@ -1,15 +1,19 @@
 - if !request.subdomain.present? 
   %section#top-header.row
     - if !logged_in?
-      %navbar.navbar-fixed-top.navbar-inverse
-        %a.navbar-brand TalentWiz
-        %ul.nav.navbar-nav
-          %li= link_to "Features"
-          %li= link_to "Pricing"
-          %li= link_to "Blog"
-        %ul.nav.navbar-nav.navbar-right
-          %li= link_to "Login", login_path
-          %li= link_to "SIGN UP", new_user_path
+      .navbar-static-top
+        .business_nav
+          .content
+            = link_to root_path do 
+              %img.logo(src="/tmp/logo.jpg")
+            %ul
+              %li= link_to "Features"
+              %li= link_to "Pricing"
+              %li= link_to "Blog"
+            %ul.navbar-right
+              %li= link_to "Login", login_path
+              %li= link_to "Sign Up", new_user_path
+              %li= link_to "Job Seekers"
 
     - if logged_in? && current_kind == 'business'
       .navbar-fixed-top 

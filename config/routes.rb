@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   get '/account/new', to: 'companies#new'
   
   root to: 'pages#home'
+  
+
+
 
   
 
@@ -100,5 +103,13 @@ Rails.application.routes.draw do
   get '/signout', to: 'sessions#destroy'
   
   get 'register/:token', to: 'users#new_with_invitation_token', as: 'register_with_token'
-  get 'expired_token', to: "password_resets#expired_token"   
+  
+
+  get 'forgot_password', to: 'forgot_passwords#new'
+  resources :forgot_passwords, only: [:create]
+  get 'forgot_password_confirmation', to: 'forgot_passwords#confirm'
+  get 'expired_token', to: "password_resets#expired_token"
+  resources :password_resets, only: [:show, :create]
+
+
 end

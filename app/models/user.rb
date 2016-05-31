@@ -23,5 +23,4 @@ class User < ActiveRecord::Base
 
   #Carrierwave uploader and minimagic for User Profile Pictures
 
-  
 end

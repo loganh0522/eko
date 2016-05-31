@@ -1,0 +1,10 @@
+.business-registration
+  .header
+    %img.logo(src="/tmp/logo.jpg")
+    %h2 Reset Password
+  .body
+    = bootstrap_form_tag url: '/password_resets' do |f|
+      %fieldset.form-group
+        = f.password_field :password, placeholder: "Password", hide_label: true
+        = hidden_field_tag :token, @token
+        %input(type="submit" value="Reset Password" class="btn button-submit")
