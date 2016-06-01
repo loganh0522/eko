@@ -1,17 +1,20 @@
 .contain 
   .sidebar    
     = link_to "Post a Job", new_business_job_path, class: 'button post-a-job'
-    .nav 
+    
+    .nav
       %ul 
         %li 
           .content
             %i.glyphicon.glyphicon-briefcase
             My Jobs 
         .body
-          %ul
-            %li Open Job Postings
-            %li Closed Job Postings
-            %li Archived Job Postings
+          .job-nav
+            %ul
+              %li.open.show Open Job Postings
+              %li.closed Closed Job Postings
+              %li.drafts Drafts 
+              %li.archived Archived Job Postings
         %li 
           .content
             %i.glyphicon.glyphicon-list-alt
@@ -25,46 +28,19 @@
   .main-container
     .header 
       %h1 Open Job Postings
-
-    .body 
+    .body
       - @jobs.each do |job|
-        .job 
-          .job-header 
-            .title 
-              = link_to job.title, business_job_path(job)
-            .location Toronto, On
-            .posted-time Posted 10 minutes ago
-            .actions
-              = link_to edit_business_job_path(job.id) do
-                %i.glyphicon.glyphicon-pencil
-              = link_to '#' do
-                %i.glyphicon.glyphicon-remove
-          .job-body
-            .btns
-              = link_to 'Post to Job Boards', '#', class: 'button-mid'
-              .btn2
-                = link_to 'Actions', '#', class: 'button-mid'
-            
-            .left-scroll.glyphicon.glyphicon-chevron-left
-             
-            
-            %ul.job-stage-area
-              .job-gallery
-                %li.job_list_stage
-                  .number 53
-                  .name All Applicants
-                - job.stages.each do |stage|  
-                  %li.job_list_stage
-                    .number 
-                      = stage.applications.count
-                    .name
-                      = stage.name
-                %li.job_list_stage
-                  .number 53
-                  .name All Applicants
+        .open-jobs.showing
+          - if job.status == 'open'
+            = render 'job_container', job: job
 
-            .right-scroll
-              .glyphicon.glyphicon-chevron-right
+        .closed-jobs
+          - if job.status == 'closed'
+            = render 'job_container', job: job
+        .draft-jobs
+          - if job.status == 'draft'
+            = render 'job_container', job: job
+
             
 
                 
