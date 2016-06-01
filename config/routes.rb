@@ -62,7 +62,9 @@ Rails.application.routes.draw do
 
     
     resources :jobs do 
-      
+      post :close_job, to: "jobs#close_job"
+      post :archive_job, to: "jobs#archive_job"
+
       resources :applications do
         collection do 
           post :update_multiple, to: "stages#update_multiple"

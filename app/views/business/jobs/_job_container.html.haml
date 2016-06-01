@@ -12,8 +12,19 @@
   .job-body
     .btns
       = link_to 'Post to Job Boards', '#', class: 'button-mid'
-      .btn2
-        = link_to 'Actions', '#', class: 'button-mid'
+      .dropdown.btn2
+        %a.button-mid.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          Actions
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            %a= link_to "Edit Job Posting", edit_business_job_path(job.id)
+          %li
+            %a= link_to "Close Job", business_job_close_job_path(job), method: :post
+          %li 
+            %a= link_to "Archive Job", business_job_archive_job_path(job), method: :post
+
+
     
     .left-scroll.glyphicon.glyphicon-chevron-left
      

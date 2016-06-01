@@ -45,6 +45,18 @@ class Business::JobsController < ApplicationController
     end
   end
 
+  def close_job 
+    @job = Job.find(params[:job_id])
+    @job.update_column(:status, "closed")
+    redirect_to business_jobs_path
+  end
+
+  def archive_job
+    @job = Job.find(params[:job_id])
+    @job.update_column(:status, "archived")
+    redirect_to business_jobs_path
+  end
+
   private 
 
   def job_params

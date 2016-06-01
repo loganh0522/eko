@@ -47,8 +47,10 @@ $(window).load ->
       $targetContainer = '.open-jobs'
     else if $(this).attr('class') == 'closed'
       $targetContainer = '.closed-jobs'
-    else if $(this).attr('class') == 'draft'
-      $targetContainer = '.education-container'
+    else if $(this).attr('class') == 'drafts'
+      $targetContainer = '.draft-jobs'
+    else if $(this).attr('class') == 'archived'
+      $targetContainer = '.archived-jobs'
 
     $('.job-nav').find('.show').css color: 'black'
     $('.job-nav').find('.show').removeClass 'show'
