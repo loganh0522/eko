@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160531225136) do
+ActiveRecord::Schema.define(version: 20160606205117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,8 +50,13 @@ ActiveRecord::Schema.define(version: 20160531225136) do
   end
 
   create_table "companies", force: :cascade do |t|
-    t.string "name"
-    t.string "website"
+    t.string   "name"
+    t.string   "website"
+    t.integer  "open_jobs"
+    t.string   "subscription"
+    t.boolean  "active",       default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -221,6 +226,14 @@ ActiveRecord::Schema.define(version: 20160531225136) do
     t.integer "rating"
     t.integer "user_id"
     t.integer "application_scorecard_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "company_id"
+    t.integer  "amount"
+    t.string   "reference_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "question_answers", force: :cascade do |t|

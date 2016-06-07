@@ -38,3 +38,24 @@ shared_examples "user does not belong to company" do
   end   
 end
 
+shared_examples "company has been deactivated" do 
+  let(:company) {Fabricate(:company, active: false)}
+  let(:alice) {Fabricate(:user, kind: 'business', company: company)}
+   
+  before do 
+    set_current_user(alice)
+    set_current_company(company)
+  end
+
+  it "redirects user" do    
+    action
+    expect(response).to redirect_to business_customers_path
+  end
+
+  it "sets the flash message " do 
+    action
+    expect(flash[:danger]).to be_present   
+  end   
+end
+
+

@@ -1,5 +1,7 @@
 class Business::CustomersController < ApplicationController
+  before_filter :require_user
   before_filter :belongs_to_company
+  before_filter :company_deactivated?
   
   def index 
     @customer = current_company.customer
@@ -20,7 +22,7 @@ class Business::CustomersController < ApplicationController
 
       if customer.successful?
         stripe_customer = JSON.parse customer.response.to_s
-        binding.pry
+
         Customer.create(company_id: current_company.id, 
           plan: stripe_customer['subscriptions']['data'].first['plan']['id'], 
           stripe_customer_id: stripe_customer["id"], 
@@ -53,8 +55,28 @@ class Business::CustomersController < ApplicationController
     end
   end
 
+  def new_plan
+    redirect_to new_business_customer_path
+    flash[:danger] = "Please complete your billing information before selecting a plan"
+  end
+
   def plan
-    @plan = current_company.customer.plan
+    @customer = current_company.customer
+  end
+
+  def create_plan
+    customer = StripeWrapper::StripeCustomer.create_plan(
+      :customer_id => current_company.customer.stripe_customer_id,
+      :plan => params[:plan]
+      )
+    if customer.successful?
+      stripe_customer = JSON.parse customer.response.to_s
+      current_company.customer.update_attribute(:plan, stripe_customer['subscriptions']['data'].first['plan']['id'])
+      current_company.customer.update_attribute(:stripe_subscription_id, stripe_customer['subscriptions']['data'].first['id'])
+      
+      redirect_to business_plan_path
+      flash[:success] = "Your subscription was successful, the charge has been added to your card"
+    end
   end
 
   def update_plan 
@@ -81,6 +103,7 @@ class Business::CustomersController < ApplicationController
       )
     if customer.successful? 
       current_company.customer.update_attribute(:plan, nil)
+      current_company.customer.update_attribute(:stripe_subscription_id, nil)
       redirect_to business_plan_path
       flash[:success] = "Your subscription was successfully canceled, your active job postings will close at the end of the billing period"
     end

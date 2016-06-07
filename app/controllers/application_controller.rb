@@ -35,6 +35,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def company_deactivated?
+    if current_user.company.active == false
+      flash[:danger] = "Sorry, your account has been deactivated, please update your payment information"
+      redirect_to business_customers_path
+    end
+  end
+
   def has_a_questionairre 
     @job = Job.find(params[:job_id])
     @questionairre = Questionairre.where(job_id: @job.id).first

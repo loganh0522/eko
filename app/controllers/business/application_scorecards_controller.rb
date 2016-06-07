@@ -1,5 +1,8 @@
 class Business::ApplicationScorecardsController < ApplicationController
-  
+  before_filter :require_user
+  before_filter :belongs_to_company
+  before_filter :company_deactivated?
+
   def index 
     @application_scorecard = ApplicationScorecard.new
     @job = Job.find(params[:job_id])

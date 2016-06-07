@@ -11,6 +11,10 @@ describe Business::JobsController do
         let(:action) {get :index}
       end
 
+      it_behaves_like "company has been deactivated" do
+        let(:action) {get :index}
+      end
+
       it "sets the @jobs to the job postings that belong to the current company" do 
         company = Fabricate(:company)
         alice = Fabricate(:user, company: company)
@@ -34,6 +38,10 @@ describe Business::JobsController do
     end
 
     it_behaves_like "user does not belong to company" do 
+      let(:action) {get :show, id: 4}
+    end
+
+    it_behaves_like "company has been deactivated" do
       let(:action) {get :show, id: 4}
     end
    
@@ -65,6 +73,10 @@ describe Business::JobsController do
       let(:action) {get :new}
     end
 
+    it_behaves_like "company has been deactivated" do
+      let(:action) {get :new}
+    end
+
     it "sets the @job_posting instance" do 
       company = Fabricate(:company)
       alice = Fabricate(:user, company: company)
@@ -81,6 +93,10 @@ describe Business::JobsController do
     end
 
     it_behaves_like "user does not belong to company" do 
+      let(:action) {post :create}
+    end
+
+    it_behaves_like "company has been deactivated" do
       let(:action) {post :create}
     end
     
@@ -140,6 +156,11 @@ describe Business::JobsController do
     it_behaves_like "user does not belong to company" do 
       let(:action) {get :edit, id: 4}
     end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) {get :edit, id: 4}
+    end
+
     let(:company) {Fabricate(:company)}
     let(:alice) {Fabricate(:user, company: company)}
     let(:job1) {Fabricate(:job)}
@@ -171,6 +192,10 @@ describe Business::JobsController do
     end
 
     it_behaves_like "user does not belong to company" do 
+      let(:action) {put :update, id: 4}
+    end
+
+    it_behaves_like "company has been deactivated" do
       let(:action) {put :update, id: 4}
     end
 

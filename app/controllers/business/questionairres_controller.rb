@@ -2,6 +2,7 @@ class Business::QuestionairresController < ApplicationController
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :has_a_questionairre, only: [:new, :create]
+  before_filter :company_deactivated?
 
   def index 
     @job = Job.find(params[:job_id])

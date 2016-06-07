@@ -10,6 +10,11 @@ class Company < ActiveRecord::Base
   has_many :locations
   has_one :customer
   has_one :job_board
+  has_many :payments
  
   validates_presence_of :name, :website
+
+  def deactivate!
+    update_column(:active, false)
+  end
 end

@@ -60,6 +60,19 @@ module StripeWrapper
       end
     end
 
+    def self.create_plan(options={})
+      begin 
+        Stripe.api_key = ENV['STRIPE_SECRET_KEY']    
+        response = Stripe::Subscription.create(
+          customer: options[:customer_id],
+          plan: options[:plan]
+        )
+        new(response: response)
+      rescue Stripe::CardError => e
+        new(error_message: e.message)
+      end
+    end
+
     def self.update_plan(options={})
       begin 
         Stripe.api_key = ENV['STRIPE_SECRET_KEY']

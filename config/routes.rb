@@ -47,11 +47,14 @@ Rails.application.routes.draw do
     resources :users
     resources :invitations
     resources :locations 
-    get "plan", to: "customers#plan"  
+    get "plan", to: "customers#plan"
+
     
     resources :customers do
       collection do 
         get 'cancel', to: "customers#cancel"
+        post "new_plan", to: "customers#new_plan"
+        post "create_plan", to: "customers#create_plan"
         post "update_plan", to: "customers#update_plan"
         post "cancel_subscription", to: "customers#cancel_subscription"
       end
@@ -113,5 +116,6 @@ Rails.application.routes.draw do
   get 'expired_token', to: "password_resets#expired_token"
   resources :password_resets, only: [:show, :create]
 
-
+  
+  mount StripeEvent::Engine, at: '/stripe_events'
 end

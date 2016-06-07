@@ -9,94 +9,10 @@
         %h1 Subscription
       .body
         .billing
-          = form_tag update_plan_business_customers_path do
-            %table.table
-              %thead
-                %tr
-                  %th(width="20%") Name 
-                  %th(width="20%") Open Positions
-                  %th(width="25%") Monthly Plan
-                  %th(width="25%") Yearly Plan
-                  %th(width="10%") 
-                %tr
-                  %td
-                    .plan Start-up
-                  %td
-                    .open-jobs 1 Active Jobs
-                  %td
-                    .select-cost= radio_button_tag(:plan, "free", checked: (@plan == 'free' ? {checked: true} : false)) 
-                    .cost $19 / month
-                  %td
-                    .select-cost= radio_button_tag(:plan, "free_year")
-                    .cost $190 / year
-                  %td
-                    %input(type="submit" value="Select Plan" class="btn btn-success")
-                %tr
-                  %td
-                    .plan Basic
-                  %td
-                    .open-jobs 3 Active Jobs
-                  %td
-                    .select-cost= radio_button_tag(:plan, "growth", (@plan == 'growth' ? {checked: true} : false))
-                    .cost $39 / month
-                  %td
-                    .select-cost= radio_button_tag(:plan, "growth_year")
-                    .cost $390 / year
-                  %td
-                    %input(type="submit" value="Select Plan" class="btn btn-success")
-                %tr
-                  %td
-                    .plan Team
-                  %td
-                    .open-jobs 5 Active Jobs
-                  %td
-                    .select-cost= radio_button_tag(:plan, "team")
-                    .cost $99 / month
-                  %td
-                    .select-cost= radio_button_tag(:plan, "team_year")
-                    .cost $990 / year
-                  %td
-                    %input(type="submit" value="Select Plan" class="btn btn-success")
-                %tr
-                  %td
-                    .plan Plus
-                  %td
-                    .open-jobs 10 Active Jobs
-                  %td
-                    .select-cost= radio_button_tag(:plan, "plus")
-                    .cost $199 / month
-                  %td
-                    .select-cost= radio_button_tag(:plan, "plus_year")
-                    .cost $1990 / year
-                  %td
-                    %input(type="submit" value="Select Plan" class="btn btn-success")
-                %tr
-                  %td
-                    .plan Growth
-                  %td
-                    .open-jobs 15 Active Jobs
-                  %td
-                    .select-cost= radio_button_tag(:plan, "growth")
-                    .cost $299 / month
-                  %td
-                    .select-cost= radio_button_tag(:plan, "growth_year")
-                    .cost $2990 / year
-                  %td
-                    %input(type="submit" value="Select Plan" class="btn btn-success")
-                %tr
-                  %td
-                    .plan Enterprise
-                  %td
-                    .open-jobs Unlimited
-                  %td
-                    .select-cost= radio_button_tag(:plan, "enterprise")
-                    .cost $399 / month
-                  %td
-                    .select-cost= radio_button_tag(:plan, "enterprise_year")
-                    .cost $3990 / year
-                  %td
-                    %input(type="submit" value="Select Plan" class="btn btn-success")
-
-
-        / = link_to "Cancel your subscription", cancel_business_customers_path 
+          - if current_company.customer == nil 
+            = render "new_billing_plan"
+          - elsif current_company.customer.plan == nil
+            = render "no_plan"
+          - else
+            = render "update_plan"
 
