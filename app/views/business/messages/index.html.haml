@@ -1,20 +1,20 @@
 .applicant-view
-  .applicant-main-container
-    
+  .applicant-main-container   
     .applicant-header
       .user-image
         %img.profile_picture(src="/tmp/man.jpg")
       
       .applicant-details
-        %h3 Logan Houston
-        %span.glyphicon.glyphicon-map-marker  
-        Toronto, Ontario, CA
-        %br
-        %span.glyphicon.glyphicon-envelope 
-        loganh0522@gmail.com
-        %span.glyphicon.glyphicon-earphone 
-        416-806-6907 
-      
+        %p.name Logan Houston
+        .contact
+          %span.glyphicon.glyphicon-map-marker  
+          Toronto, Ontario, CA
+          %br
+          %span.glyphicon.glyphicon-envelope 
+          loganh0522@gmail.com
+          %br
+          %span.glyphicon.glyphicon-earphone 
+          416-806-6907 
       .applicant-nav-bar  
         = render "business/shared/applicant_nav"
 

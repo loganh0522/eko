@@ -2,20 +2,17 @@
   .sidebar
     .user-general-info
       .user-image
-        %img(src="/tmp/man.jpg")
+        = image_tag @avatar.image.large_image if @avatar.present?
         = link_to "Change Photo", '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"}
         = render 'profile_picture'
-      .info 
-        %p.name= "#{current_user.first_name} #{current_user.last_name}"
-        %h4 CEO Talent Wiz 
-        %h5 Toronto, On
-        .current-company Current Company Name
-        .last-education Education Queen's University
-      .contact-info 
-        .glyphicon.glyphicon-envelope 
-        .email= current_user.email
-        %h5 Mobile: 416-806-6907
-        %h5 Skype: logz.houston
+      / .info 
+      /   %h4.name= "#{current_user.first_name} #{current_user.last_name}"
+      /   %h5 Toronto, On
+      / .contact-info 
+      /   .glyphicon.glyphicon-envelope 
+      /   .email= current_user.email
+      /   %h5 Mobile: 416-806-6907
+      /   %h5 Skype: logz.houston
       
     .user-profile-nav
       %ul
@@ -26,6 +23,18 @@
         %li.my-apps-tab My Applications
 
   .main-container
+    .personal-details
+      %h2.name= "#{current_user.first_name} #{current_user.last_name}"
+      .edit_personal_details
+        = link_to "Edit Personal Details", "#"
+    
+    %h4.tag-line Entrepreneur looking to build an awesome product. Full-stack Developer with extensive experience developing products start-to-finish
+    .contact-info
+      %ul
+        %li Toronto, On, CA 
+        %li E-mail:  #{current_user.email}          
+        %li Phone:  416-806-6907
+
     .experience-container.showing
       .header
         %h1 Experience
@@ -48,12 +57,13 @@
           = link_to "+ Add Education", '#', :data => {:toggle => "modal", :target => "#education-modal"}
           = render 'job_seeker/educations/form'
       .body
-        - if current_user.educations.nil?        
-          = render 'education'
-        - else 
+        - if current_user.educations.nil? 
           .not-present-container
             %p You currently do not have any listed work experiences. 
-            = link_to "+ Add Education", '#', :data => {:toggle => "modal", :target => "#education-modal"}, class: 'add-object'
+            = link_to "+ Add Education", '#', :data => {:toggle => "modal", :target => "#education-modal"}, class: 'add-object'               
+        - else 
+          = render 'education'
+          
           
 
     .skills-container

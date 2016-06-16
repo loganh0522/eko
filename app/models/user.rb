@@ -19,8 +19,11 @@ class User < ActiveRecord::Base
   has_many :educations
 
   has_many :work_experiences
+  has_one :user_avatar
 
 
   #Carrierwave uploader and minimagic for User Profile Pictures
+
+  
 
 end

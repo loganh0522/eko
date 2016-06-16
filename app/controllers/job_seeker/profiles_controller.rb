@@ -7,6 +7,9 @@ class JobSeeker::ProfilesController < JobSeekersController
     @positions = current_user.work_experiences
     @degrees = current_user.educations
     @user = current_user
+    @user_avatar = UserAvatar.new
+
+    @avatar = current_user.user_avatar
   end
 
 end

@@ -6,17 +6,16 @@
   .job-stages  
     %ul 
       %li
-        .number 53
+        .number 
+          = @job.applications.count
         .name All Applicants
-      %li 
-        .number 10
-        .name New Applicants
       - @stages.each do |stage| 
         %li 
           .number= stage.applicants.count
           .name= stage.name  
       %li
-        .number 53
+        .number 
+          = @job.applications.where(rejected: true).count
         .name Rejected
 
 

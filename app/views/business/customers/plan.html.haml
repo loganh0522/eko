@@ -10,7 +10,7 @@
       .body
         .billing
           - if current_company.customer == nil 
-            = render "new_billing_plan"
+            = render "no_billing_plan"
           - elsif current_company.customer.plan == nil
             = render "no_plan"
           - else

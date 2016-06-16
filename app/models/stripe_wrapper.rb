@@ -62,7 +62,7 @@ module StripeWrapper
 
     def self.create_plan(options={})
       begin 
-        Stripe.api_key = ENV['STRIPE_SECRET_KEY']    
+        Stripe.api_key = ENV['STRIPE_SECRET_KEY'] 
         response = Stripe::Subscription.create(
           customer: options[:customer_id],
           plan: options[:plan]

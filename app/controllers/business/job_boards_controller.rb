@@ -3,6 +3,10 @@ class Business::JobBoardsController < ApplicationController
   before_filter :belongs_to_company
   before_filter :company_deactivated?
 
+  def create 
+    @job_board = JobBoard.new(job_params)
+  end
+
   def edit
     @job_board = JobBoard.find(params[:id])
   end
@@ -22,6 +26,7 @@ class Business::JobBoardsController < ApplicationController
   private 
 
   def job_params
-    params.require(:job_board).permit(:description, :logo)
+    params.require(:job_board).permit(:description, :logo, :subdomain)
   end
+
 end

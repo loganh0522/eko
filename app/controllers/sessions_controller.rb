@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController 
-
   def new 
     if current_user && current_kind == 'business'
       redirect_to business_root_path 

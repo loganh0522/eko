@@ -56,7 +56,7 @@
 
           .dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              %img.dropdown-img(src="/tmp/man.jpg")
+              = image_tag @avatar.image.small_image, :class => "img dropdown-img"
               Logan
               %b.caret
             %ul.dropdown-menu.dropdown-menu-right

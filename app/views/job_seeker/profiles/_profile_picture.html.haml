@@ -7,10 +7,11 @@
       .modal-body
         .row
           .image.col-md-6
-            = form_for [:job_seeker, @user] do |f| 
+            = form_for [:job_seeker, @user_avatar] do |f| 
               %p Add a photo and crop it below. 
-              = f.file_field :profile_picture
-            %img(src="/tmp/man.jpg")
+              = image_tag(@user_avatar.image) if @user_avatar.image?
+              = f.file_field :image, class: "btn btn-file"
+              = f.submit "Submit"
           .preview.col-md-6
             %p Preview
       .modal-footer

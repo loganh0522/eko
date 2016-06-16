@@ -19,20 +19,27 @@
         %ul.dropdown-menu
           %li
             %a= link_to "Edit Job Posting", edit_business_job_path(job.id)
-          %li
-            %a= link_to "Close Job", business_job_close_job_path(job), method: :post
-          %li 
-            %a= link_to "Archive Job", business_job_archive_job_path(job), method: :post
+          - if job.status == 'draft'
+            %li
+              %a= link_to "Publish Job", business_job_publish_job_path(job), method: :post
+          - elsif job.status == 'open'
+            %li
+              %a= link_to "Close Job", business_job_close_job_path(job), method: :post
+          - elsif job.status == 'closed'
+            %li
+              %a= link_to "Publish Job", business_job_publish_job_path(job), method: :post
+            %li 
+              %a= link_to "Archive Job", business_job_archive_job_path(job), method: :post
 
 
-    
     .left-scroll.glyphicon.glyphicon-chevron-left
      
     
     %ul.job-stage-area
       .job-gallery
         %li.job_list_stage
-          .number 53
+          .number 
+            = job.applications.count
           .name All Applicants
         - job.stages.each do |stage|  
           %li.job_list_stage
@@ -41,7 +48,8 @@
             .name
               = stage.name
         %li.job_list_stage
-          .number 53
+          .number 
+            = job.applications.where(rejected: true).count
           .name Rejected 
     .right-scroll
       .glyphicon.glyphicon-chevron-right

@@ -11,6 +11,7 @@ class Business::ApplicationScorecardsController < ApplicationController
     @comment = Comment.new
     @user = @application.applicant
     @scorecard = Scorecard.where(job_id: params[:job_id]).first
+
     @sections = @scorecard.scorecard_sections    
     @application_scorecards = @application.application_scorecards
     @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first

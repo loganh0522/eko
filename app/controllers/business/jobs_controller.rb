@@ -17,6 +17,7 @@ class Business::JobsController < ApplicationController
 
     if @job.save && @job.company == current_company
       @job.user_ids = params[:user_ids]
+      @job.update_column(:status, "draft") 
       redirect_to new_business_job_hiring_team_path(@job)
     else
       render :new
@@ -49,6 +50,9 @@ class Business::JobsController < ApplicationController
   def close_job 
     @job = Job.find(params[:job_id])
     @job.update_column(:status, "closed")
+    @company = current_company
+    @company.open_jobs -= 1
+    @company.save
     redirect_to business_jobs_path
   end
 
@@ -58,10 +62,50 @@ class Business::JobsController < ApplicationController
     redirect_to business_jobs_path
   end
 
+  def publish_job 
+    @job = Job.find(params[:job_id])
+    @company = current_company
+
+    if @company.subscription == 'start-up' && @company.open_jobs < 1 
+      @job.update_column(:status, "open") 
+      @company.open_jobs += 1
+      @company.save
+      redirect_to business_jobs_path
+    elsif @company.subscription == 'basic' && @company.open_jobs < 3
+      @job.update_column(:status, "open")
+      @company.open_jobs += 1
+      @company.save
+      redirect_to business_jobs_path
+    elsif @company.subscription == 'team' && @company.open_jobs < 5
+      @job.update_column(:status, "open")
+      @company.open_jobs += 1
+      @company.save
+      redirect_to business_jobs_path
+    elsif @company.subscription == 'plus' && @company.open_jobs < 10
+      @job.update_column(:status, "open")
+      @company.open_jobs += 1
+      @company.save
+      redirect_to business_jobs_path
+    elsif @company.subscription == 'growth' && @company.open_jobs < 15
+      @job.update_column(:status, "open")
+      @company.open_jobs += 1
+      @company.save
+      redirect_to business_jobs_path
+    elsif @company.subscription == 'enterprise'
+      @job.update_column(:status, "open")
+      @company.open_jobs += 1
+      @company.save
+      redirect_to business_jobs_path
+    else
+      flash[:danger] = "Sorry, you already have the maximum number of open jobs. Please close an open job before publishing another one."
+      render :edit
+    end
+  end
+
   private 
 
   def job_params
-    params.require(:job).permit(:description, :title, :city, :country, :province, :benefits, 
+    params.require(:job).permit(:description, :title, :city, :country_ids, :state_ids, :benefits, 
       :industry_ids, :function_ids, :education_level_ids, :job_kind_ids, :career_level_ids)
   end
 

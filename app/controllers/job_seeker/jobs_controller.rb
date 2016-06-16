@@ -3,6 +3,8 @@ class JobSeeker::JobsController < JobSeekersController
 
   def index 
     @jobs = Job.all
+    
+    @avatar = current_user.user_avatar
   end
 
   def show 
@@ -10,5 +12,7 @@ class JobSeeker::JobsController < JobSeekersController
     @questionairre = @job.questionairre
     @questions = @questionairre.questions
     @application = Application.new
+
+    @avatar = current_user.user_avatar
   end
 end

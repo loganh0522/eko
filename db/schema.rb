@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160606205117) do
+ActiveRecord::Schema.define(version: 20160608183307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20160606205117) do
     t.integer "stage_id"
     t.integer "company_id"
     t.string  "token"
+    t.boolean "rejected"
   end
 
   create_table "career_levels", force: :cascade do |t|
@@ -305,6 +306,18 @@ ActiveRecord::Schema.define(version: 20160606205117) do
     t.integer "company_id"
   end
 
+  create_table "user_avatars", force: :cascade do |t|
+    t.string   "image"
+    t.string   "small_image"
+    t.string   "medium_image"
+    t.string   "large_image"
+    t.string   "xs_image"
+    t.string   "xl_image"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string  "email"
     t.string  "first_name"
@@ -332,5 +345,4 @@ ActiveRecord::Schema.define(version: 20160606205117) do
     t.string   "state"
     t.string   "city"
   end
-
 end

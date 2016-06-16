@@ -31,7 +31,7 @@ gem 'mini_magick'
 gem 'carrierwave'
 gem 'carrierwave-aws'
 
-
+gem 'jcrop-rails-v2'
 
 group :development do
   gem 'thin'

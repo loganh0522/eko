@@ -26,4 +26,6 @@ class CompaniesController < ApplicationController
   def set_user(company)
     current_user.update_attribute(:company_id, company.id)
   end
+
+  
 end

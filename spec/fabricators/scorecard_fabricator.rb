@@ -1,3 +1,3 @@
 Fabricator(:scorecard) do 
-  
+ 
 end

@@ -39,6 +39,7 @@ Rails.application.routes.draw do
     resources :applications, only: [:create]
     resources :question_answers
     resources :users
+    resources :user_avatars
   end
 
   namespace :business do 
@@ -67,7 +68,8 @@ Rails.application.routes.draw do
     resources :jobs do 
       post :close_job, to: "jobs#close_job"
       post :archive_job, to: "jobs#archive_job"
-
+      post :publish_job, to: "jobs#publish_job"
+      
       resources :applications do
         collection do 
           post :update_multiple, to: "stages#update_multiple"

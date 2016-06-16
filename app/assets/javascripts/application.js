@@ -14,11 +14,14 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
+//= require jquery.Jcrop
 //= require bootstrap-sprockets
 //= require jquery.tokeninput
 //= require bootstrap-wysihtml5
 //= require chosen-jquery
 //= require_tree .
+
+
 
 
 
