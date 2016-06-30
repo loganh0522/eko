@@ -16,5 +16,7 @@ class Business::UsersController < ApplicationController
 
   def edit
     @user = current_user
+    @user_avatar = UserAvatar.new
+    @avatar = @user.user_avatar
   end
 end

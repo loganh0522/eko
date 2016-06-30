@@ -11,6 +11,7 @@ class Business::CommentsController < ApplicationController
     @positions = @user.work_experiences
     @comments = @application.comments
     @stage = @application.stage
+    @avatar = @user.user_avatar
   end
 
   def create 

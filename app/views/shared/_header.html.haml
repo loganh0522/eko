@@ -29,7 +29,7 @@
 
           .dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              %img.dropdown-img(src="/tmp/man.jpg")
+              = image_tag @avatar.image.small_image, :class => 'dropdown-img', :size => "50x50" if @avatar.present? 
               Logan
               %b.caret
             %ul.dropdown-menu.dropdown-menu-right
@@ -69,10 +69,12 @@
   - if logged_in? && current_kind == 'job seeker'
     .navbar-fixed-top
       .career-portal-nav
-        %a.navbar-brand #{@company.job_board.logo}
-        %ul.nav.navbar-nav.navbar-right
-          %li= link_to "Profile", profile_path
-          %li= link_to "Sign Out", signout_path
+        .content
+          = link_to root_path do
+            %img(src="#{@company.job_board.logo}")
+          %ul.nav.navbar-nav.navbar-right
+            %li= link_to "Profile", profile_path
+            %li= link_to "Sign Out", signout_path
   - else
     .navbar-fixed-top
       .career-portal-nav

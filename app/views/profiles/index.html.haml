@@ -1,20 +1,104 @@
-.user-general-info
-  .user-image
-    %img.circle(src="/tmp/man.jpg")
-  .info 
-    %h3 Logan Houston
-    %h4 CEO Talent Wiz 
-    %h5 Toronto, On
-  .contact-info 
-    %h3 Contact Info
-    %h5 E-mail: loganh0522@gmail.com
-    %h5 Mobile: 416-806-6907
-    %h5 Skype: logz.houston
+.job-seeker
+  .sidebar
+    .user-general-info
+      .user-image
+        = image_tag @avatar.image.large_image if @avatar.present?
+        = link_to "Change Photo", '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"}
+        / = render 'profile_picture'
+      
+    .user-profile-nav
+      %ul
+        %li.experience-tab.active Experience 
+        %li.education-tab Education      
+        %li.skills-tab Skills & Certifications
+        %li.career-prefs-tab Career Preferences
+        %li.my-apps-tab My Applications
 
-.work-experience
-  .header
-    %h3 Experience
-    %p.new_experience= link_to "+ Add Work Experience", new_job_seeker_work_experience_path, :data => {:remote => true}
-  
-  .experience
-    = render 'job_seeker/profiles/experience'
+  .main-container
+    .personal-details
+      %h2.name= "#{current_user.first_name} #{current_user.last_name}"
+      .edit_personal_details
+        = link_to "Edit Personal Details", edit_job_seeker_user_path(@user.id), :data => {:remote => true}
+        
+    %h4.tag-line= current_user.tag_line
+    .contact-info
+      %ul
+        %li #{current_user.countries.first.name}, #{current_user.states.first.name}, #{current_user.city}
+        %li E-mail:  #{current_user.email}          
+        %li Phone:  #{current_user.phone}
+
+    .experience-container.showing
+      .header
+        %h1 Experience
+        .new_experience
+          = link_to "+ Add Work Experience", new_job_seeker_work_experience_path, :data => {:remote => true}
+      .body
+        - if current_user.work_experiences.nil? 
+          .not-present-container
+            %p You currently do not have any listed work experiences. 
+            = link_to "+ Add Work Experience", new_job_seeker_work_experience_path, :data => {:remote => true}
+        - else
+          = render 'job_seeker/work_experiences/experience'
+
+    .education-container
+      .header
+        %h1 Education
+        .new_experience
+          = link_to "+ Add Education", new_job_seeker_education_path, :data => {:remote => true}
+      .body
+        - if current_user.educations.nil? 
+          .not-present-container
+            %p You currently do not have any listed work experiences. 
+            = link_to "+ Add Education", new_job_seeker_education_path, :data => {:remote => true}, class: 'add-object'               
+        - else 
+          = render 'job_seeker/educations/education'
+         
+    .skills-container
+      .header
+        %h1 Skills
+        .new_experience
+          = link_to "+ Add Skills", job_seeker_user_add_skills_path(@user.id), :data => {:remote => true}
+
+      .body
+        .not-present-container
+          %p You currently do not have any skills listed. 
+          = link_to "+ Add Skill", job_seeker_user_add_skills_path(@user.id), :data => {:remote => true}, class: 'add-object'
+
+      .header
+        %h1 Certifications
+        .new_experience
+          = link_to "+ Add Certification", job_seeker_user_add_certifications_path(@user.id), :data => {:remote => true} 
+      .body
+        .not-present-container
+          %p You currently do not have any certifications listed. 
+          = link_to "+ Add Certification", job_seeker_user_add_certifications_path(@user.id), :data => {:remote => true} , class: 'add-object'
+              
+    .career-prefs-container
+      .header
+        %h1 Career Preferences
+      .body
+        - if current_user.educations.nil?        
+          
+        - else 
+          .not-present-container
+            %p You currently do not have any career preferences. 
+            = link_to "+ Add Career Preferences", '#', :data => {:remote =>  true}, class: 'add-object'
+    
+    .my-apps-container
+      .header
+        %h1 Applications
+      .body
+        - if current_user.educations.nil?        
+          
+        - else 
+          .not-present-container
+            %p You currently do not have any career preferences. 
+            = link_to "+ Add Career Preferences", '#', :data => {:remote =>  true}, class: 'add-object'    
+    
+    .modal
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+            %h4.modal-title  
+          .modal-body

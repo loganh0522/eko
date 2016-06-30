@@ -7,6 +7,7 @@ class Business::MessagesController < ApplicationController
     @job = Job.find(params[:job_id])
     @application = Application.find(params[:application_id])
     @user = @application.applicant
+    @avatar = @user.user_avatar
     @messages = @application.messages
     @stage = @application.stage
     @comment = Comment.new

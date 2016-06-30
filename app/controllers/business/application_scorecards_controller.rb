@@ -10,6 +10,7 @@ class Business::ApplicationScorecardsController < ApplicationController
     @stage = @application.stage
     @comment = Comment.new
     @user = @application.applicant
+    @avatar = @user.user_avatar
     @scorecard = Scorecard.where(job_id: params[:job_id]).first
 
     @sections = @scorecard.scorecard_sections    

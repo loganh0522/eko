@@ -4,11 +4,6 @@
       = link_to job.title, business_job_path(job)
     .location Toronto, On
     .posted-time Posted 10 minutes ago
-    .actions
-      = link_to edit_business_job_path(job.id) do
-        %i.glyphicon.glyphicon-pencil
-      = link_to '#' do
-        %i.glyphicon.glyphicon-remove
   .job-body
     .btns
       = link_to 'Post to Job Boards', '#', class: 'button-mid'
@@ -32,9 +27,8 @@
               %a= link_to "Archive Job", business_job_archive_job_path(job), method: :post
 
 
-    .left-scroll.glyphicon.glyphicon-chevron-left
-     
-    
+    .left-scroll
+      %img(src="/tmp/left_arrow.png")
     %ul.job-stage-area
       .job-gallery
         %li.job_list_stage
@@ -52,6 +46,6 @@
             = job.applications.where(rejected: true).count
           .name Rejected 
     .right-scroll
-      .glyphicon.glyphicon-chevron-right
+      %img(src="/tmp/right_arrow.png")
 
       

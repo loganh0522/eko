@@ -2,19 +2,20 @@
   .applicant-main-container   
     .applicant-header
       .user-image
-        %img.profile_picture(src="/tmp/man.jpg")
+        .profile_picture
+          = image_tag @avatar.image.large_image, :size => "200x200" if @avatar.present?
       
       .applicant-details
-        %p.name Logan Houston
+        %p.name= "#{@user.first_name.upcase} #{@user.last_name.upcase}"
         .contact
           %span.glyphicon.glyphicon-map-marker  
-          Toronto, Ontario, CA
+            = "#{@user.city}, #{@user.countries.first.name}"
           %br
           %span.glyphicon.glyphicon-envelope 
-          loganh0522@gmail.com
+            = "#{@user.email}"
           %br
           %span.glyphicon.glyphicon-earphone 
-          416-806-6907 
+            = "#{@user.phone}"
       .applicant-nav-bar  
         = render "business/shared/applicant_nav"
 

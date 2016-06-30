@@ -32,7 +32,14 @@
         .name
           font-size: 12px
           font-weight: bold
-        
+
+      li.activated
+        background: 1px #EF7B2B
+        border: 1px solid black
+        .number 
+          color: black
+        .name
+          color: black
         
 
 .job-applicants 
@@ -67,10 +74,13 @@
     .checkbox
       margin-left: 20px
     .circle
+      display: inline-block
       margin: 5px 0 5px 0
-      border-radius: 50%
-      width: 40px 
-      height: 40px
+      img
+        width: 50px 
+        height: 50px
+        border-radius: 50%
+
 
     .name 
       margin: 5px 0 0 0 
@@ -106,7 +116,18 @@
       top: 100px
       z-index: 3
 
+  .not-present-container
+    width: 900px
+    height: 200px 
+    margin: 25px 100px 50px 100px
+    border: 2px dashed #c6c8ca
+    text-align: center
+    display: none
 
+    p 
+      margin: 85px 0 0 300px
+      float: left
+      color: #c6c8ca
 
     
       

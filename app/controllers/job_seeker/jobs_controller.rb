@@ -10,7 +10,7 @@ class JobSeeker::JobsController < JobSeekersController
   def show 
     @job = Job.find(params[:id])
     @questionairre = @job.questionairre
-    @questions = @questionairre.questions
+    @questions = @questionairre
     @application = Application.new
 
     @avatar = current_user.user_avatar

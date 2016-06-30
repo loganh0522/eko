@@ -1,8 +1,8 @@
 - @education.each do |position| 
   .position
     .job-header
-      %h4.title=  "#{position.title}"
-      %p.date June 2015 - Present
+      %h4.title=  "#{position.school}"
+      %p.date= "#{position.start_year} - #{position.end_year}"
     .job-body       
-      %h5= "#{position.company_name}"
+      %h5= "#{position.degree}"
       %p= position.description

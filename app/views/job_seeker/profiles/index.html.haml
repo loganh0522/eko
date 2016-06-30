@@ -2,17 +2,9 @@
   .sidebar
     .user-general-info
       .user-image
-        = image_tag @avatar.image.large_image if @avatar.present?
+        = image_tag @avatar.image.large_image, :size => "200x200" if @avatar.present?
         = link_to "Change Photo", '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"}
-        = render 'profile_picture'
-      / .info 
-      /   %h4.name= "#{current_user.first_name} #{current_user.last_name}"
-      /   %h5 Toronto, On
-      / .contact-info 
-      /   .glyphicon.glyphicon-envelope 
-      /   .email= current_user.email
-      /   %h5 Mobile: 416-806-6907
-      /   %h5 Skype: logz.houston
+        / = render 'profile_picture'
       
     .user-profile-nav
       %ul
@@ -24,82 +16,92 @@
 
   .main-container
     .personal-details
-      %h2.name= "#{current_user.first_name} #{current_user.last_name}"
+      %h1.name= "#{current_user.first_name.upcase} #{current_user.last_name.upcase}"
       .edit_personal_details
-        = link_to "Edit Personal Details", "#"
-    
-    %h4.tag-line Entrepreneur looking to build an awesome product. Full-stack Developer with extensive experience developing products start-to-finish
+        = link_to "Edit Personal Details", edit_job_seeker_user_path(@user.id), :data => {:remote => true}
+        
+    %h4.tag-line= current_user.tag_line
     .contact-info
       %ul
-        %li Toronto, On, CA 
+        %li #{current_user.countries.first.name}, #{current_user.states.first.name}, #{current_user.city}
         %li E-mail:  #{current_user.email}          
-        %li Phone:  416-806-6907
+        %li Phone:  #{current_user.phone}
 
     .experience-container.showing
       .header
         %h1 Experience
         .new_experience
-          = link_to "+ Add Work Experience", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}
-          = render 'job_seeker/work_experiences/form'
-          = render 'job_seeker/accomplishments/form', :locals => {@exp_id => params[:id]}
+          = link_to "+ Add Work Experience", new_job_seeker_work_experience_path, :data => {:remote => true}
       .body
         - if current_user.work_experiences.nil? 
           .not-present-container
             %p You currently do not have any listed work experiences. 
-            = link_to "+ Add Work Experience", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}, class: "add-object"
+            = link_to "+ Add Work Experience", new_job_seeker_work_experience_path, :data => {:remote => true}
         - else
-          = render 'experience'
+          = render 'job_seeker/work_experiences/experience'
 
     .education-container
       .header
         %h1 Education
         .new_experience
-          = link_to "+ Add Education", '#', :data => {:toggle => "modal", :target => "#education-modal"}
-          = render 'job_seeker/educations/form'
+          = link_to "+ Add Education", new_job_seeker_education_path, :data => {:remote => true}
       .body
         - if current_user.educations.nil? 
           .not-present-container
             %p You currently do not have any listed work experiences. 
-            = link_to "+ Add Education", '#', :data => {:toggle => "modal", :target => "#education-modal"}, class: 'add-object'               
+            = link_to "+ Add Education", new_job_seeker_education_path, :data => {:remote => true}, class: 'add-object'               
         - else 
-          = render 'education'
-          
-          
-
+          = render 'job_seeker/educations/education'
+         
     .skills-container
       .header
         %h1 Skills
         .new_experience
-          = link_to "+ Add Skills", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}
+          = link_to "+ Add Skills", job_seeker_user_add_skills_path(@user.id), :data => {:remote => true}
 
       .body
         .not-present-container
           %p You currently do not have any skills listed. 
-          = link_to "+ Add Skill", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}, class: 'add-object'
+          = link_to "+ Add Skill", job_seeker_user_add_skills_path(@user.id), :data => {:remote => true}, class: 'add-object'
 
       .header
         %h1 Certifications
         .new_experience
-          = link_to "+ Add Certification", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}
+          = link_to "+ Add Certification", job_seeker_user_add_certifications_path(@user.id), :data => {:remote => true} 
       .body
         .not-present-container
           %p You currently do not have any certifications listed. 
-          = link_to "+ Add Certification", '#', :data => {:toggle => "modal", :target => "#work-experience-modal"}, class: 'add-object'
-
-    / .career-prefs-container
-    /   .header
-    /     %h1 Career Preferences
-    /   .body
-    /     - if current_user.educations.nil?        
-    /       = render 'education'
-    /     - else 
-    /       .not-present-container
-    /         %p You currently do not have any career preferences. 
-    /         = link_to "+ Add Education", '#', :data => {:toggle => "modal", :target => "#education-modal"}, class: 'add-object'
-          
-
+          = link_to "+ Add Certification", job_seeker_user_add_certifications_path(@user.id), :data => {:remote => true} , class: 'add-object'
               
-
+    .career-prefs-container
+      .header
+        %h1 Career Preferences
+      .body
+        - if current_user.educations.nil?        
+          
+        - else 
+          .not-present-container
+            %p You currently do not have any career preferences. 
+            = link_to "+ Add Career Preferences", '#', :data => {:remote =>  true}, class: 'add-object'
+    
+    .my-apps-container
+      .header
+        %h1 Applications
+      .body
+        - if current_user.educations.nil?        
+          
+        - else 
+          .not-present-container
+            %p You currently do not have any career preferences. 
+            = link_to "+ Add Career Preferences", '#', :data => {:remote =>  true}, class: 'add-object'    
+    
+    .modal
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+            %h4.modal-title  
+          .modal-body
 
 
 

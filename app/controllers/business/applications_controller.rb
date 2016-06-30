@@ -16,6 +16,7 @@ class Business::ApplicationsController < ApplicationController
   def show 
     @application = Application.find(params[:id])
     @user = @application.applicant
+    @avatar = @user.user_avatar
     @job = Job.find(params[:job_id])
     @stage = @application.stage
     @positions = @user.work_experiences

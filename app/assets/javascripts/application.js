@@ -19,6 +19,7 @@
 //= require jquery.tokeninput
 //= require bootstrap-wysihtml5
 //= require chosen-jquery
+//= require autocomplete-rails
 //= require_tree .
 
 

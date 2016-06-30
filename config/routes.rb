@@ -25,21 +25,29 @@ Rails.application.routes.draw do
   
   root to: 'pages#home'
   
-
-
-
-  
+  resources :skills 
+  resources :certifications
 
   namespace :job_seeker do 
     resources :jobs
+
     resources :profiles 
+
     resources :educations
     resources :work_experiences
     resources :accomplishments
     resources :applications, only: [:create]
     resources :question_answers
-    resources :users
+    
+    resources :users do
+      get "add_skills", to: "users#add_skills"
+      get "add_certifications", to: "users#add_certifications"
+    end
+
     resources :user_avatars
+
+    post "update_skills", to: "users#update_skills"
+    post "update_certification", to: "users#update_certifications"
   end
 
   namespace :business do 
@@ -50,6 +58,7 @@ Rails.application.routes.draw do
     resources :locations 
     get "plan", to: "customers#plan"
 
+    resources :user_avatars
     
     resources :customers do
       collection do 

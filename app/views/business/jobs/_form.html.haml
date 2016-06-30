@@ -24,12 +24,12 @@
         = f.collection_select(:career_level_ids, CareerLevel.all, :id, :name, label: "Career Level")
     .row
       .form-group.col-md-12
-        = f.text_area :description, rows: 12, class: "wysihtml5 form-control", label: "Description", :data => {:provider => "summernote" } , id: "summmernote"
+        = f.text_area :description, rows: 12, class: "wysihtml5 form-control", label: "Description"
     .row
       .form-group.col-md-12
         = f.text_area :benefits, rows: 12, class: "wysihtml5 form-control", label: "Benefits"
     .row
       = hidden_field_tag :user_ids, current_user.id
-      .col-md-1.col-md-offset-10
+      .col-md-1.col-md-offset-9
         = f.submit @job.new_record? ? "Create Job Posting" : "Save and Continue", class: "btn btn-primary"
 

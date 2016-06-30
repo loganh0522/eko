@@ -28,6 +28,7 @@ class Business::JobsController < ApplicationController
     @job = Job.find(params[:id])
     @applicants = @job.applicants
     @stages = @job.stages
+    
   end
 
   def edit

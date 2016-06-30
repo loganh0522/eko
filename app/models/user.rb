@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :invitations
   has_many :messages
 
-  validates_presence_of :first_name, :last_name, :email, :password
+  validates_presence_of :first_name, :last_name, :email, :password, on: [:create]
   validates_uniqueness_of :email
 
   has_secure_password validations: false 
@@ -21,9 +21,22 @@ class User < ActiveRecord::Base
   has_many :work_experiences
   has_one :user_avatar
 
+  has_many :job_countries
+  has_many :countries, through: :job_countries
+
+  has_many :job_states
+  has_many :states, through: :job_states
+
+  has_many :user_skills
+  has_many :skills, through: :user_skills
+
+  has_many :user_certifications
+  has_many :certifications, through: :user_certifications
+
 
   #Carrierwave uploader and minimagic for User Profile Pictures
 
+  
   
 
 end

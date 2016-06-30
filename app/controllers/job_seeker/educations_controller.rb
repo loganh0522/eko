@@ -6,7 +6,10 @@ class JobSeeker::EducationsController < JobSeekersController
     @user_degrees = current_user.educations
   end
 
-  
+  def new
+    @education = Education.new
+  end
+
   def create 
     @education = Education.new(education_params.merge!(user: current_user))
     

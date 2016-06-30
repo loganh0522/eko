@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160608183307) do
+ActiveRecord::Schema.define(version: 20160630132539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,16 +30,24 @@ ActiveRecord::Schema.define(version: 20160608183307) do
   end
 
   create_table "applications", force: :cascade do |t|
-    t.integer "job_id"
-    t.integer "user_id"
-    t.integer "stage_id"
-    t.integer "company_id"
-    t.string  "token"
-    t.boolean "rejected"
+    t.integer  "job_id"
+    t.integer  "user_id"
+    t.integer  "stage_id"
+    t.integer  "company_id"
+    t.string   "token"
+    t.boolean  "rejected"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "career_levels", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "certifications", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -152,6 +160,7 @@ ActiveRecord::Schema.define(version: 20160608183307) do
     t.integer "country_id"
     t.integer "job_id"
     t.integer "work_experience_id"
+    t.integer "user_id"
   end
 
   create_table "job_education_levels", force: :cascade do |t|
@@ -182,6 +191,7 @@ ActiveRecord::Schema.define(version: 20160608183307) do
     t.integer "state_id"
     t.integer "job_id"
     t.integer "work_experience_id"
+    t.integer "user_id"
   end
 
   create_table "job_types", force: :cascade do |t|
@@ -285,7 +295,7 @@ ActiveRecord::Schema.define(version: 20160608183307) do
   end
 
   create_table "skills", force: :cascade do |t|
-    t.integer "name"
+    t.string "name"
   end
 
   create_table "stages", force: :cascade do |t|
@@ -318,6 +328,18 @@ ActiveRecord::Schema.define(version: 20160608183307) do
     t.datetime "updated_at"
   end
 
+  create_table "user_certifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "certification_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_skills", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "skill_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string  "email"
     t.string  "first_name"
@@ -327,6 +349,11 @@ ActiveRecord::Schema.define(version: 20160608183307) do
     t.string  "kind"
     t.string  "role"
     t.string  "token"
+    t.string  "city"
+    t.string  "phone"
+    t.string  "linked_in"
+    t.string  "website"
+    t.string  "tag_line"
   end
 
   create_table "work_experiences", force: :cascade do |t|
@@ -345,4 +372,5 @@ ActiveRecord::Schema.define(version: 20160608183307) do
     t.string   "state"
     t.string   "city"
   end
+
 end

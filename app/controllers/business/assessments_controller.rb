@@ -12,6 +12,7 @@ class Business::AssessmentsController < ApplicationController
     @answers = @application.question_answers
     @stage = @application.stage
     @user = @application.applicant
+    @avatar = @user.user_avatar
   end
 
 end

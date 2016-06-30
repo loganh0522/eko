@@ -1,0 +1,16 @@
+= bootstrap_form_for [:job_seeker, @education] do |f|
+  .fieldset
+    .row
+      .form-group.col-md-4
+        = f.collection_select(:industry_ids, Industry.all, :id, :name, label: "Industry")
+      .form-group.col-md-4
+        = f.collection_select(:function_ids, Function.all, :id, :name, label: "Job Function")
+      .form-group.col-md-4
+        = f.collection_select(:job_kind_ids, JobKind.all, :id, :name, label: "Job Type", :include_blank => true)
+    .row
+      .form-group.col-md-6
+        = f.text_field :base_salary
+    .row
+      .form-group.col-md-12
+        = f.text_area :description, rows: 6, class: "form-control", label: "Description"
+  = f.submit "Add Education", class: "submit btn btn-primary"

@@ -1,5 +1,6 @@
 class JobSeeker::WorkExperiencesController < JobSeekersController
   before_filter :require_user
+  
   def new
     @work_experience = WorkExperience.new
   end
@@ -19,7 +20,21 @@ class JobSeeker::WorkExperiencesController < JobSeekersController
       }
       format.js { }
     end  
+  end
 
+  def edit 
+    @work_experience = WorkExperience.find(params[:id])
+  end
+
+  def update
+    @work_experience = WorkExperience.find(params[:id])
+    
+    if @work_experience.update(position_params)
+      flash[:notice] = "#{@job.title} has been updated"
+      redirect_to job_seeker_profiles_path
+    else
+      render :edit
+    end
   end
 
   private 

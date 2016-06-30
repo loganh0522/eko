@@ -1,5 +1,5 @@
 jQuery -> 
-  $('.active').css background: 'rgb(239, 122, 43)'
+  $('.active').css color: 'rgb(239, 122, 43)'
 
   changeContainer = ($targetContainer) -> 
     $('.main-container').find('.showing').hide()
@@ -17,14 +17,16 @@ jQuery ->
     else if $(this).attr('class') == 'skills-tab'
       $targetContainer = '.skills-container'
     else if $(this).attr('class') == 'career-prefs-tab'
-      $targetContainer = '.education-container'
+      $targetContainer = '.career-prefs-container'
+    else if $(this).attr('class') == 'my-apps-tab'
+      $targetContainer = '.my-apps-container'
   
-    $('.user-profile-nav').find('.active').css background: '#ffffff'
+    $('.user-profile-nav').find('.active').css color: 'black'
     $('.user-profile-nav').find('.active').removeClass 'active'
     
     
     $(this).addClass 'active'
-    $(this).css background: 'rgb(239, 122, 43)'
+    $(this).css color: 'rgb(239, 122, 43)'
 
     console.log($targetContainer)
     changeContainer $targetContainer
