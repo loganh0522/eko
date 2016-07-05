@@ -1,20 +1,23 @@
 .contain
   .sidebar
     = render 'business/shared/post_job'
-
-
   .main-container
     .header
       .hiring-team 
         %h1 Hiring Team
         = link_to "+ Invite New User", new_business_invitation_path, {:class => "invite", :data => {:toggle => "modal", :target => "#myModal"}}
         = render "invitation_form"
-    
+
+  
     .body
-      = form_for [:business, @job, @hiring_team] do |f| 
-        = f.text_field :user_tokens, placeholder: "Type a users name to find them" 
-        = f.hidden_field :job_id, value: @job.id
-        = f.submit "+ Add Member", class: "btn btn-primary"
+      = form_for [:business, @job, @hiring_team], html: {remote: true, class: 'add_user'}  do |f|
+        .row
+          .form-group           
+            = f.text_field :user_tokens, :class => 'ui-autocomplete-input form-control', :placeholder => 'Type a team members name', id: "team_members"
+            %div#team-members-results
+            = hidden_field_tag :user_id
+            = hidden_field_tag :job_id, value: @job.id
+            = f.submit "+ Add Member", class: "submit btn btn-primary"
 
       .user-list
         %table
@@ -24,16 +27,5 @@
               %th(width="20%")
               %th(width="20%")
               %th.delete(width="20%")
-          %tbody
-            - @users.each do |user|
-              %tr
-                %td
-                  %img.circle(src="/tmp/man.jpg")
-                %td
-                  %p.name= "#{user.first_name} #{user.last_name}"
-                  %p.email= user.email
-                %td
-                  %p.permissions Hiring Manager
-                %td
-                  = link_to business_job_hiring_team_path(@job.id, user.id), remote: true, :method => :delete do
-                    %i.glyphicon.glyphicon-remove
+          %tbody.hiring_team
+            = render "hiring_team"

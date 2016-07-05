@@ -1,0 +1,12 @@
+- @users.each do |user|
+  %tr{:id => "user_#{user.id}" }
+    %td
+      = image_tag user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" if user.user_avatar.present? 
+    %td
+      %p.name= "#{user.first_name} #{user.last_name}"
+      %p.email= user.email
+    %td
+      %p.permissions Hiring Manager
+    %td
+      = link_to business_job_hiring_team_path(@job.id, user.id), remote: true, :method => :delete do
+        %i.glyphicon.glyphicon-remove

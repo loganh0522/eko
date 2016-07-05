@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   
   resources :skills 
   resources :certifications
+  
 
   namespace :job_seeker do 
     resources :jobs
@@ -52,7 +53,7 @@ Rails.application.routes.draw do
 
   namespace :business do 
     root to: "jobs#index" 
-
+    resources :hiring_teams
     resources :users
     resources :invitations
     resources :locations 
@@ -100,7 +101,10 @@ Rails.application.routes.draw do
         post :move_stages    
       end
       
-      resources :hiring_teams
+      resources :hiring_teams do
+        
+      end
+
       resources :questionairres
       resources :scorecards
       resources :stages do 
