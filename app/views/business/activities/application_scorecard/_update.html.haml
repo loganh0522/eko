@@ -1,0 +1,2 @@
+updated their scorecard for
+= link_to "#{activity.trackable.application.applicant.first_name} #{activity.trackable.application.applicant.last_name}", business_job_application_application_scorecards_path(Job.where(id: activity.trackable.application.job_id).first.id, Application.where(user_id: activity.trackable.application.user_id, job_id: activity.trackable.application.job_id).first.id)

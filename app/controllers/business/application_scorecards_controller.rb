@@ -28,6 +28,7 @@ class Business::ApplicationScorecardsController < ApplicationController
     @application = Application.find(params[:application_id])
     
     if @application_scorecard.save
+      track_activity @application_scorecard
       redirect_to business_job_application_application_scorecards_path(@job, @application.id)
     else
       redirect_to new_business_job_application_user_scorecard_path(@job, @application), {:data => {:toggle => "modal", :target => "#scorecardModal"}}
@@ -44,6 +45,7 @@ class Business::ApplicationScorecardsController < ApplicationController
     @application_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first
 
     if @application_scorecard.update(application_scorecard_params)
+      track_activity @application_scorecard
       redirect_to business_job_application_application_scorecards_path(@job, @application.id)
     else
       redirect_to business_job_application_scorecards_path(@job.id, @application.id), {:data => {:toggle => "modal", :target => "#edit_scorecardModal"}}

@@ -13,5 +13,9 @@
 
   %li{:class => is_active?(business_job_application_application_scorecards_path(@job, @application.id))}
     = link_to "Scorecards", business_job_application_application_scorecards_path(@job, @application.id)
-  %li
-    = link_to "Activity", '#'
+  
+  %li{:class => is_active?(business_job_application_application_activity_path(@job, @application.id))}
+    = link_to "Activity", business_job_application_application_activity_path(@job, @application.id)
+
+
+

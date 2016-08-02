@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160630132539) do
+ActiveRecord::Schema.define(version: 20160714130251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 20160630132539) do
   create_table "accomplishments", force: :cascade do |t|
     t.integer "work_experience_id"
     t.text    "body"
+  end
+
+  create_table "activities", force: :cascade do |t|
+    t.string   "action"
+    t.string   "trackable_type"
+    t.integer  "trackable_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "application_id"
   end
 
   create_table "application_scorecards", force: :cascade do |t|
@@ -61,7 +71,7 @@ ActiveRecord::Schema.define(version: 20160630132539) do
   create_table "companies", force: :cascade do |t|
     t.string   "name"
     t.string   "website"
-    t.integer  "open_jobs"
+    t.integer  "open_jobs",    default: 0,    null: false
     t.string   "subscription"
     t.boolean  "active",       default: true
     t.datetime "created_at"

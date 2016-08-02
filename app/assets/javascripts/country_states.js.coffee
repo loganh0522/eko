@@ -17,8 +17,12 @@ jQuery ->
       $('#work_experience_city').parent().show()
 
 jQuery ->
-  $('#job_state_ids').parent().hide()
-  $('#job_city').parent().hide()
+  if $('#job_country_ids').find(':selected').text() == "Select a Country"
+    $('#job_state_ids').parent().hide()
+    $('#job_city').parent().hide()
+  else
+    $('#job_state_ids').parent().show()
+    $('#job_city').parent().show()
   
   states = $('#job_state_ids').html()
   
@@ -34,3 +38,4 @@ jQuery ->
       $('#job_state_ids').empty()
       $('#job_state_ids').parent().hide()
       $('#job_city').parent().show()
+

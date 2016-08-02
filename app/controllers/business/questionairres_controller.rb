@@ -13,6 +13,7 @@ class Business::QuestionairresController < ApplicationController
   def new
     @job = Job.find(params[:job_id])
     @questionairre = Questionairre.new
+    @scorecard = @job.scorecard
   end 
 
   def create 

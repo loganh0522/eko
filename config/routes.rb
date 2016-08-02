@@ -53,14 +53,16 @@ Rails.application.routes.draw do
 
   namespace :business do 
     root to: "jobs#index" 
+    resources :activities
     resources :hiring_teams
     resources :users
     resources :invitations
     resources :locations 
-    get "plan", to: "customers#plan"
-
     resources :user_avatars
-    
+    resources :job_boards
+    resources :applications
+
+    get "plan", to: "customers#plan"
     resources :customers do
       collection do 
         get 'cancel', to: "customers#cancel"
@@ -70,10 +72,6 @@ Rails.application.routes.draw do
         post "cancel_subscription", to: "customers#cancel_subscription"
       end
     end
-
-    resources :job_boards
-    resources :applications
-
     
     resources :jobs do 
       post :close_job, to: "jobs#close_job"
@@ -86,7 +84,8 @@ Rails.application.routes.draw do
           post :add_note_multiple, to: "comments#add_note_multiple"
           post :send_multiple_messages, to: "messages#send_multiple_messages"
         end
-        
+
+        get :application_activity, to: "activities#application_activity"
         resources :messages
         resources :comments
         resources :application_scorecards

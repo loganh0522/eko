@@ -11,10 +11,35 @@ class Business::MessagesController < ApplicationController
     @messages = @application.messages
     @stage = @application.stage
     @comment = Comment.new
+    @message = Message.new
   end
 
   def create 
-    @messages = Message.new(message_params)
+    @job = Job.find(params[:job_id])
+    
+    @application = Application.find(params[:application_id])
+    @message = Message.create(body: params[:message][:body], application_id: @application.id, user_id: current_user.id)
+    @recipient = @application.applicant
+    @token = @application.token
+
+    AppMailer.send_applicant_message(@token, @message, @job, @recipient, current_company).deliver
+    
+    track_activity(@message)
+
+    redirect_to :back
+  end
+
+  def send_messages 
+    @job = Job.find(params[:job_id])
+    @application = Application.where(user_id: id, job_id: params[:job_id]).first
+    @message = Message.create(body: params[:message][:body], application_id: @application.id, user_id: current_user.id)
+    @recipient = User.find()
+    @token = @application.token
+
+    AppMailer.send_applicant_message(@token, @message, @job, @recipient, current_company).deliver
+    track_activity(@message, action = "create")
+
+    redirect_to business_job_path(@job)
   end
 
   def send_multiple_messages 
@@ -28,9 +53,11 @@ class Business::MessagesController < ApplicationController
       @token = @application.token
 
       AppMailer.send_applicant_message(@token, @message, @job, @recipient, current_company).deliver
+      track_activity(@message, action = "create")
     end
-
     redirect_to business_job_path(@job)
   end
+
+
   
 end

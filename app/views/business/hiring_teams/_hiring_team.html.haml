@@ -1,7 +1,10 @@
 - @users.each do |user|
   %tr{:id => "user_#{user.id}" }
     %td
-      = image_tag user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" if user.user_avatar.present? 
+      - if user.user_avatar.present? 
+        = image_tag user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
+      - else
+        .circle-img= user.first_name.first.capitalize
     %td
       %p.name= "#{user.first_name} #{user.last_name}"
       %p.email= user.email

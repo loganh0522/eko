@@ -1,0 +1,14 @@
+.modal#messageModal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title Send Message        
+      .modal-body
+        = form_for [:business, @job, @application, @message] do |f| 
+          %fieldset
+          = f.text_area :body, size: "12x12"
+          = hidden_field_tag :user_id, current_user.id
+          %br
+          = f.submit "Send Message", class: "btn btn-primary"
+

@@ -5,7 +5,7 @@
         = f.text_field :title, class: "form-control", label: "Job Title"
     .row
       .form-group.col-md-4
-        = f.collection_select(:country_ids, Country.all, :id, :name, label: "Country")
+        = f.collection_select(:country_ids, Country.all, :id, :name, include_blank: "Select a Country", label: "Country")
       .form-group.col-md-4
         = f.grouped_collection_select(:state_ids, Country.order(:name), :states, :name, :id, :name, include_blank: true, label: "Province/State")
       .form-group.col-md-4

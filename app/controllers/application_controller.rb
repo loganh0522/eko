@@ -59,4 +59,12 @@ class ApplicationController < ActionController::Base
       redirect_to edit_business_job_scorecard_path(@job.id, @scorecard.id)
     end
   end
+
+  def track_activity(trackable, action = params[:action])
+    if (params[:application_id]).present?
+      current_user.activities.create! action: action, trackable: trackable, application_id: params[:application_id]
+    else
+      current_user.activities.create! action: action, trackable: trackable
+    end
+  end
 end

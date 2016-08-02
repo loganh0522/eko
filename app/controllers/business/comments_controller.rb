@@ -18,6 +18,7 @@ class Business::CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
 
     if @comment.save 
+      track_activity @comment
       redirect_to :back
     else
       flash[:error] = "Sorry something went wrong"

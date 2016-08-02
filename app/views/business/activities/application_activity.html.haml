@@ -31,21 +31,16 @@
               = f.hidden_field :application_id, value: @application.id
             %td(width="10%")
               = f.submit "+ Add", class: "btn btn-primary"
-    
-    .applicant-messages
-      .header
-        %h4 Messages
-        = link_to "Send a Message", '#', {:data => {:toggle => "modal", :target => "#messageModal"}}
-      = render "message" 
 
-      - @messages.each do |message|
-        .message
-          .message-header 
-            = image_tag message.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" if message.user.user_avatar.present? 
-            %p.name= "#{message.user.first_name} #{message.user.last_name}"
-            %p.sent= time_ago_in_words(message.created_at) unless message.created_at.blank?
-          .body
-            %p= message.body
+  
+    .activity-feed
+      - @activities.each do |activity| 
+        .activity
+          = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" if activity.user.user_avatar.present? 
+          = "#{activity.user.first_name} #{activity.user.last_name}"
+          = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity
+          = time_ago_in_words(activity.created_at) 
+          = "ago"
 
   .applicant-side-container
     .current-stage
@@ -59,29 +54,6 @@
 
         = form_tag business_job_application_move_stages_path(@job.id, @application) do
           %input(type="submit" value="Next Stage" class="btn btn-success")
-
-
-  / .applicant-side-container
-  /   .current-stage
-  /     %h4= "Current Stage: #{@stage.name}"
-
-  /     = form_tag business_job_application_move_stages_path(@job.id, @application) do
-  /       %input(type="submit" value="Move to Next Stage" class="btn btn-success")
-
-  /     = form_tag sort_business_job_stages_path do
-  /       %input(type="submit" value="X Reject" class="btn btn-danger")
-
-  /   .add-task
-  /     %h4 Add a Task
-  /     %p Create a task for this applicant. Tag a team member using @name to notify them of the task.
-  /     = form_tag do
-  /       = text_area_tag(:q)
-
-  /   .send-applicant-message
-  /     %h4 Send a Message 
-  /     %p Create a task for this applicant. Tag a team member using @name to notify them of the task.
-  /     = form_tag do
-  /       = text_area_tag(:q)
-  / 
-
 .footer 
+
+
