@@ -10,6 +10,7 @@ class JobSeeker::ApplicationsController < JobSeekersController
 
       if @application.save 
         flash[:success] = "Your application has been submitted"
+        track_activity @application
         redirect_to job_seeker_jobs_path
       else
         flash[:error] = "Something went wrong please try again"
@@ -18,9 +19,6 @@ class JobSeeker::ApplicationsController < JobSeekersController
       flash[:error] = "You have already applied to this job"
       redirect_to job_seeker_jobs_path
     end
-
-    # Application.create(user: current_user, job: job) unless current_user_applied?(job)
-    # redirect_to job_seeker_jobs_path
   end
 
   private 

@@ -1,0 +1,3 @@
+%div{:id => "educations"}
+  - @degrees.each do |degree| 
+    = render 'job_seeker/educations/education', degree: degree

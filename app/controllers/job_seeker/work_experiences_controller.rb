@@ -10,31 +10,44 @@ class JobSeeker::WorkExperiencesController < JobSeekersController
     @work_experience = WorkExperience.new(position_params.merge!(user: current_user))
     
     respond_to do |format| 
-      format.html { 
-        if @work_experience.save
-          flash[:error] = "Your new work experience was successfully added."
-        else 
-          flash[:error] = "Something went wrong"
-        end
-        redirect_to job_seeker_profiles_path
-      }
-      format.js { }
+      if @work_experience.save
+        format.html { 
+          if @work_experience.update(position_params)
+            flash[:success] = "#{@work_experience.title} has been updated"
+          else 
+            flash[:danger] = "Something went wrong"
+          end
+          redirect_to job_seeker_profiles_path
+        }
+        format.js 
+      else 
+        flash[:danger] = "Something went wrong, please try again."
+      end
     end  
   end
 
   def edit 
+    @positions = current_user.work_experiences
     @work_experience = WorkExperience.find(params[:id])
   end
 
   def update
-    @work_experience = WorkExperience.find(params[:id])
+    @positions = current_user.work_experiences
+    @work_experience = WorkExperience.find(params[:id])   
     
-    if @work_experience.update(position_params)
-      flash[:notice] = "#{@job.title} has been updated"
-      redirect_to job_seeker_profiles_path
-    else
-      render :edit
-    end
+    respond_to do |format| 
+      if @work_experience.update(position_params)
+        format.html { 
+          if @work_experience.update(position_params)
+            flash[:success] = "#{@work_experience.title} has been updated"
+          else 
+            flash[:danger] = "Something went wrong"
+          end
+          redirect_to job_seeker_profiles_path
+        }
+        format.js 
+      end
+    end  
   end
 
   private 

@@ -1,11 +1,22 @@
-.activity-feed
-  - @activities.each do |activity| 
-    .activity
-      = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" if activity.user.user_avatar.present? 
-      = "#{activity.user.first_name} #{activity.user.last_name}"
-      = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity
-      = time_ago_in_words(activity.created_at) 
-      = "ago"
+.contain
+  .activity-filters
+    .nav
+      %h4 Filter By: 
+      %ul
+        %li
+          %h5 Open Job Postings
+        %li 
+          %h5 Type
+  .activity-feed
+    - @activities.each do |activity| 
+      .activity
+        = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" if activity.user.user_avatar.present? 
+        .header 
+          %h4= "#{activity.user.first_name} #{activity.user.last_name}"
+          .time= time_ago_in_words(activity.created_at) 
+        .body
+          = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity  
+          = "ago"
       
 
 

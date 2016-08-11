@@ -1,35 +1,6 @@
-- @positions.each do |position| 
-  .job-position
-    .experience-header 
-      .company= position.company_name
-      .edit
-        = link_to "Edit", edit_job_seeker_work_experience_path(position.id), :data => {:remote => true} 
-      
-    
-    .experience-position
-      .title= position.title 
-      .date= "#{position.start_month} #{position.start_year} - #{position.start_month} #{position.start_year}"
-    .experience-body 
-      / .location= "#{position.countries.first.name}, #{position.states.first.name}, #{position.city}"
-      %p.description= position.description
-      
-      .accomplishments 
-        .acc 
-          Accomplishments
-        %ul
-          - position.accomplishments.each do |accomplishment|
-            %li
-              %p= accomplishment.body
-
-      .actions
-        %ul
-          %li
-            / = link_to "+ Add Accomplishment", new_job_seeker_accomplishment_path(id: position.id), :data => {:toggle => "modal", :target => "#accomplishments", :id => position.id}, class: 'add-accomplishment'
-            = link_to "+ Add Accomplishment", new_job_seeker_accomplishment_path(id: position.id), :data => {:remote => true}, class: 'add-accomplishment'
-          %li
-            = link_to "+ Add Skills", new_job_seeker_work_experience_path, :data => {:toggle => "modal", :target => "#work-experience-modal"}
-          %li
-            = link_to "+ Get a Reference", new_job_seeker_work_experience_path, :data => {:toggle => "modal", :target => "#work-experience-modal"}
+%div{:id => "work_experiences"}
+  - @positions.each do |position| 
+    = render "job_seeker/work_experiences/work_experience", position: position
 
 
       

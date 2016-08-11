@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   has_many :apps, through: :applications, class_name: "Job", foreign_key: :job_id
   has_many :educations
 
-  has_many :work_experiences
+  has_many :work_experiences, -> {order("start_year DESC")} 
   has_one :user_avatar
 
   has_many :job_countries

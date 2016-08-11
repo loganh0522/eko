@@ -43,7 +43,7 @@ class Business::HiringTeamsController < ApplicationController
 
   def create_hiring_member 
     if !HiringTeam.where(user_id: params[:user_id], job_id: params[:job_id]).present?
-      HiringTeam.create(user_id: params[:user_id], job_id: params[:job_id]) 
+      HiringTeam.create(user_id: params[:user_id], job_id: params[:job_id])
     else 
       render :new 
       flash[:danger] = "Team member already exists"

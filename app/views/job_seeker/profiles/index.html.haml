@@ -20,18 +20,18 @@
       .edit_personal_details
         = link_to "Edit Personal Details", edit_job_seeker_user_path(@user.id), :data => {:remote => true}
         
-    %h4.tag-line= current_user.tag_line
-    .contact-info
-      %ul
-        %li #{current_user.countries.first.name}, #{current_user.states.first.name}, #{current_user.city}
-        %li E-mail:  #{current_user.email}          
-        %li Phone:  #{current_user.phone}
+      %h4.tag-line= current_user.tag_line
+      .contact-info
+        %ul
+          %li #{current_user.countries.first.name}, #{current_user.states.first.name}, #{current_user.city}
+          %li #{current_user.email}          
+          %li #{current_user.phone}
 
     .experience-container.showing
       .header
         %h1 Experience
         .new_experience
-          = link_to "+ Add Work Experience", new_job_seeker_work_experience_path, :data => {:remote => true}
+          = link_to "+ Add Experience", new_job_seeker_work_experience_path, :data => {:remote => true}
       .body
         - if current_user.work_experiences.nil? 
           .not-present-container
@@ -51,7 +51,7 @@
             %p You currently do not have any listed work experiences. 
             = link_to "+ Add Education", new_job_seeker_education_path, :data => {:remote => true}, class: 'add-object'               
         - else 
-          = render 'job_seeker/educations/education'
+          = render 'job_seeker/educations/education_history'
          
     .skills-container
       .header
@@ -82,7 +82,7 @@
         - else 
           .not-present-container
             %p You currently do not have any career preferences. 
-            = link_to "+ Add Career Preferences", '#', :data => {:remote =>  true}, class: 'add-object'
+            = link_to "+ Add Preferences", '#', :data => {:remote =>  true}, class: 'add-object'
     
     .my-apps-container
       .header
@@ -92,8 +92,8 @@
           
         - else 
           .not-present-container
-            %p You currently do not have any career preferences. 
-            = link_to "+ Add Career Preferences", '#', :data => {:remote =>  true}, class: 'add-object'    
+            %p You currently do not have any applications in progress. 
+                
     
     .modal
       .modal-dialog
