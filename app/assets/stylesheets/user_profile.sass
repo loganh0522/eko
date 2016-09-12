@@ -1,16 +1,18 @@
 .job-seeker
   .sidebar
     float: left
-    margin: 15px 50px 0px 15%
+    margin: 15px 25px 0px 15%
     width: 200px
+    background: white
+    border: 1px solid #E4E5E9
+    padding: 10px 10px 30px 10px
     
     .user-general-info        
       .user-image 
         text-align: center
-        width: 200px
-        height: 200px
-        background: grey
-        margin-bottom: 20px
+        width: 175px
+        height: 175px
+        margin-bottom: 30px
 
     .user-profile-nav
       overflow: hidden 
@@ -21,7 +23,6 @@
         margin-left: -40px
      
         li 
-          font-weight: bold
           font-size: 15px
           height: 30px
           padding: 5px 0 5px 0
@@ -32,27 +33,61 @@
             text-decoration: none
             height: 20px
 
-
   .main-container
     float: left
-    margin-top: 15px
+    margin: 15px 0 50px 0
     padding: 0 40px 50px 0
-    width: 600px
-    height: 1200px
+    width: 650px
+    
     
     .personal-details
       overflow: hidden
       height: 200px
       position: relative
+      background: white
+      margin-bottom: 10px
+      border: 1px solid #E4E5E9
+      padding: 10px 
       .name
         float: left
         color: black
         margin-top: 0px
-      .edit_personal_details
-        float: right
-        margin: 10px 0 0 0
-      .tag-line
-        clear: both
+
+      .details 
+        margin-left: 25px
+        .tag-line
+          font-size: 16px
+          clear: both
+        .current_location
+          margin-top: 10px
+          .bold
+            font-weight: bold
+            float: left
+          .shift
+            margin-left: 35px
+            float: left
+        .current_experience
+          clear: both
+          .bold
+            margin-top: 10px
+            font-weight: bold
+            float: left
+          .shift
+            margin-top: 10px
+            margin-left: 40px
+            float: left
+        .current_education
+          clear: both
+          .bold
+            margin-top: 10px
+            font-weight: bold
+            float: left
+          .shift
+            margin-top: 10px
+            margin-left: 25px
+            float: left
+      
+        
 
       .contact-info
         position: absolute
@@ -131,7 +166,33 @@
           width: 130px
 
         ul 
-          color: #EF7B2B
+          li
+            float: left
+            width: 450px
+
+            &:hover + .icons
+              background: rgba(0, 0, 0, 0.05)
+              display: block
+            &:hover 
+              background: rgba(0, 0, 0, 0.05)
+
+          .icons
+            float: left
+            margin-left: 2px
+            width: 40px
+            display: none
+            
+            &:hover 
+              background: rgba(0, 0, 0, 0.1)
+              display: block
+
+            &:hover 
+              background: rgba(0, 0, 0, 0.1)
+            
+
+
+
+
 
       .actions
         ul
@@ -149,16 +210,35 @@
       width: 650px
       margin: 25px 100px 25px 100px 
 
-
     .education-container
+      background: white
+      border: 1px solid #E4E5E9
+      padding: 5px 20px 10px 20px
       display: none
 
+      form
+        margin-bottom: 50px
+
+    .experience-container
+      background: white
+      border: 1px solid #E4E5E9
+      padding: 5px 20px 10px 20px
+
     .skills-container 
+      background: white
+      border: 1px solid #E4E5E9
+      padding: 5px 20px 10px 20px
       display: none
 
     .career-prefs-container
+      background: white
+      border: 1px solid #E4E5E9
+      padding: 5px 20px 10px 20px
       display: none
     .my-apps-container
+      background: white
+      border: 1px solid #E4E5E9
+      padding: 5px 20px 10px 20px
       display: none
 
   #profile-picture-modal

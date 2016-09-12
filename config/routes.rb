@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get '/account/new', to: 'companies#new'
   
   root to: 'pages#home'
+  get 'pricing', to: 'pages#pricing'
   
   resources :skills 
   resources :certifications

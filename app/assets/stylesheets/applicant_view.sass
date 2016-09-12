@@ -64,8 +64,6 @@
           li.active
             border-bottom: solid 3px #EF7B2B
 
-            a 
-              font-weight: bold
     
     .add-comment-on-applicant
       background-color: #ffffff
@@ -149,9 +147,10 @@
 
         p
           font-size: 14px
-    
+
+        
+        
     .activity-feed
-      float: left
       margin: 15px 0px 0px 75px
       padding: 5px 0px 15px 0px
       background-color: white
@@ -159,25 +158,97 @@
       border: solid 2px #E4E5E9 
 
       .activity
-        padding: 20px 0 20px 15px 
-        border-bottom: 1px solid #E4E5E9 
-        overflow: hidden
+        width: 550px
+        padding: 10px 0 20px 15px 
+        border: 1px solid #E4E5E9 
+        word-wrap: break-word
+        margin: 10px 0 5px 100px
+        display: block
+        position: relative
+        font-size: 14px
+        .glyphicon.glyphicon-share-alt
+          font-size: 20px
+        .glyphicon.glyphicon-pencil
+          font-size: 20px
+        .glyphicon.glyphicon-edit
+          font-size: 20px
+        .glyphicon.glyphicon-share
+          font-size: 20px
+
+        .icon
+          height: 45px
+          width: 45px
+          padding: 10px 12px
+          color: #fff
+          box-sizing: border-box
+          display: block
+          background: #53b2ea
+          position: absolute
+          left: -6em
+          top: 25%
+          border-radius: 50%
+
+        &:before,
+        &:after
+          content: ""
+          position: absolute
+          width: 0
+          height: 0
+          border-style: solid
+          border-color: transparent
+          border-left: 0
+
+        &:before
+          top: 35%
+          left: -10px
+          border-right-color: #E4E5E9 
+          border-width: 10px
+
+        &:after
+          top: 35%
+          left: -9px
+          border-right-color: white
+          border-width: 10px 
         .circle
           border-radius: 50%
           margin-right: 10px
-          width: 50px 
-          height: 50px
+          width: 40px 
+          height: 40px
           float: left
+        .circle-img
+          float: left
+          margin-right: 10px
+          border-radius: 50%
+          width: 40px 
+          height: 40px
+          background: #EF7B2B
+          text-align: center
+          font-size: 24px
+          padding-top: 2px
+          color: white
 
-        .header 
-          height: 20px
-          h4
-            float: left
-            margin-top: 0px
+      .comment-header
+        font-size: 12px
+        .commenting-user
+          font-weight: 600
+          font-size: 14px
           .time 
-            float: right 
-        .body  
-    
+            float: right
+            margin-right: 10px
+            font-size: 12px
+            color: rgba(0, 0, 0, 0.3)
+      .comment-body
+        margin: 15px 0 0 0
+
+      .header 
+        height: 20px
+        h4
+          float: left
+          margin-top: 0px
+        .time 
+          float: right 
+      .body
+
   .applicant-side-container
     float: left
     width: 350px

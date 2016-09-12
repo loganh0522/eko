@@ -1,0 +1,49 @@
+.header
+  %h1 Applicants  
+  %form_tag.actions
+    = render "business/applications/move_stages"
+    = render "business/comments/add_comment"
+    = render "business/messages/send_message"
+    %input(type= "submit" value= "Move Stages" class= "move_action btn btn-primary" data-toggle = "modal" data-target = "#stageModal")
+    %input(type= "submit" value= "Add Note" class= "add_note_action btn btn-primary" data-toggle = "modal" data-target = "#add_commentModal")
+    %input(type= "submit" value= "Message" class= "send_message btn btn-primary" data-toggle = "modal" data-target = "#send_messageModal")
+    %input(type= "submit" value= "Delete" class= "btn btn-primary")
+
+.applicants
+  %table.table
+    %thead
+      %tr
+        %th(width="1%")= check_box_tag "select_all"
+        %th(width="5%")
+        %th(width="20%") Name 
+        %th(width="20%") Job Title
+        %th(width="15%") Stage 
+        %th(width="15%") Rating
+        %th(width="24%")
+      %tbody
+        - @applicants.each do |applicant|
+          - stage = @job.applications.where(user_id: applicant.id).first.stage.name
+          %tr{:id => "#{stage}" }
+            %td
+              .checkbox{:data => {:id => applicant.id}}
+                = check_box_tag "applicant_ids[]", applicant.id
+            %td
+              .circle
+                = image_tag applicant.user_avatar.image.small_image, :size => "50x50" if applicant.user_avatar.present?
+            %td
+              .name= link_to "#{applicant.first_name} #{applicant.last_name}", business_job_application_path(@job, Application.where(user_id: applicant.id, job_id: @job).first.id)
+              .current-position CEO - TalentWiz 
+            %td
+              .position= @job.title
+              .date-applied= Application.where(user_id: applicant.id, job_id: @job).first.created_at
+            %td
+              .stage= stage
+            %td
+              .rating 5 stars
+            %td
+  .not-present-container
+    %p There are currently no applicants in this stage.
+
+
+
+

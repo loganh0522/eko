@@ -32,15 +32,12 @@
             %td(width="10%")
               = f.submit "+ Add", class: "btn btn-primary"
 
-  
+    
     .activity-feed
-      - @activities.each do |activity| 
-        .activity
-          = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" if activity.user.user_avatar.present? 
-          = "#{activity.user.first_name} #{activity.user.last_name}"
-          = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity
-          = time_ago_in_words(activity.created_at) 
-          = "ago"
+      - @activities.each do |activity|         
+        = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity 
+
+          
 
   .applicant-side-container
     .current-stage

@@ -1,3 +1,6 @@
-$('.modal-title').html('<%= j "Edit Work Experience" %>');
-$('.modal-body').html('<%= j render "job_seeker/work_experiences/form" %>');
-$('.modal').modal("show");
+// $('.modal-title').html('<%= j "Edit Work Experience" %>');
+// $('.modal-body').html('<%= j render "job_seeker/work_experiences/form" %>');
+// $('.modal').modal("show");
+
+$('#work_experience_<%= @work_experience.id %>').before('<%= j render "job_seeker/work_experiences/form" %>');
+$('#work_experience_<%= @work_experience.id %>').hide();

@@ -12,7 +12,8 @@ class JobSeeker::EducationsController < JobSeekersController
 
   def create 
     @education = Education.new(education_params.merge!(user: current_user))
-    
+    @degrees = current_user.educations
+
     respond_to do |format| 
       if @education.save
         format.html { 
@@ -42,6 +43,16 @@ class JobSeeker::EducationsController < JobSeekersController
         format.json { render json: @education.errors.full_messages,
                                    status: :unprocessable_entity }
       end
+    end
+  end
+
+  def destroy
+    @education = Education.find(params[:id])
+    @education.destroy
+
+    respond_to do |format|
+      format.html{redirect_to job_seeker_profiles_path}
+      format.js
     end
   end
 

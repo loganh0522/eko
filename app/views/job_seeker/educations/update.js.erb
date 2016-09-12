@@ -1,2 +1,4 @@
-$('.modal').modal('toggle');
-$('#education_<%= @education.id %>').replaceWith('<%= j render (@education), degree: @education %>');
+// $('.modal').modal('toggle');
+// $('#education_<%= @education.id %>').replaceWith('<%= j render (@education), degree: @education %>');
+
+$('#educations').find('#edit_education_<%= @education.id %>').replaceWith('<%= j render (@education), degree: @education %>');

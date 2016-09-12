@@ -62,9 +62,14 @@ class ApplicationController < ActionController::Base
 
   def track_activity(trackable, action = params[:action])
     if (params[:application_id]).present?
-      current_user.activities.create! action: action, trackable: trackable, application_id: params[:application_id]
+      current_user.activities.create! action: action, trackable: trackable, application_id: params[:application_id], company: current_company, job_id: params[:job_id]
+    elsif (params[:applicant_ids]).present?
+      applicant_ids = params[:applicant_ids].split(',')
+      applicant_ids.each do |id| 
+        current_user.activities.create! action: action, trackable: trackable, application_id: id, company: current_company, job_id: params[:job_id]
+      end
     else
-      current_user.activities.create! action: action, trackable: trackable
+      current_user.activities.create! action: action, trackable: trackable, company: current_company
     end
   end
 end

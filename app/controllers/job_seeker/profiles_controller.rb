@@ -7,8 +7,11 @@ class JobSeeker::ProfilesController < JobSeekersController
     @degrees = current_user.educations
     @user = current_user
     @user_avatar = UserAvatar.new
-    @skills = Skill.all
+    @skills = current_user.skills
     @avatar = current_user.user_avatar
+    @certifications = current_user.certifications
+
+    @current_work = current_user.work_experiences.where(:current_position, '1')
   end
 
 end

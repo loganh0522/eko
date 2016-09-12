@@ -24,7 +24,6 @@ class JobSeeker::UsersController < JobSeekersController
     if @user_skills.save
       redirect_to job_seeker_profiles_path
     else
-      flash[:danger] = "Something went wrong, please try again."
       redirect_to job_seeker_profiles_path
     end
   end
@@ -35,12 +34,11 @@ class JobSeeker::UsersController < JobSeekersController
 
   def update_certifications
     @user = User.find(current_user.id)
-    @user_certification = UserCertification.create(user_id: @user.id, skill_id: params[:certification_id])
+    @user_certification = UserCertification.create(user_id: @user.id, certification_id: params[:certification_id])
     
     if @user_certification.save
       redirect_to job_seeker_profiles_path
     else
-      flash[:danger] = "Something went wrong, please try again."
       redirect_to job_seeker_profiles_path
     end
   end

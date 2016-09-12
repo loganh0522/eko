@@ -4,7 +4,8 @@ class Business::ActivitiesController < ApplicationController
   before_filter :company_deactivated?
   
   def index
-    @activities = Activity.order("created_at desc")
+    @activities = current_company.activities.order("created_at desc")
+    @jobs = current_company.jobs.where(status: "open")
   end
 
   def application_activity 
@@ -17,6 +18,6 @@ class Business::ActivitiesController < ApplicationController
     @stage = @application.stage
     @avatar = @user.user_avatar  
     
-    @activities = Activity.where(application_id: @application.id).order('created_at DESC')
+    @activities = current_company.activities.where(application_id: @application.id).order('created_at DESC')
   end
 end

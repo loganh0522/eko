@@ -1,2 +1,21 @@
-completed a scorecard for
-= link_to "#{activity.trackable.application.applicant.first_name} #{activity.trackable.application.applicant.last_name}", business_job_application_application_scorecards_path(Job.where(id: activity.trackable.application.job_id).first.id, Application.where(user_id: activity.trackable.application.user_id, job_id: activity.trackable.application.job_id).first.id)
+.activity{:id => activity.action, :class => "#{activity.trackable_type} job_#{activity.job_id}"}      
+  .icon
+    .glyphicon.glyphicon-edit
+  .comment-header
+    .commenting-user
+      = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
+      = "#{activity.user.first_name} #{activity.user.last_name}"
+      finished their scorecard 
+      .time= "#{time_ago_in_words(activity.created_at)} ago" 
+    For
+    = link_to "#{activity.trackable.application.applicant.first_name} #{activity.trackable.application.applicant.last_name}", business_job_application_application_scorecards_path(Job.where(id: activity.trackable.application.job_id).first.id, Application.where(user_id: activity.trackable.application.user_id, job_id: activity.trackable.application.job_id).first.id)
+    application for 
+    = link_to "#{activity.trackable.application.stage.job.title}"
+
+
+
+
+
+
+
+

@@ -1,3 +1,6 @@
-$('.modal-title').html('<%= j "Edit Accomplishment" %>');
-$('.modal-body').html('<%= j render "job_seeker/accomplishments/form" %>');
-$('.modal').modal("show");
+// $('.modal-title').html('<%= j "Edit Accomplishment" %>');
+// $('.modal-body').html('<%= j render "job_seeker/accomplishments/form" %>');
+// $('.modal').modal("show");
+
+$('#accomplishment_<%= @accomplishment.id %>').before('<%= j render "job_seeker/accomplishments/form" %>');
+$('#accomplishment_<%= @accomplishment.id %>').hide();

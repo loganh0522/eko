@@ -1,0 +1,3 @@
+$('#edit_accomplishment_<%= @accomplishment.id %>').remove();
+$("#work_experience_<%= @work_experience.id %>").find('.accomplishments').find('#accomplishment_<%= @accomplishment.id %>').replaceWith('<%= j render (@accomplishment), position: @work_experience %>');
+

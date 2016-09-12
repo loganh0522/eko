@@ -8,12 +8,10 @@
               %img.logo(src="/tmp/logo.jpg")
             %ul
               %li= link_to "Features"
-              %li= link_to "Pricing"
-              %li= link_to "Blog"
+              %li= link_to "Pricing", pricing_path
             %ul.navbar-right
               %li= link_to "Login", login_path
               %li= link_to "Sign Up", new_user_path
-              %li= link_to "Job Seekers"
 
     - if logged_in? && current_kind == 'business'
       .navbar-fixed-top 
@@ -56,7 +54,10 @@
 
           .dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              = image_tag @avatar.image.small_image, :class => "img dropdown-img"
+              - if current_user.user_avatar.present? 
+                = image_tag current_user.user_avatar.image.small_image, :class => "img dropdown-img"
+              - else
+                .circle-img= current_user.first_name.first.capitalize
               Logan
               %b.caret
             %ul.dropdown-menu.dropdown-menu-right

@@ -1,0 +1,5 @@
+%div{:id => "skills"}
+  - @certifications.each do |certification| 
+    %ul
+      %li
+        = certification.name

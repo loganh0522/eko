@@ -1,0 +1,8 @@
+%li{id: "accomplishment_#{accomplishment.id}"}
+  = accomplishment.body
+
+.icons
+  = link_to edit_job_seeker_accomplishment_path(accomplishment.id), :data => {:remote => true} do
+    %i.glyphicon.glyphicon-pencil
+  = link_to job_seeker_accomplishment_path(accomplishment.id), remote: true, :method => :delete do
+    %i.glyphicon.glyphicon-remove

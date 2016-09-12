@@ -1,3 +1,8 @@
-$('.modal-title').html('<%= j "Add Work Experience" %>');
-$('.modal-body').html('<%= j render "job_seeker/work_experiences/form" %>');
-$('.modal').modal("show");
+// $('.modal-title').html('<%= j "Add Work Experience" %>');
+// $('.modal-body').html('<%= j render "job_seeker/work_experiences/form" %>');
+// $('.modal').modal("show");
+
+
+
+$('<%= j render "job_seeker/work_experiences/form" %>').insertBefore("#work_experiences");
+$('.new_experience').hide();

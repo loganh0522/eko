@@ -4,12 +4,31 @@ class Business::ApplicationsController < ApplicationController
   before_filter :company_deactivated?
   
   def index
-    @applicants = current_company.applicants
-    @jobs = current_company.jobs
-    @applications = current_company.applications
+    if params[:query].present? 
+      @results = Application.search(params[:query]).records.to_a
+      @applicants = []
+      
+      @results.each do |application|  
+        if application.company == current_company
+          @applicants.append(application.applicant)
+        end
+      end
+
+      @jobs = current_company.jobs
+      @applications = current_company.applications
     
-    @applications.each do |application| 
-      @job = Job.find(application.job_id)
+      @applications.each do |application| 
+        @job = Job.find(application.job_id)
+      end
+
+    else
+      @applicants = current_company.applicants
+      @jobs = current_company.jobs
+      @applications = current_company.applications
+    
+      @applications.each do |application| 
+        @job = Job.find(application.job_id)
+      end
     end
   end
 
@@ -22,6 +41,10 @@ class Business::ApplicationsController < ApplicationController
     @positions = @user.work_experiences
     @education = @user.educations
     @comment = Comment.new 
+  end
+
+  def applicant_search
+
   end
 
   def edit

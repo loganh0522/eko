@@ -50,6 +50,16 @@ class JobSeeker::WorkExperiencesController < JobSeekersController
     end  
   end
 
+  def destroy
+    @work_experience = WorkExperience.find(params[:id])
+    @work_experience.destroy
+
+    respond_to do |format|
+      format.html{redirect_to job_seeker_profiles_path}
+      format.js
+    end
+  end
+
   private 
   
   def position_params

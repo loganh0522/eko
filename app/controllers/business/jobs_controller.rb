@@ -28,6 +28,7 @@ class Business::JobsController < ApplicationController
   def show 
     @job = Job.find(params[:id])
     @applicants = @job.applicants
+    @activities = current_company.activities.where(job_id: @job.id).order('created_at DESC')
     @stages = @job.stages   
   end
 

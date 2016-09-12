@@ -1,0 +1,4 @@
+$('#new_accomplishment').remove();
+$("#work_experience_<%= @work_experience.id %>").find('.accomplishments').html('<%= j render "job_seeker/accomplishments/all_accomplishments", position: @work_experience %>');
+
+

@@ -17,4 +17,7 @@ class WorkExperience < ActiveRecord::Base
 
 
   validates_presence_of :title, :company_name, :description
+
+
+
 end 

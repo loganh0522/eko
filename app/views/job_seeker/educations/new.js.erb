@@ -1,3 +1,6 @@
-$('.modal-title').html('<%= j "Add Education" %>');
-$('.modal-body').html('<%= j render "job_seeker/educations/form" %>');
-$('.modal').modal("show");
+// $('.modal-title').html('<%= j "Add Education" %>');
+// $('.modal-body').html('<%= j render "job_seeker/educations/form" %>');
+// $('.modal').modal("show");
+
+$('<%= j render "job_seeker/educations/form" %>').insertBefore("#educations");
+$('.new_experience').hide();
