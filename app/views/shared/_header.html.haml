@@ -1,4 +1,4 @@
-- if request.subdomain.present? && request.subdomain == 'prod-talentwiz'
+- if !request.subdomain.present? || request.subdomain == "prod-talentwiz"
   %section#top-header.row
     - if !logged_in?
       .navbar-static-top
@@ -85,7 +85,7 @@
               %a= link_to "Billing", business_customers_path
             %li
               %a= link_to "Sign Out", signout_path
-     
+- else     
   - if logged_in? && current_kind == 'job seeker'
     .navbar-fixed-top
       .career-portal-nav
