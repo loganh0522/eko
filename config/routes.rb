@@ -5,12 +5,12 @@ Rails.application.routes.draw do
   resources :jobs
   resources :companies
 
-  match '/', to: "job_boards#index", constraints: {subdomain: 'prod-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
-  match 'login', to: "sessions#subdomain_new", constraints: {subdomain: 'prod-talentwiz'}, via: [:get]
-  match 'login', to: "sessions#create", constraints: {subdomain: 'prod-talentwiz'}, via: [:post]
-  match 'job', to: "jobs#show", constraints: {subdomain: 'prod-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
-  match 'register', to: "users#sub_new_job_seeker", constraints: {subdomain: 'prod-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
-  match 'profile', to: "profiles#index", constraints: {subdomain: 'prod-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
+  # match '/', to: "job_boards#index", constraints: {subdomain: 'prod-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
+  # match 'login', to: "sessions#subdomain_new", constraints: {subdomain: 'prod-talentwiz'}, via: [:get]
+  # match 'login', to: "sessions#create", constraints: {subdomain: 'prod-talentwiz'}, via: [:post]
+  # match 'job', to: "jobs#show", constraints: {subdomain: 'prod-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
+  # match 'register', to: "users#sub_new_job_seeker", constraints: {subdomain: 'prod-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
+  # match 'profile', to: "profiles#index", constraints: {subdomain: 'prod-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
 
 
 
