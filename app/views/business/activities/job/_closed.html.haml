@@ -1,0 +1,4 @@
+.activity{:id => activity.action, :class => "#{activity.trackable_type} job_#{activity.job_id}"}      
+  .icon
+  closed the job 
+  = link_to "#{activity.trackable.title}", activity.trackable.title

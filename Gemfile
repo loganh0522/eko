@@ -23,15 +23,23 @@ gem 'figaro'
 gem 'stripe'
 gem 'stripe_event'
 gem 'bootstrap-wysihtml5-rails'
-
+gem 'rails4-autocomplete'
 gem 'country_state_select', "2.0.0"
 gem 'chosen-rails'
-
 
 gem 'mini_magick'
 gem 'carrierwave'
 gem 'carrierwave-aws'
 
+gem 'jcrop-rails-v2'
+
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+
+gem 'remotipart', '~> 1.2'
+gem 'rmagick'
+
+gem 'googlecharts'
 
 
 group :development do

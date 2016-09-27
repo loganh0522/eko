@@ -1,11 +1,16 @@
 .contain
-  margin: 35px 135px 0 135px
+  margin: 75px 135px 0 135px
   
   .sidebar
     float: left
     margin-right: 25px
     .post-a-job
       margin-bottom: 16.25px
+    
+    .publish-job
+      width: 195px
+      margin-top: 10px
+      font-size: 15px
 
     .nav
       width: 195px
@@ -18,22 +23,23 @@
         text-decoration: none
         margin-left: -42px
         margin-bottom: 0px
-
         
         li 
-          font-weight: bold
           font-size: 15px
           height: 50px
           padding: 10px 20px 10px 5px
           border-top: 1px solid #c6c8ca
+
+          &:hover 
+            cursor: pointer
 
           a
             color: black
             text-decoration: none
             margin-left: 15px
         
-        li.active
-          background-color: rgba(239, 122, 43, .75) 
+        li.show
+          color: rgba(239, 122, 43, .75) 
 
           .content
             margin: 5px 0 0 15px
@@ -46,21 +52,22 @@
             list-style: none
             text-decoration: none          
             border-top: 1px solid #c6c8ca
+            
             li
               padding: 0px 0px 0px 0px
-              margin: 0 0 0 45px
+              margin: 10px 0 0 45px
               border-top: none
-              font-weight: bold
+              height: 30px
               font-size: 12px
 
   .main-container
     float: left
     width: 790px
     height: auto
-    background: #ffffff
-    border: 1px solid #c6c8ca
     padding: 0 40px 50px 40px
     margin-bottom: 100px
+    background: #ffffff
+    border: 1px solid #c6c8ca
 
     .header 
       border-bottom: 2px solid rgba(239, 122, 43, .25) 
@@ -87,9 +94,19 @@
           font-weight: bold 
 
 
+    .closed-jobs
+      display: none
+
+    .archived-jobs
+      display: none
+
+    .draft-jobs
+      display: none
+
     .job
       width: 710px
       margin-top: 15px
+      background: #ffffff
       .job-header
         border: 1px solid #c6c8ca
         padding: 10px 25px 0 20px
@@ -124,19 +141,37 @@
 
         .btns     
           float: left
-          margin: 10px 20px 0 20px
+          margin: 10px 15px 0 15px
           .btn2 
             margin-top: 5px
+            a
+              width: 125px
+
         .left-scroll
           float: left
-          width: 5px
-          margin-top: 25px
-          .glyphicon-chevron-left
-            height: 50px
-
+          width: 20px
+          height: 100px
+          margin-right: 5px
+          
+          img
+            margin-top: 35px
+            margin-left: -7px
+          &:hover 
+            background-color: rgba(0, 0, 0, .1)
+            cursor: pointer
+            
         .right-scroll
           float: left
-          width: 5px
+          width: 20px
+          height: 100px
+          margin-left: 5px
+          
+          img
+            margin-top: 35px
+            margin-left: -7px
+          &:hover 
+            background-color: rgba(0, 0, 0, .1)
+            cursor: pointer
 
         .job-stage-area 
           width: 501px
@@ -146,13 +181,16 @@
         .job-gallery
           position: relative
 
-        ul
+        ul.job-stage-area
           list-style: none
           text-decoration: none
           float: left
           padding: 0 0           
           height: 100px 
-        
+          
+          li:first-child
+            border-left: 1px solid #c6c8ca
+
           li 
             width: 100px
             height: 100px
@@ -166,7 +204,7 @@
               font-size: 27px 
             .name
               font-size: 12px
-              font-weight: bold
+
 
 
 

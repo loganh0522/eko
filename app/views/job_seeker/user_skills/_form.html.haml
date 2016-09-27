@@ -1,0 +1,8 @@
+= form_for [:job_seeker, @user_skill], html: {remote: true, :class => 'skills_form'} do |f|      
+  = text_field_tag 'name', nil, :class => 'ui-autocomplete-input', :placeholder => 'Add Skill', id: "skills_name"
+  
+  %div#skills-results
+  = hidden_field_tag :user_id, value: current_user.id
+  = hidden_field_tag :skills_id
+
+  = f.submit "Add Skill", class: "submit btn btn-primary", id: "submit_skills"

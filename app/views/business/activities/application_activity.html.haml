@@ -1,0 +1,56 @@
+.applicant-view
+  .applicant-main-container   
+    .applicant-header
+      .user-image
+        .profile_picture
+          = image_tag @avatar.image.large_image, :size => "200x200" if @avatar.present?
+      
+      .applicant-details
+        %p.name= "#{@user.first_name.upcase} #{@user.last_name.upcase}"
+        .contact
+          %span.glyphicon.glyphicon-map-marker  
+            = "#{@user.city}, #{@user.countries.first.name}"
+          %br
+          %span.glyphicon.glyphicon-envelope 
+            = "#{@user.email}"
+          %br
+          %span.glyphicon.glyphicon-earphone 
+            = "#{@user.phone}"
+      .applicant-nav-bar  
+        = render "business/shared/applicant_nav"
+
+    .add-comment-on-applicant
+      %table   
+        = form_for [:business, @job, @application, @comment] do |f| 
+          %tr
+            %td(width="10%")
+              = image_tag @current_user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" if @current_user.user_avatar.present? 
+            %td(width="80%")
+              = f.text_field :body, rows: 2, class: "form-control", label: "Add Feedback", placeholder: "Add a note about #{@user.first_name} #{@user.last_name}"
+              = f.hidden_field :user_id, value: current_user.id
+              = f.hidden_field :application_id, value: @application.id
+            %td(width="10%")
+              = f.submit "+ Add", class: "btn btn-primary"
+
+    
+    .activity-feed
+      - @activities.each do |activity|         
+        = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity 
+
+          
+
+  .applicant-side-container
+    .current-stage
+      %h4= "Current Stage: "
+      - @job.stages.each do |stage|
+        %p.stage{:class => is_current_stage?(stage, @application)}
+          = stage.name
+      .stage-actions
+        = form_tag sort_business_job_stages_path do
+          %input(type="submit" value="X Reject" class="btn btn-danger")
+
+        = form_tag business_job_application_move_stages_path(@job.id, @application) do
+          %input(type="submit" value="Next Stage" class="btn btn-success")
+.footer 
+
+

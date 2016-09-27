@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
 
   helper_method :logged_in?, :current_user, :current_company, :current_kind
 
-
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
@@ -36,6 +35,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def company_deactivated?
+    if current_user.company.active == false
+      flash[:danger] = "Sorry, your account has been deactivated, please update your payment information"
+      redirect_to business_customers_path
+    end
+  end
+
   def has_a_questionairre 
     @job = Job.find(params[:job_id])
     @questionairre = Questionairre.where(job_id: @job.id).first
@@ -51,6 +57,19 @@ class ApplicationController < ActionController::Base
 
     if @job.scorecard.present? 
       redirect_to edit_business_job_scorecard_path(@job.id, @scorecard.id)
+    end
+  end
+
+  def track_activity(trackable, action = params[:action])
+    if (params[:application_id]).present?
+      current_user.activities.create! action: action, trackable: trackable, application_id: params[:application_id], company: current_company, job_id: params[:job_id]
+    elsif (params[:applicant_ids]).present?
+      applicant_ids = params[:applicant_ids].split(',')
+      applicant_ids.each do |id| 
+        current_user.activities.create! action: action, trackable: trackable, application_id: id, company: current_company, job_id: params[:job_id]
+      end
+    else
+      current_user.activities.create! action: action, trackable: trackable, company: current_company
     end
   end
 end

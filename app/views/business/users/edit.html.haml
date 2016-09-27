@@ -3,7 +3,6 @@
     .nav
       = render 'business/shared/admin_sidebar'
 
-
   .main-container
     .header
       %h1 My Profile 
@@ -12,5 +11,9 @@
       = form_for [:business, @user] do |f| 
         = f.text_field :first_name
         = f.text_field :last_name
-        = f.file_field :picture
-
+      %br 
+      
+      %h4 Profile Picture
+      = image_tag @avatar.image.medium_image, :size => "100x100" if @avatar.present?
+      = link_to "Change Photo", '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"}
+      = render 'business/users/profile_picture'

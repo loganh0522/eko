@@ -1,0 +1,27 @@
+%div{:class => "work_experience", id: "work_experience_#{position.id}"}
+  .job-position
+    .experience-header 
+      .company= position.company_name
+      .edit
+        = link_to "Edit", edit_job_seeker_work_experience_path(position.id), :data => {:remote => true}           
+    .experience-position
+      .title= position.title 
+      .date= "#{position.start_month} #{position.start_year} - #{position.start_month} #{position.end_year}"
+    
+    .experience-body 
+      / .location= "#{position.countries.first.name}, #{position.states.first.name}, #{position.city}"
+      %p.description= position.description
+      
+      .accomplishments
+        %div{id: "work_accomplishments_#{position.id}"}
+          = render "job_seeker/accomplishments/all_accomplishments", position: position
+
+
+    .actions
+      %ul
+        %li
+          = link_to "+ Add Accomplishment", new_job_seeker_accomplishment_path(id: position.id), :data => {:remote => true}, class: 'add-accomplishment'
+        / %li
+        /   = link_to "+ Add Skills", job_seeker_user_add_skills_path(@user.id), :data => {:remote => true}
+        %li
+          = link_to "+ Get a Reference", new_job_seeker_work_experience_path, :data => {:toggle => "modal", :target => "#work-experience-modal"}

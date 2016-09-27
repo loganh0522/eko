@@ -2,25 +2,20 @@
   .applicant-main-container   
     .applicant-header
       .user-image
-        %img.profile_picture(src="/tmp/man.jpg")
+        .profile_picture
+          = image_tag @avatar.image.large_image, :size => "200x200" if @avatar.present?
       
       .applicant-details
-        %p.name Logan Houston
+        %p.name= "#{@user.first_name.upcase} #{@user.last_name.upcase}"
         .contact
           %span.glyphicon.glyphicon-map-marker  
-          Toronto, Ontario, CA
+            = "#{@user.city}, #{@user.countries.first.name}"
           %br
           %span.glyphicon.glyphicon-envelope 
-          loganh0522@gmail.com
+            = "#{@user.email}"
           %br
           %span.glyphicon.glyphicon-earphone 
-          416-806-6907 
-
-      .applicant-actions 
-        .action 
-          %p Send Message 
-        .action 
-          %p Schedule Meeting
+            = "#{@user.phone}"
       .applicant-nav-bar  
         = render "business/shared/applicant_nav"
 
@@ -29,7 +24,10 @@
         = form_for [:business, @job, @application, @comment] do |f| 
           %tr
             %td(width="10%")
-              %img.circle(src="/tmp/man.jpg")
+              - if current_user.user_avatar.present? 
+                = image_tag current_user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
+              - else 
+                .circle-img= current_user.first_name.first.capitalize
             %td(width="80%")
               = f.text_field :body, rows: 2, class: "form-control", label: "Add Feedback", placeholder: "Add a note about #{@user.first_name} #{@user.last_name}"
               = f.hidden_field :user_id, value: current_user.id
@@ -41,53 +39,62 @@
     .applicant-scorecard
       .header
         %h4 Scorecard
+        - if @scorecard.present?
+          .my-scorecard
+            - if @current_user_scorecard.present? 
+              = link_to "My Scorecard", edit_business_job_application_application_scorecard_path(@job, @application, @current_user_scorecard), {:data => {:toggle => "modal", :target => "#edit_scorecardModal"}} 
+              = render "edit_my_scorecard" 
+            - else 
+              = link_to "My Scorecard", new_business_job_application_application_scorecard_path(@job, @application), {:data => {:toggle => "modal", :target => "#scorecardModal"}} 
+              = render "my_scorecard" 
+      - if @scorecard.present?  
+        .scorecard
+          %h4 Overall Rating 
 
-        .my-scorecard
-          - if @current_user_scorecard.present? 
-            = link_to "My Scorecard", edit_business_job_application_application_scorecard_path(@job, @application, @current_user_scorecard), {:data => {:toggle => "modal", :target => "#edit_scorecardModal"}} 
-            = render "edit_my_scorecard" 
-          - else 
-            = link_to "My Scorecard", new_business_job_application_application_scorecard_path(@job, @application), {:data => {:toggle => "modal", :target => "#scorecardModal"}} 
-            = render "my_scorecard"      
-        
-      .scorecard
-        %h4 Overall Rating 
-        .overall-rating 
-          %table.table
-            %tbody
-              %tr
-                %td(width="30%") Recommended 
-                %td(width="70%")
-              %tr
-                %td(width="30%") Good
-                %td(width="70%")
-              %tr
-                %td(width="30%") Bad
-                %td(width="70%")
-              %tr
-                %td(width="30%") Do not Recommend 
-                %td(width="70%")
-
-        %h4 Scorecard
-        .sections
-          - @sections.each do |section|
-            %p= section.body
+          .overall-rating 
             %table.table
               %tbody
-                - section.section_options.each do |criteria|
-                  %tr
-                    %td(width="30%")= criteria.body
-                    %td(width="70%")
-                      - @application_scorecards.each do |scorecard| 
-                        - scorecard.scorecard_ratings.each do |rating|
-                          - if rating.rating == 1 && rating.section_option_id == criteria.id
-                            %i.glyphicon.glyphicon-remove
-                          - elsif rating.rating == 2 && rating.section_option_id == criteria.id
-                            %i.glyphicon.glyphicon-thumbs-down
-                          - elsif rating.rating == 3 && rating.section_option_id == criteria.id
-                            %i.glyphicon.glyphicon-thumbs-up
-                          - elsif rating.rating == 4 && rating.section_option_id == criteria.id
-                            %i.glyphicon.glyphicon-star
+                %tr
+                  %td(width="30%") Recommended 
+                  %td(width="70%")
+                    =image_tag @bar_chart_1
+                %tr
+                  %td(width="30%") Good
+                  %td(width="70%")
+                    =image_tag @bar_chart_2
+                %tr
+                  %td(width="30%") Bad
+                  %td(width="70%")
+                    =image_tag @bar_chart_3
+                %tr
+                  %td(width="30%") Do not Recommend 
+                  %td(width="70%")
+                    =image_tag @bar_chart_4
+
+          %h4 Scorecard
+        
+          .sections
+            - @sections.each do |section|
+              %p= section.body
+              %table.table
+                %tbody
+                  - section.section_options.each do |criteria|
+                    %tr
+                      %td(width="30%")= criteria.body
+                      %td(width="70%")
+                        - @application_scorecards.each do |scorecard| 
+                          - scorecard.scorecard_ratings.each do |rating|
+                            - if rating.rating == 1 && rating.section_option_id == criteria.id
+                              %i.glyphicon.glyphicon-remove
+                            - elsif rating.rating == 2 && rating.section_option_id == criteria.id
+                              %i.glyphicon.glyphicon-thumbs-down
+                            - elsif rating.rating == 3 && rating.section_option_id == criteria.id
+                              %i.glyphicon.glyphicon-thumbs-up
+                            - elsif rating.rating == 4 && rating.section_option_id == criteria.id
+                              %i.glyphicon.glyphicon-star
+      - else 
+        .not-present-container
+          %p There are currently no notes for this applicant.
 
   .applicant-side-container
     .current-stage

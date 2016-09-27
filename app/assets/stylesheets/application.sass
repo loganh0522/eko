@@ -13,8 +13,11 @@
  *= require_self
  *= require token-input-facebook
  *= require jquery-ui
+ *= require jquery.Jcrop
  *= require bootstrap-wysihtml5
  *= require chosen
+
+
  *= require_tree .
 
  */
@@ -25,15 +28,16 @@
 @import "bootstrap-wysihtml5/bootstrap3-wysihtml5"
 
 body 
-  margin-top: 50px
+  -moz-osx-font-smoothing: grayscale
+  -webkit-font-smoothing: antialiased
+
   font-family: Open Sans, sans-serif, Helvetica, Arial, sans-serif
   
   h1, h2, h3, h4, h5, h6
     font: Open Sans
   
   p 
-    font-size: 14px
-    color: rgba(0, 0, 0, .75)
+    color: rgba(0, 0, 0, .85)
           
 
   background-color: #f7f8f9
@@ -61,7 +65,39 @@ a.button
   text-decoration: none
   color: #ffffff
 
+.button-submit
+  display: block
+  height: 35px
+  width: 100%
+  background: #EF7A2B
+  color: #ffffff
+  font: bold Open Sans
+  font-size: 14px 
+  text-align: center
+  padding: 8px 0 10px 0
+
+a.button-submit
+  text-decoration: none
+  color: #ffffff
+
 .button-mid
+  display: block
+  height: 35px
+  background: #EF7A2B
+  color: #ffffff
+  font: bold Open Sans
+  font-size: 12px 
+  text-align: center
+  padding: 8px 20px 10px 20px
+  border-radius: 0px
+
+a.button-mid
+  text-decoration: none
+  color: #ffffff
+  display: inline-block
+
+
+.button-job-actions
   display: block
   height: 35px
   width: 125px
@@ -72,13 +108,48 @@ a.button
   text-align: center
   padding: 8px 0 10px 0
 
-a.button-mid
-  text-decoration: none
-  color: #ffffff
 
 .glyphicon-remove
   font-size: 15px
 
+ul.ui-autocomplete-input
+  position: absolute
+  list-style: none
+  margin: 0
+  padding: 0
+  border: solid 1px #999
+  cursor: default
+  li 
+    background-color: #FFF
+    border-top: solid 1px #DDD
+    margin: 0
+    padding: 0
+    a 
+      color: #000
+      display: block
+      padding: 3px
+    
+    a.ui-state-hover, a.ui-state-active 
+      background-color: #FFFCB2
+    
 
+
+input[type=text]
+  width: 100%
+  padding: 12px 20px
+  margin: 8px 0
+  display: inline-block
+  border: 1px solid #ccc
+  border-radius: 4px
+  box-sizing: border-box
+
+textarea
+  width: 100%
+  padding: 12px 20px
+  margin: 8px 0
+  display: inline-block
+  border: 1px solid #ccc
+  border-radius: 4px
+  box-sizing: border-box
 
 

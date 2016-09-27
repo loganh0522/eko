@@ -1,17 +1,5 @@
-.stages.col-md-12    
-  %div{:class => "stages"}
-    .panel-heading
-      .row
-        .stage All Applicants
-    .panel-body
-
-  %div{:id => 'stages', :data => {:update_url => sort_business_job_stages_path(@job)}}
-    - stages.each do |stage|
-      = render "stage", stage: stage
+%div{:id => 'stages', :data => {:update_url => sort_business_job_stages_path(@job)}}
+  - stages.each do |stage|
+    = render "stage", stage: stage
 
 
-  %div{:class => "stages"}
-    .panel-heading
-      .row
-        .stage Rejected
-    .panel-body

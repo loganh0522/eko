@@ -2,18 +2,20 @@
   .applicant-main-container   
     .applicant-header
       .user-image
-        %img.profile_picture(src="/tmp/man.jpg")
+        .profile_picture
+          = image_tag @avatar.image.large_image, :size => "200x200" if @avatar.present?
       
       .applicant-details
-        %h3 Logan Houston
-        %span.glyphicon.glyphicon-map-marker  
-        Toronto, Ontario, CA
-        %br
-        %span.glyphicon.glyphicon-envelope 
-        loganh0522@gmail.com
-        %span.glyphicon.glyphicon-earphone 
-        416-806-6907 
-      
+        %p.name= "#{@user.first_name.upcase} #{@user.last_name.upcase}"
+        .contact
+          %span.glyphicon.glyphicon-map-marker  
+            = "#{@user.city}, #{@user.countries.first.name}"
+          %br
+          %span.glyphicon.glyphicon-envelope 
+            = "#{@user.email}"
+          %br
+          %span.glyphicon.glyphicon-earphone 
+            = "#{@user.phone}"
       .applicant-nav-bar  
         = render "business/shared/applicant_nav"
 
@@ -22,7 +24,10 @@
         = form_for [:business, @job, @application, @comment] do |f| 
           %tr
             %td(width="10%")
-              %img.circle(src="/tmp/man.jpg")
+              - if current_user.user_avatar.present? 
+                = image_tag current_user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
+              - else 
+                .circle-img= current_user.first_name.first.capitalize
             %td(width="80%")
               = f.text_field :body, rows: 2, class: "form-control", label: "Add Feedback", placeholder: "Add a note about #{@user.first_name} #{@user.last_name}"
               = f.hidden_field :user_id, value: current_user.id
@@ -33,16 +38,24 @@
     .applicant-notes
       .header
         %h4 Notes
-      - @comments.each do |comment|
-        - user = User.find(comment.user_id)
-        .notes   
-          .notes-header 
-            %img.circle(src="/tmp/man.jpg")
-            %p.name= user.first_name 
-            %p.name= user.last_name
-            %p.sent= time_ago_in_words(comment.created_at) unless comment.created_at.blank?
-          .body
-            %p= comment.body
+
+      - if !@comments.nil?
+        .not-present-container
+          %p There are currently no notes for this applicant.
+      - else
+        - @comments.each do |comment|
+          - user = User.find(comment.user_id)
+          .notes   
+            .notes-header 
+              - if user.user_avatar.present? 
+                = image_tag user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
+              - else 
+                .circle-img= current_user.first_name.first.capitalize
+              %p.name= user.first_name 
+              %p.name= user.last_name
+              %p.sent= time_ago_in_words(comment.created_at) unless comment.created_at.blank?
+            .body
+              %p= comment.body
 
   .applicant-side-container
     .current-stage

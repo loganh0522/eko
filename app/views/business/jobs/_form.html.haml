@@ -5,9 +5,9 @@
         = f.text_field :title, class: "form-control", label: "Job Title"
     .row
       .form-group.col-md-4
-        = f.collection_select(:country_ids, Country.all, :id, :name, label: "Country")
+        = f.collection_select(:country_ids, Country.all, :id, :name, include_blank: "Select a Country", label: "Country")
       .form-group.col-md-4
-        = f.grouped_collection_select(:state_ids, Country.order(:name), :states, :name, :id, :name, include_blank: true)
+        = f.grouped_collection_select(:state_ids, Country.order(:name), :states, :name, :id, :name, include_blank: true, label: "Province/State")
       .form-group.col-md-4
         = f.text_field :city, class: "form-control", label: "City"
     .row
@@ -24,12 +24,12 @@
         = f.collection_select(:career_level_ids, CareerLevel.all, :id, :name, label: "Career Level")
     .row
       .form-group.col-md-12
-        = f.text_area :description, rows: 12, class: "wysihtml5 form-control", label: "Description", :data => {:provider => "summernote" } , id: "summmernote"
+        = f.text_area :description, rows: 12, class: "wysihtml5 form-control", label: "Description"
     .row
       .form-group.col-md-12
         = f.text_area :benefits, rows: 12, class: "wysihtml5 form-control", label: "Benefits"
     .row
       = hidden_field_tag :user_ids, current_user.id
-      .col-md-1.col-md-offset-10
+      .col-md-1.col-md-offset-9
         = f.submit @job.new_record? ? "Create Job Posting" : "Save and Continue", class: "btn btn-primary"
 

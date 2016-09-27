@@ -1,0 +1,5 @@
+.activity{:id => activity.action, :class => "#{activity.trackable_type} job_#{activity.job_id}"}      
+  .icon
+    .glyphicon.glyphicon-share
+  published the job
+  = link_to "#{activity.trackable.title}", business_job_path(activity.trackable.id)

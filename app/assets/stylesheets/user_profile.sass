@@ -1,150 +1,393 @@
 .job-seeker
-  .sidebar
-    float: left
-    margin: 15px 0px 0px 10%
-    width: 250px
-    
-    .user-general-info   
-      border: solid 1px #c6c8ca 
-      background-color: #ffffff
-      padding: 30px 15px 30px 15px
-      
-      .user-image 
-        text-align: center
-        width: 200px
-        height: 200px
-        background: grey
-
-      .info
-        text-align: center
-        text-color: rgba(0, 0, 0, .5)
-        padding-bottom: 20px
-        border-bottom: 1px solid rgba(0, 0, 0, 2)
-
-      .contact-info
-        text-align: center
-
-    .user-profile-nav
-      border: 1px solid #c6c8ca
-      background: #ffffff
-      overflow: hidden
-      
-      ul 
-        list-style: none
+  .top-container  
+    width: 835px
+    height: 200px
+    border: 1px solid #E4E5E9
+    overflow: hidden
+    background: white
+    margin-left: 15%
+    .user-image 
+      float: left
+      width: 200px
+      height: 200px
+      .add-photo
+        font-size: 18px 
+        margin-top: -100px
         text-decoration: none
-        margin-left: -42px
-        margin-bottom: 0px
+        color: rgba(0, 0, 0, 0.6)
+        text-align: center 
+      .edit-photo
+        font-size: 18px
+        text-align: center 
+        margin-top: -40px
+        color: black
+        background: rgba(0, 0, 0, 0.5)
+        z-index: 1
 
-        
-        li 
-          font-weight: bold
-          font-size: 15px
-          height: 50px
-          padding: 10px 20px 10px 5px
-          border-top: 1px solid #c6c8ca
-
-          a
-            display: block
-            color: black
-            text-decoration: none
-            margin-left: 15px
-            height: 50px
-
-
-  .main-container
-    float: left
-    margin: 15px 0px 0px 15px
-    background-color: white
-    border: solid 1px #c6c8ca 
-    padding: 0 40px 50px 40px
-    width: 750px
-    height: 1200px
-
-    .header 
-      border-bottom: 2px solid rgba(239, 122, 43, .25) 
-      overflow: hidden
-      
-      h1
+    .personal-details
+      float: left
+      height: 200px
+      width: 575px
+      position: relative
+      margin: 0px 0px 10px 25px
+      padding: 10px 
+     
+      .main-details
         float: left
-      
-      .new_experience
-        float: right
-        margin: 15px 0 0 0
-        a
-          color: #EF7B2B  
+        width: 300px
+        .name
+          float: left
+          color: black
+          margin-top: 0px
+        .tag-line
+          clear: both
         
-    .body
-      .not-present-container
-        width: 650px
-        height: 200px 
-        margin: 25px 30px 0 30px
-        border: 2px dashed #c6c8ca
-        text-align: center
-
-        p 
-          margin: 85px 0 0 70px
-          float: left
-          color: #c6c8ca
-        .add-object
-          margin: 85px 0 0 10px
-          float: left
-          color: #EF7B2B
-          font-weight: bold 
-    
-    .job-position
-      .experience-header
-        border-bottom: 1px solid rgba(0, 0, 0, .25)
-        overflow: hidden
-        padding-bottom: 5px
-        margin: 10px 0
-        .title
-          float: left
-          
-          font-size: 16px
-        .date
-          float: right
-          font-size: 12px
-      .experience-body 
-        font-size: 15px
-        .company
-          font-size: 16px
-      .accomplishments
-        margin-top: 10px
-        ul 
-          color: #EF7B2B
-
-          li
-            p
-              color: black
-      .actions
-        ul
-          display: inline-block
-          list-style: none
-          margin: 10px -40px
-          
-          li
+      .side-details 
+        margin-left: 25px
+        width: 200px
+        float: left   
+        .current_location
+          .bold
+            font-weight: bold
             float: left
-            margin-right: 30px
+          .shift
+            float: left     
+        .current_experience
+          clear: both
+          .bold
+            font-weight: bold
+            float: left
+          .shift          
+            float: left
+        .current_education
+          margin-top: 10px
+          clear: both
+          .bold
+            font-weight: bold
+            float: left
+          .shift
+            float: left
+      
+      .contact-info
+        position: absolute
+        bottom: 0
+        
+        ul
+          list-style: none
+          margin-left: -30px
+          li
+            display: inline-block
+            margin-right: 20px
+  
+
+  .main-body
+    clear: both
+    .sidebar
+      float: left
+      margin: 15px 25px 0px 15%
+      width: 200px
+      background: white
+      border: 1px solid #E4E5E9
+      padding: 10px 10px 30px 10px
+  
+      .user-profile-nav
+        overflow: hidden 
+        ul 
+          list-style: none
+          text-decoration: none
+          margin-bottom: 0px
+          margin-left: -40px
+       
+          li 
+            font-size: 15px
+            height: 30px
+            padding: 5px 0 5px 0
+
             a
-              color: #EF7B2B
-
-    .experiences
+              display: block
+              color: black
+              text-decoration: none
+              height: 20px
+    
+    .main-container
+      float: left
+      margin: 15px 0 50px 0
+      padding: 0 40px 50px 0
       width: 650px
-      margin: 25px 100px 25px 100px 
+
+      .header 
+        border-bottom: 2px solid rgba(239, 122, 43, .25) 
+        overflow: hidden
+        
+        h1
+          float: left
+        
+        .new_experience
+          float: right
+          margin: 15px 0 0 0
+          a
+            color: #EF7B2B  
+          
+      .body
+        .not-present-container
+          width: 560px
+          height: 200px 
+          margin: 25px 0 25px 0
+          border: 2px dashed #c6c8ca
+          text-align: center
+
+          p 
+            margin: 85px 0 0 70px
+            float: left
+            color: #c6c8ca
+          .add-object
+            margin: 85px 0 0 10px
+            float: left
+            color: #EF7B2B
+            font-weight: bold 
+      
+      .job-position
+        .experience-header
+          overflow: hidden
+          margin: 10px 0 0 0
+          .company
+            font-size: 18px
+            font-weight: 300
+            float: left 
+          .edit
+            float: right
+        .experience-position 
+          overflow: hidden
+          .title
+            float: left         
+            font-size: 15px
+            font-weight: 400
+            color: rgba(0, 0, 0, .6)
+          .date
+            float: right
+            font-size: 13px  
+            font-weight: 400 
+            color: rgba(0, 0, 0, .6)
+        
+        .experience-body
+          margin: 10px 0 
+        
+        .accomplishments
+          margin-top: 10px
+          .acc 
+            font-size: 16px
+            font-weight: 200
+            width: 130px
+
+          ul 
+            li
+              float: left
+              width: 450px
+
+              &:hover + .icons
+                background: rgba(0, 0, 0, 0.05)
+                display: block
+              &:hover 
+                background: rgba(0, 0, 0, 0.05)
+
+            .icons
+              float: left
+              margin-left: 2px
+              width: 40px
+              display: none
+              
+              &:hover 
+                background: rgba(0, 0, 0, 0.1)
+                display: block
+
+              &:hover 
+                background: rgba(0, 0, 0, 0.1)
+              
+        .actions
+          ul
+            display: inline-block
+            list-style: none
+            margin: 10px -40px
+            
+            li
+              float: left
+              margin-right: 30px
+              a
+                color: #EF7B2B
+
+      .experiences
+        width: 650px
+        margin: 25px 100px 25px 100px 
+
+      .education-container
+        background: white
+        border: 1px solid #E4E5E9
+        padding: 5px 20px 10px 20px
+        display: none
+
+        form
+          margin-bottom: 50px
+
+      .experience-container
+        background: white
+        border: 1px solid #E4E5E9
+        padding: 5px 20px 10px 20px
+
+      .skills-container 
+        background: white
+        border: 1px solid #E4E5E9
+        padding: 5px 20px 10px 20px
+        display: none
+
+        .skills_form
+          overflow: hidden
+          #skills_name
+            float: left
+            height: 35px
+            margin-right: 15px
+            width: 200px
+
+          #submit_skills
+            float: left
+
+        #skills
+          margin-top: 25px
+          
+          .skill
+            display: inline-block
+            padding: 5px 15px 
+            color: white
+            text-align: center
+            background: #EF7A2B
+            .name 
+              float: left
+              margin-right: 10px
+            .glyphicon
+              float: right
+              color: white
+              margin-top: 2px
 
 
-    .education-container
-      display: none
-
-    .skills-container 
-      display: none
-
+      .career-prefs-container
+        background: white
+        border: 1px solid #E4E5E9
+        padding: 5px 20px 10px 20px
+        display: none
+      
+      .my-apps-container
+        background: white
+        border: 1px solid #E4E5E9
+        padding: 5px 20px 10px 20px
+        display: none
 
   #profile-picture-modal
-    .image
-      height: 200px
-    .preview
-      height: 200px
+    margin-left: -15%
+    .modal-content
+      width: 700px
+    .modal-header
+      width: 700px
+    .modal-body     
+      width: 700px
+      height: 500px
+      border-radius: 0
+      
+      .image
+        height: 300px
+        width: 300px
+        float: left
+
+        .blah
+          height: 300px
+          width: 300px
+          display: none
+          margin: -300px 0 0 0
+
+        #submit-crop
+          margin: 20px 0 0 10px
+          float: left
+          display: none
+
+        .close-form
+          margin: 20px 0 0 10px
+          display: none
+          width: 70px
+          float: left
+
+
+      #img-preview-area
+        float: left
+        margin: 50px 0 0 50px
+        border-left: 1px solid black
+        height: 300px
+      
+        .img-preview 
+          overflow: hidden 
+          height: 200px
+          width: 200px
+          margin-left: 50px
+          display: none
+
+        .img-preview-2
+          overflow: hidden 
+          height: 60px
+          width: 60px
+          margin: 10px 0 0 50px
+          display: none
+          float: left
+
+        .img-preview-3
+          overflow: hidden 
+          height: 50px
+          width: 50px
+          float: left
+          margin: 10px 0 0 10px
+          display: none
+          border-radius: 50%
+
+        .img-preview-4
+          overflow: hidden 
+          height: 40px
+          width: 40px
+          margin: 10px 0 0 10px
+          display: none
+          border-radius: 50%
+          float: left
+
+        .img-preview-blank
+          overflow: hidden 
+          height: 200px
+          width: 200px
+          margin-left: 50px
+
+        .img-preview-blank-2
+          overflow: hidden 
+          height: 60px
+          width: 60px
+          margin: 10px 0 0 50px
+          float: left
+
+        .img-preview-blank-3
+          overflow: hidden 
+          height: 50px
+          width: 50px
+          margin: 10px 0 0 10px
+          border-radius: 50%
+          float: left
+
+        .img-preview-blank-4
+          overflow: hidden 
+          height: 40px
+          width: 40px
+          margin: 10px 0 0 10px
+          border-radius: 50%
+          float: left
+
+
+
+ 
+  
+      
+        
 
 
 

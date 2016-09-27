@@ -1,38 +1,103 @@
-.job-applicants
-  %h1 Applicants  
-  %form_tag   
-    = render "business/applications/move_stages"
-    = render "business/comments/add_comment"
-    = render "business/messages/send_message"
+.all-applicants-container
+  .applicant-nav
+    .nav
+      %ul.nav-header
+        %li
+          .content
+            Applied Filters
+        .body
+        %li.filter.job-status
+          .content
+            Job Status
+        .body.job-status-body
+          %ul
+            %li 
+              .checkbox{:data => {:id => "comments"}}= check_box_tag "", true, true
+              Active
+            %li.activity
+              .checkbox{:data => {:id => "assessments"}}= check_box_tag "", true, true
+              Closed
+            %li.activity  
+              .checkbox{:data => {:id => "Scorecards"}}= check_box_tag "", true, true
+              Archived     
+        %li.filter.open-jobs
+          .content
+            Open Job Postings: 
+        .body.open-job-body
+          %ul
+            - @jobs.each do |job| 
+              %li.open-job
+                .checkbox{:data => {:id => "job_#{job.id}"}}= check_box_tag "", true, true
+                #{job.title}
+        %li.filter.date-applied
+          .content
+            Date Applied 
+        .body.date-applied-body
+          %ul
+            %li 
+              .checkbox{:data => {:id => "comments"}}= check_box_tag "", true, true
+              All 
+            %li
+              .checkbox{:data => {:id => "assessments"}}= check_box_tag "", true, true
+              Last 2 weeks
+            %li 
+              .checkbox{:data => {:id => "Scorecards"}}= check_box_tag "", true, true
+              Last Month
+            %li
+              .checkbox{:data => {:id => "assessments"}}= check_box_tag "", true, true
+              Last 3 Months
+            %li 
+              .checkbox{:data => {:id => "Scorecards"}}= check_box_tag "", true, true
+              Last Year
 
-    %input(type= "submit" value= "Move Stages" class= "move_action btn btn-primary" data-toggle = "modal" data-target = "#stageModal")
-    %input(type= "submit" value= "Add Note" class= "add_note_action btn btn-primary" data-toggle = "modal" data-target = "#add_commentModal")
-    %input(type= "submit" value= "Message" class= "send_message btn btn-primary" data-toggle = "modal" data-target = "#send_messageModal")
-    %input(type= "submit" value= "Delete" class= "btn btn-primary")
-    
-
-    %table.table
-      %thead
-        %tr
-          %th(width="1%")= check_box_tag "select_all"
-          %th(width="5%")
-          %th(width="20%") Name 
-          %th(width="20%") Job Title
-          %th(width="20%") Stage 
-          %th(width="20%") Rating
-          %th(width="5%") Remove
-      %tbody
-        - @applicants.each do |applicant|
+        
+            
+  .all-job-applicants
+    .header
+      %h1 Applicants  
+      = form_tag business_applications_path, method: :get do   
+        .form-group.col-sm-4
+          = search_field_tag :query, params[:query], placeholder: "Advanced Text Search", class: "form-control"
+          %input(type="submit" value="Search" class="btn btn-primary")
+      %form_tag.actions
+        = render "business/applications/move_stages"
+        = render "business/comments/add_comment"
+        = render "business/messages/send_message"
+        %input(type= "submit" value= "Add Note" class= "add_note_action btn btn-primary" data-toggle = "modal" data-target = "#add_commentModal")
+        %input(type= "submit" value= "Message" class= "send_message btn btn-primary" data-toggle = "modal" data-target = "#send_messageModal")
+        %input(type= "submit" value= "Delete" class= "btn btn-primary")  
+    .applicants
+      %table.table
+        %thead
           %tr
-            %td.checkbox{:data => {:id => applicant.id}}
-              = check_box_tag "applicant_ids[]", applicant.id
-            %td
-              %img.circle(src="/tmp/man.jpg")
-            %td
-              %h4= link_to "#{applicant.first_name} #{applicant.last_name}", business_application_path(applicant)
-              %h6 CEO - TalentWiz 
-            %td
-              %h4 Sales Manager
-              %h6 May 22, 2015
-            %td
-              %h4 applicant.application
+            %th(width="1%")= check_box_tag "select_all"
+            %th(width="5%")
+            %th(width="20%") Name 
+            %th(width="20%") Job Title
+            %th(width="15%") Stage 
+            %th(width="15%") Rating
+            %th(width="24%")
+          %tbody
+            - @applicants.each do |applicant|
+              - stage = @job.applications.where(user_id: applicant.id).first.stage.name
+              %tr{:id => "#{stage}", :class => "#{}"}
+                %td
+                  .checkbox{:data => {:id => applicant.id}}
+                    = check_box_tag "applicant_ids[]", applicant.id
+                %td
+                  .circle               
+                    - if applicant.user_avatar.present? 
+                      = image_tag applicant.user_avatar.image.small_image, :size => "50x50" if applicant.user_avatar.present?
+                    - else
+                      .circle-img= applicant.first_name.first.capitalize
+                %td
+                  .name= link_to "#{applicant.first_name} #{applicant.last_name}", business_job_application_path(@job, Application.where(user_id: applicant.id, job_id: @job).first.id)
+                  .current-position CEO - TalentWiz 
+                %td
+                  .position= @job.title
+                  .date-applied= Application.where(user_id: applicant.id, job_id: @job).first.created_at
+                %td
+                  .stage= stage
+                %td
+                  .rating 5 stars
+                %td

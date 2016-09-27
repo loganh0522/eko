@@ -1,5 +1,6 @@
-- @positions.each do |position| 
-  .experiences
-    %h4= "#{position.company_name} - #{position.title}"
-    %p June 2015 - Present
-    %p= position.description
+%div{:id => "work_experiences"}
+  - @positions.each do |position| 
+    = render "job_seeker/work_experiences/work_experience", position: position
+
+
+      

@@ -17,4 +17,22 @@ class WorkExperience < ActiveRecord::Base
 
 
   validates_presence_of :title, :company_name, :description
+
+  # def order_by_date
+  #   order = []
+  #   month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
+  #     'August', 'September', 'October', 'Novemeber', 'December']
+    
+  #   self.each do |experience| 
+  #     if experience.current_position == 1 
+  #       order[0] == (experience)
+  #     end
+  #   end
+  # end
+
+  # def current_experiences
+  #   current_user.work_experiences.each do |experience| 
+      
+
+
 end 

@@ -1,0 +1,9 @@
+.business-registration
+  .header
+    %img.logo(src="/tmp/logo.jpg")
+    %h2 Reset Password
+  .body
+    = bootstrap_form_tag url: '/forgot_passwords' do |f|
+      %fieldset
+        = f.email_field :email, placeholder: "E-mail", hide_label: true
+        %input(type="submit" value="Submit" class="btn button-submit")

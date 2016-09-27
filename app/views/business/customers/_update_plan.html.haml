@@ -1,0 +1,91 @@
+= form_tag update_plan_business_customers_path do
+  %table.table
+    %thead
+      %tr
+        %th(width="20%") Name 
+        %th(width="20%") Open Positions
+        %th(width="25%") Monthly Plan
+        %th(width="25%") Yearly Plan
+        %th(width="10%") 
+      %tr
+        %td
+          .plan Start-up
+        %td
+          .open-jobs 1 Active Jobs
+        %td
+          .select-cost= radio_button_tag(:plan, "start_up_month", (@customer.plan == 'start_up_month' ? {checked: true} : false))
+          .cost $19 / month
+
+        %td
+          .select-cost= radio_button_tag(:plan, "start_up_year", (@customer.plan == 'start_up_year' ? {checked: true} : false))
+          .cost $190 / year
+        %td
+          %input(type="submit" value="Change Plan" class="btn btn-success")
+      %tr
+        %td
+          .plan Basic
+        %td
+          .open-jobs 3 Active Jobs
+        %td
+          .select-cost= radio_button_tag(:plan, "basic_month", (@customer.plan == 'basic_month' ? {checked: true} : false))
+          .cost $39 / month
+        %td
+          .select-cost= radio_button_tag(:plan, "basic_year", (@customer.plan == 'basic_year' ? {checked: true} : false))
+          .cost $390 / year
+        %td
+          %input(type="submit" value="Change Plan" class="btn btn-success")
+      %tr
+        %td
+          .plan Team
+        %td
+          .open-jobs 5 Active Jobs
+        %td
+          .select-cost= radio_button_tag(:plan, "team_month", (@customer.plan == 'team_month' ? {checked: true} : false))
+          .cost $99 / month
+        %td
+          .select-cost= radio_button_tag(:plan, "team_year", (@customer.plan == 'team_year' ? {checked: true} : false))
+          .cost $990 / year
+        %td
+          %input(type="submit" value="Change Plan" class="btn btn-success")
+      %tr
+        %td
+          .plan Plus
+        %td
+          .open-jobs 10 Active Jobs
+        %td
+          .select-cost= radio_button_tag(:plan, "plus_month", (@customer.plan == 'plus_month' ? {checked: true} : false))
+          .cost $199 / month
+        %td
+          .select-cost= radio_button_tag(:plan, "plus_year", (@customer.plan == 'plus_year' ? {checked: true} : false))
+          .cost $1990 / year
+        %td
+          %input(type="submit" value="Change Plan" class="btn btn-success")
+      %tr
+        %td
+          .plan Growth
+        %td
+          .open-jobs 15 Active Jobs
+        %td
+          .select-cost= radio_button_tag(:plan, "growth_month", (@customer.plan == 'growth_month' ? {checked: true} : false))
+          .cost $299 / month
+        %td
+          .select-cost= radio_button_tag(:plan, "growth_year", (@customer.plan == 'growth_year' ? {checked: true} : false))
+          .cost $2990 / year
+        %td
+          %input(type="submit" value="Change Plan" class="btn btn-success")
+      %tr
+        %td
+          .plan Enterprise
+        %td
+          .open-jobs Unlimited
+        %td
+          .select-cost= radio_button_tag(:plan, "enterprise_month", (@customer.plan == 'enterprise_month' ? {checked: true} : false))
+          .cost $399 / month
+        %td
+          .select-cost= radio_button_tag(:plan, "enterprise_year", (@customer.plan == 'enterprise_year' ? {checked: true} : false))
+          .cost $3990 / year
+        %td
+          %input(type="submit" value="Change Plan" class="btn btn-success")
+
+
+= link_to "Cancel your subscription", cancel_business_customers_path 

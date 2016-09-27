@@ -1,4 +1,7 @@
 class Business::CommentsController < ApplicationController 
+  before_filter :require_user
+  before_filter :belongs_to_company
+  before_filter :company_deactivated?
   
   def index
     @job = Job.find(params[:job_id])
@@ -8,12 +11,14 @@ class Business::CommentsController < ApplicationController
     @positions = @user.work_experiences
     @comments = @application.comments
     @stage = @application.stage
+    @avatar = @user.user_avatar
   end
 
   def create 
     @comment = Comment.new(comment_params)
 
     if @comment.save 
+      track_activity @comment
       redirect_to :back
     else
       flash[:error] = "Sorry something went wrong"

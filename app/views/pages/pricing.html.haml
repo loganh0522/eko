@@ -1,0 +1,71 @@
+.pricing-intro-header
+  .intro-message 
+    .header Affordable, Simple, Flexible Pricing
+    .sub-header We know that hiring can be expensive and unpredictable. That is why we offer cost-effective and flexible pricing plans to meet your recruitment needs.
+    .sign-up
+      = link_to "Try it Today", new_user_path, class: "btn btn-primary btn-large"
+
+.pricing-page
+  .intro-message 
+    .header Simple Pricing for a Simple Product.
+
+  .pricing-type
+    %ul
+      %li.monthly-tab.active-price Monthly Pricing
+      %li.yearly-tab Yearly Pricing 
+  
+  .pricing-table
+    .monthly.showing
+      %ul 
+        %li.pricing-container
+          .title Start-Up 
+          .cost $19/mo
+          .jobs 1 Active Job
+        %li.pricing-container
+          .title Basic 
+          .cost $39/mo
+          .jobs 3 Active Job
+        %li.pricing-container
+          .title Team
+          .cost $99/mo
+          .jobs 5 Active Job
+        %li.pricing-container
+          .title Plus
+          .cost $199/mo 
+          .jobs 10 Active Job
+        %li.pricing-container
+          .title Growth
+          .cost $299/mo 
+          .jobs 15 Active Job
+        %li.pricing-container
+          .title Enterprise
+          .cost $399/mo 
+          .jobs Unlimited Jobs
+    .yearly
+      %ul 
+        %li.pricing-container
+          .title Start-Up 
+          .cost $190/yr
+          .jobs 1 Active Job
+        %li.pricing-container
+          .title Basic 
+          .cost $390/yr
+          .jobs 3 Active Job
+        %li.pricing-container
+          .title Team
+          .cost $990/yr
+          .jobs 5 Active Job
+        %li.pricing-container
+          .title Plus
+          .cost $1990/yr 
+          .jobs 10 Active Job
+        %li.pricing-container
+          .title Growth
+          .cost $2990/yr
+          .jobs 15 Active Job
+        %li.pricing-container
+          .title Enterprise
+          .cost $3990/yr
+          .jobs Unlimited Jobs
+    .sign-up
+      = link_to "Try it Today", new_user_path, class: "btn btn-primary btn-large"

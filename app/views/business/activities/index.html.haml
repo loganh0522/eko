@@ -1,18 +1,50 @@
-.applicant-messages
-  %ul#timeline
-    %li.work
-      .radio
-      .relative
-        <label for='work5'>Lorem ipsum dolor sit amet</label>
-        %span.circle
-      .content
-        %p
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio ea necessitatibus quo velit natus cupiditate qui alias possimus ab praesentium nostrum quidem obcaecati nesciunt! Molestiae officiis voluptate excepturi rem veritatis eum aliquam qui laborum non ipsam ullam tempore reprehenderit illum eligendi cumque mollitia temporibus! Natus dicta qui est optio rerum.
-    %li.work
-      .radio
-      .relative
-        <label for='work4'>Lorem ipsum dolor sit amet</label>
-        %span.circle
-      .content
-        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio ea necessitatibus quo velit natus cupiditate qui alias possimus ab praesentium nostrum quidem obcaecati nesciunt! Molestiae officiis voluptate excepturi rem veritatis eum aliquam qui laborum non ipsam ullam tempore reprehenderit illum eligendi cumque mollitia temporibus! Natus dicta qui est optio rerum.
+.contain
+  .activity-filters
+    .nav
+      %ul 
+        %li 
+          .content
+            Open Job Postings: 
+        .body
+          %ul
+            - @jobs.each do |job| 
+              %li.open-job
+                .checkbox{:data => {:id => "job_#{job.id}"}}= check_box_tag "", true, true
+                #{job.title}
+        %li 
+          .content
+            Type: 
+        .body
+          %ul
+            %li.activity 
+              .checkbox{:data => {:id => "comments"}}= check_box_tag "", true, true
+              Comments
+            %li.activity
+              .checkbox{:data => {:id => "assessments"}}= check_box_tag "", true, true
+              Assessments
+            %li.activity  
+              .checkbox{:data => {:id => "Scorecards"}}= check_box_tag "", true, true
+              Scorecards
+            %li.activity
+              .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
+              Move Stages
+            %li.activity
+              .checkbox{:data => {:id => "applied"}}= check_box_tag "", true, true
+              Applied
+            %li.activity
+              .checkbox{:data => {:id => "interview"}}= check_box_tag "", true, true
+              Interview
+
+  .main-container
+    .header
+      %h1 Activity
+    .body
+      .activity-feed
+        - @activities.each do |activity|         
+          = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity  
+
+      
+
+
+  
             

@@ -11,6 +11,10 @@ describe Business::JobsController do
         let(:action) {get :index}
       end
 
+      it_behaves_like "company has been deactivated" do
+        let(:action) {get :index}
+      end
+
       it "sets the @jobs to the job postings that belong to the current company" do 
         company = Fabricate(:company)
         alice = Fabricate(:user, company: company)
@@ -34,6 +38,10 @@ describe Business::JobsController do
     end
 
     it_behaves_like "user does not belong to company" do 
+      let(:action) {get :show, id: 4}
+    end
+
+    it_behaves_like "company has been deactivated" do
       let(:action) {get :show, id: 4}
     end
    
@@ -65,6 +73,10 @@ describe Business::JobsController do
       let(:action) {get :new}
     end
 
+    it_behaves_like "company has been deactivated" do
+      let(:action) {get :new}
+    end
+
     it "sets the @job_posting instance" do 
       company = Fabricate(:company)
       alice = Fabricate(:user, company: company)
@@ -81,6 +93,10 @@ describe Business::JobsController do
     end
 
     it_behaves_like "user does not belong to company" do 
+      let(:action) {post :create}
+    end
+
+    it_behaves_like "company has been deactivated" do
       let(:action) {post :create}
     end
     
@@ -109,6 +125,10 @@ describe Business::JobsController do
 
       it "creates a HiringTeam association with the current user" do 
         expect(Job.first.user_ids).to eq([alice.id])
+      end
+
+      it "sets the job status as a draft" do 
+        expect(Job.first.status).to eq('draft')
       end
     end
 
@@ -140,6 +160,11 @@ describe Business::JobsController do
     it_behaves_like "user does not belong to company" do 
       let(:action) {get :edit, id: 4}
     end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) {get :edit, id: 4}
+    end
+
     let(:company) {Fabricate(:company)}
     let(:alice) {Fabricate(:user, company: company)}
     let(:job1) {Fabricate(:job)}
@@ -171,6 +196,10 @@ describe Business::JobsController do
     end
 
     it_behaves_like "user does not belong to company" do 
+      let(:action) {put :update, id: 4}
+    end
+
+    it_behaves_like "company has been deactivated" do
       let(:action) {put :update, id: 4}
     end
 
@@ -216,6 +245,92 @@ describe Business::JobsController do
       it "renders the edit template" do
         expect(response).to render_template :edit
       end
+    end
+  end
+
+  describe "POST publish job" do 
+    it_behaves_like "requires sign in" do
+      let(:action) {post :publish_job, job_id: 4}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {post :publish_job, job_id: 4}
+    end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) {post :publish_job, job_id: 4}
+    end
+
+    context "with less open jobs than paid for" do 
+      let(:company) {Fabricate(:company, subscription: 'basic', open_jobs: 1 )}
+      let(:alice) {Fabricate(:user, company: company)}
+      let(:job) {Fabricate(:job, status: 'draft', company: company)}
+    
+      before do 
+        set_current_user(alice)
+        set_current_company(company)
+        post :publish_job, job_id: job.id
+      end
+
+      it "sets the status of the job to open" do      
+        expect(Job.first.status).to eq('open')
+      end
+
+      it "increments a companies open_jobs by 1" do 
+        expect(Company.first.open_jobs).to eq(2)
+      end
+    end
+
+    context "with maximum number of open jobs" do 
+      let(:company) {Fabricate(:company, subscription: 'basic', open_jobs: 3 )}
+      let(:alice) {Fabricate(:user, company: company)}
+      let(:job) {Fabricate(:job, status: 'draft', company: company)}
+    
+      before do 
+        set_current_user(alice)
+        set_current_company(company)
+        post :publish_job, job_id: job.id
+      end
+
+      it "sets the flash message of the job to open" do
+        expect(flash[:danger]).to be_present
+      end
+
+      it "renders the edit template" do 
+        expect(response).to render_template :edit
+      end
+    end
+  end
+
+  describe "POST close job" do 
+    it_behaves_like "requires sign in" do
+      let(:action) {post :close_job, job_id: 4}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {post :close_job, job_id: 4}
+    end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) {post :close_job, job_id: 4}
+    end
+
+    let(:company) {Fabricate(:company, subscription: 'basic', open_jobs: 3 )}
+    let(:alice) {Fabricate(:user, company: company)}
+    let(:job) {Fabricate(:job, status: 'open', company: company)}
+  
+    before do 
+      set_current_user(alice)
+      set_current_company(company)
+      post :close_job, job_id: job.id
+    end
+
+    it "sets the status of the job to be closed3" do      
+      expect(Job.first.status).to eq('closed')
+    end
+
+    it "decreases a companies open_jobs by 1" do 
+      expect(Company.first.open_jobs).to eq(2)
     end
   end
 end

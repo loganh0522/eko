@@ -1,5 +1,7 @@
 class Business::CustomersController < ApplicationController
+  before_filter :require_user
   before_filter :belongs_to_company
+  before_filter :company_deactivated?
   
   def index 
     @customer = current_company.customer
@@ -20,7 +22,9 @@ class Business::CustomersController < ApplicationController
 
       if customer.successful?
         stripe_customer = JSON.parse customer.response.to_s
-        binding.pry
+
+        company_subscription(params[:plan])
+
         Customer.create(company_id: current_company.id, 
           plan: stripe_customer['subscriptions']['data'].first['plan']['id'], 
           stripe_customer_id: stripe_customer["id"], 
@@ -48,13 +52,36 @@ class Business::CustomersController < ApplicationController
       )
     if customer.successful?
       current_company.customer.update_attribute(:plan, params[:plan])
+      company_subscription(params[:plan])
       redirect_to business_customers_path
       flash[:success] = "Your billing information was successfully changed"
     end
   end
 
+  def new_plan
+    redirect_to new_business_customer_path
+    flash[:danger] = "Please complete your billing information before selecting a plan"
+  end
+
   def plan
-    @plan = current_company.customer.plan
+    @customer = current_company.customer
+  end
+
+  def create_plan
+    customer = StripeWrapper::StripeCustomer.create_plan(
+      :customer_id => current_company.customer.stripe_customer_id,
+      :plan => params[:plan]
+      )
+    if customer.successful?
+      stripe_customer = JSON.parse customer.response.to_s
+
+      company_subscription(params[:plan])
+      current_company.customer.update_attribute(:plan, stripe_customer['subscriptions']['data'].first['plan']['id'])
+      current_company.customer.update_attribute(:stripe_subscription_id, stripe_customer['subscriptions']['data'].first['id'])
+      
+      redirect_to business_plan_path
+      flash[:success] = "Your subscription was successful, the charge has been added to your card"
+    end
   end
 
   def update_plan 
@@ -64,6 +91,7 @@ class Business::CustomersController < ApplicationController
       :plan => params[:plan]
       )
     if customer.successful?
+      company_subscription(params[:plan])
       current_company.customer.update_attribute(:plan, params[:plan])
       redirect_to business_plan_path
       flash[:success] = "Your subscription was successful, the charge has been added to your card"
@@ -81,12 +109,32 @@ class Business::CustomersController < ApplicationController
       )
     if customer.successful? 
       current_company.customer.update_attribute(:plan, nil)
+      current_company.customer.update_attribute(:stripe_subscription_id, nil)
       redirect_to business_plan_path
       flash[:success] = "Your subscription was successfully canceled, your active job postings will close at the end of the billing period"
     end
   end
 
   private 
+
+  def company_subscription(plan)
+    @company = current_company
+    @plan = plan
+
+    if @plan == 'start_up_month' || @plan == 'start_up_year'
+      @company.update_column(:subscription, "start_up")
+    elsif @plan == 'basic_month' || @plan == 'basic_year'
+      @company.update_column(:subscription, "basic")
+    elsif @plan == 'team_month' || @plan == 'team_year'
+      @company.update_column(:subscription, "team")
+    elsif @plan == 'plus_month' || @plan == 'plus_year'
+      @company.update_column(:subscription, "plus")
+    elsif @plan == 'growth_month' || @plan == 'growth_year'
+      @company.update_column(:subscription, "growth")
+    elsif @plan == 'enterprise_month' || @plan == 'enterprise_year'
+      @company.update_column(:subscription, "enterprise")
+    end
+  end
 
   # def customer_params
   #   params.require(:invitation).permit()

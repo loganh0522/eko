@@ -1,7 +1,6 @@
 .contain
   .sidebar
-    .nav
-      = render 'business/shared/post_job'
+    = render 'business/shared/post_job'
 
   .main-container  
     .header   
@@ -16,6 +15,6 @@
           = link_to_add_fields "+ Add Question", f, :questions    
 
           = f.hidden_field :job_id, value: @job.id
-
-          = f.submit "Update Form", class: "submit btn btn-primary"
+          .actions
+            = f.submit "Update Form", class: "submit btn btn-primary"
 

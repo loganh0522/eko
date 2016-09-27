@@ -1,0 +1,88 @@
+= form_tag new_plan_business_customers_path do
+  %table.table
+    %thead
+      %tr
+        %th(width="20%") Name 
+        %th(width="20%") Open Positions
+        %th(width="25%") Monthly Plan
+        %th(width="25%") Yearly Plan
+        %th(width="10%") 
+      %tr
+        %td
+          .plan Start-up
+        %td
+          .open-jobs 1 Active Jobs
+        %td
+          .select-cost= radio_button_tag(:plan, "start_up_month")
+          .cost $19 / month
+        %td
+          .select-cost= radio_button_tag(:plan, "start_up_year")
+          .cost $190 / year
+        %td
+          %input(type="submit" value="Select Plan" class="btn btn-success")
+      %tr
+        %td
+          .plan Basic
+        %td
+          .open-jobs 3 Active Jobs
+        %td
+          .select-cost= radio_button_tag(:plan, "basic_month")
+          .cost $39 / month
+        %td
+          .select-cost= radio_button_tag(:plan, "basic_year")
+          .cost $390 / year
+        %td
+          %input(type="submit" value="Select Plan" class="btn btn-success")
+      %tr
+        %td
+          .plan Team
+        %td
+          .open-jobs 5 Active Jobs
+        %td
+          .select-cost= radio_button_tag(:plan, "team_month")
+          .cost $99 / month
+        %td
+          .select-cost= radio_button_tag(:plan, "team_year")
+          .cost $990 / year
+        %td
+          %input(type="submit" value="Select Plan" class="btn btn-success")
+      %tr
+        %td
+          .plan Plus
+        %td
+          .open-jobs 10 Active Jobs
+        %td
+          .select-cost= radio_button_tag(:plan, "plus_month")
+          .cost $199 / month
+        %td
+          .select-cost= radio_button_tag(:plan, "plus_year")
+          .cost $1990 / year
+        %td
+          %input(type="submit" value="Select Plan" class="btn btn-success")
+      %tr
+        %td
+          .plan Growth
+        %td
+          .open-jobs 15 Active Jobs
+        %td
+          .select-cost= radio_button_tag(:plan, "growth_month")
+          .cost $299 / month
+        %td
+          .select-cost= radio_button_tag(:plan, "growth_year")
+          .cost $2990 / year
+        %td
+          %input(type="submit" value="Select Plan" class="btn btn-success")
+      %tr
+        %td
+          .plan Enterprise
+        %td
+          .open-jobs Unlimited
+        %td
+          .select-cost= radio_button_tag(:plan, "enterprise_month")
+          .cost $399 / month
+        %td
+          .select-cost= radio_button_tag(:plan, "enterprise_year")
+          .cost $3990 / year
+        %td
+          %input(type="submit" value="Select Plan" class="btn btn-success")
+

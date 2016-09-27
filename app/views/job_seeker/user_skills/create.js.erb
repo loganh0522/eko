@@ -1,0 +1,7 @@
+<% if current_user.skills.count == 1 %>
+  $('<%= j render "job_seeker/user_skills/skills" %>').insertBefore('#skill-not-present')
+  $('#skill-not-present').remove();
+<% else %>
+  $('#skills').html('<%= j render "job_seeker/user_skills/skills" %>');
+<% end %>
+

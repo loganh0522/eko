@@ -2,25 +2,20 @@
   .applicant-main-container   
     .applicant-header
       .user-image
-        %img.profile_picture(src="/tmp/man.jpg")
+        .profile_picture
+          = image_tag @avatar.image.large_image, :size => "200x200" if @avatar.present?
       
       .applicant-details
-        %p.name Logan Houston
+        %p.name= "#{@user.first_name.upcase} #{@user.last_name.upcase}"
         .contact
           %span.glyphicon.glyphicon-map-marker  
-          Toronto, Ontario, CA
+            = "#{@user.city}, #{@user.countries.first.name}"
           %br
           %span.glyphicon.glyphicon-envelope 
-          loganh0522@gmail.com
+            = "#{@user.email}"
           %br
           %span.glyphicon.glyphicon-earphone 
-          416-806-6907 
-
-      .applicant-actions 
-        .action 
-          %p Send Message 
-        .action 
-          %p Schedule Meeting
+            = "#{@user.phone}"
       .applicant-nav-bar  
         = render "business/shared/applicant_nav"
 
@@ -29,7 +24,10 @@
         = form_for [:business, @job, @application, @comment] do |f| 
           %tr
             %td(width="10%")
-              %img.circle(src="/tmp/man.jpg")
+              - if current_user.user_avatar.present? 
+                = image_tag current_user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
+              - else 
+                .circle-img= current_user.first_name.first.capitalize
             %td(width="80%")
               = f.text_field :body, rows: 2, class: "form-control", label: "Add Feedback", placeholder: "Add a note about #{@user.first_name} #{@user.last_name}"
               = f.hidden_field :user_id, value: current_user.id
@@ -44,14 +42,12 @@
       .applicant-positions
         = render 'business/applications/application_experience'
 
-    .applicant-education
+    .applicant-experience
       .header
         %h4 Education
       
       .applicant-positions
         = render 'business/applications/application_education'
-
-
 
   .applicant-side-container
     .current-stage

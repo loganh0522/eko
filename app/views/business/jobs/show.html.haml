@@ -2,88 +2,62 @@
   .header
     %h1= @job.title
     %p= "#{@job.city}, #{@job.province}, #{@job.country}"
-
+   
   .job-stages  
     %ul 
-      %li
-        .number 53
+      %li#all_applicants.activated
+        .number 
+          = @job.applications.count
         .name All Applicants
-      %li 
-        .number 10
-        .name New Applicants
       - @stages.each do |stage| 
-        %li 
+        %li{:id => "#{stage.name}"}
           .number= stage.applicants.count
           .name= stage.name  
       %li
-        .number 53
+        .number 
+          = @job.applications.where(rejected: true).count
         .name Rejected
 
+  .job-applicants-nav
+    %ul 
+      %li.applicants-tab.activated Applicants
+      %li.activity-tab Activity
 
 
-.job-applicants
+.job-applicants.active-tab
+  = render 'business/shared/applicants_table'
+
+.job-activity
   .header
-    %h1 Applicants  
-    %form_tag.actions
-      = render "business/applications/move_stages"
-      = render "business/comments/add_comment"
-      = render "business/messages/send_message"
-      %input(type= "submit" value= "Move Stages" class= "move_action btn btn-primary" data-toggle = "modal" data-target = "#stageModal")
-      %input(type= "submit" value= "Add Note" class= "add_note_action btn btn-primary" data-toggle = "modal" data-target = "#add_commentModal")
-      %input(type= "submit" value= "Message" class= "send_message btn btn-primary" data-toggle = "modal" data-target = "#send_messageModal")
-      %input(type= "submit" value= "Delete" class= "btn btn-primary")
-  
-  .applicants
-    %table.table
-      %thead
-        %tr
-          %th(width="1%")= check_box_tag "select_all"
-          %th(width="5%")
-          %th(width="20%") Name 
-          %th(width="20%") Job Title
-          %th(width="15%") Stage 
-          %th(width="15%") Rating
-          %th(width="24%")
-      %tbody
-        - @applicants.each do |applicant|
-          - stage = @job.applications.where(user_id: applicant.id).first.stage.name
-          %tr
-            %td
-              .checkbox{:data => {:id => applicant.id}}
-                = check_box_tag "applicant_ids[]", applicant.id
-            %td
-              %img.circle(src="/tmp/man.jpg")
-            %td
-              .name= link_to "#{applicant.first_name} #{applicant.last_name}", business_job_application_path(@job, Application.where(user_id: applicant.id, job_id: @job).first.id)
-              .current-position CEO - TalentWiz 
-            %td
-              .position= @job.title
-              .date-applied May 22, 2015
-            %td
-              .stage= stage
-            %td
-              .rating 5 stars
-            %td
-
-
-      / .modal.col-md-6.col-md-offset-4
-      /   .panel.panel-primary
-      /     .panel-heading 
-      /       %h4 Move Applicants 
-      /     .panel-body
-      /       %p Move the selected applicants to a new stage, by selecting the stage below. 
-            
-      /       = form_for @job do |f|
-      /         %fieldset
-      /           / = f.hidden_field :job_id, value: @job.id
-      /           / = f.label :stage_id 
-      /           / = f.collection_select :stage_id, @stages.all, :id, :name
-      /     .panel-footer
-      /       %input(type="submit" value="Sign Up" class="btn btn-primary")
-      / .modal-layer
-
-    / %input(type="submit" value="Message" class="btn btn-primary")
-    / %input(type="submit" value="Add Comment" class="btn btn-primary")
-
-
-
+    %h1 Activity
+  .body
+    .activity-filters
+      .nav
+        %ul 
+          %li 
+            .content
+              Type: 
+          .body
+            %ul
+              %li.activity 
+                .checkbox{:data => {:id => "comments"}}= check_box_tag "", true, true
+                Comments
+              %li.activity
+                .checkbox{:data => {:id => "assessments"}}= check_box_tag "", true, true
+                Assessments
+              %li.activity  
+                .checkbox{:data => {:id => "Scorecards"}}= check_box_tag "", true, true
+                Scorecards
+              %li.activity
+                .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
+                Move Stages
+              %li.activity
+                .checkbox{:data => {:id => "applied"}}= check_box_tag "", true, true
+                Applied
+              %li.activity
+                .checkbox{:data => {:id => "interview"}}= check_box_tag "", true, true
+                Interview
+    .job-activity-feed
+      .activity-feed
+        - @activities.each do |activity|         
+          = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity  

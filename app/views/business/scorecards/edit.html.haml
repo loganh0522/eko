@@ -1,7 +1,6 @@
 .contain
   .sidebar
-    .nav
-      = render 'business/shared/post_job'
+    = render 'business/shared/post_job'
   
   .main-container 
     .header   
@@ -14,5 +13,5 @@
           %br
           = link_to_add_fields "+ Add Section", f, :scorecard_sections  
           = f.hidden_field :job_id, value: @job.id
-
-          = f.submit "Create Scorecard", class: "submit btn btn-primary"
+          .actions
+            = f.submit "Create Scorecard", class: "submit btn btn-primary"

@@ -1,0 +1,3 @@
+%div{:id => "certifications"}
+  - @certifications.each do |certification| 
+    = render "job_seeker/user_certifications/user_certification", certification: certification

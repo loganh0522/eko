@@ -33,3 +33,32 @@ $(window).load ->
     $targetItem = $(this).parent().find('.job_list_stage_active').next()
     toGalleryItem $targetItem
     return
+
+  changeContainer = ($targetContainer) -> 
+    $('.main-container').find('.showing').hide()
+    $('.main-container').find('.showing').removeClass 'showing'
+    $($targetContainer).show()
+    $($targetContainer).addClass 'showing'
+
+    return
+
+  $('.job-nav').on 'click', 'li', (event) -> 
+    if $(this).attr('class') == 'open'
+      $targetContainer = '.open-jobs'
+    else if $(this).attr('class') == 'closed'
+      $targetContainer = '.closed-jobs'
+    else if $(this).attr('class') == 'drafts'
+      $targetContainer = '.draft-jobs'
+    else if $(this).attr('class') == 'archived'
+      $targetContainer = '.archived-jobs'
+
+    $('.job-nav').find('.show').css color: 'black'
+    $('.job-nav').find('.show').removeClass 'show'
+
+    $(this).addClass 'show'
+    $(this).css color: 'rgb(239, 122, 43)'
+
+    changeContainer $targetContainer
+    return
+
+

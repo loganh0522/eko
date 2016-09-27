@@ -1,6 +1,7 @@
 class Business::UsersController < ApplicationController 
   before_filter :require_user
   before_filter :belongs_to_company
+  before_filter :company_deactivated?
   
   def index 
     @invitation = Invitation.new
@@ -15,5 +16,7 @@ class Business::UsersController < ApplicationController
 
   def edit
     @user = current_user
+    @user_avatar = UserAvatar.new
+    @avatar = @user.user_avatar
   end
 end

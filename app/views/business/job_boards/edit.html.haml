@@ -19,7 +19,11 @@
             %h4 Logo 
             %p Add a logo that will go in the header of your Career Portal. It is best if you use a logo with a white background. 
             
+            
             = f.file_field :logo, class: "btn btn-file"
+            = image_tag(@job_board.logo) if @job_board.logo?
+            = f.hidden_field :logo_cache
+
 
           %h4 Description 
           %p Tell applicants about your company, tell them why they should apply, and what makes you awesome.
