@@ -1,8 +1,0 @@
-= form_tag job_seeker_update_certification_path do
-  .row
-    .form-group.col-md-6             
-      = text_field_tag 'name', nil, :class => 'ui-autocomplete-input', :placeholder => 'Add Certification', id: "certification_name"
-      %div#certification-results
-      = hidden_field_tag :user_id, value: current_user.id
-      = hidden_field_tag :certification_id
-  %input(type="submit" value= "Add Skill" class="btn btn-success")

@@ -4,21 +4,24 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
         %h4.modal-title Application Form
-        .modal-body
-          = bootstrap_form_for [:job_seeker, @application] do |f|           
-            - @questions.each do |question|
-              %h4= question.body
-              = f.fields_for :question_answers, QuestionAnswer.new do |q|
-                - if question.kind == 'Text' || question.kind == 'Paragraph'
-                  = q.hidden_field  :question_id, value: question.id
-                  = q.text_area :body
-                - if question.kind == 'Checkbox'
-                  = q.hidden_field  :question_id, value: question.id
-                  = q.collection_radio_buttons(:question_option_id, question.question_options.all, :id, :body)
+      .modal-body
+        = bootstrap_form_for [:job_seeker, @application] do |f|           
+          - @questions.each do |question|
+            %h4= question.body
+            = f.fields_for :question_answers, QuestionAnswer.new do |q|
+              - if question.kind == 'Text' 
+                = q.hidden_field  :question_id, value: question.id
+                = q.text_field :body, hide_label: true
+              - elsif question.kind == 'Paragraph'
+                = q.hidden_field  :question_id, value: question.id
+                = q.text_area :body, hide_label: true
+              - elsif question.kind == 'Checkbox'
+                = q.hidden_field  :question_id, value: question.id
+                = q.collection_radio_buttons(:question_option_id, question.question_options.all, :id, :body, hide_label: true)
 
-            .fieldset
-              .form-group.col-md-12
-              = f.hidden_field :user_id, value: current_user.id
-              = f.hidden_field  :job_id, value: @job.id
-              = f.submit "Apply to Job", class: "btn btn-primary"
+          .fieldset
+            .form-group.col-md-12
+            = f.hidden_field :user_id, value: current_user.id
+            = f.hidden_field  :job_id, value: @job.id
+            = f.submit "Apply to Job", class: "btn btn-primary"
 

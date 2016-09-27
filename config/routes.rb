@@ -34,7 +34,8 @@ Rails.application.routes.draw do
     resources :jobs
 
     resources :profiles 
-
+    resources :user_certifications
+    resources :user_skills
     resources :educations
     resources :work_experiences
     resources :accomplishments
@@ -43,10 +44,13 @@ Rails.application.routes.draw do
     
     resources :users do
       get "add_skills", to: "users#add_skills"
+      delete "delete_skill", to: "users#delete_skill"
       get "add_certifications", to: "users#add_certifications"
     end
 
-    resources :user_avatars
+    resources :user_avatars 
+
+    
 
     post "update_skills", to: "users#update_skills"
     post "update_certification", to: "users#update_certifications"

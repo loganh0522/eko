@@ -1,6 +1,6 @@
 jQuery -> 
-  $('.modal').on 'focus', '#certification_name', ->
-    $('.modal').find('#certification_name').autocomplete(
+  $(document).ajaxComplete -> 
+    $('#certification_name').autocomplete(
       source: '/certifications'
       appendTo: $('#certification-results')
       focus: (event, ui) ->

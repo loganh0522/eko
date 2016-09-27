@@ -10,7 +10,9 @@ class JobSeeker::JobsController < JobSeekersController
   def show 
     @job = Job.find(params[:id])
     @questionairre = @job.questionairre
-    @questions = @questionairre
+    if @questionairre.present? 
+      @questions = @questionairre.questions
+    end
     @application = Application.new
 
     @avatar = current_user.user_avatar

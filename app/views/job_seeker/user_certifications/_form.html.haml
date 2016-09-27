@@ -1,0 +1,36 @@
+= bootstrap_form_for [:job_seeker, @user_certification], html: {remote: true} do |f|
+  .row
+    - if @user_certification.new_record? 
+      = text_field_tag 'name', nil, :class => 'ui-autocomplete-input', :placeholder => 'Certification Name', id: "certification_name"
+    - else
+      %h4= @user_certification.certification.name
+  .row
+    = f.text_field :agency, label: "Agency"
+  .row
+    = f.text_area :description, label: "Description"
+  .row
+    .col-md-3
+      = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
+    .col-md-3
+      = f.text_field :start_year, hide_label: true
+    .col-md-3
+      = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month", label: "Expiration Date"
+    .col-md-3
+      = f.text_field :end_year, hide_label: true
+  .row 
+    .col-sm-6.col-md-offset-6
+      = f.check_box :expires, checked_value: 1, unchecked_value: 0, label: "No expiration"
+    %div#certification-results
+    = f.hidden_field :user_id, value: current_user.id
+    = hidden_field_tag :certification_id
+  .row
+    = f.submit @user_certification.new_record? ? "Add Certification" : "Update", class: "submit btn btn-primary"
+  
+    - if !@user_certification.new_record?
+      .close-form#edit-form.btn.btn-default     
+        Close
+    - else
+      .close-form#new-form.btn.btn-default     
+        Close
+    - if !@user_certification.new_record?
+      = link_to "Remove Certification", job_seeker_user_certification_path(@user_certification), remote: true, method: :delete

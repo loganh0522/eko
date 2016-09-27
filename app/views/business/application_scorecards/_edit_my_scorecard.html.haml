@@ -7,6 +7,7 @@
       
       .modal-body 
         = form_for [:business, @job, @application, @current_user_scorecard] do |f|
+
           = f.fields_for :overall_ratings do |k|
             %table.table
               %thead
@@ -46,7 +47,7 @@
                         %td  
                           - criteria.scorecard_ratings.each do |rating|
                             - scorecard = ApplicationScorecard.find(rating.application_scorecard_id)
-                            - if scorecard.application_id == @application.id
+                            - if scorecard.application_id == @application.id && scorecard.user_id == current_user.id
                               = f.fields_for :scorecard_ratings, rating do |q| 
                                 = q.hidden_field :section_option_id, value: criteria.id
                                 = q.hidden_field :user_id, value: current_user.id

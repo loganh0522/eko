@@ -1,8 +1,8 @@
 class ProfilesController < ApplicationController 
-  def index 
+  def index
     @job_board = JobBoard.find_by_subdomain!(request.subdomain)
     @company = @job_board.company
-    
+
     @work_experience = WorkExperience.new
     @accomplishment = Accomplishment.new
     @education = Education.new
@@ -10,7 +10,11 @@ class ProfilesController < ApplicationController
     @degrees = current_user.educations
     @user = current_user
     @user_avatar = UserAvatar.new
-    @skills = Skill.all
+    @skills = current_user.user_skills
     @avatar = current_user.user_avatar
+    @user_skill = UserSkill.new
+    @certifications = current_user.user_certifications
+    @current_work = current_user.work_experiences.where(current_position: '1')
   end
+
 end

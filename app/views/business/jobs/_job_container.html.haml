@@ -2,11 +2,11 @@
   .job-header 
     .title 
       = link_to job.title, business_job_path(job)
-    .location Toronto, On
-    .posted-time Posted 10 minutes ago
+    .location= "#{job.city}, #{job.states.first.name}"
+    .posted-time= "#{time_ago_in_words(job.created_at)} ago" 
   .job-body
     .btns
-      = link_to 'Post to Job Boards', '#', class: 'button-mid'
+      = link_to 'Post to Job Boards', '#', class: 'button-job-actions'
       .dropdown.btn2
         %a.button-mid.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
           Actions

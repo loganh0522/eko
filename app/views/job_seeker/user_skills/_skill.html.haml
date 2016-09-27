@@ -1,0 +1,4 @@
+%div{:class => "skill", id: "user_skill_#{skill.id}"}
+  .name= skill.skill.name
+  = link_to job_seeker_user_delete_skill_path(skill.id), remote: true, :method => :delete do
+    %i.glyphicon.glyphicon-remove

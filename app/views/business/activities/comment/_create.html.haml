@@ -4,7 +4,11 @@
 
   .comment-header
     .commenting-user
-      = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
+      - if current_user.user_avatar.present?
+        = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
+      - else 
+        .circle-img= activity.user.first_name.first.capitalize
+        
       = "#{activity.user.first_name} #{activity.user.last_name}"
       added a comment 
       .time= "#{time_ago_in_words(activity.created_at)} ago" 

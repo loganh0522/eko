@@ -1,0 +1,16 @@
+%p You can crop the image below. 
+
+.image
+  = image_tag @user_avatar.image, :id => "cropbox"
+  = form_for [:job_seeker, @user_avatar] do |f|
+    - %w[x y w h].each do |attribute| 
+      = f.hidden_field "crop_#{attribute}"
+    = f.submit 'Crop'
+
+#image-preview-area
+  .img-preview
+    = image_tag @user_avatar.image, :id => "preview"
+
+
+
+

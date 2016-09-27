@@ -20,7 +20,7 @@
           .select-cost= radio_button_tag(:plan, "start_up_year", (@customer.plan == 'start_up_year' ? {checked: true} : false))
           .cost $190 / year
         %td
-          %input(type="submit" value="Select Plan" class="btn btn-success")
+          %input(type="submit" value="Change Plan" class="btn btn-success")
       %tr
         %td
           .plan Basic
@@ -33,7 +33,7 @@
           .select-cost= radio_button_tag(:plan, "basic_year", (@customer.plan == 'basic_year' ? {checked: true} : false))
           .cost $390 / year
         %td
-          %input(type="submit" value="Select Plan" class="btn btn-success")
+          %input(type="submit" value="Change Plan" class="btn btn-success")
       %tr
         %td
           .plan Team
@@ -46,7 +46,7 @@
           .select-cost= radio_button_tag(:plan, "team_year", (@customer.plan == 'team_year' ? {checked: true} : false))
           .cost $990 / year
         %td
-          %input(type="submit" value="Select Plan" class="btn btn-success")
+          %input(type="submit" value="Change Plan" class="btn btn-success")
       %tr
         %td
           .plan Plus
@@ -59,7 +59,7 @@
           .select-cost= radio_button_tag(:plan, "plus_year", (@customer.plan == 'plus_year' ? {checked: true} : false))
           .cost $1990 / year
         %td
-          %input(type="submit" value="Select Plan" class="btn btn-success")
+          %input(type="submit" value="Change Plan" class="btn btn-success")
       %tr
         %td
           .plan Growth
@@ -72,7 +72,7 @@
           .select-cost= radio_button_tag(:plan, "growth_year", (@customer.plan == 'growth_year' ? {checked: true} : false))
           .cost $2990 / year
         %td
-          %input(type="submit" value="Select Plan" class="btn btn-success")
+          %input(type="submit" value="Change Plan" class="btn btn-success")
       %tr
         %td
           .plan Enterprise
@@ -85,7 +85,7 @@
           .select-cost= radio_button_tag(:plan, "enterprise_year", (@customer.plan == 'enterprise_year' ? {checked: true} : false))
           .cost $3990 / year
         %td
-          %input(type="submit" value="Select Plan" class="btn btn-success")
+          %input(type="submit" value="Change Plan" class="btn btn-success")
 
 
 = link_to "Cancel your subscription", cancel_business_customers_path 

@@ -24,7 +24,10 @@
         = form_for [:business, @job, @application, @comment] do |f| 
           %tr
             %td(width="10%")
-              = image_tag @current_user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" if @current_user.user_avatar.present? 
+              - if current_user.user_avatar.present? 
+                = image_tag current_user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
+              - else 
+                .circle-img= current_user.first_name.first.capitalize
             %td(width="80%")
               = f.text_field :body, rows: 2, class: "form-control", label: "Add Feedback", placeholder: "Add a note about #{@user.first_name} #{@user.last_name}"
               = f.hidden_field :user_id, value: current_user.id
@@ -35,16 +38,24 @@
     .applicant-notes
       .header
         %h4 Notes
-      - @comments.each do |comment|
-        - user = User.find(comment.user_id)
-        .notes   
-          .notes-header 
-            = image_tag user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" if user.user_avatar.present? 
-            %p.name= user.first_name 
-            %p.name= user.last_name
-            %p.sent= time_ago_in_words(comment.created_at) unless comment.created_at.blank?
-          .body
-            %p= comment.body
+
+      - if !@comments.nil?
+        .not-present-container
+          %p There are currently no notes for this applicant.
+      - else
+        - @comments.each do |comment|
+          - user = User.find(comment.user_id)
+          .notes   
+            .notes-header 
+              - if user.user_avatar.present? 
+                = image_tag user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
+              - else 
+                .circle-img= current_user.first_name.first.capitalize
+              %p.name= user.first_name 
+              %p.name= user.last_name
+              %p.sent= time_ago_in_words(comment.created_at) unless comment.created_at.blank?
+            .body
+              %p= comment.body
 
   .applicant-side-container
     .current-stage

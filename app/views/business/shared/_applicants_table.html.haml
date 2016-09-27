@@ -22,14 +22,18 @@
         %th(width="24%")
       %tbody
         - @applicants.each do |applicant|
-          - stage = @job.applications.where(user_id: applicant.id).first.stage.name
+          - if @job.applications.where(user_id: applicant.id).first.stage.present?
+            - stage = @job.applications.where(user_id: applicant.id).first.stage.name
           %tr{:id => "#{stage}" }
             %td
               .checkbox{:data => {:id => applicant.id}}
                 = check_box_tag "applicant_ids[]", applicant.id
             %td
               .circle
-                = image_tag applicant.user_avatar.image.small_image, :size => "50x50" if applicant.user_avatar.present?
+                - if applicant.user_avatar.present? 
+                  = image_tag applicant.user_avatar.image.small_image, :size => "50x50" if applicant.user_avatar.present?
+                - else
+                  .circle-img= applicant.first_name.first.capitalize
             %td
               .name= link_to "#{applicant.first_name} #{applicant.last_name}", business_job_application_path(@job, Application.where(user_id: applicant.id, job_id: @job).first.id)
               .current-position CEO - TalentWiz 

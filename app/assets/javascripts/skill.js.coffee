@@ -1,6 +1,6 @@
 jQuery -> 
-  $('.modal').on 'focus', '#skills_name', ->
-    $('.modal').find('#skills_name').autocomplete(
+  $(document).ready ->
+    $('#skills_name').autocomplete(
       source: '/skills'
       appendTo: $('#skills-results')
       focus: (event, ui) ->

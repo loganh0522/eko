@@ -35,6 +35,12 @@ gem 'jcrop-rails-v2'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 
+gem 'remotipart', '~> 1.2'
+gem 'rmagick'
+
+gem 'googlecharts'
+
+
 group :development do
   gem 'thin'
   gem "better_errors"

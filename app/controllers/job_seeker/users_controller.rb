@@ -28,9 +28,16 @@ class JobSeeker::UsersController < JobSeekersController
     end
   end
 
+  def delete_skill
+    @skill = UserSkill.where(user_id: current_user.id, skill_id: params[:user_id])
+    @skill.first.destroy   
+    redirect_to job_seeker_profiles_path
+  end
+
   def add_certifications
 
   end
+
 
   def update_certifications
     @user = User.find(current_user.id)
@@ -52,5 +59,4 @@ class JobSeeker::UsersController < JobSeekersController
   def user_skills_params
     params.require(:user).permit(:skill_ids, :user_ids)
   end
-
 end

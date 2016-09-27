@@ -27,8 +27,11 @@
 
           .dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              = image_tag current_user.user_avatar.image.small_image, :class => 'dropdown-img', :size => "50x50" if current_user.user_avatar.present? 
-              Logan
+              - if current_user.user_avatar.present? 
+                = image_tag current_user.user_avatar.image.small_image, :class => "img dropdown-img"
+              - else
+                .circle-img= current_user.first_name.first.capitalize
+              = current_user.first_name
               %b.caret
             %ul.dropdown-menu.dropdown-menu-right
               %li
@@ -58,7 +61,7 @@
                 = image_tag current_user.user_avatar.image.small_image, :class => "img dropdown-img"
               - else
                 .circle-img= current_user.first_name.first.capitalize
-              Logan
+              = current_user.first_name
               %b.caret
             %ul.dropdown-menu.dropdown-menu-right
               %li
@@ -72,7 +75,7 @@
       .career-portal-nav
         .content
           = link_to root_path do
-            %img(src="#{@company.job_board.logo}")
+            %img(src="#{@company.job_board.logo}" class="sub_logo")
           %ul.nav.navbar-nav.navbar-right
             %li= link_to "Profile", profile_path
             %li= link_to "Sign Out", signout_path
@@ -81,7 +84,7 @@
       .career-portal-nav
         .content
           = link_to root_path do
-            %img(src="#{@company.job_board.logo}")
+            %img(src="#{@company.job_board.logo}" class="sub_logo")
           %ul.nav.navbar-nav.navbar-right
             %li= link_to "Login", login_path
             %li= link_to "Register", register_path
