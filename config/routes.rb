@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   
-  root to: 'pages#home'
   
   resources :job_boards
   resources :jobs
@@ -24,14 +23,12 @@ Rails.application.routes.draw do
   get '/job_seekers/new', to: 'users#new_job_seeker'
   get '/account/new', to: 'companies#new'
   
-
   root to: 'pages#home'
   get 'pricing', to: 'pages#pricing'
   get 'features', to: 'pages#features'
   
   resources :skills 
   resources :certifications
-
   
 
   namespace :job_seeker do 
