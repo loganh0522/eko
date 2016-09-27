@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   
   root to: 'pages#home'
   get 'pricing', to: 'pages#pricing'
+  get 'features', to: 'pages#features'
   
   resources :skills 
   resources :certifications

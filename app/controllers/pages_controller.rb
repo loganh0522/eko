@@ -11,4 +11,8 @@ class PagesController < ApplicationController
   def job_seeker
 
   end
+
+  def features
+  end
+  
 end
