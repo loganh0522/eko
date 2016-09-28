@@ -1,0 +1,9 @@
+(function(){
+
+document.write('<div class="customCSSclass" id="appName-widget">');
+
+<% @jobs.each do |job| %>
+    document.write('<p> <%= job.title %> </p> <br/>')
+<% end %>
+
+document.write('</div>') })()

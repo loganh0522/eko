@@ -1,7 +1,7 @@
 class Application < ActiveRecord::Base
-  include Elasticsearch::Model 
-  include Elasticsearch::Model::Callbacks 
-  index_name ["talentwiz", Rails.env].join('_') 
+  # include Elasticsearch::Model 
+  # include Elasticsearch::Model::Callbacks 
+  # index_name ["talentwiz", Rails.env].join('_') 
 
   belongs_to :company
   belongs_to :applicant, class_name: 'User', foreign_key: :user_id

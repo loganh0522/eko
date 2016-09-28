@@ -16,14 +16,11 @@ Rails.application.routes.draw do
   match 'register', to: "users#sub_new_job_seeker", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
   match 'profile', to: "profiles#index", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
 
-
-
   get 'login', to: "sessions#new"
   get '/job_seekers/new', to: 'users#new_job_seeker'
   get '/account/new', to: 'companies#new'
   
-  
-  map.connect '/widget/:action/:company_name', :controller => 'widget', :company_name => /.*/
+  match '/widget/:action/:widget_key', via: [:get, :post], :controller => 'widget', :widget_key => /.*/
   
   resources :skills 
   resources :certifications
