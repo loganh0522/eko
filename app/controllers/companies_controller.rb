@@ -9,6 +9,7 @@ class CompaniesController < ApplicationController
 
     if @company.save
       set_user(@company)
+      create_career_portal(@company)
       session[:company_id] = @company.id
       flash[:notice] = "Thanks for joining #{@company.name}"
       redirect_to business_root_path
@@ -27,5 +28,8 @@ class CompaniesController < ApplicationController
     current_user.update_attribute(:company_id, company.id)
   end
 
-  
+  def create_career_portal(company)
+    @subdomain = company.name.parameterize("_")
+    JobBoard.create(company_id: company.id, subdomain: @subdomain)
+  end  
 end
