@@ -29,7 +29,9 @@ class Job < ActiveRecord::Base
   has_many :states, through: :job_states
   
   
-  validates_presence_of :title, :benefits, :description, :country_ids, :city
+  validates_presence_of :title, :benefits, :description
+
+  # , :country_ids, :city
 
   has_many :applications
   has_many :applicants, through: :applications, class_name: "User", foreign_key: :user_id
