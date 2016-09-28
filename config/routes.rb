@@ -1,33 +1,32 @@
 Rails.application.routes.draw do
+  root to: 'pages#home'
+  get 'pricing', to: 'pages#pricing'
+  get 'features', to: 'pages#features'
+
+
   resources :job_boards
   resources :jobs
   resources :companies
+  resources :users
 
-  # match '/', to: "job_boards#index", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
-  # match 'login', to: "sessions#subdomain_new", constraints: {subdomain: 'prod-talentwiz'}, via: [:get]
-  # match 'login', to: "sessions#create", constraints: {subdomain: 'prod-talentwiz'}, via: [:post]
-  # match 'job', to: "jobs#show", constraints: {subdomain: 'prod-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
-  # match 'register', to: "users#sub_new_job_seeker", constraints: {subdomain: 'prod-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
-  # match 'profile', to: "profiles#index", constraints: {subdomain: 'prod-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
+  match '/', to: "job_boards#index", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
+  match 'login', to: "sessions#subdomain_new", constraints: {subdomain: /.+/}, via: [:get]
+  match 'login', to: "sessions#create", constraints: {subdomain: /.+/}, via: [:post]
+  match 'job', to: "jobs#show", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
+  match 'register', to: "users#sub_new_job_seeker", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
+  match 'profile', to: "profiles#index", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
 
 
 
   get 'login', to: "sessions#new"
-
-  get 'ui(/:action)', controller: 'ui'
-  get 'ui/home', to: 'ui#home'
-  
-  resources :users
   get '/job_seekers/new', to: 'users#new_job_seeker'
   get '/account/new', to: 'companies#new'
   
-  root to: 'pages#home'
-  get 'pricing', to: 'pages#pricing'
-  get 'features', to: 'pages#features'
+  
+  map.connect '/widget/:action/:company_name', :controller => 'widget', :company_name => /.*/
   
   resources :skills 
   resources :certifications
-  
 
   namespace :job_seeker do 
     resources :jobs
@@ -47,9 +46,7 @@ Rails.application.routes.draw do
       get "add_certifications", to: "users#add_certifications"
     end
 
-    resources :user_avatars 
-
-    
+    resources :user_avatars   
 
     post "update_skills", to: "users#update_skills"
     post "update_certification", to: "users#update_certifications"

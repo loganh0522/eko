@@ -39,7 +39,7 @@
       .header
         %h4 Notes
 
-      - if !@comments.nil?
+      - if !@comments.present?
         .not-present-container
           %p There are currently no notes for this applicant.
       - else
