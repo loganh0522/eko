@@ -1,6 +1,5 @@
 class WidgetsController < ApplicationController
   layout nil
-  session :off
 
   # before_filter :validate_api_key, :only => [:company_jobs]
 
