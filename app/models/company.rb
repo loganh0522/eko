@@ -1,4 +1,6 @@
 class Company < ActiveRecord::Base
+  before_create :generate_token
+
   has_many :users
   has_many :invitations
   
@@ -17,5 +19,9 @@ class Company < ActiveRecord::Base
 
   def deactivate!
     update_column(:active, false)
+  end
+
+  def generate_token
+    self.widget_key = SecureRandom.urlsafe_base64
   end
 end

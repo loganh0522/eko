@@ -8,6 +8,9 @@
       %h1 Career Portal     
     .body
       .edit-career-portal
+
+        %h4 Widget Details 
+        = '<script type="text/javascript" src= "http://prod-talentwiz.heroku.com/widget/company_jobs/'"#{current_company.widget_key}"'></script> <style type="text/css">.customCSSclass a{text-decoration:none;} </style>'
         = form_for [:business, @job_board] do |f|  
           .sub-domain 
             %h4 Sub-domain
