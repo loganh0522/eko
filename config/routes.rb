@@ -9,12 +9,12 @@ Rails.application.routes.draw do
   resources :companies
   resources :users
 
-  # match '/', to: "job_boards#index", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
-  # match 'login', to: "sessions#subdomain_new", constraints: {subdomain: /.+/}, via: [:get]
-  # match 'login', to: "sessions#create", constraints: {subdomain: /.+/}, via: [:post]
-  # match 'job', to: "jobs#show", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
-  # match 'register', to: "users#sub_new_job_seeker", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
-  # match 'profile', to: "profiles#index", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
+  match '/', to: "job_boards#index", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
+  match 'login', to: "sessions#subdomain_new", constraints: {subdomain: /.+/}, via: [:get]
+  match 'login', to: "sessions#create", constraints: {subdomain: /.+/}, via: [:post]
+  match 'job', to: "jobs#show", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
+  match 'register', to: "users#sub_new_job_seeker", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
+  match 'profile', to: "profiles#index", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
 
   get 'login', to: "sessions#new"
   get '/job_seekers/new', to: 'users#new_job_seeker'
@@ -27,7 +27,6 @@ Rails.application.routes.draw do
 
   namespace :job_seeker do 
     resources :jobs
-
     resources :profiles 
     resources :user_certifications
     resources :user_skills
