@@ -30,7 +30,8 @@
         .current_location
           .bold Location
           %br
-          .shift= "#{current_user.city}, #{current_user.countries.first.name}"
+          - if current_user.countries.present? 
+            .shift= "#{current_user.city}, #{current_user.countries.first.name}"
       
         .current_experience
           .bold Current Role 

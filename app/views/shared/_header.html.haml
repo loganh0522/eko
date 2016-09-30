@@ -69,22 +69,6 @@
               %li
                 %a= link_to "Sign Out", signout_path
 
-        .dropdown
-          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-            %img.dropdown-img(src="/tmp/man.jpg")
-            Logan
-            %b.caret
-          %ul.dropdown-menu.dropdown-menu-right
-            %li
-              %a= link_to "Career Portal", business_users_path
-            %li
-              %a= link_to "Team Members", business_users_path
-            %li
-              %a= link_to "Subscription", business_plan_path
-            %li
-              %a= link_to "Billing", business_customers_path
-            %li
-              %a= link_to "Sign Out", signout_path
 - else     
   - if logged_in? && current_kind == 'job seeker'
     .navbar-fixed-top

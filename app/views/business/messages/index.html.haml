@@ -42,7 +42,7 @@
       = render "message" 
      
 
-      - if !@messages.nil?
+      - if !@messages.present?
         .not-present-container
           %p There are currently no notes for this applicant.
       - else
