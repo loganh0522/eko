@@ -8,14 +8,16 @@
       .applicant-details
         %p.name= "#{@user.first_name.upcase} #{@user.last_name.upcase}"
         .contact
-          %span.glyphicon.glyphicon-map-marker  
-            = "#{@user.city}, #{@user.countries.first.name}"
+          - if @user.city.present?
+            %span.glyphicon.glyphicon-map-marker  
+              = "#{@user.city}, #{@user.countries.first.name}"
           %br
           %span.glyphicon.glyphicon-envelope 
             = "#{@user.email}"
           %br
-          %span.glyphicon.glyphicon-earphone 
-            = "#{@user.phone}"
+          - if @user.city.present?
+            %span.glyphicon.glyphicon-earphone 
+              = "#{@user.phone}"
       .applicant-nav-bar  
         = render "business/shared/applicant_nav"
 
