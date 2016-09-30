@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   
   match '/widgets/:action/:widget_key', via: [:get], :controller => 'widgets', :widget_key => /.*/
   
-  post :inbound, to: "inbound_emails#create"
+  post :incoming_email, to: "inbound_emails#create"
 
   resources :skills 
   resources :certifications
