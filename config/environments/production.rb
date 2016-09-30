@@ -33,7 +33,7 @@ Rails.application.configure do
     :address        => ENV['MAILGUN_SMTP_SERVER'],
     :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
     :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-    :domain         => 'stormy-tor-75317.heroku.com',
+    :domain         => 'prod-talentwiz.heroku.com',
     :authentication => :plain 
   }
 end

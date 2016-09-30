@@ -11,7 +11,7 @@ class AppMailer < ActionMailer::Base
     @applicant = applicant
     @job = job 
     @current_company = current_company
-    mail to: applicant.email, from: "application-" + token + "@sys.talentwiz.com", subject: "#{current_company.name}: #{job.title}"
+    mail to: applicant.email, from: "application-" + token + "@sys.talentwiz.ca", subject: "#{current_company.name}: #{job.title}"
   end
 
   def send_forgot_password(user)
