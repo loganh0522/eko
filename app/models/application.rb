@@ -3,6 +3,9 @@ class Application < ActiveRecord::Base
   # include Elasticsearch::Model::Callbacks 
   # index_name ["talentwiz", Rails.env].join('_') 
 
+  before_create :generate_token
+
+
   belongs_to :company
   belongs_to :applicant, class_name: 'User', foreign_key: :user_id
   belongs_to :apps, class_name: 'Job', foreign_key: :job_id 
@@ -19,6 +22,10 @@ class Application < ActiveRecord::Base
   has_many :question_answers, dependent: :destroy
   accepts_nested_attributes_for :question_answers, allow_destroy: true
 
+
+  def generate_token
+    self.token = SecureRandom.urlsafe_base64
+  end
 
   def as_indexed_json(options={})
     as_json(
