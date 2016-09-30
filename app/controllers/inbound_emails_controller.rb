@@ -2,7 +2,7 @@ class InboundEmailsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
 
   def create
-    @token = params[:reciever].split('-').last.split('@').first
+    @token = params[:recipient].split('-').last.split('@').first
     @application = Application.find_by(token: @token)
     @msg_body = params["body-plain"]
 
