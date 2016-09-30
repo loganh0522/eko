@@ -7,7 +7,7 @@ class InboundEmailsController < ActionController
     @msg_body = params["body-plain"]
 
     if @application.present? 
-      @message = Message.create((body: @msg_body, application_id: @application.id, user_id: app.user_id))
+      @message = Message.create(body: @msg_body, application_id: @application.id, user_id: app.user_id)
     end
   end
 end
