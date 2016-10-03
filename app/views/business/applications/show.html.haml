@@ -5,17 +5,32 @@
     .add-comment-on-applicant
       = render "business/comments/add_note_on_application"
 
-    .applicant-experience
-      .header
-        %h4 Experience   
-      .applicant-positions
+    .profile-container#showing-container
+      .applicant-experience
         = render 'business/applications/application_experience'
 
-    .applicant-experience
-      .header
-        %h4 Education    
-      .applicant-positions
+      .applicant-experience    
         = render 'business/applications/application_education'
+
+    .messages-container
+      .applicant-messages
+        = render "business/messages/applicant_messages"
+
+    .notes-container
+      .applicant-notes
+        = render "business/comments/applicant_notes"
+
+    .assessments-container
+      .applicant-assessments
+        = render "business/assessments/applicant_assessment"
+
+    .scorecards-container
+      .applicant-scorecard
+        = render "business/application_scorecards/applicant_scorecard"
+
+    .activity-container
+      .activity-feed        
+        = render "business/activities/application_activity"
 
   .applicant-side-container
     = render 'business/applications/application_side_container'

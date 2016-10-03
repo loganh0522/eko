@@ -6,7 +6,7 @@
         %h3.modal-title My Scorecard
 
       .modal-body                
-        = form_for [:business, @job, @application, @application_scorecard] do |f|
+        = form_for [:business, @job, @application, @application_scorecard], html: {remote: true} do |f|
           = f.fields_for :overall_ratings, OverallRating.new do |k|
             = k.hidden_field :user_id, value: current_user.id
             %table.table

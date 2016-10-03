@@ -2,6 +2,20 @@
   .applicant-main-container
     float: left
     margin: 0px 15px 0px 0
+
+    .profile-container
+
+    .messages-container
+      display: none
+    .notes-container
+      display: none
+    .assessments-container
+      display: none
+    .scorecards-container
+      display: none
+    .activity-container
+      display: none
+
     .applicant-header
       border: solid 2px #E4E5E9
       margin: 15px 0px 0px 75px
@@ -55,14 +69,12 @@
             height: 50px 
             padding: 15px 15px 0 15px 
             text-align: center 
-            color: white
-
-            a
-              color: black
-              text-decoration: none
-          
-          li.active
+            color: black
+            cursor: pointer
+         
+          .active-container    
             border-bottom: solid 3px #EF7B2B
+            color: black
 
     
     .add-comment-on-applicant
@@ -165,10 +177,7 @@
               ul 
                 li
                   width: 450px
-
-
-        
-        
+      
     .activity-feed
       margin: 15px 0px 0px 75px
       padding: 5px 0px 15px 0px
@@ -319,7 +328,7 @@
       
       h4 
         padding: 0 0 15px 15px
-        
+  
 
 .footer 
   clear: both

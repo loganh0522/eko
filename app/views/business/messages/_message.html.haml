@@ -7,7 +7,7 @@
       .modal-body
         = "To: #{@user.first_name} #{@user.last_name}"
         %br
-        = form_for [:business, @job, @application, @message] do |f| 
+        = form_for [:business, @job, @application, @message], html: {remote: true, class: 'invite'} do |f| 
           %fieldset
           = f.text_area :body, size: "12x12", class: "wysihtml5 form-control"
           = hidden_field_tag :user_id, current_user.id

@@ -1,0 +1,33 @@
+.header
+  %h4 Assessments
+
+.assessment
+  - if @questionairre.nil?
+    .not-present-container
+      %p You currently do not have any listed work experiences. 
+      
+  - else 
+    .panel-group#accordian{"role"=>"tablist", "aria-multiselectable"=>"true"}
+      .panel.panel-default{"role"=>"tab", "id"=>"headingOne"}
+        .panel-heading
+          %h4.panel-title
+            %a.accordion-toggle{"role" => "button", "data-toggle" => "collapse", "data-parent" => "#accordion", :href => "#collapseOne", "aria-expanded" => "true", "aria-controls" => "collapseOne"} Application Form
+        #collapseOne.panel-collapse.collapse.in{"role"=>"tabpanel", "aria-labelledby"=>"headingOne"}
+          .panel-body         
+            .application-form
+              - @questionairre.questions.each do |question|
+                .question-area
+                  .question
+                    = question.position
+                    = question.body
+                  .answer
+                    - if question.kind == 'Text' || question.kind == 'Paragraph'
+                      = question.question_answer.body
+                    - if question.kind == 'Checkbox' || question.kind == 'Multiple Choice'
+                      - question.question_options.each do |option|
+                        %ul
+                          %li
+                            - if question.question_answer.question_option_id == option.id
+                              %b= option.body
+                            - else 
+                              %p= option.body

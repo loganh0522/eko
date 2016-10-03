@@ -16,13 +16,18 @@ class Business::CommentsController < ApplicationController
 
   def create 
     @comment = Comment.new(comment_params)
-
-    if @comment.save 
-      track_activity @comment
-      redirect_to :back
-    else
-      flash[:error] = "Sorry something went wrong"
-      redirect_to :back
+    @application = Application.find(params[:application_id])
+    @comments = @application.comments
+    @activities = current_company.activities.where(application_id: @application.id).order('created_at DESC')
+    
+    respond_to do |format| 
+      if @comment.save 
+        track_activity @comment
+      else
+        flash[:error] = "Sorry something went wrong"
+        redirect_to :back
+      end
+      format.js 
     end
   end
 

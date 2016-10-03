@@ -18,15 +18,19 @@ class Business::MessagesController < ApplicationController
     @job = Job.find(params[:job_id])
     
     @application = Application.find(params[:application_id])
+    @user = @application.applicant
     @message = Message.create(body: params[:message][:body], application_id: @application.id, user_id: current_user.id)
+    @messages = @application.messages
     @recipient = @application.applicant
     @token = @application.token
+    @activities = current_company.activities.where(application_id: @application.id).order('created_at DESC')
 
     AppMailer.send_applicant_message(@token, @message, @job, @recipient, current_company).deliver
-    
     track_activity(@message)
 
-    redirect_to :back
+    respond_to do |format| 
+      format.js 
+    end
   end
 
   def send_messages 

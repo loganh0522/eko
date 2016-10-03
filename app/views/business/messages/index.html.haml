@@ -5,52 +5,9 @@
       = render "business/comments/add_note_on_application"
     
     .applicant-messages
-      .header
-        %h4 Messages
-        = link_to "Send a Message", '#', {:data => {:toggle => "modal", :target => "#messageModal"}}
-      = render "message" 
-  
-      - if !@messages.present?
-        .not-present-container
-          %p There are currently no notes for this applicant.
-      - else
-        - @messages.each do |message|
-          .message
-            .message-header 
-              - if current_user.user_avatar.present? 
-                = image_tag message.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
-              - else 
-                .circle-img= message.user.first_name.first.capitalize     
-              %p.name= "#{message.user.first_name} #{message.user.last_name}"
-              %p.sent= time_ago_in_words(message.created_at) unless message.created_at.blank?
-            .body
-              %p= simple_format(message.body)
+      = render "business/messages/applicant_messages"
 
   .applicant-side-container
     = render 'business/applications/application_side_container'
-
-
-  / .applicant-side-container
-  /   .current-stage
-  /     %h4= "Current Stage: #{@stage.name}"
-
-  /     = form_tag business_job_application_move_stages_path(@job.id, @application) do
-  /       %input(type="submit" value="Move to Next Stage" class="btn btn-success")
-
-  /     = form_tag sort_business_job_stages_path do
-  /       %input(type="submit" value="X Reject" class="btn btn-danger")
-
-  /   .add-task
-  /     %h4 Add a Task
-  /     %p Create a task for this applicant. Tag a team member using @name to notify them of the task.
-  /     = form_tag do
-  /       = text_area_tag(:q)
-
-  /   .send-applicant-message
-  /     %h4 Send a Message 
-  /     %p Create a task for this applicant. Tag a team member using @name to notify them of the task.
-  /     = form_tag do
-  /       = text_area_tag(:q)
-  / 
 
 .footer 

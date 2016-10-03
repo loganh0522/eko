@@ -1,5 +1,5 @@
 %table   
-  = form_for [:business, @job, @application, @comment] do |f| 
+  = form_for [:business, @job, @application, @comment], html: {remote: true} do |f| 
     %tr
       %td(width="10%")
         - if current_user.user_avatar.present? 
