@@ -18,7 +18,7 @@ class Business::UsersController < ApplicationController
     @user = current_user
     @user_avatar = UserAvatar.new
     @avatar = @user.user_avatar
-    @auth = request.env['omniauth.auth']['credentials']
+    # @auth = request.env['omniauth.auth']['credentials']
   end
 
   def gmail_auth
