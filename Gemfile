@@ -40,6 +40,8 @@ gem 'remotipart', '~> 1.2'
 gem 'rmagick'
 
 gem 'googlecharts'
+gem 'omniauth', '~> 1.2.2'
+gem 'omniauth-google-oauth2'
 
 
 group :development do

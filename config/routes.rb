@@ -9,12 +9,13 @@ Rails.application.routes.draw do
   resources :companies
   resources :users
 
-  # match '/', to: "job_boards#index", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
-  # match 'login', to: "sessions#subdomain_new", constraints: {subdomain: /.+/}, via: [:get]
-  # match 'login', to: "sessions#create", constraints: {subdomain: /.+/}, via: [:post]
-  # match 'job', to: "jobs#show", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
-  # match 'register', to: "users#sub_new_job_seeker", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
-  # match 'profile', to: "profiles#index", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
+
+  match '/', to: "job_boards#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
+  match 'login', to: "sessions#subdomain_new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz'}, via: [:get]
+  match 'login', to: "sessions#create", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz'}, via: [:post]
+  match 'job', to: "jobs#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
+  match 'register', to: "users#sub_new_job_seeker", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
+  match 'profile', to: "profiles#index", constraints: {subdomain: /.+/}, via: [:get, :post, :put, :patch, :delete]
 
   get 'login', to: "sessions#new"
   get '/job_seekers/new', to: 'users#new_job_seeker'
@@ -50,6 +51,8 @@ Rails.application.routes.draw do
     post "update_certification", to: "users#update_certifications"
   end
 
+  get "/auth/:provider/callback", to: 'business/users#edit'
+
   namespace :business do 
     root to: "jobs#index" 
     resources :activities
@@ -62,6 +65,8 @@ Rails.application.routes.draw do
     resources :applications
 
     get "plan", to: "customers#plan"
+
+
     resources :customers do
       collection do 
         get 'cancel', to: "customers#cancel"

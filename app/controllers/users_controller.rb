@@ -55,6 +55,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def gmail_auth
+    @auth = request.env['omniauth.auth']['credentials']
+  end
+
   private 
 
   def user_params
