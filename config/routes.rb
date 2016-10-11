@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  match '/', to: "job_boards#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
+  match 'login', to: "sessions#subdomain_new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz'}, via: [:get]
+  match 'login', to: "sessions#create", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz'}, via: [:post]
+  match 'job', to: "jobs#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
+  match 'register', to: "users#sub_new_job_seeker", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
+  match 'profile', to: "profiles#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
+
+
   root to: 'pages#home'
   get 'pricing', to: 'pages#pricing'
   get 'features', to: 'pages#features'
@@ -10,12 +18,6 @@ Rails.application.routes.draw do
   resources :users
 
 
-  match '/', to: "job_boards#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
-  match 'login', to: "sessions#subdomain_new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz'}, via: [:get]
-  match 'login', to: "sessions#create", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz'}, via: [:post]
-  match 'job', to: "jobs#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
-  match 'register', to: "users#sub_new_job_seeker", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
-  match 'profile', to: "profiles#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
 
   get 'login', to: "sessions#new"
   get '/job_seekers/new', to: 'users#new_job_seeker'
