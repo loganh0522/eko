@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  match '/', to: "job_boards#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
+  match '/', to: "job_boards#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'dev-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
   match 'login', to: "sessions#subdomain_new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz'}, via: [:get]
   match 'login', to: "sessions#create", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz'}, via: [:post]
   match 'job', to: "jobs#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
