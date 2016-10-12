@@ -12,5 +12,4 @@
           .details
             %h4= "#{job.title}"
             %p Toronto, On, Canada
-          
-            = link_to "Apply", job_path(job), class: "btn btn-primary"
+            = link_to "Apply", "jobs/#{job.id}", class: "btn btn-primary"

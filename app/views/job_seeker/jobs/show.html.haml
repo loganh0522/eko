@@ -8,7 +8,7 @@
     %p= simple_format(@job.benefits)
   .apply 
     - if @job.questionairre.present? 
-      =link_to "Apply to Job", new_job_seeker_question_answer_path, {:class => "invite", :data => {:toggle => "modal", :target => "#applyModal"}}
+      = link_to "Apply to Job", new_job_seeker_question_answer_path, {:class => "invite", :data => {:toggle => "modal", :target => "#applyModal"}}
       = render 'apply'
     - else
       = bootstrap_form_for [:job_seeker, @application] do |f|

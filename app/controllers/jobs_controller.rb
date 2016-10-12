@@ -5,7 +5,6 @@ class JobsController < ApplicationController
     @company = @job_board.company
     @job = Job.find(params[:id])
     @application = Application.new
-
     # @questionairre = @job.questionairre
     # @questions = @questionairre.questions
   end
