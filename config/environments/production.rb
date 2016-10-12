@@ -17,7 +17,7 @@ Rails.application.configure do
 
   config.assets.compile = true
 
-  config.action_dispatch.tld_length = 2
+  config.action_dispatch.tld_length = 1
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
