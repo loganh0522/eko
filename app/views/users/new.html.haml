@@ -12,7 +12,6 @@
         = f.hidden_field :kind, :value => 'business'
         = hidden_field_tag :invitation_token, @invitation_token
         = f.submit "Sign me up", class: "btn button-submit"
-
-    %p 
+    %p
       Already have an account? 
       = link_to 'Log In Here', '/login'

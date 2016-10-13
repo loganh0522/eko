@@ -6,24 +6,56 @@
     .sign-up
       = link_to "Try it Today", new_user_path, class: "btn btn-primary btn-large"
 
-.home-intro-info2
+.content-breaker
+  %h2 Learn how TalentWiz can improve your recruitment process
 
-.home-intro-info1
-  .header
-    %h3 Easy to use Tools to reduce Cost per Hire, reduce Time to Hire, and improve the Quality of Hire
-    
-    .col-md-4
-      %img.circle
-      %h2 Candidate Filters
-      %h4 Find Qualified Candidates
-      %p Use our unique candidate filters to easily, and quickly identify candidates with the right skills, industry knowledge, certifications and experience. 
-    .col-md-4
-      %img.circle
-      %h2 Candidate Portfolio
-      %h4 Learn More About Each Applicant
-      %p Candidates apply with a unique profile that provides more information than a traditional resume.
-    .col-md-4
-      %img.circle
-      %h2 Marketing Box #1
-      %p These marketing boxes are a great place to put some information. These can contain summaries of what the company does, promotional information, or anything else that is relevant to the company. These will usually be below-the-fold.
+.home-intro-info
+  .header 
+    .row 
+      .col-md-4
+        %img(src="/tmp/idea.png")
+        %h3 Build Your Hiring Process
+        %p.content Hiring great talent starts with a great hiring process. Plan and create an effective recruitment strategy with ease. 
+        = link_to "Learn More", new_user_path, class: "btn btn-primary btn-large"
+      .col-md-4
+        %img(src="/tmp/search.png") 
+        %h3 Find and Attract Talent
+        %p.content Attract, find, and engage talent to build your talent pipeline like a pro. Build an online recruitment presence in minutes.
+        = link_to "Learn More", new_user_path, class: "btn btn-primary btn-large"
+      .col-md-4
+        %img(src="/tmp/applicant.png")  
+        %h3 Manage Applicants
+        %p.content We know that hiring happens quickly. Effectively manage your applicants through the entire recruitment process. 
+        = link_to "Learn More", new_user_path, class: "btn btn-primary btn-large"
+    .second-row
+      .row
+        .col-md-4
+          %img(src="/tmp/check-list2.png")
+          %h3 Assess Candidates 
+          %p.content Find and identify the best applicants in your pipeline. With our unique candidate filter, customizable scorecards and questionairres. 
+          = link_to "Learn More", new_user_path, class: "btn btn-primary btn-large"
+        .col-md-4
+          %img(src="/tmp/stick-man.png") 
+          %h3 Team Collaboration
+          %p.content Hiring is a team a sport. Collaborate with your team members to evaluate candidates and manage the recruitment workflow. 
+          = link_to "Learn More", new_user_path, class: "btn btn-primary btn-large"
+        .col-md-4
+          %img(src="/tmp/pie-chart.png")  
+          %h3 Analyze & Improve
+          %p.content Analyze, assess and improve every aspect of your recruitment strategy. Our hiring metrics allow you to see your results. 
+          = link_to "Learn More", new_user_path, class: "btn btn-primary btn-large"
+
+.mid-container
+  %p Grow your company with us
+.bottom-container
+  .col-md-3
+    %ul 
+      %li Features
+      %li Pricing
+  .col-md-3
+    %ul
+      %li Contact
+  .col-md-3
+  .col-md-3
+
 
