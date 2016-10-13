@@ -1,7 +1,9 @@
 .home-intro-header
-  .intro-message 
-    .header Hiring Simplified
-    .sub-header TalentWiz is a profile based recruitment system, designed to improve your recruitment process. Improve candidate management, screening, and team collaboration, to make better hires.
+  .intro-message.col-md-10 
+    .header 
+      Hiring Simplified
+    .sub-header 
+      TalentWiz is a profile based recruitment system, designed to improve your recruitment process. Improve candidate management, screening, and team collaboration, to make better hires.
     
     .sign-up
       = link_to "Try it Today", new_user_path, class: "btn btn-primary btn-large"
@@ -46,16 +48,25 @@
           = link_to "Learn More", new_user_path, class: "btn btn-primary btn-large"
 
 .mid-container
-  %p Grow your company with us
+  %h2 Grow your company with us
+  = link_to "Start Your Trial", new_user_path, class: "btn btn-trial"
+
 .bottom-container
   .col-md-3
+    %img(src="/tmp/logo.jpg") 
+  .col-md-3
+    %h4 Product
     %ul 
-      %li Features
+      %li Feature Overview
       %li Pricing
   .col-md-3
+    %h4 Company 
     %ul
       %li Contact
   .col-md-3
-  .col-md-3
+    %h4 Try TalentWiz Today
+    %p Free 30-day Trial 
+    = link_to "Try it Today", new_user_path, class: "btn btn-primary btn-large"
+  
 
 
