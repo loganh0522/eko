@@ -1,22 +1,43 @@
+/ .current-stage
+/   %h4= "Current Stage: "
+/   - if @application.stage == nil 
+/     %p.stage Applied
+/   -else 
+/     %p.stage Applied
+
+/   - @job.stages.each do |stage|
+/     - if @application.stage == nil 
+/       %p.stage
+/         = stage.name
+/     - else
+/       %p.stage{:class => is_current_stage?(stage, @application)}
+/         = stage.name
+
+
 .current-stage
-  %h4= "Current Stage: "
-  - if @application.stage == nil 
-    %p.stage Applied
-  -else 
-    %p.stage Applied
-
+  %h4 Current Stage: 
   - @job.stages.each do |stage|
-    - if @application.stage == nil 
-      %p.stage
-        = stage.name
-    - else
-      %p.stage{:class => is_current_stage?(stage, @application)}
-        = stage.name
-
+    .stage
+      - if is_current_stage?(stage, @application)
+        .stage-header.active= "#{stage.name} (Current Stage)"
+        .stage-body
+          %ul
+            %li Task 1
+            %li Interview 2 
+      - else
+        .stage-header= stage.name 
+        .stage-body{:style=>"display:none;"}
+          %ul
+            %li Task 1
+            %li Interview 2
+          
 
   .stage-actions
-    = form_tag sort_business_job_stages_path do
-      %input(type="submit" value="X Reject" class="btn btn-danger")
+    .reject
+      = form_tag sort_business_job_stages_path do
+        %input(type="submit" value="X Reject" class="btn btn-danger")
 
-    = form_tag business_job_application_move_stages_path(@job.id, @application) do
-      %input(type="submit" value="Next Stage" class="btn btn-success")
+    .move-forward
+      = form_tag business_job_application_move_stages_path(@job.id, @application) do
+        %input(type="submit" value="Next Stage" class="btn btn-success")
+

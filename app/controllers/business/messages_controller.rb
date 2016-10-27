@@ -41,7 +41,7 @@ class Business::MessagesController < ApplicationController
     @token = @application.token
 
     AppMailer.send_applicant_message(@token, @message, @job, @recipient, current_company).deliver
-    track_activity(@message, action = "create")
+    track_activity(@message, "create")
 
     redirect_to business_job_path(@job)
   end
@@ -57,7 +57,7 @@ class Business::MessagesController < ApplicationController
       @token = @application.token
 
       AppMailer.send_applicant_message(@token, @message, @job, @recipient, current_company).deliver
-      track_activity(@message, action = "create")
+      track_activity(@message, "create")
     end
     redirect_to business_job_path(@job)
   end

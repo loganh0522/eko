@@ -3,22 +3,130 @@
     .header Affordable, Simple, Flexible Pricing
     .sub-header We know that hiring can be expensive and unpredictable. That is why we offer cost-effective and flexible pricing plans to meet your recruitment needs.
 
-.features-container
-  = render "shared/features_nav"
+.feature-overview-container
+  .feature-overview
+    %h3 Plan Your Hiring Process
+    .row 
+      .feat.col-md-6
+        .img
+          %img(src="/tmp/overview-user.png")
+        .des
+          %h4 Build Your Hiring Team
+          %p.content Add multiple team members to a job, that will be a part of the hiring process. 
+          = link_to "Learn More", features_hiring_team_path, class: "btn btn-primary btn-large"
+      .feat.col-md-6
+        .img
+          %img(src="/tmp/overview-stages.png")
+        .des
+          %h4 Custom Recruitment Pipeline
+          %p.content The recruitment process for each job is different. Create a unique recruitment workflow for each job posting.
+          = link_to "Learn More", features_recruitment_pipeline_path, class: "btn btn-primary btn-large"
+    .row
+      .feat.col-md-6 
+        .img
+          %img(src="/tmp/overview-list.png")
+        .des
+          %h4 Candidate Evaluations
+          %p.content Use custom applicant questionairres and scorecards to more effectively evaluate candidates. 
+          = link_to "Learn More", features_evaluate_candidate_path, class: "btn btn-primary btn-large"
+      .feat.col-md-6
+        .img
+          %img(src="/tmp/overview-templates.png")
+        .des
+          %h4 Templates (Coming Soon)
+          %p.content Build job, e-mail, interview, and scorecard templates so that they can easily be accessed and utilized later.
+          = link_to "Coming Soon", "#", class: "btn btn-primary btn-large"
+  
+  .feature-overview
+    %h3 Source Candidates
+    .row 
+      .feat.col-md-6
+        .img
+          %img(src="/tmp/overview-career-site.png")
+        .des
+          %h4 Career Site
+          %p.content Build a custom career page to display your jobs and provide applicants with the ability to apply directly to a job online.
+          = link_to "Learn More", features_branded_job_board_path, class: "btn btn-primary btn-large"
+      .feat.col-md-6
+        .img
+          %img(src="/tmp/overview-job-distribution.png")
+        .des
+          %h4 Job Distribution (Coming Soon) 
+          %p.content Distribute your job posting to both free and paid job boards at the click of a button.
+          = link_to "Coming Soon", "#", class: "btn btn-primary btn-large"
 
-  .branded-job-board
-    .header 
-      We understand that you have worked hard to build and maintain your company brand. So it is important that brand continues to shine throughout your recruitment process. TalentWiz offers several options for you to display your job opportunities.
-    .feature-container
-      .feature.col-md-3
-        Job Board
-      .description.col-md-9
-        %p Easily build and integrate a branded careers page to display jobs and accept applications online. Simply add your logo and a short description about your company to get up and running.  
+  .feature-overview
+    %h3 Manage Candidates
+    .row 
+      .feat.col-md-6
+        .img
+          %img(src="/tmp/overview-applicant-tracking.png")
+        .des
+          %h4 Applicant Tracking
+          %p.content We know that hiring happens quickly. Effectively track and manage your applicants through the entire recruitment process. 
+          = link_to "Learn More", features_applicant_tracking_path, class: "btn btn-primary btn-large"
+      .feat.col-md-6
+        .img
+          %img(src="/tmp/overview-candidate-profile.png")
+        .des
+          %h4 Candidate Profiles
+          %p.content Unique candidate profiles provide a complete view of a candidate, and the interactions hiring members have had with the candidate.
+          = link_to "Learn More", features_candidate_profile_path, class: "btn btn-primary btn-large"
+    .row
+      .feat.col-md-6 
+        .img
+          %img(src="/tmp/overview-talent-pool.png")
+        .des
+          %h4 Talent Pool
+          %p.content All your applicants are accessible in a central location. Build a pool of talent to access and filter through at any point. 
+          = link_to "Learn More", features_talent_pool_path , class: "btn btn-primary btn-large"
+      .feat.col-md-6
+        .img
+          %img(src="/tmp/overview-task-pipeline.png")
+        .des
+          %h4 Task Pipeline
+          %p.content The task pipeline provides users with an easy to use interface to show recruiters the tasks and interviews that they need to complete.
+          = link_to "Coming Soon", "", class: "btn btn-primary btn-large"
 
-    .feature-container
-      .feature.col-md-3
-        Job Widget
-      .description.col-md-9
-        %p Want to display your jobs on your website? No problem, we offer an easy to use job widget. With a little bit of code JavaScript and CSS you can customize the look of your job postings and job descriptions. Jobs are automatically updated on your website as you post, edit and close job postings. 
-   
+  .feature-overview
+    %h3 Team Collaboration
+    .row 
+      .feat.col-md-6
+        .img
+          %img(src="/tmp/overview-career-site.png")
+        .des
+          %h4 Applicant Tracking
+          %p.content Hiring great talent starts with a great hiring process. Plan and create an effective recruitment strategy with ease. 
+          = link_to "Learn More", new_user_path, class: "btn btn-primary btn-large"
+      .feat.col-md-6
+        .img
+          %img(src="/tmp/overview-career-site.png")
+        .des
+          %h4 Candidate Profiles
+          %p.content Attract, find, and engage talent to build your talent pipeline like a pro. Build an online recruitment presence in minutes.
+          = link_to "Learn More", new_user_path, class: "btn btn-primary btn-large"
+
+.mid-container
+  %h2 Grow your Company with TalentWiz
+  = link_to "Start Your Trial", new_user_path, class: "btn btn-trial"
+
+.bottom-container
+  .col-md-3
+    %img(src="/tmp/logo.jpg") 
+  .col-md-3
+    %h4 Product
+    %ul 
+      %li Feature Overview
+      %li Pricing
+  .col-md-3
+    %h4 Company 
+    %ul
+      %li Contact
+  .col-md-3
+    %h4 Try TalentWiz Today
+    %p Free 30-day Trial 
+    = link_to "Try it Today", new_user_path, class: "btn btn-primary btn-large"
+
+
+
 

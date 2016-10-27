@@ -1,4 +1,4 @@
-- if !request.subdomain.present? || request.subdomain == 'www' || request.subdomain == 'prod-talentwiz' || request.subdomain == 'dev-talentwiz' || request.subdomain == 'stageing-talentwiz'
+- if !request.subdomain.present? || request.subdomain == 'www' || request.subdomain == 'prod-talentwiz' || request.subdomain == 'dev-talentwiz' || request.subdomain == 'stageing-talentwiz' || request.subdomain == '5e1057f0'
   %section#top-header.row
     - if !logged_in?
       .navbar-static-top
@@ -31,17 +31,19 @@
                 = image_tag current_user.user_avatar.image.small_image, :class => "img dropdown-img"
               - else
                 .circle-img= current_user.first_name.first.capitalize
-              = current_user.first_name
+              .name= current_user.first_name
               %b.caret
             %ul.dropdown-menu.dropdown-menu-right
               %li
-                %a= link_to "Career Portal", business_users_path
+                %a= link_to "Career Portal", edit_business_job_board_path(current_company.job_board.id)
               %li
                 %a= link_to "Team Members", business_users_path
               %li
                 %a= link_to "Subscription", business_plan_path
               %li
                 %a= link_to "Billing", business_customers_path
+              %li
+                %a= link_to "My Profile", edit_business_user_path(current_user.id)
               %li
                 %a= link_to "Sign Out", signout_path
        

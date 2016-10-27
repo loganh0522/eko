@@ -1,5 +1,5 @@
 .all-applicants-container
-  margin: 100px 0 0 135px
+  margin: 100px 0 0 8%
   
   .applicant-nav
     float: left
@@ -9,6 +9,7 @@
     .nav
       width: 195px
       border: 1px solid #c6c8ca
+      border-top: none
       background: #ffffff
       overflow: hidden
       margin-bottom: 100px
@@ -80,12 +81,32 @@
       h1
         float: left
         margin: 25px 0 0 10px
-      .actions
-        float: right
-        margin: 20px 10px 0 0
+    
+    .search-field
+      float: left
+      margin-left: 40px
+      width: 400px
+      margin-top: -15px
+      form
+        margin-top: 0
+        input[type=search]
+          width: 250px
+          float: left
+        input[type=submit]
+          float: left
+          margin-left: 10px
+
+
+    .actions
+      float: right
+      margin: 0 40px 0 0
+
+
 
     
     .applicants
+      clear: both
+      padding-top: 40px
       .table 
         margin-left: 40px
         width: 820px

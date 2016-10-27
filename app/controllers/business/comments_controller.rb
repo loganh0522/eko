@@ -37,7 +37,8 @@ class Business::CommentsController < ApplicationController
     
     applicant_ids.each do |id| 
       @application = Application.where(user_id: id, job_id: params[:job_id]).first
-      Comment.create(body: params[:comment], user_id: current_user.id, application_id: @application.id)
+      @comment = Comment.new(body: params[:comment], user_id: current_user.id, application_id: @application.id)
+      track_activity(@comment, "create")
     end
     redirect_to business_job_path(@job)
   end

@@ -1,15 +1,24 @@
 Rails.application.routes.draw do
-  match '/', to: "job_boards#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
-  match 'login', to: "sessions#subdomain_new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz'}, via: [:get]
-  match 'login', to: "sessions#create", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz'}, via: [:post]
-  match 'jobs/:id', to: "jobs#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
-  match 'register', to: "users#sub_new_job_seeker", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
-  match 'profile', to: "profiles#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
+  # match '/', to: "job_boards#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
+  # match 'login', to: "sessions#subdomain_new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz'}, via: [:get]
+  # match 'login', to: "sessions#create", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz'}, via: [:post]
+  # match 'jobs/:id', to: "jobs#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
+  # match 'register', to: "users#sub_new_job_seeker", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
+  # match 'profile', to: "profiles#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz'}, via: [:get, :post, :put, :patch, :delete]
 
 
   root to: 'pages#home'
   get 'pricing', to: 'pages#pricing'
   get 'features', to: 'pages#features'
+  
+  get 'features/branded-job-board', to: 'features#job_board'
+  get 'features/applicant-tracking', to: 'features#applicant_tracking'
+  get 'features/candidate-profile', to: 'features#candidate_profile'
+  get 'features/talent-pool', to: 'features#talent_pool'
+  get 'features/hiring-team', to: 'features#hiring_team'
+  get 'features/recruitment-pipeline', to: 'features#recruitment_pipeline'
+  get 'features/evaluate-candidate', to: 'features#evaluate_candidate'
+  
 
 
   resources :job_boards
@@ -53,7 +62,7 @@ Rails.application.routes.draw do
     post "update_certification", to: "users#update_certifications"
   end
 
-  # get "/auth/:provider/callback", to: 'business/users#edit'
+  get "/auth/:provider/callback", to: 'business/users#edit'
 
   namespace :business do 
     root to: "jobs#index" 
@@ -65,7 +74,8 @@ Rails.application.routes.draw do
     resources :user_avatars
     resources :job_boards
     resources :applications
-
+    
+    
     get "plan", to: "customers#plan"
 
 
@@ -96,6 +106,7 @@ Rails.application.routes.draw do
         resources :comments
         resources :application_scorecards
         resources :assessments
+        resources :tags
         
         resources :scorecards do 
           collection do 

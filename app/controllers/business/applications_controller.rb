@@ -39,6 +39,7 @@ class Business::ApplicationsController < ApplicationController
     @job = Job.find(params[:job_id])
     @stage = @application.stage
 
+    @tags = @application.tags
 
     @positions = @user.work_experiences
     @education = @user.educations
@@ -71,6 +72,7 @@ class Business::ApplicationsController < ApplicationController
 
   end
 
+  
 
   private
 

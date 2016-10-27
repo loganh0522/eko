@@ -41,6 +41,7 @@ class User < ActiveRecord::Base
   has_many :user_certifications
   has_many :certifications, through: :user_certifications
 
+  has_one :google_token
   #Carrierwave uploader and minimagic for User Profile Pictures
 
   def as_indexed_json(options={})

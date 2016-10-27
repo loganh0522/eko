@@ -68,6 +68,7 @@ class Business::StagesController < ApplicationController
     @job = Job.find(params[:job_id])
     
     applicant_ids = params[:applicant_ids].split(',')
+
     applicant_ids.each do |id| 
       @application = Application.where(user_id: id, job_id: params[:job_id]).first
       @application.update_attribute(:stage_id, params[:stage][:stage_id])

@@ -13,7 +13,11 @@ module ApplicationHelper
   end
 
   def is_current_stage?(stage, application)
-    application.stage.id == stage.id ? "active" : ""
+    if application.stage.id == stage.id
+      return true
+    else
+      return false
+    end
   end
 
 end

@@ -4,11 +4,9 @@
   %li{:class => is_active?(business_users_path)}
     = link_to "Team Members", business_users_path
   %li{:class => is_active?(business_plan_path)}
-    = link_to "Subscription", business_plan_path 
-  
+    = link_to "Subscription", business_plan_path   
   %li{:class => is_active?(business_customers_path || new_business_customer_path)}
-    = link_to "Billing", current_company.customer.present? ? business_customers_path : new_business_customer_path
-  
+    = link_to "Billing", current_company.customer.present? ? business_customers_path : new_business_customer_path 
   %li{:class => is_active?(edit_business_user_path(current_user.id))}
     = link_to "My Profile", edit_business_user_path(current_user.id)
 

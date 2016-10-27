@@ -9,8 +9,9 @@
         .circle-img= activity.trackable.applicant.first_name.first.capitalize
 
       = link_to "#{activity.trackable.applicant.first_name} #{activity.trackable.applicant.last_name}", business_job_application_path(Job.where(id: activity.trackable.job_id).first.id, Application.where(user_id: activity.trackable.user_id, job_id: activity.trackable.job_id).first.id) 
-      was moved into the #{activity.trackable.stage.name} stage 
-      .time= "#{time_ago_in_words(activity.created_at)} ago" 
+      was moved to the 
+      %span= "#{activity.trackable.stage.name}"
+      stage.
     for the
     = link_to "#{activity.trackable.apps.title}", business_job_path(activity.trackable.apps)
     position by 

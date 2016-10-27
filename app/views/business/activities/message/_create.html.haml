@@ -1,4 +1,18 @@
 .activity{:id => activity.action, :class => "#{activity.trackable_type} job_#{activity.job_id}"}      
   .icon
-  sent a message to 
-  = link_to "#{activity.trackable.application.applicant.first_name} #{activity.trackable.application.applicant.last_name}", business_job_application_messages_path(Job.where(id: activity.trackable.application.job_id).first.id, Application.where(user_id: activity.trackable.application.user_id, job_id: activity.trackable.application.job_id).first.id)
+    .glyphicon.glyphicon-envelope
+  
+
+
+  .message-header
+    - if activity.user.user_avatar.present?
+      = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
+    - else 
+      .circle-img= activity.user.first_name.first.capitalize
+    .message-user-details
+      %span= "#{activity.user.first_name} #{activity.user.last_name}"
+      sent a message to 
+      = link_to "#{activity.trackable.application.applicant.first_name} #{activity.trackable.application.applicant.last_name}", business_job_application_messages_path(Job.where(id: activity.trackable.application.job_id).first.id, Application.where(user_id: activity.trackable.application.user_id, job_id: activity.trackable.application.job_id).first.id)
+      .time= "#{time_ago_in_words(activity.created_at)} ago" 
+  .message-body
+    = simple_format(activity.trackable.body)

@@ -13,14 +13,18 @@ jQuery ->
 
     if $(this).find('input').attr('value') == "true"
       $(this).find('input').attr('value', false)    
+      
       if $(this).attr('data-id') == 'move stages'
         $('.activity-feed').find('.Application').hide()
+      
       else if $(this).attr('data-id') == 'comments'
         $('.activity-feed').find('.Comment').hide()
+      
       else if $(this).attr('data-id') == 'scorecards'
         $('.activity-feed').find('.ApplicationScorecard').hide()
-      else if $(this).attr('data-id') == 'assessments'
-        $('.activity-feed').find('.ApplicationScorecard').hide()
+      
+      else if $(this).attr('data-id') == 'messages'
+        $('.activity-feed').find('.Message').hide()
 
 
     else if $(this).find('input').attr('value') == "false"
@@ -31,8 +35,8 @@ jQuery ->
         $('.activity-feed').find('.Comment').show()
       else if $(this).attr('data-id') == 'scorecards'
         $('.activity-feed').find('.ApplicationScorecard').show()
-      else if $(this).attr('data-id') == 'assessments'
-        $('.activity-feed').find('.ApplicationScorecard').show()
+      else if $(this).attr('data-id') == 'messages'
+        $('.activity-feed').find('.Message').show()
 
 
     return

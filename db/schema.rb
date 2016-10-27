@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928183830) do
+ActiveRecord::Schema.define(version: 20161024153612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,13 @@ ActiveRecord::Schema.define(version: 20160928183830) do
 
   create_table "functions", force: :cascade do |t|
     t.text "name"
+  end
+
+  create_table "google_tokens", force: :cascade do |t|
+    t.string   "access_token"
+    t.string   "refresh_token"
+    t.datetime "expires_at"
+    t.integer  "user_id"
   end
 
   create_table "hiring_teams", force: :cascade do |t|
@@ -329,6 +336,15 @@ ActiveRecord::Schema.define(version: 20160928183830) do
   create_table "subsidiaries", force: :cascade do |t|
     t.string  "name"
     t.integer "company_id"
+  end
+
+  create_table "taggings", force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "application_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "user_avatars", force: :cascade do |t|

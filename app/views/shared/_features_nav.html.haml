@@ -1,30 +1,37 @@
 .features-nav 
-  %h5 Plan your Hiring
+  %h5 Plan your Hiring Process
   %ul 
-    %li Create Job Posting
-    %li Build Hiring Team 
-    %li Custom Recruitment Pipeline 
-    %li Interview Plan (Coming Soon)
+    %li{:class => is_active?(features_hiring_team_path)}
+      = link_to "Build Hiring Team", features_hiring_team_path
+    %li{:class => is_active?(features_recruitment_pipeline_path)}
+      = link_to "Custom Recruitment Pipeline", features_recruitment_pipeline_path
+    %li{:class => is_active?(features_evaluate_candidate_path)}
+      = link_to "Evaluate Candidates", features_evaluate_candidate_path
     %li Templates (Coming Soon)
 
   %h5 Attract & Find Talent
   %ul 
-    %li Branded Job Board
+    %li{:class => is_active?(features_branded_job_board_path)}
+      = link_to "Career Site", features_branded_job_board_path
     %li Job Advertising (Coming Soon)
     %li Social Media (Coming Soon)
     %li Referral Network (Coming Soon)
-    %li People Search (Coming Soon)
+
   %h5 Manage Candidates
   %ul 
-    %li Intuitive Dashboard
-    %li Applicant Tracking
-    %li Candidate Filters
-    %li Candidate Profiles
-    %li EEO Compliance
+    %li{:class => is_active?(features_applicant_tracking_path)}
+      = link_to "Applicant Tracking", features_applicant_tracking_path
+    %li{:class => is_active?(features_candidate_profile_path)}
+      = link_to "Candidate Profiles", features_candidate_profile_path
+    %li{:class => is_active?(features_talent_pool_path)}
+      = link_to "Talent Pool", features_talent_pool_path 
+    %li Task Pipeline (Coming Soon)
+    %li EEO Compliance (Coming Soon)
+  
   %h5 Collaborate with Teammates
   %ul 
-    %li Task Pipeline (Coming Soon)
-    %li Interview Management (Coming Soon)
-    %li Score Candidates
+    %li Score & Assess
     %li Centralized Messaging
-    %li Timeline 
+    %li Timeline  
+    %li Interview Management (Coming Soon)
+    

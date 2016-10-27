@@ -1,5 +1,12 @@
 .header
   %h1 Applicants  
+  
+  .search-field
+    = form_tag business_job_path(@job), method: :get do   
+      .form-group
+        = search_field_tag :query, params[:query], placeholder: "Advanced Text Search", class: "form-control"
+        %input(type="submit" value="Search" class="btn btn-primary")
+
   %form_tag.actions
     = render "business/applications/move_stages"
     = render "business/comments/add_comment"
@@ -14,19 +21,19 @@
     %thead
       %tr
         %th(width="1%")= check_box_tag "select_all"
-        %th(width="5%")
-        %th(width="20%") Name 
+        %th(width="10%")
+        %th(width="25%") Name 
         %th(width="20%") Job Title
-        %th(width="15%") Stage 
-        %th(width="15%") Rating
-        %th(width="24%")
+        %th(width="20%") Stage 
+        %th(width="25%") Rating
+
       %tbody
         - @applicants.each do |applicant|
           - if @job.applications.where(user_id: applicant.id).first.stage.present?
             - stage = @job.applications.where(user_id: applicant.id).first.stage.name
           %tr{:id => "#{stage}" }
             %td
-              .checkbox{:data => {:id => applicant.id}}
+              .applicant-checkbox{:data => {:id => applicant.id}}
                 = check_box_tag "applicant_ids[]", applicant.id
             %td
               .circle

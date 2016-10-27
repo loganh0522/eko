@@ -26,10 +26,25 @@ class Business::JobsController < ApplicationController
   end
 
   def show 
-    @job = Job.find(params[:id])
-    @applicants = @job.applicants
-    @activities = current_company.activities.where(job_id: @job.id).order('created_at DESC')
-    @stages = @job.stages   
+    if params[:query].present? 
+      @job = Job.find(params[:id])
+
+      @results = Application.search(params[:query]).records.to_a
+      @applicants = []
+      
+      @results.each do |application|  
+        if application.company == current_company && application.apps == @job
+          @applicants.append(application.applicant)
+        end
+      end 
+      @activities = current_company.activities.where(job_id: @job.id).order('created_at DESC')
+      @stages = @job.stages  
+    else
+      @job = Job.find(params[:id])
+      @applicants = @job.applicants
+      @activities = current_company.activities.where(job_id: @job.id).order('created_at DESC')
+      @stages = @job.stages  
+    end   
   end
 
   def edit

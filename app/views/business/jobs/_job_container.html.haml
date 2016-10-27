@@ -6,7 +6,8 @@
     .posted-time= "#{time_ago_in_words(job.created_at)} ago" 
   .job-body
     .btns
-      = link_to 'Post to Job Boards', '#', class: 'button-job-actions'
+      .btn1
+        = link_to 'Post to Job Boards', '#', class: 'button-job-actions'
       .dropdown.btn2
         %a.button-mid.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
           Actions

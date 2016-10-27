@@ -20,6 +20,12 @@
             %li.activity  
               .checkbox{:data => {:id => "Scorecards"}}= check_box_tag "", true, true
               Archived     
+        %li.filter.date-applied
+          .content
+            Tags 
+        .body.open-job-body
+          
+
         %li.filter.open-jobs
           .content
             Open Job Postings: 
@@ -50,15 +56,20 @@
               .checkbox{:data => {:id => "Scorecards"}}= check_box_tag "", true, true
               Last Year
 
+
         
             
   .all-job-applicants
     .header
       %h1 Applicants  
-      = form_tag business_applications_path, method: :get do   
-        .form-group.col-sm-4
-          = search_field_tag :query, params[:query], placeholder: "Advanced Text Search", class: "form-control"
-          %input(type="submit" value="Search" class="btn btn-primary")
+
+    .applicant-actions
+      .search-field
+        = form_tag business_applications_path, method: :get do   
+          .form-group
+            = search_field_tag :query, params[:query], placeholder: "Advanced Text Search", class: "form-control"
+            %input(type="submit" value="Search" class="btn btn-primary")
+
       %form_tag.actions
         = render "business/applications/move_stages"
         = render "business/comments/add_comment"
@@ -66,6 +77,9 @@
         %input(type= "submit" value= "Add Note" class= "add_note_action btn btn-primary" data-toggle = "modal" data-target = "#add_commentModal")
         %input(type= "submit" value= "Message" class= "send_message btn btn-primary" data-toggle = "modal" data-target = "#send_messageModal")
         %input(type= "submit" value= "Delete" class= "btn btn-primary")  
+
+      
+    
     .applicants
       %table.table
         %thead

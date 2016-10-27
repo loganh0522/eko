@@ -7,11 +7,11 @@
         = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
       - else
         .circle-img= activity.user.first_name.first.capitalize
-      = "#{activity.user.first_name} #{activity.user.last_name}"
+      %span= "#{activity.user.first_name} #{activity.user.last_name}"
       finished their scorecard 
       .time= "#{time_ago_in_words(activity.created_at)} ago" 
     For
-    = link_to "#{activity.trackable.application.applicant.first_name} #{activity.trackable.application.applicant.last_name}", business_job_application_application_scorecards_path(Job.where(id: activity.trackable.application.job_id).first.id, Application.where(user_id: activity.trackable.application.user_id, job_id: activity.trackable.application.job_id).first.id)
+    = link_to "#{activity.trackable.application.applicant.first_name} #{activity.trackable.application.applicant.last_name}'s", business_job_application_application_scorecards_path(Job.where(id: activity.trackable.application.job_id).first.id, Application.where(user_id: activity.trackable.application.user_id, job_id: activity.trackable.application.job_id).first.id)
     application for 
     = link_to "#{activity.trackable.application.apps.title}"
 

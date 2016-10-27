@@ -1,6 +1,6 @@
-.contain
-  margin: 75px 135px 0 135px
-  
+.activity-container
+  margin: 50px 8.5% 0 8.5%
+  width: 975px
   .activity-filters
     float: left
     height: 500px
@@ -9,6 +9,7 @@
     .nav
       width: 195px
       border: 1px solid #c6c8ca
+      border-top: none
       background: #ffffff
       overflow: hidden
 
@@ -58,7 +59,7 @@
 
   .main-container
     float: left
-    width: 790px
+    width: 750px
     height: auto
     padding: 0 40px 50px 40px
     margin: 15px 0 100px 0
@@ -76,8 +77,8 @@
         margin-left: 25px
         
         .activity
-          width: 600px
-          padding: 10px 0 20px 15px 
+          width: 570px
+          padding: 10px 10px 20px 15px 
           border: 1px solid #E4E5E9 
           word-wrap: break-word
           margin: 10px 0 5px 25px
@@ -92,6 +93,9 @@
             font-size: 20px
           .glyphicon.glyphicon-share
             font-size: 20px
+          .glyphicon.glyphicon-envelope
+            font-size: 20px
+
 
           .icon
             height: 45px
@@ -100,7 +104,7 @@
             color: #fff
             box-sizing: border-box
             display: block
-            background: #53b2ea
+            background: #EF7B2B
             position: absolute
             left: -6em
             top: 25%
@@ -142,23 +146,62 @@
             height: 40px
             background: #EF7B2B
             text-align: center
-            font-size: 24px
-            padding-top: 2px
+            font-size: 18px
+            padding-top: 8px
             color: white
 
 
         .comment-header
           font-size: 12px
-          .commenting-user
-            font-weight: 600
+          padding: 0 10px 0 0
+          .commenting-user    
             font-size: 14px
             .time 
               float: right
               margin-right: 10px
               font-size: 12px
               color: rgba(0, 0, 0, 0.3)
+            span
+              font-weight: 600
         .comment-body
-          margin: 15px 0 0 0
+          margin: 10px 0 0 0
+
+        .comments-header
+          font-size: 12px
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+          padding: 0 10px 10px 0
+          overflow: hidden
+          .commenting-user
+            font-size: 14px
+            .time 
+              float: right
+              margin-right: 10px
+              font-size: 12px
+              color: rgba(0, 0, 0, 0.3)
+            span
+              font-weight: 600
+        .comment-body
+          margin: 10px 0 0 0
+
+        
+
+        .message-header
+          font-size: 12px
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+          padding: 0 10px 10px 0
+          overflow: hidden          
+          .message-user-details
+            margin: 10px 0 0 5px
+            font-size: 14px
+            .time 
+              float: right
+              margin-right: 10px
+              font-size: 12px
+              color: rgba(0, 0, 0, 0.3)
+            span
+              font-weight: 600
+        .message-body
+          margin: 10px 0 0 0
 
           
 

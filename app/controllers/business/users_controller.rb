@@ -18,8 +18,18 @@ class Business::UsersController < ApplicationController
     @user = current_user
     @user_avatar = UserAvatar.new
     @avatar = @user.user_avatar
-    # @auth = request.env['omniauth.auth']['credentials']
+    
+    if request.env['omniauth.auth'].present? 
+      @auth = request.env['omniauth.auth']['credentials']
+      GoogleToken.create(
+        access_token: @auth['token'],
+        refresh_token: @auth['refresh_token'],
+        expires_at: Time.at(@auth['expires_at']).to_datetime,
+        user_id: current_user.id
+        )
+    end
   end
+
 
   def gmail_auth
     @auth = request.env['omniauth.auth']['credentials']

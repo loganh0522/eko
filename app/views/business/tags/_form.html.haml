@@ -1,0 +1,9 @@
+= bootstrap_form_for [:business, @job, @application, @tag], html: {remote: true, class: 'tag_form'} do |f|
+  .row
+    .col-md-6
+      = f.text_field :name, class: "form-control", placeholder: "Tag", hide_label: true
+    .col-md-6
+      = f.hidden_field :application_id, value: @application.id
+      = f.submit "Add Tag", class: "btn btn-primary"
+
+  
