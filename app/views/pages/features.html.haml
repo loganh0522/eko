@@ -1,7 +1,7 @@
 .top-container
   .intro-message 
-    .header Affordable, Simple, Flexible Pricing
-    .sub-header We know that hiring can be expensive and unpredictable. That is why we offer cost-effective and flexible pricing plans to meet your recruitment needs.
+    .header Features
+
 
 .feature-overview-container
   .feature-overview
@@ -12,7 +12,7 @@
           %img(src="/tmp/overview-user.png")
         .des
           %h4 Build Your Hiring Team
-          %p.content Add multiple team members to a job, that will be a part of the hiring process. 
+          %p.content Add multiple team members to a job that will be a part of the hiring process. 
           = link_to "Learn More", features_hiring_team_path, class: "btn btn-primary btn-large"
       .feat.col-md-6
         .img
@@ -36,6 +36,16 @@
           %h4 Templates (Coming Soon)
           %p.content Build job, e-mail, interview, and scorecard templates so that they can easily be accessed and utilized later.
           = link_to "Coming Soon", "#", class: "btn btn-primary btn-large"
+
+      / .feat.col-md-6
+      /   .img
+      /     %img(src="/tmp/overview-interview-kit.png")
+      /   .des
+      /     %h4 Interview Kits (Coming Soon)
+      /     %p.content Easily plan and outline interviews, so every interview is performed with a clear and concise objective.
+      /     = link_to "Coming Soon", "#", class: "btn btn-primary btn-large"
+   
+      
   
   .feature-overview
     %h3 Source Candidates
@@ -93,18 +103,35 @@
     .row 
       .feat.col-md-6
         .img
-          %img(src="/tmp/overview-career-site.png")
+          %img(src="/tmp/overview-roles-tasks.png")
         .des
-          %h4 Applicant Tracking
-          %p.content Hiring great talent starts with a great hiring process. Plan and create an effective recruitment strategy with ease. 
-          = link_to "Learn More", new_user_path, class: "btn btn-primary btn-large"
+          %h4 User Roles
+          %p.content Attract, find, and engage talent to build your talent pipeline like a pro. Build an online recruitment presence in minutes.
+          = link_to "Learn More", features_user_roles_path, class: "btn btn-primary btn-large"
       .feat.col-md-6
         .img
-          %img(src="/tmp/overview-career-site.png")
+          %img(src="/tmp/overview-manage-interview.png")
         .des
-          %h4 Candidate Profiles
+          %h4 Manage Interviews
+          %p.content Evaluate candidates as a team. See what other teammates have rated & said about candidates in a central location.
+          = link_to "Learn More", features_manage_interviews_path, class: "btn btn-primary btn-large"
+    .row 
+      .feat.col-md-6
+        .img
+          %img(src="/tmp/overview-centralized-communication.png")
+        .des
+          %h4 Centralized Communication
           %p.content Attract, find, and engage talent to build your talent pipeline like a pro. Build an online recruitment presence in minutes.
-          = link_to "Learn More", new_user_path, class: "btn btn-primary btn-large"
+          = link_to "Learn More", features_centralized_communication_path, class: "btn btn-primary btn-large"
+      / .feat.col-md-6
+      /   .img
+      /     %img(src="/tmp/overview-assess-score.png")
+      /   .des
+      /     %h4 Score & Assess
+      /     %p.content Evaluate candidates as a team. See what other teammates have rated & said about candidates in a central location.
+      /     = link_to "Learn More", new_user_path, class: "btn btn-primary btn-large"
+      
+
 
 .mid-container
   %h2 Grow your Company with TalentWiz
@@ -116,7 +143,7 @@
   .col-md-3
     %h4 Product
     %ul 
-      %li Feature Overview
+      %li Features
       %li Pricing
   .col-md-3
     %h4 Company 

@@ -1,0 +1,39 @@
+.features-container
+  = render "shared/features_nav"
+  
+  .branded-job-board
+    .feature Build a Hiring Team
+
+    .header 
+      TalentWiz knows that hiring is a team sport. We make it easy for you to add team members to a job, and assign roles for each member. Using an external recruiter? No problem! We do that to. 
+    
+    .feature-container
+      .feature.col-md-3
+        Hiring Team 
+      .description.col-md-9
+        %p Hiring is more effective when it is performed as a team. It often requires multiple perspectives to assess a potential candidate. Add as many people as you want to the hiring team for a job. If they are not a part of the system, you can simply invite them directly from the job, and they will be added to the job upon signing up.
+
+    .feature-container
+      .feature.col-md-3
+        Hiring Roles
+      .description.col-md-9
+        .sub-header Hiring Manager
+        %p Hiring managers have complete control over the hiring the process. They build the recruitment process, distribute the job posting, and assign tasks and interviews to the relevant team members. They have access to all the candidates and candidate information.
+        
+        .sub-header Hiring Member
+        %p Hiring members only have the permission to view and assess candidates. They do not have the ability to distribute job postings, or edit the job details. These are usually members that occupy the role that you are hiring for, or are a part of a panel interview.
+
+    .feature-container
+      .feature.col-md-3
+        External Recruiters (Coming Soon)
+      .description.col-md-9
+        %p External recruiters can be an essential part of your hiring process. If you are using external recruiters, you can easily add them to the job posting, simply by using their e-mail. Recruiters can add candidates directly to the system, and all their contributions are tracked so you can see the effectiveness of the recruiter.
+
+    .next-page 
+      Next Feature 
+      %br
+      .next= link_to "Custom Recruitment Pipeline", features_recruitment_pipeline_path
+
+= render "shared/bottom_header"
+ 
+

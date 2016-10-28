@@ -1,0 +1,26 @@
+.features-container
+  = render "shared/features_nav"
+
+  .branded-job-board
+    .feature Centralized Communication
+    .header 
+      Managing communication between hiring members, and applicants has never been easier. Talentwiz makes it a breeze to track communication between your team and candidates, and message team members. 
+    .feature-container
+      .feature.col-md-3
+        @mentions
+      .description.col-md-9
+        %p Use @mentions to bring a team members attention to something, or to ask them to do something. When you mention a team member, they will receive a notificaiton in their pipeline showing them your comment, and it is tracked in the job and candidate activity feed. It is a simple, yet effective way to manage communication between your team for all your hiring tasks.
+    
+    .feature-container
+      .feature.col-md-3
+        Track Applicant Communication
+      .description.col-md-9
+        %p Tracking communication between the hiring team and the candidate used to be a pain. Now all messages between candidates and the hiring team are tracked directly on the candidate profile. Simply, visit the candidate profile to see the last dialogue that occured between your team and the candidate.
+
+
+    .next-page 
+      Next Feature 
+      %br
+      .next= link_to "Assess and Score", features_score_assess_path
+
+= render "shared/bottom_header"

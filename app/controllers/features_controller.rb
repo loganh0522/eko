@@ -20,5 +20,17 @@ class FeaturesController < ApplicationController
 
   def evaluate_candidate
   end
+
+  def user_roles
+  end
+
+  def manage_interviews
+  end
+
+  def centralized_communication
+  end
+
+  def score_assess
+  end
   
 end

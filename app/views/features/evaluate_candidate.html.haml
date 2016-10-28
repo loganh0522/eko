@@ -1,23 +1,38 @@
-.top-container
-  .intro-message 
-    .header Affordable, Simple, Flexible Pricing
-    .sub-header We know that hiring can be expensive and unpredictable. That is why we offer cost-effective and flexible pricing plans to meet your recruitment needs.
-
 .features-container
   = render "shared/features_nav"
 
   .branded-job-board
+    .feature Evaluate Candidates
     .header 
-      TalentWiz at its core is a modern Applicant Tracking System. Our easy to use platform makes it easy to keep track and manage applicants through the entire recruitment process. 
-    .feature-container
-      .feature.col-md-3
-        Candidate Scorecards
-      .description.col-md-9
-        %p Building a talent pool that you can go back to is a crucial part of a good recruitment strategy. View all the applicants that have applied to your company in a central location.  
+      Finding the best fit for a job begins by establishing structured evaluation criteria. TalentWiz provides multiple options to effectively recieve actionable feedback from team members.
     
     .feature-container
       .feature.col-md-3
         Custom Questionnaire's
       .description.col-md-9
-        %p Talentwiz makes it simple to track the jobs an applicant has applied to. Recruiters can also add candidates to another job, if they feel they would be a good fit. 
+        %p Often a candidates profile does not provide enough information. Build a custom questionnaire for applicants to complete when they apply for a job. Applicant answers are stored on the candidate profile, and can be viewed by all members of the hiring team. Team members can leave comments and evaluate a candidates answers to a questionnaire.
     
+    .feature-container
+      .feature.col-md-3
+        Candidate Scorecards
+      .description.col-md-9
+        %p Knowing what skills, traits, and experience a candidate has is essential to hiring a candidate that is the right fit for the job. Build a scorecard for hiring members to use to evaluate candidates. All hiring members can see what others have rated and said about a candidates fit for each section.
+
+    .feature-container
+      .feature.col-md-3
+        Interview Kits 
+      .description.col-md-9
+        %p Performing effective interviews begins by having a purpose and a plan for each interview. Hiring members can view the interview kits before an interview to more effectively prepare for an interview. Ideally, hiring managers will be provided an outline of the objectives for the interview and some questions they should ask.
+
+    .feature-container
+      .feature.col-md-3
+        Interview Scorecards
+      .description.col-md-9
+        %p Interview information is often lost, as a candidate is simply moved on to the next stage. TalentWiz ensures that every interview provides meaningful, trackable feedback. Once a hiring manager has completed an interview, they will be prompted to compete a scorecard for the interview, that other hiring members can review to get an overview of what was learned about a candidate during the interview.     
+    
+    .next-page 
+      Next Feature 
+      %br
+      .next= link_to "Career Portal", features_branded_job_board_path
+
+= render "shared/bottom_header"

@@ -1,0 +1,39 @@
+.features-container
+  = render "shared/features_nav"
+
+  .branded-job-board
+    .feature User Roles
+
+    .header 
+      We know that controlling user permissions, and access is important to you. It ensures the security of your system, and allows you to provide users with what they need.  
+    
+    .feature-container
+      .feature.col-md-3
+        Administrator
+      .description.col-md-9
+        %p The administrators are typically managers, recruiters, or a leader in the HR department. Administrators are responsible for building and implementing the system. They have complete control over the system, and can create templates, change billing and usage plans, add users, and edit the career portal. 
+    
+    .feature-container
+      .feature.col-md-3
+        Hiring Manager
+      .description.col-md-9
+        %p Hiring managers are often the head of a department, or responsible for full-filling a position. They do not have access to any of the administrative functionality, such as billing, editing the career portal, and building templates. Hiring managers have the ability to post jobs, add users, and filter through all the applicants and jobs. 
+
+    .feature-container
+      .feature.col-md-3
+        Recruiters
+      .description.col-md-9
+        %p Recruiters are often team members that will help with an interview during the process, and often are in the role that you are trying to fulfill. Recruiters do not have permission to post jobs or access to any administrative functionality. They only have access to the jobs that they are a part of the Hiring team. 
+
+    .feature-container
+      .feature.col-md-3
+        Basic Profile  
+      .description.col-md-9
+        %p A basic profile provides an avenue for your employees to refer potential applicants for your jobs. We provide you the ability to track candidates that were referred so you can reward your employees if one is hired.
+
+    .next-page 
+      Next Feature 
+      %br
+      .next= link_to "Manage Interviews", features_manage_interviews_path 
+
+= render "shared/bottom_header"

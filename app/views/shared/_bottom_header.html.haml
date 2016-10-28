@@ -1,0 +1,16 @@
+.bottom-container
+  .col-md-3
+    %img(src="/tmp/logo.jpg") 
+  .col-md-3
+    %h4 Product
+    %ul 
+      %li Feature Overview
+      %li Pricing
+  .col-md-3
+    %h4 Company 
+    %ul
+      %li Contact
+  .col-md-3
+    %h4 Try TalentWiz Today
+    %p Free 30-day Trial 
+    = link_to "Try it Today", new_user_path, class: "btn btn-primary btn-large"

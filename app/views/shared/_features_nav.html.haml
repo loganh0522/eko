@@ -2,7 +2,7 @@
   %h5 Plan your Hiring Process
   %ul 
     %li{:class => is_active?(features_hiring_team_path)}
-      = link_to "Build Hiring Team", features_hiring_team_path
+      = link_to "Build a Hiring Team", features_hiring_team_path
     %li{:class => is_active?(features_recruitment_pipeline_path)}
       = link_to "Custom Recruitment Pipeline", features_recruitment_pipeline_path
     %li{:class => is_active?(features_evaluate_candidate_path)}
@@ -12,7 +12,7 @@
   %h5 Attract & Find Talent
   %ul 
     %li{:class => is_active?(features_branded_job_board_path)}
-      = link_to "Career Site", features_branded_job_board_path
+      = link_to "Career Portal", features_branded_job_board_path
     %li Job Advertising (Coming Soon)
     %li Social Media (Coming Soon)
     %li Referral Network (Coming Soon)
@@ -26,12 +26,16 @@
     %li{:class => is_active?(features_talent_pool_path)}
       = link_to "Talent Pool", features_talent_pool_path 
     %li Task Pipeline (Coming Soon)
-    %li EEO Compliance (Coming Soon)
   
   %h5 Collaborate with Teammates
   %ul 
-    %li Score & Assess
-    %li Centralized Messaging
-    %li Timeline  
-    %li Interview Management (Coming Soon)
+    %li{:class => is_active?(features_user_roles_path )}
+      = link_to "User Roles", features_user_roles_path 
+    %li{:class => is_active?(features_manage_interviews_path )}
+      = link_to "Manage Interviews", features_manage_interviews_path 
+    %li{:class => is_active?(features_centralized_communication_path)}
+      = link_to "Centralized Communication", features_centralized_communication_path 
+    
+    / %li{:class => is_active?(features_score_assess_path)}
+    /   = link_to "Score and Assess", features_score_assess_path 
     

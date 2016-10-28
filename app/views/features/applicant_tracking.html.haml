@@ -1,41 +1,52 @@
-.top-container
-  .intro-message 
-    .header Affordable, Simple, Flexible Pricing
-    .sub-header We know that hiring can be expensive and unpredictable. That is why we offer cost-effective and flexible pricing plans to meet your recruitment needs.
-
 .features-container
   = render "shared/features_nav"
 
   .branded-job-board
+    .feature Applicant Tracking 
     .header 
-      TalentWiz at its core is a modern Applicant Tracking System. Our easy to use platform makes it easy to keep track and manage applicants through the entire recruitment process. 
+      Our easy to use platform makes it easy to track, assess and manage candidates through the entire recruitment process. 
+    
     .feature-container
       .feature.col-md-3
         Recruitment Dashboard
       .description.col-md-9
-        %p Our recruitment dashboard makes it easy to keep track of your open, closed and archived jobs. Easily view the jobs that you are a part of the hiring team, or view all the active jobs in the company.  
-
+        %p Our recruitment dashboard makes it easy to keep track of your open, closed and archived jobs. Allowing you to easily view the jobs that you are a part of, or view all the active jobs in the company. 
+        %p You can see how many applicants have applied, been moved forward, rejected and hired for a job, directly from the dashboard. 
+    
     .feature-container
       .feature.col-md-3
-        Recruitment Workflow
+        Job Overview
       .description.col-md-9
-        %p Our recruitment dashboard makes it easy to keep track of your open, closed and archived jobs. Easily view the jobs that you are a part of the hiring team, or view all the active jobs in the company.  
+        %p View all the applicants and activy for a job right on the job overview. See the candidates in each stage simply by clicking on the relevant stage. Further, get a complete overview of all the activity for the job.
 
     .feature-container
       .feature.col-md-3
         Applicant Filters
       .description.col-md-9
-        %h5 Full-Text Search
+        .sub-header Full-Text Search
         %p Easily search for candidates based on key-words or phrases in their profile. 
-        %h5 Advanced Filters (Coming Soon)
-        %p Talentwiz provides you the ability to filter out candidates based on their experience in an industry, and specific role, or by the skills that they have experience with. A complied 
- 
+        .sub-header Tags
+        %p Filter through applicants based on tags that you have added to their profiles. 
+        .sub-header Advanced Filters (Coming Soon)
+        %p Talentwiz provides you the ability to assess candidates based on their experience in an industry, and specific role, or by the skills that they have experience with. Our algorithm analyzes a candidate based on the fields you have inputed and returns a score for each candidate. 
+    
+    
     .feature-container
       .feature.col-md-3
         Bulk Actions
       .description.col-md-9
-        %p Being able to keep track of what your thoughts are on a candidate is important, its equally as important to see what everyone thinks. View what the hiring team thinks about a candidate all in a central location.
+        .sub-header E-mail
+        %p Messaging multiple candidates can be tedious, especially if you are rejecting them. Talentwiz makes this easy. Simply select the candidates you wish to message, and use our E-mail tokens, and each candidate will receive a personalized message.
+        .sub-header Move Stages
+        %p Easily move multiple candidates to a new stage simply by selecting the candidates, and the stage you wish to move them to. 
+        .sub-header Comment
+        %p Want to add the same comment to multiple candidates? No worries, you can do that too!
 
+    .next-page 
+      Next Feature 
+      %br
+      .next= link_to "Candidate Profiles", features_candidate_profile_path
 
+= render "shared/bottom_header"
 
     

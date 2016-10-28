@@ -1,0 +1,41 @@
+.features-container
+  = render "shared/features_nav"
+
+  .branded-job-board
+    .feature Manage Interviews
+    .header 
+      Arranging interviews can be a stressful process, especially when their are multiple parties involved. Talentwiz takes the headache out of interview scheduling. Easily see when your team members are available, and book interviews directly in the system.
+
+    .feature-container
+      .feature.col-md-3
+        Calendar Integration
+      .description.col-md-9
+        %p Integrate your profile and your google calendar at the click of a button. This allows you and your team to view one anothers availability, and send meeting requests to schedule interviews directly in TalentWiz.
+    
+    .feature-container
+      .feature.col-md-3
+        Schedule Interviews
+      .description.col-md-9
+        %p Begin by looking over your teammates availability than by reaching out to determine a candidates availability. This can be done one of two ways.
+        %p First Option: send an e-mail to the candidate to ask for their availability, and than send a meeting request to your team members.
+        %p Second Option: is to compose an availability form based on your teams availability that automatically books a meeting slot upon receiving a candidates submission.
+    
+    .feature-container
+      .feature.col-md-3
+        Interview Prep
+      .description.col-md-9
+        %p Once a hiring member has been scheduled for an interview it will be added to their task pipeline. Here they can access the interview kit and review the interview objectives, potential questions, and scorecard. This ensures that all hiring members are on the same page for the interview and can perform an effective interview.
+
+    .feature-container
+      .feature.col-md-3
+        Interview Feedback
+      .description.col-md-9
+        %p Once an interview has been completed the interviewers will be prompted to complete the interview scorecard, and provide feedback on the candidate. This will provide your team with quantifiable data on a candidate as they progress through the recruitment process.
+
+
+    .next-page 
+      Next Feature 
+      %br
+      .next= link_to "Centralized Communication", features_centralized_communication_path
+
+= render "shared/bottom_header"

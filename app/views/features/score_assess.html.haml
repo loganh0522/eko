@@ -1,0 +1,40 @@
+.features-container
+  = render "shared/features_nav"
+
+  .branded-job-board
+    .feature Assess and Score
+
+    .header 
+      
+    .feature-container
+      .feature.col-md-3
+        Comments
+      .description.col-md-9
+        %p The hiring team can add comments about a candidate directly on the candidate profile. They can also use @mentions in the comments to send a notification to a teammate about the comment. 
+    
+    .feature-container
+      .feature.col-md-3
+        Questionnaires
+      .description.col-md-9
+        %p If candidates were required to complete a questionnaire upon applying, the hiring team can read the answers and leave comments about the answers for other hiring team members 
+    
+    .feature-container
+      .feature.col-md-3
+        Scorecards
+      .description.col-md-9
+        %p Building a talent pool that you can go back to is a crucial part of a good recruitment strategy. View all the applicants that have applied to your company in a central location. You can filter through all the applicants by the job they applied to, tags, or search their profile for key words and phrases.  
+
+    .feature-container
+      .feature.col-md-3
+        Overall Rating
+      .description.col-md-9
+        %p 
+    
+    
+
+    .next-page 
+      Next Feature 
+      %br
+      .next= link_to "Sign Up", new_user_path
+
+= render "shared/bottom_header"
