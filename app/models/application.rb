@@ -85,5 +85,5 @@ class Application < ActiveRecord::Base
   #   #   search_definition[:query][:multi_match][:fields] << "created_at"
   #   # end
   #   __elasticsearch__.search(search_definition)
-  end
+  # end
 end
