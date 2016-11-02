@@ -50,13 +50,13 @@ class Business::ApplicationsController < ApplicationController
     @comment = Comment.new 
     @comments = @application.comments
 
-
     @questionairre = @job.questionairre
 
     @application_scorecard = ApplicationScorecard.new
     @scorecard = Scorecard.where(job_id: params[:job_id]).first
 
-    
+    @application_scorecard_present = ApplicationScorecard.where(application_id: @application.id)
+
     scorecard_graphs
 
     @activities = current_company.activities.where(application_id: @application.id).order('created_at DESC')
@@ -102,45 +102,54 @@ class Business::ApplicationsController < ApplicationController
       @application_scorecards = @application.application_scorecards
       @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first
 
-      overall_rating(@application_scorecards, @application)
-      
-      @yes = (450 * (@recommended/@application_scorecards.count)).to_i
-      @g =  (450 * (@good/@application_scorecards.count)).to_i
-      @b = (450 * (@bad/@application_scorecards.count)).to_i
-      @no = (450 * (@not_recommended/@application_scorecards.count)).to_i
 
-      # @bar_chart = Gchart.bar(:data => [@yes, @g, @b, @no],
-      #   :axis_with_labels => ['y'],
-      #   :max_value => 450,
-      #   :axis_labels => [["Not Recommended","Bad", "Good", "Recommended",]],
-      #   :orientation => 'horizontal',
-      #   :bar_colors => 'EF7B2B',
-      #   :size => "650x160")
-  
-      @bar_chart_1 = Gchart.bar(:data => [(450 * (@recommended/@application_scorecards.count))],
-        :orientation => 'horizontal',
-        :bar_colors => 'EF7B2B',
-        :max_value => 450,
-        :size => "450x30"
-        )
-      @bar_chart_2 = Gchart.bar(:data => [(450 * (@good/@application_scorecards.count))],
-        :orientation => 'horizontal',
-        :bar_colors => 'EF7B2B',
-        :max_value => 450,
-        :size => "450x30"
-        )
-      @bar_chart_3 = Gchart.bar(:data => [(450 * (@bad/@application_scorecards.count))],
-        :orientation => 'horizontal',
-        :bar_colors => 'EF7B2B',
-        :max_value => 450,
-        :size => "450x30"
-        )
-      @bar_chart_4 = Gchart.bar(:data => [(450 * (@not_recommended/@application_scorecards.count))],
-        :orientation => 'horizontal',
-        :bar_colors => 'EF7B2B',
-        :max_value => 450,
-        :size => "450x30"
-        )
+      @application_scorecard_present = ApplicationScorecard.where(application_id: @application.id)
+
+      if @application_scorecard_present.present? 
+        @application_scorecard_present.each do |card|
+          if card.overall_ratings.present?
+            overall_rating(@application_scorecards, @application)
+            
+            @yes = (450 * (@recommended/@application_scorecards.count)).to_i
+            @g =  (450 * (@good/@application_scorecards.count)).to_i
+            @b = (450 * (@bad/@application_scorecards.count)).to_i
+            @no = (450 * (@not_recommended/@application_scorecards.count)).to_i
+
+            # @bar_chart = Gchart.bar(:data => [@yes, @g, @b, @no],
+            #   :axis_with_labels => ['y'],
+            #   :max_value => 450,
+            #   :axis_labels => [["Not Recommended","Bad", "Good", "Recommended",]],
+            #   :orientation => 'horizontal',
+            #   :bar_colors => 'EF7B2B',
+            #   :size => "650x160")
+        
+            @bar_chart_1 = Gchart.bar(:data => [(450 * (@recommended/@application_scorecards.count))],
+              :orientation => 'horizontal',
+              :bar_colors => 'EF7B2B',
+              :max_value => 450,
+              :size => "450x30"
+              )
+            @bar_chart_2 = Gchart.bar(:data => [(450 * (@good/@application_scorecards.count))],
+              :orientation => 'horizontal',
+              :bar_colors => 'EF7B2B',
+              :max_value => 450,
+              :size => "450x30"
+              )
+            @bar_chart_3 = Gchart.bar(:data => [(450 * (@bad/@application_scorecards.count))],
+              :orientation => 'horizontal',
+              :bar_colors => 'EF7B2B',
+              :max_value => 450,
+              :size => "450x30"
+              )
+            @bar_chart_4 = Gchart.bar(:data => [(450 * (@not_recommended/@application_scorecards.count))],
+              :orientation => 'horizontal',
+              :bar_colors => 'EF7B2B',
+              :max_value => 450,
+              :size => "450x30"
+              )
+          end
+        end
+      end
     end
   end
 end

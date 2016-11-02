@@ -1,6 +1,6 @@
 class ApplicationScorecard < ActiveRecord::Base 
-  has_many :scorecard_ratings
-  has_many :overall_ratings
+  has_many :scorecard_ratings, dependent: :destroy
+  has_many :overall_ratings, dependent: :destroy
   belongs_to :application
   belongs_to :user
 

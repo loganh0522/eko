@@ -16,20 +16,41 @@
 
 .current-stage
   %h4 Current Stage: 
-  - @job.stages.each do |stage|
+  - if @application.stage == nil 
     .stage
-      - if is_current_stage?(stage, @application)
-        .stage-header.active= "#{stage.name} (Current Stage)"
+      .stage-header.active Applied (Current Stage)
+      .stage-body
+        %ul
+          %li Task 1
+          %li Interview 2
+    - @job.stages.each do |stage|
+      .stage   
+        .stage-header= "#{stage.name}"
         .stage-body
           %ul
             %li Task 1
             %li Interview 2 
-      - else
-        .stage-header= stage.name 
-        .stage-body{:style=>"display:none;"}
-          %ul
-            %li Task 1
-            %li Interview 2
+  - else 
+    .stage
+      .stage-header Applied
+      .stage-body
+        %ul
+          %li Task 1
+          %li Interview 2
+    - @job.stages.each do |stage|
+      .stage
+        - if is_current_stage?(stage, @application)
+          .stage-header.active= "#{stage.name} (Current Stage)"
+          .stage-body
+            %ul
+              %li Task 1
+              %li Interview 2 
+        - else
+          .stage-header= stage.name 
+          .stage-body{:style=>"display:none;"}
+            %ul
+              %li Task 1
+              %li Interview 2
           
 
   .stage-actions
