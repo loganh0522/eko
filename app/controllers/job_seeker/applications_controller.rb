@@ -3,7 +3,6 @@ class JobSeeker::ApplicationsController < JobSeekersController
 
   def create 
     job = Job.find(params[:application][:job_id])  
-
     if !current_user_applied?(job)
 
       @application = Application.new(application_params)

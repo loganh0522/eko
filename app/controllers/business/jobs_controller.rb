@@ -30,7 +30,7 @@ class Business::JobsController < ApplicationController
       @job = Job.find(params[:id])
 
       @applications = Application.where(job_id: @job.id)
-      @results = @applications.search(params[:query]).records.to_a
+      @results = Application.search(params[:query]).records.to_a
       @applicants = []
       
       @results.each do |application|  

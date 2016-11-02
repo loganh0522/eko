@@ -23,5 +23,6 @@
             .form-group.col-md-12
             = f.hidden_field :user_id, value: current_user.id
             = f.hidden_field  :job_id, value: @job.id
+            = f.hidden_field  :company_id, value: @job.company.id
             = f.submit "Apply to Job", class: "btn btn-primary"
 
