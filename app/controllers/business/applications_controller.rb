@@ -55,6 +55,8 @@ class Business::ApplicationsController < ApplicationController
 
     @application_scorecard = ApplicationScorecard.new
     @scorecard = Scorecard.where(job_id: params[:job_id]).first
+
+    
     scorecard_graphs
 
     @activities = current_company.activities.where(application_id: @application.id).order('created_at DESC')
