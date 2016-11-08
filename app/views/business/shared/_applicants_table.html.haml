@@ -32,7 +32,7 @@
           - if @job.applications.where(user_id: applicant.id).first.stage.present?
             - stage = @job.applications.where(user_id: applicant.id).first.stage.name
           - elsif @job.applications.where(user_id: applicant.id).first.rejected == true
-            - stage = "rejected"
+            - stage = "Rejected"
 
           %tr{:id => "#{stage}" }
             %td
@@ -44,8 +44,9 @@
                   = image_tag applicant.user_avatar.image.small_image, :size => "50x50" if applicant.user_avatar.present?
                 - else
                   .circle-img= applicant.first_name.first.capitalize
-            %td
-              .name= link_to "#{applicant.first_name} #{applicant.last_name}", business_job_application_path(@job, Application.where(user_id: applicant.id, job_id: @job).first.id)
+            %td.names
+              .name{:data => {:id =>  "#{applicant.first_name} #{applicant.last_name}"}}
+                = link_to "#{applicant.first_name} #{applicant.last_name}", business_job_application_path(@job, Application.where(user_id: applicant.id, job_id: @job).first.id)
               .current-position CEO - TalentWiz 
             %td
               .position= @job.title

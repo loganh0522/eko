@@ -10,7 +10,6 @@ jQuery ->
         $('.activity-feed').find("." + "#{val}").show()
 
 
-
     if $(this).find('input').attr('value') == "true"
       $(this).find('input').attr('value', false)    
       
