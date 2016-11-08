@@ -13,7 +13,7 @@
         %li{:id => "#{stage.name}"}
           .number= stage.applicants.count
           .name= stage.name  
-      %li
+      %li#rejected
         .number 
           = @job.applications.where(rejected: true).count
         .name Rejected

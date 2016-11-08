@@ -71,8 +71,13 @@ class Business::StagesController < ApplicationController
 
     applicant_ids.each do |id| 
       @application = Application.where(user_id: id, job_id: params[:job_id]).first
-      @application.update_attribute(:stage_id, params[:stage][:stage_id])
-      track_activity(@application, "move_stage")
+
+      if params[:stages] == "Rejected"
+        @application.update_attribute(:rejected, true)
+      else
+        @application.update_attribute(:stage_id, params[:stages])
+        track_activity(@application, "move_stage")
+      end
     end
     redirect_to business_job_path(@job)
   end

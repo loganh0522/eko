@@ -8,3 +8,17 @@
         = link_to business_job_stage_path(@job.id, stage.id), remote: true, :method => :delete do
           %i.glyphicon.glyphicon-remove
   .panel-body
+    / .tasks
+    /   .task
+    /     Review the candidates application. 
+    /     = link_to "Assign Task", "#", :html => {:data => {:remote => true } }
+    /   .interview
+    /     Phone Interview
+    /     = link_to "+ Interview Kit", "#", :html => {:data => {:remote => true }}
+    /     = link_to "Assign Interview", "#", :html => {:data => {:remote => true } }
+
+
+    / .actions
+    /   = link_to "+ Add Task", "#", :html => {:data => {:remote => true } }
+    /   = link_to "+ Add Interview", "#", :html => {:data => {:remote => true } }
+        

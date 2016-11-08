@@ -1,5 +1,28 @@
-.container.job-board 
-  .job-posting 
-    - @jobs.each do |job|
-      %h4= link_to "#{job.company.name} - #{job.title}", job_seeker_job_path(job)
-      %p= job.description
+.job-board
+  - @jobs.each do |job|
+    .job-posting
+      .header-info
+        %img(src="#{job.company.job_board.logo}" class="logo") 
+        .job-detail
+          .title= link_to "#{job.title}", job_seeker_job_path(job)
+          .company= job.company.name
+        .view-job= link_to "View Job", job_seeker_job_path(job), class: "btn btn-primary"
+      .bottom-info
+        .left-side
+          %img(src="/tmp/small-location.png") 
+          = "#{job.city}, #{job.states.first.name}"
+          
+          %img(src="/tmp/small-bar-chart.png") 
+          = job.job_career_level.first.career_level.name
+
+        .right-side 
+          %img(src="/tmp/small-hammer.png") 
+          = job.job_industries.first.industry.name
+
+          %img(src="/tmp/small-briefcase.png") 
+          = job.job_kind.first.name
+
+          %img(src="/tmp/small-clock.png") 
+          = "#{time_ago_in_words(job.created_at)} ago"
+      
+

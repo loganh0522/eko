@@ -6,7 +6,8 @@
         %h4.modal-title Move Applicants 
       = form_tag update_multiple_business_job_applications_path(@job.id) do   
         .modal-body
-          = collection_select(:stage, :stage_id, @job.stages, :id, :name)
+          / = collection_select(:stage, :stage_id, @job.stages, :id, :name)
+          = select_tag "stages", options_for_select(@job.stages.collect{ |u| [u.name, u.id] } + ["Rejected"])
           = hidden_field_tag :applicant_ids
           %br
           %input(type="submit" value="Move Applicants" class="btn btn-primary")

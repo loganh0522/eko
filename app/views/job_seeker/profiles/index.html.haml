@@ -1,5 +1,5 @@
 .job-seeker
-  .top-container
+  .profile-top-container  
     .user-image
       - if current_user.user_avatar.present? 
         = image_tag @avatar.image.large_image if @avatar.present?

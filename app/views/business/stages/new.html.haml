@@ -10,12 +10,15 @@
       .body
         = render "form" 
         .stages.col-md-12    
+          
           %div{:class => "stages"}
             .panel-heading
               .row
                 .stage All Applicants
             .panel-body
+            
             = render "create_stages", stages: @stages
+          
           %div{:class => "stages"}
             .panel-heading
               .row
