@@ -25,10 +25,11 @@
         %th(width="25%") Name 
         %th(width="20%") Job Title
         %th(width="20%") Stage 
-        %th(width="25%") Rating
+        %th(width="25%") 
 
       %tbody
         - @applicants.each do |applicant|
+          - @application = Application.where(user_id: applicant.id, job_id: @job).first.created_at
           - if @job.applications.where(user_id: applicant.id).first.stage.present?
             - stage = @job.applications.where(user_id: applicant.id).first.stage.name
           - elsif @job.applications.where(user_id: applicant.id).first.rejected == true
@@ -50,11 +51,12 @@
               .current-position CEO - TalentWiz 
             %td
               .position= @job.title
-              .date-applied= Application.where(user_id: applicant.id, job_id: @job).first.created_at
+              - if @application.present?
+                .date-applied= "#{time_ago_in_words(@application)} ago"        
             %td
               .stage= stage
             %td
-              .rating 5 stars
+              / .rating 5 stars
             %td
   .not-present-container
     %p There are currently no applicants in this stage.

@@ -1,23 +1,35 @@
 .job-show-header
   .header
-    %h1= @job.title
-    %p= "#{@job.city}, #{@job.province}, #{@job.country}"
-    = link_to "#{@job.url}", "http://" + @job.url, :target => "_blank"
-    = link_to "Edit Job Details", edit_business_job_path(@job)
-  .job-stages  
-    %ul 
-      %li#all_applicants.activated
-        .number 
-          = @job.applications.count
-        .name All Applicants
-      - @stages.each do |stage| 
-        %li{:id => "#{stage.name}"}
-          .number= stage.applicants.count
-          .name= stage.name  
-      %li#Rejected
-        .number 
-          = @job.applications.where(rejected: true).count
-        .name Rejected
+    .details
+      %h1= @job.title
+      %p= "#{@job.city}, #{@job.province}, #{@job.country}"
+      = link_to "Job Link: #{@job.url}", "http://" + @job.url, :target => "_blank", class: "link"
+    .links
+      = link_to "Edit Job Details", edit_business_job_path(@job), class: "btn btn-primary"
+
+  .job-stages
+
+    .left_scroll
+      %img(src="/tmp/left_arrow.png")
+    
+    %ul.job-stage-area
+      .job-gallery
+        %li#all_applicants.activated.job_list_stage
+          .number 
+            = @job.applications.count
+          .name All Applicants
+        - @stages.each do |stage| 
+          %li.job_list_stage{:id => "#{stage.name}"}
+            .number= stage.applicants.count
+            .name= stage.name  
+        %li.job_list_stage#Rejected
+          .number 
+            = @job.applications.where(rejected: true).count
+          .name Rejected
+
+    .right_scroll
+      %img(src="/tmp/right_arrow.png")
+
 
   .job-applicants-nav
     %ul 
@@ -37,7 +49,7 @@
         %ul 
           %li 
             .content
-              Type: 
+              Filters
           .body
             %ul
               %li.activity 
