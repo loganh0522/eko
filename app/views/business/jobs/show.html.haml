@@ -2,7 +2,8 @@
   .header
     %h1= @job.title
     %p= "#{@job.city}, #{@job.province}, #{@job.country}"
-   
+    = link_to "#{@job.url}", "http://" + @job.url, :target => "_blank"
+    = link_to "Edit Job Details", edit_business_job_path(@job)
   .job-stages  
     %ul 
       %li#all_applicants.activated

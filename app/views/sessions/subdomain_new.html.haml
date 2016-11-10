@@ -1,14 +1,15 @@
-%section.well.col-md-8.col-md-offset-2
-  .row
-  = form_tag '/login' do
-    %header
-      %h1 Log In
-    %fieldset.col-md-8.vertical-form
-      = label_tag :email, "E-mail Address"
-      = email_field_tag :email
-      %br
-      = label_tag :password
-      = password_field_tag :password
-    %fieldset.actions.control-group.row.col-md-8.col-md-offset-6
-      .controls
-        %input(type="submit" value="Log In" class="btn")
+
+
+.business-registration
+  .header
+    %h2 Login 
+  .body
+    = bootstrap_form_tag url: '/login' do |f|
+      %fieldset
+        = f.email_field :email, placeholder: "E-mail", hide_label: true
+        = f.password_field :password, placeholder: "Password", hide_label: true
+        %input(type="submit" value="Log In" class="btn button-submit")
+
+    %p 
+      Forgot your password? 
+      = link_to 'Reset Password', '/forgot_password'

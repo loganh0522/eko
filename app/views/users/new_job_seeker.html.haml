@@ -1,14 +1,35 @@
-%section.well.col-md-8.col-md-offset-2
-  .row
-  = bootstrap_form_for @user, html: {class: 'form-horizontal'} do |f|
-    %header
-      %h1 Register
-    %fieldset.col-md-8
-      = f.text_field :first_name, label: "First Name"
-      = f.text_field :last_name, label: "Last Name"
-      = f.email_field :email, label: "Email Address"
-      = f.password_field :password
-      = f.hidden_field :kind, :value => 'job seeker'
-    %fieldset.actions.control-group.col-md-8.col-md-offset-6
-      .controls
-        %input(type="submit" value="Sign Up" class="btn")
+.job-seeker-homepage
+  .details-container 
+    .first
+      %h4 Build your Profile 
+      .body Your profile acts as your resume and CV. Take your time to build out your profile as it acts as your resume when you apply to a job.
+    .second
+      %h4 Apply to Jobs 
+      .body Once you have completed your profile, you can apply to jobs directly from Talentwiz. When you apply to a job from TalentWiz your profile will be submitted as your resume. Any additional information the company has asked for will also be submitted as a part of your profile.
+    .third
+      %h4 Track your Progress
+      .body Track all your applications directly from the platform. 
+    .fourth
+      %h4 Company Job Boards
+      .body When you are applying to a job via a company's website, look for the "TalentWiz" logo. If  you see this, sign-in using your e-mail and password for Talentwiz. Your profile will be automatically loaded to the companies career portal, and you can quickly apply to jobs.
+
+
+
+  .sign-up
+    = bootstrap_form_for @user, html: {class: 'form-horizontal'} do |f|
+      %header
+        %h2 Sign Up Today
+        %p It's Free for Job Seekers
+      %fieldset
+        .row
+          .col-md-6
+            = f.text_field :first_name, placeholder: "First Name", hide_label: true
+          .col-md-6
+            = f.text_field :last_name, placeholder: "Last Name", hide_label: true
+        = f.email_field :email, placeholder: "Email Address", hide_label: true
+        = f.password_field :password, placeholder: "Password", hide_label: true
+        = f.hidden_field :kind, :value => 'job seeker'
+      = f.submit "Sign me up", class: "btn button-submit"
+
+
+

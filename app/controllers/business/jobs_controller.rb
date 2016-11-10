@@ -18,6 +18,7 @@ class Business::JobsController < ApplicationController
     if @job.save && @job.company == current_company
       @job.user_ids = params[:user_ids]
       @job.update_column(:status, "draft")
+      job_url
       track_activity(@job, "draft")
       redirect_to new_business_job_hiring_team_path(@job)
     else
@@ -145,5 +146,7 @@ class Business::JobsController < ApplicationController
     params.require(:job).permit(:description, :title, :city, :country_ids, :state_ids, :benefits, 
       :industry_ids, :function_ids, :education_level_ids, :job_kind_ids, :career_level_ids)
   end
-
+  def job_url
+    @job.update_column(:url, "www.#{current_company.job_board.subdomain}.talentwiz.ca/jobs/#{@job.id}")
+  end
 end 
