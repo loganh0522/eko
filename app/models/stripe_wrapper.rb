@@ -169,8 +169,6 @@ module StripeWrapper
       end
     end
 
-
-
     def successful?
       response.present?
     end
