@@ -1,0 +1,37 @@
+%table.table
+  %thead
+    %tr
+      %th(width="1%")= check_box_tag "select_all"
+      %th(width="10%")
+      %th(width="25%") Name 
+      %th(width="20%") Job Title
+      %th(width="20%") Stage 
+      %th(width="25%") Rating
+    %tbody
+      - @applicants.each do |applicant|
+        - if @job.applications.where(user_id: applicant.id).first.stage.present?
+          - stage = @job.applications.where(user_id: applicant.id).first.stage.name
+        - elsif @job.applications.where(user_id: applicant.id).first.rejected == true
+          - stage = "Rejected"
+
+        %tr{:class => "#{stage} #{applicant.apps.first.status} #{applicant.apps.first.created_at}"}
+          %td
+            .applicant-checkbox{:data => {:id => applicant.id}}
+              = check_box_tag "applicant_ids[]", applicant.id
+          %td
+            .circle
+              - if applicant.user_avatar.present? 
+                = image_tag applicant.user_avatar.image.small_image, :size => "50x50" if applicant.user_avatar.present?
+              - else
+                .circle-img= applicant.first_name.first.capitalize
+          %td.names
+            .name{:data => {:id =>  "#{applicant.first_name} #{applicant.last_name}"}}
+              = link_to "#{applicant.first_name} #{applicant.last_name}", business_job_application_path(@job, Application.where(user_id: applicant.id, job_id: @job).first.id)
+            .current-position CEO - TalentWiz 
+          %td
+            .position= @job.title
+            .date-applied= Application.where(user_id: applicant.id, job_id: @job).first.created_at
+          %td
+            .stage= stage
+          %td
+            .rating 5 stars

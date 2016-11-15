@@ -17,19 +17,28 @@ jQuery ->
     return
     
 
-  $('.applicant-nav').on 'click', '.checkbox', (event) ->
-    filter_type = $(this).attr('data-id')
+  $('.applicant-nav').on 'click', '.applicant-filter-checkbox', (event) ->    
+    checked = []
+    checkbox = $('.applicant-filter-checkbox')
+
+    for n in checkbox 
+      if $(n).find('input').is(':checked') == true
+        checked.push($(n).data('id'))
+
+    $.ajax
+      url: "business/applications"
+      type: 'get'
+      async: true
+      dataType: 'json'
+      data: checked
+
     
-    table_rows = $('tbody').find('tr')
 
-    for n in table_rows
-      if $(n).attr('class') == filter_type
-        $('.all-job-applicants').find('.' + filter_type).show()
-      else 
-        $('.all-job-applicants').find('.' + filter_type).hide()
-      console.log($(n).attr('class') == filter_type)
 
-    console.log(table_rows)
+    
+
+
+    
     
 
 

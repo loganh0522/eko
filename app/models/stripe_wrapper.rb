@@ -18,6 +18,18 @@ module StripeWrapper
         new(response: response)
       rescue Stripe::CardError => e
         new(error_message: e.message) 
+      rescue Stripe::RateLimitError => e
+        new(error_message: e.message)
+      rescue Stripe::InvalidRequestError => e
+        new(error_message: e.message)
+      rescue Stripe::AuthenticationError => e
+        new(error_message: e.message)
+      rescue Stripe::APIConnectionError => e
+        new(error_message: e.message)
+      rescue Stripe::StripeError => e
+        new(error_message: e.message)
+      rescue => e
+        new(error_message: e.message)
       end
     end
 
@@ -45,6 +57,18 @@ module StripeWrapper
         new(response: response)
       rescue Stripe::CardError => e 
         new(error_message: e.message)
+      rescue Stripe::RateLimitError => e
+        new(error_message: e.message)
+      rescue Stripe::InvalidRequestError => e
+        new(error_message: e.message)
+      rescue Stripe::AuthenticationError => e
+        new(error_message: e.message)
+      rescue Stripe::APIConnectionError => e
+        new(error_message: e.message)
+      rescue Stripe::StripeError => e
+        new(error_message: e.message)
+      rescue => e
+        new(error_message: e.message)
       end         
     end
 
@@ -56,6 +80,18 @@ module StripeWrapper
         customer.save
         new(response: customer)
       rescue Stripe::CardError => e
+        new(error_message: e.message)
+      rescue Stripe::RateLimitError => e
+        new(error_message: e.message)
+      rescue Stripe::InvalidRequestError => e
+        new(error_message: e.message)
+      rescue Stripe::AuthenticationError => e
+        new(error_message: e.message)
+      rescue Stripe::APIConnectionError => e
+        new(error_message: e.message)
+      rescue Stripe::StripeError => e
+        new(error_message: e.message)
+      rescue => e
         new(error_message: e.message)
       end
     end
@@ -70,6 +106,18 @@ module StripeWrapper
         new(response: response)
       rescue Stripe::CardError => e
         new(error_message: e.message)
+      rescue Stripe::RateLimitError => e
+        new(error_message: e.message)
+      rescue Stripe::InvalidRequestError => e
+        new(error_message: e.message)
+      rescue Stripe::AuthenticationError => e
+        new(error_message: e.message)
+      rescue Stripe::APIConnectionError => e
+        new(error_message: e.message)
+      rescue Stripe::StripeError => e
+        new(error_message: e.message)
+      rescue => e
+        new(error_message: e.message)
       end
     end
 
@@ -83,6 +131,18 @@ module StripeWrapper
         new(response: customer)
       rescue Stripe::CardError => e
         new(error_message: e.message)
+      rescue Stripe::RateLimitError => e
+        new(error_message: e.message)
+      rescue Stripe::InvalidRequestError => e
+        new(error_message: e.message)
+      rescue Stripe::AuthenticationError => e
+        new(error_message: e.message)
+      rescue Stripe::APIConnectionError => e
+        new(error_message: e.message)
+      rescue Stripe::StripeError => e
+        new(error_message: e.message)
+      rescue => e
+        new(error_message: e.message)
       end
     end
 
@@ -93,6 +153,18 @@ module StripeWrapper
         subscription = customer.subscriptions.retrieve(options[:subscription_id]).delete
         new(response: customer)
       rescue Stripe::CardError => e
+        new(error_message: e.message)
+      rescue Stripe::RateLimitError => e
+        new(error_message: e.message)
+      rescue Stripe::InvalidRequestError => e
+        new(error_message: e.message)
+      rescue Stripe::AuthenticationError => e
+        new(error_message: e.message)
+      rescue Stripe::APIConnectionError => e
+        new(error_message: e.message)
+      rescue Stripe::StripeError => e
+        new(error_message: e.message)
+      rescue => e
         new(error_message: e.message)
       end
     end

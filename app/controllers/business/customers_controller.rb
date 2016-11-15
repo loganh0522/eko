@@ -51,8 +51,17 @@ class Business::CustomersController < ApplicationController
       :card => params[:stripeToken]
       )
     if customer.successful?
-      current_company.customer.update_attribute(:plan, params[:plan])
+      stripe_customer = JSON.parse customer.response.to_s
+
       company_subscription(params[:plan])
+
+      current_company.customer.update( 
+        last_four: stripe_customer['sources']['data'].first['last4'],
+        exp_year: stripe_customer['sources']['data'].first['exp_year'],
+        exp_month: stripe_customer['sources']['data'].first['exp_month'])
+      # current_company.customer.update_attribute(:plan, params[:plan])
+      # company_subscription(params[:plan])
+      
       redirect_to business_customers_path
       flash[:success] = "Your billing information was successfully changed"
     end

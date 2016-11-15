@@ -2,7 +2,7 @@ class Business::ApplicationsController < ApplicationController
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :company_deactivated?
-  
+
   def index
     if params[:query].present? 
       @results = Application.search(params[:query]).records.to_a
@@ -20,7 +20,6 @@ class Business::ApplicationsController < ApplicationController
       @applications.each do |application| 
         @job = Job.find(application.job_id)
       end
-
     else
       @applicants = current_company.applicants
       @jobs = current_company.jobs

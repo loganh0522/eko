@@ -18,3 +18,5 @@
         = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, class: 'form-control', data: {stripe: "exp-year"})
   %fieldset.form-group.action
   = f.submit @company.customer.present? ? "Update Payment Details" : "Add Payment Details" , class: "btn btn-primary" 
+  - if @company.customer.present? 
+    = link_to "Cancel", business_customers_path, class: "btn"

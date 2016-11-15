@@ -1,6 +1,7 @@
 .all-applicants-container
   .applicant-nav
     .nav
+      = form_tag 
       %ul.nav-header
         %li
           .content
@@ -12,13 +13,13 @@
         .body.job-status-body
           %ul
             %li 
-              .checkbox{:data => {:id => "open"}}= check_box_tag "", true
+              .applicant-filter-checkbox{:data => {:id => "open"}}= check_box_tag "", true
               Active
             %li.activity
-              .checkbox{:data => {:id => "closed"}}= check_box_tag "", true
+              .applicant-filter-checkbox{:data => {:id => "closed"}}= check_box_tag "", true
               Closed
             %li.activity  
-              .checkbox{:data => {:id => "archived"}}= check_box_tag "", true
+              .applicant-filter-checkbox{:data => {:id => "archived"}}= check_box_tag "", true
               Archived     
         %li.filter.date-applied
           .content
@@ -33,7 +34,7 @@
           %ul
             - @jobs.each do |job| 
               %li.open-job
-                .checkbox{:data => {:id => "job_#{job.id}"}}= check_box_tag "", true
+                .applicant-filter-checkbox{:data => {:id => "job_#{job.id}"}}= check_box_tag "", true
                 #{job.title}
         %li.filter.date-applied
           .content
@@ -41,19 +42,19 @@
         .body.date-applied-body
           %ul
             %li 
-              .checkbox{:data => {:id => "all_applied"}}= check_box_tag "", true, true
+              .applicant-filter-checkbox{:data => {:id => "all_applied"}}= check_box_tag "", true, true
               All 
             %li
-              .checkbox{:data => {:id => "2_weeks"}}= check_box_tag "", true
+              .applicant-filter-checkbox{:data => {:id => "2_weeks"}}= check_box_tag "", true
               Last 2 weeks
             %li 
-              .checkbox{:data => {:id => "last_month"}}= check_box_tag "", true
+              .applicant-filter-checkbox{:data => {:id => "last_month"}}= check_box_tag "", true
               Last Month
             %li
-              .checkbox{:data => {:id => "3_months"}}= check_box_tag "", true
+              .applicant-filter-checkbox{:data => {:id => "3_months"}}= check_box_tag "", true
               Last 3 Months
             %li 
-              .checkbox{:data => {:id => "last_year"}}= check_box_tag "", true
+              .applicant-filter-checkbox{:data => {:id => "last_year"}}= check_box_tag "", true
               Last Year
 
 
@@ -80,42 +81,6 @@
       
     
     .applicants
-      %table.table
-        %thead
-          %tr
-            %th(width="1%")= check_box_tag "select_all"
-            %th(width="10%")
-            %th(width="25%") Name 
-            %th(width="20%") Job Title
-            %th(width="20%") Stage 
-            %th(width="25%") Rating
-          %tbody
-            - @applicants.each do |applicant|
-              - if @job.applications.where(user_id: applicant.id).first.stage.present?
-                - stage = @job.applications.where(user_id: applicant.id).first.stage.name
-              - elsif @job.applications.where(user_id: applicant.id).first.rejected == true
-                - stage = "Rejected"
-
-              %tr{:class => "#{stage} #{applicant.apps.first.status} #{applicant.apps.first.created_at}"}
-                %td
-                  .applicant-checkbox{:data => {:id => applicant.id}}
-                    = check_box_tag "applicant_ids[]", applicant.id
-                %td
-                  .circle
-                    - if applicant.user_avatar.present? 
-                      = image_tag applicant.user_avatar.image.small_image, :size => "50x50" if applicant.user_avatar.present?
-                    - else
-                      .circle-img= applicant.first_name.first.capitalize
-                %td.names
-                  .name{:data => {:id =>  "#{applicant.first_name} #{applicant.last_name}"}}
-                    = link_to "#{applicant.first_name} #{applicant.last_name}", business_job_application_path(@job, Application.where(user_id: applicant.id, job_id: @job).first.id)
-                  .current-position CEO - TalentWiz 
-                %td
-                  .position= @job.title
-                  .date-applied= Application.where(user_id: applicant.id, job_id: @job).first.created_at
-                %td
-                  .stage= stage
-                %td
-                  .rating 5 stars
+      = render 'business/applications/all_applicants_table'
       .not-present-container
         %p There are currently no applicants in this stage.
