@@ -3,7 +3,7 @@ class Business::ApplicationScorecardsController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
-  ?
+
 
   def index 
     @application_scorecard = ApplicationScorecard.new
