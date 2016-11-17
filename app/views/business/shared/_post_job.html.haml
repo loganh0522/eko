@@ -13,4 +13,4 @@
         = link_to "Scorecard", @job.scorecard.present? ? edit_business_job_scorecard_path(@job, @scorecard.id) : business_job_scorecards_path(@job.id)
       %li Post Job 
 
-= link_to "Publish Job", business_job_publish_job_path(@job), class: 'button-mid publish-job'
+= link_to "Publish Job", business_job_publish_job_path(@job), method: :post, class: 'button-mid publish-job'

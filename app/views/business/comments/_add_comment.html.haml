@@ -4,8 +4,8 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
         %h4.modal-title Add Note        
-      = form_tag add_note_multiple_business_job_applications_path(@job.id) do
-        .modal-body
-          = text_area_tag :comment, nil, rows: 5, cols: 75
-          = hidden_field_tag :applicant_ids
-          %input(type="submit" value="Add Note" class="btn btn-primary")
+      / = form_tag add_note_multiple_business_job_applications_path(@job.id) do
+      /   .modal-body
+      /     = text_area_tag :comment, nil, rows: 5, cols: 75
+      /     = hidden_field_tag :applicant_ids
+      /     %input(type="submit" value="Add Note" class="btn btn-primary")

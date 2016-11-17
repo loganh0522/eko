@@ -52,7 +52,6 @@ module StripeWrapper
         response = Stripe::Customer.create(
           card: options[:card],
           email: options[:company].name,
-          plan: 'free'
         )
         new(response: response)
       rescue Stripe::CardError => e 
@@ -104,6 +103,7 @@ module StripeWrapper
           plan: options[:plan]
         )
         new(response: response)
+
       rescue Stripe::CardError => e
         new(error_message: e.message)
       rescue Stripe::RateLimitError => e
@@ -127,7 +127,20 @@ module StripeWrapper
         customer = Stripe::Customer.retrieve(options[:customer_id])
         subscription = customer.subscriptions.retrieve(options[:subscription_id])
         subscription.plan = options[:plan]
-        subscription.save
+
+        if options[:plan][-4..-1] == "year"
+          subscription.proration_date = Time.now.to_i
+          subscription.save
+
+          invoice = Stripe::Invoice.create(
+            :customer => customer
+          )
+          invoice.pay
+        else 
+          subscription.proration_date = Time.now.to_i
+          subscription.save
+        end
+
         new(response: customer)
       rescue Stripe::CardError => e
         new(error_message: e.message)
@@ -167,6 +180,13 @@ module StripeWrapper
       rescue => e
         new(error_message: e.message)
       end
+    end
+
+    def self.create_invoice
+      customer = Stripe::Customer.retrieve(options[:customer_id])
+      Stripe::Invoice.create(
+        :customer => customer
+      )
     end
 
     def successful?

@@ -1,4 +1,5 @@
-= form_tag new_plan_business_customers_path do
+= form_tag new_plan_business_customers_path, html: {id: "payment-form"}  do
+  %span.payment-errors
   %table.table
     %thead
       %tr

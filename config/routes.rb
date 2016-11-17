@@ -78,7 +78,7 @@ Rails.application.routes.draw do
     resources :job_boards
     resources :applications
     
-    
+    get "business/applications/filter", to: "applications#filter_applicants"
     get "plan", to: "customers#plan"
 
 
@@ -86,9 +86,9 @@ Rails.application.routes.draw do
       collection do 
         get 'cancel', to: "customers#cancel"
         post "new_plan", to: "customers#new_plan"
-        post "create_plan", to: "customers#create_plan"
-        post "update_plan", to: "customers#update_plan"
-        post "cancel_subscription", to: "customers#cancel_subscription"
+        post :create_plan, to: "customers#create_plan"
+        post :update_plan, to: "customers#update_plan"
+        post :cancel_subscription, to: "customers#cancel_subscription"
       end
     end
     
@@ -105,6 +105,7 @@ Rails.application.routes.draw do
         end
 
         get :application_activity, to: "activities#application_activity"
+        
         resources :messages
         resources :comments
         resources :application_scorecards

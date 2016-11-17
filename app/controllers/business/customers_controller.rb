@@ -1,7 +1,6 @@
 class Business::CustomersController < ApplicationController
   before_filter :require_user
   before_filter :belongs_to_company
-  before_filter :company_deactivated?
   
   def index 
     @customer = current_company.customer
@@ -19,25 +18,22 @@ class Business::CustomersController < ApplicationController
         :company => @company,
         :card => params[:stripeToken]
         )   
-
       if customer.successful?
         stripe_customer = JSON.parse customer.response.to_s
 
         company_subscription(params[:plan])
 
         Customer.create(company_id: current_company.id, 
-          plan: stripe_customer['subscriptions']['data'].first['plan']['id'], 
-          stripe_customer_id: stripe_customer["id"], 
-          stripe_subscription_id: stripe_customer['subscriptions']['data'].first['id'], 
+          stripe_customer_id: stripe_customer["id"],  
           last_four: stripe_customer['sources']['data'].first['last4'],
           exp_year: stripe_customer['sources']['data'].first['exp_year'],
           exp_month: stripe_customer['sources']['data'].first['exp_month'])
-        redirect_to business_customers_path
       end
     else 
       render :index
       flash[:error] = "You have already created subscription."
     end
+    redirect_to business_customers_path
   end
 
   def edit 
@@ -53,16 +49,15 @@ class Business::CustomersController < ApplicationController
     if customer.successful?
       stripe_customer = JSON.parse customer.response.to_s
 
-      company_subscription(params[:plan])
-
       current_company.customer.update( 
         last_four: stripe_customer['sources']['data'].first['last4'],
         exp_year: stripe_customer['sources']['data'].first['exp_year'],
         exp_month: stripe_customer['sources']['data'].first['exp_month'])
-
-      redirect_to business_customers_path
-      flash[:success] = "Your billing information was successfully changed"
+    else
+      error = JSON.parse(customer.to_json)["error_message"]
+      flash[:danger] = "#{error}. Please update your credit card information."
     end
+    redirect_to business_customers_path
   end
 
   def new_plan
@@ -79,16 +74,18 @@ class Business::CustomersController < ApplicationController
       :customer_id => current_company.customer.stripe_customer_id,
       :plan => params[:plan]
       )
-    
+
     if customer.successful?
       stripe_customer = JSON.parse customer.response.to_s
-
       company_subscription(params[:plan])
-      current_company.customer.update_attribute(:plan, stripe_customer['subscriptions']['data'].first['plan']['id'])
-      current_company.customer.update_attribute(:stripe_subscription_id, stripe_customer['subscriptions']['data'].first['id'])
-      
+      current_company.customer.update_attribute(:plan, stripe_customer['plan']['id'])     
+      current_company.customer.update_attribute(:stripe_subscription_id, stripe_customer['id'])
       redirect_to business_plan_path
-      flash[:success] = "Your subscription was successful, the charge has been added to your card"
+      flash[:success] = "Your subscription was successful, the charge has been added to your card"  
+    else 
+      error = JSON.parse(customer.to_json)["error_message"]
+      flash[:danger] = "#{error}. Please update your credit card information."
+      redirect_to business_plan_path
     end
   end
 
@@ -103,6 +100,10 @@ class Business::CustomersController < ApplicationController
       current_company.customer.update_attribute(:plan, params[:plan])
       redirect_to business_plan_path
       flash[:success] = "Your subscription was successful, the charge has been added to your card"
+    else 
+      error = JSON.parse(customer.to_json)["error_message"]
+      flash[:danger] = "#{error} Please update your credit card information."
+      redirect_to business_plan_path
     end
   end
 
@@ -120,6 +121,8 @@ class Business::CustomersController < ApplicationController
       current_company.customer.update_attribute(:stripe_subscription_id, nil)
       redirect_to business_plan_path
       flash[:success] = "Your subscription was successfully canceled, your active job postings will close at the end of the billing period"
+    else 
+      redirect_to business_plan_path  
     end
   end
 

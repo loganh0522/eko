@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController 
-
+  
   def new 
     @company = Company.new
   end
@@ -10,6 +10,7 @@ class CompaniesController < ApplicationController
     if @company.save
       set_user(@company)
       create_career_portal(@company)
+      @company.update_attribute(:plan, 'trial')
       session[:company_id] = @company.id
       flash[:notice] = "Thanks for joining #{@company.name}"
       redirect_to business_root_path

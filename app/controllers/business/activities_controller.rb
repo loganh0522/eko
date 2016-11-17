@@ -1,7 +1,9 @@
 class Business::ActivitiesController < ApplicationController
   before_filter :require_user
   before_filter :belongs_to_company
+  before_filter :trial_over
   before_filter :company_deactivated?
+  
   
   def index
     @activities = current_company.activities.order("created_at desc")
@@ -16,8 +18,7 @@ class Business::ActivitiesController < ApplicationController
     @positions = @user.work_experiences
     @comments = @application.comments
     @stage = @application.stage
-    @avatar = @user.user_avatar  
-    
+    @avatar = @user.user_avatar   
     @activities = current_company.activities.where(application_id: @application.id).order('created_at DESC')
   end
 end

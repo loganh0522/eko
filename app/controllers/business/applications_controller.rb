@@ -1,33 +1,43 @@
 class Business::ApplicationsController < ApplicationController
   before_filter :require_user
   before_filter :belongs_to_company
+  before_filter :trial_over
   before_filter :company_deactivated?
+  
 
   def index
     if params[:query].present? 
       @results = Application.search(params[:query]).records.to_a
       @applicants = []
-      
+      @jobs = current_company.jobs
       @results.each do |application|  
         if application.company == current_company
-          @applicants.append(application.applicant)
+          @applicants.append(application)
+        end
+      end 
+    else
+      @applicants = current_company.applications 
+      @jobs = current_company.jobs  
+    end
+  end
+
+  def filter_applicants
+    @applications = current_company.applications
+    @jobs = current_company.jobs
+    @applicants = []
+
+    params[:checked].each do |param|    
+      @applications.each do |applicant|
+        if applicant.apps.status == param 
+          @applicants.append(applicant)
+        elsif applicant.apps.title == param
+          @applicants.append(applicant)
         end
       end
+    end
 
-      @jobs = current_company.jobs
-      @applications = current_company.applications
-    
-      @applications.each do |application| 
-        @job = Job.find(application.job_id)
-      end
-    else
-      @applicants = current_company.applicants
-      @jobs = current_company.jobs
-      @applications = current_company.applications
-    
-      @applications.each do |application| 
-        @job = Job.find(application.job_id)
-      end
+    respond_to do |format|
+      format.js
     end
   end
 

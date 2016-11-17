@@ -1,7 +1,9 @@
 class Business::MessagesController < ApplicationController 
   before_filter :require_user
   before_filter :belongs_to_company
+  before_filter :trial_over
   before_filter :company_deactivated?
+  
   
   def index 
     @job = Job.find(params[:job_id])
@@ -61,7 +63,4 @@ class Business::MessagesController < ApplicationController
     end
     redirect_to business_job_path(@job)
   end
-
-
-  
 end

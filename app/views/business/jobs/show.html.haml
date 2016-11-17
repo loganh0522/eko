@@ -2,7 +2,7 @@
   .header
     .details
       %h1= @job.title
-      %p= "#{@job.city}, #{@job.province}, #{@job.country}"
+      %p= "#{@job.city}, #{@job.states.first.name}, #{@job.countries.first.name}"
       = link_to "Job Link: #{@job.url}", "http://" + @job.url, :target => "_blank", class: "link"
     .links
       = link_to "Edit Job Details", edit_business_job_path(@job), class: "btn btn-primary"

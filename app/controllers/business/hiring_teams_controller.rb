@@ -1,7 +1,9 @@
 class Business::HiringTeamsController < ApplicationController
   before_filter :require_user
   before_filter :belongs_to_company
+  before_filter :trial_over
   before_filter :company_deactivated?
+  
   
   def index
     @company_users = current_company.users.order(:first_name).where("first_name ILIKE ?", "%#{params[:term]}%")

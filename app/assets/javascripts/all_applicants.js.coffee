@@ -15,7 +15,6 @@ jQuery ->
       $('.date-applied-body').addClass('showing')
 
     return
-    
 
   $('.applicant-nav').on 'click', '.applicant-filter-checkbox', (event) ->    
     checked = []
@@ -26,11 +25,10 @@ jQuery ->
         checked.push($(n).data('id'))
 
     $.ajax
-      url: "business/applications"
+      url: "business/applications/filter"
       type: 'get'
-      async: true
-      dataType: 'json'
-      data: checked
+      dataType: 'script'
+      data: {checked}
 
     
 

@@ -2,10 +2,12 @@ class Business::ScorecardsController < ApplicationController
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :has_a_scorecard, only: [:new, :create]
+  before_filter :trial_over
   before_filter :company_deactivated?
+  
 
   def index 
-   @job = Job.find(params[:job_id])
+    @job = Job.find(params[:job_id])
     @questionairre = @job.questionairre
     @scorecard = Scorecard.where(job_id: @job.id).first
   end

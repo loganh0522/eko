@@ -1,6 +1,7 @@
 class Business::UsersController < ApplicationController 
   before_filter :require_user
   before_filter :belongs_to_company
+  before_filter :trial_over
   before_filter :company_deactivated?
   
   def index 
@@ -29,7 +30,6 @@ class Business::UsersController < ApplicationController
         )
     end
   end
-
 
   def gmail_auth
     @auth = request.env['omniauth.auth']['credentials']

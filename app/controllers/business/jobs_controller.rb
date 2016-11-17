@@ -1,6 +1,7 @@
 class Business::JobsController < ApplicationController
   before_filter :require_user
   before_filter :belongs_to_company
+  before_filter :trial_over
   before_filter :company_deactivated?
   
   def index
@@ -104,6 +105,12 @@ class Business::JobsController < ApplicationController
       @company.save
       track_activity(@job, "published")
       redirect_to business_jobs_path
+    elsif @company.subscription == 'trial' && @company.open_jobs < 3
+      @job.update_column(:status, "open")
+      @company.open_jobs += 1
+      @company.save
+      track_activity(@job, "published")
+      redirect_to business_jobs_path
     elsif @company.subscription == 'basic' && @company.open_jobs < 3
       @job.update_column(:status, "open")
       @company.open_jobs += 1
@@ -146,6 +153,7 @@ class Business::JobsController < ApplicationController
     params.require(:job).permit(:description, :title, :city, :country_ids, :state_ids, :benefits, 
       :industry_ids, :function_ids, :education_level_ids, :job_kind_ids, :career_level_ids)
   end
+  
   def job_url
     @job.update_column(:url, "www.#{current_company.job_board.subdomain}.talentwiz.ca/jobs/#{@job.id}")
   end

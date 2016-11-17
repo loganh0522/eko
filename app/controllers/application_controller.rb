@@ -36,9 +36,18 @@ class ApplicationController < ActionController::Base
   end
 
   def company_deactivated?
-    if current_user.company.active == false
-      flash[:danger] = "Sorry, your account has been deactivated, please update your payment information"
+    if current_company.active == false && current_company.subscription == "trial"
+      flash[:danger] = "Your 14-Day Trial has ended. Please select a plan to continue use."
+      redirect_to business_plan_path
+    elsif current_company.active == false 
+      flash[:danger] = "Sorry, your subscription payment failed. Please update your payment information"
       redirect_to business_customers_path
+    end
+  end
+
+  def trial_over
+    if current_company.created_at < (Date.today - 14.days) && current_company.subscription == "trial"
+      current_company.update_attribute(:active, false)
     end
   end
 

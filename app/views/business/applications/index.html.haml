@@ -1,7 +1,6 @@
 .all-applicants-container
   .applicant-nav
     .nav
-      = form_tag 
       %ul.nav-header
         %li
           .content
@@ -13,7 +12,7 @@
         .body.job-status-body
           %ul
             %li 
-              .applicant-filter-checkbox{:data => {:id => "open"}}= check_box_tag "", true
+              .applicant-filter-checkbox{:data => {:id => "open", :remote => true, :url =>business_applications_path}}= check_box_tag "", true
               Active
             %li.activity
               .applicant-filter-checkbox{:data => {:id => "closed"}}= check_box_tag "", true
@@ -34,7 +33,7 @@
           %ul
             - @jobs.each do |job| 
               %li.open-job
-                .applicant-filter-checkbox{:data => {:id => "job_#{job.id}"}}= check_box_tag "", true
+                .applicant-filter-checkbox{:data => {:id => "#{job.title}"}}= check_box_tag "", true
                 #{job.title}
         %li.filter.date-applied
           .content
@@ -56,10 +55,7 @@
             %li 
               .applicant-filter-checkbox{:data => {:id => "last_year"}}= check_box_tag "", true
               Last Year
-
-
-        
-            
+         
   .all-job-applicants
     .header
       %h1 Applicants  
@@ -72,8 +68,9 @@
             %input(type="submit" value="Search" class="btn btn-primary")
 
       %form_tag.actions
-        = render "business/comments/add_comment"
-        = render "business/messages/send_message"
+        - if current_company.applications.present?
+          = render "business/comments/add_comment"
+          = render "business/messages/send_message"
         %input(type= "submit" value= "Add Note" class= "add_note_action btn btn-primary" data-toggle = "modal" data-target = "#add_commentModal")
         %input(type= "submit" value= "Message" class= "send_message btn btn-primary" data-toggle = "modal" data-target = "#send_messageModal")
         %input(type= "submit" value= "Delete" class= "btn btn-primary")  
@@ -82,5 +79,6 @@
     
     .applicants
       = render 'business/applications/all_applicants_table'
-      .not-present-container
-        %p There are currently no applicants in this stage.
+      - if !current_company.applications.present?
+        .not-present-container
+          %p There are currently no applicants in this stage.
