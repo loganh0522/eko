@@ -49,6 +49,8 @@ class Business::CustomersController < ApplicationController
     if customer.successful?
       stripe_customer = JSON.parse customer.response.to_s
 
+
+
       current_company.customer.update( 
         last_four: stripe_customer['sources']['data'].first['last4'],
         exp_year: stripe_customer['sources']['data'].first['exp_year'],
@@ -80,6 +82,8 @@ class Business::CustomersController < ApplicationController
       company_subscription(params[:plan])
       current_company.customer.update_attribute(:plan, stripe_customer['plan']['id'])     
       current_company.customer.update_attribute(:stripe_subscription_id, stripe_customer['id'])
+
+      
       redirect_to business_plan_path
       flash[:success] = "Your subscription was successful, the charge has been added to your card"  
     else 

@@ -12,6 +12,8 @@ StripeEvent.configure do |events|
   events.subscribe 'charge.failed' do |event|
     customer = Customer.where(stripe_customer_id: event.data.object.customer).first
     company = customer.company
+    customer.update_attribute(:stripe_subscription_id, nil)
+    customer.update_attribute(:plan, nil)
     company.deactivate!
   end
 end

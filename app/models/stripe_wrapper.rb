@@ -100,7 +100,8 @@ module StripeWrapper
         Stripe.api_key = ENV['STRIPE_SECRET_KEY'] 
         response = Stripe::Subscription.create(
           customer: options[:customer_id],
-          plan: options[:plan]
+          plan: options[:plan],
+          :metadata => {'action' => 'create_plan'}
         )
         new(response: response)
 
@@ -127,13 +128,13 @@ module StripeWrapper
         customer = Stripe::Customer.retrieve(options[:customer_id])
         subscription = customer.subscriptions.retrieve(options[:subscription_id])
         subscription.plan = options[:plan]
-
+        
         if options[:plan][-4..-1] == "year"
           subscription.proration_date = Time.now.to_i
           subscription.save
-
           invoice = Stripe::Invoice.create(
-            :customer => customer
+            :customer => customer,
+            :metadata => {'action' => 'update_plan'}
           )
           invoice.pay
         else 

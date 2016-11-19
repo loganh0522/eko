@@ -78,10 +78,31 @@ describe "deactivate user on payment fail" do
     }
   end
 
-  it "deactivates a user with the web hook from stripe, with a failed charge", :vcr do 
+  it "creates a payment with webhook from stripe with charge succeeded", :vcr do 
     talentwiz = Fabricate(:company)
     customer = Fabricate(:customer, company: talentwiz, stripe_customer_id: 'cus_8Z2JOTzC6WSeet')
     post '/stripe_events', event_data
-    expect(talentwiz.reload).not_to be_active
+    expect(Payment.count).to eq(1)
+  end
+
+  it "creates a payment associated with the company", :vcr do 
+    talentwiz = Fabricate(:company)
+    customer = Fabricate(:customer, company: talentwiz, stripe_customer_id: 'cus_8Z2JOTzC6WSeet')
+    post '/stripe_events', event_data
+    expect(Payment.first.company).to eq(talentwiz)
+  end
+
+  it "creates the payment with the amount", :vcr do 
+    talentwiz = Fabricate(:company)
+    customer = Fabricate(:customer, company: talentwiz, stripe_customer_id: 'cus_8Z2JOTzC6WSeet')
+    post '/stripe_events', event_data
+    expect(Payment.first.amount).to eq(999)
+  end
+
+  it "creates the reference_id for the payment", :vcr do 
+    talentwiz = Fabricate(:company)
+    customer = Fabricate(:customer, company: talentwiz, stripe_customer_id: 'cus_8Z2JOTzC6WSeet')
+    post '/stripe_events', event_data
+    expect(Payment.first.reference_id).to eq("ch_19GvefBDRuCwc6R2YRDduQa1")
   end
 end

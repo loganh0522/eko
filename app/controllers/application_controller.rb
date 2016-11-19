@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
       flash[:danger] = "Your 14-Day Trial has ended. Please select a plan to continue use."
       redirect_to business_plan_path
     elsif current_company.active == false 
-      flash[:danger] = "Sorry, your subscription payment failed. Please update your payment information"
+      flash[:danger] = "Sorry, your subscription payment failed. Please update your payment information, and choose a new subscription."
       redirect_to business_customers_path
     end
   end
