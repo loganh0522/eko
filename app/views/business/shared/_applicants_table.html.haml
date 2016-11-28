@@ -8,7 +8,7 @@
         %input(type="submit" value="Search" class="btn btn-primary")
 
   %form_tag.actions
-    = render "business/applications/move_stages"
+    / = render "business/applications/move_stages"
     = render "business/comments/add_comment"
     = render "business/messages/send_message"
     %input(type= "submit" value= "Move Stages" class= "move_action btn btn-primary" data-toggle = "modal" data-target = "#stageModal")
@@ -28,31 +28,33 @@
         %th(width="25%") 
 
       %tbody
-        - @applicants.each do |applicant|
-          - @application = Application.where(user_id: applicant.id, job_id: @job).first.created_at
-          - if @job.applications.where(user_id: applicant.id).first.stage.present?
-            - stage = @job.applications.where(user_id: applicant.id).first.stage.name
-          - elsif @job.applications.where(user_id: applicant.id).first.rejected == true
+        - @applicants.each do |application|
+          - if application.stage.present?
+            - stage = application.stage.name
+          - elsif application.rejected == true
             - stage = "Rejected"
+          - elsif 
+            - stage = "Applied"
+
 
           %tr{:id => "#{stage}" }
             %td
-              .applicant-checkbox{:data => {:id => applicant.id}}
-                = check_box_tag "applicant_ids[]", applicant.id
+              .applicant-checkbox{:data => {:id => application.id}}
+                = check_box_tag "applicant_ids[]", application.id
             %td
               .circle
-                - if applicant.user_avatar.present? 
-                  = image_tag applicant.user_avatar.image.small_image, :size => "50x50" if applicant.user_avatar.present?
+                - if application.applicant.user_avatar.present? 
+                  = image_tag application.applicant.user_avatar.image.small_image, :size => "50x50" 
                 - else
-                  .circle-img= applicant.first_name.first.capitalize
+                  .circle-img= application.applicant.first_name.first.capitalize
             %td.names
-              .name{:data => {:id =>  "#{applicant.first_name} #{applicant.last_name}"}}
-                = link_to "#{applicant.first_name} #{applicant.last_name}", business_job_application_path(@job, Application.where(user_id: applicant.id, job_id: @job).first.id)
+              .name{:data => {:id =>  "#{application.applicant.first_name} #{application.applicant.last_name}"}}
+                = link_to "#{application.applicant.first_name} #{application.applicant.last_name}", business_job_application_path(@job, application.id)
               .current-position CEO - TalentWiz 
             %td
               .position= @job.title
-              - if @application.present?
-                .date-applied= "#{time_ago_in_words(@application)} ago"        
+              - if application.created_at.present?
+                .date-applied= "#{time_ago_in_words(application.created_at)} ago"        
             %td
               .stage= stage
             %td

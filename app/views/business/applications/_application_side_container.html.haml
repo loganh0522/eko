@@ -1,48 +1,56 @@
 .current-stage
-  %h4 Current Stage: 
-  - if @application.stage == nil 
-    .stage
-      .stage-header.active Applied (Current Stage)
-      .stage-body
-        %ul
-          %li Task 1
-          %li Interview 2
-    - @job.stages.each do |stage|
-      .stage   
-        .stage-header= "#{stage.name}"
-        .stage-body
-          %ul
-            %li Task 1
-            %li Interview 2 
-  - else 
-    .stage
-      .stage-header Applied
-      .stage-body
-        %ul
-          %li Task 1
-          %li Interview 2
-    - @job.stages.each do |stage|
-      .stage
-        - if is_current_stage?(stage, @application)
-          .stage-header.active= "#{stage.name} (Current Stage)"
-          .stage-body
-            %ul
-              %li Task 1
-              %li Interview 2 
-        - else
-          .stage-header= stage.name 
-          .stage-body{:style=>"display:none;"}
-            %ul
-              %li Task 1
-              %li Interview 2
+  = render 'business/applications/stage'
+
+.applicant-tags
+  %h4 Tags
+  .tags
+    = render "business/tags/tags"
+  .add_tag
+    = link_to "+ Add Tag", new_business_job_application_tag_path(@job.id, @application.id), :data => {remote: true}, id: 'add_tag'
+    
+
+        
+
+
+
+
+
+  / - if @application.stage == nil 
+  /   .stage
+  /     .stage-header.active Applied (Current Stage)
+  /     .stage-body
+  /       %ul
+  /         %li Task 1
+  /         %li Interview 2
+  /   - @job.stages.each do |stage|
+  /     .stage   
+  /       .stage-header= "#{stage.name}"
+  /       .stage-body
+  /         %ul
+  /           %li Task 1
+  /           %li Interview 2 
+  / - else 
+  /   .stage
+  /     .stage-header Applied
+  /     .stage-body
+  /       %ul
+  /         %li Task 1
+  /         %li Interview 2
+  /   - @job.stages.each do |stage|
+  /     .stage
+  /       - if is_current_stage?(stage, @application)
+  /         .stage-header.active= "#{stage.name} (Current Stage)"
+  /         .stage-body
+  /           %ul
+  /             %li Task 1
+  /             %li Interview 2 
+  /       - else
+  /         .stage-header= stage.name 
+  /         .stage-body{:style=>"display:none;"}
+  /           %ul
+  /             %li Task 1
+  /             %li Interview 2
           
 
-  .stage-actions
-    .reject
-      = form_tag sort_business_job_stages_path do
-        %input(type="submit" value="X Reject" class="btn btn-danger")
-
-    .move-forward
-      = form_tag business_job_application_move_stages_path(@job.id, @application) do
-        %input(type="submit" value="Next Stage" class="btn btn-success")
+  
 

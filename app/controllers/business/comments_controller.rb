@@ -34,11 +34,12 @@ class Business::CommentsController < ApplicationController
   end
 
   def add_note_multiple 
-    @job = Job.find(params[:job_id])  
+     
     applicant_ids = params[:applicant_ids].split(',')
     
     applicant_ids.each do |id| 
-      @application = Application.where(user_id: id, job_id: params[:job_id]).first
+      @application = Application.find(id)
+      @job = Job.find(@application.job_id)
       @comment = Comment.new(body: params[:comment], user_id: current_user.id, application_id: @application.id)
       track_activity(@comment, "create")
     end

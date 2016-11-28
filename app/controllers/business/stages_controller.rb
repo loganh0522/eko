@@ -53,6 +53,10 @@ class Business::StagesController < ApplicationController
     @job = Job.find(params[:job_id])
     @stage.destroy
 
+    @job.stages.each_with_index do |id, index| 
+      Stage.update(id, {position: index + 1})
+    end
+
     respond_to do |format|
       format.js
     end
@@ -84,19 +88,6 @@ class Business::StagesController < ApplicationController
     redirect_to business_job_path(@job)
   end
 
-  def move_stages 
-    @app = Application.find(params[:application_id])
-    current_stage = app.stage
-    @next_stage = Stage.where(position: current_stage.position + 1, job_id: params[:job_id]).first
-    
-    if @app.update_attribute(:stage_id, @next_stage.id)
-      track_activity(@app, "move_stage")
-      redirect_to :back
-    else
-      flash[:danger] = "Sorry, something went wrong please try again."
-      redirect_to :back
-    end
-  end
 
   private 
 

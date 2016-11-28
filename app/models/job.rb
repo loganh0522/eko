@@ -1,4 +1,5 @@
 class Job < ActiveRecord::Base
+  liquid_methods :title
   belongs_to :company
 
   has_one :questionairre

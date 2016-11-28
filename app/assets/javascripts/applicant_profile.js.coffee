@@ -30,3 +30,10 @@ jQuery ->
     $(this).attr('class', 'active-container')
 
     changeContainer($targetContainer)
+  
+#################### Close Tag Form ######################
+  $('.add_tag').on 'click', '.close-form', (event) ->
+    console.log("clicked")
+    $('#add_tag').show()
+    $('.tag_form').remove()
+

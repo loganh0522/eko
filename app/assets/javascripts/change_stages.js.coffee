@@ -1,7 +1,4 @@
 $(window).load ->
-  
-  
-
   changeContainer = ($targetContainer) -> 
     $('.main-container').find('.showing').hide()
     $('.main-container').find('.showing').removeClass 'showing'
@@ -26,10 +23,6 @@ $(window).load ->
         $(this).hide()
 
       return
-
-
-
-
   
   totalWidth = 0 
 

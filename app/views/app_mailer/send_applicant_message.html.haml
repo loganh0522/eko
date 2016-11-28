@@ -1,5 +1,5 @@
 !!!5
 %html(lang='en-US')
   %body
-    %p= simple_format(@message.body)
+    %p= simple_format(Liquid::Template.parse(@message.body).render('recipient' => @recipient, 'company' => @current_company), 'job' => @job)
     

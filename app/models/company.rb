@@ -14,8 +14,11 @@ class Company < ActiveRecord::Base
   has_one :job_board
   has_many :payments
   has_many :activities
+  has_many :tags
  
   validates_presence_of :name, :website
+
+  liquid_methods :name
 
   def deactivate!
     update_column(:active, false)

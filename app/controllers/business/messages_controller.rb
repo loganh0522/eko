@@ -48,19 +48,19 @@ class Business::MessagesController < ApplicationController
     redirect_to business_job_path(@job)
   end
 
-  def send_multiple_messages 
-    @job = Job.find(params[:job_id])
+  def send_multiple_messages    
     applicant_ids = params[:applicant_ids].split(',')
 
     applicant_ids.each do |id| 
-      @application = Application.where(user_id: id, job_id: params[:job_id]).first
+      @application = Application.find(id)
+      @job = Job.find(@application.job_id)
       @message = Message.create(body: params[:body], application_id: @application.id, user_id: current_user.id)
-      @recipient = User.find(id)
+      @recipient = @application.applicant
       @token = @application.token
 
       AppMailer.send_applicant_message(@token, @message, @job, @recipient, current_company).deliver
       track_activity(@message, "create")
     end
-    redirect_to business_job_path(@job)
+    redirect_to :back
   end
 end

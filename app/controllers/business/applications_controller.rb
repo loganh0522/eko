@@ -83,7 +83,37 @@ class Business::ApplicationsController < ApplicationController
 
   end
 
+  def move_stages 
+    @app = Application.find(params[:application_id])
+    @current_stage = @app.stage
+    @job = Job.find(params[:job_id])
+
+    if @current_stage == nil 
+      @next_stage = Stage.where(position: 1, job_id: params[:job_id]).first
+    elsif @current_stage.position == @job.stages.count
+
+    elsif @app.rejected == true
+      
+    else
+      @next_stage = Stage.where(position: @current_stage.position + 1, job_id: params[:job_id]).first
+    end
+    
+    respond_to do |format|
+      if @app.update_attribute(:stage_id, @next_stage.id)
+        track_activity(@app, "move_stage")   
+        @job = Job.find(params[:job_id])
+        @application = Application.find(params[:application_id])
+        format.js
+      else
+        flash[:danger] = "Sorry, something went wrong please try again."
+        redirect_to :back
+      end
+    end
+  end
   
+  def reject
+
+  end
 
   private
 

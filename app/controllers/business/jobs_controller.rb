@@ -45,7 +45,7 @@ class Business::JobsController < ApplicationController
       @stages = @job.stages  
     else
       @job = Job.find(params[:id])
-      @applicants = @job.applicants
+      @applicants = @job.applications
       @activities = current_company.activities.where(job_id: @job.id).order('created_at DESC')
       @stages = @job.stages  
     end   

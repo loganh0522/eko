@@ -2,30 +2,23 @@
   .applicant-nav
     .nav
       %ul.nav-header
-        %li
-          .content
-            Applied Filters
-        .body
         %li.filter.job-status
           .content
             Job Status
         .body.job-status-body
           %ul
             %li 
-              .applicant-filter-checkbox{:data => {:id => "open", :remote => true, :url =>business_applications_path}}= check_box_tag "", true
-              Active
+              .applicant-filter-checkbox{:data => {:id => "open"}}
+                = check_box_tag "", true
+                Active
             %li.activity
-              .applicant-filter-checkbox{:data => {:id => "closed"}}= check_box_tag "", true
-              Closed
+              .applicant-filter-checkbox{:data => {:id => "closed"}}
+                = check_box_tag "", true
+                Closed
             %li.activity  
-              .applicant-filter-checkbox{:data => {:id => "archived"}}= check_box_tag "", true
-              Archived     
-        %li.filter.date-applied
-          .content
-            Tags 
-        .body.open-job-body
-          
-
+              .applicant-filter-checkbox{:data => {:id => "archived"}}
+                = check_box_tag "", true
+                Archived     
         %li.filter.open-jobs
           .content
             Open Job Postings: 
@@ -33,28 +26,34 @@
           %ul
             - @jobs.each do |job| 
               %li.open-job
-                .applicant-filter-checkbox{:data => {:id => "#{job.title}"}}= check_box_tag "", true
-                #{job.title}
+                .applicant-filter-checkbox{:data => {:id => "#{job.title}"}}
+                  = check_box_tag "", true
+                  #{job.title}
         %li.filter.date-applied
           .content
             Date Applied 
         .body.date-applied-body
           %ul
             %li 
-              .applicant-filter-checkbox{:data => {:id => "all_applied"}}= check_box_tag "", true, true
-              All 
+              .applicant-filter-checkbox{:data => {:id => "all_applied"}}
+                = check_box_tag "", true, true
+                All 
             %li
-              .applicant-filter-checkbox{:data => {:id => "2_weeks"}}= check_box_tag "", true
-              Last 2 weeks
+              .applicant-filter-checkbox{:data => {:id => "2_weeks"}}
+                = check_box_tag "", true
+                Last 2 weeks
             %li 
-              .applicant-filter-checkbox{:data => {:id => "last_month"}}= check_box_tag "", true
-              Last Month
+              .applicant-filter-checkbox{:data => {:id => "last_month"}}
+                = check_box_tag "", true
+                Last Month
             %li
-              .applicant-filter-checkbox{:data => {:id => "3_months"}}= check_box_tag "", true
-              Last 3 Months
+              .applicant-filter-checkbox{:data => {:id => "3_months"}}
+                = check_box_tag "", true
+                Last 3 Months
             %li 
-              .applicant-filter-checkbox{:data => {:id => "last_year"}}= check_box_tag "", true
-              Last Year
+              .applicant-filter-checkbox{:data => {:id => "last_year"}}
+                = check_box_tag "", true
+                Last Year
          
   .all-job-applicants
     .header
@@ -74,9 +73,7 @@
         %input(type= "submit" value= "Add Note" class= "add_note_action btn btn-primary" data-toggle = "modal" data-target = "#add_commentModal")
         %input(type= "submit" value= "Message" class= "send_message btn btn-primary" data-toggle = "modal" data-target = "#send_messageModal")
         %input(type= "submit" value= "Delete" class= "btn btn-primary")  
-
-      
-    
+   
     .applicants
       = render 'business/applications/all_applicants_table'
       - if !current_company.applications.present?

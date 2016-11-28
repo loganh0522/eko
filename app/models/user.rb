@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   # index_name ["talentwiz", Rails.env].join('_') 
 
   #Business User Relationships
-
+  liquid_methods :first_name, :last_name
   belongs_to :company
 
 
@@ -60,5 +60,9 @@ class User < ActiveRecord::Base
 
   def sort_by_date
     
+  end
+
+  def full_name
+    full_name = "#{self.first_name} #{self.last_name}"
   end
 end

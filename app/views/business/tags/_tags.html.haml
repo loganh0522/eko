@@ -1,3 +1,6 @@
-- @tags.each do |tag| 
-  = "#" + tag.name
+- if @tags.present?
+  - @tags.each do |tag| 
+    #tag
+      .name= "#" + tag.name
+      .delete-tag &times
 

@@ -76,7 +76,16 @@ Rails.application.routes.draw do
     resources :locations 
     resources :user_avatars
     resources :job_boards
-    resources :applications
+    resources :tags
+    
+    resources :applications do 
+      collection do 
+        post :update_multiple, to: "stages#update_multiple"
+        post :add_note_multiple, to: "comments#add_note_multiple"
+        post :send_multiple_messages, to: "messages#send_multiple_messages"
+      end
+    end
+
     
     get "business/applications/filter", to: "applications#filter_applicants"
     get "plan", to: "customers#plan"
@@ -98,14 +107,7 @@ Rails.application.routes.draw do
       post :publish_job, to: "jobs#publish_job"
       
       resources :applications do
-        collection do 
-          post :update_multiple, to: "stages#update_multiple"
-          post :add_note_multiple, to: "comments#add_note_multiple"
-          post :send_multiple_messages, to: "messages#send_multiple_messages"
-        end
-
         get :application_activity, to: "activities#application_activity"
-        
         resources :messages
         resources :comments
         resources :application_scorecards

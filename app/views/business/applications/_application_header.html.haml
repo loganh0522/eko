@@ -19,11 +19,6 @@
       - if @user.city.present?
         %span.glyphicon.glyphicon-earphone 
           = "#{@user.phone}"
-      %br
-        .row
-          #tags
-            = render "business/tags/tags"
-          = link_to "+ Add Tag", new_business_job_application_tag_path(@job.id, @application.id), :data => {remote: true}, id: 'add_tag'
 
   .applicant-nav-bar  
     = render "business/shared/applicant_nav"

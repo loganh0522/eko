@@ -14,3 +14,4 @@ jQuery ->
       $('<li>').attr('ui-item-autocomplete', item.value).append("<a>" + item.first_name + "</a>").appendTo ul
     
     return
+  return
