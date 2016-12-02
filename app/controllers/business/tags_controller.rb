@@ -15,21 +15,44 @@ class Business::TagsController < ApplicationController
     @tag = Tag.new
   end
 
-  def create
-    binding.pry
-    @tag = Tag.new(tag_params)
-    @application = Application.find(params[:application_id])
-    @tags = @application.tags
-    if @tag.save 
-      Tagging.create(application_id: params[:application_id], tag_id: @tag.id)
-      respond_to do |format| 
-        format.js 
+  def create 
+    respond_to do |format|    
+      @tag = Tag.where(name: params[:tag][:name], company_id: current_company.id) 
+      @job = Job.find(params[:tag][:job_id])  
+      @application = Application.find(params[:tag][:application_id])
+      @tags = @application.tags
+
+      if @tag.present?
+        @tagging_present = false
+        if @application.taggings.count != 0
+          @application.taggings.each do |tagging|  
+            if tagging.tag_id == @tag.first.id
+              return
+            else
+              @tagging_present = true
+              break
+            end
+          end
+          if @tagging_present == false
+            Tagging.create(application_id: params[:tag][:application_id], tag_id: @tag.first.id)
+          end
+        else
+          Tagging.create(application_id: params[:tag][:application_id], tag_id: @tag.first.id)
+        end
+      else
+        @tag = Tag.new(tag_params)
+        @tag.company = current_company   
+        if @tag.save 
+          Tagging.create(application_id: params[:tag][:application_id], tag_id: @tag.id)
+        end
       end
-    end
+
+      format.js 
+    end  
   end
 
   def destroy
-    @tag = Taggings.find(params[:id])
+    @tag = Tagging.find(params[:id])
     @job = Job.find(params[:job_id])
     @tag.destroy
 
@@ -40,7 +63,11 @@ class Business::TagsController < ApplicationController
 
   private
 
+  def tag_exists
+     
+  end
+
   def tag_params
-    params.require(:tag).permit(:name)
+    params.require(:tag).permit(:name, :company_id)
   end
 end

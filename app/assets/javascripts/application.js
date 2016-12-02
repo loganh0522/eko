@@ -21,6 +21,7 @@
 //= require bootstrap-wysihtml5
 //= require chosen-jquery
 //= require autocomplete-rails
+//= require geocomplete
 //= require_tree .
 
 

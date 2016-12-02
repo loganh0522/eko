@@ -1,28 +1,80 @@
+.job-board-header 
+
 .job-board
-  - @jobs.each do |job|
-    .job-posting
-      .header-info
-        %img(src="#{job.company.job_board.logo}" class="logo") 
-        .job-detail
-          .title= link_to "#{job.title}", job_seeker_job_path(job)
-          .company= job.company.name
-        .view-job= link_to "View Job", job_seeker_job_path(job), class: "btn btn-primary"
-      .bottom-info
-        .left-side
-          %img(src="/tmp/small-location.png") 
-          = "#{job.city}, #{job.states.first.name}"
-          
-          %img(src="/tmp/small-bar-chart.png") 
-          = job.job_career_level.first.career_level.name
+  .filters
+    .header Search for Jobs
 
-        .right-side 
-          %img(src="/tmp/small-hammer.png") 
-          = job.job_industries.first.industry.name
+    .job-function
+      .title Job Function 
+      .body
+        %ul
+          - @function.each do |function|   
+            %li.activity 
+              .checkbox{:data => {:id => "scorecards"}}= check_box_tag "", true, true
+              #{function.name}
+    .job-function
+      .title Experience Level
+      .body
+        %ul
+          %li.activity 
+            .checkbox{:data => {:id => "comments"}}= check_box_tag "", true, true
+            Entry Level
+          %li.activity
+            .checkbox{:data => {:id => "scorecards"}}= check_box_tag "", true, true
+            Associate
+          %li.activity
+            .checkbox{:data => {:id => "messages"}}= check_box_tag "", true, true
+            Mid-Level
+          %li.activity
+            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
+            Director
+          %li.activity
+            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
+            Executive
+    .job-function
+      .title Job Status
+      .body
+        %ul
+          %li.activity 
+            .checkbox{:data => {:id => "comments"}}= check_box_tag "", true, true
+            Full Time
+          %li.activity
+            .checkbox{:data => {:id => "scorecards"}}= check_box_tag "", true, true
+            Part Time
+          %li.activity
+            .checkbox{:data => {:id => "messages"}}= check_box_tag "", true, true
+            Contract
+          %li.activity
+            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
+            Temp
+          %li.activity
+            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
+            Internship
+  .jobs
+    - @jobs.each do |job|
+      .job-posting
+        .header-info
+          %img(src="#{job.company.job_board.logo}" class="logo") 
+          .job-detail
+            .title= link_to "#{job.title}", job_seeker_job_path(job)
+            .company= job.company.name
+          .view-job= link_to "View Job", job_seeker_job_path(job), class: "btn btn-primary"
+        .bottom-info
+          .left-side
+            %img(src="/tmp/small-location.png") 
+            = "#{job.city}, #{job.states.first.name}"
+            
+            %img(src="/tmp/small-bar-chart.png") 
+            = job.job_career_level.first.career_level.name
 
-          %img(src="/tmp/small-briefcase.png") 
-          = job.job_kind.first.name
+          .right-side 
+            %img(src="/tmp/small-hammer.png") 
+            = job.job_industries.first.industry.name
 
-          %img(src="/tmp/small-clock.png") 
-          = "#{time_ago_in_words(job.created_at)} ago"
-      
+            %img(src="/tmp/small-briefcase.png") 
+            = job.job_kind.first.name
+
+            %img(src="/tmp/small-clock.png") 
+            = "#{time_ago_in_words(job.created_at)} ago"
+        
 

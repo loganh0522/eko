@@ -48,6 +48,9 @@ class User < ActiveRecord::Base
   has_one :google_token
   #Carrierwave uploader and minimagic for User Profile Pictures
 
+  accepts_nested_attributes_for :work_experiences, allow_destroy: true, reject_if: proc { |a| a[:body].blank? }
+  accepts_nested_attributes_for :educations, allow_destroy: true, reject_if: proc { |a| a[:body].blank? }
+
   def as_indexed_json(options={})
     as_json(
       only: [:first_name, :last_name, :tag_line],

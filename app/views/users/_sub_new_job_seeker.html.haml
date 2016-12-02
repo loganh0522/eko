@@ -1,0 +1,24 @@
+.modal#newSubUserModal
+  .modal-dialog
+    .modal-content
+      .modal-body
+        .sub-header
+          .logo
+            %img(src="#{@company.job_board.logo}" class="sub_logo")
+          %h3
+            Register
+        .body
+          = bootstrap_form_for @user, html: {class: 'form-horizontal'} do |f|
+            %fieldset
+              = f.text_field :first_name, placeholder: "First Name", hide_label: true
+              = f.text_field :last_name, placeholder: "Last Name", hide_label: true
+              = f.email_field :email, placeholder: "Email Address", hide_label: true
+              = f.password_field :password, placeholder: "Password", hide_label: true
+              = f.hidden_field :kind, :value => 'job seeker'
+              = f.submit "Create Account", class: "btn button-submit"
+            %br
+            %p
+              Already have an account? 
+              = link_to "Sign In", "", "data-toggle" => "modal", "data-dismiss" => "modal", "data-target" => "#SubLoginModal"
+
+    

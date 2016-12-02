@@ -1,3 +1,4 @@
+
 = bootstrap_form_for [:job_seeker, @work_experience], html: {remote: true, class: 'invite'} do |f|
   .fieldset
     .row
@@ -6,6 +7,9 @@
     .row
       .col-md-12
         = f.text_field :company_name, class: "form-control", label: "Company Name"
+    .row
+      .col-md-12
+        = f.text_field :city, class: "form-control", id: "geocomplete", label: "Location", autocomplete: "off"
     .row
       .col-md-6
         = f.collection_select(:industry_ids, Industry.all, :id, :name, label: "Industry")

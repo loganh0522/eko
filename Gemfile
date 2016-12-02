@@ -26,6 +26,7 @@ gem 'bootstrap-wysihtml5-rails'
 gem 'rails4-autocomplete'
 gem 'country_state_select', "2.0.0"
 gem 'chosen-rails'
+gem 'geocomplete_rails'
 
 gem 'mini_magick'
 gem 'carrierwave'

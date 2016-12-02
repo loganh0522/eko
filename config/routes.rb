@@ -5,11 +5,13 @@ Rails.application.routes.draw do
   match 'jobs/:id', to: "jobs#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'ee3439a1'}, via: [:get, :post, :put, :patch, :delete]
   match 'register', to: "users#sub_new_job_seeker", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'ee3439a1'}, via: [:get, :post, :put, :patch, :delete]
   match 'profile', to: "profiles#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'ee3439a1'}, via: [:get, :post, :put, :patch, :delete]
-
+  match 'create-profile', to: "profiles#create_profile", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'ee3439a1'}, via: [:get, :post, :put, :patch, :delete]
 
   root to: 'pages#home'
   get 'pricing', to: 'pages#pricing'
   get 'features', to: 'pages#features'
+
+  get 'create-profile', to: "profiles#create_profile"
   
   get 'features/branded-job-board', to: 'features#job_board'
   get 'features/applicant-tracking', to: 'features#applicant_tracking'
@@ -120,7 +122,8 @@ Rails.application.routes.draw do
           end
         end  
 
-        post :move_stages    
+        get :move_stages 
+        get :reject   
       end
       
       resources :hiring_teams do

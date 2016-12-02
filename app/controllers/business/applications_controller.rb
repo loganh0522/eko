@@ -87,15 +87,13 @@ class Business::ApplicationsController < ApplicationController
     @app = Application.find(params[:application_id])
     @current_stage = @app.stage
     @job = Job.find(params[:job_id])
-
-    if @current_stage == nil 
+   
+    if @current_stage == nil && @app.rejected != true
       @next_stage = Stage.where(position: 1, job_id: params[:job_id]).first
-    elsif @current_stage.position == @job.stages.count
-
-    elsif @app.rejected == true
-      
-    else
+    elsif @current_stage.position != @job.stages.count && @app.rejected != true
       @next_stage = Stage.where(position: @current_stage.position + 1, job_id: params[:job_id]).first
+    else 
+      @next_stage = @current_stage
     end
     
     respond_to do |format|
@@ -105,14 +103,18 @@ class Business::ApplicationsController < ApplicationController
         @application = Application.find(params[:application_id])
         format.js
       else
-        flash[:danger] = "Sorry, something went wrong please try again."
-        redirect_to :back
+        render :back
       end
     end
   end
   
   def reject
-
+    @application = Application.find(params[:application_id])
+    @application.update_attribute(:rejected, true)
+    @job = Job.find(params[:job_id])
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

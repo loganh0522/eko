@@ -1,16 +1,74 @@
-.career-portal
-  .container
-    / .header
-    /   %h1= "About #{@company.name}"
-    / .body
-    /   %p= simple_format(@company.job_board.description)
-    
-    .header
-      %h1 Current Opportunities 
-    .jobs  
-      - @jobs.each do |job|
-        .job
-          .details
-            %h4= "#{job.title}"
-            %p Toronto, On, Canada
-            = link_to "Apply", "jobs/#{job.id}", class: "btn btn-primary"
+.job-board
+  .filters
+    .header Search for Jobs
+
+    .job-function
+      .title Job Function 
+      .body
+        %ul
+          - @function.each do |function|   
+            %li.activity 
+              .checkbox{:data => {:id => "scorecards"}}= check_box_tag "", true, true
+              #{function.name}
+    .job-function
+      .title Experience Level
+      .body
+        %ul
+          %li.activity 
+            .checkbox{:data => {:id => "comments"}}= check_box_tag "", true, true
+            Entry Level
+          %li.activity
+            .checkbox{:data => {:id => "scorecards"}}= check_box_tag "", true, true
+            Associate
+          %li.activity
+            .checkbox{:data => {:id => "messages"}}= check_box_tag "", true, true
+            Mid-Level
+          %li.activity
+            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
+            Director
+          %li.activity
+            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
+            Executive
+    .job-function
+      .title Job Status
+      .body
+        %ul
+          %li.activity 
+            .checkbox{:data => {:id => "comments"}}= check_box_tag "", true, true
+            Full Time
+          %li.activity
+            .checkbox{:data => {:id => "scorecards"}}= check_box_tag "", true, true
+            Part Time
+          %li.activity
+            .checkbox{:data => {:id => "messages"}}= check_box_tag "", true, true
+            Contract
+          %li.activity
+            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
+            Temp
+          %li.activity
+            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
+            Internship
+  .jobs
+    - @jobs.each do |job|
+      .job-posting
+        .header-info
+          .job-detail
+            .title= link_to "#{job.title}", "jobs/#{job.id}" 
+          .view-job= link_to "View Job", "jobs/#{job.id}", class: "btn btn-primary"
+        .bottom-info
+          .left-side
+            %img(src="/tmp/small-location.png") 
+            = "#{job.city}, #{job.states.first.name}"
+            
+            %img(src="/tmp/small-bar-chart.png") 
+            = job.job_career_level.first.career_level.name
+
+          .right-side 
+            %img(src="/tmp/small-hammer.png") 
+            = job.job_industries.first.industry.name
+
+            %img(src="/tmp/small-briefcase.png") 
+            = job.job_kind.first.name
+
+            %img(src="/tmp/small-clock.png") 
+            = "#{time_ago_in_words(job.created_at)} ago"

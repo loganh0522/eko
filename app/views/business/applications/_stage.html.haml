@@ -5,11 +5,11 @@
 - else 
   - stage = @application.stage.name
 
-  %h4 Current Stage:
-  .stage
-    .stage-header= "#{stage}"
-  .stage-actions
-    .reject
-      = link_to "Reject", business_job_application_reject_path(@job.id, @application), method: :post,  :data => {remote: true}
-    .move-forward
-      = link_to "Move To Next Stage ->", business_job_application_move_stages_path(@job.id, @application), method: :post,  :data => {remote: true}
+%h4 Current Stage:
+.stage
+  .stage-header= "#{stage}"
+.stage-actions
+  .reject
+    = link_to "Reject", business_job_application_reject_path(@job.id, @application), :data => {remote: true}
+  .move-forward
+    = link_to "Move To Next Stage ->", business_job_application_move_stages_path(@job.id, @application), :data => {remote: true}

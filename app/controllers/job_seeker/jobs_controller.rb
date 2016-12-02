@@ -3,7 +3,7 @@ class JobSeeker::JobsController < JobSeekersController
 
   def index 
     @jobs = Job.all
-    
+    @function = Function.all
     @avatar = current_user.user_avatar
   end
 

@@ -1,0 +1,9 @@
+.create-profile-container
+  .header  
+    %h1 Build Your Profile
+  .body
+    .job_scorecard
+      = bootstrap_form_for [@user] do |f|
+        = f.fields_for :work_experiences, WorkExperience.new do |q| 
+          = render "/profiles/work_experience_fields", f: q        
+        = link_to_add_fields "+ Add Work Experience", f, :work_experiences

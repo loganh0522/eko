@@ -5,12 +5,12 @@
         = image_tag @avatar.image.large_image if @avatar.present?
         = link_to  '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"} do
           .edit-photo Edit Profile Picture
-        / = render 'profile_picture'
+        = render 'job_seeker/profiles/profile_picture'
       - else      
         = link_to '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"} do
           %img(src="/tmp/blank_profile_picture.png")
           .add-photo Add Profile Picture
-        / = render 'profile_picture'
+        = render 'job_seeker/profiles/profile_picture'
       
 
     .personal-details
@@ -30,7 +30,8 @@
         .current_location
           .bold Location
           %br
-          .shift= "#{current_user.city}, #{current_user.countries.first.name}"
+          - if current_user.countries.present? 
+            .shift= "#{current_user.city}, #{current_user.countries.first.name}"
       
         .current_experience
           .bold Current Role 
@@ -137,7 +138,3 @@
             %h4.modal-title  
           .modal-body
 
-
-
-
-          .modal-body

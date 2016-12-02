@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       if @user.kind == 'job seeker'
         session[:user_id] = @user.id 
         if request.subdomain.present? 
-          redirect_to job_seeker_profile_path(@user)
+          redirect_to profile_path(@user)
         else
           redirect_to job_seeker_jobs_path
         end

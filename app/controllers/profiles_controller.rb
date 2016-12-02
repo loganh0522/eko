@@ -17,4 +17,11 @@ class ProfilesController < ApplicationController
     @current_work = current_user.work_experiences.where(current_position: '1')
   end
 
+  def create_profile
+    @job_board = JobBoard.find_by_subdomain!(request.subdomain)
+    @company = @job_board.company
+    @user = current_user
+    @work_experience = WorkExperience.new
+  end
+
 end

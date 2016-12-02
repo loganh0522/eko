@@ -1,0 +1,21 @@
+.modal#SubLoginModal
+  .modal-dialog
+    .modal-content
+      .modal-body
+        .sub-header
+          .logo
+            %img(src="#{@company.job_board.logo}" class="sub_logo")
+          %h3
+            Login
+        .body
+          = bootstrap_form_tag url: '/login' do |f|
+            %fieldset
+              = f.email_field :email, placeholder: "E-mail", hide_label: true
+              = f.password_field :password, placeholder: "Password", hide_label: true
+              %input(type="submit" value="Log In" class="btn button-submit")
+        .sub-footer
+          .create-account
+            = link_to "Create Account", "", "data-toggle" => "modal", "data-dismiss" => "modal", "data-target" => "#newSubUserModal"
+          .forgot-password
+            = link_to 'Forgot Password', '/forgot_password'
+

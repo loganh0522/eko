@@ -2,5 +2,6 @@
   - @tags.each do |tag| 
     #tag
       .name= "#" + tag.name
-      .delete-tag &times
+      = link_to business_job_application_tag_path(@job, @application, tag.id), remote: true, :method => :delete do 
+        .delete-tag &times
 
