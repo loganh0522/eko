@@ -75,6 +75,7 @@
             = job.job_kind.first.name
 
             %img(src="/tmp/small-clock.png") 
-            = "#{time_ago_in_words(job.created_at)} ago"
+            - if job.created_at.present?
+              = "#{time_ago_in_words(job.created_at)} ago"
         
 
