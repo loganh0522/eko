@@ -5,17 +5,21 @@ class User < ActiveRecord::Base
 
   #Business User Relationships
   liquid_methods :first_name, :last_name
+  
   belongs_to :company
 
-
   has_many :hiring_teams
-  has_many :jobs, through: :hiring_teams
-
-  
+  has_many :jobs, through: :hiring_teams 
   has_many :application_scorecards
   has_many :invitations
   has_many :messages
   has_many :activities
+  has_many :notifications
+
+  has_many :mentions
+  has_many :mentioned, :through => :mentions
+  has_many :mentioned, :class_name => "Mention", :foreign_key => "mentioned_id"
+
 
   validates_presence_of :first_name, :last_name, :email, :password, on: [:create]
   validates_uniqueness_of :email

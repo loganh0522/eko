@@ -14,9 +14,9 @@ class Business::JobsController < ApplicationController
 
   def create 
     @job = Job.new(job_params)  
-    @job.company = current_company
 
     if @job.save && @job.company == current_company
+      convert_location
       @job.user_ids = params[:user_ids]
       @job.update_column(:status, "draft")
       job_url
@@ -61,6 +61,7 @@ class Business::JobsController < ApplicationController
     @job = Job.find(params[:id])
     
     if @job.update(job_params)
+      convert_location
       track_activity @job
       flash[:notice] = "#{@job.title} has been updated"
       redirect_to new_business_job_hiring_team_path(@job)
@@ -150,11 +151,23 @@ class Business::JobsController < ApplicationController
   private 
 
   def job_params
-    params.require(:job).permit(:description, :title, :city, :country_ids, :state_ids, :benefits, 
+    params.require(:job).permit(:description, :title, :location, :address, :benefits, :company_id,
       :industry_ids, :function_ids, :education_level_ids, :job_kind_ids, :career_level_ids)
   end
   
   def job_url
-    @job.update_column(:url, "www.#{current_company.job_board.subdomain}.talentwiz.ca/jobs/#{@job.id}")
+    @job.update_column(:url, "#{current_company.job_board.subdomain}.talentwiz.ca/jobs/#{@job.id}")
+  end
+
+  def convert_location
+    location = params[:job][:location].split(',')
+    if location.count == 3
+      @job.city = location[0]
+      @job.province = location[1]
+      @job.country = location[2]
+    else
+      @job.city = location[0]
+      @job.country = location[1]
+    end
   end
 end 

@@ -47,6 +47,10 @@ gem 'google-api-client', '0.9'
 
 gem 'liquid-rails', '~> 0.1.1'
 
+gem 'jquery-atwho-rails'
+
+
+
 group :development do
   gem 'thin'
   gem "better_errors"

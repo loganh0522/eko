@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  match '/', to: "job_boards#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'ee3439a1'}, via: [:get, :post, :put, :patch, :delete]
-  match 'login', to: "sessions#subdomain_new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'ee3439a1'}, via: [:get]
-  match 'login', to: "sessions#create", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'ee3439a1'}, via: [:post]
-  match 'jobs/:id', to: "jobs#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'ee3439a1'}, via: [:get, :post, :put, :patch, :delete]
-  match 'register', to: "users#sub_new_job_seeker", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'ee3439a1'}, via: [:get, :post, :put, :patch, :delete]
-  match 'profile', to: "profiles#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'ee3439a1'}, via: [:get, :post, :put, :patch, :delete]
-  match 'create-profile', to: "profiles#create_profile", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'ee3439a1'}, via: [:get, :post, :put, :patch, :delete]
+  match '/', to: "job_boards#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:get, :post, :put, :patch, :delete]
+  match 'login', to: "sessions#subdomain_new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:get]
+  match 'login', to: "sessions#create", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:post]
+  match 'jobs/:id', to: "jobs#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:get, :post, :put, :patch, :delete]
+  match 'register', to: "users#sub_new_job_seeker", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:get, :post, :put, :patch, :delete]
+  match 'profile', to: "profiles#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:get, :post, :put, :patch, :delete]
+  match 'create-profile', to: "profiles#create_profile", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:get, :post, :put, :patch, :delete]
 
   root to: 'pages#home'
   get 'pricing', to: 'pages#pricing'
@@ -79,6 +79,7 @@ Rails.application.routes.draw do
     resources :user_avatars
     resources :job_boards
     resources :tags
+    resources :notifications
     
     resources :applications do 
       collection do 
@@ -90,6 +91,8 @@ Rails.application.routes.draw do
 
     
     get "business/applications/filter", to: "applications#filter_applicants"
+    get "business/mention_user", to: "applications#mention_user"
+    
     get "plan", to: "customers#plan"
 
 

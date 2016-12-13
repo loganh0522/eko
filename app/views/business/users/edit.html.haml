@@ -18,17 +18,17 @@
       = link_to "Change Photo", '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"}
       = render 'business/users/profile_picture'
 
-      / %h4 Sync With Gmail 
-      / = link_to "Authenticate with Google!", '/auth/google_oauth2'
+      %h4 Sync With Gmail 
+      = link_to "Authenticate with Google!", '/auth/google_oauth2'
 
-      / - if @auth.present? 
-      /   - @auth.each do |key, value| 
-      /     = key 
-      /     = value
+      - if @auth.present? 
+        - @auth.each do |key, value| 
+          = key 
+          = value
 
-      / - if @emails.present? 
-      /   - @emails.each do |email|
-      /     = email.body
+      - if @emails.present? 
+        - @emails.each do |email|
+          = email.body
           
 
      

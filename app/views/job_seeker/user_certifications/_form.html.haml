@@ -1,4 +1,4 @@
-= bootstrap_form_for [:job_seeker, @user_certification], html: {remote: true} do |f|
+= bootstrap_form_for [:job_seeker, @user_certification], html: {remote: true, class: 'profile-form'} do |f|
   .row
     - if @user_certification.new_record? 
       = text_field_tag 'name', nil, :class => 'ui-autocomplete-input', :placeholder => 'Certification Name', id: "certification_name"

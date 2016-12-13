@@ -6,6 +6,7 @@ class InboundEmailsController < ApplicationController
     @application = Application.find_by(token: @token)
     @msg_body = params["stripped-text"]
 
+
     if @application.present? 
       @message = Message.create(body: @msg_body, application_id: @application.id, user_id: @application.user_id)
     end

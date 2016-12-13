@@ -24,6 +24,22 @@ jQuery ->
         $('.date-applied-body').show()
         $('.date-applied-body').addClass('showing')
       return
+    else if $(this).attr('class') == 'filter tags'
+      if $('.tags-body').hasClass('showing') 
+        $('.tags-body').hide()
+        $('.tags-body').removeClass('showing')
+      else 
+        $('.tags-body').show()
+        $('.tags-body').addClass('showing')
+      return
+    else if $(this).attr('class') == 'filter locations'
+      if $('.locations-body').hasClass('showing') 
+        $('.locations-body').hide()
+        $('.locations-body').removeClass('showing')
+      else 
+        $('.locations-body').show()
+        $('.locations-body').addClass('showing')
+      return
     return
 
   $('.applicant-nav').on 'click', '.applicant-filter-checkbox', (event) ->    

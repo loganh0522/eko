@@ -2,7 +2,7 @@
   .job-description
     .job-header
       %h1= @job.title
-      = "#{@job.city}, #{@job.states.first.name} - #{@job.job_kind.first.name}"
+      = "#{@job.location} - #{@job.job_kind.first.name}"
     .job-body
       %p= simple_format(@job.description)
 

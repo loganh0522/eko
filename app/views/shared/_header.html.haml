@@ -1,4 +1,4 @@
-- if !request.subdomain.present? || request.subdomain == 'www' || request.subdomain == 'prod-talentwiz' || request.subdomain == 'dev-talentwiz' || request.subdomain == 'stageing-talentwiz' || request.subdomain == 'ee3439a1'
+- if !request.subdomain.present? || request.subdomain == 'www' || request.subdomain == 'prod-talentwiz' || request.subdomain == 'dev-talentwiz' || request.subdomain == 'stageing-talentwiz' || request.subdomain == '7c1aba01'
   %section#top-header.row
     - if !logged_in?
       .navbar-static-top
@@ -23,6 +23,7 @@
               %li= link_to "JOBS", business_jobs_path 
               %li= link_to "APPLICANTS", business_applications_path
               %li= link_to "ACTIVITY", business_activities_path
+              %li= link_to "NOTIFICATIONS", business_notifications_path
 
           .dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}

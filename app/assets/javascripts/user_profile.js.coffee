@@ -33,7 +33,6 @@ jQuery ->
     $(this).addClass 'active'
     $(this).css color: 'rgb(239, 122, 43)'
 
-    console.log($targetContainer)
     changeContainer $targetContainer
     return
 
@@ -45,7 +44,7 @@ jQuery ->
 
 
   $(document).on('click', '.close-form', ( ->
-    formobj = $('form').attr('id').slice(5)
+    formobj = $('.profile-form').attr('id').slice(5)
     console.log(formobj)
 
     if $(this).attr('id') == 'new-form'

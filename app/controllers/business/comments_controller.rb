@@ -17,6 +17,8 @@ class Business::CommentsController < ApplicationController
   end
 
   def create 
+    @regex = params[:comment][:body].scan /@([\w]+\s[\w]+)/   
+
     @comment = Comment.new(comment_params)
     @application = Application.find(params[:application_id])
     @comments = @application.comments
@@ -24,6 +26,13 @@ class Business::CommentsController < ApplicationController
     
     respond_to do |format| 
       if @comment.save 
+        if @regex.present? 
+          @regex.each do |user|
+            user = User.where(full_name: user.first).first
+            @mention = Mention.create(user_id: current_user.id, mentioned_id: user.id, comment_id: @comment.id)
+            Notification.create(user_id: user.id, trackable: @mention, action: 'create')
+          end
+        end
         track_activity @comment
       else
         flash[:error] = "Sorry something went wrong"

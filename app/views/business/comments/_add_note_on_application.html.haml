@@ -7,8 +7,13 @@
         - else 
           .circle-img= current_user.first_name.first.capitalize
       %td(width="80%")
-        = f.text_field :body, rows: 2, class: "form-control", label: "Add Feedback", placeholder: "Add a note about #{@user.first_name} #{@user.last_name}"
+        = f.text_field :body, rows: 2, class: "form-control user-comment", label: "Add Feedback", autocomplete: 'off', placeholder: "Add a note about #{@user.first_name} #{@user.last_name} (@mention a teammate)"
         = f.hidden_field :user_id, value: current_user.id
         = f.hidden_field :application_id, value: @application.id
       %td(width="10%")
         = f.submit "+ Add", class: "btn btn-primary"
+
+
+
+.user-comment
+  

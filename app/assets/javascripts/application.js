@@ -22,6 +22,8 @@
 //= require chosen-jquery
 //= require autocomplete-rails
 //= require geocomplete
+//= require jquery.atwho
+
 //= require_tree .
 
 

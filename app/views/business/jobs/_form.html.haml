@@ -4,17 +4,24 @@
       .form-group.col-md-6
         = f.text_field :title, class: "form-control", label: "Job Title"
     .row
-      .form-group.col-md-4
-        = f.collection_select(:country_ids, Country.all, :id, :name, include_blank: "Select a Country", label: "Country")
-      .form-group.col-md-4
-        = f.grouped_collection_select(:state_ids, Country.order(:name), :states, :name, :id, :name, include_blank: true, label: "Province/State")
-      .form-group.col-md-4
-        = f.text_field :city, class: "form-control", label: "City"
+      .form-group.col-md-6
+        = f.text_field :location, class: "form-control", id: "geocomplete", label: "Location (City)", autocomplete: "off", placeholder: "City Name"
+      
+      .form-group.col-md-6
+        = f.text_field :address, class: "form-control", id: "geocomplete2", label: "Address", autocomplete: "off", placeholder: "Enter the Address"
+    
+    / .row
+    /   .form-group.col-md-4
+    /     = f.collection_select(:country_ids, Country.all, :id, :name, include_blank: "Select a Country", label: "Country")
+    /   .form-group.col-md-4
+    /     = f.grouped_collection_select(:state_ids, Country.order(:name), :states, :name, :id, :name, include_blank: true, label: "Province/State")
+    /   .form-group.col-md-4
+    /     = f.text_field :city, class: "form-control", label: "City"
     .row
       .form-group.col-md-4
-        = f.collection_select(:industry_ids, Industry.all, :id, :name, label: "Industry")
+        = f.collection_select(:industry_ids, Industry.all, :id, :name, label: "Industry", :include_blank => true)
       .form-group.col-md-4
-        = f.collection_select(:function_ids, Function.all, :id, :name, label: "Job Function")
+        = f.collection_select(:function_ids, Function.all, :id, :name, label: "Job Function", :include_blank => true)
       .form-group.col-md-4
         = f.collection_select(:job_kind_ids, JobKind.all, :id, :name, label: "Job Type", :include_blank => true)
     .row
@@ -30,6 +37,7 @@
         = f.text_area :benefits, rows: 12, class: "wysihtml5 form-control", label: "Benefits"
     .row
       = hidden_field_tag :user_ids, current_user.id
+      = f.hidden_field :company_id, value: current_company.id
       .col-md-1.col-md-offset-9
         = f.submit @job.new_record? ? "Create Job Posting" : "Save and Continue", class: "btn btn-primary"
 

@@ -2,7 +2,7 @@
   .job-header 
     .title 
       = link_to job.title, business_job_path(job)
-    .location= "#{job.city}, #{job.states.first.name}"
+    .location= "#{job.location}"
     .posted-time= "#{time_ago_in_words(job.created_at)} ago" 
   .job-body
     .btns

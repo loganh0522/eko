@@ -58,7 +58,7 @@
         .bottom-info
           .left-side
             %img(src="/tmp/small-location.png") 
-            = "#{job.city}, #{job.states.first.name}"
+            = "#{job.location}"
             
             %img(src="/tmp/small-bar-chart.png") 
             = job.job_career_level.first.career_level.name

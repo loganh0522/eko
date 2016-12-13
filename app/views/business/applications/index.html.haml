@@ -21,14 +21,35 @@
                 Archived     
         %li.filter.open-jobs
           .content
-            Open Job Postings: 
+            Job Applied To: 
         .body.open-job-body
           %ul
             - @jobs.each do |job| 
               %li.open-job
-                .applicant-filter-checkbox{:data => {:id => "#{job.title}"}}
+                .applicant-filter-checkbox{:data => {:id => "#{job}"}}
+                  = check_box_tag "", true  
+                  #{job}
+        %li.filter.locations
+          .content
+            Location Applied To: 
+        .body.locations-body
+          %ul
+            - @locations.each do |location| 
+              %li
+                .applicant-filter-checkbox{:data => {:id => "#{location}"}}
                   = check_box_tag "", true
-                  #{job.title}
+                  #{location}
+        %li.filter.tags
+          .content
+            Tags: 
+        .body.tags-body
+          %ul
+            - @tags.each do |tag| 
+              %li
+                .applicant-filter-checkbox{:data => {:id => "#{tag.name}"}}
+                  = check_box_tag "", true
+                  #{tag.name}
+        
         %li.filter.date-applied
           .content
             Date Applied 
@@ -36,7 +57,7 @@
           %ul
             %li 
               .applicant-filter-checkbox{:data => {:id => "all_applied"}}
-                = check_box_tag "", true, true
+                = check_box_tag "", true
                 All 
             %li
               .applicant-filter-checkbox{:data => {:id => "2_weeks"}}

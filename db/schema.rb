@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125194755) do
+ActiveRecord::Schema.define(version: 20161213034459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -234,6 +234,10 @@ ActiveRecord::Schema.define(version: 20161125194755) do
     t.integer  "company_id"
     t.string   "status"
     t.string   "url"
+    t.string   "address"
+    t.string   "location"
+    t.string   "start_salary"
+    t.string   "end_salary"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -247,11 +251,29 @@ ActiveRecord::Schema.define(version: 20161125194755) do
     t.integer "subsidiary_id"
   end
 
+  create_table "mentions", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "mentioned_id"
+    t.integer "comment_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.text     "body"
     t.string   "subject"
     t.integer  "application_id"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string   "action"
+    t.string   "trackable_type"
+    t.integer  "trackable_id"
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.integer  "application_id"
+    t.integer  "job_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -394,6 +416,7 @@ ActiveRecord::Schema.define(version: 20161125194755) do
     t.string  "linked_in"
     t.string  "website"
     t.string  "tag_line"
+    t.string  "full_name"
   end
 
   create_table "work_experiences", force: :cascade do |t|

@@ -9,7 +9,9 @@ class Business::ApplicationsController < ApplicationController
     if params[:query].present? 
       @results = Application.search(params[:query]).records.to_a
       @applicants = []
-      @jobs = current_company.jobs
+      company_jobs
+      company_locations
+      @tags = current_company.tags
       @results.each do |application|  
         if application.company == current_company
           @applicants.append(application)
@@ -17,7 +19,9 @@ class Business::ApplicationsController < ApplicationController
       end 
     else
       @applicants = current_company.applications 
-      @jobs = current_company.jobs  
+      company_jobs
+      company_locations
+      @tags = current_company.tags
     end
   end
 
@@ -26,12 +30,20 @@ class Business::ApplicationsController < ApplicationController
     @jobs = current_company.jobs
     @applicants = []
 
-    params[:checked].each do |param|    
-      @applications.each do |applicant|
-        if applicant.apps.status == param 
-          @applicants.append(applicant)
-        elsif applicant.apps.title == param
-          @applicants.append(applicant)
+       
+    @applications.each do |applicant|
+      params[:checked].each do |param| 
+        @tags = []
+        tags_present(applicant)
+
+        if applicant.apps.status == param || 
+          applicant.apps.title == param || 
+          @tags.include?(param)
+
+          
+          @applicants.append(applicant) unless @applicants.include?(applicant)
+        else
+          @applicants.delete(applicant)
         end
       end
     end
@@ -40,6 +52,11 @@ class Business::ApplicationsController < ApplicationController
       format.js
     end
   end
+
+  # def mention_user
+  #   @job = Job.find(params[:job_id])
+  #   @hiring_team = @job.users
+  # end
 
   def show 
     @application = Application.find(params[:id])
@@ -69,6 +86,8 @@ class Business::ApplicationsController < ApplicationController
     scorecard_graphs
 
     @activities = current_company.activities.where(application_id: @application.id).order('created_at DESC')
+    
+    @hiring_team = @job.users 
   end
 
   def applicant_search
@@ -118,6 +137,25 @@ class Business::ApplicationsController < ApplicationController
   end
 
   private
+  def tags_present(applicant)
+    applicant.tags.each do |tag| 
+      @tags.append(tag.name)
+    end
+  end
+
+  def company_locations
+    @locations = []
+    current_company.jobs.each do |job|  
+      @locations.append(job.location) unless @locations.include?(job.location)
+    end
+  end
+
+  def company_jobs
+    @jobs = []  
+    current_company.jobs.each do |job|  
+      @jobs.append(job.title) unless @jobs.include?(job.title)
+    end
+  end
 
   def overall_rating(scorecard, application)
     @recommended = 0.0
