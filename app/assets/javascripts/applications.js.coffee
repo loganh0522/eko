@@ -74,7 +74,6 @@ jQuery ->
     $('#add_commentModal').find('form').find('#applicant_ids').val(applicant_ids)
 
   $('#add_commentModal').on 'hidden.bs.modal', ->
-    console.log('closed')
     $('.recipients').children().remove() 
 
     return

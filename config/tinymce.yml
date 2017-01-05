@@ -1,0 +1,11 @@
+toolbar:
+  - styleselect | bold italic underline | undo redo | image link
+plugins:
+  - image
+  - link
+
+menubar: false
+
+content_css: asset_path('tinymce.sass')
+
+content_css : '/assets/stylesheets/tinymce.sass'

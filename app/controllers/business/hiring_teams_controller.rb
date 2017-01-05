@@ -6,7 +6,7 @@ class Business::HiringTeamsController < ApplicationController
   
   
   def index
-    @company_users = current_company.users.order(:first_name).where("first_name ILIKE ?", "%#{params[:term]}%")
+    @company_users = current_company.users.order(:full_name).where("full_name ILIKE ?", "%#{params[:term]}%")
     render :json => @company_users.to_json 
   end
 
@@ -39,6 +39,12 @@ class Business::HiringTeamsController < ApplicationController
       format.html {redirect_to new_business_job_hiring_team_path(@job)}
       format.js 
     end
+  end
+
+  def job_hiring_team
+    @job = Job.find(params[:job])
+    @hiring_team = @job.users.order(:full_name).where("full_name ILIKE ?", "%#{params[:term]}%")
+    render :json => @hiring_team.to_json
   end
 
   private 

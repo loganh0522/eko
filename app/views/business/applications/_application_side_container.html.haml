@@ -1,12 +1,21 @@
 .current-stage
   = render 'business/applications/stage'
 
+.schedule-interview
+  %h4 Interviews
+  = render 'business/interviews/form'
+
+  = link_to  'Schedule Interview', '#', :data => {:toggle => "modal", :target => "#interview-modal"}
+
+
 .applicant-tags
   %h4 Tags
   .tags
     = render "business/tags/tags"
   .add_tag
     = link_to "+ Add Tag", new_business_job_application_tag_path(@job.id, @application.id), :data => {remote: true}, id: 'add_tag'
+
+
     
 
         

@@ -1,0 +1,35 @@
+.modal#interview-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title Schedule Interview
+      .modal-body
+        = bootstrap_form_for [:business, @interview] do |f|
+          .fieldset
+            .row 
+              .form-group.col-md-4
+                = f.text_field :date 
+              .form-group.col-md-4
+                = f.text_field :start_time, class: "time_picker"
+              .form-group.col-md-4
+                = f.text_field :end_time, class: "time_picker"
+            .row
+              .form-group.col-md-6
+                = f.select :kind, ['Phone', 'Skype', 'In-person'],{}
+              .form-group.col-md-6
+                = f.text_field :location, id: "geocomplete2", label: "Address", autocomplete: "off", placeholder: "Enter the Address"
+
+            .row 
+              %div#user-image
+              .col-md-12
+                = text_field_tag :hiring_team, nil, id: 'job_team_members', :data => {:job_id => @job.id }, placeholder: "Add Team Members"
+              %div#team-members-results
+              = hidden_field_tag :user_ids
+            .row  
+              .form-group.col-md-12
+                = f.text_area :notes
+
+            = f.hidden_field :application_id, value: @application.id
+            = f.submit "Send Invitation", class: "btn btn-primary"
+    

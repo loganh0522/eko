@@ -88,6 +88,10 @@ class Business::ApplicationsController < ApplicationController
     @activities = current_company.activities.where(application_id: @application.id).order('created_at DESC')
     
     @hiring_team = @job.users 
+
+    @interview = Interview.new
+
+    
   end
 
   def applicant_search
@@ -137,6 +141,7 @@ class Business::ApplicationsController < ApplicationController
   end
 
   private
+  
   def tags_present(applicant)
     applicant.tags.each do |tag| 
       @tags.append(tag.name)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161213034459) do
+ActiveRecord::Schema.define(version: 20161218174212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,6 +151,19 @@ ActiveRecord::Schema.define(version: 20161213034459) do
     t.integer "work_experience_id"
   end
 
+  create_table "interviews", force: :cascade do |t|
+    t.string   "notes"
+    t.integer  "application_id"
+    t.string   "kind"
+    t.datetime "date"
+    t.string   "start_time"
+    t.string   "end_time"
+    t.string   "location"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "invitations", force: :cascade do |t|
     t.integer  "inviter_id"
     t.string   "recipient_name"
@@ -262,6 +275,13 @@ ActiveRecord::Schema.define(version: 20161213034459) do
     t.string   "subject"
     t.integer  "application_id"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "my_interviews", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "interview_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

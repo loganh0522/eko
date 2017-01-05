@@ -7,11 +7,47 @@ jQuery ->
         $('#team_members').val ui.item.name
         false
       select: (event, ui) ->
-        $('#team_members').val ui.item.first_name 
+        $('#team_members').val ui.item.full_name 
         $('#user_id').val ui.item.id
         false
     ).data('ui-autocomplete')._renderItem = (ul, item) ->
-      $('<li>').attr('ui-item-autocomplete', item.value).append("<a>" + item.first_name + "</a>").appendTo ul
+      $('<li>').attr('ui-item-autocomplete', item.value).append("<a>" + item.full_name + "</a>").appendTo ul
     
     return
-  return
+
+  $('form').on 'focus', '#job_team_members', ->   
+    job = ('#job_team_members')   
+    $('form').find('#job_team_members').autocomplete( 
+      source: (request, response) ->
+        $.ajax
+          url: '/business/job_hiring_team'
+          dataType: 'json'
+          data:
+            term: request.term
+            job: $('#job_team_members').data('job-id')
+          success: (data) ->
+            response data
+            return
+        return
+
+      appendTo: $('#team-members-results')
+      focus: (event, ui) ->
+        $('#job_team_members').val ui.item.name
+        false
+      select: (event, ui) ->
+        $('#user-image').append('<div>' + ui.item.full_name + '<div>')
+        $('#job_team_members').val ui.item.full_name 
+        values =  $('#user_ids').val() + ', ' + ui.item.id 
+        $('#user_ids').val values
+        $('#job_team_members').val('')
+        false
+    ).data('ui-autocomplete')._renderItem = (ul, item) ->
+      $('<li>').attr('ui-item-autocomplete', item.value).append("<a>" + item.full_name + "</a>").appendTo ul
+    
+    return
+
+  $('form').on 'click', '.insert', (event) -> 
+    tinymce.activeEditor.execCommand('mceInsertContent', false, "<div class='class_one'> some text </div>")
+
+
+

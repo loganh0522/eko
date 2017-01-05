@@ -44,11 +44,15 @@ gem 'googlecharts'
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-google-oauth2'
 gem 'google-api-client', '0.9'
+gem 'signet', '~> 0.7.3'
 
 gem 'liquid-rails', '~> 0.1.1'
 
 gem 'jquery-atwho-rails'
 
+gem 'jquery-timepicker-rails'
+
+gem 'tinymce-rails'
 
 
 group :development do

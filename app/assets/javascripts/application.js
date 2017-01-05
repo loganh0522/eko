@@ -23,6 +23,10 @@
 //= require autocomplete-rails
 //= require geocomplete
 //= require jquery.atwho
+//= require tinymce
+//= require tinymce-jquery
+//= require jquery.timepicker.js
+
 
 //= require_tree .
 

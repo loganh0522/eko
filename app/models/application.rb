@@ -22,6 +22,8 @@ class Application < ActiveRecord::Base
   has_many :taggings
   has_many :tags, through: :taggings
 
+  has_many :interviews
+
 
   def generate_token
     self.token = SecureRandom.urlsafe_base64

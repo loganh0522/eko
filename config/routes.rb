@@ -80,6 +80,7 @@ Rails.application.routes.draw do
     resources :job_boards
     resources :tags
     resources :notifications
+    resources :interviews
     
     resources :applications do 
       collection do 
@@ -89,7 +90,8 @@ Rails.application.routes.draw do
       end
     end
 
-    
+    get 'job_hiring_team', to: "hiring_teams#job_hiring_team"
+
     get "business/applications/filter", to: "applications#filter_applicants"
     get "business/mention_user", to: "applications#mention_user"
     

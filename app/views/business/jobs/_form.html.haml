@@ -1,3 +1,4 @@
+
 = bootstrap_form_for [:business, @job] do |f|
   .fieldset
     .row
@@ -30,6 +31,11 @@
       .form-group.col-md-4
         = f.collection_select(:career_level_ids, CareerLevel.all, :id, :name, label: "Career Level")
     .row
+      .btn.btn-primary.insert Insert Text
+    .row
+      = f.text_area :description, :class => "tinymce", :rows => 40, :cols => 120
+      = tinymce_assets        
+      = tinymce 
       .form-group.col-md-12
         = f.text_area :description, rows: 12, class: "wysihtml5 form-control", label: "Description"
     .row

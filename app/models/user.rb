@@ -16,6 +16,9 @@ class User < ActiveRecord::Base
   has_many :activities
   has_many :notifications
 
+  has_many :interviews
+  has_many :interviews, through: :my_interviews
+
   has_many :mentions
   has_many :mentioned, :through => :mentions
   has_many :mentioned, :class_name => "Mention", :foreign_key => "mentioned_id"
