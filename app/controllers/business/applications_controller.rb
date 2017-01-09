@@ -90,7 +90,7 @@ class Business::ApplicationsController < ApplicationController
     @hiring_team = @job.users 
 
     @interview = Interview.new
-
+    @interviews = Interview.where(application: @application)
     
   end
 

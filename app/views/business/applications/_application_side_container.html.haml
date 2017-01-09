@@ -4,8 +4,17 @@
 .schedule-interview
   %h4 Interviews
   = render 'business/interviews/form'
+  
 
-  = link_to  'Schedule Interview', '#', :data => {:toggle => "modal", :target => "#interview-modal"}
+  .scheduled-interviews
+    .interview
+      - @interviews.each do |interview| 
+        = interview.kind
+        = interview.date.to_date
+        = "#{interview.start_time} - #{interview.end_time}"
+        = link_to 'View', business_interview_path(interview.id), :data => {:remote => true}
+
+  = link_to 'Schedule Interview', '#', :data => {:toggle => "modal", :target => "#interview-modal"}
 
 
 .applicant-tags
@@ -16,7 +25,7 @@
     = link_to "+ Add Tag", new_business_job_application_tag_path(@job.id, @application.id), :data => {remote: true}, id: 'add_tag'
 
 
-    
+
 
         
 

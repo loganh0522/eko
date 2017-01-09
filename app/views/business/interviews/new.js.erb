@@ -1,0 +1,4 @@
+$('.modal-title').html('<%= j "Schedule Interview" %>');
+$('.modal-body').html('<%= j render "business/interviews/form", interview: @interview %>');
+$('#myModal').modal("show");
+

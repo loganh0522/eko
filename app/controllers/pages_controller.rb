@@ -1,4 +1,6 @@
 class PagesController < ApplicationController 
+  before_filter :user_logged_in
+
 
   def home
     

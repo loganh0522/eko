@@ -43,7 +43,7 @@ class Business::HiringTeamsController < ApplicationController
 
   def job_hiring_team
     @job = Job.find(params[:job])
-    @hiring_team = @job.users.order(:full_name).where("full_name ILIKE ?", "%#{params[:term]}%")
+    @hiring_team = @job.users.order(:full_name).where("full_name ILIKE ?", "%#{params[:term]}%") 
     render :json => @hiring_team.to_json
   end
 

@@ -1,0 +1,3 @@
+$('#myModal .modal-title').html("<%= @interview.kind %>");
+$('#myModal .modal-body').html('<%= j render "business/interviews/show_interview", interview: @interview %>');
+$('#myModal').modal("show");

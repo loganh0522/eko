@@ -3,7 +3,6 @@ class JobSeeker::UserCertificationsController < JobSeekersController
     @user_certification = UserCertification.new
   end
 
-
   def create
     @user_certification = UserCertification.new(certification_params.merge!(certification_id: params[:certification_id] ))
     @certifications = current_user.user_certifications

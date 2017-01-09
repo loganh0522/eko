@@ -31,8 +31,6 @@ Rails.application.routes.draw do
   resources :companies
   resources :users
 
-
-
   get 'login', to: "sessions#new"
   get '/job_seekers/new', to: 'users#new_job_seeker'
   get '/account/new', to: 'companies#new'
