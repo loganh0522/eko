@@ -1,78 +1,81 @@
-.job-seeker
-  .profile-top-container  
-    .user-image
-      - if current_user.user_avatar.present? 
-        = image_tag @avatar.image.large_image if @avatar.present?
-        = link_to  '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"} do
-          .edit-photo Edit Profile Picture
-        = render 'job_seeker/profiles/profile_picture'
-      - else      
-        = link_to '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"} do
-          %img(src="/tmp/blank_profile_picture.png")
-          .add-photo Add Profile Picture
-        = render 'job_seeker/profiles/profile_picture'
-      
-
-    .personal-details
-      .main-details
-        %h1
-          .name= "#{current_user.first_name.upcase} #{current_user.last_name.upcase}"
-          .icons
-            = link_to "#", :data => {:remote => true} do
-              %i.glyphicon.glyphicon-pencil
-        .tag-line
-          = current_user.tag_line
-          .icons
-            = link_to "#", :data => {:remote => true} do
-              %i.glyphicon.glyphicon-pencil
+.job-seeker-profile-subdomain
+  .profile-background-photo
+  .user-image
+    - if current_user.user_avatar.present? 
+      = image_tag @avatar.image.large_image if @avatar.present?
+      = link_to  '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"} do
+        .edit-photo Edit Profile Picture
+      = render 'job_seeker/profiles/profile_picture'
+    - else      
+      = link_to '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"} do
+        %img(src="/tmp/blank_profile_picture.png")
+        .add-photo Add Profile Picture
+      = render 'job_seeker/profiles/profile_picture' 
+  .personal-details
+    .main-details
+      .name= "#{current_user.full_name}"
+      .icon-detail
+        %img(src="/tmp/black-small-location.png") 
+        = "Toronto, On, Canada"
+      .icon-detail
+        %img(src="/tmp/black-small-e-mail-envelope.png") 
+        = "#{current_user.email}"
+      .icon-detail
+        %img(src="/tmp/black-small-phone-call.png") 
+        = "#{current_user.phone}"
         
-      .side-details
-        .current_location
-          .bold Location
-          %br
-          - if current_user.countries.present? 
-            .shift= "#{current_user.city}, #{current_user.countries.first.name}"
-      
-        .current_experience
-          .bold Current Role 
-          %br
-          .shift= "Founder - TalentWiz.com" 
-        .current_education
-          .bold Education 
-          %br
-          .shift= "Queen's - Bachelor of Commerce"
 
+      
+  /       .current_experience
+  /         .bold Current Role 
+  /         %br
+  /         .shift= "Founder - TalentWiz.com" 
+  /       .current_education
+  /         .bold Education 
+  /         %br
+  /         .shift= "Queen's - Bachelor of Commerce"
+  .job-seeker-nav
+    .user-profile-nav-subdomain
+      %ul
+        %li.experience-tab.active-subdomain Experience 
+        %li.education-tab Education      
+        %li.skills-tab Certifications
+        %li.my-apps-tab My Applications
+  
   .main-body
     .sidebar
-      .user-profile-nav
-        %ul
-          %li.experience-tab.active Experience 
-          %li.education-tab Education      
-          %li.skills-tab Skills & Certifications
-          %li.career-prefs-tab Career Preferences
-          %li.my-apps-tab My Applications
+      .header
+        .title Skills
+      = render "job_seeker/user_skills/form"
+      .sidebar-container
+        - if current_user.user_skills.count == 0
+          .skills-not-present
+            %p No Skills Listed
+        - else
+          = render 'job_seeker/user_skills/skills'
+        
     .main-container
       .experience-container#showing
         .header
-          %h1 Experience
+          .title Experience
           .new_experience
             = link_to "+ Add Experience", new_job_seeker_work_experience_path, :data => {:remote => true}, :html => {id: 'new_work_exp'}
         .body
-          - if current_user.work_experiences.nil? 
-            .not-present-container
+          - if current_user.work_experiences.count == 0
+            .not-present-container#not-present
               %p You currently do not have any listed work experiences. 
-              = link_to "+ Add Work Experience", new_job_seeker_work_experience_path, :data => {:remote => true}
+              = link_to "+ Add Work Experience", new_job_seeker_work_experience_path, :data => {:remote => true}, class: 'add-object'
           - else
             = render 'job_seeker/work_experiences/experience'
 
       .education-container
         .header
-          %h1 Education
+          .title Education
           .new_experience
             = link_to "+ Add Education", new_job_seeker_education_path, :data => {:remote => true}
         .body
-          - if current_user.educations.nil? 
-            .not-present-container
+          - if current_user.educations.count == 0
+            .not-present-container#not-present
               %p You currently do not have any listed work experiences. 
               = link_to "+ Add Education", new_job_seeker_education_path, :data => {:remote => true}, class: 'add-object'               
           - else 
@@ -80,21 +83,7 @@
            
       .skills-container
         .header
-          %h1 Skills
-          / .new_experience
-          /   = link_to "+ Add Skills", job_seeker_user_add_skills_path(@user.id), :data => {:remote => true}
-
-        .body#skill-body
-          - if current_user.user_skills.count == 0
-            = render 'job_seeker/user_skills/form'
-            .not-present-container#skill-not-present
-              %p You currently do not have any skills listed. 
-          - else 
-            = render 'job_seeker/user_skills/form'
-            = render 'job_seeker/user_skills/skills'
-
-        .header
-          %h1 Certifications
+          .title Certifications
           .new_experience
             = link_to "+ Add Certification", new_job_seeker_user_certification_path, :data => {:remote => true} 
         .body#certification-body
@@ -110,7 +99,7 @@
 
       .career-prefs-container
         .header
-          %h1 Career Preferences
+          .title Career Preferences
         .body
           - if current_user.educations.nil?        
             
@@ -121,7 +110,7 @@
       
       .my-apps-container
         .header
-          %h1 Applications
+          .title Applications
         .body
           - if current_user.educations.nil?        
             
@@ -137,4 +126,3 @@
             %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
             %h4.modal-title  
           .modal-body
-

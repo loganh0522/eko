@@ -25,7 +25,7 @@
               .col-md-12
                 = text_field_tag :hiring_team, nil, id: 'job_team_members', :data => {:job_id => @job.id }, placeholder: "Add Team Members"
               %div#team-members-results
-              = hidden_field_tag :user_ids
+              = hidden_field_tag :user_ids, current_user.id
             .row  
               .form-group.col-md-12
                 = f.text_area :notes

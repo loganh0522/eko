@@ -1,74 +1,25 @@
-.job-board
-  .filters
-    .header Search for Jobs
-
-    .job-function
-      .title Job Function 
-      .body
-        %ul
-          - @function.each do |function|   
-            %li.activity 
-              .checkbox{:data => {:id => "scorecards"}}= check_box_tag "", true, true
-              #{function.name}
-    .job-function
-      .title Experience Level
-      .body
-        %ul
-          %li.activity 
-            .checkbox{:data => {:id => "comments"}}= check_box_tag "", true, true
-            Entry Level
-          %li.activity
-            .checkbox{:data => {:id => "scorecards"}}= check_box_tag "", true, true
-            Associate
-          %li.activity
-            .checkbox{:data => {:id => "messages"}}= check_box_tag "", true, true
-            Mid-Level
-          %li.activity
-            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
-            Director
-          %li.activity
-            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
-            Executive
-    .job-function
-      .title Job Status
-      .body
-        %ul
-          %li.activity 
-            .checkbox{:data => {:id => "comments"}}= check_box_tag "", true, true
-            Full Time
-          %li.activity
-            .checkbox{:data => {:id => "scorecards"}}= check_box_tag "", true, true
-            Part Time
-          %li.activity
-            .checkbox{:data => {:id => "messages"}}= check_box_tag "", true, true
-            Contract
-          %li.activity
-            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
-            Temp
-          %li.activity
-            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
-            Internship
+.company-job-board  
   .jobs
     - @jobs.each do |job|
       .job-posting
         .header-info
           .job-detail
             .title= link_to "#{job.title}", "jobs/#{job.id}" 
-          .view-job= link_to "View Job", "jobs/#{job.id}", class: "btn btn-primary"
+          .view-job= link_to "View Job", "jobs/#{job.id}", class: "btn"
         .bottom-info
           .left-side
-            %img(src="/tmp/small-location.png") 
+            %img(src="/tmp/black-small-location.png") 
             = "#{job.location}"
             
-            %img(src="/tmp/small-bar-chart.png") 
+            %img(src="/tmp/black-small-bar-chart.png") 
             = job.job_career_level.first.career_level.name
 
           .right-side 
-            %img(src="/tmp/small-hammer.png") 
+            %img(src="/tmp/black-small-hammer.png") 
             = job.job_industries.first.industry.name
 
-            %img(src="/tmp/small-briefcase.png") 
+            %img(src="/tmp/black-small-briefcase.png") 
             = job.job_kind.first.name
 
-            %img(src="/tmp/small-clock.png") 
+            %img(src="/tmp/black-small-clock.png") 
             = "#{time_ago_in_words(job.created_at)} ago"

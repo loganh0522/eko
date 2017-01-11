@@ -1,9 +1,8 @@
-.fieldset
+.fieldset.create-work-experience
   .row
-    .col-md-12
+    .col-md-6
       = f.text_field :title, class: "form-control", label: "Job Title"
-  .row
-    .col-md-12
+    .col-md-6
       = f.text_field :company_name, class: "form-control", label: "Company Name"
   .row
     .col-md-12
@@ -14,13 +13,6 @@
     .col-md-6
       = f.collection_select(:function_ids, Function.all, :id, :name, label: "Job Function")
     %br
-  .row
-    .col-md-4
-      = f.collection_select(:country_ids, Country.all, :id, :name, include_blank: "Select a Country", label: "Country")
-    .col-md-4
-      = f.grouped_collection_select(:state_ids, Country.order(:name), :states, :name, :id, :name, include_blank: true, label: "Province/State")
-    .col-md-4
-      = f.text_field :city, class: "form-control", label: "City", class: 'select-month'
   .row
     .col-md-3
       = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"

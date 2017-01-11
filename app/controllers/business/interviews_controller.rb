@@ -8,16 +8,19 @@ class Business::InterviewsController < ApplicationController
     @application = Application.find()
     @interview = Interview.new
     respond_to do |format| 
-      
-
       format.js 
     end 
   end
 
   def create
     @interview = Interview.new(interview_params)
+    @team = params[:user_ids].split(',')
 
     if @interview.save 
+      @team.each do |user| 
+        @user = user.to_i
+        MyInterview.create(user_id: @user, interview_id: @interview.id)
+      end
       redirect_to :back
     else
       flash[:danger] = "Something went wrong"
@@ -27,6 +30,7 @@ class Business::InterviewsController < ApplicationController
   def show 
     @interview = Interview.find(params[:id])
     @applicant = @interview.application.applicant
+    @team = @interview.users 
   end
 
 

@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   resources :certifications
 
   namespace :job_seeker do 
+    root to: "jobs#index"
     resources :jobs
     resources :profiles 
     resources :user_certifications

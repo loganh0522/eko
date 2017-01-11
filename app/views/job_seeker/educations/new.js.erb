@@ -2,5 +2,13 @@
 // $('.modal-body').html('<%= j render "job_seeker/educations/form" %>');
 // $('.modal').modal("show");
 
-$('<%= j render "job_seeker/educations/form" %>').insertBefore("#educations");
-$('.new_experience').hide();
+
+
+
+<% if current_user.educations.count == 0 %>
+  $('<%= j render "job_seeker/educations/form" %>').insertBefore('#not-present');
+  $('#not-present').remove();
+<% else %>
+  $('<%= j render "job_seeker/educations/form" %>').insertBefore("#educations");
+  $('.new_experience').hide();
+<% end %>

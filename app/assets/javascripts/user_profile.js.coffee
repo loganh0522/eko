@@ -94,7 +94,32 @@ jQuery ->
 
 
   
+  $('.user-profile-nav-subdomain').on 'click', 'li', (event) -> 
+    if $(this).attr('class') == 'experience-tab'
+      $targetContainer = '.experience-container'
+      $('.new_experience').show()
+    else if $(this).attr('class') == 'education-tab'
+      $targetContainer = '.education-container'
+      $('.new_experience').show()
+    else if $(this).attr('class') == 'skills-tab'
+      $targetContainer = '.skills-container'
+      $('.new_experience').show()
+    else if $(this).attr('class') == 'career-prefs-tab'
+      $targetContainer = '.career-prefs-container'
+      $('.new_experience').show()
+    else if $(this).attr('class') == 'my-apps-tab'
+      $targetContainer = '.my-apps-container'
+      $('.new_experience').show()
+  
+    $('.user-profile-nav-subdomain').find('.active-subdomain').css color: 'black'
+    $('.user-profile-nav-subdomain').find('.active-subdomain').removeClass 'active-subdomain'
+    
+    
+    $(this).addClass 'active-subdomain'
 
+
+    changeContainer $targetContainer
+    return
 
   
 

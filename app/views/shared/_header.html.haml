@@ -85,8 +85,9 @@
         = link_to root_path do
           %img(src="#{@company.job_board.logo}" class="sub_logo")
         %ul.nav.navbar-nav.navbar-right
-          %input(type= "submit" value= "Login"  data-toggle = "modal" data-dismiss= 'modal' data-target = "#SubLoginModal")
-          %input(type= "submit" value= "Register" cdata-toggle = "modal" data-dismiss= 'modal' data-target = "#newSubUserModal")
+          %li= link_to "Register", register_path, class: "sign-up-btn"
+          %li= link_to "Sign In", login_path, class: "sign-up-btn"
+
 
 
 

@@ -37,7 +37,7 @@ jQuery ->
       select: (event, ui) ->
         $('#user-image').append('<div>' + ui.item.full_name + '<div>')
         $('#job_team_members').val ui.item.full_name 
-        values =  $('#user_ids').val() + ', ' + ui.item.id 
+        values =  $('#user_ids').val() + ',' + ui.item.id 
         $('#user_ids').val values
         $('#job_team_members').val('')
         false

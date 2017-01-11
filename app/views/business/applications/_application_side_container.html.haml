@@ -13,6 +13,7 @@
         = interview.date.to_date
         = "#{interview.start_time} - #{interview.end_time}"
         = link_to 'View', business_interview_path(interview.id), :data => {:remote => true}
+        %br
 
   = link_to 'Schedule Interview', '#', :data => {:toggle => "modal", :target => "#interview-modal"}
 

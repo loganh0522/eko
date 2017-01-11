@@ -3,7 +3,13 @@
 // $('.modal').modal("show");
 
 
+<% if current_user.work_experiences.count == 0 %>
+  $('<%= j render "job_seeker/work_experiences/form" %>').insertBefore('#not-present');
+  $('#not-present').remove();
+<% else %>
+  $('<%= j render "job_seeker/work_experiences/form" %>').insertBefore("#work_experiences");
+  $('.new_experience').hide();
+<% end %>
 
-$('<%= j render "job_seeker/work_experiences/form" %>').insertBefore("#work_experiences");
-$('.new_experience').hide();
+
 
