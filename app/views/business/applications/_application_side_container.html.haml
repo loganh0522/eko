@@ -10,7 +10,7 @@
     .interview
       - @interviews.each do |interview| 
         = interview.kind
-        = interview.date.to_date
+        = interview.interview_date
         = "#{interview.start_time} - #{interview.end_time}"
         = link_to 'View', business_interview_path(interview.id), :data => {:remote => true}
         %br

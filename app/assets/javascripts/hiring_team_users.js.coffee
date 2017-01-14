@@ -47,7 +47,11 @@ jQuery ->
     return
 
   $('form').on 'click', '.insert', (event) -> 
-    tinymce.activeEditor.execCommand('mceInsertContent', false, "<div class='class_one'> some text </div>")
+    tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #EF7B2B; color: white; width: 100px; border-radius: 5px; height: 16px; text-align: center;'> {{ some text }}  </span>")
+
+
+
+
 
 
 

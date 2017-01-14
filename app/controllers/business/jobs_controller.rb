@@ -28,26 +28,24 @@ class Business::JobsController < ApplicationController
   end
 
   def show 
+    @job = Job.find(params[:id])
+    @activities = current_company.activities.where(job_id: @job.id).order('created_at DESC')
+    @stages = @job.stages  
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    @interviews_by_date = @job.interviews.group_by(&:interview_date)
+    
     if params[:query].present? 
-      @job = Job.find(params[:id])
-
       @applications = Application.where(job_id: @job.id)
       @results = Application.search(params[:query]).records.to_a
-      @applicants = []
-      
+      @applicants = [] 
       @results.each do |application|  
         if application.company == current_company && application.apps == @job
           @applicants.append(application.applicant)
         end
       end 
-
-      @activities = current_company.activities.where(job_id: @job.id).order('created_at DESC')
-      @stages = @job.stages  
     else
       @job = Job.find(params[:id])
-      @applicants = @job.applications
-      @activities = current_company.activities.where(job_id: @job.id).order('created_at DESC')
-      @stages = @job.stages  
+      @applicants = @job.applications     
     end   
   end
 
@@ -170,4 +168,6 @@ class Business::JobsController < ApplicationController
       @job.country = location[1]
     end
   end
+
+
 end 

@@ -1,0 +1,17 @@
+.header
+  %h1 Calendar 
+.body
+  #articles
+    %h2#month
+      = link_to "<", date: @date.prev_month 
+      = @date.strftime("%B %Y")
+      = link_to ">", date: @date.next_month
+
+    = calendar @date do |date| 
+      = date.day 
+      - if @interviews_by_date[date]
+        %ul
+          - @interviews_by_date[date].each do |interview| 
+            %li
+              = interview.kind
+

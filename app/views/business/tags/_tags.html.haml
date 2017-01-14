@@ -1,6 +1,6 @@
 - if @tags.present?
   - @tags.each do |tag| 
-    #tag
+    %div{id: "tag_#{tag.id}", class: "tag"}
       .name= "#" + tag.name
       = link_to business_job_application_tag_path(@job, @application, tag.id), remote: true, :method => :delete do 
         .delete-tag &times

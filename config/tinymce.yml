@@ -1,11 +1,20 @@
-toolbar:
-  - styleselect | bold italic underline | undo redo | image link
-plugins:
-  - image
-  - link
+default: 
+  toolbar: false
+    - styleselect | bold italic underline | undo redo | image link
+  plugins:
+    - image
+    - link
+    - noneditable
+  menubar: false
 
-menubar: false
+  content_css: asset_path 'tinymce.sass'
+  # noneditable_noneditable_class: "class_one"
+  # noneditable_regexp: /\{\{[^\]]+\}\}/g
 
-content_css: asset_path('tinymce.sass')
+alternate:
+  selector: textarea.table-editor
+  toolbar: false
+  menubar: false
+  statusbar: false
 
-content_css : '/assets/stylesheets/tinymce.sass'
+

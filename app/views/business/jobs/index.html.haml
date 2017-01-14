@@ -20,8 +20,6 @@
             %i.glyphicon.glyphicon-list-alt
             Company Jobs
 
-    
-
   .main-container
     .header 
       .open-jobs.showing
@@ -92,34 +90,4 @@
                 
 
 
-    / - @jobs.each do |job|
-    /   .row 
-    /     .well 
-    /       %a
-    /         =link_to job.title, business_job_path(job)
-    /       %p
-    /         = job.city 
-    /         ,
-    /         = job.country |
-    /         = link_to "Edit", edit_business_job_path(job)
-    /         Delete
-    /       .row
-    /         .well.col-md-2
-    /           %h2.text-center 58 
-    /           %p.text-center All Applicants
-    /         .well.col-md-2
-    /           %h2.text-center 10
-    /           %p.text-center Screened
-    /         .well.col-md-2
-    /           %h2.text-center 5
-    /           %p.text-center Phone Interview
-    /         .well.col-md-2
-    /           %h2.text-center 4 
-    /           %p.text-center Interview
-    /         .well.col-md-2
-    /           %h2.text-center 1 
-    /           %p.text-center Offer
-    /         .well.col-md-2
-    /           %h2.text-center 1 
-    /           %p.text-center Hired
 

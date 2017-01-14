@@ -5,7 +5,7 @@ class Business::TagsController < ApplicationController
   before_filter :company_deactivated?
   
   def index
-    @tags = Tag.order(:name).where("name ILIKE ?", "%#{params[:term]}%") 
+    @tags = current_company.tags.order(:name).where("name ILIKE ?", "%#{params[:term]}%") 
     render :json => @tags.to_json 
   end
 
@@ -16,45 +16,33 @@ class Business::TagsController < ApplicationController
   end
 
   def create 
-    respond_to do |format|    
-      @tag = Tag.where(name: params[:tag][:name], company_id: current_company.id) 
-      @job = Job.find(params[:tag][:job_id])  
-      @application = Application.find(params[:tag][:application_id])
-      @tags = @application.tags
-
-      if @tag.present?
-        @tagging_present = false
-        if @application.taggings.count != 0
-          @application.taggings.each do |tagging|  
-            if tagging.tag_id == @tag.first.id
-              return
-            else
-              @tagging_present = true
-              break
-            end
-          end
-          if @tagging_present == false
-            Tagging.create(application_id: params[:tag][:application_id], tag_id: @tag.first.id)
-          end
-        else
-          Tagging.create(application_id: params[:tag][:application_id], tag_id: @tag.first.id)
-        end
-      else
-        @tag = Tag.new(tag_params)
-        @tag.company = current_company   
-        if @tag.save 
-          Tagging.create(application_id: params[:tag][:application_id], tag_id: @tag.id)
-        end
+    @company_tags = current_company.tags 
+    @tag = Tag.where(name: params[:tag][:name], company_id: current_company.id).first
+    @application = Application.find(params[:tag][:application_id])
+    @tags = @application.tags
+    @job = Job.find(params[:tag][:job_id]) 
+    
+    if @company_tags.include?(@tag)
+      Tagging.create(application_id: params[:tag][:application_id], tag_id: @tag.id)
+    else
+      @tag = Tag.new(tag_params)
+      @tag.company = current_company   
+      if @tag.save 
+        Tagging.create(application_id: params[:tag][:application_id], tag_id: @tag.id)
       end
+    end 
 
-      format.js 
-    end  
+    respond_to do |format|
+      format.js
+    end 
   end
 
   def destroy
-    @tag = Tagging.find(params[:id])
+    @tagging = Tagging.where(application_id: params[:application_id], tag_id: params[:id]).first
     @job = Job.find(params[:job_id])
-    @tag.destroy
+
+    @tag = Tag.find(params[:id])
+    @tagging.destroy
 
     respond_to do |format|
       format.js

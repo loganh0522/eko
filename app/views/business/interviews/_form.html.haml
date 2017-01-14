@@ -9,7 +9,7 @@
           .fieldset
             .row 
               .form-group.col-md-4
-                = f.text_field :date 
+                = f.text_field :interview_date 
               .form-group.col-md-4
                 = f.text_field :start_time, class: "time_picker"
               .form-group.col-md-4
@@ -31,5 +31,7 @@
                 = f.text_area :notes
 
             = f.hidden_field :application_id, value: @application.id
+            = f.hidden_field :job_id, value: @job.id
+            = f.hidden_field :company_id, value: current_company.id
             = f.submit "Send Invitation", class: "btn btn-primary"
     

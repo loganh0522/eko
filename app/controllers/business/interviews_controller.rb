@@ -41,7 +41,7 @@ class Business::InterviewsController < ApplicationController
   private
 
   def interview_params
-    params.require(:interview).permit(:notes, :location, :start_time, :end_time, :date, :kind, :notes, :application_id)
+    params.require(:interview).permit(:notes, :location, :start_time, :end_time, :interview_date, :kind, :notes, :application_id, :job_id, :company_id)
   end
 
 end

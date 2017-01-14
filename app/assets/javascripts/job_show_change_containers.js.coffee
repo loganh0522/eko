@@ -14,6 +14,8 @@ jQuery ->
       $targetContainer = '.job-applicants'
     else if $(this).attr('class') == 'activity-tab'
       $targetContainer = '.job-activity'
+    else if $(this).attr('class') == 'calendar-tab'
+      $targetContainer = '.calendar-container'
 
 
     $('.job-applicants-nav').find('.activated').css border: ''

@@ -10,14 +10,7 @@
       
       .form-group.col-md-6
         = f.text_field :address, class: "form-control", id: "geocomplete2", label: "Address", autocomplete: "off", placeholder: "Enter the Address"
-    
-    / .row
-    /   .form-group.col-md-4
-    /     = f.collection_select(:country_ids, Country.all, :id, :name, include_blank: "Select a Country", label: "Country")
-    /   .form-group.col-md-4
-    /     = f.grouped_collection_select(:state_ids, Country.order(:name), :states, :name, :id, :name, include_blank: true, label: "Province/State")
-    /   .form-group.col-md-4
-    /     = f.text_field :city, class: "form-control", label: "City"
+
     .row
       .form-group.col-md-4
         = f.collection_select(:industry_ids, Industry.all, :id, :name, label: "Industry", :include_blank => true)

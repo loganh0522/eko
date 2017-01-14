@@ -1,25 +1,30 @@
 .company-job-board  
   .jobs
-    - @jobs.each do |job|
-      .job-posting
-        .header-info
-          .job-detail
-            .title= link_to "#{job.title}", "jobs/#{job.id}" 
-          .view-job= link_to "View Job", "jobs/#{job.id}", class: "btn"
-        .bottom-info
-          .left-side
-            %img(src="/tmp/black-small-location.png") 
-            = "#{job.location}"
-            
-            %img(src="/tmp/black-small-bar-chart.png") 
-            = job.job_career_level.first.career_level.name
+    %h2 Current Job Openings
+    - if @jobs.count != 0  
+      - @jobs.each do |job|
+        .job-posting
+          .header-info
+            .job-detail
+              .title= link_to "#{job.title}", "jobs/#{job.id}" 
+            .view-job= link_to "View Job", "jobs/#{job.id}", class: "btn"
+          .bottom-info
+            .left-side
+              %img(src="/tmp/black-small-location.png") 
+              = "#{job.location}"
+              
+              %img(src="/tmp/black-small-bar-chart.png") 
+              = job.job_career_level.first.career_level.name
 
-          .right-side 
-            %img(src="/tmp/black-small-hammer.png") 
-            = job.job_industries.first.industry.name
+            .right-side 
+              %img(src="/tmp/black-small-hammer.png") 
+              = job.job_industries.first.industry.name
 
-            %img(src="/tmp/black-small-briefcase.png") 
-            = job.job_kind.first.name
+              %img(src="/tmp/black-small-briefcase.png") 
+              = job.job_kind.first.name
 
-            %img(src="/tmp/black-small-clock.png") 
-            = "#{time_ago_in_words(job.created_at)} ago"
+              %img(src="/tmp/black-small-clock.png") 
+              = "#{time_ago_in_words(job.created_at)} ago"
+    - else 
+      .not-present-container
+        %p Sorry, there are currently no open job postings. 

@@ -7,6 +7,8 @@ class Job < ActiveRecord::Base
   has_many :hiring_teams
   has_many :users, through: :hiring_teams
   has_many :stages, -> {order(:position)}
+  has_many :interviews
+
 
   has_many :job_industries
   has_many :industries, through: :job_industries
@@ -22,12 +24,6 @@ class Job < ActiveRecord::Base
 
   has_many :job_career_level
   has_many :career_level, through: :job_career_level
-
-  has_many :job_countries
-  has_many :countries, through: :job_countries
-
-  has_many :job_states
-  has_many :states, through: :job_states
   
   has_many :applications
   has_many :applicants, through: :applications, class_name: "User", foreign_key: :user_id

@@ -35,42 +35,15 @@
     %ul 
       %li.applicants-tab.activated Applicants
       %li.activity-tab Activity
+      %li.calendar-tab Calendar
 
 
 .job-applicants.active-tab
   = render 'business/shared/applicants_table'
 
+.calendar-container
+  = render 'business/calendar/job_calendar'
+
 .job-activity
-  .header
-    %h1 Activity
-  .body
-    .activity-filters
-      .nav
-        %ul 
-          %li 
-            .content
-              Filters
-          .body
-            %ul
-              %li.activity 
-                .checkbox{:data => {:id => "comments"}}= check_box_tag "", true, true
-                Comments
-              %li.activity
-                .checkbox{:data => {:id => "scorecards"}}= check_box_tag "", true, true
-                Scorecards
-              %li.activity
-                .checkbox{:data => {:id => "messages"}}= check_box_tag "", true, true
-                Messages
-              %li.activity
-                .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
-                Move Stages
-              %li.activity
-                .checkbox{:data => {:id => "applied"}}= check_box_tag "", true, true
-                Applied
-              %li.activity
-                .checkbox{:data => {:id => "interview"}}= check_box_tag "", true, true
-                Interview
-    .job-activity-feed
-      .activity-feed
-        - @activities.each do |activity|         
-          = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity  
+  = render 'business/activities/job_activity_feed'
+    
