@@ -12,9 +12,19 @@ default:
   # noneditable_regexp: /\{\{[^\]]+\}\}/g
 
 alternate:
-  selector: textarea.table-editor
   toolbar: false
   menubar: false
   statusbar: false
+  plugins:
+    - noneditable
+
+
+  # mentions: 
+  #   source: [
+  #       { name: 'Tyra Porcelli' },
+  #       { name: 'Brigid Reddish' },
+  #       { name: 'Ashely Buckler' },
+  #       { name: 'Teddy Whelan' }
+  #       ]
 
 

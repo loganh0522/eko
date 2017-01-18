@@ -28,7 +28,7 @@ class Job < ActiveRecord::Base
   has_many :applications
   has_many :applicants, through: :applications, class_name: "User", foreign_key: :user_id
   
-  validates_presence_of :title, :benefits, :description, :location, :address, :industry_ids, :function_ids, 
+  validates_presence_of :title, :description, :location, :address, :industry_ids, :function_ids, 
   :education_level_ids, :job_kind_ids, :career_level_ids
 
 

@@ -123,16 +123,16 @@ jQuery ->
 
   $('#insert-fluid-variable').change -> 
     if $('#insert-fluid-variable').val() == "Applicant First Name"
-      $('#message-body').val($("#message-body").val() + "{{recipient.first_name}}")
-
+      tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.first_name}}  </span>")
     else if $('#insert-fluid-variable').val() == "Applicant Last Name"
-      $('#message-body').val($("#message-body").val() + "{{recipient.last_name}}")
+      tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.last_name}}  </span>")
     else if $('#insert-fluid-variable').val() == "Applicant Full Name"
-      $('#message-body').val($("#message-body").val() + "{{recipient.full_name}}")
+      tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.full_name}}  </span>")
     else if $('#insert-fluid-variable').val() == "Job Title"
-      $('#message-body').val($("#message-body").val() + "{{job.title}}")
+      tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{job.title}}  </span>")
     else if $('#insert-fluid-variable').val() == "Company Name"
-      $('#message-body').val($("#message-body").val() + "{{company.name}}")
+      tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{company.name}}  </span>")
 
-    
+
+
 

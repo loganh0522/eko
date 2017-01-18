@@ -51,8 +51,7 @@ gem 'liquid-rails', '~> 0.1.1'
 gem 'jquery-atwho-rails'
 
 gem 'jquery-timepicker-rails'
-
-gem 'tinymce-rails'
+gem 'tinymce-rails', '~> 4.5'
 
 
 group :development do

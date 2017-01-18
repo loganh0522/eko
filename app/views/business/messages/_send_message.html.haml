@@ -6,16 +6,16 @@
         %h4.modal-title Send Message        
       .modal-body
         .to To: 
-        .recipients 
-          
+        .recipients    
         .email_variables
           .to Insert:
-          = select_tag "insert-fluid-variable", options_for_select([ "Applicant First Name", "Applicant Last Name", "Job Title", "Company Name" ] )
+          = select_tag "insert-fluid-variable", options_for_select([ "Applicant First Name", "Applicant Last Name", "Applicant Full Name", "Job Title", "Company Name" ] ), :include_blank => true
         = form_tag send_multiple_messages_business_applications_path do 
           .modal-body
             %fieldset
-            / .editable-container{:contenteditable => 'true', :placeholder => "title"}
-            = text_area_tag :body, nil, rows: 12, cols: 12, id: "message-body"
+            = text_area_tag :body, nil, :class => "tinymce", id: "message-body", rows: 12, cols: 12
+            = tinymce_assets        
+            = tinymce :alternate
             = hidden_field_tag :applicant_ids
           .modal-footer
-            %input(type="submit" value="Send Message" class="btn btn-success")
+            %input(type="submit" value="Send Message" class="btn btn-primary")
