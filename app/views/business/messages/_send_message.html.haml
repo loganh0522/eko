@@ -11,11 +11,11 @@
           .to Insert:
           = select_tag "insert-fluid-variable", options_for_select([ "Applicant First Name", "Applicant Last Name", "Applicant Full Name", "Job Title", "Company Name" ] ), :include_blank => true
         = form_tag send_multiple_messages_business_applications_path do 
-          .modal-body
-            %fieldset
-            = text_area_tag :body, nil, :class => "tinymce", id: "message-body", rows: 12, cols: 12
-            = tinymce_assets        
-            = tinymce :alternate
-            = hidden_field_tag :applicant_ids
-          .modal-footer
-            %input(type="submit" value="Send Message" class="btn btn-primary")
+          %fieldset
+          = text_area_tag :body, nil, :class => "tinymce", id: "message-body", rows: 12, cols: 12
+          = tinymce_assets        
+          = tinymce :alternate
+          = hidden_field_tag :applicant_ids
+      .modal-footer
+        %input(type="submit" value="Cancel" class="btn border-button")
+        %input(type="submit" value="Send Message" class="btn submit-button")

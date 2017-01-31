@@ -7,9 +7,10 @@
       .modal-body
         .to To: 
         .recipients        
-      = form_tag add_note_multiple_business_applications_path do
-        .modal-body
+        = form_tag add_note_multiple_business_applications_path do
           = text_area_tag :comment, nil, rows: 5, cols: 75
           = hidden_field_tag :applicant_ids
           = hidden_field_tag :job_id
-          %input(type="submit" value="Add Note" class="btn btn-primary")
+      .modal-footer
+        %input(type="submit" value="Cancel" class="btn border-button")
+        %input(type="submit" value="Add Note" class="btn submit-button")

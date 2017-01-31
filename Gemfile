@@ -52,6 +52,7 @@ gem 'jquery-atwho-rails'
 
 gem 'jquery-timepicker-rails'
 gem 'tinymce-rails', '~> 4.5'
+gem 'trix'
 
 
 group :development do

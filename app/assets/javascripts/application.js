@@ -26,6 +26,8 @@
 //= require tinymce
 //= require tinymce-jquery
 //= require jquery.timepicker.js
+//= require trix
+
 
 
 //= require_tree .

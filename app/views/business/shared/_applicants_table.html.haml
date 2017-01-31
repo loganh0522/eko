@@ -1,68 +1,74 @@
-.header
-  %h1 Applicants  
+#job-applicants.active-tab
+  .main-container
+    .applicants
+      .header
+        = render "business/applications/move_stages"
+        = render "business/comments/add_comment"
+        = render "business/messages/send_message"
+
+        .dropdown
+          %a.dropdown-toggle.btn.border-button{:href => "#", "role" => "button", "data-toggle" => "dropdown", "data-target" => "#"} 
+            Actions
+            %b.caret
+          %ul.dropdown-menu
+            %li
+              %a= link_to 'Schedule Interview', '#', :data => {:toggle => "modal", :target => "#stageModal"}
+            %li
+              %a= link_to 'Schedule Interview', '#', :data => {:toggle => "modal", :target => "#add_commentModal"}
+            %li
+              %a= link_to 'Schedule Interview', '#', :data => {:toggle => "modal", :target => "#send_messageModal"}
+        .search-field
+          = form_tag business_job_path(@job), method: :get do   
+            .form-group
+              = search_field_tag :query, params[:query], placeholder: "Advanced Text Search", class: "form-control"
+              %input(type="submit" value="Search" class="btn btn-primary")
+      %table.table
+        %thead
+          %tr
+            %th(width="1%")= check_box_tag "select_all"
+            %th(width="10%")
+            %th(width="25%") Name 
+            %th(width="20%") Job Title
+            %th(width="20%") Stage 
+            %th(width="25%") 
+
+          %tbody
+            - @applicants.each do |application|
+              - if application.stage.present?
+                - stage = application.stage.name
+              - elsif application.rejected == true
+                - stage = "Rejected"
+              - elsif 
+                - stage = "Applied"
+
+
+              %tr{:id => "#{stage}" }
+                %td
+                  .applicant-checkbox{:data => {:id => application.id}}
+                    = check_box_tag "applicant_ids[]", application.id
+                %td
+                  .circle
+                    - if application.applicant.user_avatar.present? 
+                      = image_tag application.applicant.user_avatar.image.small_image, :size => "50x50" 
+                    - else
+                      .circle-img= application.applicant.first_name.first.capitalize
+                %td.names
+                  .name{:data => {:id =>  "#{application.applicant.first_name} #{application.applicant.last_name}"}}
+                    = link_to "#{application.applicant.first_name} #{application.applicant.last_name}", business_job_application_path(@job, application.id)
+                  .current-position CEO - TalentWiz 
+                %td
+                  .position= @job.title
+                  - if application.created_at.present?
+                    .date-applied= "#{time_ago_in_words(application.created_at)} ago"        
+                %td
+                  .stage= stage
+                %td
+                  / .rating 5 stars
+                %td
+      .not-present-container
+        %p There are currently no applicants in this stage.
+
+.side-container
   
-  .search-field
-    = form_tag business_job_path(@job), method: :get do   
-      .form-group
-        = search_field_tag :query, params[:query], placeholder: "Advanced Text Search", class: "form-control"
-        %input(type="submit" value="Search" class="btn btn-primary")
-
-  %form_tag.actions
-    / = render "business/applications/move_stages"
-    = render "business/comments/add_comment"
-    = render "business/messages/send_message"
-    %input(type= "submit" value= "Move Stages" class= "move_action btn btn-primary" data-toggle = "modal" data-target = "#stageModal")
-    %input(type= "submit" value= "Add Note" class= "add_note_action btn btn-primary" data-toggle = "modal" data-target = "#add_commentModal")
-    %input(type= "submit" value= "Message" class= "send_message btn btn-primary" data-toggle = "modal" data-target = "#send_messageModal")
-    %input(type= "submit" value= "Delete" class= "btn btn-primary")
-
-.applicants
-  %table.table
-    %thead
-      %tr
-        %th(width="1%")= check_box_tag "select_all"
-        %th(width="10%")
-        %th(width="25%") Name 
-        %th(width="20%") Job Title
-        %th(width="20%") Stage 
-        %th(width="25%") 
-
-      %tbody
-        - @applicants.each do |application|
-          - if application.stage.present?
-            - stage = application.stage.name
-          - elsif application.rejected == true
-            - stage = "Rejected"
-          - elsif 
-            - stage = "Applied"
-
-
-          %tr{:id => "#{stage}" }
-            %td
-              .applicant-checkbox{:data => {:id => application.id}}
-                = check_box_tag "applicant_ids[]", application.id
-            %td
-              .circle
-                - if application.applicant.user_avatar.present? 
-                  = image_tag application.applicant.user_avatar.image.small_image, :size => "50x50" 
-                - else
-                  .circle-img= application.applicant.first_name.first.capitalize
-            %td.names
-              .name{:data => {:id =>  "#{application.applicant.first_name} #{application.applicant.last_name}"}}
-                = link_to "#{application.applicant.first_name} #{application.applicant.last_name}", business_job_application_path(@job, application.id)
-              .current-position CEO - TalentWiz 
-            %td
-              .position= @job.title
-              - if application.created_at.present?
-                .date-applied= "#{time_ago_in_words(application.created_at)} ago"        
-            %td
-              .stage= stage
-            %td
-              / .rating 5 stars
-            %td
-  .not-present-container
-    %p There are currently no applicants in this stage.
-
-
 
 

@@ -1,29 +1,30 @@
-.current-stage
-  = render 'business/applications/stage'
+.bar
+  .current-stage
+    = render 'business/applications/stage'
+.bar
+  .schedule-interview
+    .title Interviews
+    = render 'business/interviews/form'
+    
 
-.schedule-interview
-  %h4 Interviews
-  = render 'business/interviews/form'
-  
+    .scheduled-interviews
+      .interview
+        - @interviews.each do |interview| 
+          = interview.kind
+          = interview.interview_date
+          = "#{interview.start_time} - #{interview.end_time}"
+          = link_to 'View', business_interview_path(interview.id), :data => {:remote => true}
+          %br
 
-  .scheduled-interviews
-    .interview
-      - @interviews.each do |interview| 
-        = interview.kind
-        = interview.interview_date
-        = "#{interview.start_time} - #{interview.end_time}"
-        = link_to 'View', business_interview_path(interview.id), :data => {:remote => true}
-        %br
+    = link_to 'Schedule Interview', '#', :data => {:toggle => "modal", :target => "#interview-modal"}
 
-  = link_to 'Schedule Interview', '#', :data => {:toggle => "modal", :target => "#interview-modal"}
-
-
-.applicant-tags
-  %h4 Tags
-  .tags
-    = render "business/tags/tags"
-  .add_tag
-    = link_to "+ Add Tag", new_business_job_application_tag_path(@job.id, @application.id), :data => {remote: true}, id: 'add_tag'
+.bar
+  .applicant-tags
+    .title Tags
+    .tags
+      = render "business/tags/tags"
+    .add_tag
+      = link_to "+ Add Tag", new_business_job_application_tag_path(@job.id, @application.id), :data => {remote: true}, id: 'add_tag'
 
 
 

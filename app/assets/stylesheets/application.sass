@@ -18,6 +18,7 @@
  *= require jquery.atwho
  *= require chosen
  *= require jquery.timepicker.css
+ *= require trix
  *= require_tree .
 
  */
@@ -32,23 +33,66 @@ body
   -webkit-font-smoothing: antialiased
 
   font-family: Open Sans, sans-serif, Helvetica, Arial, sans-serif
-  
+  font-weight: 300
+
   h1, h2, h3, h4, h5, h6
+
     font: Open Sans
+    font-family: Open Sans, sans-serif, Helvetica, Arial, sans-serif
   
   p 
     color: rgba(0, 0, 0, .85)
-          
-
+    font-family:  Open Sans, sans-serif, Helvetica, Arial, sans-serif
+    font-weight: 300
   background-color: #f7f8f9
 
+.side-container 
+  float: left  
+  width: 24%   
+  margin: 10px 1% 0 0
+.main-container
+  float: right
+  padding: 5px 0px 15px 0px
+  padding-left: 2.5em
+  width: 74%
+
 h1 
-  font-weight: 500
+  font-weight: 300
   font-size: 24px
   font: Open Sans
   color: #EF7A2B
   margin: 12px 0 10px 0
 
+
+
+.submit-button
+  display: block
+  height: 40px
+  border-radius: 2px
+  font-weight: 800
+  font-size: 14px 
+  text-align: center
+  padding: 10px 15px 13px 15px
+  background: rgba(239, 122, 43, 0.9)
+  color: white
+a.button
+  text-decoration: none
+  color: white
+
+.border-button
+  display: block
+  height: 40px
+  border-radius: 2px
+  font-weight: 800
+  font-size: 14px 
+  text-align: center
+  padding: 10px 15px 13px 15px
+  border: 1px solid rgba(239, 122, 43, 0.9)
+  background: #ffffff
+  color: rgba(239, 122, 43, 0.9)
+a.button
+  text-decoration: none
+  color: white
 
 .button
   display: block

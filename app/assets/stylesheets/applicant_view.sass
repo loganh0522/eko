@@ -20,7 +20,8 @@
       margin: 15px 0px 0px 0px
 
     .applicant-header
-      border: solid 2px #E4E5E9
+      border-radius: 5px
+      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
       margin: 15px 0px 0px 75px
       width: 700px
       height: 210px
@@ -41,7 +42,7 @@
         height: 190px
         .name 
           font-size: 24px
-          font-weight: 300
+          font-weight: 100
 
         .contact
           margin-left: 15px 
@@ -78,7 +79,8 @@
     
     .add-comment-on-applicant
       background-color: #ffffff
-      border: solid 2px #E4E5E9
+      border-radius: 5px
+      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
       padding: 10px 10px 10px 10px
       margin: 10px 0px 0px 75px
       width: 700px
@@ -115,10 +117,7 @@
 
     .applicant-experience
       margin: 15px 0px 0px 75px
-      padding: 5px 0px 15px 0px
-      background-color: white
       width: 700px
-      border: solid 2px #E4E5E9
 
       .header 
         margin: 0 0 15px 25px
@@ -134,12 +133,15 @@
           font-size: 14px
 
       .applicant-positions       
-        margin: 25px 25px 25px 25px           
+        margin: 25px 0px 25px 0px           
 
         .job-position
+          background: white 
+          border-radius: 5px
+          box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
           clear: both
           margin-top: 15px
-          padding-bottom: 10px
+          padding: 10px 20px
           border-bottom: solid 1px rgba(0, 0, 0, 0.2)
           .experience-header
             overflow: hidden
@@ -177,240 +179,99 @@
                 li
                   width: 450px
       
-    .activity-feed
-      margin: 15px 0px 0px 75px
-      padding: 5px 0px 15px 0px
-      background-color: white
-      width: 700px
-      border: solid 2px #E4E5E9 
-
-      .activity
-        width: 570px
-        padding: 10px 10px 20px 15px 
-        border: 1px solid #E4E5E9 
-        word-wrap: break-word
-        margin: 10px 0 5px 100px
-        display: block
-        position: relative
-        font-size: 14px
-        .glyphicon.glyphicon-share-alt
-          font-size: 20px
-        .glyphicon.glyphicon-pencil
-          font-size: 20px
-        .glyphicon.glyphicon-edit
-          font-size: 20px
-        .glyphicon.glyphicon-share
-          font-size: 20px
-        .glyphicon.glyphicon-envelope
-          font-size: 20px
-
-
-        .icon
-          height: 45px
-          width: 45px
-          padding: 10px 12px
-          color: #fff
-          box-sizing: border-box
-          display: block
-          background: #EF7B2B
-          position: absolute
-          left: -6em
-          top: 25%
-          border-radius: 50%
-
-
-        &:before,
-        &:after
-          content: ""
-          position: absolute
-          width: 0
-          height: 0
-          border-style: solid
-          border-color: transparent
-          border-left: 0
-
-        &:before
-          top: 35%
-          left: -10px
-          border-right-color: #E4E5E9 
-          border-width: 10px
-
-        &:after
-          top: 35%
-          left: -9px
-          border-right-color: white
-          border-width: 10px 
-        .circle
-          border-radius: 50%
-          margin-right: 10px
-          width: 40px 
-          height: 40px
-          float: left
-        .circle-img
-          float: left
-          margin-right: 10px
-          border-radius: 50%
-          width: 40px 
-          height: 40px
-          background: #EF7B2B
-          text-align: center
-          font-size: 18px
-          padding-top: 8px
-          color: white
-
-
-      .comment-header
-        font-size: 12px
-        padding: 0 10px 0 0
-        .commenting-user    
-          font-size: 14px
-          .time 
-            float: right
-            margin-right: 10px
-            font-size: 12px
-            color: rgba(0, 0, 0, 0.3)
-          span
-            font-weight: 600
-      .comment-body
-        margin: 10px 0 0 0
-
-      .comments-header
-        font-size: 12px
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-        padding: 0 10px 10px 0
-        overflow: hidden
-        .commenting-user
-          font-size: 14px
-          .time 
-            float: right
-            margin-right: 10px
-            font-size: 12px
-            color: rgba(0, 0, 0, 0.3)
-          span
-            font-weight: 600
-      .comment-body
-        margin: 10px 0 0 0
-
-      
-
-      .message-header
-        font-size: 12px
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-        padding: 0 10px 10px 0
-        overflow: hidden          
-        .message-user-details
-          margin: 10px 0 0 5px
-          font-size: 14px
-          .time 
-            float: right
-            margin-right: 10px
-            font-size: 12px
-            color: rgba(0, 0, 0, 0.3)
-          span
-            font-weight: 600
-      .message-body
-        margin: 10px 0 0 0
-
-        
-
-      .header 
-        height: 20px
-        h4
-          float: left
-          margin-top: 0px
-        .time 
-          float: right 
-      .body
+    
 
   .applicant-side-container
     float: left
     width: 400px
     height: auto
     margin: 15px 75px 0px 15px
-    padding: 0 10px 15px 10px
-    background-color: white
-    border: solid 2px #E4E5E9
-    border-radius: 3px
-    
-    .current-stage
-      overflow: hidden
-      h4 
-        padding: 0 0 15px 0 
-      .stage
-        margin: 10px 0 0 15px
-        width: 375px
-        .stage-header
-          background: #F5F5F5
-          border: 1px solid #DDDDDD
-          border-radius: 3px
-          height: 40px
-          padding: 10px 10px
-        .stage-body
-          border: 1px solid #DDDDDD
-          border-top: none
-          padding: 10px 10px
-          ul
-            list-style: none
-            li
-              margin-left: -40px
-              font-size: 12px
-      .reject
-        margin: 20px 0 0 20px
-        float: left
-        width: 100px
-      .move-forward
-        margin: 20px 0 0 20px
-        float: right
-        width: 170px
-    
-
-    .schedule-interview
-      margin-top: 10px
-      border-top: 1px solid #E4E5E9
-    .applicant-tags
-      margin-top: 10px
-      border-top: 1px solid #E4E5E9
-      .tags
+    .bar
+      padding: 10px 15px
+      border-radius: 5px
+      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+      background: white
+      margin-bottom: 10px
+      .current-stage
         overflow: hidden
-        .tag
+        .title
+          font-size: 18px
+        .stage
+          margin: 10px 0 0 15px
+          width: 375px
+          .stage-header
+            background: #F5F5F5
+            border: 1px solid #DDDDDD
+            border-radius: 3px
+            height: 40px
+            padding: 10px 10px
+          .stage-body
+            border: 1px solid #DDDDDD
+            border-top: none
+            padding: 10px 10px
+            ul
+              list-style: none
+              li
+                margin-left: -40px
+                font-size: 12px
+        .reject
+          margin: 20px 0 0 20px
           float: left
-          border-radius: 5px
-          background-color: #EF7B2B
-          color: white
-          width: auto
-          margin: 2px 5px 0 0 
-          padding: 3px 5px 3px 5px
-          overflow: hidden
-          .name
-            float: left
-          .delete-tag
-            float: left
-            margin-left: 5px
-            color: white
-
-            &:hover
-              cursor: pointer
-      
-      .add_tag
-        margin-top: 15px
-
-      .add_tag
-        margin-top: 10px
+          width: 100px
+        .move-forward
+          margin: 20px 0 0 20px
+          float: right
+          width: 170px
         
-        .tag_form
+
+      .schedule-interview
+        .title
+          font-size: 18px
+      .applicant-tags
+
+        .tags
+          overflow: hidden
+          .title
+            font-size: 18px
+          .tag
+            float: left
+            border-radius: 5px
+            background-color: #EF7B2B
+            color: white
+            width: auto
+            margin: 2px 5px 0 0 
+            padding: 3px 5px 3px 5px
+            overflow: hidden
+            .name
+              float: left
+            .delete-tag
+              float: left
+              margin-left: 5px
+              color: white
+
+              &:hover
+                cursor: pointer
+        
+        .add_tag
+          margin-top: 15px
+
+        .add_tag
           margin-top: 10px
-          input
-            margin-top: 0
-            float: left
           
-          .close-form
-            float: left
-            margin: 5px 0 0 10px
-            &:hover
-              cursor: pointer
+          .tag_form
+            margin-top: 10px
+            input
+              margin-top: 0
+              float: left
+            
+            .close-form
+              float: left
+              margin: 5px 0 0 10px
+              &:hover
+                cursor: pointer
       
 
-    
+  
 
     
   

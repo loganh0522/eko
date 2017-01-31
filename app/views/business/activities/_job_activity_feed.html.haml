@@ -1,12 +1,14 @@
-.header
-  %h1 Activity
-.body
-  .activity-filters
-    .nav
-      %ul 
-        %li 
-          .content
-            Filters
+#job-activity-container
+  .main-container
+    .job-activity-feed
+      .activity-feed
+        - @activities.each do |activity|         
+          = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity
+  .side-container
+    .activity-filters
+      .nav
+        .header 
+          Filters
         .body
           %ul
             %li.activity 
@@ -27,7 +29,3 @@
             %li.activity
               .checkbox{:data => {:id => "interview"}}= check_box_tag "", true, true
               Interview
-  .job-activity-feed
-    .activity-feed
-      - @activities.each do |activity|         
-        = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity

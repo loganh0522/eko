@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170113212253) do
+ActiveRecord::Schema.define(version: 20170125115519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -188,26 +188,11 @@ ActiveRecord::Schema.define(version: 20170113212253) do
     t.text    "description"
   end
 
-  create_table "job_career_levels", force: :cascade do |t|
-    t.integer "job_id"
-    t.integer "career_level_id"
-  end
-
   create_table "job_countries", force: :cascade do |t|
     t.integer "country_id"
     t.integer "job_id"
     t.integer "work_experience_id"
     t.integer "user_id"
-  end
-
-  create_table "job_education_levels", force: :cascade do |t|
-    t.integer "job_id"
-    t.integer "education_level_id"
-  end
-
-  create_table "job_experience_levels", force: :cascade do |t|
-    t.integer "job_id"
-    t.integer "experience_level_id"
   end
 
   create_table "job_functions", force: :cascade do |t|
@@ -218,22 +203,6 @@ ActiveRecord::Schema.define(version: 20170113212253) do
   create_table "job_industries", force: :cascade do |t|
     t.integer "job_id"
     t.integer "industry_id"
-  end
-
-  create_table "job_kinds", force: :cascade do |t|
-    t.string "name"
-  end
-
-  create_table "job_states", force: :cascade do |t|
-    t.integer "state_id"
-    t.integer "job_id"
-    t.integer "work_experience_id"
-    t.integer "user_id"
-  end
-
-  create_table "job_types", force: :cascade do |t|
-    t.integer "job_id"
-    t.integer "job_kind_id"
   end
 
   create_table "jobs", force: :cascade do |t|

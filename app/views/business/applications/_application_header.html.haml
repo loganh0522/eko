@@ -7,7 +7,7 @@
         %img(src="/tmp/blank_profile_picture.png")
   
   .applicant-details
-    %p.name= "#{@user.first_name.upcase} #{@user.last_name.upcase}"
+    .name= "#{@user.first_name.capitalize } #{@user.last_name.capitalize }"
     .contact
       - if @user.city.present?
         %span.glyphicon.glyphicon-map-marker  

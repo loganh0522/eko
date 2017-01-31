@@ -3,15 +3,12 @@
     .details
       %h1= @job.title
       %p= "#{@job.location}"
-      = link_to "Job Link: #{@job.url}", "http://" + @job.url, :target => "_blank", class: "link"
-    .links
-      = link_to "Edit Job Details", edit_business_job_path(@job), class: "btn btn-primary"
-
+    /   = link_to "Job Link: #{@job.url}", "http://" + @job.url, :target => "_blank", class: "link"
+    / / .links
+    /   = link_to "Edit Job Details", edit_business_job_path(@job), class: "btn btn-primary"
   .job-stages
-
     .left_scroll
-      %img(src="/tmp/left_arrow.png")
-    
+      %img(src="/tmp/left_arrow.png") 
     %ul.job-stage-area
       .job-gallery
         %li#all_applicants.activated.job_list_stage
@@ -26,7 +23,6 @@
           .number 
             = @job.applications.where(rejected: true).count
           .name Rejected
-
     .right_scroll
       %img(src="/tmp/right_arrow.png")
 
@@ -38,12 +34,8 @@
       %li.calendar-tab Calendar
 
 
-.job-applicants.active-tab
+.job-applicants-main-container
   = render 'business/shared/applicants_table'
-
-.calendar-container
   = render 'business/calendar/job_calendar'
-
-.job-activity
   = render 'business/activities/job_activity_feed'
     

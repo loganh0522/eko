@@ -17,12 +17,14 @@
       .form-group.col-md-4
         = f.collection_select(:function_ids, Function.all, :id, :name, label: "Job Function", :include_blank => true)
       .form-group.col-md-4
-        = f.collection_select(:job_kind_ids, JobKind.all, :id, :name, label: "Job Type", :include_blank => true)
+        = select_tag "Job Type", options_for_select([ "Full Time", "Part Time", "Contract", "Permanent", "Summer", "Internship" ] ), :include_blank => true
     .row
       .form-group.col-md-4
-        = f.collection_select(:education_level_ids, EducationLevel.all, :id, :name, label: "Education Level", :include_blank => "Choose...")
+        = select_tag "Education Level", options_for_select([ "High Scool", "Associate Degree", "Bachelor's Degree", "Master's", "Ph.D"] ), :include_blank => true
       .form-group.col-md-4
-        = f.collection_select(:career_level_ids, CareerLevel.all, :id, :name, label: "Career Level")
+        = select_tag "Job Level", options_for_select([ "Entry Level", "Experience", "Manager", "Executive", "Senior Executive"] ), :include_blank => true
+        
+        / = f.collection_select(:career_level_ids, CareerLevel.all, :id, :name, label: "Career Level")
     .row
       = f.text_area :description, :class => "tinymce", :rows => 40, :cols => 120
       = tinymce_assets        
