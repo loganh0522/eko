@@ -1,11 +1,13 @@
 .job-show-header
   background: #ffffff
-  margin: -20px 0 25px 0
-  padding: 30px 6% 0 6%
+  margin: 60px 0 25px 0
+  padding: 30px 3% 0 3%
+  border-bottom: 1px solid rgba(0,0,0,0.1)
   h1
     margin-top: 0
     font: 24px 
     font-weight: 300
+    color: black
   
   .header 
     margin-bottom: 10px
@@ -13,86 +15,16 @@
     overflow: hidden
     .details
       float: left
-      .link
-        text-decoration: none
-        color: rgba(0, 0, 0, .85)
+    .links
+      float: right
+      width: 100pxs
 
-  .job-stages
-    overflow: hidden
-    
-    .left_scroll
-      float: left
-      width: 10px
-      margin-right: 13px
-      height: 100px
-
-      img
-        margin-top: 35px
-        margin-left: -7px
-      &:hover 
-        background-color: rgba(0, 0, 0, .1)
-        cursor: pointer
-            
-    .right_scroll
-      float: left
-      width: 5px
-      height: 100px
-      margin-left: -10px
-      img
-        margin-top: 35px
-        margin-left: -3px
-      &:hover 
-        background-color: rgba(0, 0, 0, .1)
-        cursor: pointer
-
-    .job-stage-area 
-      width: 940px
-      overflow: hidden 
-      margin: 0 0
-
-    .job-gallery
-      position: relative
-
-    ul.job-stage-area
-      list-style: none
-      text-decoration: none
-      float: left
-      padding: 0 0           
-      height: 100px 
-      
-      li 
-        display: inline
-        float: left
-        height: 100px 
-        width: 130px
-        text-align: center
-        border: 1px solid 
-        background-color: white
-        margin-right: 2px
-        
-        &:hover 
-          background-color: orange
-        .number 
-          margin-top: 17px
-          font-size: 27px 
-        .name
-          font-size: 12px
-          font-weight: bold
-
-      li.activated
-        background: rgba(208, 208, 208, 0.4)
-        border: 1px solid black
-        .number 
-          color: black
-        .name
-          color: black
-    
   .job-applicants-nav  
-    clear:both 
+    clear: both 
     ul 
       list-style: none
       text-decoration: none
-      margin: 10px 0 -2px -35px
+      margin: 10px 0 -2px -45px
       font-size: 16px
       li
         display: inline-block
@@ -108,254 +40,16 @@
       li.not-active
         border: none
 
-
-/* Job Applicants Main Container */
-
-.job-applicants-main-container
-  margin: 0px 30px 100px 30px
-
-#job-applicants
-  .side-container
-    float: right
-  .main-container
-    float: left
-    .applicants 
-      .header 
-        margin: 0 0 10px 0
-        .search-field
-          float: right
-          form
-            margin-top: 0
-            input[type=search]
-              width: 250px
-              float: left
-            input[type=submit]
-              float: left
-              margin-left: 10px
-      .table 
-        thead
-          display: table-header-group
-          tr
-            th
-              border-bottom: none
-      .checkbox
-        margin: 30px 0 0 20px
-      .circle
-        display: inline-block
-        margin: 5px 0 5px 10px
-        img
-          width: 40px 
-          height: 40px
-          border-radius: 50%
-          margin-left: 10px
-      .circle-img
-        margin: 0px 0px 5px 10px
-        border-radius: 50%
-        width: 40px 
-        height: 40px
-        background: #EF7B2B
-        text-align: center
-        font-size: 24px
-        padding-top: 2px
-        color: white
-      .name 
-        margin: 5px 0 0 0 
-        a
-          color: rgba(0, 0, 0, 0.8)
-          font-size: 14px
-          font-weight: 600
-      .current-position
-        font-size: 10px
-
-      .position
-        font-size: 12px
-        margin: 10px 0 0 0 
-      .date-applied
-        font-size: 10px    
-      .stage
-        font-size: 12px
-        margin: 10px 0 0 0 
-      .modal-layer 
-        display: none
-        position: fixed 
-        top: 0 
-        right: 0 
-        bottom: 0
-        left: 0
-        z-index: 2 
-        background: rgba(0, 0, 0, .3)
-      .move-stages-modal 
-        display: none
-        position: absolute
-        top: 100px
-        z-index: 3
+.job-show-body
   .not-present-container
-    width: 700px
-    height: 200px 
-    margin: 25px 100px 50px 100px
-    border: 2px dashed #c6c8ca
-    text-align: center
-    display: none
+    width: 90%
+    margin: 0 5% 25px 5%
 
-    p 
-      margin: 85px 0 0 300px
-      float: left
-      color: #c6c8ca
 
-/* Activity Feed Container */
-#job-activity-container
-  display: none
-  .activity-filters    
-    background: #ffffff
-    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-    border-radius: 2px
-    .header
-      padding: 10px 10px
-      font-size: 18px
-      font-weight: 300
-      border-bottom: 1px solid #c6c8ca 
-    .body 
-      ul 
-        list-style: none
-        text-decoration: none                    
-        li
-          padding: 0px 0px 0px 0px
-          margin: 10px 0 0 0
-          border-top: none
-          height: 30px
-          font-size: 12px
-  .job-activity-feed 
-    padding: 5px 0px 15px 0px
-    border-left: 1px solid #ccc
-    padding-left: 2.5em
-    margin-left: 30px
-
-    .activity
-      width: 90%
-      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-      padding: 10px 10px 20px 15px  
-      background: white
-      word-wrap: break-word
-      margin: 10px 0 5px 25px
-      display: block
-      position: relative
-      font-size: 14px
-      border-radius: 2px
-      .glyphicon
-        font-size: 20px 
-      .icon
-        height: 45px
-        width: 45px
-        padding: 10px 12px
-        color: #fff
-        box-sizing: border-box
-        display: block
-        background: #EF7B2B
-        position: absolute
-        left: -6em
-        top: 25%
-        border-radius: 50%
-      &:before,
-      &:after
-        content: ""
-        position: absolute
-        width: 0
-        height: 0
-        border-style: solid
-        border-color: transparent
-        border-left: 0
-
-      &:before
-        top: 35%
-        left: -10px
-        border-right-color: #E4E5E9 
-        border-width: 10px
-
-      &:after
-        top: 35%
-        left: -9px
-        border-right-color: white
-        border-width: 10px 
-      .circle
-        border-radius: 50%
-        margin-right: 10px
-        width: 40px 
-        height: 40px
-        float: left
-      .circle-img
-        float: left
-        margin-right: 10px
-        border-radius: 50%
-        width: 40px 
-        height: 40px
-        background: #EF7B2B
-        text-align: center
-        font-size: 18px
-        padding-top: 8px
-        color: white
-
-    .comment-header
-      font-size: 12px
-      padding: 0 10px 0 0
-      .commenting-user    
-        font-size: 14px
-        .time 
-          float: right
-          margin-right: 10px
-          font-size: 12px
-          color: rgba(0, 0, 0, 0.3)
-        span
-          font-weight: 600
-    .comment-body
-      margin: 10px 0 0 0
-
-    .comments-header
-      font-size: 12px
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-      padding: 0 10px 10px 0
-      overflow: hidden
-      .commenting-user
-        font-size: 14px
-        .time 
-          float: right
-          margin-right: 10px
-          font-size: 12px
-          color: rgba(0, 0, 0, 0.3)
-        span
-          font-weight: 600
-    .comment-body
-      margin: 10px 0 0 0
-
-    .message-header
-      font-size: 12px
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-      padding: 0 10px 10px 0
-      overflow: hidden          
-      .message-user-details
-        margin: 10px 0 0 5px
-        font-size: 14px
-        .time 
-          float: right
-          margin-right: 10px
-          font-size: 12px
-          color: rgba(0, 0, 0, 0.3)
-        span
-          font-weight: 600
-    .message-body
-      margin: 10px 0 0 0
-
-    .header 
-      height: 20px
-      h4
-        float: left
-        margin-top: 0px
-      .time 
-        float: right 
-    .body
+/* Calendar Container */
 
 #calendar-container
   display: none
-
 
   .calendar 
     border-collapse: collapse

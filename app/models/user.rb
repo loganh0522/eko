@@ -75,4 +75,9 @@ class User < ActiveRecord::Base
   def full_name
     full_name = "#{self.first_name} #{self.last_name}"
   end
+
+  def current_jobs
+    @current_jobs = self.work_experiences.where(current_position: true)
+    return @current_jobs
+  end
 end

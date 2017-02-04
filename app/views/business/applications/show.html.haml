@@ -1,39 +1,72 @@
 .applicant-view
-  .applicant-main-container   
-    = render "business/applications/application_header"
-
-    .add-comment-on-applicant
-      = render "business/comments/add_note_on_application"
-
-    .profile-container#showing-container
-      .applicant-experience
-        = render 'business/applications/application_experience'
-
-      .applicant-experience    
-        = render 'business/applications/application_education'
-
-    .messages-container
-      .applicant-messages
-        = render "business/messages/applicant_messages"
-
-    .notes-container
-      .applicant-notes
-        = render "business/comments/applicant_notes"
-
-    .assessments-container
-      .applicant-assessments
-        = render "business/assessments/applicant_assessment"
-
-    .scorecards-container
-      .applicant-scorecard
-        = render "business/application_scorecards/applicant_scorecard"
-
-    .activity-container
-      .activity-feed        
-        = render "business/activities/application_activity"
-
+  .home-page-header
+    %h1= "#{@job.title}"
+  /   .add-comment-on-applicant
+  /     = render "business/comments/add_note_on_application"
   .applicant-side-container
     = render 'business/applications/application_side_container'
+  
+  .applicant-profile-information
+    .applicant-main-top
+      .applicant-nav-bar  
+        = render "business/shared/applicant_nav"
+      .actions
+        #add-note.btn.border-button
+          + Add Note
+        #send-email.btn.border-button
+          Send Email
+        #schedule-appt.btn.border-button
+          Schedule Interview
+
+      .email-area
+        .to= "To: #{@user.full_name} (#{@user.email})"
+        .to= "From: #{current_user.full_name}"
+        .to= "Subject"
+        .body
+        .email-area-footer
+          = form_for [:business, @job, @application, @message], html: {remote: true, class: 'invite'} do |f| 
+            %fieldset
+            = hidden_field_tag :user_id, current_user.id
+            %br
+            = f.submit "Send Message", class: "btn submit-button"
+      / .comment-area
+      /   %div.ui-autocomplete-input.user-comment#comment-body{:contentEditable => true, :placeholder => "Add a note about #{@user.first_name} #{@user.last_name} (@mention a teammate)", :data => {:job_id => @job.id } }
+      /   %div#comment-team-members
+      /   .comment-area-footer
+      /     = form_for [:business, @job, @application, @comment], html: {remote: true} do |f|  
+            
+      /       = f.hidden_field :user_id, value: current_user.id
+      /       = f.hidden_field :application_id, value: @application.id
+      /       = f.submit "+ Add", class: "btn submit-button", id: "submit-comment-btn", :data => {:job_id => @job.id }
+
+    .applicant-details
+      .profile-container#showing-container
+        .applicant-experience
+          = render 'business/applications/application_experience'
+        .applicant-experience    
+          = render 'business/applications/application_education'
+
+      .messages-container
+        .applicant-messages
+          = render "business/messages/applicant_messages"
+
+      .notes-container
+        .applicant-notes
+          = render "business/comments/applicant_notes"
+
+      .assessments-container
+        .applicant-assessments
+          = render "business/assessments/applicant_assessment"
+
+      .scorecards-container
+        .applicant-scorecard
+          = render "business/application_scorecards/applicant_scorecard"
+
+      .activity-container
+        .activity-feed        
+          = render "business/activities/application_activity"
+
+  
 
 
   .modal#myModal

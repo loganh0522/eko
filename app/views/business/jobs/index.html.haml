@@ -1,86 +1,67 @@
-.contain 
-  .sidebar    
-    = link_to "Post a Job", new_business_job_path, class: 'button post-a-job'
-    
-    .nav
-      %ul 
-        %li 
-          .content
-            %i.glyphicon.glyphicon-briefcase
-            My Jobs 
-        .body
-          .job-nav
-            %ul
-              %li.open.show Open Job Postings
-              %li.closed Closed Job Postings
-              %li.drafts Drafts 
-              %li.archived Archived Job Postings
-        %li 
-          .content
-            %i.glyphicon.glyphicon-list-alt
-            Company Jobs
+.home-page-header
+  .top-info
+    %h1= "Jobs at #{current_company.name}"
+    .post-job= link_to "Post a Job", new_business_job_path, class: 'white-border-button'
+  .job-navigation
+    %ul
+      %li.open.activated Open 
+      %li.closed Closed 
+      %li.drafts Drafts 
+      %li.archived Archived 
 
+.home-page-body
   .main-container
-    .header 
-      .open-jobs.showing
-        %h1 Open Job Postings
-      .closed-jobs 
-        %h1 Closed Job Postings
-      .draft-jobs 
-        %h1 Drafts
-      .archived-jobs 
-        %h1 Archived Jobs
-    .body
-      .open-jobs.showing
-        - @open_jobs_count = 0
+    .open-jobs.showing
+      - @open_jobs_count = 0
 
-        - @jobs.each do |job|
-          - open_jobs_count = 0
-          - if job.status == 'open'
-            - @open_jobs_count += 1 
-            = render 'job_container', job: job
-        
-        - if @open_jobs_count == 0
-          .not-present-container
-            %p You currently do not have any open jobs.              
+      - @jobs.each do |job|
+        - open_jobs_count = 0
+        - if job.status == 'open'
+          - @open_jobs_count += 1 
+          = render 'job_container', job: job
       
-      .closed-jobs 
-        - @closed_jobs_count = 0     
+      - if @open_jobs_count == 0
+        .not-present-container
+          %p You currently do not have any open jobs.              
+    
+    .closed-jobs 
+      - @closed_jobs_count = 0     
 
-        - @jobs.each do |job|       
-          - if job.status == 'closed'      
-            - @closed_jobs_count += 1
-            = render 'job_container', job: job 
+      - @jobs.each do |job|       
+        - if job.status == 'closed'      
+          - @closed_jobs_count += 1
+          = render 'job_container', job: job 
 
-        - if @closed_jobs_count == 0
-          .not-present-container
-            %p You currently do not have any closed jobs.
-          
-      .draft-jobs
-        - @draft_jobs_count = 0
-
-        - @jobs.each do |job|
-          - if job.status == 'draft'                     
-            - @draft_jobs_count += 1
-            = render 'job_container', job: job
-
-        - if @draft_jobs_count == 0
-          .not-present-container
-            %p You currently do not have any drafted job postings.
-
-      .archived-jobs
-        - @archived_jobs_count = 0
-
-        - @jobs.each do |job|
-          - if job.status == 'archived'                     
-            - @archived_jobs_count += 1
-            = render 'job_container', job: job
-
-        - if @archived_jobs_count == 0
-          .not-present-container
-            %p You currently do not have any drafted job postings.
+      - if @closed_jobs_count == 0
+        .not-present-container
+          %p You currently do not have any closed jobs.
         
+    .draft-jobs
+      - @draft_jobs_count = 0
 
+      - @jobs.each do |job|
+        - if job.status == 'draft'                     
+          - @draft_jobs_count += 1
+          = render 'job_container', job: job
+
+      - if @draft_jobs_count == 0
+        .not-present-container
+          %p You currently do not have any drafted job postings.
+
+    .archived-jobs
+      - @archived_jobs_count = 0
+
+      - @jobs.each do |job|
+        - if job.status == 'archived'                     
+          - @archived_jobs_count += 1
+          = render 'job_container', job: job
+
+      - if @archived_jobs_count == 0
+        .not-present-container
+          %p You currently do not have any drafted job postings.
+      
+  .side-container
+    .container
              
 
 

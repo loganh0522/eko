@@ -1,20 +1,19 @@
-.header
-  %h4 Notes
-
 - if !@comments.present?
   .not-present-container
     %p There are currently no notes for this applicant.
-- else
+- else  
   - @comments.each do |comment|
-    - user = User.find(comment.user_id)
-    .notes   
-      .notes-header 
-        - if user.user_avatar.present? 
-          = image_tag user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
-        - else 
-          .circle-img= current_user.first_name.first.capitalize
-        %p.name= user.first_name 
-        %p.name= user.last_name
-        %p.sent= time_ago_in_words(comment.created_at) unless comment.created_at.blank?
-      .body
-        %p= comment.body
+    .note-container
+      .icon
+
+      .note   
+        .note-header 
+          - if comment.user.user_avatar.present? 
+            = image_tag comment.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
+          - else 
+            .circle-img= current_user.first_name.first.capitalize
+          %p.name= comment.user.first_name 
+          %p.name= comment.user.last_name
+          %p.sent= time_ago_in_words(comment.created_at) unless comment.created_at.blank?
+        .body
+          %p= comment.body

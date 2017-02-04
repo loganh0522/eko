@@ -1,31 +1,29 @@
 #job-activity-container
   .main-container
-    .job-activity-feed
-      .activity-feed
-        - @activities.each do |activity|         
-          = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity
+    .activity-feed
+      - @activities.each do |activity|         
+        = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity
   .side-container
     .activity-filters
-      .nav
-        .header 
-          Filters
-        .body
-          %ul
-            %li.activity 
-              .checkbox{:data => {:id => "comments"}}= check_box_tag "", true, true
-              Comments
-            %li.activity
-              .checkbox{:data => {:id => "scorecards"}}= check_box_tag "", true, true
-              Scorecards
-            %li.activity
-              .checkbox{:data => {:id => "messages"}}= check_box_tag "", true, true
-              Messages
-            %li.activity
-              .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
-              Move Stages
-            %li.activity
-              .checkbox{:data => {:id => "applied"}}= check_box_tag "", true, true
-              Applied
-            %li.activity
-              .checkbox{:data => {:id => "interview"}}= check_box_tag "", true, true
-              Interview
+      .header 
+        %h4 Filters
+      .body
+        %ul
+          %li.activity 
+            .checkbox{:data => {:id => "comments"}}= check_box_tag "", true, true
+            Comments
+          %li.activity
+            .checkbox{:data => {:id => "scorecards"}}= check_box_tag "", true, true
+            Scorecards
+          %li.activity
+            .checkbox{:data => {:id => "messages"}}= check_box_tag "", true, true
+            Messages
+          %li.activity
+            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
+            Move Stages
+          %li.activity
+            .checkbox{:data => {:id => "applied"}}= check_box_tag "", true, true
+            Applied
+          %li.activity
+            .checkbox{:data => {:id => "interview"}}= check_box_tag "", true, true
+            Interview

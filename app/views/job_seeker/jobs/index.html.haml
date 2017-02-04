@@ -65,14 +65,14 @@
             = "#{job.location}"
             
             %img(src="/tmp/small-bar-chart.png") 
-            = job.job_career_level.first.career_level.name
+            / = job.job_career_level.first.career_level.name
 
           .right-side 
             %img(src="/tmp/small-hammer.png") 
             = job.job_industries.first.industry.name
 
             %img(src="/tmp/small-briefcase.png") 
-            = job.job_kind.first.name
+            / = job.job_kind.first.name
 
             %img(src="/tmp/small-clock.png") 
             - if job.created_at.present?

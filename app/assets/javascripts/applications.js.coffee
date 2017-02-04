@@ -1,6 +1,6 @@
 jQuery -> 
   
-  $('form_tag').on 'click', '.move_action', (event) ->
+  $('.applicants').on 'click', '#move-applicants', (event) ->
     checkbox = $('.applicant-checkbox')
     
     applicant_ids = []
@@ -40,9 +40,8 @@ jQuery ->
 
 ##################### Add Note on Multiple Modal ###########################
 
-  $('form_tag').on 'click', '.add_note_action', (event) ->
+  $('.applicants').on 'click', '#add-note-multiple', (event) ->
     checkbox = $('.applicant-checkbox')
-    
     applicant_ids = []
     applicants = []
     applicant_names = []
@@ -80,7 +79,7 @@ jQuery ->
 
 ##################### Send Message to Multiple Modal ###########################
 
-  $('form_tag').on 'click', '.send_message', (event) ->
+  $('.applicants').on 'click', '#send-email', (event) ->
     checkbox = $('.applicant-checkbox')
     
     applicant_ids = []

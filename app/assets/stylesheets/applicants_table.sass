@@ -1,0 +1,181 @@
+#job-applicants
+  margin: 0px 3% 100px 3%
+  .job-stages
+    overflow: hidden
+    width: 100%
+    background: #ffffff
+    border-radius: 5px 
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    .left_scroll
+      float: left
+      width: 4%
+      height: 100px
+      img
+        margin-top: 35px
+        margin-left: auto
+        margin-right: auto
+        display: block
+      &:hover 
+        background-color: rgba(0, 0, 0, .1)
+        cursor: pointer           
+    .right_scroll
+      float: left
+      width: 4%
+      height: 100px
+      border-left: 1px solid rgba(0, 0, 0, .1)
+      img
+        margin-top: 35px
+        margin-left: auto
+        margin-right: auto
+        display: block
+      &:hover 
+        background-color: rgba(0, 0, 0, .1)
+        cursor: pointer
+
+    .job-stage-area 
+      width: 92%
+      overflow: hidden 
+      margin: 0 0
+
+    .job-gallery
+      position: relative
+
+    ul.job-stage-area
+      list-style: none
+      text-decoration: none
+      float: left
+      padding: 0 0           
+      height: 100px 
+      font-weight: 300
+      li:last-child
+        border-right: 1px solid rgba(0,0,0,0.1)
+      li 
+        display: inline
+        float: left
+        height: 100px 
+        width: 130px
+        text-align: center
+        border-left: 1px solid rgba(0,0,0,0.1)
+        background-color: white
+      
+
+        &:hover 
+          background-color: rgba(0, 0, 0, .03)
+          cursor: pointer   
+        .number 
+          margin-top: 17px
+          font-size: 27px 
+        .name
+          font-size: 12px
+
+      li.activated
+        background: rgba(208, 208, 208, 0.4)
+        .number 
+          color: black
+        .name
+          color: black
+  .side-container
+    float: left
+    background: #ffffff
+    height: auto
+    padding: 5px 10px
+    border-radius: 5px
+    margin-top: 25px
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    .header 
+      border-bottom: 1px solid rgba(0,0,0,0.1)
+      padding-bottom: 10px
+    .filter
+      border-bottom: 1px solid rgba(0,0,0,0.1)
+      padding: 10px 0
+      ul
+        list-style: none
+        padding: 0 15px
+        li
+          text-decoration: none
+  .main-container
+    float: right
+    padding: 0 0 
+    border-radius: 5px
+    background: #ffffff
+    margin: 25px 0 50px 0
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    .applicants 
+      .header 
+        margin: 15px 15px 10px 0
+        overflow: hidden
+        padding: 0px 15px 15px 15px
+        .border-button
+          float: right
+          width: 100px
+          height: auto
+          margin-left: 10px
+          background: rgba(0,0,0,0.1)
+          color: rgba(0,0,0,0.7)
+          padding: 5px 0
+          border: none
+          border-radius: 5px
+          font-weight: 300
+        #select_all
+          float: left
+          width: 100px
+          height: auto
+          background: rgba(0,0,0,0.1)
+          color: rgba(0,0,0,0.7)
+          padding: 5px 5px
+          border-radius: 5px
+          border: none
+          font-weight: 300
+      .table 
+        padding: 5px
+        thead
+          display: table-header-group
+          tr
+            th
+              border-bottom: none
+              checkbox
+                margin: 0 0 0 10px
+        tbody
+          background: #ffffff
+          tr
+            td
+              .applicant-checkbox
+                margin: 12px 0 0 10px
+      .checkbox
+        margin: 30px 0 0 20px
+      .circle
+        display: inline-block
+        margin: 5px 0 5px 0
+        img
+          width: 40px 
+          height: 40px
+          border-radius: 50%
+          margin-left: 10px
+      .circle-img
+        margin: 0px 0px 5px 10px
+        border-radius: 50%
+        width: 40px 
+        height: 40px
+        background: #EF7B2B
+        text-align: center
+        font-size: 24px
+        padding-top: 2px
+        color: white
+      .name 
+        margin: 5px 0 0 0 
+        a
+          color: rgba(0, 0, 0, 0.8)
+          font-size: 14px
+          font-weight: 600
+      .current-position
+        font-size: 10px
+
+      .position
+        font-size: 12px
+        margin: 10px 0 0 0 
+      .date-applied
+        font-size: 10px    
+      .stage
+        font-size: 12px
+        margin: 10px 0 0 0 
+  

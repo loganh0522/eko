@@ -39,10 +39,9 @@ $(window).load ->
     $('.main-container').find('.showing').removeClass 'showing'
     $($targetContainer).show()
     $($targetContainer).addClass 'showing'
-
     return
 
-  $('.job-nav').on 'click', 'li', (event) -> 
+  $('.job-navigation').on 'click', 'li', (event) -> 
     if $(this).attr('class') == 'open'
       $targetContainer = '.open-jobs'
     else if $(this).attr('class') == 'closed'
@@ -52,11 +51,12 @@ $(window).load ->
     else if $(this).attr('class') == 'archived'
       $targetContainer = '.archived-jobs'
 
-    $('.job-nav').find('.show').css color: 'black'
-    $('.job-nav').find('.show').removeClass 'show'
+    $('.job-navigation').find('.activated').css color: '#ffffff'
 
-    $(this).addClass 'show'
-    $(this).css color: 'rgb(239, 122, 43)'
+
+    $('.job-navigation').find('.activated').removeClass 'activated'
+
+    $(this).addClass 'activated'
 
     changeContainer $targetContainer
     return

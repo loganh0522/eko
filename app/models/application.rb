@@ -3,6 +3,7 @@ class Application < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks 
   index_name ["talentwiz", Rails.env].join('_') 
 
+
   before_create :generate_token
 
   belongs_to :company

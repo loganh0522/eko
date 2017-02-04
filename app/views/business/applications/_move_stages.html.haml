@@ -4,16 +4,25 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
         %h4.modal-title Move Applicants 
+      .modal-body
+        = form_tag update_multiple_business_applications_path do  
+          .email-area
+            .to
+              .title
+                Moving: 
+              .recipients
+            .applicants-list
+            / = collection_select(:stage, :stage_id, @job.stages, :id, :name)
+            .choose-stage
+              .title
+                %h4 Stage: 
+              .stages-select
+                = select_tag "stages", options_for_select(@job.stages.collect{ |u| [u.name, u.id] } + ["Rejected"])
 
-      = form_tag update_multiple_business_applications_path do  
-        .modal-body
-          .applicants-list
-          / = collection_select(:stage, :stage_id, @job.stages, :id, :name)
-          = select_tag "stages", options_for_select(@job.stages.collect{ |u| [u.name, u.id] } + ["Rejected"])
-          = hidden_field_tag :applicant_ids
-          %br
-        .modal-footer
-          %input(type="submit" value="Cancel" class="btn border-button")
-          %input(type="submit" value="Save Changes" class="btn submit-button")
+            = hidden_field_tag :applicant_ids
+      .modal-footer
+        %input(type="submit" value="Move Stages" class="btn submit-button")
+        %input(type="submit" value="Cancel" class="btn border-button2")
+        
 
      

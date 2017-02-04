@@ -1,15 +1,4 @@
-- if @application.stage == nil 
-  - stage = "Applied"
-- elsif @application.rejected == true
-  - stage = "Rejected"
-- else 
-  - stage = @application.stage.name
-
 %h4 Current Stage:
 .stage
-  = select_tag "stages", options_for_select(["Applied"] + @job.stages.collect{ |u| [u.name, u.id] } + ["Rejected"])
-.stage-actions
-  .reject
-    = link_to "Reject", business_job_application_reject_path(@job.id, @application), :data => {remote: true}
-  .move-forward
-    = link_to "Move To Next Stage ->", business_job_application_move_stages_path(@job.id, @application), :data => {remote: true}
+  .select-stage= select_tag "stages", options_for_select(["Applied"] + @job.stages.collect{ |u| [u.name, u.id] } + ["Rejected"])
+

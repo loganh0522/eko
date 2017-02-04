@@ -1,11 +1,30 @@
-.bar
+.bar 
+  .applicant-header
+    .user-image
+      .profile_picture
+        - if @avatar.present?
+          = image_tag @avatar.image.large_image, :size => "200x200" 
+        - else 
+          %img(src="/tmp/blank_profile_picture.png")
+    
+    .applicant-details
+      .name= "#{@user.first_name.capitalize } #{@user.last_name.capitalize}"
+      .job= "#{@user.current_jobs.first.title} @ #{@user.current_jobs.first.company_name} "
+      .location= "#{@user.city}"
+
   .current-stage
     = render 'business/applications/stage'
-.bar
+  
+  .applicant-tags
+    %h4 Tags
+    .tags
+      = render "business/tags/tags"
+    .add_tag
+      = link_to "+ Add Tag", new_business_job_application_tag_path(@job.id, @application.id), :data => {remote: true}, id: 'add_tag'
+
   .schedule-interview
-    .title Interviews
+    %h4 Scheduled Interviews
     = render 'business/interviews/form'
-    
 
     .scheduled-interviews
       .interview
@@ -18,13 +37,7 @@
 
     = link_to 'Schedule Interview', '#', :data => {:toggle => "modal", :target => "#interview-modal"}
 
-.bar
-  .applicant-tags
-    .title Tags
-    .tags
-      = render "business/tags/tags"
-    .add_tag
-      = link_to "+ Add Tag", new_business_job_application_tag_path(@job.id, @application.id), :data => {remote: true}, id: 'add_tag'
+  
 
 
 

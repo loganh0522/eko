@@ -33,6 +33,4 @@ class WorkExperience < ActiveRecord::Base
   # def current_experiences
   #   current_user.work_experiences.each do |experience| 
       
-
-
 end 

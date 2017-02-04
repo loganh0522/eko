@@ -1,215 +1,141 @@
-.contain
-  width: 1080px
-  margin: 75px 9% 0 10%
-  
-  .sidebar
-    float: left
-    margin-right: 25px
-    .post-a-job
-      margin-bottom: 16.25px
-      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-      border-radius: 5px
-    
-    .publish-job
-      width: 195px
-      margin-top: 10px
-      font-size: 15px
+.home-page-header
+  height: 140px
+  margin-top: 60px
+  width: 100%
+  background: rgba(0,0,0,.7)
+  padding: 10px 3% 0 3%
+  overflow: hidden
+  .top-info
+    overflow: hidden
+    h1
+      float: left
+    .post-job
+      float: right
+      margin-top: 10pxs
+  .job-navigation
+    position: absolute
+    margin-top: 32px
+    ul 
+      list-style: none
+      text-decoration: none
+      margin-left: -45px
+      li
+        display: inline-block
+        padding: 15px 15px 10px 15px 
+        text-align: center 
+        font-szie: 14px
+        color: #ffffff
+        cursor: pointer
+      .activated
+        border-bottom: 3px solid #ffffff
+        color: #ffffff
 
-    .nav
-      width: 195px
-      border: 1px solid #c6c8ca
-      border-top: none
-      background: #ffffff
-      overflow: hidden
-      
-      ul 
-        list-style: none
-        text-decoration: none
-        margin-left: -42px
-        margin-bottom: 0px
-        
-        li 
-          font-size: 15px
-          height: 50px
-          padding: 10px 20px 10px 5px
-          border-top: 1px solid #c6c8ca
-          
-          &:hover 
-            cursor: pointer
+.main-container
+  float: left
+  .not-present-container
+    width: 100%
+    margin: 0 0
+  .closed-jobs
+    display: none
+  .archived-jobs
+    display: none
+  .draft-jobs
+    display: none
 
-          a
-            color: black
-            text-decoration: none
-            margin-left: 15px
-        
-        li.show
-          color: rgba(239, 122, 43, .75) 
-
-          .content
-            margin: 5px 0 0 15px
-            i
-              margin-right: 15px 
-       
-        .body 
-          background: #f7f8f9
-          ul 
-            list-style: none
-            text-decoration: none          
-            border-top: 1px solid #c6c8ca
-            
-            li
-              padding: 0px 0px 0px 0px
-              margin: 10px 0 0 45px
-              border-top: none
-              height: 30px
-              font-size: 12px
-
-  .main-container
-    float: left
-    width: 790px
-    height: auto
-    padding: 0 40px 50px 40px
-    margin-bottom: 100px
+  .job
+    width: 100%
+    margin-top: 15px
     background: #ffffff
-   
     border-radius: 5px
     box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-    .header 
-      border-bottom: 2px solid rgba(239, 122, 43, .25) 
-
-    .body
-      width: 710px
-      margin-top: 10px
-
-      .not-present-container
-        width: 650px
-        height: 200px 
-        margin: 25px 30px 0 30px
-        border: 2px dashed #c6c8ca
-        text-align: center
-
-        p 
-          margin: 85px 0 0 70px
-          float: left
-          color: #c6c8ca
-        .add-object
-          margin: 85px 0 0 10px
-          float: left
-          color: #EF7B2B
-          font-weight: bold 
-
-
-    .closed-jobs
-      display: none
-
-    .archived-jobs
-      display: none
-
-    .draft-jobs
-      display: none
-
-    .job
-      width: 710px
-      margin-top: 15px
-      background: #ffffff
-      .job-header
-        border: 1px solid #c6c8ca
-        padding: 10px 25px 0 20px
-        height: 50px
-
-        .title 
-          font-size: 18px 
-          float: left
-          margin: 0 25px 0 0
-          a 
-            color: #000000
-        .location 
-          margin: 5px 25px 0 0
-          font-size: 12px
-          float: left
-        .posted-time
-          font-size: 12px
-          float: left
-          margin: 5px 25px 0 0
-          color: #c6c8ca
-        .actions
-          float: right
-          margin: 5px 0 0 0 
-          i 
-            color: #c6c8ca
-      
-      .job-body
+    .job-header
+      border-bottom: 1px solid #c6c8ca
+      padding: 10px 25px 0 20px
+      height: 50px
+      .title 
+        font-size: 18px 
+        float: left
+        margin: 0 25px 0 0
+        a 
+          color: #000000
+      .location 
+        margin: 5px 25px 0 0
+        font-size: 12px
+        float: left
+      .posted-time
+        font-size: 12px
+        float: left
+        margin: 5px 25px 0 0
+        color: #c6c8ca
+      .actions
+        float: right
+        margin: 5px 0 0 0 
+        i 
+          color: #c6c8ca   
+    .job-body
+      height: 100px 
+      .btns     
+        float: left
+        margin: 10px 15px 0 15px
+        .btn2 
+          margin-top: 5px
+          a
+            width: 125px
+      .left-scroll
+        float: left
+        width: 20px
+        height: 100px
+        margin-right: 5px
+        
+        img
+          margin-top: 35px
+          margin-left: -7px
+        &:hover 
+          background-color: rgba(0, 0, 0, .1)
+          cursor: pointer
+          
+      .right-scroll
+        float: left
+        width: 20px
+        height: 100px
+        margin-left: 5px
+        
+        img
+          margin-top: 35px
+          margin-left: -7px
+        &:hover 
+          background-color: rgba(0, 0, 0, .1)
+          cursor: pointer
+      .job-stage-area 
+        width: 501px
+        overflow: hidden 
+        margin: 0 0
+      .job-gallery
+        position: relative
+      ul.job-stage-area
+        list-style: none
+        text-decoration: none
+        float: left
+        padding: 0 0           
         height: 100px 
-        border-left: 1px solid #c6c8ca
-        border-right: 1px solid #c6c8ca
-        border-bottom: 1px solid #c6c8ca
-
-        .btns     
-          float: left
-          margin: 10px 15px 0 15px
-          .btn2 
-            margin-top: 5px
-            a
-              width: 125px
-
-        .left-scroll
-          float: left
-          width: 20px
+        
+        li:first-child
+          border-left: 1px solid #c6c8ca
+        li 
+          width: 100px
           height: 100px
-          margin-right: 5px
-          
-          img
-            margin-top: 35px
-            margin-left: -7px
-          &:hover 
-            background-color: rgba(0, 0, 0, .1)
-            cursor: pointer
-            
-        .right-scroll
           float: left
-          width: 20px
-          height: 100px
-          margin-left: 5px
-          
-          img
-            margin-top: 35px
-            margin-left: -7px
-          &:hover 
-            background-color: rgba(0, 0, 0, .1)
-            cursor: pointer
+          display: inline
+          border-right: 1px solid #c6c8ca
+          text-align: center         
+          .number 
+            margin-top: 17px
+            font-size: 27px 
+          .name
+            font-size: 12px
 
-        .job-stage-area 
-          width: 501px
-          overflow: hidden 
-          margin: 0 0
-
-        .job-gallery
-          position: relative
-
-        ul.job-stage-area
-          list-style: none
-          text-decoration: none
-          float: left
-          padding: 0 0           
-          height: 100px 
-          
-          li:first-child
-            border-left: 1px solid #c6c8ca
-
-          li 
-            width: 100px
-            height: 100px
-            float: left
-            display: inline
-            border-right: 1px solid #c6c8ca
-            text-align: center
-            
-            .number 
-              margin-top: 17px
-              font-size: 27px 
-            .name
-              font-size: 12px
-
+.side-container
+  float: right
 
 
 

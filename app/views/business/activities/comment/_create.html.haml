@@ -2,8 +2,8 @@
   .icon
     .glyphicon.glyphicon-pencil
 
-  .comments-header
-    .commenting-user
+  .activity-body
+    .activity-body-header
       - if activity.user.user_avatar.present?
         = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
       - else 
@@ -12,11 +12,11 @@
       %span= "#{activity.user.first_name} #{activity.user.last_name}"
       added a comment 
       .time= "#{time_ago_in_words(activity.created_at)} ago" 
-    on 
-    = link_to "#{activity.trackable.application.applicant.first_name} #{activity.trackable.application.applicant.last_name}'s", business_job_application_comments_path(activity.trackable.application.apps, activity.trackable.application)
-    application for
-    = link_to "#{activity.trackable.application.apps.title}", business_job_path(activity.trackable.application.apps)
-  .comment-body
-    = activity.trackable.body
+      on 
+      = link_to "#{activity.trackable.application.applicant.first_name} #{activity.trackable.application.applicant.last_name}'s", business_job_application_comments_path(activity.trackable.application.apps, activity.trackable.application)
+      application for
+      = link_to "#{activity.trackable.application.apps.title}", business_job_path(activity.trackable.application.apps)
+    .activity-body-body
+      = activity.trackable.body
 
     

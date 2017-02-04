@@ -1,9 +1,7 @@
 .scheduled-interview
   .date-location
     .name= "#{@applicant.full_name}"
-    .time= "#{@interview.date.to_formatted_s(:long).slice(0..-6)} at #{@interview.start_time} - #{@interview.end_time}"
-  
-
+    / .time= "#{@interview.date.to_formatted_s(:long).slice(0..-6)} at #{@interview.start_time} - #{@interview.end_time}"
   .interviewers 
     %h4 Interviewers
     %ul

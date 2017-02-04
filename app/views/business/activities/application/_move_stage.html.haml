@@ -1,8 +1,9 @@
 .activity{:id => activity.action, :class => "#{activity.trackable_type} job_#{activity.job_id}"}      
   .icon
     .glyphicon.glyphicon-share-alt
-  .comment-header
-    .commenting-user
+  
+  .activity-body
+    .activity-body-header
       - if activity.trackable.applicant.user_avatar.present? 
         = image_tag activity.trackable.applicant.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
       - else 

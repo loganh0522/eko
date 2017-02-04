@@ -3,30 +3,9 @@
     .details
       %h1= @job.title
       %p= "#{@job.location}"
-    /   = link_to "Job Link: #{@job.url}", "http://" + @job.url, :target => "_blank", class: "link"
-    / / .links
-    /   = link_to "Edit Job Details", edit_business_job_path(@job), class: "btn btn-primary"
-  .job-stages
-    .left_scroll
-      %img(src="/tmp/left_arrow.png") 
-    %ul.job-stage-area
-      .job-gallery
-        %li#all_applicants.activated.job_list_stage
-          .number 
-            = @job.applications.count
-          .name All Applicants
-        - @stages.each do |stage| 
-          %li.job_list_stage{:id => "#{stage.name}"}
-            .number= stage.applicants.count
-            .name= stage.name  
-        %li.job_list_stage#Rejected
-          .number 
-            = @job.applications.where(rejected: true).count
-          .name Rejected
-    .right_scroll
-      %img(src="/tmp/right_arrow.png")
-
-
+      / = link_to "Job Link: #{@job.url}", "http://" + @job.url, :target => "_blank", class: "link"
+    .links
+      = link_to "Edit Job Details", edit_business_job_path(@job), class: "btn submit-button"
   .job-applicants-nav
     %ul 
       %li.applicants-tab.activated Applicants
@@ -34,8 +13,9 @@
       %li.calendar-tab Calendar
 
 
-.job-applicants-main-container
+.job-show-body
   = render 'business/shared/applicants_table'
-  = render 'business/calendar/job_calendar'
-  = render 'business/activities/job_activity_feed'
+
+= render 'business/calendar/job_calendar'
+= render 'business/activities/job_activity_feed'
     

@@ -8,3 +8,5 @@ class DropJobKindJobTypeTables < ActiveRecord::Migration
     drop_table :job_career_levels
   end
 end
+
+

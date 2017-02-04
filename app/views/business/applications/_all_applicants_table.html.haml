@@ -1,39 +1,48 @@
-%table.table
-  %thead
-    %tr
-      %th(width="1%")= check_box_tag "select_all"
-      %th(width="10%")
-      %th(width="25%") Name 
-      %th(width="20%") Job Title
-      %th(width="20%") Stage 
-      %th(width="25%") Rating
-    %tbody
-      .all_applicants_data
-        - @applicants.each do |application|
-          - if application.stage.present?
-            - stage = application.stage.name
-          - elsif application.rejected == true
-            - stage = "Rejected"
-          - elsif 
-            - stage = "Applied"
+.applicants
+  .header
+    #select_all
+      = check_box_tag 'Select All'
+      Select All
+    = link_to 'Move Stages', '#', class: "btn border-button", :data => {:toggle => "modal", :target => "#stageModal"}
+    = link_to 'Add Note', '#', class: "btn border-button", :data => {:toggle => "modal", :target => "#add_commentModal"}
+    = link_to 'Send E-mail', '#', class: "btn border-button", :data => {:toggle => "modal", :target => "#send_messageModal"}
+  .applicant-table-body
+    %table.table
+      %thead
+        %tr
+          %th(width="1%")
+          %th(width="10%")
+          %th(width="25%") Name 
+          %th(width="20%") Job Title
+          %th(width="20%") Stage 
+          %th(width="25%") Rating
+        %tbody
+          .all_applicants_data
+            - @applicants.each do |application|
+              - if application.stage.present?
+                - stage = application.stage.name
+              - elsif application.rejected == true
+                - stage = "Rejected"
+              - elsif 
+                - stage = "Applied"
 
-          %tr{:class => "#{stage} #{application.apps.status} #{application.apps.created_at}"}
-            %td
-              .applicant-checkbox{:data => {:id => application.id}}
-                = check_box_tag "applicant_ids[]", application.id
-            %td
-              .circle
-                - if application.applicant.user_avatar.present? 
-                  = image_tag application.applicant.user_avatar.image.small_image, :size => "50x50" 
-                - else
-                  .circle-img= application.applicant.first_name.first.capitalize
-            %td.names
-              .name{:data => {:id =>  "#{application.applicant.first_name} #{application.applicant.last_name}"}}
-                = link_to "#{application.applicant.first_name} #{application.applicant.last_name}", business_job_application_path(application.apps.id, application.id)
-              .current-position CEO - TalentWiz 
-            %td
-              .position= application.apps.title
-              .date-applied= application.created_at
-            %td
-              .stage= stage
-            %td
+              %tr{:class => "#{stage} #{application.apps.status} #{application.apps.created_at}"}
+                %td
+                  .applicant-checkbox{:data => {:id => application.id}}
+                    = check_box_tag "applicant_ids[]", application.id
+                %td
+                  .circle
+                    - if application.applicant.user_avatar.present? 
+                      = image_tag application.applicant.user_avatar.image.small_image, :size => "50x50" 
+                    - else
+                      .circle-img= application.applicant.first_name.first.capitalize
+                %td.names
+                  .name{:data => {:id =>  "#{application.applicant.first_name} #{application.applicant.last_name}"}}
+                    = link_to "#{application.applicant.first_name} #{application.applicant.last_name}", business_job_application_path(application.apps.id, application.id)
+                  .current-position CEO - TalentWiz 
+                %td
+                  .position= application.apps.title
+                  .date-applied= application.created_at
+                %td
+                  .stage= stage
+                %td

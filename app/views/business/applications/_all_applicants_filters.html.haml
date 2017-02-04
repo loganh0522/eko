@@ -1,0 +1,71 @@
+%h4 Filters
+.filter
+  .search-field
+    = form_tag business_applications_path, method: :get do   
+      .form-group
+        = search_field_tag :query, params[:query], placeholder: "Advanced Text Search", class: "form-control"
+.filter
+  %h4 Location
+  #geocomplete= text_field_tag :city, "", id: "geocomplete", placeholder: "Enter a City"
+.filter
+  %h4 Job Status
+  %ul
+    %li 
+      .applicant-filter-checkbox{:data => {:id => "open"}}
+        = check_box_tag "", true
+        Active
+    %li.activity
+      .applicant-filter-checkbox{:data => {:id => "closed"}}
+        = check_box_tag "", true
+        Closed
+    %li.activity  
+      .applicant-filter-checkbox{:data => {:id => "archived"}}
+        = check_box_tag "", true
+        Archived 
+.filter
+  %h4 Job Applied To:  
+  %ul
+    - @jobs.each do |job| 
+      %li.open-job
+        .applicant-filter-checkbox{:data => {:id => "#{job}"}}
+          = check_box_tag "", true  
+          #{job}
+.filter 
+  %h4 Location Applied To
+  %ul
+    - @locations.each do |location| 
+      %li
+        .applicant-filter-checkbox{:data => {:id => "#{location}"}}
+          = check_box_tag "", true
+          #{location}
+.filter
+  %h4 Tags
+  %ul
+    - @tags.each do |tag| 
+      %li
+        .applicant-filter-checkbox{:data => {:id => "#{tag.name}"}}
+          = check_box_tag "", true
+          #{tag.name.capitalize}
+.filter 
+  %h4 Date Applied
+  %ul
+    %li 
+      .applicant-filter-checkbox{:data => {:id => "all_applied"}}
+        = check_box_tag "", true
+        All 
+    %li
+      .applicant-filter-checkbox{:data => {:id => "2_weeks"}}
+        = check_box_tag "", true
+        Last 2 weeks
+    %li 
+      .applicant-filter-checkbox{:data => {:id => "last_month"}}
+        = check_box_tag "", true
+        Last Month
+    %li
+      .applicant-filter-checkbox{:data => {:id => "3_months"}}
+        = check_box_tag "", true
+        Last 3 Months
+    %li 
+      .applicant-filter-checkbox{:data => {:id => "last_year"}}
+        = check_box_tag "", true
+        Last Year

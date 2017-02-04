@@ -40,13 +40,15 @@ class Business::JobsController < ApplicationController
       @applicants = [] 
       @results.each do |application|  
         if application.company == current_company && application.apps == @job
-          @applicants.append(application.applicant)
+          @applicants.append(application)
         end
       end 
+      tags_present(@results)
     else
       @job = Job.find(params[:id])
-      @applicants = @job.applications     
-    end   
+      @applicants = @job.applications   
+      tags_present(@applicants)  
+    end
   end
 
   def edit
@@ -148,9 +150,20 @@ class Business::JobsController < ApplicationController
 
   private 
 
+  def tags_present(applications)
+    @tags = []
+    applications.each do |applicant|
+      if applicant.tags.present?
+        applicant.tags.each do |tag| 
+          @tags.append(tag) unless @tags.include?(tag)
+        end
+      end
+    end
+  end
+
   def job_params
     params.require(:job).permit(:description, :title, :location, :address, :benefits, :company_id,
-      :industry_ids, :function_ids, :education_level_ids, :job_kind_ids, :career_level_ids)
+      :industry_ids, :function_ids, :education_level, :kind, :career_level)
   end
   
   def job_url
