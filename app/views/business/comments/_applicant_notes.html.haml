@@ -1,8 +1,8 @@
-- if !@comments.present?
+- if !@application.comments.present?
   .not-present-container
     %p There are currently no notes for this applicant.
 - else  
-  - @comments.each do |comment|
+  - @application.comments.each do |comment|
     .note-container
       .icon
 

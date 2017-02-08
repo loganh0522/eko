@@ -1,19 +1,16 @@
-.contain
-  .sidebar
-    .nav
-      = render 'business/shared/admin_sidebar'
-  
+.page-header
+  %h1 Billing Information
+#post-a-job
+  .side-container
+    = render 'business/shared/admin_sidebar'
   .main-container 
-    .header
-      %h1 Billing Information
-    .body
-      - if @current_company.customer.present? 
-        %h4 Credit Card 
-        %p= "xxxx xxxx xxxx #{@customer.last_four}"
-        %h4 Expires 
-        %p= "#{@customer.exp_month} / #{@customer.exp_year}"
-        = link_to 'Update Billing Information', edit_business_customer_path(@customer.id), class: 'btn btn-primary'
-      - else
-        .not-present-container
-          %p There are currently no notes for this applicant. 
-          = link_to "Add Billing Information", new_business_customer_path, class: 'add-object' 
+    - if @current_company.customer.present? 
+      %h4 Credit Card 
+      %p= "xxxx xxxx xxxx #{@customer.last_four}"
+      %h4 Expires 
+      %p= "#{@customer.exp_month} / #{@customer.exp_year}"
+      = link_to 'Update Billing Information', edit_business_customer_path(@customer.id), class: 'btn btn-primary'
+    - else
+      .not-present-container
+        %p There are currently no notes for this applicant. 
+        = link_to "Add Billing Information", new_business_customer_path, class: 'add-object' 

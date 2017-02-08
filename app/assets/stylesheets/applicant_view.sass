@@ -14,7 +14,7 @@
       margin-top: 20px
       background: #ffffff
       .applicant-nav-bar 
-        margin-left: -20px
+        margin-left: -40px
         height: 50px
         border-radius: 5px 5px 0 0
         ul 
@@ -30,57 +30,101 @@
           .active-container    
             border-bottom: solid 3px #EF7B2B
             color: black
-      .actions
+      .application-actions
         overflow: hidden
-        padding: 10px 10px
+        padding: 5px 10px
         border-top: 1px solid rgba(0,0,0,0.1)
         border-bottom: 1px solid rgba(0,0,0,0.1)
+        .active-button
+          background: #EF7B2B
+          border-radius: 10px
+          padding: 5px 15px
+          width: auto
+          color: #ffffff
+        &:hover
+          cursor: pointer
+        .inactive-button
+          background: rgba(0,0,0,0.2)
+          border-radius: 10px
+          padding: 5px 15px
+          width: auto
+          color: #ffffff
+        &:hover
+          cursor: pointer
         #add-note
-          width: 100px
           float: left
+          margin-right: 15px
         #send-email
-          width: 100px
+          margin-right: 15px
           float: left
         #schedule-appt
-          width: 100px
           float: left
+          margin-right: 15px
+
       .email-area
-        
-        .to
+        width: 100%
+        display: none
+        #message-body
+          border: none
+        .to 
+          height: auto
           padding: 10px 10px
           border-bottom: 1px solid rgba(0,0,0,0.1)
-        .body
-          height: 200px
-          border-bottom: 1px solid rgba(0,0,0,0.1)
-        .email-area-footer
+          overflow: hidden
+          .title
+            float: left
+            width: 10%
+          .recipients
+            float: left
+            width: 90%
+          .sender
+            float: left
+            width: 90%
+        .subject
+          height: auto
+          border-bottom: 1px solid rgba(0,0,0,.1)
+          overflow: hidden
+          padding: 0 0
+          #message-subject
+            float: left
+            border: none
+            width: 80%
+            height: auto
+            margin: 0 0 
+            padding-left: 0
+            &:focus 
+              outline: none
+          .title
+            float: left
+            width: 10%
+            margin: 10px 0 10px 10px
+        .email-footer
           padding: 10px 10px
           border-top: 1px solid rgba(0,0,0,0.1)
-          background: rgba(0,0,0,0.02)
+          background: rgba(0,0,0,.05)
           overflow: hidden
           .btn
             float: right
-
+            margin-top: -15px
       .comment-area
         background: #ffffff
         border-radius:  0 0 5px 5px
-        border-top: 1px solid rgba(0,0,0,0.1)
         margin-top: 0
         #comment-body
           width: 100%
           height: 150px
           padding: 5px 15px
+          border: none
+          margin: none
         .comment-area-footer
           padding: 10px 10px
           border-top: 1px solid rgba(0,0,0,0.1)
-          background: rgba(0,0,0,0.02)
+          background: rgba(0,0,0,0.05)
           overflow: hidden
           .btn
             float: right
 
-
-    
     .applicant-details
-      .profile-container
       .messages-container
         display: none
       .notes-container
@@ -165,20 +209,18 @@
         border-bottom: 1px solid rgba(0, 0, 0, 0.1)
         .user-image 
           img
-            width: 100px 
-            height: 100px
+            width: 125px 
+            height: 125px
             border-radius: 50%
             border: 1px solid #fff
             margin-left: auto
             margin-right: auto
             display: block
-            padding-bottom: 10px
         .applicant-details
           vertical-align: top
           text-align: center
           .name 
             font-size: 24px
-          .title
       .current-stage
         overflow: hidden
         width: 100%
@@ -200,8 +242,6 @@
         .tags
           overflow: hidden
           margin-top: 10px
-          .title
-
           .tag
             float: left
             border-radius: 5px

@@ -1,0 +1,21 @@
+.sections
+  %ul{:id => 'sections'}
+    - sections.in_groups_of(2).each do |section_group| 
+      .row 
+        - section_group.each do |section|
+          %li
+            .section{:id => "section_#{section.id}"}
+              .section-header
+                %h4= section.body
+                .icons
+                  = link_to edit_business_job_scorecard_scorecard_section_path(@job.id, @scorecard.id, section.id), :data => {:remote => true} do
+                    %i.glyphicon.glyphicon-pencil
+                  = link_to business_job_scorecard_scorecard_section_path(@job.id, @scorecard.id, section.id), remote: true, :method => :delete do
+                    %i.glyphicon.glyphicon-remove
+              .section-body
+                %ul 
+                  - section.section_options.each do |option| 
+                    %li
+                      = option.body
+
+                

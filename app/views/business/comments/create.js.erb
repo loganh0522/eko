@@ -1,3 +1,7 @@
-$('.applicant-notes').html('<%= j render "business/comments/applicant_notes" %>');
-$('.activity-feed').html('<%= j render "business/activities/application_activity" %>');
-$('#comment_body').val('');
+$('.applicant-notes').html('<%= j render "business/comments/applicant_notes", application: @application %>');
+$('.activity-feed').html('<%= j render "business/activities/application_activity", application: @application %>');
+$('#comment-body').val('');
+
+
+
+

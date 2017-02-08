@@ -1,7 +1,7 @@
 .header
   %h4 Education    
 .applicant-positions
-  - @education.each do |degree| 
+  - @application.applicant.educations.each do |degree| 
     .job-position
       .experience-header 
         .company= degree.school 

@@ -1,5 +1,5 @@
 .assessment
-  - if @questionairre.nil?
+  - if @application.apps.questionairre.nil?
     .not-present-container
       %p You currently do not have a Questionnaire for this position. 
       
@@ -12,7 +12,7 @@
         #collapseOne.panel-collapse.collapse.in{"role"=>"tabpanel", "aria-labelledby"=>"headingOne"}
           .panel-body         
             .application-form
-              - @questionairre.questions.each do |question|
+              - @application.apps.questionairre.questions.each do |question|
                 .question-area
                   .question
                     = question.position

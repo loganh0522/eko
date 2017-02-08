@@ -4,30 +4,30 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
         %h4.modal-title Send Message        
-      .modal-body
-        .email-area
-          .to 
-            .title To:  
-            .recipients
-          .to
-            .title From: 
-            .sender= "#{current_user.full_name} (#{current_user.email})"
-          = form_tag send_multiple_messages_business_applications_path do 
+      = form_tag send_multiple_messages_business_applications_path do 
+        .modal-body
+          .email-area
+            .to 
+              .title To:  
+              .recipients
+            .to
+              .title From: 
+              .sender= "#{current_user.full_name} (#{current_user.email})"       
             .subject
               .title Subject
               .sender= text_field_tag :subject, nil, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false
             .email-variables
               Insert:
               = select_tag "insert-fluid-variable", options_for_select([ "Applicant First Name", "Applicant Last Name", "Applicant Full Name", "Job Title", "Company Name" ] ), :include_blank => true
-            
+          
             %fieldset
             = text_area_tag :body, "Type Your Message", :class => "tinymce", id: "message-body", rows: 12, cols: 12, placeholder: "Type your Message"
             = tinymce_assets        
             = tinymce :alternate
             = hidden_field_tag :applicant_ids
-      .modal-footer
-        %input(type="submit" value="Send Message" class="btn submit-button")
-        %input(type="submit" value="Cancel" class="btn border-button2")
+        .modal-footer
+          = submit_tag "Send E-mail", class: "btn submit-button"
+          %input(type="submit" value="Cancel" class="btn border-button2")
         
         
 

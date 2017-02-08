@@ -8,6 +8,7 @@ class Job < ActiveRecord::Base
   has_many :users, through: :hiring_teams
   has_many :stages, -> {order(:position)}
   has_many :interviews
+  has_many :activities, -> {order("created_at DESC")}
 
 
   has_many :job_industries
@@ -21,8 +22,4 @@ class Job < ActiveRecord::Base
   
   validates_presence_of :title, :description, :location, :address, :industry_ids, :function_ids, 
   :education_level, :kind, :career_level
-
-
-  
-
 end

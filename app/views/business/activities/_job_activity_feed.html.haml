@@ -1,7 +1,7 @@
 #job-activity-container
   .main-container
     .activity-feed
-      - @activities.each do |activity|         
+      - @job.activities.each do |activity|         
         = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity
   .side-container
     .activity-filters

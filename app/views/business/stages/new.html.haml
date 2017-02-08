@@ -1,38 +1,33 @@
-.contain
-  .sidebar
+.page-header
+  %h1 Create a Job
+#post-a-job
+  .side-container
     = render 'business/shared/post_job' 
-
   .main-container
-    .stage-page
-      .header    
-        %h1 Recruitment Process
-      
-      .body
-        = render "form" 
-        .stages.col-md-12    
-          
-          %div{:class => "stages"}
-            .panel-heading
-              .row
-                .stage All Applicants
-            .panel-body
-            
-            = render "create_stages", stages: @stages
-          
-          %div{:class => "stages"}
-            .panel-heading
-              .row
-                .stage Rejected
-            .panel-body
-        
-
-      .modal
-        .modal-dialog
-          .modal-content
-            .modal-header
-              %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-              %h3.modal-title Edit Stage 
-            .modal-body
+    .stage-header
+      %h4 Add Stages
+      = render "form"  
+    .create_stages    
+      %ul
+        %li
+          .stage 
+            .stage-header
+              All Applicants
+            .stage-body     
+      = render "create_stages", stages: @stages
+      %ul
+        %li 
+          .stage 
+            .stage-header
+              Rejected
+            .stage-body
+  .modal
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+          %h3.modal-title Edit Stage 
+        .modal-body
                 
 
 

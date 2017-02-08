@@ -87,14 +87,13 @@ Rails.application.routes.draw do
         post :update_multiple, to: "stages#update_multiple"
         post :add_note_multiple, to: "comments#add_note_multiple"
         post :send_multiple_messages, to: "messages#send_multiple_messages"
+        post :change_stage, to: "applications#change_stage"
       end
     end
 
     get 'job_hiring_team', to: "hiring_teams#job_hiring_team"
-
     get "business/applications/filter", to: "applications#filter_applicants"
     get "business/mention_user", to: "applications#mention_user"
-    
     get "plan", to: "customers#plan"
 
 
@@ -119,24 +118,27 @@ Rails.application.routes.draw do
         resources :comments
         resources :application_scorecards
         resources :assessments
-        resources :tags
-        
+        resources :tags       
         resources :scorecards do 
           collection do 
             post :my_scorecard
           end
         end  
-
         get :move_stages 
         get :reject   
       end
       
-      resources :hiring_teams do
-        
+      resources :hiring_teams do    
       end
 
-      resources :questionairres
-      resources :scorecards
+      resources :questionairres do 
+        resources :questions
+      end
+
+      resources :scorecards do
+        resources :scorecard_sections
+      end
+      
       resources :stages do 
         collection do
           post :sort, to: "stages#sort"
@@ -150,11 +152,8 @@ Rails.application.routes.draw do
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
-  get '/signout', to: 'sessions#destroy'
-  
+  get '/signout', to: 'sessions#destroy'  
   get 'register/:token', to: 'users#new_with_invitation_token', as: 'register_with_token'
-  
-
   get 'forgot_password', to: 'forgot_passwords#new'
   resources :forgot_passwords, only: [:create]
   get 'forgot_password_confirmation', to: 'forgot_passwords#confirm'

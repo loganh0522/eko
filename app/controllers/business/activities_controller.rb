@@ -10,15 +10,4 @@ class Business::ActivitiesController < ApplicationController
     @jobs = current_company.jobs.where(status: "open")
   end
 
-  def application_activity 
-    @job = Job.find(params[:job_id])
-    @application = Application.find(params[:application_id])
-    @comment = Comment.new
-    @user = @application.applicant
-    @positions = @user.work_experiences
-    @comments = @application.comments
-    @stage = @application.stage
-    @avatar = @user.user_avatar   
-    @activities = current_company.activities.where(application_id: @application.id).order('created_at DESC')
-  end
 end

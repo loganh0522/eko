@@ -4,9 +4,10 @@
       - if user.user_avatar.present? 
         = image_tag user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
       - else
-        .circle-img= user.first_name.first.capitalize
+        .circle-img
+          %img(src="/tmp/little-man.png") 
     %td
-      %p.name= "#{user.first_name} #{user.last_name}"
+      %p.name= "#{user.first_name.capitalize} #{user.last_name.capitalize}"
       %p.email= user.email
     %td
       %p.permissions Hiring Manager

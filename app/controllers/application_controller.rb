@@ -83,7 +83,7 @@ class ApplicationController < ActionController::Base
     elsif (params[:applicant_ids]).present?
       applicant_ids = params[:applicant_ids].split(',')
       applicant_ids.each do |id| 
-        current_user.activities.create! action: action, trackable: trackable, application_id: id, company: current_company, job_id: params[:job_id]
+        current_user.activities.create! action: action, trackable: trackable, application_id: id, company: current_company, job_id: @job.id
       end
     else
       current_user.activities.create! action: action, trackable: trackable, company: current_company

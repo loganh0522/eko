@@ -8,7 +8,7 @@
           .number 
             = @job.applications.count
           .name All Applicants
-        - @stages.each do |stage| 
+        - @job.stages.each do |stage| 
           %li.job_list_stage{:id => "#{stage.name}"}
             .number= stage.applicants.count
             .name= stage.name  
@@ -43,11 +43,11 @@
               %th(width="25%") Rating
 
             %tbody
-              - @applicants.each do |application|
-                - if application.stage.present?
-                  - stage = application.stage.name
-                - elsif application.rejected == true
+              - @job.applications.each do |application|
+                - if application.rejected == true
                   - stage = "Rejected"
+                - elsif application.stage.present?
+                  - stage = application.stage.name
                 - elsif 
                   - stage = "Applied"
 
@@ -56,11 +56,12 @@
                     .applicant-checkbox{:data => {:id => application.id}}
                       = check_box_tag "applicant_ids[]", application.id
                   %td
-                    .circle
-                      - if application.applicant.user_avatar.present? 
+                    - if application.applicant.user_avatar.present? 
+                      .circle
                         = image_tag application.applicant.user_avatar.image.small_image, :size => "50x50" 
-                      - else
-                        .circle-img= application.applicant.first_name.first.capitalize
+                    - else
+                      .circle-img
+                        %img(src="/tmp/little-man.png") 
                   %td.names
                     .name{:data => {:id =>  "#{application.applicant.first_name} #{application.applicant.last_name}"}}
                       = link_to "#{application.applicant.first_name} #{application.applicant.last_name}", business_job_application_path(@job, application.id)

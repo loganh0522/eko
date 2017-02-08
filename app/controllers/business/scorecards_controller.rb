@@ -10,6 +10,7 @@ class Business::ScorecardsController < ApplicationController
     @job = Job.find(params[:job_id])
     @questionairre = @job.questionairre
     @scorecard = Scorecard.where(job_id: @job.id).first
+    @sections = @scorecard.scorecard_sections 
   end
 
   def new 
@@ -33,7 +34,9 @@ class Business::ScorecardsController < ApplicationController
   def edit 
     @job = Job.find(params[:job_id])
     @questionairre = @job.questionairre
+    @new_scorecard_section = Scorecard.new
     @scorecard = Scorecard.where(job_id: @job.id).first
+    @sections = @scorecard.scorecard_sections
   end
 
   def update

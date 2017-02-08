@@ -60,37 +60,28 @@ class Business::ApplicationsController < ApplicationController
 
   def show 
     @application = Application.find(params[:id])
-    @user = @application.applicant
-    @avatar = @user.user_avatar
     @job = Job.find(params[:job_id])
-    @stage = @application.stage
-
-    @tags = @application.tags
-
-    @positions = @user.work_experiences
-    @education = @user.educations
-
     @message = Message.new
-    @messages = @application.messages
-
     @comment = Comment.new 
-    @comments = @application.comments
-
-    @questionairre = @job.questionairre
-
-    @application_scorecard = ApplicationScorecard.new
-    @scorecard = Scorecard.where(job_id: params[:job_id]).first
-
-    @application_scorecard_present = ApplicationScorecard.where(application_id: @application.id)
-
-    scorecard_graphs
-
-    @activities = current_company.activities.where(application_id: @application.id).order('created_at DESC')
-    
-    @hiring_team = @job.users 
-
     @interview = Interview.new
-    @interviews = Interview.where(application: @application)
+    @application_scorecard = ApplicationScorecard.new
+    @hiring_team = @job.users 
+    # @questionairre = @job.questionairre
+    # @user = @application.applicant
+    # @stage = @application.stage
+    # @tags = @application.tags
+    # @messages = @application.messages
+    # @comments = @application.comments
+    # @activities = current_company.activities.where(application_id: @application.id).order('created_at DESC')
+    # @avatar = @user.user_avatar
+    # @positions = @user.work_experiences
+    # @education = @user.educations
+    # @interviews = Interview.where(application: @application)
+    
+    @scorecard = Scorecard.where(job_id: params[:job_id]).first
+    @application_scorecard_present = ApplicationScorecard.where(application_id: @application.id)
+    scorecard_graphs
+    
   end
 
   def applicant_search
@@ -105,29 +96,10 @@ class Business::ApplicationsController < ApplicationController
 
   end
 
-  def move_stages 
-    @app = Application.find(params[:application_id])
-    @current_stage = @app.stage
-    @job = Job.find(params[:job_id])
-   
-    if @current_stage == nil && @app.rejected != true
-      @next_stage = Stage.where(position: 1, job_id: params[:job_id]).first
-    elsif @current_stage.position != @job.stages.count && @app.rejected != true
-      @next_stage = Stage.where(position: @current_stage.position + 1, job_id: params[:job_id]).first
-    else 
-      @next_stage = @current_stage
-    end
-    
-    respond_to do |format|
-      if @app.update_attribute(:stage_id, @next_stage.id)
-        track_activity(@app, "move_stage")   
-        @job = Job.find(params[:job_id])
-        @application = Application.find(params[:application_id])
-        format.js
-      else
-        render :back
-      end
-    end
+  def change_stage 
+    @app = Application.find(params[:application])
+    @stage = Stage.find(params[:stage])
+    @app.update_attribute(:stage, @stage)
   end
   
   def reject

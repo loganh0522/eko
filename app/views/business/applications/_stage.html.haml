@@ -1,4 +1,6 @@
 %h4 Current Stage:
 .stage
-  .select-stage= select_tag "stages", options_for_select(["Applied"] + @job.stages.collect{ |u| [u.name, u.id] } + ["Rejected"])
+  .select-stage= select_tag "stages", options_for_select(["Applied"] + @job.stages.collect{ |u| [u.name, u.id, { 'data-id' => u.id, 'data-application' => @application.id }] } + ["Rejected"], @application.stage.present? ? @application.stage.id : 1 ), id: 'move-applicant-stages'
+
+
 

@@ -1,14 +1,14 @@
-.contain
-  .sidebar
+.page-header
+  %h1 Create a Job
+#post-a-job
+  .side-container
     = render 'business/shared/post_job'
-
   .main-container
     .header   
       %h1 Application Form
     .body
       .job_scorecard
         = form_for [:business, @job, @questionairre] do |f|
-
           = f.fields_for :questions, Question.new do |q| 
             = render "question_fields", f: q
 

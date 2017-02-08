@@ -1,7 +1,7 @@
 .header
   %h4 Experience   
 .applicant-positions
-  - @positions.each do |position|
+  - @application.applicant.work_experiences.each do |position|
     .job-position
       .experience-header 
         .company= position.company_name           

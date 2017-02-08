@@ -1,11 +1,17 @@
-.contain
-  .sidebar
+.page-header
+  %h1 Create a Job
+#post-a-job
+  .side-container
     = render 'business/shared/post_job'
-
   .main-container
-    .header   
-      %h1 Application Form
+    .stage-header   
+      %h4 Scorecard
+      = link_to "+ Add Section", new_business_job_scorecard_scorecard_section_path(@job.id, @scorecard.id), :data => {:remote => true}      
     .body
-      .not-present-container
-        %p There currently is no application form for this job. 
-        = link_to "Create Scorecard", new_business_job_scorecard_path(@job.id), class: "add-object"
+      .job_scorecard
+      - if @sections.present? 
+        = render 'business/scorecard_sections/sections', sections: @sections
+      - else    
+        .not-present-container
+          %p There currently are currently no questions for the application form. 
+          = link_to "+ Add Section", new_business_job_scorecard_scorecard_section_path(@job.id, @scorecard.id), :data => {:remote => true}      

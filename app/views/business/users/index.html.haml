@@ -1,30 +1,28 @@
-.contain
-  .sidebar
-    .nav
-      = render 'business/shared/admin_sidebar'
-
+.page-header
+  %h1 Add Team Members 
+#post-a-job
+  .side-container
+    = render 'business/shared/admin_sidebar'
   .main-container
-    .header
-      %h1 Team Members 
-    .body
-      .company-users
+    .stage-header
+      %h4 Team Members 
+      .stage-form
         = form_for [:business, @invitation], html: {class: 'invite'} do |f|    
-          = f.text_field :recipient_email, class: "form-control", placeholder: "Invite a colleague by Email"
+          = f.text_field :recipient_email, class: "form-control", placeholder: "Invite a colleague by Email", id: "stage_name"
           = f.submit "Invite User", class: "submit btn btn-primary"
-        
-      .user-list
-        %table.table
-          %tbody
-            - @users.each do |user|
-              %tr{:id => "user_#{user.id}" }
-                %td
-                  - if user.user_avatar.present? 
-                    = image_tag user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
-                  - else
-                    .circle-img= user.first_name.first.capitalize
-                %td
-                  %p.name= "#{user.first_name} #{user.last_name}"
-                %td
-                  %p.permissions Hiring Manager
-                %td
-                  %i.glyphicon.glyphicon-remove
+    .user-list
+      %table.table
+        %tbody
+          - @users.each do |user|
+            %tr{:id => "user_#{user.id}" }
+              %td
+                - if user.user_avatar.present? 
+                  = image_tag user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
+                - else
+                  .circle-img= user.first_name.first.capitalize
+              %td
+                %p.name= "#{user.first_name} #{user.last_name}"
+              %td
+                %p.permissions Hiring Manager
+              %td
+                %i.glyphicon.glyphicon-remove

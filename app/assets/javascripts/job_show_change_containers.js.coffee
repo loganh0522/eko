@@ -1,5 +1,4 @@
 jQuery -> 
-
   changeContainer = ($targetContainer) -> 
     $('.active-tab').hide()
     $('.active-tab').removeClass 'active-tab'

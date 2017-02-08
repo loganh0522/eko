@@ -5,9 +5,7 @@ class Business::NotificationsController < ApplicationController
   before_filter :company_deactivated?
 
   def index 
-    @notifications = current_user.notifications
-
-    
+    @notifications = current_user.notifications 
   end
 
   def create

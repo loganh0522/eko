@@ -29,8 +29,6 @@ class Business::JobsController < ApplicationController
 
   def show 
     @job = Job.find(params[:id])
-    @activities = current_company.activities.where(job_id: @job.id).order('created_at DESC')
-    @stages = @job.stages  
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     @interviews_by_date = @job.interviews.group_by(&:interview_date)
     
@@ -44,10 +42,8 @@ class Business::JobsController < ApplicationController
         end
       end 
       tags_present(@results)
-    else
-      @job = Job.find(params[:id])
-      @applicants = @job.applications   
-      tags_present(@applicants)  
+    else 
+      tags_present(@job.applications)  
     end
   end
 
@@ -181,6 +177,4 @@ class Business::JobsController < ApplicationController
       @job.country = location[1]
     end
   end
-
-
 end 

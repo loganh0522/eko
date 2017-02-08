@@ -1,0 +1,17 @@
+= form_for [:business, @job, @application, @message], html: {remote: true, class: 'invite'} do |f|
+  .to 
+    .title To:
+    .sender= "#{@application.applicant.full_name} (#{@application.applicant.email})" 
+  .to
+    .title From: 
+    .sender= "#{current_user.full_name} (#{current_user.email})"       
+  .subject
+    .title Subject
+    .sender= f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false
+  = f.text_area :body, :class => "tinymce", id: "message-body", rows: 12, cols: 12, placeholder: "Type your Message"
+  = hidden_field_tag :applicant_ids
+  .email-footer
+    %fieldset
+    = hidden_field_tag :user_id, current_user.id
+    %br
+    = f.submit "Send Message", class: "btn submit-button"

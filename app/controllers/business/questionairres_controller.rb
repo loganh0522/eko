@@ -10,6 +10,8 @@ class Business::QuestionairresController < ApplicationController
     @job = Job.find(params[:job_id])
     @questionairre = Questionairre.where(job_id: @job.id).first
     @scorecard = @job.scorecard
+    @question = Question.new
+    @questions = @questionairre.questions
   end
   
   def new
@@ -21,13 +23,6 @@ class Business::QuestionairresController < ApplicationController
   def create 
     @job = Job.find(params[:job_id])
     @questionairre = Questionairre.new(q_params)
-
-    if @questionairre.save 
-      flash[:success] = "Questionairre successfully created"
-      redirect_to edit_business_job_questionairre_path(@job.id, @questionairre.id)
-    else
-      render :new
-    end
   end
 
   def edit 
@@ -52,6 +47,6 @@ class Business::QuestionairresController < ApplicationController
   private
 
   def q_params 
-    params.require(:questionairre).permit(:job_id, questions_attributes: [:id, :body, :required, :kind, :_destroy, question_options_attributes: [:id, :body, :_destroy]])
+    params.require(:questionairre).permit(:job_id)
   end
 end

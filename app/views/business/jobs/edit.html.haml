@@ -1,10 +1,8 @@
-.contain
-  .sidebar
+.page-header
+  %h1 Create a Job
+#post-a-job
+  .side-container
     = render 'business/shared/post_job'
- 
   .main-container
-    .header
-      = render '/shared/errors', type: @job
-      %h1 Job Details
-    .body
-      = render 'form'
+    = render '/shared/errors', type: @job
+    = render 'form'

@@ -2,18 +2,22 @@
   .applicant-header
     .user-image
       .profile_picture
-        - if @avatar.present?
-          = image_tag @avatar.image.large_image, :size => "200x200" 
+        - if @application.applicant.user_avatar.present?
+          = image_tag @application.applicant.user_avatar.image.large_image 
         - else 
           %img(src="/tmp/blank_profile_picture.png")
     
     .applicant-details
-      .name= "#{@user.first_name.capitalize } #{@user.last_name.capitalize}"
-      .job= "#{@user.current_jobs.first.title} @ #{@user.current_jobs.first.company_name} "
-      .location= "#{@user.city}"
+      .name= "#{@application.applicant.first_name.capitalize } #{@application.applicant.last_name.capitalize}"
+      .job= "#{@application.applicant.current_jobs.first.title}  #{@application.applicant.current_jobs.first.company_name} "
+      .location= "#{@application.applicant.city}"
 
   .current-stage
     = render 'business/applications/stage'
+  .applicant-contact-info
+    = "Email: #{@application.applicant.email}"
+    = "Phone: #{@application.applicant.phone}"
+
   
   .applicant-tags
     %h4 Tags
@@ -28,7 +32,7 @@
 
     .scheduled-interviews
       .interview
-        - @interviews.each do |interview| 
+        - @application.interviews.each do |interview| 
           = interview.kind
           = interview.interview_date
           = "#{interview.start_time} - #{interview.end_time}"

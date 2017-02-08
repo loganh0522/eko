@@ -71,20 +71,20 @@ class Business::StagesController < ApplicationController
   end
 
   def update_multiple
-    @job = Job.find(params[:job_id])
-    
     applicant_ids = params[:applicant_ids].split(',')
-
+    
     applicant_ids.each do |id| 
-      @application = Application.where(user_id: id, job_id: params[:job_id]).first
-
+      @application = Application.find(id)
+      @job = @application.apps
+      
       if params[:stages] == "Rejected"
         @application.update_attribute(:rejected, true)
       else
-        @application.update_attribute(:stage_id, params[:stages])
-        track_activity(@application, "move_stage")
+        @application.update_attribute(:stage_id, params[:stages])  
       end
     end
+    
+    track_activity(@application, "move_stage")
     redirect_to business_job_path(@job)
   end
 

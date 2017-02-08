@@ -1,17 +1,200 @@
 #post-a-job
   margin: 0px 3% 100px 3%
   .main-container
-    float: right
-    background: #ffffff
-    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-    padding: 10px 10px
-  .side-container
     float: left
+    background: #ffffff
+    border-radius: 5px
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    padding: 10px 50px
+    z-index: 0
+    position: relative
+    min-height: 600px
+
+  .side-container
+    position: relative
+    float: left
+    margin: 0 0 0 0 
+    z-index: 1
     ul 
+      padding: 0 0 
       li
         list-style: none
-        font-size: 24px 
-        margin-bottom: 15px
+        font-size: 16px 
+        font-weight: 300
+        padding: 20px 15px 20px 15px
+        height: 65px
+        color: black
+      a
+        text-decoration: none
+        color: rgba(0,0,0,0.7)
 
-        li.active
+      li.active
+        background: #ffffff
+        box-shadow: -1.7px 1px 4px 0px rgba(199,197,199,1)
+        border-radius: 5px 0 0 5px
+        width: 100%
+        z-index: 10
+
+  .stage-header
+    margin-bottom: 25px
+    overflow: hidden
+    width: 100%
+    h4
+      float: left
+      margin-top: 5px
+
+    a
+      float: right
+      margin-top: 5px
+
+    .stage-form
+      float: right
+      width: auto
+      overflow: hidden
+      #stage_name 
+        width: 300px
+        float: left
+        margin: 0 0
+      #team_members
+        width: 300px
+        float: left
+        margin: 0 0 
+      .submit
+        float: left
+        border-radius: 5px
+        width: 150px
+        margin-left: 10px
+  .invitation
+    float: right
+    margin-top: -10px
+    margin-bottom: 15px
+      
+
+  .create_stages
+    margin-top: 25px
+    ul
+      width: 100%
+      padding: 0 0
+      li
+        list-style: none
+        box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+        border-radius: 5px
+        float: left
+        width: 100%
+        margin-bottom: 15px
+        color: rgba(0,0,0, .7)
+        .stage   
+          .stage-header
+            background-color: rgba(0, 0, 0, 0.05) 
+            padding: 10px 10px 
+            border-bottom: 1px solid rgba(0,0,0,.1)
+            .glyphicon.glyphicon-move
+              float: left
+              margin-right: 15px
+              margin-top: 2px
+              color: rgba(0,0,0, .3)
+            .body
+              float: left
+            .icons
+              float: right
+              margin-right: 10px
+              margin-top: -4px
+              i  
+                color: rgba(0,0,0, .3)
+                margin-left: 5px
+          &:hover
+            cursor: move
+        .stage-body
+          height: 100px
+
+        .tasks
           
+        .actions
+          float: rights
+
+          a:first-of-type
+            margin-right: 10px
+  
+  .questions
+    margin-top: 25px
+    ul
+      width: 100%
+      padding: 0 0
+      li
+        list-style: none
+        box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+        border-radius: 5px
+        float: left
+        width: 100%
+        margin-bottom: 15px
+        color: rgba(0,0,0, .7)
+      .question 
+        background-color: rgba(0, 0, 0, 0.03) 
+        padding: 15px 15px 
+        overflow: hidden
+        .glyphicon.glyphicon-move
+          float: left
+          margin-right: 20px
+          color: rgba(0,0,0, .3)
+        .body
+          float: left
+          margin-top: -2px
+        .icons
+          float: right
+          margin-right: 10px
+          text-decoration: none
+          i  
+            color: rgba(0,0,0, .3)
+            margin-left: 5px
+        &:hover
+          cursor: move
+
+  .sections
+    ul
+      width: 100%
+      padding: 0 0
+      li
+        list-style: none
+        color: rgba(0,0,0, .7)
+    .row
+      margin-bottom: 15px
+    .section 
+      width: 45%
+      border-radius: 5px
+      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+      float: left
+      margin-right: 2.5%
+      .section-header
+        background-color: rgba(0, 0, 0, 0.1) 
+        padding: 5px 15px
+        overflow: hidden
+        h4 
+          float: left
+        .icons
+          float: right
+          margin-top: 10px
+          text-decoration: none
+          i  
+            color: rgba(0,0,0, .3)
+            margin-left: 5px
+      .section-body
+        padding: 15px 15px
+        ul
+          width: 100%
+          padding: 0 0
+          li
+            list-style: none
+            margin-bottom: 15px
+            color: rgba(0,0,0, .7)
+
+
+
+
+        
+
+
+
+
+
+
+
