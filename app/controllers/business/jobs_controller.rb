@@ -6,6 +6,7 @@ class Business::JobsController < ApplicationController
   
   def index
     @jobs = current_company.jobs
+
   end
 
   def new
@@ -169,12 +170,12 @@ class Business::JobsController < ApplicationController
   def convert_location
     location = params[:job][:location].split(',')
     if location.count == 3
-      @job.city = location[0]
-      @job.province = location[1]
-      @job.country = location[2]
+      @job.update_column(:city, location[0])
+      @job.update_column(:province, location[1])
+      @job.update_column(:country, location[2])
     else
-      @job.city = location[0]
-      @job.country = location[1]
+      @job.update_column(:city, location[0])
+      @job.update_column(:country, location[1])
     end
   end
 end 
