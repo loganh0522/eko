@@ -14,8 +14,6 @@ Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
     = render 'business/shared/admin_sidebar'
   .main-container
     .billing
-      .header
-        %h1 Subscription
       .body
         .billing
           - if current_company.customer == nil 

@@ -14,14 +14,14 @@
               = "#{job.location}"
               
               %img(src="/tmp/black-small-bar-chart.png") 
-              = job.job_career_level.first.career_level.name
+              = job.career_level
 
             .right-side 
               %img(src="/tmp/black-small-hammer.png") 
               = job.job_industries.first.industry.name
 
               %img(src="/tmp/black-small-briefcase.png") 
-              = job.job_kind.first.name
+              = job.kind
 
               %img(src="/tmp/black-small-clock.png") 
               = "#{time_ago_in_words(job.created_at)} ago"

@@ -7,7 +7,6 @@ jQuery ->
 
     return
 
-
   $('.job-applicants-nav').on 'click', 'li', (event) -> 
     if $(this).attr('class') == 'applicants-tab'
       $targetContainer = '#job-applicants'
@@ -15,8 +14,6 @@ jQuery ->
       $targetContainer = '#job-activity-container'
     else if $(this).attr('class') == 'calendar-tab'
       $targetContainer = '#calendar-container'
-
-
     $('.job-applicants-nav').find('.activated').css border: ''
     $('.job-applicants-nav').find('.activated').removeClass 'activated'
     

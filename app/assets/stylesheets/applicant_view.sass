@@ -192,98 +192,102 @@
                   li
                     width: 450px
         
-  .applicant-side-container
+  .side-container
     float: left
-    width: 30%
+    background: #ffffff
     height: auto
+    padding: 10px 10px
+    border-radius: 5px
     margin: 15px 2% 0px 3%
-    .bar
-      padding: 10px 10px
-      border-radius: 5px
-      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-      background: white
-      margin-bottom: 10px
-      .applicant-header
-        height: auto
-        padding-bottom: 20px
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-        .user-image 
-          img
-            width: 125px 
-            height: 125px
-            border-radius: 50%
-            border: 1px solid #fff
-            margin-left: auto
-            margin-right: auto
-            display: block
-        .applicant-details
-          vertical-align: top
-          text-align: center
-          .name 
-            font-size: 24px
-      .current-stage
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    width: 30%
+    .applicant-header
+      height: auto
+      padding-bottom: 20px
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+      .user-image 
+        img
+          width: 125px 
+          height: 125px
+          border-radius: 50%
+          border: 1px solid #fff
+          margin-left: auto
+          margin-right: auto
+          display: block
+      .applicant-details
+        vertical-align: top
+        text-align: center
+        .name 
+          font-size: 24px
+    .filter
+      border-bottom: 1px solid rgba(0,0,0,0.1)
+      padding: 10px 0
+      .filter-header 
         overflow: hidden
-        width: 100%
-        padding: 10px 0 20px 0
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-        .title
-          font-size: 16px
+        h4
+          float: left
+        .glyphicon
+          margin-top: 10px
+          float: right
+        .glyphicon-minus
+          display: none
+      .filter-body
+        display: none
+        ul
+          list-style: none
+          padding: 0 15px
+          li
+            text-decoration: none
         .stage      
           select
             width: 100%
             height: 30px
             background: #ffffff
             font-size: 16px
-      .applicant-tags
-        overflow: hidden
-        width: 100%
-        padding: 10px 0 20px 0
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-        .tags
+        .applicant-tags
           overflow: hidden
-          margin-top: 10px
-          .tag
-            float: left
-            border-radius: 5px
-            border: 1px solid #EF7B2B
-            color: rgba(0,0,0,.7)
-            width: auto
-            margin: 2px 5px 0 0 
-            text-align: center
-            padding: 3px 5px 3px 8px
+          width: 100%
+          padding: 10px 0 20px 0
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+          .tags
             overflow: hidden
-            .name
-              float: left
-            .delete-tag
-              float: left
-              margin-left: 5px
-              color: rgba(0,0,0,.7)
-
-              &:hover
-                cursor: pointer       
-        .add_tag
-          margin-top: 15px
-        .add_tag
-          margin-top: 10px        
-          .tag_form
             margin-top: 10px
-            input
-              margin-top: 0
+            .tag
               float: left
-            
-            .close-form
-              float: left
-              margin: 5px 0 0 10px
-              &:hover
-                cursor: pointer
-      .schedule-interview
-        overflow: hidden
-        width: 100%
-        padding: 10px 0 20px 0
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-        .title
-          font-size: 18px
-      
+              border-radius: 5px
+              border: 1px solid #EF7B2B
+              color: rgba(0,0,0,.7)
+              width: auto
+              margin: 2px 5px 0 0 
+              text-align: center
+              padding: 3px 5px 3px 8px
+              overflow: hidden
+              .name
+                float: left
+              .delete-tag
+                float: left
+                margin-left: 5px
+                color: rgba(0,0,0,.7)
+                &:hover
+                  cursor: pointer       
+          .add_tag
+            margin-top: 15px
+          .add_tag
+            margin-top: 10px        
+            .tag_form
+              margin-top: 10px
+              input
+                margin-top: 0
+                float: left    
+              .close-form
+                float: left
+                margin: 5px 0 0 10px
+                &:hover
+                  cursor: pointer
+        .schedule-interview
+          .title
+            font-size: 18px
+          
 .footer 
   clear: both
   height: 150px

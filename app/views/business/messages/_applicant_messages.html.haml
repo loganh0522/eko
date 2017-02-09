@@ -12,7 +12,7 @@
           %p.sent= time_ago_in_words(message.created_at) unless message.created_at.blank?
           
         .body
-          %p= simple_format(message.body)
+          %p= simple_format(Liquid::Template.parse(message.body).render('recipient' => @application.applicant, 'company' => @current_company), 'job' => @application.apps)
 - else
   .not-present-container
     %p There are currently no notes for this applicant.

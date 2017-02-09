@@ -1,46 +1,59 @@
-.bar 
-  .applicant-header
-    .user-image
-      .profile_picture
-        - if @application.applicant.user_avatar.present?
-          = image_tag @application.applicant.user_avatar.image.large_image 
-        - else 
-          %img(src="/tmp/blank_profile_picture.png")
-    
-    .applicant-details
-      .name= "#{@application.applicant.first_name.capitalize } #{@application.applicant.last_name.capitalize}"
-      .job= "#{@application.applicant.current_jobs.first.title}  #{@application.applicant.current_jobs.first.company_name} "
-      .location= "#{@application.applicant.city}"
 
-  .current-stage
-    = render 'business/applications/stage'
-  .applicant-contact-info
+.applicant-header
+  .user-image
+    .profile_picture
+      - if @application.applicant.user_avatar.present?
+        = image_tag @application.applicant.user_avatar.image.large_image 
+      - else 
+        %img(src="/tmp/blank_profile_picture.png")
+  
+  .applicant-details
+    .name= "#{@application.applicant.first_name.capitalize } #{@application.applicant.last_name.capitalize}"
+    .job= "#{@application.applicant.current_jobs.first.title}  #{@application.applicant.current_jobs.first.company_name} "
+    .location= "#{@application.applicant.city}"
+
+.filter
+  .filter-header
+    %h4 Contact Details
+    .glyphicon.glyphicon-minus
+    .glyphicon.glyphicon-plus
+  .filter-body
     = "Email: #{@application.applicant.email}"
     = "Phone: #{@application.applicant.phone}"
 
-  
-  .applicant-tags
+.filter
+  .filter-header
+    %h4 Current Stage
+    .glyphicon.glyphicon-minus
+    .glyphicon.glyphicon-plus
+  .filter-body
+    = render 'business/applications/stage'
+
+.filter
+  .filter-header
     %h4 Tags
-    .tags
-      = render "business/tags/tags"
-    .add_tag
-      = link_to "+ Add Tag", new_business_job_application_tag_path(@job.id, @application.id), :data => {remote: true}, id: 'add_tag'
+    .glyphicon.glyphicon-minus
+    .glyphicon.glyphicon-plus
+  .filter-body 
+    .applicant-tags
+      .tags
+        = render "business/tags/tags"
+      .add_tag
+        = link_to "+ Add Tag", new_business_job_application_tag_path(@job.id, @application.id), :data => {remote: true}, id: 'add_tag'
 
-  .schedule-interview
-    %h4 Scheduled Interviews
-    = render 'business/interviews/form'
-
-    .scheduled-interviews
-      .interview
-        - @application.interviews.each do |interview| 
-          = interview.kind
-          = interview.interview_date
-          = "#{interview.start_time} - #{interview.end_time}"
-          = link_to 'View', business_interview_path(interview.id), :data => {:remote => true}
-          %br
-
-    = link_to 'Schedule Interview', '#', :data => {:toggle => "modal", :target => "#interview-modal"}
-
+.filter
+  .filter-header
+    %h4 Interviews
+    .glyphicon.glyphicon-minus
+    .glyphicon.glyphicon-plus
+  .filter-body
+    .interview
+      - @application.interviews.each do |interview| 
+        = interview.kind
+        = interview.interview_date
+        = "#{interview.start_time} - #{interview.end_time}"
+        = link_to 'View', business_interview_path(interview.id), :data => {:remote => true}
+        %br
   
 
 

@@ -20,7 +20,7 @@
             = hidden_field_tag :applicant_ids
         .modal-footer
           = submit_tag "Move Stages", class: "btn submit-button"
-          %input(type="submit" value="Cancel" class="btn border-button2")
+          .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
           
 
      

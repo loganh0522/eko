@@ -1,5 +1,4 @@
 jQuery -> 
-
   $('.applicant-profile-information').find('.user-comment').on 'keypress', (e)-> 
     console.log("pressed")
     if e.keyCode == 64

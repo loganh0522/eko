@@ -26,11 +26,16 @@
         = render "business/comments/add_comment"
         = render "business/messages/send_message"
         #select_all
-          = check_box_tag 'Select All'
+          = check_box_tag 'Select All', class: 'select_all_applicants'
           Select All
-        = link_to 'Move Stages', '#', class: "btn border-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#stageModal"}
-        = link_to 'Add Note', '#', class: "btn border-button", id: "add-note-multiple", :data => {:toggle => "modal", :target => "#add_commentModal"}
-        = link_to 'Send E-mail', '#', class: "btn border-button", id: "send-email", :data => {:toggle => "modal", :target => "#send_messageModal"}
+        .no-action-buttons
+          .btn.border-button Move Stages
+          .btn.border-button Add Note
+          .btn.border-button Send E-mail
+        .applicant-action-buttons
+          = link_to 'Move Stages', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#stageModal"}
+          = link_to 'Add Note', '#', class: "btn active-application-button", id: "add-note-multiple", :data => {:toggle => "modal", :target => "#add_commentModal"}
+          = link_to 'Send E-mail', '#', class: "btn active-application-button", id: "send-email", :data => {:toggle => "modal", :target => "#send_messageModal"}
       .applicant-table-body
         %table.table
           %thead
@@ -86,11 +91,18 @@
           .form-group
             = search_field_tag :query, params[:query], placeholder: "Advanced Text Search", class: "form-control"
     .filter
-      %h4 Location
-      #geocomplete= text_field_tag :city, "", id: "geocomplete", placeholder: "Enter a City"
+      .filter-header
+        %h4 Location
+        .glyphicon.glyphicon-minus
+        .glyphicon.glyphicon-plus
+      .filter-body
+        #geocomplete= text_field_tag :city, "", id: "geocomplete", placeholder: "Enter a City"
     .filter
-      %h4 Tags: 
-      #tags
+      .filter-header
+        %h4 Tags
+        .glyphicon.glyphicon-minus
+        .glyphicon.glyphicon-plus
+      .filter-body 
         %ul
           - @tags.each do |tag| 
             %li

@@ -4,7 +4,6 @@ class Business::ApplicationScorecardsController < ApplicationController
   before_filter :trial_over
   before_filter :company_deactivated?
 
-
   def index 
     @application_scorecard = ApplicationScorecard.new
     @job = Job.find(params[:job_id])

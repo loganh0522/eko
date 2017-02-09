@@ -82,17 +82,25 @@
     border-radius: 5px
     margin-top: 25px
     box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-    .header 
-      border-bottom: 1px solid rgba(0,0,0,0.1)
-      padding-bottom: 10px
     .filter
       border-bottom: 1px solid rgba(0,0,0,0.1)
       padding: 10px 0
-      ul
-        list-style: none
-        padding: 0 15px
-        li
-          text-decoration: none
+      .filter-header 
+        overflow: hidden
+        h4
+          float: left
+        .glyphicon
+          margin-top: 10px
+          float: right
+        .glyphicon-minus
+          display: none
+      .filter-body
+        display: none
+        ul
+          list-style: none
+          padding: 0 15px
+          li
+            text-decoration: none
   .main-container
     float: right
     padding: 0 0 
@@ -101,6 +109,8 @@
     margin: 25px 0 50px 0
     box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
     .applicants 
+      .not-present-container
+        display: none
       .header 
         margin: 15px 15px 10px 0
         overflow: hidden
@@ -110,8 +120,21 @@
           width: 100px
           height: auto
           margin-left: 10px
-          background: rgba(0,0,0,0.1)
+          background: rgba(0,0,0,0.05)
           color: rgba(0,0,0,0.7)
+          padding: 5px 0
+          border: none
+          border-radius: 5px
+          font-weight: 300
+        .applicant-action-buttons
+          display: none
+        .active-application-button
+          float: right
+          width: 100px
+          height: auto
+          margin-left: 10px
+          background: #EF7B2B
+          color: #ffffff
           padding: 5px 0
           border: none
           border-radius: 5px
@@ -120,7 +143,6 @@
           float: left
           width: 100px
           height: auto
-          background: rgba(0,0,0,0.1)
           color: rgba(0,0,0,0.7)
           padding: 5px 5px
           border-radius: 5px

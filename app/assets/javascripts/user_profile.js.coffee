@@ -72,8 +72,6 @@ jQuery ->
 
     return
 
-
-
   $(document).on('click', '#work_experience_current_position', ( ->
     console.log($('#work_experience_current_position').prop('checked'))
     if $('#work_experience_current_position').prop('checked') == true
@@ -89,10 +87,6 @@ jQuery ->
 
     return
   ));
-
-
-
-
   
   $('.user-profile-nav-subdomain').on 'click', 'li', (event) -> 
     if $(this).attr('class') == 'experience-tab'

@@ -15,4 +15,4 @@
             = hidden_field_tag :job_id      
         .modal-footer 
           = submit_tag "Add Note", class: "btn submit-button"
-          %input(type="" value="Cancel" class="btn border-button2")
+          .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

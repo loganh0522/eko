@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   # index_name ["talentwiz", Rails.env].join('_') 
 
   #Business User Relationships
-  liquid_methods :first_name, :last_name
+  liquid_methods :first_name, :last_name, :full_name
   
   belongs_to :company
 

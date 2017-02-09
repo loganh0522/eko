@@ -48,9 +48,6 @@ class Business::CustomersController < ApplicationController
       )
     if customer.successful?
       stripe_customer = JSON.parse customer.response.to_s
-
-
-
       current_company.customer.update( 
         last_four: stripe_customer['sources']['data'].first['last4'],
         exp_year: stripe_customer['sources']['data'].first['exp_year'],
