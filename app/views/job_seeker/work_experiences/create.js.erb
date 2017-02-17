@@ -2,8 +2,8 @@
 // $('#work_experiences').html('<%= j render "job_seeker/work_experiences/experience" %>');
 
 
-$('#new_work_experience').remove();
-$('.new_experience').show();
+$('#new_work_experience').parent().remove();
+$('#new_work_exp').show();
 $('#work_experiences').html('<%= j render "job_seeker/work_experiences/experience" %>');
 
 

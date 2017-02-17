@@ -1,6 +1,5 @@
 #job-activity-container
-  margin: 0px 3% 100px 3%
-  display: none
+  margin: -75px 3% 100px 3%
   .activity-feed
     margin-top: -30px
   .main-container
@@ -9,7 +8,12 @@
     width: 71%
   .side-container
     float: right
-
+    background: #ffffff
+    height: auto
+    padding: 0 10px
+    border-radius: 5px
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    
 #activity-container
   margin: 0px 3% 100px 3%
   .activity-feed
@@ -39,13 +43,14 @@
           margin-left: 15px
 
 .activity-feed
-  padding: 30px 0 15px 5%
+  margin-left: 3.6%
+  padding: 30px 3.6% 15px 5%
   border-left: 1px solid #EF7B2B
   width: 100%
   .activity
     display: block
     position: relative
-    margin-left: 27px    
+    margin-left: 3%    
     .glyphicon.glyphicon-share-alt
       font-size: 20px
     .glyphicon.glyphicon-pencil
@@ -59,33 +64,15 @@
     .icon
       height: 35px
       width: 35px
-      padding: 10px 12px
+      padding: 7px 8px
       color: #fff
       box-sizing: border-box
       display: block
       background: #EF7B2B
       position: absolute
-      left: -6em
+      left: -11.5%
       top: 25%
       border-radius: 50%
-    .circle
-      border-radius: 50%
-      margin-right: 10px
-      width: 40px 
-      height: 40px
-      float: left
-    .circle-img
-      float: left
-      margin-right: 10px
-      border-radius: 50%
-      width: 40px 
-      height: 40px
-      background: #EF7B2B
-      text-align: center
-      font-size: 18px
-      padding-top: 8px
-      color: white
-  
   .activity-body
     width: 100%
     background: white
@@ -98,23 +85,29 @@
     .activity-body-header    
       font-size: 14px
       overflow: hidden
-      .time 
-        float: right
+      .circle
+        border-radius: 50%
         margin-right: 10px
+        width: 40px 
+        height: 40px
+        float: left
+      .circle-img
+        float: left
+        margin-right: 15px
+        border-radius: 50%
+        width: 40px 
+        height: 40px
+        background: rgba(0,0,0,0.1)
+        text-align: center
+        font-size: 18px
+        padding-top: 8px
+        color: white
+      .content
+        float: left
+      .time 
         font-size: 12px
         color: rgba(0, 0, 0, 0.3)
-      span
-        font-weight: 600
     .activity-body-body
-      margin: 10px 0 0 0
+      margin: 10px 0 0 50px
       border-top: 1px solid rgba(0, 0, 0, 0.1)
-      padding: 10px 15px
-
-  .header 
-    height: 20px
-    h4
-      float: left
-      margin-top: 0px
-    .time 
-      float: right 
-  .body
+      padding: 10px 15px 15px 5px

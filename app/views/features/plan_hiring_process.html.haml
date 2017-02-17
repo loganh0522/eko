@@ -1,0 +1,46 @@
+#features-nav
+  %ul
+    = link_to "#" do 
+      %li Plan your Hiring Process
+    = link_to "#" do 
+      %li Source Candidates
+    = link_to "#" do 
+      %li Screen Candidates
+    = link_to "#" do 
+      %li Manage & Evaluate
+    = link_to "#" do 
+      %li Company Management
+
+#feature-section-right
+  .description
+    %h2 Create your Job Posting
+    %p Talentwiz allows you track all your applications online in a central location. Applications are organized by job, and can be easily moved from stage to stage until the end of the hiring process.
+  .image
+    %img(src="/tmp/homepage-dashboard2.png")
+
+#feature-section-left
+  .description
+    %h2 Customize Your Hiring Pipeline
+    %p Keeping track of candidates starts by building a recruitment pipeline. Add as many stages as you want to a job and arrange them in any order you see fit. Candidates are added to the "All Applicants" folder, and you can move them from stage to stage as they progress through the recruitment process. 
+  .image
+    %img(src="/tmp/application-form-screenshot.png")
+
+#feature-section-right
+  .description
+    %h2 Build a Hiring Team
+    %p Hiring is more effective when it is performed as a team. It often requires multiple perspectives to assess a potential candidate. Add as many people as you want to the hiring team for a job. If they are not a part of the system, you can simply invite them directly from the job, and they will be added to the job upon signing up.
+  .image
+    %img(src="/tmp/homepage-dashboard2.png")
+
+#feature-section-left
+  .description
+    %h2 Application Form 
+    %p Often a candidates profile does not provide enough information. Build a custom questionnaire for applicants to complete when they apply for a job. Applicant answers are stored on the candidate profile, and can be viewed by all members of the hiring team. Team members can leave comments and evaluate a candidates answers to a questionnaire.
+  .image
+    %img(src="/tmp/application-form-screenshot.png")
+
+.mid-container
+  %h1 Transform your hiring process today
+  = link_to "Try it Today", new_user_path, class: "btn btn-primary btn-large"
+
+= render 'shared/bottom_header'

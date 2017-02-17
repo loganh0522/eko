@@ -11,7 +11,7 @@ class Business::QuestionairresController < ApplicationController
     @questionairre = Questionairre.where(job_id: @job.id).first
     @scorecard = @job.scorecard
     @question = Question.new
-    @questions = @questionairre.questions
+    # @questions = @questionairre.questions
   end
   
   def new

@@ -1,8 +1,5 @@
 jQuery -> 
   $(document).ajaxComplete (event, xhr, settings) ->
-    
-  
-
     $('#certification_name').autocomplete(
       source: '/certifications'
       appendTo: $('#certification-results')

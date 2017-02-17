@@ -8,7 +8,7 @@ class Business::MessagesController < ApplicationController
     @job = Job.find(params[:job_id])
     @application = Application.find(params[:application_id])
     @user = @application.applicant
-    @message = Message.create(body: params[:message][:body], application_id: @application.id, user_id: current_user.id)
+    @message = Message.create(body: params[:message][:body], subject: params[:message][:subject], application_id: @application.id, user_id: current_user.id)
     @messages = @application.messages
     @recipient = @application.applicant
     @token = @application.token

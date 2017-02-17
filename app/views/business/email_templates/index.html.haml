@@ -1,0 +1,14 @@
+.page-header
+  %h1 Templates
+#post-a-job
+  .side-container
+    = render 'business/shared/admin_sidebar'
+  .main-container
+    .stage-header
+      %h2 Templates
+      %h4 E-mail Templates
+      = link_to "+ Add E-mail Template", new_business_email_template_path, :data => {:remote => true}  
+    = render "business/email_templates/email_templates", email_templates: @email_templates
+    = render "business/email_templates/email_form"
+
+

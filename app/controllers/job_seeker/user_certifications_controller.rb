@@ -1,4 +1,6 @@
 class JobSeeker::UserCertificationsController < JobSeekersController
+  before_filter :require_user
+  
   def new
     @user_certification = UserCertification.new
   end

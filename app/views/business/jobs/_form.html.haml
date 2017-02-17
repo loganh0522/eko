@@ -11,16 +11,17 @@
         = f.text_field :address, class: "form-control", id: "geocomplete2", label: "Address", placeholder: "Enter the Address"
     .row
       .form-group.col-md-4
-        = f.collection_select(:industry_ids, Industry.all, :id, :name, label: "Industry", :include_blank => true)
+
+        = f.collection_select(:industry_ids, Industry.all, :id, :name, label: "Industry", :include_blank => true, :selected => @job.new_record? ? nil : @job.industries.first.id )
       .form-group.col-md-4
         = f.collection_select(:function_ids, Function.all, :id, :name, label: "Job Function", :include_blank => true)
     .row
       .form-group.col-md-4
-        = f.select :education_level, options_for_select([ "High Scool", "Associate Degree", "Bachelor's Degree", "Masters", "Ph.D"] ), :include_blank => true
+        = f.select :education_level, options_for_select([ "High Scool", "Associate Degree", "Bachelor's Degree", "Masters", "Ph.D"], :selected => "#{@job.education_level}" ), :include_blank => true
       .form-group.col-md-4
-        = f.select :career_level, options_for_select([ "Entry Level", "Experience", "Manager", "Executive", "Senior Executive"] ), :include_blank => true
+        = f.select :career_level, options_for_select([ "Entry Level", "Experience", "Manager", "Executive", "Senior Executive"], :selected => "#{@job.career_level}" ), :include_blank => true
       .form-group.col-md-4
-        = f.select :kind, options_for_select([ "Full Time", "Part Time", "Contract", "Permanent", "Summer", "Internship" ] ), :include_blank => true, label: "Job Type"
+        = f.select :kind, options_for_select([ "Full Time", "Part Time", "Contract", "Permanent", "Summer", "Internship" ], :selected => "#{@job.kind}"), :include_blank => true, label: "Job Type"
     .row
       = f.text_area :description, :class => "tinymce", :rows => 40
       = tinymce_assets        

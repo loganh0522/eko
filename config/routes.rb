@@ -9,11 +9,13 @@ Rails.application.routes.draw do
   match 'create-profile', to: "profiles#create_profile", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:get, :post, :put, :patch, :delete]
 
   root to: 'pages#home'
+  
   get 'pricing', to: 'pages#pricing'
   get 'features', to: 'pages#features'
-
   get 'create-profile', to: "profiles#create_profile"
-  
+  get 'features/plan-hiring-process', to: 'features#plan_hiring_process'
+
+
   get 'features/branded-job-board', to: 'features#job_board'
   get 'features/applicant-tracking', to: 'features#applicant_tracking'
   get 'features/candidate-profile', to: 'features#candidate_profile'
@@ -45,8 +47,8 @@ Rails.application.routes.draw do
 
   namespace :job_seeker do 
     root to: "jobs#index"
-    resources :jobs
-    resources :profiles 
+    resources :jobs, only: [:index, :show]
+    resources :profiles, only: [:index]
     resources :user_certifications
     resources :user_skills
     resources :educations
@@ -55,6 +57,8 @@ Rails.application.routes.draw do
     resources :applications, only: [:create]
     resources :question_answers
     
+    get "create_profile", to: "users#create_profile"
+
     resources :users do
       get "add_skills", to: "users#add_skills"
       delete "delete_skill", to: "users#delete_skill"
@@ -81,7 +85,8 @@ Rails.application.routes.draw do
     resources :tags
     resources :notifications
     resources :interviews
-    
+    resources :email_templates
+    get 'templates', to: "email_templates#index"
     resources :applications do 
       collection do 
         post :update_multiple, to: "stages#update_multiple"
@@ -144,8 +149,7 @@ Rails.application.routes.draw do
           post :sort, to: "stages#sort"
         end 
       end
-    end
-    
+    end   
     get 'invite_user', to: 'invitations#new'
     get '/signout', to: 'sessions#destroy'
   end

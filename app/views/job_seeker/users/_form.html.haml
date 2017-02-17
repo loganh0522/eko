@@ -1,22 +1,23 @@
-= bootstrap_form_for [:job_seeker, @user] do |f| 
-  .row
-    .form-group.col-md-6
-      = f.text_field :first_name
-    .form-group.col-md-6
-      = f.text_field :last_name
-  .row
-    .form-group.col-md-12
-      = f.text_area :tag_line
-  .row
-    .form-group.col-md-4
-      = f.collection_select(:country_ids, Country.all, :id, :name, label: "Country")
-    .form-group.col-md-4
-      = f.grouped_collection_select(:state_ids, Country.order(:name), :states, :name, :id, :name, include_blank: true)
-    .form-group.col-md-4
-      = f.text_field :city, class: "form-control", label: "City"
-  .row
-    .form-group.col-md-6
-      = f.text_field :phone
-    .form-group.col-md-6
-      = f.text_field :linked_in     
-  = f.submit "Submit"
+.modal#user-information
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title Personal Information
+      = bootstrap_form_for [:job_seeker, current_user] do |f| 
+        .modal-body
+          .row
+            .col-md-6
+              = f.text_field :first_name
+            .col-md-6
+              = f.text_field :last_name
+          .row
+            .col-md-6
+              = f.text_field :phone
+            .col-md-6
+              = f.text_field :location, class: "form-control", id: "geocomplete", label: "Location", autocomplete: "off"
+          .row
+            .col-md-12
+              = f.text_area :tag_line, label: "Summary"        
+        .modal-footer
+          = f.submit "Submit"

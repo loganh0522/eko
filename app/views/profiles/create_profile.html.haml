@@ -1,6 +1,4 @@
-.create-profile-container
-  .header  
-    %h1 Work Experience
+ %h1 Work Experience
   = bootstrap_form_for [@user] do |f|
     .body
       .job_scorecard
@@ -9,3 +7,5 @@
         = link_to_add_fields "+ Add Work Experience", f, :work_experiences
     .footer
       = f.submit "Next", class: "submit btn btn-primary"
+
+  

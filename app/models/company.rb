@@ -15,7 +15,7 @@ class Company < ActiveRecord::Base
   has_many :payments
   has_many :activities
   has_many :tags
- 
+  has_many :email_templates
   validates_presence_of :name, :website
 
   liquid_methods :name

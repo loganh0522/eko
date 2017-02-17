@@ -7,7 +7,5 @@ class UserAvatar < ActiveRecord::Base
  
   def crop_avatar
     image.recreate_versions! if crop_x.present?
-  end
-
-  
+  end 
 end

@@ -1,4 +1,4 @@
 
-$('#new_education').remove();
-$('.new_experience').show();
+$('#new_education').parent().remove();
+$('#add_education').show();
 $('#educations').html('<%= j render "job_seeker/educations/education_history" %>');

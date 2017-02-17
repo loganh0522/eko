@@ -17,17 +17,11 @@
 //= require jquery.remotipart
 //= require jquery.Jcrop
 //= require bootstrap-sprockets
-//= require jquery.tokeninput
-//= require bootstrap-wysihtml5
-//= require chosen-jquery
 //= require autocomplete-rails
 //= require geocomplete
-//= require jquery.atwho
 //= require tinymce
 //= require tinymce-jquery
 //= require jquery.timepicker.js
-//= require trix
-
 
 
 //= require_tree .

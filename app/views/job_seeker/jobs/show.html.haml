@@ -2,7 +2,7 @@
   .job-description
     .job-header
       %h1= @job.title
-      = "#{@job.location} - #{@job.job_kind.first.name}"
+      = "#{@job.location} - #{@job.kind}"
     .job-body
       %p= simple_format(@job.description)
 
@@ -13,7 +13,7 @@
       .content= @job.job_industries.first.industry.name
     .detail
       .type Career Level 
-      .content= @job.job_career_level.first.career_level.name
+      .content= @job.career_level
     .detail
       .type Salary
       .content= "$60,000 - $100,000"

@@ -1,4 +1,6 @@
 class JobSeeker::UserAvatarsController < JobSeekersController
+  before_filter :require_user
+  
   require 'RMagick'
 
   def new 

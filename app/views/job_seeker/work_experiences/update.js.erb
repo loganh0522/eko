@@ -1,4 +1,4 @@
 // $('.modal').modal('toggle');
 // $('#work_experience_<%= @work_experience.id %>').replaceWith('<%= j render (@work_experience), position: @work_experience %>');
 
-$('#work_experiences').find('#edit_work_experience_<%= @work_experience.id %>').replaceWith('<%= j render (@work_experience), position: @work_experience %>');
+$('#work_experiences').find('#edit_work_experience_<%= @work_experience.id %>').parent().replaceWith('<%= j render (@work_experience), position: @work_experience %>');

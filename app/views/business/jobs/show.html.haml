@@ -6,16 +6,17 @@
       / = link_to "Job Link: #{@job.url}", "http://" + @job.url, :target => "_blank", class: "link"
     .links
       = link_to "Edit Job Details", edit_business_job_path(@job), class: "btn submit-button"
-  .job-applicants-nav
+  .change-containers-nav
     %ul 
-      %li.applicants-tab.activated Applicants
-      %li.activity-tab Activity
-      %li.calendar-tab Calendar
+      %li.change#all-job-applicants.activated Applicants
+      %li.change#job-activity-feed Activity
+      %li.change#job-calendar Calendar
 
-
-.job-show-body
-  = render 'business/shared/applicants_table'
-
-= render 'business/calendar/job_calendar'
-= render 'business/activities/job_activity_feed'
+#main-container
+  .all-job-applicants-container.showing
+    = render 'business/shared/applicants_table'
+  .job-calendar-container
+    = render 'business/calendar/job_calendar'
+  .job-activity-feed-container
+    = render 'business/activities/job_activity_feed'
     

@@ -33,7 +33,7 @@ class AvatarCropper
   constructor: ->
     $('#cropbox').Jcrop
       aspectRatio: 1
-      setSelect: [0, 0, 200, 200]
+      setSelect: [0, 0, 150, 150]
       boxWidth: 300
       boxHeight: 300
       bgOpacity: 1
@@ -49,11 +49,11 @@ class AvatarCropper
 
   updatePreview: (coords) =>
     $('#preview').css
-      width: Math.round(200/coords.w * $('#cropbox').width()) + 'px'
-      height: Math.round(200/coords.h * $('#cropbox').height()) + 'px'
+      width: Math.round(150/coords.w * $('#cropbox').width()) + 'px'
+      height: Math.round(150/coords.h * $('#cropbox').height()) + 'px'
 
-      marginLeft: '-' + Math.round(200/coords.w * coords.x) + 'px'
-      marginTop: '-' + Math.round(200/coords.h * coords.y) + 'px'
+      marginLeft: '-' + Math.round(150/coords.w * coords.x) + 'px'
+      marginTop: '-' + Math.round(150/coords.h * coords.y) + 'px'
 
     $('#preview-2').css
       width: Math.round(60/coords.w * $('#cropbox').width()) + 'px'

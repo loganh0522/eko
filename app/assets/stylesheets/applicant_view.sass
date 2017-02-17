@@ -1,9 +1,6 @@
 .applicant-view
   .home-page-header
     height: 75px
-  .applicant-main-container
-    float: left
-    width: 100%
   .applicant-profile-information
     float: left
     width: 61%
@@ -27,7 +24,7 @@
             text-align: center 
             color: black
             cursor: pointer
-          .active-container    
+          .activated    
             border-bottom: solid 3px #EF7B2B
             color: black
       .application-actions
@@ -60,7 +57,6 @@
         #schedule-appt
           float: left
           margin-right: 15px
-
       .email-area
         width: 100%
         display: none
@@ -135,62 +131,9 @@
         display: none
       .activity-container
         display: none
-        padding-left: 3.6%
-
-      .applicant-experience
-        .header 
-          margin: 0 0 15px 25px
-          border-bottom: solid 1px #EF7B2B
-          width: 650px
-          h4
-            display: inline-block
-            width: 200px
-            font-weight: 500
-            font-size: 16px
-          p
-            font-size: 14px
-        .applicant-positions       
-          margin: 25px 0px 25px 0px           
-          .job-position
-            background: white 
-            border-radius: 5px
-            box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-            clear: both
-            margin-top: 15px
-            padding: 10px 20px
-            border-bottom: solid 1px rgba(0, 0, 0, 0.2)
-            .experience-header
-              overflow: hidden
-              margin: 10px 0 0 0
-              .company
-                font-size: 18px
-                font-weight: 300
-                float: left 
-              .edit
-                float: right
-            .experience-position 
-              overflow: hidden
-              .title
-                float: left         
-                font-size: 15px
-                font-weight: 400
-                color: rgba(0, 0, 0, .6)
-              .date
-                float: right
-                font-size: 13px  
-                font-weight: 400 
-                color: rgba(0, 0, 0, .6) 
-            .experience-body
-              margin: 10px 0   
-              .accomplishments
-                margin-top: 10px
-                .acc 
-                  font-size: 16px
-                  font-weight: 200
-                  width: 130px
-                ul 
-                  li
-                    width: 450px
+        padding-left: 3.6% 
+      .activated
+        border-bottom: 4px solid
         
   .side-container
     float: left
@@ -287,10 +230,124 @@
         .schedule-interview
           .title
             font-size: 18px
-          
-.footer 
-  clear: both
-  height: 150px
+
+.applicant-experience
+  .header 
+    margin: 0 0 15px 25px
+    border-bottom: solid 1px #EF7B2B
+    width: 650px
+    h4
+      display: inline-block
+      width: 200px
+      font-weight: 500
+      font-size: 16px
+    p
+      font-size: 14px
+  .applicant-positions       
+    margin: 25px 0px 25px 0px           
+    .job-position
+      background: white 
+      border-radius: 5px
+      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+      clear: both
+      margin-top: 15px
+      padding: 10px 20px
+      border-bottom: solid 1px rgba(0, 0, 0, 0.2)
+      .experience-header
+        overflow: hidden
+        margin: 10px 0 0 0
+        .company
+          font-size: 18px
+          font-weight: 300
+          float: left 
+        .edit
+          float: right
+      .experience-position 
+        overflow: hidden
+        .title
+          float: left         
+          font-size: 15px
+          font-weight: 400
+          color: rgba(0, 0, 0, .6)
+        .date
+          float: right
+          font-size: 13px  
+          font-weight: 400 
+          color: rgba(0, 0, 0, .6) 
+      .experience-body
+        margin: 10px 0   
+        .accomplishments
+          margin-top: 10px
+          .acc 
+            font-size: 16px
+            font-weight: 200
+            width: 130px
+          ul 
+            li
+              width: 450px
+
+.applicant-scorecard
+  width: 100%
+  margin-top: 20px
+  .scorecard
+    width: 100%
+    background: #ffffff
+    border-radius: 3px 
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    .header 
+      background: rgba(0, 0, 0, .05)
+      border-bottom: solid 1px rgba(0,0,0,0.03)
+      width: 100%
+      overflow: hidden
+      padding: 5px 15px 
+      h4
+        font-weight: 300
+        font-size: 20px
+        float: left
+        color: rgba(0,0,0,0.7)     
+      a
+        float: right
+        color: #EF7B2B
+        margin-top: 10px
+    .scorecard-details
+      width: 100%
+      padding: 15px 15px      
+      .overall-rating
+        padding: 15px 15px 
+        .row
+          margin-bottom: 10px
+          .rating-title
+            float: left
+            width: 25%
+          .rating-total
+            float: left
+            width: 65%
+            .rating
+              background: #EF7B2B
+              height: 10px
+              border-radius: 5px  
+          .rating-percentage
+            float: left
+            width: 10%
+      .sections 
+        padding: 15px 15px 
+        table 
+          width: 600px
+    .application-form-body
+      padding: 15px 15px
+      .question-area
+        margin-bottom: 15px 
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+        .question
+          font-size: 16px
+          font-weight: 400
+        .answer
+          margin: 10px 0 15px 20px
+          margin-top: 5px
+          margin-bottom: 10px
+          ul
+            margin-left: -20px
+
       
 
       

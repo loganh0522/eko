@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   has_many :mentions
   has_many :mentioned, :through => :mentions
   has_many :mentioned, :class_name => "Mention", :foreign_key => "mentioned_id"
-
+  has_many :email_templates
 
   validates_presence_of :first_name, :last_name, :email, :password, on: [:create]
   validates_uniqueness_of :email

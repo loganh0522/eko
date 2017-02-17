@@ -22,12 +22,8 @@ gem 'faker'
 gem 'figaro'
 gem 'stripe'
 gem 'stripe_event'
-gem 'bootstrap-wysihtml5-rails'
 gem 'rails4-autocomplete'
-gem 'country_state_select', "2.0.0"
-gem 'chosen-rails'
 gem 'geocomplete_rails'
-gem 'ratyrate'
 
 gem 'mini_magick'
 gem 'carrierwave'
@@ -39,7 +35,7 @@ gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 
 gem 'remotipart', '~> 1.2'
-gem 'rmagick'
+gem 'rmagick', :require => 'RMagick'
 
 gem 'googlecharts'
 gem 'omniauth', '~> 1.2.2'
@@ -48,12 +44,9 @@ gem 'google-api-client', '0.9'
 gem 'signet', '~> 0.7.3'
 
 gem 'liquid-rails', '~> 0.1.1'
-
-gem 'jquery-atwho-rails'
-
 gem 'jquery-timepicker-rails'
 gem 'tinymce-rails', '~> 4.5'
-gem 'trix'
+
 
 
 group :development do

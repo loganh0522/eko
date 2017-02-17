@@ -6,9 +6,10 @@
 
 
 <% if current_user.educations.count == 0 %>
-  $('<%= j render "job_seeker/educations/form" %>').insertBefore('#not-present');
-  $('#not-present').remove();
+  $('<%= j render "job_seeker/educations/form" %>').insertAfter('#education-header');
+  $('#education-not-present').remove();
+  $('#add_education_button').hide()
 <% else %>
   $('<%= j render "job_seeker/educations/form" %>').insertBefore("#educations");
-  $('.new_experience').hide();
+  $('#add_education_button').hide();
 <% end %>

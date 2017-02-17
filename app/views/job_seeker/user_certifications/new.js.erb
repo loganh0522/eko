@@ -1,7 +1,8 @@
 <% if current_user.certifications.count == 0 %>
-  $('<%= j render "job_seeker/user_certifications/form" %>').insertBefore('#not-present')
-  $('#not-present').remove()
+  $('<%= j render "job_seeker/user_certifications/form" %>').insertAfter('#certification-header')
+  $('.not-present-container').remove()
+  $('#new_user_certification_button').hide();
 <% else %>
   $('<%= j render "job_seeker/user_certifications/form" %>').insertBefore("#certifications");
-  $('.new_experience').hide();
+  $('#new_user_certification_button').hide();
 <% end %>

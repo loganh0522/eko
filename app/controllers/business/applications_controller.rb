@@ -183,44 +183,44 @@ class Business::ApplicationsController < ApplicationController
               @graph_data.append(@data_point)
             end
 
-            @bar_chart = Gchart.bar(:data => @graph_data,
-              :axis_with_labels => ['y'],
-              :max_value => 450,
-              :axis_labels => [["Not Recommended","Bad", "Good", "Recommended",]],
+            # @bar_chart = Gchart.bar(:data => @graph_data,
+            #   :axis_with_labels => ['y'],
+            #   :max_value => 450,
+            #   :axis_labels => [["Not Recommended","Bad", "Good", "Recommended",]],
+            #   :orientation => 'horizontal',
+            #   :bar_colors => 'EF7B2B',
+            #   :size => "650x160",
+            #   :axis => "none"
+            #   )
+        
+            @bar_chart_1 = Gchart.bar(:data => [(450 * (@recommended/@application_scorecards.count))],
               :orientation => 'horizontal',
               :bar_colors => 'EF7B2B',
-              :size => "650x160",
-              :axis => "none"
+              :max_value => 450,
+              :size => "450x30",
+              :axis => 'none'
               )
-        
-          #   @bar_chart_1 = Gchart.bar(:data => [(450 * (@recommended/@application_scorecards.count))],
-          #     :orientation => 'horizontal',
-          #     :bar_colors => 'EF7B2B',
-          #     :max_value => 450,
-          #     :size => "450x30",
-          #     :axis => 'none'
-          #     )
-          #   @bar_chart_2 = Gchart.bar(:data => [(450 * (@good/@application_scorecards.count))],
-          #     :orientation => 'horizontal',
-          #     :bar_colors => 'EF7B2B',
-          #     :max_value => 450,
-          #     :size => "450x30",
-          #     :axis => 'none'
-          #     )
-          #   @bar_chart_3 = Gchart.bar(:data => [(450 * (@bad/@application_scorecards.count))],
-          #     :orientation => 'horizontal',
-          #     :bar_colors => 'EF7B2B',
-          #     :max_value => 450,
-          #     :size => "450x30",
-          #     :axis => 'none'
-          #     )
-          #   @bar_chart_4 = Gchart.bar(:data => [(450 * (@not_recommended/@application_scorecards.count))],
-          #     :orientation => 'horizontal',
-          #     :bar_colors => 'EF7B2B',
-          #     :max_value => 450,
-          #     :size => "450x30",
-          #     :axis => 'none'
-          #     )
+            @bar_chart_2 = Gchart.bar(:data => [(450 * (@good/@application_scorecards.count))],
+              :orientation => 'horizontal',
+              :bar_colors => 'EF7B2B',
+              :max_value => 450,
+              :size => "450x30",
+              :axis => 'none'
+              )
+            @bar_chart_3 = Gchart.bar(:data => [(450 * (@bad/@application_scorecards.count))],
+              :orientation => 'horizontal',
+              :bar_colors => 'EF7B2B',
+              :max_value => 450,
+              :size => "450x30",
+              :axis => 'none'
+              )
+            @bar_chart_4 = Gchart.bar(:data => [(450 * (@not_recommended/@application_scorecards.count))],
+              :orientation => 'horizontal',
+              :bar_colors => 'EF7B2B',
+              :max_value => 450,
+              :size => "450x30",
+              :axis => 'none'
+              )
           end
         end
       end

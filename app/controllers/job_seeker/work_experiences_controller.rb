@@ -11,14 +11,6 @@ class JobSeeker::WorkExperiencesController < JobSeekersController
     
     respond_to do |format| 
       if @work_experience.save
-        format.html { 
-          if @work_experience.update(position_params)
-            flash[:success] = "#{@work_experience.title} has been updated"
-          else 
-            flash[:danger] = "Something went wrong"
-          end
-          redirect_to job_seeker_profiles_path
-        }
         format.js 
       else 
         flash[:danger] = "Something went wrong, please try again."

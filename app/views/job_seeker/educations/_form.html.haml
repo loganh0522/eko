@@ -1,5 +1,5 @@
-= bootstrap_form_for [:job_seeker, @education], html: {remote: true, class: 'profile-form'} do |f|
-  .fieldset
+.work-experience
+  = bootstrap_form_for [:job_seeker, @education], html: {remote: true, class: 'profile-form'} do |f|
     .row
       .col-md-12
         = f.text_field :school, class: "form-control", label: "School"

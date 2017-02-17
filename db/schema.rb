@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170204204027) do
+ActiveRecord::Schema.define(version: 20170214213112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,18 @@ ActiveRecord::Schema.define(version: 20170204204027) do
     t.string  "school"
     t.string  "degree"
     t.text    "description"
+  end
+
+  create_table "email_templates", force: :cascade do |t|
+    t.string   "title"
+    t.string   "subject"
+    t.string   "body"
+    t.string   "shared"
+    t.string   "created_by"
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "exp_functions", force: :cascade do |t|
@@ -411,6 +423,9 @@ ActiveRecord::Schema.define(version: 20170204204027) do
     t.string  "website"
     t.string  "tag_line"
     t.string  "full_name"
+    t.string  "location"
+    t.string  "province"
+    t.string  "country"
   end
 
   create_table "work_experiences", force: :cascade do |t|

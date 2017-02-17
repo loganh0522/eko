@@ -6,7 +6,6 @@ class Business::JobsController < ApplicationController
   
   def index
     @jobs = current_company.jobs
-
   end
 
   def new
@@ -18,6 +17,8 @@ class Business::JobsController < ApplicationController
 
     if @job.save && @job.company == current_company
       convert_location
+      Questionairre.create(job_id: @job.id)
+      Scorecard.create(job_id: @job.id)
       @job.user_ids = params[:user_ids]
       @job.update_column(:status, "draft")
       job_url

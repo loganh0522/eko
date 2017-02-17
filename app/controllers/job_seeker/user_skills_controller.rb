@@ -1,4 +1,6 @@
 class JobSeeker::UserSkillsController < JobSeekersController
+  before_filter :require_user
+  
   def new
     @user_skill = UserSkill.new
   end

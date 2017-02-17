@@ -9,8 +9,8 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     @application = Application.new
     @user = User.new
-    # @questionairre = @job.questionairre
-    # @questions = @questionairre.questions
+    @questionairre = @job.questionairre
+    @questions = @questionairre.questions
   end
 
 

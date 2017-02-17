@@ -12,7 +12,7 @@ class UsersController < ApplicationController
         if request.subdomain.present? 
           redirect_to profile_path
         else
-          redirect_to job_seeker_jobs_path
+          redirect_to job_seeker_create_profile_path
         end
       else
         if params[:invitation_token].present?

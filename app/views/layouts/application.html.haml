@@ -9,13 +9,12 @@
     = javascript_include_tag "application" 
 
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyABHyEmDvxwvbiHWIYaEDBFwxHmUjRiKic&libraries=places"></script>
-
+    / <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'/>
     <script type="text/javascript" src="/assets/tinymce.js"></script>
-    
-    / <script src="jquery.geocomplete.js"></script>
   %body
     %header
-      = render "/shared/header"   
+      - unless request.path == job_seeker_create_profile_path 
+        = render "/shared/header"   
     %section
       = render "/shared/messages"
       = yield 

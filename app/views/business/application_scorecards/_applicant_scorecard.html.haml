@@ -13,61 +13,56 @@
     .scorecard-details
       %h4 Overall Rating 
       .overall-rating 
-        .row
-          .rating-title
-            Recommended
-          .rating-total(width= '#{@recommended}%')
-            .rating(width= '#{@recommended}%')
-          .rating-percentage
-            = "#{@recommended}%"
-        .row
-          .rating-title
-            Good
-          .rating-total
-            .rating(width= '#{@good}%')
-          .rating-percentage
-            = "#{@good}%"
-        .row
-          .rating-title
-            Bad
-          .rating-total
-            .rating(width= '#{@bad}%')
-          .rating-percentage
-            = "#{@bad}%"
-        .row
-          .rating-title
-            Not-Recommended
-          .rating-total
-            .rating(width= '#{@not_recommended}%')
-          .rating-percentage
-            = "#{@recommended}%"
-
-
-
-
-        / %table.table
-        /   %tbody
-        /     %tr
-        /       %td(width="30%") Recommended 
-        /       %td.percentage(width= "#{@recommended}%")
-        /         =image_tag @bar_chart, class: 'chart1'
-        /     %tr
-        /       %td(width="30%") Good
-        /       %td(width="70%")
-        /         =image_tag @bar_chart_2, class: 'chart2'
-        /     %tr
-        /       %td(width="30%") Bad
-        /       %td(width="70%")
-        /         =image_tag @bar_chart_3, class: 'chart3'
-        /     %tr
-        /       %td(width="30%") Do not Recommend 
-        /       %td(width="70%")
-        /         =image_tag @bar_chart_4, class: 'chart4'
-
-      %h4 Scorecard 
+        %table.table
+          %tbody
+            %tr
+              %td(width="30%") Recommended 
+              %td(width="70%")
+                =image_tag @bar_chart_1, class: 'chart1'
+            %tr
+              %td(width="30%") Good
+              %td(width="70%")
+                =image_tag @bar_chart_2, class: 'chart2'
+            %tr
+              %td(width="30%") Bad
+              %td(width="70%")
+                =image_tag @bar_chart_3, class: 'chart3'
+            %tr
+              %td(width="30%") Do not Recommend 
+              %td(width="70%")
+                =image_tag @bar_chart_4, class: 'chart4'
+      /   .row
+      /     .rating-title
+      /       Recommended
+      /     .rating-total(width= '#{@recommended}%')
+      /       .rating(width= '#{@recommended}%')
+      /     .rating-percentage
+      /       = "#{@recommended}%"
+      /   .row
+      /     .rating-title
+      /       Good
+      /     .rating-total
+      /       .rating(width= '#{@good}%')
+      /     .rating-percentage
+      /       = "#{@good}%"
+      /   .row
+      /     .rating-title
+      /       Bad
+      /     .rating-total
+      /       .rating(width= '#{@bad}%')
+      /     .rating-percentage
+      /       = "#{@bad}%"
+      /   .row
+      /     .rating-title
+      /       Not-Recommended
+      /     .rating-total
+      /       .rating(width= '#{@not_recommended}%')
+      /     .rating-percentage
+      /       = "#{@recommended}%"
+      Scorecard 
       .sections
         - @sections.each do |section|
-          %p= section.body
+          %h4= section.body
           %table.table
             %tbody
               - section.section_options.each do |criteria|

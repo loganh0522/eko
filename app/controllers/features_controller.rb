@@ -1,5 +1,7 @@
 class FeaturesController < ApplicationController 
 
+  def plan_hiring_process
+  end
   def candidate_profile
   end
 

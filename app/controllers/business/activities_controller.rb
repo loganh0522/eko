@@ -6,5 +6,6 @@ class Business::ActivitiesController < ApplicationController
   def index
     @activities = current_company.activities.order("created_at desc")
     @jobs = current_company.jobs.where(status: "open")
+
   end
 end

@@ -1,71 +1,90 @@
 .pricing-intro-header
   .intro-message 
     .header Affordable, Simple, Flexible Pricing
-    .sub-header We know that hiring can be expensive and unpredictable. That is why we offer cost-effective and flexible pricing plans to meet your recruitment needs.
-    .sign-up
-      = link_to "Try it Today", new_user_path, class: "btn btn-primary btn-large"
+    .sub-header All-inclusive pricing. All features with every plan.
 
-.pricing-page
+
+.standard-container
   .intro-message 
     .header Simple Pricing for a Simple Product.
+    .sub-header Save 15% with yearly billing.
 
   .pricing-type
     %ul
       %li.monthly-tab.active-price Monthly Pricing
       %li.yearly-tab Yearly Pricing 
-  
   .pricing-table
     .monthly.showing
       %ul 
         %li.pricing-container
           .title Start-Up 
-          .cost $19/mo
+          .cost $19
           .jobs 1 Active Job
         %li.pricing-container
           .title Basic 
-          .cost $39/mo
-          .jobs 3 Active Job
+          .cost $39
+          .jobs 3 Active Jobs
         %li.pricing-container
           .title Team
-          .cost $99/mo
-          .jobs 5 Active Job
+          .cost $99
+          .jobs 5 Active Jobs
         %li.pricing-container
           .title Plus
-          .cost $199/mo 
-          .jobs 10 Active Job
+          .cost $199 
+          .jobs 10 Active Jobs
         %li.pricing-container
           .title Growth
-          .cost $299/mo 
-          .jobs 15 Active Job
+          .cost $299 
+          .jobs 15 Active Jobs
         %li.pricing-container
           .title Enterprise
-          .cost $399/mo 
+          .cost $399 
           .jobs Unlimited Jobs
     .yearly
       %ul 
         %li.pricing-container
           .title Start-Up 
-          .cost $190/yr
+          .cost $190
           .jobs 1 Active Job
         %li.pricing-container
           .title Basic 
-          .cost $390/yr
-          .jobs 3 Active Job
+          .cost $390
+          .jobs 3 Active Jobs
         %li.pricing-container
           .title Team
-          .cost $990/yr
-          .jobs 5 Active Job
+          .cost $990
+          .jobs 5 Active Jobs
         %li.pricing-container
           .title Plus
-          .cost $1990/yr 
-          .jobs 10 Active Job
+          .cost $1990
+          .jobs 10 Active Jobs
         %li.pricing-container
           .title Growth
-          .cost $2990/yr
-          .jobs 15 Active Job
+          .cost $2990
+          .jobs 15 Active Jobs
         %li.pricing-container
           .title Enterprise
-          .cost $3990/yr
+          .cost $3990
           .jobs Unlimited Jobs
     .sign-up
-      = link_to "Try it Today", new_user_path, class: "btn btn-primary btn-large"
+      = link_to "Try it Today", new_user_path, class: "job-seeker-btn"
+.standard-container
+  .intro-message
+    .header Frequently Asked Questions
+
+.bottom-container
+  .col-md-3
+    %img(src="/tmp/logo.jpg") 
+  .col-md-3
+    %h4 Product
+    %ul 
+      %li Feature Overview
+      %li Pricing
+  .col-md-3
+    %h4 Company 
+    %ul
+      %li Contact
+  .col-md-3
+    %h4 Try TalentWiz Today
+    %p Free 30-day Trial 
+    = link_to "Try it Today", new_user_path, class: "btn btn-primary btn-large"

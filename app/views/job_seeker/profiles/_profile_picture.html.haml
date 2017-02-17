@@ -4,47 +4,45 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
         %h4.modal-title Edit Profile Picture
-      .modal-body
-        .image
-          %p Add a photo and crop it below.
-
-          = form_for [:job_seeker, @user_avatar] do |f| 
+      = form_for [:job_seeker, @user_avatar] do |f| 
+        .modal-body
+          .crop-image
+            %p Add a photo and crop it below.
+            
             = f.file_field :image, class: "btn btn-file", id: "imgInp"
             - %w[x y w h].each do |attribute| 
-              = f.hidden_field "crop_#{attribute}"
-            
+              = f.hidden_field "crop_#{attribute}"     
             %img(src="#" class="blah" id="cropbox")
-            .row
-              = f.submit 'Crop Image', class: 'btn btn-primary', id: 'submit-crop'
+          #img-preview-area
+            .img-preview-blank
+              %img(src="/tmp/blank_profile_picture.png")
+            .img-preview
+              %img(src="#" class="blah" id="preview")
 
-              - if !@user_avatar.new_record?
-                .close-form#edit-form.btn.btn-primary     
-                  Close
-              - else
-                .close-form#new-form.btn.btn-primary     
-                  Close
-
+        .modal-footer
+          .row
+            = f.submit 'Crop Image', class: 'btn btn-primary', id: 'submit-crop'
+            - if !@user_avatar.new_record?
+              .close-form#edit-form.btn.btn-primary     
+                Close
+            - else
+              .close-form#new-form.btn.btn-primary     
+                Close 
           
-        #img-preview-area
-          .img-preview-blank
-            %img(src="/tmp/blank_profile_picture.png")
-          .img-preview
-            %img(src="#" class="blah" id="preview")
-          
-          .img-preview-blank-2
-            %img(src="/tmp/blank_profile_picture.png")
-          .img-preview-2
-            %img(src="#" class="blah" id="preview-2")
+          / .img-preview-blank-2
+          /   %img(src="/tmp/blank_profile_picture.png")
+          / .img-preview-2
+          /   %img(src="#" class="blah" id="preview-2")
 
-          .img-preview-blank-3
-            %img(src="/tmp/blank_profile_picture.png")
-          .img-preview-3
-            %img(src="#" class="blah" id="preview-3")
+          / .img-preview-blank-3
+          /   %img(src="/tmp/blank_profile_picture.png")
+          / .img-preview-3
+          /   %img(src="#" class="blah" id="preview-3")
 
-          .img-preview-blank-4
-            %img(src="/tmp/blank_profile_picture.png")
-          .img-preview-4
-            %img(src="#" class="blah" id="preview-4")
+          / .img-preview-blank-4
+          /   %img(src="/tmp/blank_profile_picture.png")
+          / .img-preview-4
+          /   %img(src="#" class="blah" id="preview-4")
 
       
 

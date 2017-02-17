@@ -11,14 +11,9 @@
  * file per style scope.
  *
  *= require_self
- *= require token-input-facebook
  *= require jquery-ui
  *= require jquery.Jcrop
- *= require bootstrap-wysihtml5
- *= require jquery.atwho
- *= require chosen
  *= require jquery.timepicker.css
- *= require trix
  *= require_tree .
 
  */
@@ -26,11 +21,12 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans)
 @import "bootstrap-sprockets"
 @import "bootstrap"
-@import "bootstrap-wysihtml5/bootstrap3-wysihtml5"
+
 
 body 
   -moz-osx-font-smoothing: grayscale
   -webkit-font-smoothing: antialiased
+  background-color: #f7f8f9
 
   font-family: Open Sans, sans-serif, Helvetica, Arial, sans-serif
   font-weight: 300
@@ -49,7 +45,8 @@ body
     color: rgba(0, 0, 0, .85)
     font-family:  Open Sans, sans-serif, Helvetica, Arial, sans-serif
     font-weight: 300
-  background-color: #f7f8f9
+
+ 
 
 .page-header
   margin-top: 60px
@@ -82,8 +79,48 @@ body
     font-size: 23px
     float: left
     color: #c6c8ca
+  .add-object
+    margin: 85px 0 0 10px
+    float: left
+    color: #EF7B2B
+    font-weight: bold 
+
+.circle
+  border-radius: 50%
+  width: 35px 
+  height: 35px
+  float: left
+.circle-img
+  float: left
+  margin-right: 10px
+  border-radius: 50%
+  width: 35px 
+  height: 35px
+  background: rgba(0,0,0,0.1)
+  text-align: center
+  font-size: 24px
+  padding-top: 2px
+  color: white
 
 
+.btn-primary
+  border-radius: 0px
+  background-color: rgba(239, 123, 43, .9)
+  color: #ffffff
+  border: none
+  
+  &:hover 
+    background-color: #EF7B2B
+
+
+.job-seeker-btn
+  border: solid 1.5px #EF7B2B
+  padding: 10px 20px
+  border-radius: 2px
+a.job-seeker-btn
+  color: black
+  font-size: 14px
+  text-decoration: none
 
 .submit-button
   display: block
@@ -131,8 +168,25 @@ a.button
     color: rgba(0, 0, 0, 0.7)
     text-decoration: none
 a.button
-  
   color: white
+
+.clear-button 
+  height: auto
+  border: 1px solid rgba(0,0,0,0.2)
+  color: rgba(0,0,0,0.5)  
+  border-radius: 5px
+  padding: 5px 5px
+  color: rgba(0,0,0,0.5) 
+  text-decoration: none
+  &:hover
+    background: rgba(0,0,0,0.1)
+    cursor: pointer
+    color: rgba(0,0,0,0.7) 
+    text-decoration: none
+    
+      
+
+
 
 
 .button
@@ -248,4 +302,28 @@ textarea
   border-radius: 4px
   box-sizing: border-box
 
+.email-template-area
+  width: 100%
+  border: 1px solid rgba(0,0,0,0.1)
+  .mce-panel
+    border: none
+  #message-subject
+    border: none
 
+  .email-variables
+    border-bottom: 1px solid rgba(0,0,0,.1)
+    padding: 10px 15px
+    height: auto
+  .subject
+    height: auto
+    border-bottom: 1px solid rgba(0,0,0,.1)
+    padding: 0 0
+    
+  .email-footer
+    padding: 10px 10px
+    border-top: 1px solid rgba(0,0,0,0.1)
+    background: rgba(0,0,0,.05)
+    overflow: hidden
+    .btn
+      float: right
+      margin-top: -15px

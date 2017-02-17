@@ -34,31 +34,6 @@ $(window).load ->
     toGalleryItem $targetItem
     return
 
-  changeContainer = ($targetContainer) -> 
-    $('.main-container').find('.showing').hide()
-    $('.main-container').find('.showing').removeClass 'showing'
-    $($targetContainer).show()
-    $($targetContainer).addClass 'showing'
-    return
-
-  $('.job-navigation').on 'click', 'li', (event) -> 
-    if $(this).attr('class') == 'open'
-      $targetContainer = '.open-jobs'
-    else if $(this).attr('class') == 'closed'
-      $targetContainer = '.closed-jobs'
-    else if $(this).attr('class') == 'drafts'
-      $targetContainer = '.draft-jobs'
-    else if $(this).attr('class') == 'archived'
-      $targetContainer = '.archived-jobs'
-
-    $('.job-navigation').find('.activated').css color: '#ffffff'
-
-
-    $('.job-navigation').find('.activated').removeClass 'activated'
-
-    $(this).addClass 'activated'
-
-    changeContainer $targetContainer
-    return
+  
 
 

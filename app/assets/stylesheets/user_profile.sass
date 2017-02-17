@@ -1,71 +1,94 @@
-.job-seeker-profile
-  .profile-background-photo
-    height: 165px
-    margin-top: -15px
-  .user-image
-    position: absolute
-    top: 85px
-    left: 5%
-    width: 210px
-    height: 210px
-    img   
-      padding: 8px
-      background: white
-      border-radius: 5%
-      border: 1px solid #E4E5E9
-      width: 210px
-      height: 210px
-    .add-photo
-      font-size: 18px 
-      margin-top: -100px
-      text-decoration: none
-      color: rgba(0, 0, 0, 0.6)
-      text-align: center 
-      display: none
-    .edit-photo
-      font-size: 18px
-      text-align: center 
-      margin-top: -40px
-      color: black
-      background: rgba(0, 0, 0, 0.8)
-      z-index: 1
-      display: none
-    
-    &:hover
-      .edit-photo
-        display: block
+.create-profile-container
+  margin: 60px 15% 100px 15%
+  padding: 25px 50px 50px 50px
+  width: 70%
+  background: white
+  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+  h1
+    color: black
+    margin-top: 0
+  .header 
+    overflow: hidden  
+    margin-bottom: 15px
+    height: auto
+    margin-top: 20px
+    .title
+      float: left
+      font-size: 24px
+      font-weight: 500    
+    .new_experience
+      float: left
+      margin: 6px 0 0 15px   
+  .work-experience
+    width: 98%
+    margin-left: 1%
+  .footer
+    padding: 50px 15px
+    border-top: 1px solid rgba(0,0,0,0.1)
 
-  .personal-details
-    width: 575px
+.job-seeker-profile
+  width: 100%
+  .background-photo
+    height: 250px 
+    width: 100% 
+    z-index: 100
+    background: rgba(0,0,0,0.7)
+  .user-image
+    width: 150px
+    height: 150px
+    margin-left: auto
+    margin-right: auto
+    border-radius: 50%
     position: absolute
-    top: 80px
-    left: 25%
-    margin: 0px 0px 10px 25px  
-    .main-details
-      width: 300px
-      .icon-detail
-        margin-bottom: 8px
-        img
-          margin-right: 10px
+    left: calc(50vw - (/* width */150px / 2))
+    top: 110px
+    img  
+      padding: 4px
+      background: white
+      border: 1px solid #E4E5E9
+      width: 150px
+      height: 150px
+      border-radius: 50%
+    .glyphicon.glyphicon-pencil
+      font-size: 18px
+      float: right
+      margin: 10px -10px 0 0 
+      color: #ffffff  
+  .profile-header
+    width: 80%
+    margin: 0 10%
+    z-index: 50
+    margin-top: -100px
+    background: #ffffff
+    padding-top: 75px
+    border-radius: 5px
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)  
+    .personal-details
+      margin-top: 25px
+      width: 350px
+      margin-left: auto
+      margin-right: auto
+      margin-bottom: 50px
+      text-align: center
+      .glyphicon.glyphicon-pencil
+        margin-left: 70%
+        width: auto
+        color: rgba(0,0,0,0.5)
       .name
         margin-bottom: 5px
-        font-size: 32px
-        font-weight: 300
+        font-size: 24px
+        font-weight: 100
         color: black
       .tag-line
         clear: both
-
-
-  .job-seeker-nav
-    border-top: 1px solid #E4E5E9
-    border-bottom: 1px solid #E4E5E9
-    .user-profile-nav
+    .change-containers-nav 
       background: white
-      height: 50px
+      height: 50pxs
       ul 
+        width: 660px
         list-style: none
         text-decoration: none
-        margin-left: 300px
+        margin: auto
         li
           display: inline-block
           height: 50px 
@@ -73,222 +96,105 @@
           text-align: center 
           color: black
           cursor: pointer
-     
-      .active   
+      .activated 
         border-bottom: solid 3px #EF7B2B
         color: black
+  .main-container
+    margin-left: auto
+    margin-right: auto
+    float: none
+    width: 80%
+    padding-left: 0
+    .education-container
+      display: none
+    .skills-container
+      display: none    
+    .career-prefs-container
+      display: none
+    .my-apps-container
+      display: none
+    .header 
+      border-bottom: 2px solid rgba(239, 122, 43, .25) 
+      overflow: hidden  
+      margin-bottom: 15px
+      .title
+        float: left
+        font-size: 24px
+        font-weight: 500    
+      .new_experience
+        float: right
+        margin: 10px 0 0 0
+        a
+          color: #EF7B2B  
 
-
-  .main-body
-    clear: both    
-    .sidebar
-      float: left
-      margin: 40px 25px 0px 5%
-      width: 250px
-      .header 
-        border-bottom: 2px solid rgba(239, 122, 43, .25) 
-        overflow: hidden
-        margin-bottom: 10px
-
-        .title
-          float: left
-          font-size: 24px
-          font-weight: 500
-
-      .skills_form
-        margin-bottom: 10px
-        input
-          width: 195px
-          height: 35px
-          float: left
-          margin: 0
-        input[type=submit]
-          float: left
-          width: 55px
-          margin: 0px 0px 10px -3px
-          border-radius: 0px 5px 5px 0px
-
-      .sidebar-container
-        background: white
-        box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-        padding: 10px 10px 30px 10px
-        border-radius: 5px
-        clear: both
-        .skills-not-present
-          text-align: center
-          margin-top: 15px
-          p
-            color: rgba(0, 0, 0, .5)
-    
-    .main-container
-      float: left
-      margin: 40px 0 60px 0
-      width: 750px  
-      .header 
-        border-bottom: 2px solid rgba(239, 122, 43, .25) 
-        overflow: hidden
+.work-experience
+  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+  background: white
+  width: 100%
+  padding: 20px 45px
+  border-radius: 5px
+  margin-bottom: 15px
+  overflow: hidden
+  .experience-header
+    overflow: hidden
+    margin: 10px 0 0 0
+    .company
+      font-size: 18px
+      font-weight: 300
+      float: left 
+    .edit
+      float: right
+  .experience-position 
+    overflow: hidden
+    border-bottom: 1px solid rgba(0,0,0,0.1)
+    padding-bottom: 10px
+    .title
+      float: left         
+      font-size: 15px
+      font-weight: 400
+      color: rgba(0, 0, 0, .6)
+    .date
+      float: right
+      font-size: 13px  
+      font-weight: 400 
+      color: rgba(0, 0, 0, .6)
+  .experience-body
+    margin: 10px 0  
+  .accomplishments
+    margin-top: 10px
+    .acc 
+      font-size: 16px
+      font-weight: 200
+    ul 
+      li
+        &:hover + .icons
+          background: rgba(0, 0, 0, 0.05)
+          display: block
+        &:hover 
+          background: rgba(0, 0, 0, 0.05)
+      .icons
+        float: left
+        margin-left: 2px
+        width: 40px
+        display: none
         
-        .title
-          float: left
-          font-size: 24px
-          font-weight: 500
-        
-        .new_experience
-          float: right
-          margin: 10px 0 0 0
-          a
-            color: #EF7B2B  
-          
-      .body
-        .not-present-container
-          width: 560px
-          height: 200px 
-          margin: 25px 0 25px 0
-          border: 2px dashed #c6c8ca
-          text-align: center
+        &:hover 
+          background: rgba(0, 0, 0, 0.1)
+          display: block
 
-          p 
-            margin: 85px 0 0 70px
-            float: left
-            color: #c6c8ca
-          .add-object
-            margin: 85px 0 0 10px
-            float: left
-            color: #EF7B2B
-            font-weight: bold 
-      
-      .profile-form
-        box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-        background: white
-        width: 750px
-        padding: 10px 25px
-        border-radius: 5px
-        margin-bottom: 15px
-        margin-left: 0px
-
-      .job-position
-        box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-        background: white
-        width: 750px
-        padding: 10px 25px
-        border-radius: 5px
-        margin-bottom: 15px
-        .experience-header
-          overflow: hidden
-          margin: 10px 0 0 0
-          .company
-            font-size: 18px
-            font-weight: 300
-            float: left 
-          .edit
-            float: right
-        .experience-position 
-          overflow: hidden
-          .title
-            float: left         
-            font-size: 15px
-            font-weight: 400
-            color: rgba(0, 0, 0, .6)
-          .date
-            float: right
-            font-size: 13px  
-            font-weight: 400 
-            color: rgba(0, 0, 0, .6)
-        
-        .experience-body
-          margin: 10px 0 
-        
-        .accomplishments
-          margin-top: 10px
-          .acc 
-            font-size: 16px
-            font-weight: 200
-            width: 130px
-
-          ul 
-            li
-              float: left
-              width: 450px
-
-              &:hover + .icons
-                background: rgba(0, 0, 0, 0.05)
-                display: block
-              &:hover 
-                background: rgba(0, 0, 0, 0.05)
-
-            .icons
-              float: left
-              margin-left: 2px
-              width: 40px
-              display: none
+        &:hover 
+          background: rgba(0, 0, 0, 0.1)      
+  .actions
+    ul
+      display: inline-block
+      list-style: none
+      margin: 10px -40px
+      li
+        float: left
+        margin-right: 30px
+        a
+          color: #EF7B2B
               
-              &:hover 
-                background: rgba(0, 0, 0, 0.1)
-                display: block
-
-              &:hover 
-                background: rgba(0, 0, 0, 0.1)
-              
-        .actions
-          ul
-            display: inline-block
-            list-style: none
-            margin: 10px -40px
-            
-            li
-              float: left
-              margin-right: 30px
-              a
-                color: #EF7B2B
-
-      .experiences
-        width: 650px
-        margin: 25px 100px 25px 100px 
-
-      .education-container
-        display: none
-
-        form
-          margin-bottom: 50px
-
-
-      .skills-container 
-        display: none
-
-        .skills_form
-          overflow: hidden
-          #skills_name
-            float: left
-            height: 35px
-            margin-right: 15px
-            width: 200px
-
-          #submit_skills
-            float: left
-
-        #skills
-          margin-top: 25px
-          
-          .skill
-            display: inline-block
-            padding: 5px 15px 
-            color: white
-            text-align: center
-            background: #EF7A2B
-            .name 
-              float: left
-              margin-right: 10px
-            .glyphicon
-              float: right
-              color: white
-              margin-top: 2px
-
-
-      .career-prefs-container
-        display: none
-      
-      .my-apps-container
-        display: none
 
   #profile-picture-modal
     margin-left: -15%
@@ -296,47 +202,62 @@
       width: 700px
     .modal-header
       width: 700px
+    .modal-footer
+      width: 700px
+      overflow: hidden
+      #submit-crop
+        margin: 20px 0 0 10px
+        float: left
+        display: none
+      .close-form
+        margin: 20px 0 0 10px
+        width: 70px
+        float: left
     .modal-body     
       width: 700px
-      height: 500px
+      height: 400px
       border-radius: 0
-      
-      .image
-        height: 300px
-        width: 300px
+      padding: 20px 20px
+      overflow: hidden
+      .jcrop-holder
+        margin-top: -300px
+      .crop-image
         float: left
-
-        .blah
+        img
+          height: 300px
+          width: 300px 
+          border-radius: 0
+          padding: 0 0 
+        .image
           height: 300px
           width: 300px
-          display: none
-          margin: -300px 0 0 0
-
-        #submit-crop
-          margin: 20px 0 0 10px
-          float: left
-          display: none
-
-        .close-form
-          margin: 20px 0 0 10px
-          display: none
-          width: 70px
-          float: left
-
-
+          .blah
+            max-height: 300px
+            max-width: 300px
+            display: none
+            margin: 0 0 0 0
+            padding: 0 0 
       #img-preview-area
         float: left
-        margin: 50px 0 0 50px
-        border-left: 1px solid black
-        height: 300px
-      
+        margin: 65px 0 0 50px
+        border-left: 1px solid rgba(0,0,0,0.2)
+        padding: 75px 0 0 30px
+        height: 300px 
+        img
+          padding: 0 0
+        .img-preview-blank
+          overflow: hidden 
+          height: 150px
+          width: 150px
+          margin-left: 50px
         .img-preview 
           overflow: hidden 
-          height: 200px
-          width: 200px
+          height: 150px
+          width: 150px
           margin-left: 50px
+          border-radius: 50%
+          padding: 0 0 
           display: none
-
         .img-preview-2
           overflow: hidden 
           height: 60px
@@ -344,7 +265,6 @@
           margin: 10px 0 0 50px
           display: none
           float: left
-
         .img-preview-3
           overflow: hidden 
           height: 50px
@@ -353,7 +273,6 @@
           margin: 10px 0 0 10px
           display: none
           border-radius: 50%
-
         .img-preview-4
           overflow: hidden 
           height: 40px
@@ -362,20 +281,12 @@
           display: none
           border-radius: 50%
           float: left
-
-        .img-preview-blank
-          overflow: hidden 
-          height: 200px
-          width: 200px
-          margin-left: 50px
-
         .img-preview-blank-2
           overflow: hidden 
           height: 60px
           width: 60px
           margin: 10px 0 0 50px
           float: left
-
         .img-preview-blank-3
           overflow: hidden 
           height: 50px
@@ -383,7 +294,6 @@
           margin: 10px 0 0 10px
           border-radius: 50%
           float: left
-
         .img-preview-blank-4
           overflow: hidden 
           height: 40px
@@ -393,11 +303,14 @@
           float: left
 
 
-
- 
-  
-      
-        
+#applyModal
+  .modal-content
+    width: 100%
+  .question
+    padding: 10px 20px
+    border-bottom: 1px solid rgba(0,0,0,0.1)   
+  .answer
+    padding: 0 20px   
 
 
 

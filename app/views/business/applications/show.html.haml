@@ -3,27 +3,26 @@
     %h1= "#{@job.title}"
   .side-container
     = render 'business/applications/application_side_container'
-  
   .applicant-profile-information
     .applicant-main-top
       = render 'business/applications/application_navigation'
-    .applicant-details
-      .profile-container#showing-container
+    .applicant-details#main-container
+      .profile-container.showing
         .applicant-experience
           = render 'business/applications/application_experience'
         .applicant-experience    
           = render 'business/applications/application_education'
 
       .messages-container
-        .applicant-messages
+        .activity-feed
           = render "business/messages/applicant_messages", application: @application
 
       .notes-container
-        .applicant-notes
+        .activity-feed
           = render "business/comments/applicant_notes", application: @application
 
       .assessments-container
-        .applicant-assessments
+        .applicant-scorecard
           = render "business/assessments/applicant_assessment"
 
       .scorecards-container
