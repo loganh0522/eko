@@ -3,9 +3,10 @@
     .details
       %h1= @job.title
       = "#{@job.location}"
-      / = link_to "Job Link: #{@job.url}", "http://" + @job.url, :target => "_blank", class: "link"
+      %br
+      = link_to "Job Link: #{@job.url}", "http://" + @job.url, :target => "_blank", class: "link"
     .links
-      = link_to "Edit Job Details", edit_business_job_path(@job), class: "btn submit-button"
+      = link_to "Edit Job Details", edit_business_job_path(@job), class: "white-border-button"
   .change-containers-nav
     %ul 
       %li.change#all-job-applicants.activated Applicants

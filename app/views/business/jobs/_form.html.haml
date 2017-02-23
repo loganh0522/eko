@@ -23,9 +23,10 @@
       .form-group.col-md-4
         = f.select :kind, options_for_select([ "Full Time", "Part Time", "Contract", "Permanent", "Summer", "Internship" ], :selected => "#{@job.kind}"), :include_blank => true, label: "Job Type"
     .row
-      = f.text_area :description, :class => "tinymce", :rows => 40
-      = tinymce_assets        
-      = tinymce 
+      .form-group.col-md-12
+        = f.text_area :description, :class => "tinymce", :rows => 40
+        = tinymce_assets        
+        = tinymce 
     .row
       = hidden_field_tag :user_ids, current_user.id
       = f.hidden_field :company_id, value: current_company.id

@@ -7,7 +7,7 @@
             = link_to root_path do 
               %img.logo(src="/tmp/logo.jpg")
             %ul.navbar-right
-              %li= link_to "Features", features_path
+              %li= link_to "Features", features_plan_hiring_process_path
               %li= link_to "Pricing", pricing_path
               %li= link_to "Login", login_path
               %li= link_to "Sign Up", new_user_path, class: "sign-up-btn"
@@ -31,7 +31,7 @@
                 = image_tag current_user.user_avatar.image.small_image, :class => "img dropdown-img"
               - else
                 .circle-img= current_user.first_name.first.capitalize
-              .name= current_user.first_name
+              = current_user.first_name
               %b.caret
             %ul.dropdown-menu.dropdown-menu-right
               %li

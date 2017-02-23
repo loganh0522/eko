@@ -199,6 +199,10 @@ jQuery ->
       $(this).parent().parent().hide()
     return
 
-     
+################ Star Rating ##################
+  $(document).on 'click', '.new_rating', (event) -> 
+    console.log($(this))
+    
+
 
 

@@ -13,21 +13,13 @@ Rails.application.routes.draw do
   get 'pricing', to: 'pages#pricing'
   get 'features', to: 'pages#features'
   get 'create-profile', to: "profiles#create_profile"
+
   get 'features/plan-hiring-process', to: 'features#plan_hiring_process'
+  get 'features/screen-applicants', to: 'features#screen_applicants'
+  get 'features/source-applicants', to: 'features#source_applicants'
+  get 'features/manage-evaluate', to: 'features#manage_evaluate'
+  get 'features/company-management', to: 'features#company_management'
 
-
-  get 'features/branded-job-board', to: 'features#job_board'
-  get 'features/applicant-tracking', to: 'features#applicant_tracking'
-  get 'features/candidate-profile', to: 'features#candidate_profile'
-  get 'features/talent-pool', to: 'features#talent_pool'
-  get 'features/hiring-team', to: 'features#hiring_team'
-  get 'features/recruitment-pipeline', to: 'features#recruitment_pipeline'
-  get 'features/evaluate-candidate', to: 'features#evaluate_candidate'
-  get 'features/task-pipeline', to: 'features#task_pipeline'
-  get 'features/user-roles', to: 'features#user_roles'
-  get 'features/manage-interviews', to: 'features#manage_interviews'
-  get 'features/centralized-communication', to: 'features#centralized_communication'
-  get 'features/score-assess', to: 'features#score_assess'
 
   resources :job_boards
   resources :jobs
@@ -77,6 +69,7 @@ Rails.application.routes.draw do
     root to: "jobs#index" 
     resources :activities
     resources :hiring_teams
+    
     resources :users
     resources :invitations
     resources :locations 
@@ -87,7 +80,9 @@ Rails.application.routes.draw do
     resources :interviews
     resources :email_templates
     get 'templates', to: "email_templates#index"
+    
     resources :applications do 
+      resources :ratings
       collection do 
         post :update_multiple, to: "stages#update_multiple"
         post :add_note_multiple, to: "comments#add_note_multiple"

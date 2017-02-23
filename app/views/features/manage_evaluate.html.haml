@@ -1,0 +1,56 @@
+#features-nav
+  %ul
+    %li= link_to 'Plan Hiring Process', features_plan_hiring_process_path 
+    %li= link_to 'Source Candidates', features_source_applicants_path     
+    %li= link_to 'Manage Candidates', features_screen_applicants_path 
+    %li= link_to 'Evaluate Candidates', features_manage_evaluate_path
+    / %li= link_to 'Company Management', features_company_management_path
+
+#feature-section-left
+  .description
+    %h2 Profile Based Recruitment
+    %p Talentwiz goes beyond the traditional resume, and allow a candidate to build a unique profile to provide employers with a more complete view of their experience and skills. A candidates entire application and details are stored in the candidate profile. Easily review an candidates CV, completed questionnaires, hiring member notes and scorecards, all in a central location.
+  .image
+    %img(src="/tmp/applicant-profile-screenshot.png")
+
+#feature-section-right
+  .description
+    %h2 Collaborate with Teammates
+    %p Being able to keep track of your thoughts about a candidate is important; its equally as important to see what your hiring team thinks. Add notes directly to a candidates profile, that your team can view and comment on.
+  .image
+    %img(src="/tmp/applicant-notes.png")
+
+/ #feature-section-left
+/   .description
+/     %h2 Schedule Interviews
+/     %p Begin by looking over your teammates availability than by reaching out to determine a candidates availability. This can be done one of two ways.First Option: send an e-mail to the candidate to ask for their availability, and than send a meeting request to your team members. Second Option: is to compose an availability form based on your teams availability that automatically books a meeting slot upon receiving a candidates submission.
+/   .image
+/     %img(src="/tmp/homepage-dashboard2.png")
+#feature-section-left
+  .description
+    %h2 Application Form
+    %p Keeping track of the communication between your team and a candidate can be complicated. Talentwiz makes it simple. Simply, e-mail candidates directly from the candidate profile. All messages are tracked and added to the candidate profile, so the entire hiring team can see the last communication with an applicant.
+  .image
+    %img(src="/tmp/profile-message.png")
+
+#feature-section-right
+  .description
+    %h2 Applicant Scorecards
+    %p Begin by looking over your teammates availability than by reaching out to determine a candidates availability. This can be done one of two ways.First Option: send an e-mail to the candidate to ask for their availability, and than send a meeting request to your team members. Second Option: is to compose an availability form based on your teams availability that automatically books a meeting slot upon receiving a candidates submission.
+  .image
+    %img(src="/tmp/applicant-scorecard.png")
+
+
+
+#feature-section-left
+  .description
+    %h2 Centralized Messaging
+    %p Keeping track of the communication between your team and a candidate can be complicated. Talentwiz makes it simple. Simply, e-mail candidates directly from the candidate profile. All messages are tracked and added to the candidate profile, so the entire hiring team can see the last communication with an applicant.
+  .image
+    %img(src="/tmp/profile-message.png")
+
+.mid-container
+  %h1 Transform your hiring process today
+  = link_to "Try it Today", new_user_path, class: "white-border-button"
+
+= render 'shared/bottom_header'

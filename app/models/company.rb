@@ -13,7 +13,7 @@ class Company < ActiveRecord::Base
   has_one :customer
   has_one :job_board
   has_many :payments
-  has_many :activities
+  has_many :activities, -> {order("created_at DESC")}
   has_many :tags
   has_many :email_templates
   validates_presence_of :name, :website

@@ -1,8 +1,8 @@
-.contain
-  .sidebar
-    .nav
-      = render 'business/shared/admin_sidebar'
-
+.page-header
+  %h1 Add Team Members 
+#post-a-job
+  .side-container
+    = render 'business/shared/admin_sidebar'
   .main-container
     .header
       %h1 My Profile 
@@ -16,23 +16,24 @@
       %h4 Profile Picture
       = image_tag @avatar.image.medium_image, :size => "100x100" if @avatar.present?
       = link_to "Change Photo", '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"}
-      = render 'business/users/profile_picture'
 
-      / %h4 Sync With Gmail 
-      / = link_to "Authenticate with Google!", '/auth/google_oauth2'
+= render 'business/users/profile_picture'
 
-      / - if @auth.present? 
-      /   - @auth.each do |key, value| 
-      /     = key 
-      /     = value
+/ %h4 Sync With Gmail 
+/ = link_to "Authenticate with Google!", '/auth/google_oauth2'
 
-      / - if @emails.present? 
-      /   - @emails.each do |email|
-      /     = email.body
+/ - if @auth.present? 
+/   - @auth.each do |key, value| 
+/     = key 
+/     = value
 
-      / - if @labels.present? 
-      /   - @labels.each do |label|
-      /     = label.id
-          
+/ - if @emails.present? 
+/   - @emails.each do |email|
+/     = email.body
 
-     
+/ - if @labels.present? 
+/   - @labels.each do |label|
+/     = label.id
+    
+
+

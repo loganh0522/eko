@@ -4,23 +4,18 @@
   .side-container
     = render 'business/shared/post_job' 
   .main-container
-    .stage-header
+    #stage-header
       %h4 Add Stages
       = render "form"  
     .create_stages    
-      %ul
-        %li
-          .stage 
-            .stage-header
-              All Applicants
-            .stage-body     
+      .stage 
+        .stage-header
+          All Applicants     
       = render "create_stages", stages: @stages
-      %ul
-        %li 
-          .stage 
-            .stage-header
-              Rejected
-            .stage-body
+      .stage 
+        .stage-header
+          Rejected
+
   .modal
     .modal-dialog
       .modal-content

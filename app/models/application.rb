@@ -24,6 +24,7 @@ class Application < ActiveRecord::Base
   has_many :tags, through: :taggings
 
   has_many :interviews
+  has_many :ratings
 
 
   def generate_token

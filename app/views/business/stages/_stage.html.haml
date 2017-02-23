@@ -1,16 +1,14 @@
+.stage{:id => "stage_#{stage.id}"}
+  .stage-header
+    .glyphicon.glyphicon-move
+    .body
+      = stage.name
+    .icons
+      = link_to business_job_stage_path(@job.id, stage.id), remote: true, :method => :delete do
+        %i.glyphicon.glyphicon-remove
+      = link_to edit_business_job_stage_path(@job.id, stage.id), :data => {:remote => true } do
+        %i.glyphicon.glyphicon-pencil
 
-%li{:id => "stage_#{stage.id}"}
-  .stage
-    .stage-header
-      .glyphicon.glyphicon-move
-      .body
-        = stage.name
-      .icons
-        = link_to edit_business_job_stage_path(@job.id, stage.id), :data => {:remote => true } do
-          %i.glyphicon.glyphicon-pencil
-        = link_to business_job_stage_path(@job.id, stage.id), remote: true, :method => :delete do
-          %i.glyphicon.glyphicon-remove
-    .stage-body
 
     / .tasks
     /   .task

@@ -35,7 +35,7 @@
         width: 100%
         z-index: 10
 
-  .stage-header
+  #stage-header
     margin-bottom: 25px
     overflow: hidden
     width: 100%
@@ -71,49 +71,45 @@
       
 
   .create_stages
-    margin-top: 25px
-    ul
+    margin-top: 25px          
+    .stage   
+      border-radius: 5px
+      margin-bottom: 10px
+      color: rgba(0,0,0, .7) 
       width: 100%
-      padding: 0 0
-      li
-        list-style: none
-        box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-        border-radius: 5px
-        float: left
-        width: 100%
-        margin-bottom: 15px
-        color: rgba(0,0,0, .7)
-        .stage   
-          .stage-header
-            background-color: rgba(0, 0, 0, 0.05) 
-            padding: 10px 10px 
-            border-bottom: 1px solid rgba(0,0,0,.1)
-            .glyphicon.glyphicon-move
-              float: left
-              margin-right: 15px
-              margin-top: 2px
-              color: rgba(0,0,0, .3)
-            .body
-              float: left
-            .icons
-              float: right
-              margin-right: 10px
-              margin-top: -4px
-              i  
-                color: rgba(0,0,0, .3)
-                margin-left: 5px
-          &:hover
-            cursor: move
-        .stage-body
-          height: 100px
+      height: auto
+      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+      .stage-header
+        background-color: rgba(0, 0, 0, 0.05) 
+        height: auto
+        overflow: hidden
+        padding: 10px 10px 
+        border-bottom: 1px solid rgba(0,0,0,.1)
+        .glyphicon.glyphicon-move
+          float: left
+          margin-right: 15px
+          color: rgba(0,0,0, .3)
+        .body
+          float: left
+        .icons
+          float: right
+          margin-right: 10px
+          margin-top: 2px
+          i  
+            color: rgba(0,0,0, .3)
+            margin-left: 5px
+      &:hover
+        cursor: move
+      .stage-body
+        height: 100px
 
-        .tasks
-          
-        .actions
-          float: rights
+      .tasks
+        
+      .actions
+        float: rights
 
-          a:first-of-type
-            margin-right: 10px
+        a:first-of-type
+          margin-right: 10px
   
   .questions
     margin-top: 25px
@@ -187,53 +183,55 @@
             margin-bottom: 15px
             color: rgba(0,0,0, .7)
 
-.main-container
-  .job_scorecard
-    .question-area
-      width: 100%
-      border-radius: 5px
-      background: #ffffff
-      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-      margin-bottom: 10px
-      padding: 5px 15px
-      .answer-type
-        clear: both
-        float: left
-        margin: 0 0 10px 10px
-        .question-type
-          margin: 0 30px 0 10px
-        .remove_question
-          float: left
-          margin-top: 3px
-      .add_fields
-        color: #EF7B2B 
-        margin: 10px 0 10px 10px
-      .answers 
-        width: 500px
-        margin: 5px 0 0 25px
-        .form-control
-          float: left
-          width: 400px
-          margin-bottom: 5px
-          margin-right: 10px   
-        .glyphicon
-          margin: 18px 0 0 10px
-          float: left
-          color: rgba(0,0,0,0.3)
-          text-decoration: none 
-    .footer
-      margin-top: 15px
-      overflow: hidden
-      height: auto
-      padding: 10px 10px
-      .submit-button
-        float: right
-        margin-left: 15px
+
+.job_scorecard
+  height: auto
+  clear: both
+  .question-area
+    width: 100%
+    border-radius: 5px
+    background: #ffffff
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    margin-bottom: 10px
+    padding: 5px 15px
+    .answer-type
+      clear: both
+      float: left
+      margin: 0 0 10px 10px
+      .question-type
+        margin: 0 30px 0 10px
       .remove_question
-        float: right
-        background: rgba(0,0,0,0.01)
-        color: rgba(0,0,0,0.7)
-        border: 1px solid rgba(0,0,0,0.1)
+        float: left
+        margin-top: 3px
+    .add_fields
+      color: #EF7B2B 
+      margin: 10px 0 10px 10px
+    .answers 
+      width: 500px
+      margin: 5px 0 0 25px
+      .form-control
+        float: left
+        width: 400px
+        margin-bottom: 5px
+        margin-right: 10px   
+      .glyphicon
+        margin: 18px 0 0 10px
+        float: left
+        color: rgba(0,0,0,0.3)
+        text-decoration: none 
+  .footer
+    margin-top: 15px
+    overflow: hidden
+    height: auto
+    padding: 10px 10px
+    .submit-button
+      float: right
+      margin-left: 15px
+    .remove_question
+      float: right
+      background: rgba(0,0,0,0.01)
+      color: rgba(0,0,0,0.7)
+      border: 1px solid rgba(0,0,0,0.1)
 
 
 

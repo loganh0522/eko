@@ -1,0 +1,40 @@
+#features-nav
+  %ul
+    %li= link_to 'Plan Hiring Process', features_plan_hiring_process_path 
+    %li= link_to 'Source Candidates', features_source_applicants_path     
+    %li= link_to 'Manage Candidates', features_screen_applicants_path 
+    %li= link_to 'Evaluate Candidates', features_manage_evaluate_path
+    / %li= link_to 'Company Management', features_company_management_path
+
+#feature-section-right
+  .description
+    %h2 One-click Job Distribution   
+  .image
+    %p Get your job in front of people is essential to attracting top talent to your company. Quickly post jobs to multiple job boards directly from TalentWiz at the click of a button.  
+
+#feature-section-right
+  .description
+    %h2 Hosted Job Portal  
+  .image
+    %p Easily build and integrate a branded careers page to display jobs and accept applications online. Simply add your logo and a short description about your company to get up and running. Jobs are automatically updated on the portal as you add, edit and delete job postings.
+
+#feature-section-right
+  .description
+    %h2 Job Widget  
+  .image
+    %p Want to display your jobs on your website? No problem, we offer an easy to use job widget. With a little bit of code JavaScript and CSS you can customize the look of your job postings and job descriptions. Jobs are automatically updated on your website as you post, edit and close job postings.
+
+#feature-section-right
+  .description
+    %h2 Build a Talent Pool
+    %p Building a talent pool that you can go back to is a crucial part of a good recruitment strategy. View all the applicants that have applied to your company in a central location. 
+    %p You can filter through all the applicants by the job they applied to, tags, or search their profile for key words and phrases.
+    %p Talentwiz makes it simple to track the job an applicant applied to, and what your team thought about them. Recruiters can easily add candidates to another job, if they feel they would be a good fit.
+  .image
+    %img(src="/tmp/build-talent-pool.png")
+
+.mid-container
+  %h1 Transform your hiring process today
+  = link_to "Try it Today", new_user_path, class: "white-border-button"
+
+= render 'shared/bottom_header'

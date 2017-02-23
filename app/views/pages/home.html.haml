@@ -5,26 +5,53 @@
     .sub-header 
       Easy to use software, to source, evaluate & manage your applicants all in one location.   
     .sign-up
-      = link_to "Try it Today", new_user_path, class: "btn btn-primary btn-large"
+      = link_to "Try it Today", new_user_path, class: "white-border-button"
 
 #feature-section-right
   .description
     %h2 Manage all your jobs with ease
-    %p Talentwiz allows you track all your applications online in a central location. Applications are organized by job, and can be easily moved from stage to stage until the end of the hiring process.
+    %p No more guessing which job still needs to filled. Talentwiz allows you to track all your job postings with ease. Our dashboard effectively displays all your jobs in a central location.
+    %ul 
+      %li 
+        %span Visual pipeline of where the hiring process stands
+      %li 
+        %span Customize your recruitment process for each job
+      %li 
+        %span Filter jobs by status, location, name and type
+
   .image
     %img(src="/tmp/homepage-dashboard2.png")
 
 #feature-section-left
   .description
-    %h2 Collect more information about applicants
-    %p Hiring is all about getting to know people and building relationships. Easily build an application form that applicants complete when they apply for a job. Want to learn more? Send them another assessment once you have screened applicants.
+    %h2 Accept & Manage Applications Online
+    %p Don't let applications fill up your e-mail. Talentwiz allows you to accept all applications online directly through your branded career portal.  
+    %ul 
+      %li
+        %span Build a great career portal to promote job opportunities
+      %li
+        %span Customized application form 
+      %li
+        %span Easily rank and filter applicants
+      %li 
+        %span Mass actions for candidates
   .image
-    %img(src="/tmp/application-form-screenshot.png")
+    %img(src="/tmp/build-talent-pool.png")
 
 #feature-section-right
   .description
     %h2 Centralized Candidate Management
-    %p Talentwiz allows you track all the information about a candidate in a central location. Track your notes, e-mail chains, completed questionnaires and evaluations, all on the candidate profile.   
+    %p Losing track of a candidate and their standing in your hiring process can be costly. Talentwiz allows you track all the information about a candidate in a central location. 
+    %ul 
+      %li 
+        %span  All contact information & CV
+      %li 
+        %span Collaborate with teammates 
+      %li 
+        %span Track all communication with an applicant
+      %li 
+        %span Centralized assessments and evaluations
+
   .image
     %img(src="/tmp/applicant-profile-screenshot.png")
 
@@ -57,42 +84,27 @@
 / .home-intro-info
 /   .header 
 /     .row 
-/       .col-md-4
-/         %img(src="/tmp/idea.png")
-/         %h3 Build Your Hiring Process
-/         %p.content Hiring great talent starts with a great hiring process. Plan and create an effective recruitment strategy with ease. 
-/         = link_to "Learn More", features_hiring_team_path, class: "btn btn-primary btn-large"
-/       .col-md-4
-/         %img(src="/tmp/search.png") 
-/         %h3 Find and Attract Talent
-/         %p.content Attract, find, and engage talent to build your talent pipeline like a pro. Build an online recruitment presence in minutes.
-/         = link_to "Learn More", features_branded_job_board_path, class: "btn btn-primary btn-large"
-/       .col-md-4
-/         %img(src="/tmp/applicant.png")  
+/       .col-md-3
+/         %h3 Plan Hiring Process
+/         %p.content Hiring great talent starts with a great hiring process. Don't worry we will help you get there.
+/         = link_to "Learn More", features_hiring_team_path, class: "job-seeker-btn"
+/       .col-md-3
+/         %h3 Source Applicants
+/         %p.content Attract, find, and engage talent to build your talent pipeline like a pro. 
+/         = link_to "Learn More", features_branded_job_board_path, class: "job-seeker-btn"
+/       .col-md-3 
 /         %h3 Manage Applicants
-/         %p.content We know that hiring often needs to happen quickly. Efficiently manage your applicants through the entire recruitment process. 
-/         = link_to "Learn More", features_applicant_tracking_path, class: "btn btn-primary btn-large"
-/     .second-row
-/       .row
-/         .col-md-4
-/           %img(src="/tmp/check-list2.png")
-/           %h3 Assess Candidates 
-/           %p.content Find and identify the best applicants in your pipeline. Leverage your success with our unique candidate filters, customizable scorecards and questionnaires. 
-/           = link_to "Learn More", '', class: "btn btn-primary btn-large"
-/         .col-md-4
-/           %img(src="/tmp/stick-man.png") 
-/           %h3 Team Collaboration
-/           %p.content Hiring is a team a sport. Collaborate with your team members to evaluate candidates and efficiently manage the recruitment workflow together.
-/           = link_to "Learn More", features_user_roles_path, class: "btn btn-primary btn-large"
-/         .col-md-4
-/           %img(src="/tmp/pie-chart.png")  
-/           %h3 Analyze & Improve
-/           %p.content Analyze, assess and improve every aspect of your recruitment strategy. Our hiring metrics allow you to see your results. 
-/           = link_to "Learn More", '', class: "btn btn-primary btn-large"
+/         %p.content Efficiently manage your applicants through the entire recruitment process. 
+/         = link_to "Learn More", features_applicant_tracking_path, class: "job-seeker-btn"
+/       .col-md-3
+/         %h3 Assess Applicants 
+/         %p.content Easily assess candidates and collaborate with your team in a central location.
+/         = link_to "Learn More", '', class: "job-seeker-btn"
 
 .mid-container
   %h2 Grow your Company with TalentWiz
-  = link_to "Start Your Trial", new_user_path, class: "btn btn-trial"
+  = link_to "Start Your Trial", new_user_path, class: "white-border-button"
+
 
 .bottom-container
   .col-md-3

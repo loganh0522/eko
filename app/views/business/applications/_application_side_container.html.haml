@@ -9,7 +9,8 @@
   
   .applicant-details
     .name= "#{@application.applicant.first_name.capitalize } #{@application.applicant.last_name.capitalize}"
-    .job= "#{@application.applicant.current_jobs.first.title}  #{@application.applicant.current_jobs.first.company_name} "
+    - if @application.applicant.current_jobs.present?
+      .job= "#{@application.applicant.current_jobs.first.title}  #{@application.applicant.current_jobs.first.company_name} "
     .location= "#{@application.applicant.city}"
 
 .filter

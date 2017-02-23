@@ -29,6 +29,8 @@ gem 'mini_magick'
 gem 'carrierwave'
 gem 'carrierwave-aws'
 
+gem "font-awesome-rails"
+
 gem 'jcrop-rails-v2'
 
 gem 'elasticsearch-model'

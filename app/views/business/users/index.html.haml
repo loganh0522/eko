@@ -4,7 +4,7 @@
   .side-container
     = render 'business/shared/admin_sidebar'
   .main-container
-    .stage-header
+    #stage-header
       %h4 Team Members 
       .stage-form
         = form_for [:business, @invitation], html: {class: 'invite'} do |f|    

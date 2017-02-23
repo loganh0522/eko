@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :activities
   has_many :notifications
+  has_many :ratings
 
   has_many :interviews
   has_many :interviews, through: :my_interviews

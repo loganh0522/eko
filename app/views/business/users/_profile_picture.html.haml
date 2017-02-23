@@ -4,14 +4,25 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
         %h4.modal-title Edit Profile Picture
-      .modal-body
-        .row
-          .image.col-md-6
-            = form_for [:business, @user_avatar] do |f| 
-              %p Add a photo and crop it below. 
-              = image_tag(@user_avatar.image) if @user_avatar.image?
-              = f.file_field :image, class: "btn btn-file"
-              = f.submit "Submit"
-          .preview.col-md-6
-            %p Preview
-      .modal-footer
+      = form_for [:business, @user_avatar] do |f| 
+        .modal-body
+          .crop-image
+            %p Add a photo and crop it below.s
+            = f.file_field :image, class: "btn btn-file", id: "imgInp"
+            - %w[x y w h].each do |attribute| 
+              = f.hidden_field "crop_#{attribute}"     
+            %img(src="#" class="blah" id="cropbox")
+          #img-preview-area
+            .img-preview-blank
+              %img(src="/tmp/blank_profile_picture.png")
+            .img-preview
+              %img(src="#" class="blah" id="preview")
+        .modal-footer
+          .row
+            = f.submit 'Crop Image', class: 'btn btn-primary', id: 'submit-crop'
+            - if !@user_avatar.new_record?
+              .close-form#edit-form.btn.btn-primary     
+                Close
+            - else
+              .close-form#new-form.btn.btn-primary     
+                Close 

@@ -2,37 +2,16 @@ class FeaturesController < ApplicationController
 
   def plan_hiring_process
   end
-  def candidate_profile
+
+  def screen_applicants
   end
 
-  def applicant_tracking
+  def source_applicants
   end
 
-  def job_board
+  def manage_evaluate
   end
 
-  def talent_pool
+  def company_management
   end
-
-  def hiring_team
-  end
-
-  def recruitment_pipeline
-  end
-
-  def evaluate_candidate
-  end
-
-  def user_roles
-  end
-
-  def manage_interviews
-  end
-
-  def centralized_communication
-  end
-
-  def score_assess
-  end
-  
 end

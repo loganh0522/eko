@@ -1,46 +1,44 @@
 #features-nav
   %ul
-    = link_to "#" do 
-      %li Plan your Hiring Process
-    = link_to "#" do 
-      %li Source Candidates
-    = link_to "#" do 
-      %li Screen Candidates
-    = link_to "#" do 
-      %li Manage & Evaluate
-    = link_to "#" do 
-      %li Company Management
-
-#feature-section-right
-  .description
-    %h2 Create your Job Posting
-    %p Talentwiz allows you track all your applications online in a central location. Applications are organized by job, and can be easily moved from stage to stage until the end of the hiring process.
-  .image
-    %img(src="/tmp/homepage-dashboard2.png")
+    %li= link_to 'Plan Hiring Process', features_plan_hiring_process_path 
+    %li= link_to 'Source Candidates', features_source_applicants_path     
+    %li= link_to 'Manage Candidates', features_screen_applicants_path 
+    %li= link_to 'Evaluate Candidates', features_manage_evaluate_path
+    / %li= link_to 'Company Management', features_company_management_path
 
 #feature-section-left
   .description
     %h2 Customize Your Hiring Pipeline
-    %p Keeping track of candidates starts by building a recruitment pipeline. Add as many stages as you want to a job and arrange them in any order you see fit. Candidates are added to the "All Applicants" folder, and you can move them from stage to stage as they progress through the recruitment process. 
+    %p We allow you to customize the recruitment process for each job to allow you to easily manage and track candidates through the hiring process. Add as many stages as you want to a job and simply drag and drop them to arrange them in any order you see fit. Candidates can be moved from stage to stage as they progress through the recruitment process.
+
   .image
-    %img(src="/tmp/application-form-screenshot.png")
+    %img(src="/tmp/customize-stages.png")
 
 #feature-section-right
   .description
     %h2 Build a Hiring Team
-    %p Hiring is more effective when it is performed as a team. It often requires multiple perspectives to assess a potential candidate. Add as many people as you want to the hiring team for a job. If they are not a part of the system, you can simply invite them directly from the job, and they will be added to the job upon signing up.
+    %p Hiring is more effective when it is performed as a team. Hiring often requires multiple perspectives to effectively assess a potential candidate. Add as many people as you want to the hiring team for a job. If they are not a part of the system, you can simply invite them directly from the job, and they will be added to the job upon signing up.
   .image
-    %img(src="/tmp/homepage-dashboard2.png")
+    %img(src="/tmp/build-hiring-team.png")
 
 #feature-section-left
   .description
-    %h2 Application Form 
-    %p Often a candidates profile does not provide enough information. Build a custom questionnaire for applicants to complete when they apply for a job. Applicant answers are stored on the candidate profile, and can be viewed by all members of the hiring team. Team members can leave comments and evaluate a candidates answers to a questionnaire.
+    %h2 Custom Application Form 
+    %p Gain more insight into an applicants fit for a job. Build a completely customizable application form, using multiple choice, yes/no and text questions. Candidates complete the form before their application is submitted to a job. 
+
   .image
-    %img(src="/tmp/application-form-screenshot.png")
+    %img(src="/tmp/application-form.png")
+
+#feature-section-right
+  .description
+    %h2 Create a Candidate Scorecard
+    %p Knowing what skills, traits, and experience a candidate has is essential to hiring a candidate that is the right fit for the job. Build a scorecard for hiring members to use to evaluate candidates. Hiring members can see what others have rated and said about a candidates fit for a specific criteria. 
+  .image
+    %img(src="/tmp/applicant-scorecard.png")
+
 
 .mid-container
   %h1 Transform your hiring process today
-  = link_to "Try it Today", new_user_path, class: "btn btn-primary btn-large"
+  = link_to "Try it Today", new_user_path, class: "white-border-button"
 
 = render 'shared/bottom_header'

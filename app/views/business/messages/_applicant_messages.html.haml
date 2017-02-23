@@ -12,7 +12,7 @@
             .circle-img
               %img(src="/tmp/little-man.png")     
           .contain
-            = "#{message.user.full_name} sent a message to #{@application.applicant.full_name}"
+            = "#{message.user.full_name} sent a message"
             %br
             .time= time_ago_in_words(message.created_at)
             

@@ -1,0 +1,53 @@
+#features-nav
+  %ul
+    %li= link_to 'Plan Hiring Process', features_plan_hiring_process_path 
+    %li= link_to 'Source Candidates', features_source_applicants_path     
+    %li= link_to 'Manage Candidates', features_screen_applicants_path 
+    %li= link_to 'Evaluate Candidates', features_manage_evaluate_path
+    / %li= link_to 'Company Management', features_company_management_path
+
+#feature-section-right
+  .description
+    %h2 Job Pipeline / Dashboard
+    %p Our recruitment dashboard makes it easy to keep track of your open, closed and archived jobs. Allowing you to easily view the jobs that you are a part of, or view all the active jobs in the company. From the dashboard, you can see how many applicants have applied, been moved forward, put on hold, rejected and hired for a job.
+
+    %p The job pipeline overview shows all the applicants and activity for a job in a central location. View the candidates in each stage, simply by clicking on the relevant stage. Further, get a complete overview of all the activity for the job.
+  .image
+    %img(src="/tmp/homepage-dashboard2.png")
+
+#feature-section-left
+  .description
+    %h2 Simple Job Management
+    %p Hiring can be difficult. We built the our system to be as easy to use as possible. All your candidates are organized by the job that they applied and can be accessed from a central location. 
+  .image
+    %img(src="/tmp/specific-job-layout-shot2.png")
+
+#feature-section-right
+  .description
+    %h2 Bulk Actions
+    .sub-header E-mail
+    %p Messaging multiple candidates can be tedious, especially if you are rejecting them. Talentwiz makes this easy. Simply select the candidates you wish to message, and use our E-mail tokens, and each candidate will receive a personalized message.
+    .sub-header Move Stages
+    %p Easily move multiple candidates to a new stage simply by selecting the candidates, and the stage you wish to move them to. 
+    .sub-header Comment
+    %p Want to add the same comment to multiple candidates? No worries, you can do that too! 
+  .image
+    %img(src="/tmp/mass-notes.png")
+
+#feature-section-left
+  .description
+    %h2 Applicant Filters
+    .sub-header Full-Text Search
+    %p Easily search for candidates based on key-words or phrases in their profile. 
+    .sub-header Tags
+    %p Add tags to applicants to build pools of candidates that have specific skills, experience, and other criteria. Easily filter candidates based on the tags your company has used. 
+  .image
+    %img(src="/tmp/homepage-dashboard2.png")
+
+
+
+.mid-container
+  %h1 Transform your hiring process today
+  = link_to "Try it Today", new_user_path, class: "white-border-button"
+= render 'shared/bottom_header'
+
