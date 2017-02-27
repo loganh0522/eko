@@ -1,0 +1,20 @@
+.home-intro-header
+  .intro-message 
+    .header
+      Request a Tour
+    .sub-header 
+      Submit a personal tour request. We will build you an account, so we can run you through our product. 
+
+.standard-container
+  .inner-container
+    = form_tag send_multiple_messages_business_applications_path do 
+      = text_field_tag :first_name, nil, placeholder: "First Name", autocomplete: false
+      = text_field_tag :last_name, nil, placeholder: "Last Name", autocomplete: false
+      = text_field_tag :email, nil, placeholder: "E-mail", autocomplete: false
+      = text_field_tag :phone, nil, placeholder: "Phone Number", autocomplete: false
+      = text_field_tag :company_name, nil, placeholder: "Company Name", autocomplete: false
+      = text_field_tag :company_name, nil, placeholder: "Company Website", autocomplete: false   
+      = select_tag :company_name, nil, placeholder: "Company Name", autocomplete: false
+      = submit_tag "Submit Request", class: "btn submit-button"
+
+= render 'shared/bottom_header'

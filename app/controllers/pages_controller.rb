@@ -17,4 +17,10 @@ class PagesController < ApplicationController
   def features
   end
   
+  def contact
+  end
+
+  def demo
+    
+  end
 end

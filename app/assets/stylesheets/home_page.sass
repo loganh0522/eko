@@ -1,26 +1,29 @@
 .home-intro-header
-  padding-top: 50px
+  padding: 25px 0
   text-align: center
-  height: 300px
+  height: auto
   background: #EF7B2B
   border-bottom: 1px solid rgba(0, 0, 0, 0.1)
   color: #ffffff
   .intro-message
-    margin-right: 15%
-    margin-left: 15%
-    width: 70%
+    width: 90%
+    margin: 0 auto
+    height: auto
     .header 
       margin-bottom: 20px
       font-size: 44px
       font-weight: 300
+      height: auto
     .sub-header
       font-size: 20px
-      font-weight: 400
+      font-weight: 300
       margin-bottom: 30px
+      height: auto
     .sign-up   
       width: auto
       a
         margin: 15px auto
+
 
 #feature-section-right
   height: auto
@@ -32,19 +35,15 @@
     font-size: 16px
     color: rgba(0,0,0,0.6)
     line-height: 2
-
-  .sub-header
-    font-size: 20px 
-    color: rgba(0,0,0,0.6)
-  .description
-    width: 48%
-    float: left
-    margin-right: 4%
-    h2
-      margin-top: 0
-      margin-bottom: 25px   
-      color: #EF7B2B
+  .submit-button
+    width: 100%
+    font-weight: 400
+  h2
+    margin-top: 0
+    margin-bottom: 25px   
+    color: #EF7B2B 
   ul 
+    margin: 0 0 
     li 
       color: #EF7B2B
       margin-top: 10px
@@ -52,6 +51,17 @@
         color: rgba(0,0,0,0.6)
         font-size: 16px
         margin-left: 15px
+  .sub-header
+    font-size: 20px 
+    color: rgba(0,0,0,0.6)
+  .description
+    width: 48%
+    float: left
+    margin-right: 4%
+    
+    @media screen and (max-width: 960px)
+      float: none
+      width: 100%
   .image
     width: 48%
     float: right
@@ -59,6 +69,10 @@
       border-radius: 5px
       box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
       max-width: 100%
+    @media screen and (max-width: 960px)
+      margin-top: 35px
+      float: none
+      width: 100%
 
 #feature-section-left
   height: auto
@@ -70,17 +84,10 @@
     font-size: 16px
     color: rgba(0,0,0,0.6)
     line-height: 2
-  .sub-header
-    font-size: 20px 
-    color: rgba(0,0,0,0.6)
-  .description
-    float: right
-    width: 48%
-    margin-left: 4%
-    h2
-      margin-top: 0
-      margin-bottom: 25px 
-      color: #EF7B2B
+  h2
+    margin-top: 0
+    margin-bottom: 25px 
+    color: #EF7B2B
   ul 
     li 
       color: #EF7B2B
@@ -90,6 +97,16 @@
         color: rgba(0,0,0,0.6)
         font-size: 16px
         margin-left: 15px
+  .sub-header
+    font-size: 20px 
+    color: rgba(0,0,0,0.6)
+  .description
+    float: right
+    width: 48%
+    margin-left: 4%
+    @media screen and (max-width: 960px)
+      float: none
+      width: 100% 
   .image
     float: left
     width: 48%
@@ -97,28 +114,10 @@
       border-radius: 5px
       box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
       max-width: 100%
-
-.content-breaker
-  background: #EF7B2B
-  text-align: center
-  margin-top: -20px
-  color: white
-  padding-left: 10%
-  padding-right: 10%
-  padding-top: 20px
-  padding-bottom: 20px
-
-.home-intro-info
-  padding: 50px 100px 75px 100px
-  text-align: center
-  background-color: #ffffff
-  .col-md-6
-    margin-top: 60px
-  .content
-    margin: 20px 0
-  p
-    font-size: 16px
-    color: rgba(0, 0, 0, 0.7)
+    @media screen and (max-width: 960px)
+      margin-top: 35px
+      float: none
+      width: 100%
 
 .mid-container
   text-align: center
@@ -134,18 +133,71 @@
 
 .bottom-container
   background: white
-  padding: 50px 10% 150px 10%
-  
+  width: 100%
+  padding: 25px 10% 150px 10%
+  .logo
+    float: left
+    width: 25%
+    @media screen and (max-width: 600px)
+      float: none
+      width: 100%
+      text-align: center
+  .product-info
+    float: left
+    width: 25%
+    @media screen and (max-width: 600px)
+      float: none
+      width: 100%
+      text-align: center
+  .contact-info
+    float: left
+    width: 25%
+    @media screen and (max-width: 600px)
+      float: none
+      margin-top: 25px
+      width: 100%
+      text-align: center
+  .try-talentwiz
+    float: left
+    width: 25%
+    @media screen and (max-width: 600px)
+      float: none
+      margin-top: 25px
+      width: 100%
+      text-align: center
   h4
-    font-weight: 600
+    font-weight: 400
+    color: #EF7B2B
+    font-size: 18px
   ul 
     list-style: none
-    text-decoration: none
     font-size: 14px
     li
       margin-left: -40px
+      margin-top: 10px
       font-size: 16px
+      a
+        text-decoration: none
+        color: rgba(0,0,0,0.7)
+  @media screen and (max-width: 600px)
+    h4
+      font-size: 22px
 
+.standard-container
+  height: auto
+  background: white
+  border-bottom: 1px solid rgba(0,0,0,0.1)
+  width: 100%
+  padding: 25px 0
+  .inner-container
+    text-align: center
+    width: 600px
+    margin: auto
+    .submit-button
+      width: 100%
+      font-weight: 400
+    @media screen and (max-width: 600px)
+      width: 90%
 
 /* Pricing Page */ 
 
@@ -156,7 +208,7 @@
   background: #EF7B2B
   background-size: cover
   height: auto
-  padding: 50px
+  padding: 25px
   .intro-message
     .header 
       margin-bottom: 20px
@@ -173,7 +225,6 @@
   height: auto
   background: white
   border-bottom: 1px solid rgba(0,0,0,0.1)
-
   .intro-message
     .header 
       margin-bottom: 20px
@@ -186,11 +237,13 @@
       margin-bottom: 30px
 
 .pricing-type
-  margin-bottom: 25px
+  margin: 25px 0
   ul 
     list-style: none
     text-decoration: none
-    margin: 0 0 0 -30px
+    text-align: center
+    margin: 0 0 
+    padding: 0 0 
     li 
       display: inline-block
       height: auto
@@ -203,7 +256,6 @@
       &:hover 
         cursor: pointer
         background: rgba(0,0,0,0.05)
-        
     .active-price 
       background: #EF7B2B
       border: none
@@ -254,7 +306,7 @@
   background: #ffffff
   border-bottom: 1px solid rgba(0,0,0,0.1)
   ul
-    width: 70%
+    width: 100%
     padding: 0 0
     overflow: hidden
     list-style: none
@@ -272,6 +324,7 @@
       height: auto
       font-size: 14px
       color: black
+      text-align: center
 
 
 

@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   
   get 'pricing', to: 'pages#pricing'
   get 'features', to: 'pages#features'
+  get 'contact', to: "pages#contact"
+  get 'demo', to: "pages#demo"
+
   get 'create-profile', to: "profiles#create_profile"
 
   get 'features/plan-hiring-process', to: 'features#plan_hiring_process'
@@ -56,9 +59,7 @@ Rails.application.routes.draw do
       delete "delete_skill", to: "users#delete_skill"
       get "add_certifications", to: "users#add_certifications"
     end
-
     resources :user_avatars   
-
     post "update_skills", to: "users#update_skills"
     post "update_certification", to: "users#update_certifications"
   end

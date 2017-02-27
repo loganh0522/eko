@@ -204,5 +204,17 @@ jQuery ->
     console.log($(this))
     
 
+################ Responsive Menu ############### 
+  $(document).on 'click', '.responsive-menu', (event) ->
+    if $('.responsive-menu-links').is(':visible')
+      $('.responsive-menu-links').hide()
+    else  
+      $('.responsive-menu-links').show()
+
+  $(window).on "resize", (event) -> 
+    if $(this).width() > 780 
+      $('.responsive-menu-links').hide()
+
+
 
 
