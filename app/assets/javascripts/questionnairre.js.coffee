@@ -11,6 +11,11 @@ jQuery ->
     $(this).parent().closest('.question-area').hide()
     event.preventDefault()
 
+
+  $('.create-profile-container ').on 'click', '.remove_fields', (event) ->
+    $(this).parent().parent().remove()
+    event.preventDefault()
+
   $('.job_scorecard').on 'click', '.add_fields', (event) ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')

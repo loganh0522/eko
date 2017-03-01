@@ -1,8 +1,8 @@
 .header
   .title Career Preferences
 .body
-  - if current_user.educations.nil?           
-  - else 
-    .not-present-container
-      %p You currently do not have any career preferences. 
-      = link_to "+ Add Preferences", new_job_seeker_education_path, :data => {:remote =>  true}, class: 'add-object' 
+  / - if current_user.profile.educations.nil?           
+  / - else 
+  /   .not-present-container
+  /     %p You currently do not have any career preferences. 
+  /     = link_to "+ Add Preferences", new_job_seeker_education_path, :data => {:remote =>  true}, class: 'add-object' 

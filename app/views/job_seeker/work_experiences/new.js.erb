@@ -3,7 +3,7 @@
 // $('.modal').modal("show");
 
 
-<% if current_user.work_experiences.count == 0 %>
+<% if current_user.profile.work_experiences.count == 0 %>
   $('<%= j render "job_seeker/work_experiences/form" %>').insertAfter('#experience-header');
   $('#experience-not-present').remove();
   $('#new_work_experience_button').hide()

@@ -13,7 +13,7 @@
     <script type="text/javascript" src="/assets/tinymce.js"></script>
   %body
     %header
-      - unless request.path == job_seeker_create_profile_path 
+      - unless request.path == new_job_seeker_profile_path 
         = render "/shared/header"   
     %section
       = render "/shared/messages"

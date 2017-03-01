@@ -1,9 +1,9 @@
 .body#certification-body
-  - if current_user.certifications.count == 0
+  - if current_user.profile.user_certifications.count == 0
     .not-present-container#not-present
       %p You currently do not have any certifications listed. 
       / = link_to "+ Add Certification", new_job_seeker_user_certification_path, :data => {:remote => true} , class: 'add-object'
   - else 
     %div{:id => "certifications"}
-      - current_user.user_certifications.each do |certification| 
+      - current_user.profile.user_certifications.each do |certification| 
         = render "job_seeker/user_certifications/user_certification", certification: certification

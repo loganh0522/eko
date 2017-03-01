@@ -39,6 +39,8 @@
           .col-md-6
             = f.text_field :last_name, placeholder: "Last Name", hide_label: true
         = f.email_field :email, placeholder: "Email Address", hide_label: true
+        = f.text_field :phone, placeholder: "Phone Number", hide_label: true
+        = f.text_field :location, class: "form-control", id: "geocomplete", label: "Location", autocomplete: "off"   
         = f.password_field :password, placeholder: "Password", hide_label: true
         = f.hidden_field :kind, :value => 'job seeker'
       = f.submit "Sign me up", class: "btn button-submit"

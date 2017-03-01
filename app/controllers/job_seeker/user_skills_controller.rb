@@ -1,5 +1,6 @@
 class JobSeeker::UserSkillsController < JobSeekersController
   before_filter :require_user
+  before_filter :profile_sign_up_complete
   
   def new
     @user_skill = UserSkill.new

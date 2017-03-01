@@ -1,6 +1,5 @@
 - if position.accomplishments.present? 
   .acc 
     %p Accomplishments
-  %ul
-    - position.accomplishments.each do |accomplishment|
-      = render 'job_seeker/accomplishments/accomplishment', accomplishment: accomplishment
+  - position.accomplishments.each do |accomplishment|
+    = render 'job_seeker/accomplishments/accomplishment', accomplishment: accomplishment, position: position

@@ -1,0 +1,33 @@
+.create-profile-container 
+  %h1 Welcome to TalentWiz
+  %p Your profile is submitted to the jobs that you apply for so that you do not have to compelete a new profile every time. So please take a few minutes to complete your profile.  
+
+  .job_scorecard
+    = bootstrap_form_for [:job_seeker, @profile] do |f|
+      .experience-container
+        .header
+          .title Experience
+        = f.fields_for :work_experiences, WorkExperience.new do |q|
+          = render "work_experience_fields", f: q
+        
+        = link_to_add_fields "+ Add Work Experience", f, :work_experiences
+      .experience-container
+        .header
+          .title Education
+        = f.fields_for :educations, Education.new do |q|
+          = render "education_fields", f: q
+        = link_to_add_fields "+ Add Education", f, :educations
+      .experience-container
+        .header#certification-header
+          .title Certification
+        = f.fields_for :user_certifications, UserCertification.new do |q|
+          = render "user_certification_fields", f: q
+        = link_to_add_fields "+ Add Certification", f, :educations
+      .footer
+        = f.hidden_field :user_id, value: current_user.id
+        = f.submit "Create Profile", class: "job-seeker-btn"
+
+
+
+
+     

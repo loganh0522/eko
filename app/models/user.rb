@@ -19,7 +19,6 @@ class User < ActiveRecord::Base
 
   has_many :interviews
   has_many :interviews, through: :my_interviews
-
   has_many :mentions
   has_many :mentioned, :through => :mentions
   has_many :mentioned, :class_name => "Mention", :foreign_key => "mentioned_id"
@@ -32,32 +31,15 @@ class User < ActiveRecord::Base
 
   # Job Seeker User relationships 
   
+  has_one :profile
+  
   has_many :applications
   has_many :apps, through: :applications, class_name: "Job", foreign_key: :job_id
-  has_many :educations
 
-
-  has_many :work_experiences, -> {order("end_year DESC")} 
   has_one :user_avatar
-
-  has_many :job_countries
-  has_many :countries, through: :job_countries
-
-
-  has_many :job_states
-  has_many :states, through: :job_states
-
-  has_many :user_skills
-  has_many :skills, through: :user_skills
-
-  has_many :user_certifications
-  has_many :certifications, through: :user_certifications
 
   has_one :google_token
   #Carrierwave uploader and minimagic for User Profile Pictures
-
-  accepts_nested_attributes_for :work_experiences, allow_destroy: true, reject_if: proc { |a| a[:body].blank? }
-  accepts_nested_attributes_for :educations, allow_destroy: true, reject_if: proc { |a| a[:body].blank? }
 
   def as_indexed_json(options={})
     as_json(

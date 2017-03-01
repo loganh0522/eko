@@ -14,6 +14,16 @@ class AppMailer < ActionMailer::Base
     mail to: recipient.email, from: "application-" + token + "@sys.talentwiz.ca", subject: "#{@message.subject}"
   end
 
+  def send_contact_message(contact)
+    @contact = contact
+    mail to: "houston@talentwiz.ca", from: "no-reply@talentwiz.com", subject: "Potential Customer Message"
+  end
+
+  def send_demo_request(demo)
+    @demo = demo
+    mail to: "houston@talentwiz.ca", from: "no-reply@talentwiz.com", subject: "Company Demo Request"
+  end
+
   def send_forgot_password(user)
     @user = user
     mail to: user.email, from: "info@myflix.com", subject: "Please reset your password"

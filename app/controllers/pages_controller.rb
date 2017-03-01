@@ -18,9 +18,10 @@ class PagesController < ApplicationController
   end
   
   def contact
+    @contact = ContactMessage.new
   end
 
   def demo
-    
+    @demo = Demo.new
   end
 end

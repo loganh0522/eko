@@ -30,27 +30,27 @@
         %li.change#experience.activated Experience 
         %li.change#education Education      
         %li.change#skills Certifications
-        %li.change#career-prefsCareer Preferences
         %li.change#my-apps My Applications
 
   .main-container#main-container
     .experience-container.showing
-      .header
+      .header#experience-header
         .title Experience
         .new_experience
-          = link_to "+ Add Experience", new_job_seeker_work_experience_path, :data => {:remote => true}, :html => {id: 'new_work_experience_button'}
+          = link_to "+ Add Experience", new_job_seeker_profile_work_experience_path(@profile), :data => {:remote => true}, :html => {id: 'new_work_experience_button'}
       = render 'job_seeker/work_experiences/experience'
+      
     .education-container
-      .header
+      .header#education-header
         .title Education
         .new_experience
-          = link_to "+ Add Education", new_job_seeker_education_path, :data => {:remote => true}, :html => {id: 'new_education_button'}
+          = link_to "+ Add Education", new_job_seeker_profile_education_path(@profile), :data => {:remote => true}, :html => {id: 'new_education_button'}
       = render 'job_seeker/educations/education_history'     
     .skills-container
-      .header
+      .header#certification-header
         .title Certifications
         .new_experience
-          = link_to "+ Add Certification", new_job_seeker_user_certification_path, :data => {:remote => true}, :html => {id: 'new_user_certification_button'}
+          = link_to "+ Add Certification", new_job_seeker_profile_user_certification_path(@profile), :data => {:remote => true}, :html => {id: 'new_user_certification_button'}
       = render 'job_seeker/user_certifications/certifications'    
     .career-prefs-container
       = render 'job_seeker/career_preferences/career_preferences'

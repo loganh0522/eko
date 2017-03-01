@@ -192,11 +192,11 @@ jQuery ->
     if $(this).attr('id') == 'edit-form'
       formobj = $(this).parent().attr('id').slice(5)
       $("#" + "#{formobj}").show()
-      $(this).parent().parent().hide()
+      $(this).parent().parent().remove()
     else if $(this).attr('id') == 'new-form'
       buttonobj = $(this).parent().attr('id')
       $("#" + "#{buttonobj}" + "_button").show()
-      $(this).parent().parent().hide()
+      $(this).parent().parent().remove()
     return
 
 ################ Star Rating ##################
@@ -214,6 +214,24 @@ jQuery ->
   $(window).on "resize", (event) -> 
     if $(this).width() > 780 
       $('.responsive-menu-links').hide()
+
+############### Current Position ##################
+  $(document).on 'click', '#work_experience_current_position', (event) ->
+    if $(this).is(':checked') == true  
+      $('#work_experience_end_month').hide()
+      $('#work_experience_end_year').hide()
+    else
+      $('#work_experience_end_month').show()
+      $('#work_experience_end_year').show()
+
+  $(document).on 'click', '.edit-position', (event) ->
+    if $('#work_experience_current_position').is(':checked') == true  
+      $('#work_experience_end_month').hide()
+      $('#work_experience_end_year').hide()
+    else
+      $('#work_experience_end_month').show()
+      $('#work_experience_end_year').show()
+
 
 
 

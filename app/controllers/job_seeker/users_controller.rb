@@ -1,5 +1,6 @@
 class JobSeeker::UsersController < JobSeekersController 
   before_filter :require_user
+  before_filter :profile_sign_up_complete
 
   
   def edit
@@ -17,58 +18,11 @@ class JobSeeker::UsersController < JobSeekersController
     end
   end
 
-  def create_profile
-    @user = current_user
-    @work_experience = WorkExperience.new
-    @education = Education.new
-    @certification = Certification.new
-  end
-
-  def add_skills
-
-  end
-
-  def update_skills
-    @user = User.find(current_user.id)
-    @user_skills = UserSkill.create(user_id: @user.id, skill_id: params[:skills_id])
-    
-    if @user_skills.save
-      redirect_to job_seeker_profiles_path
-    else
-      redirect_to job_seeker_profiles_path
-    end
-  end
-
-  def delete_skill
-    @skill = UserSkill.where(user_id: current_user.id, skill_id: params[:user_id])
-    @skill.first.destroy   
-    redirect_to job_seeker_profiles_path
-  end
-
-  def add_certifications
-
-  end
-
-
-  def update_certifications
-    @user = User.find(current_user.id)
-    @user_certification = UserCertification.create(user_id: @user.id, certification_id: params[:certification_id])
-    
-    if @user_certification.save
-      redirect_to job_seeker_profiles_path
-    else
-      redirect_to job_seeker_profiles_path
-    end
-  end
 
   private 
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :phone, :tag_line, :location)
-  end
-
-  def user_skills_params
-    params.require(:user).permit(:skill_ids, :user_ids)
   end
 
   def convert_location

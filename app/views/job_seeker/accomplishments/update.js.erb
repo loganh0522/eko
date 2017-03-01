@@ -1,3 +1,11 @@
-$('#edit_accomplishment_<%= @accomplishment.id %>').remove();
-$("#work_experience_<%= @work_experience.id %>").find('.accomplishments').find('#accomplishment_<%= @accomplishment.id %>').replaceWith('<%= j render (@accomplishment), position: @work_experience %>');
-
+<% if @accomplishment.valid? %>
+  $('#edit_accomplishment_<%= @accomplishment.id %>').remove();
+  $("#work_experience_<%= @work_experience.id %>").find('.accomplishments').find('#accomplishment_<%= @accomplishment.id %>').replaceWith('<%= j render (@accomplishment), position: @work_experience %>');
+<% else %>
+  $(".notice").remove();
+  $('.form-group').removeClass('has-error');
+  <% if @errorBody[0] != nil %>
+    $("#body_Block").append('<div class="notice"><%= escape_javascript(@errorBody[0])%></div>')
+    $("#body_Block").parent().find('.form-group').addClass('has-error');
+  <%end%>
+<%end%>

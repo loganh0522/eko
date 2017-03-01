@@ -1,5 +1,6 @@
 class JobSeeker::UserAvatarsController < JobSeekersController
   before_filter :require_user
+  before_filter :profile_sign_up_complete
   
   require 'RMagick'
 
@@ -26,7 +27,6 @@ class JobSeeker::UserAvatarsController < JobSeekersController
   end
 
   def update
-    binding.pry
     @user_avatar = UserAvatar.find(params[:id])
 
     if @user_avatar.update(user_params) 

@@ -1,3 +1,38 @@
-$('#new_user_certification').remove();
-$('.new_experience').show();
-$('#certification-body').html('<%= j render "job_seeker/user_certifications/certifications" %>');
+<% if @user_certification.valid? %>
+  $('#new_user_certification').parent().remove();
+  $('.new_experience').show();
+  $('#certification-body').html('<%= j render "job_seeker/user_certifications/certifications" %>');
+<% else %>
+  $(".notice").remove();
+  $('.form-group').removeClass('has-error');
+
+  <% if @errorName[0] != nil %>
+    $("#name_Block").append('<div class="notice"><%= escape_javascript(@errorName[0])%></div>')
+    $("#name_Block").parent().find('.form-group').addClass('has-error');
+  <%end%>
+
+  <% if @errorAgency[0] != nil %>
+    $("#agency_Block").append('<div class="notice"><%= escape_javascript(@errorAgency[0])%></div>');
+    $("#agency_Block").parent().find('.form-group').addClass('has-error');
+  <%end%>
+
+  <% if @errorStartMonth[0] != nil %>
+    $("#start_month_Block").append('<div class="notice"><%= escape_javascript(@errorStartMonth[0])%></div>');
+    $("#start_month_Block").parent().find('.form-group').addClass('has-error');
+  <%end%>
+
+  <% if @errorStartYear[0] != nil %>
+    $("#start_year_Block").append('<div class="notice"><%= escape_javascript(@errorStartYear[0])%></div>');
+    $("#start_year_Block").parent().find('.form-group').addClass('has-error');
+  <%end%>
+
+  <% if @errorEndMonth[0] != nil %>
+    $("#end_month_Block").append('<div class="notice"><%= escape_javascript(@errorEndMonth[0])%></div>');
+    $("#end_month_Block").parent().find('.form-group').addClass('has-error');
+  <%end%>
+
+  <% if @errorEndYear[0] != nil %>
+    $("#end_year_Block").append('<div class="notice"><%= escape_javascript(@errorEndYear[0])%></div>');
+    $("#end_year_Block").parent().find('.form-group').addClass('has-error');
+  <%end%>
+<%end%>

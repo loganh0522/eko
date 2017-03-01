@@ -1,9 +1,9 @@
 .body
-  - if current_user.educations.count == 0
+  - if current_user.profile.educations.count == 0
     .not-present-container#education-not-present
       %p You currently do not have any education. 
       / = link_to "+ Add Education", new_job_seeker_education_path, :data => {:remote => true}, class: 'add-object'               
   - else 
     %div{:id => "educations"}
-      - current_user.educations.each do |degree| 
+      - current_user.profile.educations.each do |degree| 
         = render 'job_seeker/educations/education', degree: degree

@@ -1,4 +1,4 @@
-<% if current_user.certifications.count == 0 %>
+<% if current_user.profile.user_certifications.count == 0 %>
   $('<%= j render "job_seeker/user_certifications/form" %>').insertAfter('#certification-header')
   $('.not-present-container').remove()
   $('#new_user_certification_button').hide();

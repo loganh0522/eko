@@ -3,10 +3,13 @@
     .experience-header 
       .company= position.company_name
       .edit
-        = link_to "Edit", edit_job_seeker_work_experience_path(position.id), :data => {:remote => true}           
+        = link_to "Edit", edit_job_seeker_profile_work_experience_path(@profile, position.id), :data => {:remote => true}       
     .experience-position
       .title= position.title 
-      .date= "#{position.start_month} #{position.start_year} - #{position.start_month} #{position.end_year}"
+      - if position.current_position == 1
+        .date= "#{position.start_month} #{position.start_year} - Present"
+      - else
+        .date= "#{position.start_month} #{position.start_year} - #{position.start_month} #{position.end_year}"
     
     .experience-body 
       / .location= "#{position.countries.first.name}, #{position.states.first.name}, #{position.city}"
@@ -16,12 +19,11 @@
         %div{id: "work_accomplishments_#{position.id}"}
           = render "job_seeker/accomplishments/all_accomplishments", position: position
 
-
     .actions
       %ul
         %li
-          = link_to "+ Add Accomplishment", new_job_seeker_accomplishment_path(id: position.id), :data => {:remote => true}, class: 'add-accomplishment'
+          = link_to "+ Add Accomplishment", new_job_seeker_profile_work_experience_accomplishment_path(@profile, position.id), :data => {:remote => true}, class: 'add-accomplishment'
         / %li
         /   = link_to "+ Add Skills", job_seeker_user_add_skills_path(@user.id), :data => {:remote => true}
-        %li
-          = link_to "+ Get a Reference", new_job_seeker_work_experience_path, :data => {:toggle => "modal", :target => "#work-experience-modal"}
+        / %li
+        /   = link_to "+ Get a Reference", new_job_seeker_work_experience_path, :data => {:toggle => "modal", :target => "#work-experience-modal"}

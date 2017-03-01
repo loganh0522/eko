@@ -1,4 +1,54 @@
 // $('.modal').modal('toggle');
 // $('#work_experience_<%= @work_experience.id %>').replaceWith('<%= j render (@work_experience), position: @work_experience %>');
 
-$('#work_experiences').find('#edit_work_experience_<%= @work_experience.id %>').parent().replaceWith('<%= j render (@work_experience), position: @work_experience %>');
+<% if @work_experience.errors.any? %>
+  $(".notice").remove();
+  $('.form-group').removeClass('has-error');
+
+  <% if @errorTitle[0] != nil %>
+    $("#title_Block").append('<div class="notice"><%= escape_javascript(@errorTitle[0])%></div>')
+    $("#title_Block").parent().find('.form-group').addClass('has-error');
+  <%end%>
+
+  <% if @errorCompany[0] != nil %>
+    $("#company_name_Block").append('<div class="notice"><%= escape_javascript(@errorCompany[0])%></div>');
+    $("#company_name_Block").parent().find('.form-group').addClass('has-error');
+  <%end%>
+
+  <% if @errorStartMonth[0] != nil %>
+    $("#start_month_Block").append('<div class="notice"><%= escape_javascript(@errorStartMonth[0])%></div>');
+    $("#start_month_Block").parent().find('.form-group').addClass('has-error');
+  <%end%>
+
+  <% if @errorStartYear[0] != nil %>
+    $("#start_year_Block").append('<div class="notice"><%= escape_javascript(@errorStartYear[0])%></div>');
+    $("#start_year_Block").parent().find('.form-group').addClass('has-error');
+  <%end%>
+
+  <% if @errorEndMonth[0] != nil %>
+    $("#end_month_Block").append('<div class="notice"><%= escape_javascript(@errorEndMonth[0])%></div>');
+    $("#end_month_Block").parent().find('.form-group').addClass('has-error');
+  <%end%>
+
+  <% if @errorEndYear[0] != nil %>
+    $("#end_year_Block").append('<div class="notice"><%= escape_javascript(@errorEndYear[0])%></div>');
+    $("#end_year_Block").parent().find('.form-group').addClass('has-error');
+  <%end%>
+  
+  <% if @errorIndustry[0] != nil %>
+    $("#industry_ids_Block").append('<div class="notice"><%= escape_javascript(@errorIndustry[0])%></div>');
+    $("#industry_ids_Block").parent().find('.form-group').addClass('has-error');
+  <%end%>
+
+  <% if @errorFunction[0] != nil %>
+    $("#function_ids_Block").append('<div class="notice"><%= escape_javascript(@errorFunction[0])%></div>');
+    $("#function_ids_Block").parent().find('.form-group').addClass('has-error');
+  <%end%>
+
+  <% if @errorDescription[0] != nil%>
+    $("#description_Block").append('<div class="notice"><%= escape_javascript(@errorDescription[0])%></div>');
+    $("#description_Block").parent().find('.form-group').addClass('has-error');
+  <%end%>
+<%else %> 
+  $('#work_experiences').find('#edit_work_experience_<%= @work_experience.id %>').parent().replaceWith('<%= j render (@work_experience), position: @work_experience %>');
+<%end%>

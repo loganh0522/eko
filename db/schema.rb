@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170221162240) do
+ActiveRecord::Schema.define(version: 20170228234516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,15 @@ ActiveRecord::Schema.define(version: 20170221162240) do
     t.string   "widget_key"
   end
 
+  create_table "contact_messages", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "phone"
+    t.string "message"
+    t.string "company"
+  end
+
   create_table "countries", force: :cascade do |t|
     t.string "name"
   end
@@ -101,12 +110,23 @@ ActiveRecord::Schema.define(version: 20170221162240) do
     t.integer  "exp_year"
   end
 
+  create_table "demos", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "phone"
+    t.string "message"
+    t.string "company"
+    t.string "company_size"
+    t.string "company_website"
+    t.string "demo"
+  end
+
   create_table "education_levels", force: :cascade do |t|
     t.string "name"
   end
 
   create_table "educations", force: :cascade do |t|
-    t.integer "user_id"
     t.string  "start_month"
     t.string  "start_year"
     t.string  "end_month"
@@ -114,6 +134,7 @@ ActiveRecord::Schema.define(version: 20170221162240) do
     t.string  "school"
     t.string  "degree"
     t.text    "description"
+    t.integer "profile_id"
   end
 
   create_table "email_templates", force: :cascade do |t|
@@ -298,6 +319,10 @@ ActiveRecord::Schema.define(version: 20170221162240) do
     t.datetime "updated_at"
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.integer "user_id"
+  end
+
   create_table "question_answers", force: :cascade do |t|
     t.text    "body"
     t.integer "question_id"
@@ -398,7 +423,6 @@ ActiveRecord::Schema.define(version: 20170221162240) do
   end
 
   create_table "user_certifications", force: :cascade do |t|
-    t.integer  "user_id"
     t.integer  "certification_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -409,11 +433,14 @@ ActiveRecord::Schema.define(version: 20170221162240) do
     t.string   "end_month"
     t.string   "end_year"
     t.integer  "expires"
+    t.integer  "profile_id"
+    t.string   "name"
   end
 
   create_table "user_skills", force: :cascade do |t|
     t.integer "user_id"
     t.integer "skill_id"
+    t.integer "profile_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -441,7 +468,6 @@ ActiveRecord::Schema.define(version: 20170221162240) do
     t.string   "company_name"
     t.text     "description"
     t.integer  "current_position"
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "start_month"
@@ -451,6 +477,9 @@ ActiveRecord::Schema.define(version: 20170221162240) do
     t.string   "country"
     t.string   "state"
     t.string   "city"
+    t.integer  "profile_id"
+    t.string   "location"
+    t.integer  "position"
   end
 
 end

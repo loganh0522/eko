@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :logged_in?, :current_user, :current_company, :current_kind, :user_logged_in
+  helper_method :logged_in?, :current_user, :current_company, :current_kind, :user_logged_in, :profile_sign_up_complete
+
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -33,6 +34,13 @@ class ApplicationController < ActionController::Base
     if !logged_in? 
       flash[:error] = "Must be logged in."
       redirect_to login_path
+    end
+  end
+
+  def profile_sign_up_complete
+    if current_user.profile.present? == false
+      redirect_to new_job_seeker_profile_path
+      flash[:error] = "Please complete your profile before you continue."
     end
   end
 
@@ -76,6 +84,8 @@ class ApplicationController < ActionController::Base
       redirect_to edit_business_job_scorecard_path(@job.id, @scorecard.id)
     end
   end
+
+  
 
   def track_activity(trackable, action = params[:action])
     if (params[:application_id]).present?

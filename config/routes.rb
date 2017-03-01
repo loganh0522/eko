@@ -23,7 +23,9 @@ Rails.application.routes.draw do
   get 'features/manage-evaluate', to: 'features#manage_evaluate'
   get 'features/company-management', to: 'features#company_management'
 
-
+  resources :contact_messages, only: [:new, :create]
+  resources :demos, only: [:new, :create]
+  
   resources :job_boards
   resources :jobs
   resources :companies
@@ -43,26 +45,23 @@ Rails.application.routes.draw do
   namespace :job_seeker do 
     root to: "jobs#index"
     resources :jobs, only: [:index, :show]
-    resources :profiles, only: [:index]
-    resources :user_certifications
-    resources :user_skills
-    resources :educations
-    resources :work_experiences
-    resources :accomplishments
+    resources :users
+    resources :profiles do 
+      resources :user_certifications
+      resources :user_skills
+      resources :educations
+      resources :work_experiences do
+        resources :accomplishments
+      end
+    end
+
     resources :applications, only: [:create]
     resources :question_answers
-    
-    get "create_profile", to: "users#create_profile"
-
-    resources :users do
-      get "add_skills", to: "users#add_skills"
-      delete "delete_skill", to: "users#delete_skill"
-      get "add_certifications", to: "users#add_certifications"
-    end
     resources :user_avatars   
-    post "update_skills", to: "users#update_skills"
-    post "update_certification", to: "users#update_certifications"
   end
+
+
+
 
   get "/auth/:provider/callback", to: 'business/users#edit'
 

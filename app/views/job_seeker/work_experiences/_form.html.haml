@@ -1,34 +1,44 @@
 .work-experience
-  = bootstrap_form_for [:job_seeker, @work_experience], html: {remote: true, class: 'profile-form'} do |f|
+  = bootstrap_form_for [:job_seeker, @profile, @work_experience], html: {remote: true, class: 'profile-form'} do |f|
     .fieldset
       .row
         .col-md-6
-          = f.text_field :title, class: "form-control", label: "Job Title"
+          = f.text_field :title, placeholder: "Job Title", hide_label: true
+          %span#title_Block.help-block
         .col-md-6
-          = f.text_field :company_name, class: "form-control", label: "Company Name"
-      .row
+          = f.text_field :company_name, placeholder: "Company Name", hide_label: true
+          %span#company_name_Block.help-block
         .col-md-12
-          = f.text_field :city, class: "form-control", id: "geocomplete", label: "Location", autocomplete: "off"
+          = f.text_field :location, id: "geocomplete", hide_label: true, autocomplete: "off"
+          %span#location_Block.help-block
       .row
         .col-md-6
-          = f.collection_select(:industry_ids, Industry.all, :id, :name, label: "Industry")
+          = f.collection_select(:industry_ids, Industry.all, :id, :name, hide_label: true, prompt: "Select Industry")
+          %span#industry_ids_Block.help-block
         .col-md-6
-          = f.collection_select(:function_ids, Function.all, :id, :name, label: "Job Function")
+          = f.collection_select(:function_ids, Function.all, :id, :name, hide_label: true, prompt: "Select Job Function")
+          %span#function_ids_Block.help-block
       .row
-        .col-md-3
+        .col-md-3.col-xs-6.col-sm-6
           = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
-        .col-md-3
+          %span#start_month_Block.help-block
+        .col-md-3.col-xs-6.col-sm-6
           = f.text_field :start_year
-        .col-md-3
+          %span#start_year_Block.help-block
+        .col-md-3.col-xs-6.col-sm-6
           = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
-        .col-md-3
+          %span#end_year_Block.help-block
+        .col-md-3.col-xs-6.col-sm-6
           = f.text_field :end_year
+          %span#end_month_Block.help-block
       .row 
         .col-sm-6.col-md-offset-6
           = f.check_box :current_position, checked_value: 1, unchecked_value: 0
+          %span#current_position_Block.help-block
       .row
         .col-md-12
-          = f.text_area :description, rows: 12, class: "form-control", label: "Description"
+          = f.text_area :description, rows: 5, hide_label: true, placeholder: "Description"
+          %span#description_Block.help-block
     = f.submit @work_experience.new_record? ? "Add Work Experience" : "Update", class: "submit btn btn-primary"
     - if !@work_experience.new_record?
       .close-form#edit-form.btn.btn-default     
@@ -37,4 +47,4 @@
       .close-form#new-form.btn.btn-default     
         Close
     - if !@work_experience.new_record?
-      = link_to "Remove Work Experience", job_seeker_work_experience_path(@work_experience), remote: true, method: :delete
+      = link_to "Remove Work Experience", job_seeker_profile_work_experience_path(@profile, @work_experience), remote: true, method: :delete

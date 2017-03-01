@@ -5,7 +5,7 @@
 
 
 
-<% if current_user.educations.count == 0 %>
+<% if current_user.profile.educations.count == 0 %>
   $('<%= j render "job_seeker/educations/form" %>').insertAfter('#education-header');
   $('#education-not-present').remove();
   $('#add_education_button').hide()

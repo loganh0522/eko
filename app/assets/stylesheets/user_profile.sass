@@ -1,9 +1,11 @@
 .create-profile-container
-  margin: 60px 15% 100px 15%
-  padding: 25px 50px 50px 50px
-  width: 70%
+  margin: 60px auto 100px auto
+  padding: 25px 25px 25px 25px
+  width: 780px
   background: white
   box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+  @media screen and (max-width: 780px)
+    width: 100%
   h1
     color: black
     margin-top: 0
@@ -12,6 +14,8 @@
     margin-bottom: 15px
     height: auto
     margin-top: 20px
+    padding-bottom: 10px
+    border-bottom: 1px solid rgba(0,0,0,0.1)
     .title
       float: left
       font-size: 24px
@@ -22,12 +26,32 @@
   .work-experience
     width: 98%
     margin-left: 1%
+    box-shadow: none
+    border-radius: 0
+    padding: 10px 10px
+    background: #f7f8f9
+  .experience-container
+    overflow: hidden
+    .add_fields
+      float: right
+      color: #EF7B2B
+    .remove_fields
+      float: right
+      border: 1px solid rgba(0,0,0,0.1)
   .footer
-    padding: 50px 15px
+    padding: 15px 0 0 0 
+    margin: 15px 0 0 0 
     border-top: 1px solid rgba(0,0,0,0.1)
+    .job-seeker-btn
+      float: right
+      background: #ffffff
+      &:hover
+        background: #EF7B2B
+        color: #ffffff
 
 .job-seeker-profile
   width: 100%
+  overflow-x: hidden
   .background-photo
     height: 250px 
     width: 100% 
@@ -63,6 +87,9 @@
     padding-top: 75px
     border-radius: 5px
     box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)  
+    @media screen and (max-width: 800px)
+      width: 100%
+      margin: -100px 0 0 0
     .personal-details
       margin-top: 25px
       width: 350px
@@ -83,7 +110,7 @@
         clear: both
     .change-containers-nav 
       background: white
-      height: 50pxs
+      height: 50px
       ul 
         width: 660px
         list-style: none
@@ -96,6 +123,13 @@
           text-align: center 
           color: black
           cursor: pointer
+          @media screen and (max-width: 475px)
+            padding: 15px 5px 0 5px
+      @media screen and (max-width: 475px)
+        width: auto
+        margin: 0 0 0 -40px
+        padding: 0 0 
+
       .activated 
         border-bottom: solid 3px #EF7B2B
         color: black
@@ -105,14 +139,27 @@
     float: none
     width: 80%
     padding-left: 0
+    @media screen and (max-width: 800px)
+      width: 100%
+    .experience-container
+      @media screen and (max-width: 800px)
+        padding: 0 1% 0 1%
     .education-container
       display: none
+      @media screen and (max-width: 800px)
+        padding: 0 1% 0 1%
     .skills-container
-      display: none    
+      display: none  
+      @media screen and (max-width: 800px)
+        padding: 0 1% 0 1% 
     .career-prefs-container
       display: none
+      @media screen and (max-width: 800px)
+        padding: 0 1% 0 1%
     .my-apps-container
       display: none
+      @media screen and (max-width: 800px)
+        padding: 0 1% 0 1%
     .header 
       border-bottom: 2px solid rgba(239, 122, 43, .25) 
       overflow: hidden  
@@ -135,12 +182,17 @@
   border-radius: 5px
   margin-bottom: 15px
   overflow: hidden
+  @media screen and (max-width: 800px)
+    width: 98%
+    padding: 0 10px 10px 10px
+  .form-control
+    margin-top: 9px
   .experience-header
     overflow: hidden
     margin: 10px 0 0 0
     .company
       font-size: 18px
-      font-weight: 300
+      font-weight: 400
       float: left 
     .edit
       float: right
@@ -160,30 +212,30 @@
       color: rgba(0, 0, 0, .6)
   .experience-body
     margin: 10px 0  
+  .add-accomplishment
+    margin: 10px 0 
   .accomplishments
     margin-top: 10px
     .acc 
       font-size: 16px
       font-weight: 200
-    ul 
-      li
+    .accomplishment   
+      overflow: hidden
+      .accomplishment-body
+        width: 94%
+        float: left
         &:hover + .icons
           background: rgba(0, 0, 0, 0.05)
           display: block
         &:hover 
           background: rgba(0, 0, 0, 0.05)
       .icons
-        float: left
+        float: right
         margin-left: 2px
-        width: 40px
-        display: none
-        
-        &:hover 
-          background: rgba(0, 0, 0, 0.1)
-          display: block
+        width: 5%  
+        .glyphicon
+          color: rgba(0,0,0,0.4)
 
-        &:hover 
-          background: rgba(0, 0, 0, 0.1)      
   .actions
     ul
       display: inline-block

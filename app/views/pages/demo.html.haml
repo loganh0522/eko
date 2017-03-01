@@ -7,14 +7,16 @@
 
 .standard-container
   .inner-container
-    = form_tag send_multiple_messages_business_applications_path do 
-      = text_field_tag :first_name, nil, placeholder: "First Name", autocomplete: false
-      = text_field_tag :last_name, nil, placeholder: "Last Name", autocomplete: false
-      = text_field_tag :email, nil, placeholder: "E-mail", autocomplete: false
-      = text_field_tag :phone, nil, placeholder: "Phone Number", autocomplete: false
-      = text_field_tag :company_name, nil, placeholder: "Company Name", autocomplete: false
-      = text_field_tag :company_name, nil, placeholder: "Company Website", autocomplete: false   
-      = select_tag :company_name, nil, placeholder: "Company Name", autocomplete: false
-      = submit_tag "Submit Request", class: "btn submit-button"
+    = form_for @demo do |f|
+      = f.text_field :first_name, placeholder: "First Name", autocomplete: false, hide_label: true
+      = f.text_field :last_name, placeholder: "Last Name", autocomplete: false, hide_label: true
+      = f.text_field :email, placeholder: "E-mail", autocomplete: false, hide_label: true
+      = f.text_field :phone, placeholder: "Phone Number", autocomplete: false, hide_label: true
+      = f.text_field :company, placeholder: "Company Name", autocomplete: false, hide_label: true
+      = f.text_field :company_website, placeholder: "Company Website", autocomplete: false, hide_label: true
+      = f.text_field :company_size, placeholder: "Number of Employees", autocomplete: false, hide_label: true
+      = f.text_area :message, placeholder: "Message", autocomplete: false, hide_label: true
+      = f.submit "Submit Request", class: "btn submit-button"
 
 = render 'shared/bottom_header'
+
