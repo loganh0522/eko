@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
   end
 
   def current_jobs
-    @current_jobs = self.work_experiences.where(current_position: true)
+    @current_jobs = self.profile.work_experiences.where(current_position: true)
     return @current_jobs
   end
 end
