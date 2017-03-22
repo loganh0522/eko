@@ -68,7 +68,7 @@ class Business::ApplicationsController < ApplicationController
     @rating = Rating.new  
     @scorecard = Scorecard.where(job_id: params[:job_id]).first
     @application_scorecard_present = ApplicationScorecard.where(application_id: @application.id)
-    scorecard_graphs  
+    scorecard_graphs
   end
 
   def applicant_search
@@ -121,7 +121,7 @@ class Business::ApplicationsController < ApplicationController
   end
 
   def scorecard_graphs
-   if @scorecard.present? 
+   if @scorecard.scorecard_sections.present? 
       @sections = @scorecard.scorecard_sections    
       @application_scorecards = @application.application_scorecards
       @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first

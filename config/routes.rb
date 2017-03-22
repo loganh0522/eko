@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   match 'jobs/:id', to: "jobs#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:get, :post, :put, :patch, :delete]
   match 'register', to: "users#sub_new_job_seeker", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:get, :post, :put, :patch, :delete]
   match 'profile', to: "profiles#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:get, :post, :put, :patch, :delete]
-  match 'create-profile', to: "profiles#create_profile", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:get, :post, :put, :patch, :delete]
+  match 'create-profile', to: "profiles#new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:get, :post, :put, :patch, :delete]
 
   root to: 'pages#home'
   
@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   get 'contact', to: "pages#contact"
   get 'demo', to: "pages#demo"
 
-  get 'create-profile', to: "profiles#create_profile"
 
   get 'features/plan-hiring-process', to: 'features#plan_hiring_process'
   get 'features/screen-applicants', to: 'features#screen_applicants'
@@ -30,6 +29,8 @@ Rails.application.routes.draw do
   resources :jobs
   resources :companies
   resources :users
+  resources :profiles, only: [:index, :new]
+  
 
   get 'login', to: "sessions#new"
   get '/job_seekers/new', to: 'users#new_job_seeker'
@@ -74,7 +75,9 @@ Rails.application.routes.draw do
     resources :invitations
     resources :locations 
     resources :user_avatars
-    resources :job_boards
+    resources :job_boards do
+      resources :job_board_rows
+    end
     resources :tags
     resources :notifications
     resources :interviews

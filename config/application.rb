@@ -10,9 +10,8 @@ Bundler.require(*Rails.groups)
 module Talentwiz
   class Application < Rails::Application
     config.assets.paths << "#{Rails}/vendor/assets/fonts"
-    if Rails.env.production?
-      config.force_ssl = true
-    end
+    # config.force_ssl = true
+    # config.ssl_options = {hsts: {expires: 3600}}
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

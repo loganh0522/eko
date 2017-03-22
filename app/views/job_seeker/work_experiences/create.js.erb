@@ -4,7 +4,7 @@
 <% if @work_experience.valid? %>
   $('#new_work_experience').parent().remove();
   $('#new_work_exp').show();
-  $('#work_experiences').html('<%= j render "job_seeker/work_experiences/experience" %>');
+  $('#work_experiences').html('<%= j render "job_seeker/work_experiences/experience", work_experience: @work_experiences %>');
 <% else %>
   $(".notice").remove();
   $('.form-group').removeClass('has-error');

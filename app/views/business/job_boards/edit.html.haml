@@ -1,32 +1,26 @@
 .page-header
   %h1 Build Career Portal 
-#post-a-job
+.company-settings
   .side-container
     = render 'business/shared/admin_sidebar'
   .main-container
     .edit-career-portal
-      / %h4 Widget Details 
-      / = '<script type="text/javascript" src= "http://prod-talentwiz.heroku.com/widget/company_jobs/'"#{current_company.widget_key}"'></script> <style type="text/css">.customCSSclass a{text-decoration:none;} </style>'
+      .change-containers-nav
+        %ul
+          %li.change#open.activated Settings
+          %li.change#closed Sections
+      #main-container
+        .open-container.showing
+          = render 'settings_form'
+        .closed-container
+          = render "sections"
 
-      = form_for [:business, @job_board] do |f|  
-        .sub-domain 
-          %h4 Sub-domain
-          = f.text_field :subdomain, class: "form-control subdomain-field"
-          .domain .talentwiz.ca
 
-        .logo
-          %h4 Logo 
-          Add a logo that will go in the header of your Career Portal. It is best if you use a logo with a white background.
-          .row 
-            .col-md-6
-              = f.file_field :logo, class: "btn btn-file"
-            .col-md-6
-              = image_tag(@job_board.logo) if @job_board.logo?
+  / %h4 Widget Details 
+  / = '<script type="text/javascript" src= "http://prod-talentwiz.heroku.com/widget/company_jobs/'"#{current_company.widget_key}"'></script> <style type="text/css">.customCSSclass a{text-decoration:none;} </style>'
 
-          = f.hidden_field :logo_cache
-        %h4 Description 
-        = f.text_area :description, rows: 10, class: "form-control", placeholder: "Add a company description"
-        %br
-        = f.submit "Update Career Portal", class: "submit btn btn-primary"
+     
+      
+        
 
 

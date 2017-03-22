@@ -1,21 +1,23 @@
 .create-profile-container
   margin: 60px auto 100px auto
-  padding: 25px 25px 25px 25px
+  padding: 25px 0 25px 0
   width: 780px
   background: white
   box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
   @media screen and (max-width: 780px)
     width: 100%
-  h1
-    color: black
-    margin-top: 0
+  .create-profile-header
+    h1
+      color: black
+      margin-top: 0
+    border-bottom: 1px solid rgba(0,0,0,0.1)
+    text-align: center
+    padding: 0 10% 25px 10%
   .header 
     overflow: hidden  
-    margin-bottom: 15px
+    margin: 10px 2.5% 0px 2.5%
     height: auto
-    margin-top: 20px
     padding-bottom: 10px
-    border-bottom: 1px solid rgba(0,0,0,0.1)
     .title
       float: left
       font-size: 24px
@@ -24,24 +26,29 @@
       float: left
       margin: 6px 0 0 15px   
   .work-experience
-    width: 98%
-    margin-left: 1%
+    width: 95%
+    margin: 10px 2.5%
     box-shadow: none
     border-radius: 0
     padding: 10px 10px
     background: #f7f8f9
+
   .experience-container
     overflow: hidden
     .add_fields
       float: right
       color: #EF7B2B
+      margin: 10px 25px 0 0
     .remove_fields
       float: right
       border: 1px solid rgba(0,0,0,0.1)
+      margin-right: 20px
+      display: none
   .footer
-    padding: 15px 0 0 0 
+    padding: 15px 2.5% 0 0 
     margin: 15px 0 0 0 
     border-top: 1px solid rgba(0,0,0,0.1)
+    overflow: hidden
     .job-seeker-btn
       float: right
       background: #ffffff

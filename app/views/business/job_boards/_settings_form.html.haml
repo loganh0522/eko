@@ -1,0 +1,38 @@
+= form_for [:business, @job_board] do |f|  
+  .float-container
+    .header 
+      Career Portal address
+    .body
+      = f.text_field :subdomain, class: "form-control subdomain-field"
+      .domain .talentwiz.ca
+  .float-container
+    .header 
+      Company Logo 
+    .body  
+      .logo= image_tag(@job_board.logo) if @job_board.logo?
+      = f.file_field :logo, class: "btn btn-file"
+      = f.hidden_field :logo_cache
+  .float-container
+    .header 
+      Career Portal Colors 
+    .body
+      .div.input-append.color
+        = f.label :brand_color, "Brand Color"
+        .color-container
+          = f.text_field :brand_color, class: "colorpicker"
+          %span.add-on
+            %i{:style => "background-color: #{@job_board.brand_color}"}
+
+      .div.input-append.color
+        = f.label :text_color, "Font Color"
+        .color-container
+          = f.text_field :text_color, class: "colorpicker"
+          %span.add-on
+            %i{:style => "background-color: rgb(255, 146, 180)"}           
+      .div.input-append.color
+        = f.label :sub_heading_color, "Sub-Header Color"
+        .color-container
+          = f.text_field :sub_heading_color, class: "colorpicker"
+          %span.add-on
+            %i{:style => "background-color: rgb(255, 146, 180)"}
+  = f.submit "Update Settings", class: "submit-button"

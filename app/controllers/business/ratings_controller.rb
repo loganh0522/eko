@@ -5,7 +5,17 @@ class Business::RatingsController < ApplicationController
   before_filter :company_deactivated?
 
   def create
-    binding.pry
+    @rating = Rating.create(score: params[:rating].to_f, 
+      application_id: params[:application_id].to_i, 
+      user_id: current_user.id)
   end
 
+  def update
+  end
+
+  private 
+
+  def rating_params
+    params.require(:rating).permit(:application_id, :score)
+  end
 end

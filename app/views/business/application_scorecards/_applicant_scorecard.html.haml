@@ -1,15 +1,16 @@
 .scorecard
   .header
     %h4 Application Scorecard
-    - if @scorecard.present?
+    - if @scorecard.scorecard_sections.present?
       .my-scorecard
         - if @current_user_scorecard.present? 
           = link_to "My Scorecard", edit_business_job_application_application_scorecard_path(@job, @application, @current_user_scorecard), {:data => {:toggle => "modal", :target => "#edit_scorecardModal"}} 
           = render "business/application_scorecards/edit_my_scorecard" 
         - else 
           = link_to "My Scorecard", new_business_job_application_application_scorecard_path(@job, @application), {:data => {:toggle => "modal", :target => "#scorecardModal"}} 
-          = render "business/application_scorecards/my_scorecard" 
-  - if @scorecard.present?  
+          - if @scorecard.scorecard_sections.present?
+            = render "business/application_scorecards/my_scorecard" 
+  - if @scorecard.scorecard_sections.present?  
     .scorecard-details
       %h4 Overall Rating 
       .overall-rating 

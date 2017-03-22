@@ -4,7 +4,8 @@ development:
   database: talentwiz_development
   pool: 5
   username: loganhouston
-  password: 
+  password:   
+
 
 test:
   adapter: postgresql

@@ -1,3 +1,8 @@
+.job-board-header{:style => "background-image: url(#{@job_board.cover_photo.url})"}
+  .intro-message
+    .header= @job.title
+    .sub-header= @job.location
+
 .career-portal-job-container
   .job-description
     .job-header
@@ -5,8 +10,42 @@
       = "#{@job.location}"
     .job-body
       %p= simple_format(@job.description)
+    .apply 
+      - if current_user.present?
+        - if @job.questionairre.present? 
+          = link_to "Apply to this Job", new_job_seeker_question_answer_path, {:class => "app-btn", :data => {:toggle => "modal", :target => "#applyModal"}}
+          = render 'job_seeker/jobs/apply'
+        - else
+          = bootstrap_form_for [:job_seeker, @application] do |f|
+            .fieldset
+              .form-group.col-md-12
+              = f.hidden_field :user_id, value: current_user.id
+              = f.hidden_field  :job_id, value: @job.id
+              .app-btn{:style => "background-color: #{@job_board.brand_color})"}= f.submit "Apply to Job"
+      - else 
+        = render "/users/sub_new_job_seeker"
+        = render "/sessions/sub_login"
+        .app-btn{:style => "background-color: #{@job_board.brand_color})"}= link_to "Apply To Job", "", :class => "btn btn-primary app-btn", "data-toggle" => "modal", "data-target" => "#SubLoginModal"
 
   .extra-job-details
+    .apply 
+      - if current_user.present?
+        - if @job.questionairre.present? 
+          = link_to "Apply to this Job", new_job_seeker_question_answer_path, {:class => "app-btn", :data => {:toggle => "modal", :target => "#applyModal"}}
+          = render 'job_seeker/jobs/apply'
+        - else
+          = bootstrap_form_for [:job_seeker, @application] do |f|
+            .fieldset
+              .form-group.col-md-12
+              = f.hidden_field :user_id, value: current_user.id
+              = f.hidden_field  :job_id, value: @job.id
+              .app-btn{:style => "background-color: #{@job_board.brand_color})"}= f.submit "Apply to Job"
+      - else 
+        = render "/users/sub_new_job_seeker"
+        = render "/sessions/sub_login"
+        .app-btn{:style => "background-color: #{@job_board.brand_color})"}= link_to "Apply To Job", "", :class => "btn btn-primary app-btn", "data-toggle" => "modal", "data-target" => "#SubLoginModal"
+
+
     %h3 Job Details 
     .detail
       .type Industry
@@ -22,21 +61,6 @@
       .content= "#{time_ago_in_words(@job.created_at)} ago"
 
     
-    .apply 
-      - if current_user.present?
-        - if @job.questionairre.present? 
-          = link_to "Apply to this Job", new_job_seeker_question_answer_path, {:class => "app-btn", :data => {:toggle => "modal", :target => "#applyModal"}}
-          = render 'job_seeker/jobs/apply'
-        - else
-          = bootstrap_form_for [:job_seeker, @application] do |f|
-            .fieldset
-              .form-group.col-md-12
-              = f.hidden_field :user_id, value: current_user.id
-              = f.hidden_field  :job_id, value: @job.id
-              = f.submit "Apply to Job", class: "btn btn-primary app-btn"
-      - else 
-        = render "/users/sub_new_job_seeker"
-        = render "/sessions/sub_login"
-        = link_to "Apply To Job", "", :class => "btn btn-primary app-btn", "data-toggle" => "modal", "data-target" => "#SubLoginModal"
+    
 
 

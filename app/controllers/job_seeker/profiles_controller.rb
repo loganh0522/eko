@@ -5,14 +5,15 @@ class JobSeeker::ProfilesController < JobSeekersController
   def new
     @user = current_user
     @profile = Profile.new
+    @profile.work_experiences.build
+    @profile.educations.build
   end
 
   def create
     @user = current_user
     @profile = Profile.new(profile_params)
-
     if @profile.save 
-      flash[:success] = "Scorecard successfully created"
+      flash[:success] = "Your profile was successfully created!"
       redirect_to job_seeker_profiles_path
     else
       render :new
@@ -28,8 +29,7 @@ class JobSeeker::ProfilesController < JobSeekersController
     @user_skill = UserSkill.new
 
     @avatar = current_user.user_avatar
-    @work_experiences = current_user.profile.work_experiences.sort_by{|work| [work.start_year, work.end_year] }.reverse
-    @current_work = current_user.profile.work_experiences.where(current_position: '1')
+    @work_experiences = profile.organize_work_experiences
   end
 
   private 

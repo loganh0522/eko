@@ -77,19 +77,27 @@
   - if logged_in? && current_kind == 'job seeker'
     .career-portal-nav
       .content
-        = link_to root_path do
-          %img(src="#{@company.job_board.logo}" class="sub_logo")
-        %ul.nav.navbar-nav.navbar-right
+        - if @company.job_board.logo.present?
+          = link_to root_path do
+            %img(src="#{@company.job_board.logo}" class="sub_logo")
+        - else
+          = @company.name
+        %ul
           %li= link_to "Profile", profile_path
           %li= link_to "Sign Out", signout_path
   - else
-    .career-portal-nav
-      .content
+    .career-portal-nav   
+      - if @company.job_board.logo.present?
         = link_to root_path do
           %img(src="#{@company.job_board.logo}" class="sub_logo")
-        %ul.nav.navbar-nav.navbar-right
-          %li= link_to "Register", register_path, class: "sign-up-btn"
-          %li= link_to "Sign In", login_path, class: "sign-up-btn"
+      - else
+        .brand= @company.name
+      %ul
+        %li= link_to "Sign In", "", :class => "sub-signin-btn", "data-toggle" => "modal", "data-target" => "#SubLoginModal"
+        
+        %li= link_to "Register", "", :class => ".sub-register-btn", :style => "height: 30px; padding: 10px 20px; width: 40px; border-radius: 5px; border: 1px solid #{@job_board.brand_color}", "data-toggle" => "modal", "data-target" => "#subNewUserModal"
+        = render "/sessions/sub_login"
+        = render "/users/sub_new_job_seeker"
 
 .responsive-menu-links
   %ul

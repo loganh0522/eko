@@ -76,5 +76,8 @@
             %img(src="/tmp/small-clock.png") 
             - if job.created_at.present?
               = "#{time_ago_in_words(job.created_at)} ago"
+    - if @jobs.count == 0 
+      .not-present-container
+        %p Sorry, there are currently no jobs posted.
         
 

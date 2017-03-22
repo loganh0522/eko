@@ -1,0 +1,32 @@
+%a.dropdown-toggle.btn.btn-default{"data-toggle" => "dropdown", :href => "#"}
+  + Add Section
+%ul.dropdown-menu
+  %li
+    %a= link_to "Team", job_seeker_profiles_path
+  %li
+    %a= link_to "Photo Gallery", job_seeker_profiles_path
+  %li 
+    %a= link_to "Benefits & Perks", job_seeker_profiles_path
+
+.sections
+  .stage{:id => "stage_"}
+    .stage-header
+      .body
+        Header
+      .icons
+        = link_to "#{}", :data => {:remote => true} do
+          %i.glyphicon.glyphicon-pencil
+    .stage-body
+      = render 'header_form'
+
+  .stage{:id => "stage_"}
+    .stage-header
+      .glyphicon.glyphicon-move
+      .body
+        Jobs Container
+      .icons
+        = link_to "#", remote: true, :method => :delete do
+          %i.glyphicon.glyphicon-remove
+        = link_to "#{}", :data => {:remote => true } do
+          %i.glyphicon.glyphicon-pencil
+

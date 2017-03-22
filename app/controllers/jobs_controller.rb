@@ -13,6 +13,4 @@ class JobsController < ApplicationController
     @questions = @questionairre.questions
   end
 
-
-
 end

@@ -20,4 +20,11 @@ module ApplicationHelper
     end
   end
 
+  def current_user_application_rating(application)
+    if current_user.ratings.where(application_id: application.id).present?
+      @rating = current_user.ratings.where(application_id: 1).first.score
+    end
+  end
+
+  
 end

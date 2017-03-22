@@ -27,23 +27,20 @@
 
 
 
-  .sign-up
-    = bootstrap_form_for @user, html: {class: 'form-horizontal'} do |f|
-      %header
+  .job-seeker-registration
+    = bootstrap_form_for @user do |f|
+      .header
         %h2 Sign Up Today
         %p It's Free for Job Seekers
-      %fieldset
-        .row
-          .col-md-6
-            = f.text_field :first_name, placeholder: "First Name", hide_label: true
-          .col-md-6
-            = f.text_field :last_name, placeholder: "Last Name", hide_label: true
+      .body
+        = f.text_field :first_name, placeholder: "First Name", hide_label: true, class: 'first_name'
+        = f.text_field :last_name, placeholder: "Last Name", hide_label: true, class: 'last_name'
         = f.email_field :email, placeholder: "Email Address", hide_label: true
         = f.text_field :phone, placeholder: "Phone Number", hide_label: true
-        = f.text_field :location, class: "form-control", id: "geocomplete", label: "Location", autocomplete: "off"   
+        = f.text_field :location, class: "form-control", id: "geocomplete", autocomplete: "off", hide_label: true
         = f.password_field :password, placeholder: "Password", hide_label: true
         = f.hidden_field :kind, :value => 'job seeker'
-      = f.submit "Sign me up", class: "btn button-submit"
+        = f.submit "Sign me up", class: "btn button-submit"
 
 
 

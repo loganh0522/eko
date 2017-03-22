@@ -10,7 +10,7 @@ Rails.application.configure do
 
   config.assets.js_compressor = :uglifier
   config.assets.digest = true
-  config.force_ssl = true
+  
   config.log_level = :debug
 
   config.i18n.fallbacks = true
@@ -20,10 +20,10 @@ Rails.application.configure do
   config.action_dispatch.tld_length = 1
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
-
+  config.force_ssl = true
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-
+  
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 

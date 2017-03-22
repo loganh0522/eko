@@ -4,10 +4,10 @@ class JobBoardsController < ApplicationController
     @function = Function.all
     @company = @job_board.company
     @jobs = @company.jobs.where(status: 'open')
+    @user = User.new
   end
 
   def show 
 
   end
-
 end

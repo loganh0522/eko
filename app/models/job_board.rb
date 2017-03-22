@@ -1,8 +1,10 @@
 class JobBoard < ActiveRecord::Base
   belongs_to :company 
   before_save :generate_subdomain!
+  has_many :job_board_rows
 
   mount_uploader :logo, CareerPortalUploader
+  mount_uploader :cover_photo, CareerPortalHeaderUploader
 
   def generate_subdomain!
     the_subdomain = to_subdomain(self.subdomain)  

@@ -10,9 +10,9 @@ class UsersController < ApplicationController
       if @user.kind == 'job seeker'
         session[:user_id] = @user.id 
         if request.subdomain.present? 
-          redirect_to profile_path
+          redirect_to create_profile_path
         else
-          redirect_to job_seeker_create_profile_path
+          redirect_to new_job_seeker_profile_path
         end
       else
         if params[:invitation_token].present?
@@ -62,6 +62,6 @@ class UsersController < ApplicationController
   private 
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :kind)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :kind, :phone, :location)
   end
 end

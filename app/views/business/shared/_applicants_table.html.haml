@@ -6,7 +6,7 @@
       .job-gallery
         %li#all_applicants.activated.job_list_stage
           .number 
-            = @job.applications.count
+            = applied_applications_count
           .name All Applicants
         - @job.stages.each do |stage| 
           %li.job_list_stage{:id => "#{stage.name}"}
@@ -14,7 +14,7 @@
             .name= stage.name  
         %li.job_list_stage#Rejected
           .number 
-            = @job.applications.where(rejected: true).count
+            = rejected_applications_count
           .name Rejected
     .right_scroll
       %img(src="/tmp/right_arrow.png")
@@ -43,20 +43,13 @@
               %th(width="1%")
               %th(width="10%")
               %th(width="25%") Name 
-              %th(width="20%") Job Title
-              %th(width="20%") Stage 
-              %th(width="25%") Rating
+              %th(width="20%") Stage
+              %th(width="20%") Rating 
+              %th(width="25%") Date Applied
 
             %tbody
               - @job.applications.each do |application|
-                - if application.rejected == true
-                  - stage = "Rejected"
-                - elsif application.stage.present?
-                  - stage = application.stage.name
-                - elsif 
-                  - stage = "Applied"
-
-                %tr{:id => "#{stage}" }
+                %tr{:id => "#{application_stage(application)}" }
                   %td
                     .applicant-checkbox{:data => {:id => application.id}}
                       = check_box_tag "applicant_ids[]", application.id
@@ -70,15 +63,14 @@
                   %td.names
                     .name{:data => {:id =>  "#{application.applicant.first_name} #{application.applicant.last_name}"}}
                       = link_to "#{application.applicant.first_name} #{application.applicant.last_name}", business_job_application_path(@job, application.id)
-                    .current-position CEO - TalentWiz 
+                    .current-position= application.current_position 
                   %td
-                    .position= @job.title
-                    - if application.created_at.present?
-                      .date-applied= "#{time_ago_in_words(application.created_at)} ago"        
-                  %td
-                    .stage= stage
+                    = application_stage(application)
                   %td
                     = render 'business/ratings/form', application: application
+                  %td
+                    = "#{time_ago_in_words(application.created_at)} ago"        
+                 
                   %td
         .not-present-container
           %p There are currently no applicants in this stage.

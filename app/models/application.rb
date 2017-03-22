@@ -54,7 +54,23 @@ class Application < ActiveRecord::Base
 
   ######### ElasticSearch ##############
 
-  
+  def app_stage
+    applied = "Applied"
+    rejected = "Rejected"
+    if self.rejected == true
+      return rejected
+    elsif self.stage.present?
+      self.stage.name
+    elsif 
+      applied
+    end
+  end
+
+  def current_position
+    self.applicant.profile.current_position.title
+  end
+
+
   def as_indexed_json(options={})
     as_json(
       only: [:created_at],

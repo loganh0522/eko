@@ -15,7 +15,7 @@ class JobSeeker::WorkExperiencesController < JobSeekersController
     @profile = current_user.profile
     @positions = current_user.profile.work_experiences
     @work_experience = WorkExperience.new(position_params.merge!(profile: current_user.profile))
-    
+   
     respond_to do |format|
       @errorTitle = [] 
       @errorCompany = [] 
@@ -29,6 +29,8 @@ class JobSeeker::WorkExperiencesController < JobSeekersController
 
       if @work_experience.save
         format.js 
+        @profile = current_user.profile
+        @work_experiences = current_user.profile.work_experiences.sort_by{|work| [work.start_year, work.end_year] }.reverse
       else 
         format.js
         @profile = current_user.profile

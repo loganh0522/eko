@@ -1,9 +1,9 @@
 .create-profile-container 
   .create-profile-header
-    %h1 Welcome to TalentWiz
+    %h1 Build your Profile
     %p Your profile is submitted to the jobs that you apply for so that you do not have to compelete a new profile every time. So please take a few minutes to complete your profile.  
   .create-profile-body
-    = bootstrap_form_for [:job_seeker, @profile] do |f|
+    = bootstrap_form_for [@profile] do |f|
       .experience-container
         .header
           .title Experience
@@ -26,7 +26,4 @@
         = f.hidden_field :user_id, value: current_user.id
         = f.submit "Create Profile", class: "job-seeker-btn"
 
-
-
-
-     
+  

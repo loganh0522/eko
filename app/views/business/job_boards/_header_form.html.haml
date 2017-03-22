@@ -1,0 +1,17 @@
+= form_for [:business, @job_board] do |f| 
+  .float-container
+    .header 
+      Header
+    .body
+      = f.text_field :header, class: "form-control subdomain-field"
+  .float-container
+    .header 
+      Sub-Header
+    .body  
+      = f.text_field :subheader, label: "Subheader", class: "form-control"
+  .float-container
+    .header 
+      Background Photo
+    .body  
+      = f.file_field :cover_photo, label: "Background Photo", class: "btn btn-file"
+      = f.hidden_field :cover_photo_cache

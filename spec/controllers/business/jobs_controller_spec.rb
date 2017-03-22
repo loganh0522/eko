@@ -54,14 +54,6 @@ describe Business::JobsController do
     it "sets the @job to the correct job posting" do      
       expect(assigns(:job)).to eq(job)
     end
-
-    it "sets @applicants to the applicants that belong to the job" do 
-      expect(assigns(:applicants)).to eq(job.applicants)
-    end
-
-    it "sets @stages to the stages that belong to the job" do 
-      expect(assigns(:stages)).to eq(job.stages)
-    end
   end
 
   describe "GET new" do 
@@ -119,12 +111,24 @@ describe Business::JobsController do
         expect(Job.count).to eq(1)
       end
 
+      it "creates a questionairre associated to the Job posting" do 
+        expect(Questionairre.count).to eq(1)
+      end
+
+      it "creates a scorecard associated to the Job posting" do 
+        expect(Scorecard.count).to eq(1)
+      end
+
+      it "creates the stages associated to the Job posting" do 
+        expect(Stage.count).to eq(6)
+      end
+
       it "associates the job posting with the current_company" do
         expect(Job.first.company).to eq(company)
       end
 
       it "creates a HiringTeam association with the current user" do 
-        expect(Job.first.user_ids).to eq([alice.id])
+        expect(HiringTeam.first.user_id).to eq([alice.id])
       end
 
       it "sets the job status as a draft" do 
@@ -144,6 +148,18 @@ describe Business::JobsController do
 
       it "does not create a job posting" do     
         expect(Job.count).to eq(0)
+      end
+
+      it "does not create a questionairre for the job posting" do     
+        expect(Questionairre.count).to eq(0)
+      end
+
+      it "does not create a scorecard for the job posting" do     
+        expect(Scorecard.count).to eq(0)
+      end
+
+      it "does not create a stage for the job posting" do     
+        expect(Stage.count).to eq(0)
       end
 
       it "renders the new action" do 

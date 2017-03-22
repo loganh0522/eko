@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170302142742) do
+ActiveRecord::Schema.define(version: 20170318145300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -174,6 +174,11 @@ ActiveRecord::Schema.define(version: 20170302142742) do
     t.integer  "user_id"
   end
 
+  create_table "hiring_members", force: :cascade do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "hiring_teams", force: :cascade do |t|
     t.integer "user_id"
     t.integer "job_id"
@@ -214,11 +219,31 @@ ActiveRecord::Schema.define(version: 20170302142742) do
     t.integer  "job"
   end
 
+  create_table "job_board_rows", force: :cascade do |t|
+    t.integer  "job_board_id"
+    t.string   "header"
+    t.string   "subheader"
+    t.string   "description"
+    t.string   "video_link"
+    t.integer  "position"
+    t.string   "job_filters"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "job_boards", force: :cascade do |t|
     t.string  "subdomain"
     t.string  "logo"
     t.integer "company_id"
     t.text    "description"
+    t.string  "cover_photo"
+    t.string  "header"
+    t.string  "subheader"
+    t.string  "brand_color"
+    t.string  "sub_heading_color"
+    t.string  "text_color"
+    t.string  "nav_color"
+    t.string  "font_family"
   end
 
   create_table "job_countries", force: :cascade do |t|

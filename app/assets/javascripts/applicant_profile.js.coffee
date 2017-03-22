@@ -200,8 +200,17 @@ jQuery ->
     return
 
 ################ Star Rating ##################
-  $(document).on 'click', '.new_rating', (event) -> 
-    console.log($(this))
+  $(document).on 'click', '.star', (event) -> 
+    console.log($(this).val())
+    console.log($(this).parent().parent().attr('id'))
+    PostCode = $(this).parent().parent().attr('id')
+    Rating = $(this).val()
+    $.ajax
+      url : "/business/applications/"+PostCode+"/ratings"
+      type : "post"
+      data:
+        application_id: PostCode
+        rating: Rating
     
 
 ################ Responsive Menu ############### 
@@ -232,6 +241,14 @@ jQuery ->
       $('#work_experience_end_month').show()
       $('#work_experience_end_year').show()
 
+############## Color Picker #################
+
+  $('.colorpicker').colorpicker({
+    autoOpen: true
+    hideOn:'button'})
+
+  $('#cp2').colorpicker()
+  return
 
 
 

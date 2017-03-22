@@ -1,24 +1,27 @@
-.modal#newSubUserModal
+.modal#subNewUserModal
   .modal-dialog
-    .modal-content
-      .modal-body
-        .sub-header
-          .logo
-            %img(src="#{@company.job_board.logo}" class="sub_logo")
-          %h3
-            Register
-        .body
-          = bootstrap_form_for @user, html: {class: 'form-horizontal'} do |f|
-            %fieldset
-              = f.text_field :first_name, placeholder: "First Name", hide_label: true
-              = f.text_field :last_name, placeholder: "Last Name", hide_label: true
-              = f.email_field :email, placeholder: "Email Address", hide_label: true
-              = f.password_field :password, placeholder: "Password", hide_label: true
-              = f.hidden_field :kind, :value => 'job seeker'
-              = f.submit "Create Account", class: "btn button-submit"
-            %br
-            %p
-              Already have an account? 
-              = link_to "Sign In", "", "data-toggle" => "modal", "data-dismiss" => "modal", "data-target" => "#SubLoginModal"
+    .modal-content 
+      .modal-header
+        %h3 Create Profile
+      .modal-body   
+        %p Build a career portfolio, than easily apply to jobs at the click of a button. Track your job applications with ease, and build job notifications to alert you when jobs are posted.
+        = bootstrap_form_for @user do |f|
+          .row
+            .col-md-6
+              = f.text_field :first_name, placeholder: "First Name", hide_label: true, class: 'first_name'
+            .col-md-6
+              = f.text_field :last_name, placeholder: "Last Name", hide_label: true, class: 'last_name'
+          = f.email_field :email, placeholder: "Email Address", hide_label: true
+          = f.text_field :phone, placeholder: "Phone Number", hide_label: true
+          = f.text_field :location, class: "form-control", id: "geocomplete", autocomplete: "off", hide_label: true
+          = f.password_field :password, placeholder: "Password", hide_label: true
+          = f.hidden_field :kind, :value => 'job seeker'
+          = f.submit "Sign In", class: "btn button-submit", :style => "background-color: #{@job_board.brand_color}"
+        .have-account
+          Already have an account? 
+          = link_to "Sign In", "", "data-toggle" => "modal", "data-dismiss" => "modal", "data-target" => "#SubLoginModal"
+      .modal-footer
+        .power
+          .powered-by Powered by
+          %img(src="/tmp/logo.jpg")
 
-    

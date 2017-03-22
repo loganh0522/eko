@@ -1,4 +1,5 @@
-$('.applicant-messages').html('<%= j render "business/messages/applicant_messages", application: @application %>');
-$('.activity-feed').html('<%= j render "business/activities/application_activity" application: @application %>');
 $('#message-subject').val('');
 $('#message-body').val('');
+$('.messages-container').find('.activity-feed').html('<%= j render "business/messages/applicant_messages", application: @application %>');
+$('.activity-container').find('.activity-feed').html('<%= j render "business/activities/application_activity", application: @application %>');
+

@@ -49,7 +49,7 @@ gem 'liquid-rails', '~> 0.1.1'
 gem 'jquery-timepicker-rails'
 gem 'tinymce-rails', '~> 4.5'
 
-
+gem 'bootstrap-colorpicker-rails'
 
 group :development do
   gem 'thin'
@@ -62,6 +62,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'rspec-rails', '3.1'
+  gem 'rb-readline'
 end
 
 group :test do

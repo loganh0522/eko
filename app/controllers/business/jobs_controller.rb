@@ -13,13 +13,16 @@ class Business::JobsController < ApplicationController
   end
 
   def create 
+    binding.pry
     @job = Job.new(job_params)  
 
     if @job.save && @job.company == current_company
       convert_location
       Questionairre.create(job_id: @job.id)
       Scorecard.create(job_id: @job.id)
-      @job.user_ids = params[:user_ids]
+      HiringTeam.create(job_id: @job.id, user_id: params[:user_id])
+      create_stages(@job)
+      # @job.user_ids = params[:user_ids]
       @job.update_column(:status, "draft")
       job_url
       track_activity(@job, "draft")
@@ -34,6 +37,7 @@ class Business::JobsController < ApplicationController
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     @interviews_by_date = @job.interviews.group_by(&:interview_date)
     @rating = Rating.new
+
     if params[:query].present? 
       @applications = Application.where(job_id: @job.id)
       @results = Application.search(params[:query]).records.to_a
@@ -159,11 +163,23 @@ class Business::JobsController < ApplicationController
     end
   end
 
+ 
+
   def job_params
     params.require(:job).permit(:description, :title, :location, :address, :benefits, :company_id,
       :industry_ids, :function_ids, :education_level, :kind, :career_level)
   end
   
+  def create_stages(job)
+    stages = ["Screen", "Phone Interview", "Interview", 
+      "Group Interview", "Offer", "Hired"]
+    @position = 1 
+    stages.each do |stage| 
+      Stage.create(name: stage, position: @position, job_id: job.id)
+      @position += 1
+    end
+  end
+
   def job_url
     @job.update_column(:url, "#{current_company.job_board.subdomain}.talentwiz.ca/jobs/#{@job.id}")
   end

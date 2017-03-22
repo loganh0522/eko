@@ -28,7 +28,8 @@ class Business::JobBoardsController < ApplicationController
   private 
 
   def job_params
-    params.require(:job_board).permit(:description, :logo, :subdomain)
+    params.require(:job_board).permit(:description, :logo, :subdomain, :header, :subheader, :cover_photo, 
+      :brand_color, :text_color, :sub_header_color)
   end
 
 end

@@ -12,9 +12,6 @@ jQuery ->
     event.preventDefault()
 
 
-  $('.create-profile-container ').on 'click', '.remove_fields', (event) ->
-    $(this).parent().parent().remove()
-    event.preventDefault()
 
   $('.job_scorecard').on 'click', '.add_fields', (event) ->
     time = new Date().getTime()
@@ -52,7 +49,16 @@ jQuery ->
         event.preventDefault() 
       i++
 
-    
+################## Create Profile ##################    
       
+  $('.create-profile-container ').on 'click', '.remove_fields', (event) ->
+    $(this).parent().parent().remove()
+    event.preventDefault()
 
+  $('.create-profile-container').on 'click', '.add_fields', (event) ->
+    time = new Date().getTime()
+    regexp = new RegExp($(this).data('id'), 'g')
+    $(this).before($(this).data('fields').replace(regexp, time))
+    $(this).prev().find('.remove_fields').show()
+    event.preventDefault()
     

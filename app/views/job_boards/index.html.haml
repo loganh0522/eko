@@ -1,3 +1,9 @@
+.job-board-header{:style => "background-image: url(#{@job_board.cover_photo.url})"}
+  .intro-message
+    .header= @job_board.header
+    .sub-header= @job_board.subheader
+
+
 .company-job-board  
   .jobs
     %h2 Current Job Openings
@@ -7,7 +13,7 @@
           .header-info
             .job-detail
               .title= link_to "#{job.title}", "jobs/#{job.id}" 
-            .view-job= link_to "View Job", "jobs/#{job.id}", class: "btn"
+            .view-job{:style => "background-color: #{@job_board.brand_color}"}= link_to "View Job", "jobs/#{job.id}", class: "btn"
           .bottom-info
             .left-side
               %img(src="/tmp/black-small-location.png") 
@@ -15,7 +21,6 @@
               
               %img(src="/tmp/black-small-bar-chart.png") 
               = job.career_level
-
             .right-side 
               %img(src="/tmp/black-small-hammer.png") 
               = job.job_industries.first.industry.name
@@ -28,3 +33,4 @@
     - else 
       .not-present-container
         %p Sorry, there are currently no open job postings. 
+  .footer
