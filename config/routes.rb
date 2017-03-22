@@ -26,10 +26,12 @@ Rails.application.routes.draw do
   resources :demos, only: [:new, :create]
   
   resources :job_boards
-  resources :jobs
+  resources :jobs do 
+    resources :applications, only: [:index, :new, :create]
+  end
   resources :companies
   resources :users
-  resources :profiles, only: [:index, :new]
+  resources :profiles, only: [:index, :new, :create]
   
 
   get 'login', to: "sessions#new"
@@ -45,7 +47,9 @@ Rails.application.routes.draw do
 
   namespace :job_seeker do 
     root to: "jobs#index"
-    resources :jobs, only: [:index, :show]
+    resources :jobs, only: [:index, :show] do
+      resources :applications
+    end
     resources :users
     resources :profiles do 
       resources :user_certifications

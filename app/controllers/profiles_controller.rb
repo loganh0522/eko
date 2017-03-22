@@ -1,9 +1,8 @@
 class ProfilesController < ApplicationController 
   before_filter :require_user
-  before_filter :profile_sign_up_complete
+  before_filter :profile_sign_up_complete, :only => [:index]
 
-  def index
-    @profile = current_user.profile
+  def index 
     @work_experience = WorkExperience.new
     @accomplishment = Accomplishment.new
     @education = Education.new
@@ -12,6 +11,7 @@ class ProfilesController < ApplicationController
     @job_board = JobBoard.find_by_subdomain!(request.subdomain)
     @company = @job_board.company
     @avatar = current_user.user_avatar
+    @profile = current_user.profile
     @work_experiences = @profile.organize_work_experiences
   end
 
@@ -27,14 +27,16 @@ class ProfilesController < ApplicationController
   def create
     @user = current_user
     @profile = Profile.new(profile_params)
+    @job_board = JobBoard.find_by_subdomain!(request.subdomain)
+    @company = @job_board.company
     if @profile.save 
       flash[:success] = "Your profile was successfully created!"
-      redirect_to job_seeker_profiles_path
+      redirect_to profiles_path
     else
       render :new
     end
   end
-  
+
   private
 
   def profile_params 

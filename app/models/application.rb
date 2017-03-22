@@ -71,36 +71,36 @@ class Application < ActiveRecord::Base
   end
 
 
-  def as_indexed_json(options={})
-    as_json(
-      only: [:created_at],
-      include: {
-        applicant: {
-          only: [:first_name, :last_name, :tag_line],
-          include: {
-            user_avatar: {only: [:image, :small_image]},
-            work_experiences: {only: [:title, :description, :company_name]}
-          }        
-        }
-      }
-    )
-  end
+  # def as_indexed_json(options={})
+  #   as_json(
+  #     only: [:created_at],
+  #     include: {
+  #       applicant: {
+  #         only: [:first_name, :last_name, :tag_line],
+  #         include: {
+  #           user_avatar: {only: [:image, :small_image]},
+  #           work_experiences: {only: [:title, :description, :company_name]}
+  #         }        
+  #       }
+  #     }
+  #   )
+  # end
 
-  def self.search(query, options={})
-    search_definition = {
-      query: {
-        multi_match: {
-          query: query,
-          fields: ["applicant.first_name", "applicant.last_name", "applicant.tag_line",
-            "applicant.work_experiences.description", "applicant.work_experiences.title", 
-            "applicant.work_experiences.company_name", 'applicant.education.school' ]
-        }
-      }
-    }
+  # def self.search(query, options={})
+  #   search_definition = {
+  #     query: {
+  #       multi_match: {
+  #         query: query,
+  #         fields: ["applicant.first_name", "applicant.last_name", "applicant.tag_line",
+  #           "applicant.work_experiences.description", "applicant.work_experiences.title", 
+  #           "applicant.work_experiences.company_name", 'applicant.education.school' ]
+  #       }
+  #     }
+  #   }
 
-    # if date_field.present? 
-    #   search_definition[:query][:multi_match][:fields] << "created_at"
-    # end
-    __elasticsearch__.search(search_definition)
-  end
+  #   # if date_field.present? 
+  #   #   search_definition[:query][:multi_match][:fields] << "created_at"
+  #   # end
+  #   __elasticsearch__.search(search_definition)
+  # end
 end

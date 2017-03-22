@@ -39,8 +39,12 @@ class ApplicationController < ActionController::Base
 
   def profile_sign_up_complete
     if current_user.profile.present? == false
-      redirect_to new_job_seeker_profile_path
-      flash[:error] = "Please complete your profile before you continue."
+      if request.subdomain.present? 
+        redirect_to new_profile_path
+      else
+        redirect_to new_job_seeker_profile_path
+      end
+      flash[:danger] = "Please complete your profile before you continue."
     end
   end
 

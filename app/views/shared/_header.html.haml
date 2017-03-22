@@ -83,8 +83,8 @@
         - else
           = @company.name
         %ul
-          %li= link_to "Profile", profile_path
-          %li= link_to "Sign Out", signout_path
+          %li= link_to "Profile", profile_path, :class => ".sub-register-btn", :style => "height: 30px; padding: 10px 20px; width: 40px; border-radius: 5px; border: 1px solid #{@job_board.brand_color}"
+          %li= link_to "Sign Out", signout_path, class: "sub-signin-btn"
   - else
     .career-portal-nav   
       - if @company.job_board.logo.present?

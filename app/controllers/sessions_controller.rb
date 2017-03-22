@@ -36,6 +36,10 @@ class SessionsController < ApplicationController
   def destroy 
     session[:user_id] = nil 
     session[:company_id] = nil
-    redirect_to login_path
+    if request.subdomain.present? 
+      redirect_to root_path
+    else
+      redirect_to login_path
+    end
   end
 end

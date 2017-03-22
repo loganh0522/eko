@@ -16,7 +16,7 @@
           = f.text_field :location, class: "form-control", id: "geocomplete", autocomplete: "off", hide_label: true
           = f.password_field :password, placeholder: "Password", hide_label: true
           = f.hidden_field :kind, :value => 'job seeker'
-          = f.submit "Sign In", class: "btn button-submit", :style => "background-color: #{@job_board.brand_color}"
+          = f.submit "Create Profile", class: "btn button-submit", :style => "background-color: #{@job_board.brand_color}"
         .have-account
           Already have an account? 
           = link_to "Sign In", "", "data-toggle" => "modal", "data-dismiss" => "modal", "data-target" => "#SubLoginModal"

@@ -1,4 +1,6 @@
 class JobBoardsController < ApplicationController 
+  before_filter :profile_sign_up_complete
+
   def index
     @job_board = JobBoard.find_by_subdomain!(request.subdomain)
     @function = Function.all
