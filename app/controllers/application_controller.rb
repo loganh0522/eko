@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
   end
 
   def profile_sign_up_complete
-    if current_user.profile.present? == false
+    if current_user.present? && current_user.profile.present? == false && current_user.kind == "job seeker"
       if request.subdomain.present? 
         redirect_to new_profile_path
       else
