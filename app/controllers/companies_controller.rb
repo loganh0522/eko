@@ -31,6 +31,7 @@ class CompaniesController < ApplicationController
 
   def create_career_portal(company)
     @subdomain = company.name.parameterize("_")
-    JobBoard.create(company_id: company.id, subdomain: @subdomain)
+    JobBoard.create(company_id: company.id, subdomain: @subdomain, header: "Come Work With Our Team",
+      subheader: "We are hiring great people to help grow our company")
   end  
 end
