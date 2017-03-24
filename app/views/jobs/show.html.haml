@@ -11,49 +11,13 @@
     .job-body
       %p= simple_format(@job.description)
     .apply 
-      - if current_user.present?
-        - if @job.questionairre.present?      
-          = link_to new_job_application_path(@job) do 
-            .app-btn{:style => "background-color: #{@job_board.brand_color}"}
-              Apply to this Job
-    
-        - else
-          = bootstrap_form_for [@application] do |f|
-            .fieldset
-              .form-group.col-md-12
-              = f.hidden_field :user_id, value: current_user.id
-              = f.hidden_field  :job_id, value: @job.id
-              .app-btn{:style => "background-color: #{@job_board.brand_color})"}
-                = f.submit "Apply to Job"
-      - else 
-        = render "/users/sub_new_job_seeker"
-        = render "/sessions/sub_login"
-        .app-btn{:style => "background-color: #{@job_board.brand_color})"}
-          = link_to "Apply To Job", "", :class => "btn btn-primary app-btn", "data-toggle" => "modal", "data-target" => "#SubLoginModal"
-
-
+      = render "apply_method"
 
   .extra-job-details
     .apply 
-      - if current_user.present?
-        - if @job.questionairre.present?
-          = link_to new_job_application_path(@job) do 
-            .app-btn{:style => "background-color: #{@job_board.brand_color}"}
-              Apply to this Job
-              
-        - else
-          = bootstrap_form_for [@application] do |f|
-            .fieldset
-              .form-group.col-md-12
-              = f.hidden_field :user_id, value: current_user.id
-              = f.hidden_field  :job_id, value: @job.id
-              .app-btn{:style => "background-color: #{@job_board.brand_color})"}
-                = f.submit "Apply to Job", class: 'app-btn', :html => {:style => "background-color: #{@job_board.brand_color})"}
-      - else 
-        = render "/users/sub_new_job_seeker"
-        = render "/sessions/sub_login"
-        .app-btn{:style => "background-color: #{@job_board.brand_color})"}
-          = link_to "Apply To Job", "", :class => "btn btn-primary app-btn", "data-toggle" => "modal", "data-target" => "#SubLoginModal"
+      = render "apply_method"
+
+    
     %h3 Job Details 
     .detail
       .type Industry
@@ -68,6 +32,8 @@
       .type Posted
       .content= "#{time_ago_in_words(@job.created_at)} ago"
 
+  = render "/users/sub_new_job_seeker"
+  = render "/sessions/sub_login"
   
     
     
