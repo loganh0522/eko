@@ -9,7 +9,8 @@
       .fieldset
         .form-group.col-md-12
         = f.hidden_field :user_id, value: current_user.id
-        = f.hidden_field  :job_id, value: @job.id
+        = f.hidden_field :job_id, value: @job.id
+        = f.hidden_field :company_id, value: @company.id
         .app-btn{:style => "background-color: #{@job_board.brand_color})"}
           = f.submit "Apply to Job", class: 'app-btn', :html => {:style => "background-color: #{@job_board.brand_color})"}
 - else 

@@ -13,14 +13,13 @@ class Business::JobsController < ApplicationController
   end
 
   def create 
-    binding.pry
     @job = Job.new(job_params)  
 
     if @job.save && @job.company == current_company
       convert_location
       Questionairre.create(job_id: @job.id)
       Scorecard.create(job_id: @job.id)
-      HiringTeam.create(job_id: @job.id, user_id: params[:user_id])
+      HiringTeam.create(job_id: @job.id, user_id: current_user.id)
       create_stages(@job)
       # @job.user_ids = params[:user_ids]
       @job.update_column(:status, "draft")
