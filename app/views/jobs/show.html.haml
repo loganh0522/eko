@@ -12,10 +12,12 @@
       %p= simple_format(@job.description)
     .apply 
       = render "apply_method"
-
+  
   .extra-job-details
     .apply 
       = render "apply_method"
+
+  
 
     
     %h3 Job Details 
@@ -32,8 +34,6 @@
       .type Posted
       .content= "#{time_ago_in_words(@job.created_at)} ago"
 
-  = render "/users/sub_new_job_seeker"
-  = render "/sessions/sub_login"
   
     
     
