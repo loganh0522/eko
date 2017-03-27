@@ -17,9 +17,7 @@
     .apply 
       = render "apply_method"
 
-  
-
-    
+   
     %h3 Job Details 
     .detail
       .type Industry
@@ -27,9 +25,6 @@
     .detail
       .type Career Level 
       .content= @job.career_level
-    .detail
-      .type Salary
-      .content= "$60,000 - $100,000"
     .detail
       .type Posted
       .content= "#{time_ago_in_words(@job.created_at)} ago"

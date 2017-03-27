@@ -203,6 +203,7 @@ jQuery ->
   $(document).on 'click', '.star', (event) -> 
     console.log($(this).val())
     console.log($(this).parent().parent().attr('id'))
+    
     PostCode = $(this).parent().parent().attr('id')
     Rating = $(this).val()
     $.ajax

@@ -1,8 +1,8 @@
 .sections
-  %ul{:id => 'sections'}
-    - sections.in_groups_of(2).each do |section_group| 
-      .row 
-        - section_group.each do |section|
+  - if @sections.present? 
+    %ul{:id => 'sections'}
+      - sections.each do |section| 
+        .row 
           %li
             .section{:id => "section_#{section.id}"}
               .section-header
@@ -18,4 +18,7 @@
                     %li
                       = option.body
 
-                
+  - else    
+    .not-present-container
+      %p There currently are currently no parameters for the scorecard. 
+      = link_to "+ Add Section", new_business_job_scorecard_scorecard_section_path(@job.id, @scorecard.id), :data => {:remote => true}

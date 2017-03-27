@@ -5,12 +5,17 @@ class Business::RatingsController < ApplicationController
   before_filter :company_deactivated?
 
   def create
-    @rating = Rating.create(score: params[:rating].to_f, 
-      application_id: params[:application_id].to_i, 
-      user_id: current_user.id)
-  end
-
-  def update
+    @application = Application.find(params[:application_id])
+    
+    if @application.current_user_rating_present?(current_user)
+      @rating = Rating.where(application_id: params[:application_id].to_i, 
+        user_id: current_user.id).first
+      @rating.update(score: params[:rating].to_f)
+    else
+      @rating = Rating.create(score: params[:rating].to_f, 
+        application_id: params[:application_id].to_i, 
+        user_id: current_user.id)
+    end
   end
 
   private 

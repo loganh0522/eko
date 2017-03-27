@@ -11,8 +11,8 @@
     .name= "#{@application.applicant.first_name.capitalize } #{@application.applicant.last_name.capitalize}"
     - if @application.applicant.current_jobs.present?
       .job= "#{@application.applicant.current_jobs.first.title}  #{@application.applicant.current_jobs.first.company_name} "
-    .location= "#{@application.applicant.city}"
-    .name= render 'business/ratings/form', application: @application
+    .location= "#{@application.applicant.location}"
+    = render 'business/ratings/form', application: @application
 
 .filter
   .filter-header
@@ -21,6 +21,7 @@
     .glyphicon.glyphicon-plus
   .filter-body
     = "Email: #{@application.applicant.email}"
+    %br
     = "Phone: #{@application.applicant.phone}"
 
 .filter

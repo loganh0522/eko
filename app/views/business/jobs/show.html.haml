@@ -11,13 +11,13 @@
     %ul 
       %li.change#all-job-applicants.activated Applicants
       %li.change#job-activity-feed Activity
-      %li.change#job-calendar Calendar
+      / %li.change#job-calendar Calendar
 
 #main-container
   .all-job-applicants-container.showing
     = render 'business/shared/applicants_table'
-  .job-calendar-container
-    = render 'business/calendar/job_calendar'
+  / .job-calendar-container
+  /   = render 'business/calendar/job_calendar'
   .job-activity-feed-container
     = render 'business/activities/job_activity_feed'
     

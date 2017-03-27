@@ -6,6 +6,7 @@ class Business::ApplicationsController < ApplicationController
   
 
   def index
+
     if params[:query].present? 
       @results = Application.search(params[:query]).records.to_a
       @applicants = []
@@ -23,6 +24,7 @@ class Business::ApplicationsController < ApplicationController
       company_locations
       @tags = current_company.tags
     end
+    
   end
 
   def filter_applicants

@@ -2,8 +2,7 @@
   - if @job.questionairre.questions.present?
     = link_to new_job_application_path(@job) do 
       .app-btn{:style => "background-color: #{@job_board.brand_color}"}
-        Apply to this Job
-        
+        Apply to this Job      
   - else
     = bootstrap_form_for [@job, @application] do |f|
       .fieldset

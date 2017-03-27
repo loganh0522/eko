@@ -162,8 +162,6 @@ class Business::JobsController < ApplicationController
     end
   end
 
- 
-
   def job_params
     params.require(:job).permit(:description, :title, :location, :address, :benefits, :company_id,
       :industry_ids, :function_ids, :education_level, :kind, :career_level)

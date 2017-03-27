@@ -63,7 +63,7 @@
                   %td.names
                     .name{:data => {:id =>  "#{application.applicant.first_name} #{application.applicant.last_name}"}}
                       = link_to "#{application.applicant.first_name} #{application.applicant.last_name}", business_job_application_path(@job, application.id)
-                    .current-position= application.current_position 
+                    / .current-position= application.current_position 
                   %td
                     = application_stage(application)
                   %td

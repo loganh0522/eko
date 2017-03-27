@@ -1,63 +1,61 @@
-/ = form_for [:business, application, @rating], remote: true, :html => {:id => "#{application.id}" } do |f| 
-/   %fieldset.rating
-/     = f.radio_button :score, "5", id: 'star5', class: 'star'
-/     %label.full{:for => "star5"}
-
-/     = f.radio_button :score, "4.5", id: 'star4half', class: 'star'
-/     %label.half{:for => "star4half"} 
-
-/     = f.radio_button :score, "4", id: 'star4', class: 'star'
-/     %label.full{:for => "star4"}
-
-/     = f.radio_button :score, "3.5", id: 'star3half', class: 'star'
-/     %label.half{:for => "star3half"} 
-
-/     = f.radio_button :score, "3", id: 'star3', class: 'star'
-/     %label.full{:for => "star3"}
-
-/     = f.radio_button :score, "2.5", id: 'star2half', class: 'star'
-/     %label.half{:for => "star2half"} 
-
-/     = f.radio_button :score, "2", id: 'star2', class: 'star'
-/     %label.full{:for => "star2"} 
-
-/     = f.radio_button :score, "1.5", id: 'star1half', class: 'star'
-/     %label.half{:for => "star1half"} 
-
-/     = f.radio_button :score, "1", id: 'star1', class: 'star'
-/     %label.full{:for => "star1"}
-
-/     = f.radio_button :score, "0.5", id: 'starhalf', class: 'star'
-/     %label.half{:for => "starhalf"}  
-/     = f.hidden_field :application_id, value: application.id
 %div.new_rating{:id => "#{application.id}"}
-  .rating
-    %input#star5.star{:name => "rating", :type => "radio", :value => "5"}
-    %label.full{:for => "star5"}
+  %fieldset.rating{:id => "rating_#{application.id}"}
+    - if application.current_user_rating(current_user) == 5
+      %input.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_star4half", :type => "radio", :value => "5", checked: true}
+    - else
+      %input.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_star5", :type => "radio", :value => "5"}
+    %label.full{:for => "rating_#{application.id}_star5"}
 
-    %input#star4half.star{:name => "rating", :type => "radio", :value => "4.5"}
-    %label.half{:for => "star4half"}
+    - if application.current_user_rating(current_user) == 4.5
+      %input.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_star4half", :type => "radio", :value => "4.5", checked: true}
+    - else
+      %input.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_star4half", :type => "radio", :value => "4.5"}
+    %label.half{:for => "rating_#{application.id}_star4half"}
     
-    %input#star4.star{:name => "rating", :type => "radio", :value => "4", :checked => true}
-    %label.full{:for => "star4"}
+    - if application.current_user_rating(current_user) == 4
+      %input.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_star4",  :type => "radio", :value => "4", checked: true} 
+    - else
+      %input.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_star4",  :type => "radio", :value => "4"}
+    %label.full{:for => "rating_#{application.id}_star4"}
     
-    %input#star3half.star{:name => "rating", :type => "radio", :value => "3.5"}
-    %label.half{:for => "star3half"}
+    - if application.current_user_rating(current_user) == 3.5
+      %input.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_star3half", :type => "radio", :value => "3.5", checked: true}
+    - else
+      %input.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_star3half", :type => "radio", :value => "3.5"}
+    %label.half{:for => "rating_#{application.id}_star3half"}
     
-    %input#star3.star{:name => "rating", :type => "radio", :value => "3"}
-    %label.full{:for => "star3"}
+    - if application.current_user_rating(current_user) == 3
+      %input.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_star3", :type => "radio", :value => "3", checked: true}
+    - else
+      %input.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_star3", :type => "radio", :value => "3"}
+    %label.full{:for => "rating_#{application.id}_star3"}
     
-    %input#star2half.star{:name => "rating", :type => "radio", :value => "2.5"}
-    %label.half{:for => "star2half"}
+    - if application.current_user_rating(current_user) == 2.5
+      %input.star{:name => "rating_#{application.id}",:id => "rating_#{application.id}_star2half", :type => "radio", :value => "2.5", checked: true}
+    - else 
+      %input.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_star2half", :type => "radio", :value => "2.5"}
+    %label.half{:for => "rating_#{application.id}_star2half"}
     
-    %input#star2.star{:name => "rating", :type => "radio", :value => "2"}
-    %label.full{:for => "star2"}
+    - if application.current_user_rating(current_user) == 2
+      %input.star{:name => "rating_#{application.id}",:id => "rating_#{application.id}_star2", :type => "radio", :value => "2", checked: true}
+    - else
+      %input.star{:name => "rating_#{application.id}",:id => "rating_#{application.id}_star2", :type => "radio", :value => "2"}
+    %label.full{:for => "rating_#{application.id}_star2"}
     
-    %input#star1half.star{:name => "rating", :type => "radio", :value => "1.5"}
-    %label.half{:for => "star1half"}
+    - if application.current_user_rating(current_user) == 1.5
+      %input.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_star1half", :type => "radio", :value => "1.5", checked: true}
+    - else
+      %input.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_star1half", :type => "radio", :value => "1.5"}
+    %label.half{:for => "rating_#{application.id}_star1half"}
     
-    %input#star1.star{:name => "rating", :type => "radio", :value => "1"}
-    %label.full{:for => "star1"}
+    - if application.current_user_rating(current_user) == 1
+      %input.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_star1", :type => "radio", :value => "1", checked: true}
+    - else
+      %input.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_star1", :type => "radio", :value => "1"}
+    %label.full{:for => "rating_#{application.id}_star1"}
     
-    %input#starhalf.star{:name => "rating", :type => "radio", :value => "half"}
-    %label.half{:for => "starhalf"}
+    - if application.current_user_rating(current_user) == 0.5
+      %input#starhalf.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_starhalf", :type => "radio", :value => "half", checked: true}
+    - else
+      %input#starhalf.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_starhalf", :type => "radio", :value => "half"}
+    %label.half{:for => "rating_#{application.id}_starhalf"}

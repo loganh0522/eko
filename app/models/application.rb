@@ -66,9 +66,28 @@ class Application < ActiveRecord::Base
     end
   end
 
-  def current_position
-    self.applicant.profile.current_position.title
+  def current_user_rating_present?(current_user)
+    self.ratings.each do |rating| 
+      if rating.user == current_user
+        return true   
+      end
+    end
+    return false
   end
+
+  def current_user_rating(current_user)
+    self.ratings.each do |rating| 
+      if rating.user == current_user
+        return rating.score 
+      end
+    end
+    return false
+  end
+
+
+  # def current_position
+  #   self.applicant.profile.current_position.title
+  # end
 
 
   # def as_indexed_json(options={})

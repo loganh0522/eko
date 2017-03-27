@@ -8,13 +8,7 @@
       %h4 Application Form
       = link_to "+ Add Question", new_business_job_questionairre_question_path(@job.id, @questionairre.id), :data => {:remote => true}      
     .body
-      - if @questions.present? 
-        .questions
-          = render 'business/questions/questions', questions: @questions
-      - else    
-        .not-present-container
-          %p There currently are currently no questions for the application form. 
-          = link_to "+ Add Question", new_business_job_questionairre_question_path(@job.id, @questionairre.id), :data => {:remote => true}
+      = render 'business/questions/questions', questions: @questions
     .job_scorecard
 
         
