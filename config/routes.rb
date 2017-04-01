@@ -118,6 +118,7 @@ Rails.application.routes.draw do
       post :close_job, to: "jobs#close_job"
       post :archive_job, to: "jobs#archive_job"
       post :publish_job, to: "jobs#publish_job"
+      get :promote, to: "jobs#promote"
       
       resources :applications do
         get :application_activity, to: "activities#application_activity"

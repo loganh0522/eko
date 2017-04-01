@@ -6,7 +6,6 @@ class Business::ApplicationsController < ApplicationController
   
 
   def index
-
     if params[:query].present? 
       @results = Application.search(params[:query]).records.to_a
       @applicants = []
@@ -39,9 +38,7 @@ class Business::ApplicationsController < ApplicationController
 
         if applicant.apps.status == param || 
           applicant.apps.title == param || 
-          @tags.include?(param)
-
-          
+          @tags.include?(param)        
           @applicants.append(applicant) unless @applicants.include?(applicant)
         else
           @applicants.delete(applicant)
@@ -71,18 +68,6 @@ class Business::ApplicationsController < ApplicationController
     @scorecard = Scorecard.where(job_id: params[:job_id]).first
     @application_scorecard_present = ApplicationScorecard.where(application_id: @application.id)
     scorecard_graphs
-  end
-
-  def applicant_search
-
-  end
-
-  def edit
-
-  end
-
-  def update
-
   end
 
   def change_stage 

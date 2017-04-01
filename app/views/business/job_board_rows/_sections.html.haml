@@ -1,0 +1,26 @@
+.stage
+  .stage-header
+    .body
+      Header
+    .icons
+      = link_to "#{}", :data => {:remote => true} do
+        %i.glyphicon.glyphicon-pencil
+.stage
+  .stage-header
+    .glyphicon.glyphicon-move
+    .body
+      Jobs Container
+    .icons
+      = link_to "#{}", :data => {:remote => true } do
+        %i.glyphicon.glyphicon-pencil
+      / = link_to "#", remote: true, :method => :delete do
+      /   %i.glyphicon.glyphicon-remove
+- @sections.each do |section| 
+  .stage
+    .stage-header
+      .glyphicon.glyphicon-move
+      .body
+        section.kind
+      .icons
+        = link_to "#{}", :data => {:remote => true } do
+          %i.glyphicon.glyphicon-pencil

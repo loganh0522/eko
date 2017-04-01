@@ -1,5 +1,5 @@
-.email-template-area
-  = form_for [:business, @email_template], html: {remote: true, class: 'invite'} do |f|
+= form_for [:business, @email_template], html: {remote: true, class: 'invite'} do |f|
+  .email-template-area
     .subject
       .sender= f.text_field :title, placeholder: "Title", id: "message-subject"
     .subject
@@ -7,19 +7,13 @@
     .email-variables
       Insert:
       = select_tag "insert-fluid-variable", options_for_select([ "Applicant First Name", "Applicant Last Name", "Applicant Full Name", "Job Title", "Company Name" ] ), :include_blank => true, id: "insert-fluid-variable"
-    = f.text_area :body, :class => "tinymce", id: "message-body", rows: 12, cols: 12
+    = f.text_area :body, :class => "tinymce", id: "message-body", rows: 7, cols: 12
     = tinymce_assets        
     = tinymce :alternate
-    .email-footer
-      %fieldset
-      = hidden_field_tag :user_id, current_user.id
-      = hidden_field_tag :company_id, current_company.id
+  .modal-footer
+    %fieldset
+      = f.hidden_field :user_id, value: current_user.id
+      = f.hidden_field :company_id, value: current_company.id
       %br
       = f.submit "Save Template", class: "btn submit-button"
-      - if !@email_template.new_record?
-        .close-form#edit-form.btn.btn-default     
-          Close
-      - else
-        .close-form#new-form.btn.btn-default     
-          Close
-            
+      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

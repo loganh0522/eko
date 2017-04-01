@@ -58,6 +58,12 @@ class Business::JobsController < ApplicationController
     @scorecard = @job.scorecard
   end
 
+  def promote
+    @job = Job.find(params[:job_id])
+    @questionairre = @job.questionairre
+    @scorecard = @job.scorecard
+  end
+
   def update
     @job = Job.find(params[:id])
     

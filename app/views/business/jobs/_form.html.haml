@@ -30,6 +30,5 @@
     .row
       = hidden_field_tag :user_ids, current_user.id
       = f.hidden_field :company_id, value: current_company.id
-      .col-md-1.col-md-offset-9
-        = f.submit @job.new_record? ? "Create Job Posting" : "Save and Continue", class: "btn btn-primary"
+      = f.submit @job.new_record? ? "Create Job Posting" : "Save and Continue", class: "btn button-mid"
 

@@ -8,36 +8,50 @@ gem 'sass-rails', '~> 5.0.1'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'coffee_routes'
+
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+
 gem 'turbolinks'
 gem 'haml-rails'
+
 gem 'jbuilder', '~> 2.0'
+
 gem 'sdoc', '~> 0.4.0', group: :doc
+
 gem 'bootstrap_form'
 gem 'autoprefixer-rails'
+
 gem 'bcrypt'
 gem 'fabrication'
 gem 'faker'
+
 gem 'figaro'
 gem 'stripe'
 gem 'stripe_event'
+
 gem 'rails4-autocomplete'
 gem 'geocomplete_rails'
 
+
 gem 'mini_magick'
+gem 'rmagick', :require => 'RMagick'
 gem 'carrierwave'
 gem 'carrierwave-aws'
+gem 'dropzonejs-rails'
+gem 'jcrop-rails-v2'
+gem 'remotipart', '~> 1.2'
+gem 'jquery-fileupload-rails'
+
 
 gem "font-awesome-rails"
 
-gem 'jcrop-rails-v2'
 
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 
-gem 'remotipart', '~> 1.2'
-gem 'rmagick', :require => 'RMagick'
+
+
 
 gem 'googlecharts'
 gem 'omniauth', '~> 1.2.2'
@@ -46,7 +60,6 @@ gem 'google-api-client', '0.9'
 gem 'signet', '~> 0.7.3'
 
 gem 'liquid-rails', '~> 0.1.1'
-gem 'jquery-timepicker-rails'
 gem 'tinymce-rails', '~> 4.5'
 
 gem 'bootstrap-colorpicker-rails'

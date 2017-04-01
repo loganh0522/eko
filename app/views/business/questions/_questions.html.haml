@@ -1,5 +1,6 @@
-.questions
-  - if @questions.present?        
+
+- if @questions.present? 
+  .questions       
     %ul{:id => 'stages'}
       - questions.each do |question| 
         %li{:id => "question_#{question.id}"}
@@ -11,10 +12,10 @@
                 %i.glyphicon.glyphicon-pencil
               = link_to business_job_questionairre_question_path(@job.id, @questionairre.id, question.id), remote: true, :method => :delete do
                 %i.glyphicon.glyphicon-remove
-  - else    
-    .not-present-container
-      %p There currently are currently no questions for the application form. 
-      = link_to "+ Add Question", new_business_job_questionairre_question_path(@job.id, @questionairre.id), :data => {:remote => true}
+- else    
+  .not-present-container
+    %p There currently are currently no questions for the application form. 
+    = link_to "+ Add Question", new_business_job_questionairre_question_path(@job.id, @questionairre.id), :data => {:remote => true}
 
 
          

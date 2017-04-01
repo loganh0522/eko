@@ -15,18 +15,17 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require jquery.remotipart
-//= require jquery.Jcrop
 //= require bootstrap-sprockets
-//= require autocomplete-rails
 //= require geocomplete
+//= require jquery.Jcrop
 //= require tinymce
 //= require tinymce-jquery
-//= require jquery.timepicker.js
+//= require autocomplete-rails
+//= require dropzone
 //= require bootstrap-colorpicker
-
-
-
+//= require jquery-fileupload
 //= require_tree .
+
 
 
 

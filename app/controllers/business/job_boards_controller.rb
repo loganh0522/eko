@@ -11,6 +11,8 @@ class Business::JobBoardsController < ApplicationController
 
   def edit
     @job_board = JobBoard.find(params[:id])
+    @section = JobBoardRow.new
+    @sections = @job_board.job_board_rows
   end
 
   def update

@@ -1,39 +1,39 @@
 .page-header
   %h1 Add Team Members 
-#post-a-job
+.company-settings
   .side-container
     = render 'business/shared/admin_sidebar'
   .main-container
-    .header
-      %h1 My Profile 
     .body
-      %h4 General Info 
-      = form_for [:business, @user] do |f| 
-        = f.text_field :first_name
-        = f.text_field :last_name
-      %br 
-      
-      %h4 Profile Picture
-      = image_tag @avatar.image.medium_image, :size => "100x100" if @avatar.present?
-      = link_to "Change Photo", '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"}
+      .user-profile-header
+        .profile-picture
+          .circle= image_tag @avatar.image.medium_image, :size => "100x100" if @avatar.present?
+          .change-photo= link_to "Change Photo", '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"}
+        .user-info
+          %h3= current_user.full_name
+          = current_user.email
+        .profile-actions
+          .link1= link_to "Edit Profile", edit_business_user_path(@current_user),  class: "btn border-button2"
+          .link2= link_to "Change Password", '#',  class: "btn border-button2"
 
-= render 'business/users/profile_picture'
+      .e-mail-signature
+        %h4 E-mail Signature
+      .sync-email
+        %h4 Sync Your E-mail 
+        = link_to "Authenticate with Google!", '/auth/google_oauth2'
 
-/ %h4 Sync With Gmail 
-/ = link_to "Authenticate with Google!", '/auth/google_oauth2'
+        - if @auth.present? 
+          - @auth.each do |key, value| 
+            = key 
+            = value
 
-/ - if @auth.present? 
-/   - @auth.each do |key, value| 
-/     = key 
-/     = value
+        - if @emails.present? 
+          - @emails.each do |email|
+            = email.body
 
-/ - if @emails.present? 
-/   - @emails.each do |email|
-/     = email.body
-
-/ - if @labels.present? 
-/   - @labels.each do |label|
-/     = label.id
+        - if @labels.present? 
+          - @labels.each do |label|
+            = label.id
     
-
+= render 'business/users/profile_picture'
 

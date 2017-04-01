@@ -13,9 +13,11 @@
  *= require_self
  *= require jquery-ui
  *= require jquery.Jcrop
- *= require jquery.timepicker.css
  *= require font-awesome
  *= require bootstrap-colorpicker
+ *= require dropzone/dropzone
+ *= require jquery.fileupload
+ *= require jquery.fileupload-ui
  *= require_tree .
 
  */
@@ -154,9 +156,15 @@ a.button
   border: 1px solid rgba(239, 122, 43, 0.9)
   background: none
   color: rgba(239, 122, 43, 0.9)
+  &:hover
+    background-color: rgba(239, 122, 43, 0.1)
+    color: rgba(239, 122, 43, 0.9)
+    text-decoration: none
+
 a.button
   text-decoration: none
   color: white
+
 
 
 .white-border-button
@@ -228,14 +236,16 @@ a.button-submit
 
 .button-mid
   display: block
-  height: 35px
+  height: auto
   background: #EF7A2B
   color: #ffffff
   font: bold Open Sans
-  font-size: 12px 
+  font-size: 18px 
   text-align: center
-  padding: 8px 20px 10px 20px
-  border-radius: 0px
+  padding: 10px 20px 10px 20px
+  border-radius: 5px
+  width: 90%
+  margin: 0 5%
 
 a.button-mid
   text-decoration: none

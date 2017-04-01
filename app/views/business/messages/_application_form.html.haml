@@ -1,4 +1,4 @@
-= form_for [:business, @job, @application, @message], html: {remote: true, class: 'invite'} do |f|
+= form_for [:business, @job, @application, @message], html: {remote: true, class: 'invite', data: {behaviour: 'has-saved-templates'}} do |f|
   .to 
     .title To:
     .sender= "#{@application.applicant.full_name} (#{@application.applicant.email})" 
@@ -8,8 +8,14 @@
   .subject
     .title Subject
     .sender= f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false
-  = f.text_area :body, :class => "tinymce", id: "message-body", rows: 12, cols: 12, placeholder: "Type your Message"
-  = hidden_field_tag :applicant_ids
+  .email-variables
+    Template:
+    = select_tag "Templates", options_for_select(current_company.email_templates.all.map{|m| [m.title, m.id, data: {:body => m.body}]}), :prompt => "Select E-mail Templates", data: {behaviour: 'saved-template-select'}
+  #message-body
+    = text_area_tag :body, " ", :class => "tinymce", rows: 20, data: {behaviour: 'comment-body'}, placeholder: "Type Your Message"
+    = tinymce_assets        
+    = tinymce :alternate
+    = hidden_field_tag :applicant_ids
   .email-footer
     %fieldset
     = hidden_field_tag :user_id, current_user.id

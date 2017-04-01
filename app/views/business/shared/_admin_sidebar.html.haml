@@ -4,13 +4,15 @@
     = link_to "Career Portal", edit_business_job_board_path(current_company.job_board.id)
   %li{:class => is_active?(business_users_path)}
     = link_to "Team Members", business_users_path
+  %li{:class => is_active?(business_users_path)}
+    = link_to "Templates", business_templates_path
   .nav-section Billing
   %li{:class => is_active?(business_plan_path)}
     = link_to "Subscription", business_plan_path   
   %li{:class => is_active?(business_customers_path || new_business_customer_path)}
     = link_to "Billing", current_company.customer.present? ? business_customers_path : new_business_customer_path 
 
-  .nav-section My Info
+  .nav-section My Profile
   %li{:class => is_active?(edit_business_user_path(current_user.id))}
-    = link_to "My Profile", edit_business_user_path(current_user.id)
+    = link_to "Profile, E-mail & Calendar Sync, Notifications ", edit_business_user_path(current_user.id)
 

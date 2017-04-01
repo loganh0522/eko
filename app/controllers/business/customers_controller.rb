@@ -77,7 +77,8 @@ class Business::CustomersController < ApplicationController
     if customer.successful?
       stripe_customer = JSON.parse customer.response.to_s
       company_subscription(params[:plan])
-      current_company.customer.update_attribute(:plan, stripe_customer['plan']['id'])     
+      current_company.customer.update_attribute(:plan, stripe_customer['plan']['id'])
+      current_company.customer.update_attribute(:active, true)     
       current_company.customer.update_attribute(:stripe_subscription_id, stripe_customer['id'])
 
       
@@ -99,6 +100,7 @@ class Business::CustomersController < ApplicationController
     if customer.successful?
       company_subscription(params[:plan])
       current_company.customer.update_attribute(:plan, params[:plan])
+      current_company.customer.update_attribute(:active, true)  
       redirect_to business_plan_path
       flash[:success] = "Your subscription was successful, the charge has been added to your card"
     else 
@@ -119,6 +121,7 @@ class Business::CustomersController < ApplicationController
       )
     if customer.successful? 
       current_company.customer.update_attribute(:plan, nil)
+      current_company.customer.update_attribute(:active, false)  
       current_company.customer.update_attribute(:stripe_subscription_id, nil)
       redirect_to business_plan_path
       flash[:success] = "Your subscription was successfully canceled, your active job postings will close at the end of the billing period"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327154132) do
+ActiveRecord::Schema.define(version: 20170331170620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -229,6 +229,8 @@ ActiveRecord::Schema.define(version: 20170327154132) do
     t.string   "job_filters"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "kind"
+    t.string   "layout"
   end
 
   create_table "job_boards", force: :cascade do |t|
@@ -294,6 +296,11 @@ ActiveRecord::Schema.define(version: 20170327154132) do
     t.string  "number"
     t.integer "company_id"
     t.integer "subsidiary_id"
+  end
+
+  create_table "media_photos", force: :cascade do |t|
+    t.string  "file_name"
+    t.integer "job_board_row_id"
   end
 
   create_table "mentions", force: :cascade do |t|
@@ -492,6 +499,7 @@ ActiveRecord::Schema.define(version: 20170327154132) do
     t.string  "location"
     t.string  "province"
     t.string  "country"
+    t.string  "email_signature"
   end
 
   create_table "work_experiences", force: :cascade do |t|

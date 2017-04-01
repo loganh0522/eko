@@ -1,10 +1,10 @@
-.modal#send_messageModal
+.modal#send_messageModal{data: {behaviour: 'has-saved-templates'}}
   .modal-dialog
     .modal-content
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
         %h4.modal-title Send Message        
-      = form_tag send_multiple_messages_business_applications_path do 
+      = form_tag send_multiple_messages_business_applications_path, html: {data: {behaviour: 'has-saved-templates'}} do 
         .modal-body
           .email-area
             .to 
@@ -19,9 +19,11 @@
             .email-variables
               Insert:
               = select_tag "insert-fluid-variable", options_for_select([ "Applicant First Name", "Applicant Last Name", "Applicant Full Name", "Job Title", "Company Name" ] ), :include_blank => true
+              Template:
+              = select_tag "Templates", options_for_select(current_company.email_templates.all.map{|m| [m.title, m.id, data: {:body => m.body}]}), :prompt => "Select E-mail Templates", data: {behaviour: 'saved-template-select'}
           
             %fieldset
-            = text_area_tag :body, "Type Your Message", :class => "tinymce", id: "message-body", rows: 12, cols: 12, placeholder: "Type your Message"
+            = text_area_tag :body, " ", :class => "tinymce", id: "message-body", rows: 12, cols: 12, data: {behaviour: 'comment-body'}
             = tinymce_assets        
             = tinymce :alternate
             = hidden_field_tag :applicant_ids

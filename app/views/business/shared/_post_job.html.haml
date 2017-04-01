@@ -9,6 +9,7 @@
     = link_to "Application Form", business_job_questionairres_path(@job)
   %li{:class => is_active?(business_job_scorecards_path(@job))}  
     = link_to "Scorecard", business_job_scorecards_path(@job)
-  %li Advertise Job
+  %li{:class => is_active?(business_job_promote_path(@job))}  
+    = link_to "Promote Job", business_job_promote_path(@job)
 
 = link_to "Publish Job", business_job_publish_job_path(@job), method: :post, class: 'button-mid publish-job'

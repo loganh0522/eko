@@ -54,10 +54,23 @@ jQuery ->
     $('.tag_form').remove()
 
 ###################### Insert Fluid Variable into E-mail #####################
-
+  $(document).ajaxComplete ->
+    $('#insert-fluid-variable').change -> 
+      if $('#insert-fluid-variable').val() == "Applicant First Name"
+        tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.first_name}}  </span>")
+      else if $('#insert-fluid-variable').val() == "Applicant Last Name"
+        tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.last_name}}  </span>")
+      else if $('#insert-fluid-variable').val() == "Applicant Full Name"
+        tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.full_name}}  </span>")
+      else if $('#insert-fluid-variable').val() == "Job Title"
+        tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{job.title}}  </span>")
+      else if $('#insert-fluid-variable').val() == "Company Name"
+        tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{company.name}}  </span>")
+  
   $('#insert-fluid-variable').change -> 
     if $('#insert-fluid-variable').val() == "Applicant First Name"
-      tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.first_name}}  </span>")
+      console.log('clicked')
+      $('#message-body').append("<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.first_name}}  </span>")
     else if $('#insert-fluid-variable').val() == "Applicant Last Name"
       tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.last_name}}  </span>")
     else if $('#insert-fluid-variable').val() == "Applicant Full Name"
@@ -66,6 +79,8 @@ jQuery ->
       tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{job.title}}  </span>")
     else if $('#insert-fluid-variable').val() == "Company Name"
       tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{company.name}}  </span>")
+
+
 
 #################### Select All & Show Button's on Select ###################
 
@@ -250,7 +265,6 @@ jQuery ->
 
   $('#cp2').colorpicker()
   return
-
 
 
 

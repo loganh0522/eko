@@ -4,6 +4,14 @@ class Business::EmailTemplatesController < ApplicationController
   before_filter :trial_over
   before_filter :company_deactivated?
 
+  def new
+    @email_template = EmailTemplate.new
+
+    respond_to do |format| 
+      format.js
+    end
+  end
+
   def index 
     @email_template = EmailTemplate.new
     @email_templates = current_company.email_templates
@@ -22,12 +30,17 @@ class Business::EmailTemplatesController < ApplicationController
 
   def edit
     @email_template = EmailTemplate.find(params[:id])
+
+    respond_to do |format| 
+      format.js
+    end
   end
 
   def update
     @email_template = EmailTemplate.find(params[:id])
     respond_to do |format|
       if @email_template.update(e_temp_params)
+        @email_templates = current_company.email_templates
         format.js
       end
     end
@@ -38,6 +51,7 @@ class Business::EmailTemplatesController < ApplicationController
     @email_template.destroy
 
     respond_to do |format|
+      @email_templates = current_company.email_templates
       format.js
     end
   end
