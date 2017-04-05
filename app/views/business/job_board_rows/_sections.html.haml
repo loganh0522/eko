@@ -20,7 +20,9 @@
     .stage-header
       .glyphicon.glyphicon-move
       .body
-        section.kind
+        = "#{section.kind} - #{section.header}"
       .icons
-        = link_to "#{}", :data => {:remote => true } do
+        = link_to edit_business_job_board_job_board_row_path(@job_board.id, section.id), :data => {:remote => true } do
           %i.glyphicon.glyphicon-pencil
+        = link_to business_job_board_job_board_row_path(@job_board.id, section.id), remote: true, :method => :delete do
+          %i.glyphicon.glyphicon-remove

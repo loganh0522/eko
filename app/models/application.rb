@@ -33,6 +33,13 @@ class Application < ActiveRecord::Base
 
   ########### Tagging #############
 
+  def tags_present
+    @tags = []
+    self.tags.each do |tag| 
+      @tags.append(tag.name)
+    end
+  end
+
   # def self.tagged_with(name)
   #   Tag.find_by_name!(name).articles
   # end
@@ -84,42 +91,52 @@ class Application < ActiveRecord::Base
     return false
   end
 
+  def average_rating 
+    self.ratings.average(:score).to_f.round(1) if ratings.any?
+  end
 
   # def current_position
   #   self.applicant.profile.current_position.title
   # end
 
 
-  # def as_indexed_json(options={})
-  #   as_json(
-  #     only: [:created_at],
-  #     include: {
-  #       applicant: {
-  #         only: [:first_name, :last_name, :tag_line],
-  #         include: {
-  #           user_avatar: {only: [:image, :small_image]},
-  #           work_experiences: {only: [:title, :description, :company_name]}
-  #         }        
-  #       }
-  #     }
-  #   )
-  # end
+  def as_indexed_json(options={})
+    as_json(
+      methods: [:average_rating],
+      only: [:created_at],
+      include: {
+        apps: {only: [:title, :location, :status]},
+        tags: {only: [:name]},
+        applicant: {
+          only: [:first_name, :last_name, :tag_line],
+          user_avatar: {only: [:image, :small_image]},
+          include: {
+            profile: {
+              include: {   
+                educations: {only: [:title, :description, :school]},
+                work_experiences: {only: [:title, :description, :company_name]}
+              }
+            }  
+          }        
+        }
+      }
+    )
+  end
 
-  # def self.search(query, options={})
-  #   search_definition = {
-  #     query: {
-  #       multi_match: {
-  #         query: query,
-  #         fields: ["applicant.first_name", "applicant.last_name", "applicant.tag_line",
-  #           "applicant.work_experiences.description", "applicant.work_experiences.title", 
-  #           "applicant.work_experiences.company_name", 'applicant.education.school' ]
-  #       }
-  #     }
-  #   }
-
-  #   # if date_field.present? 
-  #   #   search_definition[:query][:multi_match][:fields] << "created_at"
-  #   # end
-  #   __elasticsearch__.search(search_definition)
-  # end
+  def self.search(query, options={})
+    search_definition = {
+      query: {
+        multi_match: {
+          query: query,
+          fields: ["applicant.first_name", "applicant.last_name", "applicant.tag_line",
+            "applicant.profile.work_experiences.description", "applicant.profile.work_experiences.title", 
+            "applicant.profile.work_experiences.company_name", 'applicant.profile.education.school' ]
+        }
+      }
+    }
+    # if date_field.present? 
+    #   search_definition[:query][:multi_match][:fields] << "created_at"
+    # end
+    __elasticsearch__.search(search_definition)
+  end
 end

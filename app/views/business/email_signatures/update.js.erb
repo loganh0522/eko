@@ -1,0 +1,3 @@
+$('.email-signature-form').hide(); 
+$(".e-mail-signature").find('.signature').show();
+$(".e-mail-signature").find('.signature').html('<%= j render "business/email_signatures/signature", signature: @signature%>')

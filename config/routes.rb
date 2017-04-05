@@ -75,7 +75,9 @@ Rails.application.routes.draw do
     resources :activities
     resources :hiring_teams
     
-    resources :users
+    resources :users do 
+      resources :email_signatures
+    end
     resources :invitations
     resources :locations 
     resources :user_avatars

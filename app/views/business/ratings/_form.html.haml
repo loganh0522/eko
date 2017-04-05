@@ -1,7 +1,7 @@
 %div.new_rating{:id => "#{application.id}"}
   %fieldset.rating{:id => "rating_#{application.id}"}
     - if application.current_user_rating(current_user) == 5
-      %input.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_star4half", :type => "radio", :value => "5", checked: true}
+      %input.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_star5", :type => "radio", :value => "5", checked: true}
     - else
       %input.star{:name => "rating_#{application.id}", :id => "rating_#{application.id}_star5", :type => "radio", :value => "5"}
     %label.full{:for => "rating_#{application.id}_star5"}

@@ -27,4 +27,20 @@ class Company < ActiveRecord::Base
   def generate_token
     self.widget_key = SecureRandom.urlsafe_base64
   end
+
+  def company_locations
+    @locations = []
+    self.jobs.each do |job|  
+      @locations.append(job.location) unless @locations.include?(job.location)
+    end
+    return @locations
+  end
+
+  def company_jobs
+    @jobs = []  
+    self.jobs.each do |job|  
+      @jobs.append(job.title) unless @jobs.include?(job.title)
+    end
+    return @jobs
+  end
 end

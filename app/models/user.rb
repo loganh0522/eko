@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   has_many :activities
   has_many :notifications
   has_many :ratings
-
+  has_one  :email_signature
   has_many :interviews
   has_many :interviews, through: :my_interviews
   has_many :mentions

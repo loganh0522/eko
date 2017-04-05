@@ -1,0 +1,3 @@
+.signature
+  .form-area= simple_format(@signature.signature)
+  = link_to 'Edit Signature', edit_business_user_email_signature_path(current_user, @signature.id), class: "submit-button", remote: true

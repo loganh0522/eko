@@ -1,5 +1,5 @@
 - if @job_board.cover_photo.present? 
-  .job-board-header{:style => "background-image: url(#{@job_board.cover_photo.url})"}
+  .job-board-header{:style => "background-image: url(#{@job_board.cover_photo.url}); background-size: cover"}
     .intro-message
       .header= @job_board.header
       .sub-header= @job_board.subheader
@@ -9,6 +9,17 @@
       .header= @job_board.header
       .sub-header= @job_board.subheader
   
+.job-board-sections
+  - @sections.each do |section|
+    .section
+      - if section.kind == 'Text'
+        = render 'job_board_rows/text_img_left', section: section
+      - elsif section.kind == 'Video'
+        .intro-message
+          .header= section.header
+          .sub-header= section.subheader
+        %iframe{:allowFullScreen => "true", :frameborder => "0", :height => "430", :src => "https://www.youtube.com/embed/#{section.youtube_id}", :title => "YouTube video player", :width => "640"}
+        
 
 .company-job-board  
   .jobs

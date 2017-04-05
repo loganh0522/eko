@@ -19,7 +19,7 @@ class Business::UsersController < ApplicationController
     @user = current_user
     @user_avatar = UserAvatar.new
     @avatar = @user.user_avatar
-    
+    @signature = @user.email_signature
     # if request.env['omniauth.auth'].present? 
     #   @auth = request.env['omniauth.auth']['credentials']
     #   GoogleToken.create(

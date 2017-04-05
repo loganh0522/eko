@@ -30,6 +30,7 @@
         .applicant-filter-checkbox{:data => {:id => "archived"}}
           = check_box_tag "", true
           Archived 
+
 .filter
   .filter-header
     %h4 Job Applied To:
@@ -37,7 +38,7 @@
     .glyphicon.glyphicon-plus
   .filter-body 
     %ul
-      - @jobs.each do |job| 
+      - current_company.company_jobs.each do |job| 
         %li.open-job
           .applicant-filter-checkbox{:data => {:id => "#{job}"}}
             = check_box_tag "", true  
@@ -49,11 +50,21 @@
     .glyphicon.glyphicon-plus
   .filter-body 
     %ul
-      - @locations.each do |location| 
+      - current_company.company_locations.each do |location| 
         %li
           .applicant-filter-checkbox{:data => {:id => "#{location}"}}
             = check_box_tag "", true
             #{location}
+
+.filter
+  .filter-header
+    %h4 Rating
+    .glyphicon.glyphicon-minus
+    .glyphicon.glyphicon-plus
+  .filter-body 
+    = render 'business/ratings/rating_filter'
+  .filter-footer
+
 .filter
   .filter-header
     %h4 Tags

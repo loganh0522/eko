@@ -7,7 +7,7 @@
       = form_for [:business, @user_avatar] do |f| 
         .modal-body
           .crop-image
-            %p Add a photo and crop it below.s
+            %p Add a photo and crop it below
             = f.file_field :image, class: "btn btn-file", id: "imgInp"
             - %w[x y w h].each do |attribute| 
               = f.hidden_field "crop_#{attribute}"     

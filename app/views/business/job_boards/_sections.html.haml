@@ -2,21 +2,19 @@
   + Add Section
 %ul.dropdown-menu
   %li
-    %a= link_to 'Text & Photo', '#', :data => {:toggle => "modal", :target => "#textRowModal"}
+    %a= link_to 'Text & Photo', new_business_job_board_job_board_row_path(@job_board, kind: "Text"), remote: true
   %li
-    %a= link_to 'Video', '#', :data => {:toggle => "modal", :target => "#videoRowModal"}
+    %a= link_to 'Video', new_business_job_board_job_board_row_path(@job_board, kind: "Video"), remote: true
   %li
-    %a= link_to 'Photos', '#', :data => {:toggle => "modal", :target => "#photoRowModal"} 
+    %a= link_to 'Photos', new_business_job_board_job_board_row_path(@job_board, kind: "Photo"), remote: true
   / %li
   /   %a= link_to 'Location / Map', '#', :data => {:toggle => "modal", :target => "#multimediaRowModal"}
   / %li
   /   %a= link_to 'Perks & Benefits', '#', :data => {:toggle => "modal", :target => "#multimediaRowModal"}
-
-= render 'business/job_board_rows/photo_row'
-= render 'business/job_board_rows/text_row'
-= render 'business/job_board_rows/video_row'
-
+= render 'business/job_board_rows/row_modal'
+  
 .sections
-  = render 'business/job_board_rows/sections'
+  .view-templates
+    = render 'business/job_board_rows/sections'
         
 

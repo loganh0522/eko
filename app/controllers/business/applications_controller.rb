@@ -9,8 +9,6 @@ class Business::ApplicationsController < ApplicationController
     if params[:query].present? 
       @results = Application.search(params[:query]).records.to_a
       @applicants = []
-      company_jobs
-      company_locations
       @tags = current_company.tags
       @results.each do |application|  
         if application.company == current_company
@@ -19,11 +17,8 @@ class Business::ApplicationsController < ApplicationController
       end 
     else
       @applicants = current_company.applications 
-      company_jobs
-      company_locations
       @tags = current_company.tags
     end
-    
   end
 
   def filter_applicants
@@ -50,11 +45,6 @@ class Business::ApplicationsController < ApplicationController
       format.js
     end
   end
-
-  # def mention_user
-  #   @job = Job.find(params[:job_id])
-  #   @hiring_team = @job.users
-  # end
 
   def show 
     @application = Application.find(params[:id])
@@ -86,26 +76,6 @@ class Business::ApplicationsController < ApplicationController
   end
 
   private
-  
-  def tags_present(applicant)
-    applicant.tags.each do |tag| 
-      @tags.append(tag.name)
-    end
-  end
-
-  def company_locations
-    @locations = []
-    current_company.jobs.each do |job|  
-      @locations.append(job.location) unless @locations.include?(job.location)
-    end
-  end
-
-  def company_jobs
-    @jobs = []  
-    current_company.jobs.each do |job|  
-      @jobs.append(job.title) unless @jobs.include?(job.title)
-    end
-  end
 
   def scorecard_graphs
    if @scorecard.scorecard_sections.present? 

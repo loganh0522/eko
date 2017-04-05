@@ -18,6 +18,8 @@
 
       .e-mail-signature
         %h4 E-mail Signature
+        = render 'business/email_signatures/signature'
+
       .sync-email
         %h4 Sync Your E-mail 
         = link_to "Authenticate with Google!", '/auth/google_oauth2'

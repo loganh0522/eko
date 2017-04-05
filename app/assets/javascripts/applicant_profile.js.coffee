@@ -117,12 +117,6 @@ jQuery ->
       $(this).prev().show()
     return
 
-########## Date Picker ##############
-
-  $('#interview_interview_date').datepicker
-    dateFormat: 'yy-mm-dd'
-  $('.time_picker').timepicker()
-
 #################### Add Applicants To Modal On Action Click #############################
 
   $('.applicants').on 'click', '#move-applicants', (event) ->
@@ -258,13 +252,11 @@ jQuery ->
       $('#work_experience_end_year').show()
 
 ############## Color Picker #################
+  
+  $('.colorpicker').colorpicker()
 
-  $('.colorpicker').colorpicker({
-    autoOpen: true
-    hideOn:'button'})
 
-  $('#cp2').colorpicker()
-  return
+
 
 
 

@@ -1,13 +1,13 @@
 <% if @section_type == 'Text'  %>
   $(".modal-body").html('<%= j render "business/job_board_rows/text_form" %>');
-  $(".modal-title").html('<%= "Create Section" %>');
+  $(".modal-title").html('<%= "Edit Section" %>');
   $('.modal').modal("toggle");
 <% elsif @section_type == 'Video' %>
   $(".modal-body").html('<%= j render "business/job_board_rows/video_form" %>');
-  $(".modal-title").html('<%= "Create Section" %>');
+  $(".modal-title").html('<%= "Edit Section" %>');
   $('.modal').modal("toggle");
 <% elsif @section_type == 'Photo' %>
   $(".modal-body").html('<%= j render "business/job_board_rows/photo_form" %>');
-  $(".modal-title").html('<%= "Create Section" %>');
+  $(".modal-title").html('<%= "Edit Section" %>');
   $('.modal').modal("toggle");
 <% end %>

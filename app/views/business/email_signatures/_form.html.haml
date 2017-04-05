@@ -1,0 +1,3 @@
+= form_for [:business, current_user, @signature], html: {remote: true, class: "email-signature-form"} do |f|
+  = f.text_area :signature
+  = f.submit "Save Signature", class: "btn submit-button"
