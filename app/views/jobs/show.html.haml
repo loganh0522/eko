@@ -1,8 +1,13 @@
-.job-board-header{:style => "background-image: url(#{@job_board.cover_photo.url})"}
-  .intro-message
-    .header= @job.title
-    .sub-header= @job.location
-
+- if @job_board.cover_photo.present? 
+  .job-board-header{:style => "background-image: url(#{@job_board.cover_photo.url})"}
+    .intro-message
+      .header= @job.title
+      .sub-header= @job.location
+- else
+  .job-board-header{:style => "background-color: #EF7B2B"}
+    .intro-message
+      .header= @job.title
+      .sub-header= @job.location
 .career-portal-job-container
   .job-description
     .job-header
