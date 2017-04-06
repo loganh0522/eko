@@ -29,7 +29,9 @@
     = f.hidden_field  :company_id, value: @job.company.id
     / .app-btn{:style => "background-color: #{@job_board.brand_color})"}= f.submit "Apply to Job", :class => "app-btn"
 
-
-    = f.submit "Finish Application", class: "btn app-btn", :style => "background-color: #{@job_board.brand_color}"
+    - if @job_board.brand_color.present? 
+      = f.submit "Finish Application", class: "btn app-btn", :style => "background-color: #{@job_board.brand_color}"
+    - else
+      = f.submit "Finish Application", class: "btn app-btn", :style => "background-color: #EF7B2B"
 
   
