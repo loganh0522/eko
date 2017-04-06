@@ -51,10 +51,6 @@ class Business::TagsController < ApplicationController
 
   private
 
-  def tag_exists
-     
-  end
-
   def tag_params
     params.require(:tag).permit(:name, :company_id)
   end

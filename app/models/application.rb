@@ -109,7 +109,6 @@ class Application < ActiveRecord::Base
         tags: {only: [:name]},
         applicant: {
           only: [:first_name, :last_name, :tag_line],
-          user_avatar: {only: [:image, :small_image]},
           include: {
             profile: {
               include: {   
@@ -134,9 +133,46 @@ class Application < ActiveRecord::Base
         }
       }
     }
+
+    # if options[:average_rating].present? 
+    #   search_definition[:filter] = {
+    #     range: {
+    #       average_rating: {
+    #         gte: (options[:average_rating])
+    #       }
+    #     }
+    #   }
+    # end
+
+    if options[:tags].present? 
+      search_definition[:filter] = {
+        terms: {
+          "tags" => 
+            options[:tags]
+        }
+      }
+    end
+    
+    # if option[:job_status].present? 
+    #   search_definition[:filter] = {
+    #     query: {
+    #       terms: {
+    #         apps: {
+    #           fields: [:status]
+    #           options[:job_status]
+    #         } 
+    #       }
+    #     }
+    #   }
+    # end
+
+    # if options[:date_applied].present?
+    # end
+
     # if date_field.present? 
     #   search_definition[:query][:multi_match][:fields] << "created_at"
     # end
+
     __elasticsearch__.search(search_definition)
   end
 end

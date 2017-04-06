@@ -20,13 +20,13 @@
     .body  
       = f.fields_for :media_photos, MediaPhoto.new do |q| 
         = q.file_field :file_name, class: "btn btn-file"
-  .float-container
-    .header 
-      Layout
-    .body  
-      = f.radio_button :layout, 'float-left', label: "Float Left"
-      = f.radio_button :layout, 'float-right', label: "Float Right"
-      = f.radio_button :layout, 'center', label: "Center"
+  / .float-container
+  /   .header 
+  /     Layout
+  /   .body  
+  /     = f.radio_button :layout, 'float-left', label: "Float Left"
+  /     = f.radio_button :layout, 'float-right', label: "Float Right"
+  /     = f.radio_button :layout, 'center', label: "Center"
   .modal-footer
     %fieldset
       = f.hidden_field :kind, value: 'Text'

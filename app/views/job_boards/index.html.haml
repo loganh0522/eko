@@ -10,15 +10,16 @@
       .sub-header= @job_board.subheader
   
 .job-board-sections
-  - @sections.each do |section|
-    .section
-      - if section.kind == 'Text'
-        = render 'job_board_rows/text_img_left', section: section
-      - elsif section.kind == 'Video'
-        .intro-message
-          .header= section.header
-          .sub-header= section.subheader
-        %iframe{:allowFullScreen => "true", :frameborder => "0", :height => "430", :src => "https://www.youtube.com/embed/#{section.youtube_id}", :title => "YouTube video player", :width => "640"}
+  - if @sections.count != 0
+    - @sections.each do |section|
+      .section
+        - if section.kind == 'Text'
+          = render 'job_board_rows/text_img_left', section: section
+        - elsif section.kind == 'Video'
+          .intro-message
+            .header= section.header
+            .sub-header= section.subheader
+          %iframe{:allowFullScreen => "true", :frameborder => "0", :height => "430", :src => "https://www.youtube.com/embed/#{section.youtube_id}", :title => "YouTube video player", :width => "640"}
         
 
 .company-job-board  
@@ -30,7 +31,10 @@
           .header-info
             .job-detail
               .title= link_to "#{job.title}", "jobs/#{job.id}" 
-            .view-job{:style => "background-color: #{@job_board.brand_color}"}= link_to "View Job", "jobs/#{job.id}", class: "btn"
+            - if @job_board.brand_color.present?
+              .view-job{:style => "background-color: #{@job_board.brand_color}"}= link_to "View Job", "jobs/#{job.id}", class: "btn"
+            - else
+              .view-job{:style => "background-color: #EF7B2B"}= link_to "View Job", "jobs/#{job.id}", class: "btn"
           .bottom-info
             .left-side
               %img(src="/tmp/black-small-location.png") 

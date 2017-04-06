@@ -256,7 +256,47 @@ jQuery ->
   $('.colorpicker').colorpicker()
 
 
+############# Application Filters ################## 
+  
+  $('.applicant-filter-checkbox').on 'click', '.filter-checkbox', (event) -> 
+    filters = $('.filter-checkbox')
+    
+    Query = []
+    AverageRating = []
+    Tags = []
+    JobStatus = []
+    DateApplied = []
+    JobAppliedTo = []
+    LocationAppliedTo = []
 
+    for n in filters   
+      if $(n).find('input').is(':checked') == true  
+        if $(n).parent().data('filter') == 'Tags' 
+          Tags.push($(n).parent().data('id')) unless Tags.includes($(n).parent().data('id'))
+        if $(n).parent().data('filter') == 'Rating'
+          AverageRating.push($(n).parent().data('id')) unless AverageRating.includes($(n).parent().data('id'))
+        if $(n).parent().data('filter') == 'JobStatus'
+          JobStatus.push($(n).parent().data('id')) unless JobStatus.includes($(n).parent().data('id'))
+        if $(n).parent().data('filter') == 'DateApplied'
+          DateApplied.push($(n).parent().data('id')) unless DateApplied.includes($(n).parent().data('id'))
+        if $(n).parent().data('filter') == 'JobAppliedTo'
+          JobAppliedTo.push($(n).parent().data('id')) unless JobAppliedTo.includes($(n).parent().data('id'))
+        if $(n).parent().data('filter') == 'LocationAppliedTo'
+          LocationAppliedTo.push($(n).parent().data('id')) unless LocationAppliedTo.includes($(n).parent().data('id'))
+
+        
+
+    $.ajax
+      url : "/business/applications/filter_applicants"
+      type : "post"
+      data:
+        query: Query
+        average_rating: AverageRating
+        tags: Tags
+        job_status: JobStatus
+        date_applied: DateApplied
+        job_applied: JobAppliedTo
+        location_applied: LocationAppliedTo
 
 
 

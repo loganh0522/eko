@@ -7,13 +7,6 @@
       .domain .talentwiz.ca
   .float-container
     .header 
-      Company Logo 
-    .body  
-      .logo= image_tag(@job_board.logo) if @job_board.logo?
-      = f.file_field :logo, class: "btn btn-file"
-      = f.hidden_field :logo_cache
-  .float-container
-    .header 
       Career Portal Colors 
     .body
       .div.input-append.color
@@ -22,7 +15,6 @@
           = f.text_field :brand_color, class: "colorpicker"
           %span.add-on
             %i{:style => "background-color: #{@job_board.brand_color}"}
-
       .div.input-append.color
         = f.label :text_color, "Font Color"
         .color-container
@@ -35,4 +27,27 @@
           = f.text_field :sub_heading_color, class: "colorpicker"
           %span.add-on
             %i{:style => "background-color: rgb(255, 146, 180)"}
+  .float-container
+    .header 
+      Header
+    .body
+      = f.text_field :header, class: "form-control subdomain-field"
+  .float-container
+    .header 
+      Sub-Header
+    .body  
+      = f.text_field :subheader, label: "Subheader", class: "form-control"
+  .float-container
+    .header 
+      Company Logo 
+    .body  
+      .logo= image_tag(@job_board.logo) if @job_board.logo?
+      = f.file_field :logo, class: "btn btn-file"
+      = f.hidden_field :logo_cache
+  .float-container
+    .header 
+      Background Photo
+    .body  
+      = f.file_field :cover_photo, label: "Background Photo", class: "btn btn-file"
+      = f.hidden_field :cover_photo_cache
   = f.submit "Update Settings", class: "submit-button"

@@ -12,6 +12,7 @@ class UsersController < ApplicationController
         if request.subdomain.present? 
           redirect_to new_profile_path
         else
+          EmailSignature.create(user_id: @user.id, signature: "#{@user.first_name} #{@user.last_name}")
           redirect_to new_job_seeker_profile_path
         end
       else

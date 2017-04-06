@@ -6,10 +6,11 @@ class Business::ApplicationsController < ApplicationController
   
 
   def index
+    @tags = current_company.tags
+
     if params[:query].present? 
       @results = Application.search(params[:query]).records.to_a
-      @applicants = []
-      @tags = current_company.tags
+      @applicants = []     
       @results.each do |application|  
         if application.company == current_company
           @applicants.append(application)
@@ -17,30 +18,25 @@ class Business::ApplicationsController < ApplicationController
       end 
     else
       @applicants = current_company.applications 
-      @tags = current_company.tags
     end
   end
 
   def filter_applicants
-    @applications = current_company.applications
-    @jobs = current_company.jobs
+    options = {
+      average_rating: params[:average_rating],
+      tags: params[:tags],
+      job_status: params[:job_status],
+      date_applied: params[:date_applied],
+      job_applied: params[:job_applied],
+      location_applied: params[:location_applied]
+      }
     @applicants = []
-    
-    @applications.each do |applicant|
-      params[:checked].each do |param| 
-        @tags = []
-        tags_present(applicant)
-
-        if applicant.apps.status == param || 
-          applicant.apps.title == param || 
-          @tags.include?(param)        
-          @applicants.append(applicant) unless @applicants.include?(applicant)
-        else
-          @applicants.delete(applicant)
-        end
+    @results = Application.search(params[:query], options).records.to_a
+    @results.each do |application|  
+      if application.company == current_company
+        @applicants.append(application)
       end
-    end
-
+    end 
     respond_to do |format|
       format.js
     end

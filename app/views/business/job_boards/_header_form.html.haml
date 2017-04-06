@@ -11,6 +11,13 @@
       = f.text_field :subheader, label: "Subheader", class: "form-control"
   .float-container
     .header 
+      Company Logo 
+    .body  
+      .logo= image_tag(@job_board.logo) if @job_board.logo?
+      = f.file_field :logo, class: "btn btn-file"
+      = f.hidden_field :logo_cache
+  .float-container
+    .header 
       Background Photo
     .body  
       = f.file_field :cover_photo, label: "Background Photo", class: "btn btn-file"
