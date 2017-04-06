@@ -52,7 +52,8 @@ class Business::ApplicationsController < ApplicationController
     @hiring_team = @job.users 
     @rating = Rating.new  
     @scorecard = Scorecard.where(job_id: params[:job_id]).first
-    @application_scorecard_present = ApplicationScorecard.where(application_id: @application.id)
+    @sections = @scorecard.scorecard_sections
+    @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
     scorecard_graphs
   end
 
@@ -74,7 +75,7 @@ class Business::ApplicationsController < ApplicationController
   private
 
   def scorecard_graphs
-   if @scorecard.scorecard_sections.present? 
+    if @application.application_scorecards.present? 
       @sections = @scorecard.scorecard_sections    
       @application_scorecards = @application.application_scorecards
       @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first
@@ -92,7 +93,7 @@ class Business::ApplicationsController < ApplicationController
       #   :orientation => 'horizontal',
       #   :bar_colors => 'EF7B2B',
       #   :size => "650x160")
-  
+      
       @bar_chart_1 = Gchart.bar(:data => [(450 * (@recommended/@application_scorecards.count))],
         :orientation => 'horizontal',
         :bar_colors => 'EF7B2B',
@@ -125,6 +126,7 @@ class Business::ApplicationsController < ApplicationController
     @good = 0.0
     @bad = 0.0
     @not_recommended = 0.0
+
     scorecard.each do |card|
       if card.overall_ratings.first.rating == 1
         @recommended += 1.0
@@ -156,10 +158,10 @@ class Business::ApplicationsController < ApplicationController
   #     end  
   #   end
 
-  #   @recommended = (100 * (@recommend/@application_scorecards.count))
-  #   @good = (100 * (@okay/@application_scorecards.count))
-  #   @bad = (100 * (@not_okay/@application_scorecards.count))
-  #   @not_recommended = (100 * (@not_recommend/@application_scorecards.count))
+  #   # @recommended = (100 * (@recommend/@application_scorecards.count))
+  #   # @good = (100 * (@okay/@application_scorecards.count))
+  #   # @bad = (100 * (@not_okay/@application_scorecards.count))
+  #   # @not_recommended = (100 * (@not_recommend/@application_scorecards.count))
   # end
 
   # def scorecard_graphs
