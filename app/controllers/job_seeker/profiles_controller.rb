@@ -29,7 +29,7 @@ class JobSeeker::ProfilesController < JobSeekersController
     @user_skill = UserSkill.new
 
     @avatar = current_user.user_avatar
-    @work_experiences = profile.organize_work_experiences
+    @work_experiences = @profile.organize_work_experiences
   end
 
   private 

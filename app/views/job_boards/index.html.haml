@@ -1,20 +1,25 @@
-- if @job_board.cover_photo.present? 
-  .job-board-header{:style => "background-image: url(#{@job_board.cover_photo.url}); background-size: cover"}
+- if @job_board.job_board_header.cover_photo.present? 
+  .job-board-header{:style => "background-image: url(#{@job_board.job_board_header.cover_photo.url}); background-size: cover"}
     .intro-message
       .header= @job_board.header
       .sub-header= @job_board.subheader
 - else
   .job-board-header{:style => "background-color: #EF7B2B"}
     .intro-message
-      .header= @job_board.header
-      .sub-header= @job_board.subheader
+      .header= @job_board.job_board_header.header
+      .sub-header= @job_board.job_board_header.subheader
   
 .job-board-sections
   - if @sections.count != 0
     - @sections.each do |section|
       .section
         - if section.kind == 'Text'
-          = render 'job_board_rows/text_img_left', section: section
+          - if section.layout == 'float-left'
+            = render 'job_board_rows/text_img_left', section: section
+          - elsif section.layout == 'float-right'
+            = render 'job_board_rows/text_img_right', section: section
+          - elsif section.layout == 'center'
+            = render 'job_board_rows/text_img_center', section: section
         - elsif section.kind == 'Video'
           .intro-message
             .header= section.header

@@ -1,0 +1,18 @@
+= form_for [:business, current_user, @user_avatar], remote: true, format: :js do |f| 
+  .modal-body
+    .crop-image
+      %p Add a photo and crop it below
+      = f.file_field :image, class: "btn btn-file"
+      
+      / - %w[x y w h].each do |attribute| 
+      /   = f.hidden_field "crop_#{attribute}"     
+      / %img(src="#" class="blah" id="cropbox")
+    / #img-preview-area
+    /   .img-preview-blank
+    /     %img(src="/tmp/blank_profile_picture.png")
+    /   .img-preview
+    /     %img(src="#" class="blah" id="preview")
+  .modal-footer
+    = f.hidden_field :user_id, value: current_user.id
+    = f.submit 'Upload Image', class: "btn submit-button"
+    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

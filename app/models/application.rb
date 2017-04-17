@@ -33,12 +33,7 @@ class Application < ActiveRecord::Base
 
   ########### Tagging #############
 
-  def tags_present
-    @tags = []
-    self.tags.each do |tag| 
-      @tags.append(tag.name)
-    end
-  end
+  
 
   # def self.tagged_with(name)
   #   Tag.find_by_name!(name).articles
@@ -95,6 +90,14 @@ class Application < ActiveRecord::Base
     self.ratings.average(:score).to_f.round(1) if ratings.any?
   end
 
+  def tags_present
+    @tags = []
+    self.tags.each do |tag| 
+      @tags.append(tag.name)
+    end
+    return @tags
+  end
+
   # def current_position
   #   self.applicant.profile.current_position.title
   # end
@@ -102,7 +105,7 @@ class Application < ActiveRecord::Base
 
   def as_indexed_json(options={})
     as_json(
-      methods: [:average_rating],
+      methods: [:average_rating, :tags_present],
       only: [:created_at],
       include: {
         apps: {only: [:title, :location, :status]},
@@ -122,6 +125,7 @@ class Application < ActiveRecord::Base
     )
   end
 
+
   def self.search(query, options={})
     search_definition = {
       query: {
@@ -134,21 +138,26 @@ class Application < ActiveRecord::Base
       }
     }
 
-    # if options[:average_rating].present? 
-    #   search_definition[:filter] = {
-    #     range: {
-    #       average_rating: {
-    #         gte: (options[:average_rating])
-    #       }
-    #     }
-    #   }
-    # end
+    if options[:average_rating].present? 
+      search_definition = {
+        filter: {
+          range: {
+            average_rating: {
+              gte: (options[:average_rating].first.to_f),
+              lt: 5.1
+            }
+          }
+        }
+      }
+    end
 
     if options[:tags].present? 
-      search_definition[:filter] = {
-        terms: {
-          "tags" => 
-            options[:tags]
+      search_definition = {
+        filter: {
+          match: {
+            "tags.name" => 
+              options[:tags].join(" ")
+          }
         }
       }
     end

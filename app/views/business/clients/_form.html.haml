@@ -1,0 +1,10 @@
+= bootstrap_form_for [:business, @client] do |f|
+  .fieldset
+    .row
+      .form-group
+        = f.text_field :company_name, class: "form-control", label: "Company Name"
+      .form-group.col-md-6
+        = f.text_field :website, class: "form-control", label: "Website"
+      
+      .form-group.col-md-6
+        = f.text_field :address, class: "form-control", id: "geocomplete2", label: "Address", placeholder: "Enter the Address"

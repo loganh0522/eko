@@ -48,7 +48,7 @@
                   .current-position CEO - TalentWiz 
                 %td
                   .position= application.apps.title
-                  .date-applied= application.created_at
+                  .date-applied= "#{time_ago_in_words(application.created_at)} ago"
                 %td
                   .stage= stage
                 %td

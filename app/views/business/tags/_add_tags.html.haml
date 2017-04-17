@@ -1,0 +1,51 @@
+.modal#addTagsModal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title Tag Applicants  
+      = bootstrap_form_for [:business, @tag], html: {remote: true, class: 'tag_form'} do |f|
+        .modal-body
+          .email-area
+            .to 
+              .title Tag:  
+              .recipients  
+            .choose-stage
+              .title
+                %h4 Add Tag: 
+              .stages-select
+                = f.text_field :name, :class => 'ui-autocomplete-input form-control', :placeholder => 'Tag', id: "tag_name", hide_label: true
+              %div#tag-results
+        .modal-footer
+          = hidden_field_tag :applicant_ids
+          = hidden_field_tag :tag_id
+          = f.hidden_field :job_id, value: @job.id
+          = f.submit "Add Tag", class: "btn submit-button"
+          .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+          
+
+      / = form_tag add_tag_multiple_business_applications_path do |f|
+      /   .modal-body
+      /     .email-area
+      /       .to 
+      /         .title Tag:  
+      /         .recipients  
+      /       .choose-stage
+      /         .title
+      /           %h4 Add Tag: 
+      /         .stages-select
+      /           = text_field_tag :name, nil, :class => 'ui-autocomplete-input form-control', :placeholder => 'Tag', id: "tag_name", hide_label: true
+      /         %div#tag-results
+      /     = hidden_field_tag :applicant_ids
+      /     = hidden_field_tag :tag_id
+      /     = hidden_field_tag :job_id, value: @job.id
+      /     = hidden_field_tag :company_id, value: current_company.id
+      /   .modal-footer
+      /     = submit_tag "Add Tag", class: "btn submit-button"
+      /     .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+          
+
+     
+  
+
+   

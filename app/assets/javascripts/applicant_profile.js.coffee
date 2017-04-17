@@ -210,8 +210,6 @@ jQuery ->
 
 ################ Star Rating ##################
   $(document).on 'click', '.star', (event) -> 
-    console.log($(this).val())
-    console.log($(this).parent().parent().attr('id'))
     
     PostCode = $(this).parent().parent().attr('id')
     Rating = $(this).val()
@@ -260,7 +258,11 @@ jQuery ->
   
   $('.applicant-filter-checkbox').on 'click', '.filter-checkbox', (event) -> 
     filters = $('.filter-checkbox')
-    
+
+    # console.log($(this).attr('value'))
+    # console.log($(this).parent().attr('class'))
+    # console.log($(this).parent().parent().attr('class'))
+
     Query = []
     AverageRating = []
     Tags = []
@@ -269,12 +271,15 @@ jQuery ->
     JobAppliedTo = []
     LocationAppliedTo = []
 
-    for n in filters   
-      if $(n).find('input').is(':checked') == true  
+    for n in filters 
+
+      if $(n).is(':checked') == true      
+        if $(n).parent().attr('id') == 'rating-filter'
+          AverageRating.push($(n).val()) unless Tags.includes($(n).val())
         if $(n).parent().data('filter') == 'Tags' 
           Tags.push($(n).parent().data('id')) unless Tags.includes($(n).parent().data('id'))
-        if $(n).parent().data('filter') == 'Rating'
-          AverageRating.push($(n).parent().data('id')) unless AverageRating.includes($(n).parent().data('id'))
+
+  
         if $(n).parent().data('filter') == 'JobStatus'
           JobStatus.push($(n).parent().data('id')) unless JobStatus.includes($(n).parent().data('id'))
         if $(n).parent().data('filter') == 'DateApplied'
@@ -297,6 +302,23 @@ jQuery ->
         date_applied: DateApplied
         job_applied: JobAppliedTo
         location_applied: LocationAppliedTo
+
+
+################# JQuery File Upload ######################
+
+  $('#userProfilePictureModal').on 'click', (event) -> 
+    $('#new_user_avatar').fileupload()
+
+
+################ Job Board Layout Modal ###############
+  
+  $('#jobBoardRowModal').on 'click', '#layout-form', (event) ->
+    $('.job-board-form').hide()
+    $('.job-board-layout').show()
+
+  $('#jobBoardRowModal').on 'click', '#content-form', (event) ->
+    $('.job-board-form').show()
+    $('.job-board-layout').hide()
 
 
 

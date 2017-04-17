@@ -25,17 +25,21 @@
         = render "business/applications/move_stages"
         = render "business/comments/add_comment"
         = render "business/messages/send_message"
+        = render "business/tags/add_tags"
         #select_all
           = check_box_tag 'Select All', class: 'select_all_applicants'
           Select All
         .no-action-buttons
           .btn.border-button Move Stages
-          .btn.border-button Add Note
           .btn.border-button Send E-mail
+          .btn.border-button Add Note 
+          .btn.border-button Add Tag
         .applicant-action-buttons
           = link_to 'Move Stages', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#stageModal"}
-          = link_to 'Add Note', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#add_commentModal"}
           = link_to 'Send E-mail', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#send_messageModal"}
+          = link_to 'Add Note', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#add_commentModal"}
+          = link_to 'Add Tag', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#addTagsModal"}
+
       .applicant-table-body
         %table.table
           %thead
@@ -82,25 +86,34 @@
         = form_tag business_job_path(@job), method: :get do   
           .form-group
             = search_field_tag :query, params[:query], placeholder: "Advanced Text Search", class: "form-control"
-    .filter
-      .filter-header
-        %h4 Location
-        .glyphicon.glyphicon-minus
-        .glyphicon.glyphicon-plus
-      .filter-body
-        #geocomplete= text_field_tag :city, "", id: "geocomplete", placeholder: "Enter a City"
-    .filter
-      .filter-header
-        %h4 Tags
-        .glyphicon.glyphicon-minus
-        .glyphicon.glyphicon-plus
-      .filter-body 
-        %ul
-          - @tags.each do |tag| 
-            %li
-              .applicant-filter-checkbox{:data => {:id => "#{tag.name}"}}
-                = check_box_tag "", true
-                #{tag.name.capitalize}
+    .applicant-filters
+      .filter
+        .filter-header
+          %h4 Rating
+          .glyphicon.glyphicon-minus
+          .glyphicon.glyphicon-plus
+        .filter-body 
+          = render 'business/ratings/rating_filter'
+      .filter
+        .filter-header
+          %h4 Tags
+          .glyphicon.glyphicon-minus
+          .glyphicon.glyphicon-plus
+        .filter-body
+          %ul
+            - @tags.each do |tag| 
+              %li
+                .applicant-filter-checkbox{:data => {:id => "#{tag.name}", :filter => 'Tags'}}
+                  = check_box_tag "", false, false, class: 'filter-checkbox'
+                  .filter-title #{tag.name.capitalize}
+      .filter
+        .filter-header
+          %h4 Location
+          .glyphicon.glyphicon-minus
+          .glyphicon.glyphicon-plus
+        .filter-body
+          #geocomplete= text_field_tag :city, "", id: "geocomplete", placeholder: "Enter a City"
+
       
     
 

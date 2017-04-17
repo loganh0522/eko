@@ -54,6 +54,7 @@ gem 'elasticsearch-rails'
 
 
 gem 'googlecharts'
+
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-google-oauth2'
 gem 'google-api-client', '0.9'

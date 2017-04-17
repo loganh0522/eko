@@ -20,24 +20,23 @@ class Business::UsersController < ApplicationController
     @user_avatar = UserAvatar.new
     @avatar = @user.user_avatar
     @signature = @user.email_signature
-    # if request.env['omniauth.auth'].present? 
-    #   @auth = request.env['omniauth.auth']['credentials']
-    #   GoogleToken.create(
-    #     access_token: @auth['token'],
-    #     refresh_token: @auth['refresh_token'],
-    #     expires_at: Time.at(@auth['expires_at']).to_datetime,
-    #     user_id: current_user.id
-    #     )
-    # end
-
+    
+    if request.env['omniauth.auth'].present? 
+      @auth = request.env['omniauth.auth']['credentials']
+      GoogleToken.create(
+        access_token: @auth['token'],
+        refresh_token: @auth['refresh_token'],
+        expires_at: Time.at(@auth['expires_at']).to_datetime,
+        user_id: current_user.id
+        )
+    end
+    
     # if @user.google_token.present? 
     #   @labels = GoogleWrapper::Gmail.get_messages(current_user)    
-    # end
-
-    # @titles = []
-
-    # @labels.messages.each do |label|
-    #   @titles.append(GoogleWrapper::Gmail.get_message_titles(label, @user))
+    #   @titles = []  
+    #   @labels.messages.each do |label|
+    #     @titles.append(GoogleWrapper::Gmail.get_message_titles(label, @user))
+    #   end
     # end
   end
 

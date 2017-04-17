@@ -36,7 +36,7 @@ class Business::JobsController < ApplicationController
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     @interviews_by_date = @job.interviews.group_by(&:interview_date)
     @rating = Rating.new
-
+    @tag = Tag.new
     if params[:query].present? 
       @applications = Application.where(job_id: @job.id)
       @results = Application.search(params[:query]).records.to_a

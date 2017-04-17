@@ -1,7 +1,7 @@
 %ul
   .nav-section Company 
   %li{:class => is_active?(edit_business_job_board_path(current_company.job_board.id))}
-    = link_to "Career Portal", edit_business_job_board_path(current_company.job_board.id)
+    = link_to "Career Portal", business_job_board_path(current_company.job_board.id)
   %li{:class => is_active?(business_users_path)}
     = link_to "Team Members", business_users_path
   %li{:class => is_active?(business_users_path)}

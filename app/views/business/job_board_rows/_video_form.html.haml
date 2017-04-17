@@ -1,25 +1,43 @@
 = form_for [:business, @job_board, @section], html: {remote: true} do |f|
-  .modal-body     
-    .float-container
-      .header 
-        Header
-      .body
-        = f.text_field :header, class: "form-control subdomain-field"
-    .float-container
-      .header 
-        Sub-Header
-      .body  
-        = f.text_field :subheader, label: "Subheader", class: "form-control"
-    .float-container
-      .header 
-        Video Link
-      .body  
-        = f.text_field :video_link, label: "Video Link", class: "form-control"
-    .float-container
-      .header 
-        Content
-      .body
-        = f.text_area :description, class: "form-control subdomain-field"
+  .modal-body 
+    .job-board-form-nav
+      %ul
+        %li#content-form Content
+        %li#layout-form Layout
+    .job-board-form     
+      .float-container
+        .header 
+          Header
+        .body
+          = f.text_field :header, class: "form-control subdomain-field"
+      .float-container
+        .header 
+          Sub-Header
+        .body  
+          = f.text_field :subheader, label: "Subheader", class: "form-control"
+      .float-container
+        .header 
+          Video Link
+        .body  
+          = f.text_field :video_link, label: "Video Link", class: "form-control"
+      .float-container
+        .header 
+          Content
+        .body
+          = f.text_area :description, class: "form-control subdomain-field"
+    .job-board-layout
+      .float-left
+        = f.radio_button :layout, 'float-left', label: "Float Left", id: "float-left"
+        %label.float-left{:for => "float-left"}
+          %img#float-left-img(src="/tmp/layout-float-image-left.png") 
+      .float-center
+        = f.radio_button :layout, 'center', label: "Center", id: "float-center"
+        %label.float-left{:for => "float-center"}
+          %img#float-center-img(src="/tmp/layout-float-image-center.png")
+      .float-right
+        = f.radio_button :layout, 'float-right', label: "Float Right", id: "float-right"
+        %label.float-left{:for => "float-right"}
+          %img#float-right-img(src="/tmp/layout-float-image-right.png")
   .modal-footer
     %fieldset
       = f.hidden_field :kind, value: 'Video'

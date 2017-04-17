@@ -5,15 +5,7 @@
     = render 'business/shared/admin_sidebar'
   .main-container
     .edit-career-portal
-      .change-containers-nav
-        %ul
-          %li.change#open.activated Settings
-          %li.change#closed Sections
-      #main-container
-        .open-container.showing
-          = render 'settings_form'
-        .closed-container
-          = render "sections"
+      = render "sections"
 
 
   / %h4 Widget Details 

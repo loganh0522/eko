@@ -1,4 +1,4 @@
-- if !request.subdomain.present? || request.subdomain == 'www' || request.subdomain == 'prod-talentwiz' || request.subdomain == 'dev-talentwiz' || request.subdomain == 'stageing-talentwiz' || request.subdomain == '7c1aba01'
+- if !request.subdomain.present? || request.subdomain == 'www' || request.subdomain == 'prod-talentwiz' || request.subdomain == 'dev-talentwiz' || request.subdomain == 'stageing-talentwiz' || request.subdomain == '4cc68afd'
   %section#top-header.row
     - if !logged_in?
       .navbar-static-top
@@ -39,7 +39,7 @@
               %b.caret
             %ul.dropdown-menu.dropdown-menu-right
               %li
-                %a= link_to "Career Portal", edit_business_job_board_path(current_company.job_board.id)
+                %a= link_to "Career Portal", business_job_board_path(current_company.job_board.id)
               %li
                 %a= link_to "Team Members", business_users_path
               %li
@@ -77,21 +77,25 @@
   - if logged_in? && current_kind == 'job seeker'
     .career-portal-nav
       .content
-        - if @company.job_board.logo.present?
+        - if @company.job_board.job_board_header.logo.present?
           = link_to root_path do
-            %img(src="#{@company.job_board.logo}" class="sub_logo")
+            %img(src="#{@company.job_board.job_board_header.logo}" class="sub_logo")
         - else
-          = @company.name
+          .brand
+            = link_to root_path do
+              = @company.name
         %ul
           %li= link_to "Profile", profile_path, :class => ".sub-register-btn", :style => "height: 30px; padding: 10px 20px; width: 40px; border-radius: 5px; border: 1px solid #{@job_board.brand_color}"
           %li= link_to "Sign Out", signout_path, class: "sub-signin-btn"
   - else
     .career-portal-nav   
-      - if @company.job_board.logo.present?
+      - if @company.job_board.job_board_header.logo.present?
         = link_to root_path do
-          %img(src="#{@company.job_board.logo}" class="sub_logo")
+          %img(src="#{@company.job_board.job_board_header.logo}" class="sub_logo")
       - else
-        .brand= @company.name
+        .brand
+          = link_to root_path do
+            = @company.name
       %ul
         %li= link_to "Sign In", "", :class => "sub-signin-btn", "data-toggle" => "modal", "data-target" => "#SubLoginModal"
         

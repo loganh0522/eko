@@ -31,7 +31,7 @@
         - @tags.each do |tag| 
           %li
             .applicant-filter-checkbox{:data => {:id => "#{tag.name}", :filter => 'Tags'}}
-              .filter-checkbox= check_box_tag "", true
+              = check_box_tag "", false, false, class: 'filter-checkbox'
               .filter-title #{tag.name.capitalize}
 
   .filter
@@ -43,15 +43,15 @@
       %ul
         %li 
           .applicant-filter-checkbox{:data => {:id => "open", :filter => 'JobStatus'}}
-            .filter-checkbox= check_box_tag "", true
+            = check_box_tag "", false, false, class: 'filter-checkbox'
             .filter-title Active
         %li.activity
           .applicant-filter-checkbox{:data => {:id => "closed", :filter => 'JobStatus'}}
-            .filter-checkbox= check_box_tag "", true
+            = check_box_tag "", false, false, class: 'filter-checkbox'
             .filter-title Closed
         %li.activity  
           .applicant-filter-checkbox{:data => {:id => "archived", :filter => 'JobStatus'}}
-            .filter-checkbox= check_box_tag "", true
+            = check_box_tag "", false, false, class: 'filter-checkbox'
             .filter-title Archived 
 
   .filter
@@ -64,7 +64,7 @@
         - current_company.company_jobs.each do |job| 
           %li.open-job
             .applicant-filter-checkbox{:data => {:id => "#{job}", :filter => 'JobAppliedTo'}}
-              .filter-checkbox= check_box_tag "", true  
+              = check_box_tag "", false, false, class: 'filter-checkbox'
               .filter-title #{job}
   .filter
     .filter-header
@@ -76,7 +76,7 @@
         - current_company.company_locations.each do |location| 
           %li
             .applicant-filter-checkbox{:data => {:id => "#{location}", :filter => 'LocationAppliedTo'}}
-              .filter-checkbox= check_box_tag "", true
+              = check_box_tag "", false, false, class: 'filter-checkbox'
               .filter-title #{location}
 
   .filter 
@@ -88,21 +88,21 @@
       %ul
         %li 
           .applicant-filter-checkbox{:data => {:id => "all_applied", :filter => 'DateApplied'}}
-            .filter-checkbox= check_box_tag "", true
+            = check_box_tag "", false, false, class: 'filter-checkbox'
             .filter-title All 
         %li
           .applicant-filter-checkbox{:data => {:id => "2_weeks", :filter => 'DateApplied'}}
-            .filter-checkbox= check_box_tag "", true
+            = check_box_tag "", false, false, class: 'filter-checkbox'
             .filter-titleLast 2 weeks
         %li 
           .applicant-filter-checkbox{:data => {:id => "last_month", :filter => 'DateApplied'}}
-            .filter-checkbox= check_box_tag "", true
+            = check_box_tag "", false, false, class: 'filter-checkbox'
             .filter-title Last Month
         %li
           .applicant-filter-checkbox{:data => {:id => "3_months", :filter => 'DateApplied'}}
-            .filter-checkbox= check_box_tag "", true
+            = check_box_tag "", false, false, class: 'filter-checkbox'
             .filter-title Last 3 Months
         %li 
           .applicant-filter-checkbox{:data => {:id => "last_year", :filter => 'DateApplied'}}
-            .filter-checkbox= check_box_tag "", true
+            = check_box_tag "", false, false, class: 'filter-checkbox'
             .filter-title Last Year

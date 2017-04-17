@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :logged_in?, :current_user, :current_company, :current_kind, :user_logged_in, :profile_sign_up_complete
+  helper_method :logged_in?, :current_user, :current_company, :current_kind, :user_logged_in, :profile_sign_up_complete, :belongs_to_company
 
 
   def current_user
@@ -20,6 +20,13 @@ class ApplicationController < ActionController::Base
 
   def current_company
     @current_company ||= Company.find(session[:company_id]) if session[:company_id]
+  end
+
+  def is_owned?
+    if JobBoard.find(params[:id]).company != current_company
+      flash[:danger] = "Sorry, you do not have permission to access that!"
+      redirect_to business_root_path
+    end
   end
 
   def logged_in? 
@@ -55,6 +62,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  
+
   def company_deactivated?
     if current_company.active == false && current_company.subscription == "trial"
       flash[:danger] = "Your 14-Day Trial has ended. Please select a plan to continue use."
@@ -88,8 +97,6 @@ class ApplicationController < ActionController::Base
       redirect_to edit_business_job_scorecard_path(@job.id, @scorecard.id)
     end
   end
-
-  
 
   def track_activity(trackable, action = params[:action])
     if (params[:application_id]).present?

@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
   post '/rate' => 'rater#create', :as => 'rate'
-  match '/', to: "job_boards#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:get, :post, :put, :patch, :delete]
-  match 'login', to: "sessions#subdomain_new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:get]
-  match 'login', to: "sessions#create", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:post]
-  match 'jobs/:id', to: "jobs#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:get, :post, :put, :patch, :delete]
-  match 'register', to: "users#sub_new_job_seeker", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:get, :post, :put, :patch, :delete]
-  match 'profile', to: "profiles#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:get, :post, :put, :patch, :delete]
-  match 'create-profile', to: "profiles#new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '7c1aba01'}, via: [:get, :post, :put, :patch, :delete]
+
+  if lambda {|r| r.subdomain != '4cc68afd'}
+    match '/', to: "job_boards#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '4cc68afd'}, via: [:get, :post, :put, :patch, :delete]
+    match 'login', to: "sessions#subdomain_new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '4cc68afd'}, via: [:get]
+    match 'login', to: "sessions#create", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '4cc68afd'}, via: [:post]
+    match 'jobs/:id', to: "jobs#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '4cc68afd'}, via: [:get, :post, :put, :patch, :delete]
+    match 'register', to: "users#sub_new_job_seeker", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '4cc68afd'}, via: [:get, :post, :put, :patch, :delete]
+    match 'profile', to: "profiles#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '4cc68afd'}, via: [:get, :post, :put, :patch, :delete]
+    match 'create-profile', to: "profiles#new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '4cc68afd'}, via: [:get, :post, :put, :patch, :delete]
+  end
 
   root to: 'pages#home'
   
@@ -75,15 +78,21 @@ Rails.application.routes.draw do
     resources :activities
     resources :hiring_teams
     
+    resources :clients
+    
     resources :users do 
       resources :email_signatures
+      resources :user_avatars
     end
     resources :invitations
     resources :locations 
-    resources :user_avatars
+    
+    
     resources :job_boards do
+      resources :job_board_headers
       resources :job_board_rows
     end
+
     resources :tags
     resources :notifications
     resources :interviews
@@ -97,6 +106,7 @@ Rails.application.routes.draw do
         post :add_note_multiple, to: "comments#add_note_multiple"
         post :send_multiple_messages, to: "messages#send_multiple_messages"
         post :change_stage, to: "applications#change_stage"
+        post :add_tag_multiple, to: "tags#add_tags_multiple_applications"
       end
     end
 

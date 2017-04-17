@@ -32,9 +32,10 @@ class Business::JobBoardRowsController < ApplicationController
 
   def edit 
     respond_to do |format|
-      @section = JobBoardRow.find(params[:id])
-      @section_type = @section.kind
       @job_board = JobBoard.find(params[:job_board_id])
+      @section = JobBoardRow.find(params[:id])
+      @job_board_header = @job_board.job_board_header
+      @section_type = @section.kind
       format.js
     end
   end
@@ -42,6 +43,7 @@ class Business::JobBoardRowsController < ApplicationController
   def update
     @section = JobBoardRow.find(params[:id])
     @job_board = JobBoard.find(params[:job_board_id])
+    @job_board_header = @job_board.job_board_header
     respond_to do |format|
       if @section.update(job_board_row_params)
         @sections = @job_board.job_board_rows

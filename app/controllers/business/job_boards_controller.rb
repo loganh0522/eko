@@ -3,7 +3,14 @@ class Business::JobBoardsController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
+  before_filter :is_owned?
   
+  def show
+    @job_board = JobBoard.find(params[:id])
+    @section = JobBoardRow.new
+    @job_board_header = @job_board.job_board_header
+    @sections = @job_board.job_board_rows
+  end
 
   def create 
     @job_board = JobBoard.new(job_params)
@@ -12,7 +19,12 @@ class Business::JobBoardsController < ApplicationController
   def edit
     @job_board = JobBoard.find(params[:id])
     @section = JobBoardRow.new
+    @job_board_header = @job_board.job_board_header
     @sections = @job_board.job_board_rows
+
+    respond_to do |format|
+      format.js 
+    end
   end
 
   def update

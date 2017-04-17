@@ -8,14 +8,13 @@
       .user-profile-header
         - if current_user.user_avatar.present?   
           .profile-picture
-            .circle= image_tag @avatar.image.medium_image, :size => "100x100" 
-            .change-photo= link_to "Change Photo", '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"}
+            .circle= image_tag @avatar.image.url, :size => "100x100" 
+            .change-photo= link_to "Change Photo", edit_business_user_user_avatar_path(current_user), :data => {remote: true}
         - else      
           .profile-picture
             .circle
               %img(src="/tmp/blank_profile_picture.png")
-            .change-photo= link_to "Change Photo", '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"}
-
+            .change-photo= link_to "Add Photo", new_business_user_user_avatar_path(current_user), :data => {remote: true}
         .user-info
           %h3= current_user.full_name
           = current_user.email
@@ -27,22 +26,20 @@
         %h4 E-mail Signature
         = render 'business/email_signatures/signature'
 
-      / .sync-email
-      /   %h4 Sync Your E-mail 
-      /   = link_to "Authenticate with Google!", '/auth/google_oauth2'
+      .sync-email
+        %h4 Sync Your E-mail 
+        = link_to "Authenticate with Google!", '/auth/google_oauth2'
 
-      /   - if @auth.present? 
-      /     - @auth.each do |key, value| 
-      /       = key 
-      /       = value
-
-      /   - if @emails.present? 
-      /     - @emails.each do |email|
-      /       = email.body
-
-      /   - if @labels.present? 
-      /     - @labels.each do |label|
-      /       = label.id
+        - if @auth.present? 
+          - @auth.each do |key, value| 
+            = key 
+            = value
+        - if @emails.present? 
+          - @emails.each do |email|
+            = email.body
+        / - if @labels.present? 
+        /   - @labels.each do |label|
+        /     = label.id
     
-= render 'business/users/profile_picture'
+= render 'business/user_avatars/picture_modal'
 

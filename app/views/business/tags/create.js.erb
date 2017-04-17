@@ -1,3 +1,8 @@
-$('.tags').html('<%= j render "business/tags/tags", tags: @tags %>');
-$('#add_tag').show();
-$('.tag_form').remove();
+<% if params[:applicant_ids].present? %>
+  $('#tag_name').val('')
+  $('#addTagsModal').modal("toggle");
+<% else %>
+  $('.tags').html('<%= j render "business/tags/tags", tags: @tags %>');
+  $('#add_tag').show();
+  $('.tag_form').remove();
+<% end %>
