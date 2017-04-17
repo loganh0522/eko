@@ -4,9 +4,6 @@ class JobBoard < ActiveRecord::Base
   has_many :job_board_rows
   has_one :job_board_header
 
-  
-  accepts_nested_attributes_for :job_board_header 
-
   def generate_subdomain!
     the_subdomain = to_subdomain(self.subdomain)  
     
