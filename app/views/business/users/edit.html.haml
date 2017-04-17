@@ -14,7 +14,7 @@
           .profile-picture
             .circle
               %img(src="/tmp/blank_profile_picture.png")
-            .change-photo= link_to "Add Photo", new_business_user_user_avatar_path(current_user), :data => {remote: true}
+            / .change-photo= link_to "Add Photo", new_business_user_user_avatar_path(current_user), :data => {remote: true}
         .user-info
           %h3= current_user.full_name
           = current_user.email

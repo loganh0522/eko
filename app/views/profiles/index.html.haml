@@ -6,12 +6,12 @@
       = link_to  '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"} do
         %i.glyphicon.glyphicon-pencil
       = image_tag @avatar.image.large_image if @avatar.present?  
-      = render 'job_seeker/profiles/profile_picture'
+      / = render 'job_seeker/profiles/profile_picture'
     - else      
-      = link_to '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"} do
-        %i.glyphicon.glyphicon-pencil
+      / = link_to '#', :data => {:toggle => "modal", :target => "#profile-picture-modal"} do
+      /   %i.glyphicon.glyphicon-pencil
       %img(src="/tmp/blank_profile_picture.png")
-      = render 'job_seeker/profiles/profile_picture'
+      / = render 'job_seeker/profiles/profile_picture'
   = render 'job_seeker/users/form'
   .profile-header
     .personal-details
