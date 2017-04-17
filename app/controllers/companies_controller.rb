@@ -36,7 +36,7 @@ class CompaniesController < ApplicationController
 
   def create_job_board_header(company)
     JobBoardHeader.create(header: "Come Work With Our Team",
-      subheader: "We are hiring great people to help grow our company", job_board_id: @company.job_board.id)
+      subheader: "We are hiring great people to help grow our company", job_board_id: company.job_board.id)
   end
 
 end
