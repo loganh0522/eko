@@ -6,6 +6,10 @@ class JobSeeker::AccomplishmentsController < JobSeekersController
     @profile = current_user.profile
     @work_experience = WorkExperience.find(params[:work_experience_id])
     @accomplishment = Accomplishment.new
+
+    respond_to do |format|
+      format.js
+    end
   end
   
   def create

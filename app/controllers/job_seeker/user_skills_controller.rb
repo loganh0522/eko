@@ -4,12 +4,21 @@ class JobSeeker::UserSkillsController < JobSeekersController
   
   def new
     @user_skill = UserSkill.new
+    @work_experience = WorkExperience.find(params[:work_experience_id])
+    @profile = current_user.profile
+
+    respond_to do |format| 
+      format.js
+    end
   end
 
   def create
-    @user_skill = UserSkill.new(skill_id: params[:skills_id], user_id: current_user.id)
-    @skills = current_user.user_skills
-
+    @skill = Skill.find_or_create_skill(params[:name])
+    @work_experience = WorkExperience.find(params[:work_experience_id])
+    @user_skill = UserSkill.new(skill_id: @skill.id, work_experience_id: params[:work_experience_id])
+    @skills = @work_experience.skills
+    @profile = current_user.profile
+    
     if @user_skill.save
       respond_to do |format| 
         format.js
@@ -21,6 +30,7 @@ class JobSeeker::UserSkillsController < JobSeekersController
   end
 
   def destroy
+    # @user_skill = UserSkill.where(skill_id: params[:id], work_experience_id: params[:work_experience_id]).first
     @user_skill = UserSkill.find(params[:id])
     @user_skill.destroy
 

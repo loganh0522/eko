@@ -1,0 +1,28 @@
+#job-applicants
+  .contact-header
+    %h2 Contacts
+    .add-contact= link_to "Add Contact", new_business_client_client_contact_path(@client.id), remote: true, class: "btn submit-button"
+
+  .main-container
+    %table.table
+      %thead
+        %tr
+          %th(width="1%")
+          %th(width="25%") Name
+          %th(width="25%") E-mail 
+          %th(width="25%") Company
+          %th(width="20%") Created At
+        %tbody
+          - @contacts.each do |contact|
+            %tr
+              %td
+                = check_box_tag " ", " "
+              %td
+                = link_to "#{contact.first_name} #{contact.last_name}", business_client_client_contact_path(@client.id, contact.id)
+              %td
+                = contact.email
+              %td
+                = contact.client.company_name
+              %td
+                = contact.created_at
+  .side-container

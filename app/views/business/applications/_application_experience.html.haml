@@ -1,24 +1,46 @@
 .header
   %h4 Experience   
 .applicant-positions
-  - @application.applicant.profile.work_experiences.each do |position|
-    .job-position
-      .experience-header 
-        .company= position.company_name           
-      .experience-position
-        .title= position.title 
-        .date= "#{position.start_month} #{position.start_year} - #{position.start_month} #{position.end_year}"
-      
-      .experience-body 
-        / .location= "#{position.countries.first.name}, #{position.states.first.name}, #{position.city}"
-        %p.description= position.description
+  - if @application.manually_created == true 
+    - @application.work_experiences.each do |position|
+      .job-position
+        .experience-header 
+          .company= position.company_name           
+        .experience-position
+          .title= position.title 
+          .date= "#{position.start_month} #{position.start_year} - #{position.start_month} #{position.end_year}"
         
-        .accomplishments
-          - if position.accomplishments.present? 
-            .acc 
-              %p Accomplishments
-            %ul
-              - position.accomplishments.each do |accomplishment|
-                %li
-                  = accomplishment.body
+        .experience-body 
+          / .location= "#{position.countries.first.name}, #{position.states.first.name}, #{position.city}"
+          %p.description= position.description
+          
+          .accomplishments
+            - if position.accomplishments.present? 
+              .acc 
+                %p Accomplishments
+              %ul
+                - position.accomplishments.each do |accomplishment|
+                  %li
+                    = accomplishment.body
+  - else 
+    - @application.applicant.profile.work_experiences.each do |position|
+      .job-position
+        .experience-header 
+          .company= position.company_name           
+        .experience-position
+          .title= position.title 
+          .date= "#{position.start_month} #{position.start_year} - #{position.start_month} #{position.end_year}"
+        
+        .experience-body 
+          / .location= "#{position.countries.first.name}, #{position.states.first.name}, #{position.city}"
+          %p.description= position.description
+          
+          .accomplishments
+            - if position.accomplishments.present? 
+              .acc 
+                %p Accomplishments
+              %ul
+                - position.accomplishments.each do |accomplishment|
+                  %li
+                    = accomplishment.body
 

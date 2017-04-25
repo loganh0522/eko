@@ -9,26 +9,36 @@ class Business::UserAvatarsController < ApplicationController
   end
 
   def new 
-    @user_avatar = UserAvatar.new
+    @new_avatar = UserAvatar.new
     respond_to do |format| 
       format.js
     end
   end
 
   def create
-    @user_avatar = UserAvatar.new(user_params)
-
+    @avatar = UserAvatar.create(avatar_params)
+    
+    @user_avatar = current_user.user_avatar
     respond_to do |format| 
       format.js
     end
   end
 
   def edit 
-
+    @user_avatar  = UserAvatar.find(params[:id])
+    @new_avatar = UserAvatar.new
+    respond_to do |format|
+      format.js
+    end
   end
 
   def update
+    @user_avatar = UserAvatar.find(params[:id])
+    @user_avatar.update(avatar_params)
 
+    respond_to do |format|
+      format.js
+    end
   end
 
   def destroy
@@ -37,7 +47,7 @@ class Business::UserAvatarsController < ApplicationController
 
   private
 
-  def user_params
-    params.require(:user_avatar).permit(:image, :user_id)
+  def avatar_params
+    params.require(:user_avatar).permit(:image, :user_id, :crop_x, :crop_y, :crop_w, :crop_h)
   end
 end

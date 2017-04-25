@@ -1,0 +1,4 @@
+$('#userProfilePictureModal').find('.modal-body').remove()
+$('#userProfilePictureModal').find('.modal-footer').remove()
+$('#userProfilePictureModal').find('.modal-header').after('<%= j render "business/user_avatars/crop", user_avatar: @user_avatar %>');
+

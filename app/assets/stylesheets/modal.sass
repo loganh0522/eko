@@ -13,7 +13,7 @@
       font-size: 24px
   .modal-body
     height: auto
-    padding: 0 0 25px 0
+    padding: 0 0 0 0
     background-color: #ffffff
     #comment 
       width: 100%
@@ -118,49 +118,6 @@
         text-align: center
         height: 40px
 
-
-    /* Interview Modal Body Content 
-
-    .scheduled-interview
-      .date-location
-        overflow: hidden
-        .name 
-          font-size: 16px
-          float: left
-          width: 50%
-        .time 
-          font-size: 16px
-          float: right
-          width: 50%
-      .interviewers
-        ul 
-          
-          list-style: none
-          text-decoration: none
-          
-          li
-            width: 150px
-            height: 50px
-            margin: 10px 20px 0 -20px
-            display: inline-block
-            .circle-img
-              float: left
-              margin-right: 10px
-              border-radius: 50%
-              width: 40px 
-              height: 40px
-              background: #EF7B2B
-              text-align: center
-              font-size: 24px
-              padding-top: 2px
-              color: white
-            .interviewer-name 
-              float: left
-              font-size: 14px
-              margin: -3px 0 0 10px
-              width: 75px
-
-
   .modal-footer
     background: #f8f8f8
     overflow: hiden
@@ -184,21 +141,72 @@
     .row
       margin: 0 0 
 
-
-
 #userProfilePictureModal
+  .inputfile 
+    width: 0.1px
+    height: 0.1px
+    opacity: 0
+    overflow: hidden
+    position: absolute
+    z-index: -1
+    float: left
+  .inputfile + label
+    float: left
+  .not-present-container 
+    p
+      margin-top: 50px
+    .inputfile + label
+      margin: 15px 0 0 40%
+
+  .jcrop-keymgr
+    display: none
   .modal-dialog
     width: 80%
   .modal-body
     width: 100%
     padding: 0 0
     overflow: hidden
-    padding: 50px 50px 0 50px
+    padding: 25px 50px 25px 50px
+    .crop-image
+      float: left
+      width: 40%
+      margin: 0 5%
+    #img-preview-area
+      float: left
+      width: 40%
+      margin: 0 5%
+      .img-preview
+        width: 150px 
+        height: 150px
+        margin: 65px 25% 
+        border-radius: 50%
+        overflow: hidden
   .modal-footer
     width: 100%
+#createApplicationModal
+  .modal-dialog
+    width: 80%
+  .modal-body
+    width: 100%
+    padding: 0 0
+    overflow: hidden
 
-
-
+    .experience-container
+      border-bottom: 1px solid rgba(0,0,0,0.1)
+      padding-bottom: 15px
+      .header 
+        padding: 10px 5% 
+        .title 
+          font-size: 20px 
+      .work-experience 
+        box-shadow: none
+        background: rgba(0,0,0,0.05)
+        padding: 10px 10px
+        width: 90%
+        margin: 15px 5%
+        overflow: hidden
+      .add_fields
+        margin-left: 5%
 
 
 
@@ -259,9 +267,6 @@
   .modal-footer
     width: 100%
 
-
-
-
 #SubLoginModal
   .modal-header
     padding-left: 4%
@@ -291,6 +296,8 @@
         float: left
       img
         float: left
+#createApplicationModal
+  
 
 #subNewUserModal
   .modal-body

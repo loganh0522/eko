@@ -2,16 +2,26 @@
 .applicant-header
   .user-image
     .profile_picture
-      - if @application.applicant.user_avatar.present?
-        = image_tag @application.applicant.user_avatar.image.large_image 
-      - else 
+      - if @application.manually_created == true 
         %img(src="/tmp/blank_profile_picture.png")
+      - else
+        - if @application.applicant.user_avatar.present?
+          = image_tag @application.applicant.user_avatar.image.large_image 
+        - else 
+          %img(src="/tmp/blank_profile_picture.png")
   
   .applicant-details
-    .name= "#{@application.applicant.first_name.capitalize } #{@application.applicant.last_name.capitalize}"
-    - if @application.applicant.current_jobs.present?
-      .job= "#{@application.applicant.current_jobs.first.title}  #{@application.applicant.current_jobs.first.company_name} "
-    .location= "#{@application.applicant.location}"
+    - if @application.manually_created == true 
+      .name= "#{@application.applicant_contact_details.first.full_name.capitalize }"
+      / - if @application.applicant.current_jobs.present?
+      /   .job= "#{@application.applicant.current_jobs.first.title}  #{@application.applicant.current_jobs.first.company_name} "
+      - if @application.applicant_contact_details.first.location.present?
+        .location= "#{@application.applicant_contact_details.first.location}"
+    - else
+      .name= "#{@application.applicant.first_name.capitalize } #{@application.applicant.last_name.capitalize}"
+      - if @application.applicant.current_jobs.present?
+        .job= "#{@application.applicant.current_jobs.first.title}  #{@application.applicant.current_jobs.first.company_name} "
+      .location= "#{@application.applicant.location}"
     = render 'business/ratings/form', application: @application
 
 .filter
@@ -20,9 +30,14 @@
     .glyphicon.glyphicon-minus
     .glyphicon.glyphicon-plus
   .filter-body
-    = "Email: #{@application.applicant.email}"
-    %br
-    = "Phone: #{@application.applicant.phone}"
+    - if @application.manually_created == true 
+      = "E-mail: #{@application.applicant_contact_details.first.email}"
+      %br
+      = "Phone: #{@application.applicant_contact_details.first.phone}"
+    - else
+      = "Email: #{@application.applicant.email}"
+      %br
+      = "Phone: #{@application.applicant.phone}"
 
 .filter
   .filter-header

@@ -4,6 +4,15 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
         %h4.modal-title Edit Profile Picture
-      .modal-body
+      = form_for [:business, current_user, @user_avatar], remote: true do |f| 
+        .modal-body
+          .crop-image
+            %p Add a photo and crop it below
+            = f.file_field :image, class: "btn btn-file user_avatar_image"
+            
+        .modal-footer
+          = f.hidden_field :user_id, value: current_user.id
+          = f.submit 'Upload Image', class: "btn submit-button"
+          .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
 
       

@@ -1,0 +1,11 @@
+.main-container
+  .open-container
+    - @open_jobs_count = 0
+    - @jobs.each do |job|
+      - open_jobs_count = 0
+      - if job.status == 'open'
+        - @open_jobs_count += 1 
+        = render 'business/jobs/job_container', job: job  
+    - if @open_jobs_count == 0
+      .not-present-container
+        %p You currently do not have any open jobs.

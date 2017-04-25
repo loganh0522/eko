@@ -1,7 +1,10 @@
 = form_for [:business, @job, @application, @message], html: {remote: true, class: 'invite', data: {behaviour: 'has-saved-templates'}} do |f|
   .to 
     .title To:
-    .sender= "#{@application.applicant.full_name} (#{@application.applicant.email})" 
+    - if @application.manually_created == true 
+      .sender= "#{@application.applicant_contact_details.first.full_name.capitalize } #{@application.applicant_contact_details.first.email}"
+    - else
+      .sender= "#{@application.applicant.full_name} (#{@application.applicant.email})" 
   .to
     .title From: 
     .sender= "#{current_user.full_name} (#{current_user.email})"       

@@ -162,6 +162,7 @@ jQuery ->
   })
 
   $(document).ajaxComplete ->
+    console.log("complete")
     $('.work-experience').find('#geocomplete').geocomplete({
       types: ['(cities)']
     })

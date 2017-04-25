@@ -16,8 +16,11 @@
             %br
             .time= time_ago_in_words(message.created_at)
             
-          .activity-body-body
-            = simple_format(Liquid::Template.parse(message.body).render('recipient' => @application.applicant, 'company' => @current_company), 'job' => @application.apps)
+          .activity-body-body  
+            - if @application.present?
+              = simple_format(Liquid::Template.parse(message.body).render('recipient' => @application.applicant, 'company' => @current_company), 'job' => @application.apps)
+            - else
+              = simple_format(message.body)
 - else
   .not-present-container
     %p There are currently no notes for this applicant.

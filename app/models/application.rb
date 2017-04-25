@@ -3,28 +3,42 @@ class Application < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks 
   index_name ["talentwiz", Rails.env].join('_') 
 
-
   before_create :generate_token
 
   belongs_to :company
   belongs_to :applicant, class_name: 'User', foreign_key: :user_id
   belongs_to :apps, class_name: 'Job', foreign_key: :job_id 
-  
   belongs_to :stage
 
-  has_many :comments, -> {order("created_at DESC")}
+  has_many :comments, as: :commentable
+  has_many :messages, as: :messageable
   has_many :application_scorecards
-  has_many :messages, -> {order("created_at DESC")}
+  
   has_many :activities, -> {order("created_at DESC")}
-
   has_many :question_answers, dependent: :destroy
   accepts_nested_attributes_for :question_answers, allow_destroy: true
 
   has_many :taggings
   has_many :tags, through: :taggings
-
   has_many :interviews
   has_many :ratings
+
+  ######## If Application Added Manually ########
+
+  has_many :applicant_contact_details
+  has_many :work_experiences
+  has_many :educations
+
+  accepts_nested_attributes_for :work_experiences, 
+    allow_destroy: true
+    # reject_if: :experience_validation
+
+  accepts_nested_attributes_for :educations, 
+    allow_destroy: true
+    # reject_if: proc { |a| a[:body].blank? }
+
+  accepts_nested_attributes_for :applicant_contact_details, 
+    allow_destroy: true
 
 
   def generate_token

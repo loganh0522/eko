@@ -1,17 +1,23 @@
 = bootstrap_form_for [:business, @job] do |f|
   .fieldset
     .row
-      .form-group.col-md-6
+      .form-group.col-md-12
         = f.text_field :title, class: "form-control", label: "Job Title"
     .row
       .form-group.col-md-6
         = f.text_field :location, class: "form-control", id: "geocomplete", label: "Location (City)", placeholder: "City Name"
-      
       .form-group.col-md-6
         = f.text_field :address, class: "form-control", id: "geocomplete2", label: "Address", placeholder: "Enter the Address"
+    .row 
+      .form-group.col-md-12
+        = f.collection_select(:client_id, current_company.clients, :id, :company_name, label: "Client", :include_blank => true, :selected => @job.new_record? ? nil : @job.industries.first.id)
+    .row
+      .form-group.col-md-12
+        = f.text_area :description, :class => "tinymce", :rows => 40
+        = tinymce_assets        
+        = tinymce 
     .row
       .form-group.col-md-4
-
         = f.collection_select(:industry_ids, Industry.all, :id, :name, label: "Industry", :include_blank => true, :selected => @job.new_record? ? nil : @job.industries.first.id )
       .form-group.col-md-4
         = f.collection_select(:function_ids, Function.all, :id, :name, label: "Job Function", :include_blank => true)
@@ -22,11 +28,6 @@
         = f.select :career_level, options_for_select([ "Entry Level", "Experience", "Manager", "Executive", "Senior Executive"], :selected => "#{@job.career_level}" ), :include_blank => true
       .form-group.col-md-4
         = f.select :kind, options_for_select([ "Full Time", "Part Time", "Contract", "Permanent", "Summer", "Internship" ], :selected => "#{@job.kind}"), :include_blank => true, label: "Job Type"
-    .row
-      .form-group.col-md-12
-        = f.text_area :description, :class => "tinymce", :rows => 40
-        = tinymce_assets        
-        = tinymce 
     .row
       = hidden_field_tag :user_ids, current_user.id
       = f.hidden_field :company_id, value: current_company.id

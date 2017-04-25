@@ -1,0 +1,17 @@
+.job-show-header
+  .header
+    .details
+      %h1= @client.company_name
+  .change-containers-nav
+    %ul 
+      %li.change#all-client-contacts.activated Contacts
+      %li.change#all-client-jobs Jobs
+      %li.change#client-activity-feed Activity
+
+#main-container
+  .all-client-contacts-container.showing
+    = render 'business/client_contacts/contact_table'
+  .all-client-jobs-container
+    = render 'business/clients/jobs'
+
+= render 'business/clients/modal'

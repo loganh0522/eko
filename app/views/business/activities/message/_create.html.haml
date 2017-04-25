@@ -9,7 +9,7 @@
         .circle-img= activity.user.first_name.first.capitalize
       .content
         = "#{activity.user.first_name} #{activity.user.last_name} sent a message to"
-        = link_to "#{activity.trackable.application.applicant.first_name} #{activity.trackable.application.applicant.last_name}", business_job_application_messages_path(Job.where(id: activity.trackable.application.job_id).first.id, Application.where(user_id: activity.trackable.application.user_id, job_id: activity.trackable.application.job_id).first.id)
+        = link_to "#{activity.trackable.messageable.applicant.first_name} #{activity.trackable.messageable.applicant.last_name}", business_job_application_messages_path(Job.where(id: activity.trackable.messageable.job_id).first.id, Application.where(user_id: activity.trackable.messageable.user_id, job_id: activity.trackable.messageable.job_id).first.id)
         %br
         .time= "#{time_ago_in_words(activity.created_at)} ago" 
     .activity-body-body

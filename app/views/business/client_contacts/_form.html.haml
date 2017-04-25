@@ -1,0 +1,13 @@
+= bootstrap_form_for [:business, @client, @contact], remote: true do |f|
+  .modal-body
+    .fieldset
+      .form-group
+        = f.text_field :first_name, class: "form-control", label: "First Name"
+        = f.text_field :last_name, class: "form-control", label: "Last Name"
+        = f.text_field :email, class: "form-control", label: "E-mail"
+  .modal-footer
+    %fieldset
+      = f.hidden_field :user_id, value: current_user.id
+      = f.hidden_field :client_id, value: @client.id
+      = f.submit "Save Client", class: "btn submit-button"
+      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

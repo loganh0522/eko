@@ -5,17 +5,18 @@ class Business::CommentsController < ApplicationController
   before_filter :company_deactivated?
 
   def create 
-    # @regex = params[:comment][:body].scan /@([\w]+\s[\w]+)/   
-    @comment = Comment.new(comment_params)
-    
-    @application = Application.find(params[:application_id])
-    @comments = @application.comments
-    @activities = current_company.activities.where(application_id: @application.id).order('created_at DESC')
+    # @regex = params[:comment][:body].scan /@([\w]+\s[\w]+)/
+    if params[:client_contact_id].present? 
+      @contact = ClientContact.find(params[:client_contact_id])
+      @comment = @contact.comments.build(comment_params)
+    else
+      @application = Application.find(params[:application_id])
+      @comment = @application.comments.build(comment_params)
+    end
     
     respond_to do |format| 
       if @comment.save 
-        track_activity @comment
-        @application = Application.find(params[:application_id])
+        # track_activity @comment
         format.js 
       end
       #   if @regex.present? 
@@ -47,6 +48,6 @@ class Business::CommentsController < ApplicationController
   private 
 
   def comment_params 
-    params.require(:comment).permit(:body, :user_id, :application_id)
+    params.require(:comment).permit(:body, :user_id)
   end
 end

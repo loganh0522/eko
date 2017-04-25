@@ -1,33 +1,35 @@
 jQuery ->
   $(document).ajaxComplete -> 
-    new AvatarCropper
+    $('#cropbox').on 'load', (event) -> 
+      console.log('loaded')
+      new AvatarCropper
+  
+  # readURL = (input) ->
+  #  if input.files and input.files[0]
+  #    reader = new FileReader
 
-  readURL = (input) ->
-    if input.files and input.files[0]
-      reader = new FileReader
+  #   reader.onload = (e) ->
+  #      $('.blah').attr 'src', e.target.result
+  #      return
 
-      reader.onload = (e) ->
-        $('.blah').attr 'src', e.target.result
-        return
+  #    reader.readAsDataURL input.files[0]
+  #  return
 
-      reader.readAsDataURL input.files[0]
-    return
-
-  $('#imgInp').change ->
-    readURL this
-    new AvatarCropper
-    $('.blah').show()
-    $('#submit-crop').show()
-    $('.close-form').show()
-    $('.img-preview-blank').hide()
-    $('.img-preview-blank-2').hide()
-    $('.img-preview-blank-3').hide()
-    $('.img-preview-blank-4').hide()
-    $('.img-preview').show()
-    $('.img-preview-2').show()
-    $('.img-preview-3').show()
-    $('.img-preview-4').show()
-    return
+  # $('#imgInp').change ->
+  #  readURL this
+  #  new AvatarCropper
+  #  $('.blah').show()
+  #  $('#submit-crop').show()
+  #  $('.close-form').show()
+  #  $('.img-preview-blank').hide()
+  #  $('.img-preview-blank-2').hide()
+  #  $('.img-preview-blank-3').hide()
+  #  $('.img-preview-blank-4').hide()
+  #  $('.img-preview').show()
+  #  $('.img-preview-2').show()
+  #  $('.img-preview-3').show()
+  #  $('.img-preview-4').show()
+  #  return
 
 class AvatarCropper
   constructor: ->

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413135725) do
+ActiveRecord::Schema.define(version: 20170425101630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,20 @@ ActiveRecord::Schema.define(version: 20170413135725) do
     t.integer  "job_id"
   end
 
+  create_table "applicant_contact_details", force: :cascade do |t|
+    t.integer  "application_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "location"
+    t.string   "city"
+    t.string   "province"
+    t.string   "country"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "application_scorecards", force: :cascade do |t|
     t.integer "scorecard_id"
     t.integer "user_id"
@@ -50,6 +64,8 @@ ActiveRecord::Schema.define(version: 20170413135725) do
     t.boolean  "rejected"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "manually_created"
+    t.string   "source"
   end
 
   create_table "career_levels", force: :cascade do |t|
@@ -72,6 +88,8 @@ ActiveRecord::Schema.define(version: 20170413135725) do
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+    t.string   "phone"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -81,6 +99,10 @@ ActiveRecord::Schema.define(version: 20170413135725) do
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "num_employees"
+    t.string   "status"
+    t.integer  "company_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -89,6 +111,8 @@ ActiveRecord::Schema.define(version: 20170413135725) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "commentable_type"
+    t.integer  "commentable_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -100,6 +124,7 @@ ActiveRecord::Schema.define(version: 20170413135725) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "widget_key"
+    t.string   "kind"
   end
 
   create_table "contact_messages", force: :cascade do |t|
@@ -154,6 +179,8 @@ ActiveRecord::Schema.define(version: 20170413135725) do
     t.string  "degree"
     t.text    "description"
     t.integer "profile_id"
+    t.integer "application_id"
+    t.integer "applicant_id"
   end
 
   create_table "email_signatures", force: :cascade do |t|
@@ -324,6 +351,8 @@ ActiveRecord::Schema.define(version: 20170413135725) do
     t.string   "education_level"
     t.string   "career_level"
     t.string   "kind"
+    t.integer  "client_id"
+    t.text     "recruiter_description"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -355,6 +384,8 @@ ActiveRecord::Schema.define(version: 20170413135725) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "messageable_type"
+    t.integer  "messageable_id"
   end
 
   create_table "my_interviews", force: :cascade do |t|
@@ -518,6 +549,7 @@ ActiveRecord::Schema.define(version: 20170413135725) do
     t.integer "user_id"
     t.integer "skill_id"
     t.integer "profile_id"
+    t.integer "work_experience_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -558,6 +590,7 @@ ActiveRecord::Schema.define(version: 20170413135725) do
     t.integer  "profile_id"
     t.string   "location"
     t.integer  "position"
+    t.integer  "application_id"
   end
 
 end

@@ -3,7 +3,7 @@ class Business::JobBoardsController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
-  before_filter :is_owned?
+  before_filter :owned_by_company
   
   def show
     @job_board = JobBoard.find(params[:id])

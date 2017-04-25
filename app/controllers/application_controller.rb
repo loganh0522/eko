@@ -18,16 +18,27 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def owned_by_user
+    name = controller_name.gsub("Controller","").gsub("_", ' ').singularize
+    class_name = name.split.map { |i| i.capitalize }.join('')
+
+
+  end
+
+  def owned_by_company
+    name = controller_name.gsub("Controller","").gsub("_", ' ').singularize
+    class_name = name.split.map { |i| i.capitalize }.join('').constantize
+
+    if class_name.find(params[:id]).company != current_company
+      flash[:danger] = "Sorry, you do not have permission to access that!"
+      redirect_to business_root_path
+    end   
+  end
+
   def current_company
     @current_company ||= Company.find(session[:company_id]) if session[:company_id]
   end
 
-  def is_owned?
-    if JobBoard.find(params[:id]).company != current_company
-      flash[:danger] = "Sorry, you do not have permission to access that!"
-      redirect_to business_root_path
-    end
-  end
 
   def logged_in? 
     !!current_user 
@@ -100,7 +111,7 @@ class ApplicationController < ActionController::Base
 
   def track_activity(trackable, action = params[:action])
     if (params[:application_id]).present?
-      current_user.activities.create! action: action, trackable: trackable, application_id: params[:application_id], company: current_company, job_id: params[:job_id]
+      current_user.activities.create! action: action, trackable: trackable, application_id: params[:application_id], company: current_company, job_id: params[:job_id]    
     elsif (params[:applicant_ids]).present?
       applicant_ids = params[:applicant_ids].split(',')
       applicant_ids.each do |id| 

@@ -2,12 +2,14 @@
   .header
     = render "business/comments/add_comment"
     = render "business/messages/send_message"
+    = render "business/applications/form"
     #select_all
       = check_box_tag 'Select All', class: 'select_all_applicants'
       Select All
     .no-action-buttons
       .btn.border-button Add Note
       .btn.border-button Send E-mail
+      = link_to 'Add Candidate', new_business_application_path, class: "btn active-application-button", id: "move-applicants", remote: true
     .applicant-action-buttons
       = link_to 'Add Note', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#add_commentModal"}
       = link_to 'Send E-mail', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#send_messageModal"}
@@ -36,16 +38,25 @@
                   .applicant-checkbox{:data => {:id => application.id}}
                     = check_box_tag "applicant_ids[]", application.id
                 %td
-                  - if application.applicant.user_avatar.present? 
-                    .circle
-                      = image_tag application.applicant.user_avatar.image.small_image, :size => "50x50" 
-                  - else
+                  - if application.manually_created == true 
                     .circle-img
                       %img(src="/tmp/little-man.png") 
+                  - else
+                    - if application.applicant.user_avatar.present? 
+                      .circle
+                        = image_tag application.applicant.user_avatar.image.small_image, :size => "50x50" 
+                    - else
+                      .circle-img
+                        %img(src="/tmp/little-man.png") 
                 %td.names
-                  .name{:data => {:id =>  "#{application.applicant.first_name} #{application.applicant.last_name}"}}
-                    = link_to "#{application.applicant.first_name} #{application.applicant.last_name}", business_job_application_path(application.apps.id, application.id)
-                  .current-position CEO - TalentWiz 
+                  - if application.manually_created == true 
+                    .name
+                      = link_to "#{application.applicant_contact_details.first.first_name} #{application.applicant_contact_details.first.last_name}", business_job_application_path(application.apps.id, application.id)
+                  - else
+                    .name{:data => {:id =>  "#{application.applicant.first_name} #{application.applicant.last_name}"}}
+                      = link_to "#{application.applicant.first_name} #{application.applicant.last_name}", business_job_application_path(application.apps.id, application.id)
+                    - if application.applicant.current_jobs.present?
+                      .current-position= "#{application.applicant.current_jobs.first.title} - #{application.applicant.current_jobs.first.company_name} "
                 %td
                   .position= application.apps.title
                   .date-applied= "#{time_ago_in_words(application.created_at)} ago"

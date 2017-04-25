@@ -1,2 +1,5 @@
-$('.modal-body').html('<%= j render "job_seeker/user_avatars/crop" %>');
+$('#userProfilePictureModal').find('form').remove()
+// $('#userProfilePictureModal').find('.modal-body').remove()
+// $('#userProfilePictureModal').find('.modal-footer').remove()
+$('#userProfilePictureModal').find('.modal-header').after('<%= j render "job_seeker/user_avatars/crop", user_avatar: @user_avatar %>');
 

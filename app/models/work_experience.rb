@@ -1,12 +1,17 @@
 class WorkExperience < ActiveRecord::Base
   belongs_to :user
   belongs_to :profile
-
+  belongs_to :application
+  
   has_many :exp_industries
   has_many :industries, through: :exp_industries
 
   has_many :exp_functions
   has_many :functions, through: :exp_functions
+
+  has_many :user_skills
+  has_many :skills, through: :user_skills
+
 
   has_many :accomplishments
 

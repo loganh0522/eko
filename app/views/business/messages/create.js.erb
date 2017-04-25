@@ -1,5 +1,10 @@
 $('#message-subject').val('');
 $('#message-body').val('');
-$('.messages-container').find('.activity-feed').html('<%= j render "business/messages/applicant_messages", application: @application %>');
-$('.activity-container').find('.activity-feed').html('<%= j render "business/activities/application_activity", application: @application %>');
+tinyMCE.activeEditor.setContent('')
 
+<% if params[:client_contact_id].present? %>
+  $('.messages-container').find('.activity-feed').html('<%= j render "business/messages/applicant_messages", application: @recipient %>');
+<% else %>
+  $('.messages-container').find('.activity-feed').html('<%= j render "business/messages/applicant_messages", application: @application %>');
+  $('.activity-container').find('.activity-feed').html('<%= j render "business/activities/application_activity", application: @application %>');
+<% end %>

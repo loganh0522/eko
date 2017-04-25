@@ -5,8 +5,32 @@ class Business::ApplicationsController < ApplicationController
   before_filter :company_deactivated?
   
 
+  def new
+    @application = Application.new
+    @application.work_experiences.build
+    @application.educations.build
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create 
+    @application = Application.new(application_params)
+
+    if @application.save
+      respond_to do |format|
+        format.js
+      end
+    end
+  end
+
   def index
     @tags = current_company.tags
+    @application = Application.new
+    @application.work_experiences.build
+    @application.educations.build
+    @application.applicant_contact_details.build
 
     if params[:query].present? 
       @results = Application.search(params[:query]).records.to_a
@@ -77,6 +101,13 @@ class Business::ApplicationsController < ApplicationController
   end
 
   private
+
+  def application_params
+    params.require(:application).permit(:company_id, work_experiences_attributes: [:id, :body, :_destroy, :title, :company_name, :description, :start_month, :start_year, :end_month, :end_year, :current_position, :industry_ids, :function_ids, :location],
+      educations_attributes: [:id, :school, :degree, :description, :start_month, :start_year, :end_month, :end_year, :_destroy],
+      user_certifications_attributes: [:id, :name, :agency, :description, :start_month, :start_year, :end_year, :end_month, :expires],
+      applicant_contact_details_attributes: [:id, :first_name, :last_name, :email, :phone, :_destroy])
+  end
 
   def scorecard_graphs
     if @application.application_scorecards.present? 

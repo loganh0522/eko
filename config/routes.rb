@@ -53,19 +53,22 @@ Rails.application.routes.draw do
     resources :jobs, only: [:index, :show] do
       resources :applications
     end
-    resources :users
+    resources :users do 
+      resources :user_avatars 
+    end
+
     resources :profiles do 
       resources :user_certifications
-      resources :user_skills
       resources :educations
       resources :work_experiences do
         resources :accomplishments
+        resources :user_skills
+        resources :references
       end
     end
 
     resources :applications, only: [:create]
-    resources :question_answers
-    resources :user_avatars   
+    resources :question_answers     
   end
 
 
@@ -77,13 +80,20 @@ Rails.application.routes.draw do
     root to: "jobs#index" 
     resources :activities
     resources :hiring_teams
-    
-    resources :clients
+    resources :companies
+
+    resources :clients do 
+      resources :client_contacts do
+        resources :messages
+        resources :comments
+      end
+    end
     
     resources :users do 
       resources :email_signatures
       resources :user_avatars
     end
+    
     resources :invitations
     resources :locations 
     
@@ -97,6 +107,7 @@ Rails.application.routes.draw do
     resources :notifications
     resources :interviews
     resources :email_templates
+    
     get 'templates', to: "email_templates#index"
     
     resources :applications do 

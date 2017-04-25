@@ -15,8 +15,6 @@
               %li= link_to "Sign Up", new_user_path, class: "sign-up-btn"
               %li= link_to "Job Seekers", job_seekers_new_path, class: "job-seeker-btn"
             %img.responsive-menu(src="/tmp/menu.png")
-
-
     - if logged_in? && current_kind == 'business' && current_company.present?
       .navbar-fixed-top 
         .business_nav
@@ -27,6 +25,7 @@
               %li= link_to "JOBS", business_jobs_path 
               %li= link_to "APPLICANTS", business_applications_path
               %li= link_to "ACTIVITY", business_activities_path
+              %li= link_to "CLIENTS", business_clients_path
               / %li= link_to "NOTIFICATIONS", business_notifications_path
 
           .dropdown

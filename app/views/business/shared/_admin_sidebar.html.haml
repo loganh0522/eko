@@ -6,6 +6,10 @@
     = link_to "Team Members", business_users_path
   %li{:class => is_active?(business_users_path)}
     = link_to "Templates", business_templates_path
+
+  %li{:class => is_active?(business_plan_path)}
+    = link_to "Company Structure", business_plan_path
+    
   .nav-section Billing
   %li{:class => is_active?(business_plan_path)}
     = link_to "Subscription", business_plan_path   

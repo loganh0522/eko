@@ -5,6 +5,7 @@ class Job < ActiveRecord::Base
   
   liquid_methods :title
   belongs_to :company
+  belongs_to :job
 
   has_one :questionairre
   has_one :scorecard

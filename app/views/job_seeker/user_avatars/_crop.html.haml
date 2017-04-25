@@ -1,15 +1,23 @@
-%p You can crop the image below. 
+= form_for [:job_seeker, current_user, @user_avatar], remote: true do |f| 
+  .modal-body
+    .crop-image
+      - %w[x y w h].each do |attribute| 
+        = f.hidden_field "crop_#{attribute}"     
+      = image_tag user_avatar.image.url, class: "blah", id: 'cropbox'
+    
+    #img-preview-area
+      .img-preview
+        = image_tag @user_avatar.image.url, :id => "preview"
 
-.image
-  = image_tag @user_avatar.image, :id => "cropbox"
-  = form_for [:job_seeker, @user_avatar] do |f|
-    - %w[x y w h].each do |attribute| 
-      = f.hidden_field "crop_#{attribute}"
-    = f.submit 'Crop'
+  .modal-footer
+    = f.hidden_field :user_id, value: current_user.id
+    = f.submit 'Crop and Save', class: "btn submit-button"
+    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
 
-#image-preview-area
-  .img-preview
-    = image_tag @user_avatar.image, :id => "preview"
+    / = form_for [:job_seeker, current_user, @new_avatar], remote: true do |f| 
+    /   .crop-image
+    /     = f.file_field :image, class: "btn user_avatar_image inputfile "
+    /     = f.label :image, "Change Photo", class: "btn submit-button" 
 
 
 

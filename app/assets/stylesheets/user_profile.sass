@@ -185,8 +185,6 @@
   box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
   background: white
   width: 100%
-  padding: 20px 45px
-  border-radius: 5px
   margin-bottom: 15px
   overflow: hidden
   @media screen and (max-width: 800px)
@@ -194,40 +192,102 @@
     padding: 0 10px 10px 10px
   .form-control
     margin-top: 9px
-  .experience-header
-    overflow: hidden
-    margin: 10px 0 0 0
-    .company
-      font-size: 18px
-      font-weight: 400
-      float: left 
-    .edit
-      float: right
-  .experience-position 
+  .job-position-header
     overflow: hidden
     border-bottom: 1px solid rgba(0,0,0,0.1)
-    padding-bottom: 10px
-    .title
-      float: left         
-      font-size: 15px
-      font-weight: 400
-      color: rgba(0, 0, 0, .6)
-    .date
-      float: right
-      font-size: 13px  
-      font-weight: 400 
-      color: rgba(0, 0, 0, .6)
-  .experience-body
-    margin: 10px 0  
+    .job-position-header-content
+      padding: 15px 20px
+      .experience-header
+        overflow: hidden
+        .company
+          font-size: 18px
+          font-weight: 400
+          float: left 
+        .edit
+          float: right
+      .experience-position
+        margin-top: 5px 
+        overflow: hidden
+        .title
+          float: left         
+          font-size: 15px
+          font-weight: 400
+          color: rgba(0, 0, 0, .6)
+        .date
+          float: right
+          font-size: 13px  
+          font-weight: 400 
+          color: rgba(0, 0, 0, .6)
+  .job-position-body
+    overflow: hidden
+    border-bottom: 1px solid rgba(0,0,0,0.1)
+    .job-position-body-content
+      padding: 5px 20px
+      .experience-body
+        margin: 10px 0 
+      .skills
+        margin: 15px 0
+        .title
+          float: left
+          margin-right: 10px
+          font-weight: 600
+        .skill
+          float: left
+          border-radius: 5px
+          border: 1px solid #EF7B2B
+          color: rgba(0,0,0,.7)
+          width: auto
+          margin: -3px 5px 10px 0 
+          text-align: center
+          padding: 3px 5px 3px 8px
+          overflow: hidden
+          .name
+            float: left
+          .delete-tag
+            float: left
+            margin-left: 5px
+            color: rgba(0,0,0,.7)
+            &:hover
+              cursor: pointer  
+          
+        .tag
+          float: left
+          border-radius: 5px
+          border: 1px solid #EF7B2B
+          color: rgba(0,0,0,.7)
+          width: auto
+          margin: 2px 5px 0 0 
+          text-align: center
+          padding: 3px 5px 3px 8px
+          overflow: hidden
+          
+          
+  .actions
+    margin-left: 20px
+    ul
+      display: inline-block
+      list-style: none
+      margin: 10px -40px
+      li
+        float: left
+        margin-right: 30px
+        a
+          color: #EF7B2B
+
   .add-accomplishment
     margin: 10px 0 
   .accomplishments
-    margin-top: 10px
+    ul
+      li
+        color: #EF7B2B
+      li span
+        color: black
     .acc 
       font-size: 16px
-      font-weight: 200
+      font-weight: 400
     .accomplishment   
       overflow: hidden
+      margin-top: 5px
       .accomplishment-body
         width: 94%
         float: left
@@ -243,16 +303,7 @@
         .glyphicon
           color: rgba(0,0,0,0.4)
 
-  .actions
-    ul
-      display: inline-block
-      list-style: none
-      margin: 10px -40px
-      li
-        float: left
-        margin-right: 30px
-        a
-          color: #EF7B2B
+  
               
 
 #profile-picture-modal

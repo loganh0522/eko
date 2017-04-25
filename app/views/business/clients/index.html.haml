@@ -1,6 +1,11 @@
 .home-page-header
   .top-info
     %h1 Clients
-    .post-job= link_to "Create Client", new_business_client_path, class: 'white-border-button'
+    .post-job= link_to "Create Client", new_business_client_path, remote: true, class: 'white-border-button' 
 .home-page-body
+  = render 'modal'
+  .side-container
+    
+  .main-container
+    = render 'clients_table'
 

@@ -1,0 +1,20 @@
+%table.table
+  %thead
+    %tr
+      %th(width="1%")
+      %th(width="25%") Company Name
+      %th(width="25%") Address 
+      %th(width="25%") Website
+      %th(width="20%") Open Jobs
+    %tbody
+      - @clients.each do |client|
+        %tr
+          %td
+            = check_box_tag " ", " "
+          %td
+            = link_to "#{client.company_name}", business_client_path(client.id)
+          %td
+            = client.address
+          %td
+            = client.website
+          %td

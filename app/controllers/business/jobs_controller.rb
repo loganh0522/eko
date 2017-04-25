@@ -3,7 +3,8 @@ class Business::JobsController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
-  
+  before_filter :owned_by_company, only: [:edit, :show, :update]
+
   def index
     @jobs = current_company.jobs
   end
@@ -170,7 +171,7 @@ class Business::JobsController < ApplicationController
 
   def job_params
     params.require(:job).permit(:description, :title, :location, :address, :benefits, :company_id,
-      :industry_ids, :function_ids, :education_level, :kind, :career_level)
+      :industry_ids, :function_ids, :client_id, :education_level, :kind, :career_level)
   end
   
   def create_stages(job)
