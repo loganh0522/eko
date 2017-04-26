@@ -71,10 +71,9 @@ Rails.application.routes.draw do
     resources :question_answers     
   end
 
-
-
-
   get "/auth/:provider/callback", to: 'business/users#edit'
+
+
 
   namespace :business do 
     root to: "jobs#index" 
@@ -109,6 +108,12 @@ Rails.application.routes.draw do
     resources :email_templates
     
     get 'templates', to: "email_templates#index"
+    
+    resources :candidates do 
+      resources :messages
+      resources :comments
+      resources :tags
+    end
     
     resources :applications do 
       resources :ratings

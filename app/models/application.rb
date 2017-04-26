@@ -4,11 +4,17 @@ class Application < ActiveRecord::Base
   index_name ["talentwiz", Rails.env].join('_') 
 
   before_create :generate_token
-
   belongs_to :company
+  
+  belongs_to :candidate
+
+  
   belongs_to :applicant, class_name: 'User', foreign_key: :user_id
   belongs_to :apps, class_name: 'Job', foreign_key: :job_id 
+  
+
   belongs_to :stage
+
 
   has_many :comments, as: :commentable
   has_many :messages, as: :messageable

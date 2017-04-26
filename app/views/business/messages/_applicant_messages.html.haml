@@ -1,5 +1,5 @@
-- if application.messages.present?
-  - application.messages.each do |message|
+- if @candidate.messages.present?
+  - @candidate.messages.each do |message|
     .activity
       .icon
         .glyphicon.glyphicon-envelope
@@ -20,8 +20,8 @@
             - if @application.present?
               = simple_format(Liquid::Template.parse(message.body).render('recipient' => @application.applicant, 'company' => @current_company), 'job' => @application.apps)
             - else
-              = simple_format(message.body)
+            = simple_format(message.body)
 - else
   .not-present-container
-    %p There are currently no notes for this applicant.
+    %p There are currently no e-mails with applicant.
   

@@ -1,0 +1,9 @@
+- @applicant.educations.each do |degree|
+  .job-position
+    .experience-header 
+      .company= degree.school 
+    .experience-position
+      .title= degree.degree
+      .date= "#{degree.start_month} #{degree.start_year} - #{degree.end_month} #{degree.end_year}"     
+    .experience-body 
+      %p.description= degree.description

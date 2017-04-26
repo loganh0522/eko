@@ -1,0 +1,15 @@
+.applicant-nav-bar  
+  = render "business/shared/applicant_nav"
+.application-actions
+  #add-note.btn-application-actions.active-button
+    + Add Note
+  #send-email.btn-application-actions.inactive-button
+    Send Email
+  / #schedule-appt.btn-application-actions.inactive-button
+  /   Schedule Interview
+
+.email-area
+  = render "business/messages/candidate_form"
+.comment-area#showing-action
+  = render "business/comments/candidate_form"
+

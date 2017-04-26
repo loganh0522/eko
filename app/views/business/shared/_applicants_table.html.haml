@@ -26,6 +26,7 @@
         = render "business/comments/add_comment"
         = render "business/messages/send_message"
         = render "business/tags/add_tags"
+
         #select_all
           = check_box_tag 'Select All', class: 'select_all_applicants'
           Select All
@@ -53,29 +54,10 @@
 
             %tbody
               - @job.applications.each do |application|
-                %tr{:id => "#{application_stage(application)}" }
-                  %td
-                    .applicant-checkbox{:data => {:id => application.id}}
-                      = check_box_tag "applicant_ids[]", application.id
-                  %td
-                    - if application.applicant.user_avatar.present? 
-                      .circle
-                        = image_tag application.applicant.user_avatar.image.small_image, :size => "50x50" 
-                    - else
-                      .circle-img
-                        %img(src="/tmp/little-man.png")  
-                  %td.names
-                    .name{:data => {:id =>  "#{application.applicant.first_name} #{application.applicant.last_name}"}}
-                      = link_to "#{application.applicant.first_name} #{application.applicant.last_name}", business_job_application_path(@job, application.id)
-                    / .current-position= application.current_position 
-                  %td
-                    = application_stage(application)
-                  %td
-                    = render 'business/ratings/form', application: application
-                  %td
-                    = "#{time_ago_in_words(application.created_at)} ago"        
-                 
-                  %td
+                - if application.candidate.present?
+                  = render 'business/shared/manual_application_rows', application: application
+                - else
+                  = render 'business/shared/user_applications_table_rows', application: application
         .not-present-container
           %p There are currently no applicants in this stage.
 

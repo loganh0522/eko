@@ -1,0 +1,42 @@
+.home-page-header
+.applicant-view
+  .side-container
+    = render 'business/shared_manual_candidate/side_container'
+  .applicant-profile-information
+    .applicant-main-top
+      = render 'business/shared_candidate/candidate_nav'
+    .applicant-details#main-container
+      .profile-container.showing
+        .applicant-experience
+          = render 'business/applications/application_experience'
+        .applicant-experience    
+          = render 'business/applications/application_education'
+
+      .messages-container
+        .activity-feed
+          = render "business/messages/applicant_messages", applicant: @candidate
+
+      / .notes-container
+      /   .activity-feed
+      /     = render "business/comments/applicant_notes", application: @application
+
+      / .assessments-container
+      /   .applicant-scorecard
+      /     = render "business/assessments/applicant_assessment"
+
+      / .scorecards-container
+      /   .applicant-scorecard
+      /     = render "business/application_scorecards/applicant_scorecard"
+
+      / .activity-container
+      /   .activity-feed        
+      /     = render "business/activities/application_activity", application: @application
+
+  .modal#myModal
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+          %h4.modal-title  
+        .modal-body
+.footer

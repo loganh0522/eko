@@ -19,8 +19,6 @@
       .glyphicon.glyphicon-plus
     .filter-body 
       = render 'business/ratings/rating_filter'
-
-
   .filter
     .filter-header
       %h4 Tags
@@ -33,7 +31,6 @@
             .applicant-filter-checkbox{:data => {:id => "#{tag.name}", :filter => 'Tags'}}
               = check_box_tag "", false, false, class: 'filter-checkbox'
               .filter-title #{tag.name.capitalize}
-
   .filter
     .filter-header
       %h4 Job Status

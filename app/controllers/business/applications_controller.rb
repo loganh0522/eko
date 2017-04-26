@@ -28,9 +28,9 @@ class Business::ApplicationsController < ApplicationController
   def index
     @tags = current_company.tags
     @application = Application.new
-    @application.work_experiences.build
-    @application.educations.build
-    @application.applicant_contact_details.build
+    # @application.work_experiences.build
+    # @application.educations.build
+    # @application.applicant_contact_details.build
 
     if params[:query].present? 
       @results = Application.search(params[:query]).records.to_a
@@ -72,6 +72,14 @@ class Business::ApplicationsController < ApplicationController
 
   def show 
     @application = Application.find(params[:id])
+    @candidate = @application.candidate
+
+    if @candidate.manually_created == true 
+      @applicant = @candidate
+    else
+      @applicant = @candidate.user.profile
+    end
+
     @job = Job.find(params[:job_id])
     @message = Message.new
     @comment = Comment.new 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425101630) do
+ActiveRecord::Schema.define(version: 20170426112622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,22 @@ ActiveRecord::Schema.define(version: 20170425101630) do
     t.datetime "updated_at"
     t.boolean  "manually_created"
     t.string   "source"
+    t.integer  "candidate_id"
+  end
+
+  create_table "candidates", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "location"
+    t.boolean  "manually_created"
+    t.string   "source"
+    t.string   "token"
+    t.integer  "company_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "career_levels", force: :cascade do |t|
@@ -179,8 +195,7 @@ ActiveRecord::Schema.define(version: 20170425101630) do
     t.string  "degree"
     t.text    "description"
     t.integer "profile_id"
-    t.integer "application_id"
-    t.integer "applicant_id"
+    t.integer "candidate_id"
   end
 
   create_table "email_signatures", force: :cascade do |t|
@@ -386,6 +401,7 @@ ActiveRecord::Schema.define(version: 20170425101630) do
     t.datetime "updated_at"
     t.string   "messageable_type"
     t.integer  "messageable_id"
+    t.integer  "candidate_id"
   end
 
   create_table "my_interviews", force: :cascade do |t|
@@ -516,6 +532,7 @@ ActiveRecord::Schema.define(version: 20170425101630) do
   create_table "tags", force: :cascade do |t|
     t.string  "name"
     t.integer "company_id"
+    t.integer "candidate_id"
   end
 
   create_table "user_avatars", force: :cascade do |t|
@@ -590,7 +607,7 @@ ActiveRecord::Schema.define(version: 20170425101630) do
     t.integer  "profile_id"
     t.string   "location"
     t.integer  "position"
-    t.integer  "application_id"
+    t.integer  "candidate_id"
   end
 
 end

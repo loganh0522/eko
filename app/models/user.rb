@@ -32,6 +32,8 @@ class User < ActiveRecord::Base
   # Job Seeker User relationships 
   
   has_one :profile
+
+  has_many :candidates
   
   has_many :applications
   has_many :apps, through: :applications, class_name: "Job", foreign_key: :job_id
@@ -56,7 +58,7 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    full_name = "#{self.first_name} #{self.last_name}"
+    full_name = "#{self.first_name.capitalize} #{self.last_name.capitalize}"
   end
 
   def current_jobs

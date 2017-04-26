@@ -1,0 +1,17 @@
+%tr{:id => "#{application_stage(application)}" }
+  %td
+    .applicant-checkbox{:data => {:id => application.id}}
+      = check_box_tag "applicant_ids[]", application.id
+  %td
+    .circle-img
+      %img(src="/tmp/little-man.png")  
+  %td.names
+    .name{:data => {:id =>  "#{application.candidate.first_name} #{application.candidate.last_name}"}}
+      = link_to "#{application.candidate.first_name} #{application.candidate.last_name}", business_job_application_path(@job, application.id)
+    / .current-position= application.current_position 
+  %td
+    = application_stage(application)
+  %td
+    = render 'business/ratings/form', application: application
+  %td
+    = "#{time_ago_in_words(application.created_at)} ago"    

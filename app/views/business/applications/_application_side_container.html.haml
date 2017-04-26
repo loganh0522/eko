@@ -1,77 +1,64 @@
-
-.applicant-header
-  .user-image
-    .profile_picture
-      - if @application.manually_created == true 
-        %img(src="/tmp/blank_profile_picture.png")
-      - else
+- if @application.candidate.manually_created == true 
+  = render 'manual_application_side_container'
+- else 
+  .applicant-header
+    .user-image
+      .profile_picturee
         - if @application.applicant.user_avatar.present?
           = image_tag @application.applicant.user_avatar.image.large_image 
         - else 
           %img(src="/tmp/blank_profile_picture.png")
-  
-  .applicant-details
-    - if @application.manually_created == true 
-      .name= "#{@application.applicant_contact_details.first.full_name.capitalize }"
-      / - if @application.applicant.current_jobs.present?
-      /   .job= "#{@application.applicant.current_jobs.first.title}  #{@application.applicant.current_jobs.first.company_name} "
-      - if @application.applicant_contact_details.first.location.present?
-        .location= "#{@application.applicant_contact_details.first.location}"
-    - else
-      .name= "#{@application.applicant.first_name.capitalize } #{@application.applicant.last_name.capitalize}"
-      - if @application.applicant.current_jobs.present?
+    
+    .applicant-details
+      .name= "#{@application.candidate.user.full_name}"
+      - if @application.candidate.user.current_jobs.present?
         .job= "#{@application.applicant.current_jobs.first.title}  #{@application.applicant.current_jobs.first.company_name} "
-      .location= "#{@application.applicant.location}"
-    = render 'business/ratings/form', application: @application
+      .location= "#{@application.candidate.user.location}"
+      = render 'business/ratings/form', application: @application
 
-.filter
-  .filter-header
-    %h4 Contact Details
-    .glyphicon.glyphicon-minus
-    .glyphicon.glyphicon-plus
-  .filter-body
-    - if @application.manually_created == true 
-      = "E-mail: #{@application.applicant_contact_details.first.email}"
+  .filter
+    .filter-header
+      %h4 Contact Details
+      .glyphicon.glyphicon-minus
+      .glyphicon.glyphicon-plus
+    .filter-body
+      = "Email: #{@application.candidate.user.email}"
       %br
-      = "Phone: #{@application.applicant_contact_details.first.phone}"
-    - else
-      = "Email: #{@application.applicant.email}"
-      %br
-      = "Phone: #{@application.applicant.phone}"
+      = "Phone: #{@application.candidate.user.phone}"
 
-.filter
-  .filter-header
-    %h4 Current Stage
-    .glyphicon.glyphicon-minus
-    .glyphicon.glyphicon-plus
-  .filter-body
-    = render 'business/applications/stage'
+  .filter
+    .filter-header
+      %h4 Current Stage
+      .glyphicon.glyphicon-minus
+      .glyphicon.glyphicon-plus
+    .filter-body
+      = render 'business/applications/stage'
 
-.filter
-  .filter-header
-    %h4 Tags
-    .glyphicon.glyphicon-minus
-    .glyphicon.glyphicon-plus
-  .filter-body 
-    .applicant-tags
-      .tags
-        = render "business/tags/tags"
-      .add_tag
-        = link_to "+ Add Tag", new_business_job_application_tag_path(@job.id, @application.id), :data => {remote: true}, id: 'add_tag'
+  .filter
+    .filter-header
+      %h4 Tags
+      .glyphicon.glyphicon-minus
+      .glyphicon.glyphicon-plus
+    .filter-body 
+      .applicant-tags
+        .tags
+          = render "business/tags/tags"
+        .add_tag
+          = link_to "+ Add Tag", new_business_job_application_tag_path(@job.id, @application.id), :data => {remote: true}, id: 'add_tag'
 
-.filter
-  .filter-header
-    %h4 Interviews
-    .glyphicon.glyphicon-minus
-    .glyphicon.glyphicon-plus
-  .filter-body
-    .interview
-      - @application.interviews.each do |interview| 
-        = interview.kind
-        = interview.interview_date
-        = "#{interview.start_time} - #{interview.end_time}"
-        = link_to 'View', business_interview_path(interview.id), :data => {:remote => true}
-        %br
+  .filter
+    .filter-header
+      %h4 Interviews
+      .glyphicon.glyphicon-minus
+      .glyphicon.glyphicon-plus
+    .filter-body
+      .interview
+        - @application.interviews.each do |interview| 
+          = interview.kind
+          = interview.interview_date
+          = "#{interview.start_time} - #{interview.end_time}"
+          = link_to 'View', business_interview_path(interview.id), :data => {:remote => true}
+          %br
   
 
 

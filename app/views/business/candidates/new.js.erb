@@ -1,0 +1,3 @@
+$('#createApplicationModal').find('form').remove()
+$('#createApplicationModal').modal('toggle')
+$('#createApplicationModal').find('.modal-header').after('<%= j render "business/candidates/form" %>')

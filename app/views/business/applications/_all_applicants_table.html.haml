@@ -2,14 +2,14 @@
   .header
     = render "business/comments/add_comment"
     = render "business/messages/send_message"
-    = render "business/applications/form"
+    = render "business/candidates/app_new_modal"
     #select_all
       = check_box_tag 'Select All', class: 'select_all_applicants'
       Select All
     .no-action-buttons
       .btn.border-button Add Note
       .btn.border-button Send E-mail
-      = link_to 'Add Candidate', new_business_application_path, class: "btn active-application-button", id: "move-applicants", remote: true
+      = link_to 'Add Candidate', new_business_candidate_path, class: "btn active-application-button", id: "move-applicants", remote: true
     .applicant-action-buttons
       = link_to 'Add Note', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#add_commentModal"}
       = link_to 'Send E-mail', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#send_messageModal"}
@@ -32,8 +32,7 @@
                 - stage = "Rejected"
               - elsif 
                 - stage = "Applied"
-
-              %tr{:class => "#{stage} #{application.apps.status} #{application.apps.created_at}"}
+              %tr
                 %td
                   .applicant-checkbox{:data => {:id => application.id}}
                     = check_box_tag "applicant_ids[]", application.id
@@ -64,3 +63,5 @@
                   .stage= stage
                 %td
                   = render 'business/ratings/form', application: application
+
+
