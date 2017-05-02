@@ -3,30 +3,40 @@ class Business::MessagesController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
+  
+
+  def index
+    @messages = current_user.messages.all
+    get_application_thread
+  end
+
 
   def create 
     if params[:client_contact_id].present?   
       @recipient = ClientContact.find(params[:client_contact_id])
       @message = @recipient.messages.build(user_id: current_user.id, body: params[:body], subject: params[:message][:subject])   
+    elsif params[:candidate_id].present?
+      @candidate = Candidate.find(params[:candidate_id])
+      candidate_email(@candidate)
+      @message = @candidate.messages.build(user_id: current_user.id, body: params[:body], subject: params[:message][:subject])
+      send_email(@candidate.token, @message, 'job', @email, current_company)
     else 
       @job = Job.find(params[:job_id])
       @application = Application.find(params[:application_id])
       @user = @application.applicant
       
       @messages = @application.messages
-      @recipient = @application.applicant
-      @token = @application.token
       @activities = current_company.activities.where(application_id: @application.id).order('created_at DESC')
+
+
+      @recipient = @application.applicant
+      @token = @application.token      
       @message = @application.messages.build(user_id: current_user.id, body: params[:body], subject: params[:message][:subject]) 
       
-      if @current_user.google_token.present? 
-        @email = Mail.new(to: @recipient.email, from: current_user.email, subject: params[:message][:subject], body: params[:body], content_type: "text/html")
-        GoogleWrapper::Gmail.send_message(@email, current_user)
-      else 
-        AppMailer.send_applicant_message(@token, @message, @job, @recipient, current_company).deliver
-      end
+      send_email(@token, @message, @job, @recipient, current_company)
     end
 
+    binding.pry
     if @message.save 
       track_activity(@message) 
       respond_to do |format| 
@@ -38,7 +48,6 @@ class Business::MessagesController < ApplicationController
   # def get_thread
   #   service.get_user_thread('me', "15b4e83fccf315c4").messages.first.payload.body
   # end
-
   def send_multiple_messages    
     applicant_ids = params[:applicant_ids].split(',')
 
@@ -53,4 +62,42 @@ class Business::MessagesController < ApplicationController
     track_activity(@message, "create")
     redirect_to :back
   end
+
+  private
+
+  def candidate_email(candidate)
+    if candidate.user.present? 
+      @email = candidate.user
+    else
+      @email = candidate
+    end
+    return @email
+  end
+
+  def send_email(token, message, job, recipient, current_company)
+    if @current_user.google_token.present? 
+      @email = Mail.new(to: @recipient.email, from: current_user.email, subject: params[:message][:subject], body: params[:body], content_type: "text/html")
+      GoogleWrapper::Gmail.send_message(@email, current_user, message)
+    else 
+      binding.pry
+      AppMailer.send_applicant_message(token, message, job, recipient, current_company).deliver
+    end
+  end
+
+  def get_application_thread
+    @messages.each do |message| 
+      if message.thread_id.present? 
+        @thread = GoogleWrapper::Gmail.get_message_thread(message.thread_id, current_user)
+        @messages = @thread.messages
+
+        # @messages = []
+        # @thread_messages.each do |message|
+        #   @email = {}
+        #   @email[:body] = message.payload.body.data
+        #   message.payload.headers.each do |header| 
+        #     if header.name == "Date" || "From" || "To" || "Date" || 
+      end
+    end
+  end
+
 end

@@ -10,7 +10,7 @@
       .circle-img
         %img(src="/tmp/little-man.png")  
   %td.names
-    .name{:data => {:id =>  "#{application.applicant.first_name} #{application.applicant.last_name}"}}
+    .name{:data => {:id =>  "#{application.applicant.first_name}"}}
       = link_to "#{application.applicant.first_name} #{application.applicant.last_name}", business_job_application_path(@job, application.id)
     / .current-position= application.current_position 
   %td

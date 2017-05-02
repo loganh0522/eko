@@ -57,7 +57,7 @@ require 'google/api_client/client_secrets.rb'
       @messages = service.list_user_messages('me')
     end
 
-    def self.send_message(email, current_user)
+    def self.send_message(email, current_user, client_message)
       token = current_user.google_token.access_token
       refresh_token = current_user.google_token.refresh_token
       client = Signet::OAuth2::Client.new(access_token: token, 
@@ -76,9 +76,10 @@ require 'google/api_client/client_secrets.rb'
       service.authorization = client
 
       message = Google::Apis::GmailV1::Message.new(raw: email.to_s, content_type: "text/html")
-      response = service.send_user_message('me', message)
+      @response = service.send_user_message('me', message)
+      client_message.update(thread_id: @response.thread_id)
     end
-
+    
     def self.get_message_titles(message, current_user)
       token = current_user.google_token.access_token
       refresh_token = current_user.google_token.refresh_token
@@ -98,6 +99,28 @@ require 'google/api_client/client_secrets.rb'
       service.authorization = client
       
       @message = service.get_user_message('me', message.id)
+    end
+
+    def self.get_message_thread(thread, current_user)
+      token = current_user.google_token.access_token
+      refresh_token = current_user.google_token.refresh_token
+      client = Signet::OAuth2::Client.new(access_token: token, 
+        refresh_token: refresh_token, 
+        token_credential_uri: 'https://accounts.google.com/o/oauth2/token', 
+        authorization_uri: 'https://accounts.google.com/o/oauth2/auth', 
+        client_id: ENV['GOOGLE_CLIENT_ID'],
+        client_secret: ENV['GOOGLE_CLIENT_SECRET'],
+        scope: ['email', 
+          'https://www.googleapis.com/auth/gmail.compose',
+          'https://www.googleapis.com/auth/gmail.modify'],
+        grant_type: 'authorization_code')
+         
+      
+      service = Google::Apis::GmailV1::GmailService.new
+      service.authorization = client
+      
+      thread = service.get_user_thread('me', thread)
+      return thread
     end
    
     def get_gmail_attribute(gmail_data, attribute)

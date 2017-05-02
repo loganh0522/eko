@@ -38,6 +38,8 @@ class Business::JobsController < ApplicationController
     @interviews_by_date = @job.interviews.group_by(&:interview_date)
     @rating = Rating.new
     @tag = Tag.new
+
+    
     if params[:query].present? 
       @applications = Application.where(job_id: @job.id)
       @results = Application.search(params[:query]).records.to_a

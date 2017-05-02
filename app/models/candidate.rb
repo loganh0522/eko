@@ -27,4 +27,13 @@ class Candidate < ActiveRecord::Base
     return full_name
   end
   
+  def generate_token
+    self.token = SecureRandom.urlsafe_base64
+  end
+
+  def current_jobs
+    @current_jobs = self.work_experiences.where(current_position: true)
+    return @current_jobs
+  end
+
 end

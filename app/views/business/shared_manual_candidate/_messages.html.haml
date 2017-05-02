@@ -1,0 +1,26 @@
+- if @candidate.messages.present?
+  - @candidate.messages.each do |message|
+    .activity
+      .icon
+        .glyphicon.glyphicon-envelope
+
+      .activity-body
+        .activity-body-header
+          - if message.user.user_avatar.present? 
+            = image_tag message.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
+          - else 
+            .circle-img
+              %img(src="/tmp/little-man.png")     
+          .contain
+            = "#{message.user.full_name} sent a message"
+            %br
+            .time= time_ago_in_words(message.created_at)
+            
+          .activity-body-body  
+            - if @application.present?
+              = simple_format(Liquid::Template.parse(message.body).render('recipient' => @application.applicant, 'company' => @current_company), 'job' => @application.apps)
+            - else
+            = simple_format(message.body)
+- else
+  .not-present-container
+    %p There are currently no e-mails with applicant.

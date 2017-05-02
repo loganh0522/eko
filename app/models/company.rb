@@ -7,6 +7,8 @@ class Company < ActiveRecord::Base
   has_many :applications
   has_many :applicants, through: :applications, class_name: "User", foreign_key: :user_id
   
+  has_many :candidates
+
   has_many :jobs
   has_many :subsidiaries
   has_many :locations

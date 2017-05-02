@@ -1,0 +1,19 @@
+#all-candidates
+  %h1= "All Candidates"
+  .actions
+    .search-field
+      = form_tag business_applications_path, method: :get do   
+        .form-group
+          = search_field_tag :query, params[:query], placeholder: "Advanced Text Search", class: "form-control"
+    = render "business/candidates/app_new_modal"
+    = link_to 'Add Candidate', new_business_candidate_path, class: "btn border-button2", id: "move-applicants", remote: true
+
+
+#job-applicants
+  .side-container
+    = render "business/applications/all_applicants_filters"        
+  .main-container
+    = render 'business/applications/all_applicants_table'
+
+
+  

@@ -1,3 +1,26 @@
+#all-candidates
+  border-bottom: 1px solid rgba(0,0,0,0.2)
+  overflow: hidden
+  margin: 100px 2% 0 3%
+  h1 
+    float: left
+    color: black
+    margin-top: 8px
+  .actions
+    float: right
+    overflow: hidden
+    .search-field
+      float: left
+      margin: 0 20px 0 0
+      input
+        width: 350px 
+        height: 40px
+        padding: 10px 15px 13px 15px
+        font-size: 14px
+        border-radius: 2px
+    .border-button2
+      float: left
+    
 #job-applicants
   margin: 0px 2% 200px 2%
   overflow: hidden
@@ -77,16 +100,14 @@
           color: black
   .side-container
     float: left
-    background: #ffffff
     width: 23%
     height: auto
-    padding: 5px 10px
-    border-radius: 5px
-    margin: 10px 1%
-    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    padding: 5px 10px 0 0
+    margin: 20px 1%
+    #filter-header
+      border-bottom: 1px solid rgba(0,0,0,0.2)
+      padding-bottom: 5px
     .filter
-      border-bottom: 1px solid rgba(0,0,0,0.1)
-      padding: 10px 0
       .filter-header 
         overflow: hidden
         h4
@@ -94,8 +115,10 @@
         .glyphicon
           margin-top: 10px
           float: right
+          color: #EF7B2B
         .glyphicon-minus
           display: none
+          color: #EF7B2B
       .filter-body
         display: none
         overflow: hidden
@@ -116,10 +139,11 @@
   .main-container
     float: right
     padding: 0 0 
-    border-radius: 5px
+    border-radius: 1px
     background: #ffffff
+    min-height: 375px
     width: 73%
-    margin: 10px 0 50px 0
+    margin: 20px 2px 50px 0
     box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
     .applicants 
       .not-present-container
@@ -137,7 +161,7 @@
           color: rgba(0,0,0,0.7)
           padding: 5px 0
           border: none
-          border-radius: 5px
+          border-radius: 2px
           font-weight: 300
         .applicant-action-buttons
           display: none
@@ -150,7 +174,7 @@
           color: #ffffff
           padding: 5px 0
           border: none
-          border-radius: 5px
+          border-radius: 2px
           font-weight: 300
         #select_all
           float: left
@@ -167,7 +191,7 @@
           display: table-header-group
           tr
             th
-              border-bottom: none
+              border-bottom: 1px solid #ddd
               checkbox
                 margin: 0 0 0 10px
         tbody
@@ -175,13 +199,17 @@
           tr
             overflow: hidden
             height: 75px
-            padding: 15px 8px
+            padding: 10px 8px
+            border-bottom: 1px solid #ddd
             td
-              padding: 12px 8px
+              padding: 6px 8px
+              border-top: none
               .applicant-checkbox
-                margin: 12px 0 0 10px
-      .checkbox
-        margin: 30px 0 0 20px
+                margin: 15px 0 0 10px
+      
+
+      #select_all
+        margin: 0 0 0 10px
       .circle
         img
           margin: 0px 5px 
@@ -200,22 +228,31 @@
         padding: 8px 8px
         color: white
       .name 
-        margin: 5px 0 0 0 
+        margin: 10px 0 0 0 
         a
-          color: rgba(0, 0, 0, 0.8)
+          color: #EF7B2B
           font-size: 14px
-          font-weight: 600
+
+          &:hover
+            cursor: pointer
       .current-position
-        font-size: 10px
+        font-size: 12px
+        color: rgba(0, 0, 0, 0.8)
 
       .position
-        font-size: 12px
+        font-size: 14px
         margin: 10px 0 0 0 
+        color: rgba(0, 0, 0, 0.8)
+
       .date-applied
-        font-size: 10px    
-      .stage
         font-size: 12px
+        color: rgba(0, 0, 0, 0.8)
+
+      .stage
+        font-size: 14px
         margin: 10px 0 0 0 
+      .rating
+        margin: 15px 0 0 0 
 
 
 

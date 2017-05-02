@@ -54,7 +54,7 @@
 
             %tbody
               - @job.applications.each do |application|
-                - if application.candidate.present?
+                - if application.candidate.manually_created == true
                   = render 'business/shared/manual_application_rows', application: application
                 - else
                   = render 'business/shared/user_applications_table_rows', application: application

@@ -18,6 +18,8 @@ class Application < ActiveRecord::Base
 
   has_many :comments, as: :commentable
   has_many :messages, as: :messageable
+  
+  
   has_many :application_scorecards
   
   has_many :activities, -> {order("created_at DESC")}

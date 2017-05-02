@@ -2,9 +2,9 @@
 $('#comment-body').val('');
 <% if params[:client_contact_id].present? %>
   $('.notes-container').find('.activity-feed').html('<%= j render "business/comments/applicant_notes", application: @contact %>');
+  $('.activity-container').find('.activity-feed').html('<%= j render "business/activities/application_activity", application: @application %>');
 <% else %>
   $('.notes-container').find('.activity-feed').html('<%= j render "business/comments/applicant_notes", application: @application %>');
-  $('.activity-container').find('.activity-feed').html('<%= j render "business/activities/application_activity", application: @application %>');
 <% end %>
 
 

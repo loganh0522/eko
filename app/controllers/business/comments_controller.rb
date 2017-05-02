@@ -6,14 +6,9 @@ class Business::CommentsController < ApplicationController
 
   def create 
     # @regex = params[:comment][:body].scan /@([\w]+\s[\w]+)/
-    if params[:client_contact_id].present? 
-      @contact = ClientContact.find(params[:client_contact_id])
-      @comment = @contact.comments.build(comment_params)
-    else
-      @application = Application.find(params[:application_id])
-      @comment = @application.comments.build(comment_params)
-    end
-    
+    binding.pry
+    build_proper_association
+
     respond_to do |format| 
       if @comment.save 
         # track_activity @comment
@@ -50,4 +45,17 @@ class Business::CommentsController < ApplicationController
   def comment_params 
     params.require(:comment).permit(:body, :user_id)
   end
+
+  def build_proper_association
+      if params[:client_contact_id].present? 
+        @contact = ClientContact.find(params[:client_contact_id])
+        @comment = @contact.comments.build(comment_params)
+      elsif params[:candidate_id].present?
+        @candidate = Candidate.find(params[:candidate_id])
+        @comment = @candidate.comments.build(comment_params)
+      else
+        @application = Application.find(params[:application_id])
+        @comment = @application.comments.build(comment_params)
+      end
+    end
 end

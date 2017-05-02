@@ -2,14 +2,9 @@
   .header
     = render "business/comments/add_comment"
     = render "business/messages/send_message"
-    = render "business/candidates/app_new_modal"
-    #select_all
-      = check_box_tag 'Select All', class: 'select_all_applicants'
-      Select All
     .no-action-buttons
       .btn.border-button Add Note
       .btn.border-button Send E-mail
-      = link_to 'Add Candidate', new_business_candidate_path, class: "btn active-application-button", id: "move-applicants", remote: true
     .applicant-action-buttons
       = link_to 'Add Note', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#add_commentModal"}
       = link_to 'Send E-mail', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#send_messageModal"}
@@ -18,6 +13,7 @@
       %thead
         %tr
           %th(width="1%")
+            #select_all= check_box_tag 'Select All', class: 'select_all_applicants'
           %th(width="10%")
           %th(width="25%") Name 
           %th(width="20%") Job Title
@@ -25,43 +21,49 @@
           %th(width="25%") Rating
         %tbody
           .all_applicants_data
-            - @applicants.each do |application|
-              - if application.stage.present?
-                - stage = application.stage.name
-              - elsif application.rejected == true
+            - @candidates.each do |candidate|
+              - if candidate.applications.first.stage.present?
+                - stage = candidate.applications.first.stage.name
+              - elsif candidate.applications.first.rejected == true
                 - stage = "Rejected"
               - elsif 
                 - stage = "Applied"
+
               %tr
                 %td
-                  .applicant-checkbox{:data => {:id => application.id}}
-                    = check_box_tag "applicant_ids[]", application.id
+                  .applicant-checkbox{:data => {:id => candidate.id}}
+                    = check_box_tag "applicant_ids[]", candidate.id
                 %td
-                  - if application.manually_created == true 
+                  - if candidate.manually_created == true 
                     .circle-img
                       %img(src="/tmp/little-man.png") 
                   - else
-                    - if application.applicant.user_avatar.present? 
+                    - if candidate.user.user_avatar.present? 
                       .circle
-                        = image_tag application.applicant.user_avatar.image.small_image, :size => "50x50" 
+                        = image_tag candidate.user.user_avatar.image.small_image, :size => "50x50" 
                     - else
                       .circle-img
                         %img(src="/tmp/little-man.png") 
                 %td.names
-                  - if application.manually_created == true 
+                  - if candidate.manually_created == true 
                     .name
-                      = link_to "#{application.applicant_contact_details.first.first_name} #{application.applicant_contact_details.first.last_name}", business_job_application_path(application.apps.id, application.id)
+                      = link_to "#{candidate.full_name}", business_candidate_path(candidate.id)
+                      - if candidate.current_jobs.present?
+                        .current-position= "#{candidate.current_jobs.first.title} - #{candidate.current_jobs.first.company_name}"
                   - else
-                    .name{:data => {:id =>  "#{application.applicant.first_name} #{application.applicant.last_name}"}}
-                      = link_to "#{application.applicant.first_name} #{application.applicant.last_name}", business_job_application_path(application.apps.id, application.id)
-                    - if application.applicant.current_jobs.present?
-                      .current-position= "#{application.applicant.current_jobs.first.title} - #{application.applicant.current_jobs.first.company_name} "
-                %td
-                  .position= application.apps.title
-                  .date-applied= "#{time_ago_in_words(application.created_at)} ago"
-                %td
-                  .stage= stage
-                %td
-                  = render 'business/ratings/form', application: application
+                    .name{:data => {:id =>  "#{candidate.user.full_name}"}}
+                      = link_to "#{candidate.user.full_name}", business_candidate_path(candidate.id)
+                    - if candidate.user.current_jobs.present?
+                      .current-position= "#{candidate.user.current_jobs.first.title} - #{candidate.user.current_jobs.first.company_name} "
+                
+
+                  %td
+                    .position= candidate.applications.first.apps.title
+                    .date-applied= candidate.applications.first.apps.location
+                  %td
+                    .stage= stage
+                    .date-applied= "#{time_ago_in_words(candidate.created_at)} ago"
+                  %td
+                    = render 'business/ratings/form', application: candidate.applications.first
 
 

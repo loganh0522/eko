@@ -27,22 +27,7 @@ class Business::CandidatesController < ApplicationController
 
   def index
     @tags = current_company.tags
-    @application = Application.new
-    @application.work_experiences.build
-    @application.educations.build
-    @application.applicant_contact_details.build
-
-    if params[:query].present? 
-      @results = Application.search(params[:query]).records.to_a
-      @applicants = []     
-      @results.each do |application|  
-        if application.company == current_company
-          @applicants.append(application)
-        end
-      end 
-    else
-      @applicants = current_company.applications 
-    end
+    @candidates = current_company.candidates
   end
 
   def show 

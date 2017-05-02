@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170426112622) do
+ActiveRecord::Schema.define(version: 20170428133636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -402,6 +402,7 @@ ActiveRecord::Schema.define(version: 20170426112622) do
     t.string   "messageable_type"
     t.integer  "messageable_id"
     t.integer  "candidate_id"
+    t.string   "thread_id"
   end
 
   create_table "my_interviews", force: :cascade do |t|

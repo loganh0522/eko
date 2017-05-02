@@ -1,9 +1,4 @@
-%h4 Filters
-.filter
-  .search-field
-    = form_tag business_applications_path, method: :get do   
-      .form-group
-        = search_field_tag :query, params[:query], placeholder: "Advanced Text Search", class: "form-control"
+%h4#filter-header Filters
 / .filter
 /   .filter-header
 /     %h4 Location

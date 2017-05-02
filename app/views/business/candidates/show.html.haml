@@ -14,11 +14,10 @@
 
       .messages-container
         .activity-feed
-          = render "business/messages/applicant_messages", applicant: @candidate
-
-      / .notes-container
-      /   .activity-feed
-      /     = render "business/comments/applicant_notes", application: @application
+          = render "business/shared_manual_candidate/messages"
+      .notes-container
+        .activity-feed
+          = render "business/comments/applicant_notes"
 
       / .assessments-container
       /   .applicant-scorecard

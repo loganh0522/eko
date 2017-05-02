@@ -4,7 +4,7 @@ tinyMCE.activeEditor.setContent('')
 
 <% if params[:client_contact_id].present? %>
   $('.messages-container').find('.activity-feed').html('<%= j render "business/messages/applicant_messages", application: @recipient %>');
+  $('.activity-container').find('.activity-feed').html('<%= j render "business/activities/application_activity", application: @application %>');
 <% else %>
   $('.messages-container').find('.activity-feed').html('<%= j render "business/messages/applicant_messages", application: @application %>');
-  $('.activity-container').find('.activity-feed').html('<%= j render "business/activities/application_activity", application: @application %>');
 <% end %>
