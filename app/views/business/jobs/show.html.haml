@@ -9,15 +9,15 @@
       = link_to "Edit Job Details", edit_business_job_path(@job), class: "white-border-button"
   .change-containers-nav
     %ul 
-      %li.change#all-job-applicants.activated Applicants
-      %li.change#job-activity-feed Activity
+      = link_to business_job_applications_path(@job), remote: true do 
+        %li.change#all-job-applicants.activated Applicants
+      = link_to business_job_activities_path(@job), remote: true do 
+        %li.change#job-activity-feed Activity
       / %li.change#job-calendar Calendar
 
 #main-container
-  .all-job-applicants-container.showing
-    = render 'business/shared/applicants_table'
+  = render 'business/applications/job_applications/all_applications_table'
   / .job-calendar-container
   /   = render 'business/calendar/job_calendar'
-  .job-activity-feed-container
-    = render 'business/activities/job_activity_feed'
+
     

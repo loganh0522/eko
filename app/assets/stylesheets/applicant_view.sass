@@ -1,37 +1,122 @@
 .applicant-view
-  padding-bottom: 150px
-  .home-page-header
-    height: 75px
-  .applicant-profile-information
-    float: left
-    width: 61%
-    margin-right: 3%
-    .applicant-main-top
-      border-radius: 5px
-      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-      margin-top: 20px
-      background: #ffffff
-      .applicant-nav-bar 
-        margin-left: -40px
-        height: 50px
-        border-radius: 5px 5px 0 0
-        ul 
-          list-style: none
+  .applicant-header
+    border-bottom: 1px solid rgba(0,0,0,0.1)
+    height: auto
+    margin-top: 0
+    .applicant-general-info
+      overflow: hidden
+      margin: 0px 0 20px 1.5%
+      float: left
+      width: 60%
+      .user-image 
+        img
+          width: 125px 
+          height: 125px
+          border-radius: 50%
+          border: 1px solid #fff
+          display: block
+          float: left
+      .applicant-details
+        vertical-align: top
+        float: left
+        margin-left: 40px
+        overflow: hidden
+        .name 
+          font-size: 24px
+          float: left
+        .glyphicon
+          color: rgba(0, 0, 0, 0.5)
+            
+        .new_rating
+          width: auto
+          margin: auto
+          float: left
+          margin-left: 25px
+          .rating 
+            font-size: 16px
+            margin-top: 2px
+        .current-position
+          clear: both
+    .applicant-actions  
+      float: right
+      width: 38%
+      margin-top: 25px
+      #move-applicant-stages
+        height: 40px 
+        background: #ffffff
+        border-radius: 0
+        border: 1px solid rgba(0,0,0,0.2)
+        padding-left: 20px
+        padding-right: 20px
+        option
+          margin-top: 10px
+      #reject-applicant
+        height: 40px 
+        background: #ffffff
+        border-radius: 0
+        border: 1px solid rgba(0,0,0,0.2)
+        option
+          margin-top: 10px
+      .select-stage
+        float: left
+        margin-right: 10px
+      #reject
+        float: left
+        height: 40px 
+        margin-right: 10px
+        background: #ffffff
+        border: 1px solid rgba(0,0,0,0.2)
+        padding: 10px 20px
+        border-radius: 3px
+        a
+          color: black
           text-decoration: none
-          li
-            display: inline-block
-            height: 50px 
-            padding: 15px 15px 0 15px 
-            text-align: center 
-            color: black
-            cursor: pointer
-          .activated    
-            border-bottom: solid 3px #EF7B2B
-            color: black
+          width: 100%
+      .dropdown-menu
+        position: absolute
+      .glyphicon
+        float: left
+        border: 1px solid rgba(0,0,0,0.2)
+        padding: 12px
+        border-radius: 3px
+        color: rgba(0, 0, 0, 0.5)
+        margin-right: 10px
+        top: 0
+        &:hover
+          cursor: pointer
+
+
+    .applicant-nav
+      margin-left: 30%
+      clear: both
+      ul 
+        list-style: none
+        text-decoration: none
+        padding: 0 
+        margin-bottom: 0
+        li
+          display: inline-block
+          height: 50px 
+          padding: 15px 15px 0 15px 
+          text-align: center 
+          color: black
+          cursor: pointer
+        .activated    
+          border-bottom: solid 3px #EF7B2B
+          color: black
+
+  .applicant-body
+    background: rgba(0, 0, 0, 0.02)
+    overflow: hidden
+    width: 100%
+  .applicant-profile-information
+    float: right
+    width: 70%
+    .applicant-main-top
+      background: #ffffff
       .application-actions
         overflow: hidden
-        padding: 5px 10px
-        border-top: 1px solid rgba(0,0,0,0.1)
+        padding: 10px 10px
         border-bottom: 1px solid rgba(0,0,0,0.1)
         .active-button
           background: #EF7B2B
@@ -60,7 +145,7 @@
           margin-right: 15px
       .email-area
         width: 100%
-        display: none
+        z-index: 1000
         #message-body
           border-top: 1px solid rgba(0,0,0,0.1)
         .email-variables
@@ -124,121 +209,69 @@
           .btn
             float: right
 
-    .applicant-details
-      .messages-container
-        display: none
-      .notes-container
-        display: none
-      .assessments-container
-        display: none
-      .scorecards-container
-        display: none
+    .applicant-details 
       .activity-container
         display: none
         padding-left: 3.6% 
       .activated
         border-bottom: 4px solid
         
-  .side-container
+  .applicant-side-container
     float: left
-    background: #ffffff
-    height: auto
-    padding: 10px 10px
+    position: absolute
+    height: 100%
+    padding: 10px 0
     border-radius: 5px
-    margin: 15px 2% 0px 3%
-    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    border-right: 1px solid rgba(0,0,0,0.1)
     width: 30%
-    .applicant-header
-      height: auto
-      padding-bottom: 20px
+    .stage      
+      select
+        width: 100%
+        height: 30px
+        background: #ffffff
+        font-size: 16px
+    .applicant-tags
+      overflow: hidden
+      width: 100%
+      padding: 0 0 20px 10px
       border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-      .user-image 
-        img
-          width: 125px 
-          height: 125px
-          border-radius: 50%
-          border: 1px solid #fff
-          margin-left: auto
-          margin-right: auto
-          display: block
-      .applicant-details
-        vertical-align: top
-        text-align: center
+      .tags
         overflow: hidden
-        .name 
-          font-size: 24px
-        .new_rating
-          width: 95px
-          margin: auto
-
-    .filter
-      border-bottom: 1px solid rgba(0,0,0,0.1)
-      padding: 10px 0
-      .filter-header 
-        overflow: hidden
-        h4
+        .tag
           float: left
-        .glyphicon
-          margin-top: 10px
-          float: right
-        .glyphicon-minus
-          display: none
-      .filter-body
-        display: none
-        ul
-          list-style: none
-          padding: 0 15px
-          li
-            text-decoration: none
-        .stage      
-          select
-            width: 100%
-            height: 30px
-            background: #ffffff
-            font-size: 16px
-        .applicant-tags
+          border-radius: 5px
+          border: 1px solid #EF7B2B
+          color: rgba(0,0,0,.7)
+          width: auto
+          margin: 2px 5px 0 0 
+          text-align: center
+          padding: 3px 5px 3px 8px
           overflow: hidden
-          width: 100%
-          padding: 10px 0 20px 0
-          border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-          .tags
-            overflow: hidden
-            margin-top: 10px
-            .tag
-              float: left
-              border-radius: 5px
-              border: 1px solid #EF7B2B
-              color: rgba(0,0,0,.7)
-              width: auto
-              margin: 2px 5px 0 0 
-              text-align: center
-              padding: 3px 5px 3px 8px
-              overflow: hidden
-              .name
-                float: left
-              .delete-tag
-                float: left
-                margin-left: 5px
-                color: rgba(0,0,0,.7)
-                &:hover
-                  cursor: pointer       
-          .add_tag
-            margin-top: 15px
-          .add_tag
-            margin-top: 10px        
-            .tag_form
-              margin-top: 10px
-              input
-                margin-top: 0
-                float: left    
-              .close-form
-                float: left
-                margin: 5px 0 0 10px
-                &:hover
-                  cursor: pointer
-        .schedule-interview
-          .title
-            font-size: 18px
+          .name
+            float: left
+          .delete-tag
+            float: left
+            margin-left: 5px
+            color: rgba(0,0,0,.7)
+            &:hover
+              cursor: pointer       
+      .add_tag
+        margin-top: 15px
+      .add_tag
+        margin-top: 10px        
+        .tag_form
+          margin-top: 10px
+          input
+            margin-top: 0
+            float: left    
+          .close-form
+            float: left
+            margin: 5px 0 0 10px
+            &:hover
+              cursor: pointer
+    .schedule-interview
+      .title
+        font-size: 18px
 
 .applicant-experience
   .header 
@@ -298,6 +331,7 @@
 .applicant-scorecard
   width: 100%
   margin-top: 20px
+  margin-bottom: 50px
   .scorecard
     width: 100%
     background: #ffffff

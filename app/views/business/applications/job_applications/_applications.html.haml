@@ -1,0 +1,40 @@
+.applicants
+  .header
+    = render "business/applications/move_stages"
+    = render "business/comments/add_comment"
+    = render "business/messages/send_message"
+    = render "business/tags/add_tags"
+
+    #select_all
+      = check_box_tag 'Select All', class: 'select_all_applicants'
+      Select All
+    .no-action-buttons
+      .btn.border-button Move Stages
+      .btn.border-button Send E-mail
+      .btn.border-button Add Note 
+      .btn.border-button Add Tag
+    .applicant-action-buttons
+      = link_to 'Move Stages', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#stageModal"}
+      = link_to 'Send E-mail', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#send_messageModal"}
+      = link_to 'Add Note', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#add_commentModal"}
+      = link_to 'Add Tag', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#addTagsModal"}
+
+  .applicant-table-body
+    %table.table
+      %thead
+        %tr
+          %th(width="1%")
+          %th(width="10%")
+          %th(width="25%") Name 
+          %th(width="20%") Stage
+          %th(width="20%") Rating 
+          %th(width="25%") Date Applied
+
+        %tbody
+          - @job.applications.each do |application|
+            - if application.candidate.manually_created == true
+              = render 'business/shared/manual_application_rows', application: application
+            - else
+              = render 'business/shared/user_applications_table_rows', application: application
+    .not-present-container
+      %p There are currently no applicants in this stage.

@@ -9,11 +9,24 @@
     = link_to 'Add Candidate', new_business_candidate_path, class: "btn border-button2", id: "move-applicants", remote: true
 
 
-#job-applicants
-  .side-container
-    = render "business/applications/all_applicants_filters"        
-  .main-container
-    = render 'business/applications/all_applicants_table'
+#main-container
+  #job-applicants
+    .side-container
+      = render "business/candidates/candidate_table/candidate_filters"        
+    .main-container
+      = render 'business/candidates/candidate_table/all_candidates_table'
 
+  .modal#applicant-modal
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        .modal-body
 
-  
+  .modal#add-to-jobModal
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+          %h4.modal-title Add to Job 
+        .modal-body

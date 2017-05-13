@@ -1,0 +1,54 @@
+%h4#filter-header Filters
+
+.applicant-filters
+  .filter
+    .search-field
+      = form_tag business_job_path(@job), method: :get do   
+        .form-group
+          = search_field_tag :query, params[:query], placeholder: "Advanced Text Search", class: "form-control"
+  .filter
+    .filter-header
+      %h4 Rating
+      .glyphicon.glyphicon-minus
+      .glyphicon.glyphicon-plus
+    .filter-body 
+      = render 'business/ratings/rating_filter'
+  .filter
+    .filter-header
+      %h4 Tags
+      .glyphicon.glyphicon-minus
+      .glyphicon.glyphicon-plus
+    .filter-body
+      %ul
+        - @tags.each do |tag| 
+          %li
+            .applicant-filter-checkbox{:data => {:id => "#{tag.name}", :filter => 'Tags'}}
+              = check_box_tag "", false, false, class: 'filter-checkbox'
+              .filter-title #{tag.name.capitalize}
+  .filter 
+    .filter-header
+      %h4 Date Applied
+      .glyphicon.glyphicon-minus
+      .glyphicon.glyphicon-plus
+    .filter-body
+      %ul
+        %li 
+          .applicant-filter-checkbox{:data => {:id => "all_applied", :filter => 'DateApplied'}}
+            = check_box_tag "", false, false, class: 'filter-checkbox'
+            .filter-title All 
+        %li
+          .applicant-filter-checkbox{:data => {:id => "2_weeks", :filter => 'DateApplied'}}
+            = check_box_tag "", false, false, class: 'filter-checkbox'
+            .filter-titleLast 2 weeks
+        %li 
+          .applicant-filter-checkbox{:data => {:id => "last_month", :filter => 'DateApplied'}}
+            = check_box_tag "", false, false, class: 'filter-checkbox'
+            .filter-title Last Month
+        %li
+          .applicant-filter-checkbox{:data => {:id => "3_months", :filter => 'DateApplied'}}
+            = check_box_tag "", false, false, class: 'filter-checkbox'
+            .filter-title Last 3 Months
+        %li 
+          .applicant-filter-checkbox{:data => {:id => "last_year", :filter => 'DateApplied'}}
+            = check_box_tag "", false, false, class: 'filter-checkbox'
+            .filter-title Last Year

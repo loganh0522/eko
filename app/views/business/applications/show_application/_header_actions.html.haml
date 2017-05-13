@@ -1,0 +1,22 @@
+.stage
+  .select-stage= select_tag "stages", options_for_select(["Applied"] + @job.stages.collect{ |u| [u.name, u.id, { 'data-id' => u.id, 'data-application' => @application.id }] }, @application.stage.present? ? @application.stage.id : 1 ), id: 'move-applicant-stages'
+
+.stage
+  .dropdown#reject
+    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+      Reject
+      %b.caret
+    %ul.dropdown-menu.dropdown-menu-right
+      - @rejection_reasons.each do |reason| 
+        %li
+          %a= link_to "#{reason.body}", business_job_application_reject_path(@job, @application)
+
+  / = select_tag "Reject", options_for_select(["Reject"] + @rejection_reasons.collect{ |u| [u.body, u.id, { 'data-id' => u.id, 'data-application' => @application.id }]}), id: 
+
+.stage
+  .glyphicon.glyphicon-share-alt
+
+.stage
+  .glyphicon.glyphicon-trash
+
+

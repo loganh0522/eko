@@ -4,7 +4,6 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
         %h3.modal-title My Scorecard
-
       .modal-body                
         = form_for [:business, @job, @application, @application_scorecard], html: {remote: true} do |f|
           = f.fields_for :overall_ratings, OverallRating.new do |k|

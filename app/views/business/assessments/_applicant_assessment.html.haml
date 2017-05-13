@@ -1,24 +1,26 @@
-- if @application.apps.questionairre.nil?
-  .not-present-container
-    %p You currently do not have a Questionnaire for this position.   
-- else 
-  .scorecard
-    .header
-      %h4 Application Form
-    .application-form-body
-      - @application.apps.questionairre.questions.each do |question|
-        .question-area
-          .question
-            = question.position
-            = question.body
-          .answer
-            - if question.kind == 'Text' || question.kind == 'Paragraph'
-              = question.question_answer.body unless !question.question_answer.present?
-            - if question.kind == 'Checkbox' || question.kind == 'Multiple Choice'
-              - question.question_options.each do |option|
-                %ul
-                  %li
-                    - if question.question_answer.question_option_id == option.id
-                      %b= option.body 
-                    - else 
-                      %p= option.body
+.assessments-container
+  .applicant-scorecard
+    - if @questionairre.nil?
+      .not-present-container
+        %p You currently do not have a Application Form for this position.   
+    - else 
+      .scorecard
+        .header
+          %h4 Application Form
+        .application-form-body
+          - @questions.each do |question|
+            .question-area
+              .question
+                = question.position
+                = question.body
+              .answer
+                - if question.kind == 'Text' || question.kind == 'Paragraph'
+                  = question.question_answer.body unless !question.question_answer.present?
+                - if question.kind == 'Checkbox' || question.kind == 'Multiple Choice'
+                  - question.question_options.each do |option|
+                    %ul
+                      %li
+                        - if question.question_answer.question_option_id == option.id
+                          %b= option.body 
+                        - else 
+                          %p= option.body

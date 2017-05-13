@@ -1,0 +1,70 @@
+.applicant-view
+  .applicant-header 
+    .applicant-general-info
+      - if @application.candidate.manually_created == true
+        .user-image
+          .profile_picture
+            %img(src="/tmp/blank_profile_picture.png")
+        .applicant-details
+          .name= "#{@application.candidate.full_name.capitalize}"
+          = render 'business/ratings/form', application: @application
+        .contact-details
+          .glyphicon.glyphicon-earphone 
+            = "#{@candidate.phone}"
+          .glyphicon.glyphicon-envelope
+            = "#{@application.candidate.email}"
+          %br
+          .glyphicon.glyphicon-map-marker
+            = "#{@application.candidate.location}"
+      - else
+        .user-image
+          .profile_picture
+            - if @application.applicant.user_avatar.present?
+              = image_tag @application.applicant.user_avatar.image.large_image 
+            - else 
+              %img(src="/tmp/blank_profile_picture.png")
+        .applicant-details
+          .name-rating
+            .name= "#{@application.candidate.user.full_name}"
+            = render 'business/ratings/form', application: @application
+          .current-position
+            - if @application.candidate.user.current_jobs.present?
+              = "#{@application.applicant.current_jobs.first.title}  #{@application.applicant.current_jobs.first.company_name} "
+          .contact-details
+            .glyphicon.glyphicon-earphone 
+              = "#{@application.candidate.user.phone}"
+            .glyphicon.glyphicon-envelope
+              = "#{@application.candidate.user.email}"
+            %br
+            .glyphicon.glyphicon-map-marker
+              = "#{@application.candidate.user.location}"
+    .applicant-actions
+      = render 'business/applications/show_application/header_actions' 
+    .applicant-nav
+      = render 'business/shared/applicant_nav'
+  
+  .applicant-body
+    .applicant-side-container
+      = render 'business/applications/show_application/side_container'
+    .applicant-profile-information
+      .applicant-main-top
+        = render 'business/applications/show_application/application_navigation'
+      .applicant-profile
+        .profile-container.showing
+          .applicant-experience
+            = render 'business/applications/show_application/application_cv'
+        / .applicant-experience    
+        /   = render 'business/applications/application_education'
+
+
+
+
+
+/   .modal#myModal
+/     .modal-dialog
+/       .modal-content
+/         .modal-header
+/           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+/           %h4.modal-title  
+/         .modal-body
+/ .footer 

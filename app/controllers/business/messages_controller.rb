@@ -4,10 +4,38 @@ class Business::MessagesController < ApplicationController
   before_filter :trial_over
   before_filter :company_deactivated?
   
+  def new
+    if params[:application_id].present?
+      @message = Message.new
+      @job = Job.find(params[:job_id])
+      @application = Application.find(params[:application_id])
+    else params[:candidate_id].present?
+      @message = Message.new
+      @candidate = Candidate.find(params[:candidate_id])
+    end
 
-  def index
-    @messages = current_user.messages.all
-    get_application_thread
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def index   
+    if params[:application_id].present?
+      @application = Application.find(params[:application_id])
+      @messages = @application.messages
+    elsif params[:candidate_id].present?
+      @candidate = Candidate.find(params[:candidate_id])
+      @application = @candidate.applications.first
+      @messages = @application.messages
+    else
+      @messages = current_user.messages.all
+      get_application_thread
+    end
+
+    respond_to do |format| 
+      format.js
+      format.html
+    end
   end
 
 

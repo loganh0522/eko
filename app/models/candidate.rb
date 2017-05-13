@@ -3,7 +3,7 @@ class Candidate < ActiveRecord::Base
   belongs_to :user
 
   has_many :applications
-
+  has_many :ratings
   has_many :messages, as: :messageable
   has_many :comments, as: :commentable
 
@@ -36,4 +36,14 @@ class Candidate < ActiveRecord::Base
     return @current_jobs
   end
 
+  def current_user_rating_present?(current_user)
+    self.ratings.each do |rating| 
+      if rating.user == current_user
+        return true   
+      end
+    end
+    return false
+  end
+
+ 
 end

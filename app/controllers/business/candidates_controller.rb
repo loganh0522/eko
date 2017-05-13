@@ -39,11 +39,10 @@ class Business::CandidatesController < ApplicationController
       @applicant = @candidate.user.profile
     end
 
-    @message = Message.new
-    @comment = Comment.new 
-    @interview = Interview.new
-    @application_scorecard = ApplicationScorecard.new
-    @rating = Rating.new  
+    respond_to do |format|
+      format.js
+      format.html
+    end  
   end
 
   private

@@ -8,10 +8,14 @@
     .templates-header
       %h4 E-mail Templates
       = link_to "+ Add E-mail Template", new_business_email_template_path, :data => {:remote => true } 
-      
-    
     .templates-body
       = render "business/email_templates/email_templates", email_templates: @email_templates
+
+    .templates-header
+      %h4 Rejection Reasons
+      = link_to "Create Reason", new_business_email_template_path, :data => {:remote => true } 
+    .templates-body
+      = render "business/rejection_reasons/rejection_reasons", rejection_reasons: @rejection_reasons
    
 = render "business/email_templates/email_template_modal"
 

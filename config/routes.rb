@@ -81,10 +81,14 @@ Rails.application.routes.draw do
     resources :hiring_teams
     resources :companies
     resources :messages
+    resources :tasks
+    resources :rejection_reasons
+
     resources :clients do 
       resources :client_contacts do
         resources :messages
         resources :comments
+        resources :tasks
       end
     end
     
@@ -109,10 +113,18 @@ Rails.application.routes.draw do
     
     get 'templates', to: "email_templates#index"
     
-    resources :candidates do 
+    resources :candidates do
+      resources :applications 
       resources :messages
       resources :comments
       resources :tags
+      resources :tasks
+      get :application_form, to: "applications#application_form"
+      get :application_activity, to: "activities#application_activity"
+      resources :messages
+      resources :comments
+      resources :application_scorecards
+      resources :assessments
     end
     
     resources :applications do 
@@ -146,8 +158,12 @@ Rails.application.routes.draw do
       post :close_job, to: "jobs#close_job"
       post :archive_job, to: "jobs#archive_job"
       post :publish_job, to: "jobs#publish_job"
-      get :promote, to: "jobs#promote"   
+      get :promote, to: "jobs#promote"
+      resources :activities
+      resources :tags
+
       resources :applications do
+        get :application_form, to: "applications#application_form"
         get :application_activity, to: "activities#application_activity"
         resources :messages
         resources :comments
@@ -159,8 +175,10 @@ Rails.application.routes.draw do
             post :my_scorecard
           end
         end  
+
         get :move_stages 
-        get :reject   
+        
+        post :reject   
       end
       
       resources :hiring_teams do    

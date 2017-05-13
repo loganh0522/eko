@@ -15,6 +15,7 @@ class Business::EmailTemplatesController < ApplicationController
   def index 
     @email_template = EmailTemplate.new
     @email_templates = current_company.email_templates
+    @rejection_reasons = current_company.rejection_reasons
   end
 
   def create 

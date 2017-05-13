@@ -16,7 +16,7 @@ class Application < ActiveRecord::Base
   belongs_to :stage
 
 
-  has_many :comments, as: :commentable
+  has_many :comments, -> {order("created_at DESC")}, as: :commentable 
   has_many :messages, as: :messageable
   
   

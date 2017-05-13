@@ -1,2 +1,8 @@
-$('<%= j render "business/tags/form" %>').insertBefore("#add_tag");
-$('#add_tag').hide();
+<% if params[:application_id].present? %>
+  $('<%= j render "business/tags/form" %>').insertBefore("#add_tag");
+  $('#add_tag').hide();
+<% else %>
+  $(".modal-body").html('<%= j render "business/tags/add_tags" %>');
+  $(".modal-title").html('<%= "Add Tags" %>');
+  $('.modal').modal("toggle");
+<% end %>

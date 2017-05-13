@@ -34,25 +34,11 @@ class Business::JobsController < ApplicationController
 
   def show 
     @job = Job.find(params[:id])
-    @date = params[:date] ? Date.parse(params[:date]) : Date.today
-    @interviews_by_date = @job.interviews.group_by(&:interview_date)
-    @rating = Rating.new
+    # @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    @candidates = @job.applications
+    # @interviews_by_date = @job.interviews.group_by(&:interview_date)
     @tag = Tag.new
-
-    
-    if params[:query].present? 
-      @applications = Application.where(job_id: @job.id)
-      @results = Application.search(params[:query]).records.to_a
-      @applicants = [] 
-      @results.each do |application|  
-        if application.company == current_company && application.apps == @job
-          @applicants.append(application)
-        end
-      end 
-      tags_present(@results)
-    else 
-      tags_present(@job.applications)  
-    end
+    tags_present(@candidates)    
   end
 
   def edit

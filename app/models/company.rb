@@ -3,7 +3,7 @@ class Company < ActiveRecord::Base
 
   has_many :users
   has_many :invitations
-  
+  has_many :rejection_reasons
   has_many :applications
   has_many :applicants, through: :applications, class_name: "User", foreign_key: :user_id
   
@@ -45,5 +45,14 @@ class Company < ActiveRecord::Base
       @jobs.append(job.title) unless @jobs.include?(job.title)
     end
     return @jobs
+  end
+
+  def create_rejection_reasons
+    reasons = ["Under/Overqualified", "Unresponsive", "Timing", 
+      "Offer Declined", "Position Closed", "Offer Declined", "Hired Elsewhere"]
+    
+    reasons.each do |reason| 
+      RejectionReason.create(body: reason, company_id: self.id)
+    end
   end
 end

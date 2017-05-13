@@ -47,12 +47,12 @@
                 %td.names
                   - if candidate.manually_created == true 
                     .name
-                      = link_to "#{candidate.full_name}", business_candidate_path(candidate.id)
+                      = link_to "#{candidate.full_name}", business_candidate_path(candidate.id), remote: true
                       - if candidate.current_jobs.present?
                         .current-position= "#{candidate.current_jobs.first.title} - #{candidate.current_jobs.first.company_name}"
                   - else
                     .name{:data => {:id =>  "#{candidate.user.full_name}"}}
-                      = link_to "#{candidate.user.full_name}", business_candidate_path(candidate.id)
+                      = link_to "#{candidate.user.full_name}", business_candidate_path(candidate.id), remote: true
                     - if candidate.user.current_jobs.present?
                       .current-position= "#{candidate.user.current_jobs.first.title} - #{candidate.user.current_jobs.first.company_name} "
                 
@@ -65,5 +65,9 @@
                     .date-applied= "#{time_ago_in_words(candidate.created_at)} ago"
                   %td
                     = render 'business/ratings/form', application: candidate.applications.first
-
-
+.modal#applicant-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+      .modal-body

@@ -2,43 +2,14 @@ jQuery ->
 
 ########### Change E-mail, Notes, Interview Actions ############
 
-  changeAction = ($targetContainer) -> 
-    $('.applicant-main-top').find('#showing-action').hide()
-    $('.applicant-main-top').find('#showing-action').removeAttr('id', 'showing-action')    
-    $($targetContainer).show()
-    $($targetContainer).attr('id', 'showing-action') 
-    return
-
-  $('.application-actions').on 'click', '.btn-application-actions', (event) -> 
-    if $(this).attr('id') == 'add-note'
-      $targetContainer = '.comment-area'
-    else if $(this).attr('id') == 'send-email'
-      $targetContainer = '.email-area'
-    $('.application-actions').find('.active-button').addClass('inactive-button').removeClass('active-button')
-    $(this).addClass('active-button').removeClass('inactive-button')
-    changeAction($targetContainer)
-    return
 
 ######### NavBar Change Containers #############
 
-  changeContainer = ($targetContainer) -> 
-    $('#main-container').find('.showing').hide()
-    $('#main-container').find('.showing').removeClass 'showing'
-    $($targetContainer).show()
-    $($targetContainer).addClass 'showing'
-    return
-
-
-  $('.change-containers-nav').on 'click', '.change', (event) -> 
-    $targetContainer = '.' + $(this).attr('id') + '-container' 
-    $('.change-containers-nav').find('.activated').removeClass 'activated'
-    $(this).addClass 'activated'
-    changeContainer $targetContainer
-    return
 
 ############ Move Applicant Stages ###############
 
-  $('#move-applicant-stages').change -> 
+  $('#main-container').on 'change', '#move-applicant-stages', (event) ->
+    console.log("action-takents") 
     $.ajax
       url : "/business/applications/change_stage"
       type : "post"
@@ -49,7 +20,7 @@ jQuery ->
   
   
 #################### Close Tag Form ######################
-  $('.add_tag').on 'click', '.close-form', (event) ->
+  $('#main-container').on 'click', '.close-form', (event) ->
     $('#add_tag').show()
     $('.tag_form').remove()
 
@@ -84,7 +55,7 @@ jQuery ->
 
 #################### Select All & Show Button's on Select ###################
 
-  $('.applicants').on 'click', '.applicant-checkbox', (event) ->
+  $('#main-container').on 'click', '.applicant-checkbox', (event) ->
     if $('.applicants').find('.applicant-checkbox :checked').size() > 0 
       $('.no-action-buttons').hide()
       $('.applicant-action-buttons').show()
@@ -93,7 +64,7 @@ jQuery ->
       $('.no-action-buttons').show()
     return
 
-  $('.applicants').on 'click', '#Select_All', (event) ->
+  $('#main-container').on 'click', '#Select_All', (event) ->
     if $('.applicants').find('#select_all :checked').size() > 0
       $('.applicants').find('.applicant-checkbox').find('#applicant_ids_').prop("checked", true)
       $('.no-action-buttons').hide()
@@ -209,9 +180,18 @@ jQuery ->
       $(this).parent().parent().remove()
     return
 
+  $('.modal-dialog').on 'click', '.close-form', (event) ->   
+    if $(this).attr('id') == 'edit-form'
+      formobj = $(this).parent().attr('id').slice(5)
+      $("#" + "#{formobj}").show()
+      $(this).parent().parent().remove()
+    else if $(this).attr('id') == 'new-form'
+      buttonobj = $(this).parent().attr('id')
+      $("#" + "#{buttonobj}" + "_button").show()
+      $(this).parent().parent().remove()
+    return
 ################ Star Rating ##################
-  $(document).on 'click', '.star', (event) -> 
-    
+  $(document).on 'click', '.star', (event) ->  
     PostCode = $(this).parent().parent().attr('id')
     Rating = $(this).val()
     $.ajax
@@ -279,8 +259,6 @@ jQuery ->
           AverageRating.push($(n).val()) unless Tags.includes($(n).val())
         if $(n).parent().data('filter') == 'Tags' 
           Tags.push($(n).parent().data('id')) unless Tags.includes($(n).parent().data('id'))
-
-  
         if $(n).parent().data('filter') == 'JobStatus'
           JobStatus.push($(n).parent().data('id')) unless JobStatus.includes($(n).parent().data('id'))
         if $(n).parent().data('filter') == 'DateApplied'

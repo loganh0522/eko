@@ -1,7 +1,12 @@
-.home-page-header
-  .top-info
-    %h1 Clients
-    .post-job= link_to "Create Client", new_business_client_path, remote: true, class: 'white-border-button' 
+#all-candidates
+  %h1 Clients
+  .actions
+    .search-field
+      = form_tag business_applications_path, method: :get do   
+        .form-group
+          = search_field_tag :query, params[:query], placeholder: "Advanced Text Search", class: "form-control"
+    = link_to "Create Client", new_business_client_path, class: "btn border-button2", id: "move-applicants", remote: true
+
 #job-applicants
   = render 'modal'
   .side-container

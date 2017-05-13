@@ -1,10 +1,11 @@
-= form_for [:business, @candidate, @comment], html: {remote: true} do |f|
-  - if !@applicant.user.present?
-    = f.text_area :body, id: "comment-body", rows: 12, cols: 12, placeholder: "Add a Note about #{@applicant.full_name.capitalize}"
-  - else
-    = f.text_area :body, id: "comment-body", rows: 12, cols: 12, placeholder: "Add a Note about #{@applicant.user.full_name.capitalize}"
-  / %div.ui-autocomplete-input.user-comment#comment-body{:contentEditable => true, :placeholder => "Add a note about #{@application.applicant.first_name} #{@application.applicant.last_name} (@mention a teammate)", :data => {:job_id => @application.apps.id } }
-  / %div#comment-team-members
-  .comment-area-footer 
-    = f.hidden_field :user_id, value: current_user.id
-    = f.submit "+ Add Note", class: "btn submit-button", id: "submit-comment-btn"
+.comment-area
+  = form_for [:business, @candidate, @comment], html: {remote: true} do |f|
+    - if @candidate.manually_created == true 
+      = f.text_area :body, id: "comment-body", rows: 12, cols: 12, placeholder: "Add a Note about #{@candidate.full_name.capitalize}"
+    - else
+      = f.text_area :body, id: "comment-body", rows: 12, cols: 12, placeholder: "Add a Note about #{@candidate.user.full_name.capitalize}"
+    / %div.ui-autocomplete-input.user-comment#comment-body{:contentEditable => true, :placeholder => "Add a note about #{@application.applicant.first_name} #{@application.applicant.last_name} (@mention a teammate)", :data => {:job_id => @application.apps.id } }
+    / %div#comment-team-members
+    .comment-area-footer 
+      = f.hidden_field :user_id, value: current_user.id
+      = f.submit "+ Add Note", class: "btn submit-button", id: "submit-comment-btn"

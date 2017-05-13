@@ -4,8 +4,17 @@ class Business::ActivitiesController < ApplicationController
   before_filter :trial_over
   before_filter :company_deactivated?
   
-  def index
-    @activities = current_company.activities.order("created_at desc")
-    @jobs = current_company.jobs.where(status: "open")
+  def index   
+    if params[:job_id].present? 
+      @job = Job.find(params[:job_id])
+    else
+      @activities = current_company.activities.order("created_at desc")
+      @jobs = current_company.jobs.where(status: "open")
+    end
+
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 end

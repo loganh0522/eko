@@ -11,12 +11,12 @@
         %img(src="/tmp/little-man.png")  
   %td.names
     .name{:data => {:id =>  "#{application.applicant.first_name}"}}
-      = link_to "#{application.applicant.first_name} #{application.applicant.last_name}", business_job_application_path(@job, application.id)
-    / .current-position= application.current_position 
+      = link_to "#{application.applicant.first_name} #{application.applicant.last_name}", business_job_application_path(@job, application.id), remote: true
+    - if application.candidate.user.current_jobs.present?
+      .current-position= "#{application.candidate.user.current_jobs.first.title} - #{application.candidate.user.current_jobs.first.company_name} "
   %td
-    = application_stage(application)
+    .stage= application_stage(application)
   %td
     = render 'business/ratings/form', application: application
   %td
-    = "#{time_ago_in_words(application.created_at)} ago"        
-  %td
+    .date-applied= "#{time_ago_in_words(application.created_at)} ago"        

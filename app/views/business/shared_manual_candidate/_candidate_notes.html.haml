@@ -1,0 +1,22 @@
+- if @candidate.comments.present?
+  - @candidate.comments.each do |comment|
+    .activity
+      .icon
+        .glyphicon.glyphicon-pencil
+
+      .activity-body
+        .activity-body-header
+          - if comment.user.user_avatar.present? 
+            = image_tag comment.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
+          - else 
+            .circle-img
+              %img(src="/tmp/little-man.png")
+          .contain    
+            = "#{comment.user.full_name} added a note"
+            %br
+            .time= time_ago_in_words(comment.created_at)
+        .activity-body-body
+          = comment.body
+- else  
+  .not-present-container
+    %p There are currently no notes for this applicant.

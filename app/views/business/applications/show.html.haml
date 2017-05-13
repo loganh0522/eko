@@ -1,6 +1,38 @@
 .applicant-view
-  .home-page-header
-    %h1= "#{@job.title}"
+  .home-page-header  
+    %h2= "#{@job.title}"
+    .applicant-general-info
+      - if @application.candidate.manually_created == true
+        .user-image
+          .profile_picture
+            %img(src="/tmp/blank_profile_picture.png")
+        .applicant-details
+          .name= "#{@application.candidate.full_name.capitalize}"
+          = render 'business/ratings/form', application: @application
+        .contact-details
+          = "Email: #{@application.candidate.email}"
+          = "Phone: #{@application.candidate.phone}"
+          .location= "#{@application.candidate.location}"
+      - else
+        .user-image
+          .profile_picturee
+            - if @application.applicant.user_avatar.present?
+              = image_tag @application.applicant.user_avatar.image.large_image 
+            - else 
+              %img(src="/tmp/blank_profile_picture.png")
+        .applicant-details
+          .name-rating
+            .name= "#{@application.candidate.user.full_name}"
+            = render 'business/ratings/form', application: @application
+          .current-position
+            - if @application.candidate.user.current_jobs.present?
+              = "#{@application.applicant.current_jobs.first.title}  #{@application.applicant.current_jobs.first.company_name} "
+          .contact-details
+            = "Email: #{@application.candidate.user.email}"
+            = "Phone: #{@application.candidate.user.phone}"
+          .location= "#{@application.candidate.user.location}"
+        
+
   .side-container
     = render 'business/applications/application_side_container'
   .applicant-profile-information
@@ -13,25 +45,16 @@
         .applicant-experience    
           = render 'business/applications/application_education'
 
-      .messages-container
-        .activity-feed
-          = render "business/messages/applicant_messages", application: @application
 
-      .notes-container
-        .activity-feed
-          = render "business/comments/applicant_notes", application: @application
 
-      .assessments-container
-        .applicant-scorecard
-          = render "business/assessments/applicant_assessment"
+      / .assessments-container
+      /   .applicant-scorecard
+      /     = render "business/assessments/applicant_assessment"
 
-      .scorecards-container
-        .applicant-scorecard
-          = render "business/application_scorecards/applicant_scorecard"
 
-      .activity-container
-        .activity-feed        
-          = render "business/activities/application_activity", application: @application
+      / .activity-container
+      /   .activity-feed        
+      /     = render "business/activities/application_activity", application: @application
 
   .modal#myModal
     .modal-dialog

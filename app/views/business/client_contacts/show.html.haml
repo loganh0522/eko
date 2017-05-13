@@ -1,18 +1,14 @@
 .applicant-view
   .home-page-header
-    %h1= "#{@contact.first_name} #{@contact.last_name}"
+    
   .side-container
-    / = render 'business/applications/application_side_container'
+    %h2= "#{@contact.first_name} #{@contact.last_name}"
+    = @contact.email
+    = @contact.phone
   .applicant-profile-information
     .applicant-main-top
       = render 'business/client_contacts/contact_actions_nav'
     .applicant-details#main-container
-      / .profile-container.showing
-      /   .applicant-experience
-      /     = render 'business/applications/application_experience'
-      /   .applicant-experience    
-      /     = render 'business/applications/application_education'
-
       .messages-container.showing
         .activity-feed
           = render "business/messages/applicant_messages", application: @contact

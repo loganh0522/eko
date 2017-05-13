@@ -7,8 +7,7 @@ class Business::ApplicationsController < ApplicationController
 
   def new
     @application = Application.new
-    @application.work_experiences.build
-    @application.educations.build
+    @candidate = Candidate.find(params[:candidate_id])
 
     respond_to do |format|
       format.js
@@ -26,23 +25,36 @@ class Business::ApplicationsController < ApplicationController
   end
 
   def index
-    @tags = current_company.tags
-    @application = Application.new
-    # @application.work_experiences.build
-    # @application.educations.build
-    # @application.applicant_contact_details.build
-
-    if params[:query].present? 
-      @results = Application.search(params[:query]).records.to_a
-      @applicants = []     
-      @results.each do |application|  
-        if application.company == current_company
-          @applicants.append(application)
-        end
-      end 
-    else
-      @applicants = current_company.applications 
+    @job = Job.find(params[:job_id])
+    @candidates = @job.applications
+    @tag = Tag.new
+    tags_present(@candidates) 
+    respond_to do |format| 
+      format.js
     end
+  end
+
+  def show 
+    @rejection_reasons = current_company.rejection_reasons
+    @application = Application.find(params[:id])  
+    @candidate = @application.candidate
+
+    if @candidate.manually_created == true 
+      @applicant = @candidate
+    else
+      @applicant = @candidate.user.profile
+    end
+
+    @job = Job.find(params[:job_id])
+    @hiring_team = @job.users
+
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  end
+
+  def destroy
   end
 
   def filter_applicants
@@ -70,39 +82,44 @@ class Business::ApplicationsController < ApplicationController
     end
   end
 
-  def show 
-    @application = Application.find(params[:id])
-    @candidate = @application.candidate
-
-    if @candidate.manually_created == true 
-      @applicant = @candidate
+  def application_form
+    if params[:candidate_id].present?
+      @candidate = Candidate.find(params[:candidate_id])
+      @application = @candidate.application.first
+      @questionairre = @application.apps.questionairre
+      @questions = @questionairre.questions
     else
-      @applicant = @candidate.user.profile
+      @application = Application.find(params[:application_id])
+      @job = Job.find(params[:job_id])
+      @questionairre = @application.apps.questionairre
+      @questions = @questionairre.questions
     end
-
-    @job = Job.find(params[:job_id])
-    @message = Message.new
-    @comment = Comment.new 
-    @interview = Interview.new
-    @application_scorecard = ApplicationScorecard.new
-    @hiring_team = @job.users 
-    @rating = Rating.new  
-    @scorecard = Scorecard.where(job_id: params[:job_id]).first
-    @sections = @scorecard.scorecard_sections
-    @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
-    scorecard_graphs
+     
+    respond_to do |format| 
+      format.js
+    end
   end
 
   def change_stage 
     @app = Application.find(params[:application])
     @stage = Stage.find(params[:stage])
     @app.update_attribute(:stage, @stage)
+    @candidates = @app.apps.applications
+
+    @tag = Tag.new
+    tags_present(@candidates) 
+    @job = @app.apps
+
+    respond_to do |format|
+      format.js
+    end
   end
   
   def reject
     @application = Application.find(params[:application_id])
     @application.update_attribute(:rejected, true)
     @job = Job.find(params[:job_id])
+    
     respond_to do |format|
       format.js
     end
@@ -110,76 +127,18 @@ class Business::ApplicationsController < ApplicationController
 
   private
 
+  def tags_present(applications)
+    @tags = []
+    applications.each do |applicant|
+      if applicant.tags.present?
+        applicant.tags.each do |tag| 
+          @tags.append(tag) unless @tags.include?(tag)
+        end
+      end
+    end
+  end
+
   def application_params
-    params.require(:application).permit(:company_id, work_experiences_attributes: [:id, :body, :_destroy, :title, :company_name, :description, :start_month, :start_year, :end_month, :end_year, :current_position, :industry_ids, :function_ids, :location],
-      educations_attributes: [:id, :school, :degree, :description, :start_month, :start_year, :end_month, :end_year, :_destroy],
-      user_certifications_attributes: [:id, :name, :agency, :description, :start_month, :start_year, :end_year, :end_month, :expires],
-      applicant_contact_details_attributes: [:id, :first_name, :last_name, :email, :phone, :_destroy])
-  end
-
-  def scorecard_graphs
-    if @application.application_scorecards.present? 
-      @sections = @scorecard.scorecard_sections    
-      @application_scorecards = @application.application_scorecards
-      @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first
-      overall_rating(@application_scorecards, @application)
-      
-      # @yes = (450 * (@recommended/@application_scorecards.count)).to_i
-      # @g =  (450 * (@good/@application_scorecards.count)).to_i
-      # @b = (450 * (@bad/@application_scorecards.count)).to_i
-      # @no = (450 * (@not_recommended/@application_scorecards.count)).to_i
-
-      # @bar_chart = Gchart.bar(:data => [@yes, @g, @b, @no],
-      #   :axis_with_labels => ['y'],
-      #   :max_value => 450,
-      #   :axis_labels => [["Not Recommended","Bad", "Good", "Recommended",]],
-      #   :orientation => 'horizontal',
-      #   :bar_colors => 'EF7B2B',
-      #   :size => "650x160")
-      
-      @bar_chart_1 = Gchart.bar(:data => [(450 * (@recommended/@application_scorecards.count))],
-        :orientation => 'horizontal',
-        :bar_colors => 'EF7B2B',
-        :max_value => 450,
-        :size => "450x30"
-        )
-      @bar_chart_2 = Gchart.bar(:data => [(450 * (@good/@application_scorecards.count))],
-        :orientation => 'horizontal',
-        :bar_colors => 'EF7B2B',
-        :max_value => 450,
-        :size => "450x30"
-        )
-      @bar_chart_3 = Gchart.bar(:data => [(450 * (@bad/@application_scorecards.count))],
-        :orientation => 'horizontal',
-        :bar_colors => 'EF7B2B',
-        :max_value => 450,
-        :size => "450x30"
-        )
-      @bar_chart_4 = Gchart.bar(:data => [(450 * (@not_recommended/@application_scorecards.count))],
-        :orientation => 'horizontal',
-        :bar_colors => 'EF7B2B',
-        :max_value => 450,
-        :size => "450x30"
-        )
-    end
-  end
-
-  def overall_rating(scorecard, application)
-    @recommended = 0.0
-    @good = 0.0
-    @bad = 0.0
-    @not_recommended = 0.0
-
-    scorecard.each do |card|
-      if card.overall_ratings.first.rating == 1
-        @recommended += 1.0
-      elsif card.overall_ratings.first.rating == 2
-        @good += 1.0
-      elsif card.overall_ratings.first.rating == 3
-        @bad += 1.0
-      elsif card.overall_ratings.first.rating == 4
-        @not_recommended += 1.0
-      end  
-    end
+    params.require(:application).permit(:job_id, :company_id, :candidate_id)
   end
 end

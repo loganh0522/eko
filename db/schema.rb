@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170428133636) do
+ActiveRecord::Schema.define(version: 20170512132459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20170428133636) do
     t.boolean  "manually_created"
     t.string   "source"
     t.integer  "candidate_id"
+    t.string   "rejection_reason"
   end
 
   create_table "candidates", force: :cascade do |t|
@@ -475,6 +476,14 @@ ActiveRecord::Schema.define(version: 20170428133636) do
     t.datetime "updated_at"
   end
 
+  create_table "rejection_reasons", force: :cascade do |t|
+    t.integer  "company_id"
+    t.integer  "application_id"
+    t.string   "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "scorecard_ratings", force: :cascade do |t|
     t.integer "section_option_id"
     t.integer "rating"
@@ -534,6 +543,18 @@ ActiveRecord::Schema.define(version: 20170428133636) do
     t.string  "name"
     t.integer "company_id"
     t.integer "candidate_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.integer  "taskable_id"
+    t.string   "taskable_type"
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "notes"
+    t.date     "due_date"
+    t.integer  "stage_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "user_avatars", force: :cascade do |t|
