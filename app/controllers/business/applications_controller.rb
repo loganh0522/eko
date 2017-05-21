@@ -26,9 +26,9 @@ class Business::ApplicationsController < ApplicationController
 
   def index
     @job = Job.find(params[:job_id])
-    @candidates = @job.applications
+    @applications = @job.applications
     @tag = Tag.new
-    tags_present(@candidates) 
+    tags_present(@applications) 
     respond_to do |format| 
       format.js
     end
@@ -67,16 +67,16 @@ class Business::ApplicationsController < ApplicationController
       location_applied: params[:location_applied]
       }
 
-    @applicants = []
+    @applications = []
 
     @results = current_company.applications.search(params[:query], options).records.to_a
     
     @results.each do |application|  
       if application.company == current_company
-        @applicants.append(application)
+        @applications.append(application)
       end
     end 
-
+    binding.pry
     respond_to do |format|
       format.js
     end
@@ -104,10 +104,10 @@ class Business::ApplicationsController < ApplicationController
     @app = Application.find(params[:application])
     @stage = Stage.find(params[:stage])
     @app.update_attribute(:stage, @stage)
-    @candidates = @app.apps.applications
+    @applications = @app.apps.applications
 
     @tag = Tag.new
-    tags_present(@candidates) 
+    tags_present(@applications) 
     @job = @app.apps
 
     respond_to do |format|
@@ -117,8 +117,9 @@ class Business::ApplicationsController < ApplicationController
   
   def reject
     @application = Application.find(params[:application_id])
-    @application.update_attribute(:rejected, true)
+    @application.update_attributes(rejected: true, rejection_reason: params[:val])
     @job = Job.find(params[:job_id])
+    @applications = @job.applications
     
     respond_to do |format|
       format.js

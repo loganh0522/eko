@@ -1,4 +1,10 @@
-- @application.activities.each do |activity|         
-  = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity 
+.activity-feed
+  - if @activities.present?
+    - @activities.each do |activity|         
+      = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity 
+  - else  
+    .not-present-container
+      %p There are currently no activities for this applicant.
+
 
 

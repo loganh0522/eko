@@ -15,7 +15,6 @@ class Business::JobsController < ApplicationController
 
   def create 
     @job = Job.new(job_params)  
-
     if @job.save && @job.company == current_company
       convert_location
       Questionairre.create(job_id: @job.id)
@@ -36,6 +35,7 @@ class Business::JobsController < ApplicationController
     @job = Job.find(params[:id])
     # @date = params[:date] ? Date.parse(params[:date]) : Date.today
     @candidates = @job.applications
+    @applications = @job.applications
     # @interviews_by_date = @job.interviews.group_by(&:interview_date)
     @tag = Tag.new
     tags_present(@candidates)    
@@ -62,7 +62,7 @@ class Business::JobsController < ApplicationController
       flash[:notice] = "#{@job.title} has been updated"
       redirect_to new_business_job_hiring_team_path(@job)
     else
-      redirect_to edit_business_job_path(@job.id)
+      render :edit
     end
   end
 

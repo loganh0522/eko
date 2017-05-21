@@ -1,21 +1,22 @@
 .activity{:id => activity.action, :class => "#{activity.trackable_type} job_#{activity.job_id}"}      
   .icon
     .glyphicon.glyphicon-pencil
-
   .activity-body
     .activity-body-header
-      - if activity.user.user_avatar.present?
-        = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
-      - else 
-        .circle-img
-          %img(src="/tmp/little-man.png") 
-      .content 
-        = "#{activity.user.first_name} #{activity.user.last_name}"
-        added a comment on 
-        = link_to "#{activity.trackable.commentable.applicant.first_name} #{activity.trackable.commentable.applicant.last_name}'s application", business_job_application_path(activity.trackable.commentable.apps.id, activity.trackable.commentable.id)     
-        %br
-        .time= "#{time_ago_in_words(activity.created_at)} ago" 
+      .details
+        - if activity.user.user_avatar.present?
+          = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
+        - else 
+          .circle-img
+            %img(src="/tmp/little-man.png") 
+        .content 
+          = "#{activity.user.first_name} #{activity.user.last_name}"
+          added a comment on 
+          = link_to "#{activity.trackable.commentable.applicant.first_name} #{activity.trackable.commentable.applicant.last_name}'s application", business_job_application_path(activity.trackable.commentable.apps.id, activity.trackable.commentable.id)     
+          %br
+          .time= "#{time_ago_in_words(activity.created_at)} ago" 
     .activity-body-body
-      = activity.trackable.body
+      .comment-body
+        = activity.trackable.body
 
     

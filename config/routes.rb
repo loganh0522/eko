@@ -83,6 +83,7 @@ Rails.application.routes.draw do
     resources :messages
     resources :tasks
     resources :rejection_reasons
+    
 
     resources :clients do 
       resources :client_contacts do
@@ -159,13 +160,16 @@ Rails.application.routes.draw do
       post :archive_job, to: "jobs#archive_job"
       post :publish_job, to: "jobs#publish_job"
       get :promote, to: "jobs#promote"
+      
       resources :activities
       resources :tags
+      resources :tasks
 
       resources :applications do
         get :application_form, to: "applications#application_form"
         get :application_activity, to: "activities#application_activity"
         resources :messages
+        resources :activities
         resources :comments
         resources :application_scorecards
         resources :assessments
@@ -176,9 +180,8 @@ Rails.application.routes.draw do
           end
         end  
 
-        get :move_stages 
-        
-        post :reject   
+        get :move_stages        
+        post :reject, to: "applications#reject"
       end
       
       resources :hiring_teams do    

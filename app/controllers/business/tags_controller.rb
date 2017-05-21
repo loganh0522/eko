@@ -24,33 +24,9 @@ class Business::TagsController < ApplicationController
     @job = Job.find(params[:tag][:job_id]) 
     
     if params[:applicant_ids].present?
-      @tag = Tag.find(params[:tag_id]) if params[:tag_id].present?
-      applicant_ids = params[:applicant_ids].split(',')
-      
-      applicant_ids.each do |id| 
-        if @company_tags.include?(@tag)
-          Tagging.create(application_id: id, tag_id: @tag.id)
-        else
-          @tag = Tag.new(tag_params)
-          @tag.company = current_company   
-          if @tag.save 
-            Tagging.create(application_id: id, tag_id: @tag.id)
-          end
-        end
-      end
+      add_tag_to_multiple
     else
-      @application = Application.find(params[:tag][:application_id])
-      @tag = Tag.where(name: params[:tag][:name], company_id: current_company.id).first
-      
-      if @company_tags.include?(@tag)
-        Tagging.create(application_id: params[:tag][:application_id], tag_id: @tag.id)
-      else
-        @tag = Tag.new(tag_params)
-        @tag.company = current_company   
-        if @tag.save 
-          Tagging.create(application_id: params[:tag][:application_id], tag_id: @tag.id)
-        end
-      end 
+      add_to_single_app
     end
 
     respond_to do |format|
@@ -74,5 +50,43 @@ class Business::TagsController < ApplicationController
 
   def tag_params
     params.require(:tag).permit(:name, :company_id)
+  end
+
+  def add_to_single_app
+    @application = Application.find(params[:tag][:application_id])
+    @tag = Tag.where(name: (params[:tag][:name]), company_id: current_company.id).first
+    @application_tags = @application.tags
+    
+    if !@application_tags.include?(@tag) 
+      if @company_tags.include?(@tag)
+        Tagging.create(application_id: params[:tag][:application_id], tag_id: @tag.id)
+      else
+        @tag = Tag.new(tag_params)
+        @tag.company = current_company   
+        if @tag.save 
+          Tagging.create(application_id: params[:tag][:application_id], tag_id: @tag.id)
+        end
+      end
+    end 
+  end
+
+  def add_tag_to_multiple
+    @tag = Tag.find(params[:tag_id]) if params[:tag_id].present?
+    applicant_ids = params[:applicant_ids].split(',')   
+    
+    applicant_ids.each do |id|
+      if !@application_tags.include?(@tag) 
+        if @company_tags.include?(@tag) 
+          Tagging.create(application_id: id, tag_id: @tag.id)
+        else
+          @tag = Tag.new(tag_params)
+          @tag.company = current_company   
+          if @tag.save 
+            Tagging.create(application_id: id, tag_id: @tag.id)
+          end
+        end
+      else
+      end
+    end
   end
 end

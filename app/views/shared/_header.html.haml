@@ -26,7 +26,12 @@
               %li= link_to "CANDIDATES", business_candidates_path
               %li= link_to "ACTIVITY", business_activities_path
               %li= link_to "CLIENTS", business_clients_path
-              / %li= link_to "NOTIFICATIONS", business_notifications_path
+              %li
+                = link_to business_tasks_path do
+                  .glyphicon.glyphicon-calendar
+              %li 
+                = link_to business_notifications_path do
+                  .glyphicon.glyphicon-globe
 
           .dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}

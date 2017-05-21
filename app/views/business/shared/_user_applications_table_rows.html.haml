@@ -14,9 +14,11 @@
       = link_to "#{application.applicant.first_name} #{application.applicant.last_name}", business_job_application_path(@job, application.id), remote: true
     - if application.candidate.user.current_jobs.present?
       .current-position= "#{application.candidate.user.current_jobs.first.title} - #{application.candidate.user.current_jobs.first.company_name} "
+    - else
+      .current-position No Experience Listed
   %td
     .stage= application_stage(application)
   %td
     = render 'business/ratings/form', application: application
   %td
-    .date-applied= "#{time_ago_in_words(application.created_at)} ago"        
+    .stage= "#{time_ago_in_words(application.created_at)} ago"        

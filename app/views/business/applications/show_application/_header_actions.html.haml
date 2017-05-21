@@ -9,12 +9,11 @@
     %ul.dropdown-menu.dropdown-menu-right
       - @rejection_reasons.each do |reason| 
         %li
-          %a= link_to "#{reason.body}", business_job_application_reject_path(@job, @application)
-
-  / = select_tag "Reject", options_for_select(["Reject"] + @rejection_reasons.collect{ |u| [u.body, u.id, { 'data-id' => u.id, 'data-application' => @application.id }]}), id: 
+          %a= link_to "#{reason.body}", business_job_application_reject_path(@job, @application, :val => reason.body), remote: true, method: :post 
 
 .stage
-  .glyphicon.glyphicon-share-alt
+  = link_to new_business_candidate_application_path(@candidate), remote: true do 
+    .glyphicon.glyphicon-share-alt 
 
 .stage
   .glyphicon.glyphicon-trash

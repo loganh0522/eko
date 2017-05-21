@@ -10,6 +10,7 @@ class Business::CommentsController < ApplicationController
       @comments = @candidate.applications.first.comments
     else
       @application = Application.find(params[:application_id])
+      @job = Job.find(params[:job_id])
       @comments = @application.comments
     end
 
@@ -37,9 +38,15 @@ class Business::CommentsController < ApplicationController
     # @regex = params[:comment][:body].scan /@([\w]+\s[\w]+)/
     build_proper_association
 
+    
+
     respond_to do |format| 
       if @comment.save 
-        # track_activity @comment
+        if params[:application_id].present?
+          @job = Job.find(params[:job_id])
+          @comments = Application.find(params[:application_id]).comments
+        end
+        track_activity @comment
         format.js 
       end
       #   if @regex.present? 
@@ -56,6 +63,41 @@ class Business::CommentsController < ApplicationController
       # end
     end
   end
+
+  def edit 
+    @comment = Comment.find(params[:id])
+    @application = Application.find(params[:application_id])
+    @job = Job.find(params[:job_id])
+
+    respond_to do |format| 
+      format.js
+    end
+  end
+
+  def update
+    @job = Job.find(params[:job_id])
+    @comment = Comment.find(params[:id])
+    @application = Application.find(params[:application_id])
+
+    respond_to do |format| 
+      if @comment.update(comment_params)
+        format.js
+      end
+    end
+  end
+
+  def destroy
+    @job = Job.find(params[:job_id])
+    @application = Application.find(params[:application_id])
+    @comment = Comment.find(params[:id])
+    Activity.where(trackable_id: @comment.id).first.delete
+    @comment.destroy
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
 
   def add_note_multiple   
     applicant_ids = params[:applicant_ids].split(',')

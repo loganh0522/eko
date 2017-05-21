@@ -8,7 +8,7 @@ class Company < ActiveRecord::Base
   has_many :applicants, through: :applications, class_name: "User", foreign_key: :user_id
   
   has_many :candidates
-
+  has_many :tasks
   has_many :jobs
   has_many :subsidiaries
   has_many :locations
@@ -23,6 +23,8 @@ class Company < ActiveRecord::Base
 
   liquid_methods :name
 
+  after_save :create_rejection_reasons
+  
   def deactivate!
     update_column(:active, false)
   end

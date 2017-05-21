@@ -41,7 +41,7 @@
     .applicant-actions
       = render 'business/applications/show_application/header_actions' 
     .applicant-nav
-      = render 'business/shared/applicant_nav'
+      = render 'business/applications/show_application/applicant_nav'
   
   .applicant-body
     .applicant-side-container
@@ -50,14 +50,9 @@
       .applicant-main-top
         = render 'business/applications/show_application/application_navigation'
       .applicant-profile
-        .profile-container.showing
+        .profile-container
           .applicant-experience
             = render 'business/applications/show_application/application_cv'
-        / .applicant-experience    
-        /   = render 'business/applications/application_education'
-
-
-
 
 
 /   .modal#myModal

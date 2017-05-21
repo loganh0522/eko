@@ -21,8 +21,6 @@ class ApplicationController < ActionController::Base
   def owned_by_user
     name = controller_name.gsub("Controller","").gsub("_", ' ').singularize
     class_name = name.split.map { |i| i.capitalize }.join('')
-
-
   end
 
   def owned_by_company
@@ -38,7 +36,6 @@ class ApplicationController < ActionController::Base
   def current_company
     @current_company ||= Company.find(session[:company_id]) if session[:company_id]
   end
-
 
   def logged_in? 
     !!current_user 
@@ -72,8 +69,6 @@ class ApplicationController < ActionController::Base
       redirect_to business_root_path
     end
   end
-
-  
 
   def company_deactivated?
     if current_company.active == false && current_company.subscription == "trial"

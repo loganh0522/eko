@@ -31,24 +31,24 @@ describe Business::JobsController do
   describe "GET show" do
     let(:company) {Fabricate(:company)}
     let(:alice) {Fabricate(:user, company: company)}
-    let(:job) {Fabricate(:job)}
+    let(:job) {Fabricate(:job, company: company)}
  
     it_behaves_like "requires sign in" do
-      let(:action) {get :show, id: 4}
+      let(:action) {get :show, id: job.id}
     end
 
     it_behaves_like "user does not belong to company" do 
-      let(:action) {get :show, id: 4}
+      let(:action) {get :show, id: job.id}
     end
 
     it_behaves_like "company has been deactivated" do
-      let(:action) {get :show, id: 4}
+      let(:action) {get :show, id: job.id}
     end
-   
+
     before do 
       set_current_user(alice)
-      set_current_company(company)
-      get :show, id: job.id
+      set_current_company(company) 
+      get :show, id: job.id 
     end
 
     it "sets the @job to the correct job posting" do      
@@ -95,7 +95,7 @@ describe Business::JobsController do
     context "with valid inputs" do 
       let(:company) {Fabricate(:company)}
       let(:alice) {Fabricate(:user, company: company)}
-      let(:job) {Fabricate.attributes_for(:job)}
+      let(:job) {Fabricate.attributes_for(:job, company: company)}
 
       before do  
         set_current_user(alice)
@@ -128,7 +128,7 @@ describe Business::JobsController do
       end
 
       it "creates a HiringTeam association with the current user" do 
-        expect(HiringTeam.first.user_id).to eq([alice.id])
+        expect(HiringTeam.first.user_id).to eq(alice.id)
       end
 
       it "sets the job status as a draft" do 
@@ -183,7 +183,7 @@ describe Business::JobsController do
 
     let(:company) {Fabricate(:company)}
     let(:alice) {Fabricate(:user, company: company)}
-    let(:job1) {Fabricate(:job)}
+    let(:job1) {Fabricate(:job, company: company)}
     let(:questionairre) {Fabricate(:questionairre, job_id: job1.id)}
     let(:scorecard) {Fabricate(:scorecard, job_id: job1.id)}
     
@@ -207,16 +207,20 @@ describe Business::JobsController do
   end
 
   describe "PUT update" do 
+    let(:company) {Fabricate(:company)}
+    let(:alice) {Fabricate(:user, company: company)}
+    let(:job) {Fabricate(:job, company: company)}
+
     it_behaves_like "requires sign in" do
-      let(:action) {put :update, id: 4}
+      let(:action) {put :update, id: job.id}
     end
 
     it_behaves_like "user does not belong to company" do 
-      let(:action) {put :update, id: 4}
+      let(:action) {put :update, id: job.id}
     end
 
     it_behaves_like "company has been deactivated" do
-      let(:action) {put :update, id: 4}
+      let(:action) {put :update, id: job.id}
     end
 
     context "with valid inputs" do
@@ -226,15 +230,15 @@ describe Business::JobsController do
       before do  
         set_current_user(alice)
         set_current_company(company)
-        job1 = Fabricate(:job, company: company)
-        put :update, id: job1.id, job: Fabricate.attributes_for(:job, title: "new title")
+        job = Fabricate(:job, company: company)
+        put :update, id: job.id, job: Fabricate.attributes_for(:job, title: "new title")
       end
 
       it "save the updates made on the object" do 
         expect(Job.first.title).to eq("new title")
       end
 
-      it "render's the edit page" do 
+      it "render's the hiring team page" do 
         expect(response).to redirect_to new_business_job_hiring_team_path(Job.first.id)
       end
 

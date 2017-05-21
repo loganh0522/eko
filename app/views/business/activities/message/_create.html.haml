@@ -3,14 +3,16 @@
     .glyphicon.glyphicon-envelope
   .activity-body
     .activity-body-header
-      - if activity.user.user_avatar.present?
-        = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
-      - else 
-        .circle-img= activity.user.first_name.first.capitalize
-      .content
-        = "#{activity.user.first_name} #{activity.user.last_name} sent a message to"
-        = link_to "#{activity.trackable.messageable.applicant.first_name} #{activity.trackable.messageable.applicant.last_name}", business_job_application_messages_path(Job.where(id: activity.trackable.messageable.job_id).first.id, Application.where(user_id: activity.trackable.messageable.user_id, job_id: activity.trackable.messageable.job_id).first.id)
-        %br
-        .time= "#{time_ago_in_words(activity.created_at)} ago" 
+      .details
+        - if activity.user.user_avatar.present?
+          = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
+        - else 
+          .circle-img= activity.user.first_name.first.capitalize
+        .content
+          = "#{activity.user.first_name} #{activity.user.last_name} sent a message to"
+          = link_to "#{activity.trackable.messageable.applicant.first_name} #{activity.trackable.messageable.applicant.last_name}", business_job_application_messages_path(Job.where(id: activity.trackable.messageable.job_id).first.id, Application.where(user_id: activity.trackable.messageable.user_id, job_id: activity.trackable.messageable.job_id).first.id)
+          %br
+          .time= "#{time_ago_in_words(activity.created_at)} ago" 
     .activity-body-body
-      = simple_format(activity.trackable.body)
+      .comment-body
+        = simple_format(activity.trackable.body)

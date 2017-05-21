@@ -6,6 +6,9 @@ class Business::CandidatesController < ApplicationController
   
 
   def new
+    if params[:job].present?
+      @job = Job.find(params[:job])
+    end
     @candidate = Candidate.new
     @candidate.work_experiences.build
     @candidate.educations.build
@@ -19,6 +22,10 @@ class Business::CandidatesController < ApplicationController
     @candidate = Candidate.new(application_params)
 
     if @candidate.save
+      if params[:job_id].present? 
+        @job = Job.find(params[:job_id])
+        Application.create(candidate: @candidate, job_id: @job.id, company_id: current_company)
+      end
       respond_to do |format|
         format.js
       end

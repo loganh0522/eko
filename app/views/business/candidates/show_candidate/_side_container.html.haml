@@ -1,17 +1,15 @@
-.applicant-tags
+.side-section
   %h4 Tags
   .tags
     / = render "business/tags/tags"
   .add_tag
     / = link_to "+ Add Tag", new_business_job_application_tag_path(@job.id, @application.id), :data => {remote: true}, id: 'add_tag'
-
-.applicant-tags
+.side-section
   %h4 All Applications
   - @candidate.applications.each do |application| 
     .application-container
-      = application.apps.title
-      %br
-      = application.apps.location
+      .title= application.apps.title
+      .location= application.apps.location
 
   = link_to 'Add to Job', new_business_candidate_application_path(@candidate), remote: true
 

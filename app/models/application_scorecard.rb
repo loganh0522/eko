@@ -4,6 +4,10 @@ class ApplicationScorecard < ActiveRecord::Base
   belongs_to :application
   belongs_to :user
 
-  accepts_nested_attributes_for :scorecard_ratings, allow_destroy: :true
+  accepts_nested_attributes_for :scorecard_ratings, allow_destroy: :true, reject_if: :reject_rating
   accepts_nested_attributes_for :overall_ratings, allow_destroy: :true
+
+  def reject_rating(attributes)
+    attributes['rating'].blank?
+  end
 end

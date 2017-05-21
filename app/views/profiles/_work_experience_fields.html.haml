@@ -4,8 +4,8 @@
       = f.text_field :title, class: "form-control", placeholder: "Job Title", hide_label: true
     .col-md-6
       = f.text_field :company_name, class: "form-control", placeholder: "Company Name", hide_label: true
-    .col-md-12
-      = f.text_field :city, class: "form-control", id: "geocomplete", hide_label: true, autocomplete: "off"
+    / .col-md-12
+    /   = f.text_field :, class: "form-control", id: "geocomplete", hide_label: true, autocomplete: "off"
   .row
     .col-md-6
       = f.collection_select(:industry_ids, Industry.all, :id, :name, hide_label: true, prompt: "Select Industry")

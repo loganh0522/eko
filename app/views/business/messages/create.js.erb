@@ -6,5 +6,5 @@ tinyMCE.activeEditor.setContent('')
   $('.messages-container').find('.activity-feed').html('<%= j render "business/messages/applicant_messages", application: @recipient %>');
   $('.activity-container').find('.activity-feed').html('<%= j render "business/activities/application_activity", application: @application %>');
 <% else %>
-  $('.messages-container').find('.activity-feed').html('<%= j render "business/messages/applicant_messages", application: @application %>');
+  $('.applicant-profile').html('<%= j render "business/messages/applicant_messages", application: @application %>');
 <% end %>

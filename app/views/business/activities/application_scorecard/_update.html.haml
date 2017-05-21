@@ -6,14 +6,15 @@
     
   .activity-body
     .activity-body-header
-      - if current_user.user_avatar.present?
-        = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
-      - else
-        .circle-img
-          %img(src="/tmp/little-man.png") 
-      .content
-      = "#{activity.user.first_name} #{activity.user.last_name} updated their scorecard for"
-      = link_to "#{activity.trackable.application.applicant.first_name} #{activity.trackable.application.applicant.last_name}'s application for", business_job_application_path(activity.trackable.application.apps.id, activity.trackable.application.id)
-      = link_to "#{activity.trackable.application.apps.title}"
-      %br
-      .time= "#{time_ago_in_words(activity.created_at)} ago" 
+      .details
+        - if current_user.user_avatar.present?
+          = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
+        - else
+          .circle-img
+            %img(src="/tmp/little-man.png") 
+        .content
+        = "#{activity.user.first_name} #{activity.user.last_name} updated their scorecard for"
+        = link_to "#{activity.trackable.application.applicant.first_name} #{activity.trackable.application.applicant.last_name}'s application for", business_job_application_path(activity.trackable.application.apps.id, activity.trackable.application.id)
+        = link_to "#{activity.trackable.application.apps.title}"
+        %br
+        .time= "#{time_ago_in_words(activity.created_at)} ago" 

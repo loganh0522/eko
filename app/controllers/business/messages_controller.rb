@@ -64,7 +64,6 @@ class Business::MessagesController < ApplicationController
       send_email(@token, @message, @job, @recipient, current_company)
     end
 
-    binding.pry
     if @message.save 
       track_activity(@message) 
       respond_to do |format| 
@@ -107,7 +106,6 @@ class Business::MessagesController < ApplicationController
       @email = Mail.new(to: @recipient.email, from: current_user.email, subject: params[:message][:subject], body: params[:body], content_type: "text/html")
       GoogleWrapper::Gmail.send_message(@email, current_user, message)
     else 
-      binding.pry
       AppMailer.send_applicant_message(token, message, job, recipient, current_company).deliver
     end
   end

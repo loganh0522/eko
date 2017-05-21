@@ -4,4 +4,3 @@
     = render "business/tags/tags"
   .add_tag
     = link_to "+ Add Tag", new_business_job_application_tag_path(@job.id, @application.id), :data => {remote: true}, id: 'add_tag'
-%h4 Stage

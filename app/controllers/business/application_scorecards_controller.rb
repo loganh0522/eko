@@ -12,7 +12,7 @@ class Business::ApplicationScorecardsController < ApplicationController
       @application_scorecard = ApplicationScorecard.new
       @sections = @scorecard.scorecard_sections
       @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
-      scorecard_graphs
+
       @job = Job.find(params[:job_id])
     else
       @application = Application.find(params[:application_id])
@@ -20,8 +20,8 @@ class Business::ApplicationScorecardsController < ApplicationController
       @application_scorecard = ApplicationScorecard.new
       @sections = @scorecard.scorecard_sections
       @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
-      scorecard_graphs
       @job = Job.find(params[:job_id])
+      @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first 
     end
     
     respond_to do |format|
@@ -30,9 +30,11 @@ class Business::ApplicationScorecardsController < ApplicationController
   end
 
   def new
-    @application_scorecard = ApplicationScorecard.new
     @job = Job.find(params[:job_id])
     @application = Application.find(params[:application_id])
+    @current_user_scorecard = ApplicationScorecard.new
+    @scorecard = @job.scorecard
+    @sections = @scorecard.scorecard_sections
 
     respond_to do |format|
       format.js
@@ -45,11 +47,11 @@ class Business::ApplicationScorecardsController < ApplicationController
     @application = Application.find(params[:application_id])
     @scorecard = Scorecard.where(job_id: params[:job_id]).first
     @activities = current_company.activities.where(application_id: @application.id).order('created_at DESC')
-    
+    @sections = @scorecard.scorecard_sections
+    @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
     respond_to do |format|
       if @application_scorecard.save(application_scorecard_params)
         track_activity @application_scorecard
-        scorecard_graphs
       else
         redirect_to business_job_application_path(@job.id, @application.id), {:data => {:toggle => "modal", :target => "#edit_scorecardModal"}}
       end
@@ -58,20 +60,29 @@ class Business::ApplicationScorecardsController < ApplicationController
   end
 
   def edit 
+    @job = Job.find(params[:job_id])
+    @application = Application.find(params[:application_id])
+    @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first   
+    @scorecard = Scorecard.where(job_id: params[:job_id]).first
+    @sections = @scorecard.scorecard_sections
 
+    respond_to do |format| 
+      format.js
+    end
   end
 
   def update
-    @job = Job.find(params[:job_id])
     @application = Application.find(params[:application_id])
-    @application_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first   
     @scorecard = Scorecard.where(job_id: params[:job_id]).first
-    @activities = current_company.activities.where(application_id: @application.id).order('created_at DESC')
-    
+    @application_scorecard = ApplicationScorecard.find(params[:id])
+    @sections = @scorecard.scorecard_sections
+    @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
+    @job = Job.find(params[:job_id])
+
+
     respond_to do |format|
       if @application_scorecard.update(application_scorecard_params)
         track_activity @application_scorecard
-        scorecard_graphs
       else
         redirect_to business_job_application_path(@job.id, @application.id), {:data => {:toggle => "modal", :target => "#edit_scorecardModal"}}
       end
@@ -82,7 +93,7 @@ class Business::ApplicationScorecardsController < ApplicationController
   private 
 
   def application_scorecard_params 
-    params.require(:application_scorecard).permit(:id, :application_id, :user_id, :scorecard_id, :job_id, :_destroy, scorecard_ratings_attributes: [:id, :section_option_id, :user_id, :rating, :_destroy], overall_ratings_attributes: [:id, :rating, :user_id, :_destroy])
+    params.require(:application_scorecard).permit(:id, :application_id, :user_id, :scorecard_id, :job_id, :_destroy, scorecard_ratings_attributes: [:id, :section_option_id, :user_id, :rating, :_destroy])
   end
 
   def scorecard_graphs

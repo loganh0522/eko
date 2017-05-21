@@ -225,31 +225,33 @@
       padding: 5px 20px
       .experience-body
         margin: 10px 0 
-      .skills
-        margin: 15px 0
-        .title
-          float: left
-          margin-right: 10px
-          font-weight: 600
-        .skill
-          float: left
-          border-radius: 5px
-          border: 1px solid #EF7B2B
-          color: rgba(0,0,0,.7)
-          width: auto
-          margin: -3px 5px 10px 0 
-          text-align: center
-          padding: 3px 5px 3px 8px
-          overflow: hidden
-          .name
+        .exp-description
+          clear: both
+        .skills
+          width: 100%
+          margin: 15px 0
+          .title
             float: left
-          .delete-tag
+            margin-right: 10px
+            font-weight: 600
+          .skill
             float: left
-            margin-left: 5px
+            border-radius: 5px
+            border: 1px solid #EF7B2B
             color: rgba(0,0,0,.7)
-            &:hover
-              cursor: pointer  
-          
+            width: auto
+            margin: -3px 5px 10px 0 
+            text-align: center
+            padding: 3px 5px 3px 8px
+            overflow: hidden
+            .name
+              float: left
+            .delete-tag
+              float: left
+              margin-left: 5px
+              color: rgba(0,0,0,.7)
+              &:hover
+                cursor: pointer           
         .tag
           float: left
           border-radius: 5px
@@ -277,11 +279,6 @@
   .add-accomplishment
     margin: 10px 0 
   .accomplishments
-    ul
-      li
-        color: #EF7B2B
-      li span
-        color: black
     .acc 
       font-size: 16px
       font-weight: 400
@@ -289,7 +286,7 @@
       overflow: hidden
       margin-top: 5px
       .accomplishment-body
-        width: 94%
+        width: 100%
         float: left
         &:hover + .icons
           background: rgba(0, 0, 0, 0.05)

@@ -3,7 +3,7 @@ $('#comment-body').val('');
   $('.notes-container').find('.activity-feed').html('<%= j render "business/comments/applicant_notes", application: @contact %>');
   $('.activity-container').find('.activity-feed').html('<%= j render "business/activities/application_activity", application: @application %>');
 <% else %>
-  $('.notes-container').find('.activity-feed').html('<%= j render "business/comments/applicant_notes" %>');
+  $('.applicant-profile').html('<%= j render "business/comments/applicant_notes", comments: @comments %>');
 <% end %>
 
 

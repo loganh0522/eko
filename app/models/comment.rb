@@ -7,6 +7,8 @@ class Comment < ActiveRecord::Base
   has_many :mentions
   belongs_to :commentable, polymorphic: true
 
+  validates_presence_of :body
+
   def as_indexed_json(options={})
     as_json(
       only: [:created_at, :application_id, :candidate_id, :body]

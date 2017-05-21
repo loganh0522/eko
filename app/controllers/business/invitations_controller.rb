@@ -4,7 +4,10 @@ class Business::InvitationsController < ApplicationController
   before_filter :trial_over
   before_filter :company_deactivated?
   
-
+  def index
+    
+  end
+    
   def create
     if params[:invitation][:job].present? 
       @job = Job.find(params[:invitation][:job])

@@ -1,0 +1,9 @@
+.applicant-details
+  .notes-container
+    .activity-feed
+      - if @tasks.present?
+        - @tasks.each do |comment|
+          = render 'business/tasks/comment', comment: comment
+      - else  
+        .not-present-container
+          %p There are currently no notes for this applicant.

@@ -1,0 +1,17 @@
+%ul
+  = link_to business_job_application_path(@job, @application), remote: true do
+    %li.change#profile.activated Profile
+  
+  = link_to business_job_application_messages_path(@job, @application), remote: true do
+    %li.change#messages Messages 
+  = link_to business_job_application_comments_path(@job, @application), remote: true do
+    %li.change#notes Notes
+
+  = link_to business_job_application_application_form_path(@job, @application), remote: true do
+    %li.change#assessments Assessments
+  
+  = link_to business_job_application_application_scorecards_path(@job, @application), remote: true do
+    %li.change#scorecards Scorecards
+  
+  = link_to business_job_application_activities_path(@job, @application), remote: true do
+    %li.change#activity Activity

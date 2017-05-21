@@ -25,7 +25,7 @@
           font-size: 24px
           float: left
         .glyphicon
-          color: rgba(0, 0, 0, 0.5)
+          color: rgba(0, 0, 0, 0.7)
             
         .new_rating
           width: auto
@@ -109,9 +109,12 @@
     background: rgba(0, 0, 0, 0.02)
     overflow: hidden
     width: 100%
+    min-height: 500px
   .applicant-profile-information
     float: right
     width: 70%
+    .applicant-profile
+      margin-right: 20px
     .applicant-main-top
       background: #ffffff
       .application-actions
@@ -195,6 +198,8 @@
         background: #ffffff
         border-radius:  0 0 5px 5px
         margin-top: 0
+        textarea:focus
+          outline: none
         #comment-body
           width: 100%
           height: 150px
@@ -204,10 +209,13 @@
         .comment-area-footer
           padding: 10px 10px
           border-top: 1px solid rgba(0,0,0,0.1)
+          border-bottom: 1px solid rgba(0,0,0,0.1)
           background: rgba(0,0,0,0.05)
           overflow: hidden
           .btn
-            float: right
+            float: left
+          .submit-button
+            float: left
 
     .applicant-details 
       .activity-container
@@ -230,116 +238,81 @@
         height: 30px
         background: #ffffff
         font-size: 16px
-    .applicant-tags
+    .side-section
       overflow: hidden
       width: 100%
-      padding: 0 0 20px 10px
+      padding: 0 10px 20px 10px
       border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-      .tags
+    .application-container
+      background: #ffffff
+      margin: 3px 3px 
+      padding: 5px 5px
+      border: 1px solid rgba(0,0,0,0.1)
+      border-radius: 3px
+      &:hover
+        background: rgba(239,123,43,0.3)
+        cursor: pointer
+      .title
+        font-size: 14px
+        margin: 0 0 
+        padding: 0 0
+      .location
+        font-size: 12px
+        margin: 0 0 
+        padding: 0 0
+        color: rgba(0,0,0,0.7)
+    .tags
+      overflow: hidden
+      .tag
+        float: left
+        border-radius: 5px
+        border: 1px solid #EF7B2B
+        color: rgba(0,0,0,.7)
+        width: auto
+        margin: 2px 5px 0 0 
+        text-align: center
+        padding: 3px 5px 3px 8px
         overflow: hidden
-        .tag
+        .name
           float: left
-          border-radius: 5px
-          border: 1px solid #EF7B2B
+        .delete-tag
+          float: left
+          margin-left: 5px
           color: rgba(0,0,0,.7)
-          width: auto
-          margin: 2px 5px 0 0 
-          text-align: center
-          padding: 3px 5px 3px 8px
-          overflow: hidden
-          .name
-            float: left
-          .delete-tag
-            float: left
-            margin-left: 5px
-            color: rgba(0,0,0,.7)
-            &:hover
-              cursor: pointer       
-      .add_tag
-        margin-top: 15px
-      .add_tag
-        margin-top: 10px        
-        .tag_form
-          margin-top: 10px
-          input
-            margin-top: 0
-            float: left    
-          .close-form
-            float: left
-            margin: 5px 0 0 10px
-            &:hover
-              cursor: pointer
+          &:hover
+            cursor: pointer       
+    .add_tag
+      margin-top: 15px
+    .add_tag
+      margin-top: 10px        
+      .tag_form
+        margin-top: 10px
+        input
+          margin-top: 0
+          float: left    
+        .close-form
+          float: left
+          margin: 5px 0 0 10px
+          &:hover
+            cursor: pointer
     .schedule-interview
       .title
         font-size: 18px
 
 .applicant-experience
-  .header 
-    margin: 0 0 15px 25px
-    border-bottom: solid 1px #EF7B2B
-    width: 650px
-    h4
-      display: inline-block
-      width: 200px
-      font-weight: 500
-      font-size: 16px
-    p
-      font-size: 14px
-  .applicant-positions       
-    margin: 25px 0px 25px 0px           
-    .job-position
-      background: white 
-      border-radius: 5px
-      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-      clear: both
-      margin-top: 15px
-      padding: 10px 20px
-      border-bottom: solid 1px rgba(0, 0, 0, 0.2)
-      .experience-header
-        overflow: hidden
-        margin: 10px 0 0 0
-        .company
-          font-size: 18px
-          font-weight: 300
-          float: left 
-        .edit
-          float: right
-      .experience-position 
-        overflow: hidden
-        .title
-          float: left         
-          font-size: 15px
-          font-weight: 400
-          color: rgba(0, 0, 0, .6)
-        .date
-          float: right
-          font-size: 13px  
-          font-weight: 400 
-          color: rgba(0, 0, 0, .6) 
-      .experience-body
-        margin: 10px 0   
-        .accomplishments
-          margin-top: 10px
-          .acc 
-            font-size: 16px
-            font-weight: 200
-            width: 130px
-          ul 
-            li
-              width: 450px
+  padding: 10px 10px
+
 
 .applicant-scorecard
   width: 100%
-  margin-top: 20px
-  margin-bottom: 50px
+  margin: 20px 10px 50px 10px
   .scorecard
     width: 100%
     background: #ffffff
-    border-radius: 3px 
+    border-radius: 1px 
     box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
     .header 
-      background: rgba(0, 0, 0, .05)
-      border-bottom: solid 1px rgba(0,0,0,0.03)
+      border-bottom: solid 1px rgba(0,0,0,0.1)
       width: 100%
       overflow: hidden
       padding: 5px 15px 
@@ -352,9 +325,10 @@
         float: right
         color: #EF7B2B
         margin-top: 10px
+
     .scorecard-details
       width: 100%
-      padding: 15px 15px      
+      padding: 15px 15px   
       .overall-rating
         padding: 15px 15px 
         .row
@@ -376,6 +350,27 @@
         padding: 15px 15px 
         table 
           width: 600px
+      .scorecard-inputs
+        .glyphicon
+          padding: 10px 10px
+          border-radius: 50%
+          border: 1px solid rgba(0,0,0,0.2)
+          color: rgba(0,0,0,0.2)
+          &:hover
+            cursor: pointer  
+      .scorecard-inputs > input 
+        display: none
+      .scorecard-inputs > input:checked ~ .glyphicon-thumbs-up
+        color: green
+      .scorecard-inputs > input:checked ~ .glyphicon-star
+        color: gold
+      .scorecard-inputs > input:checked ~ .glyphicon-remove 
+        color: red
+      .scorecard-inputs > input:checked ~ .glyphicon-thumbs-down
+        color: red
+      
+        
+
     .application-form-body
       padding: 15px 15px
       .question-area

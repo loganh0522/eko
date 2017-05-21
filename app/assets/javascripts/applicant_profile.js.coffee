@@ -6,6 +6,16 @@ jQuery ->
 ######### NavBar Change Containers #############
 
 
+
+######### Scorecard JS #########
+  $(document).ajaxComplete ->
+    $('#main-container').on 'click', '.application-scorecard-rating', (event) -> 
+      console.log($(this)) 
+      
+    
+
+
+
 ############ Move Applicant Stages ###############
 
   $('#main-container').on 'change', '#move-applicant-stages', (event) ->
@@ -18,11 +28,12 @@ jQuery ->
         application: $('#move-applicant-stages :selected').data('application')
 
   
-  
 #################### Close Tag Form ######################
   $('#main-container').on 'click', '.close-form', (event) ->
+    console.log($(this).parent())
     $('#add_tag').show()
     $('.tag_form').remove()
+
 
 ###################### Insert Fluid Variable into E-mail #####################
   $(document).ajaxComplete ->
@@ -171,6 +182,7 @@ jQuery ->
   
   $(document).on 'click', '.close-form', (event) ->   
     if $(this).attr('id') == 'edit-form'
+      console.log($(this).parent().attr('id'))
       formobj = $(this).parent().attr('id').slice(5)
       $("#" + "#{formobj}").show()
       $(this).parent().parent().remove()
