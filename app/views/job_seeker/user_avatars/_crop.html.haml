@@ -10,6 +10,8 @@
         = image_tag @user_avatar.image.url, :id => "preview"
 
   .modal-footer
+    = link_to "Change Photo", new_job_seeker_user_user_avatar_path(current_user), remote: true
+        
     = f.hidden_field :user_id, value: current_user.id
     = f.submit 'Crop and Save', class: "btn submit-button"
     .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

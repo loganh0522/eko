@@ -23,7 +23,7 @@ class Company < ActiveRecord::Base
 
   liquid_methods :name
 
-  after_save :create_rejection_reasons
+  after_create :create_rejection_reasons
   
   def deactivate!
     update_column(:active, false)

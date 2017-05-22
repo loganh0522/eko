@@ -3,54 +3,19 @@
     %h1= "Jobs at #{current_company.name}"
     .post-job= link_to "Post a Job", new_business_job_path, class: 'btn border-button2'
   .change-containers-nav
-    %ul
-      %li.change#open.activated Open 
-      %li.change#closed Closed 
-      %li.change#drafts Drafts 
-      %li.change#archived Archived 
+    %ul  
+      = link_to business_jobs_path(status: 'open'), remote: true do
+        %li.change#open.activated Open 
+      = link_to business_jobs_path(status: 'closed'), remote: true do
+        %li.change#closed Closed
+      = link_to business_jobs_path(status: 'draft'), remote: true do
+        %li.change#drafts Drafts
+      = link_to business_jobs_path(status: 'archived'), remote: true do
+        %li.change#archived Archived 
 
 .home-page-body
   #main-container
-    .main-container
-      .open-container.showing
-        - @open_jobs_count = 0
-        - @jobs.each do |job|
-          - open_jobs_count = 0
-          - if job.status == 'open'
-            - @open_jobs_count += 1 
-            = render 'job_container', job: job  
-        - if @open_jobs_count == 0
-          .not-present-container
-            %p You currently do not have any open jobs.               
-      .closed-container 
-        - @closed_jobs_count = 0     
-        - @jobs.each do |job|       
-          - if job.status == 'closed'      
-            - @closed_jobs_count += 1
-            = render 'job_container', job: job 
-        - if @closed_jobs_count == 0
-          .not-present-container
-            %p You currently do not have any closed jobs.       
-      .drafts-container
-        - @draft_jobs_count = 0
-        - @jobs.each do |job|
-          - if job.status == 'draft'                     
-            - @draft_jobs_count += 1
-            = render 'job_container', job: job
-        - if @draft_jobs_count == 0
-          .not-present-container
-            %p You currently do not have any drafted job postings.
-      .archived-container
-        - @archived_jobs_count = 0
-
-        - @jobs.each do |job|
-          - if job.status == 'archived'                     
-            - @archived_jobs_count += 1
-            = render 'job_container', job: job
-
-        - if @archived_jobs_count == 0
-          .not-present-container
-            %p You currently do not have any archived job postings.
+    = render 'business/jobs/jobs'
         
     .side-container
       .container

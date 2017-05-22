@@ -76,7 +76,6 @@ class Business::ApplicationsController < ApplicationController
         @applications.append(application)
       end
     end 
-    binding.pry
     respond_to do |format|
       format.js
     end

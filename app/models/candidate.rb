@@ -1,4 +1,9 @@
 class Candidate < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks 
+  index_name ["talentwiz", Rails.env].join('_') 
+
+
   belongs_to :company
   belongs_to :user
 
@@ -7,7 +12,7 @@ class Candidate < ActiveRecord::Base
   has_many :messages, as: :messageable
   has_many :comments, as: :commentable
 
-  has_many :applicant_contact_details
+
   has_many :work_experiences
   has_many :educations
 
@@ -18,9 +23,6 @@ class Candidate < ActiveRecord::Base
   accepts_nested_attributes_for :educations, 
     allow_destroy: true
     # reject_if: proc { |a| a[:body].blank? }
-
-  accepts_nested_attributes_for :applicant_contact_details, 
-    allow_destroy: true
 
   def full_name
     full_name = "#{self.first_name} #{self.last_name}"
@@ -43,6 +45,36 @@ class Candidate < ActiveRecord::Base
       end
     end
     return false
+  end
+
+
+  def as_indexed_json(options={})
+    as_json(
+      only: [:first_name, :last_name, :email, :manually_created],
+      include: {
+        educations: {only: [:title, :description, :school]},
+        work_experiences: {only: [:title, :description, :company_name]},
+        user: {
+          only: [:first_name, :last_name, :tag_line],
+          include: {
+            profile: {
+              include: {
+                educations: {only: [:title, :description, :school]},
+                work_experiences: {only: [:title, :description, :company_name]}
+              }
+            }
+          }
+        },
+        applications: {
+          only: [:created_at],
+          include: {
+            stage: {only: [:name]},
+            apps: {only: [:title, :location, :status]},
+            tags: {only: [:name]},
+          }
+        }
+      }
+    )
   end
 
  

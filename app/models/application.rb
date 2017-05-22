@@ -8,7 +8,6 @@ class Application < ActiveRecord::Base
   
   belongs_to :candidate
 
-  
   belongs_to :applicant, class_name: 'User', foreign_key: :user_id
   belongs_to :apps, class_name: 'Job', foreign_key: :job_id 
   
@@ -18,64 +17,18 @@ class Application < ActiveRecord::Base
 
   has_many :comments, -> {order("created_at DESC")}, as: :commentable 
   has_many :messages, as: :messageable
-  
-  
   has_many :application_scorecards
-  
-  has_many :activities, -> {order("created_at DESC")}
-  
+  has_many :activities, -> {order("created_at DESC")}  
   has_many :question_answers, dependent: :destroy
   accepts_nested_attributes_for :question_answers, allow_destroy: true
-
   has_many :taggings
   has_many :tags, through: :taggings
   has_many :interviews
   has_many :ratings
 
-  ######## If Application Added Manually ########
-
-  has_many :applicant_contact_details
-  has_many :work_experiences
-  has_many :educations
-
-  accepts_nested_attributes_for :work_experiences, 
-    allow_destroy: true
-    # reject_if: :experience_validation
-
-  accepts_nested_attributes_for :educations, 
-    allow_destroy: true
-    # reject_if: proc { |a| a[:body].blank? }
-
-  accepts_nested_attributes_for :applicant_contact_details, 
-    allow_destroy: true
-
-
   def generate_token
     self.token = SecureRandom.urlsafe_base64
   end
-
-  ########### Tagging #############
-
-  
-
-  # def self.tagged_with(name)
-  #   Tag.find_by_name!(name).articles
-  # end
-
-  # def self.tag_counts
-  #   Tag.select("tags.*, count(taggings.tag_id) as count").
-  #     joins(:taggings).group("taggings.tag_id")
-  # end
-
-  # def tag_list
-  #   tags.map(&:name).join(", ")
-  # end
-
-  # def tag_list=(names)
-  #   self.tags = names.split(",").map do |n|
-  #     Tag.where(name: n.strip).first_or_create!
-  #   end
-  # end
 
   ######### ElasticSearch ##############
 
@@ -124,73 +77,85 @@ class Application < ActiveRecord::Base
   # def current_position
   #   self.applicant.profile.current_position.title
   # end
-
+        
 
   def as_indexed_json(options={})
     as_json(
       methods: [:average_rating, :tags_present],
-      only: [:created_at],
+      only: [:created_at, :rejection_reason, :source, :manually_created],
       include: {
+        stage: {only: [:name]},
         apps: {only: [:title, :location, :status]},
-        tags: {only: [:name]},
-        applicant: {
-          only: [:first_name, :last_name, :tag_line],
+        tags: {only: [:name]},            
+        
+        candidate: {
+          only: [:first_name, :last_name, :email],
           include: {
-            profile: {
-              include: {   
-                educations: {only: [:title, :description, :school]},
-                work_experiences: {only: [:title, :description, :company_name]}
+            educations: {only: [:title, :description, :school]},
+            work_experiences: {only: [:title, :description, :company_name]},
+            user: {
+              only: [:first_name, :last_name, :tag_line],
+              include: {
+                profile: {
+                  include: {
+                    educations: {only: [:title, :description, :school]},
+                    work_experiences: {only: [:title, :description, :company_name]}
+                  }
+                }
               }
-            }  
-          }        
+            }
+          }
         }
       }
     )
   end
 
 
-  def self.search(query, options={})
-    search_definition = {
-      query: {
-        multi_match: {
-          query: query,
-          fields: ["applicant.first_name", "applicant.last_name", "applicant.tag_line",
-            "applicant.profile.work_experiences.description", "applicant.profile.work_experiences.title", 
-            "applicant.profile.work_experiences.company_name", 'applicant.profile.education.school' ]
-        }
-      }
-    }
+  # def self.search(query, options={})
+    # search_definition = {
+    #   query: {
+    #     multi_match: {
+    #       query: query,
+    #       fields: ["applicant.first_name", "applicant.last_name", "applicant.tag_line",
+    #         "applicant.profile.work_experiences.description", "applicant.profile.work_experiences.title", 
+    #         "applicant.profile.work_experiences.company_name", 'applicant.profile.education.school' ]
+    #     }
+    #   }
+    # }
 
-    if options[:average_rating].present? 
-      search_definition = {
-        filter: {
-          range: {
-            average_rating: {
-              gte: (options[:average_rating].first.to_f),
-              lt: 5.1
-            }
-          }
-        }
-      }
-    end
+    # if options[:average_rating].present? 
+    #   search_definition = {
+    #     filter: {
+    #       range: {
+    #         average_rating: {
+    #           gte: (options[:average_rating].first.to_f),
+    #           lt: 5.1
+    #         }
+    #       }
+    #     }
+    #   }
+    # end
 
-    if options[:tags].present? 
-      search_definition = {
-        filter: {
-          match: {
-            "tags.name" => 
-              options[:tags].join(" ")
-          }
-        }
-      }
-    end
+
+    # if options[:tags].present? 
+    #   search_definition = {
+
+    #     filter: {
+    #       match: {
+    #         "tags.name" => 
+    #           options[:tags].join(" ")
+    #       }
+    #     }
+    #   }
+    # end
+    
     
     # if option[:job_status].present? 
     #   search_definition[:filter] = {
     #     query: {
-    #       terms: {
+    #       bool: {
     #         apps: {
-    #           fields: [:status]
+    #           fields: [:status],
     #           options[:job_status]
     #         } 
     #       }
@@ -204,7 +169,38 @@ class Application < ActiveRecord::Base
     # if date_field.present? 
     #   search_definition[:query][:multi_match][:fields] << "created_at"
     # end
-
+  def self.search(query, options={})
+    search_definition = {
+      # query: {
+      #   # multi_match: {
+      #   #   query: query,
+      #   #   fields: ["candidate.first_name", "candidate.last_name", "candidate.email",
+      #   #     "candidate.user.first_name", "candidate.user.last_name", "candidate.user.email"]
+      #   # },
+      # },
+      filter: {
+        range: {
+          average_rating: {
+            gte: (options[:average_rating].first.to_f),
+            lt: 5.1
+          }
+        }
+      }
+    }
+        # },
+        # terms: { 
+        #   "tags.name" => options[:tags]
+        # }
+        # nested: {
+        #   path: 'tags',
+        #   query: {
+        #     filter:{
+        #       terms: { 
+        #         "tags.name" => options[:tags]
+        #       }
+        #     }
+        #   }
+        # }
     __elasticsearch__.search(search_definition)
   end
 end
