@@ -14,8 +14,8 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
-//= require jquery-fileupload/basic
 //= require jquery.remotipart
+//= require jquery-fileupload/basic
 //= require jquery.Jcrop
 //= require bootstrap-sprockets
 //= require geocomplete
