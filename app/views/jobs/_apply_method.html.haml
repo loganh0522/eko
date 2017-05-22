@@ -27,9 +27,16 @@
   = render "/sessions/sub_login"
 
   - if @job_board.brand_color.present?
-    = link_to "#", "data-toggle" => "modal", "data-target" => "#SubLoginModal" do 
-      .app-btn{:style => "background-color: #{@job_board.brand_color}"}
-        Apply To Job 
-  - else 
-    .app-btn{:style => "background-color: #EF7B2B)"}
-      = link_to "Apply To Job", "", :class => "btn app-btn", "data-toggle" => "modal", "data-target" => "#SubLoginModal"
+    .app-btn= link_to "Apply To Job", "", "data-toggle" => "modal", "data-dismiss" => "modal", "data-target" => "#SubLoginModal", class: "btn app-btn", :style => "background-color: #{@job_board.brand_color}"
+    / .btn.app-btn{:style => "background-color: #EF7B2B)"}
+    /   .btn.button-submit= link_to '#', "data-toggle" => "modal", "data-target" => "#SubLoginModal" do
+    /     Apply To Job
+    
+    / = link_to "#", "data-toggle" => "modal", "data-target" => "#SubLoginModal" do 
+    /   .app-btn{:style => "background-color: #{@job_board.brand_color}"}
+    /     Apply To Job 
+  - else  
+    .app-btn= link_to "Apply To Job", "", "data-toggle" => "modal", "data-dismiss" => "modal", "data-target" => "#SubLoginModal", class: "btn app-btn", :style => "background-color: #EF7B2B"
+
+
+

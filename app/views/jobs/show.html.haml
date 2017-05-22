@@ -17,12 +17,7 @@
       %p= simple_format(@job.description)
     .apply 
       = render "apply_method"
-  
   .extra-job-details
-    .apply 
-      = render "apply_method"
-
-   
     %h3 Job Details 
     .detail
       .type Industry
@@ -33,6 +28,8 @@
     .detail
       .type Posted
       .content= "#{time_ago_in_words(@job.created_at)} ago"
+    .apply 
+      = render "apply_method"
 
   
     

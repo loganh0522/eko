@@ -20,6 +20,7 @@ class Business::JobBoardHeadersController < ApplicationController
   def update
     @job_board_header = JobBoardHeader.find(params[:id])
     @job_board = JobBoard.find(params[:job_board_id])
+    
     respond_to do |format|
       if @job_board_header.update(job_board_header_params)
         @job_board_header = @job_board.job_board_header
