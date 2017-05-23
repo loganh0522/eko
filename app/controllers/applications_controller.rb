@@ -15,23 +15,14 @@ class ApplicationsController < JobSeekersController
   end
 
   def create 
-    
-
-    job = Job.find(params[:application][:job_id])  
-    if !current_user_applied?(job)
-      @application = Application.new(application_params)
-      if @application.save 
-        flash[:success] = "Your application has been submitted"
-        track_activity @application
-        redirect_to root_path
-      else
-        render :new
-        flash[:error] = "Something went wrong please try again"
-      end
+    if !current_user_candidate?(params[:application][:company_id])
+      @candidate = Candidate.create(company_id: params[:application][:company_id], user_id: current_user.id)
+      create_application
     else
-      flash[:error] = "You have already applied to this job"
-      redirect_to root_path
+      find_candidate
+      create_application
     end
+    redirect_to root_path
   end
 
   private 
@@ -41,7 +32,28 @@ class ApplicationsController < JobSeekersController
   end
 
   def create_application
-    Application.create(user: current_user, job: job) unless current_user_applied?(job)
+    @job = Job.find(params[:application][:job_id])  
+    if !current_user_applied?(@job)
+      @application = Application.new(application_params.merge!(candidate_id: @candidate.id))
+      if @application.save
+        flash[:success] = "Your application has been submitted"
+        track_activity @application
+      else
+        render :new
+        flash[:error] = "Something went wrong please try again"
+      end
+    end
+  end
+
+  def current_user_candidate?(company)
+    @user = User.find(params[:application][:user_id])
+    @user.candidates.map(&:company_id).include?(company.to_i)
+  end
+
+  def find_candidate
+    @user = User.find(params[:application][:user_id])
+    @company = Company.find(params[:application][:company_id])
+    @candidate = Candidate.where(company_id: @company.id, user_id: @user.id).first
   end
 
   def current_user_applied?(job)

@@ -9,6 +9,7 @@ class Candidate < ActiveRecord::Base
 
   has_many :applications
   has_many :ratings
+  
   has_many :messages, as: :messageable
   has_many :comments, as: :commentable
 
