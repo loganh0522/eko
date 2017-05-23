@@ -1,5 +1,5 @@
-- if @job_board.cover_photo.present? 
-  .job-board-header{:style => "background-image: url(#{@job_board.cover_photo.url})"}
+- if @job_board.job_board_header.cover_photo.present? 
+  .job-board-header{:style => "background: url(#{@job_board.job_board_header.cover_photo.url}) no-repeat center center fixed; background-size: cover "}
     .intro-message
       .header= @job.title
       .sub-header= @job.location
