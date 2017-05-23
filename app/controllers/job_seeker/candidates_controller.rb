@@ -1,8 +1,9 @@
-class ApplicationsController < JobSeekersController 
+class CandidatesController < JobSeekersController 
   before_filter :require_user
   before_filter :profile_sign_up_complete
 
   def new
+    binding.pry
     @application = Application.new
     @job = Job.find(params[:job_id])
     @questionairre = @job.questionairre
@@ -15,8 +16,6 @@ class ApplicationsController < JobSeekersController
   end
 
   def create 
-    
-
     job = Job.find(params[:application][:job_id])  
     if !current_user_applied?(job)
       @application = Application.new(application_params)
