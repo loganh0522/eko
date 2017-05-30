@@ -34,6 +34,19 @@ class Candidate < ActiveRecord::Base
     self.token = SecureRandom.urlsafe_base64
   end
 
+  def notes
+    @notes = []
+    self.applications.each do |app|
+      app.comments.each do |comment|
+        @notes.append(comment) unless @notes.include?(comment)
+      end
+    end
+    self.comments.each do |comment|
+      @notes.append(comment) unless @notes.include?(comment)
+    end
+    return @notes
+  end
+
   def current_jobs
     @current_jobs = self.work_experiences.where(current_position: true)
     return @current_jobs

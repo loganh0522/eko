@@ -8,8 +8,9 @@
     / %div#comment-team-members
     .comment-area-footer 
       = f.submit @comment.new_record? ? "+ Add Note" : "Update", class: "btn submit-button", id: "submit-comment-btn"
+      = link_to "Cancel", business_job_application_comments_path(@job, @application), remote: true, class: 'btn border-button2'
       = f.hidden_field :user_id, value: current_user.id
-      = link_to "Close", business_job_application_comments_path(@job, @application), remote: true, class: 'btn'
+      
 
 
       

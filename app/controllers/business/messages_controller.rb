@@ -5,12 +5,15 @@ class Business::MessagesController < ApplicationController
   before_filter :company_deactivated?
   
   def new
-    if params[:application_id].present?
-      @message = Message.new
+    @message = Message.new
+    
+    if params[:application_id].present?  
       @job = Job.find(params[:job_id])
       @application = Application.find(params[:application_id])
+    elsif params[:client_contact_id].present? 
+      @client = Client.find(params[:client_id])
+      @contact = ClientContact.find(params[:client_contact_id])    
     else params[:candidate_id].present?
-      @message = Message.new
       @candidate = Candidate.find(params[:candidate_id])
     end
 

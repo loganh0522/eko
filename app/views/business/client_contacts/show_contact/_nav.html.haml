@@ -1,0 +1,9 @@
+%ul
+  = link_to business_client_client_contact_messages_path(@contact, @client), remote: true do
+    %li#messages.activated Messages 
+  = link_to business_client_client_contact_comments_path(@contact, @client), remote: true do
+    %li#notes Notes
+  = link_to business_client_client_contact_tasks_path(@contact, @client), remote: true do
+    %li#tasks Tasks
+  = link_to business_client_client_contact_activities_path(@contact, @client), remote: true do
+    %li#activity Activity

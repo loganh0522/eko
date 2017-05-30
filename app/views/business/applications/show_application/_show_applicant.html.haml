@@ -11,6 +11,7 @@
         .contact-details
           .glyphicon.glyphicon-earphone 
             = "#{@candidate.phone}"
+          %br
           .glyphicon.glyphicon-envelope
             = "#{@application.candidate.email}"
           %br
@@ -19,8 +20,8 @@
       - else
         .user-image
           .profile_picture
-            - if @application.applicant.user_avatar.present?
-              = image_tag @application.applicant.user_avatar.image.large_image 
+            - if @application.candidate.user.user_avatar.present?
+              = image_tag @application.candidate.user.user_avatar.image.large_image 
             - else 
               %img(src="/tmp/blank_profile_picture.png")
         .applicant-details
@@ -29,10 +30,11 @@
             = render 'business/ratings/form', application: @application
           .current-position
             - if @application.candidate.user.current_jobs.present?
-              = "#{@application.applicant.current_jobs.first.title}  #{@application.applicant.current_jobs.first.company_name} "
+              = "#{@application.candidate.user.current_jobs.first.title}  #{@application.candidate.user.current_jobs.first.company_name} "
           .contact-details
             .glyphicon.glyphicon-earphone 
               = "#{@application.candidate.user.phone}"
+            %br
             .glyphicon.glyphicon-envelope
               = "#{@application.candidate.user.email}"
             %br

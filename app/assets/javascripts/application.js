@@ -21,7 +21,6 @@
 //= require geocomplete
 
 
-//= require dropzone
 //= require tinymce
 //= require tinymce-jquery
 //= require autocomplete-rails

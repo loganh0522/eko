@@ -18,7 +18,7 @@
               %td
                 = check_box_tag " ", " "
               %td
-                = link_to "#{contact.first_name} #{contact.last_name}", business_client_client_contact_path(@client.id, contact.id)
+                = link_to "#{contact.first_name} #{contact.last_name}", business_client_client_contact_path(@client.id, contact.id), remote: true
               %td
                 = contact.email
               %td
@@ -26,3 +26,10 @@
               %td
                 = contact.created_at
   .side-container
+
+.modal#applicant-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+      .modal-body

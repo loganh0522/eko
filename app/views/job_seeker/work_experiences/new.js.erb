@@ -1,16 +1,12 @@
 // $('.modal-title').html('<%= j "Add Work Experience" %>');
 // $('.modal-body').html('<%= j render "job_seeker/work_experiences/form" %>');
 // $('.modal').modal("show");
+$('#right-modal').find('form').remove()
+$('#right-modal').find('.modal-title').html('<%= j "Add Education" %>');
+$('#right-modal').find('.modal-header').after('<%= j render "job_seeker/work_experiences/form" %>');
+$('#right-modal').modal("toggle");
 
 
-<% if current_user.profile.work_experiences.count == 0 %>
-  $('<%= j render "job_seeker/work_experiences/form" %>').insertAfter('#experience-header');
-  $('#experience-not-present').remove();
-  $('#new_work_experience_button').hide()
-<% else %>
-  $('<%= j render "job_seeker/work_experiences/form" %>').insertBefore("#work_experiences");
-  $('#new_work_experience_button').hide();
-<% end %>
 
 
 

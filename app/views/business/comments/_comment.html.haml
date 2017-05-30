@@ -13,9 +13,14 @@
           = "#{comment.user.full_name} added a note"
           %br
           .time= time_ago_in_words(comment.created_at)
+     
       .actions
-        = link_to "Edit |", edit_business_job_application_comment_path(@job, @application, comment), remote: true
-        = link_to "Delete", business_job_application_comment_path(@job, @application, comment), remote: true, :method => :delete
+        = link_to "Edit |", edit_business_comment_path(comment), remote: true
+        = link_to "Delete", business_comment_path(comment), remote: true, :method => :delete
+      / - else
+      /   .actions
+      /     = link_to "Edit |", edit_business_job_application_comment_path(@candidate, comment), remote: true
+      /     = link_to "Delete", business_job_application_comment_path(@candidate, comment), remote: true, :method => :delete
     .activity-body-body
       .comment-body
         = comment.body

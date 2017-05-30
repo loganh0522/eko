@@ -1,37 +1,30 @@
-.work-experience
-  = bootstrap_form_for [:job_seeker, @profile, @education], html: {remote: true, class: 'profile-form'} do |f|
+= bootstrap_form_for [:job_seeker, @profile, @education], html: {remote: true, class: 'profile-form'} do |f|
+  .modal-body
     .row
-      .col-md-6
-        = f.text_field :school, class: "form-control", hide_label: true, placeholder: "School"
-        %span#school_Block.help-block
-      .col-md-6
-        = f.text_field :degree, class: "form-control", hide_label: true, placeholder:"Degree"
-        %span#degree_Block.help-block
+      .col-md-12
+        = f.text_field :school, class: "form-control", placeholder: "School"
+    .row
+      .col-md-12
+        = f.text_field :degree, class: "form-control", placeholder: "Degree"
     .row
       .col-md-3.col-xs-6.col-sm-6
         = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
         %span#start_month_Block.help-block
       .col-md-3.col-xs-6.col-sm-6
-        = f.text_field :start_year
-        %span#start_year_Block.help-block
+        = f.select(:start_year, 1960..2020)
+
       .col-md-3.col-xs-6.col-sm-6
         = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
-        %span#end_month_Block.help-block
       .col-md-3.col-xs-6.col-sm-6
-        = f.text_field :end_year
-        %span#end_year_Block.help-block
+        = f.select(:end_year, 1960..2020)
     .row
       .col-md-12
         = f.text_area :description, rows: 6, class: "form-control", placeholder: "Description", hide_label: true
-    = f.submit @education.new_record? ? "Add Education" : "Update", class: "submit btn btn-primary"
-    - if !@education.new_record?
-      .close-form#edit-form.btn.btn-default     
-        Close
-    - else
-      .close-form#new-form.btn.btn-default     
-        Close
-    - if !@education.new_record?
-      = link_to "Remove this degree", job_seeker_profile_education_path(@profile, @education), remote: true, method: :delete
+  .modal-footer 
+    / .close-form#edit-form.btn.btn-default{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel   
+    = f.submit @education.new_record? ? "Add Education" : "Update", class: "btn submit-button"
+    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+
 
 
 

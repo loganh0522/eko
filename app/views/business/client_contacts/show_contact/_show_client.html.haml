@@ -1,0 +1,28 @@
+.applicant-view
+  .applicant-header 
+    .applicant-general-info
+      .user-image
+        .profile_picture
+          %img(src="/tmp/blank_profile_picture.png")
+      .applicant-details
+        .name= "#{@contact.first_name} #{@contact.last_name}"
+      %br
+      .contact-details
+        .glyphicon.glyphicon-earphone 
+          = "#{@contact.phone}"
+        %br
+        .glyphicon.glyphicon-envelope
+          = "#{@contact.email}"    
+    .applicant-nav
+      = render 'business/client_contacts/show_contact/nav' 
+  
+  .applicant-body
+    .applicant-side-container
+      / = render 'business/applications/show_application/side_container'
+    .applicant-profile-information
+      .applicant-main-top
+        = render 'business/client_contacts/show_contact/actions' 
+      .applicant-profile
+        .profile-container
+          
+           

@@ -21,10 +21,13 @@ class Business::TasksController < ApplicationController
 
   def new 
     @task = Task.new
+
     if params[:application_id].present?
-      @comment = Comment.new
       @job = Job.find(params[:job_id])
       @application = Application.find(params[:application_id])
+    elsif params[:client_contact_id].present?
+      @client = Client.find(params[:client_id])
+      @contact = ClientContact.find(params[:client_contact_id]) 
     else
       @comment = Comment.new
       @candidate = Candidate.find(params[:candidate_id])

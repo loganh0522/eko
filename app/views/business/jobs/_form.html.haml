@@ -8,9 +8,9 @@
         = f.text_field :location, class: "form-control", id: "geocomplete", label: "Location (City)", placeholder: "City Name"
       .form-group.col-md-6
         = f.text_field :address, class: "form-control", id: "geocomplete2", label: "Address", placeholder: "Enter the Address"
-    / .row 
-    /   .form-group.col-md-12
-    /     = f.collection_select(:client_id, current_company.clients, :id, :company_name, label: "Client", :include_blank => true, :selected => @job.new_record? ? nil : @job.industries.first.id)
+    .row 
+      .form-group.col-md-12
+        = f.collection_select(:client_id, current_company.clients, :id, :company_name, label: "Client", :include_blank => true, :selected => @job.new_record? ? nil : @job.industries.first.id)
     .row
       .form-group.col-md-12
         = f.text_area :description, :class => "tinymce", :rows => 20

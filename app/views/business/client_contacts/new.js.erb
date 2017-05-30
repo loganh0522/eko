@@ -1,3 +1,4 @@
-$(".modal-body").html('<%= j render "business/client_contacts/form" %>');
-$(".modal-title").html('<%= "Create Contact" %>');
-$('.modal').modal("toggle");
+$('#right-modal').find('form').remove()
+$('#right-modal').find('.modal-title').html('<%= j "Create Contact" %>');
+$('#right-modal').find('.modal-header').after('<%= j render "business/client_contacts/form" %>');
+$('#right-modal').modal("toggle")

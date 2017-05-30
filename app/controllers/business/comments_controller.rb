@@ -7,7 +7,13 @@ class Business::CommentsController < ApplicationController
   def index
     if params[:candidate_id].present?
       @candidate = Candidate.find(params[:candidate_id])
-      @comments = @candidate.applications.first.comments
+      @comments = @candidate.notes
+    elsif params[:client_contact_id].present?
+      @contact = ClientContact.find(params[:client_contact_id])
+      @comments = @contact.comments
+    elsif params[:client_id].present?
+      @client = Client.find(params[:client_id])
+      @comments = @client.comments
     else
       @application = Application.find(params[:application_id])
       @job = Job.find(params[:job_id])
@@ -20,12 +26,15 @@ class Business::CommentsController < ApplicationController
   end
 
   def new 
-    if params[:application_id].present?
-      @comment = Comment.new
+    @comment = Comment.new
+    
+    if params[:application_id].present?     
       @job = Job.find(params[:job_id])
       @application = Application.find(params[:application_id])
+    elsif params[:client_contact_id].present?      
+      @client = Client.find(params[:client_id])
+      @contact = ClientContact.find(params[:client_contact_id])    
     else
-      @comment = Comment.new
       @candidate = Candidate.find(params[:candidate_id])
     end
 
@@ -45,29 +54,19 @@ class Business::CommentsController < ApplicationController
         if params[:application_id].present?
           @job = Job.find(params[:job_id])
           @comments = Application.find(params[:application_id]).comments
+        elsif params[:client_contact_id].present?
+          @comments = @contact.comments
         end
         track_activity @comment
         format.js 
       end
-      #   if @regex.present? 
-      #     @regex.each do |user|
-      #       user = User.where(full_name: user.first).first
-      #       @mention = Mention.create(user_id: current_user.id, mentioned_id: user.id, comment_id: @comment.id)
-      #       Notification.create(user_id: user.id, trackable: @mention, action: 'create')
-      #     end
-      #   end
-        
-      # else
-      #   flash[:error] = "Sorry something went wrong"
-      #   redirect_to :back
-      # end
     end
   end
 
   def edit 
     @comment = Comment.find(params[:id])
-    @application = Application.find(params[:application_id])
-    @job = Job.find(params[:job_id])
+    @application = Application.find(@comment.commentable_id)
+    @job = @application.apps
 
     respond_to do |format| 
       format.js

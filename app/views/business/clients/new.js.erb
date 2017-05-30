@@ -1,3 +1,4 @@
-$(".modal-body").html('<%= j render "business/clients/form" %>');
-$(".modal-title").html('<%= "Create Client" %>');
-$('.modal').modal("toggle");
+$('#right-modal').find('form').remove()
+$('#right-modal').find('.modal-title').html('<%= j "Create Client" %>');
+$('#right-modal').find('.modal-header').after('<%= j render "business/clients/form" %>');
+$('#right-modal').modal("toggle");

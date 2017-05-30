@@ -3,15 +3,15 @@
     .applicant-checkbox{:data => {:id => application.id}}
       = check_box_tag "applicant_ids[]", application.id
   %td
-    - if application.applicant.user_avatar.present? 
+    - if application.candidate.user.user_avatar.present? 
       .circle
-        = image_tag application.applicant.user_avatar.image.small_image, :size => "50x50" 
+        = image_tag application.candidate.user.user_avatar.image.small_image, :size => "50x50" 
     - else
       .circle-img
         %img(src="/tmp/little-man.png")  
   %td.names
-    .name{:data => {:id =>  "#{application.applicant.first_name}"}}
-      = link_to "#{application.applicant.first_name} #{application.applicant.last_name}", business_job_application_path(@job, application.id), remote: true
+    .name{:data => {:id =>  "#{application.candidate.user.full_name}"}}
+      = link_to "#{application.candidate.user.full_name}", business_job_application_path(@job, application.id), remote: true
     - if application.candidate.user.current_jobs.present?
       .current-position= "#{application.candidate.user.current_jobs.first.title} - #{application.candidate.user.current_jobs.first.company_name} "
     - else

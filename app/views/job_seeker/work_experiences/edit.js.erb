@@ -2,5 +2,9 @@
 // $('.modal-body').html('<%= j render "job_seeker/work_experiences/form" %>');
 // $('.modal').modal("show");
 
-$('#work_experience_<%= @work_experience.id %>').before('<%= j render "job_seeker/work_experiences/form" %>');
-$('#work_experience_<%= @work_experience.id %>').hide();
+// $('#work_experience_<%= @work_experience.id %>').before('<%= j render "job_seeker/work_experiences/form" %>');
+// $('#work_experience_<%= @work_experience.id %>').hide();
+$('#right-modal').find('form').remove()
+$('#right-modal').find('.modal-title').html('<%= j "Add Education" %>');
+$('#right-modal').find('.modal-header').after('<%= j render "job_seeker/work_experiences/form" %>');
+$('#right-modal').modal("toggle");

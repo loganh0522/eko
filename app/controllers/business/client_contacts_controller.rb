@@ -4,11 +4,25 @@ class Business::ClientContactsController < ApplicationController
   before_filter :trial_over
   before_filter :company_deactivated?
   
+  def index 
+    @client = Client.find(params[:client_id])
+    @contact = ClientContact.new
+    @contacts = @client.client_contacts
+
+    respond_to do |format|
+      format.js
+    end
+  end
+  
   def show 
     @contact = ClientContact.find(params[:id])
     @client = Client.find(params[:client_id])
     @message = Message.new
     @comment = Comment.new
+    
+    respond_to do |format|
+      format.js
+    end
   end
 
   def new 
@@ -55,6 +69,6 @@ class Business::ClientContactsController < ApplicationController
   private
 
   def client_params
-    params.require(:client_contact).permit(:client_id, :first_name, :last_name, :email, :user_id)
+    params.require(:client_contact).permit(:client_id, :first_name, :last_name, :email, :phone, :user_id)
   end
 end

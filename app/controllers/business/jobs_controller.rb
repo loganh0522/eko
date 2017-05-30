@@ -6,7 +6,17 @@ class Business::JobsController < ApplicationController
   before_filter :owned_by_company, only: [:edit, :show, :update]
 
   def index
-    @jobs = current_company.jobs
+    if params[:client_id].present?
+      @client = Client.find(params[:client_id])
+      @jobs = @client.jobs
+    else 
+      @jobs = current_company.jobs
+    end
+
+    respond_to do |format|
+      format.html
+      format.js 
+    end
   end
 
   def new

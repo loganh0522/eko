@@ -1,15 +1,16 @@
-// $('.modal-title').html('<%= j "Add Education" %>');
-// $('.modal-body').html('<%= j render "job_seeker/educations/form" %>');
-// $('.modal').modal("show");
+$('#right-modal').find('form').remove()
+$('#right-modal').find('.modal-title').html('<%= j "Add Education" %>');
+$('#right-modal').find('.modal-header').after('<%= j render "job_seeker/educations/form" %>');
+$('#right-modal').modal("toggle");
 
 
 
 
-<% if current_user.profile.educations.count == 0 %>
-  $('<%= j render "job_seeker/educations/form" %>').insertAfter('#education-header');
-  $('#education-not-present').remove();
-  $('#add_education_button').hide()
-<% else %>
-  $('<%= j render "job_seeker/educations/form" %>').insertBefore("#educations");
-  $('#add_education_button').hide();
-<% end %>
+// <% if current_user.profile.educations.count == 0 %>
+//   $('<%= j render "job_seeker/educations/form" %>').insertAfter('#education-header');
+//   $('#education-not-present').remove();
+//   $('#add_education_button').hide()
+// <% else %>
+//   $('<%= j render "job_seeker/educations/form" %>').insertBefore("#educations");
+//   $('#add_education_button').hide();
+// <% end %>

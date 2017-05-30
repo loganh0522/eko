@@ -4,14 +4,15 @@
       %h1= @client.company_name
   .change-containers-nav
     %ul 
-      %li.change#all-client-contacts.activated Contacts
-      %li.change#all-client-jobs Jobs
-      %li.change#client-activity-feed Activity
+      = link_to business_client_client_contacts_path(@client), remote: true do 
+        %li.change#client-contacts.activated Contacts
+      = link_to business_client_jobs_path(@client), remote: true do 
+        %li.change#client-jobs Jobs
+      = link_to business_client_activities_path(@client), remote: true do 
+        %li.change#job-activity-feed Activity
 
 #main-container
-  .all-client-contacts-container.showing
+  .all-client-contacts-container
     = render 'business/client_contacts/contact_table'
-  .all-client-jobs-container
-    = render 'business/clients/jobs'
 
 = render 'business/clients/modal'

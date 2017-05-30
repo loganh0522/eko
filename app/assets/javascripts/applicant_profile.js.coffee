@@ -19,7 +19,6 @@ jQuery ->
 ############ Move Applicant Stages ###############
 
   $('#main-container').on 'change', '#move-applicant-stages', (event) ->
-    console.log("action-takents") 
     $.ajax
       url : "/business/applications/change_stage"
       type : "post"
@@ -106,6 +105,7 @@ jQuery ->
     applicant_ids = []
     applicants = []
     applicant_names = []
+    
     for n in checkbox   
       if $(n).find('input').is(':checked') == true     
         applicant = []
@@ -116,6 +116,7 @@ jQuery ->
         applicants.push(applicant)
 
     $('.modal').find('form').find('#applicant_ids').val(applicant_ids)
+    
     for n in applicants
       $('.modal').find('.recipients').append('<div id="applicant" data-id=' + n[0] + '> <div class="name">' + n[1] + '</div> <div class="remove-recipient"> &times </div> </div>') 
 

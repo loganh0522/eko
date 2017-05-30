@@ -1,0 +1,7 @@
+$('#comment-body').val('');
+<% if params[:client_contact_id].present? %>
+  $('.applicant-profile').html('<%= j render "business/comments/applicant_notes", application: @contact %>');
+<% else %>
+  $('.applicant-profile').html('<%= j render "business/comments/applicant_notes", comments: @comments %>');
+<% end %>
+

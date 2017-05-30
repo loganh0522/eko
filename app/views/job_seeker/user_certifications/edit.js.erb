@@ -1,3 +1,9 @@
-$('#user_certification_<%= @user_certification.id %>').before('<%= j render "job_seeker/user_certifications/form" %>');
-$('#user_certification_<%= @user_certification.id %>').hide();
+// $('#user_certification_<%= @user_certification.id %>').before('<%= j render "job_seeker/user_certifications/form" %>');
+// $('#user_certification_<%= @user_certification.id %>').hide();
+
+
+$('#right-modal').find('form').remove()
+$('#right-modal').find('.modal-title').html('<%= j "Add Education" %>');
+$('#right-modal').find('.modal-header').after('<%= j render "job_seeker/user_certifications/form" %>');
+$('#right-modal').modal("toggle");
 

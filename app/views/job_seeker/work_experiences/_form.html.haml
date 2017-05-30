@@ -1,5 +1,6 @@
-.work-experience
-  = bootstrap_form_for [:job_seeker, @profile, @work_experience], html: {remote: true, class: 'profile-form'} do |f|
+
+= bootstrap_form_for [:job_seeker, @profile, @work_experience], html: {remote: true, class: 'profile-form'} do |f|
+  .modal-body
     .fieldset
       .row
         .col-md-6
@@ -8,9 +9,6 @@
         .col-md-6
           = f.text_field :company_name, placeholder: "Company Name", hide_label: true
           %span#company_name_Block.help-block
-        .col-md-12
-          = f.text_field :location, id: "geocomplete", hide_label: true, autocomplete: "off"
-          %span#location_Block.help-block
       .row
         .col-md-6
           = f.collection_select(:industry_ids, Industry.all, :id, :name, hide_label: true, prompt: "Select Industry")
@@ -23,13 +21,13 @@
           = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
           %span#start_month_Block.help-block
         .col-md-3.col-xs-6.col-sm-6
-          = f.text_field :start_year
+          = f.select(:start_year, 1960..2020)
           %span#start_year_Block.help-block
         .col-md-3.col-xs-6.col-sm-6
           = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
           %span#end_year_Block.help-block
         .col-md-3.col-xs-6.col-sm-6
-          = f.text_field :end_year
+          = f.select(:end_year, 1960..2020)
           %span#end_month_Block.help-block
       .row 
         .col-sm-6.col-md-offset-6
@@ -39,12 +37,8 @@
         .col-md-12
           = f.text_area :description, rows: 5, hide_label: true, placeholder: "Description"
           %span#description_Block.help-block
+  .modal-footer
     = f.submit @work_experience.new_record? ? "Add Work Experience" : "Update", class: "submit btn btn-primary"
-    - if !@work_experience.new_record?
-      .close-form#edit-form.btn.btn-default     
-        Close
-    - else
-      .close-form#new-form.btn.btn-default     
-        Close
-    - if !@work_experience.new_record?
-      = link_to "Remove Work Experience", job_seeker_profile_work_experience_path(@profile, @work_experience), remote: true, method: :delete
+    .close-form#edit-form.btn.btn-default{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+
+

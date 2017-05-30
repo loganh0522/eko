@@ -32,6 +32,7 @@
     border-radius: 0
     padding: 10px 10px
     background: #f7f8f9
+  
 
   .experience-container
     overflow: hidden
@@ -58,50 +59,44 @@
 
 .job-seeker-profile
   width: 100%
+  margin-top: 50px
   overflow-x: hidden
   .background-photo
     height: 250px 
     width: 100% 
     z-index: 100
-    background: rgba(0,0,0,0.7)
-  .user-image
-    width: 150px
-    height: 150px
-    margin-left: auto
-    margin-right: auto
-    border-radius: 50%
-    position: absolute
-    left: calc(50vw - (/* width */150px / 2))
-    top: 110px
-    img  
-      padding: 4px
-      background: white
-      border: 1px solid #E4E5E9
-      width: 150px
-      height: 150px
-      border-radius: 50%
-    .glyphicon.glyphicon-pencil
-      font-size: 18px
-      float: right
-      margin: 10px -10px 0 0 
-      color: #ffffff  
+    background: rgba(0,0,0,0.7) 
   .profile-header
-    width: 80%
-    margin: 0 10%
-    z-index: 50
-    margin-top: -100px
+    overflow: hidden 
+    margin: 0 2%
     background: #ffffff
-    padding-top: 75px
-    border-radius: 5px
+    padding: 10px 10px 0 10px
     box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)  
+    
     @media screen and (max-width: 800px)
       width: 100%
       margin: -100px 0 0 0
+    .user-image
+      width: 150px
+      height: 150px  
+      border-radius: 50%
+      float: left
+      img  
+        padding: 4px
+        background: white
+        border: 1px solid #E4E5E9
+        width: 150px
+        height: 150px
+        border-radius: 50%
+      .glyphicon.glyphicon-pencil
+        font-size: 18px
+        float: right
+        margin: 10px -10px 0 0 
+        color: #ffffff  
     .personal-details
+      float: left
       margin-top: 25px
       width: 350px
-      margin-left: auto
-      margin-right: auto
       margin-bottom: 50px
       text-align: center
       .glyphicon.glyphicon-pencil
@@ -118,15 +113,15 @@
     .change-containers-nav 
       background: white
       height: 50px
+      clear: both
       ul 
         width: 660px
         list-style: none
         text-decoration: none
-        margin: auto
         li
           display: inline-block
           height: 50px 
-          padding: 15px 15px 0 15px 
+          padding: 15px 15px 0 0
           text-align: center 
           color: black
           cursor: pointer
@@ -136,39 +131,22 @@
         width: auto
         margin: 0 0 0 -40px
         padding: 0 0 
-
       .activated 
         border-bottom: solid 3px #EF7B2B
         color: black
+  
   .main-container
-    margin-left: auto
-    margin-right: auto
-    float: none
-    width: 80%
+    margin-left: 2%
+    margin-right: 2%
+    float: left
+    width: 60%
     padding-left: 0
     @media screen and (max-width: 800px)
       width: 100%
     .experience-container
       @media screen and (max-width: 800px)
         padding: 0 1% 0 1%
-    .education-container
-      display: none
-      @media screen and (max-width: 800px)
-        padding: 0 1% 0 1%
-    .skills-container
-      display: none  
-      @media screen and (max-width: 800px)
-        padding: 0 1% 0 1% 
-    .career-prefs-container
-      display: none
-      @media screen and (max-width: 800px)
-        padding: 0 1% 0 1%
-    .my-apps-container
-      display: none
-      @media screen and (max-width: 800px)
-        padding: 0 1% 0 1%
     .header 
-      border-bottom: 2px solid rgba(239, 122, 43, .25) 
       overflow: hidden  
       margin-bottom: 15px
       .title
@@ -179,7 +157,39 @@
         float: right
         margin: 10px 0 0 0
         a
-          color: #EF7B2B  
+          color: #EF7B2B 
+  .side-container
+    float: right
+    width: 34%
+    margin-right: 2%
+    .header 
+      overflow: hidden  
+      margin-bottom: 15px
+      .title
+        float: left
+        font-size: 24px
+        font-weight: 500    
+      .new_experience
+        float: right
+        margin: 10px 0 0 0
+        a
+          color: #EF7B2B 
+     
+
+.work-experience-form
+  width: 95%
+  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+  background: white
+  width: 100%
+  padding: 20px 20px
+  overflow: hidden
+  margin-bottom: 15px
+  .footer
+    overflow: hidden
+    .submit
+      float: right
+    .close-form
+      float: right
 
 .work-experience
   box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
@@ -419,9 +429,46 @@
   .answer
     padding: 0 20px   
 
+#right-modal
+  .modal-dialog
+    width: 700px
+    margin: 0 0
+    float: right
+    height: 100%
+  .modal-title
+    color: #ffffff
+  .modal-content
+    overflow-y: auto
+    height: 100%
+    .modal-header
+      height: 10%
+      background: #EF7B2B
+      font-size: 16px       
+    form
+      height: 90%
+      .modal-body
+        height: 88%
+        padding: 10px 10px
+      .modal-footer
+        height: 12%
+        padding: 10px 10px
 
-
-   
+.user-image-example-in-the-middle
+  width: 150px
+  height: 150px
+  margin-left: auto
+  margin-right: auto
+  border-radius: 50%
+  position: absolute
+  left: calc(50vw - (/* width */150px / 2))
+  top: 110px
+  img  
+    padding: 4px
+    background: white
+    border: 1px solid #E4E5E9
+    width: 150px
+    height: 150px
+    border-radius: 50%
      
 
 

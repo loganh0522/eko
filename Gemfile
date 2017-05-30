@@ -38,11 +38,12 @@ gem 'mini_magick'
 gem 'rmagick', :require => 'RMagick'
 gem 'carrierwave'
 gem 'carrierwave-aws'
-gem 'dropzonejs-rails'
+
 gem 'jcrop-rails-v2'
+
 gem 'remotipart', '~> 1.2'
 gem 'jquery-fileupload-rails'
-
+gem 'dropzonejs-rails'
 
 gem "font-awesome-rails"
 

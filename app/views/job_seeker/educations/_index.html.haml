@@ -1,0 +1,6 @@
+.education-container
+  .header#education-header
+    .title Education
+    .new_experience
+      = link_to "+ Add Education", new_job_seeker_profile_education_path(@profile), :data => {:remote => true}, :html => {id: 'new_education_button'}
+  = render 'job_seeker/educations/education_history'   

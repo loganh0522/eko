@@ -49,12 +49,12 @@
                         %img(src="/tmp/little-man.png") 
                 %td.names
                   - if candidate.manually_created == true 
-                    .name
+                    .name{:data => {:id =>  "#{candidate.full_name} "}}
                       = link_to "#{candidate.full_name}", business_candidate_path(candidate.id), remote: true
-                      - if candidate.current_jobs.present?
-                        .current-position= "#{candidate.current_jobs.first.title} - #{candidate.current_jobs.first.company_name}"
-                      - else
-                        .current-position No Experience Listed
+                    - if candidate.current_jobs.present?
+                      .current-position= "#{candidate.current_jobs.first.title} - #{candidate.current_jobs.first.company_name}"
+                    - else
+                      .current-position No Experience Listed
                   - else
                     .name{:data => {:id =>  "#{candidate.user.full_name}"}}
                       = link_to "#{candidate.user.full_name}", business_candidate_path(candidate.id), remote: true

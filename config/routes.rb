@@ -83,13 +83,17 @@ Rails.application.routes.draw do
     resources :messages
     resources :tasks
     resources :rejection_reasons
+    resources :comments
     
 
     resources :clients do 
+      resources :jobs
+      resources :activities
       resources :client_contacts do
         resources :messages
         resources :comments
         resources :tasks
+        resources :activities
       end
     end
     
@@ -118,12 +122,13 @@ Rails.application.routes.draw do
       resources :applications 
       resources :messages
       resources :comments
+
       resources :tags
       resources :tasks
       get :application_form, to: "applications#application_form"
       get :application_activity, to: "activities#application_activity"
-      resources :messages
-      resources :comments
+
+
       resources :application_scorecards
       resources :assessments
     end

@@ -1,8 +1,6 @@
-<% if current_user.profile.user_certifications.count == 0 %>
-  $('<%= j render "job_seeker/user_certifications/form" %>').insertAfter('#certification-header')
-  $('.not-present-container').remove()
-  $('#new_user_certification_button').hide();
-<% else %>
-  $('<%= j render "job_seeker/user_certifications/form" %>').insertBefore("#certifications");
-  $('#new_user_certification_button').hide();
-<% end %>
+
+$('#right-modal').find('form').remove()
+$('#right-modal').find('.modal-title').html('<%= j "Add Education" %>');
+$('#right-modal').find('.modal-header').after('<%= j render "job_seeker/user_certifications/form" %>');
+$('#right-modal').modal("toggle");
+

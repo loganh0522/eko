@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170520212122) do
+ActiveRecord::Schema.define(version: 20170524113925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -335,6 +335,26 @@ ActiveRecord::Schema.define(version: 20170520212122) do
     t.integer "job_id"
     t.integer "work_experience_id"
     t.integer "user_id"
+  end
+
+  create_table "job_feeds", force: :cascade do |t|
+    t.integer "job_id"
+    t.boolean "adzuna"
+    t.boolean "jooble"
+    t.boolean "indeed"
+    t.boolean "trovit"
+    t.boolean "juju"
+    t.boolean "eluta"
+    t.boolean "monster"
+    t.boolean "glassdoor"
+    t.boolean "careerjet"
+    t.boolean "ziprecruiter"
+    t.boolean "neuvoo"
+    t.boolean "jobinventory"
+    t.boolean "recruitnet"
+    t.boolean "jobisjob"
+    t.boolean "jobrapido"
+    t.boolean "usjobs"
   end
 
   create_table "job_functions", force: :cascade do |t|
