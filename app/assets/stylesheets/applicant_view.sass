@@ -362,13 +362,13 @@
             cursor: pointer  
       .scorecard-inputs > input 
         display: none
-      .scorecard-inputs > input:checked ~ .glyphicon-thumbs-up
+      .scorecard-inputs input[type="radio"]:checked+label ~ .glyphicon-thumbs-up
         color: green
-      .scorecard-inputs > input:checked ~ .glyphicon-star
+      .scorecard-inputs input[type="radio"]:checked+label ~ .glyphicon-star
         color: gold
-      .scorecard-inputs > input:checked ~ .glyphicon-remove 
+      .scorecard-inputs input[type="radio"]:checked+label ~ .glyphicon-remove 
         color: red
-      .scorecard-inputs > input:checked ~ .glyphicon-thumbs-down
+      .scorecard-inputs input[type="radio"]:checked+label ~ .glyphicon-thumbs-down
         color: red
       
         
@@ -388,6 +388,19 @@
           ul
             margin-left: -20px
 
-      
+.company-kind label
+  padding: 10px 25px
+  border: 1px solid rgba(0,0,0,0.1)
+  float: left
+  margin-right: 20px
+  &:hover
+    cursor: pointer
+
+.company-kind input[type="radio"]:checked+label
+  background: #EF7B2B
+  color: #ffffff
+
+.company-kind > input 
+  display: none
 
       

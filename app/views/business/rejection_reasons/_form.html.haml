@@ -1,7 +1,7 @@
-= form_for [:business, @rejection_reason], html: {remote: true, class: 'invite'} do |f|
-  .email-template-area
-    .subject
-      .sender= f.text_field :body, placeholder: "Reason"
-      = f.hidden_field :company_id, value: current_company.id
-      = f.submit "Save Template", class: "btn submit-button"
-      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+= form_for [:business, @rejection_reason], remote: true do |f|
+  .modal-body
+    = f.text_field :body, placeholder: "Reason"
+    = f.hidden_field :company_id, value: current_company.id
+  .modal-footer
+    = f.submit "Save Template", class: "btn submit-button"
+    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

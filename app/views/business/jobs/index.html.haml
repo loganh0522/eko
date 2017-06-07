@@ -4,19 +4,14 @@
     .post-job= link_to "Post a Job", new_business_job_path, class: 'btn border-button2'
   .change-containers-nav
     %ul  
-      = link_to business_jobs_path(status: 'open'), remote: true do
-        %li.change#open.activated Open 
-      = link_to business_jobs_path(status: 'closed'), remote: true do
-        %li.change#closed Closed
-      = link_to business_jobs_path(status: 'draft'), remote: true do
-        %li.change#drafts Drafts
-      = link_to business_jobs_path(status: 'archived'), remote: true do
-        %li.change#archived Archived 
+      %li.job-status#open.activated Open 
+      %li.job-status#closed Closed
+      %li.job-status#draft Drafts
+      %li.job-status#archived Archived 
 
 .home-page-body
   #main-container
-    = render 'business/jobs/jobs'
-        
+    = render 'business/jobs/jobs'       
     .side-container
       .container
                

@@ -1,8 +1,2 @@
-- rejection_reasons.each do |template| 
-  .template
-    .body= template.body
-    .icons
-      = link_to edit_business_rejection_reason_path(template.id), :data => {:remote => true } do
-        %i.glyphicon.glyphicon-pencil
-      = link_to business_rejection_reason_path(template.id), remote: true, :method => :delete do
-        %i.glyphicon.glyphicon-remove
+- rejection_reasons.each do |reason| 
+  = render 'business/rejection_reasons/rejection_reason', reason: reason

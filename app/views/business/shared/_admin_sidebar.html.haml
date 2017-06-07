@@ -1,14 +1,28 @@
 %ul
   .nav-section Company 
-  %li{:class => is_active?(edit_business_job_board_path(current_company.job_board.id))}
-    = link_to "Career Portal", business_job_board_path(current_company.job_board.id)
+  %li{:class => is_active?(business_plan_path)}
+    = link_to "Company Details", business_company_path(current_company)
+  
+  %li{:class => is_active?(business_hiring_defaults_path)}
+    = link_to "Hiring Pipeline", business_default_stages_path
+  
+  %li{:class => is_active?(business_hiring_defaults_path)}
+    = link_to "Hiring Defaults", business_hiring_defaults_path
+  
   %li{:class => is_active?(business_users_path)}
     = link_to "Team Members", business_users_path
+
+  %li{:class => is_active?(edit_business_job_board_path(current_company.job_board.id))}
+    = link_to "Career Portal", business_job_board_path(current_company.job_board.id)
+
   %li{:class => is_active?(business_users_path)}
     = link_to "Templates", business_templates_path
+  
+  
 
-  / %li{:class => is_active?(business_plan_path)}
-  /   = link_to "Company Structure", business_plan_path
+  
+
+  
     
   .nav-section Billing
   %li{:class => is_active?(business_plan_path)}
@@ -17,6 +31,6 @@
     = link_to "Billing", current_company.customer.present? ? business_customers_path : new_business_customer_path 
 
   .nav-section My Profile
-  %li{:class => is_active?(edit_business_user_path(current_user.id))}
-    = link_to "Profile, E-mail & Calendar Sync, Notifications ", edit_business_user_path(current_user.id)
+  %li{:class => is_active?(business_user_path(current_user))}
+    = link_to "Profile, E-mail & Calendar Sync, Notifications ",business_user_path(current_user)
 

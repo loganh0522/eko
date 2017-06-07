@@ -13,9 +13,15 @@
 
     .templates-header
       %h4 Rejection Reasons
-      = link_to "Create Reason", new_business_email_template_path, :data => {:remote => true } 
-    .templates-body
+      = link_to "Create Reason", new_business_rejection_reason_path, :data => {:remote => true } 
+    .templates-body#reasons
       = render "business/rejection_reasons/rejection_reasons", rejection_reasons: @rejection_reasons
    
 = render "business/email_templates/email_template_modal"
 
+.modal#basic-form-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title

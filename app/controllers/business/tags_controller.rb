@@ -75,6 +75,8 @@ class Business::TagsController < ApplicationController
     applicant_ids = params[:applicant_ids].split(',')   
     
     applicant_ids.each do |id|
+      @application_tags = Application.find(id).tags
+
       if !@application_tags.include?(@tag) 
         if @company_tags.include?(@tag) 
           Tagging.create(application_id: id, tag_id: @tag.id)

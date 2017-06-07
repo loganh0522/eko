@@ -1,7 +1,17 @@
 jQuery -> 
 
-########### Change E-mail, Notes, Interview Actions ############
+########### Filter Jobs by Status ############
+  $('.change-containers-nav').on 'click', '.job-status', (event) ->
+    $('.change-containers-nav').find('.activated').removeClass('activated')
+    $(this).addClass('activated')
+    $.ajax
+      url : "/business/jobs"
+      type : "get"
+      data:
+        status: $(this).attr('id')
 
+
+        
 
 ######### NavBar Change Containers #############
 

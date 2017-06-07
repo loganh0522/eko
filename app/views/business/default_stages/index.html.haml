@@ -1,0 +1,16 @@
+.company-settings
+  .side-container
+    = render 'business/shared/admin_sidebar'
+  .main-container
+    .templates-header
+      %h2 Default Hiring Pipeline
+      = link_to "Create Stage", new_business_default_stage_path, :data => {:remote => true } 
+    .templates-body#stages
+      = render "business/default_stages/default_stages", stages: @stages
+
+.modal#basic-form-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title

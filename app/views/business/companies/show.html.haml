@@ -1,0 +1,18 @@
+.company-settings
+  .side-container
+    = render 'business/shared/admin_sidebar'
+  .main-container
+    .body
+      .user-profile-header
+        .user-info
+          %h3= current_company.name
+        .profile-actions
+          .link1= link_to "Edit Company", edit_business_company_path(current_company), class: "btn border-button2", :data => {remote: true}
+
+
+.modal#basic-form-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title

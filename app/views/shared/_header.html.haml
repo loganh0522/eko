@@ -25,7 +25,7 @@
               %li= link_to "JOBS", business_jobs_path 
               %li= link_to "CANDIDATES", business_candidates_path
               %li= link_to "ACTIVITY", business_activities_path
-              %li= link_to "CLIENTS", business_clients_path
+              %li= link_to "CLIENTS", business_clients_path if current_company.kind == "recruiter"
               / %li
               /   = link_to business_tasks_path do
               /     .glyphicon.glyphicon-calendar
@@ -51,7 +51,7 @@
               %li
                 %a= link_to "Billing", business_customers_path
               %li
-                %a= link_to "My Profile", edit_business_user_path(current_user.id)
+                %a= link_to "My Profile", business_user_path(current_user)
               %li
                 %a= link_to "Sign Out", signout_path
        

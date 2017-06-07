@@ -31,6 +31,7 @@ class Business::CommentsController < ApplicationController
     if params[:application_id].present?     
       @job = Job.find(params[:job_id])
       @application = Application.find(params[:application_id])
+      @commentable = 'Application'
     elsif params[:client_contact_id].present?      
       @client = Client.find(params[:client_id])
       @contact = ClientContact.find(params[:client_contact_id])    
@@ -44,10 +45,7 @@ class Business::CommentsController < ApplicationController
   end
 
   def create 
-    # @regex = params[:comment][:body].scan /@([\w]+\s[\w]+)/
     build_proper_association
-
-    
 
     respond_to do |format| 
       if @comment.save 
@@ -103,8 +101,7 @@ class Business::CommentsController < ApplicationController
     applicant_ids.each do |id| 
       @application = Application.find(id)
       @job = Job.find(@application.job_id)
-      @comment = Comment.create(body: params[:comment], user_id: current_user.id, application_id: @application.id)  
-    end
+      @comment = @application.comments.build(comment_params)
     track_activity(@comment, "create")
     redirect_to :back
   end

@@ -1,0 +1,3 @@
+%div{:id => 'stages', :data => {:update_url => sort_business_default_stages_path(current_company)}}
+  - stages.each do |stage|
+    = render "business/default_stages/default_stage", stage: stage

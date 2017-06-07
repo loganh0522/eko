@@ -34,25 +34,19 @@ class Business::UsersController < ApplicationController
 
   def edit
     @user = current_user
-    @user_avatar = UserAvatar.new
-    @avatar = @user.user_avatar
-    @signature = @user.email_signature
     
-    if request.env['omniauth.auth'].present? 
-      @auth = request.env['omniauth.auth']['credentials']
-      GoogleToken.create(
-        access_token: @auth['token'],
-        refresh_token: @auth['refresh_token'],
-        expires_at: Time.at(@auth['expires_at']).to_datetime,
-        user_id: current_user.id
-        )
-    end  
+    respond_to do |format| 
+      format.js
+    end
   end
 
   def update
     @user = current_user
-    user.password = params[:password]
-    user.save
+    @user.update(user_params)
+    
+    respond_to do |format|
+      format.js
+    end
   end
 
   def gmail_auth
@@ -62,7 +56,7 @@ class Business::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :password)
+    params.require(:user).permit(:first_name, :last_name, :phone, :email, :password, :password_confirmation)
   end
 
   def user_google_token_present

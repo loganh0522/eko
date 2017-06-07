@@ -77,6 +77,7 @@ Rails.application.routes.draw do
 
   namespace :business do 
     root to: "jobs#index" 
+    get "hiring_defaults", to: 'rejection_reasons#index'
     resources :activities
     resources :hiring_teams
     resources :companies
@@ -85,6 +86,13 @@ Rails.application.routes.draw do
     resources :rejection_reasons
     resources :comments
     
+    resources :default_stages do 
+      collection do
+        post :sort, to: "default_stages#sort"
+      end 
+    end
+
+    resources :application_emails
 
     resources :clients do 
       resources :jobs

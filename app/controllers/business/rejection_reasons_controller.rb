@@ -5,12 +5,12 @@ class Business::RejectionReasonsController < ApplicationController
   before_filter :company_deactivated?
   
   def index   
-
+    @rejection_reasons = current_company.rejection_reasons
+    @application_email = current_company.application_emails.first
   end
 
   def new
     @rejection_reason = RejectionReason.new
-
     respond_to do |format| 
       format.js
     end
@@ -19,7 +19,7 @@ class Business::RejectionReasonsController < ApplicationController
   def create
     @rejection_reason = RejectionReason.new(rejection_params)
 
-    if @rejection_reason.save? 
+    if @rejection_reason.save
       @rejection_reasons = current_company.rejection_reasons
       respond_to do |format|
         format.js
@@ -28,14 +28,13 @@ class Business::RejectionReasonsController < ApplicationController
   end
 
   def edit
-    @rejection_reason = RejectionReason.find(params[:rejection_reason_id])
+    @rejection_reason = RejectionReason.find(params[:id])
   end
 
   def update
-    @rejection_reason = RejectionReason.find(params[:rejection_reason_id])
+    @reason = RejectionReason.find(params[:id])
 
-    if @rejection_reason.update
-      @rejection_reasons = current_company.rejection_reasons
+    if @reason.update(rejection_params)
       respond_to do |format|
         format.js
       end
@@ -43,9 +42,9 @@ class Business::RejectionReasonsController < ApplicationController
   end
 
   def destroy
-    @rejection_reason = RejectionReason.find(params[:rejection_reason_id])
+    @reason = RejectionReason.find(params[:id])
 
-    if @rejection_reason.update
+    if @reason.destroy
       respond_to do |format|
         format.js
       end

@@ -55,7 +55,7 @@ class Business::MessagesController < ApplicationController
       @job = Job.find(params[:job_id])
       @application = Application.find(params[:application_id])
       @user = @application.applicant
-      
+  
       @messages = @application.messages
       @activities = current_company.activities.where(application_id: @application.id).order('created_at DESC')
 

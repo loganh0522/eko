@@ -1,0 +1,7 @@
+.template{id: "rejection_reason_#{reason.id}"}
+  .body= reason.body
+  .icons
+    = link_to edit_business_rejection_reason_path(reason.id), :data => {:remote => true } do
+      %i.glyphicon.glyphicon-pencil
+    = link_to business_rejection_reason_path(reason.id), remote: true, :method => :delete do
+      %i.glyphicon.glyphicon-remove

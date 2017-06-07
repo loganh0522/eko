@@ -3,5 +3,4 @@ $('#main-container').html('<%= j render "business/jobs/jobs" %>');
 <% if params[:client_id].present? %>
   $('.change-containers-nav').find('.activated').removeClass('activated');
   $('.change-containers-nav').find('#client-jobs').addClass('activated');
-
 <% end %>

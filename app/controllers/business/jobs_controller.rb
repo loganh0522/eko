@@ -9,14 +9,18 @@ class Business::JobsController < ApplicationController
     if params[:client_id].present?
       @client = Client.find(params[:client_id])
       @jobs = @client.jobs
+    elsif params[:status].present? 
+      @jobs = current_company.jobs.where(status: params[:status])     
+      respond_to do |format|
+        format.js 
+      end
     else 
-      @jobs = current_company.jobs
-    end
-
-    respond_to do |format|
-      format.html
-      format.js 
-    end
+      @jobs = current_company.jobs.where(status: 'open') 
+      respond_to do |format|
+        format.html
+        format.js 
+      end
+    end 
   end
 
   def new

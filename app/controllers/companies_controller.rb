@@ -22,7 +22,7 @@ class CompaniesController < ApplicationController
   private
 
   def company_params 
-    params.require(:company).permit(:name, :website)
+    params.require(:company).permit(:name, :website, :kind)
   end 
 
   def set_user(company)

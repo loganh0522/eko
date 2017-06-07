@@ -1,0 +1,14 @@
+= form_for [:business, @company] do |f|
+  .modal-body
+    %fieldset
+      = f.text_field :name, label: "Company Name"
+      = f.text_field :website, label: "Website"     
+      .company-kind
+        = f.radio_button :kind, "company", id: 'company', checked: true
+        = f.label :kind, "Company", :value => "company", :for => 'company'
+
+        = f.radio_button :kind, 'recruiter', id: "recruiter"
+        = f.label :kind, "Recruiter", :value => "recruiter", :for => 'recruiter'
+  .modal-footer
+    = f.submit "Update Company", class: "btn submit-button"
+    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

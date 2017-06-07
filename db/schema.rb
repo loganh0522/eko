@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170524113925) do
+ActiveRecord::Schema.define(version: 20170531195258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 20170524113925) do
     t.string   "city"
     t.string   "province"
     t.string   "country"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "application_emails", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "company_id"
+    t.integer  "job_id"
+    t.string   "subject"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -169,6 +178,14 @@ ActiveRecord::Schema.define(version: 20170524113925) do
     t.string   "postal_code"
     t.integer  "exp_month"
     t.integer  "exp_year"
+  end
+
+  create_table "default_stages", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "position"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "demos", force: :cascade do |t|

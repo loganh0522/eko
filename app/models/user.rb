@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :email, :password, on: [:create]
   validates_uniqueness_of :email
 
-  has_secure_password validations: false 
+  has_secure_password 
 
   # Job Seeker User relationships 
   

@@ -1,0 +1,21 @@
+.company-settings
+  .side-container
+    = render 'business/shared/admin_sidebar'
+  .main-container
+    %h2 Hiring Defaults
+    .templates-header
+      %h4 Rejection Reasons
+      = link_to "Create Reason", new_business_rejection_reason_path, :data => {:remote => true } 
+    .templates-body#reasons
+      = render "business/rejection_reasons/rejection_reasons", rejection_reasons: @rejection_reasons
+    .templates-header
+      %h4 Application E-mail
+    .templates-body#reasons
+      = render 'business/application_emails/email'
+
+.modal#basic-form-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title

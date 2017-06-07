@@ -19,6 +19,8 @@ class Company < ActiveRecord::Base
   has_many :activities, -> {order("created_at DESC")}
   has_many :tags
   has_many :email_templates
+  has_many :default_stages
+  has_many :application_emails
   validates_presence_of :name, :website
 
   liquid_methods :name

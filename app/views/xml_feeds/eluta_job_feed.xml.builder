@@ -1,4 +1,6 @@
 xml.instruct!(:xml, :version=> "1.0", :encoding => "UTF-8")
+xml.html( "xmlns" => "http://www.eluta.ca/elutaxml", :version => "1.0" )
+
 xml.source do 
 xml.publisher "TalentWiz"
 xml.publisherurl "https://www.talentwiz.ca"
@@ -9,7 +11,7 @@ xml.publisherurl "https://www.talentwiz.ca"
           xml.id { xml.cdata!((job.id).to_s) }
           xml.jobref { xml.cdata!((job.id).to_s) }
           xml.company { xml.cdata! (job.company.name)}
-          xml.joburl { xml.cdata!(job.url) }
+          xml.joburl { xml.cdata!(job.url) }       
           xml.title { xml.cdata!(job.title) }
           xml.description { xml.cdata!(job.description) }
           xml.jobaddress {xml.cdata!(job.address)}
