@@ -81,11 +81,14 @@ class Business::StagesController < ApplicationController
         @application.update_attribute(:rejected, true)
       else
         @application.update_attribute(:stage_id, params[:stages])  
-      end
+      end    
     end
-    
-    track_activity(@application, "move_stage")
-    redirect_to business_job_path(@job)
+
+    # track_activity(@application, "move_stage")
+   
+    respond_to do |format|
+      format.js
+    end
   end
 
 

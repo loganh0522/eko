@@ -110,7 +110,7 @@ jQuery ->
 
 #################### Add Applicants To Modal On Action Click #############################
 
-  $('.applicants').on 'click', '#move-applicants', (event) ->
+  $('.application-actions').on 'click', '#move-applicants', (event) ->
     checkbox = $('.applicant-checkbox')
     applicant_ids = []
     applicants = []

@@ -3,13 +3,19 @@
     .glyphicon.glyphicon-share-alt
   .activity-body
     .activity-body-header
-      - if activity.trackable.applicant.user_avatar.present? 
-        = image_tag activity.trackable.applicant.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
-      - else 
-        .circle-img
-          %img(src="/tmp/little-man.png") 
+      / - if activity.trackable.candidate.manually_created == true
+      /   .circle-img
+      /     %img(src="/tmp/little-man.png") 
+      / - else activity.trackable.candidate.user.user_avatar.present? 
+      /   = image_tag activity.trackable.applicant.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
+
+        
       .content
-        = link_to "#{activity.trackable.applicant.first_name.capitalize} #{activity.trackable.applicant.last_name.capitalize}", business_job_application_path(activity.trackable.apps.id, activity.trackable.id)    
+        / = link_to "#{activity.trackable.applicant.first_name.capitalize} #{activity.trackable.applicant.last_name.capitalize}", business_job_application_path(activity.trackable.apps.id, activity.trackable.id)  
+        - if activity.trackable.candidate.manually_created == true
+          = activity.trackable.candidate.full_name
+        - else 
+          = activity.trackable.candidate.user.full_name  
         = "was moved to the #{activity.trackable.stage.name } stage"
         = link_to "#{activity.trackable.apps.title}", business_job_path(activity.trackable.apps)
         %br

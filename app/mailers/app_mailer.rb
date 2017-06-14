@@ -11,6 +11,7 @@ class AppMailer < ActionMailer::Base
     @recipient = recipient
     @job = job 
     @current_company = current_company
+
     mail to: recipient.email, from: "application-" + token + "@sys.talentwiz.ca", subject: "#{@message.subject}"
   end
 

@@ -1,8 +1,8 @@
 .email-container
   .subject
-    = @application_email.subject
+    = "Subject: #{@application_email.subject}"
   .body
     = @application_email.body
 
-= link_to "Update", edit_business_application_email_path(current_company), remote: true, class: "btn submit-button"
+= link_to "Edit", edit_business_application_email_path(current_company), remote: true, class: "btn border-button2"
 

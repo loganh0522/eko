@@ -9,6 +9,7 @@ class Business::CandidatesController < ApplicationController
     if params[:job].present?
       @job = Job.find(params[:job])
     end
+    
     @candidate = Candidate.new
     @candidate.work_experiences.build
     @candidate.educations.build
@@ -19,12 +20,16 @@ class Business::CandidatesController < ApplicationController
   end
 
   def create 
-    @candidate = Candidate.new(application_params)
+    @candidate = Candidate.new(candidate_params)
 
     if @candidate.save
+      
       if params[:job_id].present? 
         @job = Job.find(params[:job_id])
         Application.create(candidate: @candidate, job_id: @job.id, company_id: current_company)
+        @applications = @job.applications
+      else
+        @candidates = current_company.candidates
       end
       respond_to do |format|
         format.js
@@ -54,7 +59,7 @@ class Business::CandidatesController < ApplicationController
 
   private
 
-  def application_params
+  def candidate_params
     params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :location, :company_id, :manually_created, work_experiences_attributes: [:id, :body, :_destroy, :title, :company_name, :description, :start_month, :start_year, :end_month, :end_year, :current_position, :industry_ids, :function_ids, :location],
       educations_attributes: [:id, :school, :degree, :description, :start_month, :start_year, :end_month, :end_year, :_destroy])
   end

@@ -1,6 +1,6 @@
 .main-container
-  = form_tag business_jobs_path, method: :get do   
-    = search_field_tag :query, params[:query], placeholder: "Search Jobs By Title", class: "form-control"
+  / = form_tag business_jobs_path, method: :get do   
+  /   = search_field_tag :query, params[:query], placeholder: "Search Jobs By Title", class: "form-control"
   .open-container.showing  
     - if @jobs.count == 0
       .not-present-container

@@ -2,8 +2,13 @@
   #job-applicants
     .job-stages
       = render 'business/applications/job_applications/job_stages'
-    .main-container
-      = link_to 'Add Candidate', new_business_candidate_path(:job => @job), class: "btn border-button2", id: "move-applicants", remote: true
+    .application-actions
+      = render 'business/applications/job_applications/application_actions'
+      = render "business/applications/move_stages"
+      = render "business/comments/add_comment"
+      = render "business/messages/send_message"
+      = render "business/tags/add_tags"
+    .main-container 
       = render 'business/applications/job_applications/applications'
     .side-container
       = render 'business/applications/job_applications/all_application_filters'

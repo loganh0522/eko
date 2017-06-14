@@ -1,7 +1,7 @@
 class Job < ActiveRecord::Base
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks 
-  index_name ["talentwiz", Rails.env].join('_') 
+  # include Elasticsearch::Model
+  # include Elasticsearch::Model::Callbacks 
+  # index_name ["talentwiz", Rails.env].join('_') 
   
   liquid_methods :title
   belongs_to :company

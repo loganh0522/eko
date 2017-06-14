@@ -8,9 +8,15 @@
     = render "business/candidates/app_new_modal"
     = link_to 'Add Candidate', new_business_candidate_path, class: "btn border-button2", id: "move-applicants", remote: true
 
-
 #main-container
   #job-applicants
+    .application-actions
+      .no-action-buttons
+        .btn.border-button Add Note
+        .btn.border-button Send E-mail
+      .applicant-action-buttons
+        = link_to 'Add Note', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#add_commentModal"}
+        = link_to 'Send E-mail', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#send_messageModal"}
     .side-container
       = render "business/candidates/candidate_table/candidate_filters"        
     .main-container

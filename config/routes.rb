@@ -143,6 +143,9 @@ Rails.application.routes.draw do
     
     resources :applications do 
       resources :ratings
+      resources :comments
+      resources :tasks
+      resources :messages
       collection do 
         post :update_multiple, to: "stages#update_multiple"
         post :add_note_multiple, to: "comments#add_note_multiple"

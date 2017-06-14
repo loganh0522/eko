@@ -2,12 +2,7 @@
   .header
     = render "business/comments/add_comment"
     = render "business/messages/send_message"
-    .no-action-buttons
-      .btn.border-button Add Note
-      .btn.border-button Send E-mail
-    .applicant-action-buttons
-      = link_to 'Add Note', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#add_commentModal"}
-      = link_to 'Send E-mail', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#send_messageModal"}
+    
   .applicant-table-body
     %table.table
       %thead

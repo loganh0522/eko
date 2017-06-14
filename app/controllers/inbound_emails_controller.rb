@@ -3,12 +3,12 @@ class InboundEmailsController < ApplicationController
 
   def create
     @token = params[:recipient].split('-').last.split('@').first
-    @application = Application.find_by(token: @token)
+    @candidate = Candidate.find_by(token: @token)
     @msg_body = params["stripped-text"]
 
 
-    if @application.present? 
-      @message = Message.create(body: @msg_body, application_id: @application.id, user_id: @application.user_id)
+    if @candidate.present? 
+      @message = @candidate.messages.build(body: @msg_body, candidate_id: @candidate.id)
     end
 
     head 200

@@ -52,7 +52,7 @@ class Business::JobsController < ApplicationController
     @applications = @job.applications
     # @interviews_by_date = @job.interviews.group_by(&:interview_date)
     @tag = Tag.new
-    tags_present(@candidates)    
+    tags_present(@candidates)  
   end
 
   def edit
@@ -172,7 +172,7 @@ class Business::JobsController < ApplicationController
   end
 
   def job_params
-    params.require(:job).permit(:description, :title, :location, :address, :benefits, :company_id,
+    params.require(:job).permit(:description, :recruiter_description, :title, :location, :address, :benefits, :company_id,
       :industry_ids, :function_ids, :client_id, :education_level, :kind, :career_level)
   end
   

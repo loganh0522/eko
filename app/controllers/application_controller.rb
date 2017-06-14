@@ -104,6 +104,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # def track_multiple_activity(trackable, action = params[:action], applicants)
+  #   current_user.activities.create! action: action, trackable: trackable, 
+  # end
+
   def track_activity(trackable, action = params[:action])
     if (params[:application_id]).present?
       current_user.activities.create! action: action, trackable: trackable, application_id: params[:application_id], company: current_company, job_id: params[:job_id]    

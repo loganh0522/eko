@@ -20,10 +20,10 @@
                     .time= time_ago_in_words(message.created_at)                 
               .activity-body-body  
                 .comment-body
-                  - if @application.present?
-                    = simple_format(Liquid::Template.parse(message.body).render('recipient' => @application.applicant, 'company' => @current_company), 'job' => @application.apps)
+                  - if message.messageable.user.present?
+                    = simple_format(Liquid::Template.parse(message.body).render('recipient' => message.messageable.user, 'company' => @current_company))
                   - else
-                    = simple_format(message.body)
+                    = simple_format(Liquid::Template.parse(message.body).render('recipient' => message.messageable, 'company' => @current_company))
       - else
         .not-present-container
           %p There are currently no e-mails with applicant.

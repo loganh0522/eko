@@ -14,13 +14,12 @@
                 = question.position
                 = question.body
               .answer
-                - if question.kind == 'Text' || question.kind == 'Paragraph'
-                  = question.question_answer.body unless !question.question_answer.present?
-                - if question.kind == 'Checkbox' || question.kind == 'Multiple Choice'
-                  - question.question_options.each do |option|
-                    %ul
-                      %li
-                        - if question.question_answer.question_option_id == option.id
-                          %b= option.body 
-                        - else 
-                          %p= option.body
+                = question_answer(question, @application)
+
+                / - question.question_options.each do |option|
+                /   %ul
+                /     %li
+                /       - if question.question_answer.question_option_id == option.id
+                /         %b= option.body 
+                /       - else 
+                /         %p= option.body

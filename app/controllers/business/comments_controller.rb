@@ -3,22 +3,11 @@ class Business::CommentsController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
+  before_filter :load_commentable, except: [:new, :destroy, :update, :add_note_multiple]
+  before_filter :new_commentable, only: [:new]
 
   def index
-    if params[:candidate_id].present?
-      @candidate = Candidate.find(params[:candidate_id])
-      @comments = @candidate.notes
-    elsif params[:client_contact_id].present?
-      @contact = ClientContact.find(params[:client_contact_id])
-      @comments = @contact.comments
-    elsif params[:client_id].present?
-      @client = Client.find(params[:client_id])
-      @comments = @client.comments
-    else
-      @application = Application.find(params[:application_id])
-      @job = Job.find(params[:job_id])
-      @comments = @application.comments
-    end
+    @comments = @commentable.comments
 
     respond_to do |format|
       format.js
@@ -27,44 +16,28 @@ class Business::CommentsController < ApplicationController
 
   def new 
     @comment = Comment.new
-    
-    if params[:application_id].present?     
-      @job = Job.find(params[:job_id])
-      @application = Application.find(params[:application_id])
-      @commentable = 'Application'
-    elsif params[:client_contact_id].present?      
-      @client = Client.find(params[:client_id])
-      @contact = ClientContact.find(params[:client_contact_id])    
-    else
-      @candidate = Candidate.find(params[:candidate_id])
-    end
 
     respond_to do |format|
       format.js
     end
   end
 
-  def create 
-    build_proper_association
+  def create   
+    @comment = @commentable.comments.build(comment_params)
+    
+    if @comment.save 
+      @comments = @commentable.comments
+      track_activity @comment
+    end
 
     respond_to do |format| 
-      if @comment.save 
-        if params[:application_id].present?
-          @job = Job.find(params[:job_id])
-          @comments = Application.find(params[:application_id]).comments
-        elsif params[:client_contact_id].present?
-          @comments = @contact.comments
-        end
-        track_activity @comment
-        format.js 
-      end
+      format.js 
     end
   end
 
   def edit 
-    @comment = Comment.find(params[:id])
-    @application = Application.find(@comment.commentable_id)
-    @job = @application.apps
+    @comment = @commentable
+    @commentable = @commentable.commentable
 
     respond_to do |format| 
       format.js
@@ -72,10 +45,8 @@ class Business::CommentsController < ApplicationController
   end
 
   def update
-    @job = Job.find(params[:job_id])
     @comment = Comment.find(params[:id])
-    @application = Application.find(params[:application_id])
-
+    
     respond_to do |format| 
       if @comment.update(comment_params)
         format.js
@@ -84,8 +55,6 @@ class Business::CommentsController < ApplicationController
   end
 
   def destroy
-    @job = Job.find(params[:job_id])
-    @application = Application.find(params[:application_id])
     @comment = Comment.find(params[:id])
     Activity.where(trackable_id: @comment.id).first.delete
     @comment.destroy
@@ -96,12 +65,15 @@ class Business::CommentsController < ApplicationController
   end
 
 
-  def add_note_multiple   
+  def add_note_multiple
     applicant_ids = params[:applicant_ids].split(',')
+    
     applicant_ids.each do |id| 
       @application = Application.find(id)
       @job = Job.find(@application.job_id)
-      @comment = @application.comments.build(comment_params)
+      @comment = @application.comments.build(body: params[:comment], user_id: current_user.id)
+      @comment.save
+    end
     track_activity(@comment, "create")
     redirect_to :back
   end
@@ -112,23 +84,13 @@ class Business::CommentsController < ApplicationController
     params.require(:comment).permit(:body, :user_id)
   end
 
-  def build_proper_association
-    if params[:client_contact_id].present? 
-      @contact = ClientContact.find(params[:client_contact_id])
-      @comment = @contact.comments.build(comment_params)
-    elsif params[:candidate_id].present?
-      @candidate = Candidate.find(params[:candidate_id])
-      @comment = @candidate.comments.build(comment_params)
-    else
-      @application = Application.find(params[:application_id])
-      @candidate = @application.candidate
+  def load_commentable
+    resource, id = request.path.split('/')[-3..-1]
+    @commentable = resource.singularize.classify.constantize.find(id)
+  end
 
-      if @candidate.manually_created == true 
-        @applicant = @candidate
-      else
-        @applicant = @candidate.user.profile
-      end
-      @comment = @application.comments.build(comment_params)
-    end
+  def new_commentable
+    resource, id = request.path.split('/')[-4..-2]
+    @commentable = resource.singularize.classify.constantize.find(id)
   end
 end

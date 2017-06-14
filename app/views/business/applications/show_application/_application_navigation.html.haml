@@ -1,11 +1,12 @@
 .application-actions
-  = link_to new_business_job_application_comment_path(@job, @application), remote: true do
+  = link_to new_business_application_comment_path(@application), remote: true do
     #add-note.btn-application-actions.active-button + Add Note
   = link_to new_business_job_application_message_path(@job, @application), remote: true do 
-    #send-email.btn-application-actions.inactive-button Send E-mail 
-  #schedule-appt.btn-application-actions.inactive-button
-    Schedule Interview
-
+    #send-email.btn-application-actions.inactive-button Send E-mail
+  = link_to new_business_application_task_path(@application), remote: true do 
+    #add-task.btn-application-actions.inactive-button Create Task
+  / #schedule-appt.btn-application-actions.inactive-button
+  /   Schedule Interview
 .action-area
   
 

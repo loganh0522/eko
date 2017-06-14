@@ -85,7 +85,9 @@ class Business::ApplicationsController < ApplicationController
   def application_form
     if params[:candidate_id].present?
       @candidate = Candidate.find(params[:candidate_id])
-      @application = @candidate.application.first
+
+      
+      @application = @candidate.applications.first
       @questionairre = @application.apps.questionairre
       @questions = @questionairre.questions
     else
@@ -94,7 +96,7 @@ class Business::ApplicationsController < ApplicationController
       @questionairre = @application.apps.questionairre
       @questions = @questionairre.questions
     end
-     
+
     respond_to do |format| 
       format.js
     end

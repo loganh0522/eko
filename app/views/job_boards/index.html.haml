@@ -10,8 +10,8 @@
       .header= @job_board.job_board_header.header
       .sub-header= @job_board.job_board_header.subheader
   
-.job-board-sections
-  - if @sections.count != 0
+- if @sections.count != 0
+  .job-board-sections
     - @sections.each do |section|
       .section
         - if section.kind == 'Text'

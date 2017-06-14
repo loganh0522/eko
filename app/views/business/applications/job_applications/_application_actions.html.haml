@@ -1,0 +1,11 @@
+= link_to 'Add Candidate', new_business_candidate_path(:job => @job), class: "btn border-button2", id: "add-applicant", remote: true
+.no-action-buttons
+  .btn.border-button Move Stages
+  .btn.border-button Send E-mail
+  .btn.border-button Add Note 
+  .btn.border-button Add Tag
+.applicant-action-buttons
+  = link_to 'Move Stages', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#stageModal"}
+  = link_to 'Send E-mail', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#send_messageModal"}
+  = link_to 'Add Note', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#add_commentModal"}
+  = link_to 'Add Tag', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#addTagsModal"}

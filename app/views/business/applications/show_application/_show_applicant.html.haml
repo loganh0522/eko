@@ -6,17 +6,22 @@
           .profile_picture
             %img(src="/tmp/blank_profile_picture.png")
         .applicant-details
-          .name= "#{@application.candidate.full_name.capitalize}"
-          = render 'business/ratings/form', application: @application
-        .contact-details
-          .glyphicon.glyphicon-earphone 
-            = "#{@candidate.phone}"
-          %br
-          .glyphicon.glyphicon-envelope
-            = "#{@application.candidate.email}"
-          %br
-          .glyphicon.glyphicon-map-marker
-            = "#{@application.candidate.location}"
+          .name-rating
+            .name= "#{@application.candidate.full_name.capitalize}"
+            = render 'business/ratings/form', application: @application
+          .current-position
+            / - if @application.candidate.current_jobs.present?
+            /   = "#{@application.candidate.user.current_jobs.first.title}  #{@application.candidate.user.current_jobs.first.company_name} "
+          .contact-details
+            .glyphicon.glyphicon-earphone 
+              = "#{@candidate.phone}"
+            %br
+            .glyphicon.glyphicon-envelope
+              = "#{@application.candidate.email}"
+            %br
+            - if @application.candidate.location.present?
+              .glyphicon.glyphicon-map-marker
+                = "#{@application.candidate.location}"
       - else
         .user-image
           .profile_picture
@@ -38,8 +43,9 @@
             .glyphicon.glyphicon-envelope
               = "#{@application.candidate.user.email}"
             %br
-            .glyphicon.glyphicon-map-marker
-              = "#{@application.candidate.user.location}"
+            - if @application.candidate.user.location.present? 
+              .glyphicon.glyphicon-map-marker
+                = "#{@application.candidate.user.location}"
     .applicant-actions
       = render 'business/applications/show_application/header_actions' 
     .applicant-nav

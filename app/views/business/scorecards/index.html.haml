@@ -4,10 +4,9 @@
   .side-container
     = render 'business/shared/post_job'
   .main-container
-    .stage-header   
+    #stage-header   
       %h4 Scorecard
       = link_to "+ Add Section", new_business_job_scorecard_scorecard_section_path(@job.id, @scorecard.id), :data => {:remote => true}      
     .body
-      = render 'business/scorecard_sections/sections', sections: @sections
-      
+      = render 'business/scorecard_sections/sections', sections: @sections 
     .job_scorecard 

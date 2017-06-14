@@ -8,7 +8,7 @@
       .name All Applicants
     - @job.stages.each do |stage| 
       %li.job_list_stage{:id => "#{stage.name}"}
-        .number= stage.applicants.count
+        .number= stage.applications.count
         .name= stage.name  
     %li.job_list_stage#Rejected
       .number 

@@ -4,7 +4,7 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
         %h4.modal-title Move Applicants 
-      = form_tag update_multiple_business_applications_path do  
+      = form_tag update_multiple_business_applications_path, remote: true do  
         .modal-body 
           .email-area
             .to

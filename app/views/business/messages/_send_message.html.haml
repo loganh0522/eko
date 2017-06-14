@@ -9,10 +9,7 @@
           .email-area
             .to 
               .title To:  
-              .recipients
-            .to
-              .title From: 
-              .sender= "#{current_user.full_name} (#{current_user.email})"       
+              .recipients       
             .subject
               .title Subject
               .sender= text_field_tag :subject, nil, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false

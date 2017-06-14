@@ -1,19 +1,5 @@
-<% if params[:candidate_id].present? %> 
-  $('.action-area').html('<%= j render "business/comments/candidate_form" %>');
-  $('.application-actions').find('.active-button').addClass('inactive-button');
-  $('.application-actions').find('.active-button').removeClass('active-button');
-  $('.application-actions').find('#add-note').addClass('active-button');
-  $('.application-actions').find('#add-note').removeClass('inactive-button');
-<% elsif params[:client_contact_id].present? %>
-  $('.action-area').html('<%= j render "business/comments/contact_form" %>');
-  $('.application-actions').find('.active-button').addClass('inactive-button');
-  $('.application-actions').find('.active-button').removeClass('active-button');
-  $('.application-actions').find('#add-note').addClass('active-button');
-  $('.application-actions').find('#add-note').removeClass('inactive-button');
-<% else %> 
-  $('.action-area').html('<%= j render "business/comments/application_form" %>');
-  $('.application-actions').find('.active-button').addClass('inactive-button');
-  $('.application-actions').find('.active-button').removeClass('active-button');
-  $('.application-actions').find('#add-note').addClass('active-button');
-  $('.application-actions').find('#add-note').removeClass('inactive-button');
-<% end %> 
+$('.action-area').html('<%= j render "business/comments/form" %>');
+$('.application-actions').find('.active-button').addClass('inactive-button');
+$('.application-actions').find('.active-button').removeClass('active-button');
+$('.application-actions').find('#add-note').addClass('active-button');
+$('.application-actions').find('#add-note').removeClass('inactive-button');

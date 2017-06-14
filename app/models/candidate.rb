@@ -1,21 +1,23 @@
 class Candidate < ActiveRecord::Base
   include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks 
+  include Elasticsearch::Model::Callbacks  
   index_name ["talentwiz", Rails.env].join('_') 
 
+  liquid_methods :first_name, :last_name, :full_name
+  before_create :generate_token
 
   belongs_to :company
   belongs_to :user
-
-  has_many :applications
+  
+  has_many :applications, :dependent => :destroy
   has_many :ratings
   
-  has_many :messages, as: :messageable
-  has_many :comments, as: :commentable
+  has_many :messages, as: :messageable, :dependent => :destroy
+  has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy
+  has_many :tasks, as: :taskable, :dependent => :destroy
 
-
-  has_many :work_experiences
-  has_many :educations
+  has_many :work_experiences, :dependent => :destroy
+  has_many :educations, :dependent => :destroy
 
   accepts_nested_attributes_for :work_experiences, 
     allow_destroy: true
@@ -90,6 +92,4 @@ class Candidate < ActiveRecord::Base
       }
     )
   end
-
- 
 end
