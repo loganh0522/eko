@@ -79,3 +79,4 @@ class Business::AssignedUserController < ApplicationController
     resource, id = request.path.split('/')[-4..-2]
     @assignable = resource.singularize.classify.constantize.find(id)
   end
+end
