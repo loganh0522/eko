@@ -1,5 +1,4 @@
 class DemosController < ApplicationController
-
   def create
     @demo = Demo.new(demo_params)
     if @demo.save
