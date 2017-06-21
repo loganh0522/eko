@@ -2,7 +2,7 @@
   .fieldset
     .row
       .form-group.col-md-12
-        = f.text_field :title, class: "form-control", label: "Job Title"
+        = f.text_field :title, class: "form-control", label: "Job Title", autocomplete: "off"
     .row
       .form-group.col-md-6
         = f.text_field :location, class: "form-control", id: "geocomplete", label: "Location (City)", placeholder: "City Name"
