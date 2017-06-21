@@ -1,3 +1,2 @@
-$('#templates').html('<%= j render "rejection_reasons", stages: @reasons %>');
-$('#template_name').val('');
-$('#new_stage').reset('');
+$('#stages').html('<%= j render "stages", stages: @stages %>');
+$('#new_stage').trigger('reset');

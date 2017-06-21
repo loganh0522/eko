@@ -1,40 +1,14 @@
-.page-header
-  %h1 Activity
-#activity-container
+.home-page-header
+  .top-info
+    %h1 Activity
+#main-container
   .main-container
     .activity-feed
       - @activities.each do |activity|         
         = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity
   .side-container
-    .filter
-      %h4 Activity Type
-      %ul
-        %li.activity 
-          .checkbox{:data => {:id => "comments"}}= check_box_tag ""
-          Comments
-        %li.activity
-          .checkbox{:data => {:id => "scorecards"}}= check_box_tag ""
-          Scorecards
-        %li.activity
-          .checkbox{:data => {:id => "messages"}}= check_box_tag ""
-          Messages
-        %li.activity
-          .checkbox{:data => {:id => "move stages"}}= check_box_tag ""
-          Move Stages
-        %li.activity
-          .checkbox{:data => {:id => "applied"}}= check_box_tag ""
-          Applied
-        %li.activity
-          .checkbox{:data => {:id => "interview"}}= check_box_tag ""
-          Interview
-    .filter
-      %h4 Open Job Postings
-      %ul
-        - @jobs.each do |job| 
-          %li.open-job
-            .checkbox{:data => {:id => "job_#{job.id}"}}= check_box_tag ""
-            #{job.title}
-
+    = render 'business/activities/filters'
+  
 
 
 

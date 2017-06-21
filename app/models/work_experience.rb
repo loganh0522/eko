@@ -1,7 +1,7 @@
 class WorkExperience < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :profile
-  belongs_to :candidate
+  belongs_to :user, touch: true
+  belongs_to :profile, touch: true
+  belongs_to :candidate, touch: true
   
   has_many :exp_industries
   has_many :industries, through: :exp_industries

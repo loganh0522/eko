@@ -1,10 +1,12 @@
-.job-activity-feed-container
-  #job-activity-container
-    .main-container
-      .activity-feed
-        - if @tasks.present?
-          - @tasks.each do |comment|
-            = render 'business/tasks/comment', comment: comment
-        - else  
-          .not-present-container
-            %p There are currently no tasks.
+#job-applicants
+  .side-container
+    = render 'business/tasks/filters'
+  .main-container#task-container
+    = render 'business/tasks/form'
+    .tasks
+      - if @tasks.present?
+        - @tasks.each do |task|
+          = render 'business/tasks/task', task: task
+      - else  
+        .not-present-container
+          %p There are currently no tasks.

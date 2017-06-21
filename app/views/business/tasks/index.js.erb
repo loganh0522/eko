@@ -1,9 +1,11 @@
-<% if params[:job_id].present? %> 
-  $('#main-container').html('<%= j render "business/tasks/tasks" %>');
+<% if @taskable.class == Job || Client %> 
+  $('#main-container').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
   $('.change-containers-nav').find('.activated').removeClass('activated');
-  $('.change-containers-nav').find('#job-calendar').addClass('activated');
+  $('.change-containers-nav').find('#job-tasks').addClass('activated');
 <% elsif params[:client_contact_id].present? %>
   $('.applicant-profile').html('<%= j render "business/tasks/tasks" %>');
   $('.applicant-nav').find('.activated').removeClass('activated');
   $('.applicant-nav').find('#tasks').addClass('activated');
+<% else %>
+  $(".main-container").html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
 <% end %>

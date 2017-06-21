@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531195258) do
+ActiveRecord::Schema.define(version: 20170620160210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,12 @@ ActiveRecord::Schema.define(version: 20170531195258) do
     t.string   "source"
     t.integer  "candidate_id"
     t.string   "rejection_reason"
+  end
+
+  create_table "assigned_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "assignable_id"
+    t.string  "assignable_type"
   end
 
   create_table "candidates", force: :cascade do |t|
@@ -287,7 +293,9 @@ ActiveRecord::Schema.define(version: 20170531195258) do
     t.datetime "updated_at"
     t.integer  "job_id"
     t.integer  "company_id"
-    t.date     "interview_date"
+    t.string   "title"
+    t.integer  "candidate_id"
+    t.string   "date"
   end
 
   create_table "invitations", force: :cascade do |t|
@@ -302,7 +310,9 @@ ActiveRecord::Schema.define(version: 20170531195258) do
     t.integer  "subsidiary_id"
     t.integer  "location_id"
     t.integer  "user_id"
-    t.integer  "job"
+    t.integer  "job_id"
+    t.string   "user_role"
+    t.string   "status"
   end
 
   create_table "job_board_headers", force: :cascade do |t|
@@ -521,6 +531,15 @@ ActiveRecord::Schema.define(version: 20170531195258) do
     t.datetime "updated_at"
   end
 
+  create_table "resumes", force: :cascade do |t|
+    t.string   "name"
+    t.string   "attachment"
+    t.integer  "candidate_id"
+    t.integer  "application_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "scorecard_ratings", force: :cascade do |t|
     t.integer "section_option_id"
     t.integer "rating"
@@ -593,6 +612,8 @@ ActiveRecord::Schema.define(version: 20170531195258) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "kind"
+    t.string   "due_time"
   end
 
   create_table "user_avatars", force: :cascade do |t|
@@ -643,11 +664,11 @@ ActiveRecord::Schema.define(version: 20170531195258) do
     t.string  "linked_in"
     t.string  "website"
     t.string  "tag_line"
-    t.string  "full_name"
     t.string  "location"
     t.string  "province"
     t.string  "country"
     t.string  "email_signature"
+    t.string  "full_name"
   end
 
   create_table "work_experiences", force: :cascade do |t|

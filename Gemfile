@@ -18,7 +18,6 @@ gem 'haml-rails'
 gem 'jbuilder', '~> 2.0'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
-
 gem 'bootstrap_form'
 gem 'autoprefixer-rails'
 
@@ -51,9 +50,6 @@ gem "font-awesome-rails"
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 
-
-
-
 gem 'googlecharts'
 
 gem 'omniauth', '~> 1.2.2'
@@ -65,6 +61,9 @@ gem 'liquid-rails', '~> 0.1.1'
 gem 'tinymce-rails', '~> 4.5'
 
 gem 'bootstrap-colorpicker-rails'
+
+gem 'jquery-timepicker-rails'
+gem 'declarative_authorization'
 
 group :development do
   gem 'thin'

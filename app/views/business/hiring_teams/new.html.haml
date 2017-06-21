@@ -6,17 +6,15 @@
   .main-container 
     #stage-header
       %h4 Add Team Members
-      = render "business/hiring_teams/hiring_team_form"  
+      .form= render "business/hiring_teams/form"  
     .invitation
-      = link_to "+ Invite New User", new_business_invitation_path, {:class => "invite", :data => {:toggle => "modal", :target => "#invitationModal"}} 
+      = link_to "+ Invite New User", new_business_invitation_path(job: @job), remote: true
     .user-list
-      %table
-        %thead
-          %tr
-            %th(width="1%")
-            %th(width="20%")
-            %th(width="20%")
-            %th.delete(width="20%")
-        %tbody.hiring_team
-          = render "hiring_team"
-= render "invitation_form"
+      = render "hiring_team"
+
+.modal#basic-form-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title  

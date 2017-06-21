@@ -1,8 +1,30 @@
-.task-area
+.task-form
   = form_for [:business, @taskable, @task], html: {remote: true} do |f|
-    = f.text_field :title, id: "task-title", placeholder: 'Enter Task'
-    = f.text_area :notes, id: "comment-body", placeholder: "Notes"
+    .form-row-4
+      .contain-1
+        = f.text_field :title, id: "task-title", placeholder: 'Enter Task'
+      .contain-3
+        = f.text_field :due_date, placeholder: "Due Date"
+      .contain-4
+        = f.text_field :due_time, id: "timepicker", placeholder: "Add Time"
+    = f.text_area :notes, id: "comment-body", placeholder: "Notes"  
+    .form-row-3
+      .contain-1
+        .title Type
+        = f.select :kind, options_for_select(["Schedule Interview", "To-do", "Send Assesment", "Finish Assessment"]), id: "select-kind" 
+      .contain-2
+        .title Assign User
+        = text_field_tag "", "", :class => 'ui-autocomplete-input', :placeholder => 'Type a users name to assign', id: "users-search"
+        %div#user-results
+      .contain-3
+        .assigned-users
+          .title Assigned Users: 
+          .user-tag
+            .name= current_user.full_name 
+            .delete-tag &times  
+      = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
     .comment-area-footer
       = f.submit @task.new_record? ? "+ Create Task" : "Update Task", class: "btn submit-button", id: "submit-comment-btn"
-      = link_to "Cancel", "#", remote: true, class: 'btn border-button2'
+      = link_to "Cancel", "#", remote: true, class: 'btn border-button2', id: 'cancel'
       = f.hidden_field :user_id, value: current_user.id
+      = f.hidden_field :company_id, value: current_company.id

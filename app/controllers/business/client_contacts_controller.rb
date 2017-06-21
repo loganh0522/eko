@@ -1,4 +1,5 @@
 class Business::ClientContactsController < ApplicationController
+  filter_resource_access
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -17,8 +18,7 @@ class Business::ClientContactsController < ApplicationController
   def show 
     @contact = ClientContact.find(params[:id])
     @client = Client.find(params[:client_id])
-    @message = Message.new
-    @comment = Comment.new
+ 
     
     respond_to do |format|
       format.js

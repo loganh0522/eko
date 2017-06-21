@@ -1,4 +1,8 @@
 class Business::JobsController < ApplicationController
+  filter_access_to :all
+  filter_access_to [:close_job, :promote], :require => :read
+  filter_access_to :publish_job, :require => :read
+  
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -10,12 +14,12 @@ class Business::JobsController < ApplicationController
       @client = Client.find(params[:client_id])
       @jobs = @client.jobs
     elsif params[:status].present? 
-      @jobs = current_company.jobs.where(status: params[:status])     
+      @jobs = current_user.jobs.where(status: params[:status])     
       respond_to do |format|
         format.js 
       end
     else 
-      @jobs = current_company.jobs.where(status: 'open') 
+      @jobs = current_user.jobs.where(status: 'open') 
       respond_to do |format|
         format.html
         format.js 
@@ -45,12 +49,12 @@ class Business::JobsController < ApplicationController
     end
   end
 
+  
+
   def show 
     @job = Job.find(params[:id])
-    # @date = params[:date] ? Date.parse(params[:date]) : Date.today
     @candidates = @job.applications
     @applications = @job.applications
-    # @interviews_by_date = @job.interviews.group_by(&:interview_date)
     @tag = Tag.new
     tags_present(@candidates)  
   end
@@ -69,14 +73,24 @@ class Business::JobsController < ApplicationController
 
   def update
     @job = Job.find(params[:id])
-    
-    if @job.update(job_params)
-      convert_location
-      track_activity @job
-      flash[:notice] = "#{@job.title} has been updated"
-      redirect_to new_business_job_hiring_team_path(@job)
+
+    if params[:status].present? 
+      if params[:status] == "open"
+        publish_job
+      elsif params[:status] == "closed"
+        closed_job
+      else
+        @job.update(status: params[:status])
+      end
     else
-      render :edit
+      if @job.update(job_params)
+        convert_location
+        track_activity @job
+        flash[:notice] = "#{@job.title} has been updated"
+        redirect_to new_business_job_hiring_team_path(@job)
+      else
+        render :edit
+      end
     end
   end
 
@@ -91,8 +105,6 @@ class Business::JobsController < ApplicationController
       flash[:danger] = "Sorry, something went wrong, please try again."
       redirect_to :back
     end
-
-    redirect_to business_jobs_path
   end
 
   def archive_job
@@ -109,9 +121,8 @@ class Business::JobsController < ApplicationController
   def publish_job 
     @job = Job.find(params[:job_id])
     @company = current_company
-
     if @company.subscription == 'start-up' && @company.open_jobs < 1 
-      @job.update_column(:status, "open") 
+      @job.update(:status, params[:status]) 
       @company.open_jobs += 1
       @company.save
       track_activity(@job, "published")

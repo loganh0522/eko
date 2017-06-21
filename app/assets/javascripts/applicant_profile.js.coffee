@@ -1,5 +1,12 @@
 jQuery -> 
 
+##### Multiple modals ######
+  $(".modal").on "shown.bs.modal", ->  
+    if $('.modal-backdrop').length == 2
+      $(this).css({'z-index':'1070'})
+      $('.modal-backdrop').last().css({'z-index':'1060'})
+
+
 ########### Filter Jobs by Status ############
   $('.change-containers-nav').on 'click', '.job-status', (event) ->
     $('.change-containers-nav').find('.activated').removeClass('activated')
@@ -9,22 +16,43 @@ jQuery ->
       type : "get"
       data:
         status: $(this).attr('id')
-
-
         
+########### jquery selectmenu #######
+  $('#selectmenu').selectmenu -> 
+    style: 'popup'
 
-######### NavBar Change Containers #############
 
+#########  #############
+  $('#task_due_date').datepicker
+      dateFormat: 'yy-mm-dd'
+  $('#timepicker').timepicker()
 
 
 ######### Scorecard JS #########
   $(document).ajaxComplete ->
-    $('#main-container').on 'click', '.application-scorecard-rating', (event) -> 
-      console.log($(this)) 
-      
-    
+    $('#task_due_date').datepicker  
+      dateFormat: 'yy-mm-dd'
 
+    $('#timepicker2').timepicker()
+    $('#timepicker').timepicker()
+    $("#geocomplete2").geocomplete()
 
+    $('form').on 'focus', '#users-search', ->
+      $('form').find('#users-search').autocomplete(
+        source: '/business/users'
+        appendTo: $('#user-results')
+        focus: (event, ui) ->
+          $('#users-search').val ui.item.name
+          false
+        select: (event, ui) ->
+          $('.assigned-users').append('<div class="user-tag"> <div class="name">' + ui.item.full_name  + '</div> <div class="delete-tag"> &times </div> </div>') 
+
+          values =  $('#user_ids').val() + ',' + ui.item.id 
+          $('#user_ids').val values
+          false
+      ).data('ui-autocomplete')._renderItem = (ul, item) ->
+        $('<li>').attr('ui-item-autocomplete', item.value).append("<a>" + item.full_name + "</a>").appendTo ul 
+      return
 
 ############ Move Applicant Stages ###############
 
@@ -97,7 +125,7 @@ jQuery ->
 
 ################### Collapse SideBar #########################
 
-  $('.side-container').on 'click', '.glyphicon', (event) ->
+  $('#main-container').on 'click', '.glyphicon', (event) ->
     if $(this).hasClass('glyphicon-minus')
       $(this).parent().next().hide()
       $(this).hide()
@@ -110,7 +138,7 @@ jQuery ->
 
 #################### Add Applicants To Modal On Action Click #############################
 
-  $('.application-actions').on 'click', '#move-applicants', (event) ->
+  $('#main-container').on 'click', '#move-applicants', (event) ->
     checkbox = $('.applicant-checkbox')
     applicant_ids = []
     applicants = []
@@ -130,7 +158,7 @@ jQuery ->
     for n in applicants
       $('.modal').find('.recipients').append('<div id="applicant" data-id=' + n[0] + '> <div class="name">' + n[1] + '</div> <div class="remove-recipient"> &times </div> </div>') 
 
-  $('.modal').on 'click', '.remove-recipient', (event) -> 
+  $('#main-container').on 'click', '.remove-recipient', (event) -> 
     $('.modal').find('form').find('#applicant_ids').val("")
     
     $(this).parent().remove()
@@ -155,25 +183,20 @@ jQuery ->
   })
 
   $(document).ajaxComplete ->
-    console.log("complete")
     $('.work-experience').find('#geocomplete').geocomplete({
       types: ['(cities)']
     })
-
     $('#geocomplete').geocomplete({
       types: ['(cities)']
     })
-    return
-  
-  $("#geocomplete2").geocomplete()
-
-
-  $('#interview-modal').on 'shown.bs.modal', ->
     $("#geocomplete2").geocomplete()
+    return
+    
 
-    $('#find').click ->
-      $('input').trigger 'geocode'
-      return
+
+  $('#basic-form-modal').on 'shown.bs.modal', ->
+    $('.event-form').find("#geocomplete2").geocomplete()
+  
 
   $('#find').click ->
     $('input').trigger 'geocode'
@@ -213,6 +236,7 @@ jQuery ->
       $("#" + "#{buttonobj}" + "_button").show()
       $(this).parent().parent().remove()
     return
+
 ################ Star Rating ##################
   $(document).on 'click', '.star', (event) ->  
     PostCode = $(this).parent().parent().attr('id')
@@ -257,53 +281,6 @@ jQuery ->
   
   $('.colorpicker').colorpicker()
 
-
-############# Application Filters ################## 
-  
-  $('.applicant-filter-checkbox').on 'click', '.filter-checkbox', (event) -> 
-    filters = $('.filter-checkbox')
-
-    # console.log($(this).attr('value'))
-    # console.log($(this).parent().attr('class'))
-    # console.log($(this).parent().parent().attr('class'))
-
-    Query = []
-    AverageRating = []
-    Tags = []
-    JobStatus = []
-    DateApplied = []
-    JobAppliedTo = []
-    LocationAppliedTo = []
-
-    for n in filters 
-
-      if $(n).is(':checked') == true      
-        if $(n).parent().attr('id') == 'rating-filter'
-          AverageRating.push($(n).val()) unless Tags.includes($(n).val())
-        if $(n).parent().data('filter') == 'Tags' 
-          Tags.push($(n).parent().data('id')) unless Tags.includes($(n).parent().data('id'))
-        if $(n).parent().data('filter') == 'JobStatus'
-          JobStatus.push($(n).parent().data('id')) unless JobStatus.includes($(n).parent().data('id'))
-        if $(n).parent().data('filter') == 'DateApplied'
-          DateApplied.push($(n).parent().data('id')) unless DateApplied.includes($(n).parent().data('id'))
-        if $(n).parent().data('filter') == 'JobAppliedTo'
-          JobAppliedTo.push($(n).parent().data('id')) unless JobAppliedTo.includes($(n).parent().data('id'))
-        if $(n).parent().data('filter') == 'LocationAppliedTo'
-          LocationAppliedTo.push($(n).parent().data('id')) unless LocationAppliedTo.includes($(n).parent().data('id'))
-
-        
-
-    $.ajax
-      url : "/business/applications/filter_applicants"
-      type : "post"
-      data:
-        query: Query
-        average_rating: AverageRating
-        tags: Tags
-        job_status: JobStatus
-        date_applied: DateApplied
-        job_applied: JobAppliedTo
-        location_applied: LocationAppliedTo
 
 
 ################# JQuery File Upload ######################

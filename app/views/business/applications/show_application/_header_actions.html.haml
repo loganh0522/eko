@@ -1,6 +1,8 @@
 .stage
+  = link_to new_business_candidate_interview_path(@candidate, application: @application.id), remote: true do 
+    .glyphicon.glyphicon-calendar
+.stage
   .select-stage= select_tag "stages", options_for_select(["Applied"] + @job.stages.collect{ |u| [u.name, u.id, { 'data-id' => u.id, 'data-application' => @application.id }] }, @application.stage.present? ? @application.stage.id : 1 ), id: 'move-applicant-stages'
-
 .stage
   .dropdown#reject
     %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
@@ -10,12 +12,13 @@
       - @rejection_reasons.each do |reason| 
         %li
           %a= link_to "#{reason.body}", business_job_application_reject_path(@job, @application, :val => reason.body), remote: true, method: :post 
-
 .stage
   = link_to new_business_candidate_application_path(@candidate), remote: true do 
     .glyphicon.glyphicon-share-alt 
-
 .stage
   .glyphicon.glyphicon-trash
+
+
+
 
 

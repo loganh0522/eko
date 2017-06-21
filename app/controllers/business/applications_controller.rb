@@ -1,10 +1,11 @@
 class Business::ApplicationsController < ApplicationController
+  filter_access_to :all
+  filter_access_to [:filter_applicants, :application_form], :require => :read
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
   
-
   def new
     @application = Application.new
     @candidate = Candidate.find(params[:candidate_id])
@@ -39,7 +40,8 @@ class Business::ApplicationsController < ApplicationController
     @rejection_reasons = current_company.rejection_reasons
     @application = Application.find(params[:id])  
     @candidate = @application.candidate
-
+    @resume = Resume.new
+    
     if @candidate.manually_created == true 
       @applicant = @candidate
     else
@@ -69,14 +71,21 @@ class Business::ApplicationsController < ApplicationController
       }
 
     @applications = []
+    if params[:query].present?
+      @results = current_company.applications.search(params[:query], options).records.to_a
+    else
+      @results = current_company.applications.search('', options).records.to_a
+    end
 
-    @results = current_company.applications.search(params[:query], options).records.to_a
-    
-    @results.each do |application|  
-      if application.company == current_company
-        @applications.append(application)
-      end
-    end 
+    if @results.count == 0 
+      # @applications = 
+    else
+      @results.each do |application|  
+        if application.company == current_company
+          @applications.append(application)
+        end
+      end 
+    end
     respond_to do |format|
       format.js
     end
@@ -85,15 +94,13 @@ class Business::ApplicationsController < ApplicationController
   def application_form
     if params[:candidate_id].present?
       @candidate = Candidate.find(params[:candidate_id])
-
-      
       @application = @candidate.applications.first
-      @questionairre = @application.apps.questionairre
+      @questionairre = @application.job.questionairre
       @questions = @questionairre.questions
     else
       @application = Application.find(params[:application_id])
       @job = Job.find(params[:job_id])
-      @questionairre = @application.apps.questionairre
+      @questionairre = @application.job.questionairre
       @questions = @questionairre.questions
     end
 

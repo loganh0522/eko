@@ -1,17 +1,23 @@
 class Business::UsersController < ApplicationController 
+  filter_resource_access
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
-  
+
   def index 
-    @invitation = Invitation.new
-    @users = current_company.users.order(:first_name)
-    @job_board = current_company.job_board
-    
-    respond_to do |format| 
-      format.html 
-      format.json { render json: @users.where("first_name like ?", "%#{params[:q]}%")}
+    if params[:term].present?
+      @company_users = current_company.users.order(:full_name).where("full_name ILIKE ?", "%#{params[:term]}%")
+      render :json => @company_users.to_json 
+    else
+      @invitation = Invitation.new
+      @users = current_company.users.order(:first_name)
+      @job_board = current_company.job_board
+      
+      respond_to do |format| 
+        format.html 
+        format.json { render json: @users.where("first_name like ?", "%#{params[:q]}%")}
+      end
     end
   end
 

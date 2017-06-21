@@ -1,20 +1,19 @@
 .question-area 
-  .fieldset.questions       
+  .fieldset      
     .answer-type
-      Question Type:
+      .title Question Type:
       = f.select :kind, ['Text', 'Paragraph', 'Checkbox', 'Multiple Choice'],{}, {:class => 'question-type'}
-      = f.check_box :required, checked_value: 1, unchecked_value: 0
-      = f.label :required, "Required"       
-
-    = f.text_field :body, class: "form-control questions", placeholder: "Add your Question"
+      .required-answer
+        = f.check_box :required, checked_value: 1, unchecked_value: 0
+        = f.label :required, "Required"       
+    = f.text_field :body, class: "form-control question", placeholder: "Add your Question"
     = f.hidden_field :_destroy
-  
 
   = f.fields_for :question_options, class: "options" do |a|
     = render 'question_option_fields', f: a
   = link_to_add_fields("+ Add Answer", f, :question_options)
-
   = f.hidden_field :questionairre_id, value: @questionairre.id
+  
   .footer
     = f.submit "Create", class: "btn submit-button"
-    = link_to "Cancel", '#', class: "remove_question btn border-button"
+    = link_to "Cancel", '#', class: "remove_question btn border-button2"

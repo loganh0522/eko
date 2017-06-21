@@ -5,10 +5,8 @@
     .company-users
       %h4 Team Members 
       .invite
-        = form_for [:business, @invitation], html: {class: 'invite'} do |f|    
-          = f.text_field :recipient_email, class: "form-control", placeholder: "Invite a colleague by Email", id: "stage_name"
-          = f.submit "Invite User", class: "submit btn btn-primary"
-    
+        = link_to "Invite User", new_business_invitation_path, remote: true, class: 'btn btn-primary'
+
     .user-list
       - @users.each do |user|
         .user{:id => "user_#{user.id}" }
@@ -18,5 +16,13 @@
             .circle-img= user.first_name.first.capitalize
           .name= "#{user.first_name} #{user.last_name}"
           %i.glyphicon.glyphicon-remove
-          .permissions Hiring Manager
-          
+          .permissions= select_tag "user_role", options_for_select(["Admin", "Hiring Manager", "Recruiter"], user.role)
+
+
+
+.modal#basic-form-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title      

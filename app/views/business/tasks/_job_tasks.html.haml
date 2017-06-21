@@ -1,0 +1,8 @@
+= render 'business/tasks/form'
+.tasks
+  - if @tasks.present?
+    - @tasks.each do |task|
+      = render 'business/tasks/task', task: task
+  - else  
+    .not-present-container
+      %p There are currently no tasks.

@@ -1,4 +1,5 @@
 class Business::StagesController < ApplicationController 
+  filter_access_to :all
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -16,11 +17,10 @@ class Business::StagesController < ApplicationController
   def create 
     @stage = Stage.new(stage_params)
     @job = Job.find(params[:job_id])  
-    @stages = @job.stages.order("position")
-
+    
     respond_to do |format| 
       if @stage.save & @stage.update_attribute(:position, new_stage_position(@job))
-        format.html {redirect_to new_business_job_stage_path(@job)}
+        @stages = @job.stages.order("position")
         format.js
       else
         flash[:error] = "Sorry, something went wrong. Please try again."

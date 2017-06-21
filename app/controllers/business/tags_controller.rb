@@ -1,4 +1,5 @@
 class Business::TagsController < ApplicationController
+  filter_access_to :all
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -54,7 +55,7 @@ class Business::TagsController < ApplicationController
 
   def add_to_single_app
     @application = Application.find(params[:tag][:application_id])
-    @tag = Tag.where(name: (params[:tag][:name]), company_id: current_company.id).first
+    @tag = Tag.where(name: (params[:tag][:name].titleize), company_id: current_company.id).first
     @application_tags = @application.tags
     
     if !@application_tags.include?(@tag) 
@@ -71,7 +72,7 @@ class Business::TagsController < ApplicationController
   end
 
   def add_tag_to_multiple
-    @tag = Tag.find(params[:tag_id]) if params[:tag_id].present?
+    @tag = Tag.where(name: (params[:tag][:name].titleize), company_id: current_company.id).first
     applicant_ids = params[:applicant_ids].split(',')   
     
     applicant_ids.each do |id|

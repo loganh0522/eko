@@ -18,6 +18,7 @@
  *= require dropzone/dropzone
  *= require jquery.fileupload
  *= require jquery.fileupload-ui
+ *= require jquery.timepicker.css
  *= require_tree .
 
  */
@@ -54,9 +55,6 @@ body
     color: rgba(0, 0, 0, .85)
     font-family:  Open Sans, sans-serif, Helvetica, Arial, sans-serif
     font-weight: 500
-
- 
-
 .page-header
   margin-top: 60px
   width: 100%
@@ -65,14 +63,16 @@ body
   h1
     margin: 0 0 
     padding: 0 0
-
+#main-container
+  overflow: hidden
+  width: 100%
 .side-container 
   float: left  
   width: 24%   
   margin: 10px 1% 0 0
 .main-container
   float: right
-  padding: 5px 0px 15px 0px
+  padding: 0px 0px 15px 0px
   padding-left: 2.5em
   width: 74%
   margin-bottom: 100px
@@ -117,7 +117,6 @@ body
   background-color: rgba(239, 123, 43, .9)
   color: #ffffff
   border: none
-  
   &:hover 
     background-color: #EF7B2B
 
@@ -169,8 +168,6 @@ a.button
   text-decoration: none
   color: white
 
-
-
 .white-border-button
   display: block
   height: 40px
@@ -202,11 +199,6 @@ a.button
     cursor: pointer
     color: rgba(0,0,0,0.7) 
     text-decoration: none
-    
-      
-
-
-
 
 .button
   display: block
@@ -307,6 +299,16 @@ ul.ui-autocomplete-input
 input[type=text]
   width: 100%
   padding: 12px 20px
+  margin: 8px 0
+  display: inline-block
+  border: 1px solid #ccc
+  border-radius: 4px
+  box-sizing: border-box
+
+select
+  width: 100%
+  height: 45px
+  background: #ffffff
   margin: 8px 0
   display: inline-block
   border: 1px solid #ccc

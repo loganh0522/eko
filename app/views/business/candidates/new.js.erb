@@ -1,3 +1,8 @@
-$('#createApplicationModal').find('form').remove()
-$('#createApplicationModal').modal('toggle')
-$('#createApplicationModal').find('.modal-header').after('<%= j render "business/candidates/form" %>')
+// $('#createApplicationModal').find('form').remove()
+// $('#createApplicationModal').modal('toggle')
+// $('#createApplicationModal').find('.modal-header').after('<%= j render "business/candidates/form" %>')
+
+$('#right-modal').find('form').remove()
+$('#right-modal').find('.modal-title').html('<%= j "Create Candidate" %>');
+$('#right-modal').find('.modal-header').after('<%= j render "business/candidates/form" %>');
+$('#right-modal').modal("toggle");

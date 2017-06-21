@@ -8,49 +8,19 @@
     width: 71%
   .side-container
     float: right
-    background: #ffffff
     height: auto
-    padding: 0 10px
-    border-radius: 5px
-    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
     
-#activity-container
-  margin: 0px 3% 100px 3%
-  .activity-feed
-    margin: -30px 0 50px 0
-  .main-container
-    float: left
-    margin-right: 3%
-    width: 71%
-  .side-container
-    float: right
-    background: #ffffff
-    height: auto
-    padding: 0 10px
-    border-radius: 5px
-    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-    .header 
-      border-bottom: 1px solid rgba(0,0,0,0.1)
-      padding-bottom: 10px
-    .filter
-      border-bottom: 1px solid rgba(0,0,0,0.1)
-      padding: 10px 0
-      ul
-        list-style: none
-        padding: 0 15px
-        li
-          text-decoration: none
-          margin-left: 15px
-
 .activity-feed
   margin: 0 0 50px 3.6%
-  padding: 30px 3.6% 15px 5%
+  padding: 0 3.6% 15px 5%
   border-left: 1px solid #EF7B2B
   width: 100%
   .activity
     display: block
     position: relative
-    margin-left: 3%    
+    margin-left: 3%
+    margin-top: 20px
+    width: 90%    
     .glyphicon.glyphicon-share-alt
       font-size: 20px
     .glyphicon.glyphicon-pencil
@@ -70,8 +40,8 @@
       display: block
       background: #EF7B2B
       position: absolute
-      left: -11.5%
-      top: 25%
+      left: -11.6%
+      top: 40px
       border-radius: 50%
   .activity-body
     width: 100%
@@ -79,6 +49,7 @@
     border-radius: 1px
     margin-bottom: 30px
     box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    top: 25px
     display: block
     position: relative 
     .activity-body-header    
@@ -145,3 +116,76 @@
             margin-right: 10px
           .submit-button
             float: right
+
+#interview
+  width: 100%
+  background: white
+  border-radius: 1px
+  margin-bottom: 30px
+  display: block
+  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+  position: relative
+  overflow: hidden
+  .date
+    width: 10%
+    text-align: center
+    padding: 15px
+    float: left
+    border-right: 1px solid rgba(0,0,0,0.1)
+    .event-day  
+      font-size: 20px
+    .event-month
+      font-size: 16px
+  .body
+    padding: 30px 30px 0 10px
+    float: left
+    width: 80%
+    .time
+      float: left
+      width: auto
+      margin-right: 15px
+    .title
+      float: left
+      width: auto
+    .body
+.tasks
+  margin-top: 30px
+  .task
+    width: 100%
+    background: white
+    border-radius: 1px
+    margin-bottom: 30px
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    display: block
+    position: relative 
+    .task-header
+      font-size: 14px
+      overflow: hidden
+      padding: 15px 15px
+      padding-bottom: 10px
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+      .title
+        float: left
+        width: 85%
+      .actions
+        float: right
+        width: 15%
+        a
+          float: left
+          margin-right: 5px
+    .task-row
+      .task
+        float: left
+        width: 85%
+      .due
+        float:right
+        width: 15%
+    .task-body   
+      font-size: 14px
+      overflow: hidden
+      padding: 15px 15px
+      padding-bottom: 10px
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+     
+
+

@@ -1,0 +1,24 @@
+#interview
+  .date
+    .event-day= interview.day
+    .event-month= interview.month
+  
+  .body
+    .time= "#{interview.start_time} - #{interview.end_time}"
+    .title= "#{interview.kind} with #{interview.candidate.full_name} for #{interview.job.title}"
+    / .body
+    / .notes= interview.notes
+    / .time= "#{@interview.date.to_formatted_s(:long).slice(0..-6)} at #{@interview.start_time} - #{@interview.end_time}"
+    
+    / .interviewers Interviewers
+    / %ul
+    /   - @team.each do |user|   
+    /     - if user.user_avatar.present? 
+    /       %li.user-details
+    /         .circle-image= image_tag user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
+    /         .interviewer-name= user.full_name
+    /     - else 
+    /       %li.user-details
+    /         .circle-img= user.first_name.first.capitalize
+    /         .interviewer-name= user.full_name
+      

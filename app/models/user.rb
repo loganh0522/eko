@@ -4,12 +4,20 @@ class User < ActiveRecord::Base
   # index_name ["talentwiz", Rails.env].join('_') 
 
   #Business User Relationships
+  after_create :set_full_name
   liquid_methods :first_name, :last_name, :full_name
   
   belongs_to :company
 
   has_many :hiring_teams
   has_many :jobs, through: :hiring_teams 
+  
+
+  has_many :assigned_users
+  has_many :tasks, through: :assigned_users, source: :assignable, source_type: "Task"
+  has_many :interviews, through: :assigned_users, source: :assignable, source_type: "Interview"
+
+
   has_many :application_scorecards
   has_many :invitations
   has_many :messages
@@ -17,8 +25,7 @@ class User < ActiveRecord::Base
   has_many :notifications
   has_many :ratings
   has_one  :email_signature
-  has_many :interviews
-  has_many :interviews, through: :my_interviews
+
   has_many :mentions
   has_many :mentioned, :through => :mentions
   has_many :mentioned, :class_name => "Mention", :foreign_key => "mentioned_id"
@@ -43,6 +50,16 @@ class User < ActiveRecord::Base
   has_one :google_token
   #Carrierwave uploader and minimagic for User Profile Pictures
 
+  def role_symbols
+    if role == "Admin" 
+      [:admin] 
+    elsif role == "Hiring Manager"
+      [:hiring_manager]
+    elsif role == "Recruiter"
+      [:recruiter] 
+    end
+  end
+
   def as_indexed_json(options={})
     as_json(
       only: [:first_name, :last_name, :tag_line],
@@ -57,8 +74,9 @@ class User < ActiveRecord::Base
     
   end
 
-  def full_name
-    full_name = "#{self.first_name.capitalize} #{self.last_name.capitalize}"
+  def set_full_name
+    @full_name = "#{self.first_name.capitalize} #{self.last_name.capitalize}"
+    self.update_attribute(:full_name, @full_name)
   end
 
   def current_jobs

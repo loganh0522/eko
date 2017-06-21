@@ -59,8 +59,8 @@
                       .current-position No Experience Listed
                   - if candidate.applications.present?
                     %td
-                      .position= candidate.applications.first.apps.title
-                      .date-applied= candidate.applications.first.apps.location
+                      .position= candidate.applications.first.job.title
+                      .date-applied= candidate.applications.first.job.location
                     %td
                       .position= stage
                       .date-applied= "#{time_ago_in_words(candidate.created_at)} ago"

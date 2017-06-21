@@ -1,0 +1,7 @@
+= form_for [:business, @job, @hiring_team], html: {remote: true}  do |f|         
+  %fieldset
+    = f.text_field :user_tokens, :class => 'ui-autocomplete-input form-control', :placeholder => 'Type a team members name', id: "team_members"    
+    = f.hidden_field :user_id
+    = f.hidden_field :job_id, value: @job.id
+    = f.submit "+ Add Member", class: "submit btn btn-primary"
+  %div#team-members-results

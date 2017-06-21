@@ -11,7 +11,7 @@
         %img(src="/tmp/little-man.png")  
   %td.names
     .name{:data => {:id =>  "#{application.candidate.user.full_name}"}}
-      = link_to "#{application.candidate.user.full_name}", business_job_application_path(@job, application.id), remote: true
+      = link_to "#{application.candidate.user.full_name}", business_job_application_path(application.job.id, application.id), remote: true
     - if application.candidate.user.current_jobs.present?
       .current-position= "#{application.candidate.user.current_jobs.first.title} - #{application.candidate.user.current_jobs.first.company_name} "
     - else

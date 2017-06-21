@@ -13,7 +13,6 @@
           = "#{comment.user.full_name} added a note"
           %br
           .time= time_ago_in_words(comment.created_at)
-     
       .actions
         = link_to "Edit |", edit_business_comment_path(comment), remote: true
         = link_to "Delete", business_comment_path(comment), remote: true, :method => :delete

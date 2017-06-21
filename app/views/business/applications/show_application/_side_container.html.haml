@@ -5,3 +5,15 @@
   .add_tag
     = link_to "+ Add Tag", new_business_job_application_tag_path(@job.id, @application.id), :data => {remote: true}, id: 'add_tag'
 
+.side-section
+  %h4 Tasks 
+  .tasks 
+    - @application.tasks.each do |task| 
+      .task
+        .details 
+          .title= task.title
+          .notes= task.notes
+        .action
+          .btn.border-button2 Completed
+
+

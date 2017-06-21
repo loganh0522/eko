@@ -46,6 +46,45 @@
 
       li.not-active
         border: none
+.side-container
+  #task-filters
+    .filter
+      height: 40px
+      font-size: 16px
+      padding: 10 10
+      &:hover
+        background: rgba(0,0,0,0.1)
+        cursor: pointer
+#job-action-container
+  width: 90%
+  padding-left: 50px
+  #cancel
+    display: none
+  .comment-area
+    background: #ffffff
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    margin-top: 0
+    input:focus
+      outline: none
+    textarea:focus
+      outline: none
+    #comment-body
+      width: 100%
+      height: 100px
+      padding: 5px 15px
+      border: none
+      margin: none
+    .comment-area-footer
+      padding: 10px 10px
+      border-top: 1px solid rgba(0,0,0,0.1)
+      background: #ffffff
+      overflow: hidden
+      .btn
+        float: right
+        margin-right: 10px
+      .submit-button
+        float: right
+
 
 .all-job-applicants-container
   .not-present-container
@@ -57,34 +96,27 @@
   .calendar 
     border-collapse: collapse
     width: 100%
-
     td, th 
       font-family: "Lucida Grande", arial, helvetica, sans-serif
       font-size: 10px
       padding: 6px
-      border: 1px solid #999
-    
+      border: 1px solid #999   
     th 
       background: #DDD
       color: #666
       text-align: center
-      width: 14.2857142857143%
-    
+      width: 14.2857142857143%   
     td 
       background: #FFF
       color: #777
       height: 80px
       vertical-align: top
       font-size: 16px
-    
-
     .notmonth
       a 
         color: #CCC
     .today 
       background-color: #D7F2FF
-
-
   #articles 
     #month 
       margin: 0
@@ -95,7 +127,6 @@
         text-decoration: none
         padding: 0 10px
         color: #999
-
   #articles 
     ul 
       font-size: 11px

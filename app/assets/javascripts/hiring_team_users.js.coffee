@@ -8,11 +8,28 @@ jQuery ->
         false
       select: (event, ui) ->
         $('#team_members').val ui.item.full_name 
-        $('#user_id').val ui.item.id
+        $('#hiring_team_user_id').val ui.item.id
         false
     ).data('ui-autocomplete')._renderItem = (ul, item) ->
       $('<li>').attr('ui-item-autocomplete', item.value).append("<a>" + item.full_name + "</a>").appendTo ul
     
+    return
+
+  $('form').on 'focus', '#users-search', ->
+    $('form').find('#users-search').autocomplete(
+      source: '/business/users'
+      appendTo: $('#user-results')
+      focus: (event, ui) ->
+        $('#users-search').val ui.item.name
+        false
+      select: (event, ui) ->
+        $('.assigned-users').append('<div class="user-tag"> <div class="name">' + ui.item.full_name  + '</div> <div class="delete-tag"> &times </div> </div>') 
+
+        values =  $('#user_ids').val() + ',' + ui.item.id 
+        $('#user_ids').val values
+        false
+    ).data('ui-autocomplete')._renderItem = (ul, item) ->
+      $('<li>').attr('ui-item-autocomplete', item.value).append("<a>" + item.full_name + "</a>").appendTo ul 
     return
 
   $('form').on 'focus', '#job_team_members', ->   
@@ -29,7 +46,6 @@ jQuery ->
             response data
             return
         return
-
       appendTo: $('#team-members-results')
       focus: (event, ui) ->
         $('#job_team_members').val ui.item.name
@@ -43,7 +59,6 @@ jQuery ->
         false
     ).data('ui-autocomplete')._renderItem = (ul, item) ->
       $('<li>').attr('ui-item-autocomplete', item.value).append("<a>" + item.full_name + "</a>").appendTo ul
-    
     return
 
   $('form').on 'click', '.insert', (event) -> 

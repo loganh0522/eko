@@ -1,4 +1,5 @@
 class Business::TasksController < ApplicationController
+  filter_access_to :all
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -7,13 +8,15 @@ class Business::TasksController < ApplicationController
   before_filter :new_taskable, only: [:new]
 
   def index
-    @tasks = current_company.tasks
+    @tasks = @taskable.all_tasks
+    @task = Task.new
     # @date = params[:date] ? Date.parse(params[:date]) : Date.today
     # @job = current_company.jobs.first
     # @interviews_by_date = @job.interviews.group_by(&:interview_date)
 
     respond_to do |format|
       format.js
+      format.html
     end 
   end
 
@@ -26,10 +29,15 @@ class Business::TasksController < ApplicationController
   end
 
   def create 
-    @task = @taskable.tasks.build(task_params)
+    @new_task = @taskable.tasks.build(task_params)
+    @task = Task.new
 
     respond_to do |format| 
-      if @task.save 
+      if @new_task.save 
+        if params[:task][:user_ids].present? 
+          assigned_to(@new_task)
+        end
+        @tasks = @taskable.all_tasks
         format.js 
       end
     end
@@ -65,12 +73,24 @@ class Business::TasksController < ApplicationController
   private 
 
   def task_params 
-    params.require(:task).permit(:title, :notes, :user_id)
+    params.require(:task).permit(:title, :notes, :due_date, :due_time, :user_id, :company_id)
+  end
+
+  def assigned_to(task)
+    user_ids = params[:task][:user_ids].split(',')
+    binding.pry
+    user_ids.each do |id| 
+      AssignedUser.create(assignable_type: "Task", assignable_id: task.id, user_id: id )
+    end
   end
 
   def load_taskable
-    resource, id = request.path.split('/')[-3..-1]
-    @taskable = resource.singularize.classify.constantize.find(id)
+    if request.format == 'text/html'
+      @taskable = current_company
+    else
+      resource, id = request.path.split('/')[-3..-1]
+      @taskable = resource.singularize.classify.constantize.find(id)
+    end
   end
 
   def new_taskable

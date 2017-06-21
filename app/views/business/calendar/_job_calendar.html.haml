@@ -1,18 +1,18 @@
 #calendar-container
-  .main-container
   .body
     #articles
+      
       %h2#month
-        = link_to "<", date: @date.prev_month 
+        = link_to "<", date: @date.prev_month, remote: true
         = @date.strftime("%B %Y")
-        = link_to ">", date: @date.next_month
+        = link_to ">", date: @date.next_month, remote: true
 
       = calendar @date do |date| 
         = date.day 
-        - if @interviews_by_date[date]
-          %ul
-            - @interviews_by_date[date].each do |interview| 
-              %li
-                = interview.kind
+        / - if @interviews_by_date[date]
+        /   %ul
+        /     - @interviews_by_date[date].each do |interview| 
+        /       %li
+        /         = interview.kind
 
 

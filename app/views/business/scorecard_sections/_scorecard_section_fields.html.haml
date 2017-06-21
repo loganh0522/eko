@@ -1,11 +1,11 @@
-.question-area 
+.scorecard-section
   = f.text_field :body, class: "form-control questions", placeholder: "Scorecard Section Name"  
   = f.fields_for :section_options, class: "options" do |a|
     = render 'section_option_fields', f: a
   = link_to_add_fields("+ Add Criteria", f, :section_options)
-  
+
   = f.hidden_field :scorecard_id, value: @scorecard.id
 
   .footer
     = f.submit "Create", class: "btn submit-button"
-    = link_to "Cancel", '#', class: "remove_question btn border-button"
+    = link_to "Cancel", '#', class: "remove_question btn border-button2"

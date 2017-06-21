@@ -1,8 +1,8 @@
 .modal
-  z-index: 10
   border-radius: 0px 0px 0px 0px
-  .pac-container
-    z-index: 20
+  .pac-container 
+    z-index: 9999
+
   .modal-header 
     border-radius: 0px
     background-color: #f8f8f8
@@ -15,109 +15,6 @@
     height: auto
     padding: 0 0 0 0
     background-color: #ffffff
-    #comment 
-      width: 100%
-      border: none
-      &:focus 
-        outline: none
-    .email-area
-      width: 100%
-      .to 
-        height: auto
-        padding: 10px 10px
-        border-bottom: 1px solid rgba(0,0,0,0.1)
-        overflow: hidden
-        .title
-          float: left
-          width: 10%
-        .recipients
-          float: left
-          width: 90%
-        .sender
-          float: left
-          width: 90%
-      .choose-stage
-        margin: 50px 15%
-        .title 
-          float: left
-          width: 29%
-        #stages 
-          background: none
-          border: 1px solid rgba(0,0,0,0.1)
-          height: 40px
-          width: 71%      
-      .subject
-        height: auto
-        border-bottom: 1px solid rgba(0,0,0,.1)
-        overflow: hidden
-        padding: 0 0
-        #message-subject
-          float: left
-          border: none
-          width: 80%
-          height: auto
-          margin: 0 0 
-          padding-left: 0
-          &:focus 
-            outline: none
-        .title
-          float: left
-          width: 10%
-          margin: 10px 0 10px 10px
-      .mce-panel
-        border: none
-      .email-variables
-        height: auto
-        padding: 10px 10px
-        border-bottom: 1px solid rgba(0,0,0,0.1)
-      #applicant
-        float: left
-        border-radius: 5px
-        background-color: #EF7B2B
-        color: white
-        width: auto
-        margin: 0 5px 0 0 
-        padding: 2px 5px 2px 5px
-        height: auto
-        .name
-          margin-top: 0 
-          float: left
-        .remove-recipient 
-          float: left
-          margin-left: 5px
-
-          &:hover
-            cursor: pointer
-
-    .editable-container
-      width: 100%
-      height: 200px
-      background: white
-      border-radius: 5px
-    .sub-header
-      text-align: center
-      .logo 
-        margin-bottom: 25px
-      h3
-        margin-bottom: 25px
-
-    .sub-footer
-      margin-top: 20px
-      margin-bottom: -58px
-      .create-account
-        float: left
-        width: 50%
-        border-right: 1px solid #c6c8ca
-        text-align: center
-        padding-top: 10px
-        height: 40px
-      .forgot-password
-        float: left
-        padding-top: 10px
-        width: 50%
-        text-align: center
-        height: 40px
-
   .modal-footer
     background: #f8f8f8
     overflow: hiden
@@ -157,7 +54,6 @@
       margin-top: 50px
     .inputfile + label
       margin: 15px 0 0 40%
-
   .jcrop-keymgr
     display: none
   .modal-dialog
@@ -183,6 +79,9 @@
         overflow: hidden
   .modal-footer
     width: 100%
+
+
+
 #createApplicationModal
   .modal-dialog
     width: 80%
@@ -190,7 +89,6 @@
     width: 100%
     padding: 0 0
     overflow: hidden
-
     .experience-container
       border-bottom: 1px solid rgba(0,0,0,0.1)
       padding-bottom: 15px
@@ -207,8 +105,6 @@
         overflow: hidden
       .add_fields
         margin-left: 5%
-
-
 
 #jobBoardRowModal
   .modal-dialog
@@ -263,7 +159,6 @@
           opacity: 1
       input
         display: none 
-
   .modal-footer
     width: 100%
 
@@ -296,9 +191,7 @@
         float: left
       img
         float: left
-#createApplicationModal
   
-
 #subNewUserModal
   .modal-body
     padding: 25px 5%
@@ -329,82 +222,19 @@
     width: 100%
 
 #basic-form-modal
+  .modal-dialog
+    width: 60%
+  .modal-header
   .modal-body
     height: auto
-    overflow: hidden
     width: 100%
-    padding: 5%
+    padding: 1% 5%
 
+.pac-container 
+  z-index: 9999
 
 #send_messageModal
   .modal-dialog
-    width: 70%
-    height: 70%
-  .email-area
-    width: 100%
-    .to 
-      height: auto
-      padding: 10px 10px
-      border-bottom: 1px solid rgba(0,0,0,0.1)
-      overflow: hidden
-      .title
-        float: left
-        width: 10%
-      .recipients
-        float: left
-        width: 90%
-      .sender
-        float: left
-        width: 90%
-    .choose-stage
-      margin: 50px 15%
-      .title 
-        float: left
-        width: 29%
-      #stages 
-        background: none
-        border: 1px solid rgba(0,0,0,0.1)
-        height: 40px
-        width: 71%      
-    .subject
-      height: auto
-      border-bottom: 1px solid rgba(0,0,0,.1)
-      overflow: hidden
-      padding: 0 0
-      #message-subject
-        float: left
-        border: none
-        width: 80%
-        height: auto
-        margin: 0 0 
-        padding-left: 0
-        &:focus 
-          outline: none
-      .title
-        float: left
-        width: 10%
-        margin: 10px 0 10px 10px
-    .mce-panel
-      border: none
-    .email-variables
-      height: auto
-      padding: 10px 10px
-      border-bottom: 1px solid rgba(0,0,0,0.1)
-    #applicant
-      float: left
-      border-radius: 5px
-      background-color: #EF7B2B
-      color: white
-      width: auto
-      margin: 0 5px 0 0 
-      padding: 2px 5px 2px 5px
-      height: auto
-      .name
-        margin-top: 0 
-        float: left
-      .remove-recipient 
-        float: left
-        margin-left: 5px
-
-        &:hover
-          cursor: pointer
+    
+    height: auto
+  

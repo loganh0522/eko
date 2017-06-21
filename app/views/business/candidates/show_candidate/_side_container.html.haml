@@ -8,8 +8,8 @@
   %h4 All Applications
   - @candidate.applications.each do |application| 
     .application-container
-      .title= application.apps.title
-      .location= application.apps.location
+      .title= application.job.title
+      .location= application.job.location
 
   = link_to 'Add to Job', new_business_candidate_application_path(@candidate), remote: true
 

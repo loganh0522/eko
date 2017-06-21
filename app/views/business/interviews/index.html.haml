@@ -1,0 +1,60 @@
+.home-page-header
+  .top-info
+    %h1 Calendar
+  .change-containers-nav
+    %ul  
+      %li#open.activated My Schedule
+      %li#closed Company Schedule
+#main-container
+  #job-applicants
+    .side-container
+      .applicant-filters
+        .filter
+          .filter-header
+            %h4 Interview Type
+            .glyphicon.glyphicon-minus
+            .glyphicon.glyphicon-plus
+          .filter-body
+            %ul
+              %li 
+                .applicant-filter-checkbox{:data => {:id => "open", :filter => 'JobStatus'}}
+                  = check_box_tag "", false, false, class: 'filter-checkbox'
+                  .filter-title Phone Interview
+              %li.activity
+                .applicant-filter-checkbox{:data => {:id => "closed", :filter => 'JobStatus'}}
+                  = check_box_tag "", false, false, class: 'filter-checkbox'
+                  .filter-title In-person Interview
+              %li.activity  
+                .applicant-filter-checkbox{:data => {:id => "archived", :filter => 'JobStatus'}}
+                  = check_box_tag "", false, false, class: 'filter-checkbox'
+                  .filter-title Skype
+              / %li.activity  
+              /  .applicant-filter-checkbox{:data => {:id => "archived", :filter => 'JobStatus'}}
+              /    = check_box_tag "", false, false, class: 'filter-checkbox'
+              /    .filter-title Team Meeting
+        .filter
+          .filter-header
+            %h4 Active Jobs
+            .glyphicon.glyphicon-minus
+            .glyphicon.glyphicon-plus
+          .filter-body 
+            %ul
+              - current_company.company_jobs.each do |job| 
+                %li.open-job
+                  .applicant-filter-checkbox{:data => {:id => "#{job}", :filter => 'JobAppliedTo'}}
+                    = check_box_tag "", false, false, class: 'filter-checkbox'
+                    .filter-title #{job}
+
+    .main-container#task-container
+      / = render 'business/calendar/job_calendar'
+      = render 'business/interviews/interviews'
+
+
+
+
+.modal#basic-form-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title

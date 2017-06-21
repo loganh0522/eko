@@ -1,4 +1,13 @@
-
-$('.applicant-profile').html('<%= j render "business/comments/applicant_notes" %>');
-$('.applicant-nav').find('.activated').removeClass('activated');
-$('.applicant-nav').find('#notes').addClass('activated');
+<% if @commentable.class == Job %> 
+  $('#main-container').html('<%= j render "business/comments/job_comments" %>');
+  $('.change-containers-nav').find('.activated').removeClass('activated');
+  $('.change-containers-nav').find('#job-notes').addClass('activated');
+<% elsif @commentable.class == Client %> 
+  $('#main-container').html('<%= j render "business/comments/job_comments" %>');
+  $('.change-containers-nav').find('.activated').removeClass('activated');
+  $('.change-containers-nav').find('#job-notes').addClass('activated');
+<% else %> 
+  $('.applicant-profile').html('<%= j render "business/comments/applicant_notes" %>');
+  $('.applicant-nav').find('.activated').removeClass('activated');
+  $('.applicant-nav').find('#notes').addClass('activated');  
+<% end %>

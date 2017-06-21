@@ -1,2 +1,11 @@
-/ = render 'business/calendar/job_calendar'
-/ = render 'business/tasks/tasks'
+.home-page-header
+  .top-info
+    %h1 Tasks
+  .change-containers-nav
+    %ul  
+      %li#open.activated All Tasks
+      %li#closed My Tasks
+
+#main-container
+  = render 'business/tasks/tasks'
+      

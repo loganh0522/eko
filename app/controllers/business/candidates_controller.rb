@@ -1,4 +1,6 @@
 class Business::CandidatesController < ApplicationController
+  filter_access_to :all
+  filter_access_to :filter_candidates, :require => :read
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -21,9 +23,7 @@ class Business::CandidatesController < ApplicationController
 
   def create 
     @candidate = Candidate.new(candidate_params)
-
     if @candidate.save
-      
       if params[:job_id].present? 
         @job = Job.find(params[:job_id])
         Application.create(candidate: @candidate, job_id: @job.id, company_id: current_company)
@@ -38,8 +38,13 @@ class Business::CandidatesController < ApplicationController
   end
 
   def index
-    @tags = current_company.tags
-    @candidates = current_company.candidates
+    if params[:term].present?
+      @candidates = current_company.candidates.order(:first_name).where("first_name ILIKE ?", "%#{params[:term]}%")
+      render :json => @candidates.to_json 
+    else
+      @tags = current_company.tags
+      @candidates = current_company.candidates
+    end
   end
 
   def show 
@@ -55,6 +60,28 @@ class Business::CandidatesController < ApplicationController
       format.js
       format.html
     end  
+  end
+
+  def filter_candidates
+    options = {
+      average_rating: params[:average_rating],
+      tags: params[:tags],
+      job_status: params[:job_status],
+      date_applied: params[:date_applied],
+      job_applied: params[:job_applied],
+      location_applied: params[:location_applied]
+      }
+
+    if params[:query].present?
+      @candidates = current_company.candidates.search(params[:query], options).records.to_a
+    else
+      @candidates = current_company.candidates.search('', options).records.to_a
+    end
+
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

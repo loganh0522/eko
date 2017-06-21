@@ -1,0 +1,40 @@
+.applicant-filters
+  .filter
+    .filter-header
+      %h4 Activity Type
+      .glyphicon.glyphicon-minus
+      .glyphicon.glyphicon-plus
+    .filter-body
+      %ul
+        %li 
+          .applicant-filter-checkbox{:data => {:id => "open", :filter => 'JobStatus'}}
+            = check_box_tag "", false, false, class: 'filter-checkbox'
+            .filter-title Comments
+        %li.activity
+          .applicant-filter-checkbox{:data => {:id => "closed", :filter => 'JobStatus'}}
+            = check_box_tag "", false, false, class: 'filter-checkbox'
+            .filter-title Scorecards
+        %li.activity  
+          .applicant-filter-checkbox{:data => {:id => "archived", :filter => 'JobStatus'}}
+            = check_box_tag "", false, false, class: 'filter-checkbox'
+            .filter-title Messages
+        %li.activity  
+          .applicant-filter-checkbox{:data => {:id => "archived", :filter => 'JobStatus'}}
+            = check_box_tag "", false, false, class: 'filter-checkbox'
+            .filter-title Moved Stages
+        %li.activity  
+          .applicant-filter-checkbox{:data => {:id => "archived", :filter => 'JobStatus'}}
+            = check_box_tag "", false, false, class: 'filter-checkbox'
+            .filter-title Scheduled Interview
+  .filter
+    .filter-header
+      %h4 Job Activity
+      .glyphicon.glyphicon-minus
+      .glyphicon.glyphicon-plus
+    .filter-body 
+      %ul
+        - current_company.company_jobs.each do |job| 
+          %li.open-job
+            .applicant-filter-checkbox{:data => {:id => "#{job}", :filter => 'JobAppliedTo'}}
+              = check_box_tag "", false, false, class: 'filter-checkbox'
+              .filter-title #{job}

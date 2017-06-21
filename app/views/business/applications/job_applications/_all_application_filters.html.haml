@@ -11,26 +11,26 @@
         %h4 Date Applied
         .glyphicon.glyphicon-minus
         .glyphicon.glyphicon-plus
-      .filter-body
+      .filter-body{:id => "#{@job.id}"}
         %ul
           %li 
             .applicant-filter-checkbox{:data => {:id => "all_applied", :filter => 'DateApplied'}}
               = check_box_tag :date_applied, 'all', params[:date_applied] == 'all', class: 'filter-checkbox'
               .filter-title All 
           %li
-            .applicant-filter-checkbox{:data => {:id => "2_weeks", :filter => 'DateApplied'}}
+            .applicant-filter-checkbox{:data => {:id => "now-2w", :filter => 'DateApplied'}}
               = check_box_tag "", false, false, class: 'filter-checkbox'
               .filter-titleLast 2 weeks
           %li 
-            .applicant-filter-checkbox{:data => {:id => "last_month", :filter => 'DateApplied'}}
+            .applicant-filter-checkbox{:data => {:id => "now-1M", :filter => 'DateApplied'}}
               = check_box_tag "", false, false, class: 'filter-checkbox'
               .filter-title Last Month
           %li
-            .applicant-filter-checkbox{:data => {:id => "3_months", :filter => 'DateApplied'}}
+            .applicant-filter-checkbox{:data => {:id => "now-3M", :filter => 'DateApplied'}}
               = check_box_tag "", false, false, class: 'filter-checkbox'
               .filter-title Last 3 Months
           %li 
-            .applicant-filter-checkbox{:data => {:id => "last_year", :filter => 'DateApplied'}}
+            .applicant-filter-checkbox{:data => {:id => "now-1y", :filter => 'DateApplied'}}
               = check_box_tag "", false, false, class: 'filter-checkbox'
               .filter-title Last Year
     .filter

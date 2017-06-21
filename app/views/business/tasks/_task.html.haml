@@ -1,21 +1,11 @@
-%div{:id => "task_#{task.id}", :class => "activity"}
-  .icon
-    .glyphicon.glyphicon-pencil
-  .activity-body
-    .activity-body-header
-      .details
-        - if task.user.user_avatar.present? 
-          = image_tag comment.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
-        - else 
-          .circle-img
-            %img(src="/tmp/little-man.png")
-        .contain    
-          = "#{task.title}"
-          %br
-          .time= time_ago_in_words(task.created_at)
-      .actions
-        = link_to "Edit |", edit_business_task_path(@task), remote: true
-        = link_to "Delete", business_task_path(@task), remote: true, :method => :delete
-    .activity-body-body
-      .comment-body
-        = task.notes
+.task{:id => "task_#{task.id}"}
+  .task-header  
+    .title= "#{task.title}"
+    .actions
+      = link_to "Edit |", edit_business_task_path(task), remote: true
+      = link_to "Delete", business_task_path(task), remote: true, :method => :delete
+  .task-row
+    .title= "#{task.title}"
+    .due= task.due_date
+  .task-body
+    = task.notes

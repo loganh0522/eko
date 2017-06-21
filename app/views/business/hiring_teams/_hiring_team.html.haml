@@ -1,29 +1,13 @@
-/ - @users.each do |user|
-/   %tr{:id => "user_#{user.id}" }
-/     %td
-/       - if user.user_avatar.present? 
-/         = image_tag user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
-/       - else
-/         .circle-img
-/           %img(src="/tmp/little-man.png") 
-/     %td
-/       %p.name= "#{user.first_name.capitalize} #{user.last_name.capitalize}"
-/       %p.email= user.email
-/     %td
-/       %p.permissions Hiring Manager
-/     %td
-/       = link_to business_job_hiring_team_path(@job.id, user.id), remote: true, :method => :delete do
-/         %i.glyphicon.glyphicon-remove
+- @hiring_teams.each do |member|
+  .user{:id => "user_#{member.id}" }
+    - if member.user.user_avatar.present? 
+      = image_tag member.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
+    - else
+      .circle-img= member.user.first_name.first.capitalize
+    .name= "#{member.user.first_name} #{member.user.last_name}"
+    = link_to business_hiring_team_path(member.id), :method => :delete, remote: true do
+      %i.glyphicon.glyphicon-remove
+    .permissions= member.user.role
 
-.user-list
-  - @users.each do |user|
-    .user{:id => "user_#{user.id}" }
-      - if user.user_avatar.present? 
-        = image_tag user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
-      - else
-        .circle-img= user.first_name.first.capitalize
-      .name= "#{user.first_name} #{user.last_name}"
-      = link_to business_job_hiring_team_path(@job.id, user.id), remote: true, :method => :delete do
-        %i.glyphicon.glyphicon-remove
-      .permissions Hiring Manager
+
         

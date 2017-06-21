@@ -8,8 +8,14 @@
         %li.change#client-contacts.activated Contacts
       = link_to business_client_jobs_path(@client), remote: true do 
         %li.change#client-jobs Jobs
+      = link_to business_client_tasks_path(@client), remote: true do 
+        %li.change#job-tasks Tasks
+      = link_to business_client_comments_path(@client), remote: true do 
+        %li.change#job-notes Notes
       = link_to business_client_activities_path(@client), remote: true do 
         %li.change#job-activity-feed Activity
+
+      
 
 #main-container
   .all-client-contacts-container

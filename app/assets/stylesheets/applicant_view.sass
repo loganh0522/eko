@@ -83,8 +83,6 @@
         top: 0
         &:hover
           cursor: pointer
-
-
     .applicant-nav
       margin-left: 30%
       clear: both
@@ -103,15 +101,16 @@
         .activated    
           border-bottom: solid 3px #EF7B2B
           color: black
-
+  
   .applicant-body
     background: rgba(0, 0, 0, 0.02)
     overflow: hidden
     width: 100%
     min-height: 500px
+  
   .applicant-profile-information
-    float: right
     width: 70%
+    float: right
     .applicant-profile
       margin-right: 20px
     .applicant-main-top
@@ -147,120 +146,7 @@
           float: left
         #schedule-appt
           float: left
-          margin-right: 15px
-      .email-area
-        width: 100%
-        z-index: 1000
-        #message-body
-          border-top: 1px solid rgba(0,0,0,0.1)
-        .email-variables
-          padding: 10px 10px
-          height: auto
-        .to 
-          height: auto
-          padding: 10px 10px
-          border-bottom: 1px solid rgba(0,0,0,0.1)
-          overflow: hidden
-          .title
-            float: left
-            width: 10%
-          .recipients
-            float: left
-            width: 90%
-          .sender
-            float: left
-            width: 90%
-        .subject
-          height: auto
-          border-bottom: 1px solid rgba(0,0,0,.1)
-          overflow: hidden
-          padding: 0 0
-          #message-subject
-            float: left
-            border: none
-            width: 80%
-            height: auto
-            margin: 0 0 
-            padding-left: 0
-            &:focus 
-              outline: none
-          .title
-            float: left
-            width: 10%
-            margin: 10px 0 10px 10px
-        .email-footer
-          padding: 10px 10px
-          border-top: 1px solid rgba(0,0,0,0.1)
-          background: rgba(0,0,0,.05)
-          overflow: hidden
-          .btn
-            float: right
-            margin-top: -15px
-      .comment-area
-        background: #ffffff
-        border-radius:  0 0 5px 5px
-        margin-top: 0
-        input:focus
-          outline: none
-        textarea:focus
-          outline: none
-        #comment-body
-          width: 100%
-          height: 150px
-          padding: 5px 15px
-          border: none
-          margin: none
-        .comment-area-footer
-          padding: 10px 10px
-          border-top: 1px solid rgba(0,0,0,0.1)
-          border-bottom: 1px solid rgba(0,0,0,0.1)
-          background: rgba(0,0,0,0.05)
-          overflow: hidden
-          .btn
-            float: right
-            margin-right: 10px
-          .submit-button
-            float: right
-      .task-area
-        background: #ffffff
-        margin-top: 0
-        input:focus
-          outline: none
-        textarea:focus
-          outline: none
-        #task-title
-          width: 100%
-          height: 40px
-          padding: 5px 15px
-          border-radius: 0 0
-          border: none
-          border-bottom: 1px solid rgba(0,0,0,0.1)
-          margin: none
-        #comment-body
-          width: 100%
-          height: 150px
-          padding: 5px 15px
-          border: none
-          margin: none
-        .comment-area-footer
-          padding: 10px 10px
-          border-top: 1px solid rgba(0,0,0,0.1)
-          border-bottom: 1px solid rgba(0,0,0,0.1)
-          background: rgba(0,0,0,0.05)
-          overflow: hidden
-          .btn
-            float: right
-            margin-right: 10px
-          .submit-button
-            float: right
-
-    .applicant-details 
-      .activity-container
-        display: none
-        padding-left: 3.6% 
-      .activated
-        border-bottom: 4px solid
-        
+          margin-right: 15px      
   .applicant-side-container
     float: left
     position: absolute
@@ -280,6 +166,20 @@
       width: 100%
       padding: 0 10px 20px 10px
       border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+    .tasks
+      .task
+        background: #ffffff
+        padding: 5px 5px
+        width: 100%
+        overflow: hidden
+        border: 1px solid rgba(0,0,0,0.1)
+        .details
+          float: left
+          width: 70%
+        .action
+          float: right
+          width: 30%
+
     .application-container
       background: #ffffff
       margin: 3px 3px 
@@ -338,7 +238,6 @@
 
 .applicant-experience
   padding: 10px 10px
-
 
 .applicant-scorecard
   width: 100%
@@ -406,8 +305,6 @@
       .scorecard-inputs input[type="radio"]:checked+label ~ .glyphicon-thumbs-down
         color: red
       
-        
-
     .application-form-body
       padding: 15px 15px
       .question-area
@@ -438,4 +335,4 @@
 .company-kind > input 
   display: none
 
-      
+

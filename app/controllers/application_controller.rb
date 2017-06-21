@@ -4,10 +4,15 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :logged_in?, :current_user, :current_company, :current_kind, :user_logged_in, :profile_sign_up_complete, :belongs_to_company
-
+  before_filter {|c| Authorization.current_user = c.current_user}
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+
+  def permission_denied
+    flash[:danger] = "Sorry, you are not allowed to access that page"
+    redirect_to root_url
   end
 
   def user_logged_in

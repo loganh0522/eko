@@ -1,4 +1,5 @@
-$('.modal-title').html('<%= j "Schedule Interview" %>');
-$('.modal-body').html('<%= j render "business/interviews/form", interview: @interview %>');
-$('#myModal').modal("show");
+$('#basic-form-modal').find('form').remove()
+$('#basic-form-modal').find('.modal-title').html('<%= j "Schedule Event" %>');
+$('#basic-form-modal').find('.modal-header').after('<%= j render "business/interviews/form" %>');
+$('#basic-form-modal').modal("toggle");
 

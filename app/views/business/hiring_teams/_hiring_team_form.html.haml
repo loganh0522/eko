@@ -1,9 +1,0 @@
-.stage-form
-  = form_for [:business, @job, @hiring_team], html: {remote: true, class: 'add_user'}  do |f|         
-    %fieldset
-      = f.text_field :user_tokens, :class => 'ui-autocomplete-input form-control', :placeholder => 'Type a team members name', id: "team_members"
-      
-      = hidden_field_tag :user_id
-      = hidden_field_tag :job_id, value: @job.id
-      = f.submit "+ Add Member", class: "submit btn btn-primary"
-    %div#team-members-results

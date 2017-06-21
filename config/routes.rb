@@ -80,23 +80,41 @@ Rails.application.routes.draw do
     get "hiring_defaults", to: 'rejection_reasons#index'
     resources :activities
     resources :hiring_teams
-    resources :companies
+    
+    resources :companies do 
+      resources :tasks
+    end
+
     resources :messages
     resources :tasks
     resources :rejection_reasons
     resources :comments
-    
+    resources :invitations
+    resources :locations 
+    resources :application_emails
+    resources :tags
+    resources :notifications
+    resources :interviews
+    resources :email_templates
+
     resources :default_stages do 
       collection do
         post :sort, to: "default_stages#sort"
       end 
     end
 
-    resources :application_emails
+    resources :client_contacts do
+      resources :messages
+      resources :comments
+      resources :tasks
+      resources :activities
+    end
 
     resources :clients do 
       resources :jobs
       resources :activities
+      resources :comments
+      resources :tasks
       resources :client_contacts do
         resources :messages
         resources :comments
@@ -109,34 +127,25 @@ Rails.application.routes.draw do
       resources :email_signatures
       resources :user_avatars
     end
-    
-    resources :invitations
-    resources :locations 
-    
-    
+  
     resources :job_boards do
       resources :job_board_headers
       resources :job_board_rows
     end
-
-    resources :tags
-    resources :notifications
-    resources :interviews
-    resources :email_templates
-    
+   
     get 'templates', to: "email_templates#index"
     
     resources :candidates do
+      resources :interviews
       resources :applications 
       resources :messages
       resources :comments
-
+      resources :resumes
       resources :tags
       resources :tasks
       get :application_form, to: "applications#application_form"
       get :application_activity, to: "activities#application_activity"
-
-
+      
       resources :application_scorecards
       resources :assessments
     end
@@ -146,6 +155,7 @@ Rails.application.routes.draw do
       resources :comments
       resources :tasks
       resources :messages
+      resources :resumes
       collection do 
         post :update_multiple, to: "stages#update_multiple"
         post :add_note_multiple, to: "comments#add_note_multiple"
@@ -154,7 +164,7 @@ Rails.application.routes.draw do
         post :add_tag_multiple, to: "tags#add_tags_multiple_applications"
       end
     end
-
+    post "candidates/filter_applicants", to: "candidates#filter_candidates"
     get 'job_hiring_team', to: "hiring_teams#job_hiring_team"
     post "applications/filter_applicants", to: "applications#filter_applicants"
     get "mention_user", to: "applications#mention_user"
@@ -177,10 +187,12 @@ Rails.application.routes.draw do
       post :publish_job, to: "jobs#publish_job"
       get :promote, to: "jobs#promote"
       
+      resources :comments
       resources :activities
       resources :tags
       resources :tasks
-
+      resources :hiring_teams
+      
       resources :applications do
         get :application_form, to: "applications#application_form"
         get :application_activity, to: "activities#application_activity"
@@ -200,8 +212,7 @@ Rails.application.routes.draw do
         post :reject, to: "applications#reject"
       end
       
-      resources :hiring_teams do    
-      end
+      
 
       resources :questionairres do 
         resources :questions

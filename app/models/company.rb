@@ -9,9 +9,9 @@ class Company < ActiveRecord::Base
   
   has_many :candidates
   has_many :tasks
+
   has_many :jobs
-  has_many :subsidiaries
-  has_many :locations
+  
   has_one :customer
   has_one :job_board
   has_many :clients
@@ -21,11 +21,15 @@ class Company < ActiveRecord::Base
   has_many :email_templates
   has_many :default_stages
   has_many :application_emails
+
+  has_many :subsidiaries
+  has_many :locations
+  
   validates_presence_of :name, :website
 
   liquid_methods :name
 
-  after_create :create_rejection_reasons
+  after_create :create_rejection_reasons, :create_default_stages
   
   def deactivate!
     update_column(:active, false)
@@ -43,12 +47,26 @@ class Company < ActiveRecord::Base
     return @locations
   end
 
+  def all_tasks
+    self.tasks
+  end
+
   def company_jobs
     @jobs = []  
     self.jobs.each do |job|  
       @jobs.append(job.title) unless @jobs.include?(job.title)
     end
     return @jobs
+  end
+
+  def create_default_stages
+    stages = ["Screen", "Phone Interview", "Interview", 
+      "Group Interview", "Offer", "Hired"]
+    @position = 1 
+    stages.each do |stage| 
+      DefaultStage.create(name: stage, position: @position, company_id: self.id)
+      @position += 1
+    end
   end
 
   def create_rejection_reasons

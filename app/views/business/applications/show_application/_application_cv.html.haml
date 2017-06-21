@@ -1,6 +1,16 @@
 .profile-container.showing
   .applicant-experience 
     .applicant-positions
+      / = form_for [:business, @application, @resume],:html => { :multipart => true }, remote: true do |f| 
+      /   = f.file_field :name
+      /   = f.hidden_field :candidate_id, value: @application.candidate.id
+      /   = f.submit "Save Section", class: "btn submit-button"
+
+      / - if @application.candidate.resumes.first.present?
+      /   = link_to "Download Resume", @application.candidate.resumes.first.name_url
+      /   %iframe{:src => "<%= @application.candidate.resumes.first.name_url %>"}
+      / = File.read("#{@application.candidate.resumes.first.name_url}")
+
       = render 'business/shared_manual_candidate/work_experience'
       = render 'business/shared_manual_candidate/education'
 

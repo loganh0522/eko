@@ -141,37 +141,7 @@
     #filter-header
       border-bottom: 1px solid rgba(0,0,0,0.2)
       padding-bottom: 5px
-    .filter
-      .filter-header 
-        overflow: hidden
-        h4
-          float: left
-        .glyphicon
-          margin-top: 10px
-          float: right
-          color: #EF7B2B
-        &:hover
-          cursor: pointer
-        .glyphicon-minus
-          display: none
-          color: #EF7B2B
-      .filter-body
-        display: none
-        overflow: hidden
-        ul
-          list-style: none
-          padding: 0 15px
-          li
-            text-decoration: none
-            .applicant-filter-checkbox
-              clear: both
-              .filter-checkbox
-                float: left
-                margin-right: 10px
-              .filter-title
-                float: left
-
-
+    
   .main-container
     float: right
     padding: 0 0 
@@ -242,8 +212,6 @@
               border-top: none
               .applicant-checkbox
                 margin: 15px 0 0 10px
-      
-
       #select_all
         margin: 0 0 0 10px
       .circle
@@ -290,10 +258,9 @@
         margin: 15px 0 0 0 
       .rating
         margin: 15px 0 0 0 
-
-
-
-
+  #task-container
+    background: none
+    box-shadow: none
 /****** Style Star Rating Widget *****/
 
 fieldset label 
@@ -317,29 +284,53 @@ fieldset label
   .rating > label 
     color: #ddd
     float: right
-
   /***** CSS Magic to Highlight Stars on Hover *****/
-
   .rating > input:checked ~ label
     color: #FFD700
-
   .rating:not(:checked) > label:hover
     cursor: pointer
-
   .rating:not(:checked) > label:hover ~ label 
     color: #FFD700
     cursor: pointer
-
   .rating > input:checked + label:hover
     color: #FFD700
-
   .rating > input:checked ~ label:hover
-    color: #FFD700
-    
+    color: #FFD700  
   .rating > label:hover ~ input:checked ~ label
     color: #FFD700
-
   .rating > input:checked ~ label:hover ~ label 
     color: #FFED85 
 
-  
+.filter
+  .filter-header 
+    overflow: hidden
+    h4
+      float: left
+    .glyphicon
+      margin-top: 10px
+      float: right
+      color: #EF7B2B
+    &:hover
+      cursor: pointer
+    .glyphicon-minus
+      display: none
+      color: #EF7B2B
+  .filter-body
+    display: none
+    padding: 10px 5px
+    margin: 5px 5px
+    border-radius: 5px 
+    background: rgba(0,0,0,0.05)
+    overflow: hidden
+    ul
+      list-style: none
+      padding: 0 15px
+      li
+        text-decoration: none
+        .applicant-filter-checkbox
+          clear: both
+          .filter-checkbox
+            float: left
+            margin-right: 10px
+          .filter-title
+            float: left

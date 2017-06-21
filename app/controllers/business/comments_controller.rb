@@ -1,4 +1,5 @@
 class Business::CommentsController < ApplicationController 
+  filter_access_to :all
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -8,7 +9,7 @@ class Business::CommentsController < ApplicationController
 
   def index
     @comments = @commentable.comments
-
+    @comment = Comment.new
     respond_to do |format|
       format.js
     end 
@@ -22,7 +23,7 @@ class Business::CommentsController < ApplicationController
     end
   end
 
-  def create   
+  def create 
     @comment = @commentable.comments.build(comment_params)
     
     if @comment.save 
