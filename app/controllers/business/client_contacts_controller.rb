@@ -1,5 +1,6 @@
 class Business::ClientContactsController < ApplicationController
-  filter_resource_access
+  filter_access_to :all
+  filter_access_to :filter_candidates, :require => :read
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -36,9 +37,10 @@ class Business::ClientContactsController < ApplicationController
 
   def create
     @contact = ClientContact.new(client_params)
-
+    @client = Client.find(params[:client_id])
     respond_to do |format|
       if @contact.save
+        @contacts = @client.client_contacts
         format.js
       end
     end

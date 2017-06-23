@@ -1,5 +1,5 @@
 class Business::CustomersController < ApplicationController
-  filter_resource_access
+  
   before_filter :require_user
   before_filter :belongs_to_company
   

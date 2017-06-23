@@ -1,5 +1,6 @@
 class Business::ClientsController < ApplicationController
-  filter_resource_access
+  filter_access_to :all
+  filter_access_to :filter_candidates, :require => :read
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -30,6 +31,7 @@ class Business::ClientsController < ApplicationController
 
     respond_to do |format|
       if @client.save
+        @clients = current_company.clients
         format.js
       end
     end
