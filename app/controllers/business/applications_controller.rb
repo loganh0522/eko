@@ -6,6 +6,18 @@ class Business::ApplicationsController < ApplicationController
   before_filter :trial_over
   before_filter :company_deactivated?
   
+  def index
+    @job = Job.find(params[:job_id])
+    @applications = @job.applications
+    @tag = Tag.new
+    tags_present(@applications) 
+    
+    respond_to do |format| 
+      format.js
+      format.html
+    end
+  end
+
   def new
     @application = Application.new
     @candidate = Candidate.find(params[:candidate_id])
@@ -22,17 +34,6 @@ class Business::ApplicationsController < ApplicationController
       respond_to do |format|
         format.js
       end
-    end
-  end
-
-  def index
-    @job = Job.find(params[:job_id])
-    @applications = @job.applications
-    @tag = Tag.new
-    tags_present(@applications) 
-    
-    respond_to do |format| 
-      format.js
     end
   end
 
@@ -140,8 +141,8 @@ class Business::ApplicationsController < ApplicationController
   def tags_present(applications)
     @tags = []
     applications.each do |applicant|
-      if applicant.tags.present?
-        applicant.tags.each do |tag| 
+      if applicant.candidate.tags.present?
+        applicant.candidate.tags.each do |tag| 
           @tags.append(tag) unless @tags.include?(tag)
         end
       end

@@ -1,0 +1,32 @@
+.activity{:id => activity.action, :class => "#{activity.trackable_type} job_#{activity.job_id}"}      
+  .glyphicon.glyphicon-list
+  .activity-body
+    .activity-body-header
+      .details
+        - if activity.user.user_avatar.present?
+          = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
+        - else 
+          .circle-img
+            %img(src="/tmp/little-man.png") 
+        .content 
+          = "#{activity.user.first_name} #{activity.user.last_name} created the task #{activity.trackable.kind}."
+          %br
+          .time= "#{time_ago_in_words(activity.created_at)} ago" 
+    .activity-row
+      .title= "#{activity.trackable.title}"
+      .due-date= "#{activity.trackable.due_date} #{activity.trackable.due_time}"
+    .activity-row
+      .comment-body
+        - if !activity.trackable.notes.present?
+          .no-notes There are currently no notes for this task.
+        - else
+          = activity.trackable.notes 
+    .activity-row
+      - activity.trackable.users.each do |user|
+        .assigned Assigned To: 
+        .user-tag
+          .name= current_user.full_name 
+
+    
+
+    

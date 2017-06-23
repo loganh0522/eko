@@ -11,7 +11,6 @@ class Business::CandidatesController < ApplicationController
     if params[:job].present?
       @job = Job.find(params[:job])
     end
-    
     @candidate = Candidate.new
     @candidate.work_experiences.build
     @candidate.educations.build
@@ -88,6 +87,6 @@ class Business::CandidatesController < ApplicationController
 
   def candidate_params
     params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :location, :company_id, :manually_created, work_experiences_attributes: [:id, :body, :_destroy, :title, :company_name, :description, :start_month, :start_year, :end_month, :end_year, :current_position, :industry_ids, :function_ids, :location],
-      educations_attributes: [:id, :school, :degree, :description, :start_month, :start_year, :end_month, :end_year, :_destroy])
+      educations_attributes: [:id, :school, :degree, :description, :start_month, :start_year, :end_month, :end_year, :_destroy], resumes_attributes: [:id, :name, :_destroy])
   end
 end

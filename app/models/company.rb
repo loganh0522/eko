@@ -21,7 +21,9 @@ class Company < ActiveRecord::Base
   has_many :email_templates
   has_many :default_stages
   has_many :application_emails
+  has_many :tasks, as: :taskable, :dependent => :destroy
 
+  
   has_many :subsidiaries
   has_many :locations
   

@@ -4,8 +4,10 @@ $('#comment-body').val('');
 <% elsif @commentable.class == Job %> 
   $('#main-container').html('<%= j render "business/comments/job_comments" %>');
 <% else %>
-  $('.applicant-profile').html('<%= j render "business/comments/applicant_notes", comments: @comments %>');
+  $('#basic-form-modal').modal("toggle");
+  $('.applicant-profile').html('<%= j render "business/comments/notes", comments: @comments %>');
 <% end %>
+
 
 
 

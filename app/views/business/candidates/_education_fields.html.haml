@@ -1,4 +1,4 @@
-.fieldset.work-experience
+.fieldset.add-work-experience
   .row
     .col-md-6
       = f.text_field :school, class: "form-control", hide_label: true, placeholder: "School"
@@ -8,11 +8,11 @@
     .col-md-3.col-xs-6.col-sm-6
       = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December']
     .col-md-3.col-xs-6.col-sm-6
-      = f.text_field :start_year
+      = f.text_field :start_year, class: "form-control"
     .col-md-3.col-xs-6.col-sm-6
       = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December']
     .col-md-3.col-xs-6.col-sm-6
-      = f.text_field :end_year
+      = f.text_field :end_year, class: "form-control"
   .row
     .col-md-12
       = f.text_area :description, rows: 4, class: "form-control", hide_label: true, placeholder: "Description"

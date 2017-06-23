@@ -1,4 +1,4 @@
 class Tagging < ActiveRecord::Base
   belongs_to :tag
-  belongs_to :application, touch: true
+  belongs_to :candidate, touch: true
 end

@@ -1,0 +1,2 @@
+$('#task_<%= @task.id %>').hide();
+$('#task_<%= @task.id %>').after('<%= j render "business/tasks/form" %>');

@@ -1,29 +1,37 @@
 = form_for [:business, @candidate], remote: true do |f|
   .modal-body
-    .header 
-      .title Contact Details 
-      = f.text_field :first_name, class: "form-control", hide_label: true, placeholder: "First Name"
-      = f.text_field :last_name, class: "form-control", hide_label: true, placeholder:"Last Name"
-      = f.text_field :email, class: "form-control", hide_label: true, placeholder: "E-mail"
-      = f.text_field :phone, class: "form-control", hide_label: true, placeholder: "Phone"
-    / .experience-container
-    /   .header
-    /     .title Experience
-    /   = f.fields_for :work_experiences do |q|
-    /     = render "profiles/work_experience_fields", f: q      
-    /   = link_to_add_fields "+ Add Work Experience", f, :work_experiences
-    / .experience-container
-    /   .header
-    /     .title Education
-    /   = f.fields_for :educations do |q|
-    /     = render "profiles/education_fields", f: q
-    /   = link_to_add_fields "+ Add Education", f, :educations
-    / / .experience-container
-    /   .header#certification-header
-    /     .title Certification
-    /   = f.fields_for :user_certifications do |q|
-    /     = render "user_certification_fields", f: q
-    /   = link_to_add_fields "+ Add Certification", f, :user_certifications
+    .form-row
+      .contain-50
+        = f.text_field :first_name, class: "form-control", hide_label: true, placeholder: "First Name"
+      .contain-50
+        = f.text_field :last_name, class: "form-control", hide_label: true, placeholder:"Last Name"
+      .contain-50
+        = f.text_field :email, class: "form-control", hide_label: true, placeholder: "E-mail"
+      .contain-50
+        = f.text_field :phone, class: "form-control", hide_label: true, placeholder: "Phone"
+    .form-row
+      = f.fields_for :resumes, Resume.new do |q|
+        = q.label "+ Add Resume", class: "file-container"
+        = q.file_field :name, class: "file-container"
+    .form-row
+      .header
+        .title Add Tag
+        = link_to new_business_tag_path, remote: true do
+          .glyphicon.glyphicon-plus 
+    .form-row
+      .header
+        .title Experience    
+        = link_to_add_fields "+ Experience", f, :work_experiences
+    .form-row
+      .header
+        .title Education
+        = link_to_add_fields "+ Education", f, :educations
+      / .experience-container
+      /   .header#certification-header
+      /     .title Certification
+      /   = f.fields_for :user_certifications do |q|
+      /     = render "user_certification_fields", f: q
+      /   = link_to_add_fields "+ Add Certification", f, :user_certifications
   .modal-footer
     = f.hidden_field :company_id, value: current_company.id
     = f.hidden_field :manually_created, value: true

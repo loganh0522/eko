@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170620160210) do
+ActiveRecord::Schema.define(version: 20170622203744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -592,7 +592,7 @@ ActiveRecord::Schema.define(version: 20170620160210) do
 
   create_table "taggings", force: :cascade do |t|
     t.integer "tag_id"
-    t.integer "application_id"
+    t.integer "candidate_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -614,6 +614,7 @@ ActiveRecord::Schema.define(version: 20170620160210) do
     t.integer  "company_id"
     t.string   "kind"
     t.string   "due_time"
+    t.string   "status"
   end
 
   create_table "user_avatars", force: :cascade do |t|

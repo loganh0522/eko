@@ -1,5 +1,5 @@
 .activity{:id => activity.action, :class => "#{activity.trackable_type} job_#{activity.job_id}"}      
-  .glyphicon.glyphicon-pencil
+  .glyphicon.glyphicon-ok
   .activity-body
     .activity-body-header
       .details
@@ -9,12 +9,17 @@
           .circle-img
             %img(src="/tmp/little-man.png") 
         .content 
-          = "#{activity.user.first_name} #{activity.user.last_name} added a comment on #{activity.trackable.commentable.candidate.user.full_name}"
-          / = link_to "#{activity.trackable.commentable.full_name}'s application", business_job_application_path(activity.trackable.commentable.job.id, activity.trackable.commentable.id)     
+          = "The task #{activity.trackable.title} was completed."
           %br
           .time= "#{time_ago_in_words(activity.created_at)} ago" 
-    .activity-body-body
+    .activity-row
       .comment-body
-        = activity.trackable.body
-
-    
+        - if !activity.trackable.notes.present?
+          .no-notes There are currently no notes for this task.
+        - else
+          = activity.trackable.notes 
+    .activity-row
+      - activity.trackable.users.each do |user|
+        .assigned Assigned To: 
+        .user-tag
+          .name= current_user.full_name 

@@ -1,7 +1,7 @@
 .stage-form
   = form_for [:business, @job, @stage], html: {remote: true, class: 'invite'} do |f|
     %fieldset
-      = f.text_field :name, class: "form-control", placeholder: "Name"
+      = f.text_field :name, class: "form-control", placeholder: "Name", autocomplete: 'off'
       = f.hidden_field :job_id, value: @job.id
       = f.hidden_field :position, value: 1
       = f.submit "Create Stage", class: "submit btn btn-primary"

@@ -6,14 +6,11 @@ class Business::ActivitiesController < ApplicationController
   before_filter :company_deactivated?
   
   def index   
-
     if !params[:application_id].present? && params[:job_id].present?
       @job = Job.find(params[:job_id])
     elsif params[:application_id].present?
-
       @application = Application.find(params[:application_id])
       @activities = @application.activities
-
     else
       @activities = current_company.activities.order("created_at desc")
       @jobs = current_company.jobs.where(status: "open")

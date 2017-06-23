@@ -49,8 +49,6 @@ class Business::JobsController < ApplicationController
     end
   end
 
-  
-
   def show 
     @job = Job.find(params[:id])
     @candidates = @job.applications
@@ -173,9 +171,9 @@ class Business::JobsController < ApplicationController
 
   def tags_present(applications)
     @tags = []
-    applications.each do |applicant|
-      if applicant.tags.present?
-        applicant.tags.each do |tag| 
+    applications.each do |application|
+      if application.candidate.tags.present?
+        applicant.candidate.tags.each do |tag| 
           @tags.append(tag) unless @tags.include?(tag)
         end
       end

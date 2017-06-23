@@ -1,7 +1,7 @@
 <% if params[:job_id].present? %> 
-  $('#createApplicationModal').modal('toggle');
+  $('#basic-form-modal').modal('hide');
   $('.main-container').html('<%= j render "business/applications/job_applications/applications", applications: @applications %>');
 <% else %>
-  $('#createApplicationModal').modal('toggle');
+  $('#basic-form-modal').modal('hide');
   $('.main-container').html('<%= j render "business/candidates/candidate_table/all_candidates_table", candidates: @candidates %>');
 <% end %>

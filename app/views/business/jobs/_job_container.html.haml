@@ -1,7 +1,7 @@
 .job 
   .job-header 
     .title 
-      = link_to job.title, business_job_path(job)
+      = link_to job.title, business_job_applications_path(job)
     .location= "#{job.location}"
     .posted-time= "#{time_ago_in_words(job.created_at)} ago" 
   .job-body

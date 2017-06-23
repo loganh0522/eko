@@ -29,21 +29,22 @@ class Business::TasksController < ApplicationController
   end
 
   def create 
-    @new_task = @taskable.tasks.build(task_params)
-    @task = Task.new
-
+    @task = @taskable.tasks.build(task_params)
+    
     respond_to do |format| 
       if @new_task.save 
         if params[:task][:user_ids].present? 
           assigned_to(@new_task)
         end
         @tasks = @taskable.all_tasks
+        track_activity @new_task
         format.js 
       end
     end
   end
 
   def edit 
+    @taskable = @taskable.taskable
     @task = Task.find(params[:id])
 
     respond_to do |format| 
@@ -53,11 +54,14 @@ class Business::TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-
     respond_to do |format| 
-      if @task.update(comment_params)
-        format.js
+      if params[:status].present?
+        @task.update_attribute(:status, params[:status])
+        track_activity @task, "complete"
+      else
+        @task.update(task_params)   
       end
+      format.js
     end
   end
 
@@ -73,12 +77,11 @@ class Business::TasksController < ApplicationController
   private 
 
   def task_params 
-    params.require(:task).permit(:title, :notes, :due_date, :due_time, :user_id, :company_id)
+    params.require(:task).permit(:title, :notes, :kind, :due_date, :due_time, :status, :user_id, :company_id)
   end
 
   def assigned_to(task)
     user_ids = params[:task][:user_ids].split(',')
-    binding.pry
     user_ids.each do |id| 
       AssignedUser.create(assignable_type: "Task", assignable_id: task.id, user_id: id )
     end

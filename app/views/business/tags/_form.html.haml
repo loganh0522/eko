@@ -4,9 +4,8 @@
       = f.text_field :name, :class => 'ui-autocomplete-input form-control', :placeholder => 'Tag', id: "tag_name", hide_label: true
       %div#tag-results
     .col-md-6
-      = f.hidden_field :application_id, value: @application.id
+      = f.hidden_field :candidate_id, value: @candidate.id
       = hidden_field_tag :tag_id
-      = f.hidden_field :job_id, value: @job.id
       = f.submit "Add Tag", class: "btn submit-button"
       .close-form     
         .border-button Close

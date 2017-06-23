@@ -2,6 +2,7 @@ module ApplicationHelper
   def link_to_add_fields(name, f, association)
     new_object = f.object.send(association).klass.new
     id = new_object.object_id
+
     fields = f.fields_for(association, new_object, child_index: id) do |builder|
       render(association.to_s.singularize + "_fields", f: builder)
     end
@@ -17,6 +18,14 @@ module ApplicationHelper
       return true
     else
       return false
+    end
+  end
+
+  def candidate_manual(activity)
+    if activity.trackable.commentable.candidate.manually_created
+      return activity.trackable.commentable.candidate.user.full_name
+    else 
+      activity.trackable.commentable.candidate.full_name
     end
   end
 

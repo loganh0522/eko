@@ -1,5 +1,5 @@
 .email-area
-  = form_for [:business, @candidate, @message], html: {remote: true, class: 'invite', data: {behaviour: 'has-saved-templates'}} do |f|
+  = form_for [:business, @messagable, @message], html: {remote: true, class: 'invite', data: {behaviour: 'has-saved-templates'}} do |f|
     .to 
       .title To:
       - if @candidate.manually_created == true 

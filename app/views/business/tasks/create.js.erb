@@ -1,5 +1,7 @@
-
-$('.main-container').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
-
+<% if @taskable.class == Application %> 
+  $(".side-section").find('.tasks').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
+<% else %> 
+  $('.main-container').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
+<% end %>
 
 

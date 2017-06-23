@@ -16,8 +16,6 @@ class Business::HiringTeamsController < ApplicationController
     @job = Job.find(params[:job_id])
     @hiring_teams = @job.hiring_teams 
 
-
-    
     @users =  @job.users
     @scorecard = @job.scorecard
     @company_users =  current_company.users
@@ -27,6 +25,7 @@ class Business::HiringTeamsController < ApplicationController
 
   def create    
     @hiring_team = HiringTeam.create(team_params) 
+    
     respond_to do |format| 
       if @hiring_team.save
         @job = Job.find(params[:job_id])

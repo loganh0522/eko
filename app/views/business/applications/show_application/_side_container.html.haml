@@ -3,17 +3,25 @@
   .tags
     = render "business/tags/tags"
   .add_tag
-    = link_to "+ Add Tag", new_business_job_application_tag_path(@job.id, @application.id), :data => {remote: true}, id: 'add_tag'
+    = link_to "+ Add Tag", new_business_candidate_tag_path(@candidate), remote: true, id: 'add_tag'
 
 .side-section
   %h4 Tasks 
   .tasks 
     - @application.tasks.each do |task| 
-      .task
-        .details 
+      .task{id: "task_#{task.id}"}
+        .edit-delete-actions
+          = link_to edit_business_application_task_path(@application, task), remote: true do
+            .glyphicon.glyphicon-pencil
+        .body
+          = link_to business_application_task_path(@application, task, status: "complete"), method: :put, remote: true do 
+            .glyphicon.glyphicon-ok 
           .title= task.title
-          .notes= task.notes
-        .action
-          .btn.border-button2 Completed
 
+            
+          / .action
+            
+          / .notes= task.notes
+
+   
 

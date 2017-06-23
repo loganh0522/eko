@@ -23,8 +23,9 @@
             .name= current_user.full_name 
             .delete-tag &times  
       = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
-    .comment-area-footer
-      = f.submit @task.new_record? ? "+ Create Task" : "Update Task", class: "btn submit-button", id: "submit-comment-btn"
-      = link_to "Cancel", "#", remote: true, class: 'btn border-button2', id: 'cancel'
       = f.hidden_field :user_id, value: current_user.id
       = f.hidden_field :company_id, value: current_company.id
+    .comment-area-footer
+      = f.submit @task.new_record? ? "+ Create Task" : "Update Task", class: "btn submit-button", id: "submit-comment-btn"
+      - if !@task.new_record? 
+        = link_to "Cancel", "#", remote: true, class: 'btn border-button2', id: 'cancel'

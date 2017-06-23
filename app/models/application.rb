@@ -20,16 +20,18 @@ class Application < ActiveRecord::Base
 
   has_many :application_scorecards
   has_many :activities, -> {order("created_at DESC")}  
+  
   has_many :question_answers, dependent: :destroy
   accepts_nested_attributes_for :question_answers, allow_destroy: true
   
-  has_many :taggings
-  has_many :tags, through: :taggings
   has_many :interviews
   has_many :ratings
 
   def generate_token
     self.token = SecureRandom.urlsafe_base64
+  end
+  def all_tasks
+    self.tasks
   end
 
   ######### ElasticSearch ##############
@@ -68,14 +70,6 @@ class Application < ActiveRecord::Base
     self.ratings.average(:score).to_f.round(1) if ratings.any?
   end
 
-  def tags_present
-    @tags = []
-    self.tags.each do |tag| 
-      @tags.append(tag.name)
-    end
-    return @tags
-  end
-
   # def current_position
   #   self.applicant.profile.current_position.title
   # end
@@ -92,13 +86,13 @@ class Application < ActiveRecord::Base
       include: {
         stage: {only: [:name]},
         job: {only: [:title, :location, :status]},
-        tags: {only: [:name]},            
-        
+                    
         candidate: {
           only: [:first_name, :last_name, :email],
           include: {
             educations: {only: [:title, :description, :school]},
             work_experiences: {only: [:title, :description, :company_name]},
+            tags: {only: [:name]},
             user: {
               only: [:first_name, :last_name, :tag_line],
               include: {

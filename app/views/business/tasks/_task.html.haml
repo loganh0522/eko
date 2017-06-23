@@ -1,11 +1,15 @@
 .task{:id => "task_#{task.id}"}
   .task-header  
-    .title= "#{task.title}"
+    .created_by= "#{task.user.full_name} assigned a task to #{task.users.first.full_name}"
     .actions
       = link_to "Edit |", edit_business_task_path(task), remote: true
       = link_to "Delete", business_task_path(task), remote: true, :method => :delete
   .task-row
     .title= "#{task.title}"
     .due= task.due_date
-  .task-body
+  .task-row
     = task.notes
+  .task-row
+    - task.users.each do |user|
+      .tag= user.full_name
+      

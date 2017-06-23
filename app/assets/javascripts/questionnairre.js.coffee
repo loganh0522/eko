@@ -11,8 +11,6 @@ jQuery ->
     $(this).parent().closest('.question-area').hide()
     event.preventDefault()
 
-
-
   $('.job_scorecard').on 'click', '.add_fields', (event) ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
@@ -64,14 +62,14 @@ jQuery ->
 
 ################ Create Application ###############
 
-  $('#createApplicationModal').on 'click', '.remove_fields', (event) ->
+  $('#basic-form-modal').on 'click', '.remove_fields', (event) ->
     $(this).parent().parent().remove()
     event.preventDefault()
 
-  $('#createApplicationModal').on 'click', '.add_fields', (event) ->
+  $('#basic-form-modal').on 'click', '.add_fields', (event) ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
-    $(this).before($(this).data('fields').replace(regexp, time))
+    $(this).after($(this).data('fields').replace(regexp, time))
     $(this).prev().find('.remove_fields').show()
     event.preventDefault()
 
