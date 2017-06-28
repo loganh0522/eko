@@ -15,9 +15,15 @@
         = q.file_field :name, class: "file-container"
     .form-row
       .header
-        .title Add Tag
-        = link_to new_business_tag_path, remote: true do
-          .glyphicon.glyphicon-plus 
+        .title Tags    
+        = text_field_tag '', '', :class => 'ui-autocomplete-input form-control', :placeholder => 'Add a Tag', id: "tag_name", hide_label: true
+        .btn.border-button2#add-tag-button Add
+        %div#tag-results   
+        #tags_to_add
+    .form-row
+      .header
+        .title Social Media    
+        = link_to_add_fields "+ Link", f, :social_links
     .form-row
       .header
         .title Experience    
@@ -35,5 +41,6 @@
   .modal-footer
     = f.hidden_field :company_id, value: current_company.id
     = f.hidden_field :manually_created, value: true
+    = f.hidden_field :tags, value: nil, id: "add_tag_on_create"
     = hidden_field_tag :job_id, @job.id if @job.present?
     = f.submit "Create Profile", class: "btn submit-button"

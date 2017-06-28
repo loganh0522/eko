@@ -1,7 +1,7 @@
-.activity-feed
-  - if @comments.present?
+- if @comments.present?
+  .comments
     - @comments.each do |comment|
       = render 'business/comments/comment', comment: comment
-  - else  
-    .not-present-container
-      %p There are currently no notes for this applicant.
+- else  
+  .not-present-container
+    %p There are currently no notes for this applicant.

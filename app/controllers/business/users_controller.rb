@@ -4,14 +4,14 @@ class Business::UsersController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
+  before_filter :user_to_user, only: [:show, :edit, :update]
 
   def index 
     if params[:term].present?
       @company_users = current_company.users.order(:full_name).where("full_name ILIKE ?", "%#{params[:term]}%")
       render :json => @company_users.to_json 
     else
-      @invitation = Invitation.new
-      @users = current_company.users.order(:first_name)
+      @users = current_company.users
       @job_board = current_company.job_board
       
       respond_to do |format| 
@@ -23,9 +23,7 @@ class Business::UsersController < ApplicationController
 
   def show
     @user = current_user
-    @user_avatar = UserAvatar.new
-    @avatar = @user.user_avatar
-    @signature = @user.email_signature
+    @signature = current_user.email_signature
     
     if request.env['omniauth.auth'].present? 
       @auth = request.env['omniauth.auth']['credentials']
@@ -53,6 +51,10 @@ class Business::UsersController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+  def destroy
+
   end
 
   def gmail_auth

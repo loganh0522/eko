@@ -15,6 +15,7 @@
           .contact-details
             .glyphicon.glyphicon-earphone 
               = "#{@candidate.phone}"
+            %br
             .glyphicon.glyphicon-envelope
               = "#{@candidate.email}"
             %br
@@ -38,23 +39,21 @@
           .contact-details
             .glyphicon.glyphicon-earphone 
               = "#{@candidate.user.phone}"
+            %br
             .glyphicon.glyphicon-envelope
               = "#{@candidate.user.email}"
             %br
             .glyphicon.glyphicon-map-marker
               = "#{@candidate.user.location}"
     .applicant-actions
+      = render 'business/candidates/show_candidate/header_actions'
     .applicant-nav  
       = render 'business/candidates/show_candidate/candidate_nav'
 
   .applicant-body
     .applicant-side-container
       = render 'business/candidates/show_candidate/side_container'
-    .applicant-profile-information
-      .applicant-main-top
-        = render 'business/candidates/show_candidate/action_nav'
-      .applicant-profile
-        .profile-container.showing
-          .applicant-experience
-            = render 'business/applications/show_application/application_cv'
+    .applicant-main-container
+      .applicant-experience
+        = render 'business/applications/show_application/application_cv'
 

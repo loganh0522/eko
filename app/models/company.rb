@@ -21,8 +21,9 @@ class Company < ActiveRecord::Base
   has_many :email_templates
   has_many :default_stages
   has_many :application_emails
-  has_many :tasks, as: :taskable, :dependent => :destroy
 
+  has_many :tasks, as: :taskable, :dependent => :destroy
+  has_many :tasks
   
   has_many :subsidiaries
   has_many :locations
@@ -39,6 +40,14 @@ class Company < ActiveRecord::Base
 
   def generate_token
     self.widget_key = SecureRandom.urlsafe_base64
+  end
+
+  def open_tasks
+    self.tasks.where(status: 'active')
+  end
+
+  def complete_tasks
+    self.tasks.where(status: 'complete')
   end
 
   def company_locations

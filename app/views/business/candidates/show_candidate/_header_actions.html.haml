@@ -1,0 +1,19 @@
+.bottom-row
+  .stage
+    = link_to new_business_candidate_task_path(@candidate), remote: true do 
+      .glyphicon Task
+  .stage 
+    = link_to new_business_candidate_comment_path(@candidate), remote: true do
+      .glyphicon.glyphicon-pencil Note
+  .stage
+    = link_to new_business_candidate_interview_path(@candidate), remote: true do 
+      .glyphicon.glyphicon-calendar
+  .stage
+    = link_to new_business_candidate_message_path(@candidate), remote: true do 
+      .glyphicon.glyphicon-envelope 
+  .stage
+    = link_to new_business_candidate_application_path(@candidate), remote: true do 
+      .glyphicon.glyphicon-share-alt 
+  .stage
+    = link_to business_candidate_path(@candidate), :method => :delete, remote: true do 
+      .glyphicon.glyphicon-trash

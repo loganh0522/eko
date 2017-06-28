@@ -9,6 +9,18 @@ module ApplicationHelper
     link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", ""), :add_field => 'add_field'}, style: "display:#{name == "Add Answer" ? "none" : ""}" )
   end
 
+  def taskable_link(task)
+    if task.taskable.class == Application
+      if task.taskable.candidate.manually_created?
+        @name = task.taskable.candidate.full_name
+      else
+        @name = task.taskable.candidate.user.full_name
+      end
+    end
+
+    link_to(@name, '', data: {remote: true})
+  end
+
   def is_active?(link_path)
     current_page?(link_path) ? "active" : ""
   end
@@ -22,7 +34,7 @@ module ApplicationHelper
   end
 
   def candidate_manual(activity)
-    if activity.trackable.commentable.candidate.manually_created
+    if activity.trackable.commentable.candidate.manually_created?
       return activity.trackable.commentable.candidate.user.full_name
     else 
       activity.trackable.commentable.candidate.full_name

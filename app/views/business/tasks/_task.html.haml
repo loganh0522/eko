@@ -1,15 +1,17 @@
 .task{:id => "task_#{task.id}"}
-  .task-header  
-    .created_by= "#{task.user.full_name} assigned a task to #{task.users.first.full_name}"
-    .actions
-      = link_to "Edit |", edit_business_task_path(task), remote: true
-      = link_to "Delete", business_task_path(task), remote: true, :method => :delete
+  .edit-delete-actions
+    = link_to edit_business_task_path(task), remote: true do
+      .glyphicon.glyphicon-pencil
+  .body
+    = link_to business_task_path(task, status: "complete"), method: :put, remote: true do 
+      .glyphicon.glyphicon-ok 
+    .title= task.title
+    / = link_to "#{task.taskable.candidate.first_name}'s application", business_job_application_path(task.taskable.application.job.id, task.taskable.application.id), remote: true
   .task-row
-    .title= "#{task.title}"
-    .due= task.due_date
-  .task-row
-    = task.notes
-  .task-row
-    - task.users.each do |user|
-      .tag= user.full_name
+    .tags
+      - task.users.each do |user|
+        .tag= user.full_name
+    .due= " Due: #{task.due_date}"
+    .candidate
+
       

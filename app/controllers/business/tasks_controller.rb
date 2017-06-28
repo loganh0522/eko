@@ -8,12 +8,24 @@ class Business::TasksController < ApplicationController
   before_filter :new_taskable, only: [:new]
 
   def index
-    @tasks = @taskable.all_tasks
-    @task = Task.new
+    # @tasks = @taskable.all_tasks
+
+    if params[:status] == 'complete'
+      @tasks = @taskable.complete_tasks
+    else
+      @tasks = @taskable.open_tasks
+    end
+    # else
+    #   if params[:status] == 'complete'
+    #     @tasks = current_company.complete_tasks
+    #   else
+    #     @tasks = current_company.open_tasks
+    #   end
+    # end
+    
     # @date = params[:date] ? Date.parse(params[:date]) : Date.today
     # @job = current_company.jobs.first
     # @interviews_by_date = @job.interviews.group_by(&:interview_date)
-
     respond_to do |format|
       format.js
       format.html
@@ -29,8 +41,8 @@ class Business::TasksController < ApplicationController
   end
 
   def create 
-    @task = @taskable.tasks.build(task_params)
-    
+    @new_task = @taskable.tasks.build(task_params)
+    @task = Task.new
     respond_to do |format| 
       if @new_task.save 
         if params[:task][:user_ids].present? 
@@ -88,7 +100,7 @@ class Business::TasksController < ApplicationController
   end
 
   def load_taskable
-    if request.format == 'text/html'
+    if request.path.split('/')[-3..-1][1] == "business"
       @taskable = current_company
     else
       resource, id = request.path.split('/')[-3..-1]

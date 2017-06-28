@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   has_many :mentioned, :class_name => "Mention", :foreign_key => "mentioned_id"
   has_many :email_templates
 
-  validates_presence_of :first_name, :last_name, :email, :password, on: [:create]
+  validates_presence_of :first_name, :last_name, :email, :password, on: [:create, :update]
   validates_uniqueness_of :email
 
   has_secure_password 
@@ -50,6 +50,18 @@ class User < ActiveRecord::Base
   has_one :google_token
   #Carrierwave uploader and minimagic for User Profile Pictures
 
+  def all_tasks
+    self.tasks
+  end
+  
+  def open_tasks
+    self.tasks.where(status: 'active')
+  end
+
+  def complete_tasks
+    self.tasks.where(status: 'complete')
+  end
+  
   def role_symbols
     if role == "Admin" 
       [:admin] 
@@ -68,10 +80,6 @@ class User < ActiveRecord::Base
         applications: {only: [:created_at, :user_id, :job_id]}        
         }        
       )
-  end
-
-  def sort_by_date
-    
   end
 
   def set_full_name

@@ -6,7 +6,7 @@
       .user-profile-header
         - if current_user.user_avatar.present?   
           .profile-picture
-            .circle= image_tag @avatar.image.medium_image, :size => "100x100" 
+            .circle= image_tag @user.user_avatar.avatar.image.medium_image, :size => "100x100" 
             .change-photo= link_to "Change Photo", edit_business_user_user_avatar_path(current_user, @avatar), :data => {remote: true}
         - else      
           .profile-picture
@@ -39,4 +39,4 @@
       /   - @labels.each do |label|
       /     = label.id
 = render 'business/users/right_modal'
-= render 'business/user_avatars/picture_modal'
+/ = render 'business/user_avatars/picture_modal'

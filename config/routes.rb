@@ -73,7 +73,7 @@ Rails.application.routes.draw do
 
   get "/auth/:provider/callback", to: 'business/users#edit'
 
-
+  get "/authorize", to: 'business/users#edit'
 
   namespace :business do 
     root to: "jobs#index" 

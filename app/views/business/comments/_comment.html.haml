@@ -1,20 +1,18 @@
-%div{:id => "comment_#{comment.id}", :class => "activity"}
-  .glyphicon.glyphicon-pencil
-  .activity-body
-    .activity-body-header
-      .details
-        - if comment.user.user_avatar.present? 
-          = image_tag comment.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
-        - else 
-          .circle-img
-            %img(src="/tmp/little-man.png")
-        .contain    
-          = "#{comment.user.full_name} added a note"
-          %br
-          .time= time_ago_in_words(comment.created_at)
-      .actions
-        = link_to "Edit |", edit_business_comment_path(comment), remote: true
-        = link_to "Delete", business_comment_path(comment), remote: true, :method => :delete
-    .activity-body-body
-      .comment-body
-        = comment.body
+.comment{:id => "comment_#{comment.id}", :class => "activity"}
+  .comment-header
+    .details
+      - if comment.user.user_avatar.present? 
+        = image_tag comment.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
+      - else 
+        .circle-img
+          %img(src="/tmp/little-man.png")
+      .contain    
+        = "#{comment.user.full_name} added a note"
+        %br
+        .time= time_ago_in_words(comment.created_at)
+    .actions
+      = link_to "Edit |", edit_business_comment_path(comment), remote: true
+      = link_to "Delete", business_comment_path(comment), remote: true, :method => :delete
+  .activity-body-body
+    .comment-body
+      = comment.body

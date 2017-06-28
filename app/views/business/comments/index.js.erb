@@ -7,7 +7,7 @@
   $('.change-containers-nav').find('.activated').removeClass('activated');
   $('.change-containers-nav').find('#job-notes').addClass('activated');
 <% else %> 
-  $('.applicant-profile').html('<%= j render "business/comments/notes" %>');
+  $('.applicant-main-container').html('<%= j render "business/comments/notes" %>');
   $('.applicant-nav').find('.activated').removeClass('activated');
   $('.applicant-nav').find('#notes').addClass('activated');  
 <% end %>

@@ -6,6 +6,7 @@ class Candidate < ActiveRecord::Base
   # after_commit on: [:update] do
   #   __elasticsearch__.update_document if self.published?
   # end
+
   liquid_methods :first_name, :last_name, :full_name
   before_create :generate_token
   belongs_to :company
@@ -14,9 +15,10 @@ class Candidate < ActiveRecord::Base
   has_many :jobs, through: :applications
 
 
-  has_many :resumes
+  has_many :resumes, :dependent => :destroy
   has_many :work_experiences, :dependent => :destroy
   has_many :educations, :dependent => :destroy
+  has_many :social_links, :dependent => :destroy
 
   has_many :ratings
   has_many :taggings
@@ -25,7 +27,10 @@ class Candidate < ActiveRecord::Base
   has_many :messages, as: :messageable, :dependent => :destroy
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy
   has_many :tasks, as: :taskable, :dependent => :destroy
-  
+
+  accepts_nested_attributes_for :social_links, 
+    allow_destroy: true,
+    reject_if: proc { |a| a[:url].blank? }
 
   accepts_nested_attributes_for :work_experiences, 
     allow_destroy: true,

@@ -1,8 +1,13 @@
-= render 'business/tasks/form'
-.tasks
-  - if @tasks.present?
-    - @tasks.each do |task|
-      = render 'business/tasks/task', task: task
-  - else  
-    .not-present-container
-      %p There are currently no tasks.
+#job-applicants
+  .side-container
+    = render 'business/tasks/filters'
+  .main-container#task-container
+    = link_to 'Open Tasks', business_job_tasks_path(@taskable), remote: true
+    = link_to 'Completed Tasks', business_job_tasks_path(@taskable, status: 'complete'), remote: true
+    .tasks
+      - if @tasks.present?
+        - @tasks.each do |task|
+          = render 'business/tasks/task', task: task
+      - else  
+        .not-present-container
+          %p There are currently no tasks.

@@ -1,9 +1,17 @@
 .side-section
   %h4 Tags
   .tags
-    / = render "business/tags/tags"
+    = render "business/tags/tags"
   .add_tag
-    / = link_to "+ Add Tag", new_business_job_application_tag_path(@job.id, @application.id), :data => {remote: true}, id: 'add_tag'
+    = link_to "+ Add Tag", new_business_candidate_tag_path(@candidate), remote: true, id: 'add_tag'
+
+/ .side-section
+/   %h4 Tasks 
+/   = link_to 'Open Tasks', business_application_tasks_path(@application), remote: true
+/   = link_to 'Completed Tasks', business_application_tasks_path(@application, status: 'complete'), remote: true
+/   .tasks 
+/     = render 'business/tasks/application_tasks'
+    
 .side-section
   %h4 All Applications
   - @candidate.applications.each do |application| 

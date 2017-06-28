@@ -42,7 +42,7 @@ class Business::ApplicationsController < ApplicationController
     @application = Application.find(params[:id])  
     @candidate = @application.candidate
     @resume = Resume.new
-    
+    @tasks = @application.open_tasks
     if @candidate.manually_created == true 
       @applicant = @candidate
     else

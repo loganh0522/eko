@@ -51,6 +51,33 @@ class Job < ActiveRecord::Base
     return @tasks
   end
 
+  def complete_tasks
+    @tasks = []
+    self.tasks.where(status: 'complete').each do |task|
+      @tasks.append(task) unless @tasks.include?(task)
+    end
+    self.applications.each do |application|
+      application.complete_tasks.each do |task|
+        @tasks.append(task) unless @tasks.include?(task)
+      end
+    end
+    return @tasks
+  end
+
+   def open_tasks
+    @tasks = []
+    self.tasks.where(status: 'active').each do |task|
+      @tasks.append(task) unless @tasks.include?(task)
+    end
+    
+    self.applications.each do |application|
+      application.open_tasks.each do |task|
+        @tasks.append(task) unless @tasks.include?(task)
+      end
+    end
+    return @tasks
+  end
+
   def as_indexed_json(options={})
     as_json(
       only: [:id, :title, :description, :status, :city, :country, :province,

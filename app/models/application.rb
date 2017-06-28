@@ -30,8 +30,17 @@ class Application < ActiveRecord::Base
   def generate_token
     self.token = SecureRandom.urlsafe_base64
   end
+  
   def all_tasks
     self.tasks
+  end
+  
+  def open_tasks
+    self.tasks.where(status: 'active')
+  end
+
+  def complete_tasks
+    self.tasks.where(status: 'complete')
   end
 
   ######### ElasticSearch ##############
@@ -80,8 +89,7 @@ class Application < ActiveRecord::Base
 
   def as_indexed_json(options={})
     as_json(
-      methods: [:average_rating, :tags_present],
-      
+      methods: [:average_rating, :tags_present],   
       only: [:created_at, :rejection_reason, :source, :manually_created],
       include: {
         stage: {only: [:name]},

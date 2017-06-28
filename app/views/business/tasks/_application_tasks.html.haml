@@ -1,0 +1,10 @@
+- @tasks.each do |task| 
+  .task{id: "task_#{task.id}"}
+    .edit-delete-actions
+      = link_to edit_business_task_path(task), remote: true do
+        .glyphicon.glyphicon-pencil
+    .body
+      = link_to business_task_path(task, status: "complete"), method: :put, remote: true do 
+        .glyphicon.glyphicon-ok 
+      .title= task.title
+      

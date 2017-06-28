@@ -22,10 +22,25 @@ class ApplicationController < ActionController::Base
       redirect_to job_seeker_root_path
     end
   end
-
-  def owned_by_user
+  
+  def belongs_to_user
     name = controller_name.gsub("Controller","").gsub("_", ' ').singularize
-    class_name = name.split.map { |i| i.capitalize }.join('')
+    class_name = name.split.map { |i| i.capitalize }.join('').constantize
+
+    if class_name.find(params[:id]).user != current_user
+      flash[:danger] = "Sorry, you do not have permission to access that!"
+      redirect_to business_root_path
+    end
+  end
+
+  def user_to_user
+    name = controller_name.gsub("Controller","").gsub("_", ' ').singularize
+    class_name = name.split.map { |i| i.capitalize }.join('').constantize
+
+    if class_name.find(params[:id]) != current_user
+      flash[:danger] = "Sorry, you do not have permission to access that!"
+      redirect_to business_root_path
+    end
   end
 
   def owned_by_company

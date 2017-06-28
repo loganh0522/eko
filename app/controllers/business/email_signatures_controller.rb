@@ -4,6 +4,7 @@ class Business::EmailSignaturesController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
+  before_filter :belongs_to_user
   
   def edit
     @signature = EmailSignature.find(params[:id])
@@ -15,6 +16,7 @@ class Business::EmailSignaturesController < ApplicationController
 
   def update
     @signature = EmailSignature.find(params[:id])
+
     respond_to do |format|
       if @signature.update(e_temp_params)
         format.js
