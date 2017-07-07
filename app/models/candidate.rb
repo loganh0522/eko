@@ -7,6 +7,8 @@ class Candidate < ActiveRecord::Base
   #   __elasticsearch__.update_document if self.published?
   # end
 
+  validates_presence_of :first_name, :last_name, :email
+
   liquid_methods :first_name, :last_name, :full_name
   before_create :generate_token
   belongs_to :company
@@ -14,6 +16,8 @@ class Candidate < ActiveRecord::Base
   has_many :applications, :dependent => :destroy
   has_many :jobs, through: :applications
 
+  has_many :interviews
+  has_many :interview_invitations
 
   has_many :resumes, :dependent => :destroy
   has_many :work_experiences, :dependent => :destroy
@@ -24,7 +28,7 @@ class Candidate < ActiveRecord::Base
   has_many :taggings
   has_many :tags, through: :taggings
   
-  has_many :messages, as: :messageable, :dependent => :destroy
+  has_many :messages, -> {order("created_at DESC")}, as: :messageable, :dependent => :destroy
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy
   has_many :tasks, as: :taskable, :dependent => :destroy
 
@@ -92,10 +96,17 @@ class Candidate < ActiveRecord::Base
     return @tags
   end
 
+  mapping(:_parent => {:type => 'company'}) do
+    indexes :id, :type => :integer
+    indexes :company_id, :type => :integer
+    indexes :rating, :type => :integer
+  end
+
 
   def as_indexed_json(options={})
     as_json(
       only: [:id, :first_name, :last_name, :email, :full_name, :manually_created, :created_at],
+      methods: [:average_rating, :tags_present],
       include: {
         educations: {only: [:id, :title, :description, :school]},
         work_experiences: {only: [:id, :title, :description, :company_name]},

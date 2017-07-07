@@ -4,26 +4,31 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
         %h4.modal-title Send Message        
-      = form_tag send_multiple_messages_business_applications_path, html: {data: {behaviour: 'has-saved-templates'}} do 
+      = form_tag multiple_messages_business_messages_path, html: {data: {behaviour: 'has-saved-templates'}}, remote: true do 
         .modal-body
           .email-area
             .to 
               .title To:  
-              .recipients       
+              .recipients  
+            .to 
+              .title From:  
+              .from= current_user.email    
             .subject
               .title Subject
               .sender= text_field_tag :subject, nil, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false
             .email-variables
-              Insert:
-              = select_tag "insert-fluid-variable", options_for_select([ "Applicant First Name", "Applicant Last Name", "Applicant Full Name", "Job Title", "Company Name" ] ), :include_blank => true
-              Template:
-              = select_tag "Templates", options_for_select(current_company.email_templates.all.map{|m| [m.title, m.id, data: {:body => m.body}]}), :prompt => "Select E-mail Templates", data: {behaviour: 'saved-template-select'}
-          
+              .tokens
+                = select_tag "insert-fluid-variable", options_for_select([ "Applicant First Name", "Applicant Last Name", "Applicant Full Name", "Job Title", "Company Name" ] ), :prompt => "Insert Token..."
+              .templates
+                = select_tag "Templates", options_for_select(current_company.email_templates.all.map{|m| [m.title, m.id, data: {:body => m.body}]}), :prompt => "Select E-mail Template", data: {behaviour: 'saved-template-select'}
             %fieldset
-            = text_area_tag :body, " ", :class => "tinymce", id: "message-body", rows: 12, cols: 12, data: {behaviour: 'comment-body'}
-            = tinymce_assets        
-            = tinymce :alternate
+            .email-content
+              = text_area_tag :body, " ", :class => "tinymce", id: "message-body", cols: 20, data: {behaviour: 'comment-body'}
+              = tinymce_assets        
+              = tinymce 
             = hidden_field_tag :applicant_ids
+            - if @job.present? 
+              = hidden_field_tag :job_id, @job.id
         .modal-footer
           = submit_tag "Send E-mail", class: "btn submit-button"
           .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

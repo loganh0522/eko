@@ -1,34 +1,38 @@
-- @applicant.work_experiences.each do |position|
-  .work-experience
-    .job-position
-      .job-position-header
-        .job-position-header-content
-          .experience-header 
-            .company= position.company_name 
-          .experience-position
-            .title= position.title 
-            - if position.current_position == 1
-              .date= "#{position.start_month} #{position.start_year} - Present"
-            - else
-              .date= "#{position.start_month} #{position.start_year} - #{position.start_month} #{position.end_year}"
-      .job-position-body
-        .job-position-body-content
-          .experience-body 
-            .skills
-              - if position.user_skills.present?
-                - position.user_skills.each do |skill|
-                  %div{:class => "skill", id: "user_skill_#{skill.id}"}
-                    .name= skill.skill.name
+- if @applicant.work_experiences.present?
+  - @applicant.work_experiences.each do |position|
+    .work-experience
+      .job-position
+        .job-position-header
+          .job-position-header-content
+            .experience-header 
+              .company= position.company_name 
+            .experience-position
+              .title= position.title 
+              - if position.current_position == 1
+                .date= "#{position.start_month} #{position.start_year} - Present"
               - else
-                .name No skills listed
-            .exp-description= position.description
-      - if position.accomplishments.present?
+                .date= "#{position.start_month} #{position.start_year} - #{position.start_month} #{position.end_year}"
         .job-position-body
           .job-position-body-content
             .experience-body 
-              .accomplishments
-                Accomplishments
-                %ul
-                  - position.accomplishments.each do |accomplishment|
-                    %li
-                      = accomplishment.body
+              .skills
+                - if position.user_skills.present?
+                  - position.user_skills.each do |skill|
+                    %div{:class => "skill", id: "user_skill_#{skill.id}"}
+                      .name= skill.skill.name
+                - else
+                  .name No skills listed
+              .exp-description= position.description
+        - if position.accomplishments.present?
+          .job-position-body
+            .job-position-body-content
+              .experience-body 
+                .accomplishments
+                  Accomplishments
+                  %ul
+                    - position.accomplishments.each do |accomplishment|
+                      %li
+                        = accomplishment.body
+- else
+  .not-present-container
+    %p There are currently no notes for this applicant.

@@ -1,0 +1,60 @@
+.event-form
+  = form_for [:business, @interview_invitation], html: {remote: true}  do |f|
+    .modal-body#event-form
+      .form-row-2
+        .contain-1
+          = f.label "Title"
+          = f.text_field :title, id: "half", placeholder: "Event Title", label: "Event Title"
+        .contain-2
+          = f.label "Location"
+          = f.text_field :location, id: "geocomplete2", label: "Address", autocomplete: "off", placeholder: "Enter the Address"
+        = f.label "Type of Meeting"
+        = f.select :kind, options_for_select(["Phone Interview", "Skype", "In-person Interview"])
+      .form-row-2
+        .assign_to_row
+          .assign-user
+            .title Assign Users (Team)
+            = text_field_tag "", "", :class => 'ui-autocomplete-input users', :placeholder => 'Type a users name to assign', id: "search-form"
+            %div#search-results
+          .assigned-users
+            .title Assigned Users: 
+            .user-tag
+              .name= current_user.full_name 
+              .delete-tag &times
+      .form-row-2
+        .assign_to_row
+          .assign-user
+            .title Add Candidates
+            = text_field_tag "", "", :class => 'ui-autocomplete-input candidates', :placeholder => 'Type a users name to assign', id: "search-form"
+            %div#search-results
+          .assigned-candidates
+            .title Candidates: 
+      .form-row-2
+        .assign_to_row
+          .assign-user
+            .title Job
+            = text_field_tag "", "", :class => 'ui-autocomplete-input jobs', :placeholder => 'Type a users name to assign', id: "search-form" 
+            %div#search-results
+          .assigned-jobs
+            .title Job:    
+      .form-row-2
+        .assign_to_row
+          .assign-user
+            .title Add Times
+            = text_field_tag "", "", :class => 'ui-autocomplete-input', :placeholder => 'Type a users name to assign', id: "search-form"
+            %div#search-form-results
+          .assigned-users
+      .form-row-3
+        .email-variables
+          Insert:
+        /   = select_tag "insert-fluid-variable", options_for_select([ "Applicant First Name", "Applicant Last Name", "Applicant Full Name", "Job Title", "Company Name" ] ), :include_blank => true
+        / = text_area_tag :body, " ", :class => "tinymce", id: "message-body", rows: 12, cols: 12, data: {behaviour: 'comment-body'}
+        / = tinymce_assets        
+        / = tinymce 
+      = hidden_field_tag :users_ids, value: current_user.id, id: "users_ids"
+      = hidden_field_tag :candidates_ids, value: '', id: "candidates_ids"
+      = hidden_field_tag :jobs_ids, value: '', id: "jobs_ids"
+    .modal-footer
+      = f.submit  "+ Send Invite", class: "btn submit-button", id: "submit-comment-btn"
+      = link_to "Cancel", "#", remote: true, class: 'btn border-button2', id: 'cancel'
+

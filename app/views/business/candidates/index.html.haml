@@ -10,14 +10,7 @@
 
 #main-container
   #job-applicants
-    .application-actions
-      .no-action-buttons
-        .btn.border-button Add Note
-        .btn.border-button Send E-mail
-        .btn.border-button.glyphicon.glyphicon-trash
-      .applicant-action-buttons
-        = link_to 'Add Note', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#add_commentModal"}
-        = link_to 'Send E-mail', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#send_messageModal"}
+    = render 'business/candidates/candidate_table/actions'
     .side-container
       = render "business/candidates/candidate_table/candidate_filters"        
     .main-container

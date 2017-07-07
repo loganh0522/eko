@@ -37,22 +37,6 @@ jQuery ->
     $('#timepicker').timepicker()
     $("#geocomplete2").geocomplete()
 
-    $('form').on 'focus', '#users-search', ->
-      $('form').find('#users-search').autocomplete(
-        source: '/business/users'
-        appendTo: $('#user-results')
-        focus: (event, ui) ->
-          $('#users-search').val ui.item.name
-          false
-        select: (event, ui) ->
-          $('.assigned-users').append('<div class="user-tag"> <div class="name">' + ui.item.full_name  + '</div> <div class="delete-tag"> &times </div> </div>') 
-
-          values =  $('#user_ids').val() + ',' + ui.item.id 
-          $('#user_ids').val values
-          false
-      ).data('ui-autocomplete')._renderItem = (ul, item) ->
-        $('<li>').attr('ui-item-autocomplete', item.value).append("<a>" + item.full_name + "</a>").appendTo ul 
-      return
 
 ############ Move Applicant Stages ###############
 
@@ -73,23 +57,9 @@ jQuery ->
 
 
 ###################### Insert Fluid Variable into E-mail #####################
-  $(document).ajaxComplete ->
-    $('#insert-fluid-variable').change -> 
-      if $('#insert-fluid-variable').val() == "Applicant First Name"
-        tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.first_name}}  </span>")
-      else if $('#insert-fluid-variable').val() == "Applicant Last Name"
-        tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.last_name}}  </span>")
-      else if $('#insert-fluid-variable').val() == "Applicant Full Name"
-        tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.full_name}}  </span>")
-      else if $('#insert-fluid-variable').val() == "Job Title"
-        tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{job.title}}  </span>")
-      else if $('#insert-fluid-variable').val() == "Company Name"
-        tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{company.name}}  </span>")
-  
   $('#insert-fluid-variable').change -> 
     if $('#insert-fluid-variable').val() == "Applicant First Name"
-      console.log('clicked')
-      $('#message-body').append("<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.first_name}}  </span>")
+      tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.first_name}}  </span>")
     else if $('#insert-fluid-variable').val() == "Applicant Last Name"
       tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.last_name}}  </span>")
     else if $('#insert-fluid-variable').val() == "Applicant Full Name"
@@ -142,8 +112,7 @@ jQuery ->
     checkbox = $('.applicant-checkbox')
     applicant_ids = []
     applicants = []
-    applicant_names = []
-    
+    applicant_names = []  
     for n in checkbox   
       if $(n).find('input').is(':checked') == true     
         applicant = []
@@ -153,26 +122,22 @@ jQuery ->
         applicant.push($(n).parent().parent().find('.name').data('id')) unless applicant.includes($(n).parent().parent().find('.name').data('id'))
         applicants.push(applicant)
 
-    $('.modal').find('form').find('#applicant_ids').val(applicant_ids)
-    
+    $('.modal').find('#applicant_ids').val(applicant_ids)
+
     for n in applicants
-      $('.modal').find('.recipients').append('<div id="applicant" data-id=' + n[0] + '> <div class="name">' + n[1] + '</div> <div class="remove-recipient"> &times </div> </div>') 
+      $('.modal').find('.recipients').append('<div id="tag" data-id=' + n[0] + '> <div class="tag-name">' + n[1] + '</div> <div class="remove-recipient"> &times </div> </div>') 
 
   $('#main-container').on 'click', '.remove-recipient', (event) -> 
-    $('.modal').find('form').find('#applicant_ids').val("")
-    
+    $('.modal').find('#applicant_ids').val("") 
     $(this).parent().remove()
     new_recipients = $('.recipients').children()
-    applicant_ids = []
-    
+    applicant_ids = []    
     for n in new_recipients
-      applicant_ids.push($(n).data('id'))
-    
+      applicant_ids.push($(n).data('id'))   
     $('.modal').find('form').find('#applicant_ids').val(applicant_ids)
 
   $('.modal').on 'hidden.bs.modal', ->
     $('.recipients').children().remove() 
-
     return
 
 
@@ -192,12 +157,9 @@ jQuery ->
     $("#geocomplete2").geocomplete()
     return
     
-
-
   $('#basic-form-modal').on 'shown.bs.modal', ->
     $('.event-form').find("#geocomplete2").geocomplete()
   
-
   $('#find').click ->
     $('input').trigger 'geocode'
     return

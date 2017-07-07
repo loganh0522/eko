@@ -1,4 +1,8 @@
 class Company < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks  
+  index_name ["talentwiz", Rails.env].join('_') 
+
   before_create :generate_token
 
   has_many :users
@@ -6,10 +10,8 @@ class Company < ActiveRecord::Base
   has_many :rejection_reasons
   has_many :applications
   has_many :applicants, through: :applications, class_name: "User", foreign_key: :user_id
-  
   has_many :candidates
   has_many :tasks
-
   has_many :jobs
   
   has_one :customer
@@ -62,6 +64,10 @@ class Company < ActiveRecord::Base
     self.tasks
   end
 
+  def open_jobs
+    self.jobs.where(status: "open")
+  end
+
   def company_jobs
     @jobs = []  
     self.jobs.each do |job|  
@@ -87,5 +93,16 @@ class Company < ActiveRecord::Base
     reasons.each do |reason| 
       RejectionReason.create(body: reason, company_id: self.id)
     end
+  end
+
+  mapping do 
+    indexes :created_at, type: 'date'
+  end
+
+
+  def as_indexed_json(options={})
+    as_json(
+      only: [:id, :name, :website, :created_at, :active, :kind, :open_jobs],
+    )
   end
 end

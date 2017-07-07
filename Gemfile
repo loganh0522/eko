@@ -57,6 +57,10 @@ gem 'omniauth-google-oauth2'
 gem 'google-api-client', '0.9'
 gem 'signet', '~> 0.7.3'
 
+gem 'oauth2'
+gem 'activerecord-session_store'
+gem 'microsoft_graph'
+
 gem 'liquid-rails', '~> 0.1.1'
 gem 'tinymce-rails', '~> 4.5'
 
@@ -64,6 +68,9 @@ gem 'bootstrap-colorpicker-rails'
 
 gem 'jquery-timepicker-rails'
 gem 'declarative_authorization'
+
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
 
 group :development do
   gem 'thin'

@@ -1,5 +1,6 @@
 <% if @taskable.class == Application %> 
-  $(".side-section").find('.tasks').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
+  $(".side-section").find('.tasks').html('<%= j render "business/tasks/application_tasks", tasks: @tasks %>');
+  $('#basic-form-modal').modal("toggle");
 <% else %> 
   $('.main-container').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
 <% end %>

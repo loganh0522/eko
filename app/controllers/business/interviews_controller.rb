@@ -4,13 +4,20 @@ class Business::InterviewsController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
+  include AuthHelper
   
   def index
+    get_access_token
+    token = current_user.outlook_token.access_token
+    email = current_user.email
     # @interviews = current_company.interviews.all
+
+    @interviews = OutlookWrapper::Calendar.get_events(token, email)
+
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
-    # @interviews_by_date = @interviews.group_by(&:interview_date)
-    @interviews = current_user.interviews
-    
+    @interviews_by_date = @interviews.group_by(&:start)
+
+
     respond_to do |format|
       format.js
       format.html

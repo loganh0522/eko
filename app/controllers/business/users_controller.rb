@@ -1,10 +1,11 @@
 class Business::UsersController < ApplicationController 
-  filter_resource_access
+  # filter_resource_access
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
   before_filter :user_to_user, only: [:show, :edit, :update]
+  include AuthHelper
 
   def index 
     if params[:term].present?
@@ -24,7 +25,8 @@ class Business::UsersController < ApplicationController
   def show
     @user = current_user
     @signature = current_user.email_signature
-    
+    @login_url = get_login_url
+
     if request.env['omniauth.auth'].present? 
       @auth = request.env['omniauth.auth']['credentials']
       GoogleToken.create(
@@ -34,6 +36,29 @@ class Business::UsersController < ApplicationController
         user_id: current_user.id
         )
     end
+
+    if params[:code].present? 
+      token = get_token_from_code(params[:code])
+      OutlookToken.create(
+        access_token: token.token,
+        refresh_token: token.refresh_token,
+        expires_at: Time.now + token.expires_in.to_i.seconds,
+        user_id: current_user.id
+        )
+    end
+  end
+
+  def outlook_get_token
+    token = get_token_from_code params[:code]
+
+    OutlookToken.create(
+      access_token: token.token,
+      refresh_token: token.refresh_token,
+      expires_at: Time.now + token.expires_in.to_i.seconds,
+      user_id: current_user.id
+      )
+
+    redirect_to business_users_path(current_user)
   end
 
   def edit

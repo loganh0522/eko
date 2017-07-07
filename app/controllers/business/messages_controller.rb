@@ -1,11 +1,12 @@
 class Business::MessagesController < ApplicationController 
-  filter_resource_access
+  # filter_resource_access
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
-  before_filter :load_messageable, except: [:new, :destroy, :update, :send_multiple_messages]
+  before_filter :load_messageable, except: [:new, :destroy, :update, :multiple_messages]
   before_filter :new_messageable, only: [:new]
+  include AuthHelper
   
   def new
     @message = Message.new
@@ -25,8 +26,15 @@ class Business::MessagesController < ApplicationController
     end
   end
 
-  def index 
-    @messages = @messageable.messages
+  def index   
+    if params[:application_id].present?
+      @candidate = Application.find(params[:application_id]).candidate
+      @messages = @candidate.messages
+    else
+      token = current_user.outlook_token.access_token
+      email = current_user.email
+      @messages = OutlookWrapper::Mail.get_messages(token, email)
+    end
 
     respond_to do |format| 
       format.js
@@ -55,34 +63,39 @@ class Business::MessagesController < ApplicationController
     end
   end
 
-  def send_multiple_messages    
+  def multiple_messages    
     applicant_ids = params[:applicant_ids].split(',')
     
     applicant_ids.each do |id| 
-      @application = Application.find(id)
-      @candidate = @application.candidate
-      @job = Job.find(@application.job_id)
+      @candidate = Candidate.find(id)
       @message = @candidate.messages.build(user_id: current_user.id, body: params[:body], subject: params[:subject])
-      if @application.candidate.manually_created == true
-        @recipient = @application.candidate
-      else
-        @recipient = @application.candidate.user
-      end
-
       @token = @candidate.token
-      AppMailer.send_applicant_message(@token, @message, @job, @recipient, current_company).deliver
+
+      if @candidate.manually_created == true
+        @recipient = @candidate
+      else
+        @recipient = @candidate.user
+      end
+      
+      if params[:job_id].present?
+        @job = Job.find(params[:job_id])
+        AppMailer.send_applicant_message(@token, @message, @job, @recipient, current_company).deliver
+      else 
+        AppMailer.send_applicant_message(@token, @message, 'job', @recipient, current_company).deliver
+      end
       track_activity(@message, "create")
     end
     
-    redirect_to :back
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
 
   def load_messageable
-    if params[:application_id].present? 
-      resource, id = request.path.split('/')[-3..-1]
-      @messageable = resource.singularize.classify.constantize.find(id).candidate
+    if request.path.split('/')[-3..-1][1] == "business"
+      @messageable = current_user
     else
       resource, id = request.path.split('/')[-3..-1]
       @messageable = resource.singularize.classify.constantize.find(id)
@@ -91,7 +104,7 @@ class Business::MessagesController < ApplicationController
 
   def new_messageable
     resource, id = request.path.split('/')[-4..-2]
-    @commentable = resource.singularize.classify.constantize.find(id)
+    @messageable = resource.singularize.classify.constantize.find(id)
   end
 
   def candidate_email(candidate)

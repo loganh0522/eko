@@ -15,10 +15,10 @@
     .email-variables
       Template:
       = select_tag "Templates", options_for_select(current_company.email_templates.all.map{|m| [m.title, m.id, data: {:body => m.body}]}), :prompt => "Select E-mail Templates", data: {behaviour: 'saved-template-select'}
-    #message-body
-      = text_area_tag :body, " ", :class => "tinymce", rows: 20, data: {behaviour: 'comment-body'}, placeholder: "Type Your Message"
+    .email-content
+      = text_area_tag :body, " ", :class => "tinymce", rows: 15, data: {behaviour: 'comment-body'}, placeholder: "Type Your Message"
       = tinymce_assets        
-      = tinymce :alternate
+      = tinymce 
       = hidden_field_tag :applicant_ids
     .email-footer
       %fieldset

@@ -45,6 +45,7 @@
             %br
             .glyphicon.glyphicon-map-marker
               = "#{@candidate.user.location}"
+    
     .applicant-actions
       = render 'business/candidates/show_candidate/header_actions'
     .applicant-nav  
@@ -55,5 +56,5 @@
       = render 'business/candidates/show_candidate/side_container'
     .applicant-main-container
       .applicant-experience
-        = render 'business/applications/show_application/application_cv'
+        = render 'business/candidates/show_candidate/candidate_profile'
 

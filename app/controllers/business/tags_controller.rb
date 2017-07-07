@@ -21,6 +21,7 @@ class Business::TagsController < ApplicationController
 
   def create 
     @company_tags = current_company.tags   
+    
     if params[:applicant_ids].present?
       add_tag_to_multiple
     else
@@ -68,22 +69,20 @@ class Business::TagsController < ApplicationController
 
   def add_tag_to_multiple
     @tag = Tag.where(name: (params[:tag][:name].titleize), company_id: current_company.id).first
-    candidate_ids = params[:applicant_ids].split(',')   
+    @candidate_ids = params[:applicant_ids].split(',')   
     
-    applicant_ids.each do |id|
-      @application_tags = Candidate.find(id).tags
-
-      if !@application_tags.include?(@tag) 
+    @candidate_ids.each do |id|
+      @candidate_tags = Candidate.find(id).tags
+      if !@candidate_tags.include?(@tag) 
         if @company_tags.include?(@tag) 
-          Tagging.create(application_id: id, tag_id: @tag.id)
+          Tagging.create(candidate_id: id, tag_id: @tag.id)
         else
           @tag = Tag.new(tag_params)
           @tag.company = current_company   
           if @tag.save 
-            Tagging.create(application_id: id, tag_id: @tag.id)
+            Tagging.create(candidate_id: id, tag_id: @tag.id)
           end
         end
-      else
       end
     end
   end

@@ -1,6 +1,6 @@
 class Business::CandidatesController < ApplicationController
-  filter_access_to :all
-  filter_access_to :filter_candidates, :require => :read
+  # filter_access_to :all
+  # filter_access_to :filter_candidates, :require => :read
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -8,21 +8,20 @@ class Business::CandidatesController < ApplicationController
   
   def index
     if params[:term].present?
-      @candidates = current_company.candidates.order(:first_name).where("first_name ILIKE ?", "%#{params[:term]}%")
+      @candidates = current_company.candidates.order(:full_name).where("full_name ILIKE ?", "%#{params[:term]}%")
       render :json => @candidates.to_json 
     else
       @tags = current_company.tags
       @candidates = current_company.candidates
     end
+    @tag = Tag.new
   end
 
   def new
     if params[:job].present?
       @job = Job.find(params[:job])
     end
-
     @candidate = Candidate.new
-
     respond_to do |format|
       format.js
     end
@@ -30,7 +29,6 @@ class Business::CandidatesController < ApplicationController
 
   def create 
     @candidate = Candidate.new(candidate_params)
-    
     if @candidate.save
       if params[:job_id].present? 
         @job = Job.find(params[:job_id])
@@ -39,6 +37,7 @@ class Business::CandidatesController < ApplicationController
       else
         @candidates = current_company.candidates
       end
+      create_application(@candidate)  
       add_tags(@candidate)
       respond_to do |format|
         format.js
@@ -62,11 +61,25 @@ class Business::CandidatesController < ApplicationController
 
   def destroy
     @candidate = Candidate.find(params[:id])
-    @candidate.destroy
+    @candidate.destroy 
     @candidates = current_company.candidates
+
     respond_to do |format|
       format.js
     end
+  end
+
+  def destroy_multiple
+    @ids = params[:applicant_ids].split(',')
+    @ids.each do |id| 
+      candidate = Candidate.find(id)
+      candidate.destroy
+    end
+    @candidates = current_company.candidates
+
+    respond_to do |format|
+      format.js
+    end 
   end
 
   def filter_candidates
@@ -93,10 +106,9 @@ class Business::CandidatesController < ApplicationController
   private
   
   def add_tags(candidate)  
-    if params[:candidate][:tags].present?
-      @tags = params[:candidate][:tags].split(',')
-      @company_tags = current_company.tags
-      
+    if params[:tags].present?
+      @tags = params[:tags].split(',')
+      @company_tags = current_company.tags 
       @tags.each do |tag| 
         @tag = Tag.where(name: (tag.titleize), company_id: current_company.id).first    
         if @company_tags.include?(@tag)
@@ -111,11 +123,20 @@ class Business::CandidatesController < ApplicationController
     end
   end
 
+  def create_application(candidate)  
+    if params[:jobs_ids].present?
+      @ids = params[:jobs_ids].split(',')
+      @ids.each do |id|
+        Application.create(candidate: candidate, job_id: id, company_id: current_company)
+      end
+    end
+  end
+
   def candidate_params
     params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :location, :company_id, :manually_created, 
       work_experiences_attributes: [:id, :body, :_destroy, :title, :company_name, :description, :start_month, :start_year, :end_month, :end_year, :current_position, :industry_ids, :function_ids, :location],
       educations_attributes: [:id, :school, :degree, :description, :start_month, :start_year, :end_month, :end_year, :_destroy], 
       resumes_attributes: [:id, :name, :_destroy],
-      social_links_attributes: [:id, :url, :_destroy])
+      social_links_attributes: [:id, :url, :kind, :_destroy])
   end
 end

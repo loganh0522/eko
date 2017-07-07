@@ -6,11 +6,11 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     'https://www.googleapis.com/auth/gmail.send'],
     access_type: 'offline'}
 
-  provider :office365, ENV['OUTLOOK_API_ID'], ENV['OUTLOOK_API_SECRET'], {
-    scope: ['openid',
-      'profile',
-      'User.Read',
-      'Mail.Read' 
-    ]
-  }
+  # provider :office365, ENV['OUTLOOK_API_ID'], ENV['OUTLOOK_API_SECRET'], {
+  #   scope: ['openid',
+  #     'profile',
+  #     'User.Read',
+  #     'Mail.Read' 
+  #   ]
+  # }
 end

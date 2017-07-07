@@ -17,11 +17,8 @@
 //= require jquery.remotipart
 //= require jquery-fileupload/basic
 //= require jquery.Jcrop
-
 //= require bootstrap-sprockets
 //= require geocomplete
-
-
 //= require tinymce
 //= require tinymce-jquery
 //= require autocomplete-rails

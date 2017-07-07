@@ -66,13 +66,14 @@ class Business::TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
+    if params[:status].present?
+      @task.update_attribute(:status, params[:status])
+      @tasks = @task.taskable.tasks 
+      track_activity @task, "complete"
+    else
+      @task.update(task_params)   
+    end
     respond_to do |format| 
-      if params[:status].present?
-        @task.update_attribute(:status, params[:status])
-        track_activity @task, "complete"
-      else
-        @task.update(task_params)   
-      end
       format.js
     end
   end

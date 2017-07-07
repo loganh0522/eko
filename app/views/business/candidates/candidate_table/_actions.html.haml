@@ -1,0 +1,12 @@
+.application-actions
+  .no-action-buttons
+    .btn.border-button.glyphicon.glyphicon-trash
+    .btn.border-button Add Tag
+    .btn.border-button Send E-mail
+    .btn.border-button Add Note
+  .applicant-action-buttons
+    = link_to '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#destroy_candidatesModal"} do 
+      .glyphicon.glyphicon-trash
+    = link_to 'Add Tag', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#addTagsModal"}
+    = link_to 'Send E-mail', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#send_messageModal"}
+    = link_to 'Add Note', '#', class: "btn active-application-button", id: "move-applicants", :data => {:toggle => "modal", :target => "#add_commentModal"}

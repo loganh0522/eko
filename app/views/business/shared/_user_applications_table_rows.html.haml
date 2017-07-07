@@ -1,7 +1,7 @@
 %tr{:id => "#{application_stage(application)}" }
   %td
-    .applicant-checkbox{:data => {:id => application.id}}
-      = check_box_tag "applicant_ids[]", application.id
+    .applicant-checkbox{:data => {:id => application.candidate.id}}
+      = check_box_tag "applicant_ids[]", application.candidate.id
   %td
     - if application.candidate.user.user_avatar.present? 
       .circle

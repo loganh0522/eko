@@ -73,22 +73,35 @@ Rails.application.routes.draw do
 
   get "/auth/:provider/callback", to: 'business/users#edit'
 
-  get "/authorize", to: 'business/users#edit'
+  get "/authorize", to: 'business/users#show'
 
   namespace :business do 
     root to: "jobs#index" 
     get "hiring_defaults", to: 'rejection_reasons#index'
     resources :activities
     resources :hiring_teams
+    resources :interview_invitations
     
     resources :companies do 
       resources :tasks
     end
 
-    resources :messages
+    resources :messages do
+      collection do 
+        post :multiple_messages, to: "messages#multiple_messages"
+      end
+    end
+    
+    resources :comments do
+      collection do 
+        post :add_note_multiple, to: "comments#add_note_multiple"
+      end
+    end
+
     resources :tasks
+    
     resources :rejection_reasons
-    resources :comments
+    
     resources :invitations
     resources :locations 
     resources :application_emails
@@ -148,6 +161,10 @@ Rails.application.routes.draw do
       
       resources :application_scorecards
       resources :assessments
+
+      collection do 
+        delete :destroy_multiple, to: "candidates#destroy_multiple"
+      end
     end
     
     resources :applications do 
@@ -158,12 +175,11 @@ Rails.application.routes.draw do
       resources :resumes
       collection do 
         post :update_multiple, to: "stages#update_multiple"
-        post :add_note_multiple, to: "comments#add_note_multiple"
-        post :send_multiple_messages, to: "messages#send_multiple_messages"
         post :change_stage, to: "applications#change_stage"
         post :add_tag_multiple, to: "tags#add_tags_multiple_applications"
       end
     end
+
     post "candidates/filter_applicants", to: "candidates#filter_candidates"
     get 'job_hiring_team', to: "hiring_teams#job_hiring_team"
     post "applications/filter_applicants", to: "applications#filter_applicants"

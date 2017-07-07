@@ -17,15 +17,13 @@ class Application < ActiveRecord::Base
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy
   has_many :tasks, as: :taskable, :dependent => :destroy
 
-
+  has_many :ratings
   has_many :application_scorecards
   has_many :activities, -> {order("created_at DESC")}  
   
   has_many :question_answers, dependent: :destroy
   accepts_nested_attributes_for :question_answers, allow_destroy: true
   
-  has_many :interviews
-  has_many :ratings
 
   def generate_token
     self.token = SecureRandom.urlsafe_base64
@@ -93,8 +91,7 @@ class Application < ActiveRecord::Base
       only: [:created_at, :rejection_reason, :source, :manually_created],
       include: {
         stage: {only: [:name]},
-        job: {only: [:title, :location, :status]},
-                    
+        job: {only: [:title, :location, :status]},        
         candidate: {
           only: [:first_name, :last_name, :email],
           include: {

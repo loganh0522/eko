@@ -1,13 +1,13 @@
 .profile-container
   .applicant-experience 
     .applicant-positions
-      / = form_for [:business, @application, @resume],:html => { :multipart => true }, remote: true do |f| 
-      /   = f.file_field :name
-      /   = f.hidden_field :candidate_id, value: @application.candidate.id
-      /   = f.submit "Save Section", class: "btn submit-button"
-
-      / - if @application.candidate.resumes.first.present?
-      /   = link_to "Download Resume", @application.candidate.resumes.first.name_url
+      - if @candidate.resumes.first.present?
+        = link_to "Download Resume", @candidate.resumes.first.name_url, class: "btn submit-button"
+      / - else 
+      /   = form_for [:business, @candidate, @resume],:html => { :multipart => true }, remote: true do |f| 
+      /     = f.file_field :name
+      /     = f.hidden_field :candidate_id, value: @application.candidate.id
+      /     = f.submit "Save Section", class: "btn submit-button"  
       /   %iframe{:src => "<%= @application.candidate.resumes.first.name_url %>"}
       / = File.read("#{@application.candidate.resumes.first.name_url}")
 

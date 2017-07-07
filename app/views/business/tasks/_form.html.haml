@@ -25,7 +25,7 @@
       = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
       = f.hidden_field :user_id, value: current_user.id
       = f.hidden_field :company_id, value: current_company.id
-      = f.hdden_field :status, value: "active"
+      = f.hidden_field :status, value: "active"
     .comment-area-footer
       = f.submit @task.new_record? ? "+ Create Task" : "Update Task", class: "btn submit-button", id: "submit-comment-btn"
       - if !@task.new_record? 

@@ -5,7 +5,7 @@ $('#comment-body').val('');
   $('#main-container').html('<%= j render "business/comments/job_comments" %>');
 <% else %>
   $('#basic-form-modal').modal("toggle");
-  $('.applicant-profile').html('<%= j render "business/comments/notes", comments: @comments %>');
+  $('.applicant-main-container').html('<%= j render "business/comments/notes", comments: @comments %>');
 <% end %>
 
 

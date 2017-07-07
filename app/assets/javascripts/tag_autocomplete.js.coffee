@@ -47,8 +47,11 @@ jQuery ->
 
   $('#main-container').on 'click', '#add-tag-button', (event) ->
     tagName = $('#tag_name').val()
-    values =  $('#add_tag_on_create').val() + ',' + tagName 
-    $('#add_tag_on_create').val values    
+    values =  $('#tags').val() + ',' + tagName 
+    if $('#tags').val() == ''
+      $('#tags').val tagName
+    else
+      $('#tags').val values   
     $('#tags_to_add').append('<div class="user-tag"> <div class="name">' + tagName  + '</div> <div class="delete-tag"> &times </div> </div>') 
     $('#tag_name').val('')
 

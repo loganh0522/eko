@@ -1,4 +1,11 @@
-.messages-container
+.home-page-header
+  .top-info
+    %h1 Calendar
+  .change-containers-nav
+    %ul  
+      %li#open.activated My Schedule
+      %li#closed Company Schedule
+#main-container
   .activity-feed
     - @messages.each do |message|
       .activity
@@ -11,15 +18,21 @@
             / - else 
             /   .circle-img
             /     %img(src="/tmp/little-man.png")     
-            / .contain
-            /   = "#{message.first.payload.body.data} sent a message"
-            /   %br
-            /   .time= time_ago_in_words(message.created_at)
+            .contain
+              = message.from.email_address.name
+            .contain
+              = message.subject
+            .contain
+              = message.received_date_time
+              / = "#{message.first.payload.body.data} sent a message"
+              / %br
+              / .time= time_ago_in_words(message.created_at)
               
-            .activity-body-body  
-              / - if @application.present?
-              /   = simple_format(Liquid::Template.parse(message.body).render('recipient' => @application.applicant, 'company' => @current_company), 'job' => @application.apps)
-              / - else
-              / = simple_format(message.payload.body.data)
-              = simple_format(message.snippet)
+            / .activity-body-body 
+            /   = simple_format(message.body) 
+            /   - if @application.present?
+            /   = simple_format(Liquid::Template.parse(message.body).render('recipient' => @application.applicant, 'company' => @current_company), 'job' => @application.apps)
+            /   - else
+            /   = simple_format(message.payload.body.data)
+            /   = simple_format(message.snippet)
            

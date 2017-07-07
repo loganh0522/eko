@@ -1,0 +1,5 @@
+$('#basic-form-modal').find('form').remove()
+$('#basic-form-modal').find('.modal-title').html('<%= j "Schedule Event" %>');
+$('#basic-form-modal').find('.modal-header').after('<%= j render "business/interview_invitations/form" %>');
+$('#basic-form-modal').modal("toggle");
+

@@ -6,48 +6,47 @@
       %li#open.activated My Schedule
       %li#closed Company Schedule
 #main-container
-  #job-applicants
-    .side-container
-      .applicant-filters
-        .filter
-          .filter-header
-            %h4 Interview Type
-            .glyphicon.glyphicon-minus
-            .glyphicon.glyphicon-plus
-          .filter-body
-            %ul
-              %li 
-                .applicant-filter-checkbox{:data => {:id => "open", :filter => 'JobStatus'}}
+  .side-container
+    .applicant-filters
+      .filter
+        .filter-header
+          %h4 Interview Type
+          .glyphicon.glyphicon-minus
+          .glyphicon.glyphicon-plus
+        .filter-body
+          %ul
+            %li 
+              .applicant-filter-checkbox{:data => {:id => "open", :filter => 'JobStatus'}}
+                = check_box_tag "", false, false, class: 'filter-checkbox'
+                .filter-title Phone Interview
+            %li.activity
+              .applicant-filter-checkbox{:data => {:id => "closed", :filter => 'JobStatus'}}
+                = check_box_tag "", false, false, class: 'filter-checkbox'
+                .filter-title In-person Interview
+            %li.activity  
+              .applicant-filter-checkbox{:data => {:id => "archived", :filter => 'JobStatus'}}
+                = check_box_tag "", false, false, class: 'filter-checkbox'
+                .filter-title Skype
+            / %li.activity  
+            /  .applicant-filter-checkbox{:data => {:id => "archived", :filter => 'JobStatus'}}
+            /    = check_box_tag "", false, false, class: 'filter-checkbox'
+            /    .filter-title Team Meeting
+      .filter
+        .filter-header
+          %h4 Active Jobs
+          .glyphicon.glyphicon-minus
+          .glyphicon.glyphicon-plus
+        .filter-body 
+          %ul
+            - current_company.company_jobs.each do |job| 
+              %li.open-job
+                .applicant-filter-checkbox{:data => {:id => "#{job}", :filter => 'JobAppliedTo'}}
                   = check_box_tag "", false, false, class: 'filter-checkbox'
-                  .filter-title Phone Interview
-              %li.activity
-                .applicant-filter-checkbox{:data => {:id => "closed", :filter => 'JobStatus'}}
-                  = check_box_tag "", false, false, class: 'filter-checkbox'
-                  .filter-title In-person Interview
-              %li.activity  
-                .applicant-filter-checkbox{:data => {:id => "archived", :filter => 'JobStatus'}}
-                  = check_box_tag "", false, false, class: 'filter-checkbox'
-                  .filter-title Skype
-              / %li.activity  
-              /  .applicant-filter-checkbox{:data => {:id => "archived", :filter => 'JobStatus'}}
-              /    = check_box_tag "", false, false, class: 'filter-checkbox'
-              /    .filter-title Team Meeting
-        .filter
-          .filter-header
-            %h4 Active Jobs
-            .glyphicon.glyphicon-minus
-            .glyphicon.glyphicon-plus
-          .filter-body 
-            %ul
-              - current_company.company_jobs.each do |job| 
-                %li.open-job
-                  .applicant-filter-checkbox{:data => {:id => "#{job}", :filter => 'JobAppliedTo'}}
-                    = check_box_tag "", false, false, class: 'filter-checkbox'
-                    .filter-title #{job}
-
-    .main-container#task-container
-      / = render 'business/calendar/job_calendar'
-      = render 'business/interviews/interviews'
+                  .filter-title #{job}
+  .main-container#task-container
+    / = render 'business/calendar/job_calendar'
+    = link_to "Interview Invite", new_business_interview_invitation_path, remote: true, class: "btn btn-border2"
+    = render 'business/interviews/interviews'
 
 
 

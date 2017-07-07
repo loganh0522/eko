@@ -48,10 +48,20 @@ class User < ActiveRecord::Base
   has_one :user_avatar
 
   has_one :google_token
+  has_one :outlook_token
   #Carrierwave uploader and minimagic for User Profile Pictures
 
   def all_tasks
     self.tasks
+  end
+
+  def access_token
+    if self.outlook_token.present?
+      access_token = self.outlook_token.access_token
+    else
+      access_token = self.google_token.access_token
+    end
+    return access_token
   end
   
   def open_tasks

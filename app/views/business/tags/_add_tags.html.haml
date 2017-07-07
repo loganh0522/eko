@@ -19,7 +19,6 @@
         .modal-footer
           = hidden_field_tag :applicant_ids
           = hidden_field_tag :tag_id
-          = f.hidden_field :job_id, value: @job.id
           = f.submit "Add Tag", class: "btn submit-button"
           .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
           

@@ -15,11 +15,18 @@
         = q.file_field :name, class: "file-container"
     .form-row
       .header
+        .title Add to Job    
+        = text_field_tag "", "", :class => 'ui-autocomplete-input jobs', :placeholder => 'Search Jobs', id: "search-form" 
+        %div#search-results
+        .assigned-jobs
+          .title Job:  
+    .form-row
+      .header#add-tags
         .title Tags    
         = text_field_tag '', '', :class => 'ui-autocomplete-input form-control', :placeholder => 'Add a Tag', id: "tag_name", hide_label: true
-        .btn.border-button2#add-tag-button Add
+        .btn#add-tag-button Add
         %div#tag-results   
-        #tags_to_add
+      #tags_to_add
     .form-row
       .header
         .title Social Media    
@@ -41,6 +48,9 @@
   .modal-footer
     = f.hidden_field :company_id, value: current_company.id
     = f.hidden_field :manually_created, value: true
-    = f.hidden_field :tags, value: nil, id: "add_tag_on_create"
-    = hidden_field_tag :job_id, @job.id if @job.present?
+    = hidden_field_tag :tags
+    - if @job.present? 
+      = hidden_field_tag :job_id, @job.id
+    - else
+      = hidden_field_tag :jobs_ids
     = f.submit "Create Profile", class: "btn submit-button"

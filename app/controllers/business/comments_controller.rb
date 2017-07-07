@@ -1,5 +1,5 @@
 class Business::CommentsController < ApplicationController 
-  filter_access_to :all
+  # filter_access_to :all
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -57,7 +57,7 @@ class Business::CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    Activity.where(trackable_id: @comment.id).first.delete
+    Activity.where(trackable_id: @comment.id).first.delete if Activity.where(trackable_id: @comment.id).first.present?
     @comment.destroy
 
     respond_to do |format|
@@ -65,18 +65,25 @@ class Business::CommentsController < ApplicationController
     end
   end
 
-
   def add_note_multiple
     applicant_ids = params[:applicant_ids].split(',')
     
     applicant_ids.each do |id| 
-      @application = Application.find(id)
-      @job = Job.find(@application.job_id)
-      @comment = @application.comments.build(body: params[:comment], user_id: current_user.id)
+      @candidate = Candidate.find(id)
+      if params[:job_id].present?
+        @job = Job.find(params[:job_id])
+        @application = Application.where(candidate_id: @candidate.id, job: @job.id).first
+        @comment = @application.comments.build(body: params[:comment], user_id: current_user.id)
+      else 
+        @comment = @candidate.comments.build(body: params[:comment], user_id: current_user.id)
+      end
       @comment.save
     end
-    track_activity(@comment, "create")
-    redirect_to :back
+    # track_activity(@comment, "create")
+    
+    respond_to do |format| 
+      format.js
+    end
   end
 
   private 
