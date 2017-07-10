@@ -58,6 +58,7 @@ gem 'signet', '~> 0.7.3'
 
 gem 'oauth2'
 gem 'activerecord-session_store'
+gem 'adal'
 gem 'microsoft_graph'
 
 gem 'liquid-rails', '~> 0.1.1'
@@ -67,8 +68,6 @@ gem 'bootstrap-colorpicker-rails'
 
 gem 'jquery-timepicker-rails'
 gem 'declarative_authorization'
-
-
 
 group :development do
   gem 'thin'
