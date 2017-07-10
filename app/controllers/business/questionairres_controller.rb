@@ -13,6 +13,11 @@ class Business::QuestionairresController < ApplicationController
     @scorecard = @job.scorecard
     @question = Question.new
     @questions = @questionairre.questions
+
+    respond_to do |format|
+      format.html
+      format.js 
+    end
   end
   
   def new

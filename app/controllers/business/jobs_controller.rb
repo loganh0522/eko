@@ -62,8 +62,13 @@ class Business::JobsController < ApplicationController
 
   def edit
     @job = Job.find(params[:id])
-    @questionairre = @job.questionairre
-    @scorecard = @job.scorecard
+    # @questionairre = @job.questionairre
+    # @scorecard = @job.scorecard
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def promote

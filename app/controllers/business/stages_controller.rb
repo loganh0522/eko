@@ -10,8 +10,11 @@ class Business::StagesController < ApplicationController
     @job = Job.find(params[:job_id])
     @stages = @job.stages.order("position")
     @stage = Stage.new 
-    @questionairre = @job.questionairre
-    @scorecard = @job.scorecard
+
+    respond_to do |format|
+      format.html 
+      format.js
+    end
   end
 
   def create 

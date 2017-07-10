@@ -15,12 +15,14 @@ class Business::HiringTeamsController < ApplicationController
     @hiring_team = HiringTeam.new 
     @job = Job.find(params[:job_id])
     @hiring_teams = @job.hiring_teams 
-
     @users =  @job.users
-    @scorecard = @job.scorecard
     @company_users =  current_company.users
     @invitation = Invitation.new
-    @questionairre = @job.questionairre
+
+    respond_to do |format|
+      format.html 
+      format.js
+    end
   end
 
   def create    

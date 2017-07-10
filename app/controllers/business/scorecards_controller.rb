@@ -13,6 +13,11 @@ class Business::ScorecardsController < ApplicationController
     @questionairre = @job.questionairre
     @scorecard = Scorecard.where(job_id: @job.id).first
     @sections = @scorecard.scorecard_sections 
+
+    respond_to do |format| 
+      format.html 
+      format.js 
+    end
   end
 
   def new 

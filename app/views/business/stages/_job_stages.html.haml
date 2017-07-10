@@ -1,0 +1,23 @@
+#post-a-job
+  .side-container
+    = render 'business/shared/job_details_nav' 
+  .main-container
+    #stage-header
+      %h4 Add Stages
+      = render "form"  
+    .create_stages    
+      .stage 
+        .stage-header
+          All Applicants     
+      = render "stages", stages: @stages
+      .stage 
+        .stage-header
+          Rejected
+
+  .modal
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+          %h3.modal-title Edit Stage 
+        .modal-body

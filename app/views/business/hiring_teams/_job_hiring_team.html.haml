@@ -1,0 +1,18 @@
+#post-a-job
+  .side-container
+    = render 'business/shared/job_details_nav'
+  .main-container 
+    #stage-header
+      %h4 Add Team Members
+      .form= render "business/hiring_teams/form"  
+    .invitation
+      = link_to "+ Invite New User", new_business_invitation_path(job: @job), remote: true
+    .user-list
+      = render "hiring_team"
+
+.modal#basic-form-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title  
