@@ -60,7 +60,7 @@ require 'microsoft_graph'
       @events = graph.me.events.order_by('start/dateTime asc')
     end
 
-    def self.create_event(token, email)
+    def self.create_event(token, email, dateTime, endTime)
       callback = Proc.new do |r| 
         r.headers['Authorization'] = "Bearer #{token}"
         r.headers['X-AnchorMailbox'] = email
@@ -69,8 +69,10 @@ require 'microsoft_graph'
                                 cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                 &callback)
 
-      @create = graph.me.events.create(subject: "Interview", body: {content: "Interview with Logan Once he finishes this shit"},
-        organizer: {emailAddress: {name: "Logan Houston", address: "houston@talentwiz.com"}} )
+      @create = graph.me.events.create(subject: "Pending Interview", 
+        body: {content: "Interview with Logan Once he finishes this shit"},
+        start: {dateTime: dateTime, timeZone: "America/New_York"}, end: {dateTime: endTime,  timeZone: "America/New_York"}, 
+        organizer: {emailAddress: {name: "Logan Houston", address: "houston@talentwiz.com"}})
     end
 
   end

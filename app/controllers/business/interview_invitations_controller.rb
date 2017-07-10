@@ -22,21 +22,41 @@ class Business::InterviewInvitationsController < ApplicationController
   end
 
   def create
-    @interview_invite = InterviewInvitation.new(interview_params)
+    @candidates = params[:candidates_ids].split(',')
+    @times = params[:interview_invitation][:interview_times_attributes]
+    @users = params[:users_ids].split(',')
     
-    respond_to do |format|  
-      if @interview_invite.save
-        format.js
-      else
-        flash[:danger] = "Something went wrong"
+    @interview_invite = InterviewInvitation.new(interview_invitation_params.merge!(status: "pending"))
+    if @interview_invite.save
+      @candidates.each do |id|
+        @candidate = Candidate.find(id)
+        InvitedCandidate.create(candidate_id: @candidate.id, interview_invitation_id: @interview_invite.id)
       end
+
+      @times = @interview_invite.interview_times
+      @users.each do |id| 
+        @user = User.find(id)
+        @token = @user.outlook_token.access_token
+        @email = @user.email         
+        @times.each do |time| 
+          date = time.date
+          time = time.time
+          endTime = time.chop[0..-5] + "30:00"
+          @dateTime = date + "T" + time
+          @endTime = date + "T" + endTime
+          OutlookWrapper::Calendar.create_event(@token, @email, @dateTime, @endTime)
+        end
+      end
+    end
+
+    respond_to do |format|  
+      format.js
     end
   end
 
   def show 
     @interview_invite = InterviewInvitation.find(params[:id])
   end
-
 
   def edit 
     @interview_invite = InterviewInvitations.find(params[:id])
@@ -67,8 +87,10 @@ class Business::InterviewInvitationsController < ApplicationController
     @interview_invite = InterviewInvitations.find_by(token: params[:id])
   end
 
-  def interview_params
-    params.require(:interview).permit(:title, :notes, :location, :start_time, :end_time, :date, :kind, :job_id, :candidate_id, :company_id)
+  def interview_invitation_params
+    params.require(:interview_invitation).permit(:title, :notes, :location, :kind, :job_id, :company_id,
+      interview_times_attributes: [:id, :time, :date, :_destroy],
+      invited_candidates_attributes: [:id, :candidate_id])
   end
 
 end

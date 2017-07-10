@@ -252,6 +252,9 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/signout', to: 'sessions#destroy'  
   get 'register/:token', to: 'users#new_with_invitation_token', as: 'register_with_token'
+  
+  get 'schedule_interview/:token', to: 'interview_invitations#schedule', as: 'schedule_interview'
+  
   get 'forgot_password', to: 'forgot_passwords#new'
   resources :forgot_passwords, only: [:create]
   get 'forgot_password_confirmation', to: 'forgot_passwords#confirm'

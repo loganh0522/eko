@@ -6,6 +6,15 @@ class AppMailer < ActionMailer::Base
     mail to: invitation.recipient_email, from: "no-reply@talentwiz.ca", subject: "Invitation to Join #{current_company.name} Team"
   end
 
+  def send_interview_invitation(token, message, job, recipient, current_company)
+    @message = message
+    @recipient = recipient
+    @job = job 
+    @current_company = current_company
+
+    mail to: recipient.email, from: "application-" + token + "@sys.talentwiz.ca", subject: "#{@message.subject}"
+  end
+
   def send_applicant_message(token, message, job, recipient, current_company)
     @message = message
     @recipient = recipient

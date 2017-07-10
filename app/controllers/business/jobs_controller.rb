@@ -19,7 +19,6 @@ class Business::JobsController < ApplicationController
         format.js 
       end
     elsif params[:term].present?
-      #add open jobs function to company
       @jobs = current_company.jobs.order(:title).where("title ILIKE ?", "%#{params[:term]}%")
       render :json => @jobs.to_json 
     else 

@@ -8,7 +8,7 @@ class Business::CandidatesController < ApplicationController
   
   def index
     if params[:term].present?
-      @candidates = current_company.candidates.order(:full_name).where("full_name ILIKE ?", "%#{params[:term]}%")
+      @candidates = current_company.candidates.order(:first_name).where("first_name ILIKE ?", "%#{params[:term]}%")
       render :json => @candidates.to_json 
     else
       @tags = current_company.tags
@@ -97,7 +97,7 @@ class Business::CandidatesController < ApplicationController
     else
       @candidates = current_company.candidates.search('', options).records.to_a
     end
-
+    @tag = Tag.new
     respond_to do |format|
       format.js
     end

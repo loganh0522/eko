@@ -18,9 +18,6 @@
             %div#search-results
           .assigned-users
             .title Assigned Users: 
-            .user-tag
-              .name= current_user.full_name 
-              .delete-tag &times
       .form-row-2
         .assign_to_row
           .assign-user
@@ -28,7 +25,7 @@
             = text_field_tag "", "", :class => 'ui-autocomplete-input candidates', :placeholder => 'Type a users name to assign', id: "search-form"
             %div#search-results
           .assigned-candidates
-            .title Candidates: 
+            .title Candidates:     
       .form-row-2
         .assign_to_row
           .assign-user
@@ -36,24 +33,22 @@
             = text_field_tag "", "", :class => 'ui-autocomplete-input jobs', :placeholder => 'Type a users name to assign', id: "search-form" 
             %div#search-results
           .assigned-jobs
-            .title Job:    
+            .title Job: 
       .form-row-2
-        .assign_to_row
-          .assign-user
-            .title Add Times
-            = text_field_tag "", "", :class => 'ui-autocomplete-input', :placeholder => 'Type a users name to assign', id: "search-form"
-            %div#search-form-results
-          .assigned-users
+        .header
+          .title Add Times    
+          = link_to_add_fields "+ Add Time", f, :interview_times 
       .form-row-3
         .email-variables
-          Insert:
-        /   = select_tag "insert-fluid-variable", options_for_select([ "Applicant First Name", "Applicant Last Name", "Applicant Full Name", "Job Title", "Company Name" ] ), :include_blank => true
-        / = text_area_tag :body, " ", :class => "tinymce", id: "message-body", rows: 12, cols: 12, data: {behaviour: 'comment-body'}
-        / = tinymce_assets        
-        / = tinymce 
-      = hidden_field_tag :users_ids, value: current_user.id, id: "users_ids"
-      = hidden_field_tag :candidates_ids, value: '', id: "candidates_ids"
-      = hidden_field_tag :jobs_ids, value: '', id: "jobs_ids"
+          Template:
+          = select_tag "Templates", options_for_select(current_company.email_templates.all.map{|m| [m.title, m.id, data: {:body => m.body}]}), :prompt => "Select E-mail Templates", data: {behaviour: 'saved-template-select'}
+        .email-content
+          = text_area_tag :body, " ", :class => "tinymce", rows: 15, data: {behaviour: 'comment-body'}, placeholder: "Type Your Message"
+          = tinymce_assets        
+          = tinymce 
+      = hidden_field_tag :users_ids
+      = hidden_field_tag :candidates_ids
+      = hidden_field_tag :jobs_ids
     .modal-footer
       = f.submit  "+ Send Invite", class: "btn submit-button", id: "submit-comment-btn"
       = link_to "Cancel", "#", remote: true, class: 'btn border-button2', id: 'cancel'

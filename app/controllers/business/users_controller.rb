@@ -4,7 +4,7 @@ class Business::UsersController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
-  before_filter :user_to_user, only: [:show, :edit, :update]
+  # before_filter :user_to_user, only: [:show, :edit, :update]
   include AuthHelper
 
   def index 

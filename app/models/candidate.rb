@@ -17,7 +17,10 @@ class Candidate < ActiveRecord::Base
   has_many :jobs, through: :applications
 
   has_many :interviews
-  has_many :interview_invitations
+  
+  has_many :invited_candidates
+  has_many :interview_invitations, through: :invited_candidates
+
 
   has_many :resumes, :dependent => :destroy
   has_many :work_experiences, :dependent => :destroy
@@ -100,13 +103,15 @@ class Candidate < ActiveRecord::Base
     indexes :id, :type => :integer
     indexes :company_id, :type => :integer
     indexes :rating, :type => :integer
+    indexes :full_name, :type => :string
+    indexes :created_at, :type => :date
   end
 
 
   def as_indexed_json(options={})
     as_json(
-      only: [:id, :first_name, :last_name, :email, :full_name, :manually_created, :created_at],
-      methods: [:average_rating, :tags_present],
+      only: [:id, :first_name, :last_name, :email, :manually_created, :created_at],
+      methods: [:tags_present, :full_name],
       include: {
         educations: {only: [:id, :title, :description, :school]},
         work_experiences: {only: [:id, :title, :description, :company_name]},
@@ -132,6 +137,18 @@ class Candidate < ActiveRecord::Base
       }
     )
   end
+
+  def self.search_name(query)
+    search_definition = {
+      query: {
+        multi_match: {
+          query: query,
+          fields: ["full_name"]
+        }
+      }
+    }
+    __elasticsearch__.search(search_definition)
+  end
   
   def self.search(query, options={})
     search_definition = {
@@ -145,7 +162,7 @@ class Candidate < ActiveRecord::Base
       search_definition[:query][:bool][:must] << {
         multi_match: {
           query: query,
-          fields: %w(city state),
+          fields: ["full_name"],
           operator: 'and'
         }
       }
@@ -170,7 +187,7 @@ class Candidate < ActiveRecord::Base
       options[:tags].each do |tag|
         search_definition[:query][:bool][:must] << {
           match: { 
-            "applications.tags.name" => "#{tag}"
+            "tags.name" => "#{tag}"
           }
         }
       end

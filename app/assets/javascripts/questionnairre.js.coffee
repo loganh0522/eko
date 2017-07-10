@@ -17,6 +17,7 @@ jQuery ->
     $(this).before($(this).data('fields').replace(regexp, time))
     event.preventDefault()
 
+
   $('.job_scorecard').on 'change', '.answer-type', (event) -> 
     val = $(this).find('.question-type').val()
     if val == "Checkbox" || val == "Multiple Choice"  
@@ -72,6 +73,9 @@ jQuery ->
     $(this).after($(this).data('fields').replace(regexp, time))
     $(this).prev().find('.remove_fields').show()
     event.preventDefault()
+    $('#task_due_date').datepicker  
+      dateFormat: 'yy-mm-dd'
+    $('#timepicker').timepicker()
 
 
     

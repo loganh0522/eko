@@ -1,0 +1,10 @@
+.fieldset
+  .row
+    .contain-1
+      = f.label "Date"
+      = f.text_field :date, id: "task_due_date", placeholder: "Date"
+    .contain-2
+      = f.label "Start Time"
+      = f.text_field :time, id: "timepicker", placeholder: "Start Time"
+    = link_to "", '#', class: "remove_fields glyphicon glyphicon-remove"
+
