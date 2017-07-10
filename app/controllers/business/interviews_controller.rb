@@ -7,15 +7,15 @@ class Business::InterviewsController < ApplicationController
   include AuthHelper
   
   def index
-    get_access_token
-    token = current_user.outlook_token.access_token
-    email = current_user.email
-    # @interviews = current_company.interviews.all
+    # get_access_token
+    # token = current_user.outlook_token.access_token
+    # email = current_user.email
+    # # @interviews = current_company.interviews.all
 
-    @interviews = OutlookWrapper::Calendar.get_events(token, email)
+    # @interviews = OutlookWrapper::Calendar.get_events(token, email)
 
-    @date = params[:date] ? Date.parse(params[:date]) : Date.today
-    @interviews_by_date = @interviews.group_by(&:start)
+    # @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    # @interviews_by_date = @interviews.group_by(&:start)
 
 
     respond_to do |format|

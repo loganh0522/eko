@@ -138,16 +138,23 @@
     border-right: 1px solid rgba(0,0,0,0.1)
     width: 35%
     .side-section
-      overflow: hidden
+      overflow-y: scroll
       width: 100%
+      top: 0
+      bottom: 0
       padding: 0 10px 20px 10px
       border-bottom: 1px solid rgba(0, 0, 0, 0.1)
     .tasks
+      overflow-y: scroll
+      width: 100%
+      top: 0
+      bottom: 0
       .task
         background: #ffffff
         padding: 10px 10px
         width: 100%
         overflow: hidden
+        overflow-y: scroll
         border: 1px solid rgba(0,0,0,0.1)
         .edit-delete-actions
           float: right

@@ -16,7 +16,8 @@
         %li.change#job-tasks Tasks
       = link_to business_job_comments_path(@job), remote: true do 
         %li.change#job-notes Notes
-      %li.change#job-activity-feed Job Details
+      = link_to edit_business_job_path(@job), remote: true do 
+        %li.change#job-activity-feed Job Details
 
 #main-container
   = render "business/candidates/app_new_modal"

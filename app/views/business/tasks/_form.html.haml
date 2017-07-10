@@ -1,28 +1,26 @@
 .task-form
   = form_for [:business, @taskable, @task], html: {remote: true} do |f|
-    .form-row-4
-      .contain-1
-        = f.text_field :title, id: "task-title", placeholder: 'Enter Task'
-      .contain-3
-        = f.text_field :due_date, placeholder: "Due Date"
-      .contain-4
-        = f.text_field :due_time, id: "timepicker", placeholder: "Add Time"
-    = f.text_area :notes, id: "comment-body", placeholder: "Notes"  
     .form-row-3
       .contain-1
-        .title Type
-        = f.select :kind, options_for_select(["Schedule Interview", "To-do", "Send Assesment", "Finish Assessment"]), id: "select-kind" 
+        = f.text_field :title, id: "task-title", placeholder: 'Enter Task'
+    .form-row-4
       .contain-2
-        .title Assign User
-        = text_field_tag "", "", :class => 'ui-autocomplete-input', :placeholder => 'Type a users name to assign', id: "users-search"
-        %div#user-results
-      .contain-3
+        = f.text_field :due_date, placeholder: "Due Date"
+      .contain-2
+        = f.text_field :due_time, id: "timepicker", placeholder: "Add Time"
+      .contain-2
+        = f.select :kind, options_for_select(["Schedule Interview", "To-do", "Send Assesment", "Finish Assessment"]), :prompt => "Type of Task...", id: "select-kind" 
+    = f.text_area :notes, id: "comment-body", placeholder: "Notes"  
+    .form-row-2
+      .assign_to_row
+        .assign-user
+          .title Assign Users (Team)
+          = text_field_tag "", "", :class => 'ui-autocomplete-input users', :placeholder => 'Type a users name to assign', id: "search-form"
+          %div#search-results
         .assigned-users
           .title Assigned Users: 
-          .user-tag
-            .name= current_user.full_name 
-            .delete-tag &times  
-      = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
+
+      = hidden_field_tag :users_ids
       = f.hidden_field :user_id, value: current_user.id
       = f.hidden_field :company_id, value: current_company.id
       = f.hidden_field :status, value: "active"
