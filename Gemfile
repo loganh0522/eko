@@ -59,7 +59,7 @@ gem 'signet', '~> 0.7.3'
 gem 'oauth2'
 gem 'activerecord-session_store'
 gem 'adal'
-gem 'microsoft_graph'
+# gem 'microsoft_graph'
 
 gem 'liquid-rails', '~> 0.1.1'
 gem 'tinymce-rails', '~> 4.5'
