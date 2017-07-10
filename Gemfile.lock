@@ -42,10 +42,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    adal (1.0.0)
-      jwt (~> 1.5)
-      nokogiri (~> 1.6)
-      uri_template (~> 0.7)
     addressable (2.4.0)
     arel (6.0.3)
     autoprefixer-rails (6.3.6.1)
@@ -366,7 +362,6 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
-    uri_template (0.7.0)
     vcr (3.0.1)
     webmock (2.0.2)
       addressable (>= 2.3.6)
@@ -378,7 +373,6 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-session_store
-  adal
   autoprefixer-rails
   bcrypt
   better_errors

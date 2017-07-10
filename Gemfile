@@ -8,7 +8,6 @@ gem 'sass-rails', '~> 5.0.1'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'coffee_routes'
-
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
@@ -56,10 +55,9 @@ gem 'omniauth-google-oauth2'
 gem 'google-api-client', '0.9'
 gem 'signet', '~> 0.7.3'
 
+gem 'microsoft_graph'
 gem 'oauth2'
 gem 'activerecord-session_store'
-gem 'adal'
-gem 'microsoft_graph'
 
 gem 'liquid-rails', '~> 0.1.1'
 gem 'tinymce-rails', '~> 4.5'
