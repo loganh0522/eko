@@ -46,7 +46,6 @@ gem 'dropzonejs-rails'
 
 gem "font-awesome-rails"
 
-
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 
@@ -69,8 +68,7 @@ gem 'bootstrap-colorpicker-rails'
 gem 'jquery-timepicker-rails'
 gem 'declarative_authorization'
 
-gem 'fullcalendar-rails'
-gem 'momentjs-rails'
+
 
 group :development do
   gem 'thin'

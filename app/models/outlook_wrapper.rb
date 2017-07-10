@@ -74,6 +74,5 @@ require 'microsoft_graph'
         start: {dateTime: dateTime, timeZone: "America/New_York"}, end: {dateTime: endTime,  timeZone: "America/New_York"}, 
         organizer: {emailAddress: {name: "Logan Houston", address: "houston@talentwiz.com"}})
     end
-
   end
 end
