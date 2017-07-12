@@ -1,5 +1,4 @@
 module OutlookWrapper
-# require 'microsoft_graph'
 
   class Mail
     def get_user_email(access_token)
