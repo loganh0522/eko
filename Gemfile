@@ -55,7 +55,7 @@ gem 'omniauth-google-oauth2'
 gem 'google-api-client', '0.9'
 gem 'signet', '~> 0.7.3'
 
-gem 'microsoft_graph'
+# gem 'microsoft_graph'
 gem 'oauth2'
 gem 'activerecord-session_store'
 

@@ -1,5 +1,5 @@
 module AuthHelper
-require 'microsoft_graph'
+# require 'microsoft_graph'
 
   SCOPES = [ 'openid',
              'profile',
