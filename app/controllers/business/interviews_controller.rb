@@ -7,7 +7,7 @@ class Business::InterviewsController < ApplicationController
   include AuthHelper
   
   def index
-    # get_access_token
+    get_access_token
     # token = current_user.outlook_token.access_token
     # email = current_user.email
     # # @interviews = current_company.interviews.all

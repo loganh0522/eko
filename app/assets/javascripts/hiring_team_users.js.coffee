@@ -76,15 +76,18 @@ $(document).ajaxComplete ->
           $('#search-results').val ui.item.first_name + ui.item.last_name
         false
       select: (event, ui) ->
+        idType = controller.slice(0, -1)
         if controller == "jobs"
           $('.assigned-' + controller).append('<div class="user-tag"> <div class="name">' + ui.item.title  + '</div> <div class="delete-tag"> &times </div> </div>') 
         else
           $('.assigned-' + controller).append('<div class="user-tag"> <div class="name">' + ui.item.first_name  + '</div> <div class="delete-tag"> &times </div> </div>')  
-        if $('#' + controller + '_ids').val() == ''
+        
+        if $('#' + idType + '_ids').val() == ''
           values = ui.item.id
         else
-          values =  $('#' + controller + '_ids').val() + ',' + ui.item.id
-        $('#' + controller + '_ids').val values
+          values =  $('#' + idType + '_ids').val() + ',' + ui.item.id
+        $('#' + idType + '_ids').val values
+        
         false
     ).data('ui-autocomplete')._renderItem = (ul, item) ->
       if controller == "jobs"

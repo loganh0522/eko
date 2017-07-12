@@ -1,7 +1,7 @@
 class Business::JobsController < ApplicationController
-  filter_access_to :all
-  filter_access_to [:close_job, :promote], :require => :read
-  filter_access_to :publish_job, :require => :read
+  # filter_access_to :all
+  # filter_access_to [:close_job, :promote], :require => :read
+  # filter_access_to :publish_job, :require => :read
   
   before_filter :require_user
   before_filter :belongs_to_company

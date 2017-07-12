@@ -1,6 +1,6 @@
 !!!5
 %html(lang='en-US')
   %body
-    %p= simple_format(Liquid::Template.parse(@message.body).render('recipient' => @recipient, 'job' => @job, 'company' => @current_company))
+    %p= simple_format(Liquid::Template.parse(@message).render('recipient' => @recipient, 'job' => @job, 'company' => @current_company))
     
-    %p= link_to "Schedule Interview Link", register_with_token_url(@invitation.token)
+    %p= link_to "Schedule Interview Link", register_with_token_url(@token)

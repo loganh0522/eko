@@ -33,10 +33,18 @@ require 'microsoft_graph'
     end
 
     def configure_client(current_user)
-
+      access_token
     end
 
-    def self.get_meeting_times(token, email)
+    def access_token
+      if user.outlook_token.expired?
+        user.outlook_token.refresh!
+      else
+        token = user.outlook_token.token
+      end
+    end
+
+    def self.get_meeting_times(user, token, email)
       callback = Proc.new do |r| 
         r.headers['Authorization'] = "Bearer #{token}"
         r.headers['X-AnchorMailbox'] = email
@@ -60,11 +68,19 @@ require 'microsoft_graph'
       @events = graph.me.events.order_by('start/dateTime asc')
     end
 
-    def self.create_event(token, email, dateTime, endTime)
+    def self.create_event(user, email, dateTime, endTime)
+      if user.outlook_token.expired?
+        user.outlook_token.refresh!
+        token = user.outlook_token.access_token
+      else
+        token = user.outlook_token.token
+      end
+
       callback = Proc.new do |r| 
-        r.headers['Authorization'] = "Bearer #{token}"
+        r.headers['Authorization'] = "Bearer #{user.outlook_token.access_token}"
         r.headers['X-AnchorMailbox'] = email
       end
+
       graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0',
                                 cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                 &callback)

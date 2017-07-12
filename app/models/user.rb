@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
   # index_name ["talentwiz", Rails.env].join('_') 
 
   #Business User Relationships
+
+  validates_presence_of :first_name, :last_name, :email, :password, :on => [ :create, :update ]
+  validates_uniqueness_of :email, :on => [ :create, :update ]
+
   after_create :set_full_name
   liquid_methods :first_name, :last_name, :full_name
   
@@ -12,10 +16,11 @@ class User < ActiveRecord::Base
   has_many :hiring_teams
   has_many :jobs, through: :hiring_teams 
   
-
   has_many :assigned_users
   has_many :tasks, through: :assigned_users, source: :assignable, source_type: "Task"
   has_many :interviews, through: :assigned_users, source: :assignable, source_type: "Interview"
+  has_many :interview_invitations, through: :assigned_users, source: :assignable, source_type: "InterviewInvitation"
+
 
 
   has_many :application_scorecards
@@ -31,20 +36,14 @@ class User < ActiveRecord::Base
   has_many :mentioned, :class_name => "Mention", :foreign_key => "mentioned_id"
   has_many :email_templates
 
-  validates_presence_of :first_name, :last_name, :email, :password, on: [:create, :update]
-  validates_uniqueness_of :email
-
   has_secure_password 
 
   # Job Seeker User relationships 
   
   has_one :profile
-
   has_many :candidates
-  
   has_many :applications
   has_many :apps, through: :applications, class_name: "Job", foreign_key: :job_id
-
   has_one :user_avatar
 
   has_one :google_token

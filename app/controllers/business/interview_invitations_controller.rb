@@ -14,55 +14,33 @@ class Business::InterviewInvitationsController < ApplicationController
   end
 
   def new
-    @interview_invitation = InterviewInvitation.new
+    @invitation = InterviewInvitation.new
 
     respond_to do |format| 
       format.js 
     end 
   end
 
-  def create
-    @candidates = params[:candidates_ids].split(',')
-    @times = params[:interview_invitation][:interview_times_attributes]
-    @users = params[:users_ids].split(',')
-    
-    @interview_invite = InterviewInvitation.new(interview_invitation_params.merge!(status: "pending"))
-    if @interview_invite.save
-      @candidates.each do |id|
-        @candidate = Candidate.find(id)
-        InvitedCandidate.create(candidate_id: @candidate.id, interview_invitation_id: @interview_invite.id)
-      end
-
-      @times = @interview_invite.interview_times
-      @users.each do |id| 
-        @user = User.find(id)
-        @token = @user.outlook_token.access_token
-        @email = @user.email         
-        @times.each do |time| 
-          date = time.date
-          time = time.time
-          endTime = time.chop[0..-5] + "30:00"
-          @dateTime = date + "T" + time
-          @endTime = date + "T" + endTime
-          OutlookWrapper::Calendar.create_event(@token, @email, @dateTime, @endTime)
+  def create    
+    @interview_invite = InterviewInvitation.new(interview_invitation_params)
+    respond_to do |format|
+      if @interview_invite.save
+        send_invitations(@interview_invite)
+        schedule_in_calendar(@interview_invite)
+        format.js
+      else 
+        @errors = []
+        @interview_invite.errors.messages.each do |error| 
+          @errors.append([error[0].to_s, error[1][0]])
         end
-      end
-    end
-
-    respond_to do |format|  
-      format.js
+        
+        format.js
+      end 
     end
   end
 
   def show 
     @interview_invite = InterviewInvitation.find(params[:id])
-  end
-
-  def edit 
-    @interview_invite = InterviewInvitations.find(params[:id])
-    respond_to do |format|  
-      format.js
-    end
   end
 
   private
@@ -74,12 +52,47 @@ class Business::InterviewInvitationsController < ApplicationController
     end
   end
 
-  def send_invitation(token, message, job, recipient, current_company)
-    if current_user.outlook_token.present? 
-      @email = Mail.new(to: @recipient.email, from: current_user.email, subject: params[:message][:subject], body: params[:body], content_type: "text/html")
-      GoogleWrapper::Gmail.send_message(@email, current_user, message)
-    else 
-      AppMailer.send_applicant_message(token, message, job, recipient, current_company).deliver
+  def send_invitations(interview_invite)
+    @candidates = @interview_invite.candidates    
+    @candidates.each do |candidate|
+      if candidate.manually_created == true
+        @email = candidate.email
+      else 
+        @email = candidate.user.email
+      end  
+      send_invitation_email(interview_invite, candidate, @email) 
+    end  
+  end
+
+  def send_invitation_email(interview_invite, candidate, email)
+    @job = interview_invite.job if @interview_invite.job.present?
+    @message = interview_invite.message
+    @subject = interview_invite.subject
+    @token = interview_invite.token
+
+    # if current_user.outlook_token.present? 
+    #   @email = Mail.new(to: @recipient.email, from: current_user.email, subject: params[:message][:subject], body: params[:body], content_type: "text/html")
+    #   GoogleWrapper::Gmail.send_message(@email, current_user, message)
+    # else 
+    AppMailer.send_interview_invitation(@token, @message, @subject, @job, email, current_company).deliver
+    # end
+  end
+
+  def schedule_in_calendar(interview_invite)
+    @users = @interview_invite.users
+    @users.each do |user| 
+      @times = @interview_invite.interview_times
+      # @token = user.outlook_token.access_token
+      @email = user.email          
+      
+      @times.each do |time| 
+        date = time.date
+        time = time.time
+        endTime = time.chop[0..-5] + "30:00"
+        @dateTime = date + "T" + time
+        @endTime = date + "T" + endTime
+        OutlookWrapper::Calendar.create_event(user, @email, @dateTime, @endTime)
+      end
     end
   end
 
@@ -88,9 +101,9 @@ class Business::InterviewInvitationsController < ApplicationController
   end
 
   def interview_invitation_params
-    params.require(:interview_invitation).permit(:title, :notes, :location, :kind, :job_id, :company_id,
-      interview_times_attributes: [:id, :time, :date, :_destroy],
-      invited_candidates_attributes: [:id, :candidate_id])
+    params.require(:interview_invitation).permit(:title, :notes, :location, :kind, :job_id, 
+      :candidate_ids, :user_ids, :subject, :message, :user_id, :company_id,
+      interview_times_attributes: [:id, :time, :date, :_destroy])
   end
 
 end

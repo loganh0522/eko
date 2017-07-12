@@ -5,6 +5,7 @@ require 'google/api_client/client_secrets.rb'
 
   class Gmail   
     attr_reader :error_message, :response
+    
     def initialize(current_user)
       configure_client(current_user)
     end

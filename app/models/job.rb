@@ -13,10 +13,14 @@ class Job < ActiveRecord::Base
   
   has_one :questionairre
   has_one :scorecard
+
   has_many :hiring_teams
   has_many :users, through: :hiring_teams
+  
   has_many :stages, -> {order(:position)}
   has_many :interviews
+  has_many :interview_invitations
+  
   has_many :activities, -> {order("created_at DESC")}
   has_many :applications
   has_many :candidates, through: :applications

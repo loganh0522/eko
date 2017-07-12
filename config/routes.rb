@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   resources :contact_messages, only: [:new, :create]
   resources :demos, only: [:new, :create]
+
+  resources :interview_invitations, only: [:show]
   
   resources :job_boards
   resources :jobs do 

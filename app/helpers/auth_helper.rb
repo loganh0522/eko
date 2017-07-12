@@ -52,10 +52,12 @@ require 'microsoft_graph'
                                 :site => 'https://login.microsoftonline.com',
                                 :authorize_url => '/common/oauth2/v2.0/authorize',
                                 :token_url => '/common/oauth2/v2.0/token')
-    params.merge!(:client_id      => client.id,
+
+    params =  { :client_id      => client.id,
                 :client_secret  => client.secret,
                 :grant_type     => 'refresh_token',
-                :refresh_token  => refresh_token)
+                :refresh_token  => refresh_token }
+
     token = client.get_token(params)
     current_user.outlook_token.update_attributes(access_token: token.token, refresh_token: token.refresh_token, expires_at: Time.now + token.expires_in.to_i.seconds) 
   end
