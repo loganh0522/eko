@@ -6,7 +6,6 @@
     = link_to business_task_path(task, status: "complete"), method: :put, remote: true do 
       .glyphicon.glyphicon-ok 
     .title= task.title
-    / = link_to "#{task.taskable.candidate.first_name}'s application", business_job_application_path(task.taskable.application.job.id, task.taskable.application.id), remote: true
   .task-row
     .tags
       Assigned To: 

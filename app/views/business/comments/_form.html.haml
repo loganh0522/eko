@@ -2,8 +2,6 @@
   = form_for [:business, @commentable, @comment], remote: true do |f|
     = f.text_area :body, id: "body_Block", class: "comment-body", rows: 12, cols: 12, placeholder: "Add a Note"
     %span#body_msgBlock
-    / - else
-    /   = f.text_area :body, id: "comment-body", rows: 12, cols: 12, placeholder: "Add a Note about #{@commentable.full_name}"
     .comment-area-footer
       = f.submit @comment.new_record? ? "+ Add Note" : "Update", class: "btn submit-button", id: "submit-comment-btn"
       = link_to "Cancel", "#", remote: true, class: 'btn border-button2', id: 'cancel'
