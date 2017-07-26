@@ -1,5 +1,4 @@
 module AuthHelper
-
   SCOPES = [ 'openid',
              'profile',
              'offline_access',
