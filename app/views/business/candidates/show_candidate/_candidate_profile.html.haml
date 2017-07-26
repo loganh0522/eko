@@ -6,8 +6,6 @@
       = f.file_field :name, id: "add-resume"
       = f.hidden_field :candidate_id, value: @candidate.id
       = f.submit "Add Resume", id: "submit-resume"
-  
-  / %iframe{:src => "<%= @application.candidate.resumes.first.name_url %>"}
-  / = File.read("#{@application.candidate.resumes.first.name_url}")
+
   = render 'business/shared_manual_candidate/work_experience'
   = render 'business/shared_manual_candidate/education'

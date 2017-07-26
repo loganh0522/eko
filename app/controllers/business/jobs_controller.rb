@@ -2,7 +2,6 @@ class Business::JobsController < ApplicationController
   # filter_access_to :all
   # filter_access_to [:close_job, :promote], :require => :read
   # filter_access_to :publish_job, :require => :read
-  
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -59,9 +58,14 @@ class Business::JobsController < ApplicationController
     end
   end
 
-  # def promote
-  #   @job = Job.find(params[:job_id])
-  # end
+  def promote
+    @job = Job.find(params[:job_id])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
 
   def update
     @job = Job.find(params[:id])

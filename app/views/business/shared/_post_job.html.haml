@@ -1,6 +1,7 @@
 %ul
   %li{:class => is_active?(edit_business_job_path(@job))}
     = link_to "Job Details", edit_business_job_path(@job)
+    
   %li{:class => is_active?(new_business_job_hiring_team_path(@job))}
     = link_to "Hiring Team", new_business_job_hiring_team_path(@job)
   %li{:class => is_active?(business_job_stages_path(@job))}
