@@ -35,7 +35,7 @@ class Company < ActiveRecord::Base
   
   validates_presence_of :name, :website
 
-  liquid_methods :name
+  # liquid_methods :name
 
   after_create :create_rejection_reasons, :create_default_stages
   

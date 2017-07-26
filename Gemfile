@@ -60,7 +60,7 @@ gem 'microsoft_graph'
 gem 'oauth2'
 gem 'activerecord-session_store'
 
-# gem 'liquid-rails'
+# gem 'liquid-rails', '3.0.6'
 gem 'tinymce-rails', '~> 4.5'
 
 gem 'bootstrap-colorpicker-rails'

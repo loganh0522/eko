@@ -7,7 +7,7 @@ class Job < ActiveRecord::Base
   #   __elasticsearch__.update_document 
   # end
 
-  liquid_methods :title
+  # liquid_methods :title
   belongs_to :company
   
   has_one :questionairre

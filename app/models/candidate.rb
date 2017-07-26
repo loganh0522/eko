@@ -9,7 +9,7 @@ class Candidate < ActiveRecord::Base
 
   validates_presence_of :first_name, :last_name, :email
 
-  liquid_methods :first_name, :last_name, :full_name
+  # liquid_methods :first_name, :last_name, :full_name
   before_create :generate_token, :downcase_email
   belongs_to :company
   belongs_to :user

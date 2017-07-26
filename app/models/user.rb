@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   before_create :downcase_email, :set_full_name
 
-  liquid_methods :first_name, :last_name, :full_name
+  # liquid_methods :first_name, :last_name, :full_name
   
   belongs_to :company
 
