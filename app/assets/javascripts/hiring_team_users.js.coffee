@@ -80,7 +80,7 @@ $(document).ajaxComplete ->
         if controller == "jobs"
           $('.assigned-' + controller).append('<div class="user-tag"> <div class="name">' + ui.item.title  + '</div> <div class="delete-tag"> &times </div> </div>') 
         else
-          $('.assigned-' + controller).append('<div class="user-tag"> <div class="name">' + ui.item.first_name  + '</div> <div class="delete-tag"> &times </div> </div>')  
+          $('.assigned-' + controller).append('<div class="user-tag"> <div class="name">' + ui.item.full_name  + '</div> <div class="delete-tag"> &times </div> </div>')  
         
         if $('#' + idType + '_ids').val() == ''
           values = ui.item.id

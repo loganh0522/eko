@@ -8,7 +8,7 @@ class Business::CandidatesController < ApplicationController
   
   def index
     if params[:term].present?
-      @candidates = current_company.candidates.order(:first_name).where("first_name ILIKE ?", "%#{params[:term]}%")
+      @candidates = current_company.candidates.order(:full_name).where("full_name ILIKE ?", "%#{params[:term]}%")
       render :json => @candidates.to_json 
     else
       @tags = current_company.tags
@@ -109,6 +109,7 @@ class Business::CandidatesController < ApplicationController
     if params[:tags].present?
       @tags = params[:tags].split(',')
       @company_tags = current_company.tags 
+      
       @tags.each do |tag| 
         @tag = Tag.where(name: (tag.titleize), company_id: current_company.id).first    
         if @company_tags.include?(@tag)
@@ -120,6 +121,7 @@ class Business::CandidatesController < ApplicationController
           end
         end 
       end
+      
     end
   end
 

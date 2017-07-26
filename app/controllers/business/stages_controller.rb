@@ -1,11 +1,10 @@
 class Business::StagesController < ApplicationController 
-  filter_access_to :all
+  # filter_access_to :all
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
   
-
   def new 
     @job = Job.find(params[:job_id])
     @stages = @job.stages.order("position")
@@ -24,11 +23,10 @@ class Business::StagesController < ApplicationController
     respond_to do |format| 
       if @stage.save & @stage.update_attribute(:position, new_stage_position(@job))
         @stages = @job.stages.order("position")
-        format.js
       else
-        flash[:error] = "Sorry, something went wrong. Please try again."
         render :new
       end
+      format.js
     end
   end
 
@@ -53,9 +51,9 @@ class Business::StagesController < ApplicationController
 
   def destroy
     @stage = Stage.find(params[:id])
-    @job = Job.find(params[:job_id])
     @stage.destroy
-
+    @job = Job.find(params[:job_id])
+    
     @job.stages.each_with_index do |id, index| 
       Stage.update(id, {position: index + 1})
     end
@@ -88,7 +86,6 @@ class Business::StagesController < ApplicationController
     end
 
     # track_activity(@application, "move_stage")
-   
     respond_to do |format|
       format.js
     end
@@ -102,6 +99,6 @@ class Business::StagesController < ApplicationController
   end
 
   def new_stage_position(job)
-    job.stages.count + 1
+    job.stages.count
   end
 end

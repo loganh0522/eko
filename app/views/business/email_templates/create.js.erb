@@ -1,2 +1,9 @@
-$('.modal').modal('toggle');
-$('.templates-body').html('<%= j render "email_templates", email_templates: @email_templates%>');
+<% if @errors.present? %> 
+  <% @errors.each do |error| %>
+    $('#<%= error[0] %>_Block').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+    $('#event-form').find('#<%= error[0] %>_Block').addClass('has-error');
+  <% end %>
+<% else %>
+  $('.modal').modal('toggle');
+  $('.templates-body').html('<%= j render "email_templates", email_templates: @email_templates%>');
+<% end %>

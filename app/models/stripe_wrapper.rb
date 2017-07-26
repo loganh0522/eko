@@ -16,6 +16,7 @@ module StripeWrapper
           description: options[:description]
           )
         new(response: response)
+      
       rescue Stripe::CardError => e
         new(error_message: e.message) 
       rescue Stripe::RateLimitError => e

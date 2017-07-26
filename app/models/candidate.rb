@@ -10,7 +10,7 @@ class Candidate < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :email
 
   liquid_methods :first_name, :last_name, :full_name
-  before_create :generate_token
+  before_create :generate_token, :downcase_email
   belongs_to :company
   belongs_to :user
   has_many :applications, :dependent => :destroy
@@ -59,6 +59,10 @@ class Candidate < ActiveRecord::Base
     end
     return full_name
   end
+
+  def downcase_email
+    self.email = self.email.downcase
+  end
   
   def generate_token
     self.token = SecureRandom.urlsafe_base64
@@ -91,6 +95,14 @@ class Candidate < ActiveRecord::Base
     return false
   end
 
+  def open_tasks
+    self.tasks.where(status: 'active')
+  end
+
+  def complete_tasks
+    self.tasks.where(status: 'complete')
+  end
+  
   def tags_present
     @tags = []
     self.tags.each do |tag| 

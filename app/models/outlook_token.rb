@@ -21,10 +21,10 @@ class OutlookToken < ActiveRecord::Base
     end
   end
  
-  def refresh!
+  def refresh!(user)
     refresh_token = user.outlook_token.refresh_token
     access_token = user.outlook_token.access_token
-    
+
     client = OAuth2::Client.new(ENV['OUTLOOK_API_ID'],
                                 ENV['OUTLOOK_API_SECRET'],
                                 :grant_type => 'refresh_token',
@@ -32,15 +32,16 @@ class OutlookToken < ActiveRecord::Base
                                 :site => 'https://login.microsoftonline.com',
                                 :authorize_url => '/common/oauth2/v2.0/authorize',
                                 :token_url => '/common/oauth2/v2.0/token')
-    params = []
-    params.merge!(:client_id      => client.id,
-                :client_secret  => client.secret,
-                :grant_type     => 'refresh_token',
-                :refresh_token  => refresh_token)
     
-    token = client.get_token(params)
+    outlook_params = {"client_id" => client.id,
+                "client_secret"   => client.secret,
+                "grant_type"      => 'refresh_token',
+                "refresh_token"   => refresh_token }
     
-    current_user.outlook_token.update_attributes(access_token: token.token, 
+
+    token = client.get_token(outlook_params)
+    
+    user.outlook_token.update_attributes(access_token: token.token, 
       refresh_token: token.refresh_token, 
       expires_at: Time.now + token.expires_in.to_i.seconds) 
   end

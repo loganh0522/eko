@@ -7,6 +7,7 @@ class Business::InvitationsController < ApplicationController
   
   def new
     @invitation = Invitation.new
+    
     @job = Job.find(params[:job]) if params[:job].present?
     respond_to do |format|
       format.js

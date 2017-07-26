@@ -2,8 +2,13 @@
   .side-container
     = render 'business/tasks/filters'
   .main-container#task-container
-    = link_to 'Open Tasks', business_job_tasks_path(@taskable), remote: true
-    = link_to 'Completed Tasks', business_job_tasks_path(@taskable, status: 'complete'), remote: true
+    .calendar-nav-actions
+      .change-containers-nav
+        %ul  
+          = link_to business_job_tasks_path(@taskable), remote: true do 
+            %li#open-tasks.activated Open Tasks
+          = link_to business_job_tasks_path(@taskable, status: 'complete'), remote: true do 
+            %li#closed-tasks Completed Tasks
     .tasks
       - if @tasks.present?
         - @tasks.each do |task|

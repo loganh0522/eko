@@ -15,7 +15,7 @@
           .location= "#{@application.candidate.location}"
       - else
         .user-image
-          .profile_picturee
+          .profile_picture
             - if @application.applicant.user_avatar.present?
               = image_tag @application.applicant.user_avatar.image.large_image 
             - else 

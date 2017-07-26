@@ -7,17 +7,15 @@ class Business::InterviewsController < ApplicationController
   include AuthHelper
   
   def index
-    get_access_token
-    # token = current_user.outlook_token.access_token
-    # email = current_user.email
-    # # @interviews = current_company.interviews.all
-
-    # @interviews = OutlookWrapper::Calendar.get_events(token, email)
-
+    if params[:job_id].present?
+      @job = Job.find(params[:job_id])
+      @interviews = @job.interviews
+    else
+      @interviews = current_company.interviews
+    end
+    # OutlookWrapper::Calendar.create_event(current_user, "2017-07-24T9:00pm", "2017-07-24T9:30pm")
     # @date = params[:date] ? Date.parse(params[:date]) : Date.today
     # @interviews_by_date = @interviews.group_by(&:start)
-
-
     respond_to do |format|
       format.js
       format.html
@@ -25,8 +23,6 @@ class Business::InterviewsController < ApplicationController
   end
 
   def new
-    @candidate = Candidate.find(params[:candidate_id])
-    @application = Application.find(params[:application])
     @interview = Interview.new
 
     respond_to do |format| 
@@ -38,10 +34,10 @@ class Business::InterviewsController < ApplicationController
     @interview = Interview.new(interview_params)
     respond_to do |format|  
       if @interview.save
-        assigned_to(@interview)
         format.js
       else
-        flash[:danger] = "Something went wrong"
+
+        format.js
       end
     end
   end
@@ -59,15 +55,10 @@ class Business::InterviewsController < ApplicationController
 
   private
 
-  def assigned_to(task)
-    user_ids = params[:interview][:user_ids].split(',')
-    user_ids.each do |id| 
-      AssignedUser.create(assignable_type: "Interview", assignable_id: task.id, user_id: id )
-    end
-  end
-
   def interview_params
-    params.require(:interview).permit(:title, :notes, :location, :start_time, :end_time, :date, :kind, :job_id, :candidate_id, :company_id)
+    params.require(:interview).permit(:title, :notes, :location, :start_time, 
+      :end_time, :date, :kind, :user_ids, 
+      :job_id, :candidate_id, :company_id)
   end
 
 end

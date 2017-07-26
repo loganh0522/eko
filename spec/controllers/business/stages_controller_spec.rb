@@ -3,21 +3,28 @@ require 'spec_helper'
 describe Business::StagesController do 
   describe "GET new" do 
     let(:company) {Fabricate(:company)}
-    let(:alice) {Fabricate(:user, company: company)}
-    let(:job) {Fabricate(:job, company: company)}
-
-    it_behaves_like "requires sign in" do
-      let(:action) {get :new, job_id: job.id}
-    end
-
-    it_behaves_like "user does not belong to company" do 
-      let(:action) {get :new, job_id: job.id}
-    end
+    let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
+    let(:alice) {Fabricate(:user, company: company, role: "Admin")}
+    let(:bob) {Fabricate(:user, company: company, role: "Hiring Manager")} 
+    let(:job) {Fabricate(:job, company: company, user_ids: alice.id)}
 
     before do  
       set_current_user(alice)
       set_current_company(company)
-      get :new, job_id: job.id
+      job_board
+      xhr :get, :new, job_id: job.id
+    end
+
+    it_behaves_like "requires sign in" do
+      let(:action) {xhr :get, :new, job_id: job.id}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {xhr :get, :new, job_id: job.id}
+    end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) {xhr :get, :new, job_id: job.id}
     end
 
     it "sets the @job to the current instance of the job" do 
@@ -32,60 +39,80 @@ describe Business::StagesController do
 
   describe "POST create" do 
     let(:company) {Fabricate(:company)}
-    let(:alice) {Fabricate(:user, company: company)}
-    let(:job) {Fabricate(:job, company: company)}
-    let(:stage) {Fabricate.attributes_for(:stage)}
-
-    it_behaves_like "requires sign in" do
-      let(:action) {post :create, job_id: job.id}
-    end
-
-    it_behaves_like "user does not belong to company" do 
-      let(:action) {post :create, job_id: job.id}
-    end
-
+    let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
+    let(:alice) {Fabricate(:user, company: company, role: "Admin")}
+    let(:job) {Fabricate(:job, company: company, user_ids: alice.id)}
+    let(:stage) {Fabricate.attributes_for(:stage, job_id: job.id, name: "Test")}
+    
     before do 
       set_current_user(alice)
       set_current_company(company)
-      post :create, stage: { job_id: job.id, name: "Screened", position: '1'}, job_id: job.id
+      job_board
     end
 
-    it "redirects to the new action page" do 
-      expect(response).to redirect_to new_business_job_stage_path(job)
+    it_behaves_like "requires sign in" do
+      let(:action) {xhr :post, :create, job_id: job.id}
     end
 
-    it "creates the new stage" do 
-      expect(Stage.count).to eq(1)
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {xhr :post, :create, job_id: job.id}
     end
 
-    it "associates the stage with the job" do 
-      expect(Stage.first.job).to eq(job)
+    it_behaves_like "company has been deactivated" do
+      let(:action) {xhr :post, :create, job_id: job.id}
     end
 
-    it "adds a new stage last in the list" do 
-      Fabricate(:stage, position: 1, job_id: job.id)
-      expect(Stage.first.position).to eq(2)
+    context "with valid inputs" do
+      before do 
+        xhr :post, :create, stage: stage, job_id: job.id
+      end
+
+      it "renders the new template" do 
+        expect(response).to render_template :create
+      end
+
+      it "creates the new stage" do 
+        expect(Stage.count).to eq(7)
+      end
+
+      it "creates the stage with proper name" do 
+        expect(Stage.last.name).to eq("Test")
+      end
+
+      it "associates the stage with the job" do 
+        expect(Stage.last.job).to eq(job)
+      end
+
+      it "adds a new stage last in the list" do 
+        expect(Stage.last.position).to eq(7)
+      end
     end
   end
 
   describe "GET edit" do 
     let(:company) {Fabricate(:company)}
-    let(:alice) {Fabricate(:user, company: company)}
-    let(:job) {Fabricate(:job, company: company)}
+    let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
+    let(:alice) {Fabricate(:user, company: company, role: "Admin")}
+    let(:job) {Fabricate(:job, company: company, user_ids: alice.id)}
     let(:stage) {Fabricate(:stage, job_id: job.id)}
-
-    it_behaves_like "requires sign in" do
-      let(:action) {get :edit, job_id: 4, id: 4}
-    end
-
-    it_behaves_like "user does not belong to company" do 
-      let(:action) {get :edit, job_id: 4, id: 4}
-    end
 
     before do 
       set_current_user(alice)
       set_current_company(company)
-      get :edit, id: stage.id, job_id: job.id
+      job_board
+      xhr :get, :edit, id: stage.id, job_id: job.id
+    end
+
+    it_behaves_like "requires sign in" do
+      let(:action) {xhr :get, :edit, job_id: job.id, id: stage.id}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {xhr :get, :edit, job_id: job.id, id: stage.id}
+    end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) {xhr :get, :edit, job_id: job.id, id: stage.id}
     end
 
      it "sets @job to the correct job posting" do 
@@ -99,77 +126,90 @@ describe Business::StagesController do
 
   describe "PUT update" do 
     let(:company) {Fabricate(:company)}
-    let(:alice) {Fabricate(:user, company: company)}
-    let(:job) {Fabricate(:job, company: company)}
-
-    it_behaves_like "requires sign in" do
-      let(:action) {put :update, job_id: 4, id: 4}
-    end
-
-    it_behaves_like "user does not belong to company" do 
-      let(:action) {put :update, job_id: 4, id: 4}
-    end
+    let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
+    let(:alice) {Fabricate(:user, company: company, role: "Admin")}
+    let(:job) {Fabricate(:job, company: company, user_ids: alice.id)}
+    let(:stage) {Fabricate(:stage, job: job)}
 
     before do 
       set_current_user(alice)
-      set_current_company(company)      
+      set_current_company(company)    
+      job_board  
+      xhr :put, :update, id: stage.id, stage: {job_id: job.id, name: "Screened"}, job_id: job.id
+    end
+
+    it_behaves_like "requires sign in" do
+      let(:action) {xhr :put, :update, job_id: job.id, id: stage.id}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {xhr :put, :update, job_id: job.id, id: stage.id}
+    end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) {xhr :get, :edit, job_id: job.id, id: stage.id}
     end
 
     it "save the updates made on the object" do 
-      stage = Fabricate(:stage, job_id: job.id)
-      put :update, id: stage.id, stage: {job_id: job.id, name: "Screened"}, job_id: job.id, format: :js
-      expect(Stage.first.name).to eq("Screened")
+      expect(Stage.last.name).to eq("Screened")
     end
   end
 
   describe "DELETE destroy" do 
     let(:company) {Fabricate(:company)}
-    let(:alice) {Fabricate(:user, company: company)}
-    let(:job) {Fabricate(:job, company: company)}
+    let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
+    let(:alice) {Fabricate(:user, company: company, role: "Admin")}
+    let(:job) {Fabricate(:job, company: company, user_ids: alice.id)}
+    let(:stage) {Fabricate(:stage, job: job, name: "deleted")}
     
     before do 
       set_current_user(alice)
-      set_current_company(company)      
+      set_current_company(company)  
+      job_board
+      stage
+      xhr :delete, :destroy, job_id: job.id, id: stage.id   
     end
 
     it_behaves_like "requires sign in" do
-      let(:action) {delete :destroy, job_id: 4, id: 4}
+      let(:action) {xhr :delete, :destroy, job_id: job.id, id: stage.id}
     end
 
     it_behaves_like "user does not belong to company" do 
-      let(:action) {delete :destroy, job_id: 4, id: 4}
+      let(:action) {xhr :delete, :destroy, job_id: job.id, id: stage.id}
     end
 
     it "deletes the stage" do 
-      stage = Fabricate(:stage, job_id: job.id)
-      delete :destroy, job_id: job.id, id: stage.id, format: :js
-      expect(HiringTeam.count).to eq(0)
+      expect(Stage.count).to eq(6)
+    end
+
+    it "deletes the stage" do 
+      expect(job.stages.last.name).to eq("Hired")
     end
   end
 
-  describe "POST sort" do
-    let(:company) {Fabricate(:company)}
-    let(:alice) {Fabricate(:user, company: company)}
-    let(:job) {Fabricate(:job, company: company)}
+  # describe "POST sort" do
+  #   let(:company) {Fabricate(:company)}
+  #   let(:alice) {Fabricate(:user, company: company)}
+  #   let(:job) {Fabricate(:job, company: company)}
     
-    before do 
-      set_current_user(alice)
-      set_current_company(company)      
-    end
+  #   before do 
+  #     set_current_user(alice)
+  #     set_current_company(company) 
+  #     stage1 = Fabricate(:stage, position: 1, job_id: job.id) 
+  #     stage2 = Fabricate(:stage, position: 2, job_id: job.id)
+  #     xhr :post, :sort, job_id: job.id, stage: [stage2.id, stage1.id]     
+  #   end
 
-    it_behaves_like "requires sign in" do
-      let(:action) {post :sort, job_id: job.id}
-    end
+  #   it_behaves_like "requires sign in" do
+  #     let(:action) {xhr :post, :sort, job_id: job.id}
+  #   end
 
-    it_behaves_like "user does not belong to company" do 
-      let(:action) {post :sort, job_id: job.id}
-    end
+  #   it_behaves_like "user does not belong to company" do 
+  #     let(:action) {xhr :post, :sort, job_id: job.id}
+  #   end
 
-    it "reorders the items in the queue" do
-      stage1 = Fabricate(:stage, position: 1, job_id: job.id) 
-      stage2 = Fabricate(:stage, position: 2, job_id: job.id)
-      post :sort, job_id: job.id, stage: [stage2.id, stage1.id]
-      expect(stage2.reload.position).to eq(1)
-    end
-  end
+  #   it "reorders the items in the queue" do
+  #     expect(stage2.reload.position).to eq(1)
+  #   end
+  # end
 end

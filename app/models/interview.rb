@@ -17,10 +17,10 @@ class Interview < ActiveRecord::Base
 
   belongs_to :candidate
   belongs_to :job
-
+  belongs_to :company
+  has_many :event_ids
   has_many :assigned_users, as: :assignable
-  has_many :users, through: :assigned_users
-
+  has_many :users, through: :assigned_users, validate: false
 
   def month
     Date.parse(self.date).strftime("%B")
@@ -33,7 +33,4 @@ class Interview < ActiveRecord::Base
   def year
     Date.parse(self.date).strftime("%Y")
   end
-
-
-
 end

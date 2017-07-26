@@ -6,7 +6,14 @@ class Task < ActiveRecord::Base
   has_many :assigned_users, as: :assignable
   has_many :users, through: :assigned_users
 
+  has_many :assigned_candidates, as: :assignable
+  has_many :candidates, through: :assigned_candidates
 
+  validates_presence_of :title, :kind, :status, :company_id
+
+  def my_tasks
+    current_user.tasks
+  end
 
 
   # def as_indexed_json(options={})

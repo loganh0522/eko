@@ -29,8 +29,9 @@ class Business::CommentsController < ApplicationController
     if @comment.save 
       @comments = @commentable.comments
       track_activity @comment
+    else
+      render_errors(@comment)
     end
-
     respond_to do |format| 
       format.js 
     end
@@ -51,13 +52,16 @@ class Business::CommentsController < ApplicationController
     respond_to do |format| 
       if @comment.update(comment_params)
         format.js
+      else
+      
       end
+      
     end
   end
 
   def destroy
     @comment = Comment.find(params[:id])
-    Activity.where(trackable_id: @comment.id).first.delete if Activity.where(trackable_id: @comment.id).first.present?
+    Activity.where(trackable_id: @comment.id, trackable_type: "Comment").first.delete if Activity.where(trackable_id: @comment.id).first.present?
     @comment.destroy
 
     respond_to do |format|
@@ -87,6 +91,13 @@ class Business::CommentsController < ApplicationController
   end
 
   private 
+
+  def render_errors(comment)
+    @errors = []
+    comment.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end 
+  end
 
   def comment_params 
     params.require(:comment).permit(:body, :user_id)

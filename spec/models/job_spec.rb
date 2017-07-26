@@ -13,8 +13,12 @@ describe Job do
   it { should have_many(:tasks) }
   it { should have_one(:scorecard) }
   it { should have_one(:questionairre) }
+  
   it {should validate_presence_of(:title)}
   it {should validate_presence_of(:address)}
   it {should validate_presence_of(:description)}
   it {should validate_presence_of(:location)}
+
+
+
 end

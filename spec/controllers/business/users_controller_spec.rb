@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe Business::UsersController do 
   describe "GET index" do 
-    # it_behaves_like "requires sign in" do
-    #   let(:action) {get :index}
-    # end
+    it_behaves_like "requires sign in" do
+      let(:action) {get :index}
+    end
 
-    # it_behaves_like "user does not belong to company" do 
-    #   let(:action) {get :index}
-    # end
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {get :index}
+    end
 
     let(:company) {Fabricate(:company)}
     let(:alice) {Fabricate(:user, company: company, role: "Admin")}
@@ -31,13 +31,13 @@ describe Business::UsersController do
   end
 
   describe "GET show" do 
-    # it_behaves_like "requires sign in" do
-    #   let(:action) {get :show}
-    # end
+    it_behaves_like "requires sign in" do
+      let(:action) {get :show}
+    end
 
-    # it_behaves_like "user does not belong to company" do 
-    #   let(:action) {get :show}
-    # end
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {get :show}
+    end
 
     let(:company) {Fabricate(:company)}
     let(:alice) {Fabricate(:user, company: company, role: "Admin")}
@@ -76,6 +76,14 @@ describe Business::UsersController do
     let(:joe) {Fabricate(:user, company: company)}
     let(:signature) {Fabricate(:email_signature, user: alice)}
 
+    it_behaves_like "requires sign in" do
+      let(:action) {xhr :get, :edit, id: joe.id}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {xhr :get, :edit, id: joe.id}
+    end
+    
     before do 
       set_current_company(company)
       set_current_user(alice)
@@ -99,23 +107,32 @@ describe Business::UsersController do
 
   describe "POST update" do 
     let(:company) {Fabricate(:company)}
-    let(:alice) {Fabricate(:user, company: company)}
+    let(:alice) {Fabricate(:user, company: company, role: "Admin", email: 'email')}
     let(:joe) {Fabricate(:user, company: company)}
     let(:signature) {Fabricate(:email_signature, user: alice)}
+    
+    it_behaves_like "requires sign in" do
+      let(:action) {xhr :put, :update, id: joe.id}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {xhr :put, :update, id: joe.id}
+    end
 
     before do 
       set_current_company(company)
       set_current_user(alice)
     end
 
-    context "with valid inputs" do
-      let(:company) {Fabricate(:company)}
-      let(:alice) {Fabricate(:user, company: company, role: "Admin")}
+    it "redirects the user to the sign in page if unauthenticated user" do
+      xhr :get, :edit, id: joe.id
+      expect(response).to redirect_to business_root_path
+    end
 
+    context "with valid inputs" do
       before do  
-        set_current_user(alice)
-        set_current_company(company)
-        xhr :put, :update, id: alice.id, user: {first_name: "new@email.com"}
+        xhr :put, :update, id: alice.id, user: {first_name: "new@email.com",
+          last_name: alice.last_name, email: alice.email}
       end
 
       it "save the updates made on the object" do 
@@ -128,17 +145,12 @@ describe Business::UsersController do
     end
 
     context "with invalid inputs" do
-      let(:company) {Fabricate(:company)}
-      let(:alice) {Fabricate(:user, email: "email", company: company, role: "Admin")}
-
       before do  
-        set_current_user(alice)
-        set_current_company(company)
         xhr :put, :update, id: alice.id, :user => {email: nil}
       end
 
       it "doesn't save the updates if fields invalid" do
-        expect(User.first.email).to eq("email") 
+        expect(User.first.email).to eq('email') 
       end
     end
   end

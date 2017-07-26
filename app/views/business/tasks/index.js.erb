@@ -1,12 +1,18 @@
-<% if @taskable.class == Application %>
+<% if @taskable.class == Company %>
+  <% if params[:status] == 'complete' %>
+    $('.task-main-container').html('<%= j render "business/tasks/tasks" %>');
+    $('.calendar-nav-actions').find('.activated').removeClass('activated');
+    $('.calendar-nav-actions').find('#closed-tasks').addClass('activated');
+  <% else %>
+    $('.task-main-container').html('<%= j render "business/tasks/tasks" %>');
+    $('.calendar-nav-actions').find('.activated').removeClass('activated');
+    $('.calendar-nav-actions').find('#open-tasks').addClass('activated');
+  <% end %>
+<% elsif @taskable.class == Application %>
   $(".side-section").find(".tasks").html('<%= j render "business/tasks/application_tasks", tasks: @tasks %>');
-<% elsif @taskable.class == Job || Client %> 
+<% else %> 
   $('#main-container').html('<%= j render "business/tasks/job_tasks", tasks: @tasks %>');
   $('.change-containers-nav').find('.activated').removeClass('activated');
   $('.change-containers-nav').find('#job-tasks').addClass('activated');
-<% else %>
-  $('.applicant-profile').html('<%= j render "business/tasks/tasks" %>');
-  $('.applicant-nav').find('.activated').removeClass('activated');
-  $('.applicant-nav').find('#tasks').addClass('activated');
 <% end %>
 

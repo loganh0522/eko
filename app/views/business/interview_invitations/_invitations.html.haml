@@ -1,0 +1,13 @@
+#box
+  .box-row
+    .title= "#{interview.kind}"
+  .box-row
+    .title Pending Candidates: 
+    .content 
+      - interview.candidates.each do |user| 
+        .user-tag= user.full_name
+  .box-row
+    .title Interviewers:
+    .content
+      - interview.users.each do |user|   
+        .user-tag= user.full_name

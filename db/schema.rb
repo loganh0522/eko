@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170711172319) do
+ActiveRecord::Schema.define(version: 20170725234644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,12 @@ ActiveRecord::Schema.define(version: 20170711172319) do
     t.string   "rejection_reason"
   end
 
+  create_table "assigned_candidates", force: :cascade do |t|
+    t.integer "candidate_id"
+    t.integer "assignable_id"
+    t.integer "assignable_type"
+  end
+
   create_table "assigned_users", force: :cascade do |t|
     t.integer "user_id"
     t.integer "assignable_id"
@@ -98,6 +104,7 @@ ActiveRecord::Schema.define(version: 20170711172319) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "full_name"
   end
 
   create_table "career_levels", force: :cascade do |t|
@@ -241,6 +248,13 @@ ActiveRecord::Schema.define(version: 20170711172319) do
     t.datetime "updated_at"
   end
 
+  create_table "event_ids", force: :cascade do |t|
+    t.integer "interview_time_id"
+    t.string  "event_id"
+    t.integer "user_id"
+    t.integer "interview_id"
+  end
+
   create_table "exp_functions", force: :cascade do |t|
     t.integer "function_id"
     t.integer "work_experience_id"
@@ -296,6 +310,7 @@ ActiveRecord::Schema.define(version: 20170711172319) do
     t.integer  "job_id"
     t.integer  "company_id"
     t.text     "message"
+    t.string   "event_id"
   end
 
   create_table "interview_times", force: :cascade do |t|
@@ -319,6 +334,8 @@ ActiveRecord::Schema.define(version: 20170711172319) do
     t.string   "title"
     t.integer  "candidate_id"
     t.string   "date"
+    t.string   "event_id"
+    t.string   "duration"
   end
 
   create_table "invitations", force: :cascade do |t|
@@ -449,6 +466,7 @@ ActiveRecord::Schema.define(version: 20170711172319) do
     t.string   "kind"
     t.integer  "client_id"
     t.text     "recruiter_description"
+    t.string   "token"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -512,6 +530,7 @@ ActiveRecord::Schema.define(version: 20170711172319) do
     t.datetime "expires_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "room_id"
   end
 
   create_table "overall_ratings", force: :cascade do |t|
@@ -578,6 +597,14 @@ ActiveRecord::Schema.define(version: 20170711172319) do
     t.string   "attachment"
     t.integer  "candidate_id"
     t.integer  "application_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.integer  "company_id"
+    t.string   "email"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

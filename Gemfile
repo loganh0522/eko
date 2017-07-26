@@ -10,6 +10,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'coffee_routes'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'responders', '~> 2.0'
 
 gem 'turbolinks'
 gem 'haml-rails'

@@ -1,6 +1,6 @@
 class Business::EmailTemplatesController < ApplicationController
-  filter_access_to :all
-  filter_access_to :filter_candidates, :require => :read
+  # filter_access_to :all
+  # filter_access_to :filter_candidates, :require => :read
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -15,9 +15,7 @@ class Business::EmailTemplatesController < ApplicationController
   end
 
   def index 
-    @email_template = EmailTemplate.new
     @email_templates = current_company.email_templates
-    @rejection_reasons = current_company.rejection_reasons
   end
 
   def create 
@@ -26,8 +24,10 @@ class Business::EmailTemplatesController < ApplicationController
     respond_to do |format|
       if @email_template.save
         @email_templates = current_company.email_templates
-        format.js
+      else 
+        render_errors(@email_template)
       end
+      format.js
     end
   end
 
@@ -41,11 +41,14 @@ class Business::EmailTemplatesController < ApplicationController
 
   def update
     @email_template = EmailTemplate.find(params[:id])
+    
     respond_to do |format|
       if @email_template.update(e_temp_params)
         @email_templates = current_company.email_templates
-        format.js
+      else 
+        render_errors(@email_template)  
       end
+      format.js
     end
   end
 
@@ -63,6 +66,14 @@ class Business::EmailTemplatesController < ApplicationController
 
   def e_temp_params
     params.require(:email_template).permit(:title, :body, :subject, :company_id, :user_id)
+  end
+
+  def render_errors(email_template)
+    @errors = []
+
+    email_template.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end 
   end
 
 end

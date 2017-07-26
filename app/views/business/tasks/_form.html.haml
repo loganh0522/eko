@@ -1,8 +1,8 @@
 .task-form
   = form_for [:business, @taskable, @task], html: {remote: true} do |f|
-    .form-row-3
+    .form-row-1
       .contain-1
-        = f.text_field :title, id: "task-title", placeholder: 'Enter Task'
+        = f.text_field :title, id: "title_Block", placeholder: 'Enter Task', autocomplete: 'off'
     .form-row-4
       .contain-2
         = f.text_field :due_date, placeholder: "Due Date"
@@ -11,6 +11,23 @@
       .contain-2
         = f.select :kind, options_for_select(["Schedule Interview", "To-do", "Send Assesment", "Finish Assessment"]), :prompt => "Type of Task...", id: "select-kind" 
     = f.text_area :notes, id: "comment-body", placeholder: "Notes"  
+    - if @taskable.class != Application
+      .form-row-2
+        .assign_to_row#candidate_ids_block
+          .assign-user
+            .title Add Candidates
+            = text_field_tag "", "", :class => 'ui-autocomplete-input candidates', :placeholder => 'Type a users name to assign', id: "search-form"
+            %div#search-results
+          .assigned-candidates
+            .title Candidates:     
+      .form-row-2
+        .assign_to_row
+          .assign-user
+            .title Job
+            = text_field_tag "", "", :class => 'ui-autocomplete-input jobs', :placeholder => 'Type a users name to assign', id: "search-form" 
+            %div#search-results
+          .assigned-jobs
+            .title Job: 
     .form-row-2
       .assign_to_row
         .assign-user
@@ -19,12 +36,14 @@
           %div#search-results
         .assigned-users
           .title Assigned Users: 
-
-      = hidden_field_tag :users_ids
+      = f.hidden_field :user_ids, id: "user_ids"
+      = f.hidden_field :candidate_ids, id: "candidate_ids"
+      = hidden_field_tag :job_id, value: '', id: "job_ids"
       = f.hidden_field :user_id, value: current_user.id
       = f.hidden_field :company_id, value: current_company.id
       = f.hidden_field :status, value: "active"
     .comment-area-footer
       = f.submit @task.new_record? ? "+ Create Task" : "Update Task", class: "btn submit-button", id: "submit-comment-btn"
-      - if !@task.new_record? 
-        = link_to "Cancel", "#", remote: true, class: 'btn border-button2', id: 'cancel'
+      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+
+

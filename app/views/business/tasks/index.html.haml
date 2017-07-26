@@ -3,9 +3,34 @@
     %h1 Tasks
   .change-containers-nav
     %ul  
-      %li#open.activated All Tasks
-      %li#closed My Tasks
+      = link_to business_tasks_path, remote: true do 
+        %li.change#open-tasks.activated All Tasks
+      = link_to business_tasks_path(status: 'current_user'), remote: true do 
+        %li.change#closed-tasks My Tasks
 
 #main-container
-  = render 'business/tasks/tasks'
-      
+  #job-applicants
+    .side-container
+      = render 'business/tasks/filters'
+    .main-container#task-container
+      .calendar-nav-actions
+        .actions
+          = link_to "Create Task", new_business_task_path, remote: true, class: "btn border-button2"
+        .change-containers-nav
+          %ul  
+            = link_to business_tasks_path, remote: true do 
+              %li.change#open-tasks.activated Open Tasks
+            = link_to business_tasks_path(status: 'complete'), remote: true do 
+              %li.change#closed-tasks Completed Tasks
+      .task-main-container
+        = render 'business/tasks/tasks'
+
+
+
+
+.modal#basic-form-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title

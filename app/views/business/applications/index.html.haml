@@ -16,6 +16,8 @@
         %li.change#job-tasks Tasks
       = link_to business_job_comments_path(@job), remote: true do 
         %li.change#job-notes Notes
+      = link_to business_job_interviews_path(@job), remote: true do 
+        %li.change#interviews Interviews
       = link_to edit_business_job_path(@job), remote: true do 
         %li.change#job-details Job Details
 

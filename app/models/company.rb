@@ -13,7 +13,9 @@ class Company < ActiveRecord::Base
   has_many :candidates
   has_many :tasks
   has_many :jobs
+  has_many :interviews
   has_many :interview_invitations
+  has_many :rooms
   
   has_one :customer
   has_one :job_board

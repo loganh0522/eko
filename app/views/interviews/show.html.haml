@@ -1,0 +1,16 @@
+.schedule-interview-container
+  .logo
+    %img(src="#{@invitation.company.job_board.job_board_header.logo}")
+  %h3= "Book an #{(@invitation.kind)} "
+  = render 'interviews/form'
+          
+          
+
+  
+      
+.modal#basic-form-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title

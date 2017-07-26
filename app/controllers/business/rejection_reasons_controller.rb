@@ -1,5 +1,5 @@
 class Business::RejectionReasonsController < ApplicationController
-  filter_resource_access
+  # filter_resource_access
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -53,6 +53,7 @@ class Business::RejectionReasonsController < ApplicationController
   end
 
   private
+  
   def rejection_params
     params.require(:rejection_reason).permit(:body, :company_id)
   end

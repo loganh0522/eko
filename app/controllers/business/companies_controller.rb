@@ -1,10 +1,11 @@
 class Business::CompaniesController < ApplicationController
-  filter_access_to :all
-  filter_access_to :filter_candidates, :require => :read
+  # filter_access_to :all
+  # filter_access_to :filter_candidates, :require => :read
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
+  include AuthHelper
 
   def edit 
     @company = current_company
@@ -18,12 +19,15 @@ class Business::CompaniesController < ApplicationController
     @company = current_company
     @company.update(company_params)
     
-    redirect_to :back
+    respond_to do |format|
+      format.js
+    end
   end
 
   def show
     @company = current_company
-    @rejection_reasons = current_company.rejection_reasons
+    @rooms = current_company.rooms
+    @login_url = get_room_login_url
   end
 
   private 

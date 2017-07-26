@@ -1,4 +1,4 @@
 Fabricator(:company) do 
-  name {Faker::Name.name}
+  name "Talentwiz"
   website {Faker::Internet.domain_name}
 end

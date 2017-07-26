@@ -9,9 +9,9 @@
     / = link_to "#{task.taskable.candidate.first_name}'s application", business_job_application_path(task.taskable.application.job.id, task.taskable.application.id), remote: true
   .task-row
     .tags
+      Assigned To: 
       - task.users.each do |user|
         .tag= user.full_name
     .due= " Due: #{task.due_date}"
     .candidate
 
-      

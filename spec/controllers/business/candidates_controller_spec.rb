@@ -2,21 +2,21 @@ require 'spec_helper'
 
 describe Business::CandidatesController do 
   describe "GET index" do 
-    # it_behaves_like "requires sign in" do
-    #   let(:action) {get :index}
-    # end
-
-    # it_behaves_like "user does not belong to company" do 
-    #   let(:action) {get :index}
-    # end
-
-    # it_behaves_like "company has been deactivated" do
-    #   let(:action) {get :index}
-    # end
-
     let(:company) {Fabricate(:company)}
     let(:alice) {Fabricate(:user, company: company, role: "Admin")}
-    
+
+    it_behaves_like "requires sign in" do
+      let(:action) {get :index}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {get :index}
+    end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) {get :index}
+    end
+        
     before do  
       set_current_user(alice)
       set_current_company(company)

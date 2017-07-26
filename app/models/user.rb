@@ -5,10 +5,12 @@ class User < ActiveRecord::Base
 
   #Business User Relationships
 
-  validates_presence_of :first_name, :last_name, :email, :password, :on => [ :create, :update ]
+  validates_presence_of :first_name, :last_name, :email, :password, :on => [ :create ]
+  validates_presence_of :first_name, :last_name, :email, :on => [ :update ]
   validates_uniqueness_of :email, :on => [ :create, :update ]
 
-  after_create :set_full_name
+  before_create :downcase_email, :set_full_name
+
   liquid_methods :first_name, :last_name, :full_name
   
   belongs_to :company
@@ -22,7 +24,8 @@ class User < ActiveRecord::Base
   has_many :interview_invitations, through: :assigned_users, source: :assignable, source_type: "InterviewInvitation"
 
 
-
+  has_many :event_ids
+  
   has_many :application_scorecards
   has_many :invitations
   has_many :messages
@@ -91,9 +94,12 @@ class User < ActiveRecord::Base
       )
   end
 
+  def downcase_email
+    self.email = self.email.downcase
+  end
+
   def set_full_name
-    @full_name = "#{self.first_name.capitalize} #{self.last_name.capitalize}"
-    self.update_attribute(:full_name, @full_name)
+    self.full_name = "#{self.first_name.capitalize} #{self.last_name.capitalize}"
   end
 
   def current_jobs

@@ -3,4 +3,4 @@
   %body
     %p= simple_format(Liquid::Template.parse(@message).render('recipient' => @recipient, 'job' => @job, 'company' => @current_company))
     
-    %p= link_to "Schedule Interview Link", register_with_token_url(@token)
+    %p= link_to "Schedule Interview Link", schedule_interview_url(@token)

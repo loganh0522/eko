@@ -29,7 +29,10 @@ Rails.application.routes.draw do
   resources :demos, only: [:new, :create]
 
   resources :interview_invitations, only: [:show]
-  
+  resources :interviews
+  get 'schedule_interview/:token', to: 'interviews#show', as: 'schedule_interview'
+
+
   resources :job_boards
   resources :jobs do 
     resources :applications, only: [:index, :new, :create]
@@ -75,15 +78,25 @@ Rails.application.routes.draw do
 
   get "/auth/:provider/callback", to: 'business/users#edit'
 
-  get "/authorize", to: 'business/users#show'
-
+  get "/authorize", to: 'business/users#outlook_get_token'
+  get "/authorize_room", to: 'business/rooms#outlook_token'
   namespace :business do 
     root to: "jobs#index" 
     get "hiring_defaults", to: 'rejection_reasons#index'
     resources :activities
     resources :hiring_teams
     resources :interview_invitations
-    
+    resources :rooms
+    resources :tasks
+    resources :rejection_reasons
+    resources :invitations
+    resources :locations 
+    resources :application_emails
+    resources :tags
+    resources :notifications
+    resources :interviews
+    resources :email_templates
+
     resources :companies do 
       resources :tasks
     end
@@ -100,17 +113,6 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :tasks
-    
-    resources :rejection_reasons
-    
-    resources :invitations
-    resources :locations 
-    resources :application_emails
-    resources :tags
-    resources :notifications
-    resources :interviews
-    resources :email_templates
 
     resources :default_stages do 
       collection do
@@ -205,6 +207,7 @@ Rails.application.routes.draw do
       post :publish_job, to: "jobs#publish_job"
       get :promote, to: "jobs#promote"
       
+      resources :interviews
       resources :comments
       resources :activities
       resources :tags
@@ -255,8 +258,8 @@ Rails.application.routes.draw do
   get '/signout', to: 'sessions#destroy'  
   get 'register/:token', to: 'users#new_with_invitation_token', as: 'register_with_token'
   
-  get 'schedule_interview/:token', to: 'interview_invitations#schedule', as: 'schedule_interview'
   
+
   get 'forgot_password', to: 'forgot_passwords#new'
   resources :forgot_passwords, only: [:create]
   get 'forgot_password_confirmation', to: 'forgot_passwords#confirm'
