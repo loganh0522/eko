@@ -10,8 +10,6 @@
             .name= "#{@application.candidate.full_name.capitalize}"
             = render 'business/ratings/form', application: @application
           .current-position
-            / - if @application.candidate.current_jobs.present?
-            /   = "#{@application.candidate.user.current_jobs.first.title}  #{@application.candidate.user.current_jobs.first.company_name} "
           .contact-details
             .glyphicon.glyphicon-earphone 
               = "#{@candidate.phone}"
