@@ -7,10 +7,8 @@ require 'gchart'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-# Bundler.require(*Rails.groups)
-
-Bundler.require(:default, Rails.env)
-
+Bundler.require(*Rails.groups)
+# Bundler.require(:default, Rails.env)
 module Talentwiz
   class Application < Rails::Application
     config.assets.paths << "#{Rails}/vendor/assets/fonts"
