@@ -408,7 +408,7 @@ DEPENDENCIES
   jquery-timepicker-rails
   jquery-ui-rails
   letter_opener
-  liquid-rails (~> 0.1.1)
+  liquid-rails
   microsoft_graph
   mini_magick
   oauth2
