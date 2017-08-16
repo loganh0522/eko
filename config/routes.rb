@@ -50,7 +50,7 @@ Rails.application.routes.draw do
   
   post :incoming_email, to: "inbound_emails#create"
 
-  
+
   post '/api/watch/outlookNotification', to: "inbound_emails#outlook_webhook"
   
   resources :skills 
@@ -268,6 +268,7 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/signout', to: 'sessions#destroy'  
+  
   get 'register/:token', to: 'users#new_with_invitation_token', as: 'register_with_token'
   
   
