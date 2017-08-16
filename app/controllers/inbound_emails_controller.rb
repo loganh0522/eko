@@ -8,7 +8,7 @@ class InboundEmailsController < ApplicationController
 
 
     if @candidate.present? 
-      @message = @candidate.messages.build(body: @msg_body, candidate_id: @candidate.id)
+      @message = @candidate.messages.build(body: @msg_body, candidate_id: @candidate.id).save
     end
 
     head 200
@@ -20,3 +20,5 @@ class InboundEmailsController < ApplicationController
     @token = params[:validationToken]
   end
 end
+
+https://prod-talentwiz.herokuapp.com/incoming_email
