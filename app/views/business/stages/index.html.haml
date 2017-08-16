@@ -1,12 +1,12 @@
 .page-header
-  %h1 Create a Job
+  %h2 Create a Job
 #post-a-job
   .side-container
     = render 'business/shared/post_job' 
   .main-container
-    #stage-header
-      %h4 Add Stages
-      = render "form"  
+    .standard-header
+      %h2 Recruitment Process
+      = link_to 'Add Stage', new_business_job_stage_path(@job), class: "btn border-button2", remote: true
     .create_stages    
       .stage 
         .stage-header
@@ -16,11 +16,12 @@
         .stage-header
           Rejected
 
-.modal
+.modal#basic-form-modal
   .modal-dialog
     .modal-content
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h3.modal-title Edit Stage 
-      .modal-body
-                
+        %h4.modal-title
+
+
+

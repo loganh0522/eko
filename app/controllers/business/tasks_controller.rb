@@ -4,7 +4,7 @@ class Business::TasksController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
-  before_filter :load_taskable, except: [:new, :destroy, :update, :add_note_multiple]
+  before_filter :load_taskable, except: [:new, :destroy, :create_multiple, :completed]
   before_filter :new_taskable, only: [:new]
 
   def index
@@ -13,7 +13,7 @@ class Business::TasksController < ApplicationController
     else
       @tasks = @taskable.open_tasks
     end
-    
+
     respond_to do |format|
       format.js
       format.html
@@ -64,12 +64,11 @@ class Business::TasksController < ApplicationController
 
   def completed
     @task = Task.find(params[:id])
-    
-    if params[:status].present?
-      @task.update_attribute(:status, params[:status])
-      @tasks = @task.taskable.tasks 
-      track_activity @task, "complete"
-    else
+    @task.update_attribute(:status, "complete")
+    track_activity @task, "complete"
+
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -78,6 +77,35 @@ class Business::TasksController < ApplicationController
     @task.destroy
 
     respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_multiple
+    applicant_ids = params[:applicant_ids].split(',')
+    
+    applicant_ids.each do |id| 
+      @candidate = Candidate.find(id)
+      if params[:job_id].present?
+        @job = Job.find(params[:job_id])
+        @application = Application.where(candidate_id: @candidate.id, job: @job.id).first
+        @task = @application.tasks.build(title: params[:title],
+          due_date: params[:due_date], due_time: params[:due_time],
+          kind: params[:kind], notes: params[:notes],
+          user_id: current_user.id, status: params[:status],
+          company_id: current_company.id, user_ids: params[:user_ids])
+      else 
+        @task = @candidate.tasks.build(title: params[:title],
+          due_date: params[:due_date], due_time: params[:due_time],
+          kind: params[:kind], notes: params[:notes],
+          user_id: current_user.id, status: params[:status],
+          company_id: current_company.id, user_ids: params[:user_ids])
+      end
+      @task.save
+    end
+    # track_activity(@comment, "create")
+    
+    respond_to do |format| 
       format.js
     end
   end

@@ -29,19 +29,21 @@ class Business::CandidatesController < ApplicationController
 
   def create 
     @candidate = Candidate.new(candidate_params)
-    if @candidate.save
-      if params[:job_id].present? 
-        @job = Job.find(params[:job_id])
-        Application.create(candidate: @candidate, job_id: @job.id, company_id: current_company)
-        @applications = @job.applications
-      else
-        @candidates = current_company.candidates
+    respond_to do |format|
+      if @candidate.save
+        if params[:job_id].present? 
+          @job = Job.find(params[:job_id])
+          Application.create(candidate: @candidate, job_id: @job.id, company_id: current_company)
+          @applications = @job.applications
+        else
+          @candidates = current_company.candidates
+        end      
+        create_application(@candidate)  
+        add_tags(@candidate)
+      else 
+        render_errors(@candidate)
       end
-      create_application(@candidate)  
-      add_tags(@candidate)
-      respond_to do |format|
-        format.js
-      end
+      format.js
     end
   end
 
@@ -132,6 +134,13 @@ class Business::CandidatesController < ApplicationController
         Application.create(candidate: candidate, job_id: id, company_id: current_company)
       end
     end
+  end
+
+  def render_errors(candidate)
+    @errors = []
+    candidate.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end  
   end
 
   def candidate_params

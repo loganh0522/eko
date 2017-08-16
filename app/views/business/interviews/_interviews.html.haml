@@ -14,5 +14,9 @@
       .actions
         = link_to "Interview Invite", new_business_interview_invitation_path, remote: true, class: "btn border-button2" 
     .interview-main-container
-      - @interviews.each do |interview|
-        = render "business/interviews/interview", interview: interview
+      - if @interview.present? 
+        - @interviews.each do |interview|
+          = render "business/interviews/interview", interview: interview
+      - else 
+        .not-present-container
+          %p There are currently no Interviews scheduled.

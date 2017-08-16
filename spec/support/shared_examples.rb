@@ -19,21 +19,20 @@ shared_examples "user is not a job seeker" do
 end
 
 shared_examples "user does not belong to company" do 
-  let(:alice) {Fabricate(:user, kind: 'business')}
   let(:company) {Fabricate(:company)}
+  let(:alice) {Fabricate(:user, kind: 'business')}
   
   before do 
     set_current_user(alice)
     set_current_company(company)
+    action
   end
 
   it "redirects user" do    
-    action
     expect(response).to redirect_to business_root_path
   end
 
   it "sets the flash message " do 
-    action
     expect(flash[:error]).to be_present   
   end   
 end
@@ -45,15 +44,14 @@ shared_examples "company has been deactivated" do
   before do 
     set_current_user(alice)
     set_current_company(company)
+    action
   end
 
   it "redirects user" do    
-    action
     expect(response).to redirect_to business_customers_path
   end
 
   it "sets the flash message " do 
-    action
     expect(flash[:danger]).to be_present   
   end   
 end

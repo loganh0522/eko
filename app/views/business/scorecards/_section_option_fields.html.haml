@@ -1,5 +1,6 @@
 %fieldset.answers  
-  = f.text_field :body, class: "form-control"
+  = f.text_field :body, class: "form-control", id: "section-option", autocomplete: 'off'
+  %span#optionBodyBlock
   = link_to "", '#', class: "remove_fields glyphicon glyphicon-remove" 
-  = f.hidden_field :_destroy
+  = f.hidden_field :_destroy, id: "destroy_fields"
   

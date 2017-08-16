@@ -21,12 +21,13 @@ class Business::DefaultStagesController < ApplicationController
     @stage = DefaultStage.new(stage_params) 
 
     respond_to do |format| 
-      if @stage.save & @stage.update_attribute(:position, new_stage_position(current_company))
+      if @stage.save && @stage.update_attribute(:position, new_stage_position(current_company))
         @stages = current_company.default_stages.order("position")
+        format.js
       else
         render_errors(@stage)
+        format.js
       end
-      format.js
     end
   end
 
@@ -43,11 +44,12 @@ class Business::DefaultStagesController < ApplicationController
 
     respond_to do |format|
       if @stage.update(stage_params)
-         @stages = current_company.default_stages.order("position")
+        @stages = current_company.default_stages.order("position")
+        format.js
       else
         render_errors(@stage)
-      end
-      format.js
+        format.js
+      end 
     end
   end
 

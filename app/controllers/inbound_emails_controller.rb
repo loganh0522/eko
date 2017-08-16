@@ -1,5 +1,5 @@
 class InboundEmailsController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:create]
+  skip_before_action :verify_authenticity_token, only: [:create, :outlook_webhook]
 
   def create
     @token = params[:recipient].split('-').last.split('@').first
@@ -12,5 +12,11 @@ class InboundEmailsController < ApplicationController
     end
 
     head 200
+  end
+
+
+  def outlook_webhook   
+    head 200, content_type: "text/plain", content_length: 7
+    @token = params[:validationToken]
   end
 end

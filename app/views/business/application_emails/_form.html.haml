@@ -1,12 +1,12 @@
 = form_tag [:business, @application_email], remote: true do 
   .modal-body
-    .email-area      
+    .email-area     
       .subject
         .title Subject
         .sender= text_field_tag :subject, nil, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false
       .email-variables
         Insert:
-        = select_tag "insert-fluid-variable", options_for_select([ "Applicant First Name", "Applicant Last Name", "Applicant Full Name", "Job Title", "Company Name" ] ), :include_blank => true 
+        = select_tag "insert-fluid-variable", options_for_select([ "Applicant First Name", "Applicant Last Name", "Applicant Full Name", "Job Title", "Company Name" ] ), :include_blank => true
       %fieldset
       = text_area_tag :body, " ", :class => "tinymce", id: "message-body", rows: 12, cols: 12, data: {behaviour: 'comment-body'}
       = tinymce_assets        

@@ -4,36 +4,21 @@ class Business::MessagesController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
-  before_filter :load_messageable, except: [:new, :destroy, :update, :multiple_messages]
+  before_filter :load_messageable, except: [:new, :create, :destroy, :update, :multiple_messages]
   before_filter :new_messageable, only: [:new]
+  
   include AuthHelper
   
-  def new
-    @message = Message.new
-    
-    if params[:application_id].present?  
-      @job = Job.find(params[:job_id])
-      @application = Application.find(params[:application_id])
-    elsif params[:client_contact_id].present? 
-      @client = Client.find(params[:client_id])
-      @contact = ClientContact.find(params[:client_contact_id])    
-    else params[:candidate_id].present?
-      @candidate = Candidate.find(params[:candidate_id])
-    end
-
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def index   
+  def index
     if params[:application_id].present?
       @candidate = Application.find(params[:application_id]).candidate
       @messages = @candidate.messages
     else
-      token = current_user.outlook_token.access_token
-      email = current_user.email
-      @messages = OutlookWrapper::Mail.get_messages(token, email)
+      # token = current_user.outlook_token.access_token
+      # email = current_user.email
+      # @messages = OutlookWrapper::Mail.get_messages(token, email)
+      @messages = OutlookWrapper::User.create_subscription(current_user) 
+      @messages = current_user.messages
     end
 
     respond_to do |format| 
@@ -42,24 +27,32 @@ class Business::MessagesController < ApplicationController
     end
   end
 
+  def new
+    @message = Message.new  
+
+    respond_to do |format|
+      format.js
+    end
+  end
 
   def create 
-    @message = @messageable.messages.build(user_id: current_user.id, body: params[:body], subject: params[:message][:subject])      
-    candidate_email(@messageable)
-    @token = @messageable.token  
-
-    if params[:job_id].present? 
-      send_email(@token, @message, @job, @email, current_company)
-    else
-      send_email(@token, @message, 'job', @email, current_company)
-    end
-
-    if @message.save 
-      track_activity(@message) 
-      @messages = @messageable.messages
-      respond_to do |format| 
-        format.js 
+    @candidate = Candidate.find(params[:candidate_id])
+    @message = @candidate.messages.build(message_params)        
+    respond_to do |format| 
+      if @message.save 
+        track_activity(@message) 
+        @token = @candidate.token  
+        
+        if params[:job_id].present? 
+          send_email(@token, @message, @job, @candidate, current_company)
+        else
+          send_email(@token, @message, 'job', @candidate, current_company)
+        end
+        @messages = @candidate.messages
+      else
+        render_errors(@message)
       end
+      format.js 
     end
   end
 
@@ -94,17 +87,24 @@ class Business::MessagesController < ApplicationController
   private
 
   def load_messageable
-    if request.path.split('/')[-3..-1][1] == "business"
-      @messageable = current_user
-    else
-      resource, id = request.path.split('/')[-3..-1]
-      @messageable = resource.singularize.classify.constantize.find(id)
-    end
+    resource, id = request.path.split('/')[-3..-1]
+    @messageable = resource.singularize.classify.constantize.find(id)
   end
 
   def new_messageable
     resource, id = request.path.split('/')[-4..-2]
     @messageable = resource.singularize.classify.constantize.find(id)
+  end
+
+  def message_params 
+    params.require(:message).permit(:body, :subject, :user_id, :candidate_id)
+  end
+
+  def render_errors(message)
+    @errors = []
+    message.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end  
   end
 
   def candidate_email(candidate)

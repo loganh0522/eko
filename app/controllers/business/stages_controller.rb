@@ -28,10 +28,10 @@ class Business::StagesController < ApplicationController
     @job = Job.find(params[:job_id])  
     
     respond_to do |format| 
-      if @stage.save & @stage.update_attribute(:position, new_stage_position(@job))
+      if @stage.save && @stage.update_attribute(:position, new_stage_position(@job))
         @stages = @job.stages.order("position")
       else
-        render :new
+        render_errors(@stage)
       end
       format.js
     end
@@ -50,8 +50,8 @@ class Business::StagesController < ApplicationController
       if @stage.update(stage_params)
         format.js
       else
-        format.json { render json: @stage.errors.full_messages,
-                                   status: :unprocessable_entity }
+        render_errors(@stage)
+        format.js
       end
     end
   end
@@ -72,30 +72,12 @@ class Business::StagesController < ApplicationController
 
   def sort
     @job = Job.find(params[:job_id])
+
     params[:stage].each_with_index do |id, index|
       Stage.update(id, {position: index + 1})
     end
+
     render nothing: true
-  end
-
-  def update_multiple
-    applicant_ids = params[:applicant_ids].split(',')
-    
-    applicant_ids.each do |id| 
-      @application = Application.find(id)
-      @job = @application.apps
-      
-      if params[:stages] == "Rejected"
-        @application.update_attribute(:rejected, true)
-      else
-        @application.update_attribute(:stage_id, params[:stages])  
-      end    
-    end
-
-    # track_activity(@application, "move_stage")
-    respond_to do |format|
-      format.js
-    end
   end
 
 
@@ -107,5 +89,13 @@ class Business::StagesController < ApplicationController
 
   def new_stage_position(job)
     job.stages.count
+  end
+
+  def render_errors(stage)
+    @errors = []
+
+    stage.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end  
   end
 end

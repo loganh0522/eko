@@ -1,14 +1,11 @@
 .fieldset.add-work-experience
   .row
     .col-md-6
-      = f.text_field :title, class: "form-control", placeholder: "Job Title", hide_label: true
+      = f.text_field :title, id: "title_Block", class: "form-control", placeholder: "Job Title", hide_label: true
+      %span#title_msgBlock
     .col-md-6
-      = f.text_field :company_name, class: "form-control", placeholder: "Company Name", hide_label: true
-  .row
-    .col-md-6
-      = f.collection_select(:industry_ids, Industry.all, :id, :name, hide_label: true, prompt: "Select Industry")
-    .col-md-6
-      = f.collection_select(:function_ids, Function.all, :id, :name, hide_label: true, prompt: "Select Job Function")
+      = f.text_field :company_name, id: "company_name_Block", class: "form-control", placeholder: "Company Name", hide_label: true
+      %span#company_name_msgBlock
   .row
     .col-md-3.col-xs-6.col-sm-6
       = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"

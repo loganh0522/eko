@@ -1,2 +1,21 @@
-= form_for [:business, @job, @questionairre, @question], remote: true do |f|
-  = render "question_fields", f: f
+= form_for [:business, @job, @question], remote: true do |f|
+  .question-area 
+    .fieldset      
+      .answer-type
+        .title Question Type:
+        = f.select :kind, ['Text', 'Paragraph', 'Checkbox', 'Multiple Choice'],{}, {:class => 'question-type'}
+        .required-answer
+          = f.check_box :required, checked_value: 1, unchecked_value: 0
+          = f.label :required, "Required"       
+      = f.text_field :body, id: "body_Block", class: "form-control question", placeholder: "Add your Question", autocomplete: 'off'
+      %span#body_msgBlock
+      = f.hidden_field :_destroy
+      = f.hidden_field :job_id, value: @job.id
+    
+    = f.fields_for :question_options, class: "options" do |a|
+      = render 'question_option_fields', f: a
+    = link_to_add_fields("+ Add Answer", f, :question_options)
+
+    .footer
+      = f.submit @question.new_record? ? "Create" : "Update", class: "btn submit-button"
+      = link_to "Cancel", '#', class: "remove_form btn border-button2"

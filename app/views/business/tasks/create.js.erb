@@ -1,11 +1,11 @@
-<% if @taskable.class == Application && !@errors.present? %> 
-  $(".side-section").find('.tasks').html('<%= j render "business/tasks/application_tasks", tasks: @tasks %>');
-  $('#basic-form-modal').modal("toggle");
-<% elsif @errors.present? %> 
+<% if @errors.present? %> 
   <% @errors.each do |error| %>
     $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
     $('#<%= error[0] %>_Block').addClass('has-error');
   <% end %>
+<% elsif @taskable.class == Application %> 
+  $(".side-section").find('.candidate-tasks').html('<%= j render "business/tasks/application_tasks", tasks: @tasks %>');
+  $('#basic-form-modal').modal("toggle");
 <% else %> 
   $('.task-main-container').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
   $('#basic-form-modal').modal("toggle");

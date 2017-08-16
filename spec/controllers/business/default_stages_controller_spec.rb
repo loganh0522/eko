@@ -11,7 +11,7 @@ describe Business::DefaultStagesController do
     end
 
     it_behaves_like "user does not belong to company" do 
-      let(:action) {get :index }
+      let(:action) {get :index}
     end
 
     it_behaves_like "company has been deactivated" do
@@ -82,6 +82,10 @@ describe Business::DefaultStagesController do
       let(:action) {xhr :post, :create}
     end
 
+    it_behaves_like "company has been deactivated" do
+      let(:action) {xhr :post, :create}
+    end
+
     context "with valid inputs" do
       before do  
         set_current_user(alice)
@@ -97,12 +101,12 @@ describe Business::DefaultStagesController do
         expect(response).to render_template :create
       end
 
-      it "associates the email template for current company" do 
+      it "associates the default stage for current company" do 
         expect(company.default_stages.count).to eq(7)
       end
     end
 
-    context "creates invalid inputs" do     
+    context "create with invalid inputs" do     
       before do  
         set_current_user(alice)
         set_current_company(company)

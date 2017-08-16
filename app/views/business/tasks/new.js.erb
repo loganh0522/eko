@@ -1,9 +1,3 @@
-// $('.action-area').html('<%= j render "business/tasks/form" %>');
-// $('.application-actions').find('.active-button').addClass('inactive-button');
-// $('.application-actions').find('.active-button').removeClass('active-button');
-// $('.application-actions').find('#add-task').addClass('active-button');
-// $('.application-actions').find('#add-task').removeClass('inactive-button');
-
 $('#basic-form-modal').find('form').remove()
 $('#basic-form-modal').find('.modal-title').html('<%= j "Add Task" %>');
 $('#basic-form-modal').find('.modal-header').after('<%= j render "business/tasks/form" %>');

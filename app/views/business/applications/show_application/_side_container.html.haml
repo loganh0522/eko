@@ -6,10 +6,13 @@
     = link_to "+ Add Tag", new_business_candidate_tag_path(@candidate), remote: true, id: 'add_tag'
 
 .side-section
-  %h4 Tasks 
-  = link_to 'Open Tasks', business_application_tasks_path(@application), remote: true
-  = link_to 'Completed Tasks', business_application_tasks_path(@application, status: 'complete'), remote: true
-  .tasks 
+  .change-containers-nav
+    %ul 
+      = link_to business_application_tasks_path(@application), remote: true do
+        %li.change#open-tasks.activated  Open Tasks
+      = link_to business_application_tasks_path(@application, status: 'complete'), remote: true do 
+        %li.change#completed-tasks Completed Tasks
+  .candidate-tasks
     = render 'business/tasks/application_tasks'
 
 

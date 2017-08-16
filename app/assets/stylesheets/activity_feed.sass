@@ -127,41 +127,9 @@
           .submit-button
             float: right
 
-#interview
-  width: 100%
-  background: white
-  border-radius: 1px
-  margin-bottom: 30px
-  display: block
-  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-  position: relative
-  overflow: hidden
-  .date
-    width: 10%
-    text-align: center
-    padding: 15px
-    float: left
-    border-right: 1px solid rgba(0,0,0,0.1)
-    .event-day  
-      font-size: 20px
-    .event-month
-      font-size: 16px
-  .body
-    padding: 30px 30px 0 10px
-    float: left
-    width: 80%
-    .time
-      float: left
-      width: auto
-      margin-right: 15px
-    .title
-      float: left
-      width: auto
-    .body
-
 
 .tasks
-  margin-top: 65px
+  margin-top: 50px
   .task
     width: 100%
     background: white
@@ -180,10 +148,11 @@
     .body
       overflow: hidden
       padding: 10px 10px
-      .title
+      .details
         float: left
-        margin: 10px 0 0 10px
-        font-weight: 400
+        margin: 0px 0 0 10px
+        .title
+          font-weight: 600
       .glyphicon
         float: left
         width: 35px
@@ -196,17 +165,22 @@
         &:hover
           border-color: green
           color: green
-    .task-row
-      border-top: 1px solid rgba(0,0,0,0.1)
-      overflow: hidden
-      padding: 5px 10px
+  .task-row
+    border-top: 1px solid rgba(0,0,0,0.1)
+    overflow: hidden
+    padding: 5px 10px
+    .detail
+      float: left
+      margin-right: 15px
+      .assigned
+        float: left
+        padding: 5px 5px
+        margin-right: 10px
       .tag 
         float: left
         padding: 5px 5px
-        border: 1px solid rgba(0,0,0,0.1)
-      .due
-        float: right
-        width: auto
+        border: 1px solid #EF7B2B
+      
 
 .comments
   .comment

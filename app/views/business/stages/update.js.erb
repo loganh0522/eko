@@ -1,2 +1,9 @@
-$('.modal').modal('toggle');
-$('#stage_<%= @stage.id %>').replaceWith('<%= j render (@stage) %>');
+<% if @errors.present? %>
+  <% @errors.each do |error| %>
+    $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+    $(".modal-body").find('#<%= error[0] %>_Block').addClass('has-error');
+  <% end %>
+<% else %>
+  $('.modal').modal('toggle');
+  $('#stage_<%= @stage.id %>').replaceWith('<%= j render (@stage) %>');
+<% end %>

@@ -1,10 +1,17 @@
-= bootstrap_form_for [:business, @user], remote: true do |f|
+= form_for [:business, @user], remote: true do |f|
   .modal-body
-    %fieldset
-      = f.text_field :first_name, placeholder: "First Name"
-      = f.text_field :last_name, placeholder: "Last Name"
-      = f.email_field :email, placeholder: "Email Address"
-      = f.text_field :phone, placeholder: "Phone"
+    .form-row
+      .contain-50
+        = f.text_field :first_name, id: "first_name_Block", class: "form-control", placeholder: "First Name"
+        %span#first_name_msgBlock
+      .contain-50
+        = f.text_field :last_name, id: "last_name_Block", class: "form-control", placeholder: "Last Name"
+        %span#last_name_msgBlock
+      .contain-50
+        = f.text_field :email, id: "email_Block", class: "form-control", placeholder: "E-mail"
+        %span#email_msgBlock
+      .contain-50
+        = f.text_field :phone, class: "form-control", hide_label: true, placeholder: "Phone"
   .modal-footer
     %fieldset
       = f.submit "Update", class: "btn submit-button"

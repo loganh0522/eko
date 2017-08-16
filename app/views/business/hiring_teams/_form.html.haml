@@ -1,7 +1,11 @@
-= form_for [:business, @job, @hiring_team], html: {remote: true}  do |f|         
-  %fieldset
-    = f.text_field :user_tokens, :class => 'ui-autocomplete-input form-control', :placeholder => 'Type a team members name', id: "team_members"    
-    = f.hidden_field :user_id
-    = f.hidden_field :job_id, value: @job.id
-    = f.submit "+ Add Member", class: "submit btn btn-primary"
-  %div#team-members-results
+#add-user-form
+  = form_for [:business, @job, @hiring_team], html: {remote: true}  do |f|         
+    .modal-body
+      = text_field_tag :user, nil, :class => 'ui-autocomplete-input users', :placeholder => 'Type a team members name', id: "job-team-search"   
+      %div#search-results
+      .users
+    .modal-footer
+      = hidden_field_tag :user_ids, :user_ids
+      = f.hidden_field :job_id, value: @job.id
+      = f.submit "Add Teammates", class: "btn submit-button"
+      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel  

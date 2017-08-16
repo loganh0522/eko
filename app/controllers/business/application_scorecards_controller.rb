@@ -10,18 +10,15 @@ class Business::ApplicationScorecardsController < ApplicationController
       @candidate = Candidate.find(params[:candidate_id])
       @application = @candidate.applications.first
       @scorecard = Scorecard.where(job_id: params[:job_id]).first
-      @application_scorecard = ApplicationScorecard.new
       @sections = @scorecard.scorecard_sections
       @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
-
       @job = Job.find(params[:job_id])
     else
-      @application = Application.find(params[:application_id])
-      @scorecard = Scorecard.where(job_id: params[:job_id]).first
-      @application_scorecard = ApplicationScorecard.new
-      @sections = @scorecard.scorecard_sections
-      @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
       @job = Job.find(params[:job_id])
+      @application = Application.find(params[:application_id])
+      @scorecard = @job.scorecard
+      @sections = @scorecard.scorecard_sections if @scorecard.present?
+      @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
       @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first 
     end
     
@@ -49,12 +46,14 @@ class Business::ApplicationScorecardsController < ApplicationController
     @scorecard = Scorecard.where(job_id: params[:job_id]).first
     @activities = current_company.activities.where(application_id: @application.id).order('created_at DESC')
     @sections = @scorecard.scorecard_sections
-    @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
+    @application_scorecards = ApplicationScorecard.where(application_id: @application.id) 
+   
     respond_to do |format|
       if @application_scorecard.save(application_scorecard_params)
+        @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first 
         track_activity @application_scorecard
       else
-        redirect_to business_job_application_path(@job.id, @application.id), {:data => {:toggle => "modal", :target => "#edit_scorecardModal"}}
+        
       end
       format.js
     end
@@ -66,6 +65,7 @@ class Business::ApplicationScorecardsController < ApplicationController
     @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first   
     @scorecard = Scorecard.where(job_id: params[:job_id]).first
     @sections = @scorecard.scorecard_sections
+    
 
     respond_to do |format| 
       format.js
@@ -80,7 +80,7 @@ class Business::ApplicationScorecardsController < ApplicationController
     @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
     @job = Job.find(params[:job_id])
 
-
+    @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first 
     respond_to do |format|
       if @application_scorecard.update(application_scorecard_params)
         track_activity @application_scorecard

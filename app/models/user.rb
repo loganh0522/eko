@@ -9,9 +9,10 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :email, :on => [ :update ]
   validates_uniqueness_of :email, :on => [ :create, :update ]
 
+  validates_presence_of :password, :confirmation, :on => [:update_password]
   before_create :downcase_email, :set_full_name
 
-  # liquid_methods :first_name, :last_name, :full_name
+  liquid_methods :first_name, :last_name, :full_name
   
   belongs_to :company
 
@@ -22,7 +23,6 @@ class User < ActiveRecord::Base
   has_many :tasks, through: :assigned_users, source: :assignable, source_type: "Task"
   has_many :interviews, through: :assigned_users, source: :assignable, source_type: "Interview"
   has_many :interview_invitations, through: :assigned_users, source: :assignable, source_type: "InterviewInvitation"
-
 
   has_many :event_ids
   

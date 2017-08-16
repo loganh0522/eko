@@ -1,13 +1,21 @@
 .question-area 
-  .fieldset.questions 
-    .question-header
-      .section-title= "#{@scorecard.scorecard_sections.first.body}"   
-      = link_to "Remove", '#', class: "remove_question"
-    = f.text_field :body, class: "form-control questions", placeholder: "Scorecard Section Name"
+  .header
+    = f.text_field :body, class: "form-control section-title questions", placeholder: "Section Name", id: "section-body", autocomplete: 'off'
+    %span#sectionBodyBlock
+    = link_to "Remove", '#', class: "remove_question"
     = f.hidden_field :_destroy
-  
-  %p Criteria 
-  = f.fields_for :section_options, class: "options" do |a|
-    = render 'section_option_fields', f: a
-  
-  = link_to_add_fields("+ Add Criteria", f, :section_options)
+  .body
+    Criteria
+    = f.fields_for :section_options, class: "options" do |a|
+      = render 'section_option_fields', f: a
+    - if !@job.scorecard.present?
+      = f.fields_for :section_options, SectionOption.new do |a|
+        %fieldset.answers  
+          = a.text_field :body, class: "form-control", id: "section-option", autocomplete: 'off'
+          %span#optionBodyBlock
+          = link_to "", '#', class: "remove_fields glyphicon glyphicon-remove" 
+          = a.hidden_field :_destroy
+    = link_to_add_fields("+ Add Criteria", f, :section_options)
+    
+    
+

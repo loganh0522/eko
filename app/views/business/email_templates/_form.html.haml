@@ -1,15 +1,16 @@
 = form_for [:business, @email_template], html: {remote: true, class: 'invite'} do |f|
-  .email-template-area
-    .subject
-      .sender= f.text_field :title, placeholder: "Title", id: "message-subject"
-    .subject
-      .sender= f.text_field :subject, id: "message-subject", placeholder: "Subject"
-    .email-variables
-      Insert:
-      = select_tag "insert-fluid-variable", options_for_select([ "Applicant First Name", "Applicant Last Name", "Applicant Full Name", "Job Title", "Company Name" ] ), :include_blank => true, id: "insert-fluid-variable"
-    = f.text_area :body, :class => "tinymce", id: "message-body", rows: 7, cols: 12
-    = tinymce_assets        
-    = tinymce :alternate
+  .modal-body
+    .email-template-area
+      .subject
+        .sender= f.text_field :title, placeholder: "Title", id: "message-subject"
+      .subject
+        .sender= f.text_field :subject, id: "message-subject", placeholder: "Subject"
+      .email-variables
+        Insert:
+        = select_tag "insert-fluid-variable", options_for_select([ "Applicant First Name", "Applicant Last Name", "Applicant Full Name", "Job Title", "Company Name" ] ), :include_blank => true, id: "insert-fluid-variable"
+      = f.text_area :body, :class => "tinymce", id: "message-body", rows: 7, cols: 12
+      = tinymce_assets        
+      = tinymce :alternate
   .modal-footer
     %fieldset
       = f.hidden_field :user_id, value: current_user.id

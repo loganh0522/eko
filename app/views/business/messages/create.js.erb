@@ -1,10 +1,15 @@
-$('#message-subject').val('');
-$('#message-body').val('');
-tinyMCE.activeEditor.setContent('')
-
-<% if params[:client_contact_id].present? %>
-  $('.messages-container').find('.activity-feed').html('<%= j render "business/messages/applicant_messages", application: @recipient %>');
-  $('.activity-container').find('.activity-feed').html('<%= j render "business/activities/application_activity", application: @application %>');
+<% if @errors.present? %> 
+  <% @errors.each do |error| %> 
+    <% if error[0] == "body" %>  
+      $('.mce-edit-area').addClass('has-error')
+    <% else %>
+      $('.<%= error[0] %>_Block').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+      $('.<%= error[0] %>_Block').addClass('has-error');
+    <% end %>
+  <% end %>
 <% else %>
-  $('.applicant-profile').html('<%= j render "business/messages/applicant_messages", application: @application %>');
-<% end %>
+  $('#basic-form-modal').modal("toggle");
+<% end %> 
+
+
+

@@ -1,6 +1,7 @@
 .room{:id => "room_{room.id}"}
   .title= room.name
   .content= room.email
+  
   - if room.outlook_token.present? 
     .action Synced with Outlook
   - else

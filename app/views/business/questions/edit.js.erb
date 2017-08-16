@@ -1,2 +1,8 @@
-$('.job_scorecard').append('<%= j render "business/questions/form" %>');
-$('#question_<%= @question.id %>').hide();
+<% if @question.kind == "Checkbox" ||  @question.kind == "Multiple Choice" %>
+  $('#question_<%= @question.id %>').after('<%= j render "business/questions/form" %>');
+  $('#question_<%= @question.id %>').hide();
+  $('.add_fields').show()
+<% else %>
+  $('#question_<%= @question.id %>').after('<%= j render "business/questions/form" %>');
+  $('#question_<%= @question.id %>').hide();
+<% end %>

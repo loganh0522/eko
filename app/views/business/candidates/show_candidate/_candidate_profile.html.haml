@@ -6,6 +6,5 @@
       = f.file_field :name, id: "add-resume"
       = f.hidden_field :candidate_id, value: @candidate.id
       = f.submit "Add Resume", id: "submit-resume"
-
   = render 'business/shared_manual_candidate/work_experience'
   = render 'business/shared_manual_candidate/education'

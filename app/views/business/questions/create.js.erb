@@ -1,2 +1,29 @@
-$('form').remove();
-$('.body').html('<%= j render "business/questions/questions", questions: @questions %>');
+<% if @errors.present? %> 
+  
+  <% @errors.each do |error| %>
+    <% if error[0] == "question_options.body" %>   
+      $('.question-area').find('.answers').find('#question_options').each(function(){
+        if ($(this).val().length === 0) {
+          if ($(this).hasClass('has-error')){
+            return
+          }
+          else {
+            $(this).addClass('has-error');
+            $(this).next('#questionBodyBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+          }
+        }
+        else if ($(this).val().length > 0 ){
+          $(this).removeClass('has-error');
+          $(this).next('#questionBodyBlock').hide();
+        }
+      });
+    <% else %>
+      $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+      $('form').find('#<%= error[0] %>_Block').addClass('has-error');
+    <% end %>
+  <% end %>
+
+<% else %>
+  $('form').remove();
+  $('#create-application-form').html('<%= j render "business/questions/questions", questions: @questions %>');
+<% end %>

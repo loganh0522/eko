@@ -1,6 +1,6 @@
 class Business::ApplicationsController < ApplicationController
-  filter_access_to :all
-  filter_access_to [:filter_applicants, :application_form], :require => :read
+  # filter_access_to :all
+  # filter_access_to [:filter_applicants, :application_form], :require => :read
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -43,6 +43,7 @@ class Business::ApplicationsController < ApplicationController
     @candidate = @application.candidate
     @resume = Resume.new
     @tasks = @application.open_tasks
+    
     if @candidate.manually_created == true 
       @applicant = @candidate
     else
@@ -92,17 +93,36 @@ class Business::ApplicationsController < ApplicationController
     end
   end
 
+  def move_stage
+    applicant_ids = params[:applicant_ids].split(',')
+    
+    applicant_ids.each do |id| 
+      @job = Job.find(params[:job])
+      @application = @job.applications.where(candidate_id: id).first
+      
+      if params[:stages] == "Rejected"
+        @application.update_attribute(:rejected, true)
+      else
+        @application.update_attribute(:stage_id, params[:stages])  
+      end    
+    end
+
+    @applications = @job.applications
+    # track_activity(@application, "move_stage")
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def application_form
     if params[:candidate_id].present?
       @candidate = Candidate.find(params[:candidate_id])
       @application = @candidate.applications.first
-      @questionairre = @application.job.questionairre
-      @questions = @questionairre.questions
+      @questions = @job.questions
     else
       @application = Application.find(params[:application_id])
       @job = Job.find(params[:job_id])
-      @questionairre = @application.job.questionairre
-      @questions = @questionairre.questions
+      @questions = @job.questions
     end
 
     respond_to do |format| 
@@ -112,13 +132,10 @@ class Business::ApplicationsController < ApplicationController
 
   def change_stage 
     @app = Application.find(params[:application])
+    @job = @app.job
     @stage = Stage.find(params[:stage])
     @app.update_attribute(:stage, @stage)
-    @applications = @app.apps.applications
-
-    @tag = Tag.new
-    tags_present(@applications) 
-    @job = @app.apps
+    @applications = @job.applications
 
     respond_to do |format|
       format.js

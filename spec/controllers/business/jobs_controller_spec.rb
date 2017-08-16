@@ -7,15 +7,7 @@ describe Business::JobsController do
     let(:alice) {Fabricate(:user, company: company, role: "Admin")}
     let(:bob) {Fabricate(:user, company: company, role: "Hiring Manager")} 
     let(:job) {Fabricate(:job, company: company, user_ids: alice.id)}
-
-    before do 
-      set_current_user(alice)
-      set_current_company(company)
-      job_board
-      job
-      get :index
-    end
-
+    
     it_behaves_like "requires sign in" do
       let(:action) {get :index}
     end
@@ -26,6 +18,14 @@ describe Business::JobsController do
 
     it_behaves_like "company has been deactivated" do
       let(:action) {get :index}
+    end
+
+    before do 
+      set_current_user(alice)
+      set_current_company(company)
+      job_board
+      job
+      get :index
     end
 
     context "when user belongs to current_company" do
@@ -102,10 +102,6 @@ describe Business::JobsController do
       
       it "creates the job posting" do
         expect(Job.count).to eq(1)
-      end
-
-      it "creates a questionairre associated to the Job posting" do 
-        expect(Questionairre.count).to eq(1)
       end
 
       it "creates a scorecard associated to the Job posting" do 

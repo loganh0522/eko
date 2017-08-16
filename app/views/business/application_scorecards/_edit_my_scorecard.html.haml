@@ -1,30 +1,4 @@
 = form_for [:business, @job, @application, @current_user_scorecard], html: {remote: true} do |f|
-  / = f.fields_for :overall_ratings do |k|
-  /   %table.table
-  /     %thead
-  /       %tr
-  /         %th Overall Rating
-  /       %tr
-  /         %label 
-  /           %td Recommened
-  /           %td
-  /             = k.radio_button :rating, 1 
-  /       %tr              
-  /         %label
-  /           %td Looks Good
-  /           %td
-  /             = k.radio_button :rating, 2 
-  /       %tr              
-  /         %label
-  /           %td Not Great 
-  /           %td
-  /             = k.radio_button :rating, 3 
-  /       %tr             
-  /         %label 
-  /           %td Do not Recommend 
-  /           %td
-  /             = k.radio_button :rating, 4
-
   - @sections.each do |section|
     %table.table
       %thead

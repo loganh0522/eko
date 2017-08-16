@@ -1,0 +1,22 @@
+<% if @errors.present? %> 
+  <% @errors.each do |error| %>
+    <% if error[0] == "scorecard_sections.body" %>   
+      $('.question-area').find('#section-body').each(function(){
+        if ($(this).val().length === 0) {
+          $(this).addClass('has-error');
+        }  
+      });
+    <% elsif error[0] == "scorecard_sections.section_options.body" %> 
+      $('.question-area').find('.answers').find('#section-option').each(function(){
+        if ($(this).val().length === 0) {
+          $(this).addClass('has-error');
+        }  
+      });
+    <% else %>
+      $('#<%= error[0] %>_Block').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+      $('form').find('#<%= error[0] %>_Block').addClass('has-error');
+    <% end %>
+  <% end %>
+<% else %>
+  $('.job_scorecard').html('<%= j render "business/scorecards/scorecard" %>');
+<% end %>

@@ -1,28 +1,43 @@
 jQuery ->
-  $('.job_scorecard').on 'click', '.remove_fields', (event) ->
-    $(this).nextAll('input[type=hidden]').val('1')
+  $('.main-container').on 'click', '.remove_fields', (event) ->
+    $(this).next('input[type=hidden]').val('1')
     $(this).closest('fieldset').hide()
     event.preventDefault()
 
   $('.job_scorecard').on 'click', '.remove_question', (event) ->
     $(this).nextAll('input[type=hidden]').val('1')
     $(this).closest('fieldset').hide()
-    $(this).parent().nextUntil('.questions').find('input[type=hidden]').val('1')
+    $(this).parent().nextUntil('.questions').find('#destroy_fields').val('1')
     $(this).parent().closest('.question-area').hide()
     event.preventDefault()
+  
+  $('.main-container').on 'click', '.remove_form', (event) ->
+    if $(this).closest('form').attr('class') == 'edit_question'
+      qid = $(this).closest('form').attr('id').slice(5)
+      $("#" + "#{qid}").show()
+      $(this).closest('form').remove()
+    else if $(this).closest('form').attr('class') == 'edit_scorecard'
+      qid = $(this).closest('form').attr('id').slice(5)
+      $("#" + "#{qid}").show()
+      $(this).closest('form').remove()
+    else
+      $(this).closest('form').remove()
+    return
+    event.preventDefault()
 
-  $('.job_scorecard').on 'click', '.add_fields', (event) ->
+  $('.main-container').on 'click', '.add_fields', (event) ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
     $(this).before($(this).data('fields').replace(regexp, time))
     event.preventDefault()
 
-
-  $('.job_scorecard').on 'change', '.answer-type', (event) -> 
+  $('.main-container').on 'change', '.answer-type', (event) -> 
     val = $(this).find('.question-type').val()
     if val == "Checkbox" || val == "Multiple Choice"  
       time = new Date().getTime()
       regexp = new RegExp($(this).data('id'), 'g')
+      
+      $(this).parent().after($(this).parent().next().data('fields'))
       $(this).parent().after($(this).parent().next().data('fields'))
       $(this).parent().nextAll('.answers').show()
       $(this).parent().nextAll('.answers').find('input[type=hidden]').val('0')

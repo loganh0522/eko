@@ -1,14 +1,13 @@
 .page-header
-  %h1 Create a Job
+  %h2 Create a Job
 #post-a-job
   .side-container
     = render 'business/shared/post_job'
   .main-container 
-    #stage-header
-      %h4 Add Team Members
-      .form= render "business/hiring_teams/form"  
-    .invitation
-      = link_to "+ Invite New User", new_business_invitation_path(job: @job), remote: true
+    .standard-header
+      %h2 Team Members
+      = link_to "+ Invite New User", new_business_invitation_path(job: @job), class: 'btn border-button2', remote: true
+      = link_to "Add Team Member", new_business_hiring_team_path(job: @job), class: 'btn border-button2', remote: true
     .user-list
       = render "hiring_team"
 

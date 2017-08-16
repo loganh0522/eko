@@ -1,2 +1,6 @@
-- @interview_invitations.each do |interview|
-  = render "business/interview_invitations/invitations", interview: interview
+- if @interview_invitations.present?
+  - @interview_invitations.each do |interview|
+    = render "business/interview_invitations/invitations", interview: interview
+- else 
+  .not-present-container
+    %p There are currently no pending Interview Invitations.

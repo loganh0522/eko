@@ -3,15 +3,46 @@ module OutlookWrapper
     def self.get_user_email(outlook_token)
       callback = Proc.new { |r| r.headers['Authorization'] = "Bearer #{outlook_token.access_token}"}
 
-      graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v2.0',
-                                 &callback)
+      graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0',
+                                cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
+                                &callback)
 
       me = graph.me
       
       email = me.user_principal_name
-      room = Room.where(email: email).first
 
+      room = Room.where(email: email).first
       outlook_token.update_attributes(room_id: room.id)
+    end
+
+
+    def self.create_subscription(user)
+      if user.outlook_token.expired?
+        user.outlook_token.refresh!(user)
+      end
+     
+      callback = Proc.new do |r| 
+        r.headers['Authorization'] = "Bearer #{user.outlook_token.access_token}"
+        r.headers['Content-Type'] = 'application/json'
+        r.headers['X-AnchorMailbox'] = user.email
+      end
+
+      path = 'subscriptions'
+      
+      data = {
+        changeType: "created, updated",
+        notificationUrl: "https://d2a80095.ngrok.io/api/watch/outlookNotification",
+        resource: "me/mailFolders('Inbox')/messages",
+        expirationDateTime:"2017-08-05T06:23:45.9356913Z",
+        clientState: "subscription-identifier"
+      }
+      
+      graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/beta',
+                                cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
+                                &callback)
+
+      
+      response = graph.service.post(path, data.to_json)
     end
   end
 
@@ -145,41 +176,90 @@ module OutlookWrapper
                                 cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                 &callback)
 
-      graph.service.patch(path, data.to_json)
+      graph.service.patch(path, data.to_json) 
+    end
 
+    def self.find_meeting_times(user)
+      if user.outlook_token.expired?
+        user.outlook_token.refresh!(user)
+      end
+      
+      callback = Proc.new do |r| 
+        r.headers['Authorization'] = "Bearer #{user.outlook_token.access_token}"
+        r.headers['Content-Type'] = 'application/json'
+        r.headers['X-AnchorMailbox'] = user.email
+      end
 
-      # @create = graph.me.send_mail(
-      #   "message" => {
-      #     "subject" => "TalentWiz Test", 
-      #     "body" => {
-      #       "content_type" => "Text", 
-      #       "content" => "This is clearly working now"
-      #     }, 
-      #     "to_recipients" => [
-      #       {
-      #         "email_address" => {
-      #           "address" => "houston@talentwiz.ca"
-      #         }
-      #       }
-      #     ]
-      #   })
-
-      # @create = graph.me.messages.create(
-      #   {
-      #     "subject" => "TalentWiz Test", 
-      #     "body" => {
-      #       "content_type" => "Text", 
-      #       "content" => "This is clearly working now"
-      #     }, 
-      #     "to_recipients" => [
-      #       {
-      #         "email_address" => {
-      #           "address" => "houston@talentwiz.ca"
-      #         }
-      #       }
-      #     ]
-      #   })
-            
+      path = 'me/findMeetingTimes'
+      
+      data = { 
+        isOrganizerOptional: "true",
+        attendees:[
+          { 
+            type: "required",  
+            emailAddress: { 
+              name: "Logan Houston",
+              address: "talentwiz@outlook.com" 
+            } 
+          }],  
+        timeConstraint: {
+          activityDomain: "work",
+          timeslots:[  
+            { 
+              start: { 
+                dateTime: "2017-08-04T09:00:00",  
+                timeZone: "Pacific Standard Time"
+              },  
+              end: { 
+                dateTime: "2017-08-05T17:00:00",  
+                timeZone: "Pacific Standard Time"
+              } 
+            }
+          ] 
+        },  
+        meetingDuration: "PT1H",
+        returnSuggestionReasons: "true",
+        minimumAttendeePercentage: "100"
+      }
+      
+      graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0',
+                                cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
+                                &callback)
+      
+      graph.service.post(path, data.to_json) 
     end
   end
 end
+
+
+# @create = graph.me.send_mail(
+#   "message" => {
+#     "subject" => "TalentWiz Test", 
+#     "body" => {
+#       "content_type" => "Text", 
+#       "content" => "This is clearly working now"
+#     }, 
+#     "to_recipients" => [
+#       {
+#         "email_address" => {
+#           "address" => "houston@talentwiz.ca"
+#         }
+#       }
+#     ]
+#   })
+
+# @create = graph.me.messages.create(
+#   {
+#     "subject" => "TalentWiz Test", 
+#     "body" => {
+#       "content_type" => "Text", 
+#       "content" => "This is clearly working now"
+#     }, 
+#     "to_recipients" => [
+#       {
+#         "email_address" => {
+#           "address" => "houston@talentwiz.ca"
+#         }
+#       }
+#     ]
+#   })

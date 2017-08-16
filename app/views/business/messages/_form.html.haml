@@ -2,26 +2,27 @@
   = form_for [:business, @messagable, @message], html: {remote: true, class: 'invite', data: {behaviour: 'has-saved-templates'}} do |f|
     .to 
       .title To:
-      - if @candidate.manually_created == true 
-        .sender= "#{@candidate.full_name.capitalize } (#{@candidate.email})"
+      - if @messageable.manually_created == true 
+        .sender= "#{@messageable.full_name.capitalize } (#{@messageable.email})"
       - else
-        .sender= "#{@candidate.user.full_name.capitalize} (#{@candidate.user.email})" 
+        .sender= "#{@messageable.user.full_name.capitalize} (#{@messageable.user.email})" 
     .to
       .title From: 
       .sender= "#{current_user.full_name} (#{current_user.email})"       
     .subject
       .title Subject
-      .sender= f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false
+      .sender= f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false, class: "subject_Block"
     .email-variables
       Template:
       = select_tag "Templates", options_for_select(current_company.email_templates.all.map{|m| [m.title, m.id, data: {:body => m.body}]}), :prompt => "Select E-mail Templates", data: {behaviour: 'saved-template-select'}
     .email-content
-      = text_area_tag :body, " ", :class => "tinymce", rows: 15, data: {behaviour: 'comment-body'}, placeholder: "Type Your Message"
+      = f.text_area :body, :class => "tinymce", rows: 15, data: {behaviour: 'comment-body'}, placeholder: "Type Your Message", id: "body_Block"
       = tinymce_assets        
       = tinymce 
-      = hidden_field_tag :applicant_ids
     .email-footer
       %fieldset
-      = hidden_field_tag :user_id, current_user.id
+      = f.hidden_field :user_id, value: current_user.id
+      = hidden_field_tag :candidate_id, @messageable.id
       %br
       = f.submit "Send Message", class: "btn submit-button"
+

@@ -14,6 +14,7 @@ class Business::CustomersController < ApplicationController
 
   def create  
     @company = current_company
+
     if !@company.customer.present? 
       customer = StripeWrapper::StripeCustomer.create(
         :company => @company,
@@ -81,7 +82,6 @@ class Business::CustomersController < ApplicationController
       current_company.customer.update_attribute(:plan, stripe_customer['plan']['id'])
       current_company.customer.update_attribute(:active, true)     
       current_company.customer.update_attribute(:stripe_subscription_id, stripe_customer['id'])
-
       
       redirect_to business_plan_path
       flash[:success] = "Your subscription was successful, the charge has been added to your card"  

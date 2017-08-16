@@ -4,11 +4,16 @@ class Business::QuestionsController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
+
+  def index
+    @job = Job.find(params[:job_id])
+    @questions = @job.questions
+  end
   
   def new
     @job = Job.find(params[:job_id])
-    @questionairre = Questionairre.find(params[:questionairre_id])
     @question = Question.new
+
     respond_to do |format|
       format.js 
     end
@@ -17,40 +22,49 @@ class Business::QuestionsController < ApplicationController
   def create
     @question = Question.new(q_params)
     @job = Job.find(params[:job_id])
-    @questionairre = Questionairre.find(params[:questionairre_id])  
+
     respond_to do |format| 
       if @question.save
-        @questions = @questionairre.questions
-        format.js 
+        @questions = @job.questions 
       else 
-        flash[:danger] = "Something went wrong, please try again."
+        render_errors(@question)
       end
+      format.js
     end  
   end
 
   def edit
-    @questionairre = Questionairre.find(params[:questionairre_id])
     @question = Question.find(params[:id])
     @job = Job.find(params[:job_id])
+
+    respond_to do |format|
+      format.js 
+    end
   end
 
   def update
     @question = Question.find(params[:id])
     @job = Job.find(params[:job_id])
-    @questionairre = Questionairre.find(params[:questionairre_id]) 
+
     respond_to do |format|
       if @question.update(q_params)
-        @questions = @questionairre.questions
-        format.js
+        @questions = @job.questions
       else
-        flash[:danger] = "Sorry something went wrong"
+        render_errors(@question)
       end
+      format.js
     end
+  end
+
+  def show 
+    @job = Job.find(params[:job_id])
+    @questions = @job.questions
   end
 
   def destroy
     @question = Question.find(params[:id])  
     @question.destroy  
+    
     respond_to do |format|
       format.js 
     end
@@ -59,6 +73,13 @@ class Business::QuestionsController < ApplicationController
   private
 
   def q_params 
-    params.require(:question).permit(:id, :questionairre_id, :body, :required, :kind, question_options_attributes: [:id, :body, :_destroy])
+    params.require(:question).permit(:id, :job_id, :body, :required, :kind, question_options_attributes: [:id, :body, :_destroy])
+  end
+
+  def render_errors(question)
+    @errors = []
+    question.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end  
   end
 end

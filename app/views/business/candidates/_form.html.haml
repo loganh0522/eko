@@ -1,56 +1,55 @@
-= form_for [:business, @candidate], remote: true do |f|
-  .modal-body
-    .form-row
-      .contain-50
-        = f.text_field :first_name, class: "form-control", hide_label: true, placeholder: "First Name"
-      .contain-50
-        = f.text_field :last_name, class: "form-control", hide_label: true, placeholder:"Last Name"
-      .contain-50
-        = f.text_field :email, class: "form-control", hide_label: true, placeholder: "E-mail"
-      .contain-50
-        = f.text_field :phone, class: "form-control", hide_label: true, placeholder: "Phone"
-    .form-row
-      = f.fields_for :resumes, Resume.new do |q|
-        = q.label "+ Add Resume", class: "file-container"
-        = q.file_field :name, class: "file-container"
-    .form-row
-      .header
-        .title Add to Job    
-        = text_field_tag "", "", :class => 'ui-autocomplete-input jobs', :placeholder => 'Search Jobs', id: "search-form" 
-        %div#search-results
-        .assigned-jobs
-          .title Job:  
-    .form-row
-      .header#add-tags
-        .title Tags    
-        = text_field_tag '', '', :class => 'ui-autocomplete-input form-control', :placeholder => 'Add a Tag', id: "tag_name", hide_label: true
-        .btn#add-tag-button Add
-        %div#tag-results   
-      #tags_to_add
-    .form-row
-      .header
-        .title Social Media    
-        = link_to_add_fields "+ Link", f, :social_links
-    .form-row
-      .header
-        .title Experience    
-        = link_to_add_fields "+ Experience", f, :work_experiences
-    .form-row
-      .header
-        .title Education
-        = link_to_add_fields "+ Education", f, :educations
-      / .experience-container
-      /   .header#certification-header
-      /     .title Certification
-      /   = f.fields_for :user_certifications do |q|
-      /     = render "user_certification_fields", f: q
-      /   = link_to_add_fields "+ Add Certification", f, :user_certifications
-  .modal-footer
-    = f.hidden_field :company_id, value: current_company.id
-    = f.hidden_field :manually_created, value: true
-    = hidden_field_tag :tags
-    - if @job.present? 
-      = hidden_field_tag :job_id, @job.id
-    - else
-      = hidden_field_tag :jobs_ids
-    = f.submit "Create Profile", class: "btn submit-button"
+.candidate-form
+  = form_for [:business, @candidate], remote: true do |f|
+    .modal-body
+      .form-row
+        .contain-50
+          = f.text_field :first_name, id: "first_name_Block", class: "form-control", hide_label: true, placeholder: "First Name"
+          %span#first_name_msgBlock
+        .contain-50
+          = f.text_field :last_name, id: "last_name_Block", class: "form-control", hide_label: true, placeholder:"Last Name"
+          %span#last_name_msgBlock
+        .contain-50
+          = f.text_field :email, id: "email_Block", class: "form-control", hide_label: true, placeholder: "E-mail"
+          %span#email_msgBlock
+        .contain-50
+          = f.text_field :phone, class: "form-control", hide_label: true, placeholder: "Phone"
+      .form-row
+        = f.fields_for :resumes, Resume.new do |q|
+          = q.label "+ Add Resume", class: "file-container"
+          = q.file_field :name, class: "file-container"
+      - if !@job.present?
+        .form-row
+          .header
+            .title Add to Job    
+            = text_field_tag "", "", :class => 'ui-autocomplete-input jobs', :placeholder => 'Search Jobs', id: "search-form" 
+            %div#search-results
+            .assigned-jobs
+              .title Job:  
+      .form-row
+        .header#add-tags
+          .title Tags    
+          = text_field_tag '', '', :class => 'ui-autocomplete-input form-control', :placeholder => 'Add a Tag', id: "tag_name", hide_label: true
+          .btn#add-tag-button Add
+          %div#tag-results   
+        #tags_to_add
+      .form-row
+        .header
+          .title Social Media    
+          = link_to_add_fields "+ Link", f, :social_links
+      .form-row
+        .header
+          .title Experience    
+          = link_to_add_fields "+ Experience", f, :work_experiences
+      .form-row
+        .header
+          .title Education
+          = link_to_add_fields "+ Education", f, :educations
+    .modal-footer
+      = f.hidden_field :company_id, value: current_company.id
+      = f.hidden_field :manually_created, value: true
+      = hidden_field_tag :tags
+      - if @job.present? 
+        = hidden_field_tag :job_id, @job.id
+      - else
+        = hidden_field_tag :jobs_ids
+      = f.submit "Create Profile", class: "btn submit-button"

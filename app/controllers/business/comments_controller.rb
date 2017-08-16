@@ -53,9 +53,9 @@ class Business::CommentsController < ApplicationController
       if @comment.update(comment_params)
         format.js
       else
-      
+        render_errors(@comment)
+        format.js
       end
-      
     end
   end
 

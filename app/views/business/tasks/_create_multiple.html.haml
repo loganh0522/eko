@@ -1,23 +1,23 @@
-.modal#create_taskModal{data: {behaviour: 'has-saved-templates'}}
+.modal#create_taskModal
   .modal-dialog
     .modal-content
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
         %h4.modal-title Send Message    
-      = form_tag multiple_messages_business_messages_path, html: {data: {behaviour: 'has-saved-templates'}}, remote: true do 
+      = form_tag create_multiple_business_tasks_path, remote: true do 
         .modal-body
           .task-form
             .form-row-1
               .contain-1
-                = text_field_tag :title, id: "task-title", placeholder: 'Enter Task'
+                = text_field_tag :title, nil, id: "task-title", placeholder: 'Enter Task', autocomplete: false
             .form-row-4
               .contain-2
-                = text_field_tag :due_date, placeholder: "Due Date"
+                = text_field_tag :due_date, nil, id: 'task_due_date2', placeholder: "Due Date"
               .contain-2
-                = text_field_tag :due_time, id: "timepicker", placeholder: "Add Time"
+                = text_field_tag :due_time, nil, id: "timepicker", placeholder: "Add Time"
               .contain-2
                 = select_tag :kind, options_for_select(["Schedule Interview", "To-do", "Send Assesment", "Finish Assessment"]), :prompt => "Type of Task...", id: "select-kind" 
-            = text_area_tag :notes, id: "comment-body", placeholder: "Notes"  
+            = text_area_tag :notes, nil, id: "comment-body", placeholder: "Notes"  
             .form-row-2
               .assign_to_row#candidate_ids_block
                 .assign-user
@@ -36,11 +36,10 @@
                   %div#search-results          
                 .assigned-users
                   .title Assigned Users: 
-              = hidden_field_tag :user_ids, id: "user_ids"
-              = hidden_field_tag :candidate_ids, id: "candidate_ids"
-              = hidden_field_tag :user_id, value: current_user.id
-              = hidden_field_tag :company_id, value: current_company.id
-              = hidden_field_tag :status, value: "active"
+              = hidden_field_tag :user_ids
+              = hidden_field_tag :applicant_ids  
+              = hidden_field_tag :job_id, @job.id
+              = hidden_field_tag :status, "active"
             .comment-area-footer
               = submit_tag "+ Create Task", class: "btn submit-button", id: "submit-comment-btn"
               .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

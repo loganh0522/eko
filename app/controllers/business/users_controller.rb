@@ -69,11 +69,20 @@ class Business::UsersController < ApplicationController
 
   def update
     @user = current_user
-    @user.update(user_params)
+    
     
     respond_to do |format|
-      format.js
+      if @user.update(user_params)
+        format.js
+      else
+        render_errors(@user)
+        format.js
+      end
     end
+  end
+
+  def update_password
+
   end
 
   def destroy
@@ -85,6 +94,13 @@ class Business::UsersController < ApplicationController
   end
 
   private
+
+  def render_errors(comment)
+    @errors = []
+    comment.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end 
+  end
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :phone, :email, :password, :password_confirmation)

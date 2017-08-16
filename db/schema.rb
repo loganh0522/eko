@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170725234644) do
+ActiveRecord::Schema.define(version: 20170810134714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,13 +157,14 @@ ActiveRecord::Schema.define(version: 20170725234644) do
   create_table "companies", force: :cascade do |t|
     t.string   "name"
     t.string   "website"
-    t.integer  "open_jobs",    default: 0,    null: false
     t.string   "subscription"
     t.boolean  "active",       default: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "widget_key"
     t.string   "kind"
+    t.integer  "job_count",    default: 0,    null: false
+    t.integer  "max_jobs",     default: 3,    null: false
   end
 
   create_table "contact_messages", force: :cascade do |t|
@@ -531,6 +532,8 @@ ActiveRecord::Schema.define(version: 20170725234644) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "room_id"
+    t.string   "subscription_id"
+    t.datetime "subscription_expiration"
   end
 
   create_table "overall_ratings", force: :cascade do |t|
@@ -571,9 +574,9 @@ ActiveRecord::Schema.define(version: 20170725234644) do
   create_table "questions", force: :cascade do |t|
     t.text    "body"
     t.text    "kind"
-    t.integer "questionairre_id"
     t.integer "required"
     t.integer "position"
+    t.integer "job_id"
   end
 
   create_table "ratings", force: :cascade do |t|

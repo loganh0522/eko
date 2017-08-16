@@ -20,11 +20,21 @@ class Business::EmailSignaturesController < ApplicationController
     respond_to do |format|
       if @signature.update(e_temp_params)
         format.js
+      else 
+        render_errors(@signature)
+        format.js
       end
     end
   end
 
   private 
+
+  def render_errors(comment)
+    @errors = []
+    comment.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end 
+  end
 
   def e_temp_params
     params.require(:email_signature).permit(:signature, :user_id)

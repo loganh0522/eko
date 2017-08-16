@@ -1,2 +1,4 @@
-$(".modal-body").html('<%= j render "business/stages/form" %>');
-$('.modal').modal("show");
+$('#basic-form-modal').find('form').remove();
+$('#basic-form-modal').find('.modal-title').html('<%= j "Edit Stage" %>');
+$('#basic-form-modal').find('.modal-header').after('<%= j render "business/stages/form"%>');
+$('#basic-form-modal').modal("toggle");

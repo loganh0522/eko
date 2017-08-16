@@ -1,2 +1,7 @@
-$('#task_<%= @task.id %>').hide();
-$('#task_<%= @task.id %>').after('<%= j render "business/tasks/form" %>');
+// $('#task_<%= @task.id %>').hide();
+// $('#task_<%= @task.id %>').after('<%= j render "business/tasks/form" %>');
+
+$('#basic-form-modal').find('form').remove()
+$('#basic-form-modal').find('.modal-title').html('<%= j "Edit Task" %>');
+$('#basic-form-modal').find('.modal-header').after('<%= j render "business/tasks/form"%>');
+$('#basic-form-modal').modal("toggle");

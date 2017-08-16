@@ -1,1 +1,5 @@
-$('.user-list').find('#user_<%= @member.id %>').remove();
+<% if @member.present? %> 
+  $('.user-list').find('#user_<%= @member.id %>').remove();
+<% else %> 
+  return
+<% end %>

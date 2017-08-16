@@ -5,22 +5,22 @@ class Business::HiringTeamsController < ApplicationController
   before_filter :trial_over
   before_filter :company_deactivated?
   
-  
+
   def index
-    @company_users = current_company.users.order(:full_name).where("full_name ILIKE ?", "%#{params[:term]}%")
-    render :json => @company_users.to_json 
+    @job = Job.find(params[:job_id])
+    @users = @job.hiring_teams 
+
+    respond_to do |format|
+      format.html 
+      format.js
+    end
   end
 
   def new
     @hiring_team = HiringTeam.new 
-    @job = Job.find(params[:job_id])
-    @hiring_teams = @job.hiring_teams 
-    @users =  @job.users
-    @company_users =  current_company.users
-    @invitation = Invitation.new
-
+    @job = Job.find(params[:job])
+    
     respond_to do |format|
-      format.html 
       format.js
     end
   end
@@ -31,14 +31,13 @@ class Business::HiringTeamsController < ApplicationController
     respond_to do |format| 
       if @hiring_team.save
         @job = Job.find(params[:job_id])
-        @hiring_teams = @job.hiring_teams
+        @users = @job.hiring_teams
         format.js 
       end
     end  
   end 
 
   def destroy
-    
     @member = HiringTeam.find(params[:id])
     @job = @member.job
 
@@ -50,19 +49,6 @@ class Business::HiringTeamsController < ApplicationController
       format.js 
     end
   end
-
-  # def job_hiring_team
-  #   @job = Job.find(params[:job])
-  #   @hiring_team = @job.users.order(:full_name).where("full_name ILIKE ?", "%#{params[:term]}%")
-  #   @team = []
-    
-  #   @hiring_team.each do |member| 
-  #     if member != current_user
-  #       @team.append(member)
-  #     end
-  #   end
-  #   render :json => @team.to_json
-  # end
 
   private 
 

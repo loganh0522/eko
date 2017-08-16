@@ -1,4 +1,4 @@
-- @hiring_teams.each do |member|
+- @users.each do |member|
   .user{:id => "user_#{member.id}" }
     - if member.user.user_avatar.present? 
       = image_tag member.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 
@@ -8,6 +8,5 @@
     = link_to business_hiring_team_path(member.id), :method => :delete, remote: true do
       %i.glyphicon.glyphicon-remove
     .permissions= member.user.role
-
 
         

@@ -6,7 +6,7 @@ class Business::InterviewInvitationsController < ApplicationController
 
   def index
     @interview_invitations = current_company.interview_invitations
-    
+
     respond_to do |format|
       format.js
     end
@@ -30,8 +30,8 @@ class Business::InterviewInvitationsController < ApplicationController
 
     respond_to do |format|
       if @interview_invite.save
-        # send_invitations(@interview_invite)
-        # schedule_in_calendar(@interview_invite)
+        send_invitations(@interview_invite)
+        schedule_in_calendar(@interview_invite)
         format.js
       else 
         @errors = []

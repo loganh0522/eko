@@ -1,25 +1,15 @@
 .assessments-container
-  .applicant-scorecard
-    - if @questionairre.nil?
-      .not-present-container
-        %p You currently do not have a Application Form for this position.   
-    - else 
-      .scorecard
-        .header
-          %h4 Application Form
-        .application-form-body
-          - @questions.each do |question|
-            .question-area
-              .question
-                = question.position
-                = question.body
-              .answer
-                = question_answer(question, @application)
-
-                / - question.question_options.each do |option|
-                /   %ul
-                /     %li
-                /       - if question.question_answer.question_option_id == option.id
-                /         %b= option.body 
-                /       - else 
-                /         %p= option.body
+  - if @questions.nil?
+    .not-present-container
+      %p You currently do not have a Application Form for this position.   
+  - else 
+    .header
+      %h4 Application Form
+    .assessment-body
+      - @questions.each do |question|
+        .question-area
+          .question
+            = question.position
+            = question.body
+          .answer
+            = question_answer(question, @application)

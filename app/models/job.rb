@@ -7,30 +7,30 @@ class Job < ActiveRecord::Base
   #   __elasticsearch__.update_document 
   # end
 
-  # liquid_methods :title
-  belongs_to :company
+  liquid_methods :title
   
-  has_one :questionairre
-  has_one :scorecard
+  belongs_to :company
+  has_many :questions, :dependent => :destroy
+  has_one :scorecard, :dependent => :destroy
 
   has_many :hiring_teams
   has_many :users, through: :hiring_teams
   
-  has_many :stages, -> {order(:position)}
-  has_many :interviews
-  has_many :interview_invitations
+  has_many :stages, -> {order(:position)}, :dependent => :destroy
+  has_many :interviews, :dependent => :destroy
+  has_many :interview_invitations, :dependent => :destroy
   
-  has_many :activities, -> {order("created_at DESC")}
-  has_many :applications
+  has_many :activities, -> {order("created_at DESC")}, :dependent => :destroy
+  has_many :applications, :dependent => :destroy
   has_many :candidates, through: :applications
 
-  has_many :tasks, as: :taskable, :dependent => :destroy
+  has_many :tasks, as: :taskable, :dependent => :destroy, :dependent => :destroy
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy 
 
-  has_many :job_industries
+  has_many :job_industries, :dependent => :destroy
   has_many :industries, through: :job_industries
 
-  has_many :job_functions
+  has_many :job_functions, :dependent => :destroy
   has_many :functions, through: :job_functions
   
   
@@ -40,7 +40,7 @@ class Job < ActiveRecord::Base
   ########## Actions Taken After create ############ 
 
   after_validation :set_token, :convert_location, :job_url
-  after_save :create_job_actions, :set_token, :create_stages 
+  after_save :set_token, :create_stages 
   
   def create_stages
     @stages = self.company.default_stages
@@ -59,11 +59,6 @@ class Job < ActiveRecord::Base
     self.token = SecureRandom.hex(5)
   end
 
-  def create_job_actions
-    Questionairre.create(job: self)
-    Scorecard.create(job: self)
-  end
-
   def convert_location
     location = self.location.split(',')
     if location.count == 3
@@ -77,6 +72,7 @@ class Job < ActiveRecord::Base
   end
 
   ########## Job Tasks Actions ##############
+  
   def all_tasks
     @tasks = []
     self.tasks.each do |task|

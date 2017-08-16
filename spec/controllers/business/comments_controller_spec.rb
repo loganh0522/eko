@@ -7,6 +7,7 @@ describe Business::CommentsController do
     let(:job) {Fabricate(:job, company: company)}
     let(:candidate) {Fabricate(:candidate, company: company)}
     let(:candidate1) {Fabricate(:candidate, company: company)}
+    let(:application) {Fabricate(:application, candidate_id: candidate.id, job_id: job.id)}
     let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
     let(:application_comment) {Fabricate(:comment, commentable_type: "Application", commentable_id: application.id)}
     let(:candidate_comment) {Fabricate(:comment, commentable_type: "Candidate", commentable_id: candidate.id)}
@@ -23,8 +24,6 @@ describe Business::CommentsController do
     it_behaves_like "company has been deactivated" do
       let(:action) {xhr :get, :index}
     end
-
-    
 
     context "@job in params renders job.comments" do 
       before do  
@@ -59,11 +58,37 @@ describe Business::CommentsController do
         job
         candidate
         candidate_comment
+        application
+        application_comment
+        job_comment
+        xhr :get, :index, job_id: job.id, application_id: application.id
+      end
+      
+      it "sets the @comments to the current Application" do 
+        expect(application.comments.count).to eq(1)
+      end
+
+      it "sets the @comments to the current Application" do 
+        expect(application.comments.first.body).to eq(application_comment.body)
+      end
+
+      it "only renders candidates that belong to Candidate" do
+        expect(application.comments.first).to eq(application_comment)
+      end
+    end
+
+    context "@application in params" do 
+      before do  
+        set_current_user(alice)
+        set_current_company(company)
+        job_board
+        job
+        candidate
+        candidate_comment
         job_comment
         xhr :get, :index, candidate_id: candidate.id
       end
       
-
       it "sets the @comments to the current Candidate" do 
         expect(candidate.comments.count).to eq(1)
       end
@@ -383,6 +408,18 @@ describe Business::CommentsController do
     let(:application_comment) {Fabricate(:comment, commentable_type: "Application", commentable_id: application.id)}
     let(:candidate_comment) {Fabricate(:comment, commentable_type: "Candidate", commentable_id: candidate.id)}
     let(:job_comment) {Fabricate(:comment, commentable_type: "Job", commentable_id: job.id)}
+    
+    it_behaves_like "requires sign in" do
+      let(:action) {xhr :delete, :destroy, id: application_comment.id}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) { xhr :delete, :destroy, id: application_comment.id}
+    end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) { xhr :delete, :destroy, id: application_comment.id}
+    end
 
     before do  
       set_current_user(alice)
@@ -394,18 +431,6 @@ describe Business::CommentsController do
       application_comment
       job_comment
       xhr :delete, :destroy, id: application_comment.id
-    end
-
-    it_behaves_like "requires sign in" do
-      let(:action) {xhr :delete, :destroy, id: application_comment.id}
-    end
-
-    it_behaves_like "user does not belong to company" do 
-      let(:action) { xhr :delete, :destroy, id: application_comment.id}
-    end
-
-    it_behaves_like "company has been deactivated" do
-      let(:action) { xhr :delete, :destroy, id: application_comment.id}
     end
 
     it "destroys the correct instance of the candidate" do 

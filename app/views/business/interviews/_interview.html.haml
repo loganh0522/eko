@@ -1,18 +1,16 @@
-#box
+#interview
   .date
-    / .event-day= interview.day
-    / .event-month= interview.month
-  .box-row
-    .title= "#{interview.kind} with #{interview.candidate.full_name} for"
-  .box-row
-    .notes= interview.notes
-  .box-row
-    .time= "#{interview.date} at #{interview.start_time} - #{interview.end_time}"
-  .box-row
-    .title Interviewers:
-    .content
-      - interview.users.each do |user|   
-        .user-tag= user.full_name
-    
+    .event-day= interview.day
+    .event-month= interview.month
+  .details
+    .box-row
+      .title= "#{interview.kind} with #{interview.candidate.full_name} for"
+      .time= "#{interview.start_time} - #{interview.end_time}"
+    .box-row
+      .title Interviewers:
+      .content
+        - interview.users.each do |user|   
+          .user-tag= user.full_name
+      
     
       

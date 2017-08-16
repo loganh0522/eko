@@ -1,4 +1,4 @@
-class WorkExperience < ActiveRecord::Base
+ class WorkExperience < ActiveRecord::Base
   belongs_to :user, touch: true
   belongs_to :profile, touch: true
   belongs_to :candidate, touch: true

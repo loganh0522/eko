@@ -105,15 +105,7 @@ class ApplicationController < ActionController::Base
       current_company.update_attribute(:active, false)
     end
   end
-
-  def has_a_questionairre 
-    @job = Job.find(params[:job_id])
-    @questionairre = Questionairre.where(job_id: @job.id).first
-
-    if @job.questionairre.present? 
-      redirect_to edit_business_job_questionairre_path(@job.id, @questionairre.id)
-    end
-  end
+ 
 
   def has_a_scorecard
     @job = Job.find(params[:job_id])

@@ -1,16 +1,15 @@
 .task{:id => "task_#{task.id}"}
-  .edit-delete-actions
-    = link_to edit_business_task_path(task), remote: true do
-      .glyphicon.glyphicon-pencil
   .body
-    = link_to business_task_path(task, status: "complete"), method: :put, remote: true do 
+    = link_to completed_business_tasks_path(id: task.id), method: :post, remote: true do 
       .glyphicon.glyphicon-ok 
-    .title= task.title
+    .details
+      .title= task.title
+      = "Due Date: #{ task.due_date}"
   .task-row
-    .tags
-      Assigned To: 
+    .detail
+      .assigned Assigned to: 
       - task.users.each do |user|
         .tag= user.full_name
-    .due= " Due: #{task.due_date}"
-    .candidate
+    .detail
+      .assigned= "Created by: #{task.user.full_name} "
 

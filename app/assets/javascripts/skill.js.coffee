@@ -7,7 +7,7 @@
 #      false
 #     select: (event, ui) ->
 #      $('#skills_name').val ui.item.name 
-#       $('#skills_id').val ui.item.id
+#      $('#skills_id').val ui.item.id
 #      false
 #   ).data('ui-autocomplete')._renderItem = (ul, item) ->
 #    $('<li>').attr('ui-item-autocomplete', item.value).append("<a>" + item.name + "</a>").appendTo ul

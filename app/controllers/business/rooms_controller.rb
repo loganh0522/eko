@@ -67,7 +67,6 @@ class Business::RoomsController < ApplicationController
       )
 
     OutlookWrapper::User.get_user_email(@outlookToken)
-
     redirect_to business_company_path(current_company)
   end
 

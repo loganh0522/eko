@@ -1,6 +1,8 @@
 <% if params[:applicant_ids].present? %>
   $('#tag_name').val('')
   $('#addTagsModal').modal("toggle");
+  $('#addTagsModal').find('.recipients').children().remove();
+  $('#addTagsModal').find('#applicant_ids').val('');
 <% else %>
   $('.tags').html('<%= j render "business/tags/tags", tags: @tags %>');
   $('#add_tag').show();

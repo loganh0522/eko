@@ -2,9 +2,9 @@
   .side-container
     = render 'business/shared/admin_sidebar'
   .main-container
-    .templates-header
+    .standard-header
       %h2 Default Hiring Pipeline
-      = link_to "Create Stage", new_business_default_stage_path, :data => {:remote => true } 
+      = link_to "Create Stage", new_business_default_stage_path, class: "btn border-button2", :data => {:remote => true } 
     .templates-body#stages
       = render "business/default_stages/default_stages", stages: @stages
 

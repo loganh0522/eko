@@ -9,6 +9,17 @@
     z-index: 0
     position: relative
     min-height: 600px
+    #stage-header
+      margin-bottom: 25px
+      overflow: hidden
+      width: 100%
+      h3
+        float: left
+        margin-top: 5px
+        width: 20%
+      a
+        float: right
+        margin-top: 5px
   .side-container
     position: relative
     float: left
@@ -34,16 +45,6 @@
         z-index: 10
 
   #stage-header
-    margin-bottom: 25px
-    overflow: hidden
-    width: 100%
-    h4
-      float: left
-      margin-top: 5px
-      width: 20%
-    a
-      float: right
-      margin-top: 5px
     .form 
       float: right
       width: 80%
@@ -114,39 +115,6 @@
 
         a:first-of-type
           margin-right: 10px
-  .questions
-    margin-top: 25px
-    ul
-      width: 100%
-      padding: 0 0
-      li
-        list-style: none
-        box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-        border-radius: 5px
-        float: left
-        width: 100%
-        margin-bottom: 15px
-        color: rgba(0,0,0, .7)
-      .question 
-        background-color: rgba(0, 0, 0, 0.03) 
-        padding: 15px 15px 
-        overflow: hidden
-        .glyphicon.glyphicon-move
-          float: left
-          margin-right: 20px
-          color: rgba(0,0,0, .3)
-        .body
-          float: left
-          margin-top: -2px
-        .icons
-          float: right
-          margin-right: 10px
-          text-decoration: none
-          i  
-            color: rgba(0,0,0, .3)
-            margin-left: 5px
-        &:hover
-          cursor: move
 
   .sections
     ul
@@ -189,12 +157,56 @@
 .job_scorecard
   height: auto
   clear: both
+  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
   .scorecard-section
     width: 100%
     background: #ffffff
-    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-    margin-bottom: 10px
-    padding: 0 15px
+    padding: 10px 15px
+    border-bottom: 1px solid rgba(0,0,0,0.1)
+    .title
+      width: 95%
+      margin: 0px 2.5% 
+      padding: 5px 0 
+      border-bottom: 1px solid rgba(0,0,0,0.4)
+      font-size: 18px
+    .options
+      width: 95%
+      margin: 0px 2.5% 
+      font-size: 14px
+      .option
+        margin-top: 5px
+
+    
+
+#scorecard-form
+  width: 100%
+  background: #ffffff
+  padding: 10px 15px
+  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+  margin-bottom: 10px
+  .add_fields
+    color: #EF7B2B 
+  .form-header
+    font-size: 20px
+  .question-area
+    border-bottom: 1px solid rgba(0,0,0,0.1)  
+    padding: 10px 5px
+    .header
+      overflow: hidden
+      width: 100%
+      .section-title
+        width: 80%
+        float: left
+      .remove_question
+        float: right
+        width: 19%
+        margin-top: 17px
+    .add_fields
+      color: #EF7B2B 
+      margin: 25px 0 10px 350px
+    .question
+      width: 800px
+      margin: 15px 0 0 25px
     .answers 
       width: 600px
       margin: 5px 0 0 50px
@@ -208,26 +220,84 @@
         float: left
         color: rgba(0,0,0,0.3)
         text-decoration: none 
-    .footer
-      margin-top: 15px
-      border-top: 1px solid rgba(0,0,0,0.1)
-      overflow: hidden
-      height: auto
-      padding: 10px 10px
-      .submit-button
-        float: right
-        margin-left: 15px
-      .remove_question
-        float: right
-        background: rgba(0,0,0,0.01)
-        color: rgba(0,0,0,0.7)
-        border: 1px solid rgba(0,0,0,0.1)
+  .footer
+    margin-top: 15px
+    border-top: 1px solid rgba(0,0,0,0.1)
+    overflow: hidden
+    height: auto
+    padding: 10px 10px
+    .submit-button
+      float: right
+      margin-left: 15px
+    .remove_form
+      float: right
+      background: rgba(0,0,0,0.01)
+      color: rgba(0,0,0,0.7)
+      border: 1px solid rgba(0,0,0,0.1)
+
+
+.job-feed-container
+  float: left
+  width: 200px
+  border: 1px solid rgba(0,0,0,.1)
+  padding: 25px 25px
+  margin-right: 15px
+  margin-top: 15px
+  width: 275px
+  height: 225px
+  overflow: hidden
+  .header
+    height: 50%
+    img 
+      align: center
+
+  .body
+    height: 50%
+
+ 
+
+
+#create-application-form
+  .questions
+    margin-bottom: 25px
+    ul
+      width: 100%
+      padding: 0 0
+      li
+        list-style: none
+        box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+        border-radius: 5px
+        float: left
+        width: 100%
+        margin-bottom: 15px
+        color: rgba(0,0,0, .7)
+      .question 
+        background-color: rgba(0, 0, 0, 0.03) 
+        padding: 15px 15px 
+        overflow: hidden
+        .glyphicon.glyphicon-move
+          float: left
+          margin-right: 20px
+          color: rgba(0,0,0, .3)
+        .body
+          float: left
+          margin-top: -2px
+        .icons
+          float: right
+          margin-right: 10px
+          text-decoration: none
+          i  
+            color: rgba(0,0,0, .3)
+            margin-left: 5px
+        &:hover
+          cursor: move
   .question-area
     width: 100%
     background: #ffffff
     box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
     margin-bottom: 10px
     padding: 5px 0
+    clear: both
     .answer-type
       border-bottom: 1px solid rgba(0,0,0,0.1)
       width: 100%
@@ -276,49 +346,12 @@
     .submit-button
       float: right
       margin-left: 15px
-    .remove_question
+    .remove_form
       float: right
       background: rgba(0,0,0,0.01)
       color: rgba(0,0,0,0.7)
       border: 1px solid rgba(0,0,0,0.1)
-
-
-.job-feed-container
-  float: left
-  width: 200px
-  border: 1px solid rgba(0,0,0,.1)
-  padding: 25px 25px
-  margin-right: 15px
-  margin-top: 15px
-  width: 275px
-  height: 225px
-  overflow: hidden
-  .header
-    height: 50%
-    img 
-      align: center
-
-  .body
-    height: 50%
-
- 
-.question-form
-  .fieldset      
-    .answer-type
-      border-bottom: 1px solid rgba(0,0,0,0.1)
-      .title
-        float: left
-        font-size: 16px
-        font-wieght: 600
-      .question-type
-        float: left
-        height: 35px
-
-      .required-answer
-        float: left
-
-
-
+  
 
 
 

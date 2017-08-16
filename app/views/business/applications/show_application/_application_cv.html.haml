@@ -1,14 +1,12 @@
 .profile-container
-  .applicant-experience 
-    .applicant-positions
-      - if @candidate.resumes.first.present?
-        = link_to "Download Resume", @candidate.resumes.first.name_url, class: "btn submit-button"
-      - else 
-        = form_for [:business, @candidate, @resume],:html => { :multipart => true }, remote: true do |f| 
-          = f.file_field :name
-          = f.hidden_field :candidate_id, value: @application.candidate.id
-          = f.submit "Save Section", class: "btn submit-button"  
-      = render 'business/shared_manual_candidate/work_experience'
-      = render 'business/shared_manual_candidate/education'
+  - if @candidate.resumes.first.present?
+    = link_to "Download Resume", @candidate.resumes.first.name_url, class: "btn submit-button", id: "download-resume"
+  - else 
+    = form_for [:business, @candidate, Resume.new],:html => { :multipart => true }, remote: true do |f| 
+      = f.file_field :name, id: "add-resume"
+      = f.hidden_field :candidate_id, value: @candidate.id
+      = f.submit "Add Resume", id: "submit-resume", class: "btn submit-button"
+  = render 'business/shared_manual_candidate/work_experience'
+  = render 'business/shared_manual_candidate/education'
 
       

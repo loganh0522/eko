@@ -5,7 +5,7 @@
         = f.text_field :title, class: "form-control", label: "Job Title", autocomplete: "off"
     .row
       .form-group.col-md-6
-        = f.text_field :location, class: "form-control", id: "geocomplete", label: "Location (City)", placeholder: "City Name"
+        = f.text_field :location, class: "form-control", id: "geocomplete", label: "City", placeholder: "City Name"
       .form-group.col-md-6
         = f.text_field :address, class: "form-control", id: "geocomplete2", label: "Address", placeholder: "Enter the Address"
     - if current_company.kind == "recruiter"
@@ -39,5 +39,5 @@
       = f.hidden_field :user_ids, value: current_user.id
       = f.hidden_field :company_id, value: current_company.id
       = f.hidden_field :status, value: "draft"
-      = f.submit @job.new_record? ? "Create Job Posting" : "Save and Continue", class: "btn button-mid"
+      = f.submit @job.new_record? ? "Create Job Posting" : "Save and Continue", class: "btn submit-button"
 

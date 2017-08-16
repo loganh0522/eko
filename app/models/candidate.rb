@@ -7,9 +7,8 @@ class Candidate < ActiveRecord::Base
   #   __elasticsearch__.update_document if self.published?
   # end
 
-  validates_presence_of :first_name, :last_name, :email
-
-  # liquid_methods :first_name, :last_name, :full_name
+  liquid_methods :first_name, :last_name, :full_name
+  
   before_create :generate_token, :downcase_email
   belongs_to :company
   belongs_to :user
@@ -20,8 +19,6 @@ class Candidate < ActiveRecord::Base
   
   has_many :invited_candidates
   has_many :interview_invitations, through: :invited_candidates
-
-
   has_many :resumes, :dependent => :destroy
   has_many :work_experiences, :dependent => :destroy
   has_many :educations, :dependent => :destroy
@@ -35,17 +32,17 @@ class Candidate < ActiveRecord::Base
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy
   has_many :tasks, as: :taskable, :dependent => :destroy
 
+  validates_presence_of :first_name, :last_name, :email
+  validates_associated :social_links, :work_experiences, :educations, :resumes
+  
   accepts_nested_attributes_for :social_links, 
-    allow_destroy: true,
-    reject_if: proc { |a| a[:url].blank? }
+    allow_destroy: true
 
   accepts_nested_attributes_for :work_experiences, 
-    allow_destroy: true,
-    reject_if: proc { |a| a[:title].blank? }
+    allow_destroy: true
 
   accepts_nested_attributes_for :educations, 
-    allow_destroy: true,
-    reject_if: proc { |a| a[:school].blank? }
+    allow_destroy: true
 
   accepts_nested_attributes_for :resumes, 
     allow_destroy: true,
@@ -110,20 +107,13 @@ class Candidate < ActiveRecord::Base
     end
     return @tags
   end
-
-  mapping(:_parent => {:type => 'company'}) do
-    indexes :id, :type => :integer
-    indexes :company_id, :type => :integer
-    indexes :rating, :type => :integer
-    indexes :full_name, :type => :string
-    indexes :created_at, :type => :date
-  end
-
-
+ 
   def as_indexed_json(options={})
     as_json(
+      _id: [:company_id],
       only: [:id, :first_name, :last_name, :email, :manually_created, :created_at],
       methods: [:tags_present, :full_name],
+      
       include: {
         educations: {only: [:id, :title, :description, :school]},
         work_experiences: {only: [:id, :title, :description, :company_name]},

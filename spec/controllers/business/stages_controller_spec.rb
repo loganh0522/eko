@@ -44,22 +44,22 @@ describe Business::StagesController do
     let(:job) {Fabricate(:job, company: company, user_ids: alice.id)}
     let(:stage) {Fabricate.attributes_for(:stage, job_id: job.id, name: "Test")}
     
+    it_behaves_like "requires sign in" do
+      let(:action) {xhr :post, :create, job_id: job.id, stage: stage}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {xhr :post, :create, job_id: job.id, stage: stage}
+    end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) {xhr :post, :create, job_id: job.id, stage: stage}
+    end
+
     before do 
       set_current_user(alice)
       set_current_company(company)
       job_board
-    end
-
-    it_behaves_like "requires sign in" do
-      let(:action) {xhr :post, :create, job_id: job.id}
-    end
-
-    it_behaves_like "user does not belong to company" do 
-      let(:action) {xhr :post, :create, job_id: job.id}
-    end
-
-    it_behaves_like "company has been deactivated" do
-      let(:action) {xhr :post, :create, job_id: job.id}
     end
 
     context "with valid inputs" do
@@ -139,15 +139,15 @@ describe Business::StagesController do
     end
 
     it_behaves_like "requires sign in" do
-      let(:action) {xhr :put, :update, job_id: job.id, id: stage.id}
+      let(:action) {xhr :put, :update, job_id: job.id, id: stage.id, stage: {job_id: job.id, name: "Screened"} }
     end
 
     it_behaves_like "user does not belong to company" do 
-      let(:action) {xhr :put, :update, job_id: job.id, id: stage.id}
+      let(:action) {xhr :put, :update, job_id: job.id, id: stage.id, stage: {job_id: job.id, name: "Screened"} }
     end
 
     it_behaves_like "company has been deactivated" do
-      let(:action) {xhr :get, :edit, job_id: job.id, id: stage.id}
+      let(:action) {xhr :put, :update, job_id: job.id, id: stage.id, stage: {job_id: job.id, name: "Screened"} }
     end
 
     it "save the updates made on the object" do 

@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.1.2'
 
 gem 'rails', '4.2.4'
-gem 'pg'
+gem 'pg', '0.20'
 gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'sass-rails', '~> 5.0.1'
 gem 'uglifier', '>= 1.3.0'
@@ -60,9 +60,10 @@ gem 'microsoft_graph'
 gem 'oauth2'
 gem 'activerecord-session_store'
 
-# gem 'liquid-rails', '3.0.6'
+gem 'liquid', '~> 3.0', '>= 3.0.6'
 gem 'tinymce-rails', '~> 4.5'
 
+gem 'sidekiq'
 gem 'bootstrap-colorpicker-rails'
 
 gem 'jquery-timepicker-rails'
@@ -78,7 +79,7 @@ end
 group :development, :test do
   gem 'pry'
   gem 'pry-nav'
-  gem 'rspec-rails', '3.1'
+  gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
   gem 'rb-readline'
 end
 

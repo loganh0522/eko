@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
   post '/rate' => 'rater#create', :as => 'rate'
 
-  if lambda {|r| r.subdomain != '69e63bf2'}
-    match '/', to: "job_boards#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '69e63bf2'}, via: [:get, :post, :put, :patch, :delete]
-    match 'login', to: "sessions#subdomain_new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '69e63bf2'}, via: [:get]
-    match 'login', to: "sessions#create", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '69e63bf2'}, via: [:post]
-    match 'jobs/:id', to: "jobs#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '69e63bf2'}, via: [:get, :post, :put, :patch, :delete]
-    match 'register', to: "users#sub_new_job_seeker", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '69e63bf2'}, via: [:get, :post, :put, :patch, :delete]
-    match 'profile', to: "profiles#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '69e63bf2'}, via: [:get, :post, :put, :patch, :delete]
-    match 'create-profile', to: "profiles#new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '69e63bf2'}, via: [:get, :post, :put, :patch, :delete]
+  if lambda {|r| r.subdomain != 'd2a80095'}
+    match '/', to: "job_boards#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'd2a80095'}, via: [:get, :post, :put, :patch, :delete]
+    match 'login', to: "sessions#subdomain_new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'd2a80095'}, via: [:get]
+    match 'login', to: "sessions#create", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'd2a80095'}, via: [:post]
+    match 'jobs/:id', to: "jobs#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'd2a80095'}, via: [:get, :post, :put, :patch, :delete]
+    match 'register', to: "users#sub_new_job_seeker", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'd2a80095'}, via: [:get, :post, :put, :patch, :delete]
+    match 'profile', to: "profiles#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'd2a80095'}, via: [:get, :post, :put, :patch, :delete]
+    match 'create-profile', to: "profiles#new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'd2a80095'}, via: [:get, :post, :put, :patch, :delete]
   end
 
   root to: 'pages#home'
@@ -49,7 +49,8 @@ Rails.application.routes.draw do
   match '/widgets/:action/:widget_key', via: [:get], :controller => 'widgets', :widget_key => /.*/
   
   post :incoming_email, to: "inbound_emails#create"
-
+  post '/api/watch/outlookNotification', to: "inbound_emails#outlook_webhook"
+  
   resources :skills 
   resources :certifications
 
@@ -80,6 +81,7 @@ Rails.application.routes.draw do
 
   get "/authorize", to: 'business/users#outlook_get_token'
   get "/authorize_room", to: 'business/rooms#outlook_token'
+  
   namespace :business do 
     root to: "jobs#index" 
     get "hiring_defaults", to: 'rejection_reasons#index'
@@ -87,7 +89,14 @@ Rails.application.routes.draw do
     resources :hiring_teams
     resources :interview_invitations
     resources :rooms
-    resources :tasks
+    post "update_password", to: 'users#update_password'
+    resources :tasks do 
+      collection do 
+        post :completed, to: "tasks#completed"
+        post :create_multiple, to: "tasks#create_multiple"
+      end
+    end
+    
     resources :rejection_reasons
     resources :invitations
     resources :locations 
@@ -177,8 +186,9 @@ Rails.application.routes.draw do
       resources :tasks
       resources :messages
       resources :resumes
+      
       collection do 
-        post :update_multiple, to: "stages#update_multiple"
+        post :move_stages, to: "applications#move_stage"
         post :change_stage, to: "applications#change_stage"
         post :add_tag_multiple, to: "tags#add_tags_multiple_applications"
       end
@@ -206,7 +216,7 @@ Rails.application.routes.draw do
       post :archive_job, to: "jobs#archive_job"
       post :publish_job, to: "jobs#publish_job"
       get :promote, to: "jobs#promote"
-      
+      resources :questions
       resources :interviews
       resources :comments
       resources :activities

@@ -39,14 +39,6 @@ describe Business::RoomsController do
     let(:alice) {Fabricate(:user, company: company, role: "Admin")}
     let(:room) {Fabricate.attributes_for(:room, company: company)}
 
-    it_behaves_like "requires sign in" do
-      let(:action) {xhr :post, :create}
-    end
-
-    it_behaves_like "user does not belong to company" do 
-      let(:action) {xhr :post, :create}
-    end
-
     context "with valid inputs" do
       before do  
         set_current_user(alice)
@@ -183,6 +175,10 @@ describe Business::RoomsController do
     end
 
     it_behaves_like "user does not belong to company" do 
+      let(:action) {xhr :delete, :destroy, id: room.id}
+    end
+
+    it_behaves_like "company has been deactivated" do
       let(:action) {xhr :delete, :destroy, id: room.id}
     end
 

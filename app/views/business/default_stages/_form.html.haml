@@ -1,7 +1,11 @@
-= form_for [:business, @stage], remote: true do |f|
-  .modal-body
-    = f.text_field :name, class: "form-control", placeholder: "Name", autocomplete: 'off'
-  .modal-footer
-    = f.hidden_field :company_id, value: current_company.id
-    = f.submit "Create Stage", class: "btn submit-button"
-    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+.stage-form
+  = form_for [:business, @stage], remote: true do |f|
+    .modal-body
+      .email-area
+        .choose-stage
+          = f.text_field :name, class: "form-control", id: "name_Block", placeholder: "Name", autocomplete: 'off'
+          %span#name_msgBlock
+    .modal-footer
+      = f.hidden_field :company_id, value: current_company.id
+      = f.submit @stage.new_record? ? "Create Stage" : "Update", class: "btn submit-button"
+      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

@@ -6,23 +6,27 @@ class Business::JobsController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
-  # before_filter :owned_by_company, only: [:edit, :show, :update]
+  before_filter :owned_by_company, only: [:edit, :show, :update]
 
   def index
     if params[:client_id].present?
       @client = Client.find(params[:client_id])
       @jobs = @client.jobs
-    elsif params[:status].present? 
-      @jobs = current_user.jobs.where(status: params[:status])     
-      
+    elsif params[:status].present?    
+      if current_user.role == "Admin"
+        @jobs = current_company.jobs.where(status: params[:status])   
+      else
+        @jobs = current_user.jobs.where(status: params[:status])  
+      end
       respond_to do |format|
         format.js 
       end
-    elsif params[:term].present?
-      @jobs = current_company.jobs.order(:title).where("title ILIKE ?", "%#{params[:term]}%")
-      render :json => @jobs.to_json 
     else 
-      @jobs = current_user.jobs.where(status: 'open') 
+      if current_user.role == "Admin"
+        @jobs = current_company.jobs.where(status: 'open') 
+      else
+        @jobs = current_user.jobs.where(status: 'open') 
+      end
       respond_to do |format|
         format.html
         format.js 
@@ -41,6 +45,7 @@ class Business::JobsController < ApplicationController
       track_activity(@job, "draft")
       redirect_to new_business_job_hiring_team_path(@job)
     else
+      binding.pry
       render :new
     end
   end
@@ -70,99 +75,91 @@ class Business::JobsController < ApplicationController
   def update
     @job = Job.find(params[:id])
 
-    if params[:status].present? 
-      if params[:status] == "open"
-        publish_job
-      elsif params[:status] == "closed"
-        closed_job
-      else
-        @job.update(status: params[:status])
-      end
+    if @job.update(job_params)
+      track_activity @job
+      flash[:notice] = "#{@job.title} has been updated"
+      redirect_to new_business_job_hiring_team_path(@job)
     else
-      if @job.update(job_params)
-        track_activity @job
-        flash[:notice] = "#{@job.title} has been updated"
-        redirect_to new_business_job_hiring_team_path(@job)
-      else
-        render :edit
-      end
+      render :edit
     end
   end
 
-  # def close_job 
-  #   @job = Job.find(params[:job_id])
-  #   @company = current_company
-  #   if @job.update_column(:status, "closed")
-  #     @company.open_jobs -= 1
-  #     @company.save
-  #     track_activity(@job, "closed")
-  #   else
-  #     flash[:danger] = "Sorry, something went wrong, please try again."
-  #     redirect_to :back
-  #   end
-  # end
+  def close_job 
+    @job = Job.find(params[:job_id])
+    @company = current_company
+    
+    if @job.update_column(:status, "closed")
+      @company.job_count -= 1
+      @company.save
+      track_activity(@job, "closed")
+    else
+      flash[:danger] = "Sorry, something went wrong, please try again."
+      redirect_to :back
+    end
+  end
 
-  # def archive_job
-  #   @job = Job.find(params[:job_id])
-  #   if @job.update_column(:status, "archived")
-  #     track_activity(@job, "archived")
-  #   else
-  #     flash[:danger] = "Sorry, something went wrong, please try again."
-  #     redirect_to :back
-  #   end
-  #   redirect_to business_jobs_path
-  # end
+  def archive_job
+    @job = Job.find(params[:job_id])
+    if @job.update_column(:status, "archived")
+      track_activity(@job, "archived")
+    else
+      flash[:danger] = "Sorry, something went wrong, please try again."
+      redirect_to :back
+    end
+    redirect_to business_jobs_path
+  end
 
-  # def publish_job 
-  #   @job = Job.find(params[:job_id])
-  #   @company = current_company
-  #   if @company.subscription == 'start-up' && @company.open_jobs < 1 
-  #     @job.update(:status, params[:status]) 
-  #     @company.open_jobs += 1
-  #     @company.save
-  #     track_activity(@job, "published")
-  #     redirect_to business_jobs_path
-  #   elsif @company.subscription == 'trial' && @company.open_jobs < 3
-  #     @job.update_column(:status, "open")
-  #     @company.open_jobs += 1
-  #     @company.save
-  #     track_activity(@job, "published")
-  #     redirect_to business_jobs_path
-  #   elsif @company.subscription == 'basic' && @company.open_jobs < 3
-  #     @job.update_column(:status, "open")
-  #     @company.open_jobs += 1
-  #     @company.save
-  #     track_activity(@job, "published")
-  #     redirect_to business_jobs_path
-  #   elsif @company.subscription == 'team' && @company.open_jobs < 5
-  #     @job.update_column(:status, "open")
-  #     @company.open_jobs += 1
-  #     @company.save
-  #     track_activity(@job, "published")
-  #     redirect_to business_jobs_path
-  #   elsif @company.subscription == 'plus' && @company.open_jobs < 10
-  #     @job.update_column(:status, "open")
-  #     @company.open_jobs += 1
-  #     @company.save
-  #     track_activity(@job, "published")
-  #     redirect_to business_jobs_path
-  #   elsif @company.subscription == 'growth' && @company.open_jobs < 15
-  #     @job.update_column(:status, "open")
-  #     @company.open_jobs += 1
-  #     @company.save
-  #     track_activity(@job, "published")
-  #     redirect_to business_jobs_path
-  #   elsif @company.subscription == 'enterprise'
-  #     @job.update_column(:status, "open")
-  #     @company.open_jobs += 1
-  #     @company.save
-  #     track_activity(@job, "published")
-  #     redirect_to business_jobs_path
-  #   else
-  #     flash[:danger] = "Sorry, you already have the maximum number of open jobs. Please close an open job before publishing another one."
-  #     render :edit
-  #   end
-  # end
+  def publish_job 
+    @job = Job.find(params[:job_id])
+    @company = current_company
+    if @company.subscription == 'start-up' && @company.open_jobs < 1 
+      @job.update(:status, params[:status]) 
+      @company.open_jobs += 1
+      @company.save
+      track_activity(@job, "published")
+      redirect_to business_jobs_path
+      
+    elsif @company.subscription == 'trial' && @company.open_jobs < 3
+      @job.update_column(:status, "open")
+      @company.open_jobs += 1
+      @company.save
+      track_activity(@job, "published")
+      redirect_to business_jobs_path
+    elsif @company.subscription == 'basic' && @company.open_jobs < 3
+      @job.update_column(:status, "open")
+      @company.open_jobs += 1
+      @company.save
+      track_activity(@job, "published")
+      redirect_to business_jobs_path
+    elsif @company.subscription == 'team' && @company.open_jobs < 5
+      @job.update_column(:status, "open")
+      @company.open_jobs += 1
+      @company.save
+      track_activity(@job, "published")
+      redirect_to business_jobs_path
+    elsif @company.subscription == 'plus' && @company.open_jobs < 10
+      @job.update_column(:status, "open")
+      @company.open_jobs += 1
+      @company.save
+      track_activity(@job, "published")
+      redirect_to business_jobs_path
+    elsif @company.subscription == 'growth' && @company.open_jobs < 15
+      @job.update_column(:status, "open")
+      @company.open_jobs += 1
+      @company.save
+      track_activity(@job, "published")
+      redirect_to business_jobs_path
+    elsif @company.subscription == 'enterprise'
+      @job.update_column(:status, "open")
+      @company.open_jobs += 1
+      @company.save
+      track_activity(@job, "published")
+      redirect_to business_jobs_path
+    else
+      flash[:danger] = "Sorry, you already have the maximum number of open jobs. Please close an open job before publishing another one."
+      render :edit
+    end
+  end
 
   private 
 

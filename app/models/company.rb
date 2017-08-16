@@ -4,7 +4,6 @@ class Company < ActiveRecord::Base
   index_name ["talentwiz", Rails.env].join('_') 
 
   before_create :generate_token
-
   has_many :users
   has_many :invitations
   has_many :rejection_reasons
@@ -35,7 +34,7 @@ class Company < ActiveRecord::Base
   
   validates_presence_of :name, :website
 
-  # liquid_methods :name
+  liquid_methods :name
 
   after_create :create_rejection_reasons, :create_default_stages
   
@@ -83,6 +82,7 @@ class Company < ActiveRecord::Base
     stages = ["Screen", "Phone Interview", "Interview", 
       "Group Interview", "Offer", "Hired"]
     @position = 1 
+    
     stages.each do |stage| 
       DefaultStage.create(name: stage, position: @position, company_id: self.id)
       @position += 1
@@ -100,12 +100,13 @@ class Company < ActiveRecord::Base
 
   mapping do 
     indexes :created_at, type: 'date'
+    indexes :candidates 
   end
 
 
   def as_indexed_json(options={})
     as_json(
-      only: [:id, :name, :website, :created_at, :active, :kind, :open_jobs],
+      only: [:id, :name, :website, :created_at, :active, :kind, :open_jobs, :subscription],
     )
   end
 end

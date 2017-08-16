@@ -21,7 +21,7 @@
             = link_to business_tasks_path, remote: true do 
               %li.change#open-tasks.activated Open Tasks
             = link_to business_tasks_path(status: 'complete'), remote: true do 
-              %li.change#closed-tasks Completed Tasks
+              %li.change#completed-tasks Completed Tasks
       .task-main-container
         = render 'business/tasks/tasks'
 

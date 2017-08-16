@@ -7,9 +7,22 @@
           = f.text_field :title, id: "title_Block", placeholder: "Event Title", label: "Event Title"
           %span#kind_Block.help-block
         .contain-2
-          = f.label "Type of Meeting"
-          = f.select :kind, options_for_select(["Phone Interview", "Skype", "In-person Interview"]), :html => {id: "kind_Block", prompt: "Choose Type..."}
-          %span#kind_Block.help-block
+          .dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Duration
+              %b.caret
+            %ul.dropdown-menu
+              %li 15 min
+              %li 30 min
+              %li 60 min 
+              %li 1 hour
+              %li 1.5 hours
+              %li 2 hours
+              %li All Day  
+      .form-row-2
+        = f.label "Type of Meeting"
+        = f.select :kind, options_for_select(["Phone Interview", "Skype", "In-person Interview"]), :html => {id: "kind_Block", prompt: "Choose Type..."}
+        %span#kind_Block.help-block
         = f.label "Location"
         = f.text_field :location, id: "geocomplete2", label: "Address", autocomplete: "off", placeholder: "Enter the Address"
       .form-row-2

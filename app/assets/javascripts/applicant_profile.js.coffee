@@ -23,19 +23,19 @@ jQuery ->
 
 
 #########  #############
-  $('#task_due_date').datepicker
+  $('#task_due_date2').datepicker
       dateFormat: 'yy-mm-dd'
   $('#timepicker').timepicker()
 
 
 ######### Scorecard JS #########
-  $(document).ajaxComplete ->
-    console.log("change")
-    $('#task_due_date').datepicker  
+  $(document).ajaxComplete ->   
+    $('#basic-form-modal').find('#task_due_date').datepicker  
       dateFormat: 'yy-mm-dd'
-
+    $('#basic-form-modal').find('#timepicker').timepicker()
+  
+    
     $('#timepicker2').timepicker()
-    $('#timepicker').timepicker()
     $("#geocomplete2").geocomplete()
 
 
@@ -55,6 +55,11 @@ jQuery ->
     console.log($(this).parent())
     $('#add_tag').show()
     $('.tag_form').remove()
+
+
+#################### Close Tag Form ######################
+  
+  
 
 
 ###################### Insert Fluid Variable into E-mail #####################
@@ -109,8 +114,10 @@ jQuery ->
 
 #################### Add Applicants To Modal On Action Click #############################
 
-  $('#main-container').on 'click', '#move-applicants', (event) ->
+  $('#main-container').on 'click', '.move-applicants', (event) ->
+    modalType = $(this).attr('id')
     checkbox = $('.applicant-checkbox')
+    $('#' + modalType + 'Modal').find('#applicant_ids').val('')
     applicant_ids = []
     applicants = []
     applicant_names = []  
@@ -123,22 +130,25 @@ jQuery ->
         applicant.push($(n).parent().parent().find('.name').data('id')) unless applicant.includes($(n).parent().parent().find('.name').data('id'))
         applicants.push(applicant)
 
-    $('.modal').find('#applicant_ids').val(applicant_ids)
+    $('#' + modalType + 'Modal').find('#applicant_ids').val(applicant_ids)
 
     for n in applicants
-      $('.modal').find('.recipients').append('<div id="tag" data-id=' + n[0] + '> <div class="tag-name">' + n[1] + '</div> <div class="remove-recipient"> &times </div> </div>') 
+      $('#' + modalType + 'Modal').find('.recipients').append('<div id="tag" data-id=' + n[0] + '> <div class="tag-name">' + n[1] + '</div> <div class="remove-recipient"> &times </div> </div>') 
 
   $('#main-container').on 'click', '.remove-recipient', (event) -> 
-    $('.modal').find('#applicant_ids').val("") 
+    $('.modal').find('#applicant_ids').val('')
     $(this).parent().remove()
     new_recipients = $('.recipients').children()
-    applicant_ids = []    
+    applicant_ids = []
+    
     for n in new_recipients
-      applicant_ids.push($(n).data('id'))   
+      applicant_ids.push($(n).data('id')) unless applicant_ids.includes($(n).data('id'))
+  
     $('.modal').find('form').find('#applicant_ids').val(applicant_ids)
-
+  
   $('.modal').on 'hidden.bs.modal', ->
     $('.recipients').children().remove() 
+    $('.modal').find('#applicant_ids').val('')
     return
 
 
@@ -147,6 +157,7 @@ jQuery ->
   $("#geocomplete").geocomplete({
     types: ['(cities)']
   })
+  $("#geocomplete2").geocomplete()
 
   $(document).ajaxComplete ->
     $('.work-experience').find('#geocomplete').geocomplete({
@@ -169,6 +180,13 @@ jQuery ->
 ################## Sort Stages ####################
 
   $('#stages').sortable
+    axis: 'y'
+    cursor: 'move'
+    update: ->
+      $.post($(this).data('update-url'), $(this).sortable('serialize'))
+  $("#stages").disableSelection()
+
+  $('#questions').sortable
     axis: 'y'
     cursor: 'move'
     update: ->

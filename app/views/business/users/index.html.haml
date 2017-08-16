@@ -2,11 +2,9 @@
   .side-container
     = render 'business/shared/admin_sidebar'
   .main-container
-    .company-users
-      %h4 Team Members 
-      .invite
-        = link_to "Invite User", new_business_invitation_path, remote: true, class: 'btn btn-primary'
-
+    .standard-header
+      %h2 Team Members 
+      = link_to "Invite User", new_business_invitation_path, remote: true, class: 'btn border-button2'
     .user-list
       - @users.each do |user|
         .user{:id => "user_#{user.id}" }
@@ -17,8 +15,6 @@
           .name= "#{user.first_name} #{user.last_name}"
           %i.glyphicon.glyphicon-remove
           .permissions= select_tag "user_role", options_for_select(["Admin", "Hiring Manager", "Recruiter"], user.role)
-
-
 
 .modal#basic-form-modal
   .modal-dialog

@@ -3,6 +3,7 @@
     .form-row-1
       .contain-1
         = f.text_field :title, id: "title_Block", placeholder: 'Enter Task', autocomplete: 'off'
+        %span#title_msgBlock
     .form-row-4
       .contain-2
         = f.text_field :due_date, placeholder: "Due Date"
@@ -10,6 +11,7 @@
         = f.text_field :due_time, id: "timepicker", placeholder: "Add Time"
       .contain-2
         = f.select :kind, options_for_select(["Schedule Interview", "To-do", "Send Assesment", "Finish Assessment"]), :prompt => "Type of Task...", id: "select-kind" 
+        %span#title_msgBlock
     = f.text_area :notes, id: "comment-body", placeholder: "Notes"  
     - if @taskable.class != Application
       .form-row-2
@@ -43,6 +45,7 @@
       = f.hidden_field :company_id, value: current_company.id
       = f.hidden_field :status, value: "active"
     .comment-area-footer
+      / = link_to "Delete", business_task_path(@task), remote: true, :method => :delete, class: 'btn border-button2'
       = f.submit @task.new_record? ? "+ Create Task" : "Update Task", class: "btn submit-button", id: "submit-comment-btn"
       .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
 
