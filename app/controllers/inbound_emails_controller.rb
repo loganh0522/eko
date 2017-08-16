@@ -21,4 +21,3 @@ class InboundEmailsController < ApplicationController
   end
 end
 
-https://prod-talentwiz.herokuapp.com/incoming_email
