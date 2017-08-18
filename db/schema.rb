@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170810134714) do
+ActiveRecord::Schema.define(version: 20170817143247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -174,6 +174,14 @@ ActiveRecord::Schema.define(version: 20170810134714) do
     t.string "phone"
     t.string "message"
     t.string "company"
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer  "company_id"
+    t.integer  "user_id"
+    t.integer  "candidate_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -495,7 +503,6 @@ ActiveRecord::Schema.define(version: 20170810134714) do
   create_table "messages", force: :cascade do |t|
     t.text     "body"
     t.string   "subject"
-    t.integer  "application_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -503,6 +510,7 @@ ActiveRecord::Schema.define(version: 20170810134714) do
     t.integer  "messageable_id"
     t.integer  "candidate_id"
     t.string   "thread_id"
+    t.integer  "conversation_id"
   end
 
   create_table "my_interviews", force: :cascade do |t|

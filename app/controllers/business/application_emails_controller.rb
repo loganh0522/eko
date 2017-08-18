@@ -7,7 +7,7 @@ class Business::ApplicationEmailsController < ApplicationController
   before_filter :company_deactivated?
 
   def edit
-    @application_email = ApplicationEmail.find(params[:id])
+    @email = ApplicationEmail.find(params[:id])
 
     respond_to do |format| 
       format.js
@@ -15,7 +15,8 @@ class Business::ApplicationEmailsController < ApplicationController
   end
 
   def update
-    @application_email = ApplicationEmail.find(params[:id])
+    @email = ApplicationEmail.find(params[:id])
+    
     respond_to do |format|
       if @application_email.update(e_temp_params)
         format.js

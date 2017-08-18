@@ -7,7 +7,7 @@ class Business::RejectionReasonsController < ApplicationController
   
   def index   
     @rejection_reasons = current_company.rejection_reasons
-    @application_email = current_company.application_emails.first
+    @email = current_company.application_email
   end
 
   def new

@@ -31,46 +31,45 @@ module OutlookWrapper
       
       data = {
         changeType: "created, updated",
-        notificationUrl: "https://d2a80095.ngrok.io/api/watch/outlookNotification",
+        notificationUrl: "https://talentwiz.ca/api/watch/outlookNotification",
         resource: "me/mailFolders('Inbox')/messages",
-        expirationDateTime:"2017-08-05T06:23:45.9356913Z",
+        expirationDateTime:"2017-08-19T06:23:45.9356913Z",
         clientState: "subscription-identifier"
       }
       
-      graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/beta',
-                                cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
+      graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0',
                                 &callback)
 
-      
+
       response = graph.service.post(path, data.to_json)
     end
   end
 
   class Mail
-    def self.send_message 
+    def self.send_message(user, subject, body, recipient_email)
       if user.outlook_token.expired?
         user.outlook_token.refresh!(user)
       end
 
       callback = Proc.new do |r| 
-        r.headers['Authorization'] = "Bearer #{token}"
-        r.headers['X-AnchorMailbox'] = email
+        r.headers['Authorization'] = "Bearer #{user.outlook_token.access_token}"
+        r.headers['X-AnchorMailbox'] = user.email
       end
 
-      graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v2.0',
+      graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0',
                                  &callback)
 
       @create = graph.me.send_mail(
         "message" => {
-          "subject" => "TalentWiz Test", 
+          "subject" => subject, 
           "body" => {
             "content_type" => "Text", 
-            "content" => "This is clearly working now"
+            "content" => body
           }, 
           "to_recipients" => [
             {
               "email_address" => {
-                "address" => "houston@talentwiz.ca"
+                "address" => recipient_email
               }
             }
           ]

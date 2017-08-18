@@ -5,22 +5,24 @@ class Business::MessagesController < ApplicationController
   before_filter :trial_over
   before_filter :company_deactivated?
   before_filter :load_messageable, except: [:new, :create, :destroy, :update, :multiple_messages]
-  before_filter :new_messageable, only: [:new]
-  
+  before_filter :new_messageable, only: [:new] 
   include AuthHelper
-  
+
   def index
     if params[:application_id].present?
       @candidate = Application.find(params[:application_id]).candidate
       @messages = @candidate.messages
+    elsif params[:candidate_id].present?
+       @candidate = Candidate.find(params[:candidate_id])
+       @messages = @candidate.messages
+       @messages = OutlookWrapper::User.create_subscription(current_user)
     else
       # token = current_user.outlook_token.access_token
       # email = current_user.email
       # @messages = OutlookWrapper::Mail.get_messages(token, email)
-      @messages = OutlookWrapper::User.create_subscription(current_user) 
-      @messages = current_user.messages
+       
+      # @messages = current_user.messages
     end
-
     respond_to do |format| 
       format.js
       format.html
@@ -37,22 +39,23 @@ class Business::MessagesController < ApplicationController
 
   def create 
     @candidate = Candidate.find(params[:candidate_id])
-    @message = @candidate.messages.build(message_params)        
+    if @candidate.conversation.present? 
+      @message = @candidate.messages.build(message_params.merge(conversation_id: @candidate.conversation.id))
+    else 
+      Conversation.create(candidate_id: @candidate.id, company_id: current_company.id)   
+      @conversation = Candidate.find(params[:candidate_id]).conversation
+      @message = @candidate.messages.build(message_params.merge(conversation_id: @conversation.id))
+    end
+
     respond_to do |format| 
       if @message.save 
-        track_activity(@message) 
-        @token = @candidate.token  
-        
-        if params[:job_id].present? 
-          send_email(@token, @message, @job, @candidate, current_company)
-        else
-          send_email(@token, @message, 'job', @candidate, current_company)
-        end
+        # track_activity(@message) 
         @messages = @candidate.messages
+        format.js 
       else
         render_errors(@message)
+        format.js 
       end
-      format.js 
     end
   end
 
@@ -61,21 +64,15 @@ class Business::MessagesController < ApplicationController
     
     applicant_ids.each do |id| 
       @candidate = Candidate.find(id)
-      @message = @candidate.messages.build(user_id: current_user.id, body: params[:body], subject: params[:subject])
-      @token = @candidate.token
-
-      if @candidate.manually_created == true
-        @recipient = @candidate
-      else
-        @recipient = @candidate.user
-      end
       
-      if params[:job_id].present?
-        @job = Job.find(params[:job_id])
-        AppMailer.send_applicant_message(@token, @message, @job, @recipient, current_company).deliver
+      if @candidate.conversation.present? 
+        @message = @candidate.messages.build(user_id: current_user.id, body: params[:body], subject: params[:subject], conversation_id: @candidate.conversation.id)
       else 
-        AppMailer.send_applicant_message(@token, @message, 'job', @recipient, current_company).deliver
+        Conversation.create(candidate_id: @candidate.id, company_id: current_company.id)   
+        @conversation = Candidate.find(params[:candidate_id]).conversation
+        @message = @candidate.messages.build(user_id: current_user.id, body: params[:body], subject: params[:subject], conversation_id: @conversation.id)
       end
+
       track_activity(@message, "create")
     end
     
@@ -107,24 +104,6 @@ class Business::MessagesController < ApplicationController
     end  
   end
 
-  def candidate_email(candidate)
-    if candidate.user.present? 
-      @email = candidate.user
-    else
-      @email = candidate
-    end
-    return @email
-  end
-
-  def send_email(token, message, job, recipient, current_company)
-    if current_user.google_token.present? 
-      @email = Mail.new(to: @recipient.email, from: current_user.email, subject: params[:message][:subject], body: params[:body], content_type: "text/html")
-      GoogleWrapper::Gmail.send_message(@email, current_user, message)
-    else 
-      AppMailer.send_applicant_message(token, message, job, recipient, current_company).deliver
-    end
-  end
-
   # def get_thread
   #   service.get_user_thread('me', "15b4e83fccf315c4").messages.first.payload.body
   # end
@@ -144,5 +123,4 @@ class Business::MessagesController < ApplicationController
       end
     end
   end
-
 end

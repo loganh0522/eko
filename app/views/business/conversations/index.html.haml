@@ -1,0 +1,31 @@
+.home-page-header
+  .top-info
+    %h1 Messages
+#main-container
+  .messages-side-container
+    - if @conversations.present? 
+      - @conversations.each do |conversation| 
+        = link_to business_conversation_path(conversation.id), remote: true do 
+          .conversation-container{:id => "convo_#{conversation.id}"}
+            - if conversation.candidate.manually_created == true 
+              .circle-img
+                %img(src="/tmp/little-man.png") 
+            - else
+              - if conversation.candidate.user.user_avatar.present? 
+                .circle
+                  = image_tag conversation.candidate.user.user_avatar.image.small_image, :size => "50x50" 
+              - else
+                .circle-img
+                  %img(src="/tmp/little-man.png") 
+            .details
+              .header
+                .name= conversation.candidate.full_name
+                .date= conversation.messages.last.created_at.strftime("%b %d")
+              .body
+                .from= "#{conversation.messages.last.user.first_name}:" 
+                .mess= simple_format(conversation.messages.last.body)
+    - else
+      .not-present-container 
+        %p There are currently no conversations
+  .messages-main-container
+      

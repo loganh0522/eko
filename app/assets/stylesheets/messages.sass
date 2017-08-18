@@ -1,10 +1,65 @@
 .messages-side-container
   background: #ffffff
   border: 1px solid rgba(0,0,0,0.1)
+  float: left  
+  width: 24%   
+  margin: 0px 1% 0 3%
+  position: absolute
+  height: 100%
+  .not-present-container
+    border: none
   
+  .conversation-container
+    overflow: hidden
+    border-bottom: 1px solid rgba(0,0,0,0.1)
+    height: 100px
+    &:hover
+      background: rgba(0,0,0,0.1)
+    .circle-img
+      float: left
+      margin-right: 3px
+      height: 60px
+      width: 60px
+      padding: 10px
+      margin: 20px 15px
+    .details
+      margin: 20px 0 
+      float: left
+      width: 69%
+      text-decoration: none
+      color: rgba(0,0,0,0.7)
+      overflow: hidden
+      height: 65px
+      .name 
+        float: left
+        width: 80%
+        font-size: 16px
+      .date 
+        float: right
+        width: 20%
+      .body
+        clear: both
+        .from
+          float: left
+          width: auto
+        .mess
+          float: left
+          width: auto
+          p
+            margin: 0 0
+            color: rgba(0,0,0,0.7)
+  .selected-conversation
+    border-left: 2px solid rgba(239, 123, 43, .9)
 
 
 .messages-main-container
-
+  float: right
+  margin-right: 3%
+  padding: 0px 0px 15px 0px
+  padding-left: 2.5em
+  width: 70%
+  margin-bottom: 100px
 
 .message
+
+

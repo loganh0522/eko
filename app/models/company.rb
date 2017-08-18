@@ -15,6 +15,7 @@ class Company < ActiveRecord::Base
   has_many :interviews
   has_many :interview_invitations
   has_many :rooms
+  has_many :conversations
   
   has_one :customer
   has_one :job_board
@@ -24,7 +25,7 @@ class Company < ActiveRecord::Base
   has_many :tags
   has_many :email_templates
   has_many :default_stages
-  has_many :application_emails
+  has_one :application_email
 
   has_many :tasks, as: :taskable, :dependent => :destroy
   has_many :tasks
@@ -96,6 +97,11 @@ class Company < ActiveRecord::Base
     reasons.each do |reason| 
       RejectionReason.create(body: reason, company_id: self.id)
     end
+  end
+
+  def company_messages 
+    self.candidates.messages
+
   end
 
   mapping do 

@@ -23,4 +23,6 @@ $(document).ajaxComplete ->
     return
   return
 
+  
+
 

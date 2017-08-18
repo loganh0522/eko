@@ -7,6 +7,7 @@ class Candidate < ActiveRecord::Base
   #   __elasticsearch__.update_document if self.published?
   # end
 
+  
   liquid_methods :first_name, :last_name, :full_name
   
   before_create :generate_token, :downcase_email
@@ -14,7 +15,7 @@ class Candidate < ActiveRecord::Base
   belongs_to :user
   has_many :applications, :dependent => :destroy
   has_many :jobs, through: :applications
-
+  has_one :conversation
   has_many :interviews
   
   has_many :invited_candidates
@@ -107,10 +108,26 @@ class Candidate < ActiveRecord::Base
     end
     return @tags
   end
- 
+
+  mapping _parent: { type: 'company'}, _routing: { required: true } do
+    indexes :id, type: 'integer'
+    indexes :first_name, type: 'string'
+    indexes :last_name, type: 'string'
+    indexes :email, type: 'string'
+    indexes :manually_created, type: 'boolean'
+    indexes :full_name, :type => :string
+    
+    indexes :rating, :type => :integer
+    
+    indexes :created_at, :type => :date
+  end
+
+  after_commit lambda { __elasticsearch__.index_document(parent: company_id)  },  on: :create
+  after_commit lambda { __elasticsearch__.update_document(parent: company_id) },  on: :update
+  after_commit lambda { __elasticsearch__.delete_document(parent: company_id) },  on: :destroy
+
   def as_indexed_json(options={})
     as_json(
-      _id: [:company_id],
       only: [:id, :first_name, :last_name, :email, :manually_created, :created_at],
       methods: [:tags_present, :full_name],
       

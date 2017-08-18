@@ -1,0 +1,2 @@
+$('.messages-main-container').html('<%= j render "business/conversations/conversation", messages: @messages %>');
+$('.messages-side-container').find('#convo_<%= @conversation.id %>').addClass('.selected-conversation');
