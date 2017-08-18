@@ -16,10 +16,11 @@ class InboundEmailsController < ApplicationController
 
 
   def outlook_webhook  
-    @token = params[:validationToken]
-    head 200, content_type: "text/plain", content_length: 7
-    response.body = @token
+    head 200, content_type: "text/plain"
+    render response.body = params[:validationToken]
   end
+
+
 end
 
 # https://prod-talentwiz.herokuapp.com/incoming_email

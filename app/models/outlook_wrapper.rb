@@ -24,7 +24,7 @@ module OutlookWrapper
       callback = Proc.new do |r| 
         r.headers['Authorization'] = "Bearer #{user.outlook_token.access_token}"
         r.headers['Content-Type'] = 'application/json'
-        r.headers['X-AnchorMailbox'] = user.email
+        
       end
 
       path = 'subscriptions'
@@ -38,8 +38,8 @@ module OutlookWrapper
       }
       
       graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0',
-                                &callback)
-
+                                 cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
+                                 &callback)
 
       response = graph.service.post(path, data.to_json)
     end
@@ -50,13 +50,13 @@ module OutlookWrapper
       if user.outlook_token.expired?
         user.outlook_token.refresh!(user)
       end
-
       callback = Proc.new do |r| 
         r.headers['Authorization'] = "Bearer #{user.outlook_token.access_token}"
-        r.headers['X-AnchorMailbox'] = user.email
+        # r.headers['X-AnchorMailbox'] = user.email
       end
 
       graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0',
+                                 cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                  &callback)
 
       @create = graph.me.send_mail(
