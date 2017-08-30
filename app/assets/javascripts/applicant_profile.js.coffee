@@ -6,7 +6,6 @@ jQuery ->
       $(this).css({'z-index':'1070'})
       $('.modal-backdrop').last().css({'z-index':'1060'})
 
-
 ########### Filter Jobs by Status ############
   $('.change-containers-nav').on 'click', '.job-status', (event) ->
     $('.change-containers-nav').find('.activated').removeClass('activated')
@@ -33,8 +32,6 @@ jQuery ->
     $('#basic-form-modal').find('#task_due_date').datepicker  
       dateFormat: 'yy-mm-dd'
     $('#basic-form-modal').find('#timepicker').timepicker()
-  
-    
     $('#timepicker2').timepicker()
     $("#geocomplete2").geocomplete()
 
@@ -55,13 +52,7 @@ jQuery ->
     console.log($(this).parent())
     $('#add_tag').show()
     $('.tag_form').remove()
-
-
-#################### Close Tag Form ######################
   
-  
-
-
 ###################### Insert Fluid Variable into E-mail #####################
   $('#insert-fluid-variable').change -> 
     if $('#insert-fluid-variable').val() == "Applicant First Name"
@@ -197,7 +188,6 @@ jQuery ->
   
   $(document).on 'click', '.close-form', (event) ->   
     if $(this).attr('id') == 'edit-form'
-      console.log($(this).parent().attr('id'))
       formobj = $(this).parent().attr('id').slice(5)
       $("#" + "#{formobj}").show()
       $(this).parent().parent().remove()

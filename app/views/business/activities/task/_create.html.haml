@@ -1,4 +1,4 @@
-.activity{:id => activity.action, :class => "#{activity.trackable_type} job_#{activity.job_id}"}      
+.activity{:id => activity.action, :class => "#{activity.trackable_type} job_#{activity.job_id}"}    
   .glyphicon.glyphicon-list
   .activity-body
     .activity-body-header
@@ -9,12 +9,15 @@
           .circle-img
             %img(src="/tmp/little-man.png") 
         .content 
-          = "#{activity.user.first_name} #{activity.user.last_name} created the task #{activity.trackable.kind}."
+          = "#{activity.user.first_name} #{activity.user.last_name} created the TASK #{activity.trackable.kind}."
           %br
           .time= "#{time_ago_in_words(activity.created_at)} ago" 
-    .activity-row
-      .title= "#{activity.trackable.title}"
-      .due-date= "#{activity.trackable.due_date} #{activity.trackable.due_time}"
+    .task-body
+      = link_to completed_business_tasks_path(id: "#{activity.trackable.id}"), method: :post, remote: true do 
+        .glyphicon.glyphicon-ok 
+      .details
+        .title= "#{activity.trackable.title}"
+        .due-date= "#{activity.trackable.due_date.strftime("%b %d")} by #{activity.trackable.due_time}"
     .activity-row
       .comment-body
         - if !activity.trackable.notes.present?

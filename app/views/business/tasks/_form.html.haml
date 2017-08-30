@@ -10,7 +10,7 @@
       .contain-2
         = f.text_field :due_time, id: "timepicker", placeholder: "Add Time"
       .contain-2
-        = f.select :kind, options_for_select(["Schedule Interview", "To-do", "Send Assesment", "Finish Assessment"]), :prompt => "Type of Task...", id: "select-kind" 
+        = f.select :kind, options_for_select(["Schedule Interview", "To-do", "Send Assessment", "Finish Assessment"]), :prompt => "Type of Task...", id: "select-kind" 
         %span#title_msgBlock
     = f.text_area :notes, id: "comment-body", placeholder: "Notes"  
     - if @taskable.class != Application

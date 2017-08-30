@@ -4,9 +4,9 @@
     - if @scorecard.present?
       .my-scorecard
         - if @current_user_scorecard.present? 
-          = link_to "My Scorecard", edit_business_job_application_application_scorecard_path(@job, @application, @current_user_scorecard), remote: true
+          = link_to "Edit My Scorecard", edit_business_job_application_application_scorecard_path(@job, @application, @current_user_scorecard), remote: true
         - else 
-          = link_to "My Scorecard", new_business_job_application_application_scorecard_path(@job, @application), remote: true 
+          = link_to "Create Scorecard", new_business_job_application_application_scorecard_path(@job, @application), remote: true 
   - if @scorecard.present?  
     .scorecard-details
       .sections
@@ -16,9 +16,9 @@
             %tbody
               - section.section_options.each do |criteria|
                 %tr
-                  %td(width="30%")= criteria.body
+                  %td.title(width="30%")= criteria.body
                   %td(width="70%")
-                    .scorecard-inputs
+                    .scorecard-results
                       - @application_scorecards.each do |scorecard| 
                         - scorecard.scorecard_ratings.each do |rating|
                           - if rating.rating == 1 && rating.section_option_id == criteria.id

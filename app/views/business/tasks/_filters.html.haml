@@ -1,20 +1,57 @@
 .applicant-filters
+  .filter-body
+    %ul  
+      = link_to business_tasks_path do 
+        %li.change#open-tasks.activated Open Tasks
+      = link_to due_today_business_tasks_path do 
+        %li.change#completed-tasks Due Today
+      = link_to overdue_business_tasks_path do 
+        %li.change#completed-tasks Overdue Tasks
+      = link_to complete_business_tasks_path do 
+        %li.change#completed-tasks Completed Tasks
+  .filter
+
   .filter
     .filter-header
-      %h4 Interview Type
+      %h4 Task Type
       .glyphicon.glyphicon-minus
       .glyphicon.glyphicon-plus
     .filter-body
       %ul
         %li 
-          .applicant-filter-checkbox{:data => {:id => "open", :filter => 'JobStatus'}}
-            = check_box_tag "", false, false, class: 'filter-checkbox'
-            .filter-title Phone Interview
-        %li.activity
-          .applicant-filter-checkbox{:data => {:id => "closed", :filter => 'JobStatus'}}
-            = check_box_tag "", false, false, class: 'filter-checkbox'
-            .filter-title In-person Interview
-        %li.activity  
-          .applicant-filter-checkbox{:data => {:id => "archived", :filter => 'JobStatus'}}
-            = check_box_tag "", false, false, class: 'filter-checkbox'
-            .filter-title Skype
+          = sortable "To-do", kind: ["To-do"]
+        %li 
+          = sortable "Send Assesment", kind: ["Send Assesment"]
+        %li 
+          = sortable "Email", kind: ["Email"]
+        %li 
+          = sortable "Schedule Interview", kind: ["Schedule Interview"]
+    .filter
+      .filter-header
+        %h4 Users
+        .glyphicon.glyphicon-minus
+        .glyphicon.glyphicon-plus
+      .filter-body
+        %ul
+          %li 
+            = sortable "To-do", user: ["To-do"]
+          %li 
+            = sortable "Send Assesment", user: ["Send Assesment"]
+          %li 
+            = sortable "Email", user: ["Email"]
+          %li 
+            = sortable "Schedule Interview", user: ["Schedule Interview"]
+  
+
+        /   .applicant-filter-checkbox{:data => {:id => "open", :filter => 'JobStatus'}}
+        /     = check_box_tag "", false, false, class: 'filter-checkbox'
+        /     .filter-title To-do 
+        / %li.activity
+        /   .applicant-filter-checkbox{:data => {:id => "closed", :filter => 'JobStatus'}}
+        /     = check_box_tag "", false, false, class: 'filter-checkbox'
+        /     .filter-title Schedule Interview
+        / %li.activity  
+        /   .applicant-filter-checkbox{:data => {:id => "archived", :filter => 'JobStatus'}}
+        /     = check_box_tag "", false, false, class: 'filter-checkbox'
+        /     .filter-title 
+

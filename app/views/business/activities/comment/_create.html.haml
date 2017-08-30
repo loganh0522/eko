@@ -9,8 +9,7 @@
           .circle-img
             %img(src="/tmp/little-man.png") 
         .content 
-          = "#{activity.user.first_name} #{activity.user.last_name} added a comment on #{activity.trackable.commentable.candidate.user.full_name}"
-          / = link_to "#{activity.trackable.commentable.full_name}'s application", business_job_application_path(activity.trackable.commentable.job.id, activity.trackable.commentable.id)     
+          = "#{activity.user.first_name} #{activity.user.last_name} added a comment on #{activity.trackable.commentable.candidate.user.full_name}" 
           %br
           .time= "#{time_ago_in_words(activity.created_at)} ago" 
     .activity-body-body

@@ -1,6 +1,10 @@
 module OutlookWrapper
   class User
     def self.get_user_email(outlook_token)
+      if user.outlook_token.expired?
+        user.outlook_token.refresh!(user)
+      end
+
       callback = Proc.new { |r| r.headers['Authorization'] = "Bearer #{outlook_token.access_token}"}
 
       graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0',
@@ -17,31 +21,33 @@ module OutlookWrapper
 
 
     def self.create_subscription(user)
-      if user.outlook_token.expired?
-        user.outlook_token.refresh!(user)
-      end
-     
+      # if user.outlook_token.expired?
+      #   user.outlook_token.refresh!(user)
+      # end
+      @token = user.outlook_token.access_token
+      
       callback = Proc.new do |r| 
-        r.headers['Authorization'] = "Bearer #{user.outlook_token.access_token}"
+        r.headers['Authorization'] = "Bearer #{@token}"
         r.headers['Content-Type'] = 'application/json'
-        
       end
 
       path = 'subscriptions'
       
       data = {
         changeType: "created, updated",
-        notificationUrl: "https://talentwiz.ca/api/watch/outlookNotification",
+        notificationUrl: ENV['OUTLOOK_WEBHOOK'],
         resource: "me/mailFolders('Inbox')/messages",
-        expirationDateTime:"2017-08-19T06:23:45.9356913Z",
+        expirationDateTime:"2017-08-30T23:23:45.9356913Z",
         clientState: "subscription-identifier"
       }
       
-      graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0',
+      graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/beta/',
                                  cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                  &callback)
 
-      response = graph.service.post(path, data.to_json)
+      graph.service.post(path, data.to_json)
+
+      head 200
     end
   end
 
@@ -50,9 +56,10 @@ module OutlookWrapper
       if user.outlook_token.expired?
         user.outlook_token.refresh!(user)
       end
+
+
       callback = Proc.new do |r| 
         r.headers['Authorization'] = "Bearer #{user.outlook_token.access_token}"
-        # r.headers['X-AnchorMailbox'] = user.email
       end
 
       graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0',
@@ -76,10 +83,14 @@ module OutlookWrapper
         })
     end
 
-    def self.get_messages(token, email)
+    def self.get_messages(user)
+      if user.outlook_token.expired?
+        user.outlook_token.refresh!(user)
+      end
+
       callback = Proc.new do |r| 
-        r.headers['Authorization'] = "Bearer #{token}"
-        r.headers['X-AnchorMailbox'] = email
+        r.headers['Authorization'] = "Bearer #{user.outlook_token.access_token}"
+        r.headers['X-AnchorMailbox'] = user.email
       end
 
       graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0',
@@ -87,6 +98,7 @@ module OutlookWrapper
                                  &callback)
 
       @messages = graph.me.mail_folders.find('inbox').messages.order_by('receivedDateTime desc')
+      binding.pry
     end
   end
 

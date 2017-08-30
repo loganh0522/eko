@@ -1,18 +1,18 @@
 class Job < ActiveRecord::Base
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks 
-  index_name ["talentwiz", Rails.env].join('_') 
+  # include Elasticsearch::Model
+  # include Elasticsearch::Model::Callbacks 
+  # index_name ["talentwiz", Rails.env].join('_') 
   
-  # after_commit on: [:update] do
-  #   __elasticsearch__.update_document 
-  # end
+  # # after_commit on: [:update] do
+  # #   __elasticsearch__.update_document 
+  # # end
 
   liquid_methods :title
   
   belongs_to :company
   has_many :questions, :dependent => :destroy
   has_one :scorecard, :dependent => :destroy
-
+  has_one :job_feed
   has_many :hiring_teams
   has_many :users, through: :hiring_teams
   
@@ -40,8 +40,10 @@ class Job < ActiveRecord::Base
   ########## Actions Taken After create ############ 
 
   after_validation :set_token, :convert_location, :job_url
-  after_save :set_token, :create_stages 
+  after_create :create_stages, :set_token, :create_job_feed
   
+  searchkick
+
   def create_stages
     @stages = self.company.default_stages
     @position = 1 
@@ -57,6 +59,10 @@ class Job < ActiveRecord::Base
 
   def set_token
     self.token = SecureRandom.hex(5)
+  end
+
+  def create_job_feed
+    JobFeed.create(job: self)
   end
 
   def convert_location
@@ -128,28 +134,51 @@ class Job < ActiveRecord::Base
 
   ################ Job Search Details ###################
 
+  def search_data
+    attributes.merge(
+      users: users.map(&:id),
+      candidates: candidates.map(&:id)
+    )
+  end
+
   def self.search(search)
 
   end
 
-  def as_indexed_json(options={})
-    as_json(
-      only: [:id, :title, :description, :status, :city, :country, :province,
-        :education_level, :career_level, :kind, :created_at, :updated_at, 
-        :start_salary, :end_salary, :location]
-    )
-  end
+  # mapping _parent: { type: 'company'}, _routing: {type: 'company', required: true } do
+  #   indexes :company_id, type: 'integer'
+  #   indexes :title, type: 'string'
+  #   indexes :description, type: 'string'
+  #   indexes :status, type: 'string'
+  #   indexes :city, type: 'boolean'
+  #   indexes :country, type: "string"
+  #   indexes :location, type: "integer"
+  #   indexes :created_at, type: "date"
+  #   indexes :update_at, type: "date"
+  # end
 
-  def self.search(query, options={})
-    search_definition = {
-      query: {
-        multi_match: {
-          query: query,
-          fields: ["title", "status"]
-        }
-      }
-    }
+  # after_commit lambda { __elasticsearch__.index_document(parent: company_id, routing: company_id) }, on: :create
+  # after_commit lambda { __elasticsearch__.update_document(parent: company_id, routing: company_id) }, on: :update
+  # after_commit lambda { __elasticsearch__.delete_document(parent: company_id, routing: company_id) }, on: :destroy
 
-    __elasticsearch__.search(search_definition)
-  end
+  # def as_indexed_json(options={})
+  #   as_json(
+  #     only: [:id, :title, :description, :status, :city, :country, :province,
+  #       :education_level, :career_level, :kind, :created_at, :updated_at, 
+  #       :start_salary, :end_salary, :location, :company_id]
+  #   )
+  # end
+
+  # def self.search(query, options={})
+  #   search_definition = {
+  #     query: {
+  #       multi_match: {
+  #         query: query,
+  #         fields: ["title", "status"]
+  #       }
+  #     }
+  #   }
+
+  #   __elasticsearch__.search(search_definition)
+  # end
 end

@@ -5,7 +5,6 @@
       %div#search-results
       .users
     .modal-footer
-      = hidden_field_tag :user_ids, :user_ids
-      = f.hidden_field :job_id, value: @job.id
+      = hidden_field_tag :user_ids
       = f.submit "Add Teammates", class: "btn submit-button"
       .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel  

@@ -26,14 +26,11 @@ class Business::HiringTeamsController < ApplicationController
   end
 
   def create    
-    @hiring_team = HiringTeam.create(team_params) 
-    
+    create_team 
     respond_to do |format| 
-      if @hiring_team.save
-        @job = Job.find(params[:job_id])
-        @users = @job.hiring_teams
-        format.js 
-      end
+      @job = Job.find(params[:hiring_team][:job_id])
+      @users = @job.hiring_teams
+      format.js 
     end  
   end 
 
@@ -52,7 +49,15 @@ class Business::HiringTeamsController < ApplicationController
 
   private 
 
+  def create_team 
+    @user_ids = params[:user_ids].split(',')
+
+    @user_ids.each do |id|
+      @hiring_team = HiringTeam.create(user_id: id, job_id: params[:hiring_team][:job_id]) 
+    end
+  end
+
   def team_params
-    params.require(:hiring_team).permit(:user_id, :job_id)
+    params.require(:hiring_team).permit(:user_ids, :job_id)
   end
 end

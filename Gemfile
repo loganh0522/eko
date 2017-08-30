@@ -3,6 +3,7 @@ ruby '2.1.2'
 
 gem 'rails', '4.2.4'
 gem 'pg', '0.20'
+gem 'puma', '~> 3.9'
 gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'sass-rails', '~> 5.0.1'
 gem 'uglifier', '>= 1.3.0'
@@ -56,7 +57,7 @@ gem 'omniauth-google-oauth2'
 gem 'google-api-client', '0.9'
 gem 'signet', '~> 0.7.3'
 
-gem 'microsoft_graph'
+gem 'microsoft_graph', github: 'loganh0522/msgraph-sdk-ruby'
 gem 'oauth2'
 gem 'activerecord-session_store'
 
@@ -68,9 +69,10 @@ gem 'bootstrap-colorpicker-rails'
 
 gem 'jquery-timepicker-rails'
 gem 'declarative_authorization'
+gem 'searchkick'
+
 
 group :development do
-  gem 'thin'
   gem "better_errors"
   gem "binding_of_caller"
   gem 'letter_opener'

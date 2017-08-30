@@ -11,5 +11,8 @@
       - task.users.each do |user|
         .tag= user.full_name
     .detail
-      .assigned= "Created by: #{task.user.full_name} "
+      .assigned Type
+      .tag= "#{task.kind}"
+    .detail
+      .assigned= "Created by: #{task.user.full_name}"
 

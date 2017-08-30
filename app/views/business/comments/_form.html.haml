@@ -4,5 +4,8 @@
     %span#body_msgBlock
     .comment-area-footer
       = f.submit @comment.new_record? ? "+ Add Note" : "Update", class: "btn submit-button", id: "submit-comment-btn"
-      = link_to "Cancel", "#", remote: true, class: 'btn border-button2', id: 'cancel'
+      - if @comment.new_record? 
+        .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+      - else
+        = link_to "Cancel", '#', class: "remove_form btn border-button2"
       = f.hidden_field :user_id, value: current_user.id

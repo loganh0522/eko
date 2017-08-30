@@ -1,0 +1,44 @@
+.page-header
+  %h2 Create a Job
+#post-a-job
+  .side-container
+    = render "business/shared/post_job"
+  .main-container
+    / = link_to business_job_feeds_path(@job, type: 'paid')
+    / = link_to business_job_feeds_path(@job, type: 'free')
+    .job-feed-container#adzuna-container
+      .header
+        %img(src="/tmp/adzuna_logo.png")
+      .body
+        = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { adzuna: true}), method: :put, remote: true, class: 'btn submit-button'
+    
+    .job-feed-container#trovit-container
+      .header
+        %img(src="/tmp/trovit_logo.png")
+      .body
+        = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { trovit: true}), method: :put, remote: true, class: 'btn submit-button'
+    
+    .job-feed-container#eluta-container
+      .header
+        %img(src="/tmp/eluta_logo.gif")
+      .body
+        = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { eluta: true}), method: :put, remote: true, class: 'btn submit-button'
+     
+    .job-feed-container#jooble-container
+      .header
+        %img(src="/tmp/jooble_logo.jpg")
+      .body
+        = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { jooble: true}), method: :put, remote: true, class: 'btn submit-button'
+    
+    .job-feed-container#jobinventory-container
+      .header
+        %img(src="/tmp/job_inventory_logo.jpg")
+      .body
+        = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { jobinventory: true}), method: :put, remote: true, class: 'btn submit-button'
+    
+    .job-feed-container#juju-container
+      .header
+        %img(src="/tmp/juju_logo.png")
+      .body
+        = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { juju: true}), method: :put, remote: true, class: 'btn submit-button'
+    

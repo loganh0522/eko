@@ -15,8 +15,7 @@ class Company < ActiveRecord::Base
   has_many :interviews
   has_many :interview_invitations
   has_many :rooms
-  has_many :conversations
-  
+  has_many :conversations  
   has_one :customer
   has_one :job_board
   has_many :clients
@@ -26,10 +25,8 @@ class Company < ActiveRecord::Base
   has_many :email_templates
   has_many :default_stages
   has_one :application_email
-
   has_many :tasks, as: :taskable, :dependent => :destroy
   has_many :tasks
-  
   has_many :subsidiaries
   has_many :locations
   
@@ -46,40 +43,7 @@ class Company < ActiveRecord::Base
   def generate_token
     self.widget_key = SecureRandom.urlsafe_base64
   end
-
-  def open_tasks
-    self.tasks.where(status: 'active')
-  end
-
-  def complete_tasks
-    self.tasks.where(status: 'complete')
-  end
-
-  def company_locations
-    @locations = []
-    self.jobs.each do |job|  
-      @locations.append(job.location) unless @locations.include?(job.location)
-    end
-    return @locations
-  end
-
-  def all_tasks
-    self.tasks
-  end
-
-  def open_jobs
-    self.jobs.where(status: "open")
-  end
-
-  def company_jobs
-    @jobs = []  
-    self.jobs.each do |job|  
-      @jobs.append(job.title) unless @jobs.include?(job.title)
-    end
-    return @jobs
-  end
-
-  def create_default_stages
+    def create_default_stages
     stages = ["Screen", "Phone Interview", "Interview", 
       "Group Interview", "Offer", "Hired"]
     @position = 1 
@@ -99,16 +63,69 @@ class Company < ActiveRecord::Base
     end
   end
 
+  ##### Task Methods #####
+
+  def all_tasks
+    self.tasks
+  end
+
+  def open_tasks
+    self.tasks.where(status: 'active')
+  end
+
+  def complete_tasks
+    self.tasks.where(status: 'complete')
+  end
+
+  def overdue_tasks
+    self.tasks.where("due_date <= ?", Time.now)
+  end
+
+  def tasks_due_today
+    self.tasks.where("due_date = ?", Time.now)
+  end
+
+  ### Company Locations ###
+
+  def company_locations
+    @locations = []
+    self.jobs.each do |job|  
+      @locations.append(job.location) unless @locations.include?(job.location)
+    end
+    return @locations
+  end
+
+  ### Job Methods ###
+
+  def open_jobs
+    self.jobs.where(status: "open")
+  end
+
+  def company_jobs
+    @jobs = []  
+    self.jobs.each do |job|  
+      @jobs.append(job.title) unless @jobs.include?(job.title)
+    end
+    return @jobs
+  end
+
   def company_messages 
     self.candidates.messages
-
   end
 
   mapping do 
+    indexes :id, type: 'integer'
     indexes :created_at, type: 'date'
-    indexes :candidates 
+    indexes :title, type: 'string'
+    indexes :website, type: 'string'
+    indexes :kind, type: 'string'
+    indexes :open_jobs, type: 'integer'
+    indexes :subscription, type: 'string'
   end
 
+  # after_commit lambda { __elasticsearch__.index_document}, on: :create
+  # after_commit lambda { __elasticsearch__.update_document}, on: :update
+  # after_commit lambda { __elasticsearch__.delete_document}, on: :destroy
 
   def as_indexed_json(options={})
     as_json(

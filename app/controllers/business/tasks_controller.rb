@@ -8,16 +8,42 @@ class Business::TasksController < ApplicationController
   before_filter :new_taskable, only: [:new]
 
   def index
-    if params[:status] == 'complete'
-      @tasks = @taskable.complete_tasks
+    if params[:application_id].present?
+      where = {}
+      where[:taskable_id] = params[:application_id]
+      where[:status] = 'active'
+      where[:company_id] = current_company.id
+      where[:kind] = params[:kind] if params[:kind].present?
+      @tasks = Task.search("*", where: where).to_a
     else
-      @tasks = @taskable.open_tasks
+      where = {}
+      where[:company_id] = current_company.id
+      where[:status] = 'active'
+      where[:kind] = params[:kind] if params[:kind].present?
+      @tasks = Task.search("*", where: where).to_a
     end
 
     respond_to do |format|
       format.js
       format.html
     end 
+  end
+
+  def complete
+    # @tasks = @taskable.complete_tasks
+
+    where = {}
+    where[:company_id] = current_company.id
+    where[:kind] = params[:kind] if params[:kind].present? 
+    @tasks = Task.search params[:query], where: where
+  end
+
+  def overdue
+    @tasks = @taskable.overdue_tasks
+  end
+
+  def tasks_due_today
+    @tasks = @taskable.due_today
   end
 
   def new 
@@ -120,7 +146,7 @@ class Business::TasksController < ApplicationController
   end
 
   def load_taskable
-    if request.path.split('/')[-3..-1][1] == "business"
+    if request.path.split('/')[-3..-1][1] == "business" || request.path.split('/')[-3..-1][0] == "business"
       @taskable = current_company
     else
       resource, id = request.path.split('/')[-3..-1]
@@ -129,7 +155,7 @@ class Business::TasksController < ApplicationController
   end
 
   def new_taskable
-    if request.path.split('/')[-3..-1][0] == "business"
+    if request.path.split('/')[-3..-1][0] == "business" 
       @taskable = current_company
     else
       resource, id = request.path.split('/')[-4..-2]

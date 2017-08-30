@@ -95,10 +95,19 @@ class Business::CandidatesController < ApplicationController
       }
 
     if params[:query].present?
-      @candidates = current_company.candidates.search(params[:query], options).records.to_a
+      @candidate = current_company.candidates.search(params[:query], options).records.to_a
     else
-      @candidates = current_company.candidates.search('', options).records.to_a
+      @candidate = current_company.candidates.search('', options).records.to_a
     end
+    
+    @candidates = []
+    
+    @candidate.each do |candidate| 
+      if candidate.company == current_company
+        @candidates.append(candidate)
+      end
+    end
+
     @tag = Tag.new
     respond_to do |format|
       format.js

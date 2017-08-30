@@ -16,9 +16,12 @@
       .calendar-nav-actions
         .actions
           = link_to "Create Task", new_business_task_path, remote: true, class: "btn border-button2"
-        .change-containers-nav
+        .change-containers-nav 
       .task-main-container
         = render 'business/tasks/tasks'
+
+
+
 
 .modal#basic-form-modal
   .modal-dialog

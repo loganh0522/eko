@@ -12,12 +12,13 @@ $(document).ajaxComplete ->
         $('.modal-body').find('.users').append('
           <div class="user"> <div class="name">' + ui.item.full_name  + '</div> <div class="glyphicon glyphicon-remove"> </div> </div>') 
 
-        if $('#' + idType + '_ids').val() == ''
+        if $('#user_ids').val() == ''
           values = ui.item.id
         else
           values =  $('#user_ids').val() + ',' + ui.item.id
-
         false
+        $('#user_ids').val values
+
     ).data('ui-autocomplete')._renderItem = (ul, item) ->
       $('<li>').attr('ui-item-autocomplete', item.value).append("<a>" + item.full_name + "</a>").appendTo ul 
     return

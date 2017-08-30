@@ -34,17 +34,25 @@
     .filter-body
       %ul
         %li 
-          .applicant-filter-checkbox{:data => {:id => "open", :filter => 'JobStatus'}}
-            = check_box_tag "", false, false, class: 'filter-checkbox'
-            .filter-title Active
-        %li.activity
-          .applicant-filter-checkbox{:data => {:id => "closed", :filter => 'JobStatus'}}
-            = check_box_tag "", false, false, class: 'filter-checkbox'
-            .filter-title Closed
-        %li.activity  
-          .applicant-filter-checkbox{:data => {:id => "archived", :filter => 'JobStatus'}}
-            = check_box_tag "", false, false, class: 'filter-checkbox'
-            .filter-title Archived 
+          = sortable "Open", job_status: "open"
+        %li 
+          = sortable "Closed", job_status: "closed"
+        %li 
+          = sortable "Archived", job_status: "archived"
+
+      / %ul
+      /   %li 
+      /     .applicant-filter-checkbox{:data => {:id => "open", :filter => 'JobStatus'}}
+      /       = check_box_tag "", false, false, class: 'filter-checkbox'
+      /       .filter-title Active
+      /   %li.activity
+      /     .applicant-filter-checkbox{:data => {:id => "closed", :filter => 'JobStatus'}}
+      /       = check_box_tag "", false, false, class: 'filter-checkbox'
+      /       .filter-title Closed
+      /   %li.activity  
+      /     .applicant-filter-checkbox{:data => {:id => "archived", :filter => 'JobStatus'}}
+      /       = check_box_tag "", false, false, class: 'filter-checkbox'
+      /       .filter-title Archived 
 
   .filter
     .filter-header
@@ -55,9 +63,10 @@
       %ul
         - current_company.company_jobs.each do |job| 
           %li.open-job
-            .applicant-filter-checkbox{:data => {:id => "#{job}", :filter => 'JobAppliedTo'}}
-              = check_box_tag "", false, false, class: 'filter-checkbox'
-              .filter-title #{job}
+            = sortable "#{job}", job: "#{job}"
+            / .applicant-filter-checkbox{:data => {:id => "#{job}", :filter => 'JobAppliedTo'}}
+            /   = check_box_tag "", false, false, class: 'filter-checkbox'
+            /   .filter-title #{job}
   .filter
     .filter-header
       %h4 Location Applied To
@@ -67,9 +76,10 @@
       %ul
         - current_company.company_locations.each do |location| 
           %li
-            .applicant-filter-checkbox{:data => {:id => "#{location}", :filter => 'LocationAppliedTo'}}
-              = check_box_tag "", false, false, class: 'filter-checkbox'
-              .filter-title #{location}
+            = sortable "#{location}", kind: "Schedule Interview"
+            / .applicant-filter-checkbox{:data => {:id => "#{location}", :filter => 'LocationAppliedTo'}}
+            /   = check_box_tag "", false, false, class: 'filter-checkbox'
+            /   .filter-title #{location}
 
   .filter 
     .filter-header

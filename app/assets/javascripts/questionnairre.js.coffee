@@ -12,6 +12,7 @@ jQuery ->
     event.preventDefault()
   
   $('.main-container').on 'click', '.remove_form', (event) ->
+    console.log("clicked")
     if $(this).closest('form').attr('class') == 'edit_question'
       qid = $(this).closest('form').attr('id').slice(5)
       $("#" + "#{qid}").show()
@@ -36,7 +37,6 @@ jQuery ->
     if val == "Checkbox" || val == "Multiple Choice"  
       time = new Date().getTime()
       regexp = new RegExp($(this).data('id'), 'g')
-      
       $(this).parent().after($(this).parent().next().data('fields'))
       $(this).parent().after($(this).parent().next().data('fields'))
       $(this).parent().nextAll('.answers').show()
@@ -93,4 +93,16 @@ jQuery ->
     $('#timepicker').timepicker()
 
 
-    
+  $('#main-container').on 'click', '.remove_form', (event) ->
+    if $(this).closest('form').attr('class') == 'edit_comment'
+      qid = $(this).closest('form').attr('id').slice(5)
+      $("#" + "#{qid}").find('.activity-body-body').find('.comment-body').show()
+      $(this).closest('form').remove()
+    else if $(this).closest('form').attr('class') == 'edit_application_scorecard'
+      qid = $(this).closest('form').attr('id').slice(5)
+      $("#" + "#{qid}").find('.activity-body-body').find('.comment-body').show()
+      $(this).closest('form').remove()
+    else
+      $(this).closest('.modal').toggle()
+    return
+    event.preventDefault()

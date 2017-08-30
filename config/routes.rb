@@ -2,13 +2,13 @@ Rails.application.routes.draw do
   post '/rate' => 'rater#create', :as => 'rate'
 
   if lambda {|r| r.subdomain != 'd2a80095'}
-    match '/', to: "job_boards#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'e1a328f9'}, via: [:get, :post, :put, :patch, :delete]
-    match 'login', to: "sessions#subdomain_new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'e1a328f9'}, via: [:get]
-    match 'login', to: "sessions#create", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'e1a328f9'}, via: [:post]
-    match 'jobs/:id', to: "jobs#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'e1a328f9'}, via: [:get, :post, :put, :patch, :delete]
-    match 'register', to: "users#sub_new_job_seeker", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'e1a328f9'}, via: [:get, :post, :put, :patch, :delete]
-    match 'profile', to: "profiles#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'e1a328f9'}, via: [:get, :post, :put, :patch, :delete]
-    match 'create-profile', to: "profiles#new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != 'e1a328f9'}, via: [:get, :post, :put, :patch, :delete]
+    match '/', to: "job_boards#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '9442e3c4'}, via: [:get, :post, :put, :patch, :delete]
+    match 'login', to: "sessions#subdomain_new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '9442e3c4'}, via: [:get]
+    match 'login', to: "sessions#create", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '9442e3c4'}, via: [:post]
+    match 'jobs/:id', to: "jobs#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '9442e3c4'}, via: [:get, :post, :put, :patch, :delete]
+    match 'register', to: "users#sub_new_job_seeker", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '9442e3c4'}, via: [:get, :post, :put, :patch, :delete]
+    match 'profile', to: "profiles#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '9442e3c4'}, via: [:get, :post, :put, :patch, :delete]
+    match 'create-profile', to: "profiles#new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '9442e3c4'}, via: [:get, :post, :put, :patch, :delete]
   end
 
   root to: 'pages#home'
@@ -52,7 +52,7 @@ Rails.application.routes.draw do
 
 
   post '/api/watch/outlookNotification', to: "inbound_emails#outlook_webhook"
-  
+ 
   resources :skills 
   resources :certifications
 
@@ -92,9 +92,13 @@ Rails.application.routes.draw do
     resources :interview_invitations
     resources :rooms
     post "update_password", to: 'users#update_password'
+    
     resources :tasks do 
       collection do 
         post :completed, to: "tasks#completed"
+        get :complete, to: "tasks#complete"
+        get :overdue, to: "tasks#overdue"
+        get :due_today, to: "tasks#due_today"
         post :create_multiple, to: "tasks#create_multiple"
       end
     end
@@ -215,9 +219,11 @@ Rails.application.routes.draw do
     end
     
     resources :jobs do 
-      post :close_job, to: "jobs#close_job"
-      post :archive_job, to: "jobs#archive_job"
-      post :publish_job, to: "jobs#publish_job"
+      get :close, to: "jobs#close_job"
+      get :archive, to: "jobs#archive_job"
+      get :publish, to: "jobs#publish_job"
+      
+
       get :promote, to: "jobs#promote"
       resources :questions
       resources :interviews
@@ -227,27 +233,30 @@ Rails.application.routes.draw do
       resources :tasks
       resources :hiring_teams
       
+      resources :job_feeds do
+        get :premium, to: "premium#job_feeds"
+      end
+      
       resources :applications do
         get :application_form, to: "applications#application_form"
         get :application_activity, to: "activities#application_activity"
-        resources :messages
         resources :activities
+        resources :messages
         resources :comments
         resources :application_scorecards
         resources :assessments
         resources :tags       
+        
         resources :scorecards do 
           collection do 
             post :my_scorecard
           end
-        end  
+        end 
 
         get :move_stages        
         post :reject, to: "applications#reject"
       end
       
-      
-
       resources :questionairres do 
         resources :questions
       end

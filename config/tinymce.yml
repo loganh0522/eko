@@ -1,13 +1,13 @@
 default: 
   toolbar: false
-    - styleselect | bold italic underline | undo redo | image link
+    - bold italic underline | undo redo | image link
   plugins:
     - image
     - link
     - noneditable
   menubar: false
 
-  content_css: asset_path 'tinymce.sass'
+  # content_css: asset_path 'tinymce.sass'
   # noneditable_noneditable_class: "class_one"
   # noneditable_regexp: /\{\{[^\]]+\}\}/g
 

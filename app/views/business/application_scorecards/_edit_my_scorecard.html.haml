@@ -1,14 +1,13 @@
 = form_for [:business, @job, @application, @current_user_scorecard], html: {remote: true} do |f|
-  - @sections.each do |section|
-    %table.table
-      %thead
-        %tr
-          %th(width="20%")= section.body
-          %th(width="80%")  
+  .scorecard-details
+    .sections
+      - @sections.each do |section|
+        %h4= section.body
+        %table.table
           - section.section_options.each do |criteria|
             %tbody   
               %tr
-                %td= criteria.body
+                %td.title= criteria.body
                 %td  
                   - if criteria.scorecard_ratings.present?
                     - criteria.scorecard_ratings.each do |rating|
@@ -20,7 +19,6 @@
                           .scorecard-inputs
                             = q.radio_button :rating, 1, class: 'application-scorecard-rating', id: "rating_#{criteria.id}_1"
                             %label.glyphicon.glyphicon-remove{:for => "rating_#{criteria.id}_1"}
-        
                             = q.radio_button :rating, 2, class: 'application-scorecard-rating', id: "rating_#{criteria.id}_2"
                             %label.glyphicon.glyphicon-thumbs-down{:for => "rating_#{criteria.id}_2"}
 
@@ -45,9 +43,9 @@
 
                         = q.radio_button :rating, 4, class: 'application-scorecard-rating', id: "rating_#{criteria.id}_4"
                         %label.glyphicon.glyphicon-star{:for => "rating_#{criteria.id}_4"}
-
-
-      = f.hidden_field :application_id, value: @application.id
-      = f.hidden_field :user_id, value: current_user.id
-      = f.hidden_field :scorecard_id, value: @scorecard.id
-  = f.submit "Submit", class: "btn btn-primary"
+        = f.hidden_field :application_id, value: @application.id
+        = f.hidden_field :user_id, value: current_user.id
+        = f.hidden_field :scorecard_id, value: @scorecard.id
+    .scorecard-footer
+      = f.submit "Submit", class: "btn submit-button"
+      = link_to "Cancel", '#', class: "remove_form btn border-button2"

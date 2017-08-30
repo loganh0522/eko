@@ -6,7 +6,20 @@ module ApplicationHelper
     fields = f.fields_for(association, new_object, child_index: id) do |builder|
       render(association.to_s.singularize + "_fields", f: builder)
     end
+
     link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", ""), :add_field => 'add_field'}, style: "display:#{name == "Add Answer" ? "none" : ""}" )
+  end
+
+  def sortable(action, params)
+    title ||= action.titleize
+
+    if request.query_parameters[params.first[0].to_s].present?
+      request.query_parameters[params.first[0].to_s].push(params.first[1][0])
+      link_to title, request.query_parameters
+    else
+      link_to title, request.query_parameters.merge(params)
+    end
+    
   end
 
   def taskable_link(task)

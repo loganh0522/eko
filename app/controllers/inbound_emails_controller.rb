@@ -15,9 +15,13 @@ class InboundEmailsController < ApplicationController
   end
 
 
-  def outlook_webhook  
-    head 200, content_type: "text/plain"
-    render response.body = params[:validationToken]
+  def outlook_webhook
+    render text: params[:validationToken]
+
+    # respond_to do |format|
+    #   format.html { render nothing: true, status: 200, content_type: "text/plain" }
+    # end
+    return
   end
 
 

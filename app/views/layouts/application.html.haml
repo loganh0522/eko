@@ -11,7 +11,7 @@
     <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyABHyEmDvxwvbiHWIYaEDBFwxHmUjRiKic&libraries=places"></script>
     
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'/>
-    <script type="text/javascript" src="/assets/tinymce.js"></script>
+    
   %body
     %header
       - unless request.path == new_job_seeker_profile_path 
@@ -19,6 +19,5 @@
     %section
       = render "/shared/messages"
       = yield 
-  
   %footer
 

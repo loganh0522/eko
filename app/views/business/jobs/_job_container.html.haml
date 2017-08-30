@@ -15,18 +15,18 @@
             %b.caret
           %ul.dropdown-menu
             %li
-              %a= link_to "Edit Job Posting", edit_business_job_path(job.id)
+              %a= link_to "Edit Job Posting", edit_business_job_path(job)   
             - if job.status == 'draft'
               %li
-                %a= link_to "Publish Job", business_job_path(job, status: "open"), method: :put
+                %a= link_to "Publish Job", business_job_publish_path(job), remote: true  
             - elsif job.status == 'open'
               %li
-                %a= link_to "Close Job", business_job_path(job, status: "closed"), method: :put
+                %a= link_to "Close Job", business_job_close_path(job), remote: true
             - elsif job.status == 'closed'
               %li
-                %a= link_to "Publish Job", business_job_path(job, status: "open"), method: :put
+                %a= link_to "Publish Job", business_job_publish_path(job), remote: true
               %li 
-                %a= link_to "Archive Job", business_job_path(job, status: "archive"), method: :put
+                %a= link_to "Archive Job", business_job_archive_path(job), remote: true
 
     .left-scroll
       %img(src="/tmp/left_arrow.png")
