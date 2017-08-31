@@ -57,6 +57,12 @@ class Business::CandidatesController < ApplicationController
     end
     
     respond_to do |format|
+      format.html { 
+        @candidates = current_company.candidates.where(id: params[:id])
+        @tag = Tag.new
+        @tags = current_company.tags
+        render action: :index 
+      }
       format.js
     end  
   end

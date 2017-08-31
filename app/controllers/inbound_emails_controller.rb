@@ -16,15 +16,14 @@ class InboundEmailsController < ApplicationController
 
 
   def outlook_webhook
-    render text: params[:validationToken]
-
-    # respond_to do |format|
-    #   format.html { render nothing: true, status: 200, content_type: "text/plain" }
-    # end
-    return
+    notifications = params[:value] || []
+    if notifications.any?
+      # Your processing
+      head 202
+    else
+      render text: params[:validationToken]
+    end
   end
-
-
 end
 
 # https://prod-talentwiz.herokuapp.com/incoming_email

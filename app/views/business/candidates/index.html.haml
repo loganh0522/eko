@@ -36,3 +36,7 @@
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
           %h4.modal-title Add to Job 
         .modal-body
+
+- if @candidate.present? 
+  :javascript
+    $('.names a:first').trigger("click");

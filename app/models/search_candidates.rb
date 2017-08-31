@@ -1,4 +1,4 @@
-# include Elasticsearch::Model
+  # include Elasticsearch::Model
   # include Elasticsearch::Model::Callbacks  
   # index_name ["talentwiz", Rails.env].join('_') 
 

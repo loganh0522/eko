@@ -19,7 +19,6 @@ module ApplicationHelper
     else
       link_to title, request.query_parameters.merge(params)
     end
-    
   end
 
   def taskable_link(task)

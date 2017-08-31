@@ -76,6 +76,7 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
   gem 'letter_opener'
+  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
 end
 
 group :development, :test do

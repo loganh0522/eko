@@ -1,17 +1,17 @@
 class Business::MessagesController < ApplicationController 
   # filter_resource_access
-  before_filter :require_user
-  before_filter :belongs_to_company
-  before_filter :trial_over
-  before_filter :company_deactivated?
-  before_filter :load_messageable, except: [:new, :create, :destroy, :update, :multiple_messages]
-  before_filter :new_messageable, only: [:new] 
-  include AuthHelper
+  # before_filter :require_user
+  # before_filter :belongs_to_company
+  # before_filter :trial_over
+  # before_filter :company_deactivated?
+  # before_filter :load_messageable, except: [:new, :index, :create, :destroy, :update, :multiple_messages]
+  # before_filter :new_messageable, only: [:new] 
+  # include AuthHelper
 
   def index
     if params[:application_id].present?
-      @candidate = Application.find(params[:application_id]).candidate
-      @messages = @candidate.messages
+    #   @candidate = Application.find(params[:application_id]).candidate
+    #   @messages = @candidate.messages
     elsif params[:candidate_id].present?
        # @candidate = Candidate.find(params[:candidate_id])
        # @messages = @candidate.messages
@@ -24,6 +24,7 @@ class Business::MessagesController < ApplicationController
        
       # @messages = current_user.messages
     end
+
     respond_to do |format| 
       format.js
       format.html

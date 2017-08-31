@@ -21,9 +21,9 @@ module OutlookWrapper
 
 
     def self.create_subscription(user)
-      # if user.outlook_token.expired?
-      #   user.outlook_token.refresh!(user)
-      # end
+      if user.outlook_token.expired?
+        user.outlook_token.refresh!(user)
+      end
       @token = user.outlook_token.access_token
       
       callback = Proc.new do |r| 
@@ -44,10 +44,10 @@ module OutlookWrapper
       graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/beta/',
                                  cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                  &callback)
-
-      graph.service.post(path, data.to_json)
-
-      head 200
+      
+      response = graph.service.post(path, data.to_json)
+      
+      true
     end
   end
 
