@@ -1,4 +1,5 @@
 class Business::CommentsController < ApplicationController 
+  layout "business"
   # filter_access_to :all
   before_filter :require_user
   before_filter :belongs_to_company
@@ -7,9 +8,16 @@ class Business::CommentsController < ApplicationController
   before_filter :load_commentable, except: [:new, :destroy, :update, :add_note_multiple]
   before_filter :new_commentable, only: [:new]
 
+  def job_comments
+    @comments = @commentable.comments
+    @comment = Comment.new
+    @job = @commentable
+  end
+  
   def index
     @comments = @commentable.comments
     @comment = Comment.new
+
     respond_to do |format|
       format.js
     end 

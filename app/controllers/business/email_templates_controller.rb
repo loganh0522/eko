@@ -1,4 +1,5 @@
 class Business::EmailTemplatesController < ApplicationController
+  layout "business"
   # filter_access_to :all
   # filter_access_to :filter_candidates, :require => :read
   before_filter :require_user

@@ -1,15 +1,20 @@
 class Business::ActivitiesController < ApplicationController
-  filter_access_to :all
-  filter_access_to :filter_candidates, :require => :read
+  layout "business"
+  # filter_access_to :all
+  # filter_access_to :filter_candidates, :require => :read
+
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
   
-  def index   
-    if !params[:application_id].present? && params[:job_id].present?
-      @job = Job.find(params[:job_id])
-    elsif params[:application_id].present?
+  def job_activity
+    @job = Job.find(params[:job_id])
+    @job.activities
+  end
+  
+  def index    
+    if params[:application_id].present?
       @application = Application.find(params[:application_id])
       @activities = @application.activities
     else

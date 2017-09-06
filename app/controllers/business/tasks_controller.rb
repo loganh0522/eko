@@ -1,11 +1,32 @@
 class Business::TasksController < ApplicationController
   # filter_access_to :all
+  layout "business"
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
   before_filter :load_taskable, except: [:new, :destroy, :create_multiple, :completed]
   before_filter :new_taskable, only: [:new]
+
+  def job_tasks
+    @job = @taskable
+    where = {}
+    if params[:query].present? 
+      query = params[:query] 
+    else 
+      query = "*"
+    end   
+    where[:client_id] = params[:client_id] if params[:client_id].present?
+    where[:company_id] = current_company.id
+    where[:status] = 'active'
+    where[:kind] = params[:kind] if params[:kind].present?
+    @tasks = Task.search(query, where: where).to_a
+
+    respond_to do |format|
+      format.js
+      format.html
+    end 
+  end
 
   def index
     if params[:application_id].present?

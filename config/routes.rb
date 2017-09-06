@@ -219,6 +219,8 @@ Rails.application.routes.draw do
     end
     
     resources :jobs do 
+      
+
       get :close, to: "jobs#close_job"
       get :archive, to: "jobs#archive_job"
       get :publish, to: "jobs#publish_job"
@@ -226,11 +228,19 @@ Rails.application.routes.draw do
 
       get :promote, to: "jobs#promote"
       resources :questions
-      resources :interviews
-      resources :comments
-      resources :activities
+      resources :interviews, except: [:index]
+      get 'interviews', to: 'interviews#job_interviews'
+
+      resources :comments, except: [:index]
+      get 'comments', to: "comments#job_comments"
+ 
+      get "/activities", to: 'activities#job_activity'
       resources :tags
-      resources :tasks
+      
+      resources :tasks, except: [:index]
+      get 'tasks', to: "tasks#job_tasks"
+
+
       resources :hiring_teams
       
       resources :job_feeds do

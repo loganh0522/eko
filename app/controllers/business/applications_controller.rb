@@ -1,4 +1,5 @@
 class Business::ApplicationsController < ApplicationController
+  layout "business"
   # filter_access_to :all
   # filter_access_to [:filter_applicants, :application_form], :require => :read
   before_filter :require_user

@@ -1,5 +1,5 @@
 class Business::CustomersController < ApplicationController
-  
+  layout "business"
   before_filter :require_user
   before_filter :belongs_to_company
   

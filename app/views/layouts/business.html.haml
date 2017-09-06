@@ -1,0 +1,22 @@
+!!! 5
+%html
+  %head
+    %title Talentwiz
+    %meta(charset="UTF-8")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    = csrf_meta_tag
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application" 
+
+    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyABHyEmDvxwvbiHWIYaEDBFwxHmUjRiKic&libraries=places"></script>
+    
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'/>
+    
+  %body
+    %header
+      - unless request.path == new_job_seeker_profile_path 
+        = render "/shared/business_header"   
+    %section
+      = render "/shared/messages"
+      = yield 
+  %footer

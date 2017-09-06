@@ -13,6 +13,7 @@ gem 'coffee_routes'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'jquery-turbolinks'
 gem 'responders', '~> 2.0'
 
 gem 'will_paginate', '~> 3.1.0'

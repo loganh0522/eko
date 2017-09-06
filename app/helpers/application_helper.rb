@@ -32,6 +32,10 @@ module ApplicationHelper
 
     link_to(@name, '', data: {remote: true})
   end
+  
+  def is_activated?(link_path)
+    current_page?(link_path) ? "activated" : ""
+  end
 
   def is_active?(link_path)
     current_page?(link_path) ? "active" : ""

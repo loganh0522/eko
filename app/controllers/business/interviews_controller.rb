@@ -1,18 +1,21 @@
 class Business::InterviewsController < ApplicationController
-  filter_access_to :all
+  layout "business"
+  # filter_access_to :all
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
-  include AuthHelper
+  # include AuthHelper
+  
+  
+  def job_interviews
+    @job = Job.find(params[:job_id])
+    @interviews = @job.interviews
+  end
   
   def index
-    if params[:job_id].present?
-      @job = Job.find(params[:job_id])
-      @interviews = @job.interviews
-    else
-      @interviews = current_company.interviews
-    end
+    @interviews = current_company.interviews
+
     # OutlookWrapper::Calendar.create_event(current_user, "2017-07-24T9:00pm", "2017-07-24T9:30pm")
     # @date = params[:date] ? Date.parse(params[:date]) : Date.today
     # @interviews_by_date = @interviews.group_by(&:start)

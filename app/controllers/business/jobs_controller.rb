@@ -1,4 +1,5 @@
 class Business::JobsController < ApplicationController
+  layout "business"
   # filter_access_to :all
   # filter_access_to [:close_job, :promote], :require => :read
   # filter_access_to :publish_job, :require => :read

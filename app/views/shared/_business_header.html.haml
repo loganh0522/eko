@@ -1,0 +1,56 @@
+.navbar-fixed-top 
+  .business_nav
+    .content
+      = link_to business_jobs_path do
+        %img.logo(src="/tmp/logo.jpg")       
+      %ul
+        %li= link_to "JOBS", business_jobs_path   
+        - if permitted_to? :read, :business_candidates
+          %li= link_to "CANDIDATES", business_candidates_path   
+        - if permitted_to? :read, :business_activities
+          %li= link_to "ACTIVITY", business_activities_path    
+        - if permitted_to? :read, :business_tasks
+          %li= link_to "TASKS", business_tasks_path
+        - if permitted_to? :read, :business_clients
+          %li= link_to "CLIENTS", business_clients_path if current_company.kind == "recruiter" 
+        - if permitted_to? :read, :business_clients
+          %li
+            = link_to business_interviews_path do
+              .glyphicon.glyphicon-calendar
+        %li
+          = link_to business_conversations_path do
+            .glyphicon.glyphicon-envelope
+        / %li 
+        /   = link_to business_notifications_path do
+        /     .glyphicon.glyphicon-globe
+      = link_to "Post a Job", new_business_job_path, class: "post-job-nav"
+    .dropdown
+      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+        - if current_user.user_avatar.present? 
+          = image_tag current_user.user_avatar.image.small_image, :class => "img dropdown-img"
+        - else
+          .circle-img= current_user.first_name.first.capitalize
+        = current_user.first_name
+        %b.caret
+      %ul.dropdown-menu.dropdown-menu-right
+        - if permitted_to? :manage, @career_portal
+          %li
+            %a= link_to "Career Portal", business_job_board_path(current_company.job_board.id)
+          %li
+            %a= link_to "Team Members", business_users_path
+          %li
+            %a= link_to "Company Details", business_company_path(current_company)
+          %li
+            %a= link_to "Hiring Pipeline", business_default_stages_path
+          %li
+            %a= link_to "Hiring Defaults", business_hiring_defaults_path
+          %li
+            %a= link_to "Templates", business_templates_path
+          %li
+            %a= link_to "Subscription", business_plan_path
+          %li
+            %a= link_to "Billing", business_customers_path
+        %li
+          %a= link_to "My Profile", business_user_path(current_user)
+        %li
+          %a= link_to "Sign Out", signout_path

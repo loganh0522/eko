@@ -194,6 +194,9 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-timepicker-rails (1.11.10)
       railties (>= 3.1.0)
+    jquery-turbolinks (2.1.0)
+      railties (>= 3.1.0)
+      turbolinks
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     json (1.8.6)
@@ -419,6 +422,7 @@ DEPENDENCIES
   jquery-fileupload-rails
   jquery-rails
   jquery-timepicker-rails
+  jquery-turbolinks
   jquery-ui-rails
   letter_opener
   liquid (~> 3.0, >= 3.0.6)
