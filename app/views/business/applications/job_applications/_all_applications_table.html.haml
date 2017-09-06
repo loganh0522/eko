@@ -4,19 +4,13 @@
       = render 'business/applications/job_applications/job_stages'
     .application-actions
       = render 'business/applications/job_applications/application_actions'
-      = render "business/applications/move_stages"
-      = render "business/comments/add_comment"
-      = render "business/messages/send_message"
-      = render "business/tags/add_tags"
-      = render "business/tasks/create_multiple"
     .main-container 
-      = render 'business/applications/job_applications/applications'
+      = render 'business/applications/job_applications/applications_table'
     .side-container
       = render 'business/applications/job_applications/all_application_filters'
 
-.modal#applicant-modal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-      .modal-body
+= render "business/applications/move_stages"
+= render "business/comments/add_comment"
+= render "business/messages/send_message"
+= render "business/tags/add_tags"
+= render "business/tasks/create_multiple"

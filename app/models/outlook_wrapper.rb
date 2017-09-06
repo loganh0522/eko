@@ -46,7 +46,7 @@ module OutlookWrapper
                                  &callback)
       
       response = graph.service.post(path, data.to_json)
-      
+      binding.pry
       true
     end
   end

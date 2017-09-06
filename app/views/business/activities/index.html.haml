@@ -2,12 +2,14 @@
   .top-info
     %h1 Activity
 #main-container
-  .main-container
-    .activity-feed
-      - @activities.each do |activity|         
-        = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity
-  .side-container
-    = render 'business/activities/filters'
+  #activity-container
+    .side-container
+      = render 'business/activities/filters'
+    .main-container
+      .activity-feed
+        - @activities.each do |activity|         
+          = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity
+  
   
 
 

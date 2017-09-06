@@ -1,19 +1,27 @@
-%table.table
-  %thead
-    %tr
-      %th(width="1%")
-        #select_all= check_box_tag 'Select All', class: 'select_all_applicants'
-      %th(width="10%")
-      %th(width="25%") Name 
-      %th(width="20%") Stage
-      %th(width="20%") Rating 
-      %th(width="25%") Date Applied
+.applicants
+  .applicant-table-body
+    %table.table
+      %thead
+        %tr
+          %th(width="1%")
+            #select_all= check_box_tag 'Select All', class: 'select_all_applicants'
+          %th(width="10%")
+          %th(width="25%") Name 
+          %th(width="20%") Stage
+          %th(width="20%") Rating 
+          %th(width="25%") Date Applied
+        %tbody
+          - @applications.each do |application|
+            - if application.candidate.manually_created == true
+              = render 'business/shared/manual_application_rows', application: application
+            - else
+              = render 'business/shared/user_applications_table_rows', application: application
+    .not-present-container
+      %p There are currently no applicants in this stage.
 
-    %tbody
-      - @applications.each do |application|
-        - if application.candidate.manually_created == true
-          = render 'business/shared/manual_application_rows', application: application
-        - else
-          = render 'business/shared/user_applications_table_rows', application: application
-.not-present-container
-  %p There are currently no applicants in this stage.
+.modal#applicant-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+      .modal-body

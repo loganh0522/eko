@@ -21,8 +21,8 @@
   validates_presence_of :description, :message => "Description can't be blank"
   validates_presence_of :start_month, :message => "Start Month can't be blank"
   validates_presence_of :start_year, :message => "Start Year can't be blank"
-  validates_presence_of :industry_ids, :message => "Industry can't be blank"
-  validates_presence_of :function_ids, :message => "Function can't be blank"
+  # validates_presence_of :industry_ids, :message => "Industry can't be blank"
+  # validates_presence_of :function_ids, :message => "Function can't be blank"
   validates_presence_of :end_month, :end_year, :unless => :current_position?
   validates_presence_of :current_position, :unless => :end_year?
 

@@ -9,29 +9,26 @@ class Business::JobsController < ApplicationController
   before_filter :owned_by_company, only: [:edit, :show, :update]
 
   def index
-    if params[:client_id].present?
-      @client = Client.find(params[:client_id])
-      @jobs = @client.jobs
-    elsif params[:status].present?    
-      if current_user.role == "Admin"
-        @jobs = current_company.jobs.where(status: params[:status])   
-      else
-        @jobs = current_user.jobs.where(status: params[:status])  
-      end
-      respond_to do |format|
-        format.js 
-      end
+    where = {}
+    
+    if params[:query].present? 
+      query = params[:query] 
     else 
-      if current_user.role == "Admin"
-        @jobs = current_company.jobs.where(status: 'open') 
-      else
-        @jobs = current_user.jobs.where(status: 'open') 
-      end
-      respond_to do |format|
-        format.html
-        format.js 
-      end
-    end 
+      query = "*"
+    end
+
+    where[:status] =  "open"
+    where[:client_id] = params[:client_id] if params[:cliend_id].present?
+    where[:company_id] = current_company.id
+    where[:status] = params[:status] if params[:status].present?
+    where[:kind] = params[:kind] if params[:kind].present?
+
+    @jobs = Job.search(query, where: where, fields: [:title]).to_a
+    
+    respond_to do |format|
+      format.html
+      format.js 
+    end
   end
 
   def new

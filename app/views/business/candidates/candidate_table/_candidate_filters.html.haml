@@ -1,110 +1,89 @@
 %h4#filter-header Filters
-/ .filter
-/   .filter-header
-/     %h4 Location
-/     .glyphicon.glyphicon-minus
-/     .glyphicon.glyphicon-plus
-/   .filter-body
-/     #geocomplete= text_field_tag :city, "", id: "geocomplete", placeholder: "Enter a City"
-.applicant-filters
-  .filter
-    .filter-header
-      %h4 Rating
-      .glyphicon.glyphicon-minus
-      .glyphicon.glyphicon-plus
-    .filter-body 
-      = render 'business/ratings/rating_filter'
-  .filter
-    .filter-header
-      %h4 Tags
-      .glyphicon.glyphicon-minus
-      .glyphicon.glyphicon-plus
-    .filter-body
-      %ul
-        - @tags.each do |tag| 
-          %li
-            .applicant-filter-checkbox{:data => {:id => "#{tag.name}", :filter => 'Tags'}}
-              = check_box_tag "", false, false, class: 'filter-checkbox'
+= form_tag business_candidates_path, :method => 'get', id: "search-form" do
+  = text_field_tag "query", nil, placeholder: "Search Candidates by Keyword", class: "search-field"
+  .applicant-filters
+    .filter-container
+      .filter-header
+        %h4 Rating
+        .glyphicon.glyphicon-minus
+        .glyphicon.glyphicon-plus
+      .filter-body 
+        = render 'business/ratings/rating_filter'
+    .filter-container
+      .filter-header
+        %h4 Tags
+        .glyphicon.glyphicon-minus
+        .glyphicon.glyphicon-plus
+      .filter-body
+        %ul
+          - @tags.each do |tag| 
+            %li
+              = check_box_tag "tags[]", "#{tag.name}", false, class: 'filter'
               .filter-title #{tag.name.capitalize}
-  .filter
-    .filter-header
-      %h4 Job Status
-      .glyphicon.glyphicon-minus
-      .glyphicon.glyphicon-plus
-    .filter-body
-      %ul
-        %li 
-          = sortable "Open", job_status: "open"
-        %li 
-          = sortable "Closed", job_status: "closed"
-        %li 
-          = sortable "Archived", job_status: "archived"
-
-      / %ul
-      /   %li 
-      /     .applicant-filter-checkbox{:data => {:id => "open", :filter => 'JobStatus'}}
-      /       = check_box_tag "", false, false, class: 'filter-checkbox'
-      /       .filter-title Active
-      /   %li.activity
-      /     .applicant-filter-checkbox{:data => {:id => "closed", :filter => 'JobStatus'}}
-      /       = check_box_tag "", false, false, class: 'filter-checkbox'
-      /       .filter-title Closed
-      /   %li.activity  
-      /     .applicant-filter-checkbox{:data => {:id => "archived", :filter => 'JobStatus'}}
-      /       = check_box_tag "", false, false, class: 'filter-checkbox'
-      /       .filter-title Archived 
-
-  .filter
-    .filter-header
-      %h4 Job Applied To:
-      .glyphicon.glyphicon-minus
-      .glyphicon.glyphicon-plus
-    .filter-body 
-      %ul
-        - current_company.company_jobs.each do |job| 
-          %li.open-job
-            = sortable "#{job}", job: "#{job}"
-            / .applicant-filter-checkbox{:data => {:id => "#{job}", :filter => 'JobAppliedTo'}}
-            /   = check_box_tag "", false, false, class: 'filter-checkbox'
-            /   .filter-title #{job}
-  .filter
-    .filter-header
-      %h4 Location Applied To
-      .glyphicon.glyphicon-minus
-      .glyphicon.glyphicon-plus
-    .filter-body 
-      %ul
-        - current_company.company_locations.each do |location| 
+    .filter-container
+      .filter-header
+        %h4 Job Status
+        .glyphicon.glyphicon-minus
+        .glyphicon.glyphicon-plus
+      .filter-body
+        %ul
           %li
-            = sortable "#{location}", kind: "Schedule Interview"
-            / .applicant-filter-checkbox{:data => {:id => "#{location}", :filter => 'LocationAppliedTo'}}
-            /   = check_box_tag "", false, false, class: 'filter-checkbox'
-            /   .filter-title #{location}
-
-  .filter 
-    .filter-header
-      %h4 Date Applied
-      .glyphicon.glyphicon-minus
-      .glyphicon.glyphicon-plus
-    .filter-body
-      %ul
-        %li 
-          .applicant-filter-checkbox{:data => {:id => "all_applied", :filter => 'DateApplied'}}
-            = check_box_tag "", false, false, class: 'filter-checkbox'
+            = check_box_tag "status", "open", false, class: 'filter'
+            .filter-title Active
+          %li
+            = check_box_tag "status", "closed", false, class: 'filter'
+            .filter-title Closed
+          %li
+            = check_box_tag "status", "archived", false, class: 'filter'
+            .filter-title Archived 
+    .filter-container
+      .filter-header
+        %h4 Job Applied To:
+        .glyphicon.glyphicon-minus
+        .glyphicon.glyphicon-plus
+      .filter-body 
+        %ul
+          - current_company.company_jobs.each do |job| 
+            %li
+              = check_box_tag "job_title[]", "#{job}", false, class: 'filter'
+              .filter-title #{job}
+    .filter-container
+      .filter-header
+        %h4 Location Applied To
+        .glyphicon.glyphicon-minus
+        .glyphicon.glyphicon-plus
+      .filter-body 
+        %ul
+          - current_company.company_locations.each do |location| 
+            %li
+              = check_box_tag "location", "#{location}", false, class: 'filter'
+              .filter-title #{location}
+    .filter-container 
+      .filter-header
+        %h4 Date Applied
+        .glyphicon.glyphicon-minus
+        .glyphicon.glyphicon-plus
+      .filter-body
+        %ul
+          %li 
+            = check_box_tag "date_applied", "2 years", false, class: 'filter'
             .filter-title All 
-        %li
-          .applicant-filter-checkbox{:data => {:id => "2_weeks", :filter => 'DateApplied'}}
-            = check_box_tag "", false, false, class: 'filter-checkbox'
+          %li
+            = check_box_tag "date_applied", (Time.now - 2.weeks).strftime('%Y-%m-%d'), false, class: 'filter'
             .filter-titleLast 2 weeks
-        %li 
-          .applicant-filter-checkbox{:data => {:id => "last_month", :filter => 'DateApplied'}}
-            = check_box_tag "", false, false, class: 'filter-checkbox'
+          %li 
+            = check_box_tag "date_applied", (Time.now - 1.month).strftime('%Y-%m-%d'), false, class: 'filter'
             .filter-title Last Month
-        %li
-          .applicant-filter-checkbox{:data => {:id => "3_months", :filter => 'DateApplied'}}
-            = check_box_tag "", false, false, class: 'filter-checkbox'
+          %li
+            = check_box_tag "date_applied", (Time.now - 3.months).strftime('%Y-%m-%d'), false, class: 'filter'
             .filter-title Last 3 Months
-        %li 
-          .applicant-filter-checkbox{:data => {:id => "last_year", :filter => 'DateApplied'}}
-            = check_box_tag "", false, false, class: 'filter-checkbox'
+          %li 
+            = check_box_tag "date_applied", (Time.now - 1.year).strftime('%Y-%m-%d'), false, class: 'filter'
             .filter-title Last Year
+    .filter-container 
+      .filter-header
+        %h4 Search CV
+        .glyphicon.glyphicon-minus
+        .glyphicon.glyphicon-plus
+      .filter-body
+        = text_field_tag "qcv", nil, placeholder: "Search CV", class: "search-field"

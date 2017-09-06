@@ -11,10 +11,29 @@ class Business::CandidatesController < ApplicationController
       @candidates = current_company.candidates.order(:full_name).where("full_name ILIKE ?", "%#{params[:term]}%")
       render :json => @candidates.to_json 
     else
-      @tags = current_company.tags
-      @candidates = current_company.candidates
+      where = {}
+      fields = [:work_titles, :work_description, :work_company, :education_description, :education_school]
+      query = params[:query].nil? || "*"
+      where[:company_id] = current_company.id 
+      where[:job_title] = {all: params[:job_title]} if params[:job_title].present?
+      where[:jobs] = {all: params[:jobs]} if params[:jobs].present?
+      where[:job_status] = params[:status] if params[:status].present?
+      where[:job_location] = {all: params[:location]} if params[:location].present?
+      where[:tags] = {all: params[:tags]} if params[:tags].present?
+      where[:created_at] = {gte: params[:date_applied].to_time, lte: Time.now} if params[:date_applied].present?
+      if params[:qcv].present?
+        @candidates = Candidate.search(params[:qcv], where: where, fields: fields, match: :word_start).to_a
+      else
+        @candidates = Candidate.search("*", where: where).to_a
+      end
     end
+
+    @tags = current_company.tags
     @tag = Tag.new
+    respond_to do |format|
+      format.js
+      format.html
+    end  
   end
 
   def new
@@ -79,45 +98,17 @@ class Business::CandidatesController < ApplicationController
 
   def destroy_multiple
     @ids = params[:applicant_ids].split(',')
+    
     @ids.each do |id| 
       candidate = Candidate.find(id)
       candidate.destroy
     end
+    
     @candidates = current_company.candidates
 
     respond_to do |format|
       format.js
     end 
-  end
-
-  def filter_candidates
-    options = {
-      average_rating: params[:average_rating],
-      tags: params[:tags],
-      job_status: params[:job_status],
-      date_applied: params[:date_applied],
-      job_applied: params[:job_applied],
-      location_applied: params[:location_applied]
-      }
-
-    if params[:query].present?
-      @candidate = current_company.candidates.search(params[:query], options).records.to_a
-    else
-      @candidate = current_company.candidates.search('', options).records.to_a
-    end
-    
-    @candidates = []
-    
-    @candidate.each do |candidate| 
-      if candidate.company == current_company
-        @candidates.append(candidate)
-      end
-    end
-
-    @tag = Tag.new
-    respond_to do |format|
-      format.js
-    end
   end
 
   private

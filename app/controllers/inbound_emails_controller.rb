@@ -16,13 +16,7 @@ class InboundEmailsController < ApplicationController
 
 
   def outlook_webhook
-    notifications = params[:value] || []
-    if notifications.any?
-      # Your processing
-      head 202
-    else
-      render text: params[:validationToken]
-    end
+    render text: params[:validationToken]
   end
 end
 

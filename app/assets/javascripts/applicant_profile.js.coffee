@@ -270,5 +270,5 @@ jQuery ->
     $('.job-board-form').show()
     $('.job-board-layout').hide()
 
-
+  
 

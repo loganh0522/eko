@@ -1,12 +1,13 @@
-.home-page-header
-  .top-info
-    %h1 Tasks
-  .change-containers-nav
-    %ul  
-      = link_to business_tasks_path, remote: true do 
-        %li.change#open-tasks.activated All Tasks
-      = link_to business_tasks_path(status: 'current_user'), remote: true do 
-        %li.change#closed-tasks My Tasks
+#all-candidates
+  %h1 Tasks
+  .actions
+    = link_to "Create Task", new_business_task_path, remote: true, class: "btn border-button2"
+  / .change-containers-nav
+  /   %ul  
+  /     = link_to business_tasks_path, remote: true do 
+  /       %li.change#open-tasks.activated All Tasks
+  /     = link_to business_tasks_path(status: 'current_user'), remote: true do 
+  /       %li.change#closed-tasks My Tasks
 
 #main-container
   #job-applicants

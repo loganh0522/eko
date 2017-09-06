@@ -17,10 +17,16 @@ class Business::TasksController < ApplicationController
       @tasks = Task.search("*", where: where).to_a
     else
       where = {}
+      if params[:query].present? 
+        query = params[:query] 
+      else 
+        query = "*"
+      end   
+      where[:client_id] = params[:client_id] if params[:client_id].present?
       where[:company_id] = current_company.id
       where[:status] = 'active'
       where[:kind] = params[:kind] if params[:kind].present?
-      @tasks = Task.search("*", where: where).to_a
+      @tasks = Task.search(query, where: where).to_a
     end
 
     respond_to do |format|

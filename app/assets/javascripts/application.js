@@ -18,13 +18,13 @@
 //= require jquery-fileupload/basic
 //= require jquery.Jcrop
 //= require bootstrap-sprockets
-//= require geocomplete
 //= require tinymce
+//= require geocomplete
 //= require tinymce-jquery
 //= require autocomplete-rails
 //= require bootstrap-colorpicker
 //= require jquery.timepicker.js
-
+//= require turbolinks
 //= require_tree .
 
 

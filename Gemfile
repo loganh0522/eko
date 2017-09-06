@@ -4,16 +4,20 @@ ruby '2.1.2'
 gem 'rails', '4.2.4'
 gem 'pg', '0.20'
 gem 'puma', '~> 3.9'
+
 gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'sass-rails', '~> 5.0.1'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'coffee_routes'
+
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'responders', '~> 2.0'
 
-gem 'turbolinks'
+gem 'will_paginate', '~> 3.1.0'
+
+gem 'turbolinks', '~> 5.0.0'
 gem 'haml-rails'
 
 gem 'jbuilder', '~> 2.0'
@@ -26,6 +30,8 @@ gem 'bcrypt'
 gem 'fabrication'
 gem 'faker'
 
+
+
 gem 'figaro'
 gem 'stripe'
 gem 'stripe_event'
@@ -36,6 +42,7 @@ gem 'geocomplete_rails'
 
 gem 'mini_magick'
 gem 'rmagick', :require => 'RMagick'
+
 gem 'carrierwave'
 gem 'carrierwave-aws'
 
@@ -49,22 +56,21 @@ gem "font-awesome-rails"
 
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
-
 gem 'googlecharts'
+
 
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-google-oauth2'
 gem 'google-api-client', '0.9'
 gem 'signet', '~> 0.7.3'
-
 gem 'microsoft_graph', github: 'loganh0522/msgraph-sdk-ruby'
 gem 'oauth2'
 gem 'activerecord-session_store'
 
 gem 'liquid', '~> 3.0', '>= 3.0.6'
 gem 'tinymce-rails', '~> 4.5'
-
 gem 'sidekiq'
+
 gem 'bootstrap-colorpicker-rails'
 
 gem 'jquery-timepicker-rails'

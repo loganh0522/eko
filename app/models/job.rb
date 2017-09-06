@@ -42,7 +42,7 @@ class Job < ActiveRecord::Base
   after_validation :set_token, :convert_location, :job_url
   after_create :create_stages, :set_token, :create_job_feed
   
-  searchkick
+  searchkick word_start: [:title]
 
   def create_stages
     @stages = self.company.default_stages
@@ -141,9 +141,6 @@ class Job < ActiveRecord::Base
     )
   end
 
-  def self.search(search)
-
-  end
 
   # mapping _parent: { type: 'company'}, _routing: {type: 'company', required: true } do
   #   indexes :company_id, type: 'integer'

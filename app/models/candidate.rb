@@ -2,7 +2,7 @@ class Candidate < ActiveRecord::Base
   
 
   liquid_methods :first_name, :last_name, :full_name
-  searchkick
+  searchkick word_start: [:profile_w_titles, :work_titles, :work_description, :work_company, :education_description, :education_school]
   # index_name ["talentwiz", Rails.env].join('_')
   before_create :generate_token, :downcase_email
   belongs_to :company
@@ -110,10 +110,37 @@ class Candidate < ActiveRecord::Base
   def search_data
     attributes.merge(
       comments: comments.map(&:id),
+      tags: tags.map(&:name),
+      full_name: full_name,
       jobs: jobs.map(&:id),
+      job_title: jobs.map(&:title),
+      job_status: jobs.map(&:status),
+      job_location: jobs.map(&:location),
       resumes: resumes.map(&:id),
-      tags: tags.map(&:name)
+      work_titles: work_experiences.map(&:title),
+      work_description: work_experiences.map(&:description),
+      work_company: work_experiences.map(&:company_name),
+      education_description: educations.map(&:description),
+      education_school: educations.map(&:school)
     )
   end
-  
+
+  def self.search_candidates(company, query='*', status='', title=[], jobs=[], tags=[], time= Time.now - 2.year )
+    self.search("*", 
+      where: {
+        company_id: company,
+        job_status: status,
+        job_title: {
+          all: title
+        },
+        jobs: {
+          all: jobs
+        },
+        created_at: {gte: time, lte: Time.now},
+        tags: {
+          all: tags
+        }
+      }
+    )
+  end
 end

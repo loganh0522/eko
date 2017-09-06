@@ -301,7 +301,7 @@ fieldset label
   .rating > input:checked ~ label:hover ~ label 
     color: #FFED85 
 
-.filter
+.filter-container
   .filter-header 
     overflow: hidden
     h4
@@ -327,10 +327,9 @@ fieldset label
       padding: 0 15px
       li
         text-decoration: none
-        .applicant-filter-checkbox
-          clear: both
-          .filter-checkbox
-            float: left
-            margin-right: 10px
-          .filter-title
-            float: left
+        clear: both
+        input[type="checkbox"]
+          float: left
+          margin-right: 10px
+        .filter-title
+          float: left

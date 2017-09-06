@@ -1,6 +1,5 @@
 jQuery -> 
-  $('.applicant-profile-information').find('.user-comment').on 'keypress', (e)-> 
-    console.log("pressed")
+  $('.applicant-profile-information').find('.user-comment').on 'keypress', (e)->
     if e.keyCode == 64
       $('.applicant-profile-information').find(".user-comment").autocomplete(
         source: (request, response) ->  
