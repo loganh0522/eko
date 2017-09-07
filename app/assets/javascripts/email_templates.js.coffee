@@ -11,7 +11,6 @@ class HasEmailTemplates
     comment_body = @element.find("[data-behaviour= 'comment-body']")
     tinymce.activeEditor.execCommand('mceInsertContent', false, "#{saved_template_text}")
 
-
-document.addEventListener 'turbolinks:load', ->
+jQuery ->
   $.map $("[data-behaviour= 'has-saved-templates']"), (elem) ->
     new HasEmailTemplates(elem)

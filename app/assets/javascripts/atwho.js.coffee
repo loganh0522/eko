@@ -1,4 +1,4 @@
-document.addEventListener 'turbolinks:load', ->
+jQuery ->
   $('.applicant-profile-information').find('.user-comment').on 'keypress', (e)->
     if e.keyCode == 64
       $('.applicant-profile-information').find(".user-comment").autocomplete(

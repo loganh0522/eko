@@ -1,4 +1,4 @@
-document.addEventListener 'turbolinks:load', ->
+jQuery ->
   changeContainer = ($targetContainer) -> 
     $('.pricing-table').find('.showing').hide()
     $('.pricing-table').find('.showing').removeClass 'showing'

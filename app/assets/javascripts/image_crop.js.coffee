@@ -1,4 +1,4 @@
-document.addEventListener 'turbolinks:load', ->
+jQuery ->
   $(document).ajaxComplete -> 
     $('#cropbox').on 'load', (event) -> 
       console.log('loaded')

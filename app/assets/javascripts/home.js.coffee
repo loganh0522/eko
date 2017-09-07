@@ -1,4 +1,4 @@
-document.addEventListener 'turbolinks:load', ->
+jQuery ->
   totalWidth = 0 
   
   $('.job_list_stage').each ->

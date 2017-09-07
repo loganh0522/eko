@@ -1,4 +1,4 @@
-document.addEventListener 'turbolinks:load', ->
+jQuery ->
   $(document).on 'click', '.add_tag', (event) ->    
     $('.tag_form').find('#tag_name').autocomplete( 
       source: (request, response) ->
