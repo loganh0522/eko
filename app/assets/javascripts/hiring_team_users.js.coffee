@@ -1,4 +1,4 @@
-document.addEventListener 'turbolinks:load', ->
+jQuery ->
   $('form').on 'click', '#search-form', ->  
     controller = $(this).attr('class').split(' ').pop()
     $(this).autocomplete( 

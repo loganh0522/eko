@@ -16,10 +16,10 @@
           $("#<%= error[0].split('.').last %>_msgBlock").hide();
         }
       });
+      
     <% else %>
       if ($("#<%= error[0] %>_Block").val().length === 0) {
         if ($("#<%= error[0] %>_Block").hasClass('has-error')) {
-
         }
         else
           $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');

@@ -10,7 +10,7 @@ class Business::CommentsController < ApplicationController
 
   def job_comments
     @comments = @commentable.comments
-    @comment = Comment.new
+    @new_comment = Comment.new
     @job = @commentable
   end
   
@@ -24,8 +24,8 @@ class Business::CommentsController < ApplicationController
   end
 
   def new 
-    @comment = Comment.new
-
+    @new_comment = Comment.new
+    binding.pry
     respond_to do |format|
       format.js
     end
@@ -33,6 +33,7 @@ class Business::CommentsController < ApplicationController
 
   def create 
     @comment = @commentable.comments.build(comment_params)
+    @new_comment = Comment.new
     
     if @comment.save 
       @comments = @commentable.comments
@@ -46,7 +47,7 @@ class Business::CommentsController < ApplicationController
   end
 
   def edit 
-    @comment = @commentable
+    @new_comment = @commentable
     @commentable = @commentable.commentable
 
     respond_to do |format| 

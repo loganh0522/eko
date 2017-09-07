@@ -1,4 +1,4 @@
-document.addEventListener 'turbolinks:load', ->
+jQuery ->
   $('#main-container').on 'click', '.applicant-checkbox', (event) ->
     if $('.applicants').find('.applicant-checkbox :checked').size() > 0 
       $('.no-action-buttons').hide()
@@ -38,12 +38,12 @@ document.addEventListener 'turbolinks:load', ->
 
 
 ######### Scorecard JS #########
-  #$(document).ajaxComplete ->   
-  #  $('#basic-form-modal').find('#task_due_date').datepicker  
-  #    dateFormat: 'yy-mm-dd'
-  #  $('#basic-form-modal').find('#timepicker').timepicker()
-  #  $('#timepicker2').timepicker()
-  #  $("#geocomplete2").geocomplete()
+  $(document).ajaxComplete ->   
+    $('#basic-form-modal').find('#task_due_date').datepicker  
+      dateFormat: 'yy-mm-dd'
+    $('#basic-form-modal').find('#timepicker').timepicker()
+    $('#timepicker2').timepicker()
+    $("#geocomplete2").geocomplete()
 
 
 ############ Move Applicant Stages ###############

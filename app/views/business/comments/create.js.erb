@@ -6,7 +6,7 @@ $('#comment-body').val('');
     $('#<%= error[0] %>_Block').addClass('has-error');
   <% end %>
 <% elsif @commentable.class == Job %> 
-  $('#main-container').html('<%= j render "business/comments/job_comments" %>');
+  $('#job-action-container').html('<%= j render "business/comments/job_comments" %>');
   $('form').reset();
 <% elsif params[:client_contact_id].present? %> 
   $('.applicant-profile').html('<%= j render "business/comments/applicant_notes", application: @contact %>');

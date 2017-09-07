@@ -10,7 +10,7 @@ class Business::TasksController < ApplicationController
 
   def job_tasks
     @job = @taskable
-    
+
     where = {}
     if params[:query].present? 
       query = params[:query] 
@@ -125,7 +125,7 @@ class Business::TasksController < ApplicationController
     
     respond_to do |format| 
       if @new_task.save 
-        @tasks = @taskable.open_tasks
+        @tasks = @taskable.tasks
         track_activity @new_task
         format.js 
       else

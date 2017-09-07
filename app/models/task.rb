@@ -1,7 +1,7 @@
 class Task < ActiveRecord::Base
   belongs_to :user
   belongs_to :company, touch: true
-  belongs_to :taskable, polymorphic: true, :dependent => :destroy
+  belongs_to :taskable, polymorphic: true
   
   has_many :assigned_users, as: :assignable
   has_many :users, through: :assigned_users

@@ -1,4 +1,4 @@
-document.addEventListener 'turbolinks:load', ->
+jQuery ->
   $('#search-form').on 'click', '.filter, input[name=\'owner\'] ', (event) ->
     action = $("#search-form").attr('action')
     param = $(this).attr('name') + "=" + $(this).attr('value')

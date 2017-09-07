@@ -5,6 +5,8 @@
     .details
       .title= task.title
       = "Due Date: #{ task.due_date}"
+    .actions 
+      = link_to 'Delete', business_task_path(task), remote: true, :method => :delete
   .task-row
     .detail
       .assigned Assigned to: 

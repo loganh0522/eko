@@ -25,7 +25,7 @@
 //= require autocomplete-rails
 //= require bootstrap-colorpicker
 //= require jquery.timepicker.js
-//= require turbolinks
+
 //= require_tree .
 
 

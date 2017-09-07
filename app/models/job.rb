@@ -24,7 +24,7 @@ class Job < ActiveRecord::Base
   has_many :applications, :dependent => :destroy
   has_many :candidates, through: :applications
 
-  has_many :tasks, as: :taskable, :dependent => :destroy, :dependent => :destroy
+  has_many :tasks, as: :taskable, :dependent => :destroy
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy 
 
   has_many :job_industries, :dependent => :destroy

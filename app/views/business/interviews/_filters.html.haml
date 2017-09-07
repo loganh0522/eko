@@ -1,7 +1,7 @@
 = form_tag business_interviews_path, :method => 'get', id: "search-form" do
   .filter-radios 
     = radio_button_tag "owner", "company", true, class: 'filter'
-    = label_tag "owner_company", "Company Interviews", :value => "company", class: 'filter'
+    = label_tag "owner_company", "All", :value => "company", class: 'filter'
     
     
     = radio_button_tag "owner", "user", false, class: 'filter'

@@ -10,18 +10,12 @@
       .contain-2
         = f.text_field :due_time, id: "timepicker", placeholder: "Add Time"
       .contain-2
-        = f.select :kind, options_for_select(["Schedule Interview", "To-do", "Send Assessment", "Finish Assessment"]), :prompt => "Type of Task...", id: "select-kind" 
-        %span#title_msgBlock
+        #kind_Block
+          = f.select :kind, options_for_select(["Schedule Interview", "To-do", "Send Assessment", "Finish Assessment"]), :prompt => "Type of Task...", id: "kind_Block" 
+        %span#kind_msgBlock
     = f.text_area :notes, id: "comment-body", placeholder: "Notes"  
-    - if @taskable.class != Application
-      .form-row-2
-        .assign_to_row#candidate_ids_block
-          .assign-user
-            .title Add Candidates
-            = text_field_tag "", "", :class => 'ui-autocomplete-input candidates', :placeholder => 'Type a users name to assign', id: "search-form"
-            %div#search-results
-          .assigned-candidates
-            .title Candidates:     
+    
+    - if @taskable.class != Job    
       .form-row-2
         .assign_to_row
           .assign-user
@@ -29,7 +23,15 @@
             = text_field_tag "", "", :class => 'ui-autocomplete-input jobs', :placeholder => 'Type a users name to assign', id: "search-form" 
             %div#search-results
           .assigned-jobs
-            .title Job: 
+            .title Job:
+    .form-row-2
+      .assign_to_row#candidate_ids_block
+        .assign-user
+          .title Add Candidates
+          = text_field_tag "", "", :class => 'ui-autocomplete-input candidates', :placeholder => 'Type a users name to assign', id: "search-form"
+          %div#search-results
+        .assigned-candidates
+          .title Candidates: 
     .form-row-2
       .assign_to_row
         .assign-user
@@ -38,9 +40,13 @@
           %div#search-results
         .assigned-users
           .title Assigned Users: 
+
       = f.hidden_field :user_ids, id: "user_ids"
       = f.hidden_field :candidate_ids, id: "candidate_ids"
-      = hidden_field_tag :job_id, value: '', id: "job_ids"
+      - if @taskable.class == Job
+        = f.hidden_field :job_id, value: @taskable.id
+      - else 
+        = hidden_field_tag :job_id, value: '', id: "job_ids"
       = f.hidden_field :user_id, value: current_user.id
       = f.hidden_field :company_id, value: current_company.id
       = f.hidden_field :status, value: "active"
