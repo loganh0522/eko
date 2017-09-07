@@ -13,18 +13,21 @@ gem 'coffee_routes'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'jquery-turbolinks'
+
 gem 'responders', '~> 2.0'
 
 gem 'will_paginate', '~> 3.1.0'
 
-gem 'turbolinks', '~> 5.0.0'
+# gem 'turbolinks', '~> 5.0.1'
 gem 'haml-rails'
 
 gem 'jbuilder', '~> 2.0'
-
 gem 'sdoc', '~> 0.4.0', group: :doc
+
+
 gem 'bootstrap_form'
+gem 'bootstrap-colorpicker-rails'
+
 gem 'autoprefixer-rails'
 
 gem 'bcrypt'
@@ -70,9 +73,9 @@ gem 'activerecord-session_store'
 
 gem 'liquid', '~> 3.0', '>= 3.0.6'
 gem 'tinymce-rails', '~> 4.5'
-gem 'sidekiq'
+# gem 'sidekiq'
 
-gem 'bootstrap-colorpicker-rails'
+
 
 gem 'jquery-timepicker-rails'
 gem 'declarative_authorization'
@@ -80,7 +83,7 @@ gem 'searchkick'
 
 
 group :development do
-  gem "better_errors"
+  gem "better_errors", "~> 2.2.0"
   gem "binding_of_caller"
   gem 'letter_opener'
   gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'

@@ -1,0 +1,11 @@
+#filter-links
+  %ul  
+    = link_to business_tasks_path, class: 'filter-link' do 
+      %li{:class => is_activated?(business_tasks_path)} Open Tasks
+    = link_to due_today_business_tasks_path, class: 'filter-link' do 
+      %li{:class => is_activated?(due_today_business_tasks_path)}  Due Today
+    = link_to overdue_business_tasks_path, class: 'filter-link' do 
+      %li{:class => is_activated?(overdue_business_tasks_path)}  Overdue Tasks
+    = link_to complete_business_tasks_path, class: 'filter-link' do 
+      %li{:class => is_activated?(complete_business_tasks_path)}  Completed Tasks
+

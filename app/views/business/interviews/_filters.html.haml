@@ -1,5 +1,15 @@
-.applicant-filters
-  .filter
+= form_tag business_interviews_path, :method => 'get', id: "search-form" do
+  .filter-radios 
+    = radio_button_tag "owner", "company", true, class: 'filter'
+    = label_tag "owner_company", "Company Interviews", :value => "company", class: 'filter'
+    
+    
+    = radio_button_tag "owner", "user", false, class: 'filter'
+    = label_tag "owner_user", "My Interviews", :value => "my-tasks", class: 'filter'
+
+  = text_field_tag "query", nil, placeholder: "Search Candidates by Keyword", class: "search-field"
+  = render 'filter_links'
+  .filter-container
     .filter-header
       %h4 Interview Type
       .glyphicon.glyphicon-minus
@@ -7,22 +17,19 @@
     .filter-body
       %ul
         %li 
-          .applicant-filter-checkbox{:data => {:id => "open", :filter => 'JobStatus'}}
-            = check_box_tag "", false, false, class: 'filter-checkbox'
-            .filter-title Phone Interview
-        %li.activity
-          .applicant-filter-checkbox{:data => {:id => "closed", :filter => 'JobStatus'}}
-            = check_box_tag "", false, false, class: 'filter-checkbox'
-            .filter-title In-person Interview
-        %li.activity  
-          .applicant-filter-checkbox{:data => {:id => "archived", :filter => 'JobStatus'}}
-            = check_box_tag "", false, false, class: 'filter-checkbox'
-            .filter-title Skype
+          = check_box_tag "", false, false, class: 'filter'
+          .filter-title Phone Interview
+        %li
+          = check_box_tag "", false, false, class: 'filter'
+          .filter-title In-person Interview
+        %li
+          = check_box_tag "", false, false, class: 'filter'
+          .filter-title Skype
         / %li.activity  
         /  .applicant-filter-checkbox{:data => {:id => "archived", :filter => 'JobStatus'}}
         /    = check_box_tag "", false, false, class: 'filter-checkbox'
         /    .filter-title Team Meeting
-  .filter
+  .filter-container
     .filter-header
       %h4 Active Jobs
       .glyphicon.glyphicon-minus
@@ -30,7 +37,6 @@
     .filter-body 
       %ul
         - current_company.company_jobs.each do |job| 
-          %li.open-job
-            .applicant-filter-checkbox{:data => {:id => "#{job}", :filter => 'JobAppliedTo'}}
-              = check_box_tag "", false, false, class: 'filter-checkbox'
-              .filter-title #{job}
+          %li
+            = check_box_tag "job_title[]", "#{job}", false, class: 'filter'
+            .filter-title #{job}

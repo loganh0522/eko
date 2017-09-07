@@ -1,24 +1,34 @@
-jQuery -> 
+document.addEventListener 'turbolinks:load', ->
+  $('#main-container').on 'click', '.applicant-checkbox', (event) ->
+    if $('.applicants').find('.applicant-checkbox :checked').size() > 0 
+      $('.no-action-buttons').hide()
+      $('.applicant-action-buttons').show()
+    else if $('.applicants').find('.applicant-checkbox :checked').size() == 0
+      $('.applicant-action-buttons').hide()
+      $('.no-action-buttons').show()
+    return
 
-##### Multiple modals ######
+  $('#main-container').on 'click', '#Select_All', (event) ->
+    if $('.applicants').find('#select_all :checked').size() > 0
+      $('.applicants').find('.applicant-checkbox').find('#applicant_ids_').prop("checked", true)
+      $('.no-action-buttons').hide()
+      $('.applicant-action-buttons').show()
+    else if $('.applicants').find('#select_all :checked').size() == 0
+      $('.applicants').find('.applicant-checkbox').find('#applicant_ids_').prop("checked", false)
+      $('.applicant-action-buttons').hide()
+      $('.no-action-buttons').show()
+    return
+
+
+
   $(".modal").on "shown.bs.modal", ->  
     if $('.modal-backdrop').length == 2
       $(this).css({'z-index':'1070'})
       $('.modal-backdrop').last().css({'z-index':'1060'})
-
-########### Filter Jobs by Status ############
-  $('.change-containers-nav').on 'click', '.job-status', (event) ->
-    $('.change-containers-nav').find('.activated').removeClass('activated')
-    $(this).addClass('activated')
-    $.ajax
-      url : "/business/jobs"
-      type : "get"
-      data:
-        status: $(this).attr('id')
         
 ########### jquery selectmenu #######
-  $('#selectmenu').selectmenu -> 
-    style: 'popup'
+  # $('#selectmenu').selectmenu -> 
+  #  style: 'popup'
 
 
 #########  #############
@@ -28,12 +38,12 @@ jQuery ->
 
 
 ######### Scorecard JS #########
-  $(document).ajaxComplete ->   
-    $('#basic-form-modal').find('#task_due_date').datepicker  
-      dateFormat: 'yy-mm-dd'
-    $('#basic-form-modal').find('#timepicker').timepicker()
-    $('#timepicker2').timepicker()
-    $("#geocomplete2").geocomplete()
+  #$(document).ajaxComplete ->   
+  #  $('#basic-form-modal').find('#task_due_date').datepicker  
+  #    dateFormat: 'yy-mm-dd'
+  #  $('#basic-form-modal').find('#timepicker').timepicker()
+  #  $('#timepicker2').timepicker()
+  #  $("#geocomplete2").geocomplete()
 
 
 ############ Move Applicant Stages ###############
@@ -70,38 +80,8 @@ jQuery ->
 
 #################### Select All & Show Button's on Select ###################
 
-  $('#main-container').on 'click', '.applicant-checkbox', (event) ->
-    if $('.applicants').find('.applicant-checkbox :checked').size() > 0 
-      $('.no-action-buttons').hide()
-      $('.applicant-action-buttons').show()
-    else if $('.applicants').find('.applicant-checkbox :checked').size() == 0
-      $('.applicant-action-buttons').hide()
-      $('.no-action-buttons').show()
-    return
+  
 
-  $('#main-container').on 'click', '#Select_All', (event) ->
-    if $('.applicants').find('#select_all :checked').size() > 0
-      $('.applicants').find('.applicant-checkbox').find('#applicant_ids_').prop("checked", true)
-      $('.no-action-buttons').hide()
-      $('.applicant-action-buttons').show()
-    else if $('.applicants').find('#select_all :checked').size() == 0
-      $('.applicants').find('.applicant-checkbox').find('#applicant_ids_').prop("checked", false)
-      $('.applicant-action-buttons').hide()
-      $('.no-action-buttons').show()
-    return
-
-################### Collapse SideBar #########################
-
-  $('#main-container').on 'click', '.glyphicon', (event) ->
-    if $(this).hasClass('glyphicon-minus')
-      $(this).parent().next().hide()
-      $(this).hide()
-      $(this).next().show()
-    else if $(this).hasClass('glyphicon-plus')
-      $(this).parent().next().show()
-      $(this).hide()
-      $(this).prev().show()
-    return
 
 #################### Add Applicants To Modal On Action Click #############################
 
@@ -186,7 +166,7 @@ jQuery ->
 
 ################# Close Form ######################
   
-  $(document).on 'click', '.close-form', (event) ->   
+  $('#main-container').on 'click', '.close-form', (event) ->   
     if $(this).attr('id') == 'edit-form'
       formobj = $(this).parent().attr('id').slice(5)
       $("#" + "#{formobj}").show()
@@ -209,7 +189,7 @@ jQuery ->
     return
 
 ################ Star Rating ##################
-  $(document).on 'click', '.star', (event) ->  
+  $('#main-container').on 'click', '.star', (event) ->  
     PostCode = $(this).parent().parent().attr('id')
     Rating = $(this).val()
     $.ajax
@@ -269,6 +249,8 @@ jQuery ->
   $('#jobBoardRowModal').on 'click', '#content-form', (event) ->
     $('.job-board-form').show()
     $('.job-board-layout').hide()
+
+
 
   
 

@@ -1,7 +1,7 @@
 class Interview < ActiveRecord::Base
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks 
-  index_name ["talentwiz", Rails.env].join('_') 
+  # include Elasticsearch::Model
+  # include Elasticsearch::Model::Callbacks 
+  # index_name ["talentwiz", Rails.env].join('_') 
   
   # def as_indexed_json(options={})
   #   as_json(
@@ -15,12 +15,22 @@ class Interview < ActiveRecord::Base
   # end
 
 
+
   belongs_to :candidate
   belongs_to :job
   belongs_to :company
   has_many :event_ids, :dependent => :destroy
   has_many :assigned_users, as: :assignable, :dependent => :destroy
   has_many :users, through: :assigned_users, validate: false
+  
+  searchkick
+
+  def search_data
+    attributes.merge(
+      users: users.map(&:id),
+      candidates: candidates.map(&:id)
+    )
+  end
 
   def month
     Date.parse(self.date).strftime("%B")

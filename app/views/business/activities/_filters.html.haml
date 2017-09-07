@@ -30,5 +30,5 @@
       %ul
         - current_company.company_jobs.each do |job| 
           %li
-            = check_box_tag "job", false, false, class: 'filter'
+            = check_box_tag "job_title[]", "#{job}", false, class: 'filter'
             .filter-title #{job}

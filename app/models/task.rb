@@ -20,10 +20,9 @@ class Task < ActiveRecord::Base
   def search_data
     attributes.merge(
       users: users.map(&:id),
-      candidates: candidates.map(&:id)
+      candidates: candidates.map(&:id),
     )
   end
-
 
   # def as_indexed_json(options={})
   #   as_json(

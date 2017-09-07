@@ -21,6 +21,15 @@ module ApplicationHelper
     end
   end
 
+  def build_link(path)
+    if request.query_parameters[params.first[0].to_s].present?
+      request.query_parameters[params.first[0].to_s].push(params.first[1][0])
+      link_to path, request.query_parameters
+    else
+      link_to path, request.query_parameters.merge(params)
+    end
+  end
+
   def taskable_link(task)
     if task.taskable.class == Application
       if task.taskable.candidate.manually_created?

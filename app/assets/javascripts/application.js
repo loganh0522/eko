@@ -14,7 +14,7 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
-//= require jquery.turbolinks
+
 //= require jquery.remotipart
 //= require jquery-fileupload/basic
 //= require jquery.Jcrop
@@ -26,7 +26,6 @@
 //= require bootstrap-colorpicker
 //= require jquery.timepicker.js
 //= require turbolinks
-//= require turbolinks-compatibility
 //= require_tree .
 
 

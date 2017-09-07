@@ -301,6 +301,46 @@ fieldset label
   .rating > input:checked ~ label:hover ~ label 
     color: #FFED85 
 
+.filter-radios 
+  label
+    display: inline-block
+    padding: 15px 15px 10px 15px 
+    text-align: center 
+    font-size: 16px
+    color: black
+    cursor: pointer
+    font-weight: normal
+  &:hover
+    cursor: pointer
+  
+  input[type="radio"]:checked+label
+    border-bottom: 4px solid #EF7B2B
+    color: black
+
+  input[type="radio"]
+    display: none
+#filter-links
+  ul
+    list-style: none
+    padding: 0 0
+    margin: 0 0 
+    a:hover
+      text-decoration: none
+    li
+      text-decoration: none
+      margin-bottom: 3px
+      color: rgba(0,0,0,0.7)
+      border-radius: 5px 
+      padding: 10px 5px
+
+      &:hover
+        background: rgba(0,0,0,0.03)
+        a
+          text-decoration: none
+    .activated
+      background: rgba(0,0,0,0.05)
+      color: black
+
 .filter-container
   .filter-header 
     overflow: hidden

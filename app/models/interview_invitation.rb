@@ -18,6 +18,16 @@ class InterviewInvitation < ActiveRecord::Base
 
   accepts_nested_attributes_for :interview_times,
     allow_destroy: true
+
+  searchkick 
+
+  def search_data
+    attributes.merge(
+      users: users.map(&:id),
+      
+      candidates: candidates.map(&:id)
+    )
+  end
   
   def to_param
     self.token

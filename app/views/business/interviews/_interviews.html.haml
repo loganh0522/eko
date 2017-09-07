@@ -1,22 +1,7 @@
-#calendar-container
-  .side-container
-    = render 'business/interviews/filters'
-  .main-container#task-container
-    / = render 'business/calendar/job_calendar'
-    / = render 'business/interview_invitations/interview_invitations'
-    .calendar-nav-actions
-      .change-containers-nav
-        %ul  
-          = link_to business_interviews_path, remote: true do 
-            %li.change#interviews.activated Interviews
-          = link_to business_interview_invitations_path, remote: true do 
-            %li.change#interview-invitations Pending Invitations
-      .actions
-        = link_to "Interview Invite", new_business_interview_invitation_path, remote: true, class: "btn border-button2" 
-    .interview-main-container
-      - if @interview.present? 
-        - @interviews.each do |interview|
-          = render "business/interviews/interview", interview: interview
-      - else 
-        .not-present-container
-          %p There are currently no Interviews scheduled.
+.interview-main-container
+  - if @interview.present? 
+    - @interviews.each do |interview|
+      = render "business/interviews/interview", interview: interview
+  - else 
+    .not-present-container
+      %p There are currently no Interviews scheduled.

@@ -1,7 +1,6 @@
 <% if @taskable.class == Company %>
   $('#task-container').html('<%= j render "business/tasks/tasks" %>');
-  $('.calendar-nav-actions').find('.activated').removeClass('activated');
-  $('.calendar-nav-actions').find('#open-tasks').addClass('activated');
+  
 <% elsif @taskable.class == Application %>
   <% if params[:status] == 'complete' %>
     $(".side-section").find(".candidate-tasks").html('<%= j render "business/tasks/application_tasks", tasks: @tasks %>');

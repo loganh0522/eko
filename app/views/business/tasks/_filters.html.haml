@@ -1,48 +1,34 @@
-#task-links
-  %ul  
-    = link_to business_tasks_path do 
-      %li.change#open-tasks.activated Open Tasks
-    = link_to due_today_business_tasks_path do 
-      %li.change#completed-tasks Due Today
-    = link_to overdue_business_tasks_path do 
-      %li.change#completed-tasks Overdue Tasks
-    = link_to complete_business_tasks_path do 
-      %li.change#completed-tasks Completed Tasks
+.filter-radios 
+  = radio_button_tag "owner", "company", true, class: 'filter'
+  = label_tag "owner_company", "All Tasks", :value => "company", class: 'filter'
+  
+  = radio_button_tag "owner", "user", false, class: 'filter'
+  = label_tag "owner_user", "My Tasks", :value => "my-tasks", class: 'filter'
 
-= form_tag business_tasks_path, :method => 'get', id: "search-form" do
-  = text_field_tag "query", nil, placeholder: "Search Tasks", class: "search-field", autocomplete: "off"
-  .applicant-filters
-    .filter-container
-      .filter-header
-        %h4 Assigned To
-        .glyphicon.glyphicon-minus
-        .glyphicon.glyphicon-plus
-      .filter-body 
-        = check_box_tag "status[]", "To-do", false, class: 'filter'
-        .filter-title To-Do
-    .filter-container
-      .filter-header
-        %h4 Kind
-        .glyphicon.glyphicon-minus
-        .glyphicon.glyphicon-plus
-      .filter-body 
-        = check_box_tag "kind[]", "To-do", false, class: 'filter'
-        .filter-title To-Do
-        = check_box_tag "kind[]", "Email", false, class: 'filter'
-        .filter-title Email
-        = check_box_tag "kind[]", "Schedule Interview", false, class: 'filter'
-        .filter-title Schedule Interview
-        = check_box_tag "kind[]", "Send Assesment", false, class: 'filter'
-        .filter-title Send Assessment
+= text_field_tag "query", nil, placeholder: "Search Tasks", class: "search-field", autocomplete: "off"
+= render 'filter_links'
+.filter-container
+  .filter-header
+    %h4 Assigned To
+    .glyphicon.glyphicon-minus
+    .glyphicon.glyphicon-plus
+  .filter-body 
+    = check_box_tag "status[]", "To-do", false, class: 'filter'
+    .filter-title To-Do
+.filter-container
+  .filter-header
+    %h4 Kind
+    .glyphicon.glyphicon-minus
+    .glyphicon.glyphicon-plus
+  .filter-body 
+    = check_box_tag "kind[]", "To-do", false, class: 'filter'
+    .filter-title To-Do
+    = check_box_tag "kind[]", "Email", false, class: 'filter'
+    .filter-title Email
+    = check_box_tag "kind[]", "Schedule Interview", false, class: 'filter'
+    .filter-title Schedule Interview
+    = check_box_tag "kind[]", "Send Assesment", false, class: 'filter'
+    .filter-title Send Assessment
 
-/ %ul
-/   %li 
-/     = sortable "To-do", kind: ["To-do"]
-/   %li 
-/     = sortable "Send Assesment", kind: ["Send Assesment"]
-/   %li 
-/     = sortable "Email", kind: ["Email"]
-/   %li 
-/     = sortable "Schedule Interview", kind: ["Schedule Interview"]       
 
 

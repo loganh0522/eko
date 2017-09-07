@@ -12,6 +12,6 @@ class HasEmailTemplates
     tinymce.activeEditor.execCommand('mceInsertContent', false, "#{saved_template_text}")
 
 
-jQuery -> 
+document.addEventListener 'turbolinks:load', ->
   $.map $("[data-behaviour= 'has-saved-templates']"), (elem) ->
     new HasEmailTemplates(elem)

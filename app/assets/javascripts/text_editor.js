@@ -1,6 +1,6 @@
-$(document).ready(function(){
-  $('.wysihtml5').each(function(i, elem) {
-    $(elem).wysihtml5();
-  });
-});
+document.addEventListener 'turbolinks:load', ->
+  $('.wysihtml5').each (i, elem) ->
+    $(elem).wysihtml5()
+    return
+  return
 
