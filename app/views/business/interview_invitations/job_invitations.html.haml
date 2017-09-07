@@ -1,9 +1,10 @@
-= render 'business/applications/top_container'
+= render 'job_header'
 
 #main-container
   #calendar-container
     .side-container
-      = render 'job_filters'
+      = form_tag business_job_interview_invitations_path(@job), :method => 'get', id: "search-form" do
+        = render 'job_filters'
     .main-container#task-container
       = render 'business/interviews/interviews'
 

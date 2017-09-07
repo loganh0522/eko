@@ -52,6 +52,13 @@ class User < ActiveRecord::Base
   has_one :google_token
   has_one :outlook_token
   #Carrierwave uploader and minimagic for User Profile Pictures
+  searchkick word_start: [:full_name]
+
+  def search_data
+    attributes.merge(
+      full_name: full_name
+    )
+  end
 
   def all_tasks
     self.tasks

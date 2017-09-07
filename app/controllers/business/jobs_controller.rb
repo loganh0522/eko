@@ -127,6 +127,11 @@ class Business::JobsController < ApplicationController
     end
   end
 
+  def autocomplete
+    render :json => Job.search(params[:term], where: {company_id: current_company.id}, 
+      fields: [{title: :word_start}])
+  end
+
   private 
 
   def job_params

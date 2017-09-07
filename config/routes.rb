@@ -159,6 +159,9 @@ Rails.application.routes.draw do
     resources :users do 
       resources :email_signatures
       resources :user_avatars
+      collection do 
+        get :autocomplete
+      end
     end
   
     resources :job_boards do
@@ -169,13 +172,16 @@ Rails.application.routes.draw do
     get 'templates', to: "email_templates#index"
     
     resources :candidates do
+      collection do 
+        get :autocomplete
+      end
       resources :interviews
       resources :applications 
       resources :messages
       resources :comments
       resources :resumes
       resources :tags
-      resources :tasks
+      resources :tasks 
       get :application_form, to: "applications#application_form"
       get :application_activity, to: "activities#application_activity"
       
@@ -219,7 +225,9 @@ Rails.application.routes.draw do
     end
     
     resources :jobs do 
-      
+      collection do 
+        get :autocomplete
+      end
 
       get :close, to: "jobs#close_job"
       get :archive, to: "jobs#archive_job"
@@ -229,15 +237,27 @@ Rails.application.routes.draw do
       get :promote, to: "jobs#promote"
       resources :questions
       resources :interviews, except: [:index]
+      resources :interview_invitations, except: [:index] 
+
       get 'interviews', to: 'interviews#job_interviews'
+      get 'interview_invitations', to: 'interview_invitations#job_invitations'
 
       resources :comments, except: [:index]
       get 'comments', to: "comments#job_comments"
  
       get "/activities", to: 'activities#job_activity'
       resources :tags
-      
-      resources :tasks, except: [:index]
+
+      resources :tasks, except: [:index] do 
+        collection do 
+          post :completed, to: "tasks#completed"
+          get :complete, to: "tasks#job_complete"
+          get :overdue, to: "tasks#job_overdue"
+          get :due_today, to: "tasks#job_due_today"
+          post :create_multiple, to: "tasks#create_multiple"
+        end
+      end
+
       get 'tasks', to: "tasks#job_tasks"
 
 

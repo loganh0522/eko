@@ -1,0 +1,9 @@
+#filter-links
+  %ul  
+    = link_to business_job_interviews_path(@job), class: 'filter-link' do 
+      %li{:class => is_activated?(business_job_interviews_path(@job))} Scheduled Interviews
+    
+    = link_to business_job_interview_invitations_path(@job), class: 'filter-link' do 
+      %li{:class => is_activated?(business_job_interview_invitations_path(@job))} Pending Interviews
+    
+

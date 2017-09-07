@@ -2,7 +2,7 @@ class Candidate < ActiveRecord::Base
   
 
   liquid_methods :first_name, :last_name, :full_name
-  searchkick word_start: [:profile_w_titles, :work_titles, :work_description, :work_company, :education_description, :education_school]
+  searchkick word_start: [:profile_w_titles, :work_titles, :work_description, :work_company, :education_description, :education_school, :full_name]
   # index_name ["talentwiz", Rails.env].join('_')
   before_create :generate_token, :downcase_email
   belongs_to :company

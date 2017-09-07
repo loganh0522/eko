@@ -71,7 +71,6 @@ class Business::UsersController < ApplicationController
   def update
     @user = current_user
     
-    
     respond_to do |format|
       if @user.update(user_params)
         format.js
@@ -88,6 +87,11 @@ class Business::UsersController < ApplicationController
 
   def destroy
 
+  end
+
+  def autocomplete
+    render :json => User.search(params[:term], where: {company_id: current_company.id}, 
+      fields: [{full_name: :word_start}])
   end
 
   def gmail_auth

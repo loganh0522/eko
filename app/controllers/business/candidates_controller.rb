@@ -8,26 +8,22 @@ class Business::CandidatesController < ApplicationController
   before_filter :company_deactivated?
   
   def index
-    if params[:term].present?
-      @candidates = current_company.candidates.order(:full_name).where("full_name ILIKE ?", "%#{params[:term]}%")
-      render :json => @candidates.to_json 
+    where = {}
+    fields = [:work_titles, :work_description, :work_company, :education_description, :education_school]
+    query = params[:query].nil? || "*"
+    where[:company_id] = current_company.id 
+    where[:job_title] = {all: params[:job_title]} if params[:job_title].present?
+    where[:jobs] = {all: params[:jobs]} if params[:jobs].present?
+    where[:job_status] = params[:status] if params[:status].present?
+    where[:job_location] = {all: params[:location]} if params[:location].present?
+    where[:tags] = {all: params[:tags]} if params[:tags].present?
+    where[:created_at] = {gte: params[:date_applied].to_time, lte: Time.now} if params[:date_applied].present?
+    if params[:qcv].present?
+      @candidates = Candidate.search(params[:qcv], where: where, fields: fields, match: :word_start).to_a
     else
-      where = {}
-      fields = [:work_titles, :work_description, :work_company, :education_description, :education_school]
-      query = params[:query].nil? || "*"
-      where[:company_id] = current_company.id 
-      where[:job_title] = {all: params[:job_title]} if params[:job_title].present?
-      where[:jobs] = {all: params[:jobs]} if params[:jobs].present?
-      where[:job_status] = params[:status] if params[:status].present?
-      where[:job_location] = {all: params[:location]} if params[:location].present?
-      where[:tags] = {all: params[:tags]} if params[:tags].present?
-      where[:created_at] = {gte: params[:date_applied].to_time, lte: Time.now} if params[:date_applied].present?
-      if params[:qcv].present?
-        @candidates = Candidate.search(params[:qcv], where: where, fields: fields, match: :word_start).to_a
-      else
-        @candidates = Candidate.search("*", where: where).to_a
-      end
+      @candidates = Candidate.search("*", where: where).to_a
     end
+
 
     @tags = current_company.tags
     @tag = Tag.new
@@ -110,6 +106,12 @@ class Business::CandidatesController < ApplicationController
     respond_to do |format|
       format.js
     end 
+  end
+
+  def autocomplete
+    # @candidates = current_company.candidates.order(:full_name).where("full_name ILIKE ?", "%#{params[:term]}%")
+    render :json => Candidate.search(params[:term], where: {company_id: current_company.id}, 
+      fields: [{full_name: :word_start}])
   end
 
   private

@@ -9,8 +9,14 @@ class Business::InterviewInvitationsController < ApplicationController
     @interview_invitations = current_company.interview_invitations
 
     respond_to do |format|
+      format.html
       format.js
     end
+  end
+
+  def job_invitations
+    @job = Job.find(params[:job_id])
+    @interview_invitations = current_company.interview_invitations
   end
 
   def new
@@ -24,10 +30,7 @@ class Business::InterviewInvitationsController < ApplicationController
   def create 
     @candidate_ids = params[:interview_invitation][:candidate_ids].split(',')  
     @user_ids = params[:interview_invitation][:user_ids].split(',')  
-
-    @interview_invite = InterviewInvitation.new(
-      interview_invitation_params.merge!(candidate_ids: @candidate_ids, 
-        user_ids: @user_ids))
+    @interview_invite = InterviewInvitation.new(interview_invitation_params.merge!(candidate_ids: @candidate_ids, user_ids: @user_ids))
 
     respond_to do |format|
       if @interview_invite.save

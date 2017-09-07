@@ -24,9 +24,40 @@ class InterviewInvitation < ActiveRecord::Base
   def search_data
     attributes.merge(
       users: users.map(&:id),
-      
       candidates: candidates.map(&:id)
     )
+  end
+
+  def send_email
+    if self.user.google_token.present? 
+      @email = Mail.new(to: @recipient.email, from: current_user.email, subject: params[:message][:subject], body: params[:body], content_type: "text/html")
+      GoogleWrapper::Gmail.send_message(@email, current_user, message)
+    elsif self.user.outlook_token.present?
+      OutlookWrapper::Mail.send_message(self.user, self.subject, self.body, self.messageable.email)
+    else 
+      AppMailer.send_applicant_message(self.candidate.token, self.body, self.job, self.candidate.email, self.user.company).deliver
+    end
+  end
+
+  def schedule_in_calendar(interview_invite, users)
+    @users = interview_invite.users
+    
+    @users.each do |user| 
+      if user.outlook_token.present?
+        @times = interview_invite.interview_times
+        @email = user.email          
+        
+        @times.each do |time| 
+          date = time.date
+          dateTime = DateTime.parse(time.time).strftime("%H:%M:%S")
+          endTime = dateTime.chop[0..-5] + "30:00"
+          @dateTime = date + "T" + dateTime
+          @endTime = date + "T" + endTime
+
+          OutlookWrapper::Calendar.create_event(user, @dateTime, @endTime, time)
+        end
+      end
+    end
   end
   
   def to_param

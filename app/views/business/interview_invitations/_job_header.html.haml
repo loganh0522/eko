@@ -1,0 +1,27 @@
+.job-show-header
+  .header
+    .details
+      %h1= @job.title
+      .location= "#{@job.location}"
+      .job-link
+        = link_to "http://" + @job.url, :target => "_blank", class: "link" do
+          .glyphicon.glyphicon-link
+  .change-containers-nav
+    %ul 
+      = link_to business_job_applications_path(@job), class: 'change-aj' do 
+        %li{:class => is_activated?(business_job_applications_path(@job))} Applicants
+
+      = link_to business_job_activities_path(@job), class: 'change-aj' do 
+        %li{:class => is_activated?(business_job_activities_path(@job))} Activity
+
+      = link_to business_job_tasks_path(@job), class: 'change-aj' do 
+        %li{:class => is_activated?(business_job_tasks_path(@job))} Tasks
+      
+      = link_to business_job_comments_path(@job), class: 'change-aj' do 
+        %li{:class => is_activated?(business_job_comments_path(@job))} Notes
+      
+      = link_to business_job_interviews_path(@job), class: 'change-aj' do 
+        %li.activated Interviews
+
+      = link_to edit_business_job_path(@job), class: 'change-aj' do 
+        %li{:class => is_activated?(edit_business_job_path(@job))} Job Details

@@ -1,4 +1,4 @@
-document.addEventListener 'turbolinks:load', ->
+jQuery ->
   $('.main-container').on 'click', '.remove_fields', (event) ->
     $(this).next('input[type=hidden]').val('1')
     $(this).closest('fieldset').hide()

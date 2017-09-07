@@ -5,11 +5,12 @@ class Business::TasksController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
-  before_filter :load_taskable, except: [:new, :destroy, :create_multiple, :completed]
+  before_filter :load_taskable, except: [:new, :destroy, 
+    :job_complete, :job_overdue, :job_due_today, :create_multiple, :completed]
   before_filter :new_taskable, only: [:new]
 
   def job_tasks
-    @job = @taskable
+    @job = Job.find(params[:job_id]) 
 
     where = {}
     if params[:query].present? 
@@ -31,17 +32,50 @@ class Business::TasksController < ApplicationController
     end 
   end
 
-  def index
-    # if params[:application_id].present?
-    #   where = {}
-    #   where[:taskable_id] = params[:application_id]
-    #   where[:status] = 'active'
-    #   where[:company_id] = current_company.id
-    #   where[:kind] = params[:kind] if params[:kind].present?
-    #   where[:due_date] = {lte: Time.now} if params[:status]
-    #   @tasks = Task.search("*", where: where).to_a
-    # else
+  def job_complete
+    @job = Job.find(params[:job_id]) 
+
+    where = {}
+    where[:company_id] = current_company.id
+    where[:status] = 'complete'
+    where[:job_id] = @job.id 
+    where[:kind] = params[:kind] if params[:kind].present?
+    where[:users] = params[:owner] if params[:owner].present?
     
+    @tasks = Task.search params[:query], where: where
+  end
+
+  def job_due_today
+    @job = Job.find(params[:job_id]) 
+    where = {}
+    where[:company_id] = current_company.id
+    where[:job_id] = @job.id 
+    where[:status] = 'complete'
+    where[:kind] = params[:kind] if params[:kind].present?
+    where[:users] = params[:owner] if params[:owner].present?
+    
+    @tasks = Task.search params[:query], where: where
+  end
+
+  def job_overdue
+    @job = Job.find(params[:job_id]) 
+    where = {}
+    if params[:query].present? 
+      query = params[:query] 
+    else 
+      query = "*"
+    end 
+    where[:company_id] = current_company.id
+    where[:status] = 'active'
+    where[:job_id] = @job.id 
+    where[:due_date] = {lte: Time.now}
+    where[:users] = {all: [current_user.id]} if params[:owner] == "user"
+    where[:taskable_type] = params[:type] if params[:type].present?
+    where[:kind] = params[:kind] if params[:kind].present?
+    @tasks = Task.search(query, where: where).to_a
+  end
+
+  def index
     where = {}
     if params[:query].present? 
       query = params[:query] 
@@ -82,8 +116,6 @@ class Business::TasksController < ApplicationController
     else 
       query = "*"
     end 
-    
-    
     where[:company_id] = current_company.id
     where[:status] = 'active'
     where[:due_date] = {lte: Time.now}
