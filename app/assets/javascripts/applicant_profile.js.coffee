@@ -19,8 +19,6 @@ jQuery ->
       $('.no-action-buttons').show()
     return
 
-
-
   $(".modal").on "shown.bs.modal", ->  
     if $('.modal-backdrop').length == 2
       $(this).css({'z-index':'1070'})
@@ -92,6 +90,7 @@ jQuery ->
     applicant_ids = []
     applicants = []
     applicant_names = []  
+    
     for n in checkbox   
       if $(n).find('input').is(':checked') == true     
         applicant = []

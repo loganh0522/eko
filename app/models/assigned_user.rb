@@ -4,6 +4,6 @@ class AssignedUser < ActiveRecord::Base
 
   validates_presence_of :user_id
 
-  validates :user_id, 
-    :uniqueness => {:scope => [:assignable_id, :assignable_type]}
+  # validates :user_id, 
+  #   :uniqueness => {:scope => [:assignable_id, :assignable_type]}
 end

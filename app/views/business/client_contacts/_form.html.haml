@@ -2,10 +2,14 @@
   .modal-body
     .fieldset
       .form-group
-        = f.text_field :first_name, class: "form-control", label: "First Name"
-        = f.text_field :last_name, class: "form-control", label: "Last Name"
-        = f.text_field :email, class: "form-control", label: "E-mail"
-        = f.text_field :phone, class: "form-control", label: "Phone"
+        = f.text_field :first_name, id: "first_name_Block", class: "form-control", label: "First Name"
+        %span#first_name_msgBlock
+        = f.text_field :last_name, id: "last_name_Block", class: "form-control", label: "Last Name"
+        %span#last_name_msgBlock
+        = f.text_field :email, id: "email_Block", class: "form-control", label: "E-mail"
+        %span#email_msgBlock
+        = f.text_field :phone, id: "phone_Block", class: "form-control", label: "Phone"
+        %span#phone_msgBlock
   .modal-footer
     %fieldset
       = f.hidden_field :user_id, value: current_user.id

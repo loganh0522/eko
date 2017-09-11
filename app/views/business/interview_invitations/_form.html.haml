@@ -14,7 +14,6 @@
             %ul.dropdown-menu
               %li 15 min
               %li 30 min
-              %li 60 min 
               %li 1 hour
               %li 1.5 hours
               %li 2 hours
@@ -41,14 +40,7 @@
             %div#search-results
           .assigned-candidates
             .title Candidates:     
-      .form-row-2
-        .assign_to_row
-          .assign-user
-            .title Job
-            = text_field_tag "", "", :class => 'ui-autocomplete-input jobs', :placeholder => 'Type a users name to assign', id: "autocomplete" 
-            %div#search-results
-          .assigned-jobs
-            .title Job: 
+      = render 'form_fields/job_auto'
       .form-row-2
         .header
           .title Add Times    

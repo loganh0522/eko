@@ -31,11 +31,11 @@
       } 
     <% end %>
   <% end %>
+<% elsif request.path == "/business/candidates" %>
+  $('#basic-form-modal').modal('hide');
+  $('.main-container').html('<%= j render "business/candidates/candidate_table/all_candidates_table", candidates: @candidates %>');
 <% elsif params[:job_id].present? %> 
   $('#basic-form-modal').modal('hide');
   $('.main-container').html('<%= j render "business/applications/job_applications/applications", applications: @applications %>');
-<% else %>
-  $('#basic-form-modal').modal('hide');
-  $('.main-container').html('<%= j render "business/candidates/candidate_table/all_candidates_table", candidates: @candidates %>');
 <% end %>
 

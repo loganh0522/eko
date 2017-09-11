@@ -1,16 +1,11 @@
 .home-page-header
   .top-info
     %h1= "Jobs at #{current_company.name}"
-  .change-containers-nav
-    %ul  
-      %li.job-status#open.activated Open 
-      %li.job-status#closed Closed
-      %li.job-status#draft Drafts
-      %li.job-status#archived Archived 
+  
 
 .home-page-body
+  = render 'filters'
   #main-container
-    = render 'filters'
     = render 'business/jobs/jobs'       
     .side-container
       .container

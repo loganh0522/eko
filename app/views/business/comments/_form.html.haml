@@ -1,10 +1,10 @@
 .comment-area
-  = form_for [:business, @commentable, @new_comment], remote: true do |f|
+  = form_for [:business, @commentable, @comment], remote: true do |f|
     = f.text_area :body, id: "body_Block", class: "comment-body", rows: 12, cols: 12, placeholder: "Add a Note"
     %span#body_msgBlock
     .comment-area-footer
-      = f.submit @new_comment.new_record? ? "+ Add Note" : "Update", class: "btn submit-button", id: "submit-comment-btn"
-      - if @new_comment.new_record? 
+      = f.submit @comment.new_record? ? "+ Add Note" : "Update", class: "btn submit-button", id: "submit-comment-btn"
+      - if @comment.new_record? 
         .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
       - else
         = link_to "Cancel", '#', class: "remove_form btn border-button2"

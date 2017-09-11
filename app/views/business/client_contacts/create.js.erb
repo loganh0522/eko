@@ -1,3 +1,9 @@
-$('#main-container').html('<%= j render "business/client_contacts/contact_table", contacts: @contacts %>');
-
-$('.modal').modal('hide');
+<% if @errors.present? %>
+  <% @errors.each do |error| %>
+    $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+    $('#<%= error[0] %>_Block').addClass('has-error');
+  <% end %>
+<% else %>
+  $('#main-container').html('<%= j render "business/client_contacts/contact_table", contacts: @contacts %>');
+  $('.modal').modal('hide');
+<% end %>

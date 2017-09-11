@@ -93,7 +93,7 @@ Rails.application.routes.draw do
     resources :rooms
     post "update_password", to: 'users#update_password'
     
-    resources :tasks do 
+    resources :tasks, except: [:show] do 
       collection do 
         post :completed, to: "tasks#completed"
         get :complete, to: "tasks#complete"
@@ -144,10 +144,23 @@ Rails.application.routes.draw do
     end
 
     resources :clients do 
-      resources :jobs
+      resources :jobs, except: [:index, :show]
+      get 'jobs', to: "jobs#client_jobs"
+
       resources :activities
-      resources :comments
-      resources :tasks
+      resources :comments, except: [:index]
+      get :comments, to: "comments#client_comments"
+      resources :tasks, except: [:index, :show] do 
+        collection do 
+          post :completed, to: "tasks#completed"
+          get :complete, to: "tasks#client_complete"
+          get :overdue, to: "tasks#client_overdue"
+          get :due_today, to: "tasks#client_due_today"
+          post :create_multiple, to: "tasks#create_multiple"
+        end
+      end
+      get "tasks", to: "tasks#client_tasks"
+
       resources :client_contacts do
         resources :messages
         resources :comments
@@ -228,6 +241,17 @@ Rails.application.routes.draw do
       collection do 
         get :autocomplete
       end
+      resources :tasks, except: [:index, :show] do 
+        collection do 
+          post :completed, to: "tasks#completed"
+          get :complete, to: "tasks#job_complete"
+          get :overdue, to: "tasks#job_overdue"
+          get :due_today, to: "tasks#job_due_today"
+          post :create_multiple, to: "tasks#create_multiple"
+        end
+      end
+
+      get 'tasks', to: "tasks#job_tasks"
 
       get :close, to: "jobs#close_job"
       get :archive, to: "jobs#archive_job"
@@ -248,17 +272,7 @@ Rails.application.routes.draw do
       get "/activities", to: 'activities#job_activity'
       resources :tags
 
-      resources :tasks, except: [:index] do 
-        collection do 
-          post :completed, to: "tasks#completed"
-          get :complete, to: "tasks#job_complete"
-          get :overdue, to: "tasks#job_overdue"
-          get :due_today, to: "tasks#job_due_today"
-          post :create_multiple, to: "tasks#create_multiple"
-        end
-      end
-
-      get 'tasks', to: "tasks#job_tasks"
+      
 
 
       resources :hiring_teams

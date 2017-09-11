@@ -13,6 +13,19 @@
   #   indexes :created_at, type: "date"
   # end
 
+    # mapping do 
+  #   indexes :id, type: 'integer'
+  #   indexes :created_at, type: 'date'
+  #   indexes :title, type: 'string'
+  #   indexes :website, type: 'string'
+  #   indexes :kind, type: 'string'
+  #   indexes :open_jobs, type: 'integer'
+  #   indexes :subscription, type: 'string'
+  # end
+
+  # after_commit lambda { __elasticsearch__.index_document}, on: :create
+  # after_commit lambda { __elasticsearch__.update_document}, on: :update
+  # after_commit lambda { __elasticsearch__.delete_document}, on: :destroy
   # after_commit lambda { __elasticsearch__.index_document(parent: company_id, routing: company_id) }, on: :create
   # after_commit lambda { __elasticsearch__.update_document(parent: company_id, routing: company_id) }, on: :update
   # after_commit lambda { __elasticsearch__.delete_document(parent: company_id, routing: company_id) }, on: :destroy

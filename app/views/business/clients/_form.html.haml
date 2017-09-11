@@ -2,7 +2,8 @@
   .modal-body
     .fieldset
       .form-group
-        = f.text_field :company_name, class: "form-control", label: "Company Name"
+        = f.text_field :company_name, id: "company_name_Block", class: "form-control", label: "Company Name"
+        %span#company_name_msgBlock
       .form-group
         = f.text_field :website, class: "form-control", label: "Website"
       .form-group

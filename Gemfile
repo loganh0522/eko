@@ -66,10 +66,12 @@ gem 'googlecharts'
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-google-oauth2'
 gem 'google-api-client', '0.9'
+gem 'google-cloud-pubsub'
 gem 'signet', '~> 0.7.3'
 gem 'microsoft_graph', github: 'loganh0522/msgraph-sdk-ruby'
 gem 'oauth2'
 gem 'activerecord-session_store'
+
 
 gem 'liquid', '~> 3.0', '>= 3.0.6'
 gem 'tinymce-rails', '~> 4.5'

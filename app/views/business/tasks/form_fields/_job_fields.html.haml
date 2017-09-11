@@ -1,0 +1,16 @@
+.form-row-2
+  .assign_to_row#candidate_ids_block
+    .assign-user
+      .title Add Candidates
+      = text_field_tag "", "", :class => 'ui-autocomplete-input candidates', :placeholder => 'Type a users name to assign', id: "autocomplete"
+      %div#search-results
+    .assigned-candidates
+      .title Candidates: 
+.form-row-2
+  .assign_to_row
+    .assign-user
+      .title Assign Users (Team)
+      = text_field_tag "", "", :class => 'ui-autocomplete-input users', :placeholder => 'Type a users name to assign', id: "autocomplete"
+      %div#search-results
+    .assigned-users
+      .title Assigned Users: 

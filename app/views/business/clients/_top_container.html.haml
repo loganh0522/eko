@@ -1,0 +1,20 @@
+.job-show-header
+  .header
+    .details
+      %h1= @client.company_name
+  .change-containers-nav
+    %ul 
+      = link_to business_client_client_contacts_path(@client) do 
+        %li{:class => is_activated?(business_client_client_contacts_path(@client))} Contacts
+      
+      = link_to business_client_jobs_path(@client) do 
+        %li{:class => is_activated?(business_client_jobs_path(@client))} Jobs
+      
+      = link_to business_client_tasks_path(@client) do 
+        %li{:class => is_activated?(business_client_tasks_path(@client))} Tasks
+      
+      = link_to business_client_comments_path(@client) do 
+        %li{:class => is_activated?(business_client_comments_path(@client))} Notes
+      
+      = link_to business_client_activities_path(@client) do 
+        %li{:class => is_activated?(business_client_activities_path(@client))} Activity

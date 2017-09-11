@@ -5,17 +5,15 @@
   .change-containers-nav
     %ul 
       = link_to business_client_client_contacts_path(@client), remote: true do 
-        %li.change#client-contacts.activated Contacts
-      = link_to business_client_jobs_path(@client), remote: true do 
-        %li.change#client-jobs Jobs
-      = link_to business_client_tasks_path(@client), remote: true do 
-        %li.change#job-tasks Tasks
-      = link_to business_client_comments_path(@client), remote: true do 
-        %li.change#job-notes Notes
-      = link_to business_client_activities_path(@client), remote: true do 
-        %li.change#job-activity-feed Activity
-
-      
+        %li Contacts
+      = link_to business_client_jobs_path(@client) do 
+        %li{:class => is_activated?(business_client_jobs_path(@client))} Jobs
+      = link_to business_client_tasks_path(@client) do 
+        %li Tasks
+      = link_to business_client_comments_path(@client) do 
+        %li Notes
+      = link_to business_client_activities_path(@client) do 
+        %li Activity
 
 #main-container
   .all-client-contacts-container

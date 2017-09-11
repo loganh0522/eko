@@ -1,8 +1,4 @@
 class Company < ActiveRecord::Base
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks  
-  index_name ["talentwiz", Rails.env].join('_') 
-
   before_create :generate_token
   has_many :users
   has_many :invitations
@@ -101,6 +97,10 @@ class Company < ActiveRecord::Base
     self.jobs.where(status: "open")
   end
 
+  def closed_jobs
+    self.jobs.where(status: "closed")
+  end
+
   def company_jobs
     @jobs = []  
     self.jobs.each do |job|  
@@ -111,25 +111,5 @@ class Company < ActiveRecord::Base
 
   def company_messages 
     self.candidates.messages
-  end
-
-  mapping do 
-    indexes :id, type: 'integer'
-    indexes :created_at, type: 'date'
-    indexes :title, type: 'string'
-    indexes :website, type: 'string'
-    indexes :kind, type: 'string'
-    indexes :open_jobs, type: 'integer'
-    indexes :subscription, type: 'string'
-  end
-
-  # after_commit lambda { __elasticsearch__.index_document}, on: :create
-  # after_commit lambda { __elasticsearch__.update_document}, on: :update
-  # after_commit lambda { __elasticsearch__.delete_document}, on: :destroy
-
-  def as_indexed_json(options={})
-    as_json(
-      only: [:id, :name, :website, :created_at, :active, :kind, :open_jobs, :subscription],
-    )
   end
 end

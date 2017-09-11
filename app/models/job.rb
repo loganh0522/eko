@@ -42,7 +42,7 @@ class Job < ActiveRecord::Base
   after_validation :set_token, :convert_location, :job_url
   after_create :create_stages, :set_token, :create_job_feed
   
-  searchkick word_start: [:title]
+  searchkick word_start: [:title], callbacks: :async
 
   def create_stages
     @stages = self.company.default_stages

@@ -19,19 +19,20 @@
           = q.file_field :name, class: "file-container"
       - if !@job.present?
         .form-row
-          .header
-            .title Add to Job    
-            = text_field_tag "", "", :class => 'ui-autocomplete-input jobs', :placeholder => 'Search Jobs', id: "search-form" 
-            %div#search-results
-            .assigned-jobs
-              .title Job:  
-      .form-row
-        .header#add-tags
-          .title Tags    
-          = text_field_tag '', '', :class => 'ui-autocomplete-input form-control', :placeholder => 'Add a Tag', id: "tag_name", hide_label: true
-          .btn#add-tag-button Add
-          %div#tag-results   
-        #tags_to_add
+          .assign_to_row
+            .assign-user
+              .title Job
+              = text_field_tag "", "", :class => 'ui-autocomplete-input jobs', :placeholder => 'Type a users name to assign', id: "autocomplete" 
+              %div#search-results
+          .assigned-jobs
+            .title Job:
+      / .form-row
+      /   .header#add-tags
+      /     .title Tags    
+      /     = text_field_tag '', '', :class => 'ui-autocomplete-input form-control', :placeholder => 'Add a Tag', id: "tag_name", hide_label: true
+      /     .btn#add-tag-button Add
+      /     %div#tag-results   
+      /   #tags_to_add
       .form-row
         .header
           .title Social Media    
@@ -51,5 +52,6 @@
       - if @job.present? 
         = hidden_field_tag :job_id, @job.id
       - else
-        = hidden_field_tag :jobs_ids
+        = hidden_field_tag :job_id, nil, {:id => "job_ids"}
       = f.submit "Create Profile", class: "btn submit-button"
+

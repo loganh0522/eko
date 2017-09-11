@@ -45,20 +45,23 @@ class Business::CandidatesController < ApplicationController
 
   def create 
     @candidate = Candidate.new(candidate_params)
-    respond_to do |format|
+
+    respond_to do |format| 
       if @candidate.save
         if params[:job_id].present? 
           @job = Job.find(params[:job_id])
           Application.create(candidate: @candidate, job_id: @job.id, company_id: current_company)
           @applications = @job.applications
+          @candidates = current_company.candidates
         else
           @candidates = current_company.candidates
         end      
-        create_application(@candidate)  
         add_tags(@candidate)
       else 
         render_errors(@candidate)
       end
+      @tags = current_company.tags
+      @tag = Tag.new
       format.js
     end
   end
@@ -136,14 +139,6 @@ class Business::CandidatesController < ApplicationController
     end
   end
 
-  def create_application(candidate)  
-    if params[:jobs_ids].present?
-      @ids = params[:jobs_ids].split(',')
-      @ids.each do |id|
-        Application.create(candidate: candidate, job_id: id, company_id: current_company)
-      end
-    end
-  end
 
   def render_errors(candidate)
     @errors = []
@@ -153,7 +148,7 @@ class Business::CandidatesController < ApplicationController
   end
 
   def candidate_params
-    params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :location, :company_id, :manually_created, 
+    params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :location, :company_id, :manually_created, :job_id,
       work_experiences_attributes: [:id, :body, :_destroy, :title, :company_name, :description, :start_month, :start_year, :end_month, :end_year, :current_position, :industry_ids, :function_ids, :location],
       educations_attributes: [:id, :school, :degree, :description, :start_month, :start_year, :end_month, :end_year, :_destroy], 
       resumes_attributes: [:id, :name, :_destroy],

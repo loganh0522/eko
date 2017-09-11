@@ -19,15 +19,10 @@
                 = select_tag :kind, options_for_select(["Schedule Interview", "To-do", "Send Assesment", "Finish Assessment"]), :prompt => "Type of Task...", id: "select-kind" 
             = text_area_tag :notes, nil, id: "comment-body", placeholder: "Notes"  
             .form-row-2
-              .assign_to_row#candidate_ids_block
-                .assign-user
-                  .title Add Candidates
-                  = text_field_tag "", "", :class => 'ui-autocomplete-input candidates', :placeholder => 'Type a users name to assign', id: "search-form"
-                  %div#search-results
-                .email-area
-                  .to 
-                    .title To:  
-                    .recipients    
+              .email-area
+                .to 
+                  .title To:  
+                  .recipients    
             .form-row-2
               .assign_to_row
                 .assign-user

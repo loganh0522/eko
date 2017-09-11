@@ -11,17 +11,12 @@ class Business::ClientContactsController < ApplicationController
     @client = Client.find(params[:client_id])
     @contact = ClientContact.new
     @contacts = @client.client_contacts
-
-    respond_to do |format|
-      format.js
-    end
   end
   
   def show 
     @contact = ClientContact.find(params[:id])
     @client = Client.find(params[:client_id])
  
-    
     respond_to do |format|
       format.js
     end
@@ -39,9 +34,13 @@ class Business::ClientContactsController < ApplicationController
   def create
     @contact = ClientContact.new(client_params)
     @client = Client.find(params[:client_id])
+
     respond_to do |format|
       if @contact.save
         @contacts = @client.client_contacts
+        format.js
+      else 
+        render_errors(@contact)
         format.js
       end
     end
@@ -70,6 +69,13 @@ class Business::ClientContactsController < ApplicationController
   end
 
   private
+
+  def render_errors(contact)
+    @errors = []
+    contact.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end 
+  end
 
   def client_params
     params.require(:client_contact).permit(:client_id, :first_name, :last_name, :email, :phone, :user_id)

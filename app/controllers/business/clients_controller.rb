@@ -1,7 +1,7 @@
 class Business::ClientsController < ApplicationController
   layout "business"
-  filter_access_to :all
-  filter_access_to :filter_candidates, :require => :read
+  # filter_access_to :all
+  # filter_access_to :filter_candidates, :require => :read
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -34,6 +34,9 @@ class Business::ClientsController < ApplicationController
       if @client.save
         @clients = current_company.clients
         format.js
+      else 
+        render_errors(@client)
+        format.js
       end
     end
   end
@@ -61,6 +64,13 @@ class Business::ClientsController < ApplicationController
   end
 
   private
+
+  def render_errors(client)
+    @errors = []
+    client.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end 
+  end
 
   def client_params
     params.require(:client).permit(:company_id, :company_name, :website, :address, :user_id)

@@ -1,12 +1,12 @@
 class Business::MessagesController < ApplicationController 
   layout "business"
   # filter_resource_access
-  # before_filter :require_user
-  # before_filter :belongs_to_company
-  # before_filter :trial_over
-  # before_filter :company_deactivated?
-  # before_filter :load_messageable, except: [:new, :index, :create, :destroy, :update, :multiple_messages]
-  # before_filter :new_messageable, only: [:new] 
+  before_filter :require_user
+  before_filter :belongs_to_company
+  before_filter :trial_over
+  before_filter :company_deactivated?
+  before_filter :load_messageable, except: [:new, :index, :create, :destroy, :update, :multiple_messages]
+  before_filter :new_messageable, only: [:new] 
   # include AuthHelper
 
   def index
@@ -22,7 +22,6 @@ class Business::MessagesController < ApplicationController
       # token = current_user.outlook_token.access_token
       # email = current_user.email
       # @messages = OutlookWrapper::Mail.get_messages(token, email)
-       
       # @messages = current_user.messages
     end
 
@@ -34,7 +33,7 @@ class Business::MessagesController < ApplicationController
 
   def new
     @message = Message.new  
-
+    binding.pry
     respond_to do |format|
       format.js
     end

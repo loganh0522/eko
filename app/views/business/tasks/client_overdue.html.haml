@@ -1,0 +1,36 @@
+.job-show-header
+  .header
+    .details
+      %h1= @client.company_name
+  .change-containers-nav
+    %ul 
+      = link_to business_client_client_contacts_path(@client) do 
+        %li Contacts
+      
+      = link_to business_client_jobs_path(@client) do 
+        %li Jobs
+      
+      = link_to business_client_tasks_path(@client) do 
+        %li.activated Tasks
+      
+      = link_to business_client_comments_path(@client) do 
+        %li Notes
+      
+      = link_to business_client_activities_path(@client) do 
+        %li Activity
+
+#main-container
+  #job-applicants
+    .side-container
+      = form_tag business_client_tasks_path(@client), :method => 'get', id: "search-form" do
+        = render 'business/tasks/client_filters'
+    .main-container#task-container
+      = link_to "Create Task", new_business_client_task_path(@client),  data: {:turbolinks => "false"}, remote: true, class: "btn border-button2"
+      = render 'business/tasks/tasks'
+
+.modal#basic-form-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title

@@ -5,6 +5,7 @@
     .side-container
       = render 'job_filters'
     .main-container#task-container
+      = link_to "Create Interview", new_business_interview_invitation_path,  data: {:turbolinks => "false"}, remote: true, class: "btn border-button2"
       = render 'business/interviews/interviews'
 
 .modal#basic-form-modal

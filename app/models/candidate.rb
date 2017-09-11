@@ -25,7 +25,7 @@ class Candidate < ActiveRecord::Base
   
   has_many :messages, -> {order("created_at DESC")}, as: :messageable, :dependent => :destroy
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy
-  has_many :tasks, as: :taskable, :dependent => :destroy
+  has_many :tasks, -> {order("created_at DESC")}, as: :taskable, :dependent => :destroy
 
   validates_presence_of :first_name, :last_name, :email
   validates_associated :social_links, :work_experiences, :educations, :resumes

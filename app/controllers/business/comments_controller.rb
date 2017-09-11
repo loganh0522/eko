@@ -10,10 +10,16 @@ class Business::CommentsController < ApplicationController
 
   def job_comments
     @comments = @commentable.comments
-    @new_comment = Comment.new
+    @comment = Comment.new
     @job = @commentable
   end
   
+  def client_comments
+    @comments = @commentable.comments
+    @comment = Comment.new
+    @client = @commentable
+  end
+
   def index
     @comments = @commentable.comments
     @comment = Comment.new
@@ -24,18 +30,18 @@ class Business::CommentsController < ApplicationController
   end
 
   def new 
-    @new_comment = Comment.new
-    binding.pry
+    @comment = Comment.new
+
     respond_to do |format|
       format.js
     end
   end
 
   def create 
-    @comment = @commentable.comments.build(comment_params)
-    @new_comment = Comment.new
+    @new_comment = @commentable.comments.build(comment_params)
+    @comment = Comment.new
     
-    if @comment.save 
+    if @new_comment.save 
       @comments = @commentable.comments
       track_activity @comment
     else
@@ -47,9 +53,8 @@ class Business::CommentsController < ApplicationController
   end
 
   def edit 
-    @new_comment = @commentable
+    @comment = Comment.find(params[:id])
     @commentable = @commentable.commentable
-
     respond_to do |format| 
       format.js
     end

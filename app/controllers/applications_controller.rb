@@ -5,13 +5,9 @@ class ApplicationsController < JobSeekersController
   def new
     @application = Application.new
     @job = Job.find(params[:job_id])
-    @questionairre = @job.questionairre
+    @questions = @job.questions if @job.questions.present?
     @job_board = JobBoard.find_by_subdomain!(request.subdomain)
     @company = @job_board.company
-
-    if @questionairre.questions.present? 
-      @questions = @questionairre.questions
-    end
   end
 
   def create 
