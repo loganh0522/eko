@@ -252,7 +252,6 @@ class Business::TasksController < ApplicationController
     @user_ids = params[:task][:user_ids].split(',') 
     @candidate_ids = params[:task][:candidate_ids].split(',')
     
-
     create_tasks
 
     respond_to do |format| 

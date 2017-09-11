@@ -30,7 +30,8 @@
     - elsif @taskable.class == Application
       = f.hidden_field :job_id, value: @taskable.job.id
     - else 
-      = f.hidden_field :job_id, id: "job_ids"
+      = hidden_field_tag :job_id, nil, id: "job_ids"
+      
     = f.hidden_field :user_id, value: current_user.id
     = f.hidden_field :company_id, value: current_company.id
     = f.hidden_field :status, value: "active"
