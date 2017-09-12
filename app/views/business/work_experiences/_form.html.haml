@@ -1,0 +1,27 @@
+= form_for [:business, @candidate, @experience] do |f|
+  .fieldset.add-work-experience
+    .row
+      .col-md-6
+        = f.text_field :title, id: "title_Block", class: "form-control", placeholder: "Job Title", hide_label: true
+        %span#title_msgBlock
+      .col-md-6
+        = f.text_field :company_name, id: "company_name_Block", class: "form-control", placeholder: "Company Name", hide_label: true
+        %span#company_name_msgBlock
+    .row
+      .col-md-3.col-xs-6.col-sm-6
+        = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
+      .col-md-3.col-xs-6.col-sm-6
+        = f.text_field :start_year, class: "form-control"
+      .col-md-3.col-xs-6.col-sm-6
+        = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
+      .col-md-3.col-xs-6.col-sm-6
+        = f.text_field :end_year, class: "form-control"
+    .row 
+      .col-sm-6.col-md-offset-6
+        = f.check_box :current_position, checked_value: 1, unchecked_value: 0
+    .row
+      .col-md-12
+        = f.text_area :description, rows: 5, class: "form-control", hide_label: true, placeholder: "Description"
+    .comment-area-footer
+      = f.submit @experience.new_record? ? "+ Add Experience" : "Update", class: "btn submit-button", id: "submit-comment-btn"
+      = link_to "Cancel", '#', class: "remove_form btn border-button2"

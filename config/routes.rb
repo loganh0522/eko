@@ -188,6 +188,7 @@ Rails.application.routes.draw do
       collection do 
         get :autocomplete
       end
+      resources :work_experiences
       resources :interviews
       resources :applications 
       resources :messages

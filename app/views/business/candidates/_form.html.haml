@@ -50,7 +50,7 @@
       = f.hidden_field :manually_created, value: true
       = hidden_field_tag :tags
       - if @job.present? 
-        = hidden_field_tag :job_id, @job.id
+        = hidden_field_tag :job_ids, @job.id
       - else
         = hidden_field_tag :job_id, nil, {:id => "job_ids"}
       = f.submit "Create Profile", class: "btn submit-button"

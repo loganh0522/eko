@@ -7,17 +7,12 @@
           = f.text_field :title, id: "title_Block", placeholder: "Event Title", label: "Event Title"
           %span#kind_Block.help-block
         .contain-2
-          .dropdown
-            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              Duration
-              %b.caret
-            %ul.dropdown-menu
-              %li 15 min
-              %li 30 min
-              %li 1 hour
-              %li 1.5 hours
-              %li 2 hours
-              %li All Day  
+          = f.label "Duration"
+          .duration
+            = text_field_tag :hours, nil,  class: "number-only", id: "hours", maxlength: "2", placeholder: '00'
+            .duration-title hrs
+            = text_field_tag :minutes, nil, class: "number-only", id: "minutes", maxlength:"2", placeholder: '00'
+            .duration-title mins
       .form-row-2
         = f.label "Type of Meeting"
         = f.select :kind, options_for_select(["Phone Interview", "Skype", "In-person Interview"]), :html => {id: "kind_Block", prompt: "Choose Type..."}
@@ -40,7 +35,7 @@
             %div#search-results
           .assigned-candidates
             .title Candidates:     
-      = render 'form_fields/job_auto'
+      = render 'business/interview_invitations/form_fields/job_auto'
       .form-row-2
         .header
           .title Add Times    
@@ -64,5 +59,5 @@
       = f.hidden_field :company_id, value: current_company.id
     .modal-footer
       = f.submit  "+ Send Invite", class: "btn submit-button", id: "submit-comment-btn"
-      = link_to "Cancel", "#", remote: true, class: 'btn border-button2', id: 'cancel'
+      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel  
 

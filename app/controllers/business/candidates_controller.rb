@@ -51,8 +51,11 @@ class Business::CandidatesController < ApplicationController
         if params[:job_id].present? 
           @job = Job.find(params[:job_id])
           Application.create(candidate: @candidate, job_id: @job.id, company_id: current_company)
-          @applications = @job.applications
           @candidates = current_company.candidates
+        elsif params[:job_ids]
+          @job = Job.find(params[:job_ids])
+          Application.create(candidate: @candidate, job_id: @job.id, company_id: current_company)
+          @applications = @job.applications
         else
           @candidates = current_company.candidates
         end      

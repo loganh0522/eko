@@ -251,5 +251,10 @@ jQuery ->
 
 
 
-  
+  $(document).on 'keyup', '.number-only', (event) ->  
+    if $.isNumeric($(this).val()) == false
+      @value = @value.slice(0, -1)
+    return
+
+
 
