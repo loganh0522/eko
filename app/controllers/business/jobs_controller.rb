@@ -92,7 +92,6 @@ class Business::JobsController < ApplicationController
         track_activity(@job, "closed")  
         format.js
       else
-        flash[:danger] = "Sorry, something went wrong, please try again."
         format.js 
       end
     end
@@ -104,7 +103,6 @@ class Business::JobsController < ApplicationController
     if @job.update_attributes(status: "archived") 
       track_activity(@job, "archived")
     else
-      flash[:danger] = "Sorry, something went wrong, please try again."
       redirect_to :back
     end
     redirect_to business_jobs_path

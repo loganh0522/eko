@@ -14,6 +14,9 @@ class InboundEmailsController < ApplicationController
     head 200
   end
 
+  def gmail_webhook
+
+  end
 
   def outlook_webhook
     render text: params[:validationToken]

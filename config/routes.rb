@@ -49,8 +49,7 @@ Rails.application.routes.draw do
   match '/widgets/:action/:widget_key', via: [:get], :controller => 'widgets', :widget_key => /.*/
   
   post :incoming_email, to: "inbound_emails#create"
-
-
+  post '/#/publish/gmail-notifications', to: "inbound_emails#gmail_webhook"
   post '/api/watch/outlookNotification', to: "inbound_emails#outlook_webhook"
  
   resources :skills 
