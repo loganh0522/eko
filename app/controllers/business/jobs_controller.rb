@@ -65,7 +65,7 @@ class Business::JobsController < ApplicationController
     if @job.update(job_params)
       track_activity @job
       flash[:notice] = "#{@job.title} has been updated"
-      redirect_to new_business_job_hiring_team_path(@job)
+      redirect_to business_job_hiring_teams_path(@job)
     else
       render :edit
     end
