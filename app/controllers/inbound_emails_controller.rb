@@ -21,6 +21,7 @@ class InboundEmailsController < ApplicationController
   def outlook_webhook
     render text: params[:validationToken]
   end
+
 end
 
 # https://prod-talentwiz.herokuapp.com/incoming_email

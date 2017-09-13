@@ -35,9 +35,9 @@ module OutlookWrapper
       
       data = {
         changeType: "created, updated",
-        notificationUrl: ENV['OUTLOOK_WEBHOOK'],
+        notificationUrl: "https://9977dc56.ngrok.io/api/watch/outlookNotification",
         resource: "me/mailFolders('Inbox')/messages",
-        expirationDateTime:"2017-08-30T23:23:45.9356913Z",
+        expirationDateTime: Time.now + 4230.minutes,
         clientState: "subscription-identifier"
       }
       
@@ -46,7 +46,7 @@ module OutlookWrapper
                                  &callback)
       
       response = graph.service.post(path, data.to_json)
-      binding.pry
+  
       true
     end
   end
