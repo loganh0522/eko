@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'features', to: 'pages#features'
   get 'contact', to: "pages#contact"
   get 'demo', to: "pages#demo"
+  get 'privacy', to: "pages#privacy"
 
 
   get 'features/plan-hiring-process', to: 'features#plan_hiring_process'

@@ -21,6 +21,10 @@ class PagesController < ApplicationController
     @contact = ContactMessage.new
   end
 
+  def privacy
+
+  end
+
   def demo
     @demo = Demo.new
   end
