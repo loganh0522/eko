@@ -24,6 +24,7 @@ module OutlookWrapper
       if user.outlook_token.expired?
         user.outlook_token.refresh!(user)
       end
+
       @token = user.outlook_token.access_token
       
       callback = Proc.new do |r| 
@@ -35,7 +36,7 @@ module OutlookWrapper
       
       data = {
         changeType: "created, updated",
-        notificationUrl: "https://9977dc56.ngrok.io/api/watch/outlookNotification",
+        notificationUrl: ENV['OUTLOOK_WEBHOOK'],
         resource: "me/mailFolders('Inbox')/messages",
         expirationDateTime: Time.now + 4230.minutes,
         clientState: "subscription-identifier"

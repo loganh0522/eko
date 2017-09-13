@@ -30,6 +30,9 @@
         %h4 Sync Gmail
         = link_to "Authenticate with Google!", '/auth/google_oauth2'
 
+        = link_to "Sync Email", edit_business_user_path(@current_user),  class: "btn border-button2"
+
+        
       /   - if @auth.present? 
       /     - @auth.each do |key, value| 
       /       = key 

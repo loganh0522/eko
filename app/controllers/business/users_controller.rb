@@ -23,6 +23,10 @@ class Business::UsersController < ApplicationController
     end
   end
 
+  def create_subscription
+    OutlookWrapper::User.create_subscription(current_user)
+  end
+
   def show
     @user = current_user
     @signature = current_user.email_signature

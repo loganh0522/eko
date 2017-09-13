@@ -2,13 +2,13 @@ Rails.application.routes.draw do
   post '/rate' => 'rater#create', :as => 'rate'
 
   if lambda {|r| r.subdomain != 'd2a80095'}
-    match '/', to: "job_boards#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '9977dc56'}, via: [:get, :post, :put, :patch, :delete]
-    match 'login', to: "sessions#subdomain_new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '9977dc56'}, via: [:get]
-    match 'login', to: "sessions#create", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '9977dc56'}, via: [:post]
-    match 'jobs/:id', to: "jobs#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '9977dc56'}, via: [:get, :post, :put, :patch, :delete]
-    match 'register', to: "users#sub_new_job_seeker", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '9977dc56'}, via: [:get, :post, :put, :patch, :delete]
-    match 'profile', to: "profiles#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '9977dc56'}, via: [:get, :post, :put, :patch, :delete]
-    match 'create-profile', to: "profiles#new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '9977dc56'}, via: [:get, :post, :put, :patch, :delete]
+    match '/', to: "job_boards#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '01d61a28'}, via: [:get, :post, :put, :patch, :delete]
+    match 'login', to: "sessions#subdomain_new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '01d61a28'}, via: [:get]
+    match 'login', to: "sessions#create", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '01d61a28'}, via: [:post]
+    match 'jobs/:id', to: "jobs#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '01d61a28'}, via: [:get, :post, :put, :patch, :delete]
+    match 'register', to: "users#sub_new_job_seeker", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '01d61a28'}, via: [:get, :post, :put, :patch, :delete]
+    match 'profile', to: "profiles#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '01d61a28'}, via: [:get, :post, :put, :patch, :delete]
+    match 'create-profile', to: "profiles#new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '01d61a28'}, via: [:get, :post, :put, :patch, :delete]
   end
 
   root to: 'pages#home'
@@ -53,7 +53,7 @@ Rails.application.routes.draw do
   post '/#/publish/gmail-notifications', to: "inbound_emails#gmail_webhook"
   
   post '/api/watch/outlookNotification', to: "inbound_emails#outlook_webhook"
- 
+  
   resources :skills 
   resources :certifications
 
@@ -93,7 +93,7 @@ Rails.application.routes.draw do
     resources :interview_invitations
     resources :rooms
     post "update_password", to: 'users#update_password'
-    
+    post 'create_subscription', to: 'users#create_subscription'
     resources :tasks, except: [:show] do 
       collection do 
         post :completed, to: "tasks#completed"
