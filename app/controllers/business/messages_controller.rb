@@ -33,7 +33,7 @@ class Business::MessagesController < ApplicationController
 
   def new
     @message = Message.new  
-    binding.pry
+
     respond_to do |format|
       format.js
     end

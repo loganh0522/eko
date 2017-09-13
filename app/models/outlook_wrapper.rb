@@ -48,7 +48,7 @@ module OutlookWrapper
       
       @response = graph.service.post(path, data.to_json)
 
-      user.outlook_token.update_attributes(subscription_id: @response)
+      user.outlook_token.update_attributes(subscription_id: @response['id'],  subscription_expiration: @response["expiration_date_time"])
       true
     end
   end
@@ -167,6 +167,7 @@ module OutlookWrapper
         organizer: {emailAddress: {name: "Logan Houston", address: "houston@talentwiz.com"}},
         responseRequested: true, responseStatus: {"@odata.type" => "microsoft.graph.responseStatus"})
 
+      binding.pry
       EventId.create(user_id: user.id, event_id: @create.id, interview_time_id: time.id) 
     end
 
