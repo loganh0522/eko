@@ -46,8 +46,9 @@ module OutlookWrapper
                                  cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                  &callback)
       
-      response = graph.service.post(path, data.to_json)
-  
+      @response = graph.service.post(path, data.to_json)
+      
+      user.outlook_token.update_attributes(subscription_id: @response.id, subscription_expiration: @response.expirationDateTime)
       true
     end
   end
@@ -99,7 +100,6 @@ module OutlookWrapper
                                  &callback)
 
       @messages = graph.me.mail_folders.find('inbox').messages.order_by('receivedDateTime desc')
-      binding.pry
     end
   end
 
