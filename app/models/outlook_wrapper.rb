@@ -47,8 +47,8 @@ module OutlookWrapper
                                  &callback)
       
       @response = graph.service.post(path, data.to_json)
-      
-      user.outlook_token.update_attributes(subscription_id: @response.id, subscription_expiration: @response.expirationDateTime)
+
+      user.outlook_token.update_attributes(subscription_expiration: @response.expirationDateTime)
       true
     end
   end
