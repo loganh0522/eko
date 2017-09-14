@@ -23,7 +23,7 @@ class InboundEmailsController < ApplicationController
       render text: params[:validationToken]
     else 
       head 200 
-      Message.create(body: )
+      
     end
   end
 
