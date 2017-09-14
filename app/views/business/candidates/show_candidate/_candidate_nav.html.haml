@@ -14,5 +14,6 @@
     = link_to business_candidate_application_scorecards_path(@candidate), remote: true do
       %li.change#scorecards Scorecards
     
-/     %li.change#activity
-/       Activity
+    = link_to business_candidate_activities_path(@candidate), remote: true do 
+      %li.change#activity Activities
+

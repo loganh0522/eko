@@ -10,9 +10,29 @@ class Task < ActiveRecord::Base
   has_many :candidates, through: :assigned_candidates
 
   validates_presence_of :title, :kind, :status, :company_id
-
+  after_save :create_activity
   def my_tasks
     current_user.tasks
+  end
+
+  def create_activity
+    if self.taskable_type == "Job"
+      Activity.create(action: "create", trackable_type: "Task", trackable_id: self.id, user_id: self.user_id,
+      company_id: self.company_id, job_id: self.job_id)
+    
+    elsif self.taskable_type == "Candidate" && self.job_id.present?
+
+      Activity.create(action: "create", trackable_type: "Task", trackable_id: self.id, user_id: self.user_id,
+      company_id: self.company_id, job_id: self.job_id, candidate_id: self.taskable_id)     
+    
+    elsif self.taskable_type == "Candidate"
+      Activity.create(action: "create", trackable_type: "Task", trackable_id: self.id, user_id: self.user_id,
+      company_id: self.company_id, candidate_id: self.taskable_id)
+    else 
+      
+      Activity.create(action: "create", trackable_type: "Task", trackable_id: self.id, user_id: self.user_id,
+      company_id: self.company_id)
+    end
   end
 
   searchkick 

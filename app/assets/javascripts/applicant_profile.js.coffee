@@ -52,7 +52,7 @@ jQuery ->
       type : "post"
       data:
         stage: $('#move-applicant-stages :selected').data('id')
-        application: $('#move-applicant-stages :selected').data('application')
+        application_id: $('#move-applicant-stages :selected').data('application')
 
   
 #################### Close Tag Form ######################

@@ -39,7 +39,6 @@ class Business::JobsController < ApplicationController
     @job = Job.new(job_params)  
 
     if @job.save && @job.company == current_company
-      track_activity(@job, "draft")
       redirect_to business_job_hiring_teams_path(@job)
     else
       render :new
@@ -63,7 +62,6 @@ class Business::JobsController < ApplicationController
     @job = Job.find(params[:id])
 
     if @job.update(job_params)
-      track_activity @job
       flash[:notice] = "#{@job.title} has been updated"
       redirect_to business_job_hiring_teams_path(@job)
     else
@@ -89,7 +87,6 @@ class Business::JobsController < ApplicationController
         @company.job_count -= 1
         @company.save
         @jobs = @company.closed_jobs
-        track_activity(@job, "closed")  
         format.js
       else
         format.js 
@@ -101,7 +98,7 @@ class Business::JobsController < ApplicationController
     @job = Job.find(params[:job_id])
 
     if @job.update_attributes(status: "archived") 
-      track_activity(@job, "archived")
+      
     else
       redirect_to :back
     end
@@ -118,7 +115,6 @@ class Business::JobsController < ApplicationController
         @company.job_count += 1
         @company.save
         @jobs = @company.open_jobs
-        track_activity(@job, "published")
         format.js
       else
         format.js

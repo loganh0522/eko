@@ -5,7 +5,7 @@
         = link_to edit_business_task_path(task), remote: true do
           .glyphicon.glyphicon-pencil
       .body
-        = link_to completed_business_tasks_path(id: task.id), method: :post, remote: true do 
+        = link_to completed_business_tasks_path(id: task.id, application_id: @application.id), method: :post, remote: true do 
           .glyphicon.glyphicon-ok 
         .title= task.title
 - else 

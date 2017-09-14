@@ -15,12 +15,20 @@ class Business::ActivitiesController < ApplicationController
   
   def index    
     if params[:application_id].present?
-      @application = Application.find(params[:application_id])
-      @activities = @application.activities
+      @candidate = Application.find(params[:application_id]).candidate
+    elsif params[:candidate_id].present?
+      @candidate = Candidate.find(params[:candidate_id])
     else
-      @activities = current_company.activities.order("created_at desc")
-      @jobs = current_company.jobs.where(status: "open")
+      nil
     end
+
+    where = {}
+    where[:job_id] = params[:job_id] if params[:job_id].present?
+    where[:candidate_id] = @candidate.id if @candidate.present?
+    where[:company_id] = current_company.id
+
+    @activities = Activity.search("*", where: where)
+    @jobs = current_company.jobs.where(status: "open")
 
     respond_to do |format|
       format.js

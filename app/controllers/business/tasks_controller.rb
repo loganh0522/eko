@@ -243,6 +243,11 @@ class Business::TasksController < ApplicationController
   def new 
     @task = Task.new
 
+    if @taskable.class == Application 
+      @job = @taskable.job
+      @taskable = @taskable.candidate
+    end
+
     respond_to do |format|
       format.js
     end
@@ -251,18 +256,15 @@ class Business::TasksController < ApplicationController
   def create 
     @user_ids = params[:task][:user_ids].split(',') 
     @candidate_ids = params[:task][:candidate_ids].split(',')
-    
     create_tasks
 
     respond_to do |format| 
-      if @new_task.save 
-        
+      if @new_task.save        
         if @taskable.class == Job
           @tasks = Task.search("*", where: {job_id: @taskable.id}) 
         else
           @tasks = @taskable.tasks 
         end
-        track_activity @new_task
         format.js 
       else
         render_errors(@new_task)
@@ -291,7 +293,8 @@ class Business::TasksController < ApplicationController
 
   def completed
     @task = Task.find(params[:id])
-    @task.update_attribute(:status, "complete")
+    @task.update_attributes(status: "complete", completed_by_id: current_user.id)
+
     track_activity @task, "complete"
 
     respond_to do |format|
@@ -385,9 +388,6 @@ class Business::TasksController < ApplicationController
         @candidate = Candidate.find(id)
         @task = @candidate.tasks.build(task_params.merge!(user_ids: @user_ids)).save
       end
-    elsif params[:task][:job_id].present? && @taskable.class != Job && @taskable.class != Application
-      @job = Job.find(params[:task][:job_id])
-      @new_task = @job.tasks.build(task_params.merge(user_ids: @user_ids))
     else 
       @new_task = @taskable.tasks.build(task_params.merge!(user_ids: @user_ids))
     end

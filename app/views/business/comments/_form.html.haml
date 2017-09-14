@@ -9,3 +9,6 @@
       - else
         = link_to "Cancel", '#', class: "remove_form btn border-button2"
       = f.hidden_field :user_id, value: current_user.id
+      
+      - if @job.present? 
+        = f.hidden_field :job_id, value: @job.id

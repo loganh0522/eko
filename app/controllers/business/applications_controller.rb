@@ -32,6 +32,7 @@ class Business::ApplicationsController < ApplicationController
     @application = Application.new(application_params)
 
     if @application.save
+      track_activity @application, "create", params[:candidate_id], params[:application][:job_id]
       respond_to do |format|
         format.js
       end
@@ -43,16 +44,15 @@ class Business::ApplicationsController < ApplicationController
     @application = Application.find(params[:id])  
     @candidate = @application.candidate
     @resume = Resume.new
-    @tasks = @application.open_tasks
+    @job = Job.find(params[:job_id])
+    @hiring_team = @job.users
+    @tasks = Task.search("*", where: {taskable_id: @candidate.id, job_id: @job.id} )
     
     if @candidate.manually_created == true 
       @applicant = @candidate
     else
       @applicant = @candidate.user.profile
     end
-
-    @job = Job.find(params[:job_id])
-    @hiring_team = @job.users
 
     respond_to do |format|
       format.js
@@ -61,37 +61,6 @@ class Business::ApplicationsController < ApplicationController
   end
 
   def destroy
-  end
-
-  def filter_applicants
-    options = {
-      average_rating: params[:average_rating],
-      tags: params[:tags],
-      job_status: params[:job_status],
-      date_applied: params[:date_applied],
-      job_applied: params[:job_applied],
-      location_applied: params[:location_applied]
-      }
-
-    @applications = []
-    if params[:query].present?
-      @results = current_company.applications.search(params[:query], options).records.to_a
-    else
-      @results = current_company.applications.search('', options).records.to_a
-    end
-
-    if @results.count == 0 
-      # @applications = 
-    else
-      @results.each do |application|  
-        if application.company == current_company
-          @applications.append(application)
-        end
-      end 
-    end
-    respond_to do |format|
-      format.js
-    end
   end
 
   def move_stage
@@ -119,11 +88,14 @@ class Business::ApplicationsController < ApplicationController
     if params[:candidate_id].present?
       @candidate = Candidate.find(params[:candidate_id])
       @application = @candidate.applications.first
+      @job = @application.job
       @questions = @job.questions
+
     else
       @application = Application.find(params[:application_id])
       @job = Job.find(params[:job_id])
       @questions = @job.questions
+
     end
 
     respond_to do |format| 
@@ -132,11 +104,11 @@ class Business::ApplicationsController < ApplicationController
   end
 
   def change_stage 
-    @app = Application.find(params[:application])
-    @job = @app.job
+    @app = Application.find(params[:application_id])
     @stage = Stage.find(params[:stage])
     @app.update_attribute(:stage, @stage)
-    @applications = @job.applications
+
+    track_activity @app, "move_stage", @app.candidate.id, @app.job.id, @stage.id
 
     respond_to do |format|
       format.js
@@ -148,7 +120,9 @@ class Business::ApplicationsController < ApplicationController
     @application.update_attributes(rejected: true, rejection_reason: params[:val])
     @job = Job.find(params[:job_id])
     @applications = @job.applications
-    
+
+    track_activity @application, "rejected", @application.candidate.id, @job.id
+
     respond_to do |format|
       format.js
     end

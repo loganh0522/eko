@@ -9,17 +9,6 @@
           .circle-img
             %img(src="/tmp/little-man.png") 
         .content 
-          = "The task #{activity.trackable.title} was completed."
+          = "The task #{activity.trackable.title} was completed by #{activity.user.full_name}."
           %br
           .time= "#{time_ago_in_words(activity.created_at)} ago" 
-    .activity-row
-      .comment-body
-        - if !activity.trackable.notes.present?
-          .no-notes There are currently no notes for this task.
-        - else
-          = activity.trackable.notes 
-    .activity-row
-      - activity.trackable.users.each do |user|
-        .assigned Assigned To: 
-        .user-tag
-          .name= current_user.full_name 

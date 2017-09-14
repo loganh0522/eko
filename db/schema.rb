@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170907141924) do
+ActiveRecord::Schema.define(version: 20170914121110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20170907141924) do
     t.integer  "application_id"
     t.integer  "company_id"
     t.integer  "job_id"
+    t.integer  "stage_id"
+    t.integer  "candidate_id"
   end
 
   create_table "applicant_contact_details", force: :cascade do |t|
@@ -154,6 +156,7 @@ ActiveRecord::Schema.define(version: 20170907141924) do
     t.datetime "updated_at"
     t.string   "commentable_type"
     t.integer  "commentable_id"
+    t.integer  "job_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -513,6 +516,7 @@ ActiveRecord::Schema.define(version: 20170907141924) do
     t.integer  "candidate_id"
     t.string   "thread_id"
     t.integer  "conversation_id"
+    t.integer  "job_id"
   end
 
   create_table "my_interviews", force: :cascade do |t|
@@ -709,6 +713,7 @@ ActiveRecord::Schema.define(version: 20170907141924) do
     t.string   "due_time"
     t.string   "status"
     t.integer  "job_id"
+    t.integer  "completed_by_id"
   end
 
   create_table "user_avatars", force: :cascade do |t|

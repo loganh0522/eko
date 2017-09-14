@@ -9,6 +9,8 @@ class Comment < ActiveRecord::Base
   belongs_to :commentable, polymorphic: true
 
   validates_presence_of :body
+  
+  searchkick
 
   def as_indexed_json(options={})
     as_json(

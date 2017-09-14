@@ -95,10 +95,11 @@ module OutlookWrapper
         r.headers['X-AnchorMailbox'] = user.email
       end
 
-      graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0',
+      graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0/',
                                  cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                  &callback)
 
+      "AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAAycOIvAAAA"
       @messages = graph.me.mail_folders.find('inbox').messages.order_by('receivedDateTime desc')
     end
   end

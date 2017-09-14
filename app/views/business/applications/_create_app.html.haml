@@ -5,7 +5,7 @@
         .title
           %h4 Move to Job: 
         .stages-select
-          = f.collection_select(:job_id, current_company.jobs, :id, :title, label: "Move to Job", :include_blank => true)
+          = f.collection_select(:job_id, current_company.open_jobs, :id, :title, label: "Move to Job", :include_blank => true)
   .modal-footer
     = f.hidden_field :company_id, value: current_company.id
     = f.hidden_field :candidate_id, value: @candidate.id

@@ -11,13 +11,13 @@ class Business::MessagesController < ApplicationController
 
   def index
     if params[:application_id].present?
-    #   @candidate = Application.find(params[:application_id]).candidate
-    #   @messages = @candidate.messages
+      @candidate = Application.find(params[:application_id]).candidate
+      @messages = @candidate.messages
     elsif params[:candidate_id].present?
        # @candidate = Candidate.find(params[:candidate_id])
        # @messages = @candidate.messages
-       @messages = OutlookWrapper::User.create_subscription(current_user)
-       # @messages = OutlookWrapper::Mail.get_messages(current_user)
+       # @messages = OutlookWrapper::User.create_subscription(current_user)
+       @messages = OutlookWrapper::Mail.get_messages(current_user)
     else
       # token = current_user.outlook_token.access_token
       # email = current_user.email
@@ -75,7 +75,6 @@ class Business::MessagesController < ApplicationController
         @message = @candidate.messages.build(user_id: current_user.id, body: params[:body], subject: params[:subject], conversation_id: @conversation.id)
       end
 
-      track_activity(@message, "create")
     end
     
     respond_to do |format|

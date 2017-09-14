@@ -18,6 +18,7 @@ class Business::CandidatesController < ApplicationController
     where[:job_location] = {all: params[:location]} if params[:location].present?
     where[:tags] = {all: params[:tags]} if params[:tags].present?
     where[:created_at] = {gte: params[:date_applied].to_time, lte: Time.now} if params[:date_applied].present?
+    
     if params[:qcv].present?
       @candidates = Candidate.search(params[:qcv], where: where, fields: fields, match: :word_start).to_a
     else

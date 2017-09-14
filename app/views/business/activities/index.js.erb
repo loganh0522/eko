@@ -1,4 +1,4 @@
-<% if params[:application_id].present?  %>
+<% if params[:application_id].present? || params[:candidate_id].present?  %>
   $('.applicant-main-container').html('<%= j render "business/activities/application_activity" %>');
   $('.applicant-nav').find('.activated').removeClass('activated');
   $('.applicant-nav').find('#activity').addClass('activated');

@@ -5,7 +5,6 @@
     .activity-body-header
       .details
         .content
-          = activity.trackable.candidate.user.full_name  
-          = "was moved to the #{activity.trackable.stage.name} stage for #{activity.trackable.job.title} by #{activity.user.full_name}"
+          = "#{activity.user.full_name} added #{activity.trackable.candidate.full_name}  to #{activity.trackable.job.title} job opening"
           %br
           .time= "#{time_ago_in_words(activity.created_at)} ago" 

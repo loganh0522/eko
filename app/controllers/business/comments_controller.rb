@@ -21,8 +21,17 @@ class Business::CommentsController < ApplicationController
   end
 
   def index
-    @comments = @commentable.comments
-    @comment = Comment.new
+    if params[:application_id].present?
+      @candidate = Application.find(params[:application_id]).candidate.id
+    else
+      @candidate = Candidate.find(params[:candidate_id]).id
+    end
+    
+    where = {}
+    where[:job_id] = params[:job_id] if params[:job_id].present?
+    where[:commentable_id] = @candidate
+
+    @comments = Comment.search("*", where: where)
 
     respond_to do |format|
       format.js
@@ -32,6 +41,11 @@ class Business::CommentsController < ApplicationController
   def new 
     @comment = Comment.new
 
+    if @commentable.class == Application 
+      @job = @commentable.job
+      @commentable = @commentable.candidate
+    end
+
     respond_to do |format|
       format.js
     end
@@ -40,10 +54,18 @@ class Business::CommentsController < ApplicationController
   def create 
     @new_comment = @commentable.comments.build(comment_params)
     @comment = Comment.new
-    
+
     if @new_comment.save 
       @comments = @commentable.comments
-      track_activity @comment
+
+      if @commentable.class == Job
+        track_activity @new_comment, 'job_note', nil, params[:job_id]
+      elsif @commentable.class != Job && params[:comment][:job_id].present?
+        track_activity @new_comment, 'create', @commentable.id, params[:comment][:job_id]
+      else 
+        track_activity @new_comment, 'create', @commentable.id
+      end
+      
     else
       render_errors(@comment)
     end
@@ -75,7 +97,6 @@ class Business::CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    Activity.where(trackable_id: @comment.id, trackable_type: "Comment").first.delete if Activity.where(trackable_id: @comment.id).first.present?
     @comment.destroy
 
     respond_to do |format|
@@ -114,7 +135,7 @@ class Business::CommentsController < ApplicationController
   end
 
   def comment_params 
-    params.require(:comment).permit(:body, :user_id)
+    params.require(:comment).permit(:body, :user_id, :job_id)
   end
 
   def load_commentable

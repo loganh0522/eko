@@ -191,6 +191,7 @@ Rails.application.routes.draw do
       end
       resources :work_experiences
       resources :interviews
+      resources :activities
       resources :applications 
       resources :messages
       resources :comments

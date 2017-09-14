@@ -116,21 +116,20 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # def track_multiple_activity(trackable, action = params[:action], applicants)
-  #   current_user.activities.create! action: action, trackable: trackable, 
-  # end
-
-  def track_activity(trackable, action = params[:action])
-    if (params[:application_id]).present?
-      current_user.activities.create! action: action, trackable: trackable, application_id: params[:application_id], company: current_company, job_id: params[:job_id]    
-    elsif (params[:applicant_ids]).present?
+  def track_multiple_activity(trackable, action = params[:action], applicants)
+    if (params[:applicant_ids]).present?
       applicant_ids = params[:applicant_ids].split(',')
       applicant_ids.each do |id| 
         current_user.activities.create! action: action, trackable: trackable, application_id: id, company: current_company, job_id: @job.id
       end
     else
-      current_user.activities.create! action: action, trackable: trackable, company: current_company
+      current_user.activities.create! action: action, trackable: trackable
     end
+  end
+
+  def track_activity(trackable, action = params[:action], candidate=nil, job=nil, stage = nil)
+    current_user.activities.create! action: action, trackable: trackable, 
+      company: current_company, job_id: job, stage_id: stage, candidate_id: candidate
   end
 
   def track_notification(trackable, action = params[:action])

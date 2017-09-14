@@ -19,7 +19,12 @@ class InboundEmailsController < ApplicationController
   end
 
   def outlook_webhook
-    render text: params[:validationToken]
+    if params[:validationToken].present? 
+      render text: params[:validationToken]
+    else 
+      head 200 
+      Message.create(body: )
+    end
   end
 
 end
