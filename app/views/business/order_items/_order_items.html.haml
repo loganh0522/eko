@@ -1,0 +1,6 @@
+- if @order.order_items.count == 0 
+  %p There are currently no items in your cart
+- else 
+  - @order.order_items.each do |item| 
+    = item.premium_board.name
+    = item.premium_board.price

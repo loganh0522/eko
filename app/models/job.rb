@@ -62,7 +62,7 @@ class Job < ActiveRecord::Base
   end
 
   def create_job_feed
-    JobFeed.create(job: self)
+    JobFeed.create(job_id: self.id)
   end
 
   def convert_location

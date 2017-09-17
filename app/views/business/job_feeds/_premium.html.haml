@@ -1,0 +1,32 @@
+= link_to business_job_job_feeds_path(@job, type: 'premium') do 
+  Premium
+= link_to business_job_job_feeds_path(@job, type: 'free') do 
+  Free
+
+= form_for [:business, @order] do |f|
+  #premium-boards
+    - @job_feeds.each do |board| 
+      .job-feed-container
+        .header
+          %img(src="/tmp/adzuna_logo.png")
+          = "Price: $#{board.price}"
+        .body
+          = link_to_add_to_cart "Add to Cart", f, :order_items, board.id
+          / = link_to "In Cart", "#", class: "in-cart btn submit-button"
+  #cart 
+    .header My Cart
+    .body
+
+    .footer
+      #cart-total 
+        .total Total
+        .amount= "0"
+      = f.hidden_field :total
+      
+      - if current_company.customer.present? 
+        = f.submit "Checkout", class: 'btn submit-button' 
+      - else
+        = link_to "Checkout", new_business_customer_path, remote: true, class: 'btn submit-button' 
+        
+
+

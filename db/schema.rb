@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170914121110) do
+ActiveRecord::Schema.define(version: 20170916125419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,9 @@ ActiveRecord::Schema.define(version: 20170914121110) do
 
   create_table "career_levels", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "carts", force: :cascade do |t|
   end
 
   create_table "certifications", force: :cascade do |t|
@@ -538,6 +541,26 @@ ActiveRecord::Schema.define(version: 20170914121110) do
     t.datetime "updated_at"
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.integer "cart_id"
+    t.integer "product_id"
+    t.integer "order_id"
+    t.integer "quantity"
+    t.decimal "total_price"
+    t.decimal "unit_price"
+    t.integer "premium_board_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "company_id"
+    t.integer "job_id"
+    t.integer "user_id"
+    t.string  "status"
+    t.decimal "subtotal"
+    t.decimal "tax"
+    t.decimal "total"
+  end
+
   create_table "outlook_tokens", force: :cascade do |t|
     t.string   "access_token"
     t.string   "refresh_token"
@@ -562,6 +585,15 @@ ActiveRecord::Schema.define(version: 20170914121110) do
     t.string   "reference_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "premium_boards", force: :cascade do |t|
+    t.string  "name"
+    t.decimal "price"
+    t.string  "logo"
+    t.string  "website"
+    t.string  "description"
+    t.string  "kind"
   end
 
   create_table "profiles", force: :cascade do |t|

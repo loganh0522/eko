@@ -1,0 +1,6 @@
+= f.fields_for :order_item, OrderItem.new do |q|
+  = @board.name
+  = @board.price
+  = q.hidden_field :total_price, value: @board.price
+  = q.hidden_field :premium_board_id, value: @board.id
+

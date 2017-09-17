@@ -1,18 +1,23 @@
 .application-actions
   .no-action-buttons
+    .btn.glyphicon.glyphicon-trash.border-button
     .btn.border-button Send E-mail
     .btn.border-button Add Note 
     .btn.border-button Add Tag
     .btn.border-button Create Task
+
     / .btn.border-button Interview Invitation
   .applicant-action-buttons
+    = link_to '#', id: "destroy_candidates", class: "move-applicants", :data => {:toggle => "modal", :target => "#destroy_candidatesModal"} do
+      .btn.active-application-button.glyphicon.glyphicon-trash
     = link_to 'Send E-mail', '#', class: "btn active-application-button move-applicants", id: "send_message", :data => {:toggle => "modal", :target => "#send_messageModal"}
-
     = link_to 'Add Note', '#', class: "btn active-application-button move-applicants", id: "add_comment", :data => {:toggle => "modal", :target => "#add_commentModal"}
-
     = link_to 'Add Tag', '#', class: "btn active-application-button move-applicants", id: "addTags", :data => {:toggle => "modal", :target => "#addTagsModal"}
-
     = link_to 'Create Task', '#', class: "btn active-application-button move-applicants", id: "create_task", :data => {:toggle => "modal", :target => "#create_taskModal"}
+
+    
+
+
 
     / = link_to 'Interview Invitation', '#', class: "btn active-application-button move-applicants", id: "send_message", :data => {:toggle => "modal", :target => "#send_messageModal"}
 

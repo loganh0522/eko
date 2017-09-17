@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   has_many :tasks, through: :assigned_users, source: :assignable, source_type: "Task"
   has_many :interviews, through: :assigned_users, source: :assignable, source_type: "Interview"
   has_many :interview_invitations, through: :assigned_users, source: :assignable, source_type: "InterviewInvitation"
-
+  has_many :orders
   has_many :event_ids
   
   has_many :application_scorecards

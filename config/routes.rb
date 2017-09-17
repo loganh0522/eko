@@ -103,7 +103,8 @@ Rails.application.routes.draw do
         post :create_multiple, to: "tasks#create_multiple"
       end
     end
-    
+    resources :orders
+    resources :order_items
     resources :conversations
     resources :rejection_reasons
     resources :invitations
@@ -273,16 +274,10 @@ Rails.application.routes.draw do
       get 'comments', to: "comments#job_comments"
  
       get "/activities", to: 'activities#job_activity'
+      
       resources :tags
-
-      
-
-
       resources :hiring_teams
-      
-      resources :job_feeds do
-        get :premium, to: "premium#job_feeds"
-      end
+      resources :job_feeds 
       
       resources :applications do
         get :application_form, to: "applications#application_form"

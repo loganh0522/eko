@@ -10,6 +10,11 @@ class Business::CustomersController < ApplicationController
   def new
     @customer = Customer.new
     @company = current_company
+    
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def create  

@@ -94,7 +94,8 @@ class Business::CandidatesController < ApplicationController
     @candidate = Candidate.find(params[:id])
     @candidate.destroy 
     @candidates = current_company.candidates
-
+    @tags = current_company.tags
+    @tag = Tag.new
     respond_to do |format|
       format.js
     end
@@ -109,7 +110,8 @@ class Business::CandidatesController < ApplicationController
     end
     
     @candidates = current_company.candidates
-
+    @tags = current_company.tags
+    @tag = Tag.new
     respond_to do |format|
       format.js
     end 
