@@ -19,7 +19,6 @@ class Business::OrderItemsController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    StripeWrapper::StripeCharge.create(
     respond_to do |format| 
       if @order.save 
         format.js
