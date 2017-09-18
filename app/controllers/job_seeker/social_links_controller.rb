@@ -1,5 +1,5 @@
 class JobSeeker::SocialLinksController < JobSeekersController
-
+  layout "job_seeker"
   def new
 
   end

@@ -8,6 +8,8 @@
         .applicant-details
           .name-rating
             .name= "#{@candidate.full_name.capitalize}"
+            = link_to edit_business_candidate_path(@candidate), remote: true do 
+              .glyphicon.glyphicon-pencil
             / = render 'business/ratings/form', application: @candidate.applications.first
           .current-position
             - if @candidate.current_jobs.present?

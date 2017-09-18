@@ -1,32 +1,31 @@
 .job-seeker-profile
-  / .background-photo
-  
-  .profile-header
-    = render 'job_seeker/users/form'
-    .user-image
-      - if current_user.user_avatar.present? 
-        = link_to edit_job_seeker_user_user_avatar_path(current_user, @avatar), :data => {remote: true} do
+  .background
+    .profile-header
+      = render 'job_seeker/users/form'
+      .user-image
+        - if current_user.user_avatar.present? 
+          = link_to edit_job_seeker_user_user_avatar_path(current_user, @avatar), :data => {remote: true} do
+            %i.glyphicon.glyphicon-pencil
+          = image_tag @avatar.image.large_image if @avatar.present?  
+        - else      
+          = link_to new_job_seeker_user_user_avatar_path(current_user), remote: true do
+            %i.glyphicon.glyphicon-pencil
+          %img(src="/tmp/blank_profile_picture.png")  
+      .personal-details
+        = link_to '#', :data => {:toggle => "modal", :target => "#user-information"} do
           %i.glyphicon.glyphicon-pencil
-        = image_tag @avatar.image.large_image if @avatar.present?  
-      - else      
-        = link_to new_job_seeker_user_user_avatar_path(current_user), remote: true do
-          %i.glyphicon.glyphicon-pencil
-        %img(src="/tmp/blank_profile_picture.png")  
-    .personal-details
-      = link_to '#', :data => {:toggle => "modal", :target => "#user-information"} do
-        %i.glyphicon.glyphicon-pencil
-      .name= "#{current_user.full_name}"
-      = "#{current_user.email} | #{current_user.phone}"
-      %br
-      = current_user.location
-    .user-summary
-      = current_user.tag_line
-      
-    .change-containers-nav
-      %ul
-        %li.change#experience.activated Profile
-        %li.change#portfolio Portfolio   
-        %li.change#my-apps My Applications
+        .name= "#{current_user.full_name}"
+        = "#{current_user.email} | #{current_user.phone}"
+        %br
+        = current_user.location
+      .user-summary
+        = current_user.tag_line
+        
+      .change-containers-nav
+        %ul
+          %li.change#experience.activated Profile
+          %li.change#portfolio Portfolio   
+          %li.change#my-apps Applications
 
   .main-container
     .experience-container.showing

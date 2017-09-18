@@ -90,12 +90,34 @@ class Business::CandidatesController < ApplicationController
     end  
   end
 
+  def edit
+    @candidate = Candidate.find(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def update
+    @candidate = Candidate.find(params[:id])
+
+    respond_to do |format| 
+      if @candidate.update(candidate_params)
+        format.js
+      else
+        render_errors(@candidate)
+        format.js
+      end
+    end
+  end
+
   def destroy
     @candidate = Candidate.find(params[:id])
     @candidate.destroy 
     @candidates = current_company.candidates
     @tags = current_company.tags
     @tag = Tag.new
+    
     respond_to do |format|
       format.js
     end

@@ -2,20 +2,13 @@
   belongs_to :user, touch: true
   belongs_to :profile, touch: true
   belongs_to :candidate, touch: true
-  
   has_many :exp_industries
   has_many :industries, through: :exp_industries
-
   has_many :exp_functions
   has_many :functions, through: :exp_functions
-
   has_many :user_skills
   has_many :skills, through: :user_skills
-
-
   has_many :accomplishments
-
-
   validates_presence_of :title, :message => "Job title can't be blank"
   validates_presence_of :company_name, :message => "Company can't be blank"
   # validates_presence_of :description, :message => "Description can't be blank"
@@ -25,6 +18,13 @@
   # validates_presence_of :function_ids, :message => "Function can't be blank"
   # validates_presence_of :end_month, :end_year, :unless => :current_position?
   # validates_presence_of :current_position, :unless => :end_year?
+
+  accepts_nested_attributes_for :skills, 
+    allow_destroy: true
+
+  accepts_nested_attributes_for :accomplishments, 
+    allow_destroy: true
+
 
   # def order_by_date
   #   order = []
