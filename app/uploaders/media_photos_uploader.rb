@@ -1,5 +1,5 @@
 class MediaPhotosUploader < CarrierWave::Uploader::Base
-  include CarrierWave::MiniMagick
+  include CarrierWave::RMagick
 
   process resize_to_fill: [400, 400]
   
