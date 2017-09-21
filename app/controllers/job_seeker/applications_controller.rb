@@ -2,23 +2,21 @@ class JobSeeker::ApplicationsController < JobSeekersController
   layout "job_seeker"
   before_filter :require_user
   before_filter :profile_sign_up_complete
+  before_filter :ensure_job_seeker
+  before_filter :has_applied?
   
   def new
     @application = Application.new
     @job = Job.find(params[:job_id])
-    @questionairre = @job.questionairre
-
-    if @questionairre.questions.present? 
-      @questions = @questionairre.questions
-    end
+    @questions = @job.questions if @job.questions.present?
   end
 
   def create 
     if !current_user_candidate?(params[:application][:company_id])
-      @candidate = Candidate.create(company_id: params[:application][:company_id], user_id: current_user.id)
+      @candidate = Candidate.create(company_id: params[:application][:company_id], user_id: current_user.id, manually_created: false)
       create_application
     else
-      find_candidate
+      find_candidate(params[:application][:company_id])
       create_application
     end
     redirect_to root_path
@@ -27,35 +25,29 @@ class JobSeeker::ApplicationsController < JobSeekersController
   private 
 
   def application_params 
-    params.require(:application).permit(:user_id, :job_id, :company_id, question_answers_attributes: [:id, :body, :question_id, :question_option_id])
+    params.require(:application).permit(:user_id, :job_id, 
+      :company_id, 
+      question_answers_attributes: [:id, :body, :question_id, :question_option_id])
   end
 
   def create_application
     @job = Job.find(params[:application][:job_id])  
-    if !current_user_applied?(@job)
-      @application = Application.new(application_params.merge!(candidate_id: @candidate.id))
-      if @application.save
-        flash[:success] = "Your application has been submitted"
-        track_activity @application
-      else
-        render :new
-        flash[:error] = "Something went wrong please try again"
-      end
+    @application = Application.new(application_params.merge!(candidate_id: @candidate.id))
+      
+    if @application.save
+      flash[:success] = "Your application has been submitted"
+      track_activity @application, "applied", @job.company.id, @candidate.id, @job.id
+    else
+      render :new
+      flash[:error] = "Something went wrong please try again"
     end
   end
 
   def current_user_candidate?(company)
-    @user = User.find(params[:application][:user_id])
-    @user.candidates.map(&:company_id).include?(company.to_i)
+    current_user.candidates.map(&:company_id).include?(company.to_i)
   end
 
-  def find_candidate
-    @user = User.find(params[:application][:user_id])
-    @company = Company.find(params[:application][:company_id])
-    @candidate = Candidate.where(company_id: @company.id, user_id: @user.id).first
-  end
-
-  def current_user_applied?(job)
-    current_user.applications.map(&:job_id).include?(job.id)
+  def find_candidate(company)
+    @candidate = Candidate.where(company_id: company.to_i, user_id: current_user.id).first
   end
 end

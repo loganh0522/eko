@@ -4,6 +4,9 @@
   
   = link_to business_job_application_messages_path(@job, @application), remote: true do
     %li.change#messages Messages 
+
+  = link_to business_job_application_tasks_path(@job, @application, type: "Candidate"), remote: true do
+    %li.change#tasks Tasks
     
   = link_to business_job_application_comments_path(@job, @application), remote: true do
     %li.change#notes Notes
@@ -16,3 +19,15 @@
   
   = link_to business_job_application_activities_path(@job, @application), remote: true do
     %li.change#activity Activity
+.bottom-row
+  = link_to new_business_application_comment_path(@application), id: "add-note", remote: true do
+    + Note
+  = link_to new_business_candidate_message_path(@candidate), id: "add-message",  remote: true do 
+    .glyphicon.glyphicon-envelope E-mail
+  = link_to new_business_application_task_path(@application), id: "add-task", remote: true do 
+    + Task  
+
+  = link_to new_business_candidate_interview_invitation_path(@candidate, application: @application.id), id: "add-invitation", remote: true do 
+    .glyphicon.glyphicon-calendar Interview
+
+  .hide-can-form Hide 

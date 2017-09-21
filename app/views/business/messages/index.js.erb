@@ -1,3 +1,3 @@
-$('.applicant-main-container').html('<%= j render "business/messages/applicant_messages" %>');
+$('.applicant-general').html('<%= j render "business/messages/applicant_messages", message: @message %>');
 $('.applicant-nav').find('.activated').removeClass('activated');
 $('.applicant-nav').find('#messages').addClass('activated');

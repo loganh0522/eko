@@ -3,16 +3,20 @@
     .fieldset
       .row
         .col-md-6
+          = f.label "Title"
           = f.text_field :title, id: "title_Block", class: "form-control", placeholder: "Job Title", hide_label: true
           %span#title_msgBlock
         .col-md-6
+          = f.label "Company"
           = f.text_field :company_name, id: "company_name_Block", class: "form-control", placeholder: "Company Name", hide_label: true
           %span#company_name_msgBlock
       .row
         .col-md-6
+          = f.label "Industry"
           = f.collection_select(:industry_ids, Industry.all, :id, :name, hide_label: true, prompt: "Select Industry")
           %span#industry_ids_Block.help-block
         .col-md-6
+          = f.label "Job Function"
           = f.collection_select(:function_ids, Function.all, :id, :name, hide_label: true, prompt: "Select Job Function")
           %span#function_ids_Block.help-block
       .row
@@ -40,6 +44,7 @@
           %span#current_position_Block.help-block
       .row
         .col-md-12
+          = f.label "Description"
           = f.text_area :description, rows: 5, hide_label: true, placeholder: "Description"
           %span#description_Block.help-block
   .modal-footer

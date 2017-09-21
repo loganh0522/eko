@@ -10,6 +10,9 @@
           .circle-img
             %img(src="/tmp/little-man.png") 
         .content 
-          = "#{activity.user.full_name} finished their scorecard for #{activity.trackable.application.candidate.full_name} application for #{activity.trackable.application.job.title}"
+          - if activity.candidate.manually_created == true
+            .title= "#{activity.user.full_name} finished their scorecard for #{activity.candidate.full_name} application for #{activity.job.title}"
+          - else 
+            .title= "#{activity.user.full_name} finished their scorecard for #{activity.candidate.user.full_name} application for #{activity.job.title}"
           %br
           .time= "#{time_ago_in_words(activity.created_at)} ago" 

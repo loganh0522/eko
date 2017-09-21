@@ -1,0 +1,8 @@
+.form-row-2
+  .assign_to_row
+    .assign-user
+      .title Assign Users (Team)
+      = text_field_tag "", "", :class => 'ui-autocomplete-input users', :placeholder => 'Type a users name to assign', id: "autocomplete"
+      %div#search-results
+    .assigned-users
+      .title Assigned Users: 

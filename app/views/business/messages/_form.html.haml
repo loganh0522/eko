@@ -16,13 +16,19 @@
       Template:
       = select_tag "Templates", options_for_select(current_company.email_templates.all.map{|m| [m.title, m.id, data: {:body => m.body}]}), :prompt => "Select E-mail Templates", data: {behaviour: 'saved-template-select'}
     .email-content
-      = f.text_area :body, :class => "tinymce", rows: 15, data: {behaviour: 'comment-body'}, placeholder: "Type Your Message", id: "body_Block"
-      = tinymce_assets        
-      = tinymce 
+      = f.trix_editor :body, rows: 8, data: {behaviour: 'comment-body'}, id: "body_Block"
+      / = f.text_area :body, :class => "tinymce", rows: 15, data: {behaviour: 'comment-body'}, placeholder: "Type Your Message", id: "body_Block"
+      / = tinymce_assets        
+      / = tinymce 
     .email-footer
       %fieldset
       = f.hidden_field :user_id, value: current_user.id
       = hidden_field_tag :candidate_id, @messageable.id
       %br
       = f.submit "Send Message", class: "btn submit-button"
+      - if @message.new_record? 
+        .btn.border-button2.hide-can-form Cancel
+      - else
+        = link_to "Cancel", '#', class: "remove_form btn border-button2"
+      
 

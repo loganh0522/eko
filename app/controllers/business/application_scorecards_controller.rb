@@ -9,19 +9,13 @@ class Business::ApplicationScorecardsController < ApplicationController
   def index 
     if params[:candidate_id].present?
       @candidate = Candidate.find(params[:candidate_id])
-
-
       @application = @candidate.applications.first
-      
       @job = @application.job
 
       @scorecard = Scorecard.where(job_id: @job.id).first
-
       @sections = @scorecard.scorecard_sections
-
       @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
-      
-
+      @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first 
     else
       @job = Job.find(params[:job_id])
       @application = Application.find(params[:application_id])
@@ -60,7 +54,7 @@ class Business::ApplicationScorecardsController < ApplicationController
     respond_to do |format|
       if @application_scorecard.save(application_scorecard_params)
         @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first 
-        track_activity @application_scorecard, 'update', @application.candidate.id, @job.id   
+        track_activity @application_scorecard, 'create', current_company.id, @application.candidate.id, @job.id   
       else
         
       end
@@ -88,11 +82,11 @@ class Business::ApplicationScorecardsController < ApplicationController
     @sections = @scorecard.scorecard_sections
     @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
     @job = Job.find(params[:job_id])
-
     @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first 
+    
     respond_to do |format|
       if @application_scorecard.update(application_scorecard_params)
-        track_activity @application_scorecard, 'update', @application.candidate.id, @job.id 
+        track_activity @application_scorecard, 'create', current_company.id, @application.candidate.id, @job.id 
       else
         redirect_to business_job_application_path(@job.id, @application.id), {:data => {:toggle => "modal", :target => "#edit_scorecardModal"}}
       end

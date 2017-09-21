@@ -1,57 +1,15 @@
 .applicant-view
-  .applicant-header 
+  .applicant-side-container
     .applicant-general-info
-      - if @application.candidate.manually_created == true
-        .user-image
-          .profile_picture
-            %img(src="/tmp/blank_profile_picture.png")
-        .applicant-details
-          .name-rating
-            .name= "#{@application.candidate.full_name.capitalize}"
-            = render 'business/ratings/form', application: @application
-          .current-position
-          .contact-details
-            .glyphicon.glyphicon-earphone 
-              = "#{@candidate.phone}"
-            %br
-            .glyphicon.glyphicon-envelope
-              = "#{@application.candidate.email}"
-            %br
-            - if @application.candidate.location.present?
-              .glyphicon.glyphicon-map-marker
-                = "#{@application.candidate.location}"
-      - else
-        .user-image
-          .profile_picture
-            - if @application.candidate.user.user_avatar.present?
-              = image_tag @application.candidate.user.user_avatar.image.large_image 
-            - else 
-              %img(src="/tmp/blank_profile_picture.png")
-        .applicant-details
-          .name-rating
-            .name= "#{@application.candidate.user.full_name}"
-            = render 'business/ratings/form', application: @application
-          .current-position
-            - if @application.candidate.user.current_jobs.present?
-              = "#{@application.candidate.user.current_jobs.first.title}  #{@application.candidate.user.current_jobs.first.company_name} "
-          .contact-details
-            .glyphicon.glyphicon-earphone 
-              = "#{@application.candidate.user.phone}"
-            %br
-            .glyphicon.glyphicon-envelope
-              = "#{@application.candidate.user.email}"
-            %br
-            - if @application.candidate.user.location.present? 
-              .glyphicon.glyphicon-map-marker
-                = "#{@application.candidate.user.location}"
-    .applicant-actions
-      = render 'business/applications/show_application/header_actions' 
-    .applicant-nav
-      = render 'business/applications/show_application/applicant_nav'
-  
-  .applicant-body
-    .applicant-side-container
-      = render 'business/applications/show_application/side_container'
-    .applicant-main-container
-      .applicant-experience
-        = render 'business/applications/show_application/application_cv'
+      = render 'business/applications/show_application/applicant_details'
+    = render 'business/applications/show_application/side_container'
+  .applicant-main-container
+    .navigation-container
+      .applicant-nav
+        = render 'business/applications/show_application/applicant_nav'
+      .action-area
+    .applicant-general
+      = render 'business/applications/show_application/application_cv'
+
+    / .applicant-actions
+    / = render 'business/applications/show_application/header_actions' 

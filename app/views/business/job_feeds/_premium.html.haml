@@ -1,7 +1,9 @@
-= link_to business_job_job_feeds_path(@job, type: 'premium') do 
-  Premium
-= link_to business_job_job_feeds_path(@job, type: 'free') do 
-  Free
+.change-containers-nav
+  %ul 
+    = link_to business_job_job_feeds_path(@job, type: 'free'), remote: true do 
+      %li.change#free Free
+    = link_to business_job_job_feeds_path(@job, type: 'paid-boards'), remote: true do 
+      %li.change#premium.activated Premium
 
 = form_for [:business, @order] do |f|
   #premium-boards

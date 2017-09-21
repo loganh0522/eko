@@ -21,6 +21,7 @@
 //= require bootstrap-sprockets
 //= require tinymce
 //= require geocomplete
+//= require trix
 //= require tinymce-jquery
 //= require autocomplete-rails
 //= require bootstrap-colorpicker

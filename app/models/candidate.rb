@@ -4,7 +4,10 @@ class Candidate < ActiveRecord::Base
   liquid_methods :first_name, :last_name, :full_name
   searchkick word_start: [:profile_w_titles, :work_titles, :work_description, :work_company, :education_description, :education_school, :full_name]
   # index_name ["talentwiz", Rails.env].join('_')
-  before_create :generate_token, :downcase_email
+
+  before_create :generate_token, :downcase_email, if: :manually_created?
+  before_save :add_user_info_to_candidate, :generate_token, if: :not_manually_created?
+
   belongs_to :company
   belongs_to :user
   has_many :applications, :dependent => :destroy
@@ -27,7 +30,7 @@ class Candidate < ActiveRecord::Base
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy
   has_many :tasks, -> {order("created_at DESC")}, as: :taskable, :dependent => :destroy
 
-  validates_presence_of :first_name, :last_name, :email
+  validates_presence_of :first_name, :last_name, :email, :if => :manually_created?
   validates_associated :social_links, :work_experiences, :educations, :resumes
   
   accepts_nested_attributes_for :social_links, 
@@ -42,6 +45,23 @@ class Candidate < ActiveRecord::Base
   accepts_nested_attributes_for :resumes, 
     allow_destroy: true,
     reject_if: proc { |a| a[:name].blank? }
+
+  def manually_created?
+    manually_created.present? && manually_created == true
+  end
+
+  def not_manually_created?
+    !manually_created.present? || manually_created == false
+  end
+
+  def add_user_info_to_candidate
+    self.first_name = self.user.first_name 
+    self.last_name = self.user.last_name
+    self.full_name =  "#{self.user.first_name} #{self.user.last_name}"
+    self.email = self.user.email
+    self.phone = self.user.phone
+    self.location = self.user.location
+  end
 
   def full_name
     if self.manually_created
@@ -122,25 +142,6 @@ class Candidate < ActiveRecord::Base
       work_company: work_experiences.map(&:company_name),
       education_description: educations.map(&:description),
       education_school: educations.map(&:school)
-    )
-  end
-
-  def self.search_candidates(company, query='*', status='', title=[], jobs=[], tags=[], time= Time.now - 2.year )
-    self.search("*", 
-      where: {
-        company_id: company,
-        job_status: status,
-        job_title: {
-          all: title
-        },
-        jobs: {
-          all: jobs
-        },
-        created_at: {gte: time, lte: Time.now},
-        tags: {
-          all: tags
-        }
-      }
     )
   end
 end

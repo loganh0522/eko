@@ -94,11 +94,14 @@ class Business::TasksController < ApplicationController
       query = "*"
     end 
 
+    where[:commentable_id] = @candidate
     where[:company_id] = current_company.id
     where[:status] = 'active'
     where[:users] = {all: [current_user.id]} if params[:owner] == "user"
+    where[:job_id] = params[:job_id] if params[:job_id].present?
 
     where[:taskable_type] = params[:type] if params[:type].present?
+
     where[:client_id] = params[:client_id] if params[:client_id].present?
     where[:kind] = params[:kind] if params[:kind].present?
     @tasks = Task.search(query, where: where).to_a
@@ -262,8 +265,9 @@ class Business::TasksController < ApplicationController
       if @new_task.save        
         if @taskable.class == Job
           @tasks = Task.search("*", where: {job_id: @taskable.id}) 
-        else
-          @tasks = @taskable.tasks 
+        elsif @taskable.class == Candidate && params[:task][:job_id].present?
+          @tasks = Task.search("*", where: {job_id: params[:task][:job_id], 
+            taskable_type: "Candidate", taskable_id: @new_task.taskable_id}) 
         end
         format.js 
       else

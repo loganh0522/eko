@@ -5,7 +5,7 @@
     .comment-area-footer
       = f.submit @comment.new_record? ? "+ Add Note" : "Update", class: "btn submit-button", id: "submit-comment-btn"
       - if @comment.new_record? 
-        .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+        .btn.border-button2.hide-can-form Cancel
       - else
         = link_to "Cancel", '#', class: "remove_form btn border-button2"
       = f.hidden_field :user_id, value: current_user.id

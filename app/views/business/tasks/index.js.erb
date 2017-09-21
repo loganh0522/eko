@@ -7,9 +7,9 @@
     $('.change-containers-nav').find('.activated').removeClass('activated');
     $('.change-containers-nav').find('#completed-tasks').addClass('activated');
   <% else %>
-    $(".side-section").find(".candidate-tasks").html('<%= j render "business/tasks/application_tasks", tasks: @tasks %>');
-    $('.change-containers-nav').find('.activated').removeClass('activated');
-    $('.change-containers-nav').find('#open-tasks').addClass('activated');
+    $(".applicant-general").html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
+    $('.applicant-nav').find('.activated').removeClass('activated');
+    $('.applicant-nav').find('#tasks').addClass('activated');
   <% end %>
 <% else %> 
   $('#main-container').html('<%= j render "business/tasks/job_tasks", tasks: @tasks %>');

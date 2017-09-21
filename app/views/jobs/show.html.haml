@@ -1,38 +1,39 @@
-/ - if @job_board.job_board_header.cover_photo.present? 
-/   .job-board-header{:style => "background: url(#{@job_board.job_board_header.cover_photo.url}) no-repeat center center fixed; background-size: cover "}
-/     .intro-message
-/       .header= @job.title
-/       .sub-header= @job.location
-/ - else
-.job-board-header{:style => "background-color: #EF7B2B"}
-  .intro-message
-    .header= @job.title
-    .sub-header= @job.location
-.career-portal-job-container
-  .job-description
-    .job-header
-      %h1= @job.title
-      = "#{@job.location}"
-    .job-body
-      %p= simple_format(@job.description)
-    .apply 
-      = render "apply_method"
-  .extra-job-details
-    %h3 Job Details 
-    .detail
-      .type Industry
-      .content= @job.job_industries.first.industry.name
-    .detail
-      .type Career Level 
-      .content= @job.career_level
-    .detail
-      .type Posted
-      .content= "#{time_ago_in_words(@job.created_at)} ago"
-    .apply 
-      = render "apply_method"
+- if @job_board.job_board_header.cover_photo.present? 
+  .portal-header{:style => "background: url(#{@job_board.job_board_header.cover_photo.url}) no-repeat center center fixed; background-size: cover "}
+    .header-overlay{:style => "background: rgba(0,0,0,0.4)"}
+      .intro-message
+        .header= @job.title
+        .sub-header= @job.location
+- else
+  .portal-header{:style => "background-color: #EF7B2B"}
+    .header-overlay{:style => "background: rgba(0,0,0,0.5)"}
+      .intro-message
+        .header= @job.title
+        .sub-header= @job.location
+    
+.main-row-container
+  .inner-container
+    .job-description
+      .job-header
+        %h2= @job.title
+        = "#{@job.location} - #{@job.kind}"
+      .job-body
+        = simple_format(@job.description)
+      .apply 
+      / = render "apply_method"
+    .extra-job-details
+      %h3 Job Details 
+      .detail
+        .type Industry
+        / .content= @job.industries.first.name
+      .detail
+        .type Career Level 
+        / .content= @job.career_level
+      .detail
+        .type Posted
+        .content= "#{time_ago_in_words(@job.created_at)} ago"
+      .apply 
+      / = render "apply_method"
 
-  
-    
-    
 
 

@@ -72,7 +72,7 @@ module OutlookWrapper
         "message" => {
           "subject" => subject, 
           "body" => {
-            "content_type" => "Text", 
+            "content_type" => "HTML", 
             "content" => body
           }, 
           "to_recipients" => [
@@ -83,6 +83,8 @@ module OutlookWrapper
             }
           ]
         })
+      # graph.me.mail_folders.find('SentItems').messages.first.conversation_id
+      # graph.me.mail_folders.find('SentItems').messages.first.conversation_id
     end
 
     def self.get_messages(user)
@@ -99,8 +101,29 @@ module OutlookWrapper
                                  cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                  &callback)
 
-      "AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAAycOIvAAAA"
-      @messages = graph.me.mail_folders.find('inbox').messages.order_by('receivedDateTime desc')
+
+      
+
+
+
+      @message = graph.me.mail_folders.find('inbox').messages.first.body.content
+      # graph.me.messages.find(id)
+      
+      # id1 graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH2AAAA").body.content.split("dir=\"ltr\">")[1].split('</div>')[0]
+      # id2 graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH3AAAA").body.content.split("dir=\"ltr\">")[1].split('</div>')[0]
+      # id3 graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH4AAAA").body.content.split("dir=\"ltr\">")[1].split('</div>')[0]
+      # id4 graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH5AAAA").body.content.split("dir=\"ltr\">")[1].split('</div>')[0]
+      # ActionView::Base.full_sanitizer.sanitize(graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH3AAAA").body.content)
+      # ActionView::Base.full_sanitizer.sanitize(graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH5AAAA").body.content)
+      # dad-hockley "AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjIAAAE="
+      # email-mom "AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH-AAAA"
+
+
+      # send from outlook
+      # ActionView::Base.full_sanitizer.sanitize(graph.me.mail_folders.find('inbox').messages.first.body.content)
+
+      # @message.body.content.split("dir=\"ltr\">")[1].split('</div>')[0]
+      # @messages = graph.me.mail_folders.find('inbox').messages.order_by('receivedDateTime desc')
     end
   end
 

@@ -27,19 +27,16 @@
           = f.collection_select(:client_id, current_company.clients, :id, :company_name, label: "Client", :include_blank => true, :selected => @job.new_record? ? nil : @job.industries.first.id)
     .row
       .form-group.col-md-12
-        = f.text_area :description, :class => "tinymce", :rows => 20
-        = tinymce_assets        
-        = tinymce 
+        = f.trix_editor :description
+
     - if current_company.kind == "recruiter"
       .row
         .form-group.col-md-12
-          = f.text_area :recruiter_description, :class => "tinymce", :rows => 20
-          = tinymce_assets        
-          = tinymce
-            
-    .row
+          = f.trix_editor :recruiter_description
+    .modal-footer
       = f.hidden_field :user_ids, value: current_user.id
       = f.hidden_field :company_id, value: current_company.id
-      = f.hidden_field :status, value: "draft"
+      - if @job.new_record?
+        = f.hidden_field :status, value: "draft"
       = f.submit @job.new_record? ? "Create Job Posting" : "Save and Continue", class: "btn submit-button"
 

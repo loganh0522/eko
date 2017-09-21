@@ -19,11 +19,11 @@ class JobSeeker::UsersController < JobSeekersController
     end
   end
 
-
   private 
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :phone, :tag_line, :location)
+    params.require(:user).permit(:first_name, :last_name, :phone, :tag_line, :location,
+      social_links_attributes: [:id, :url, :kind, :_destroy] )
   end
 
   def convert_location

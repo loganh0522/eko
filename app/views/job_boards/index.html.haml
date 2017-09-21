@@ -1,31 +1,27 @@
-- if @job_board.job_board_header.cover_photo.present? 
-  .job-board-header{:style => "background: url(#{@job_board.job_board_header.cover_photo.url}) no-repeat center center fixed; background-size: cover "}
-    .header-overlay{:style => "background: rgba(0,0,0,0.5)"}
-      .intro-message
-        .header= @job_board.job_board_header.header
-        .sub-header= @job_board.job_board_header.subheader
-- else
-  .job-board-header{:style => "background-color: #EF7B2B"}
+.portal-header{:style => "background: url(#{@job_board.job_board_header.cover_photo.url}) no-repeat center center fixed; background-size: cover "}
+
+  .header-overlay{:style => "background: rgba(0,0,0,0.5)"}
     .intro-message
       .header= @job_board.job_board_header.header
       .sub-header= @job_board.job_board_header.subheader
-  
+
 - if @sections.count != 0
   .job-board-sections
     - @sections.each do |section|
       .section
-        - if section.kind == 'Text'
-          - if section.layout == 'float-left'
-            = render 'job_board_rows/text_img_left', section: section
-          - elsif section.layout == 'float-right'
-            = render 'job_board_rows/text_img_right', section: section
-          - elsif section.layout == 'center'
-            = render 'job_board_rows/text_img_center', section: section
-        - elsif section.kind == 'Video'
-          .intro-message
-            .header= section.header
-            .sub-header= section.subheader
-          %iframe{:allowFullScreen => "true", :frameborder => "0", :height => "430", :src => "https://www.youtube.com/embed/#{section.youtube_id}", :title => "YouTube video player", :width => "640"}
+        .section-content
+          - if section.kind == 'Text'
+            - if "#{section.layout}" == 'float-left'
+              = render 'job_board_rows/text_img_left', section: section
+            - elsif "#{section.layout}" == 'float-right'
+              = render 'job_board_rows/text_img_right', section: section
+            - elsif "#{section.layout}" == 'center'
+              = render 'job_board_rows/text_img_center', section: section
+          - elsif section.kind == 'Video'
+            .intro-message
+              .header= section.header
+              .sub-header= section.subheader
+            %iframe{:allowFullScreen => "true", :frameborder => "0", :height => "430", :src => "https://www.youtube.com/embed/#{section.youtube_id}", :title => "YouTube video player", :width => "640"}
         
 
 .company-job-board  
@@ -60,4 +56,4 @@
     - else 
       .not-present-container
         %p Sorry, there are currently no open job postings. 
-  .footer
+.footer

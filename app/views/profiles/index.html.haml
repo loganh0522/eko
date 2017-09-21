@@ -1,23 +1,15 @@
 .job-seeker-profile
   .background
     .profile-header
-      = render 'job_seeker/users/form'
-      .user-image
-        - if current_user.user_avatar.present? 
-          = link_to edit_job_seeker_user_user_avatar_path(current_user, @avatar), :data => {remote: true} do
-            %i.glyphicon.glyphicon-pencil
-          = image_tag @avatar.image.large_image if @avatar.present?  
-        - else      
-          = link_to new_job_seeker_user_user_avatar_path(current_user), remote: true do
-            %i.glyphicon.glyphicon-pencil
-          %img(src="/tmp/blank_profile_picture.png")  
+      = render 'job_seeker/user_avatars/user_avatar'
       .personal-details
-        = link_to '#', :data => {:toggle => "modal", :target => "#user-information"} do
+        = link_to edit_job_seeker_user_path(current_user), remote: true do
           %i.glyphicon.glyphicon-pencil
         .name= "#{current_user.full_name}"
-        = "#{current_user.email} | #{current_user.phone}"
-        %br
-        = current_user.location
+        .contact-details= "#{current_user.email} | #{current_user.phone}"
+        .location= current_user.location
+        .social-links
+          
       .user-summary
         = current_user.tag_line
         
@@ -44,7 +36,10 @@
         .new_experience
           = link_to "+ Add Certification", new_job_seeker_profile_user_certification_path(@profile), :data => {:remote => true}, :html => {id: 'new_user_certification_button'}
       = render 'job_seeker/user_certifications/certifications'    
- 
+
+                
+     
+  
   / .main-body
   /   .sidebar
   /     .header
@@ -56,13 +51,26 @@
   /           %p No Skills Listed
   /       - else
   /         = render 'job_seeker/user_skills/skills'
-  
-  .modal#right-modal
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-          .modal-title Education 
-        
-= render 'job_seeker/user_avatars/picture_modal'  
 
+
+  
+.modal#right-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        .modal-title 
+
+.modal#basic-form-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        .modal-title
+        
+      .modal-body
+ 
+
+   
+
+= render 'job_seeker/user_avatars/picture_modal'  

@@ -1,9 +1,10 @@
 .side-section
-  %h4 Tags
-  .tags
-    = render "business/tags/tags"
-  .add_tag
-    = link_to "+ Add Tag", new_business_candidate_tag_path(@candidate), remote: true, id: 'add_tag'
+  .tag-container
+    .tags
+      %h4 Tags
+      = render "business/tags/tags"
+    .add_tag
+      = link_to "+ Add Tag", new_business_candidate_tag_path(@candidate), remote: true, id: 'add_tag'
 
 / .side-section
 /   %h4 Tasks 
@@ -13,11 +14,12 @@
 /     = render 'business/tasks/application_tasks'
     
 .side-section
-  %h4 All Applications
-  - @candidate.applications.each do |application| 
-    .application-container
-      .title= application.job.title
-      .location= application.job.location
+  .all-applications
+    %h4 All Applications
+    - @candidate.applications.each do |application| 
+      .application-container
+        .title= application.job.title
+        .location= application.job.location
 
-  = link_to 'Add to Job', new_business_candidate_application_path(@candidate), remote: true
+    = link_to 'Add to Job', new_business_candidate_application_path(@candidate), remote: true
 

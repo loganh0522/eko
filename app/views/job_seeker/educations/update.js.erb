@@ -1,39 +1,9 @@
-// $('.modal').modal('toggle');
-// $('#education_<%= @education.id %>').replaceWith('<%= j render (@education), degree: @education %>');
-
-<% if @education.valid? %>
-  $('#educations').find('#edit_education_<%= @education.id %>').parent().replaceWith('<%= j render (@education), degree: @education %>');
-<%else%>
-  $(".notice").remove();
-  $('.form-group').removeClass('has-error');
-
-  <% if @errorSchool[0] != nil %>
-    $("#school_Block").append('<div class="notice"><%= escape_javascript(@errorSchool[0])%></div>')
-    $("#school_Block").parent().find('.form-group').addClass('has-error');
-  <%end%>
-
-  <% if @errorDegree[0] != nil %>
-    $("#degree_Block").append('<div class="notice"><%= escape_javascript(@errorDegree[0])%></div>');
-    $("#degree_Block").parent().find('.form-group').addClass('has-error');
-  <%end%>
-
-  <% if @errorStartMonth[0] != nil %>
-    $("#start_month_Block").append('<div class="notice"><%= escape_javascript(@errorStartMonth[0])%></div>');
-    $("#start_month_Block").parent().find('.form-group').addClass('has-error');
-  <%end%>
-
-  <% if @errorStartYear[0] != nil %>
-    $("#start_year_Block").append('<div class="notice"><%= escape_javascript(@errorStartYear[0])%></div>');
-    $("#start_year_Block").parent().find('.form-group').addClass('has-error');
-  <%end%>
-
-  <% if @errorEndMonth[0] != nil %>
-    $("#end_month_Block").append('<div class="notice"><%= escape_javascript(@errorEndMonth[0])%></div>');
-    $("#end_month_Block").parent().find('.form-group').addClass('has-error');
-  <%end%>
-
-  <% if @errorEndYear[0] != nil %>
-    $("#end_year_Block").append('<div class="notice"><%= escape_javascript(@errorEndYear[0])%></div>');
-    $("#end_year_Block").parent().find('.form-group').addClass('has-error');
+<% if @errors.present? %>
+  <% @errors.each do |error| %>
+    $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+    $('#<%= error[0] %>_Block').addClass('has-error');
   <% end %>
-<% end %> 
+<%else %> 
+  $('#right-modal').modal("toggle");
+  $('#education_<%= @education.id %>').replaceWith('<%= j render (@education), degree: @education %>');
+<%end%>

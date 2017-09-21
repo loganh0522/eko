@@ -3,7 +3,9 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :logged_in?, :current_user, :current_company, :current_kind, :user_logged_in, :profile_sign_up_complete, :belongs_to_company
+  helper_method :logged_in?, :current_user, :current_company, :current_kind, :user_logged_in, 
+    :profile_sign_up_complete, :belongs_to_company, :has_applied?
+  
   before_filter {|c| Authorization.current_user = c.current_user}
 
   def current_user
@@ -127,9 +129,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def track_activity(trackable, action = params[:action], candidate=nil, job=nil, stage = nil)
+  def track_activity(trackable, action = params[:action], company=nil, candidate=nil, job=nil, stage = nil)
     current_user.activities.create! action: action, trackable: trackable, 
-      company: current_company, job_id: job, stage_id: stage, candidate_id: candidate
+      company_id: company, job_id: job, stage_id: stage, candidate_id: candidate
   end
 
   def track_notification(trackable, action = params[:action])

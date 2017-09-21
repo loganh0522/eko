@@ -9,12 +9,14 @@ $('#comment-body').val('');
 <% elsif @commentable.class == Job || @commentable.class == Client  %> 
   $('#job-action-container').html('<%= j render "business/comments/job_comments" %>');
   $('form').reset();
-
 <% elsif params[:client_contact_id].present? %> 
   $('.applicant-profile').html('<%= j render "business/comments/applicant_notes", application: @contact %>');
 <% else %>
-  $('#basic-form-modal').modal("hide");
-  $('.applicant-main-container').html('<%= j render "business/comments/notes", comments: @comments %>');
+  $('.applicant-general').html('<%= j render "business/comments/notes", comments: @comments %>');
+  $('.action-area').children().remove();
+  $('.active-button').removeClass('active-button');
+  $('.applicant-nav').find('.activated').removeClass('activated');
+  $('.applicant-nav').find('#notes').addClass('activated');  
 <% end %>
 
 

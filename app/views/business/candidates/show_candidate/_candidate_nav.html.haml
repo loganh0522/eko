@@ -2,9 +2,10 @@
   %ul
     = link_to business_candidate_path(@candidate), remote: true do
       %li.change#profile.activated Profile
-    
+
     = link_to business_candidate_messages_path(@candidate), remote: true do
       %li.change#messages Messages 
+      
     = link_to business_candidate_comments_path(@candidate), remote: true do
       %li.change#notes Notes
 
@@ -17,3 +18,20 @@
     = link_to business_candidate_activities_path(@candidate), remote: true do 
       %li.change#activity Activities
 
+.bottom-row
+  = link_to new_business_candidate_task_path(@candidate), id: "add-task", remote: true do 
+    .glyphicon Task
+
+  = link_to new_business_candidate_comment_path(@candidate), id: "add-note", remote: true do
+    .glyphicon.glyphicon-pencil Note
+
+  = link_to new_business_candidate_interview_invitation_path(@candidate), id: "add-invitation", remote: true do 
+    .glyphicon.glyphicon-calendar Schedule Interview
+
+  = link_to new_business_candidate_message_path(@candidate), id: "add-message", remote: true do 
+    .glyphicon.glyphicon-envelope E-mail
+
+  .hide-can-form Hide
+  / .stage
+  /   = link_to business_candidate_path(@candidate), :method => :delete, remote: true do 
+  /     .glyphicon.glyphicon-trash

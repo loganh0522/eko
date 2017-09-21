@@ -2,7 +2,6 @@ class User < ActiveRecord::Base
   # include Elasticsearch::Model 
   # include Elasticsearch::Model::Callbacks 
   # index_name ["talentwiz", Rails.env].join('_') 
-
   #Business User Relationships
 
   validates_presence_of :first_name, :last_name, :email, :password, :on => [ :create ]
@@ -10,7 +9,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email, :on => [ :create, :update ]
 
   validates_presence_of :password, :confirmation, :on => [:update_password]
-  before_create :downcase_email, :set_full_name
+  before_create :downcase_email
+  after_save :set_full_name
 
   liquid_methods :first_name, :last_name, :full_name
   
@@ -46,11 +46,17 @@ class User < ActiveRecord::Base
   has_one :profile
   has_many :candidates
   has_many :applications
-  has_many :apps, through: :applications, class_name: "Job", foreign_key: :job_id
   has_one :user_avatar
 
   has_one :google_token
   has_one :outlook_token
+  has_many :social_links
+  validates_presence_of :first_name, :last_name, :email
+  validates_associated :social_links
+  
+  accepts_nested_attributes_for :social_links, 
+    allow_destroy: true
+
   #Carrierwave uploader and minimagic for User Profile Pictures
   searchkick word_start: [:full_name]
 

@@ -42,7 +42,7 @@ class JobSeeker::WorkExperiencesController < JobSeekersController
     respond_to do |format|
       if @work_experience.update(position_params)
         @profile = current_user.profile
-        @work_experiences = current_user.profile.work_experiencess
+        @work_experiences = current_user.profile.work_experiences
       else 
         render_errors(@work_experience)
       end

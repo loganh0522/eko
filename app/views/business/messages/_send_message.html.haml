@@ -3,7 +3,7 @@
     .modal-content
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title Send Message        
+        %h4.modal-title Send Message  
       = form_tag multiple_messages_business_messages_path, html: {data: {behaviour: 'has-saved-templates'}}, remote: true do 
         .modal-body
           .email-area
@@ -23,9 +23,10 @@
                 = select_tag "Templates", options_for_select(current_company.email_templates.all.map{|m| [m.title, m.id, data: {:body => m.body}]}), :prompt => "Select E-mail Template", data: {behaviour: 'saved-template-select'}
             %fieldset
             .email-content
-              = text_area_tag :body, " ", :class => "tinymce", id: "message-body", cols: 20, data: {behaviour: 'comment-body'}
-              = tinymce_assets        
-              = tinymce 
+              / = trix_editor :body
+              / = text_area_tag :body, " ", :class => "tinymce", id: "message-body", cols: 20, data: {behaviour: 'comment-body'}
+              / = tinymce_assets        
+              / = tinymce 
             = hidden_field_tag :applicant_ids
             - if @job.present? 
               = hidden_field_tag :job_id, @job.id

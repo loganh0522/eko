@@ -1,7 +1,4 @@
 = bootstrap_form_for [@job, @application] do |f|  
-  / = f.text_field :first_name
-  / = f.text_field :last_name
-  
   - @questions.each do |question|
     .question
       .question-title= question.body

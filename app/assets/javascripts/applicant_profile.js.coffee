@@ -28,6 +28,9 @@ jQuery ->
   # $('#selectmenu').selectmenu -> 
   #  style: 'popup'
 
+  
+
+
 
 #########  #############
   $('#task_due_date2').datepicker
@@ -37,9 +40,9 @@ jQuery ->
 
 ######### Scorecard JS #########
   $(document).ajaxComplete ->   
-    $('#basic-form-modal').find('#task_due_date').datepicker  
+    $('#task_due_date').datepicker  
       dateFormat: 'yy-mm-dd'
-    $('#basic-form-modal').find('#timepicker').timepicker()
+    $('#timepicker').timepicker()
     $('#timepicker2').timepicker()
     $("#geocomplete2").geocomplete()
 
@@ -60,6 +63,10 @@ jQuery ->
     console.log($(this).parent())
     $('#add_tag').show()
     $('.tag_form').remove()
+
+  $('#main-container').on 'click', '.hide-can-form', (event) ->
+    console.log($(this))
+    $('.action-area').children().remove()
   
 ###################### Insert Fluid Variable into E-mail #####################
   $('#insert-fluid-variable').change -> 

@@ -1,4 +1,7 @@
 .job-board-header 
+  .header-container
+    = form_tag job_seeker_jobs_path, :method => 'get', id: "search-form" do
+      = text_field_tag "query", nil, placeholder: "Search Jobs", class: "search-field"
 
 .job-board
   .filters
@@ -65,7 +68,6 @@
             
             %img(src="/tmp/small-bar-chart.png") 
             / = job.job_career_level.first.career_level.name
-
           .right-side 
             %img(src="/tmp/small-hammer.png") 
             / = job.industries.first.name

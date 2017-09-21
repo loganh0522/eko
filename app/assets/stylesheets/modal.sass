@@ -14,10 +14,17 @@
     height: auto
     padding: 0 0 0 0
     background-color: #ffffff
+    .warning
+      width: 60%
+      margin: 30px auto
+      font-size: 16px
   .modal-footer
     background: #f8f8f8
     overflow: hiden
     .submit-button
+      float: right
+      margin-left: 5px
+    .danger-btn
       float: right
       margin-left: 5px
     .submit-button-deactivated
@@ -26,6 +33,8 @@
     .border-button2
       float: right
       margin-left: 5px
+
+
 .modal-backdrop
   z-index: 5    
 .modal-content
@@ -38,6 +47,7 @@
     width: auto
     .row
       margin: 0 0 
+
 
 #userProfilePictureModal
   .inputfile 
@@ -80,12 +90,20 @@
         overflow: hidden
   .modal-footer
     width: 100%
+    .glyphicon.glyphicon-trash
+      float: left
+      color: black
+      border: 1px solid black
+      font-size: 24px
 
 
 
 #createApplicationModal
   .modal-dialog
     width: 80%
+    height: 95%
+    .modal-content
+
   .modal-body
     width: 100%
     padding: 0 0
@@ -209,6 +227,7 @@
         float: left
 
 #applicant-modal
+  height: 100%
   .modal-header
     padding-left: 4%
     h2
@@ -217,14 +236,18 @@
     border-bottom: none
   .modal-dialog
     width: 90%
+    height: 90%
+    .modal-content
+      height: 100%
   .modal-body
-    height: auto
+    height: 100%
     overflow: hidden
     width: 100%
 
 #basic-form-modal
   .modal-dialog
-    width: 60%
+    width: 80%
+    max-width: 1000px
   .modal-header
   .modal-body
     height: auto

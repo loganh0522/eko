@@ -20,28 +20,202 @@
         h4
           margin-top: 0
 
-  .job-seeker-registration
-    width: 40%
-    background: #ffffff
-    box-shadow: 0px 1px 8px 1px rgba(199,197,199,1)
-    border-radius: 3px
-    padding: 20px 0
+.job-board-header
+  background-size: contain
+  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1) 
+  height: 300px
+  
+  @media screen and (max-width: 800px)
+    width: 100%
+    margin: 0 0 
+  .header-container
+    margin: 0 auto
+    padding: 50px 5%
+    height: 400px
+    background: rgba(0,0,0,0.5)
+    .content
+.job-board
+  width: 100%
+  max-width: 1280px
+  margin: 0 auto
+  .filters
     float: left
-    margin: 10px 3% 10px 0px
-    text-align: center
-    .header
-      border-bottom: 1px solid rgba(0,0,0,0.1)
-    .body
-      padding: 0 5%
-      .first_name
-        width: 49%
-        float: left
-        margin-right: 2%
-      .last_name
-        width: 49%
-        float: left
-    h2 
-      margin-top: 0px
+    width: 22%
+    margin: 50px 2% 0 2%
+    height: 200px
+    .header 
+      font-size: 24px
+      font-weight: 100
+    .job-function
+      background: white
+      border: 1px solid rgba(0, 0, 0, 0.1)
+      .title
+        height: 50px
+        padding: 15px 0 0 20px
+        font-weight: 800
+      .body
+        height: 275px 
+        overflow-y: auto
+        display: none      
+  .jobs
+    float: right
+    width: 70%
+    margin: 50px 2% 0 2%
+    .job-posting
+      width: 100%
+      margin-bottom: 20px
+      padding: 10px 10px 10px 10px
+      background: #ffffff
+      border-radius: 2px
+      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+      .header-info
+        overflow: hidden
+        margin-bottom: 10px
+        .logo
+          float: left
+          margin-top: 10px
+        .view-job
+          float: right
+          margin: 7px 25px 0 0
+          box-shadow: 1px 1px 2px 1px rgba(199,197,199,1)
+        .job-detail
+          float: left
+          margin-left: 30px
+        
+          .title
+            font-size: 18px
+            font-weight: 500
+            a
+              color: black
+          .company  
+            color: rgba(0, 0, 0, 0.6)
+            font-weight: 500
+      .bottom-info
+        border-top: 1px solid rgba(0, 0, 0, 0.1)
+        padding-top: 10px
+        color: rgba(0, 0, 0, 0.6)
+        font-size: 12px
+        overflow: hidden
+        .left-side
+          float: left
+          img
+            margin: 0 5px 0 10px
+        .right-side
+          float: right
+          img
+            margin: 0 5px 0 10px
+
+    .job-seeker-registration
+      width: 40%
+      background: #ffffff
+      box-shadow: 0px 1px 8px 1px rgba(199,197,199,1)
+      border-radius: 3px
+      padding: 20px 0
+      float: left
+      margin: 10px 3% 10px 0px
+      text-align: center
+      .header
+        border-bottom: 1px solid rgba(0,0,0,0.1)
+      .body
+        padding: 0 5%
+        .first_name
+          width: 49%
+          float: left
+          margin-right: 2%
+        .last_name
+          width: 49%
+          float: left
+      h2 
+        margin-top: 0px
 
 
+.main-row-container
+  width: 100%
+  background-color: #ffffff
+  .inner-container
+    width: 100%
+    max-width: 1280px
+    margin: 0 auto
+    padding: 25px 3%
+    overflow: hidden
+    .job-description
+      h1
+        color: black
+        margin-bottom: 2px
+      width: 63%
+      padding: 0 25px 100px 25px
+      float: left
+      .job-header
+        padding-bottom: 10px
+        margin-bottom: 20px
+        border-bottom: 1px solid rgba(0, 0, 0, .3)
+        h1 
+          margin-top: 0
+      .job-body
+        font-size: 16spx
+    .extra-job-details
+      width: 33%
+      float: left
+      margin-left: 2%
+      padding: 0 30px 20px 30px
+      h3
+        margin-top: 10px
+      .apply
+        a
+          text-decoration: none
+        .app-btn
+          width: 100%
+          margin: 0 0
+          font-size: 18px
+          padding: 11px
+          border-radius: 3px 
+          text-align: center
+          font-decoration: none
+      .detail
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+        margin-bottom: 10px
+        margin-top: 10px
+        padding-bottom: 10px
+        .type
+          color: rgba(0, 0, 0, 0.5)
+        .content
+          font-size: 16px
+          font-weight: 500
+
+    .application-form
+      width: 65%
+      margin: 0 auto
+      h1
+        color: black
+      .application-header
+        border-bottom: 1px solid rgba(0,0,0,0.1)
+        width: 100%
+      .application-body
+        width: 100%
+        .question
+          margin-top: 15px
+          .question-title
+            font-weight: 600
+            color: rgba(0,0,0,0.7)
+      .application-footer
+        .app-btn
+          width: 70%
+          margin: 30px 15%
+          font-size: 18px
+          padding: 12px
+          border-radius: 3px 
+          text-align: center 
+          color: #ffffff
+
+.apply
+  a
+    text-decoration: none
+  .app-btn
+    width: 70%
+    margin: 30px 15%
+    font-size: 18px
+    padding: 12px
+    border-radius: 3px 
+    text-align: center 
+    color: #ffffff
 

@@ -90,12 +90,10 @@ class Business::ApplicationsController < ApplicationController
       @application = @candidate.applications.first
       @job = @application.job
       @questions = @job.questions
-
     else
       @application = Application.find(params[:application_id])
       @job = Job.find(params[:job_id])
       @questions = @job.questions
-
     end
 
     respond_to do |format| 

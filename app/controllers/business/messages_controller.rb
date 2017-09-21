@@ -7,6 +7,7 @@ class Business::MessagesController < ApplicationController
   before_filter :company_deactivated?
   before_filter :load_messageable, except: [:new, :index, :create, :destroy, :update, :multiple_messages]
   before_filter :new_messageable, only: [:new] 
+  
   # include AuthHelper
 
   def index
@@ -14,10 +15,11 @@ class Business::MessagesController < ApplicationController
       @candidate = Application.find(params[:application_id]).candidate
       @messages = @candidate.messages
     elsif params[:candidate_id].present?
-       # @candidate = Candidate.find(params[:candidate_id])
-       # @messages = @candidate.messages
-       # @messages = OutlookWrapper::User.create_subscription(current_user)
-       @messages = OutlookWrapper::Mail.get_messages(current_user)
+      @candidate = Candidate.find(params[:candidate_id])
+      @messages = @candidate.messages
+      # @messages = OutlookWrapper::User.create_subscription(current_user)
+      # @message = OutlookWrapper::Mail.get_messages(current_user)
+
     else
       # token = current_user.outlook_token.access_token
       # email = current_user.email

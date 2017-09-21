@@ -25,6 +25,7 @@
         .header 
           Background Photo
         .body  
+          .logo= image_tag(@job_board.job_board_header.cover_photo) if @job_board.job_board_header.cover_photo?
           = f.file_field :cover_photo, label: "Background Photo", class: "btn btn-file"
           = f.hidden_field :cover_photo_cache
   .modal-footer

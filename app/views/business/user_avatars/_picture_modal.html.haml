@@ -9,7 +9,6 @@
           .crop-image
             %p Add a photo and crop it below
             = f.file_field :image, class: "btn btn-file user_avatar_image"
-            
         .modal-footer
           = f.hidden_field :user_id, value: current_user.id
           = f.submit 'Upload Image', class: "btn submit-button"

@@ -4,9 +4,12 @@
     $('#<%= error[0] %>_Block').addClass('has-error');
   <% end %>
 
-<% elsif @taskable.class == Application %> 
-  $(".side-section").find('.candidate-tasks').html('<%= j render "business/tasks/application_tasks", tasks: @tasks %>');
-  $('#basic-form-modal').modal("toggle");
+<% elsif @taskable.class == Candidate %> 
+  $(".applicant-general").html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
+  $('.applicant-nav').find('.activated').removeClass('activated');
+  $('.applicant-nav').find('#tasks').addClass('activated');
+  $('.action-area').children().remove();
+  $('.active-button').removeClass('active-button');
 <% elsif @taskable.class == Job %> 
   $('#task-container').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
   $('#basic-form-modal').modal("toggle");

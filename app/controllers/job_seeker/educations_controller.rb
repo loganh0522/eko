@@ -19,21 +19,13 @@ class JobSeeker::EducationsController < JobSeekersController
     @profile = current_user.profile
     
     respond_to do |format|
-      @errorSchool = [] 
-      @errorDegree = [] 
-      @errorStartYear = []
-      @errorStartMonth = []
-      @errorEndMonth = []
-      @errorEndYear = [] 
       if @education.save
-        format.js 
-      else 
-        format.js
         @degrees = current_user.profile.educations
         @profile = current_user.profile
-        @education.errors.any?
-        validate_education(@education)
+      else 
+        render_errors(@education)
       end
+      format.js
     end
   end
 
@@ -45,30 +37,23 @@ class JobSeeker::EducationsController < JobSeekersController
   def update 
     @profile = current_user.profile
     @education = Education.find(params[:id])
+    
     respond_to do |format|
-      @errorSchool = [] 
-      @errorDegree = [] 
-      @errorStartYear = []
-      @errorStartMonth = []
-      @errorEndMonth = []
-      @errorEndYear = [] 
       if @education.update(education_params)
-        format.js
-      else
-        format.js
         @degrees = current_user.profile.educations
         @profile = current_user.profile
-        @education.errors.any?
-        validate_education(@education)
+      else
+        render_errors(@education)
       end
+      format.js
     end
   end
 
   def destroy
     @education = Education.find(params[:id])
     @education.destroy
+
     respond_to do |format|
-      format.html{redirect_to job_seeker_profiles_path}
       format.js
     end
   end
@@ -79,24 +64,10 @@ class JobSeeker::EducationsController < JobSeekersController
     params.require(:education).permit(:school, :degree, :description, :start_month, :start_year, :end_month, :end_year)
   end
 
-  def validate_education(education)
-    if (education.errors["school"] != nil)
-      @errorSchool.push(education.errors["school"][0])
+  def render_errors(education)
+    @errors = []
+    education.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
     end  
-    if (education.errors["degree"] != nil)
-      @errorDegree.push(education.errors["degree"][0])
-    end
-    if (education.errors["start_year"] != nil)
-      @errorStartYear.push(education.errors["start_year"][0])
-    end
-    if (education.errors["start_month"] != nil)
-      @errorStartMonth.push(education.errors["start_month"][0])
-    end
-    if (education.errors["end_year"] != nil)
-      @errorEndYear.push(education.errors["end_year"][0])
-    end
-    if (education.errors["end_month"] != nil)
-      @errorEndMonth.push(education.errors["end_month"][0])
-    end
   end
 end

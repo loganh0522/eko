@@ -22,6 +22,12 @@ module ApplicationHelper
     link_to(name, '#', class: "add_to_cart btn submit-button", data: {id: id, fields: fields.gsub("\n", ""), :board => board.name}, style: "display:#{name == "Add Answer" ? "none" : ""}" )
   end
 
+  # def social_links(user)
+  #   user.social_links.each do |link|
+  #     link_to ("#", link.url, class: 'fa fa-linkedin fa-stack-1x', :target => "_blank")
+  #   end
+  # end
+
   def sortable(action, params)
     title ||= action.titleize
 
@@ -84,9 +90,17 @@ module ApplicationHelper
     else
       @ans = QuestionAnswer.where(question: question, application: application).first
       if question.kind == 'Text' || question.kind == 'Paragraph'
-        @answer = @ans.body
+        if @ans.present?
+          @answer = @ans.body
+        else 
+          return "There are currently no answers for this application"
+        end
       elsif question.kind == 'Checkbox' || question.kind == 'Multiple Choice'
-        @answer = QuestionOption.find(@ans.question_option_id).body
+        if @ans.present?
+          @answer = QuestionOption.find(@ans.question_option_id).body
+        else 
+          return "There are currently no answers for this application"
+        end
       end
       return @answer
     end

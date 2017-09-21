@@ -1,11 +1,6 @@
-// $('.modal-title').html('<%= j "Edit Education" %>');
-// $('.modal-body').html('<%= j render "job_seeker/educations/form" %>');
-// $('.modal').modal("show");
-
 $('#right-modal').find('form').remove()
 $('#right-modal').find('.modal-title').html('<%= j "Add Education" %>');
 $('#right-modal').find('.modal-header').after('<%= j render "job_seeker/educations/form" %>');
 $('#right-modal').modal("toggle");
-// $('#education_<%= @education.id %>').before('<%= j render "job_seeker/educations/form" %>');
-// $('#education_<%= @education.id %>').hide();
+
 

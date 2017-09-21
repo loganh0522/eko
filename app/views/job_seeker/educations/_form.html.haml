@@ -2,10 +2,12 @@
   .modal-body
     .row
       .col-md-12
-        = f.text_field :school, class: "form-control", placeholder: "School"
+        = f.text_field :school, id: "school_Block", class: "form-control", placeholder: "School"
+        %span#school_msgBlock
     .row
       .col-md-12
-        = f.text_field :degree, class: "form-control", placeholder: "Degree"
+        = f.text_field :degree, id: "degree_Block", class: "form-control", placeholder: "Degree"
+        %span#degree_msgBlock
     .row
       .col-md-3.col-xs-6.col-sm-6
         = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
@@ -21,7 +23,6 @@
       .col-md-12
         = f.text_area :description, rows: 6, class: "form-control", placeholder: "Description", hide_label: true
   .modal-footer 
-    / .close-form#edit-form.btn.btn-default{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel   
     = f.submit @education.new_record? ? "Add Education" : "Update", class: "btn submit-button"
     .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
 

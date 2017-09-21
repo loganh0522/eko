@@ -190,6 +190,7 @@ Rails.application.routes.draw do
       collection do 
         get :autocomplete
       end
+      resources :interview_invitations
       resources :work_experiences
       resources :interviews
       resources :activities
@@ -288,7 +289,7 @@ Rails.application.routes.draw do
         resources :application_scorecards
         resources :assessments
         resources :tags       
-        
+        resources :tasks
         resources :scorecards do 
           collection do 
             post :my_scorecard

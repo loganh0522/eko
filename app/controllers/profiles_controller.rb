@@ -3,11 +3,6 @@ class ProfilesController < ApplicationController
   before_filter :profile_sign_up_complete, :only => [:index]
 
   def index 
-    @work_experience = WorkExperience.new
-    @accomplishment = Accomplishment.new
-    @education = Education.new
-    @user_avatar = UserAvatar.new
-    @user_skill = UserSkill.new
     @job_board = JobBoard.find_by_subdomain!(request.subdomain)
     @company = @job_board.company
     @avatar = current_user.user_avatar

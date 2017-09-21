@@ -18,6 +18,8 @@
     - if @taskable.class == Job 
       = render 'business/tasks/form_fields/job_fields'   
     - elsif @taskable.class == Candidate && @job.present?  
+      = render 'business/tasks/form_fields/applicant_fields'
+    - elsif @taskable.class == Candidate
       = render 'business/tasks/form_fields/candidate_fields'
     - else 
       = render 'business/tasks/form_fields/all_fields'
@@ -38,6 +40,10 @@
     .comment-area-footer
       / = link_to "Delete", business_task_path(@task), remote: true, :method => :delete, class: 'btn border-button2'
       = f.submit @task.new_record? ? "+ Create Task" : "Update Task", class: "btn submit-button", id: "submit-comment-btn"
-      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+      - if @task.new_record? 
+        .btn.border-button2.hide-can-form Cancel
+      - else
+        = link_to "Cancel", '#', class: "remove_form btn border-button2"
+      / .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
 
 

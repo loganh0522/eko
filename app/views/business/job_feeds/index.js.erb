@@ -1,0 +1,5 @@
+<% if params[:type] == "free" %> 
+  $('#main-container').html('<%= j render "business/job_feeds/free" %>');
+<% else %> 
+  $('#main-container').html('<%= j render "business/job_feeds/premium" %>');
+<% end %>

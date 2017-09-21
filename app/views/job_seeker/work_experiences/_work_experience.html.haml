@@ -5,7 +5,9 @@
         .experience-header 
           .company= position.company_name
           .edit
-            = link_to "Edit", edit_job_seeker_profile_work_experience_path(@profile, position.id), :data => {:remote => true}       
+            = link_to "Edit", edit_job_seeker_profile_work_experience_path(@profile, position.id), :data => {:remote => true}     
+            = link_to job_seeker_profile_work_experience_path(@profile, position.id), remote: true, :method => :delete, data:{:confirm => "Are You Sure? You can not undo this action."}  do
+              .glyphicon.glyphicon-trash  
         .experience-position
           .title= position.title 
           - if position.current_position == 1

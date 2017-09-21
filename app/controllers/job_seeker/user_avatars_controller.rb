@@ -14,8 +14,8 @@ class JobSeeker::UserAvatarsController < JobSeekersController
 
   def create
     @avatar = UserAvatar.create(avatar_params)
-
     @user_avatar = current_user.user_avatar
+    @new_avatar = UserAvatar.new
     respond_to do |format| 
       format.js
     end
@@ -23,6 +23,7 @@ class JobSeeker::UserAvatarsController < JobSeekersController
 
   def edit 
     @user_avatar  = UserAvatar.find(params[:id])
+    @new_avatar = UserAvatar.new
 
     respond_to do |format|
       format.js
@@ -30,16 +31,19 @@ class JobSeeker::UserAvatarsController < JobSeekersController
   end
 
   def update
-    @user_avatar = UserAvatar.find(params[:id])
-    @user_avatar.update(avatar_params)
+    @avatar = UserAvatar.find(params[:id])
+    @avatar.update(avatar_params)
 
-    respond_to do |format|
-      format.js
-    end
+    redirect_to job_seeker_profiles_path(current_user)
   end
 
   def destroy
+    @user_avatar = UserAvatar.find(params[:id])
+    @user_avatar.destroy
 
+    respond_to do |format|
+      format.js 
+    end
   end
 
   private

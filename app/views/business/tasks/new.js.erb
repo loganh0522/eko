@@ -1,4 +1,8 @@
-$('#basic-form-modal').find('form').remove()
-$('#basic-form-modal').find('.modal-title').html('<%= j "Add Task" %>');
-$('#basic-form-modal').find('.modal-header').after('<%= j render "business/tasks/form" %>');
-$('#basic-form-modal').modal('toggle');
+// $('#basic-form-modal').find('form').remove()
+// $('#basic-form-modal').find('.modal-title').html('<%= j "Add Task" %>');
+// $('#basic-form-modal').find('.modal-header').after('<%= j render "business/tasks/form" %>');
+// $('#basic-form-modal').modal('toggle');
+
+$('.action-area').html('<%= j render "business/tasks/form" %>');
+$('.active-button').removeClass('active-button');
+$('#add-task').addClass('active-button');

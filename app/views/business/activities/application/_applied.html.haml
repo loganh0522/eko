@@ -1,0 +1,15 @@
+.activity{:id => activity.action, :class => "#{activity.trackable_type} job_#{activity.job_id}"}      
+  .icon
+    .glyphicon.glyphicon-share-alt
+  .activity-body
+    .activity-body-header
+      .details
+        - if activity.user.user_avatar.present?
+          = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
+        - else
+          .circle-img
+            %img(src="/tmp/little-man.png") 
+        .content
+          = "#{activity.trackable.candidate.user.full_name} applied to the job: #{activity.job.title}"
+          %br
+          .time= "#{time_ago_in_words(activity.created_at)} ago" 

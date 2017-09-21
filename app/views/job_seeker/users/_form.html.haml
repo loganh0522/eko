@@ -1,23 +1,31 @@
-.modal#user-information
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title Personal Information
-      = bootstrap_form_for [:job_seeker, current_user] do |f| 
-        .modal-body
-          .row
-            .col-md-6
-              = f.text_field :first_name
-            .col-md-6
-              = f.text_field :last_name
-          .row
-            .col-md-6
-              = f.text_field :phone
-            .col-md-6
-              = f.text_field :location, class: "form-control", id: "geocomplete", label: "Location", autocomplete: "off"
-          .row
-            .col-md-12
-              = f.text_area :tag_line, label: "Summary"        
-        .modal-footer
-          = f.submit "Submit"
+= form_for [:job_seeker, current_user] do |f| 
+  .modal-body
+    .form-row
+      .contain-50
+        = f.label "First Name"
+        = f.text_field :first_name, id: "first_name_Block", class: "form-control", placeholder: "First Name"
+        %span#first_name_msgBlock
+      .contain-50
+        = f.label "Last Name"
+        = f.text_field :last_name, id: "last_name_Block", class: "form-control", placeholder:"Last Name"
+        %span#last_name_msgBlock
+    .form-row
+      .contain-50
+        = f.label "E-mail"
+        = f.text_field :email, id: "email_Block", class: "form-control", placeholder: "E-mail"
+        %span#email_msgBlock
+      .contain-50
+        = f.label "Cell Phone"
+        = f.text_field :phone, class: "form-control", hide_label: true, placeholder: "Phone"
+    .form-row
+      = f.label "Location"
+      = f.text_field :location, class: "form-control", id: "geocomplete", label: "Location", autocomplete: "off"
+    .form-row
+      .header
+        .title Social Media    
+        = link_to_add_fields "+ Link", f, :social_links
+        = f.fields_for :social_links, class: "options" do |a|
+          = render 'social_link_fields', f: a
+  .modal-footer
+    = f.submit "Update", class: "btn submit-button"
+    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

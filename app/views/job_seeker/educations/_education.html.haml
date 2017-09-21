@@ -6,6 +6,10 @@
           .company= degree.school 
           .edit
             = link_to "Edit", edit_job_seeker_profile_education_path(@profile, degree.id), :data => {:remote => true} 
+      
+            = link_to job_seeker_profile_education_path(@profile, degree.id), remote: true, :method => :delete, data:{:confirm => "Are You Sure? You can not undo this action."}  do
+              .glyphicon.glyphicon-trash
+
         .experience-position
           .title= degree.degree
           .date= "#{degree.start_month} #{degree.start_year} - #{degree.end_month} #{degree.end_year}"

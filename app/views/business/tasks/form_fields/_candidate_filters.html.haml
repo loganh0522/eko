@@ -1,0 +1,12 @@
+.filter-radios 
+  = radio_button_tag "status", "open", true, class: 'filter'
+  = label_tag "owner_company", "Open Tasks", :value => "company", class: 'filter'
+  
+  = radio_button_tag "status", "complete", false, class: 'filter'
+  = label_tag "owner_user", "Completed Tasks", :value => "my-tasks", class: 'filter'
+.filter-radios 
+  = radio_button_tag "owner", "company", true, class: 'filter'
+  = label_tag "owner_company", "All Tasks", :value => "company", class: 'filter'
+  
+  = radio_button_tag "owner", "user", false, class: 'filter'
+  = label_tag "owner_user", "My Tasks", :value => "my-tasks", class: 'filter'

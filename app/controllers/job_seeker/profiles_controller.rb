@@ -13,6 +13,7 @@ class JobSeeker::ProfilesController < JobSeekersController
   def create
     @user = current_user
     @profile = Profile.new(profile_params)
+
     if @profile.save 
       flash[:success] = "Your profile was successfully created!"
       redirect_to job_seeker_profiles_path
@@ -23,12 +24,7 @@ class JobSeeker::ProfilesController < JobSeekersController
 
   def index
     @profile = current_user.profile
-    @work_experience = WorkExperience.new
-    @accomplishment = Accomplishment.new
-    @education = Education.new
-    @user_avatar = UserAvatar.new
-    @user_skill = UserSkill.new
-
+    @social_links = current_user.social_links
     @avatar = current_user.user_avatar
     @work_experiences = @profile.organize_work_experiences
   end

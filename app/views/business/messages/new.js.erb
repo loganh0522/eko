@@ -1,20 +1,13 @@
 <% if params[:candidate_id].present? %> 
-  $('#basic-form-modal').find('form').remove()
-  $('#basic-form-modal').find('.modal-title').html('<%= j "Send E-mail" %>');
-  $('#basic-form-modal').find('.modal-header').after('<%= j render "business/messages/form" %>');
-  $('#basic-form-modal').modal("toggle");
+  $('.action-area').html('<%= j render "business/messages/form" %>');
+  $('.active-button').removeClass('active-button');
+  $('#add-message').addClass('active-button');
 <% elsif params[:client_contact_id].present? %>
   $('.action-area').html('<%= j render "business/messages/client_contact_form" %>');
   $('.application-actions').find('.active-button').addClass('inactive-button');
   $('.application-actions').find('.active-button').removeClass('active-button');
   $('.application-actions').find('#add-note').addClass('active-button');
   $('.application-actions').find('#add-note').removeClass('inactive-button');
-<% else %> 
-  $('.action-area').html('<%= j render "business/messages/application_form" %>');
-  $('.application-actions').find('.active-button').addClass('inactive-button');
-  $('.application-actions').find('.active-button').removeClass('active-button');
-  $('.application-actions').find('#send-email').addClass('active-button');
-  $('.application-actions').find('#send-email').removeClass('inactive-button');
 <% end %>
 
 
