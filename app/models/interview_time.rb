@@ -6,6 +6,6 @@ class InterviewTime < ActiveRecord::Base
   validates_presence_of :date, :time
   
   def convert_date
-    return Date.parse(self.date)
+    return DateTime.parse(self.date)
   end
 end

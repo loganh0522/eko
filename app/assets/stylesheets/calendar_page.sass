@@ -94,10 +94,16 @@
     margin-bottom: 15px
     background: #ffffff
     text-align: center
-
+    input[radio]
     &:hover
       cursor: pointer
-      background: #EF7B2B
+      background: rgba(239,123,43, 0.4)
+
+  input[type="radio"]:checked+label
+    background: rgba(239,123,43, 0.4)
+
+  input[type="radio"]
+    display: none
 
 
 

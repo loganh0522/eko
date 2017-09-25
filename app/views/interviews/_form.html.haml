@@ -1,15 +1,12 @@
 = form_for @interview do |f|
-  = text_field_tag :email
-  
+  = text_field_tag :email, "", placeholder: "E-mail"
   - @times.each do |time|   
-    %label.time-container{:for => "time_#{time.id}"}
-      .dateTime= "#{time.convert_date } #{time.time}"
-      = radio_button_tag "time", time.id, false, id: "time_#{time.id}"
+    = radio_button_tag "time", time.id, false, id: "time_#{time.id}"
+    = label_tag "time_#{time.id}", "#{time.date.to_time.strftime('%A %B %e')} @ #{time.time}", :value => "#{time.id}", class: 'dateTime time-container'
 
-  %label.time-container{:for => "n/a"}
-    .dateTime None of these times work for me.
-    = radio_button_tag "time", "n/a", false, id: "n/a"
-  
+  = radio_button_tag "time", "n/a", false, id: "n_a"
+  = label_tag "n/a", "None of these times work for me.", :value => "n/a", class: 'dateTime time-container'
+
   = f.hidden_field :user_ids, value: @user_ids
   = f.hidden_field :company_id, value: @company.id
   = f.hidden_field :kind, value: @invitation.kind

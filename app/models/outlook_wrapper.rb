@@ -167,6 +167,7 @@ module OutlookWrapper
 
       graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0',
                                 &callback)
+
       @events = graph.me.events.order_by('start/dateTime asc')
     end
 
@@ -191,7 +192,6 @@ module OutlookWrapper
         organizer: {emailAddress: {name: "Logan Houston", address: "houston@talentwiz.com"}},
         responseRequested: true, responseStatus: {"@odata.type" => "microsoft.graph.responseStatus"})
 
-      binding.pry
       EventId.create(user_id: user.id, event_id: @create.id, interview_time_id: time.id) 
     end
 
@@ -209,7 +209,7 @@ module OutlookWrapper
       path = 'me/events/' + event.event_id
       data = {subject: "Interview with #{candidate.full_name}"}
       
-      graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0',
+      graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0/',
                                 cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                 &callback)
 

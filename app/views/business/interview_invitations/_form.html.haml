@@ -14,44 +14,72 @@
             = text_field_tag :minutes, nil, class: "number-only", id: "minutes", maxlength:"2", placeholder: '00'
             .duration-title mins
       .form-row-2
-        = f.label "Type of Meeting"
-        = f.select :kind, options_for_select(["Phone Interview", "Skype", "In-person Interview"]), :html => {id: "kind_Block", prompt: "Choose Type..."}
-        %span#kind_Block.help-block
-        = f.label "Location"
-        = f.text_field :location, id: "geocomplete2", label: "Address", autocomplete: "off", placeholder: "Enter the Address"
-      .form-row-2
-        .assign_to_row
+        .contain-1
+          = f.label "Type of Meeting"
+          = f.select :kind, options_for_select(["Phone Interview", "Skype", "In-person Interview"]), :html => {id: "kind_Block", prompt: "Choose Type..."}
+          %span#kind_Block.help-block
+        .contain-2
+          = f.label "Location"
+          = f.text_field :location, id: "geocomplete2", label: "Address", autocomplete: "off", placeholder: "Enter the Address"
+      .form-row-3
+        .contain-1
           .assign-user#user_ids_Block
             .title Assign Users (Team)
-            = text_field_tag "", "", :class => 'ui-autocomplete-input users', :placeholder => 'Type a users name to assign', id:"autocomplete"
-            %div#search-results
-          .assigned-users
-            .title Assigned Users: 
-      .form-row-2
-        .assign_to_row
-          .assign-user#candidate_ids_Block
+            .show-hidden-search-box
+              .add-button-search
+                .glyphicon.glyphicon-plus
+            .hidden-search-box
+              = text_field_tag "", "", :class => 'ui-autocomplete-input users', :placeholder => 'Type a users name to assign', id: "autocomplete"
+              #search-results
+              .user-tag= current_user.full_name
+
+
+
+
+            .tag= current_user.full_name
+        .contain-3
+          .assign-user#user_ids_Block
             .title Add Candidates
-            = text_field_tag "", "", :class => 'ui-autocomplete-input candidates', :placeholder => 'Type a users name to assign', id: "autocomplete"
-            %div#search-results
-          .assigned-candidates
-            .title Candidates:     
-      = render 'business/interview_invitations/form_fields/job_auto'
+            .show-hidden-search-box
+              .add-button-search
+                .glyphicon.glyphicon-plus
+            .hidden-search-box
+              = text_field_tag "", "", :class => 'ui-autocomplete-input candidates', :placeholder => 'Type a users name to assign', id: "autocomplete"
+              %div#search-results
+
+     
       .form-row-2
         .header
           .title Add Times    
           = link_to_add_fields "+ Add Time", f, :interview_times 
-      .form-row-3
-        .subject
-          .title Subject
-          .sender= f.text_field :subject, id: "subject_Block", placeholder: "Type Subject Here", autocomplete: false
-        .email-variables
-          Template:
-          = select_tag "Templates", options_for_select(current_company.email_templates.all.map{|m| [m.title, m.id, data: {:body => m.body}]}), :prompt => "Select E-mail Templates", data: {behaviour: 'saved-template-select'}
-        .email-content
-          = f.text_area :message, :class => "tinymce", rows: 15, data: {behaviour: 'comment-body'}, placeholder: "Type Your Message", id: "message_Block"
-          = tinymce_assets        
-          = tinymce 
-      
+      .form-row-2
+        .email-area
+          .subject
+            .title Subject
+            .sender= f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false
+          .email-variables
+            .show-hidden-search-box
+              .plain-text
+                Insert-Token
+            .hidden-search-box
+              .insert-tokens
+                .token#first-name Candidate First Name
+                .token#last-name Candidate Last Name
+                .token#full-name Candidate Full Name
+                .token#company-name Company Name
+
+            .show-hidden-search-box
+              .plain-text
+                Use E-mail Template
+            .hidden-search-box
+              .insert-tokens
+                - current_company.email_templates.each do |template|
+                  .token{data: {:body => template.body}}= template.title
+          .email-content
+            = f.trix_editor :message, rows: 9
+            / = f.text_area :message, :class => "tinymce", rows: 15, data: {behaviour: 'comment-body'}, placeholder: "Type Your Message", id: "message_Block"
+            / = tinymce_assets        
+            / = tinymce 
       = f.hidden_field :user_ids, id: "user_ids"
       = f.hidden_field :candidate_ids, id: "candidate_ids"
       = f.hidden_field :job_id, id: "job_ids"

@@ -263,5 +263,19 @@ jQuery ->
       @value = @value.slice(0, -1)
     return
 
+########## Hidden Search Box #########
+
+  $(document).on 'click', '.show-hidden-search-box', (e) ->
+    $(this).next('.hidden-search-box').show()
+    e.stopPropagation()
+
+
+  $(document).on 'click', '.hidden-search-box', (e) -> 
+    e.stopPropagation()
+
+  $(document).click (e) -> 
+    $('.hidden-search-box').hide()
+    return
+
 
 

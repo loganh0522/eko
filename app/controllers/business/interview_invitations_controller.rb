@@ -83,11 +83,9 @@ class Business::InterviewInvitationsController < ApplicationController
         @email = user.email          
         
         @times.each do |time| 
-          date = time.date
-          dateTime = DateTime.parse(time.time).strftime("%H:%M:%S")
-          endTime = dateTime.chop[0..-5] + "30:00"
-          @dateTime = date + "T" + dateTime
-          @endTime = date + "T" + endTime
+          @dateTime = DateTime.parse(time.date + " " + time.time).strftime("%Y-%m-%dT%H:%M:%S")
+          endTime = DateTime.parse(time.date + " " + time.time) + params[:minutes].to_i.minutes + params[:hours].to_i.hours
+          @endTime = endTime.strftime("%Y-%m-%dT%H:%M:%S")
 
           OutlookWrapper::Calendar.create_event(user, @dateTime, @endTime, time)
         end

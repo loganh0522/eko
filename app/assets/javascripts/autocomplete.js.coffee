@@ -3,7 +3,7 @@ jQuery ->
     controller = $(this).attr('class').split(' ').pop()
     
     $(this).autocomplete( 
-      source: '/business/' + controller
+      source: '/business/' + controller 
       appendTo: $('#search-results')     
       focus: (event, ui) -> 
         if controller == "jobs"

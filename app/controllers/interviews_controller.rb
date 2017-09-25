@@ -13,6 +13,7 @@ class InterviewsController < ApplicationController
     @users.each do |user|
       @user_ids.append(user.id)
     end
+
   end
 
   
@@ -20,6 +21,7 @@ class InterviewsController < ApplicationController
     @time = InterviewTime.find(params[:time])  
     
     if @time.present?
+      binding.pry
       @invite =  @time.interview_invitation
       @candidate = @invite.candidates.where(email: (params[:email]).downcase).first  
       @events = @time.event_ids

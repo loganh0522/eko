@@ -141,8 +141,7 @@ class Business::CandidatesController < ApplicationController
 
   def autocomplete
     # @candidates = current_company.candidates.order(:full_name).where("full_name ILIKE ?", "%#{params[:term]}%")
-    render :json => Candidate.search(params[:term], where: {company_id: current_company.id}, 
-      fields: [{full_name: :word_start}])
+    render :json => Candidate.search(params[:term], where: {company_id: current_company.id}, fields: [{full_name: :word_start}])
   end
 
   private
