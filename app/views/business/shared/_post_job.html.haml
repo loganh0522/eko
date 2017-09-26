@@ -14,7 +14,3 @@
   %li{:class => is_active?(business_job_scorecards_path(@job))}  
     = link_to "Scorecard", business_job_scorecards_path(@job)
   
-  %li{:class => is_active?(business_job_job_feeds_path(@job))}  
-    = link_to "Promote Job", business_job_job_feeds_path(@job)
-
-= link_to "Publish Job", business_job_publish_path(@job), class: 'btn border-button2'
