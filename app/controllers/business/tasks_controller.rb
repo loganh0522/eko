@@ -111,7 +111,7 @@ class Business::TasksController < ApplicationController
     where[:client_id] = params[:client_id] if params[:client_id].present?
     where[:kind] = params[:kind] if params[:kind].present?
     @tasks = Task.search(query, where: where).to_a
-    binding.pry
+
     respond_to do |format|
       format.js
       format.html
