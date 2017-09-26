@@ -86,7 +86,13 @@ class Business::UsersController < ApplicationController
   end
 
   def update_password
-
+    @user = User.find(1)
+    @user.password = params[:password]
+    @user.save
+    binding.pry
+    respond_to do |format| 
+      format.js
+    end
   end
 
   def destroy
