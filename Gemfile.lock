@@ -180,6 +180,8 @@ GEM
       os (~> 0.9)
       signet (~> 0.7)
     googlecharts (1.6.12)
+    googledocviewer (1.7.5)
+      jquery-rails
     grpc (1.6.0)
       google-protobuf (~> 3.1)
       googleauth (~> 0.5.1)
@@ -435,6 +437,7 @@ DEPENDENCIES
   google-api-client (= 0.9)
   google-cloud-pubsub
   googlecharts
+  googledocviewer
   haml-rails
   jbuilder (~> 2.0)
   jcrop-rails-v2

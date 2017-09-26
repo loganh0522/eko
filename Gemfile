@@ -14,6 +14,7 @@ gem 'coffee_routes'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'trix'
+gem 'googledocviewer'
 
 gem 'responders', '~> 2.0'
 

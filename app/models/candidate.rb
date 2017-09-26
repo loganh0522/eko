@@ -12,7 +12,7 @@ class Candidate < ActiveRecord::Base
   belongs_to :user
   has_many :applications, :dependent => :destroy
   has_many :jobs, through: :applications
-  has_one :conversation
+  has_one :conversation, :dependent => :destroy
   has_many :interviews
   
   has_many :invited_candidates

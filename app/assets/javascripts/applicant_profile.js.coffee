@@ -1,4 +1,6 @@
 jQuery ->
+  $('#embedURL').gdocsViewer({width :'400',height : '500'})
+
   $('#main-container').on 'click', '.applicant-checkbox', (event) ->
     if $('.applicants').find('.applicant-checkbox :checked').size() > 0 
       $('.no-action-buttons').hide()
@@ -60,18 +62,24 @@ jQuery ->
   
 #################### Close Tag Form ######################
   $('#main-container').on 'click', '.close-form', (event) ->
-    console.log($(this).parent())
     $('#add_tag').show()
     $('.tag_form').remove()
 
   $('#main-container').on 'click', '.hide-can-form', (event) ->
-    console.log($(this))
     $('.action-area').children().remove()
   
 ###################### Insert Fluid Variable into E-mail #####################
+
+
+
+
+
+
+
+
   $('#insert-fluid-variable').change -> 
     if $('#insert-fluid-variable').val() == "Applicant First Name"
-      tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.first_name}}  </span>")
+      tinymce.activeEditor.execCommand('mceInsertContent', false, "<div contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.first_name}}  </div>")
     else if $('#insert-fluid-variable').val() == "Applicant Last Name"
       tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.last_name}}  </span>")
     else if $('#insert-fluid-variable').val() == "Applicant Full Name"
@@ -256,8 +264,6 @@ jQuery ->
     $('.job-board-form').show()
     $('.job-board-layout').hide()
 
-
-
   $(document).on 'keyup', '.number-only', (event) ->  
     if $.isNumeric($(this).val()) == false
       @value = @value.slice(0, -1)
@@ -277,5 +283,16 @@ jQuery ->
     $('.hidden-search-box').hide()
     return
 
-
+  $(document).on 'click', '.insert-token', (event) ->
+    element = document.querySelector("trix-editor")
+    if $(this).attr('id') == "first-name"
+      element.editor.insertHTML("<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.first_name}} </span>")
+    else if $(this).attr('id') == "last-name" 
+      element.editor.insertHTML("<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.last_name}} </span>")
+    else if $(this).attr('id') == "full-name" 
+      element.editor.insertHTML("<span contentEditable= 'false' class='class_one' style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.full_name}} </span>")
+    else if $(this).attr('id') == "job-title" 
+      element.editor.insertHTML("<span contentEditable= 'false' class='class_one' style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{job.title}} </span>")
+    else if $(this).attr('id') == "company-name" 
+      element.editor.insertHTML("<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{company.name}} </span>")
 

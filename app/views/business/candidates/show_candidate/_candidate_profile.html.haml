@@ -1,6 +1,8 @@
 .profile-container
   - if @candidate.resumes.first.present?
     = link_to "Download Resume", @candidate.resumes.first.name_url, class: "btn submit-button", id: "download-resume"
+
+    
   / - else 
   /   = form_for [:business, @candidate, Resume.new],:html => { :multipart => true }, remote: true do |f| 
   /     = f.file_field :name, id: "add-resume", class: "btn user_avatar_image inputfile "

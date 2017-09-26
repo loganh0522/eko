@@ -17,9 +17,9 @@ class Business::MessagesController < ApplicationController
     elsif params[:candidate_id].present?
       @candidate = Candidate.find(params[:candidate_id])
       @messages = @candidate.messages
-      # @messages = OutlookWrapper::User.create_subscription(current_user)
+      
+      @messages = OutlookWrapper::User.create_subscription(current_user)
       # @message = OutlookWrapper::Mail.get_messages(current_user)
-
     else
       # token = current_user.outlook_token.access_token
       # email = current_user.email
@@ -53,7 +53,7 @@ class Business::MessagesController < ApplicationController
 
     respond_to do |format| 
       if @message.save 
-        # track_activity(@message) 
+        track_activity @message, 'create', current_company.id, @candidate.id  
         @messages = @candidate.messages
         format.js 
       else

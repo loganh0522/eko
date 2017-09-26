@@ -61,9 +61,9 @@ class Business::CommentsController < ApplicationController
       if @commentable.class == Job
         track_activity @new_comment, 'job_note', nil, params[:job_id]
       elsif @commentable.class != Job && params[:comment][:job_id].present?
-        track_activity @new_comment, 'create', @commentable.id, params[:comment][:job_id]
+        track_activity @new_comment, 'create', current_company.id, @commentable.id, params[:comment][:job_id]   
       else 
-        track_activity @new_comment, 'create', @commentable.id
+        track_activity @new_comment, 'create', current_company.id, @commentable.id
       end
       
     else

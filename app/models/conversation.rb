@@ -2,6 +2,6 @@ class Conversation < ActiveRecord::Base
   belongs_to :user
   belongs_to :candidate
   belongs_to :company
-  has_many :messages
+  has_many :messages, :dependent => :destroy
 
 end

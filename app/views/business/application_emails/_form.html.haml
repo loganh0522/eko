@@ -1,18 +1,29 @@
 = form_for [:business, @email], remote: true do |f|
-  .modal-body
-    .email-area     
+  .email-area
+    .modal-body  
       .subject
         .title Subject
-        .sender= f.text_field :subject, id: "subject_Block", placeholder: "Type Subject Here", autocomplete: false
+        .sender= f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false, class: "subject_Block"
         %span#subject_msgBlock
       .email-variables
-        .tokens
-          = select_tag "insert-fluid-variable", options_for_select([ "Applicant First Name", "Applicant Last Name", "Applicant Full Name", "Job Title", "Company Name" ] ), :prompt => "Insert Token..."
+        .show-hidden-search-box
+          .plain-text
+            Insert-Token
+        .hidden-search-box
+          .insert-tokens
+            .insert-token#first-name Candidate First Name
+            .insert-token#last-name Candidate Last Name
+            .insert-token#full-name Candidate Full Name
+            .insert-token#company-name Company Name
+            .insert-token#job-title Job Title
+          / = select_tag "insert-fluid-variable", options_for_select([ "Applicant First Name", "Applicant Last Name", "Applicant Full Name", "Job Title", "Company Name" ] ), :prompt => "Insert Token..."
       %fieldset
       .email-content
-        = text_area_tag :body, " ", :class => "tinymce", id: "message-body", cols: 20, data: {behaviour: 'comment-body'}
-        = tinymce_assets        
-        = tinymce 
-  .modal-footer
-    = submit_tag "Send E-mail", class: "btn submit-button"
-    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+        = f.trix_editor :body
+        
+        / = text_area_tag :body, " ", :class => "tinymce", id: "message-body", cols: 20, data: {behaviour: 'comment-body'}
+        / = tinymce_assets        
+        / = tinymce 
+    .modal-footer
+      = submit_tag "Save E-mail", class: "btn submit-button"
+      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

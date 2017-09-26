@@ -12,11 +12,8 @@
           = "#{activity.user.first_name} #{activity.user.last_name} sent a message to"
           - if activity.trackable.messageable.manually_created == true
             = "#{activity.trackable.messageable.full_name}"
-
-            / = link_to "#{activity.trackable.messageable.candidate.first_name} #{activity.trackable.messageable.candidate.last_name}", business_job_application_messages_path(Job.where(id: activity.trackable.messageable.job_id).first.id, Application.where(user_id: activity.trackable.messageable.user_id, job_id: activity.trackable.messageable.job_id).first.id)
           - else 
             = "#{activity.trackable.messageable.user.full_name}"
-            / = link_to "#{activity.trackable.messageable.candidate.user.first_name} #{activity.trackable.messageable.candidate.user.last_name}", business_job_application_messages_path(Job.where(id: activity.trackable.messageable.job_id).first.id, Application.where(user_id: activity.trackable.messageable.user_id, job_id: activity.trackable.messageable.job_id).first.id)
           %br
           .time= "#{time_ago_in_words(activity.created_at)} ago" 
     .activity-body-body
