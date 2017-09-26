@@ -89,6 +89,7 @@ module ApplicationHelper
       return "There are currently no answers for this application"
     else
       @ans = QuestionAnswer.where(question: question, application: application).first
+      
       if question.kind == 'Text' || question.kind == 'Paragraph'
         if @ans.present?
           @answer = @ans.body
@@ -106,12 +107,9 @@ module ApplicationHelper
     end
   end
 
-
   def current_user_application_rating(application)
     if current_user.ratings.where(application_id: application.id).present?
       @rating = current_user.ratings.where(application_id: 1).first.score
     end
   end
-
-  
 end

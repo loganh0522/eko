@@ -1,26 +1,26 @@
-/ / - if current_user.present?
-/ /   - if @job.questions.present?
-/ /     - if @job_board.brand_color.present?
-/ /       = link_to new_job_application_path(@job) do 
-/ /         .app-btn{:style => "background-color: #{@job_board.brand_color}"}
-/ /           Apply to this Job 
-/ /     - else   
-/ /       = link_to new_job_application_path(@job) do 
-/ /         .app-btn{:style => "background-color: #EF7B2B"}
-/ /           Apply to this Job   
-/ /   - else  
-/ /     = bootstrap_form_for [@job, @application] do |f|
-/ /       .fieldset
-/ /         .form-group.col-md-12
-/ /         = f.hidden_field :user_id, value: current_user.id
-/ /         = f.hidden_field :job_id, value: @job.id
-/ /         = f.hidden_field :company_id, value: @company.id
-/ /         - if @job_board.brand_color.present?
-/ /           .app-btn{:style => "background-color: #{@job_board.brand_color})"}
-/ /             = f.submit "Apply to Job", class: 'app-btn', :html => {:style => "background-color: #{@job_board.brand_color})"}
-/ /         - else
-/ /           .app-btn{:style => "background-color: #{@job_board.brand_color})"}
-/ /             = f.submit "Apply to Job", class: 'app-btn', :html => {:style => "background-color: #EF7B2B)"}
+- if current_user.present?
+  - if @job.questions.present?
+    - if @job_board.brand_color.present?
+      = link_to new_job_application_path(@job) do 
+        .btn.submit-button{:style => "background-color: #{@job_board.brand_color}"}
+          Apply to this Job 
+    - else   
+      = link_to new_job_application_path(@job) do 
+        .btn.submit-button{:style => "background-color: #EF7B2B"}
+          Apply to this Job   
+  - else  
+    = bootstrap_form_for [@job, @application] do |f|
+      .fieldset
+        .form-group.col-md-12
+        = f.hidden_field :user_id, value: current_user.id
+        = f.hidden_field :job_id, value: @job.id
+        = f.hidden_field :company_id, value: @company.id
+        - if @job_board.brand_color.present?
+          .app-btn{:style => "background-color: #{@job_board.brand_color})"}
+            = f.submit "Apply to Job", class: 'app-btn', :html => {:style => "background-color: #{@job_board.brand_color})"}
+        - else
+          .app-btn{:style => "background-color: #{@job_board.brand_color})"}
+            = f.submit "Apply to Job", class: 'app-btn', :html => {:style => "background-color: #EF7B2B)"}
 
 / - else 
 /   = render "/users/sub_new_job_seeker"

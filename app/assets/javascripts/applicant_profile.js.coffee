@@ -270,6 +270,21 @@ jQuery ->
     return
 
 ########## Hidden Search Box #########
+  $(document).on 'click', '.delete-tag', (event) -> 
+    
+    valId = $(this).parent().data('id').toString()
+    console.log(valId)
+    if $(this).parent().data('kind') == 'user'
+      $('#user_ids').val($('#user_ids').val($('#user_ids').val().split(',').splice( valId )))
+      $(this).parent().remove()
+    else if $(this).parent().data('kind') == 'candidate'
+      $('#candidate_ids').val($('#candidate_ids').val($('#candidate_ids').val().split(',').splice(valId)))
+      $(this).parent().remove()
+    else
+      return
+
+  
+
 
   $(document).on 'click', '.show-hidden-search-box', (e) ->
     $(this).next('.hidden-search-box').show()
@@ -296,3 +311,7 @@ jQuery ->
     else if $(this).attr('id') == "company-name" 
       element.editor.insertHTML("<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{company.name}} </span>")
 
+
+  
+  
+  

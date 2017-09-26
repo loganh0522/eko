@@ -327,14 +327,14 @@
     margin: 20px 0 0 1%
     width: 8%
 
-.assign_to_row
+.assign-to-row
   overflow: hidden
   width: 100%
   border: none
   padding: 5px 5px
   .assign-user
     clear: both
-    width: 39%
+    width: fit-content
     float: left
     #users-search
       margin: 0 0       
@@ -342,7 +342,12 @@
       margin: none
   .assigned-users
     float: left
-    width: 60%
+    width: 80%
+    margin-left: 1%
+    overflow: hidden
+  .assigned-candidates
+    float: left
+    width: 80%
     margin-left: 1%
     overflow: hidden
 
@@ -361,6 +366,8 @@
   .delete-tag 
     float: left
     width: auto
+  &:hover
+    cursor: pointer
 
 #add-tags
   overflow: hidden

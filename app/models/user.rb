@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email, :on => [ :create, :update ]
 
   validates_presence_of :password, :confirmation, :on => [:update_password]
-  before_create :downcase_email
+  before_create :downcase_email, :set_full_name
   after_save :set_full_name
 
   liquid_methods :first_name, :last_name, :full_name

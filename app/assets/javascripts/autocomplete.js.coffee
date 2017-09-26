@@ -17,7 +17,7 @@ jQuery ->
         if controller == "jobs"
           $('.assigned-' + controller).append('<div class="user-tag"> <div class="name">' + ui.item.title  + '</div> <div class="delete-tag"> &times </div> </div>') 
         else
-          $('.assigned-' + controller).append('<div class="user-tag"> <div class="name">' + ui.item.full_name  + '</div> <div class="delete-tag"> &times </div> </div>')  
+          $('.assigned-' + controller).append('<div class="user-tag" > <div class="name">' + ui.item.full_name  + '</div> <div class="delete-tag"> &times </div> </div>')  
         
         if $('#' + idType + '_ids').val() == ''
           values = ui.item.id
@@ -53,11 +53,13 @@ $(document).ajaxComplete ->
         if controller == "jobs"
           $('.assigned-' + controller).append('<div class="user-tag"> <div class="name">' + ui.item.title  + '</div> <div class="delete-tag"> &times </div> </div>') 
         else
-          $('.assigned-' + controller).append('<div class="user-tag"> <div class="name">' + ui.item.full_name  + '</div> <div class="delete-tag"> &times </div> </div>')  
+          userId = ui.item.id
+          console.log(ui.item.id)
+          
+          $('.assigned-' + controller).append('<div class="user-tag" data-id=' + userId + ' data-kind="user"> <div class="name">' + ui.item.full_name  + '</div> <div class="delete-tag"> &times </div> </div>')  
         
         if $('#' + idType + '_ids').val() == ''
           values = ui.item.id
-        
         else
           values =  $('#' + idType + '_ids').val() + ',' + ui.item.id
         $('#' + idType + '_ids').val values

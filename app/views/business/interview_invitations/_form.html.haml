@@ -23,31 +23,32 @@
           = f.text_field :location, id: "geocomplete2", label: "Address", autocomplete: "off", placeholder: "Enter the Address"
       .form-row-3
         .contain-1
-          .assign-user#user_ids_Block
+          .assign-to-row
             .title Assign Users (Team)
-            .show-hidden-search-box
-              .add-button-search
-                .glyphicon.glyphicon-plus
-            .hidden-search-box
-              = text_field_tag "", "", :class => 'ui-autocomplete-input users', :placeholder => 'Type a users name to assign', id: "autocomplete"
-              #search-results
-              .user-tag= current_user.full_name
-
-
-
-
-            .tag= current_user.full_name
+            .assign-user#user_ids_Block
+              .show-hidden-search-box
+                .add-button-search
+                  .glyphicon.glyphicon-plus
+              .hidden-search-box
+                = text_field_tag "", "", :class => 'ui-autocomplete-input users', :placeholder => 'Type a users name to assign', id: "autocomplete"
+                #search-results
+            .assigned-users
+              .user-tag{:data => {id: current_user.id, kind: "user"}}
+                .name= current_user.full_name
+                .delete-tag &times
+        
         .contain-3
-          .assign-user#user_ids_Block
-            .title Add Candidates
-            .show-hidden-search-box
-              .add-button-search
-                .glyphicon.glyphicon-plus
-            .hidden-search-box
-              = text_field_tag "", "", :class => 'ui-autocomplete-input candidates', :placeholder => 'Type a users name to assign', id: "autocomplete"
-              %div#search-results
-
-     
+          .assign-to-row
+            .assign-user#user_ids_Block
+              .title Add Candidates
+              .show-hidden-search-box
+                .add-button-search
+                  .glyphicon.glyphicon-plus
+              .hidden-search-box
+                = text_field_tag "", "", :class => 'ui-autocomplete-input candidates', :placeholder => 'Type a users name to assign', id: "autocomplete"
+                %div#search-results
+            .assigned-candidates
+       
       .form-row-2
         .header
           .title Add Times    
@@ -80,7 +81,7 @@
             / = f.text_area :message, :class => "tinymce", rows: 15, data: {behaviour: 'comment-body'}, placeholder: "Type Your Message", id: "message_Block"
             / = tinymce_assets        
             / = tinymce 
-      = f.hidden_field :user_ids, id: "user_ids"
+      = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
       = f.hidden_field :candidate_ids, id: "candidate_ids"
       = f.hidden_field :job_id, id: "job_ids"
       = f.hidden_field :user_id, value: current_user.id

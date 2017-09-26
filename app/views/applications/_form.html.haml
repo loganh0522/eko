@@ -19,7 +19,7 @@
               = q.text_area :body, hide_label: true, rows: 5
           - elsif question.kind == 'Checkbox'
             = q.hidden_field  :question_id, value: question.id
-            = q.collection_checkbox(:question_option_id, question.question_options.all, :id, :body, hide_label: true)
+            = q.collection_check_boxes(:question_option_id, question.question_options.all, :id, :body, hide_label: true)
 
           - elsif question.kind == 'Multiple Choice'
             = q.hidden_field  :question_id, value: question.id
