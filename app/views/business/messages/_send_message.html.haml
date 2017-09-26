@@ -24,9 +24,9 @@
             %fieldset
             .email-content
               / = trix_editor :body
-              / = text_area_tag :body, " ", :class => "tinymce", id: "message-body", cols: 20, data: {behaviour: 'comment-body'}
-              / = tinymce_assets        
-              / = tinymce 
+              = text_area_tag :body, " ", :class => "tinymce", id: "message-body", cols: 20, data: {behaviour: 'comment-body'}
+              = tinymce_assets        
+              = tinymce 
             = hidden_field_tag :applicant_ids
             - if @job.present? 
               = hidden_field_tag :job_id, @job.id

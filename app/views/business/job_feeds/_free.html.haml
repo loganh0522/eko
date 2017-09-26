@@ -2,15 +2,15 @@
   %ul 
     = link_to business_job_job_feeds_path(@job, type: 'free'), remote: true do 
       %li.change#free.activated Free
-    = link_to business_job_job_feeds_path(@job, type: 'premium-job-boards'), remote: true do 
-      %li.change#premium Premium
+    / = link_to business_job_job_feeds_path(@job, type: 'premium-job-boards'), remote: true do 
+    /   %li.change#premium Premium
 
 #free-boards
   .job-feed-container#adzuna-container
     .header
       %img(src="/tmp/adzuna_logo.png")
     .body
-      - if @job.job_feed.adzuna == false 
+      - if @job.job_feed.adzuna == nil
         = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { adzuna: true}), method: :put, remote: true, class: 'btn submit-button'
       - else 
         Posted 
@@ -18,7 +18,7 @@
     .header
       %img(src="/tmp/trovit_logo.png")
     .body
-      - if @job.job_feed.trovit == false 
+      - if @job.job_feed.trovit == nil 
         = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { trovit: true}), method: :put, remote: true, class: 'btn submit-button'
       - else 
         Posted 
@@ -26,23 +26,31 @@
     .header
       %img(src="/tmp/eluta_logo.gif")
     .body
-      = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { eluta: true}), method: :put, remote: true, class: 'btn submit-button'
-   
+      - if @job.job_feed.eluta == nil 
+        = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { eluta: true}), method: :put, remote: true, class: 'btn submit-button'
+      - else 
+        Posted 
   .job-feed-container#jooble-container
     .header
       %img(src="/tmp/jooble_logo.jpg")
     .body
-      = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { jooble: true}), method: :put, remote: true, class: 'btn submit-button'
-
+      - if @job.job_feed.jooble == nil
+        = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { jooble: true}), method: :put, remote: true, class: 'btn submit-button'
+      - else 
+        Posted 
   .job-feed-container#jobinventory-container
     .header
       %img(src="/tmp/job_inventory_logo.jpg")
     .body
-      = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { jobinventory: true}), method: :put, remote: true, class: 'btn submit-button'
-
+      - if @job.job_feed.jobinventory == nil
+        = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { jobinventory: true}), method: :put, remote: true, class: 'btn submit-button'
+      - else 
+        Posted 
   .job-feed-container#juju-container
     .header
       %img(src="/tmp/juju_logo.png")
     .body
-      = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { juju: true}), method: :put, remote: true, class: 'btn submit-button'
-      
+      - if @job.job_feed.juju == nil
+        = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { juju: true}), method: :put, remote: true, class: 'btn submit-button'
+      - else 
+        Posted 

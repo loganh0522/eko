@@ -12,7 +12,7 @@
     $('.applicant-nav').find('#tasks').addClass('activated');
   <% end %>
 <% else %> 
-  $('#main-container').html('<%= j render "business/tasks/job_tasks", tasks: @tasks %>');
+  $('#main-container').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
   $('.change-containers-nav').find('.activated').removeClass('activated');
   $('.change-containers-nav').find('#job-tasks').addClass('activated');
 <% end %>

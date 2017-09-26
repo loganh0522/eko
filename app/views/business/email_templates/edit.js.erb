@@ -1,3 +1,4 @@
-$("#basic-form-modal").html('<%= j render "business/email_templates/form" %>');
-$(".modal-title").html('<%= "Edit Email Template" %>');
-$('#basic-form-modal').modal("show");
+$('#basic-form-modal').find('form').remove()
+$('#basic-form-modal').find('.modal-title').html('<%= j "Edit E-mail Template" %>');
+$('#basic-form-modal').find('.modal-header').after('<%= j render "business/email_templates/form" %>');
+$('#basic-form-modal').modal("toggle");

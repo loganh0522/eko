@@ -46,6 +46,7 @@ module OutlookWrapper
                                  cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                  &callback)
       
+      binding.pry
       @response = graph.service.post(path, data.to_json)
 
       user.outlook_token.update_attributes(subscription_id: @response['id'],  subscription_expiration: @response["expiration_date_time"])
@@ -116,7 +117,9 @@ module OutlookWrapper
       # ActionView::Base.full_sanitizer.sanitize(graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH3AAAA").body.content)
       # ActionView::Base.full_sanitizer.sanitize(graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH5AAAA").body.content)
       # dad-hockley "AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjIAAAE="
-      # email-mom "AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH-AAAA"
+      # email-mom ActionView::Base.full_sanitizer.sanitize(graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH-AAAA").body.content)
+
+      # ActionView::Base.full_sanitizer.sanitize(graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjIAAAE=").body.content)
 
 
       # send from outlook

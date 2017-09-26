@@ -12,10 +12,11 @@ class Business::CandidatesController < ApplicationController
     fields = [:work_titles, :work_description, :work_company, :education_description, :education_school]
     query = params[:query].nil? || "*"
     where[:company_id] = current_company.id 
+    where[:rating]
     where[:job_title] = {all: params[:job_title]} if params[:job_title].present?
     where[:jobs] = {all: params[:jobs]} if params[:jobs].present?
     where[:job_status] = params[:status] if params[:status].present?
-    where[:job_location] = {all: params[:location]} if params[:location].present?
+    where[:job_location] = params[:location] if params[:location].present?
     where[:tags] = {all: params[:tags]} if params[:tags].present?
     where[:created_at] = {gte: params[:date_applied].to_time, lte: Time.now} if params[:date_applied].present?
     

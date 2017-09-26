@@ -6,14 +6,10 @@
 #main-container
   #job-applicants
     .side-container
-      = render 'filter_links'
       = form_tag overdue_business_tasks_path, :method => 'get', id: "search-form" do
         = render 'filters'
     .main-container#task-container
       = render 'business/tasks/tasks'
-
-
-
 
 .modal#basic-form-modal
   .modal-dialog

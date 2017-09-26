@@ -1,6 +1,6 @@
 class Business::RatingsController < ApplicationController
   layout "business"
-  filter_resource_access
+  # filter_resource_access
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -14,6 +14,7 @@ class Business::RatingsController < ApplicationController
         user_id: current_user.id).first
       @rating.update(score: params[:rating].to_f)
     else
+
       @rating = Rating.create(score: params[:rating].to_f, 
         application_id: params[:application_id].to_i, 
         user_id: current_user.id)

@@ -3,7 +3,7 @@
     .modal-content
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title Send Message    
+        %h4.modal-title Create Task   
       = form_tag create_multiple_business_tasks_path, remote: true do 
         .modal-body
           .task-form

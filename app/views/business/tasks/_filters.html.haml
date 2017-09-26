@@ -7,28 +7,35 @@
 
 = text_field_tag "query", nil, placeholder: "Search Tasks", class: "search-field", autocomplete: "off"
 = render 'filter_links'
+
 .filter-container
   .filter-header
     %h4 Assigned To
     .glyphicon.glyphicon-minus
     .glyphicon.glyphicon-plus
-  .filter-body 
-    = check_box_tag "status[]", "To-do", false, class: 'filter'
-    .filter-title To-Do
+  .filter-body
+    %ul
+      - current_company.users.each do |user|
+        %li
+          = check_box_tag "assigned_to[]", "#{user.id}", false, class: 'filter'
+          .filter-title= user.full_name
+
 .filter-container
   .filter-header
-    %h4 Kind
+    %h4 Task Type
     .glyphicon.glyphicon-minus
     .glyphicon.glyphicon-plus
-  .filter-body 
-    = check_box_tag "kind[]", "To-do", false, class: 'filter'
-    .filter-title To-Do
-    = check_box_tag "kind[]", "Email", false, class: 'filter'
-    .filter-title Email
-    = check_box_tag "kind[]", "Schedule Interview", false, class: 'filter'
-    .filter-title Schedule Interview
-    = check_box_tag "kind[]", "Send Assesment", false, class: 'filter'
-    .filter-title Send Assessment
-
-
-
+  .filter-body
+    %ul
+      %li
+        = check_box_tag "kind[]", "To-do", false, class: 'filter'
+        .filter-title To-Do
+      %li
+        = check_box_tag "kind[]", "Email", false, class: 'filter'
+        .filter-title Email
+      %li
+        = check_box_tag "kind[]", "Schedule Interview", false, class: 'filter'
+        .filter-title Schedule Interview
+      %li
+        = check_box_tag "kind[]", "Send Assesment", false, class: 'filter'
+        .filter-title Send Assessment
