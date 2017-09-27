@@ -1,0 +1,10 @@
+- if @candidate.resumes.first.present?
+  %iframe{:src=> "https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.talentwiz.ca%2Fpublic%2Fuploads%2Fresume%2Fname%2F#{@resume.id}%2F" + File.basename(@resume.name.path), :width=> "100%", :height=>"800px"}
+- else 
+  = form_for [:business, @candidate, Resume.new],:html => { :multipart => true }, remote: true do |f| 
+    = f.file_field :name, id: "add-resume"
+    = f.hidden_field :candidate_id, value: @candidate.id
+    = f.submit "Add Resume", id: "submit-resume", class: "btn submit-button"
+
+
+  

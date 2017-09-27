@@ -97,9 +97,12 @@ class Business::TasksController < ApplicationController
     else 
       query = "*"
     end 
+    
+    if params[:application_id].present?
+      @candidate = Application.find(params[:application_id]).candidate.id
+      where[:taskable_id] = @candidate 
+    end
 
-
-    where[:commentable_id] = @candidate
     where[:company_id] = current_company.id
     where[:status] = 'active'
     where[:users] = {all: [current_user.id]} if params[:owner] == "user"
@@ -110,7 +113,8 @@ class Business::TasksController < ApplicationController
 
     where[:client_id] = params[:client_id] if params[:client_id].present?
     where[:kind] = params[:kind] if params[:kind].present?
-    @tasks = Task.search(query, where: where).to_a
+    
+    @tasks = Task.search(query, where: where, order: {created_at: :desc}).to_a
 
     respond_to do |format|
       format.js

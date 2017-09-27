@@ -7,7 +7,7 @@
     $('.change-containers-nav').find('.activated').removeClass('activated');
     $('.change-containers-nav').find('#completed-tasks').addClass('activated');
   <% else %>
-    $(".applicant-general").html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
+    $('.display-applicant-details').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
     $('.applicant-nav').find('.activated').removeClass('activated');
     $('.applicant-nav').find('#tasks').addClass('activated');
   <% end %>

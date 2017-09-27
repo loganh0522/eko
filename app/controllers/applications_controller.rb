@@ -12,10 +12,10 @@ class ApplicationsController < JobSeekersController
 
   def create 
     if !current_user_candidate?(params[:application][:company_id])
-      @candidate = Candidate.create(company_id: params[:application][:company_id], user_id: current_user.id)
+      @candidate = Candidate.create(company_id: params[:application][:company_id], user_id: current_user.id, manually_created: false)
       create_application
     else
-      find_candidate
+      find_candidate(params[:application][:company_id])
       create_application
     end
     redirect_to root_path
@@ -30,15 +30,14 @@ class ApplicationsController < JobSeekersController
 
   def create_application
     @job = Job.find(params[:application][:job_id])  
-    if !current_user_applied?(@job)
-      @application = Application.new(application_params.merge!(candidate_id: @candidate.id))
-      if @application.save
-        flash[:success] = "Your application has been submitted"
-        track_activity @application
-      else
-        render :new
-        flash[:error] = "Something went wrong please try again"
-      end
+    @application = Application.new(application_params.merge!(candidate_id: @candidate.id))
+      
+    if @application.save
+      flash[:success] = "Your application has been submitted"
+      track_activity @application, "applied", @job.company.id, @candidate.id, @job.id
+    else
+      render :new
+      flash[:error] = "Something went wrong please try again"
     end
   end
 

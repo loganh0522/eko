@@ -26,6 +26,7 @@ class Candidate < ActiveRecord::Base
   has_many :taggings
   has_many :tags, through: :taggings
   
+  has_many :activities, -> {order("created_at DESC")}, :dependent => :destroy
   has_many :messages, -> {order("created_at DESC")}, as: :messageable, :dependent => :destroy
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy
   has_many :tasks, -> {order("created_at DESC")}, as: :taskable, :dependent => :destroy

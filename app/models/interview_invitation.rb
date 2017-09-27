@@ -9,6 +9,9 @@ class InterviewInvitation < ActiveRecord::Base
   has_many :assigned_users, as: :assignable, :dependent => :destroy
   has_many :users, through: :assigned_users, validate: false
 
+
+  has_one :room, through: :assigned_rooms, validate: false
+
   before_create :set_token
 
   validates_presence_of :kind, :candidate_ids, :user_ids, :title, :message, :subject

@@ -12,7 +12,7 @@ $('#comment-body').val('');
 <% elsif params[:client_contact_id].present? %> 
   $('.applicant-profile').html('<%= j render "business/comments/applicant_notes", application: @contact %>');
 <% else %>
-  $('.applicant-general').html('<%= j render "business/comments/notes", comments: @comments %>');
+  $('.display-applicant-details').html('<%= j render "business/comments/notes", comments: @comments %>');
   $('.action-area').children().remove();
   $('.active-button').removeClass('active-button');
   $('.applicant-nav').find('.activated').removeClass('activated');

@@ -1,35 +1,36 @@
 .scorecards-container
-  .header
-    %h4 Application Scorecard
-    - if @scorecard.present?
-      .my-scorecard
-        - if @current_user_scorecard.present? 
-          = link_to "Edit My Scorecard", edit_business_job_application_application_scorecard_path(@job, @application, @current_user_scorecard), remote: true
-        - else 
-          = link_to "Create Scorecard", new_business_job_application_application_scorecard_path(@job, @application), remote: true 
-  - if @scorecard.present?  
-    .scorecard-details
-      .sections
-        - @sections.each do |section|
-          %h4= section.body
-          %table.table
-            %tbody
-              - section.section_options.each do |criteria|
-                %tr
-                  %td.title(width="30%")= criteria.body
-                  %td(width="70%")
-                    .scorecard-results
-                      - @application_scorecards.each do |scorecard| 
-                        - scorecard.scorecard_ratings.each do |rating|
-                          - if rating.rating == 1 && rating.section_option_id == criteria.id
-                            %i.glyphicon.glyphicon-remove
-                          - elsif rating.rating == 2 && rating.section_option_id == criteria.id
-                            %i.glyphicon.glyphicon-thumbs-down
-                          - elsif rating.rating == 3 && rating.section_option_id == criteria.id
-                            %i.glyphicon.glyphicon-thumbs-up
-                          - elsif rating.rating == 4 && rating.section_option_id == criteria.id
-                            %i.glyphicon.glyphicon-star
-  - else 
-    .not-present-container
-      %p There is currently no scorecard for this job posting.
-      
+  .scorecard
+    .header
+      %h4 Application Scorecard
+      - if @scorecard.present?
+        .my-scorecard
+          - if @current_user_scorecard.present? 
+            = link_to "Edit My Scorecard", edit_business_job_application_application_scorecard_path(@job, @application, @current_user_scorecard), remote: true
+          - else 
+            = link_to "Create Scorecard", new_business_job_application_application_scorecard_path(@job, @application), remote: true 
+    - if @scorecard.present?  
+      .scorecard-details
+        .sections
+          - @sections.each do |section|
+            %h4= section.body
+            %table.table
+              %tbody
+                - section.section_options.each do |criteria|
+                  %tr
+                    %td.title(width="30%")= criteria.body
+                    %td(width="70%")
+                      .scorecard-results
+                        - @application_scorecards.each do |scorecard| 
+                          - scorecard.scorecard_ratings.each do |rating|
+                            - if rating.rating == 1 && rating.section_option_id == criteria.id
+                              %i.glyphicon.glyphicon-remove
+                            - elsif rating.rating == 2 && rating.section_option_id == criteria.id
+                              %i.glyphicon.glyphicon-thumbs-down
+                            - elsif rating.rating == 3 && rating.section_option_id == criteria.id
+                              %i.glyphicon.glyphicon-thumbs-up
+                            - elsif rating.rating == 4 && rating.section_option_id == criteria.id
+                              %i.glyphicon.glyphicon-star
+    - else 
+      .not-present-container
+        %p There is currently no scorecard for this job posting.
+        

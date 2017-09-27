@@ -27,7 +27,7 @@ class Business::ActivitiesController < ApplicationController
     where[:candidate_id] = @candidate.id if @candidate.present?
     where[:company_id] = current_company.id
 
-    @activities = Activity.search("*", where: where)
+    @activities = Activity.search("*", where: where, order: {created_at: :desc})
     @jobs = current_company.jobs.where(status: "open")
 
     respond_to do |format|

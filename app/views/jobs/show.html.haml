@@ -18,7 +18,7 @@
         %h2= @job.title
         = "#{@job.location} - #{@job.kind}"
       .job-body
-        = simple_format(@job.description)
+        = @job.description.html_safe
       .apply 
       / = render "apply_method"
     .extra-job-details

@@ -103,6 +103,7 @@ class Business::InterviewInvitationsController < ApplicationController
       :subject, :message, :user_id, :company_id,
       candidate_ids: [], 
       user_ids: [],
+      room_ids: [],
       interview_times_attributes: [:id, :time, :date, :_destroy])
   end
 end

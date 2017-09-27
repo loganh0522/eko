@@ -11,153 +11,163 @@
     min-height: 375px
     width: 70%
     margin: 0 4% 50px 0
-.activity-feed
-  margin: -30px 0 50px 15px
-  padding: 0 30px 15px 30px
+
+.job-activity-feed
+  margin: -20px 0 50px 70px
+  padding: 0 45px 15px 30px
   border-left: 1px solid #EF7B2B
   width: 100%
-  .activity
+
+.activity-feed
+  margin: -30px 0 50px 30px
+  padding: 0 45px 15px 30px
+  border-left: 1px solid #EF7B2B
+  width: 100%
+
+.activity
+  display: block
+  max-width: 800px
+  position: relative
+  margin-left: 10px
+  margin-top: 20px
+  width: 100%    
+  .glyphicon
+    height: 35px
+    width: 35px
+    padding: 10px
+    color: #fff
+    box-sizing: border-box
     display: block
-    max-width: 800px
-    position: relative
-    margin-left: 10px
-    margin-top: 20px
-    width: 100%    
-    .glyphicon
-      height: 35px
-      width: 35px
-      padding: 10px
-      color: #fff
-      box-sizing: border-box
-      display: block
-      background: #EF7B2B
-      position: absolute
-      left: -58px
-      top: 35px
-      border-radius: 50%
-    .activity-body
+    background: #EF7B2B
+    position: absolute
+    left: -58px
+    top: 35px
+    border-radius: 50%
+  .activity-body
+    width: 100%
+    background: white
+    border-radius: 1px
+    margin-bottom: 30px
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    top: 25px
+    display: block
+    position: relative 
+    .task-body
+      overflow: hidden
+      border-bottom: 1px solid rgba(0,0,0,0.1)
       width: 100%
-      background: white
-      border-radius: 1px
-      margin-bottom: 30px
-      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-      top: 25px
-      display: block
-      position: relative 
-      .task-body
-        overflow: hidden
-        border-bottom: 1px solid rgba(0,0,0,0.1)
-        width: 100%
-        padding: 10px 10px
-        .details
-          float: left
-          margin: 0px 0 0 10px
-          .title
-            font-weight: 600
-        .glyphicon-ok
-          float: left
-          width: 35px
-          height: 35px
-          margin-right: 5px
-          border: 1px solid (rgba(0,0,0,0.4))
-          color: rgba(0,0,0,0.4)
-          border-radius: 50%
-          padding: 9px
-          position: relative
-          background: none
-          left: 0
-          top: 0
-          &:hover
-            border-color: green
-            color: green
-      .activity-row
-        padding: 10px 10px
-        border-bottom: 1px solid rgba(0,0,0,0.1)
-        overflow: hidden
-        width: 100%
-        .no-notes
-          color: rgba(0,0,0,0.5)
-        .assigned 
-          float: left
-          font-size: 14px
-          margin-right: 5px
-          margin-top: 10px
+      padding: 10px 10px
+      .details
+        float: left
+        margin: 0px 0 0 10px
         .title
+          font-weight: 600
+      .glyphicon-ok
+        float: left
+        width: 35px
+        height: 35px
+        margin-right: 5px
+        border: 1px solid (rgba(0,0,0,0.4))
+        color: rgba(0,0,0,0.4)
+        border-radius: 50%
+        padding: 9px
+        position: relative
+        background: none
+        left: 0
+        top: 0
+        &:hover
+          border-color: green
+          color: green
+    .activity-row
+      padding: 10px 10px
+      border-bottom: 1px solid rgba(0,0,0,0.1)
+      overflow: hidden
+      width: 100%
+      .no-notes
+        color: rgba(0,0,0,0.5)
+      .assigned 
+        float: left
+        font-size: 14px
+        margin-right: 5px
+        margin-top: 10px
+      .title
+        float: left
+        font-size: 16px
+      .due-date
+        float: right
+      .user-tag
+        float: left
+        margin-right: 5px
+    .activity-body-header    
+      font-size: 14px
+      overflow: hidden
+      padding: 15px 15px
+      padding-bottom: 10px
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+      .details
+        float: left
+        width: 100%
+        .circle
+          border-radius: 50%
+          margin-right: 10px
+          width: 40px 
+          height: 40px
           float: left
-          font-size: 16px
-        .due-date
-          float: right
-        .user-tag
+        .circle-img
+          float: left
+          margin-right: 15px
+          border-radius: 50%
+          width: 40px 
+          height: 40px
+          background: rgba(0,0,0,0.1)
+          text-align: center
+          font-size: 18px
+          padding-top: 8px
+          color: white
+        .content
+          float: left
+          max-width: 475px
+          .description
+          .time 
+            font-size: 12px
+            color: rgba(0, 0, 0, 0.3)
+      .actions
+        float: right
+        width: 15%
+        a
           float: left
           margin-right: 5px
-      .activity-body-header    
-        font-size: 14px
-        overflow: hidden
-        padding: 15px 15px
-        padding-bottom: 10px
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-        .details
-          float: left
+    .activity-body-body
+      .comment-body
+        padding: 20px 15px
+      .comment-area
+        background: #ffffff
+        border-radius:  0 0 5px 5px
+        margin-top: 0
+        textarea:focus
+          outline: none
+        #comment-body
           width: 100%
-          .circle
-            border-radius: 50%
+          height: 150px
+          padding: 5px 15px
+          border: none
+          margin: none
+        .comment-area-footer
+          padding: 10px 10px
+          border-top: 1px solid rgba(0,0,0,0.1)
+          border-bottom: 1px solid rgba(0,0,0,0.1)
+          background: rgba(0,0,0,0.05)
+          overflow: hidden
+          .btn
+            float: right
             margin-right: 10px
-            width: 40px 
-            height: 40px
-            float: left
-          .circle-img
-            float: left
-            margin-right: 15px
-            border-radius: 50%
-            width: 40px 
-            height: 40px
-            background: rgba(0,0,0,0.1)
-            text-align: center
-            font-size: 18px
-            padding-top: 8px
-            color: white
-          .content
-            float: left
-            max-width: 475px
-            .description
-            .time 
-              font-size: 12px
-              color: rgba(0, 0, 0, 0.3)
-        .actions
-          float: right
-          width: 15%
-          a
-            float: left
-            margin-right: 5px
-      .activity-body-body
-        .comment-body
-          padding: 20px 15px
-        .comment-area
-          background: #ffffff
-          border-radius:  0 0 5px 5px
-          margin-top: 0
-          textarea:focus
-            outline: none
-          #comment-body
-            width: 100%
-            height: 150px
-            padding: 5px 15px
-            border: none
-            margin: none
-          .comment-area-footer
-            padding: 10px 10px
-            border-top: 1px solid rgba(0,0,0,0.1)
-            border-bottom: 1px solid rgba(0,0,0,0.1)
-            background: rgba(0,0,0,0.05)
-            overflow: hidden
-            .btn
-              float: right
-              margin-right: 10px
-            .submit-button
-              float: right
+          .submit-button
+            float: right
 
 
 .tasks
+  margin: 10px 0 
+  padding: 0 5px
   .task
     width: 100%
     background: white
@@ -209,68 +219,6 @@
         padding: 5px 5px
         border: 1px solid #EF7B2B
       
-.comments
-  .comment
-    width: 100%
-    background: white
-    border-radius: 1px
-    margin-bottom: 30px
-    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-    top: 25px
-    display: block
-    position: relative 
-    .comment-header   
-      font-size: 14px
-      overflow: hidden
-      padding: 15px 15px
-      padding-bottom: 10px
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-      .details
-        float: left
-        width: 85%
-        .circle
-          border-radius: 50%
-          margin-right: 10px
-          width: 40px 
-          height: 40px
-          float: left
-        .circle-img
-          float: left
-          margin-right: 15px
-          border-radius: 50%
-          width: 40px 
-          height: 40px
-          background: rgba(0,0,0,0.1)
-          text-align: center
-          font-size: 18px
-          padding-top: 8px
-          color: white
-        .content
-          float: left
-        .time 
-          font-size: 12px
-          color: rgba(0, 0, 0, 0.3)
-      .actions
-        float: right
-        width: 14%
-        a
-          float: left
-          margin-right: 5px
-    .activity-body-body
-      .comment-body
-        padding: 20px 15px
-      .comment-area
-        background: #ffffff
-        border-radius:  0 0 5px 5px
-        margin-top: 0
-        textarea:focus
-          outline: none
-        #comment-body
-          width: 100%
-          height: 150px
-          padding: 5px 15px
-          border: none
-          margin: none
 
      
 

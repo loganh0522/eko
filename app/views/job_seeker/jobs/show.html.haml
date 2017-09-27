@@ -10,7 +10,7 @@
         %h2= @job.title
         = "#{@job.location} - #{@job.kind}"
       .job-body
-        = simple_format(@job.description)
+        = @job.description.html_safe
     .extra-job-details
       %h3 Job Details 
       .detail

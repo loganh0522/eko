@@ -23,6 +23,15 @@ class Business::ResumesController < ApplicationController
     end
   end
 
+  def show 
+    @candidate = Candidate.find(params[:candidate_id])
+    @resume = Resume.find(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def destroy
     @resume = Resume.find(params[:id])
     @resume.destroy

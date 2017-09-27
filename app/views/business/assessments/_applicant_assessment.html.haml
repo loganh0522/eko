@@ -1,15 +1,16 @@
 .assessments-container
-  - if @questions.nil?
-    .not-present-container
-      %p You currently do not have a Application Form for this position.   
-  - else 
-    .header
-      %h4 Application Form
-    .assessment-body
-      - @questions.each do |question|
-        .question-area
-          .question
-            = question.position
-            = question.body
-          .answer
-            = question_answer(question, @application)
+  .assessment
+    - if @questions.nil?
+      .not-present-container
+        %p You currently do not have a Application Form for this position.   
+    - else 
+      .header
+        %h4 Application Form
+      .assessment-body
+        - @questions.each do |question|
+          .question-area
+            .question
+              = question.position
+              = question.body
+            .answer
+              = question_answer(question, @application)

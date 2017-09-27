@@ -23,14 +23,15 @@
       .e-mail-signature
         %h4 E-mail Signature
         = render 'business/email_signatures/signature'
+      
       .sync-email
         %h4 Sync Outlook
-        = link_to "Sync with Outlook", "#{@login_url}"
-        
+        = link_to "#{@login_url}" do
+          .sync-box Sync with Outlook
+      .sync-email
         %h4 Sync Gmail
-        = link_to "Authenticate with Google!", '/auth/google_oauth2'
-
-        = link_to "Sync Email", edit_business_user_path(@current_user),  class: "btn border-button2"
+        = link_to '/auth/google_oauth2' do 
+          .sync-box Authenticate with Google!
 
         
       /   - if @auth.present? 

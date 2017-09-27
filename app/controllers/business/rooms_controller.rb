@@ -58,6 +58,14 @@ class Business::RoomsController < ApplicationController
     end
   end
 
+  def autocomplete
+    @room = current_company.candidates.order(:full_name).where("full_name ILIKE ?", "%#{params[:term]}%")
+
+
+    render :json => Room.search(params[:term], where: {company_id: current_company.id}, 
+      fields: [{full_name: :word_start}])
+  end
+
   def outlook_token
     token = get_room_token_from_code params[:code]
     

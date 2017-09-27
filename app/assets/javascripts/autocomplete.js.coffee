@@ -37,15 +37,16 @@ jQuery ->
 $(document).ajaxComplete ->
   $('form').on 'focus', '#autocomplete', ->  
     controller = $(this).attr('class').split(' ').pop()
-    console.log(controller)
+    console.log('#search-results-' + controller)
+    
     $(this).autocomplete( 
       source: '/business/' + controller + '/autocomplete'
-      appendTo: $('#search-results')     
+      appendTo: $('#search-results-' + controller)     
       focus: (event, ui) -> 
         if controller == "jobs"
-          $('#search-results').val ui.item.title
+          $('#search-results-' + controller).val ui.item.title
         else
-          $('#search-results').val ui.item.first_name + ui.item.last_name
+          $('#search-results-' + controller).val ui.item.first_name + ui.item.last_name
         false
       select: (event, ui) ->
         idType = controller.slice(0, -1)
@@ -67,7 +68,7 @@ $(document).ajaxComplete ->
         false
     ).data('ui-autocomplete')._renderItem = (ul, item) ->
       if controller == "jobs"
-        $('<li>').attr('ui-item-autocomplete', item.value).append("<a>" + item.title + "</a>").appendTo ul 
+        $('<li>').attr('ui-item-autocomplete' , item.value).append("<a>" + item.title + "</a>").appendTo ul 
       else
         $('<li>').attr('ui-item-autocomplete', item.value).append("<a>" + item.full_name + "</a>").appendTo ul 
     return

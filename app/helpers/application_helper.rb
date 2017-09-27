@@ -88,22 +88,42 @@ module ApplicationHelper
     if application.question_answers.count == 0
       return "There are currently no answers for this application"
     else
-      @ans = QuestionAnswer.where(question: question, application: application).first
-      
       if question.kind == 'Text' || question.kind == 'Paragraph'
-        if @ans.present?
-          @answer = @ans.body
+        @answers = QuestionAnswer.where(question: question, application: application).first 
+        if @answers.present?
+          @answer = @answers.body
         else 
           return "There are currently no answers for this application"
         end
-      elsif question.kind == 'Checkbox' || question.kind == 'Multiple Choice'
-        if @ans.present?
-          @answer = QuestionOption.find(@ans.question_option_id).body
-        else 
-          return "There are currently no answers for this application"
+      elsif question.kind == 'Multiple Choice'
+        @answers = []
+        question.question_answers.each do |answer| 
+          @answers.push(answer.question_option_id)
         end
+        content_tag(:ui, :class => "multi-answer") do 
+          question.question_options.each do |option| 
+            if @answers.include?(option.id)
+              concat content_tag(:li, option.body, :class => "bold")
+            else
+              concat content_tag(:li, option.body)
+            end
+          end 
+        end 
+      elsif question.kind == 'Checkbox'
+        @answers = []
+        question.question_answers.each do |answer| 
+          @answers.push(answer.question_option_id)
+        end
+        content_tag(:ui, :class => "multi-answer") do 
+          question.question_options.each do |option| 
+            if @answers.include?(option.id)
+              concat content_tag(:li, option.body, :class => "bold")
+            else
+              concat content_tag(:li, option.body)
+            end
+          end 
+        end 
       end
-      return @answer
     end
   end
 

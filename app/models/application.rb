@@ -16,7 +16,7 @@ class Application < ActiveRecord::Base
   belongs_to :job, touch: true
 
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy
-  has_many :tasks, as: :taskable, :dependent => :destroy
+  has_many :tasks, -> {order("created_at DESC")}, as: :taskable, :dependent => :destroy
   has_many :activities, -> {order("created_at DESC")}, :dependent => :destroy
 
   has_many :ratings

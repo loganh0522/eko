@@ -26,18 +26,12 @@ gem 'haml-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-
 gem 'bootstrap_form'
 gem 'bootstrap-colorpicker-rails'
-
 gem 'autoprefixer-rails'
-
 gem 'bcrypt'
 gem 'fabrication'
 gem 'faker'
-
-
-
 gem 'figaro'
 gem 'stripe'
 gem 'stripe_event'
