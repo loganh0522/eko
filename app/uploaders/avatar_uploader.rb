@@ -1,11 +1,6 @@
 class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
-
-  def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  end
-
-
+  
   resize_to_limit(300, 300)
 
   version :large_image do
