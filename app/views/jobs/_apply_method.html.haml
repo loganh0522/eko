@@ -15,12 +15,14 @@
         = f.hidden_field :user_id, value: current_user.id
         = f.hidden_field :job_id, value: @job.id
         = f.hidden_field :company_id, value: @company.id
-        - if @job_board.brand_color.present?
-          .app-btn{:style => "background-color: #{@job_board.brand_color})"}
-            = f.submit "Apply to Job", class: 'app-btn', :html => {:style => "background-color: #{@job_board.brand_color})"}
-        - else
-          .app-btn{:style => "background-color: #{@job_board.brand_color})"}
-            = f.submit "Apply to Job", class: 'app-btn', :html => {:style => "background-color: #EF7B2B)"}
+        = f.submit "Apply to Job", class: 'app-btn', :html => {:style => "background-color: #EF7B2B)"}
+        
+        / - if @job_board.brand_color.present?
+        /   .app-btn{:style => "background-color: #{@job_board.brand_color})"}
+        /     = f.submit "Apply to Job", class: 'app-btn', :html => {:style => "background-color: #{@job_board.brand_color})"}
+        / - else
+        /   .app-btn{:style => "background-color: #{@job_board.brand_color})"}
+            
 
 / - else 
 /   = render "/users/sub_new_job_seeker"
