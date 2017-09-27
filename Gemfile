@@ -39,7 +39,6 @@ gem 'stripe_event'
 gem 'rails4-autocomplete'
 gem 'geocomplete_rails'
 
-
 gem 'mini_magick'
 gem 'rmagick', :require => 'RMagick'
 

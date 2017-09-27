@@ -47,18 +47,6 @@
                 = text_field_tag "", "", :class => 'ui-autocomplete-input candidates', :placeholder => 'Type a users name to assign', id: "autocomplete"
                 #search-results-candidates
             .assigned-candidates
-
-        .contain-2
-          .assign-to-row
-            .assign-user#user_ids_Block
-              .title Add Room
-              .show-hidden-search-box
-                .add-button-search
-                  .glyphicon.glyphicon-plus
-              .hidden-search-box
-                = text_field_tag "", "", :class => 'ui-autocomplete-input rooms', :placeholder => 'Type a users name to assign', id: "autocomplete"
-                #search-results-rooms
-            .assigned-candidates
        
       .form-row-2
         .header
@@ -95,7 +83,6 @@
       = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
       = f.hidden_field :candidate_ids, id: "candidate_ids"
       = f.hidden_field :job_id, id: "job_ids"
-      = f.hidden_field :room_ids, id: "rooom_ids"
       = f.hidden_field :user_id, value: current_user.id
       = f.hidden_field :company_id, value: current_company.id
     .modal-footer

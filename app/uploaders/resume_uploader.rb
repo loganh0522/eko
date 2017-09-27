@@ -1,5 +1,5 @@
 class ResumeUploader < CarrierWave::Uploader::Base
-  storage :file
+  
 
   def store_dir
     "public/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
@@ -8,5 +8,4 @@ class ResumeUploader < CarrierWave::Uploader::Base
   def extension_white_list
     %w(pdf doc docx)
   end
-
 end

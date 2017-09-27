@@ -1,6 +1,6 @@
 class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
-
+  
   resize_to_limit(300, 300)
 
   version :large_image do

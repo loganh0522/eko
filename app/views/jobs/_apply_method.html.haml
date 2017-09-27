@@ -15,7 +15,7 @@
         = f.hidden_field :user_id, value: current_user.id
         = f.hidden_field :job_id, value: @job.id
         = f.hidden_field :company_id, value: @company.id
-        = f.submit "Apply to Job", class: 'app-btn', :html => {:style => "background-color: #EF7B2B)"}
+        = f.submit "Apply to this Job", class: 'btn submit-button', :html => {:style => "background-color: #EF7B2B)"}
         / - if @job_board.brand_color.present?
         /   .app-btn{:style => "background-color: #{@job_board.brand_color})"}
         /     = f.submit "Apply to Job", class: 'app-btn', :html => {:style => "background-color: #{@job_board.brand_color})"}
@@ -26,7 +26,7 @@
   = render "/sessions/sub_login"
 
   - if @job_board.brand_color.present?
-    .app-btn= link_to "Apply To Job", "", "data-toggle" => "modal", "data-dismiss" => "modal", "data-target" => "#SubLoginModal", class: "btn app-btn", :style => "background-color: #{@job_board.brand_color}"
+    .app-btn= link_to "Apply To Job", "", "data-toggle" => "modal", "data-dismiss" => "modal", "data-target" => "#SubLoginModal", class: "btn submit-button", :style => "background-color: #{@job_board.brand_color}"
     / .btn.app-btn{:style => "background-color: #EF7B2B)"}
     / .btn.button-submit= link_to '#', "data-toggle" => "modal", "data-target" => "#SubLoginModal" do
     /   Apply To Job
