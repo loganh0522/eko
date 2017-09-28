@@ -51,7 +51,8 @@ module OutlookWrapper
       data = {
         changeType: "created, updated",
         notificationUrl: ENV['OUTLOOK_WEBHOOK'],
-        resource: "me/messages",
+        resource: "me/mail_folders('SentItems')/messages",
+        resource: "me/mail_folders('Inbox')/messages",
         expirationDateTime: Time.now + 4230.minutes,
         clientState: "subscription-identifier"
       }
@@ -114,7 +115,7 @@ module OutlookWrapper
       graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0/',
                                  cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                  &callback)
-
+      binding.pry
       @message = graph.me.mail_folders.find('inbox').messages.first.body.content
       # graph.me.messages.find(id)
       
