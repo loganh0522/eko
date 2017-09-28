@@ -51,8 +51,8 @@ module OutlookWrapper
       data = {
         changeType: "created, updated",
         notificationUrl: ENV['OUTLOOK_WEBHOOK'],
-        resource: "me/mail_folders('SentItems')/messages",
-        resource: "me/mail_folders('Inbox')/messages",
+        resource: "me/mailFolders('SentItems')/messages",
+        resource: "me/mailFolders('Inbox')/messages",
         expirationDateTime: Time.now + 4230.minutes,
         clientState: "subscription-identifier"
       }
