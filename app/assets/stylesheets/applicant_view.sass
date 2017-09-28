@@ -1,7 +1,8 @@
 .applicant-view
+  height: inherit
   .applicant-main-container
     width: 65%
-    min-height: 600px 
+    height: inherit 
     float: right
     padding: 10px 0 
     background: #f7f8f9
@@ -70,8 +71,7 @@
     .applicant-general
       overflow: hidden
       overflow-y: scroll
-      max-height: 800px
-      min-height: 800px
+      height: inherit
       .display-applicant-details
         height: 87%
         max-height: 700px
@@ -433,6 +433,7 @@
 
 .interview-container
   clear: both
+  margin-top: 20px
   #interview
     width: 100%
     background: white
@@ -441,6 +442,20 @@
     box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
     position: relative
     overflow: hidden
+    .header 
+      padding: 5px 10px 
+      overflow: hidden
+      width: 100%
+      height: auto
+      border-top: 1px solid rgba(0,0,0,0.1)
+      overflow: hidden
+      .title
+        font-weight: bold
+        float: left
+      .sent
+        float: left
+        margin-left: 20px
+
     .date
       width: 90px
       text-align: center
@@ -463,10 +478,13 @@
       border-top: 1px solid rgba(0,0,0,0.1)
       .title
         float: left
+        margin: 10px 10px 0 0 
+        font-size: 14px
       .time
         float: right
       .content
         float: left
+    
 
 
 .company-kind label

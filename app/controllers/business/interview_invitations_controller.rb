@@ -36,6 +36,7 @@ class Business::InterviewInvitationsController < ApplicationController
       if @interview_invite.save
         send_invitations(@interview_invite)
         schedule_in_calendar(@interview_invite)
+        schedule_room(@interview_invite)
         format.js
       else 
         @errors = []
@@ -93,6 +94,23 @@ class Business::InterviewInvitationsController < ApplicationController
     end
   end
 
+  def schedule_room(interview_invite)
+    @room = Room.find(params[:interview_invitation][:room_id])
+    
+    if @room.outlook_token.present?
+      @times = interview_invite.interview_times
+      @email = @room.email          
+      
+      @times.each do |time| 
+        @dateTime = DateTime.parse(time.date + " " + time.time).strftime("%Y-%m-%dT%H:%M:%S")
+        endTime = DateTime.parse(time.date + " " + time.time) + params[:minutes].to_i.minutes + params[:hours].to_i.hours
+        @endTime = endTime.strftime("%Y-%m-%dT%H:%M:%S")
+
+        OutlookWrapper::Calendar.create_event(@room, @dateTime, @endTime, time)
+      end
+    end
+  end
+
   def set_interview_invitation
     @interview_invite = InterviewInvitations.find_by(token: params[:id])
   end
@@ -100,10 +118,8 @@ class Business::InterviewInvitationsController < ApplicationController
   def interview_invitation_params
     params.require(:interview_invitation).permit(:title, :notes, :location, 
       :kind, :job_id, 
-      :subject, :message, :user_id, :company_id,
-      candidate_ids: [], 
+      :subject, :message, :user_id, :company_id, :room_id,
       user_ids: [],
-      room_ids: [],
       interview_times_attributes: [:id, :time, :date, :_destroy])
   end
 end

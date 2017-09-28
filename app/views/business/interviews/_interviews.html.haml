@@ -1,5 +1,5 @@
 .interview-container
-  - if @interview.present? 
+  - if @interviews.present? 
     - @interviews.each do |interview|
       = render "business/interviews/interview", interview: interview
   - else 

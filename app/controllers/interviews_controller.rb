@@ -21,8 +21,8 @@ class InterviewsController < ApplicationController
     @time = InterviewTime.find(params[:time])  
     
     if @time.present?
-      binding.pry
       @invite =  @time.interview_invitation
+
       @candidate = @invite.candidates.where(email: (params[:email]).downcase).first  
       @events = @time.event_ids
       @user_ids = params[:interview][:user_ids].split(' ') 
@@ -67,7 +67,11 @@ class InterviewsController < ApplicationController
     @candidate = candidate 
    
     @events.each do |event| 
-      @user = event.user
+      if event.user_id == nil 
+        @user = event.room
+      else
+        @user = event.user
+      end
       
       if @user.outlook_token.present?    
         OutlookWrapper::Calendar.update_event(@user, event, candidate)

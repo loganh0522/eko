@@ -26,12 +26,17 @@
       
       .sync-email
         %h4 Sync Outlook
-        = link_to "#{@login_url}" do
-          .sync-box Sync with Outlook
-      .sync-email
-        %h4 Sync Gmail
-        = link_to '/auth/google_oauth2' do 
-          .sync-box Authenticate with Google!
+        - if current_user.outlook_token.present? 
+          .sync-box Synced To Outlook
+        - else 
+          
+          = link_to "#{@login_url}" do
+            .sync-box Sync with Outlook
+
+      / .sync-email
+      /   %h4 Sync Gmail
+      /   = link_to '/auth/google_oauth2' do 
+      /     .sync-box Authenticate with Google!
       /   - if @auth.present? 
       /     - @auth.each do |key, value| 
       /       = key 

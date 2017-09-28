@@ -337,23 +337,11 @@ class Business::TasksController < ApplicationController
     
     applicant_ids.each do |id| 
       @candidate = Candidate.find(id)
-
-      if params[:job_id].present?
-        @job = Job.find(params[:job_id])
-        @application = Application.where(candidate_id: @candidate.id, job: @job.id).first
-        @task = @application.tasks.build(title: params[:title],
-          due_date: params[:due_date], due_time: params[:due_time],
-          kind: params[:kind], notes: params[:notes],
-          job_id: params[:job_id],
-          user_id: current_user.id, status: params[:status],
-          company_id: current_company.id, user_ids: params[:user_ids])
-      else 
-        @task = @candidate.tasks.build(title: params[:title],
-          due_date: params[:due_date], due_time: params[:due_time],
-          kind: params[:kind], notes: params[:notes],
-          user_id: current_user.id, status: params[:status],
-          company_id: current_company.id, user_ids: params[:user_ids])
-      end
+      @task = @candidate.tasks.build(title: params[:title],
+        due_date: params[:due_date], due_time: params[:due_time],
+        kind: params[:kind], notes: params[:notes],
+        user_id: current_user.id, job_id: params[:job_id], status: params[:status],
+        company_id: current_company.id, user_ids: params[:user_ids])
       @task.save
     end
     # track_activity(@comment, "create")

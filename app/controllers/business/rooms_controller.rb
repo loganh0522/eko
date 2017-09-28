@@ -68,14 +68,15 @@ class Business::RoomsController < ApplicationController
 
   def outlook_token
     token = get_room_token_from_code params[:code]
-    
+
     @outlookToken = OutlookToken.create(
       access_token: token.token,
       refresh_token: token.refresh_token,
       expires_at: Time.now + token.expires_in.to_i.seconds,
       )
+    binding.pry
 
-    OutlookWrapper::User.get_user_email(@outlookToken)
+    OutlookWrapper::User.set_room_token(@outlookToken)
     redirect_to business_company_path(current_company)
   end
 

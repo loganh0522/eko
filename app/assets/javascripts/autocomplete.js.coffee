@@ -37,8 +37,6 @@ jQuery ->
 $(document).ajaxComplete ->
   $('form').on 'focus', '#autocomplete', ->  
     controller = $(this).attr('class').split(' ').pop()
-    console.log('#search-results-' + controller)
-    
     $(this).autocomplete( 
       source: '/business/' + controller + '/autocomplete'
       appendTo: $('#search-results-' + controller)     
@@ -50,7 +48,6 @@ $(document).ajaxComplete ->
         false
       select: (event, ui) ->
         idType = controller.slice(0, -1)
-        
         if controller == "jobs"
           $('.assigned-' + controller).append('<div class="user-tag"> <div class="name">' + ui.item.title  + '</div> <div class="delete-tag"> &times </div> </div>') 
         else
@@ -70,9 +67,10 @@ $(document).ajaxComplete ->
       if controller == "jobs"
         $('<li>').attr('ui-item-autocomplete' , item.value).append("<a>" + item.title + "</a>").appendTo ul 
       else
-        $('<li>').attr('ui-item-autocomplete', item.value).append("<a>" + item.full_name + "</a>").appendTo ul 
+        $('<li>').attr('ui-item-autocomplete', item.value).append("<a>" + item.full_name + "</a>").appendTo ul
     return
   return
+
 
 
   

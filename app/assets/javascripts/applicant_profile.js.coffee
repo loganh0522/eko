@@ -271,7 +271,6 @@ jQuery ->
 
 ########## Hidden Search Box #########
   $(document).on 'click', '.delete-tag', (event) -> 
-    
     valId = $(this).parent().data('id').toString()
     console.log(valId)
     if $(this).parent().data('kind') == 'user'
@@ -283,10 +282,19 @@ jQuery ->
     else
       return
 
-  
+  $(document).on 'click', '.select-item', (e) -> 
+    elementId = $(this).data('id')
+    $(this).nextAll('#select-box-field').val(elementId)
+    $(this).parent().parent().hide()
+    $(this).parent().parent().prev().find('.plain-text').html($(this).html() + '<span class="caret"></span>')
+    e.stopPropagation()
+    
+    
+
 
 
   $(document).on 'click', '.show-hidden-search-box', (e) ->
+    console.log('showing')
     $(this).next('.hidden-search-box').show()
     e.stopPropagation()
 
@@ -300,6 +308,7 @@ jQuery ->
 
   $(document).on 'click', '.insert-token', (event) ->
     element = document.querySelector("trix-editor")
+
     if $(this).attr('id') == "first-name"
       element.editor.insertHTML("<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.first_name}} </span>")
     else if $(this).attr('id') == "last-name" 
@@ -310,7 +319,7 @@ jQuery ->
       element.editor.insertHTML("<span contentEditable= 'false' class='class_one' style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{job.title}} </span>")
     else if $(this).attr('id') == "company-name" 
       element.editor.insertHTML("<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{company.name}} </span>")
-
+    $(this).parent().parent().hide()
 
   
   

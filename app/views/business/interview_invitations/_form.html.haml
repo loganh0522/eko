@@ -21,8 +21,8 @@
         .contain-2
           = f.label "Location"
           = f.text_field :location, id: "geocomplete2", label: "Address", autocomplete: "off", placeholder: "Enter the Address"
-      .form-row-3
-        .contain-1
+      .form-row
+        .contain-3
           .assign-to-row
             .title Assign Users (Team)
             .assign-user#user_ids_Block
@@ -32,49 +32,69 @@
               .hidden-search-box
                 = text_field_tag "", "", :class => 'ui-autocomplete-input users', :placeholder => 'Type a users name to assign', id: "autocomplete"
                 #search-results-users
-            .assigned-users
+                .assigned-users
+                  .user-tag{:data => {id: current_user.id, kind: "user"}}
+                    .name= current_user.full_name
+                    .delete-tag &times
               .user-tag{:data => {id: current_user.id, kind: "user"}}
                 .name= current_user.full_name
                 .delete-tag &times
-        .contain-2
+        .contain-3
           .assign-to-row
+            .title Add Candidates
             .assign-user#user_ids_Block
-              .title Add Candidates
               .show-hidden-search-box
                 .add-button-search
                   .glyphicon.glyphicon-plus
-              .hidden-search-box
+              .hidden-search-box#search-results-candidates
                 = text_field_tag "", "", :class => 'ui-autocomplete-input candidates', :placeholder => 'Type a users name to assign', id: "autocomplete"
-                #search-results-candidates
+                
             .assigned-candidates
+        .contain-3
+          .assign-to-row
+            .title Add Room
+            .assign-user#user_ids_Block
+              .show-hidden-search-box
+                .plain-text 
+                  No Room 
+                  .caret
+              .hidden-search-box
+                .select-box
+                  .select-item{data: {:id => ''}} No Room
+                  - current_company.rooms.each do |room|
+                    .select-item{data: {:id => room.id}}= room.name
+                  = f.hidden_field :room_id, id: "select-box-field"            
        
       .form-row-2
         .header
           .title Add Times    
           = link_to_add_fields "+ Add Time", f, :interview_times 
-      .form-row-2
+      .form-row
         .email-area
           .subject
             .title Subject
             .sender= f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false
           .email-variables
-            .show-hidden-search-box
-              .plain-text
-                Insert-Token
-            .hidden-search-box
-              .insert-tokens
-                .token#first-name Candidate First Name
-                .token#last-name Candidate Last Name
-                .token#full-name Candidate Full Name
-                .token#company-name Company Name
-
-            .show-hidden-search-box
-              .plain-text
-                Use E-mail Template
-            .hidden-search-box
-              .insert-tokens
-                - current_company.email_templates.each do |template|
-                  .token{data: {:body => template.body}}= template.title
+            .contain-2
+              .show-hidden-search-box
+                .plain-text
+                  Insert-Token
+                  .caret
+              .hidden-search-box
+                .insert-tokens
+                  .insert-token#first-name Candidate First Name
+                  .insert-token#last-name Candidate Last Name
+                  .insert-token#full-name Candidate Full Name
+                  .insert-token#company-name Company Name
+            .contain-2
+              .show-hidden-search-box
+                .plain-text
+                  Use E-mail Template
+                  .caret
+              .hidden-search-box
+                .insert-tokens
+                  - current_company.email_templates.each do |template|
+                    .insert-token{data: {:body => template.body}}= template.title
           .email-content
             = f.trix_editor :message, rows: 9
             / = f.text_area :message, :class => "tinymce", rows: 15, data: {behaviour: 'comment-body'}, placeholder: "Type Your Message", id: "message_Block"

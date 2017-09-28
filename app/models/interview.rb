@@ -25,12 +25,12 @@ class Interview < ActiveRecord::Base
   
   searchkick
 
-  def search_data
-    attributes.merge(
-      users: users.map(&:id),
-      candidates: candidates.map(&:id)
-    )
-  end
+  # def search_data
+  #   attributes.merge(
+  #     users: users.map(&:id),
+  #     candidates: candidates.map(&:id)
+  #   )
+  # end
 
   def month
     Date.parse(self.date).strftime("%B")

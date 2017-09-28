@@ -7,7 +7,7 @@
     .side-container
       = form_tag business_interview_invitations_path, :method => 'get', id: "search-form" do
         = render 'filters'
-    .main-container#task-container
+    .main-container
       = render 'business/interview_invitations/interview_invitations'
 
 .modal#basic-form-modal

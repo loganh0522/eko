@@ -1,6 +1,11 @@
 #interview
-  .box-row
-    .title= "#{interview.kind}"
+  .header
+    - if interview.job == nil
+      .title= "#{interview.kind}"
+      .sent= "Sent: #{time_ago_in_words(interview.created_at)} ago"
+    - else
+      .title= "#{interview.kind} for #{interview.job.title}"
+      .sent= "Sent: #{time_ago_in_words(interview.created_at)} ago"
   .box-row
     .title Pending Candidates: 
     .content 
