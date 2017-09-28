@@ -59,8 +59,7 @@ module OutlookWrapper
       graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/beta/',
                                  cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                  &callback)
-      
-      binding.pry
+
       @response = graph.service.post(path, data.to_json)
 
       user.outlook_token.update_attributes(subscription_id: @response['id'],  subscription_expiration: @response["expiration_date_time"])
