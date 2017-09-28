@@ -49,7 +49,7 @@ module OutlookWrapper
       path = 'subscriptions'
       
       data = {
-        changeType: "created, updated",
+        changeType: "created",
         notificationUrl: ENV['OUTLOOK_WEBHOOK'],
         resource: "me/mailFolders('SentItems')/messages",
         resource: "me/mailFolders('Inbox')/messages",
