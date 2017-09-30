@@ -23,7 +23,7 @@ class Business::JobsController < ApplicationController
     where[:status] = params[:status] if params[:status].present?
     where[:kind] = params[:kind] if params[:kind].present?
 
-    @jobs = Job.search(query, where: where, fields: [:title]).to_a
+    @jobs = Job.search(query, where: where, fields: [{title: :word_start}]).to_a
     
     respond_to do |format|
       format.html
@@ -117,6 +117,7 @@ class Business::JobsController < ApplicationController
         @jobs = @company.open_jobs
         format.js
       else
+        @jobs = @company.open_jobs
         format.js
       end
     end

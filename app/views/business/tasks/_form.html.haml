@@ -40,10 +40,9 @@
     .comment-area-footer
       / = link_to "Delete", business_task_path(@task), remote: true, :method => :delete, class: 'btn border-button2'
       = f.submit @task.new_record? ? "+ Create Task" : "Update Task", class: "btn submit-button", id: "submit-comment-btn"
-      - if @task.new_record? 
+      - if @taskable.class == Candidate
         .btn.border-button2.hide-can-form Cancel
       - else
-        = link_to "Cancel", '#', class: "remove_form btn border-button2"
-      / .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+        .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
 
 

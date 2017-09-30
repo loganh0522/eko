@@ -1,8 +1,12 @@
 .form-row-2
-  .assign_to_row
-    .assign-user
-      .title Assign Users (Team)
-      = text_field_tag "", "", :class => 'ui-autocomplete-input users', :placeholder => 'Type a users name to assign', id: "autocomplete"
-      %div#search-results
+  .show-hidden-search-box
+    .plain-text
+      Assign Users
+      .caret
+  .hidden-search-box
+    = text_field_tag "", "", :class => 'ui-autocomplete-input users', :placeholder => 'Type a users name to assign', id: "autocomplete"
+    #search-results-users
     .assigned-users
-      .title Assigned Users: 
+      .user-tag{:data => {id: current_user.id, kind: "user"}}
+        .name= current_user.full_name
+        .delete-tag &times

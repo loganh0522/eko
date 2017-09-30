@@ -11,7 +11,7 @@ class Message < ActiveRecord::Base
       @email = Mail.new(to: @recipient.email, from: current_user.email, subject: params[:message][:subject], body: params[:body], content_type: "text/html")
       GoogleWrapper::Gmail.send_message(@email, current_user, message)
     elsif self.user.outlook_token.present?
-      OutlookWrapper::Mail.send_message(self.user, self.subject, self.body, self.messageable.email)
+      OutlookWrapper::Mail.send_message(self.user, self.id, self.subject, self.body, self.messageable.email)
     else 
       AppMailer.send_applicant_message(self.candidate.token, self.body, self.job, self.candidate.email, self.user.company).deliver
     end

@@ -13,8 +13,14 @@
       .title Subject
       .sender= f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false, class: "subject_Block"
     .email-variables
-      Template:
-      = select_tag "Templates", options_for_select(current_company.email_templates.all.map{|m| [m.title, m.id, data: {:body => m.body}]}), :prompt => "Select E-mail Templates", data: {behaviour: 'saved-template-select'}
+      .show-hidden-search-box
+        .plain-text
+          Use E-mail Template
+          .caret
+      .hidden-search-box
+        .insert-tokens
+          - current_company.email_templates.each do |template|
+            .insert-token{data: {:body => template.body}}= template.title
     .email-content
       = f.trix_editor :body, rows: 8, data: {behaviour: 'comment-body'}, id: "body_Block"
       / = f.text_area :body, :class => "tinymce", rows: 15, data: {behaviour: 'comment-body'}, placeholder: "Type Your Message", id: "body_Block"

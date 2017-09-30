@@ -24,6 +24,10 @@ class InboundEmailsController < ApplicationController
     else 
       head 200 
     end
+
+    if params[:value].present? 
+      params[:value][:subscription]
+    end
   end
 
 end
