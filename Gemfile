@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.1.2'
+ruby '2.4.2'
 
-gem 'rails', '4.2.4'
+gem 'rails', '4.2.8'
 gem 'pg', '0.20'
 gem 'puma', '~> 3.9'
 
@@ -70,7 +70,7 @@ gem 'activerecord-session_store'
 
 gem 'liquid', '~> 3.0', '>= 3.0.6'
 gem 'tinymce-rails', '~> 4.5'
-# gem 'sidekiq'
+gem 'sidekiq'
 
 
 
