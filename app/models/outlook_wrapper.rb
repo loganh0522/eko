@@ -123,9 +123,9 @@ module OutlookWrapper
                                  cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                  &callback)
       
-      graph.service.delete('subscriptions/dbc3532d-df27-46ac-b28e-1d21099abc9a')
+      # graph.service.delete('subscriptions/dbc3532d-df27-46ac-b28e-1d21099abc9a')
       
-      # @message = graph.me.mail_folders.find('inbox').messages.first.body.content
+      @message = graph.me.mail_folders.find('inbox').messages.first.body.content
       # graph.me.messages.find(id)
       
     end
