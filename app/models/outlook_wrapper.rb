@@ -125,6 +125,7 @@ module OutlookWrapper
       
       # graph.service.delete('subscriptions/dbc3532d-df27-46ac-b28e-1d21099abc9a')
       
+      binding.pry
       @message = graph.me.mail_folders.find('inbox').messages.first.body.content
       # graph.me.messages.find(id)
       
