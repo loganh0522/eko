@@ -62,7 +62,7 @@ class Business::UsersController < ApplicationController
       user_id: current_user.id
       )
 
-    # OutlookWrapper::User.create_subscription(current_user)
+    OutlookWrapper::User.create_subscription(current_user)
     redirect_to business_user_path(current_user)
   end
 
@@ -91,7 +91,7 @@ class Business::UsersController < ApplicationController
     @user = User.find(1)
     @user.password = params[:password]
     @user.save
-    binding.pry
+
     respond_to do |format| 
       format.js
     end

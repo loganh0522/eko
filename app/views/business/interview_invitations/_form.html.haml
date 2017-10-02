@@ -61,9 +61,11 @@
               .hidden-search-box
                 .select-box
                   .select-item{data: {:id => ''}} No Room
-                  - current_company.rooms.each do |room|
-                    .select-item{data: {:id => room.id}}= room.name
-                  = f.hidden_field :room_id, id: "select-box-field"            
+                  - if current_company.rooms.present?
+                    - current_company.rooms.each do |room|
+                      .select-item{data: {:id => room.id}}= room.name
+                    = f.hidden_field :room_id, id: "select-box-field"
+ 
        
       .form-row-2
         .header
