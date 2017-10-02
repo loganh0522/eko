@@ -30,6 +30,7 @@ class InboundEmailsController < ApplicationController
       @msgId = params[:value].first[:resourceData][:id]
       
       @message = OutlookWrapper::Mail.create_message_object_from_outlook(@subId, @msgId)
+      head 202 
     end
   end
 

@@ -4,7 +4,7 @@ class Message < ActiveRecord::Base
   belongs_to :conversation
   validates_presence_of :subject, :body
 
-  after_create :send_email
+  # after_create :send_email
 
   def send_email
     if self.user.google_token.present? 

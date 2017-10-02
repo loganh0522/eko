@@ -176,10 +176,10 @@ module OutlookWrapper
           if @content.include?("<div class=gmail_extra>") 
             @content = @content.split("<div dir=ltr>")[1]
             @content = @content.split("<div class=gmail_extra>")[0]
-            @msg = "<div>" + @content
+            @msg = @content
           else
             @content = @content.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
-            @msg = "<p>" + @content
+            @msg = @content
           end
           Message.create(conversation_id: @candidate.conversation.id, 
             body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
