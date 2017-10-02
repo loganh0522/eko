@@ -26,7 +26,10 @@ class InboundEmailsController < ApplicationController
     end
 
     if params[:value].present? 
-      params[:value][:subscription]
+      @subId = params[:value].first[:subscriptionId]
+      @msgId = params[:value].first[:resourceData][:id]
+      
+      @message = OutlookWrapper::Mail.create_message_object_from_outlook(@subId, @msgId)
     end
   end
 

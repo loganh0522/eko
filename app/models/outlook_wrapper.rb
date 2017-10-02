@@ -51,8 +51,7 @@ module OutlookWrapper
       data = {
         changeType: "created",
         notificationUrl: ENV['OUTLOOK_WEBHOOK'],
-        resource: "me/mailFolders('SentItems')/messages",
-        resource: "me/mailFolders('Inbox')/messages",
+        resource: "me/messages",
         expirationDateTime: Time.now + 4230.minutes,
         clientState: "subscription-identifier"
       }
@@ -124,12 +123,11 @@ module OutlookWrapper
                                  cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                  &callback)
       
-      # graph.service.delete('subscriptions/dbc3532d-df27-46ac-b28e-1d21099abc9a')
+      # graph.service.delete('subscriptions/8e61ed0c-201f-48eb-8393-f45229416a0e')
 
       binding.pry
       @message = graph.me.mail_folders.find('inbox').messages.first.body.content
       # graph.me.messages.find(id)
-      
     end
     # #outlook
     # if @message.body.content_type == "text"
@@ -159,8 +157,6 @@ module OutlookWrapper
     # msg = msg.split("<p>")[1..-2].join()
     #  "<p>" + msg
 
-
-
     def create_message_object_from_outlook(subId, msgId)
       @user = OutlookToken.where(subscription_id: subId).first.user
       
@@ -177,22 +173,25 @@ module OutlookWrapper
                                  cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                  &callback)
       
-      @message = graph.me.messages.find(id)
+      @message = graph.me.messages.find(msgId)
+      @subject = @message.subject
+      @threadId = @message.conversation_id
       @user_email = graph.me.user_principal_name
       @company = user.company
+
       @sender = @message.sender.email_address.address
 
-      msg =  msg.body.content.gsub("\r\n", "")
-      msg = msg.gsub(/\"/, "")
+      @content =  @message.body.content.gsub("\r\n", "")
+      @content = @content.gsub(/\"/, "")
 
       if @sender == @user_email #sent from user
         @recipient = @message.to_recipients.first.email_address.address
         @candidate = Candidate.where(company_id: @company.id, email: @recipient).first
         
         if @candidate.present? 
-          msg = msg.gsub("\t", "")
-          msg = msg.split("<p>")[1..-2].join()
-          @msg = "<p>" + msg
+          @content = @content.gsub("\t", "")
+          @content = @content.split("<p>")[1..-2].join()
+          @msg = "<p>" + @content 
         else
           return nil
         end
@@ -201,14 +200,17 @@ module OutlookWrapper
         @candidate = Candidate.where(company_id: @company.id, email: @recipient).first
         
         if @candidate.present?
-          if msg.include?("<div class=gmail_extra>") 
-            msg = msg.split("<div dir=ltr>")[1]
-            msg = msg.split("<div class=gmail_extra>")[0]
-            @msg = "<div>" + msg
+          if @content.include?("<div class=gmail_extra>") 
+            @content = @content.split("<div dir=ltr>")[1]
+            @content = @content.split("<div class=gmail_extra>")[0]
+            @msg = "<div>" + @content
           else
-            msg = msg.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
-            @msg = "<p>" + @msg
+            @content = @content.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
+            @msg = "<p>" + @content
           end
+          Message.create(conversation_id: @candidate.conversation_id, 
+            body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
+            candidate_id: @candidate.id)
         else
           return nil
         end
