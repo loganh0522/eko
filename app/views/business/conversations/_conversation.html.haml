@@ -17,7 +17,8 @@
             .time= time_ago_in_words(message.created_at)                 
       .activity-body-body  
         .comment-body
-          - if message.messageable.user.present?
-            = simple_format(Liquid::Template.parse(message.body).render('recipient' => message.messageable.user, 'company' => @current_company))
-          - else
-            = simple_format(Liquid::Template.parse(message.body).render('recipient' => message.messageable, 'company' => @current_company))
+          - if message.messageable_type.present?
+            - if message.messageable.user.present?
+              = simple_format(Liquid::Template.parse(message.body).render('recipient' => message.messageable.user, 'company' => @current_company))
+            - else
+              = simple_format(Liquid::Template.parse(message.body).render('recipient' => message.messageable, 'company' => @current_company))
