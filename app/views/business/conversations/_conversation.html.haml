@@ -22,3 +22,5 @@
               = simple_format(Liquid::Template.parse(message.body).render('recipient' => message.messageable.user, 'company' => @current_company))
             - else
               = simple_format(Liquid::Template.parse(message.body).render('recipient' => message.messageable, 'company' => @current_company))
+          - else
+            = message.body.html_safe
