@@ -22,7 +22,7 @@ class InboundEmailsController < ApplicationController
     if params[:validationToken].present? 
       render text: params[:validationToken]
     else 
-      head 200 
+      head 202
     end
 
     if params[:value].present? 
