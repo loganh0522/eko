@@ -124,8 +124,6 @@ module OutlookWrapper
                                  &callback)
       
       # graph.service.delete('subscriptions/8e61ed0c-201f-48eb-8393-f45229416a0e')
-
-      binding.pry
       @message = graph.me.mail_folders.find('inbox').messages.first.body.content
       # graph.me.messages.find(id)
     end
@@ -151,8 +149,8 @@ module OutlookWrapper
       @threadId = @message.conversation_id
       @user_email = graph.me.user_principal_name
       @company = @user.company
-
       @sender = @message.sender.email_address.address
+
 
       @content =  @message.body.content.gsub("\r\n", "")
       @content = @content.gsub(/\"/, "")
@@ -164,14 +162,26 @@ module OutlookWrapper
         if @candidate.present? 
           @content = @content.gsub("\t", "")
           @content = @content.split("<p>")[1..-2].join()
-          @msg = "<p>" + @content 
+          @msg = @content 
+
+          if @candidate.conversation.present?
+            Message.create(conversation_id: @candidate.conversation.id, 
+              body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
+              user_id: @user.id)
+          else 
+            Conversation.create(candidate_id: @candidate.id, company_id: @company.id)   
+            @conversation = Candidate.find(@candidate.id).conversation
+            Message.create(conversation_id: @conversation.id, 
+              body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
+              @user.id)
+          end
         else
           return nil
         end
+
       else #sent from Candidate
         @recipient = @message.sender.email_address.address
         @candidate = Candidate.where(company_id: @company.id, email: @recipient).first
-        
         if @candidate.present?
           if @content.include?("<div class=gmail_extra>") 
             @content = @content.split("<div dir=ltr>")[1]
@@ -189,7 +199,6 @@ module OutlookWrapper
           else 
             Conversation.create(candidate_id: @candidate.id, company_id: @company.id)   
             @conversation = Candidate.find(@candidate.id).conversation
-
             Message.create(conversation_id: @conversation.id, 
               body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
               candidate_id: @candidate.id)
