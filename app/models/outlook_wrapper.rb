@@ -173,7 +173,7 @@ module OutlookWrapper
             @conversation = Candidate.find(@candidate.id).conversation
             Message.create(conversation_id: @conversation.id, 
               body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
-              @user.id)
+              user_id: @user.id)
           end
         else
           return nil
@@ -354,98 +354,3 @@ module OutlookWrapper
     end
   end
 end
-
-# #outlook
-# if @message.body.content_type == "text"
-# else
-#   ActionView::Base.full_sanitizer.sanitize(graph.me.messages.find(id)
-#     .body.content).split("Hey TalemtWiz Room")[0]
-# end
-#inbox emails 
-# msg =  msg.gsub("\r\n", "")
-# msg = msg.gsub(/\"/, "")
-# if msg.include?("<div class=gmail_extra>") 
-# msg = msg.split("<div dir=ltr>")[1]
-# msg = msg.split("<div class=gmail_extra>")[0]
-# "<div>" + msg
-# else
-# msg = msg.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
-# "<p>" + msg
-# end
-
-
-# sent emails
-# if @message.content_type == "text"
-# else 
-# msg = msg.gsub("\r\n", "")
-# msg = msg.gsub(/\"/, "")
-# msg = msg.gsub("\t", "")
-# msg = msg.split("<p>")[1..-2].join()
-#  "<p>" + msg
-
-#graph.service.delete('subscriptions/dbc3532d-df27-46ac-b28e-1d21099abc9a')
-
-
-# @create = graph.me.send_mail(
-#   "message" => {
-#     "subject" => "TalentWiz Test", 
-#     "body" => {
-#       "content_type" => "Text", 
-#       "content" => "This is clearly working now"
-#     }, 
-#     "to_recipients" => [
-#       {
-#         "email_address" => {
-#           "address" => "houston@talentwiz.ca"
-#         }
-#       }
-#     ]
-#   })
-
-# @create = graph.me.messages.create(
-#   {
-#     "subject" => "TalentWiz Test", 
-#     "body" => {
-#       "content_type" => "Text", 
-#       "content" => "This is clearly working now"
-#     }, 
-#     "to_recipients" => [
-#       {
-#         "email_address" => {
-#           "address" => "houston@talentwiz.ca"
-#         }
-#       }
-#     ]
-#   })
-
-# id1 graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH2AAAA").body.content.split("dir=\"ltr\">")[1].split('</div>')[0]
-# id2 graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH3AAAA").body.content.split("dir=\"ltr\">")[1].split('</div>')[0]
-# id3 graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH4AAAA").body.content.split("dir=\"ltr\">")[1].split('</div>')[0]
-# id4 graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH5AAAA").body.content.split("dir=\"ltr\">")[1].split('</div>')[0]
-# ActionView::Base.full_sanitizer.sanitize(graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH3AAAA").body.content)
-# ActionView::Base.full_sanitizer.sanitize(graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH5AAAA").body.content)
-# dad-hockley "AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjIAAAE="
-# email-mom ActionView::Base.full_sanitizer.sanitize(graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH-AAAA").body.content)
-
-# ActionView::Base.full_sanitizer.sanitize(graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjIAAAE=").body.content)
-
-
-# send from outlook
-# ActionView::Base.full_sanitizer.sanitize(graph.me.messages.find('inbox').messages.first.body.content)
-
-# @message.body.content.split("dir=\"ltr\">")[1].split('</div>')[0]
-# @messages = graph.me.mail_folders.find('inbox').messages.order_by('receivedDateTime desc')
-# ActionView::Base.full_sanitizer.sanitize(graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA7rA2VAAAA").body.content.split("Hey Logan")[0]).split("On" + date)[0]
-#gmail
-# if @message.content_type == "text"
-#   @message.body.content.split("Hey Logan")[0].split("Sent from")[0]
-# else
-#   ActionView::Base.full_sanitizer.sanitize(graph.me.messages.find(id).body.content.split("Hey Logan")[0]).split("On " + date)[0]
-# Get Email Address @message.to_recipients.first.email_address
-# end
-
-# msg.split("<html><head><meta http-equiv= Content-Type  content= text/html; charset=utf-8 ><meta content= text/html; charset=iso-8859-1 ><style type= text/css  style= display:none ><!--p\t{margin-top:0;\tmargin-bottom:0}--></style></head><body dir= ltr ><div id= divtagdefaultwrapper  dir= ltr  style= font-size:12pt; color:#000000; font-family:Calibri,Helvetica,sans-serif >")[1]
-# msg.split("<div id= Signature >")[0]
-# msg.gsub("</body>", "")
-# msg.gsub("<body>", "")
-# msg.gsub("</html>", "")
