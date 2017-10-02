@@ -9,7 +9,10 @@
           /   .circle-img
           /     %img(src="/tmp/little-man.png")     
           .contain
-            = "#{message.user.full_name} sent a message"
+            - if message.candidate_id.present?
+              "#{message.conversation.candidate.full_name} sent a message"
+            - else 
+              = "#{message.user.full_name} sent a message"
             %br
             .time= time_ago_in_words(message.created_at)                 
       .activity-body-body  
