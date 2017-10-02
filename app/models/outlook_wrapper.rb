@@ -181,9 +181,19 @@ module OutlookWrapper
             @content = @content.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
             @msg = @content
           end
-          Message.create(conversation_id: @candidate.conversation.id, 
-            body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
-            candidate_id: @candidate.id)
+          
+          if @candidate.conversation.present?
+            Message.create(conversation_id: @candidate.conversation.id, 
+              body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
+              candidate_id: @candidate.id)
+          else 
+            Conversation.create(candidate_id: @candidate.id, company_id: @company.id)   
+            @conversation = Candidate.find(@candidate.id).conversation
+
+            Message.create(conversation_id: @conversation.id, 
+              body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
+              candidate_id: @candidate.id)
+          end
         else
           return nil
         end

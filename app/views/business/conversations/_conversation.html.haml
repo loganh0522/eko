@@ -3,14 +3,18 @@
     .comment
       .comment-header
         .details
-          / - if message.user.user_avatar.present? 
-          /   = image_tag message.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
-          / - else 
-          /   .circle-img
-          /     %img(src="/tmp/little-man.png")     
+          - if message.candidate_id.present?
+            .circle-img
+              %img(src="/tmp/little-man.png")
+          - else
+            - if message.user.user_avatar.present? 
+              = image_tag message.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
+            - else 
+              .circle-img
+                %img(src="/tmp/little-man.png")     
           .contain
             - if message.candidate_id.present?
-              "#{message.conversation.candidate.full_name} sent a message"
+              = "#{message.conversation.candidate.full_name} sent a message"
             - else 
               = "#{message.user.full_name} sent a message"
             %br
@@ -23,4 +27,4 @@
             - else
               = simple_format(Liquid::Template.parse(message.body).render('recipient' => message.messageable, 'company' => @current_company))
           - else
-            = message.body.html_safe
+            = simple_format(message.body)

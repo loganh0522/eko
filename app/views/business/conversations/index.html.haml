@@ -20,10 +20,14 @@
             .details
               .header
                 .name= conversation.candidate.full_name
-                .date= conversation.messages.last.created_at.strftime("%b %d")
+              
               .body
-                .from= "#{conversation.messages.last.user.first_name}:" 
-                .mess= simple_format(conversation.messages.last.body)
+                - if conversation.messages.first.candidate_id.present?
+                  .from= "#{conversation.candidate.first_name}: " 
+                  .mess= simple_format(conversation.messages.first.body)
+                - else 
+                  .from= "#{conversation.messages.first.user.first_name}: " 
+                  .mess= simple_format(conversation.messages.first.body)
     - else
       .not-present-container 
         %p There are currently no conversations
