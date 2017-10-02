@@ -181,7 +181,7 @@ module OutlookWrapper
             @content = @content.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
             @msg = "<p>" + @content
           end
-          Message.create(conversation_id: @candidate.conversation_id, 
+          Message.create(conversation_id: @candidate.conversation.id, 
             body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
             candidate_id: @candidate.id)
         else
