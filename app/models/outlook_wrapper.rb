@@ -138,7 +138,7 @@ module OutlookWrapper
       end
 
       callback = Proc.new do |r| 
-        r.headers['Authorization'] = "Bearer #{user.outlook_token.access_token}"
+        r.headers['Authorization'] = "Bearer #{@user.outlook_token.access_token}"
         r.headers['X-AnchorMailbox'] = @user.email
       end
 
