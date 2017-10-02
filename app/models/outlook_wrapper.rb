@@ -129,35 +129,8 @@ module OutlookWrapper
       @message = graph.me.mail_folders.find('inbox').messages.first.body.content
       # graph.me.messages.find(id)
     end
-    # #outlook
-    # if @message.body.content_type == "text"
-    # else
-    #   ActionView::Base.full_sanitizer.sanitize(graph.me.messages.find(id)
-    #     .body.content).split("Hey TalemtWiz Room")[0]
-    # end
-    #inbox emails 
-    # msg =  msg.gsub("\r\n", "")
-    # msg = msg.gsub(/\"/, "")
-    # if msg.include?("<div class=gmail_extra>") 
-    # msg = msg.split("<div dir=ltr>")[1]
-    # msg = msg.split("<div class=gmail_extra>")[0]
-    # "<div>" + msg
-    # else
-    # msg = msg.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
-    # "<p>" + msg
-    # end
-    
 
-    # sent emails
-    # if @message.content_type == "text"
-    # else 
-    # msg = msg.gsub("\r\n", "")
-    # msg = msg.gsub(/\"/, "")
-    # msg = msg.gsub("\t", "")
-    # msg = msg.split("<p>")[1..-2].join()
-    #  "<p>" + msg
-
-    def create_message_object_from_outlook(subId, msgId)
+    def self.create_message_object_from_outlook(subId, msgId)
       @user = OutlookToken.where(subscription_id: subId).first.user
       
       if @user.outlook_token.expired?
