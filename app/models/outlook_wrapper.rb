@@ -150,7 +150,7 @@ module OutlookWrapper
       @subject = @message.subject
       @threadId = @message.conversation_id
       @user_email = graph.me.user_principal_name
-      @company = user.company
+      @company = @user.company
 
       @sender = @message.sender.email_address.address
 
