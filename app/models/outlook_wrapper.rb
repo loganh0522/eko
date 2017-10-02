@@ -134,12 +134,12 @@ module OutlookWrapper
       @user = OutlookToken.where(subscription_id: subId).first.user
       
       if @user.outlook_token.expired?
-        @user.outlook_token.refresh!(user)
+        @user.outlook_token.refresh!(@user)
       end
 
       callback = Proc.new do |r| 
         r.headers['Authorization'] = "Bearer #{user.outlook_token.access_token}"
-        r.headers['X-AnchorMailbox'] = user.email
+        r.headers['X-AnchorMailbox'] = @user.email
       end
 
       graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0/',
@@ -335,6 +335,34 @@ module OutlookWrapper
     end
   end
 end
+
+# #outlook
+# if @message.body.content_type == "text"
+# else
+#   ActionView::Base.full_sanitizer.sanitize(graph.me.messages.find(id)
+#     .body.content).split("Hey TalemtWiz Room")[0]
+# end
+#inbox emails 
+# msg =  msg.gsub("\r\n", "")
+# msg = msg.gsub(/\"/, "")
+# if msg.include?("<div class=gmail_extra>") 
+# msg = msg.split("<div dir=ltr>")[1]
+# msg = msg.split("<div class=gmail_extra>")[0]
+# "<div>" + msg
+# else
+# msg = msg.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
+# "<p>" + msg
+# end
+
+
+# sent emails
+# if @message.content_type == "text"
+# else 
+# msg = msg.gsub("\r\n", "")
+# msg = msg.gsub(/\"/, "")
+# msg = msg.gsub("\t", "")
+# msg = msg.split("<p>")[1..-2].join()
+#  "<p>" + msg
 
 #graph.service.delete('subscriptions/dbc3532d-df27-46ac-b28e-1d21099abc9a')
 
