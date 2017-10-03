@@ -166,7 +166,7 @@ module OutlookWrapper
               @content =  @message.body.content.gsub("\r\n", "")
               @content = @content.gsub(/\"/, "")
               @content = @content.gsub("\t", "")
-              @content = @content.split("<p>")
+              @content = @content.split("<p>")[1..-2].join()
             end
             
             @msg = @content
