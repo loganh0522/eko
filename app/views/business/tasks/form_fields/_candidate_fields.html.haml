@@ -1,17 +1,35 @@
-.form-row-2
-  .assign_to_row
-    .assign-user
-      .title Job
-      = text_field_tag "", "", :class => 'ui-autocomplete-input jobs', :placeholder => 'Type a users name to assign', id: "autocomplete" 
-      %div#search-results
-    .assigned-jobs
-      .title Job:
+.form-row
+  .contain-3
+    .assign-to-row
+      .title Add Job
+      .assign-user#user_ids_Block
+        .show-hidden-search-box
+          .plain-text 
+            No Job Selected
+            .caret
+        .hidden-search-box
+          .select-box
+            .select-item{data: {:id => ''}} No Job Selected
+            - if current_company.open_jobs.present?
+              - @taskable.applications.each do |app|
+                .select-item{data: {:id => app.job.id}}= app.job.title
+              = hidden_field_tag :job_id, value: '', id: "select-box-field"
 
-.form-row-2
-  .assign_to_row
-    .assign-user
+  .contain-3
+    .assign-to-row
       .title Assign Users (Team)
-      = text_field_tag "", "", :class => 'ui-autocomplete-input users', :placeholder => 'Type a users name to assign', id: "autocomplete"
-      %div#search-results
-    .assigned-users
-      .title Assigned Users: 
+      .assign-user#user_ids_Block
+        .show-hidden-search-box
+          .add-button-search
+            .glyphicon.glyphicon-plus
+        .hidden-search-box
+          = text_field_tag "", "", :class => 'ui-autocomplete-input users', :placeholder => 'Type a users name to assign', id: "autocomplete"
+          #search-results-users
+          .assigned-users
+            .user-tag{:data => {id: current_user.id, kind: "user"}}
+              .name= current_user.full_name
+              .delete-tag &times
+      .user-tag{:data => {id: current_user.id, kind: "user"}}
+        .name= current_user.full_name
+        .delete-tag &times
+

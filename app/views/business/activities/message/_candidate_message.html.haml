@@ -1,0 +1,11 @@
+.activity-body-header
+  .details
+    .circle-img
+      %img(src="/tmp/little-man.png")
+    .contain
+      = "#{activity.trackable.conversation.candidate.full_name} sent a message"
+      %br
+      .time= "#{time_ago_in_words(activity.created_at)} ago"                 
+.activity-body-body  
+  .comment-body
+    = simple_format(activity.trackable.body)

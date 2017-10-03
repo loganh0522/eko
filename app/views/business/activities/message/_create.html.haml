@@ -2,20 +2,7 @@
   .icon
     .glyphicon.glyphicon-envelope
   .activity-body
-    .activity-body-header
-      .details
-        - if activity.user.user_avatar.present?
-          = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
-        - else 
-          .circle-img= activity.user.first_name.first.capitalize
-        .content
-          = "#{activity.user.first_name} #{activity.user.last_name} sent a message to"
-          - if activity.trackable.messageable.manually_created == true
-            = "#{activity.trackable.messageable.full_name}"
-          - else 
-            = "#{activity.trackable.messageable.user.full_name}"
-          %br
-          .time= "#{time_ago_in_words(activity.created_at)} ago" 
-    .activity-body-body
-      .comment-body
-        = simple_format(activity.trackable.body)
+    - if activity.trackable.candidate_id.present?
+      = render 'business/activities/message/candidate_message', activity: activity
+    - else 
+      = render 'business/activities/message/user_message', activity: activity

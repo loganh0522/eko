@@ -1,4 +1,5 @@
-.applicant-filters
+%h4#filter-header Filters
+= form_tag business_activities_path, :method => 'get', id: "search-form" do
   .filter-container
     .filter-header
       %h4 Activity Type
@@ -6,29 +7,58 @@
       .glyphicon.glyphicon-plus
     .filter-body
       %ul
-        %li 
-          = check_box_tag "", false, false, class: 'filter'
+        %li
+          = check_box_tag "kind", "comments", false, class: 'filter'
           .filter-title Comments
         %li
-          = check_box_tag "", false, false, class: 'filter'
-          .filter-title Scorecards
-        %li
-          = check_box_tag "", false, false, class: 'filter'
+          = check_box_tag "kind", "closed", false, class: 'filter'
           .filter-title Messages
         %li
           = check_box_tag "", false, false, class: 'filter'
-          .filter-title Moved Stages
-        %li
-          = check_box_tag "", false, false, class: 'filter'
           .filter-title Scheduled Interview
+        %li
+          = check_box_tag "kind", "application_created", false, class: 'filter'
+          .filter-title Applied
+        %li
+          = check_box_tag "kind", "application_move_stage", false, class: 'filter'
+          .filter-title Moved Stages 
+        %li
+          = check_box_tag "kind", "application_created", false, class: 'filter'
+          .filter-title Applied
   .filter-container
     .filter-header
-      %h4 Job Activity
+      %h4 Job Applied To:
       .glyphicon.glyphicon-minus
       .glyphicon.glyphicon-plus
     .filter-body 
       %ul
-        - current_company.company_jobs.each do |job| 
+        - current_company.open_jobs.each do |job| 
           %li
-            = check_box_tag "job_title[]", "#{job}", false, class: 'filter'
+            = check_box_tag "job_title[]", "#{job.id}", false, class: 'filter'
             .filter-title #{job}
+  
+  .filter-container 
+    .filter-header
+      %h4 Date 
+      .glyphicon.glyphicon-minus
+      .glyphicon.glyphicon-plus
+    .filter-body
+      %ul
+        %li 
+          = check_box_tag "date_applied", "2 years", false, class: 'filter'
+          .filter-title All 
+        %li
+          = check_box_tag "date_applied", (Time.now - 2.weeks).strftime('%Y-%m-%d'), false, class: 'filter'
+          .filter-titleLast Last 2 weeks
+        %li 
+          = check_box_tag "date_applied", (Time.now - 1.month).strftime('%Y-%m-%d'), false, class: 'filter'
+          .filter-title Last Month
+        %li
+          = check_box_tag "date_applied", (Time.now - 3.months).strftime('%Y-%m-%d'), false, class: 'filter'
+          .filter-title Last 3 Months
+        %li 
+          = check_box_tag "date_applied", (Time.now - 1.year).strftime('%Y-%m-%d'), false, class: 'filter'
+          .filter-title Last Year
+
+
+

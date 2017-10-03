@@ -1,0 +1,18 @@
+.activity-body-header
+  .details
+    - if activity.user.user_avatar.present?
+      = image_tag activity.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
+    - else 
+      .circle-img= activity.user.first_name.first.capitalize
+    .content
+      = "#{activity.user.first_name} #{activity.user.last_name} sent a message to"
+      - if activity.trackable.messageable.manually_created == true
+        = "#{activity.trackable.messageable.full_name}"
+      - else 
+        = "#{activity.trackable.messageable.user.full_name}"
+      %br
+      .time= "#{time_ago_in_words(activity.created_at)} ago" 
+
+.activity-body-body
+  .comment-body
+    = simple_format(activity.trackable.body)

@@ -1,0 +1,13 @@
+.comment
+  .comment-header
+    .details
+      .circle-img
+        %img(src="/tmp/little-man.png")
+      .contain
+        = "#{message.conversation.candidate.full_name} sent a message"
+        .subject= "#{message.subject}"
+        %br
+        .time= time_ago_in_words(message.created_at)                 
+  .activity-body-body  
+    .comment-body
+      = simple_format(message.body)

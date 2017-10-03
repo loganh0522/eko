@@ -65,6 +65,34 @@ module OutlookWrapper
       user.outlook_token.update_attributes(subscription_id: @response['id'],  subscription_expiration: @response["expiration_date_time"])
       true
     end
+
+    def self.update_subscription(user)
+      if user.outlook_token.expired?
+        user.outlook_token.refresh!(user)
+      end
+
+      @token = user.outlook_token.access_token
+      
+      callback = Proc.new do |r| 
+        r.headers['Authorization'] = "Bearer #{@token}"
+        r.headers['Content-Type'] = 'application/json'
+      end
+
+      path = 'subscriptions/9f6b01db-3d9c-4d51-bf77-34ee458f26b2'
+      
+      data = {
+        expirationDateTime: Time.now + 4230.minutes,
+      }
+      
+      graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/beta/',
+                                 cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
+                                 &callback)
+
+      @response = graph.service.patch(path, data.to_json)
+
+      user.outlook_token.update_attributes(subscription_id: @response['id'],  subscription_expiration: @response["expiration_date_time"])
+      true
+    end
   end
 
   class Mail
@@ -166,7 +194,7 @@ module OutlookWrapper
               @content =  @message.body.content.gsub("\r\n", "")
               @content = @content.gsub(/\"/, "")
               @content = @content.gsub("\t", "")
-              @content = @content.split("<p>")[1..-2].join()
+              @content = @content.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
             end
             
             @msg = @content
@@ -197,13 +225,14 @@ module OutlookWrapper
             @content = @message.body.content.gsub("\r\n", "<br>")
             @content = @message.body.content.gsub("<br><br><br>", "")
           else
+            @content =  @message.body.content.gsub("\r\n", "")
+            @content = @content.gsub(/\"/, "")
+            
             if @content.include?("<div class=gmail_extra>") 
               @content = @content.split("<div dir=ltr>")[1]
               @content = @content.split("<div class=gmail_extra>")[0]
               @msg = @content
             else
-              @content =  @message.body.content.gsub("\r\n", "")
-              @content = @content.gsub(/\"/, "")
               @content = @content.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
               @msg = @content
             end
