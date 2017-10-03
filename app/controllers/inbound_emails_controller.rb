@@ -22,15 +22,13 @@ class InboundEmailsController < ApplicationController
     if params[:validationToken].present? 
       render text: params[:validationToken]
     else 
-      head 202
-    end
+      head 200
 
-    if params[:value].present? 
-      @subId = params[:value].first[:subscriptionId]
-      @msgId = params[:value].first[:resourceData][:id]
-      
-      @message = OutlookWrapper::Mail.create_message_object_from_outlook(@subId, @msgId)
-      head 202 
+      if params[:value].present? 
+        @subId = params[:value].first[:subscriptionId]
+        @msgId = params[:value].first[:resourceData][:id]
+        @message = OutlookWrapper::Mail.create_message_object_from_outlook(@subId, @msgId) 
+      end
     end
   end
 
