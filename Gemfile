@@ -71,7 +71,7 @@ gem 'activerecord-session_store'
 gem 'liquid', '~> 3.0', '>= 3.0.6'
 gem 'tinymce-rails', '~> 4.5'
 gem 'sidekiq'
-
+gem 'newrelic_rpm'
 
 
 gem 'jquery-timepicker-rails'

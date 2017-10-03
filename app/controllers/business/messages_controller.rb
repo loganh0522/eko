@@ -15,11 +15,11 @@ class Business::MessagesController < ApplicationController
       @candidate = Application.find(params[:application_id]).candidate
       @messages = @candidate.messages
     elsif params[:candidate_id].present?
-      # @candidate = Candidate.find(params[:candidate_id])
-      # @conversation = @candidate.conversation if @candidate.conversation.present?
-      # @messages = @conversation.messages if @conversation.present?
+      @candidate = Candidate.find(params[:candidate_id])
+      @conversation = @candidate.conversation if @candidate.conversation.present?
+      @messages = @conversation.messages if @conversation.present?
       # @messages = OutlookWrapper::User.update_subscription(user)
-      @message = OutlookWrapper::Mail.get_messages(current_user)
+      # @message = OutlookWrapper::Mail.get_messages(current_user)
     else
       # token = current_user.outlook_token.access_token
       # email = current_user.email

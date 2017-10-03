@@ -53,7 +53,7 @@ module OutlookWrapper
         notificationUrl: ENV['OUTLOOK_WEBHOOK'],
         resource: "me/messages",
         expirationDateTime: Time.now + 4230.minutes,
-        clientState: "subscription-identifier"
+        clientState: "talentWiz-graph-state"
       }
       
       graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/beta/',
