@@ -49,11 +49,11 @@ module OutlookWrapper
       path = 'subscriptions'
       
       data = {
-        changeType: "created, updated",
-        notificationUrl: "https://talentwiz.ca/api/watch/outlookNotification",
-        resource: "/me/mailFolders('Inbox')/messages",
+        changeType: "created",
+        notificationUrl: ENV['OUTLOOK_WEBHOOK'],
+        resource: "me/messages",
         expirationDateTime: Time.now + 4230.minutes,
-        clientState: "talentWiz-webhook-ograph"
+        clientState: "subscription-identifier"
       }
       
       graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/beta/',
