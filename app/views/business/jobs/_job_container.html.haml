@@ -5,28 +5,27 @@
     .location= "#{job.location}"
     .posted-time= "#{time_ago_in_words(job.created_at)} ago" 
   .job-body
-    - if permitted_to? :edit, @job
-      .btns
-        .btn1
-          = link_to 'Advertise Job', '#', class: 'button-job-actions'
-        .dropdown.btn2
-          %a.button-job-actions.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-            Actions
-            %b.caret
-          %ul.dropdown-menu
+    .btns
+      .btn1
+        = link_to 'Advertise Job', '#', class: 'button-job-actions'
+      .dropdown.btn2
+        %a.button-job-actions.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          Actions
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            %a= link_to "Edit Job Posting", edit_business_job_path(job)   
+          - if job.status == 'draft'
             %li
-              %a= link_to "Edit Job Posting", edit_business_job_path(job)   
-            - if job.status == 'draft'
-              %li
-                %a= link_to "Publish Job", business_job_publish_path(job), remote: true  
-            - elsif job.status == 'open'
-              %li
-                %a= link_to "Close Job", business_job_close_path(job), remote: true
-            - elsif job.status == 'closed'
-              %li
-                %a= link_to "Publish Job", business_job_publish_path(job), remote: true
-              %li 
-                %a= link_to "Archive Job", business_job_archive_path(job), remote: true
+              %a= link_to "Publish Job", business_job_publish_path(job), remote: true  
+          - elsif job.status == 'open'
+            %li
+              %a= link_to "Close Job", business_job_close_path(job), remote: true
+          - elsif job.status == 'closed'
+            %li
+              %a= link_to "Publish Job", business_job_publish_path(job), remote: true
+            %li 
+              %a= link_to "Archive Job", business_job_archive_path(job), remote: true
 
     .left-scroll
       %img(src="/tmp/left_arrow.png")

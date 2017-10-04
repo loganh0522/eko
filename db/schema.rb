@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170930155437) do
+ActiveRecord::Schema.define(version: 20171004103204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -173,6 +173,13 @@ ActiveRecord::Schema.define(version: 20170930155437) do
     t.string   "kind"
     t.integer  "job_count",    default: 0,    null: false
     t.integer  "max_jobs",     default: 3,    null: false
+  end
+
+  create_table "company_users", force: :cascade do |t|
+    t.integer  "company_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "contact_messages", force: :cascade do |t|

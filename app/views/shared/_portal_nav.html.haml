@@ -21,7 +21,7 @@
         = link_to root_path do
           = @company.name
     %ul
-      %li= link_to "Sign In", "", :class => "sub-signin-btn", "data-toggle" => "modal", "data-target" => "#SubLoginModal"
+      %li= link_to "Sign In", "", "data-toggle" => "modal", "data-target" => "#SubLoginModal"
       
       %li= link_to "Register", "", :class => ".sub-register-btn", :style => "height: 30px; padding: 10px 20px; width: 40px; border-radius: 5px; border: 1px solid #{@job_board.brand_color}", "data-toggle" => "modal", "data-target" => "#subNewUserModal"
       = render "/sessions/sub_login"

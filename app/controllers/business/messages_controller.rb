@@ -18,7 +18,6 @@ class Business::MessagesController < ApplicationController
       @candidate = Candidate.find(params[:candidate_id])
       @conversation = @candidate.conversation if @candidate.conversation.present?
       @messages = @conversation.messages if @conversation.present?
-      # @messages = OutlookWrapper::User.update_subscription(user)
       # @message = OutlookWrapper::Mail.get_messages(current_user)
     else
       # token = current_user.outlook_token.access_token
@@ -43,6 +42,7 @@ class Business::MessagesController < ApplicationController
 
   def create 
     @candidate = Candidate.find(params[:candidate_id])
+    
     if @candidate.conversation.present? 
       @message = @candidate.messages.build(message_params.merge(conversation_id: @candidate.conversation.id))
     else 

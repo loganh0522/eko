@@ -23,7 +23,9 @@ class Business::JobBoardRowsController < ApplicationController
       @section = JobBoardRow.new(job_board_row_params)  
     end
 
+
     @job_board = JobBoard.find(params[:job_board_id])
+    @job_board_header = @job_board.job_board_header
     respond_to do |format|
       if @section.save
         @sections = @job_board.job_board_rows
@@ -55,7 +57,11 @@ class Business::JobBoardRowsController < ApplicationController
   end
 
   def destroy
-
+    @section = JobBoardRow.find(params[:id])
+    @section.destroy
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

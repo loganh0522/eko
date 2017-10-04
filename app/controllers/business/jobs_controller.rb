@@ -11,16 +11,19 @@ class Business::JobsController < ApplicationController
 
   def index
     where = {}
-    
     if params[:query].present? 
       query = params[:query] 
     else 
       query = "*"
     end
 
-    where[:status] =  "open"
+    if params[:status].present?
+      where[:status] = params[:status] if params[:status].present?
+    else
+      where[:status] =  "open"
+    end
+
     where[:company_id] = current_company.id
-    where[:status] = params[:status] if params[:status].present?
     where[:kind] = params[:kind] if params[:kind].present?
 
     @jobs = Job.search(query, where: where, fields: [{title: :word_start}]).to_a
@@ -81,7 +84,7 @@ class Business::JobsController < ApplicationController
   def close_job 
     @job = Job.find(params[:job_id])
     @company = current_company
-    
+
     respond_to do |format|  
       if @job.update_attributes(status: "closed") 
         @company.job_count -= 1
@@ -114,6 +117,7 @@ class Business::JobsController < ApplicationController
         @job.update_attributes(status: 'open') 
         @company.job_count += 1
         @company.save
+        
         @jobs = @company.open_jobs
         format.js
       else

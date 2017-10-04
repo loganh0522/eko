@@ -2,8 +2,10 @@
   $('.display-applicant-details').html('<%= j render "business/activities/application_activity" %>');
   $('.applicant-nav').find('.activated').removeClass('activated');
   $('.applicant-nav').find('#activity').addClass('activated');
-<% else %> 
+<% elsif params[:job_id].present? %> 
   $('#main-container').html('<%= j render "business/activities/job_activity_feed" %>');
   $('.change-containers-nav').find('.activated').removeClass('activated');
   $('.change-containers-nav').find('#job-activity-feed').addClass('activated');
+<% else %>
+  
 <% end %>

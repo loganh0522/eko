@@ -1,4 +1,5 @@
 jQuery ->
+
   $('#embedURL').gdocsViewer({width :'400',height : '500'})
 
   $('#main-container').on 'click', '.applicant-checkbox', (event) ->
@@ -288,10 +289,6 @@ jQuery ->
     $(this).parent().parent().hide()
     $(this).parent().parent().prev().find('.plain-text').html($(this).html() + '<span class="caret"></span>')
     e.stopPropagation()
-    
-    
-
-
 
   $(document).on 'click', '.show-hidden-search-box', (e) ->
     console.log('showing')

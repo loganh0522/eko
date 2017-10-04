@@ -116,6 +116,7 @@ class Business::TasksController < ApplicationController
     
     @tasks = Task.search(query, where: where, order: {created_at: :desc}).to_a
 
+
     respond_to do |format|
       format.js
       format.html
@@ -276,10 +277,10 @@ class Business::TasksController < ApplicationController
     respond_to do |format| 
       if @new_task.save        
         if @taskable.class == Job
-          @tasks = Task.search("*", where: {job_id: @taskable.id}) 
+          @tasks = Task.where(job_id: @taskable.id) 
         elsif @taskable.class == Candidate && params[:task][:job_id].present?
-          @tasks = Task.search("*", where: {job_id: params[:task][:job_id], 
-            taskable_type: "Candidate", taskable_id: @new_task.taskable_id}) 
+          @tasks = Task.where(job_id: params[:task][:job_id].to_i, 
+            taskable_type: "Candidate", taskable_id: @new_task.taskable_id, status: "active")
         end
         format.js 
       else

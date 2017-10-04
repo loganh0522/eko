@@ -8,23 +8,27 @@
     .filter-body
       %ul
         %li
-          = check_box_tag "kind", "comments", false, class: 'filter'
+          = check_box_tag "kind[]", "Comment", false, class: 'filter'
           .filter-title Comments
         %li
-          = check_box_tag "kind", "closed", false, class: 'filter'
+          = check_box_tag "kind[]", "Message", false, class: 'filter'
           .filter-title Messages
         %li
           = check_box_tag "", false, false, class: 'filter'
           .filter-title Scheduled Interview
         %li
-          = check_box_tag "kind", "application_created", false, class: 'filter'
+          = check_box_tag "kind[]", "Application", false, class: 'filter'
           .filter-title Applied
         %li
-          = check_box_tag "kind", "application_move_stage", false, class: 'filter'
+          = check_box_tag "kind[]", "Application", false, class: 'filter'
           .filter-title Moved Stages 
         %li
-          = check_box_tag "kind", "application_created", false, class: 'filter'
+          = check_box_tag "kind[]", "Application", false, class: 'filter'
           .filter-title Applied
+        %li 
+          = check_box_tag "kind[]", "Task", false, class: 'filter'
+          .filter-title Tasks
+
   .filter-container
     .filter-header
       %h4 Job Applied To:
@@ -35,7 +39,7 @@
         - current_company.open_jobs.each do |job| 
           %li
             = check_box_tag "job_title[]", "#{job.id}", false, class: 'filter'
-            .filter-title #{job}
+            .filter-title #{job.title}
   
   .filter-container 
     .filter-header

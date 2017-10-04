@@ -17,15 +17,21 @@
           = f.text_field :subheader, label: "Subheader", class: "form-control"
       .float-container
         .header 
-          Content
-        .body
-          = f.text_area :description, class: "form-control subdomain-field"
-      .float-container
-        .header 
           Photo
         .body  
-          = f.fields_for :media_photos, MediaPhoto.new do |q| 
-            = q.file_field :file_name, class: "btn btn-file"
+          / = f.fields_for :media_photos, MediaPhoto.new do |q| 
+          /   = q.file_field :file_name, id: "fileupload"
+          / .logo= image_tag(@section.media_photos.last.file_name) if @section.media_photos.last.file_name?
+
+          = file_field_tag "images[]", type: :file, id: "inputFile"
+          %img#image_upload_preview 
+
+      .float-container
+        .header 
+          Content
+        .body
+          = f.trix_editor :description
+      
     .job-board-layout
       .float-left
         = f.radio_button :layout, 'float-left', label: "Float Left", id: "float-left"

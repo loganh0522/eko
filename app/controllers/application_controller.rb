@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
+  def current_company
+    @current_company ||= Company.find(session[:company_id]) if session[:company_id]
+  end
+
   def permission_denied
     flash[:danger] = "Sorry, you are not allowed to access that page"
     redirect_to root_url
@@ -50,13 +54,9 @@ class ApplicationController < ActionController::Base
     class_name = name.split.map { |i| i.capitalize }.join('').constantize
 
     if class_name.find(params[:id]).company != current_company
-      flash[:danger] = "Sorry, you do not have permission to access that!"
+      flash[:notice] = "Sorry, you do not have permission to access that!"
       redirect_to business_root_path
     end   
-  end
-
-  def current_company
-    @current_company ||= Company.find(session[:company_id]) if session[:company_id]
   end
 
   def logged_in? 
@@ -91,6 +91,13 @@ class ApplicationController < ActionController::Base
       redirect_to business_root_path
     end
   end
+
+  # def belongs_to_company
+  #   if !current_user.companies.include?(current_company)
+  #     flash[:error] = "Sorry, you do not have permission to access that!"
+  #     redirect_to business_root_path
+  #   end
+  # end
 
   def company_deactivated?
     if current_company.active == false && current_company.subscription == "trial"

@@ -92,8 +92,10 @@ Rails.application.routes.draw do
     resources :hiring_teams
     resources :interview_invitations
     resources :rooms
+    resources :tags
     post "update_password", to: 'users#update_password'
     post 'create_subscription', to: 'users#create_subscription'
+
     resources :tasks, except: [:show] do 
       collection do 
         post :completed, to: "tasks#completed"
@@ -103,6 +105,7 @@ Rails.application.routes.draw do
         post :create_multiple, to: "tasks#create_multiple"
       end
     end
+
     resources :orders
     resources :order_items
     resources :conversations
@@ -110,7 +113,7 @@ Rails.application.routes.draw do
     resources :invitations
     resources :locations 
     resources :application_emails
-    resources :tags
+
     resources :notifications
     resources :interviews
     resources :email_templates
@@ -275,8 +278,7 @@ Rails.application.routes.draw do
       get 'comments', to: "comments#job_comments"
  
       get "/activities", to: 'activities#job_activity'
-      
-      resources :tags
+
       resources :hiring_teams
       resources :job_feeds 
       
@@ -287,8 +289,7 @@ Rails.application.routes.draw do
         resources :messages
         resources :comments
         resources :application_scorecards
-        resources :assessments
-        resources :tags       
+        resources :assessments     
         resources :tasks
         resources :scorecards do 
           collection do 
@@ -332,6 +333,16 @@ Rails.application.routes.draw do
   get 'expired_token', to: "password_resets#expired_token"
   resources :password_resets, only: [:show, :create]
 
+
+  namespace :admin do 
+    resources :premium_boards
+    resources :users
+    
+    resources :companies do 
+      resources :users
+      resources :candidates
+    end
+  end
   
   mount StripeEvent::Engine, at: '/stripe_events'
 end

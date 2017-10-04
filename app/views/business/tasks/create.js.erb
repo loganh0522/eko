@@ -9,7 +9,7 @@
   $('.applicant-nav').find('#tasks').addClass('activated');
   $('.action-area').children().remove();
   $('.active-button').removeClass('active-button');
-  $(".applicant-general").html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
+  $(".display-applicant-details").html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
 <% elsif @taskable.class == Job %> 
   $('#task-container').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
   $('#basic-form-modal').modal("toggle");

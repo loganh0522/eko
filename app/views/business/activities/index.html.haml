@@ -7,8 +7,7 @@
       = render 'business/activities/filters'
     .main-container
       .activity-feed
-        - @activities.each do |activity|         
-          = render "business/activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity
+        = render 'business/activities/activities'
   
   
 

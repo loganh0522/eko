@@ -1,2 +1,12 @@
 $('#main-container').html('<%= j render "business/jobs/jobs" %>');
+<% if params[:action] == "publish_job" %>
+  $('#status_open').click();
+
+<% elsif params[:action] == "close_job" %>
+  $('#status_closed').click();
+<% elsif params[:action] == "publish_job" %>
+  $('#status_archived').click();
+<% elsif params[:action] == "draft_job" %>
+  $('#status_draft').click();
+<%end%>
 

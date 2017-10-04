@@ -1,0 +1,4 @@
+%div{id: "tag_#{tag.id}", class: "tag"}
+  .name= "#" + tag.name
+  = link_to business_candidate_tag_path(@candidate, tag), remote: true, :method => :delete do 
+    .delete-can-tag &times
