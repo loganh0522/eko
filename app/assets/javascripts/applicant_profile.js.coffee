@@ -1,7 +1,7 @@
 jQuery ->
 
   $('#embedURL').gdocsViewer({width :'400',height : '500'})
-
+  $(document).find('.colorpicker').colorpicker()
   $('#main-container').on 'click', '.applicant-checkbox', (event) ->
     if $('.applicants').find('.applicant-checkbox :checked').size() > 0 
       $('.no-action-buttons').hide()
@@ -48,7 +48,7 @@ jQuery ->
     $('#timepicker').timepicker()
     $('#timepicker2').timepicker()
     $("#geocomplete2").geocomplete()
-
+    $('.colorpicker').colorpicker()
 
 ############ Move Applicant Stages ###############
 
@@ -70,14 +70,6 @@ jQuery ->
     $('.action-area').children().remove()
   
 ###################### Insert Fluid Variable into E-mail #####################
-
-
-
-
-
-
-
-
   $('#insert-fluid-variable').change -> 
     if $('#insert-fluid-variable').val() == "Applicant First Name"
       tinymce.activeEditor.execCommand('mceInsertContent', false, "<div contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.first_name}}  </div>")
@@ -244,8 +236,6 @@ jQuery ->
       $('#work_experience_end_year').show()
 
 ############## Color Picker #################
-  
-  $('.colorpicker').colorpicker()
 
 
 

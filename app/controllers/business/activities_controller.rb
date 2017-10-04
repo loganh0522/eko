@@ -27,7 +27,7 @@ class Business::ActivitiesController < ApplicationController
     where[:job_id] = params[:job_id] if params[:job_id].present?
     where[:candidate_id] = @candidate.id if @candidate.present?
     where[:company_id] = current_company.id
-    binding.pry
+
     @activities = Activity.search("*", where: where, order: {created_at: :desc}).to_a
     @jobs = current_company.jobs.where(status: "open")
 
