@@ -48,6 +48,7 @@ jQuery ->
   $('#main-container').on 'click', '#add-tag-button', (event) ->
     tagName = $('#tag_name').val()
     values =  $('#tags').val() + ',' + tagName 
+    
     if $('#tags').val() == ''
       $('#tags').val tagName
     else

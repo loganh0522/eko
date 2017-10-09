@@ -1,0 +1,13 @@
+.job-show-header
+  .header
+    .details
+      %h1= @company.name
+  .change-containers-nav
+    %ul 
+      = link_to admin_company_path(@company), class: 'change-aj' do 
+        %li{:class => is_activated?(admin_company_path(@company))} Company
+      
+      = link_to admin_company_jobs_path(@company), class: 'change-aj' do 
+        %li{:class => is_activated?(admin_company_jobs_path(@company))} Jobs
+
+#main-container

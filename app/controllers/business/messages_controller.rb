@@ -5,7 +5,7 @@ class Business::MessagesController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
-  before_filter :load_messageable, except: [:new, :index, :create, :destroy, :update, :multiple_messages]
+  before_filter :load_messageable, except: [:new, :index, :create, :destroy, :update, :multiple_messages, :new_multiple]
   before_filter :new_messageable, only: [:new] 
   
   # include AuthHelper
@@ -63,18 +63,26 @@ class Business::MessagesController < ApplicationController
     end
   end
 
-  def multiple_messages    
+  def new_multiple
+    @message = Message.new
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def multiple_messages   
     applicant_ids = params[:applicant_ids].split(',')
     
     applicant_ids.each do |id| 
       @candidate = Candidate.find(id)
-      
+
       if @candidate.conversation.present? 
-        @message = @candidate.messages.build(user_id: current_user.id, body: params[:body], subject: params[:subject], conversation_id: @candidate.conversation.id)
+        @message = @candidate.messages.build(message_params.merge(conversation_id: @candidate.conversation.id)).save
       else 
         Conversation.create(candidate_id: @candidate.id, company_id: current_company.id)   
-        @conversation = Candidate.find(params[:candidate_id]).conversation
-        @message = @candidate.messages.build(user_id: current_user.id, body: params[:body], subject: params[:subject], conversation_id: @conversation.id)
+        @conversation = Candidate.find(id).conversation
+        @message = @candidate.messages.build(message_params.merge(conversation_id: @conversation.id)).save
       end
     end
     

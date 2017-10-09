@@ -12,7 +12,9 @@ class Task < ActiveRecord::Base
   has_one :activity, as: :trackable, :dependent => :destroy
 
   validates_presence_of :title, :kind, :status, :company_id
+  
   after_save :create_activity
+  
   def my_tasks
     current_user.tasks
   end

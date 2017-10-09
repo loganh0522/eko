@@ -1,7 +1,7 @@
 <% if @taskable.class == Company %>
   $('#task-container').html('<%= j render "business/tasks/tasks" %>');
   
-<% elsif @taskable.class == Application %>
+<% elsif @taskable.class == Application || @taskable.class == Candidate %>
   <% if params[:status] == 'complete' %>
     $(".side-section").find(".candidate-tasks").html('<%= j render "business/tasks/application_tasks", tasks: @tasks %>');
     $('.change-containers-nav').find('.activated').removeClass('activated');

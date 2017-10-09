@@ -1,0 +1,9 @@
+= form_for [:admin, @job_board], :html => { :multipart => true }, :remote => true do |f|
+  .modal-body     
+    = f.text_field :name, label: "Name", class: "form-control"
+    = f.text_field :description, label: "Description", class: "form-control"
+    = file_field_tag "images[]", type: :file, id: "inputFile"
+      %img#image_upload_preview 
+  .modal-footer
+    = f.submit "Add Job Boards", class: "btn submit-button"
+    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

@@ -34,6 +34,7 @@ class Business::JobFeedsController < ApplicationController
   def update 
     @feed = JobFeed.find(params[:id])
     @type = params[:job_feed].first.first
+    
     respond_to do |format| 
       @feed.update(feed_params)
       format.js

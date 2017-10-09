@@ -1,0 +1,29 @@
+.admin-pages
+  .home-page-header
+    .top-info
+      %h1= "Users"
+  .home-page-body
+    #main-container
+      %table.table
+        %thead
+          %tr
+            %td(width="5%")
+            %th(width="25%") Title
+            %th(width="25%") Type
+            %th(width="10%") Profile Complete
+            %th(width="10%") Candidates
+            %th(width="10%") Created At
+          %tbody
+            - @users.each do |user| 
+              %tr
+                %td
+                %td
+                  = link_to "#{user.full_name}", admin_user_path(user)
+                %td
+                  
+                %td
+                  = user.kind
+                %td
+   
+                %td
+                

@@ -21,6 +21,7 @@ class Business::InterviewInvitationsController < ApplicationController
 
   def new
     @candidate = Candidate.find(params[:candidate_id]) if params[:candidate_id].present?
+    @job = Job.find(params[:job]) if params[:job].present?
     @invitation = InterviewInvitation.new
 
     respond_to do |format| 

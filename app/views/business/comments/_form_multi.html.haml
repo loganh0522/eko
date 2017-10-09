@@ -1,0 +1,16 @@
+.comment-area
+  = form_for @comment, :url => add_note_multiple_business_comments_path, remote: true do |f|
+    .modal-body
+      .email-area
+        .to 
+          .title To:  
+          .recipients   
+        = f.text_area :body, id: "body_Block", class: "comment-body", rows: 10, cols: 8, placeholder: "Add a Note"
+        = hidden_field_tag :applicant_ids    
+        = f.hidden_field :user_id, value: current_user.id
+        - if @job.present? 
+          = f.hidden_field :job_id, value: @job.id 
+    .modal-footer 
+      = f.submit "Add Note", class: "btn submit-button"
+      / .submit-button-deactivated Add Note
+      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

@@ -10,20 +10,6 @@ jQuery ->
     $(this).parent().nextUntil('.questions').find('#destroy_fields').val('1')
     $(this).parent().closest('.question-area').hide()
     event.preventDefault()
-  
-  $('.main-container').on 'click', '.remove_form', (event) ->
-    if $(this).closest('form').attr('class') == 'edit_question'
-      qid = $(this).closest('form').attr('id').slice(5)
-      $("#" + "#{qid}").show()
-      $(this).closest('form').remove()
-    else if $(this).closest('form').attr('class') == 'edit_scorecard'
-      qid = $(this).closest('form').attr('id').slice(5)
-      $("#" + "#{qid}").show()
-      $(this).closest('form').remove()
-    else
-      $(this).closest('form').remove()
-    return
-    event.preventDefault()
 
   $('.main-container').on 'click', '.add_fields', (event) ->
     time = new Date().getTime()
@@ -125,11 +111,24 @@ jQuery ->
       qid = $(this).closest('form').attr('id').slice(5)
       $("#" + "#{qid}").find('.activity-body-body').find('.comment-body').show()
       $(this).closest('form').remove()
+    else if $(this).closest('form').attr('class') == 'edit_question'
+      qid = $(this).closest('form').attr('id').slice(5)
+      $("#" + "#{qid}").show()
+      $(this).closest('form').remove()
+    else if $(this).closest('form').attr('class') == 'edit_scorecard'
+      qid = $(this).closest('form').attr('id').slice(5)
+      $("#" + "#{qid}").show()
+      $(this).closest('form').remove()
+    else if $(this).closest('form').attr('class') == 'edit_task'
+      $(this).parent().parent().parent().parent().find('.task-details').show()
+      $(this).closest('form').remove()    
     else if $(this).closest('form').attr('class') == 'edit_application_scorecard'
       qid = $(this).closest('form').attr('id').slice(5)
       $("#" + "#{qid}").find('.activity-body-body').find('.comment-body').show()
       $(this).closest('form').remove()
     else
-      $(this).closest('.modal').toggle()
+      $(this).closest('form').remove()
     return
     event.preventDefault()
+
+

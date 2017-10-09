@@ -1,0 +1,23 @@
+.admin-pages
+  .home-page-header
+    .top-info
+      %h1= "Companies"
+  .home-page-body
+    %table.table
+      %thead
+        %tr
+          %th(width="30%") Name
+          %th(width="5%") Open Jobs
+          %th
+          %th(width="45%") Created At
+        %tbody
+          - @companies.each do |company| 
+            %tr
+              %td
+                = link_to "#{company.name}", admin_company_path(company)
+              %td
+                = company.open_jobs.count
+              %td 
+                
+              %td
+                = company.created_at

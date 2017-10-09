@@ -1,13 +1,16 @@
 <% if @candidate.present? %>  
   $('.action-area').html('<%= j render "business/interview_invitations/form" %>');
   $('.active-button').removeClass('active-button');
-  $('#add-task').addClass('active-button');
+  $('#add-invitation').addClass('active-button');
+<% elsif @job.present? %>
+  $('#basic-form-modal').find('form').remove()
+  $('#basic-form-modal').find('.modal-title').html('<%= j "Send E-mail" %>');
+  $('#basic-form-modal').find('.modal-header').after('<%= j render "business/interview_invitations/form_multiple" %>');
+  $('#basic-form-modal').modal("toggle");
 <% else %>
   $('#basic-form-modal').find('form').remove()
   $('#basic-form-modal').find('.modal-title').html('<%= j "Schedule Event" %>');
   $('#basic-form-modal').find('.modal-header').after('<%= j render "business/interview_invitations/form" %>');
   $('#basic-form-modal').modal("toggle");
 <% end %>
-// $('.action-area').html('<%= j render "business/interview_invitations/form" %>');
-// $('.active-button').removeClass('active-button');
-// $('#add-invitation').addClass('active-button');
+

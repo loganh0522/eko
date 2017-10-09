@@ -1,0 +1,39 @@
+= form_for @task, :url => create_multiple_business_tasks_path, remote: true do |f|
+  .modal-body
+    .task-form
+      .form-row-1
+        .contain-1
+          = f.text_field :title, id: "task-title", placeholder: 'Enter Task', autocomplete: false
+      .form-row-4
+        .contain-2
+          = f.text_field :due_date, id: 'task_due_date2', placeholder: "Due Date"
+        .contain-2
+          = f.text_field :due_time, id: "timepicker", placeholder: "Add Time"
+        .contain-2
+          = f.select :kind, options_for_select(["Schedule Interview", "To-do", "Send Assesment", "Finish Assessment"]), :prompt => "Type of Task...", id: "select-kind" 
+      = f.text_area :notes, id: "comment-body", placeholder: "Notes"  
+      .form-row-2
+        .email-area
+          .to 
+            .title To:  
+            .recipients    
+      .form-row-2
+        = render 'business/users/users_autocomplete'
+        
+      .comment-area-footer
+        = f.hidden_field :user_id, value: current_user.id
+        = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
+        = f.hidden_field :company_id, value: current_company.id
+        = hidden_field_tag :applicant_ids 
+        = f.hidden_field :status, value: "active" 
+        - if @job.present?
+          = f.hidden_field :job_id, value: @job.id
+        
+        = f.submit "+ Create Task", class: "btn submit-button", id: "submit-comment-btn"
+        .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+
+
+ 
+    
+
+  

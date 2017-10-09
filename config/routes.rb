@@ -90,14 +90,14 @@ Rails.application.routes.draw do
     get "hiring_defaults", to: 'rejection_reasons#index'
     resources :activities
     resources :hiring_teams
-    resources :interview_invitations
     resources :rooms
-    resources :tags
+    
     post "update_password", to: 'users#update_password'
     post 'create_subscription', to: 'users#create_subscription'
 
     resources :tasks, except: [:show] do 
       collection do 
+        get :new_multiple, to: "tasks#new_multiple"
         post :completed, to: "tasks#completed"
         get :complete, to: "tasks#complete"
         get :overdue, to: "tasks#overdue"
@@ -113,7 +113,6 @@ Rails.application.routes.draw do
     resources :invitations
     resources :locations 
     resources :application_emails
-
     resources :notifications
     resources :interviews
     resources :email_templates
@@ -122,14 +121,29 @@ Rails.application.routes.draw do
       resources :tasks
     end
 
+    resources :interview_invitations do 
+      collection do 
+        get :new_multiple, to: "interview_invitations#new_multiple" 
+        post :multiple_messages, to: "interview_invitations#multiple_messages"
+      end
+    end
+
+    resources :tags do
+      collection do 
+        get :new_multiple, to: "tags#new_multiple" 
+      end
+    end
+
     resources :messages do
       collection do 
+        get :new_multiple, to: "messages#new_multiple" 
         post :multiple_messages, to: "messages#multiple_messages"
       end
     end
     
     resources :comments do
       collection do 
+        get :new_multiple, to: "comments#new_multiple"
         post :add_note_multiple, to: "comments#add_note_multiple"
       end
     end
@@ -335,12 +349,24 @@ Rails.application.routes.draw do
 
 
   namespace :admin do 
+    root to: "jobs#index" 
     resources :premium_boards
     resources :users
-    
+    resources :candidates
+    resources :customers
+
+    resources :jobs do 
+      resources :applications
+      resources :candidates
+      resources :comments
+      resources :tasks
+      resources :activities
+    end
+
     resources :companies do 
       resources :users
       resources :candidates
+      get 'jobs', to: "jobs#company_jobs"
     end
   end
   

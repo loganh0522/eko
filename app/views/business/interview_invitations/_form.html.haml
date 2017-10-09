@@ -23,33 +23,10 @@
           = f.text_field :location, id: "geocomplete2", label: "Address", autocomplete: "off", placeholder: "Enter the Address"
       .form-row
         .contain-3
-          .assign-to-row
-            .title Assign Users (Team)
-            .assign-user#user_ids_Block
-              .show-hidden-search-box
-                .add-button-search
-                  .glyphicon.glyphicon-plus
-              .hidden-search-box
-                = text_field_tag "", "", :class => 'ui-autocomplete-input users', :placeholder => 'Type a users name to assign', id: "autocomplete"
-                #search-results-users
-                .assigned-users
-                  .user-tag{:data => {id: current_user.id, kind: "user"}}
-                    .name= current_user.full_name
-                    .delete-tag &times
-              .user-tag{:data => {id: current_user.id, kind: "user"}}
-                .name= current_user.full_name
-                .delete-tag &times
+          = render 'business/users/users_autocomplete'
         .contain-3
-          .assign-to-row
-            .title Add Candidates
-            .assign-user#user_ids_Block
-              .show-hidden-search-box
-                .add-button-search
-                  .glyphicon.glyphicon-plus
-              .hidden-search-box#search-results-candidates
-                = text_field_tag "", "", :class => 'ui-autocomplete-input candidates', :placeholder => 'Type a users name to assign', id: "autocomplete"
+          = render 'business/candidates/candidates_autocomplete'
                 
-            .assigned-candidates
         .contain-3
           .assign-to-row
             .title Add Room
@@ -96,12 +73,9 @@
               .hidden-search-box
                 .insert-tokens
                   - current_company.email_templates.each do |template|
-                    .insert-token{data: {:body => template.body}}= template.title
+                    .insert-template{data: {:body => template.body}}= template.title
           .email-content
             = f.trix_editor :message, rows: 9
-            / = f.text_area :message, :class => "tinymce", rows: 15, data: {behaviour: 'comment-body'}, placeholder: "Type Your Message", id: "message_Block"
-            / = tinymce_assets        
-            / = tinymce 
       = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
       = f.hidden_field :candidate_ids, id: "candidate_ids"
       = f.hidden_field :job_id, id: "job_ids"
@@ -109,5 +83,6 @@
       = f.hidden_field :company_id, value: current_company.id
     .modal-footer
       = f.submit  "+ Send Invite", class: "btn submit-button", id: "submit-comment-btn"
+      .btn.border-button2.remove_form Cancel
       .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel  
 

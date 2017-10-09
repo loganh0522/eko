@@ -1,21 +1,6 @@
 .form-row
   .contain-3
-    .assign-to-row
-      .title Assign Users (Team)
-      .assign-user#user_ids_Block
-        .show-hidden-search-box
-          .add-button-search
-            .glyphicon.glyphicon-plus
-        .hidden-search-box
-          = text_field_tag "", "", :class => 'ui-autocomplete-input users', :placeholder => 'Type a users name to assign', id: "autocomplete"
-          #search-results-users
-          .assigned-users
-            .user-tag{:data => {id: current_user.id, kind: "user"}}
-              .name= current_user.full_name
-              .delete-tag &times
-        .user-tag{:data => {id: current_user.id, kind: "user"}}
-          .name= current_user.full_name
-          .delete-tag &times
+    = render 'business/users/users_autocomplete'
   .contain-3
     .assign-to-row
       .title Add Candidates

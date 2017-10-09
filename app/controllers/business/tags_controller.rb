@@ -12,7 +12,7 @@ class Business::TagsController < ApplicationController
   end
 
   def new
-    @candidate = Candidate.find(params[:candidate_id])
+    @candidate = Candidate.find(params[:candidate_id]) if params[:candidate_id].present?
     @tag = Tag.new
 
     respond_to do |format|

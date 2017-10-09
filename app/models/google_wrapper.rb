@@ -145,10 +145,5 @@ require 'google/api_client/client_secrets.rb'
       @client.authorization.refresh!
       @service = @client.discovered_api('gmail', 'v1')
     end
-
-
-
-
-
   end
 end

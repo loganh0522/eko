@@ -108,8 +108,6 @@ GEM
     debug_inspector (0.0.3)
     declarative_authorization (0.5.7)
     diff-lcs (1.3)
-    dropzonejs-rails (0.8.1)
-      rails (> 3.1)
     elasticsearch (5.0.4)
       elasticsearch-api (= 5.0.4)
       elasticsearch-transport (= 5.0.4)
@@ -403,8 +401,6 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
-    tinymce-rails (4.6.6)
-      railties (>= 3.1.1)
     trix (0.9.10)
       rails
     tzinfo (1.2.3)
@@ -437,7 +433,6 @@ DEPENDENCIES
   coffee_routes
   database_cleaner (= 1.2.0)
   declarative_authorization
-  dropzonejs-rails
   elasticsearch-model
   elasticsearch-rails
   fabrication
@@ -485,7 +480,6 @@ DEPENDENCIES
   signet (~> 0.7.3)
   stripe
   stripe_event
-  tinymce-rails (~> 4.5)
   trix
   uglifier (>= 1.3.0)
   vcr

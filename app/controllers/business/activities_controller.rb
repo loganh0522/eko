@@ -22,7 +22,6 @@ class Business::ActivitiesController < ApplicationController
     end
 
     where = {}
-
     where[:trackable_type] = {all: params[:kind]} if params[:kind].present?
     where[:job_id] = params[:job_id] if params[:job_id].present?
     where[:candidate_id] = @candidate.id if @candidate.present?

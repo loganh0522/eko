@@ -1,7 +1,7 @@
 #add-user-form
   = form_for [:business, @job, @hiring_team], html: {remote: true}  do |f|         
     .modal-body
-      = text_field_tag :user, nil, :class => 'ui-autocomplete-input users', :placeholder => 'Type a team members name', id: "job-team-search"   
+      = text_field_tag :user, nil, :class => 'ui-autocomplete-input users', :placeholder => 'Type a team members name', id: "autocomplete"   
       %div#search-results
       .users
     .modal-footer

@@ -26,7 +26,8 @@ class Business::CandidatesController < ApplicationController
       @candidates = Candidate.search("*", where: where).to_a
     end
 
-
+    @message = Message.new
+    @invitation = InterviewInvitation.new
     @tags = current_company.tags
     @tag = Tag.new
     respond_to do |format|
@@ -141,8 +142,8 @@ class Business::CandidatesController < ApplicationController
   end
 
   def autocomplete
-    # @candidates = current_company.candidates.order(:full_name).where("full_name ILIKE ?", "%#{params[:term]}%")
-    render :json => Candidate.search(params[:term], where: {company_id: current_company.id}, fields: [{full_name: :word_start}])
+    render :json => Candidate.search(params[:term], where: {company_id: current_company.id}, 
+      fields: [{full_name: :word_start}]).to_a
   end
 
   private

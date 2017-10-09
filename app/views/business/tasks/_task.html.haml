@@ -1,20 +1,39 @@
 .task{:id => "task_#{task.id}"}
-  .body
-    = link_to completed_business_tasks_path(id: task.id), method: :post, remote: true do 
-      .glyphicon.glyphicon-ok 
-    .details
-      .title= task.title
-      = "Due Date: #{ task.due_date}"
+  .task-header
+    .circle-img
+      %img(src="/tmp/little-man.png") 
+    .content 
+      = "#{task.user.first_name} #{task.user.last_name} created the task for #{task.kind}."
+      %br
+      .time= "#{time_ago_in_words(task.created_at)} ago" 
     .actions 
+      = link_to "Edit | ", edit_business_task_path(task), remote: true 
       = link_to 'Delete', business_task_path(task.id), remote: true, :method => :delete
-  .task-row
-    .detail
-      .assigned Assigned to: 
-      - task.users.each do |user|
-        .tag= user.full_name
-    .detail
-      .assigned Type
-      .tag= "#{task.kind}"
-    .detail
-      .assigned= "Created by: #{task.user.full_name}"
+  .task-details
+    .body
+      - if task.status == "complete"
+        #completed
+          = link_to completed_business_tasks_path(id: task.id), method: :post, remote: true do 
+            .glyphicon.glyphicon-ok
+      - else
+        = link_to completed_business_tasks_path(id: task.id), method: :post, remote: true do 
+          .glyphicon.glyphicon-ok 
+      .details
+        .title= task.title
+        = "Due Date: #{ task.due_date}"
+      
+    .task-row
+      - if !task.notes.present?
+        .no-notes There are currently no notes for this task.
+      - else
+        = task.notes 
+    .task-row
+      .detail
+        .assigned Assigned to: 
+        - task.users.each do |user|
+          .tag= user.full_name
+      .detail
+        .assigned Type
+        .tag= "#{task.kind}"
+
 

@@ -2,6 +2,7 @@ jQuery ->
 
   $('#embedURL').gdocsViewer({width :'400',height : '500'})
   $(document).find('.colorpicker').colorpicker()
+  
   $('#main-container').on 'click', '.applicant-checkbox', (event) ->
     if $('.applicants').find('.applicant-checkbox :checked').size() > 0 
       $('.no-action-buttons').hide()
@@ -28,12 +29,6 @@ jQuery ->
       $('.modal-backdrop').last().css({'z-index':'1060'})
         
 ########### jquery selectmenu #######
-  # $('#selectmenu').selectmenu -> 
-  #  style: 'popup'
-
-  
-
-
 
 #########  #############
   $('#task_due_date2').datepicker
@@ -61,27 +56,8 @@ jQuery ->
         application_id: $('#move-applicant-stages :selected').data('application')
 
   
-#################### Close Tag Form ######################
-  $('#main-container').on 'click', '.close-form', (event) ->
-    $('#add_tag').show()
-    $('.tag_form').remove()
-
-  $('#main-container').on 'click', '.hide-can-form', (event) ->
-    $('.action-area').children().remove()
-  
 ###################### Insert Fluid Variable into E-mail #####################
-  $('#insert-fluid-variable').change -> 
-    if $('#insert-fluid-variable').val() == "Applicant First Name"
-      tinymce.activeEditor.execCommand('mceInsertContent', false, "<div contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.first_name}}  </div>")
-    else if $('#insert-fluid-variable').val() == "Applicant Last Name"
-      tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.last_name}}  </span>")
-    else if $('#insert-fluid-variable').val() == "Applicant Full Name"
-      tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.full_name}}  </span>")
-    else if $('#insert-fluid-variable').val() == "Job Title"
-      tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{job.title}}  </span>")
-    else if $('#insert-fluid-variable').val() == "Company Name"
-      tinymce.activeEditor.execCommand('mceInsertContent', false, "<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{company.name}}  </span>")
-
+ 
 
 
 #################### Select All & Show Button's on Select ###################
@@ -90,6 +66,25 @@ jQuery ->
 
 
 #################### Add Applicants To Modal On Action Click #############################
+  $('.multi-form').on 'shown.bs.modal', ->
+    checkbox = $('.applicant-checkbox')
+    $(this).find('#applicant_ids').val('')
+    
+    applicant_ids = []
+    applicants = []
+    applicant_names = []  
+    
+    for n in checkbox   
+      if $(n).find('input').is(':checked') == true     
+        applicant = []
+        applicant_ids.push($(n).data('id')) unless applicant_ids.includes($(n).data('id'))    
+        applicant.push($(n).data('id')) unless applicant.includes($(n).data('id'))    
+        applicant.push($(n).parent().parent().find('.name').data('id')) unless applicant.includes($(n).parent().parent().find('.name').data('id')) 
+        applicants.push(applicant)
+    $(this).find('#applicant_ids').val(applicant_ids)
+    for n in applicants
+      $(this).find('.recipients').append('<div id="tag" data-id=' + n[0] + '> <div class="tag-name">' + n[1] + '</div> <div class="remove-recipient"> &times </div> </div>') 
+
 
   $('#main-container').on 'click', '.move-applicants', (event) ->
     modalType = $(this).attr('id')
@@ -195,6 +190,10 @@ jQuery ->
       $(this).parent().parent().remove()
     return
 
+  $('#main-container').on 'click', '.close-form', (event) ->
+    $('#add_tag').show()
+    $('.tag_form').remove()
+
 ################ Star Rating ##################
   $('#main-container').on 'click', '.star', (event) ->  
     PostCode = $(this).parent().parent().attr('id')
@@ -263,10 +262,14 @@ jQuery ->
 ########## Hidden Search Box #########
   $(document).on 'click', '.delete-tag', (event) -> 
     valId = $(this).parent().data('id').toString()
-    console.log(valId)
+    
     if $(this).parent().data('kind') == 'user'
-      $('#user_ids').val($('#user_ids').val($('#user_ids').val().split(',').splice( valId )))
+      arr = $('#user_ids').val().split(',')
+      indexId = arr.indexOf(valId)
+      arr.splice(indexId)
+      $('#user_ids').val(arr)
       $(this).parent().remove()
+    
     else if $(this).parent().data('kind') == 'candidate'
       $('#candidate_ids').val($('#candidate_ids').val($('#candidate_ids').val().split(',').splice(valId)))
       $(this).parent().remove()
@@ -281,10 +284,8 @@ jQuery ->
     e.stopPropagation()
 
   $(document).on 'click', '.show-hidden-search-box', (e) ->
-    console.log('showing')
     $(this).next('.hidden-search-box').show()
     e.stopPropagation()
-
 
   $(document).on 'click', '.hidden-search-box', (e) -> 
     e.stopPropagation()
@@ -293,9 +294,14 @@ jQuery ->
     $('.hidden-search-box').hide()
     return
 
+  $(document).on 'click', '.insert-template', (e) ->
+    element = document.querySelector("trix-editor")
+    txtBody = $(this).data('body')
+    element.editor.insertHTML(txtBody)
+    $('.hidden-search-box').hide()
+
   $(document).on 'click', '.insert-token', (event) ->
     element = document.querySelector("trix-editor")
-
     if $(this).attr('id') == "first-name"
       element.editor.insertHTML("<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{recipient.first_name}} </span>")
     else if $(this).attr('id') == "last-name" 

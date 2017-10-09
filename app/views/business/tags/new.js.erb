@@ -2,7 +2,8 @@
   $('<%= j render "business/tags/form" %>').insertBefore("#add_tag");
   $('#add_tag').hide();
 <% else %>
-  $(".modal-body").html('<%= j render "business/tags/add_tags" %>');
-  $(".modal-title").html('<%= "Add Tags" %>');
-  $('.modal').modal("toggle");
+  $('.multi-form').find('form').remove()
+  $('.multi-form').find('.modal-title').html('<%= j "Add Tags" %>');
+  $('.multi-form').find('.modal-header').after('<%= j render "business/tags/form_multiple" %>');
+  $('.multi-form').modal("toggle");
 <% end %>

@@ -1,5 +1,2 @@
-<% if params[:status] == "complete" && @task.taskable_type == "Application" %> 
-  $(".side-section").find('.tasks').html('<%= j render "business/tasks/application_tasks", tasks: @tasks %>');
-<% else %> 
-  $('#comment_<%= @comment.id %>').replaceWith('<%= j render (@comment) %>')
-<% end %>
+$('#task_<%= @task.id %>').replaceWith('<%= j render (@task) %>')
+

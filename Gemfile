@@ -49,7 +49,7 @@ gem 'jcrop-rails-v2'
 
 gem 'remotipart', '~> 1.2'
 gem 'jquery-fileupload-rails'
-gem 'dropzonejs-rails'
+
 
 gem "font-awesome-rails"
 
@@ -69,7 +69,7 @@ gem 'activerecord-session_store'
 
 
 gem 'liquid', '~> 3.0', '>= 3.0.6'
-gem 'tinymce-rails', '~> 4.5'
+
 gem 'sidekiq'
 gem 'newrelic_rpm'
 

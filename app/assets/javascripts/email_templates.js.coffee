@@ -11,9 +11,11 @@ class HasEmailTemplates
     saved_template_text = @element.find("[data-behaviour= 'saved-template-select']").find(":selected").data("body")
     comment_body = @element.find("[data-behaviour= 'comment-body']")
     
-    textEditor.insertString
+    textEditor.insertHtml("#{saved_template_text}")
     tinymce.activeEditor.execCommand('mceInsertContent', false, "#{saved_template_text}")
 
 jQuery ->
   $.map $("[data-behaviour= 'has-saved-templates']"), (elem) ->
     new HasEmailTemplates(elem)
+
+  

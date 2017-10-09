@@ -5,19 +5,20 @@
   .btn.border-button Add Note 
   .btn.border-button Add Tag
   .btn.border-button Create Task
-  / .btn.border-button Interview Invitation
+  .btn.border-button Interview Invitation
 .applicant-action-buttons
   = link_to 'Move Stages', '#', class: "btn active-application-button move-applicants", id: "stage", :data => {:toggle => "modal", :target => "#stageModal"}
+  
+  = link_to 'Send E-mail', new_multiple_business_messages_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true
+  
+  = link_to 'Add Note', new_multiple_business_comments_path(job: @job), class: "btn active-application-button move-applicants", id: "add_comment", remote: true
 
-  = link_to 'Send E-mail', '#', class: "btn active-application-button move-applicants", id: "send_message", :data => {:toggle => "modal", :target => "#send_messageModal"}
+  = link_to "Add Tag", new_business_tag_path, class: "btn active-application-button move-applicants", id: "addTags", remote: true
 
-  = link_to 'Add Note', '#', class: "btn active-application-button move-applicants", id: "add_comment", :data => {:toggle => "modal", :target => "#add_commentModal"}
+  = link_to "Create Task", new_multiple_business_tasks_path(job: @job), class: "btn active-application-button move-applicants", id: "create_task", remote: true
 
-  = link_to 'Add Tag', '#', class: "btn active-application-button move-applicants", id: "addTags", :data => {:toggle => "modal", :target => "#addTagsModal"}
+  = link_to "Interview Invitation", new_business_interview_invitation_path(job: @job), class: "btn active-application-button move-applicants", id: "create_task", remote: true
 
-  = link_to 'Create Task', '#', class: "btn active-application-button move-applicants", id: "create_task", :data => {:toggle => "modal", :target => "#create_taskModal"}
-
-  / = link_to 'Interview Invitation', '#', class: "btn active-application-button move-applicants", id: "send_message", :data => {:toggle => "modal", :target => "#send_messageModal"}
 
 
 

@@ -1,0 +1,4 @@
+$('.multi-form').find('form').remove()
+$('.multi-form').find('.modal-title').html('<%= j "Send E-mail" %>');
+$('.multi-form').find('.modal-header').after('<%= j render "business/messages/form_multiple" %>');
+$('.multi-form').modal("toggle");

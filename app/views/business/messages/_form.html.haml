@@ -13,28 +13,26 @@
       .title Subject
       .sender= f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false, class: "subject_Block"
     .email-variables
-      .show-hidden-search-box
-        .plain-text
-          Use E-mail Template
-          .caret
-      .hidden-search-box
-        .insert-tokens
-          - current_company.email_templates.each do |template|
-            .insert-token{data: {:body => template.body}}= template.title
+      .contain-2
+        .show-hidden-search-box
+          .plain-text
+            Use E-mail Template
+            .caret
+        .hidden-search-box
+          .insert-tokens
+            - current_company.email_templates.each do |template|
+              .insert-template{data: {:body => template.body}}= template.title
     .email-content
       = f.trix_editor :body, rows: 8, data: {behaviour: 'comment-body'}, id: "body_Block"
-      / = f.text_area :body, :class => "tinymce", rows: 15, data: {behaviour: 'comment-body'}, placeholder: "Type Your Message", id: "body_Block"
-      / = tinymce_assets        
-      / = tinymce 
     .email-footer
       %fieldset
       = f.hidden_field :user_id, value: current_user.id
       = hidden_field_tag :candidate_id, @messageable.id
       %br
       = f.submit "Send Message", class: "btn submit-button"
-      - if @message.new_record? 
-        .btn.border-button2.hide-can-form Cancel
-      - else
-        = link_to "Cancel", '#', class: "remove_form btn border-button2"
+      .btn.border-button2.remove_form Cancel
+      / .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+
+
       
 

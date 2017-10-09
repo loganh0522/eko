@@ -1,20 +1,6 @@
-.modal#add_commentModal
+.modal.multi-form
   .modal-dialog
     .modal-content
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title Add Note 
-      = form_tag add_note_multiple_business_comments_path, remote: true do
-        .modal-body
-          .email-area
-            .to 
-              .title To:  
-              .recipients   
-            = text_area_tag :comment, nil, rows: 5, cols: 75, placeholder: "Type your comment..."
-            = hidden_field_tag :applicant_ids    
-            - if @job.present? 
-              = hidden_field_tag :job_id, @job.id 
-        .modal-footer 
-          = submit_tag "Add Note", class: "btn submit-button"
-          / .submit-button-deactivated Add Note
-          .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+        %h4.modal-title 

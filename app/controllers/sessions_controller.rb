@@ -23,6 +23,9 @@ class SessionsController < ApplicationController
         else
           redirect_to job_seeker_jobs_path
         end
+      elsif @user.kind == "superTalentwizAdmin"
+        session[:user_id] = @user.id
+        redirect_to admin_root_path
       end
     else 
       flash[:error] = "Either your Username or Password is incorrect."

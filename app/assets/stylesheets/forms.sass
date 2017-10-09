@@ -8,10 +8,10 @@
   padding: 5px 10px
   background: #FFFFFF
 .form-row
+  padding: 10px 5%
   overflow: hidden
-  padding: 5px 0 
+
   border-bottom: 1px solid rgba(0,0,0,0.1)
-  padding: 5px 10px
   .contain-50
     float: left
     width: 49%
@@ -129,7 +129,7 @@
   .comment-area-footer
     padding: 10px 10px
     border-top: 1px solid rgba(0,0,0,0.1)
-    background: #ffffff
+    background: rgba(0,0,0,.05)
     overflow: hidden
     clear: both
     .btn
@@ -154,6 +154,9 @@
     overflow: hidden
     height: auto
     border-bottom: 1px solid rgba(0,0,0,0.1)
+    .show-hidden-search-box
+      float: left
+      margin-right: 25px
   .to 
     height: auto
     padding: 10px 10px
@@ -344,20 +347,24 @@
     overflow: hidden
 
 .user-tag
-  width: auto
+  width: 100%
   float: left
   padding: 5px 10px
   margin: 5px 5px 0 0 
   overflow: hidden
   border: 1px solid rgba(239, 122, 43, 0.9)
   border-radius: 2px
+  .circle-img
+    float: left
+    margin-right: 5px
   .name
     float: left 
     width: auto
-    margin-right: 5px
+    margin: 5px 0 0 5px
   .delete-tag 
-    float: left
+    float: right
     width: auto
+    margin: 5px 0 0 0
   &:hover
     cursor: pointer
 
@@ -433,14 +440,25 @@
   z-index: 100
   background: #ffffff
   box-shadow: 0px 1px 2px 1px rgba(199,197,199,1) 
-  min-width: auto
+  min-width: 300px
   min-height: auto
-  width: fit-content
+  max-width: 300px
   height: fit-content
   position: absolute
+  padding: 10px 10px
+  input
+    border: 1px solid #ccc
+  .assigned-users
+    width: 100%
   .insert-tokens
     width: 100%
     .insert-token
+      width: 100%
+      padding: 10px 10px
+      &:hover
+        cursor: pointer
+        background: rgba(239,123,43, 0.3)
+    .insert-template
       width: 100%
       padding: 10px 10px
       &:hover

@@ -8,7 +8,7 @@ class Business::TasksController < ApplicationController
   before_filter :load_taskable, except: [:new, :destroy, 
     :job_complete, :job_overdue, :job_due_today, 
     :client_complete, :client_overdue, :client_due_today, 
-    :create_multiple, :completed]
+    :create_multiple, :completed, :update, :new_multiple]
   before_filter :new_taskable, only: [:new]
 
   def job_tasks
@@ -101,6 +101,8 @@ class Business::TasksController < ApplicationController
     if params[:application_id].present?
       @candidate = Application.find(params[:application_id]).candidate.id
       where[:taskable_id] = @candidate 
+    else 
+      where[:taskable_id] = params[:candidate_id]
     end
 
     where[:company_id] = current_company.id
@@ -277,10 +279,13 @@ class Business::TasksController < ApplicationController
     respond_to do |format| 
       if @new_task.save        
         if @taskable.class == Job
-          @tasks = Task.where(job_id: @taskable.id) 
+          @tasks = Task.where(job_id: @taskable.id, status: "active") 
         elsif @taskable.class == Candidate && params[:task][:job_id].present?
           @tasks = Task.where(job_id: params[:task][:job_id].to_i, 
             taskable_type: "Candidate", taskable_id: @new_task.taskable_id, status: "active")
+        elsif @taskable.class == Candidate
+          @tasks = Task.where(taskable_type: "Candidate", 
+            taskable_id: @new_task.taskable_id, status: "active")
         end
         format.js 
       else
@@ -333,16 +338,22 @@ class Business::TasksController < ApplicationController
 
   end
 
+  def new_multiple
+    @task = Task.new
+    @job = Job.find(params[:job]) if params[:job].present?
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def create_multiple
     applicant_ids = params[:applicant_ids].split(',')
-    
+    @user_ids = params[:task][:user_ids].split(',') 
+
     applicant_ids.each do |id| 
       @candidate = Candidate.find(id)
-      @task = @candidate.tasks.build(title: params[:title],
-        due_date: params[:due_date], due_time: params[:due_time],
-        kind: params[:kind], notes: params[:notes],
-        user_id: current_user.id, job_id: params[:job_id], status: params[:status],
-        company_id: current_company.id, user_ids: params[:user_ids])
+      @task = @candidate.tasks.build(task_params.merge!(user_ids: @user_ids))
       @task.save
     end
     # track_activity(@comment, "create")
@@ -357,8 +368,7 @@ class Business::TasksController < ApplicationController
   def task_params 
     params.require(:task).permit(:title, :notes, :kind, 
       :due_date, :due_time, :status, :candidate_ids, :job_id,
-      :user_id, :company_id,
-      user_ids: []
+      :user_id, :company_id
       )
   end
 

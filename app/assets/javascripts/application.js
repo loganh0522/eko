@@ -21,8 +21,6 @@
 //= require geocomplete
 //= require googledocviewer
 //= require trix
-//= require tinymce
-//= require tinymce-jquery
 //= require autocomplete-rails
 //= require bootstrap-colorpicker
 //= require jquery.timepicker.js

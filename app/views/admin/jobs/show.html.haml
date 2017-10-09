@@ -1,0 +1,55 @@
+.job-show-header
+  .header
+    .details
+      %h1= @job.title
+      .location= "#{@job.location}"
+      .job-link
+        = link_to "http://" + @job.url, :target => "_blank", class: "link" do
+          .glyphicon.glyphicon-link
+  .change-containers-nav
+    %ul 
+      = link_to admin_job_path(@job), class: 'change-aj' do 
+        %li{:class => is_activated?(business_job_path(@job))} Details
+      = link_to admin_job_applications_path(@job), class: 'change-aj' do 
+        %li{:class => is_activated?(admin_job_applications_path(@job))} Applicants
+
+      = link_to admin_job_activities_path(@job), class: 'change-aj' do 
+        %li{:class => is_activated?(admin_job_activities_path(@job))} Activity
+
+      = link_to admin_job_tasks_path(@job), class: 'change-aj' do 
+        %li{:class => is_activated?(admin_job_tasks_path(@job))} Tasks
+      
+      = link_to admin_job_comments_path(@job), class: 'change-aj' do 
+        %li{:class => is_activated?(admin_job_comments_path(@job))} Notes
+
+#main-container
+  .main-row-container
+    .inner-container
+      .job-description
+        .job-header
+          %h2= @job.title
+          = "#{@job.location} - #{@job.kind}"
+        .job-body
+          = @job.description.html_safe 
+      .extra-job-details
+        %h3 Job Details 
+        .detail
+          .type Industry
+          / .content= @job.industries.first.name
+        .detail
+          .type Career Level 
+          / .content= @job.career_level
+        .detail
+          .type Posted
+          .content= "#{time_ago_in_words(@job.created_at)} ago"
+
+  / .all-job-applicants-container
+  / #job-applicants
+  /   .job-stages
+  /     = render 'business/applications/job_applications/job_stages'
+  /   .main-container 
+  /     = render 'business/applications/job_applications/applications_table'
+
+
+
+

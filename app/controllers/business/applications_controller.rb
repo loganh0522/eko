@@ -10,7 +10,6 @@ class Business::ApplicationsController < ApplicationController
   def index
     @job = Job.find(params[:job_id])
     @applications = @job.applications
-    @tag = Tag.new
     tags_present(@applications) 
     
     respond_to do |format| 

@@ -11,7 +11,7 @@
   $('.active-button').removeClass('active-button');
   $(".display-applicant-details").html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
 <% elsif @taskable.class == Job %> 
-  $('#task-container').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
+  $('.tasks').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
   $('#basic-form-modal').modal("toggle");
 <% else %> 
   $('#task-container').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');

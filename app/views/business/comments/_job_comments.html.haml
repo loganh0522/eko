@@ -1,8 +1,9 @@
-= render 'business/comments/form'
-.comment-container
-  - if @comments.present?
-    - @comments.each do |comment|
-      = render 'business/comments/comment', comment: comment
-  - else  
-    .not-present-container
-      %p There are currently no notes for this applicant.
+.job-comment-container
+  = render 'business/comments/form'
+  .comment-container
+    - if @comments.present?
+      - @comments.each do |comment|
+        = render 'business/comments/comment', comment: comment
+    - else  
+      .not-present-container
+        %p There are currently no notes for this applicant.

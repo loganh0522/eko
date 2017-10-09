@@ -1,19 +1,6 @@
 .form-row
   .contain-3
-    .assign-to-row
-      .title Add Job
-      .assign-user#user_ids_Block
-        .show-hidden-search-box
-          .plain-text 
-            No Job Selected
-            .caret
-        .hidden-search-box
-          .select-box
-            .select-item{data: {:id => ''}} No Job Selected
-            - if current_company.open_jobs.present?
-              - @taskable.applications.each do |app|
-                .select-item{data: {:id => app.job.id}}= app.job.title
-              = hidden_field_tag :job_id, value: '', id: "select-box-field"
+    = render 'business/users/users_autocomplete'
 
   .contain-3
     .assign-to-row

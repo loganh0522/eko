@@ -1,9 +1,8 @@
 .task-form
   = form_for [:business, @taskable, @task], html: {remote: true} do |f|
     .form-row-1
-      .contain-1
-        = f.text_field :title, id: "title_Block", placeholder: 'Enter Task', autocomplete: 'off'
-        %span#title_msgBlock
+      = f.text_field :title, id: "title_Block", placeholder: 'Enter Task', autocomplete: 'off'
+      %span#title_msgBlock
     .form-row-4
       .contain-2
         = f.text_field :due_date, placeholder: "Due Date"
@@ -24,24 +23,24 @@
     - else 
       = render 'business/tasks/form_fields/all_fields', f: f
 
-    = f.hidden_field :user_ids, id: "user_ids"
+    = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
     = f.hidden_field :candidate_ids, id: "candidate_ids"
-    
+
     - if @taskable.class == Job
       = f.hidden_field :job_id, value: @taskable.id
     - elsif @taskable.class == Candidate && @job.present?
       = f.hidden_field :job_id, value: @job.id
     - else 
       = hidden_field_tag :job_id, nil, id: "job_ids"
-      
+    
     = f.hidden_field :user_id, value: current_user.id
     = f.hidden_field :company_id, value: current_company.id
     = f.hidden_field :status, value: "active"
     .comment-area-footer
-      / = link_to "Delete", business_task_path(@task), remote: true, :method => :delete, class: 'btn border-button2'
       = f.submit @task.new_record? ? "+ Create Task" : "Update Task", class: "btn submit-button", id: "submit-comment-btn"
-      - if @taskable.class == Candidate
-        .btn.border-button2.hide-can-form Cancel
+
+      - if @taskable.class == Candidate || !@task.new_record?
+        .btn.border-button2.remove_form Cancel
       - else
         .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
 

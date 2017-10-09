@@ -5,7 +5,7 @@ class Business::CommentsController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
-  before_filter :load_commentable, except: [:new, :destroy, :update, :add_note_multiple]
+  before_filter :load_commentable, except: [:new, :destroy, :update, :add_note_multiple, :new_multiple]
   before_filter :new_commentable, only: [:new]
 
   def job_comments
@@ -104,6 +104,15 @@ class Business::CommentsController < ApplicationController
     end
   end
 
+  def new_multiple
+    @comment = Comment.new
+    @job = Job.find(params[:job]) if params[:job].present?
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def add_note_multiple
     applicant_ids = params[:applicant_ids].split(',')
     
@@ -111,10 +120,9 @@ class Business::CommentsController < ApplicationController
       @candidate = Candidate.find(id)
       if params[:job_id].present?
         @job = Job.find(params[:job_id])
-        @application = Application.where(candidate_id: @candidate.id, job: @job.id).first
-        @comment = @application.comments.build(body: params[:comment], user_id: current_user.id)
+        @comment = @candidate.comments.build(comment_params)
       else 
-        @comment = @candidate.comments.build(body: params[:comment], user_id: current_user.id)
+        @comment = @candidate.comments.build(comment_params)
       end
       @comment.save
     end
