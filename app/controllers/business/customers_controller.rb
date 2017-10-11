@@ -4,7 +4,11 @@ class Business::CustomersController < ApplicationController
   before_filter :belongs_to_company
   
   def index 
-    @customer = current_company.customer
+    if current_company.customer.present?
+      @customer = current_company.customer
+    else
+      @customer = Customer.new
+    end
   end
 
   def new
@@ -13,13 +17,11 @@ class Business::CustomersController < ApplicationController
     
     respond_to do |format|
       format.js
-      format.html
     end
   end
 
   def create  
     @company = current_company
-
     if !@company.customer.present? 
       customer = StripeWrapper::StripeCustomer.create(
         :company => @company,
@@ -28,13 +30,15 @@ class Business::CustomersController < ApplicationController
       if customer.successful?
         stripe_customer = JSON.parse customer.response.to_s
 
-        company_subscription(params[:plan])
-
         Customer.create(company_id: current_company.id, 
-          stripe_customer_id: stripe_customer["id"],  
-          last_four: stripe_customer['sources']['data'].first['last4'],
-          exp_year: stripe_customer['sources']['data'].first['exp_year'],
-          exp_month: stripe_customer['sources']['data'].first['exp_month'])
+          address: params[:customer][:address],
+          full_name: params[:customer][:full_name],
+          location: params[:customer][:city],
+          postal_code: params[:customer][:postal_code],
+          stripe_customer_id: stripe_customer["id"],
+          exp_year: stripe_customer["sources"]["data"].first["exp_year"],
+          exp_month: stripe_customer["sources"]["data"].first["exp_month"], 
+          last_four: stripe_customer["sources"]["data"].first["last4"])
       end
     else 
       render :index
@@ -46,6 +50,10 @@ class Business::CustomersController < ApplicationController
   def edit 
     @customer = current_company.customer 
     @company = current_company
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def update
@@ -84,8 +92,7 @@ class Business::CustomersController < ApplicationController
     if customer.successful?
       stripe_customer = JSON.parse customer.response.to_s
       company_subscription(params[:plan])
-      current_company.customer.update_attribute(:plan, stripe_customer['plan']['id'])
-      current_company.customer.update_attribute(:active, true)     
+      current_company.customer.update_attribute(:plan, stripe_customer['plan']['id'])  
       current_company.customer.update_attribute(:stripe_subscription_id, stripe_customer['id'])
       
       redirect_to business_plan_path
@@ -106,7 +113,6 @@ class Business::CustomersController < ApplicationController
     if customer.successful?
       company_subscription(params[:plan])
       current_company.customer.update_attribute(:plan, params[:plan])
-      current_company.customer.update_attribute(:active, true)  
       redirect_to business_plan_path
       flash[:success] = "Your subscription was successful, the charge has been added to your card"
     else 
@@ -141,6 +147,7 @@ class Business::CustomersController < ApplicationController
   def company_subscription(plan)
     @company = current_company
     @plan = plan
+    current_company.update_attribute(:active, true)   
 
     if @plan == 'start_up_month' || @plan == 'start_up_year'
       @company.update_column(:subscription, "start_up")

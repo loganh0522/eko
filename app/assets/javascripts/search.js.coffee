@@ -4,8 +4,12 @@ jQuery ->
     param = $(this).attr('name') + "=" + $(this).attr('value')
     url = window.location
     links = $('.filter-link') 
+
     for n in links
-      n.setAttribute('href', "?" + $("#search-form").serialize())
+      linkUrl = $(n).attr('href').split("?")[0]
+      console.log(linkUrl)
+      n.setAttribute('href', linkUrl + "?" + $("#search-form").serialize())
+
     $.get(action, $("#search-form").serialize(), null, "script")
     history.pushState({}, "", "?" + $("#search-form").serialize())
   
@@ -14,10 +18,16 @@ jQuery ->
     param = $(this).attr('name') + "=" 
     url = window.location
     links = $('.filter-link')
+    
     for n in links
-      n.setAttribute('href', "?" + $("#search-form").serialize())
-    $.get(action, $("#search-form").serialize(), null, "script")
+      linkUrl = $(n).attr('href')
+      console.log(n)
+      n.setAttribute('href', linkUrl + "?" + $("#search-form").serialize())
+    
+    $.get(action, $("#search-form").serialize(), null, "script")  
     history.pushState({}, "", "?" + $("#search-form").serialize())
+
+
 
   $(".change-containers-nav").on 'click', '.change-aj', (event) ->
     $.getScript(this.href)

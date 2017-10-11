@@ -130,7 +130,9 @@ jQuery ->
   $("#geocomplete").geocomplete({
     types: ['(cities)']
   })
+  
   $("#geocomplete2").geocomplete()
+
 
   $(document).ajaxComplete ->
     $('.work-experience').find('#geocomplete').geocomplete({
@@ -141,6 +143,10 @@ jQuery ->
     })
     $("#geocomplete2").geocomplete()
     return
+    
+    $("#geocomplete-address").geocomplete({
+      types: ['(address)']
+    })
     
   $('#basic-form-modal').on 'shown.bs.modal', ->
     $('.event-form').find("#geocomplete2").geocomplete()

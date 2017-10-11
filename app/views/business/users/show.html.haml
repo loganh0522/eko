@@ -32,11 +32,11 @@
           
           = link_to "#{@login_url}" do
             .sync-box Sync with Outlook
-
-      / .sync-email
-      /   %h4 Sync Gmail
-      /   = link_to '/auth/google_oauth2' do 
-      /     .sync-box Authenticate with Google!
+      .sync-email
+        %h4 Sync Gmail
+        = link_to '/auth/google_oauth2' do 
+          .sync-box Authenticate with Google!
+      
       /   - if @auth.present? 
       /     - @auth.each do |key, value| 
       /       = key 
@@ -47,5 +47,5 @@
       / - if @labels.present? 
       /   - @labels.each do |label|
       /     = label.id
-= render 'business/users/right_modal'
+/ = render 'business/users/right_modal'
 / = render 'business/user_avatars/picture_modal'

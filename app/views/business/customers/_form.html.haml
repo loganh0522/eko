@@ -1,22 +1,34 @@
-= form_for [:business, @customer], html: {id: "payment-form"} do |f|
-  %fieldset.credit_card
-    %span.payment-errors
-    .row
-      .form-group.col-sm-10
-        %label.control-label(for="credit-card-number") Credit Card Number
-        %input.form-control#credit-card-number(type="text" data-stripe="number")
-    .row
-      .form-group.col-sm-10
-        %label.control-label(for="security-code") Security Code
-        %input.form-control#security-code(type="text" data-stripe="cvc")
-    .row
-      %label.control-label.col-sm-2 Expiration
-    .row
-      .col-sm-6
-        = select_month(Date.today, {add_month_numbers: true},  class: 'form-control', data: {stripe: "exp-month"})
-      .col-sm-6 
-        = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, class: 'form-control', data: {stripe: "exp-year"})
-  %fieldset.form-group.action
-  = f.submit @company.customer.present? ? "Update Payment Details" : "Add Payment Details" , class: "btn btn-primary" 
-  - if @company.customer.present? 
-    = link_to "Cancel", business_customers_path, class: "btn"
+.billing-form
+  = form_for [:business, @customer], html: {id: "payment-form"} do |f|
+    .modal-body
+      %span.payment-errors
+      .row
+        .col-md-12
+          %label Billing Address
+          = f.text_field :address, id: "geocomplete2", placeholder: "Address"
+      .row
+        .col-md-6
+          = f.text_field :city, id: "geocomplete", placeholder: "City"  
+        .col-md-6
+          = f.text_field :postal_code, placeholder: "Postal/Zip Code", autocomplete: "off"
+      .row
+        .col-md-12
+          %label Cardholder Name
+          = f.text_field :full_name, placeholder: "Cardholder Full Name", autocomplete: "off"
+      .row
+        .col-md-12
+          %label(for="credit-card-number") Credit Card Number
+          %input#credit-card-number(type="text" data-stripe="number")            
+      .row
+        .col-sm-4
+          %label Exp. Month
+          = select_month(Date.today, {add_month_numbers: true}, data: {stripe: "exp-month"})
+        .col-sm-4
+          %label Exp. Day
+          = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, data: {stripe: "exp-year"})
+        .col-sm-4
+          %label(for="security-code") CVC Number
+          %input#security-code(type="text" data-stripe="cvc")
+    .modal-footer
+      = f.submit current_company.customer.present? ? "Update Payment Details" : "Add Payment Details" , class: "btn submit-button"  
+      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

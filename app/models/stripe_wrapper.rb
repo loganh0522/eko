@@ -11,9 +11,8 @@ module StripeWrapper
       begin
         response = Stripe::Charge.create(
           amount: options[:amount], 
-          currency: 'cdn', 
-          card: options[:card], 
-          description: options[:description]
+          currency: 'usd', 
+          customer: options[:customer_id]
           )
         new(response: response)
       

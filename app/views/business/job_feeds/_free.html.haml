@@ -2,8 +2,8 @@
   %ul 
     = link_to business_job_job_feeds_path(@job, type: 'free'), remote: true do 
       %li.change#free.activated Free
-    = link_to business_job_job_feeds_path(@job, type: 'premium-job-boards'), remote: true do 
-      %li.change#premium Premium
+    / = link_to business_job_job_feeds_path(@job, type: 'premium-job-boards'), remote: true do 
+    /   %li.change#premium Premium
 
 #free-boards
   .job-feed-container#adzuna-container

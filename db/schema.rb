@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171004103204) do
+ActiveRecord::Schema.define(version: 20171010160814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -215,6 +215,11 @@ ActiveRecord::Schema.define(version: 20171004103204) do
     t.string   "postal_code"
     t.integer  "exp_month"
     t.integer  "exp_year"
+    t.string   "address"
+    t.string   "city"
+    t.string   "country"
+    t.string   "state"
+    t.string   "location"
   end
 
   create_table "default_stages", force: :cascade do |t|

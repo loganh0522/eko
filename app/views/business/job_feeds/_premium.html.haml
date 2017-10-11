@@ -18,13 +18,13 @@
   #cart 
     .header My Cart
     .body
-
     .footer
       #cart-total 
         .total Total
         .amount= "0"
       = f.hidden_field :total
-      
+      = f.hidden_field :job_id, value: @job.id
+      = f.hidden_field :company_id, value: current_company.id
       - if current_company.customer.present? 
         = f.submit "Checkout", class: 'btn submit-button' 
       - else
