@@ -15,6 +15,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'trix'
 gem 'googledocviewer'
+gem 'viewerjs-rails'
 
 gem 'responders', '~> 2.0'
 

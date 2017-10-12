@@ -3,7 +3,8 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   scope: ['email', 
     'https://www.googleapis.com/auth/gmail.compose',
     'https://www.googleapis.com/auth/gmail.modify',
-    'https://www.googleapis.com/auth/gmail.send'],
+    'https://www.googleapis.com/auth/gmail.send',
+    'https://www.googleapis.com/auth/calendar'],
     access_type: 'offline'}
 
   # provider :microsoft_v2_auth, ENV['OUTLOOK_API_ID'], ENV['OUTLOOK_API_SECRET'], {

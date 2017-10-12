@@ -1,12 +1,16 @@
 .profile-container
-  / .change-containers-nav
-  /   %ul 
-  /     = link_to business_job_application_path(@job, @application), remote: true do
-  /       %li.change#profile.activated Profile
-      
-  /     = link_to business_candidate_resume_path(@candidate.id, @candidate.resumes.first.id), remote: true do 
-  /       %li.change#resume Resume
+  .change-containers-nav
+    %ul 
+      = link_to business_job_application_path(@job, @application), remote: true do
+        %li.change#profile-link.activated Profile
+      - if @candidate.resumes.present?
+        = link_to business_candidate_resume_path(@candidate.id, @candidate.resumes.first.id), remote: true do 
+          %li.change#resume-link Resume
+      - else 
+        = link_to new_business_candidate_resume_path(@candidate.id), remote: true do 
+          %li.change#resume-link Resume
   .experience-container
     = render 'business/shared_manual_candidate/work_experience'
     = render 'business/shared_manual_candidate/education'
+
     

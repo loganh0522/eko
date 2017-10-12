@@ -42,10 +42,8 @@ class Business::ApplicationsController < ApplicationController
     @rejection_reasons = current_company.rejection_reasons
     @application = Application.find(params[:id])  
     @candidate = @application.candidate
-    @resume = Resume.new
     @job = Job.find(params[:job_id])
-    @hiring_team = @job.users
-    @tasks = Task.search("*", where: {taskable_id: @candidate.id, job_id: @job.id} )
+    @resume = @candidate.resumes.first
     
     if @candidate.manually_created == true 
       @applicant = @candidate

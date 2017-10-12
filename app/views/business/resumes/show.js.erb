@@ -1,1 +1,3 @@
-$('.experience-container').html('<%= j render "business/resumes/resume", resume: @resume  %>')
+$('.experience-container').html('<%= j render "business/resumes/resume", resume: @resume  %>');
+$('#resume-link').addClass('activated');
+$('#profile-link').removeClass('activated');

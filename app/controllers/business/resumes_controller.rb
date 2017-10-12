@@ -11,6 +11,10 @@ class Business::ResumesController < ApplicationController
 
   def new
     @resume = Resume.new
+    @candidate = Candidate.find(params[:candidate_id])
+    respond_to do |format|
+      format.js
+    end
   end
 
   def create
@@ -25,7 +29,7 @@ class Business::ResumesController < ApplicationController
 
   def show 
     @candidate = Candidate.find(params[:candidate_id])
-    @resume = Resume.find(params[:id])
+    @resume = @candidate.resumes.first
 
     respond_to do |format|
       format.js
