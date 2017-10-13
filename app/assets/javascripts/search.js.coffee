@@ -1,6 +1,10 @@
 jQuery ->
   searchRequest = null  
-  $('#search-form').on 'click', '.filter, input[name=\'owner\'] ', (event) ->
+  debounceTimeout = null
+  searchInput = $('.filter, input[name=\'owner\']')
+  searchText = $('.search-field')
+  
+  searchEvents = -> 
     if (searchRequest)
       searchRequest.abort()
     action = $("#search-form").attr('action')
@@ -14,18 +18,30 @@ jQuery ->
     searchRequest = $.get(action, $("#search-form").serialize(), null, "script")
     history.pushState({}, "", "?" + $("#search-form").serialize())
   
-  $('#search-form').on 'keyup', '.search-field', (event) ->
+  searchField = ->
+    if (searchRequest)
+      searchRequest.abort()
     action = $("#search-form").attr('action')
     param = $(this).attr('name') + "=" 
     url = window.location
     links = $('.filter-link')
-    
     for n in links
       linkUrl = $(n).attr('href').split("?")[0]
       n.setAttribute('href', linkUrl + "?" + $("#search-form").serialize())
-    
     $.get(action, $("#search-form").serialize(), null, "script")  
     history.pushState({}, "", "?" + $("#search-form").serialize())
+
+  searchInput.on 'click', (event) ->
+    clearTimeout debounceTimeout
+    debounceTimeout = setTimeout(searchEvents, 500)
+    return
+
+  searchText.on 'change keyup', (event) ->
+    clearTimeout debounceTimeout
+    debounceTimeout = setTimeout(searchField, 500)
+    return
+
+  
 
 
 
@@ -37,38 +53,6 @@ jQuery ->
     $.getScript location.url
     return
 
-  $('form').on 'click', '#search-form', ->  
-    controller = $(this).attr('class').split(' ').pop()  
-    $(this).autocomplete( 
-      source: '/business/' + controller 
-      appendTo: $('#search-results')     
-      focus: (event, ui) -> 
-        if controller == "jobs"
-          $('#search-results').val ui.item.title
-        else
-          $('#search-results').val ui.item.first_name + ui.item.last_name
-        false
-      select: (event, ui) ->
-        idType = controller.slice(0, -1)
-        if controller == "jobs"
-          $('.assigned-' + controller).append('<div class="user-tag"> <div class="name">' + ui.item.title  + '</div> <div class="delete-tag"> &times </div> </div>') 
-        else
-          $('.assigned-' + controller).append('<div class="user-tag" > <div class="name">' + ui.item.full_name  + '</div> <div class="delete-tag"> &times </div> </div>')  
-        
-        if $('#' + idType + '_ids').val() == ''
-          values = ui.item.id
-        else
-          values =  $('#' + idType + '_ids').val() + ',' + ui.item.id
-        $('#' + idType + '_ids').val values
-        false
-    ).data('ui-autocomplete')._renderItem = (ul, item) ->
-      if controller == "jobs"
-        $('<li>').attr('ui-item-autocomplete', item.value).append("<a>" + item.title + "</a>").appendTo ul 
-      else
-        $('<li>').attr('ui-item-autocomplete', item.value).append("<a>" + item.full_name + "</a>").appendTo ul 
-    return
-    
-  
   $('#main-container').on 'click', '.glyphicon', (event) ->
     if $(this).hasClass('glyphicon-minus')
       $(this).parent().next().hide()

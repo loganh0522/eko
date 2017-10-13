@@ -3,6 +3,7 @@ class Resume < ActiveRecord::Base
 
   mount_uploader :name, ResumeUploader
 
+  validates_presence_of :name
 
   def set_filetype
     File.basename(self.name.path).split('.')[]

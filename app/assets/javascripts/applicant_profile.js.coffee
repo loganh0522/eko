@@ -67,6 +67,7 @@ jQuery ->
 
 #################### Add Applicants To Modal On Action Click #############################
   $('.multi-form').on 'shown.bs.modal', ->
+    console.log('i am')
     checkbox = $('.applicant-checkbox')
     $(this).find('#applicant_ids').val('')
     

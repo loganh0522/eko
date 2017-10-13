@@ -1,9 +1,19 @@
 .profile-container
-  - if @candidate.resumes.first.present?
-    = link_to "Download Resume", @candidate.resumes.first.name_url, class: "btn submit-button", id: "download-resume"
-
-  = render 'business/shared_manual_candidate/work_experience'
-  = render 'business/shared_manual_candidate/education'
+  .change-containers-nav
+    %ul 
+      = link_to business_candidate_path(@candidate), remote: true do
+        %li.change#profile-link.activated Profile
+      - if @candidate.resumes.present?
+        = link_to business_candidate_resume_path(@candidate.id, @candidate.resumes.first.id), remote: true do 
+          %li.change#resume-link Resume
+      - else 
+        = link_to new_business_candidate_resume_path(@candidate.id), remote: true do 
+          %li.change#resume-link Resume
+  / - if @candidate.resumes.first.present?
+  /   = link_to "Download Resume", @candidate.resumes.first.name_url, class: "btn submit-button", id: "download-resume"
+  .experience-container
+    = render 'business/shared_manual_candidate/work_experience'
+    = render 'business/shared_manual_candidate/education'
     
   / - else 
   /   = form_for [:business, @candidate, Resume.new],:html => { :multipart => true }, remote: true do |f| 

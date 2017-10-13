@@ -9,7 +9,7 @@ class Business::CandidatesController < ApplicationController
   
   def index
     where = {}
-    fields = [:work_titles, :work_description, :work_company, :education_description, :education_school]
+    fields = [:full_name, :work_titles, :work_description, :work_company, :education_description, :education_school]
     query = params[:query].nil? || "*"
     where[:company_id] = current_company.id 
     where[:rating]
@@ -19,17 +19,17 @@ class Business::CandidatesController < ApplicationController
     where[:job_location] = params[:location] if params[:location].present?
     where[:tags] = {all: params[:tags]} if params[:tags].present?
     where[:created_at] = {gte: params[:date_applied].to_time, lte: Time.now} if params[:date_applied].present?
-    
+
+
     if params[:qcv].present?
       @candidates = Candidate.search(params[:qcv], where: where, fields: fields, match: :word_start).to_a
     else
       @candidates = Candidate.search("*", where: where).to_a
     end
 
-    @message = Message.new
     @invitation = InterviewInvitation.new
     @tags = current_company.tags
-    @tag = Tag.new
+
     respond_to do |format|
       format.js
       format.html

@@ -29,6 +29,7 @@
         .modal-header
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
           %h4.modal-title
+  
   .modal#add-to-jobModal
     .modal-dialog
       .modal-content
@@ -36,7 +37,8 @@
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
           %h4.modal-title Add to Job 
         .modal-body
-
+= render "business/comments/add_comment"
+= render "business/candidates/destroy"
 - if @candidate.present? 
   :javascript
     $('.names a:first').trigger("click");
