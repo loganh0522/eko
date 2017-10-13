@@ -1,16 +1,17 @@
 jQuery ->
+  searchRequest = null  
   $('#search-form').on 'click', '.filter, input[name=\'owner\'] ', (event) ->
+    if (searchRequest)
+      searchRequest.abort()
     action = $("#search-form").attr('action')
     param = $(this).attr('name') + "=" + $(this).attr('value')
     url = window.location
     links = $('.filter-link') 
-
     for n in links
       linkUrl = $(n).attr('href').split("?")[0]
-      console.log(linkUrl)
       n.setAttribute('href', linkUrl + "?" + $("#search-form").serialize())
 
-    $.get(action, $("#search-form").serialize(), null, "script")
+    searchRequest = $.get(action, $("#search-form").serialize(), null, "script")
     history.pushState({}, "", "?" + $("#search-form").serialize())
   
   $('#search-form').on 'keyup', '.search-field', (event) ->
@@ -20,8 +21,7 @@ jQuery ->
     links = $('.filter-link')
     
     for n in links
-      linkUrl = $(n).attr('href')
-      console.log(n)
+      linkUrl = $(n).attr('href').split("?")[0]
       n.setAttribute('href', linkUrl + "?" + $("#search-form").serialize())
     
     $.get(action, $("#search-form").serialize(), null, "script")  

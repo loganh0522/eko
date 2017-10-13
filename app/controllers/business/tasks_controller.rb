@@ -102,25 +102,18 @@ class Business::TasksController < ApplicationController
     else 
       query = "*"
     end 
-    
-    if params[:application_id].present?
-      @candidate = Application.find(params[:application_id]).candidate.id
-      where[:taskable_id] = @candidate 
-    else 
-      where[:taskable_id] = params[:candidate_id]
-    end
 
     where[:company_id] = current_company.id
     where[:status] = 'active'
     where[:users] = {all: [current_user.id]} if params[:owner] == "user"
     where[:users] = {all: [params[:assigned_to]]} if params[:assigned_to].present?
     where[:job_id] = params[:job_id] if params[:job_id].present?
-
+    where[:taskable_id] = params[:candidate_id] if params[:candidate_id].present?
     where[:taskable_type] = params[:type] if params[:type].present?
-
     where[:client_id] = params[:client_id] if params[:client_id].present?
     where[:kind] = params[:kind] if params[:kind].present?
-    
+
+
     @tasks = Task.search(query, where: where, order: {created_at: :desc}).to_a
 
 
