@@ -1,6 +1,6 @@
 .comment-area
   = form_for [:business, @commentable, @comment], remote: true do |f|
-    = f.text_area :body, id: "body_Block", class: "comment-body", rows: 10, cols: 8, placeholder: "Add a Note"
+    = f.trix_editor :body, id: "body_Block", class: "comment-body", rows: 10, cols: 8, placeholder: "Add a Note"
     %span#body_msgBlock
     .comment-area-footer
       = f.submit @comment.new_record? ? "+ Add Note" : "Update", class: "btn submit-button", id: "submit-comment-btn"

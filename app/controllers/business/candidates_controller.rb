@@ -24,7 +24,7 @@ class Business::CandidatesController < ApplicationController
     if params[:qcv].present?
       @candidates = Candidate.search(params[:qcv], where: where, fields: fields, match: :word_start).to_a
     else
-      @candidates = Candidate.search(query, where: where).to_a
+      @candidates = Candidate.search("*", where: where).to_a
     end
 
     @invitation = InterviewInvitation.new

@@ -9,9 +9,16 @@ class Business::JobFeedsController < ApplicationController
   include AuthHelper
 
   def index
+    if current_company.customer.present?
+      @customer = current_company.customer 
+    else 
+      @customer = Customer.new
+    end
+    
     if params[:type] == "free"
       @job = Job.find(params[:job_id])
       @job_feed = @job.job_feed
+
     elsif params[:type] == "premium-job-boards"
       @job = Job.find(params[:job_id])
       @job_feed = @job.job_feed

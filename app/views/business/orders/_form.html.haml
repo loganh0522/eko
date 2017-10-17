@@ -21,4 +21,4 @@
       - if current_company.customer.present? 
         = f.submit "Checkout", class: 'btn submit-button' 
       - else
-        = link_to "Checkout", business_customer_path, class: 'btn submit-button' 
+        = link_to "Checkout", business_customers_path, class: 'btn submit-button' 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171011205710) do
+ActiveRecord::Schema.define(version: 20171017144601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -437,6 +437,8 @@ ActiveRecord::Schema.define(version: 20171011205710) do
     t.string  "text_color"
     t.string  "nav_color"
     t.string  "font_family"
+    t.string  "kind"
+    t.string  "app_process"
   end
 
   create_table "job_countries", force: :cascade do |t|

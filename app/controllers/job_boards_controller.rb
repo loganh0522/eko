@@ -1,6 +1,6 @@
 class JobBoardsController < ApplicationController 
   before_filter :profile_sign_up_complete
-  
+  layout :set_layout
 
   def index
     @job_board = JobBoard.find_by_subdomain!(request.subdomain)
@@ -17,15 +17,13 @@ class JobBoardsController < ApplicationController
 
   private
 
-  # def set_layout
-  #   @job_board = JobBoard.find_by_subdomain!(request.subdomain)
-    
-  #   if @job_board
+  def set_layout
+    @job_board = JobBoard.find_by_subdomain!(request.subdomain)
 
-  #   elsif 
-
-  #   else
-
-  #   end
-  # end
+    if @job_board.kind == "basic"
+      "career_portal"
+    else
+      "advanced_career_portal"
+    end
+  end
 end

@@ -103,17 +103,24 @@ class Business::TasksController < ApplicationController
       query = "*"
     end 
 
+    if params[:status].present?
+      where[:status] = params[:status]
+    else
+      where[:status] = 'active' 
+    end
+
     where[:company_id] = current_company.id
-    where[:status] = 'active'
     where[:users] = {all: [current_user.id]} if params[:owner] == "user"
     where[:users] = {all: [params[:assigned_to]]} if params[:assigned_to].present?
     where[:job_id] = params[:job_id] if params[:job_id].present?
-    where[:taskable_id] = params[:candidate_id] if params[:candidate_id].present?
+    where[:taskable_id] = params[:candidate_id] if params[:candidate_id].present? 
     where[:taskable_type] = params[:type] if params[:type].present?
     where[:client_id] = params[:client_id] if params[:client_id].present?
     where[:kind] = params[:kind] if params[:kind].present?
 
 
+    @job = Job.find(params[:job_id]) if params[:job_id].present?  
+    @candidate = Candidate.find(params[:candidate_id])
     @tasks = Task.search(query, where: where, order: {created_at: :desc}).to_a
 
 
@@ -125,14 +132,20 @@ class Business::TasksController < ApplicationController
 
   def complete
     # @tasks = @taskable.complete_tasks
+
+    binding.pry
+
     where = {}
     if params[:query].present? 
       query = params[:query] 
     else 
       query = "*"
     end 
+
     where[:company_id] = current_company.id
     where[:status] = 'complete'
+    where[:taskable_id] = params[:candidate_id] if params[:candidate_id].present?
+    where[:taskable_type] = params[:type] if params[:type].present?
     where[:kind] = params[:kind] if params[:kind].present?
     where[:users] = params[:owner] if params[:owner].present?
     
@@ -279,6 +292,7 @@ class Business::TasksController < ApplicationController
         if @taskable.class == Job
           @tasks = Task.where(job_id: @taskable.id, status: "active") 
         elsif @taskable.class == Candidate && params[:task][:job_id].present?
+          @job = Job.find(params[:task][:job_id])
           @tasks = Task.where(job_id: params[:task][:job_id].to_i, 
             taskable_type: "Candidate", taskable_id: @new_task.taskable_id, status: "active")
         elsif @taskable.class == Candidate

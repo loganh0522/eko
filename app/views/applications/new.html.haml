@@ -5,8 +5,10 @@
         %img(src="#{@company.job_board.job_board_header.logo.large_logo}")
   .career-portal-job-container
     .application-form
+      .job-header
+        %h2= @job.title
       .application-header
-        %h1 Application Form
+        %h2 Application Form
         %p Please finish the following questions to apply to this job.
       .application-body
         = render 'form'
