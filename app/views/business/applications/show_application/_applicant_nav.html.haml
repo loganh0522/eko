@@ -8,7 +8,7 @@
   / = link_to business_job_application_tasks_path(@job, @application, type: "Candidate"), remote: true do
   /   %li.change#tasks Tasks
 
-  = link_to business_candidate_tasks_path(@candidate, job_id: @job.id), remote: true do
+  = link_to business_candidate_tasks_path(@candidate), remote: true do
     %li.change#tasks Tasks
     
     
