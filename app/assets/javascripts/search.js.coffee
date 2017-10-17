@@ -41,9 +41,6 @@ jQuery ->
     debounceTimeout = setTimeout(searchField, 500)
     return
 
-  
-
-
 
   $(".change-containers-nav").on 'click', '.change-aj', (event) ->
     $.getScript(this.href)

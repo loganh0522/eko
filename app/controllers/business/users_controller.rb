@@ -53,18 +53,18 @@ class Business::UsersController < ApplicationController
   end
 
   def outlook_get_token
-    OutlookWrapper::User.update_subscription(current_user)
+    # OutlookWrapper::User.update_subscription(current_user)
 
-    # token = get_token_from_code params[:code]
+    token = get_token_from_code params[:code]
 
-    # OutlookToken.create(
-    #   access_token: token.token,
-    #   refresh_token: token.refresh_token,
-    #   expires_at: Time.now + token.expires_in.to_i.seconds,
-    #   user_id: current_user.id
-    #   )
+    OutlookToken.create(
+      access_token: token.token,
+      refresh_token: token.refresh_token,
+      expires_at: Time.now + token.expires_in.to_i.seconds,
+      user_id: current_user.id
+      )
 
-    # OutlookWrapper::User.create_subscription(current_user)
+    OutlookWrapper::User.create_subscription(current_user)
     redirect_to business_user_path(current_user)
   end
 

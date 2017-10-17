@@ -9,15 +9,9 @@
       - else 
         = link_to new_business_candidate_resume_path(@candidate.id), remote: true do 
           %li.change#resume-link Resume
-  / - if @candidate.resumes.first.present?
-  /   = link_to "Download Resume", @candidate.resumes.first.name_url, class: "btn submit-button", id: "download-resume"
   .experience-container
     = render 'business/shared_manual_candidate/work_experience'
     = render 'business/shared_manual_candidate/education'
     
-  / - else 
-  /   = form_for [:business, @candidate, Resume.new],:html => { :multipart => true }, remote: true do |f| 
-  /     = f.file_field :name, id: "add-resume", class: "btn user_avatar_image inputfile "
-  /     = f.label :name, "Add Resume", class: "btn submit-button" 
 
   

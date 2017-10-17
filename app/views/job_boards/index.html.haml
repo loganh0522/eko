@@ -1,8 +1,8 @@
-.portal-header{:style => "background: url(#{@job_board.job_board_header.cover_photo.url}) no-repeat center center fixed; background-size: cover "}
-  .header-overlay{:style => "background: rgba(0,0,0,0.5)"}
-    .intro-message
-      .header= @job_board.job_board_header.header
-      .sub-header= @job_board.job_board_header.subheader
+/ .portal-header{:style => "background: url(#{@job_board.job_board_header.cover_photo.url}) no-repeat center center fixed; background-size: cover "}
+/   .header-overlay{:style => "background: rgba(0,0,0,0.5)"}
+/     .intro-message
+/       .header= @job_board.job_board_header.header
+/       .sub-header= @job_board.job_board_header.subheader
 
 - if @sections.count != 0
   .job-board-sections
@@ -24,35 +24,17 @@
         
 
 .company-job-board  
-  .jobs
-    %h2 Current Job Openings
+  - if @company.job_board.job_board_header.logo.present?
+    .logo
+      = link_to root_path do
+        %img(src="#{@company.job_board.job_board_header.logo.large_logo}")
+  .basic-jobs
+    %h2{style: "color: #67696C"} Current Job Openings
     - if @jobs.count != 0  
       - @jobs.each do |job|
-        .job-posting
-          .header-info
-            .job-detail
-              .title= link_to "#{job.title}", "jobs/#{job.id}" 
-            - if @job_board.brand_color.present?
-              .view-job{:style => "background-color: #{@job_board.brand_color}"}= link_to "View Job", "jobs/#{job.id}", class: "btn"
-            - else
-              .view-job{:style => "background-color: #EF7B2B"}= link_to "View Job", "jobs/#{job.id}", class: "btn"
-          .bottom-info
-            .left-side
-              %img(src="/tmp/black-small-location.png") 
-              = "#{job.location}"
-              
-              %img(src="/tmp/black-small-bar-chart.png") 
-              = job.career_level
-            .right-side 
-              %img(src="/tmp/black-small-hammer.png") 
-              = job.job_industries.first.industry.name
-
-              %img(src="/tmp/black-small-briefcase.png") 
-              = job.kind
-
-              %img(src="/tmp/black-small-clock.png") 
-              = "#{time_ago_in_words(job.created_at)} ago"
+        .title= link_to "#{job.title}", "jobs/#{job.id}", {style: "color: #67696C"}
     - else 
       .not-present-container
         %p Sorry, there are currently no open job postings. 
+
 .footer

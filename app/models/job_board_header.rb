@@ -4,9 +4,9 @@ class JobBoardHeader < ActiveRecord::Base
   mount_uploader :logo, CareerPortalUploader
   mount_uploader :cover_photo, CareerPortalHeaderUploader
 
-  # validates_size_of :logo, maximum: 500.kilobytes,
-  #                   message: "should be no more than 500 KB", if: :image_changed?
-
-  # validates_property :format, of: :image, in: [:jpeg, :jpg, :png, :bmp], case_sensitive: false,
-  #                    message: "should be either .jpeg, .jpg, .png, .bmp", if: :image_changed?
+  after_update :crop_avatar
+  
+  def crop_avatar
+    logo.recreate_versions!(:large_logo) 
+  end 
 end

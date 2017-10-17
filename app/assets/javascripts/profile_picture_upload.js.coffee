@@ -1,3 +1,3 @@
-document.addEventListener 'turbolinks:load', ->
-  $(document).ajaxComplete -> 
-    $('.user_avatar_image').fileupload()  
+jQuery ->
+  $('.new_user_avatar').fileupload()
+  

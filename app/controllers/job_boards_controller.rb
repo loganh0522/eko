@@ -1,5 +1,6 @@
 class JobBoardsController < ApplicationController 
   before_filter :profile_sign_up_complete
+  
 
   def index
     @job_board = JobBoard.find_by_subdomain!(request.subdomain)
@@ -13,4 +14,18 @@ class JobBoardsController < ApplicationController
   def show 
 
   end
+
+  private
+
+  # def set_layout
+  #   @job_board = JobBoard.find_by_subdomain!(request.subdomain)
+    
+  #   if @job_board
+
+  #   elsif 
+
+  #   else
+
+  #   end
+  # end
 end

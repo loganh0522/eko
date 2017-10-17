@@ -22,29 +22,31 @@ class Business::CustomersController < ApplicationController
 
   def create  
     @company = current_company
-    if !@company.customer.present? 
-      customer = StripeWrapper::StripeCustomer.create(
-        :company => @company,
-        :card => params[:stripeToken]
-        )   
-      if customer.successful?
-        stripe_customer = JSON.parse customer.response.to_s
+    customer = StripeWrapper::StripeCustomer.create(
+      :company => @company,
+      :card => params[:stripeToken]
+      )   
 
-        Customer.create(company_id: current_company.id, 
-          address: params[:customer][:address],
-          full_name: params[:customer][:full_name],
-          location: params[:customer][:city],
-          postal_code: params[:customer][:postal_code],
-          stripe_customer_id: stripe_customer["id"],
-          exp_year: stripe_customer["sources"]["data"].first["exp_year"],
-          exp_month: stripe_customer["sources"]["data"].first["exp_month"], 
-          last_four: stripe_customer["sources"]["data"].first["last4"])
-      end
+    if customer.successful?
+      stripe_customer = JSON.parse customer.response.to_s
+
+      Customer.create(company_id: current_company.id, 
+        address: params[:customer][:address],
+        full_name: params[:customer][:full_name],
+        location: params[:customer][:city],
+        postal_code: params[:customer][:postal_code],
+        stripe_customer_id: stripe_customer["id"],
+        exp_year: stripe_customer["sources"]["data"].first["exp_year"],
+        exp_month: stripe_customer["sources"]["data"].first["exp_month"], 
+        last_four: stripe_customer["sources"]["data"].first["last4"])
+      
+      @customer = current_company.customer
+      redirect_to :back
     else 
       render :index
       flash[:error] = "You have already created subscription."
     end
-    redirect_to business_customers_path
+
   end
 
   def edit 

@@ -13,13 +13,16 @@ class Business::OrdersController < ApplicationController
 
 
   def create
-    customer = StripeWrapper::Charge.create(
+    order_item_total(params[:order][:order_items_attributes])
+
+    charge = StripeWrapper::Charge.create(
       :customer_id => current_company.customer.stripe_customer_id,
-      :amount => (params[:order][:total].to_f * 100).to_i
+      :amount => @totalPrice 
       )
     
-    if customer.successful?
+    if charge.successful?
       @order = Order.new(order_params)
+      
       respond_to do |format| 
         if @order.save 
           format.js
@@ -44,6 +47,18 @@ class Business::OrdersController < ApplicationController
     room.errors.messages.each do |error| 
       @errors.append([error[0].to_s, error[1][0]])
     end 
+  end
+
+  def order_item_total(items)
+    @totalPrice = 0 
+
+    items.each do |item| 
+      item[1][:premium_board_id]
+      @job_board = PremiumBoard.find(item[1][:premium_board_id])
+      totalPrice += (@job_board.price.to_f * 100).to_i
+    end
+    
+    return @totalPrice
   end
 
   def order_params 

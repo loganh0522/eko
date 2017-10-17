@@ -12,9 +12,9 @@
     
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'/>
     
-  %body
-    %header
-      = render "/shared/portal_nav"   
+  %body{:style => "background: url(#{@job_board.job_board_header.cover_photo.url}) no-repeat center center fixed; background-size: cover "}
+    / %header
+    /   = render "/shared/portal_nav"   
     %section
       = render "/shared/messages"
       = yield 

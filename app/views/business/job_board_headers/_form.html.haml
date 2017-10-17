@@ -18,7 +18,7 @@
         .header 
           Company Logo 
         .body  
-          .logo= image_tag(@job_board.job_board_header.logo) if @job_board.job_board_header.logo?
+          .logo= image_tag(@job_board.job_board_header.logo.large_logo) if @job_board.job_board_header.logo?
           = f.file_field :logo, class: "btn btn-file"
           = f.hidden_field :logo_cache
       .float-container

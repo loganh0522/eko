@@ -4,16 +4,8 @@
   .main-container 
     .standard-header
       %h2 Billing Information
-    - if current_company.customer.present? 
-      %h4 Credit Card 
-      %p= "xxxx xxxx xxxx #{current_company.customer.last_four}"
-      %h4 Expires 
-      %p= "#{current_company.customer.exp_month} / #{current_company.customer.exp_year}"
-      = link_to 'Update Billing Information', edit_business_customer_path(current_company.customer.id), class: 'btn btn-primary', remote: true
-    - else
-      .not-present-container
-        %p There are currently no notes for this applicant. 
-        .add-object= link_to  "Add Billing Information", '#', class: "btn active-application-button move-applicants", id: "stage", :data => {:toggle => "modal", :target => "#createBillingDetails"}
+    .cus_details
+      = render 'business/customers/cus_details'
 
 .modal#createBillingDetails
   .modal-dialog

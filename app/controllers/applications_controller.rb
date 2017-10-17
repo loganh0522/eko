@@ -1,7 +1,8 @@
 class ApplicationsController < JobSeekersController 
   before_filter :require_user
   before_filter :profile_sign_up_complete
-
+  layout 'career_portal'
+  
   def new
     @application = Application.new
     @job = Job.find(params[:job_id])

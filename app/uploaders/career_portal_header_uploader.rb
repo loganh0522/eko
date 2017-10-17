@@ -6,4 +6,6 @@ class CareerPortalHeaderUploader < CarrierWave::Uploader::Base
   end
   
   process :resize_to_fit => [1280, 720]
+
+  
 end
