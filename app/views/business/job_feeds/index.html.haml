@@ -11,16 +11,3 @@
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
         %h4.modal-title
 
-.modal#createBillingDetails
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title Billing Details
-      = render 'business/customers/form'
-
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript">
-Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
-</script>
-= javascript_include_tag 'payment'
