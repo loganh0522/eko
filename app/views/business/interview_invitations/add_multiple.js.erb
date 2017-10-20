@@ -1,0 +1,4 @@
+$('.multi-form').find('form').remove()
+$('.multi-form').find('.modal-title').html('<%= j "Add Comment" %>');
+$('.multi-form').find('.modal-header').after('<%= j render "business/interview_invitations/form_multi" %>');
+$('.multi-form').modal("toggle");

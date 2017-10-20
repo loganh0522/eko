@@ -128,6 +128,18 @@ class Candidate < ActiveRecord::Base
     self.ratings.average(:score).to_f.round(1) if ratings.any?
   end
 
+  def avatar_url
+    if !self.manually_created?
+      if self.user.user_avatar.present?
+        self.user.user_avatar.image.small_image.url 
+      else
+        return "undefined"
+      end
+    else
+      return "undefined"
+    end
+  end
+
   def search_data
     attributes.merge(
       comments: comments.map(&:id),

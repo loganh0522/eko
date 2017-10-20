@@ -22,11 +22,12 @@ class InterviewsController < ApplicationController
     
     if @time.present?
       @invite =  @time.interview_invitation
-
       @candidate = @invite.candidates.where(email: (params[:email]).downcase).first  
       @events = @time.event_ids
       @user_ids = params[:interview][:user_ids].split(' ') 
       @job = @invite.job if @invite.job.present?
+      
+
       
       @interview = Interview.new(interview_params.merge!(
         user_ids: @user_ids,
@@ -34,8 +35,10 @@ class InterviewsController < ApplicationController
         job: @job,
         start_time: @time.time , date: @time.date))
       
+
       if @interview.save
         update_user_calendar(@time, @candidate)  
+
         InvitedCandidate.where(candidate_id: @candidate.id, interview_invitation_id: @invite.id).first.destroy
         
         @events.each do |event|
@@ -44,9 +47,7 @@ class InterviewsController < ApplicationController
 
         @time.destroy
 
-        if @invite.candidates.count == 0 
-          @invite.destroy
-        end
+        destroy_user_events
       else
         respond_to do |format|
           format.js
@@ -76,6 +77,24 @@ class InterviewsController < ApplicationController
       if @user.outlook_token.present?    
         OutlookWrapper::Calendar.update_event(@user, event, candidate)
       end
+    end
+  end
+
+  def destroy_user_events
+    if @invite.candidates.count == 0 
+      @invite.interview_times.each do |time|
+        time.event_ids.each do |event|
+          if event.user_id == nil 
+            @user = event.room
+          else
+            @user = event.user
+          end
+          if @user.outlook_token.present?    
+            OutlookWrapper::Calendar.destroy_event(@user, event)
+          end
+        end
+      end
+      @invite.destroy
     end
   end
 

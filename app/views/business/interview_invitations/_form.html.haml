@@ -3,24 +3,16 @@
     .modal-body#event-form
       .form-row-2
         .contain-1
-          = f.label "Title"
-          = f.text_field :title, id: "title_Block", placeholder: "Event Title", label: "Event Title"
-          %span#kind_Block.help-block
-        .contain-2
-          = f.label "Duration"
-          .duration
-            = text_field_tag :hours, nil,  class: "number-only", id: "hours", maxlength: "2", placeholder: '00'
-            .duration-title hrs
-            = text_field_tag :minutes, nil, class: "number-only", id: "minutes", maxlength:"2", placeholder: '00'
-            .duration-title mins
-      .form-row-2
-        .contain-1
           = f.label "Type of Meeting"
           = f.select :kind, options_for_select(["Phone Interview", "Skype", "In-person Interview"]), :html => {id: "kind_Block", prompt: "Choose Type..."}
           %span#kind_Block.help-block
         .contain-2
-          = f.label "Location"
-          = f.text_field :location, id: "geocomplete2", label: "Address", autocomplete: "off", placeholder: "Enter the Address"
+          = f.label "Duration"
+          .duration
+            = text_field_tag :hours, nil,  class: "number-only", id: "hours", maxlength: "2", placeholder: '00', autocomplete: 'off'
+            .duration-title hrs
+            = text_field_tag :minutes, nil, class: "number-only", id: "minutes", maxlength:"2", placeholder: '00', autocomplete: 'off'
+            .duration-title mins
       .form-row
         .contain-3
           = render 'business/users/users_autocomplete'
@@ -83,6 +75,9 @@
       = f.hidden_field :company_id, value: current_company.id
     .modal-footer
       = f.submit  "+ Send Invite", class: "btn submit-button", id: "submit-comment-btn"
-      .btn.border-button2.remove_form Cancel
-      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel  
+      - if @candidate.present? 
+        .btn.border-button2.remove_form Cancel
+      - else
+        .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+
 

@@ -7,6 +7,7 @@
   = radio_button_tag "time", "n/a", false, id: "n_a"
   = label_tag "n/a", "None of these times work for me.", :value => "n/a", class: 'dateTime time-container'
 
+  = text_area_tag :response, "", placeholder: "Let us know some times that work."
   = f.hidden_field :user_ids, value: @user_ids
   = f.hidden_field :company_id, value: @company.id
   = f.hidden_field :kind, value: @invitation.kind

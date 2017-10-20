@@ -191,6 +191,7 @@ Rails.application.routes.draw do
     resources :users do 
       resources :email_signatures
       resources :user_avatars
+      
       collection do 
         get :autocomplete
       end

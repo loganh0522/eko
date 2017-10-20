@@ -1,11 +1,10 @@
 .side-section
   .tag-container
     %h4 Tags
-    .tags
-      = render "business/tags/tags"
     .add_tag
       = link_to "+ Add Tag", new_business_candidate_tag_path(@candidate), remote: true, id: 'add_tag'
-
+    .tags
+      = render "business/tags/tags"
 .side-section
   
 

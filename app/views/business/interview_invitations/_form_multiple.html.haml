@@ -25,9 +25,6 @@
         .contain-3
           = render 'business/users/users_autocomplete'
         .contain-3
-          = render 'business/candidates/candidates_autocomplete'
-                
-        .contain-3
           .assign-to-row
             .title Add Room
             .assign-user#user_ids_Block
@@ -42,6 +39,11 @@
                     - current_company.rooms.each do |room|
                       .select-item{data: {:id => room.id}}= room.name
                     = f.hidden_field :room_id, id: "select-box-field"
+      .form-row-2
+        .email-area
+          .to 
+            .title Candidates:  
+            .recipients     
       .form-row-2
         .header
           .title Add Times    

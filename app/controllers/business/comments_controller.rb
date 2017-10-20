@@ -31,7 +31,7 @@ class Business::CommentsController < ApplicationController
     where[:job_id] = params[:job_id] if params[:job_id].present?
     where[:commentable_id] = @candidate
 
-    @comments = Comment.search("*", where: where)
+    @comments = Comment.search("*", where: where, order: {created_at: :desc} )
 
     respond_to do |format|
       format.js
@@ -65,10 +65,10 @@ class Business::CommentsController < ApplicationController
       else 
         track_activity @new_comment, 'create', current_company.id, @commentable.id
       end
-      
     else
       render_errors(@comment)
     end
+
     respond_to do |format| 
       format.js 
     end

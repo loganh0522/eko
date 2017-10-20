@@ -31,6 +31,8 @@ class Business::UsersController < ApplicationController
     @user = current_user
     @signature = current_user.email_signature
     @login_url = get_login_url
+    @user_avatar = current_user.user_avatar
+
 
     if request.env['omniauth.auth'].present? 
       @auth = request.env['omniauth.auth']['credentials']
@@ -104,8 +106,12 @@ class Business::UsersController < ApplicationController
   end
 
   def autocomplete
-    render :json => User.search(params[:term], where: {company_id: current_company.id}, 
+    @users = User.search(params[:term], where: {company_id: current_company.id}, 
       fields: [{full_name: :word_start}])
+    
+    respond_to do |format|
+      format.json { render json: @users.as_json(only: [:first_name, :id, :last_name, :full_name], methods: [:avatar_url])}
+    end
   end
 
   def gmail_auth

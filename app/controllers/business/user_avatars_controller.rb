@@ -1,6 +1,6 @@
 class Business::UserAvatarsController < ApplicationController
   layout "business"
-  filter_resource_access
+  # filter_resource_access
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -11,7 +11,8 @@ class Business::UserAvatarsController < ApplicationController
   end
 
   def new 
-    @new_avatar = UserAvatar.new
+    @user_avatar = UserAvatar.new
+
     respond_to do |format| 
       format.js
     end
@@ -19,8 +20,9 @@ class Business::UserAvatarsController < ApplicationController
 
   def create
     @avatar = UserAvatar.create(avatar_params)
-    
     @user_avatar = current_user.user_avatar
+    @new_avatar = UserAvatar.new
+    
     respond_to do |format| 
       format.js
     end
@@ -38,6 +40,7 @@ class Business::UserAvatarsController < ApplicationController
     @user_avatar = UserAvatar.find(params[:id])
     @user_avatar.update(avatar_params)
 
+    @user = @user_avatar.user
     respond_to do |format|
       format.js
     end

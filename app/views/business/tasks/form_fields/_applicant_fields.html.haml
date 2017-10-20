@@ -1,1 +1,17 @@
-= render 'business/users/users_autocomplete'
+.form-row
+  .assign-to-row
+    .title Assign Task to Job
+    .assign-user#user_ids_Block
+      .show-hidden-search-box
+        .plain-text 
+          No Job Selected
+          .caret
+      .hidden-search-box
+        .select-box
+          - if @taskable.applications.present?
+            - @taskable.applications.each do |app|
+              .select-item{data: {:id => app.job.id}}= app.job.title
+            = f.hidden_field :job_id, id: "select-box-field"
+          - else 
+            .not-present-container 
+              %p No Applications

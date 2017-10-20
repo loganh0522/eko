@@ -120,7 +120,9 @@ class Business::TasksController < ApplicationController
 
 
     @job = Job.find(params[:job_id]) if params[:job_id].present?  
-    @candidate = Candidate.find(params[:candidate_id])
+    @candidate = Candidate.find(params[:candidate_id]) if params[:candidate_id].present?
+
+
     @tasks = Task.search(query, where: where, order: {created_at: :desc}).to_a
 
 
@@ -132,8 +134,6 @@ class Business::TasksController < ApplicationController
 
   def complete
     # @tasks = @taskable.complete_tasks
-
-    binding.pry
 
     where = {}
     if params[:query].present? 
@@ -147,8 +147,9 @@ class Business::TasksController < ApplicationController
     where[:taskable_id] = params[:candidate_id] if params[:candidate_id].present?
     where[:taskable_type] = params[:type] if params[:type].present?
     where[:kind] = params[:kind] if params[:kind].present?
-    where[:users] = params[:owner] if params[:owner].present?
-    
+    where[:users] = {all: [current_user.id]} if params[:owner] == "user"
+    where[:users] = {all: [params[:assigned_to]]} if params[:assigned_to].present?
+
     @tasks = Task.search("*", where: where)
   end
 
@@ -166,6 +167,7 @@ class Business::TasksController < ApplicationController
     where[:taskable_type] = params[:type] if params[:type].present?
     where[:client_id] = params[:client_id] if params[:client_id].present?
     where[:kind] = params[:kind] if params[:kind].present?
+    
     @tasks = Task.search(query, where: where).to_a
   end
 

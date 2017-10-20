@@ -52,8 +52,12 @@ $(document).ajaxComplete ->
           $('.assigned-' + controller).append('<div class="user-tag"> <div class="name">' + ui.item.title  + '</div> <div class="delete-tag"> &times </div> </div>') 
         else
           userId = ui.item.id
-       
-          $('.assigned-' + controller).append('<div class="user-tag" data-id=' + userId + ' data-kind="user"><div class="circle-img"><img src="/tmp/little-man.png"></div><div class="name">' + ui.item.full_name  + '</div> <div class="delete-tag"> &times </div> </div>') 
+          
+          if ui.item.avatar_url == 'undefined'
+            $('.assigned-' + controller).append('<div class="user-tag" data-id="' + userId + '"data-kind="user"><div class="circle-img"><img src="/tmp/little-man.png"></div><div class="name">' + ui.item.full_name  + '</div> <div class="delete-tag"> &times </div> </div>') 
+          else
+            $('.assigned-' + controller).append('<div class="user-tag" data-id="' + userId + '"data-kind="user"><img class="img circle-img" src="' + ui.item.avatar_url + '"><div class="name">' + ui.item.full_name + '</div><div class="delete-tag"> &times </div> </div>') 
+
 
         if $('#' + idType + '_ids').val() == ''
           values = ui.item.id

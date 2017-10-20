@@ -109,6 +109,14 @@ class User < ActiveRecord::Base
       )
   end
 
+  def avatar_url
+    if self.user_avatar.present?
+      self.user_avatar.image.small_image.url 
+    else
+      return "undefined"
+    end
+  end
+
   def downcase_email
     self.email = self.email.downcase
   end

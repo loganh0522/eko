@@ -51,6 +51,23 @@
     .row
       margin: 0 0 
 
+.new_resume
+  .inputfile 
+    width: 0.1px
+    height: 0.1px
+    opacity: 0
+    overflow: hidden
+    position: absolute
+    z-index: -1
+    float: left
+  .inputfile + label
+    float: left
+  .not-present-container 
+    p
+      margin-top: 20px
+    .inputfile + label
+      margin: 15px 0 0 40%
+
 
 #userProfilePictureModal
   .inputfile 
@@ -65,7 +82,7 @@
     float: left
   .not-present-container 
     p
-      margin-top: 50px
+      margin-top: 20px
     .inputfile + label
       margin: 15px 0 0 40%
   .jcrop-keymgr
@@ -269,4 +286,11 @@
     height: auto
     width: 70%
 
-  
+.multi-form
+  .modal-dialog
+    width: 80%
+    max-width: 1000px
+  .modal-header
+  .modal-body
+    height: auto
+    width: 100%

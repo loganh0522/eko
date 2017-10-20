@@ -1,27 +1,47 @@
 .task-form
   = form_for [:business, @taskable, @task], html: {remote: true} do |f|
-    .form-row-1
-      = f.text_field :title, id: "title_Block", placeholder: 'Enter Task', autocomplete: 'off'
+    .form-row
+      = f.text_field :title, id: "title_Block", placeholder: 'Enter Task Title', autocomplete: 'off', class: "no-border-input"
       %span#title_msgBlock
-    .form-row-4
+    .form-row
       .contain-2
-        = f.text_field :due_date, placeholder: "Due Date"
+        .assign-to-row
+          .title Date
+          = f.text_field :due_date, placeholder: "Due Date", class: "task-input"
       .contain-2
-        = f.text_field :due_time, id: "timepicker", placeholder: "Add Time"
+        .assign-to-row
+          .title Time 
+          = f.text_field :due_time, id: "timepicker", placeholder: "Add Time", class: "task-input"
       .contain-2
         #kind_Block
-          = f.select :kind, options_for_select(["Schedule Interview", "To-do", "Send Assessment", "Finish Assessment"]), :prompt => "Type of Task...", id: "kind_Block" 
-        %span#kind_msgBlock
-    = f.text_area :notes, id: "comment-body", placeholder: "Notes"  
-    
+          %span#kind_msgBlock
+          .assign-to-row
+            .title Kind 
+            .assign-user#user_ids_Block
+              .show-hidden-search-box
+                .plain-text 
+                  To-do
+                  .caret
+              .hidden-search-box
+                .select-box
+                  .select-item{data: {:id => 'To-Do'}} To-do
+                  - array = ["Send E-mail", "Schedule Interview", "Send Assessment", "Finish Assessment"]
+                  - array.each do |item|
+                    .select-item{data: {:id => "#{item}"}}= item
+                  = f.hidden_field :kind, id: "select-box-field", value: "To-do"
+      .contain-2
+        = render 'business/users/users_autocomplete'
+        
+
+    = f.text_area :notes, placeholder: "Notes", id: "comment-body"
     - if @taskable.class == Job 
       = render 'business/tasks/form_fields/job_fields'   
     - elsif @taskable.class == Candidate && @job.present?  
-      = render 'business/tasks/form_fields/applicant_fields'
     - elsif @taskable.class == Candidate
-      = render 'business/tasks/form_fields/candidate_fields'
+      = render 'business/tasks/form_fields/applicant_fields', f: f     
     - else 
-      = render 'business/tasks/form_fields/all_fields', f: f
+      = render 'business/tasks/form_fields/all_fields'
+      
 
     = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
     = f.hidden_field :candidate_ids, id: "candidate_ids"
@@ -37,8 +57,7 @@
     = f.hidden_field :company_id, value: current_company.id
     = f.hidden_field :status, value: "active"
     .comment-area-footer
-      = f.submit @task.new_record? ? "+ Create Task" : "Update Task", class: "btn submit-button", id: "submit-comment-btn"
-
+      = f.submit @task.new_record? ? "+ Create Task" : "Update Task", class: "btn submit-button"
       - if @taskable.class == Candidate || !@task.new_record?
         .btn.border-button2.remove_form Cancel
       - else

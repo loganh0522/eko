@@ -142,8 +142,11 @@ class Business::CandidatesController < ApplicationController
   end
 
   def autocomplete
-    render :json => Candidate.search(params[:term], where: {company_id: current_company.id}, 
-      fields: [{full_name: :word_start}]).to_a
+    @candidates = Candidate.search(params[:term], where: {company_id: current_company.id}, fields: [{full_name: :word_start}]).to_a
+
+    respond_to do |format|
+      format.json { render json: @candidates.as_json(only: [:first_name, :id, :last_name, :full_name], methods: [:avatar_url])}
+    end
   end
 
   private

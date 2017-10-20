@@ -74,6 +74,7 @@ gem 'liquid', '~> 3.0', '>= 3.0.6'
 gem 'sidekiq'
 gem 'newrelic_rpm'
 
+gem "simple_calendar", "~> 2.0"
 
 gem 'jquery-timepicker-rails'
 gem 'declarative_authorization'

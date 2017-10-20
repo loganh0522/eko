@@ -22,7 +22,10 @@ class Business::ResumesController < ApplicationController
 
     respond_to do |format|
       if @resume.save
-        format.js      
+        format.js 
+      else
+        @error = "Must be PDF file."
+        format.js 
       end
     end
   end

@@ -1,12 +1,4 @@
 .form-row
   .contain-3
-    = render 'business/users/users_autocomplete'
-  .contain-3
-    .assign-to-row
-      .title Add Candidates
-      .assign-user#user_ids_Block
-        .show-hidden-search-box
-          .add-button-search
-            .glyphicon.glyphicon-plus
-        .hidden-search-box#search-results-candidates
-          = text_field_tag "", "", :class => 'ui-autocomplete-input candidates', :placeholder => 'Type a users name to assign', id: "autocomplete"
+    = render 'business/candidates/candidates_autocomplete'
+    

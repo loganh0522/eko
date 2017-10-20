@@ -10,8 +10,13 @@
       #search-results-users
       .assigned-users
         .user-tag{:data => {id: current_user.id, kind: "user"}}
-          .circle-img
-            %img(src="/tmp/little-man.png")
-          .name= current_user.full_name
-          .delete-tag &times
-  
+          - if current_user.user_avatar.present?
+            = image_tag current_user.user_avatar.image.small_image, class: 'img circle-img'
+            .name= current_user.full_name
+            .delete-tag &times
+          - else 
+            .circle-img
+              %img(src="/tmp/little-man.png")
+            .name= current_user.full_name
+            .delete-tag &times
+    

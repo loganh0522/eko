@@ -1,1 +1,5 @@
-$('.experience-container').html('<%= j render "business/resumes/resume", resume: @resume  %>')
+<% if @error.present? %>
+  $('#error_msgBlock').append('<div class="notice"><%= escape_javascript(@error) %></div>');
+<% else %>
+  $('.experience-container').html('<%= j render "business/resumes/resume", resume: @resume  %>')
+<% end %>

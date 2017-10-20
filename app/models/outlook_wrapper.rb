@@ -349,6 +349,26 @@ module OutlookWrapper
       graph.service.patch(path, data.to_json) 
     end
 
+    def self.destroy_event(user, event)
+      if user.outlook_token.expired?
+        user.outlook_token.refresh!(user)
+      end
+      
+      callback = Proc.new do |r| 
+        r.headers['Authorization'] = "Bearer #{user.outlook_token.access_token}"
+        r.headers['Content-Type'] = 'application/json'
+        r.headers['X-AnchorMailbox'] = user.email
+      end
+
+      path = 'me/events/' + event.event_id
+      
+      graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0/',
+                                cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
+                                &callback)
+
+      graph.service.delete(path)
+    end
+
     def self.find_meeting_times(user)
       if user.outlook_token.expired?
         user.outlook_token.refresh!(user)
@@ -397,6 +417,8 @@ module OutlookWrapper
                                 &callback)
       
       graph.service.post(path, data.to_json) 
+
+
     end
   end
 end

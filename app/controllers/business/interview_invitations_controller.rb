@@ -38,13 +38,18 @@ class Business::InterviewInvitationsController < ApplicationController
       if @interview_invite.save
         send_invitations(@interview_invite)
         schedule_in_calendar(@interview_invite)
-        schedule_room(@interview_invite)
+        
+        if params[:interview_invitation][:room_id].present?
+          schedule_room(@interview_invite)
+        end
+        
         format.js
       else 
         @errors = []
         @interview_invite.errors.messages.each do |error| 
           @errors.append([error[0].to_s, error[1][0]])
         end
+
         format.js
       end 
     end
@@ -69,10 +74,12 @@ class Business::InterviewInvitationsController < ApplicationController
     @message = interview_invite.message
     @subject = interview_invite.subject
     @token = interview_invite.token
+
     # if current_user.outlook_token.present? 
     #   @email = Mail.new(to: @recipient.email, from: current_user.email, subject: params[:message][:subject], body: params[:body], content_type: "text/html")
     #   GoogleWrapper::Gmail.send_message(@email, current_user, message)
     # else 
+    
     AppMailer.send_interview_invitation(@token, @message, @subject, @job, email, current_company).deliver_now
     # end
   end

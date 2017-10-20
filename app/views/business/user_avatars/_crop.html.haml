@@ -1,10 +1,4 @@
-/ .modal#cropProfilePictureModal
-/   .modal-dialog
-/     .modal-content
-/       .modal-header
-/         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-/         %h4.modal-title Edit Profile Picture
-= form_for [:business, current_user, @avatar], remote: true do |f| 
+= form_for [:business, current_user, @user_avatar], remote: true do |f| 
   .modal-body
     .crop-image
       - %w[x y w h].each do |attribute| 
@@ -13,9 +7,12 @@
     
     #img-preview-area
       .img-preview
-        = image_tag user_avatar.image.url, :id => "preview"
-
+        = image_tag @user_avatar.image.url, :id => "preview"
   .modal-footer
+    = link_to job_seeker_user_user_avatar_path(current_user, @user_avatar), remote: true, :method => :delete, data:{:confirm => "Are You Sure? You can not undo this action."} do
+      .glyphicon.glyphicon-trash
     = f.hidden_field :user_id, value: current_user.id
-    = f.submit 'Upload Image', class: "btn submit-button"
+    = f.submit 'Crop and Save', class: "btn submit-button"
     .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+
+

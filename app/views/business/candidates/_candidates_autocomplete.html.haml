@@ -2,10 +2,9 @@
   .title Add Candidates
   .assign-user#user_ids_Block
     .show-hidden-search-box
-      .plain-text 
-        No Candidates 
-        .caret
+      .add-button-search
+        .glyphicon.glyphicon-plus
     .hidden-search-box
-      = text_field_tag "", "", :class => 'ui-autocomplete-input candidates', :placeholder => 'Type a candidates name', id: "autocomplete"
+      = text_field_tag "", "", :class => 'ui-autocomplete-input candidates', :placeholder => 'Type a users name to assign', id: "autocomplete"
       #search-results-candidates
-      .assigned-candidates
+  .assigned-candidates

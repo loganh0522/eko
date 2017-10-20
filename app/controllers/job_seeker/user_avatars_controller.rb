@@ -16,6 +16,7 @@ class JobSeeker::UserAvatarsController < JobSeekersController
     @avatar = UserAvatar.create(avatar_params)
     @user_avatar = current_user.user_avatar
     @new_avatar = UserAvatar.new
+    
     respond_to do |format| 
       format.js
     end

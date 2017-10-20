@@ -1,0 +1,10 @@
+- if current_user.user_avatar.present?   
+  .profile-picture
+    .circle= image_tag @user.user_avatar.image.medium_image, :size => "100x100" 
+    .change-photo= link_to "Change Photo", edit_business_user_user_avatar_path(current_user, @user_avatar), :data => {remote: true}
+- else      
+  .profile-picture
+    .circle
+      %img(src="/tmp/blank_profile_picture.png")
+    .change-photo= link_to "Add Photo", new_business_user_user_avatar_path(current_user), :data => {remote: true}
+

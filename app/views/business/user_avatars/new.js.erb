@@ -1,2 +1,4 @@
 $(".modal-title").html('<%= "Upload Profile Picture" %>');
-$('.modal').modal("toggle");
+$('#userProfilePictureModal').find('form').remove()
+$('#userProfilePictureModal').find('.modal-header').after('<%= j render "business/user_avatars/new_form", user_avatar: @user_avatar %>');
+$('#userProfilePictureModal').modal("toggle");

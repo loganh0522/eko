@@ -9,7 +9,10 @@
           .circle-img
             %img(src="/tmp/little-man.png") 
         .content 
-          = "#{activity.user.first_name} #{activity.user.last_name} created the TASK #{activity.trackable.kind}."
+          - if activity.trackable.taskable_type == "Candidate"
+            = "#{activity.user.first_name} #{activity.user.last_name} created the task #{activity.trackable.kind} on #{activity.trackable.taskable.full_name}" 
+          - if activity.trackable.taskable_type == "Job"
+            = "#{activity.user.first_name} #{activity.user.last_name} created the task #{activity.trackable.kind} on #{activity.trackable.taskable.title}" 
           %br
           .time= "#{time_ago_in_words(activity.created_at)} ago" 
     .task-body
