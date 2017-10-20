@@ -14,7 +14,7 @@ class InterviewInvitation < ActiveRecord::Base
 
   before_create :set_token
 
-  validates_presence_of :kind, :candidate_ids, :user_ids, :title, :message, :subject
+  validates_presence_of :kind, :candidate_ids, :user_ids, :message, :subject
   
   validate :at_least_one_interview_time
   validates_associated :interview_times

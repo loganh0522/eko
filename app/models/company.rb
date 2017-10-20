@@ -33,7 +33,7 @@ class Company < ActiveRecord::Base
 
   liquid_methods :name
 
-  after_create :create_rejection_reasons, :create_default_stages
+  after_create :create_rejection_reasons, :create_default_stages, :create_application_email
   
   def deactivate!
     update_column(:active, false)
@@ -42,7 +42,8 @@ class Company < ActiveRecord::Base
   def generate_token
     self.widget_key = SecureRandom.urlsafe_base64
   end
-    def create_default_stages
+  
+  def create_default_stages
     stages = ["Screen", "Phone Interview", "Interview", 
       "Group Interview", "Offer", "Hired"]
     @position = 1 
@@ -60,6 +61,10 @@ class Company < ActiveRecord::Base
     reasons.each do |reason| 
       RejectionReason.create(body: reason, company_id: self.id)
     end
+  end
+
+  def create_application_email
+    ApplicationEmail.create(body: "We appreciate your application for the {{job.title}}, we will be in touch with you soon.", subject: "Thanks for Applying to {{job.title}}", company_id: self.id)
   end
 
   ##### Task Methods #####

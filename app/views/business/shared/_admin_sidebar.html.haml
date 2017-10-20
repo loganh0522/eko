@@ -23,8 +23,8 @@
     .nav-section Billing
     %li{:class => is_active?(business_plan_path)}
       = link_to "Subscription", business_plan_path   
-    %li{:class => is_active?(business_customers_path || new_business_customer_path)}
-      = link_to "Billing", current_company.customer.present? ? business_customers_path : new_business_customer_path 
+    %li{:class => is_active?(business_customers_path)}
+      = link_to "Billing", business_customers_path 
 
   .nav-section My Profile
   %li{:class => is_active?(business_user_path(current_user))}

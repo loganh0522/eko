@@ -1,8 +1,8 @@
 .event-form
   = form_for [:business, @invitation], html: {remote: true}  do |f|
-    .modal-body#event-form
-      .form-row-2
-        .contain-1
+    #event-form
+      .form-row
+        .contain-3
           = f.label "Type of Meeting"
           = f.select :kind, options_for_select(["Phone Interview", "Skype", "In-person Interview"]), :html => {id: "kind_Block", prompt: "Choose Type..."}
           %span#kind_Block.help-block
@@ -14,12 +14,9 @@
             = text_field_tag :minutes, nil, class: "number-only", id: "minutes", maxlength:"2", placeholder: '00', autocomplete: 'off'
             .duration-title mins
       .form-row
-        .contain-3
-          = render 'business/users/users_autocomplete'
-        .contain-3
-          = render 'business/candidates/candidates_autocomplete'
-                
-        .contain-3
+        .contain-2
+          = render 'business/users/users_autocomplete', f: f
+        .contain-2
           .assign-to-row
             .title Add Room
             .assign-user#user_ids_Block
@@ -34,8 +31,9 @@
                     - current_company.rooms.each do |room|
                       .select-item{data: {:id => room.id}}= room.name
                     = f.hidden_field :room_id, id: "select-box-field"
- 
-       
+      - if !@candidate.present?
+        .form-row
+          = render 'business/candidates/candidates_autocomplete', f: f
       .form-row-2
         .header
           .title Add Times    
@@ -46,7 +44,7 @@
             .title Subject
             .sender= f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false
           .email-variables
-            .contain-2
+            .contain-50
               .show-hidden-search-box
                 .plain-text
                   Insert-Token
@@ -57,7 +55,7 @@
                   .insert-token#last-name Candidate Last Name
                   .insert-token#full-name Candidate Full Name
                   .insert-token#company-name Company Name
-            .contain-2
+            .contain-50
               .show-hidden-search-box
                 .plain-text
                   Use E-mail Template
