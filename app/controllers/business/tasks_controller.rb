@@ -288,25 +288,6 @@ class Business::TasksController < ApplicationController
     @user_ids = params[:task][:user_ids].split(',') 
     @candidate_ids = params[:task][:candidate_ids].split(',')
     create_tasks
-
-    respond_to do |format| 
-      if @new_task.save        
-        if @taskable.class == Job
-          @tasks = Task.where(job_id: @taskable.id, status: "active") 
-        elsif @taskable.class == Candidate && params[:task][:job_id].present?
-          @job = Job.find(params[:task][:job_id])
-          @tasks = Task.where(job_id: params[:task][:job_id].to_i, 
-            taskable_type: "Candidate", taskable_id: @new_task.taskable_id, status: "active")
-        elsif @taskable.class == Candidate
-          @tasks = Task.where(taskable_type: "Candidate", 
-            taskable_id: @new_task.taskable_id, status: "active")
-        end
-        format.js 
-      else
-        render_errors(@new_task)
-        format.js 
-      end
-    end
   end
 
   def edit 
@@ -412,13 +393,34 @@ class Business::TasksController < ApplicationController
   end
 
   def create_tasks 
-    if @candidate_ids.length >= 1 && params[:task][:job_id].present?
-      @candidate_ids.each do |id| 
-        @candidate = Candidate.find(id)
-        @task = @candidate.tasks.build(task_params.merge!(user_ids: @user_ids)).save
+    respond_to do |format| 
+      if @candidate_ids.length >= 1 && params[:task][:job_id].present?
+        @candidate_ids.each do |id| 
+          @candidate = Candidate.find(id)
+          @task = @candidate.tasks.build(task_params.merge!(user_ids: @user_ids)).save
+        end
+
+        @tasks = Task.where(job_id: params[:task][:job_id], status: "active")
+        format.js
+      else 
+        @new_task = @taskable.tasks.build(task_params.merge!(user_ids: @user_ids))
+        if @new_task.save        
+          if @taskable.class == Job
+            @tasks = Task.where(job_id: @taskable.id, status: "active") 
+          elsif @taskable.class == Candidate && params[:task][:job_id].present?
+            @job = Job.find(params[:task][:job_id])
+            @tasks = Task.where(job_id: params[:task][:job_id].to_i, 
+              taskable_type: "Candidate", taskable_id: @new_task.taskable_id, status: "active")
+          elsif @taskable.class == Candidate
+            @tasks = Task.where(taskable_type: "Candidate", 
+              taskable_id: @new_task.taskable_id, status: "active")
+          end
+          format.js 
+        else
+          render_errors(@new_task)
+          format.js 
+        end
       end
-    else 
-      @new_task = @taskable.tasks.build(task_params.merge!(user_ids: @user_ids))
     end
   end
 end

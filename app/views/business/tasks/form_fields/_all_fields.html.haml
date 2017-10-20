@@ -1,7 +1,5 @@
 .form-row
-  .contain-3
-    = render 'business/users/users_autocomplete'
-  .contain-3
+  .contain-50
     .assign-to-row
       .title Add Job
       .assign-user#user_ids_Block
@@ -11,19 +9,12 @@
             .caret
         .hidden-search-box
           .select-box
-            .select-item{data: {:id => ''}} No Room
+            .select-item{data: {:id => ''}} No Job 
             - if current_company.open_jobs.present?
               - current_company.open_jobs.each do |job|
                 .select-item{data: {:id => job.id}}= job.title
               = f.hidden_field :job_id, id: "select-box-field"
-  .contain-3
-    .assign-to-row
-      .title Add Candidates
-      .assign-user#user_ids_Block
-        .show-hidden-search-box
-          .add-button-search
-            .glyphicon.glyphicon-plus
-        .hidden-search-box
-          = text_field_tag "", "", :class => 'ui-autocomplete-input candidates', :placeholder => 'Type a users name to assign', id: "autocomplete"
-          #search-results-candidates
+  .contain-50
+    = render 'business/candidates/candidates_autocomplete'
+
 

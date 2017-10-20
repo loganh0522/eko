@@ -40,7 +40,7 @@
     - elsif @taskable.class == Candidate
       = render 'business/tasks/form_fields/applicant_fields', f: f     
     - else 
-      = render 'business/tasks/form_fields/all_fields'
+      = render 'business/tasks/form_fields/all_fields', f: f
       
 
     = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
