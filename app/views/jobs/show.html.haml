@@ -1,16 +1,3 @@
-.company-job-board  
-  - if @company.job_board.job_board_header.logo.present?
-    .logo
-      = link_to root_path do
-        %img(src="#{@company.job_board.job_board_header.logo.large_logo}")
-  .basic-job-description
-    .job-header
-      %h2= @job.title
-      = "#{@job.location} - #{@job.kind}"
-    .job-body
-      = @job.description.html_safe
-    .apply 
-      = render "apply_method"
-
+= render 'jobs/regular_job'
 
 

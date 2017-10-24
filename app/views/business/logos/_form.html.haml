@@ -1,0 +1,9 @@
+= form_for [:business, @logo], :html => {id: "media-photo-up"} do |q| 
+  .float-container
+    .header 
+      Company Logo 
+    .body#photo-body 
+      - if !@logo.new_record?
+        %div{:id => "photo_#{@logo.id}"}= image_tag @logo.file.medium_logo
+      = q.hidden_field :company_id, value: current_company.id
+      = q.file_field :file

@@ -1,8 +1,8 @@
-= form_for [:business, @job_board, @job_board_header], remote: true do |f|
-  .modal-body
-    .job-board-form-nav
-      %ul
-        %li.active Content
+.modal-body
+  .job-board-form-nav
+    %ul
+      %li.active Content 
+  = form_for [:business, @job_board, @job_board_header],:html => { :multipart => true, id: "job-board-section"}, remote: true do |f|
     .job-board-form   
       .float-container
         .header 
@@ -14,20 +14,15 @@
           Sub-Header
         .body  
           = f.text_field :subheader, label: "Subheader", class: "form-control"
-      .float-container
-        .header 
-          Company Logo 
-        .body  
-          .logo= image_tag(@job_board.job_board_header.logo.large_logo) if @job_board.job_board_header.logo?
-          = f.file_field :logo, class: "btn btn-file"
-          = f.hidden_field :logo_cache
-      .float-container
-        .header 
-          Background Photo
-        .body  
-          .logo= image_tag(@job_board.job_board_header.cover_photo) if @job_board.job_board_header.cover_photo?
-          = f.file_field :cover_photo, label: "Background Photo", class: "btn btn-file"
-          = f.hidden_field :cover_photo_cache
-  .modal-footer
-    = f.submit "Update Header", class: "btn submit-button"
-    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+  .job-board-form 
+    #logo-area
+      = render 'business/logos/form'
+  .job-board-form
+    #background-area
+      = render 'business/background_images/form'
+
+
+
+.modal-footer
+  = submit_tag "Update Header", class: "btn submit-button"
+  .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

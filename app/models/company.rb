@@ -28,7 +28,9 @@ class Company < ActiveRecord::Base
   has_many :tasks
   has_many :subsidiaries
   has_many :locations
+  has_one :background_image
   
+  has_one :logo
   validates_presence_of :name, :website
 
   liquid_methods :name

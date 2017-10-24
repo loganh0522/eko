@@ -153,6 +153,11 @@
     padding: 0 0
     overflow: hidden
     min-height: 400px
+    .images-container
+      width: 90%
+      margin: 0 auto
+      height: auto
+      padding: 10px 10px
     .job-board-form-nav
       width: 20%
       float: left
@@ -165,13 +170,18 @@
           margin-bottom: 10px
           padding-left: 10px
           border-left: 3px solid #ffffff
+        &:hover
+          cursor: pointer
         .active 
           border-left: 3px solid #EF7B2B
     .job-board-form
       width: 80%
       padding: 20px 20px 0px 20px
-      float: left
+      float: right
       border-left: 1px solid rgba(0, 0,0,0.1)
+    #image-form
+      width: 80%
+      float: left
     .job-board-layout
       display: none
       overflow: hidden

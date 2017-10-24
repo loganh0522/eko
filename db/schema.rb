@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171019195614) do
+ActiveRecord::Schema.define(version: 20171024112408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,16 @@ ActiveRecord::Schema.define(version: 20171019195614) do
     t.integer "user_id"
     t.integer "assignable_id"
     t.string  "assignable_type"
+  end
+
+  create_table "background_images", force: :cascade do |t|
+    t.integer  "company_id"
+    t.integer  "job_board_header_id"
+    t.integer  "job_board_row_id"
+    t.integer  "user_id"
+    t.string   "file"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "candidates", force: :cascade do |t|
@@ -404,8 +414,6 @@ ActiveRecord::Schema.define(version: 20171019195614) do
     t.integer  "job_board_id"
     t.string   "header"
     t.string   "subheader"
-    t.string   "cover_photo"
-    t.string   "logo"
     t.string   "layout"
     t.string   "color_overlay"
     t.datetime "created_at"
@@ -515,6 +523,13 @@ ActiveRecord::Schema.define(version: 20171019195614) do
     t.string  "number"
     t.integer "company_id"
     t.integer "subsidiary_id"
+  end
+
+  create_table "logos", force: :cascade do |t|
+    t.string   "file"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "media_photos", force: :cascade do |t|
@@ -779,6 +794,16 @@ ActiveRecord::Schema.define(version: 20171019195614) do
     t.string   "status"
     t.integer  "job_id"
     t.integer  "completed_by_id"
+  end
+
+  create_table "team_members", force: :cascade do |t|
+    t.string   "file"
+    t.string   "name"
+    t.string   "position"
+    t.string   "details"
+    t.integer  "job_board_row_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "user_avatars", force: :cascade do |t|

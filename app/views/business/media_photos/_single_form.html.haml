@@ -1,0 +1,7 @@
+= form_for [:business, @photo], :html => {id: "media-photo-up"} do |q| 
+  .float-container
+    .header 
+      Photo
+    .body#photo-body
+      %div{:id => "photo_#{@photo.id}"}= image_tag @photo.file_name.small_image if @photo.present?
+      = q.file_field :file_name

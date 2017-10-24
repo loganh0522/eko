@@ -255,10 +255,15 @@ jQuery ->
   $('#jobBoardRowModal').on 'click', '#layout-form', (event) ->
     $('.job-board-form').hide()
     $('.job-board-layout').show()
+    $('#jobBoardRowModal').find('.active').removeClass('.active')
+    $(this).addClass('.active')
 
   $('#jobBoardRowModal').on 'click', '#content-form', (event) ->
     $('.job-board-form').show()
     $('.job-board-layout').hide()
+    $('#jobBoardRowModal').find('.active').removeClass('.active')
+    $(this).addClass('.active')
+
 
   $(document).on 'keyup', '.number-only', (event) ->  
     if $.isNumeric($(this).val()) == false

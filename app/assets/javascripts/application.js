@@ -16,8 +16,10 @@
 //= require jquery_ujs
 //= require jquery.remotipart
 //= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
 //= require jquery.Jcrop
 //= require bootstrap-sprockets
+//= require owlcarousel2/owl.carousel
 //= require geocomplete
 //= require googledocviewer
 //= require trix

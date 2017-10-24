@@ -1,9 +1,12 @@
-= form_for [:business, @job_board, @section], :html => {:multipart => true}, :remote => true do |f|   
-  .modal-body
-    .job-board-form-nav
-      %ul
-        %li#content-form Content
-        %li#layout-form Layout
+.modal-body
+  .job-board-form-nav
+    %ul
+      %li#content-form.active Content
+      %li#layout-form Layout
+  = form_for [:business, @job_board, @section], :html => {:multipart => true, id: "job-board-section"}, :remote => true do |f|   
+    = f.hidden_field :kind, value: 'Text'
+    = f.hidden_field :job_board_id, value: @job_board.id
+    = hidden_field_tag :media_photo, '', id: "media_photo"
     .job-board-form 
       .float-container
         .header 
@@ -17,24 +20,12 @@
           = f.text_field :subheader, label: "Subheader", class: "form-control"
       .float-container
         .header 
-          Photo
-        .body  
-          / = f.fields_for :media_photos, MediaPhoto.new do |q| 
-          /   = q.file_field :file_name, id: "fileupload"
-          / .logo= image_tag(@section.media_photos.last.file_name) if @section.media_photos.last.file_name?
-
-          = file_field_tag "images[]", type: :file, id: "inputFile"
-          %img#image_upload_preview 
-
-      .float-container
-        .header 
           Content
         .body
           = f.trix_editor :description
-      
     .job-board-layout
       .float-left
-        = f.radio_button :layout, 'float-left', label: "Float Left", id: "float-left"
+        = f.radio_button :layout, 'float-left', label: "Float Left", id: "float-left", checked: true
         %label.float-left{:for => "float-left"}
           %img#float-left-img(src="/tmp/layout-float-image-left.png") 
       .float-center
@@ -45,9 +36,11 @@
         = f.radio_button :layout, 'float-right', label: "Float Right", id: "float-right"
         %label.float-left{:for => "float-right"}
           %img#float-right-img(src="/tmp/layout-float-image-right.png")
-  .modal-footer
-    %fieldset
-      = f.hidden_field :kind, value: 'Text'
-      = f.hidden_field :job_board_id, value: @job_board.id
-      = f.submit "Save Section", class: "btn submit-button"
-      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+  .job-board-form 
+    #image-form
+      = render 'business/media_photos/single_form'
+   
+.modal-footer
+  %fieldset
+    = submit_tag "Save Section", class: "btn submit-button", id: "submit-section"
+    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

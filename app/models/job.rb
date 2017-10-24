@@ -34,8 +34,9 @@ class Job < ActiveRecord::Base
   has_many :functions, through: :job_functions
   
   
-  validates_presence_of :title, :description, :location, :address, 
-    :education_level, :kind, :career_level
+  validates_presence_of :title, :description, :location, :address 
+    
+  # :education_level, :kind, :career_level
   
   ########## Actions Taken After create ############ 
 

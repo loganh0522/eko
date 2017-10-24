@@ -1,5 +1,5 @@
-- if @job_board.job_board_header.cover_photo.present? 
-  .portal-header{:style => "background: url(#{@job_board.job_board_header.cover_photo.url}) no-repeat center center fixed; background-size: cover "}
+- if @job_board.job_board_header.background_image.present? 
+  .portal-header{:style => "background: url(#{@job_board.job_board_header.background_image.file.url}) no-repeat center center fixed; background-size: cover "}
     .header-overlay{:style => "background: rgba(0,0,0,0.4)"}
       .intro-message
         .header= @job.title

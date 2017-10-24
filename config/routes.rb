@@ -91,6 +91,9 @@ Rails.application.routes.draw do
     resources :activities
     resources :hiring_teams
     resources :rooms
+    resources :media_photos
+    resources :logos
+    resources :background_images
     
     post "update_password", to: 'users#update_password'
     post 'create_subscription', to: 'users#create_subscription'

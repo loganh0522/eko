@@ -28,6 +28,10 @@ class Business::JobBoardsController < ApplicationController
   def update
     @job_board = JobBoard.find(params[:id])
 
+    if params[:kind].present? 
+      @job_board.update_attributes(kind: params[:kind])
+    end
+
     if @job_board.update_attributes(job_params)
       flash[:success] = "You have successfully updated your Career Portal"
       redirect_to edit_business_job_board_path(@job_board)

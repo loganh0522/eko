@@ -18,7 +18,7 @@ gem 'googledocviewer'
 gem 'viewerjs-rails'
 
 gem 'responders', '~> 2.0'
-
+gem 'owlcarousel2'
 gem 'will_paginate', '~> 3.1.0'
 
 # gem 'turbolinks', '~> 5.0.1'

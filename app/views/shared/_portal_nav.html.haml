@@ -1,9 +1,9 @@
 - if logged_in? && current_kind == 'job seeker'
   .career-portal-nav
     .content
-      - if @company.job_board.job_board_header.logo.present?
+      - if @company.logo.present?
         = link_to root_path do
-          %img(src="#{@company.job_board.job_board_header.logo}" class="sub_logo")
+          %img(src="#{@company.logo.file.large_logo}" class="sub_logo")
       - else
         .brand
           = link_to root_path do
@@ -11,22 +11,18 @@
       %ul
         %li= link_to "Profile", profile_path, :class => ".sub-register-btn", :style => "height: 30px; padding: 10px 20px; width: 40px; border-radius: 5px; border: 1px solid #{@job_board.brand_color}"
         %li= link_to "Sign Out", signout_path, class: "sub-signin-btn"
-
-- elsif logged_in? && current_kind == 'business'
-  = current_user.full_name
 - else
   .career-portal-nav   
-    - if @company.job_board.job_board_header.logo.present?
+    - if @company.logo.present?
       = link_to root_path do
-        %img(src="#{@company.job_board.job_board_header.logo}" class="sub_logo")
+        %img(src="#{@company.logo.file.large_logo}" class="sub_logo")
     - else
       .brand
         = link_to root_path do
           = @company.name
     %ul
       %li= link_to "Sign In", "", "data-toggle" => "modal", "data-target" => "#SubLoginModal"
-      
-      %li= link_to "Register", "", :class => ".sub-register-btn", :style => "height: 30px; padding: 10px 20px; width: 40px; border-radius: 5px; border: 1px solid #{@job_board.brand_color}", "data-toggle" => "modal", "data-target" => "#subNewUserModal"
+      %li= link_to "Create Profile", "", :class => ".sub-register-btn", :style => "height: 30px; padding: 10px 20px; width: 40px; border-radius: 5px; border: 1px solid #{@job_board.brand_color}", "data-toggle" => "modal", "data-target" => "#subNewUserModal"
       = render "/sessions/sub_login"
       = render "/users/sub_new_job_seeker"
 

@@ -3,7 +3,14 @@
     = render 'business/shared/admin_sidebar'
   .main-container
     .edit-career-portal
-      = render "sections"
+      .change-containers-nav
+        %ul 
+          = link_to business_job_board_path(kind: 'advanced'), :method => :put, remote: true do 
+            %li.change.activated Advanced 
+          = link_to business_job_board_path(kind: 'basic'), :method => :put, remote: true do 
+            %li.change Basic
+      .career-portal-details
+        = render "sections"
 
 
   / %h4 Widget Details 

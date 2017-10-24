@@ -15,6 +15,18 @@ class Business::JobBoardHeadersController < ApplicationController
     respond_to do |format|
       @job_board_header = JobBoardHeader.find(params[:id])
       @job_board = JobBoard.find(params[:job_board_id])
+      
+      if @job_board_header.background_image.present?
+        @background = @job_board_header.background_image
+      else
+        @background = BackgroundImage.new 
+      end
+
+      if current_company.logo.present?
+        @logo = current_company.logo
+      else
+        @logo = Logo.new
+      end
       format.js
     end
   end

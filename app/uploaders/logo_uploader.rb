@@ -1,5 +1,6 @@
-class CareerPortalUploader < CarrierWave::Uploader::Base
+class LogoUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
+  
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
@@ -8,5 +9,13 @@ class CareerPortalUploader < CarrierWave::Uploader::Base
 
   version :large_logo do
     process :resize_to_fit => [200, 200]
+  end
+
+  version :medium_logo do 
+    process :resize_to_fit => [100, 100]
+  end
+
+  version :small_logo do 
+    process :resize_to_fit => [50, 100]
   end
 end

@@ -10,6 +10,7 @@ class Business::JobBoardRowsController < ApplicationController
     @section = JobBoardRow.new
     @job_board = JobBoard.find(params[:job_board_id])
     @section_type = params[:kind]
+    @photo = MediaPhoto.new
     respond_to do |format|
       format.js
     end
@@ -23,11 +24,20 @@ class Business::JobBoardRowsController < ApplicationController
       @section = JobBoardRow.new(job_board_row_params)  
     end
 
+    @photos = params[:media_photo].split(',')
+    @photos.delete('')
+
 
     @job_board = JobBoard.find(params[:job_board_id])
     @job_board_header = @job_board.job_board_header
+    
     respond_to do |format|
+      binding.pry
       if @section.save
+        @photos.each do |id|
+          photo = MediaPhoto.find(id).update_attributes(job_board_row_id: @section.id)
+        end
+
         @sections = @job_board.job_board_rows
         format.js
       end
@@ -40,6 +50,13 @@ class Business::JobBoardRowsController < ApplicationController
       @section = JobBoardRow.find(params[:id])
       @job_board_header = @job_board.job_board_header
       @section_type = @section.kind
+
+
+      if @section.kind == 'Photo'
+        @photo = MediaPhoto.new
+      else 
+        @photo = @section.media_photos.first
+      end
       format.js
     end
   end

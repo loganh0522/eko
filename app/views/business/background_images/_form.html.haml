@@ -1,0 +1,9 @@
+= form_for [:business, @background], :html => {id: "background-photo-up"} do |q| 
+  .float-container
+    .header 
+      Background
+    .body#photo-body 
+      - if !@background.new_record?
+        %div{:id => "photo_#{@background.id}"}= image_tag @background.file.medium
+      = q.hidden_field :job_board_header_id, value: @job_board_header.id
+      = q.file_field :file
