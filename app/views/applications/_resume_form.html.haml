@@ -1,0 +1,49 @@
+= form_for [@job, @application] do |f|  
+  
+
+  - @questions.each do |question|
+    .question
+      .question-title= question.body
+      .answer
+        - if question.kind == 'Checkbox'
+          %ul 
+            - question.question_options.each do |option|
+              = f.fields_for :question_answers, QuestionAnswer.new do |q| 
+                %li
+                  = q.hidden_field  :question_id, value: question.id
+                  = q.check_box :question_option_id, {}, option.id, nil
+                  = option.body
+        - else 
+          = f.fields_for :question_answers, QuestionAnswer.new do |q|
+            - if question.kind == 'Text' 
+              = q.hidden_field  :question_id, value: question.id
+              - if question.required == 1 
+                = q.text_field :body, hide_label: true, :required => true
+              - else
+                = q.text_field :body, hide_label: true
+            - elsif question.kind == 'Paragraph'
+
+              = q.hidden_field  :question_id, value: question.id
+              - if question.required == 1
+                = q.text_area :body, hide_label: true, :required => true, rows: 5
+              - else
+                = q.text_area :body, hide_label: true, rows: 5 
+            - elsif question.kind == 'Multiple Choice'
+              %ul
+                - question.question_options.each do |option|
+                  %li
+                    = q.hidden_field  :question_id, value: question.id
+                    = q.radio_button :question_option_id, option.id
+                    = option.body
+
+  .application-footer
+    = f.hidden_field :user_id, value: current_user.id
+    = f.hidden_field  :job_id, value: @job.id
+    = f.hidden_field  :company_id, value: @job.company.id
+    / .app-btn{:style => "background-color: #{@job_board.brand_color})"}= f.submit "Apply to Job", :class => "app-btn"
+    - if @job_board.brand_color.present? 
+      = f.submit "Finish Application", class: "btn app-btn", :style => "background-color: #{@job_board.brand_color}"
+    - else
+      = f.submit "Finish Application", class: "btn app-btn", :style => "background-color: #EF7B2B"
+
+  

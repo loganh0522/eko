@@ -30,11 +30,5 @@ class Profile < ActiveRecord::Base
   # validate :must_have_experience
 
 
-  def organize_work_experiences
-    self.work_experiences.sort_by{|work| [work.start_year, work.end_year] }.reverse
-  end
-
-  def current_position
-    self.work_experiences.where(current_position: 1).first
-  end
+ 
 end

@@ -1,0 +1,23 @@
+.create-profile-container 
+  .create-profile-header
+    %h1 Welcome to TalentWiz
+    %p Your profile is submitted to the jobs that you apply for so that you do not have to compelete a new profile every time. So please take a few minutes to complete your profile.  
+  .create-profile-body
+    = form_for [:job_seeker, @user], url: wizard_path do |f|
+      .experience-container
+        .header
+          .title Experience
+        = f.fields_for :work_experiences do |q|
+          = render "work_experience_fields", f: q      
+        = link_to_add_fields "+ Add Work Experience", f, :work_experiences
+      
+      / .experience-container
+      /   .header#certification-header
+      /     .title Certification
+      /   = f.fields_for :user_certifications do |q|
+      /     = render "user_certification_fields", f: q
+      /   = link_to_add_fields "+ Add Certification", f, :user_certifications
+      .footer
+        = link_to 'Previous', wizard_path(:education)
+        = f.hidden_field :user_id, value: current_user.id
+        = f.submit "Create Profile", class: "job-seeker-btn"

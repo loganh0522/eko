@@ -11,7 +11,8 @@ class UsersController < ApplicationController
         if request.subdomain.present? 
           redirect_to new_profile_path
         else
-          redirect_to new_job_seeker_profile_path
+          # redirect_to new_job_seeker_profile_path
+          redirect_to job_seeker_create_profiles_path
         end
       else
         EmailSignature.create(user_id: @user.id, signature: "#{@user.first_name} #{@user.last_name}")      
@@ -23,8 +24,8 @@ class UsersController < ApplicationController
         end
       end
     else
-      if @user.kind == 'job seeker'
-        render :new_job_seeker
+      if params[:user][:kind] == 'job seeker'
+        render template: 'users/new_job_seeker'
       else
         render :new
       end
@@ -77,5 +78,12 @@ class UsersController < ApplicationController
       session[:company_id] = @user.company.id
       redirect_to business_root_path
     end
+  end
+
+  def render_errors(candidate)
+    @errors = []
+    candidate.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end  
   end
 end

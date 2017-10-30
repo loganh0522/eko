@@ -29,7 +29,6 @@ class Business::BackgroundImagesController < ApplicationController
   def edit 
     @background = BackgroundImage.find(params[:id])
 
-
     respond_to do |format|
       format.js
     end
@@ -47,6 +46,8 @@ class Business::BackgroundImagesController < ApplicationController
   def destroy
     @background = BackgroundImage.find(params[:id])
     @background.destroy
+
+    @job_board_header = @background.job_board_header
 
     respond_to do |format|
       format.js

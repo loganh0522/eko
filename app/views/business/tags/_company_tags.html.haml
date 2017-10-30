@@ -1,0 +1,6 @@
+.tags
+  - @tags.each do |tag|
+    %div{id: "tag_#{tag.id}", class: "tag"}
+      .name= "#" + tag.name
+      = link_to business_tag_path(tag), remote: true, :method => :delete do 
+        .delete-can-tag &times

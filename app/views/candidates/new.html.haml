@@ -1,0 +1,14 @@
+.company-job-board  
+  - if @company.logo.present?
+    .logo
+      = link_to root_path do
+        %img(src="#{@company.logo.file.large_logo}")
+  .basic-job-description
+    .application-form
+      .job-header
+        %h2= @job.title
+      .application-header
+        %h4 Application Form
+        %p Please finish the following questions to apply to this job.
+      .application-body
+        = render 'form'

@@ -1,7 +1,7 @@
-- if current_user.profile.work_experiences.count == 0 
+- if current_user.work_experiences.count == 0 
   .not-present-container#experience-not-present
     %p You currently do not have any listed work experiences. 
-    = link_to "+ Add Work Experience", new_job_seeker_profile_work_experience_path(@profile), :data => {:remote => true}
+    = link_to "+ Add Work Experience", new_job_seeker_user_work_experience_path(@profile), :data => {:remote => true}
 - else
   %div{:id => "work_experiences"}
     - @work_experiences.each do |position| 

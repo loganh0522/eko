@@ -22,6 +22,15 @@ module ApplicationHelper
     link_to(name, '#', class: "add_to_cart btn submit-button", data: {id: id, fields: fields.gsub("\n", ""), :board => board.name}, style: "display:#{name == "Add Answer" ? "none" : ""}" )
   end
 
+  
+  def show_errors(object, field_name)
+    if object.errors.any?
+      if !object.errors.messages[field_name].blank?
+        object.errors.messages[field_name].join(", ")
+      end
+    end
+  end
+
   # def social_links(user)
   #   user.social_links.each do |link|
   #     link_to ("#", link.url, class: 'fa fa-linkedin fa-stack-1x', :target => "_blank")

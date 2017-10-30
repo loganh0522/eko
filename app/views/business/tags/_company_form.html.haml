@@ -1,0 +1,13 @@
+= form_for [:business, @tag], html: {remote: true, class: 'tag_form'} do |f|
+  .modal-body
+    .email-area
+      .choose-stage
+        .title
+          %h4 Add Tag: 
+        .stages-select
+          = f.text_field :name, :class => 'form-control', :placeholder => 'Tag', id: "tag_name", hide_label: true
+        %div#tag-results
+  .modal-footer
+    = f.hidden_field :company_id, value: current_company.id
+    = f.submit "Add Tag", class: "btn submit-button"
+    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

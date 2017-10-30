@@ -14,8 +14,7 @@
     
   %body
     %header
-      - unless request.path == new_job_seeker_profile_path 
-        = render "/shared/business_header"   
+      = render "/shared/business_header"   
     %section
       = render "/shared/messages"
       = yield 

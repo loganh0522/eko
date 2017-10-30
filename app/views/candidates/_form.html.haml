@@ -1,45 +1,71 @@
-= form_for [@job, @application] do |f|  
-  - @questions.each do |question|
-    .question
-      .question-title= question.body
-      .answer
-        - if question.kind == 'Checkbox'
-          %ul 
-            - question.question_options.each do |option|
-              = f.fields_for :question_answers, QuestionAnswer.new do |q| 
-                %li
-                  = q.hidden_field  :question_id, value: question.id
-                  = q.check_box :question_option_id, {}, option.id, nil
-                  = option.body
+= link_to "", :class => "apply-w-talentwiz", "data-toggle" => "modal", "data-target" => "#subNewUserModal" do 
+  %img.logo(src="/tmp/logo.jpg")
+  .account Profile
+
+= render "/sessions/sub_login"
+= render "/users/sub_new_job_seeker"
+
+= form_for [@job, @candidate] do |f| 
+  .row 
+    .col-md-6
+      = f.label "First Name *"
+      = f.text_field :first_name, placeholder: "First Name"
+    .col-md-6
+      = f.label "Last Name *"
+      = f.text_field :last_name, placeholder: "Last Name"
+  = f.label "E-mail Address *"
+  = f.email_field :email, placeholder: "Email Address", hide_label: true
+  
+  = f.fields_for :resumes, Resume.new do |q|
+    = q.label "Resume *", class: "file-container"
+    = q.file_field :name, class: "file-container"
+
+  - if @questions.present?
+    - @questions.each do |question|
+      .question
+        - if question.required == 1
+          .question-title= "#{question.body} *"
         - else 
-          = f.fields_for :question_answers, QuestionAnswer.new do |q|
-            - if question.kind == 'Text' 
-              = q.hidden_field  :question_id, value: question.id
-              - if question.required == 1 
-                = q.text_field :body, hide_label: true, :required => true
-              - else
-                = q.text_field :body, hide_label: true
-            - elsif question.kind == 'Paragraph'
-
-              = q.hidden_field  :question_id, value: question.id
-              - if question.required == 1
-                = q.text_area :body, hide_label: true, :required => true, rows: 5
-              - else
-                = q.text_area :body, hide_label: true, rows: 5 
-            - elsif question.kind == 'Multiple Choice'
-              %ul
-                - question.question_options.each do |option|
+          .question-title= question.body
+        .answer
+          - if question.kind == 'Checkbox'
+            %ul 
+              - question.question_options.each do |option|
+                = f.fields_for :question_answers, QuestionAnswer.new do |q| 
                   %li
-                    = q.hidden_field  :question_id, value: question.id
-                    = q.radio_button :question_option_id, option.id
+                    = q.hidden_field :question_id, value: question.id
+                    = q.hidden_field  :job_id, value: @job.id
+                    = q.check_box :question_option_id, {}, option.id, nil
                     = option.body
-
-  .application-footer
-    = f.hidden_field :user_id, value: current_user.id
-    = f.hidden_field  :job_id, value: @job.id
-    = f.hidden_field  :company_id, value: @job.company.id
-    / .app-btn{:style => "background-color: #{@job_board.brand_color})"}= f.submit "Apply to Job", :class => "app-btn"
+          - else 
+            = f.fields_for :question_answers, QuestionAnswer.new do |q|
+              - if question.kind == 'Text' 
+                = q.hidden_field  :question_id, value: question.id
+                = q.hidden_field  :job_id, value: @job.id
+                - if question.required == 1 
+                  = q.text_field :body, hide_label: true, :required => true
+                - else
+                  = q.text_field :body, hide_label: true
+              - elsif question.kind == 'Paragraph'
+                = q.hidden_field  :question_id, value: question.id
+                = q.hidden_field  :job_id, value: @job.id
+                - if question.required == 1
+                  = q.text_area :body, hide_label: true, :required => true, rows: 5
+                - else
+                  = q.text_area :body, hide_label: true, rows: 5 
+              - elsif question.kind == 'Multiple Choice'
+                %ul
+                  - question.question_options.each do |option|
+                    %li
+                      = q.hidden_field  :question_id, value: question.id
+                      = q.hidden_field  :job_id, value: @job.id
+                      = q.radio_button :question_option_id, option.id
+                      = option.body
+  .apply
+    = f.hidden_field :job_id, value: @job.id
+    = f.hidden_field :company_id, value: @job.company.id
+    = f.hidden_field :manually_created, value: true
     - if @job_board.brand_color.present? 
-      = f.submit "Finish Application", class: "btn app-btn", :style => "background-color: #{@job_board.brand_color}"
+      = f.submit "Finish Application", class: "btn submit-button", :style => "background-color: #{@job_board.brand_color}"
     - else
-      = f.submit "Finish Application", class: "btn app-btn", :style => "background-color: #EF7B2B"
+      = f.submit "Finish Application", class: 'btn submit-button', :style => "background-color: #EF7B2B"

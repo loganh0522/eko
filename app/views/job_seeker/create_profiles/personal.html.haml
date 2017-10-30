@@ -1,0 +1,64 @@
+.main-container
+  .create-profile-container
+    .create-profile-header
+      %h1 Build your Profile
+      %p Your profile is submitted to the jobs that you apply for so that you do not have to compelete a new profile every time. So please take a few minutes to complete your profile.  
+    .create-profile-body
+      
+      .job-seeker-profile
+        = render 'job_seeker/background_images/form'
+        .job-seeker-topper
+          - if @background.new_record? 
+            .background
+              .profile-header
+                .personal-details
+                  = render 'job_seeker/user_avatars/user_avatar'
+          - else 
+            .background{:style => "background: url(#{@background.file}) no-repeat center center; background-size: cover "}
+              .profile-header
+                .personal-details
+                  = render 'job_seeker/user_avatars/user_avatar'
+
+      = form_for [:job_seeker, @user], url: wizard_path do |f| 
+        .row
+          .header 
+            .title Personal Details
+          .col-md-6
+            = f.label "First Name"
+            = f.text_field :first_name, id: "first_name_Block", class: "form-control", placeholder: "First Name"
+            %span#first_name_msgBlock
+          .col-md-6
+            = f.label "Last Name"
+            = f.text_field :last_name, id: "last_name_Block", class: "form-control", placeholder:"Last Name"
+            %span#last_name_msgBlock
+        .row
+          .col-md-6
+            = f.label "Phone"
+            = f.text_field :phone, class: "form-control", hide_label: true, placeholder: "Phone"
+        .row
+          = f.label "Location"
+          = f.text_field :location, class: "form-control", id: "geocomplete", label: "Location", autocomplete: "off"
+        .row
+          .header
+            .title Links    
+            = link_to_add_fields "+ Link", f, :social_links
+            = f.fields_for :social_links, class: "options" do |a|
+              = render 'social_link_fields', f: a
+
+        .footer
+          = f.submit "Continue", class: "job-seeker-btn"
+
+  .modal#basic-form-modal
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+          .modal-title
+        .modal-body
+
+  .modal#userProfilePictureModal
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+          %h4.modal-title Edit Profile Picture

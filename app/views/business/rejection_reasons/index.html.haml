@@ -13,8 +13,6 @@
       = link_to "Create Reason", new_business_rejection_reason_path, :data => {:remote => true }, class: "btn border-button2"
     .templates-body#reasons
       = render "business/rejection_reasons/rejection_reasons", rejection_reasons: @rejection_reasons
-
-
 .modal#basic-form-modal
   .modal-dialog
     .modal-content

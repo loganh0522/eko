@@ -1,0 +1,6 @@
+- if @background.new_record? 
+  .background
+    = render 'job_seeker/users/profile_header'
+- else 
+  .background{:style => "background: url(#{@background.file}) no-repeat center center; background-size: cover "}
+    = render 'job_seeker/users/profile_header'

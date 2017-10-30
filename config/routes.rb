@@ -37,7 +37,9 @@ Rails.application.routes.draw do
   resources :job_boards
   resources :jobs do 
     resources :applications, only: [:index, :new, :create]
+    resources :candidates, only: [:index, :new, :create]
   end
+  
   resources :companies
   resources :users
   resources :profiles, only: [:index, :new, :create]
@@ -57,16 +59,22 @@ Rails.application.routes.draw do
   resources :skills 
   resources :certifications
 
+
+
   namespace :job_seeker do 
     root to: "jobs#index"
+    resources :create_profiles
+    
     resources :jobs, only: [:index, :show] do
       resources :applications
+      resources :candidates, only: [:index, :new, :create]
     end
+    get '/profile', to: 'users#show'
+    resources :background_images
+    resources :applications, only: [:create]
+    resources :question_answers  
     resources :users do 
       resources :user_avatars 
-    end
-
-    resources :profiles do 
       resources :user_certifications
       resources :educations
       resources :work_experiences do
@@ -75,9 +83,7 @@ Rails.application.routes.draw do
         resources :references
       end
     end
-
-    resources :applications, only: [:create]
-    resources :question_answers     
+   
   end
 
   get "/auth/:provider/callback", to: 'business/users#edit'

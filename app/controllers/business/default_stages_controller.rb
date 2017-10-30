@@ -68,7 +68,7 @@ class Business::DefaultStagesController < ApplicationController
   end
 
   def sort
-    params[:stage].each_with_index do |id, index|
+    params[:default_stage].each_with_index do |id, index|
       DefaultStage.update(id, {position: index + 1})
     end
     render nothing: true

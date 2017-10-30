@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171024112408) do
+ActiveRecord::Schema.define(version: 20171026142630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(version: 20171024112408) do
     t.datetime "updated_at"
     t.string   "agency"
     t.string   "acronym"
+    t.integer  "user_id"
   end
 
   create_table "client_contacts", force: :cascade do |t|
@@ -176,13 +177,14 @@ ActiveRecord::Schema.define(version: 20171024112408) do
     t.string   "name"
     t.string   "website"
     t.string   "subscription"
-    t.boolean  "active",       default: true
+    t.boolean  "active",              default: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "widget_key"
     t.string   "kind"
-    t.integer  "job_count",    default: 0,    null: false
-    t.integer  "max_jobs",     default: 3,    null: false
+    t.integer  "job_count",           default: 0,    null: false
+    t.integer  "max_jobs",            default: 3,    null: false
+    t.string   "application_process"
   end
 
   create_table "company_users", force: :cascade do |t|
@@ -266,6 +268,7 @@ ActiveRecord::Schema.define(version: 20171024112408) do
     t.text    "description"
     t.integer "profile_id"
     t.integer "candidate_id"
+    t.integer "user_id"
   end
 
   create_table "email_signatures", force: :cascade do |t|
@@ -641,6 +644,8 @@ ActiveRecord::Schema.define(version: 20171024112408) do
     t.integer "question_id"
     t.integer "application_id"
     t.integer "question_option_id"
+    t.integer "candidate_id"
+    t.integer "job_id"
   end
 
   create_table "question_options", force: :cascade do |t|
@@ -831,6 +836,7 @@ ActiveRecord::Schema.define(version: 20171024112408) do
     t.integer  "expires"
     t.integer  "profile_id"
     t.string   "name"
+    t.integer  "user_id"
   end
 
   create_table "user_skills", force: :cascade do |t|
@@ -879,6 +885,7 @@ ActiveRecord::Schema.define(version: 20171024112408) do
     t.string   "location"
     t.integer  "position"
     t.integer  "candidate_id"
+    t.integer  "user_id"
   end
 
 end

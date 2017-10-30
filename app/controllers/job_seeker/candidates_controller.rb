@@ -1,50 +1,44 @@
-class CandidatesController < JobSeekersController 
+class JobSeeker::CandidatesController < ApplicationController 
   layout "job_seeker"
-  before_filter :require_user
-  before_filter :profile_sign_up_complete
+  # before_filter :require_user
+  # before_filter :profile_sign_up_complete
 
   def new
-    binding.pry
-    @application = Application.new
+    @candidate = Candidate.new
+    @application = Candidate.new
     @job = Job.find(params[:job_id])
-    @questionairre = @job.questionairre
-    @job_board = JobBoard.find_by_subdomain!(request.subdomain)
-    @company = @job_board.company
-
-    if @questionairre.questions.present? 
-      @questions = @questionairre.questions
-    end
+    @questions = @job.questions
   end
 
   def create 
-    job = Job.find(params[:application][:job_id])  
-    if !current_user_applied?(job)
-      @application = Application.new(application_params)
-      if @application.save 
+    @job = Job.find(params[:job_id])  
+    @company = @job.company
+    
+    if @company.candidates.where(email: params[:candidate][:email]).present?
+      @candidate = @company.candidates.where(email: params[:candidate][:email]).first
+      @application = Application.create(candidate_id: @candidate.id, job_id: @job) 
+      track_activity @application, "create", @company.id, @candidate.id, params[:job_id]
+      redirect_to root_path
+    else
+      @candidate = Candidate.new(candidate_params)
+      if @candidate.save   
+        @application = Application.create(candidate_id: @candidate.id, job_id: @job)   
         flash[:success] = "Your application has been submitted"
-        track_activity @application
+        track_activity @application, "create", @company.id, @candidate.id, params[:job_id]
         redirect_to root_path
       else
         render :new
         flash[:error] = "Something went wrong please try again"
       end
-    else
-      flash[:error] = "You have already applied to this job"
-      redirect_to root_path
     end
   end
 
   private 
-
-  def application_params 
-    params.require(:application).permit(:user_id, :job_id, :company_id, question_answers_attributes: [:id, :body, :question_id, :question_option_id])
+  
+  def candidate_params
+    params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :company_id,
+      resumes_attributes: [:id, :name, :_destroy],
+      question_answers_attributes: [:id, :body, :job_id, :question_id, :question_option_id])
   end
 
-  def create_application
-    Application.create(user: current_user, job: job) unless current_user_applied?(job)
-  end
-
-  def current_user_applied?(job)
-    current_user.applications.map(&:job_id).include?(job.id)
-  end
 end

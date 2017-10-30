@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController 
+
   before_filter :require_user
   before_filter :profile_sign_up_complete, :only => [:index]
 
@@ -14,6 +15,16 @@ class ProfilesController < ApplicationController
     @job_board = JobBoard.find_by_subdomain!(request.subdomain)
     @company = @job_board.company
     @user = current_user
+    if @user.user_avatar.present?
+      @avatar = @user.user_avatar 
+    else
+      @avatar = UserAvatar.new
+    end
+    if @user.background_image.present?
+      @background = @user.background_image
+    else
+      @background = BackgroundImage.new 
+    end
     @profile = Profile.new
     @profile.work_experiences.build
     @profile.educations.build

@@ -16,6 +16,6 @@
         %b.caret
       %ul.dropdown-menu.dropdown-menu-right
         %li
-          %a= link_to "Profile", job_seeker_profiles_path
+          %a= link_to "Profile", job_seeker_user_path(current_user)
         %li
           %a= link_to "Sign Out", signout_path

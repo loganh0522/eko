@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :logged_in?, :current_user, :current_company, :current_kind, :user_logged_in, 
-    :profile_sign_up_complete, :belongs_to_company, :has_applied?
+    :profile_sign_up_complete, :belongs_to_company
   
   before_filter {|c| Authorization.current_user = c.current_user}
 
@@ -75,11 +75,11 @@ class ApplicationController < ActionController::Base
   end
 
   def profile_sign_up_complete
-    if current_user.present? && current_user.profile.present? == false && current_user.kind == "job seeker"
+    if current_user.present? && current_user.kind == "job seeker"
       if request.subdomain.present? 
-        redirect_to new_profile_path
+        redirect_to create_profiles_path
       else
-        redirect_to new_job_seeker_profile_path
+        redirect_to job_seeker_create_profiles_path
       end
       flash[:danger] = "Please complete your profile before you continue."
     end
@@ -98,6 +98,16 @@ class ApplicationController < ActionController::Base
   #     redirect_to business_root_path
   #   end
   # end
+
+  def resume_application_denied
+    @job_board = JobBoard.find_by_subdomain!(request.subdomain)
+    @company = @job_board.company  
+
+    if @company.application_process != "resume-process" 
+      flash[:error] = "Sorry, you do not have permission to access that!"
+      redirect_to root_path
+    end
+  end
 
   def company_deactivated?
     if current_company.active == false && current_company.subscription == "trial"

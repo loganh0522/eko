@@ -7,8 +7,10 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :email, :password, :on => [ :create ]
   validates_presence_of :first_name, :last_name, :email, :on => [ :update ]
   validates_uniqueness_of :email, :on => [ :create, :update ]
-
   validates_presence_of :password, :confirmation, :on => [:update_password]
+
+  
+
   before_create :downcase_email, :set_full_name
   after_save :set_full_name
 
@@ -40,7 +42,8 @@ class User < ActiveRecord::Base
   has_many :mentioned, :through => :mentions
   has_many :mentioned, :class_name => "Mention", :foreign_key => "mentioned_id"
   has_many :email_templates
-
+  has_one :google_token
+  has_one :outlook_token
   has_secure_password 
 
   # Job Seeker User relationships 
@@ -48,23 +51,60 @@ class User < ActiveRecord::Base
   has_one :profile
   has_many :candidates
   has_many :applications
-  has_one :user_avatar
-
-  has_one :google_token
-  has_one :outlook_token
-  has_many :social_links
-  validates_presence_of :first_name, :last_name, :email
-  validates_associated :social_links
   
+  has_one :user_avatar
+  has_one :background_image
+  has_many :work_experiences, -> {order("end_year DESC")} 
+  has_many :educations
+  has_many :user_certifications
+  has_many :social_links
+  has_many :user_skills
+  has_many :skills, through: :user_skills
+
+  validates_associated :social_links
+  validates_associated :work_experiences
+  validates_associated :educations
+  validates_associated :user_certifications
+  
+  accepts_nested_attributes_for :work_experiences, 
+    allow_destroy: true
+    # reject_if: :experience_validation
+
+  accepts_nested_attributes_for :educations, 
+    allow_destroy: true
+    # reject_if: proc { |a| a[:body].blank? }
+
+  accepts_nested_attributes_for :user_certifications, 
+    allow_destroy: true
+    # reject_if: proc { |a| a[:body].blank? }
+
   accepts_nested_attributes_for :social_links, 
     allow_destroy: true
+
+
+  def organize_work_experiences
+    self.work_experiences.sort_by{|work| [work.start_year, work.end_year] }.reverse
+  end
+
+  def current_position
+    self.work_experiences.where(current_position: 1).first
+  end
+  
+  
+  
 
   #Carrierwave uploader and minimagic for User Profile Pictures
   searchkick word_start: [:full_name]
 
   def search_data
     attributes.merge(
-      full_name: full_name
+      full_name: full_name,
+      work_titles: work_experiences.map(&:title),
+      work_description: work_experiences.map(&:description),
+      work_company: work_experiences.map(&:company_name),
+      education_description: educations.map(&:degree),
+      education_description: educations.map(&:description),
+      education_school: educations.map(&:school)
     )
   end
 
@@ -128,5 +168,13 @@ class User < ActiveRecord::Base
   def current_jobs
     @current_jobs = self.profile.work_experiences.where(current_position: true)
     return @current_jobs
+  end
+  
+  def organize_work_experiences
+    self.work_experiences.sort_by{|work| [work.start_year, work.end_year] }.reverse
+  end
+
+  def current_position
+    self.work_experiences.where(current_position: 1).first
   end
 end

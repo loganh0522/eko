@@ -19,6 +19,9 @@
     %li{:class => is_active?(business_users_path)}
       = link_to "Templates", business_templates_path
     
+    %li{:class => is_active?(business_users_path)}
+      = link_to "Tags", business_tags_path
+    
   - if permitted_to? :manage, @career_portal
     .nav-section Billing
     %li{:class => is_active?(business_plan_path)}

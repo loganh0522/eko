@@ -5,6 +5,7 @@
       %div#tag-results
     .col-md-6
       = f.hidden_field :candidate_id, value: @candidate.id
+      = f.hidden_field :company_id, value: current_company.id
       = hidden_field_tag :tag_id
       = f.submit "Add Tag", class: "btn submit-button"
       .close-form     

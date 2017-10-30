@@ -1,6 +1,6 @@
 class Tag < ActiveRecord::Base
-  has_many :taggings
-  belongs_to :company, dependent: :destroy
+  has_many :taggings, :dependent => :destroy
+  belongs_to :company
 
   before_create :titleize 
 

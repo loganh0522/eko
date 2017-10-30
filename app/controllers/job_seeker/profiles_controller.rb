@@ -1,7 +1,7 @@
 class JobSeeker::ProfilesController < JobSeekersController
   layout "job_seeker"
   before_filter :require_user
-  before_filter :profile_sign_up_complete, :only => [:index]
+  # before_filter :profile_sign_up_complete, :only => [:index]
   
   def new
     @user = current_user
@@ -26,6 +26,13 @@ class JobSeeker::ProfilesController < JobSeekersController
     @profile = current_user.profile
     @social_links = current_user.social_links
     @avatar = current_user.user_avatar
+
+    if current_user.background_image.present?
+      @background = current_user.background_image
+    else
+      @background = BackgroundImage.new
+    end
+    
     @work_experiences = @profile.organize_work_experiences
   end
 

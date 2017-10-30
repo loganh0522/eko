@@ -6,13 +6,21 @@
       = f.text_field :degree, class: "form-control", hide_label: true, placeholder:"Degree"
   .row
     .col-md-3.col-xs-6.col-sm-6
-      = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December']
+      = f.label "Start Date"
+      = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
+      %span#start_month_Block.help-block
     .col-md-3.col-xs-6.col-sm-6
-      = f.text_field :start_year
+      = f.label "Year"
+      = f.select(:start_year, 1960..2020)
+      %span#start_year_Block.help-block
     .col-md-3.col-xs-6.col-sm-6
-      = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December']
+      = f.label "End Date"
+      = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
+      %span#end_year_Block.help-block
     .col-md-3.col-xs-6.col-sm-6
-      = f.text_field :end_year
+      = f.label  "Year"
+      = f.select(:end_year, 1960..2020)
+      %span#end_month_Block.help-block
   .row
     .col-md-12
       = f.text_area :description, rows: 4, class: "form-control", hide_label: true, placeholder: "Description"

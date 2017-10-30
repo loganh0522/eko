@@ -2,10 +2,10 @@
   .modal-dialog
     .modal-content 
       .modal-header
-        %h1 Create Profile
+        Create Profile
       .modal-body   
-        %p Build a career portfolio, than easily apply to jobs at the click of a button. Track your job applications with ease, and build job notifications to alert you when jobs are posted.
-        = bootstrap_form_for @user do |f|
+        / %p Build a career portfolio, than easily apply to jobs at the click of a button. Track your job applications with ease, and build job notifications to alert you when jobs are posted.
+        = form_for @user, remote: true do |f|
           .row
             .col-md-6
               = f.text_field :first_name, placeholder: "First Name", hide_label: true, class: 'first_name'
@@ -13,8 +13,9 @@
               = f.text_field :last_name, placeholder: "Last Name", hide_label: true, class: 'last_name'
           = f.email_field :email, placeholder: "Email Address", hide_label: true
           = f.text_field :phone, placeholder: "Phone Number", hide_label: true
-          = f.text_field :location, class: "form-control", id: "geocomplete", autocomplete: "off", hide_label: true
+          = f.text_field :location, id: "geocomplete", autocomplete: "off", hide_label: true
           = f.password_field :password, placeholder: "Password", hide_label: true
+          = f.password_field :password_confirmation, placeholder: "Confirm Password", hide_label: true
           = f.hidden_field :kind, :value => 'job seeker'
           = f.submit "Create Profile", class: "btn submit-button", :style => "background-color: #{@job_board.brand_color}"
         .have-account

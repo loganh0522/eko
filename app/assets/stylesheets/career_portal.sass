@@ -223,14 +223,31 @@
 .company-job-board
   margin: 30px 10% 0 10% 
   @media screen and (max-width: 960px)
-    margin: 30px 5% 0 5%
+    margin: 0px 5% 0 5%
   .basic-job-description
     width: 65%
     margin: 0 17.5%
     max-width: 780px
+    .job-header
+      text-align: center
+      padding: 10px 0
+    .job-body
+      margin-top: 10px
+    .apply 
+      margin: 50px auto 100px auto
+      width: 50%
+      .btn
+        width: 100%
+        font-size: 16px
+        padding: 8px 15px 13px 15px
+
+    @media screen and (max-width: 768px)
+      width: 90%
+      margin: 30px 5% 0 5%
   .logo 
     width: fit-content
     margin: 0 auto
+  
   .basic-jobs
     width: 100%
     max-width: 1200px
@@ -341,14 +358,6 @@
     .apply
       a
         text-decoration: none
-      .app-btn
-        width: 100%
-        margin: 0 0
-        font-size: 18px
-        padding: 11px
-        border-radius: 3px 
-        text-align: center
-        font-decoration: none
     .detail
       border-bottom: 1px solid rgba(0, 0, 0, 0.1)
       margin-bottom: 10px
@@ -360,31 +369,7 @@
         font-size: 16px
         font-weight: 500
 
-  .application-form
-    width: 65%
-    margin: 0 auto
-    h1
-      color: black
-    .application-header
-      border-bottom: 1px solid rgba(0,0,0,0.1)
-      width: 100%
-    .application-body
-      width: 100%
-      .question
-        margin-top: 15px
-        .question-title
-          font-weight: 600
-          color: rgba(0,0,0,0.7)
-    .application-footer
-      .app-btn
-        width: 70%
-        margin: 30px 15%
-        font-size: 18px
-        padding: 12px
-        border-radius: 3px 
-        text-align: center 
-        color: #ffffff
-
+  
 .footer
   height: 100px
 

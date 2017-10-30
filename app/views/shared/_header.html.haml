@@ -19,9 +19,9 @@
     .career-portal-nav
       .navigation-actions
         .content
-          - if @company.job_board.job_board_header.logo.present?
+          - if @company.logo.present?
             = link_to root_path do
-              %img(src="#{@company.job_board.job_board_header.logo}" class="sub_logo")
+              %img(src="#{@company.logo}" class="sub_logo")
           - else
             .brand
               = link_to root_path do
@@ -32,9 +32,9 @@
   - else
     .career-portal-nav   
       .navigation-actions
-        - if @company.job_board.job_board_header.logo.present?
+        - if @company.logo.present?
           = link_to root_path do
-            %img(src="#{@company.job_board.job_board_header.logo}" class="sub_logo")
+            %img(src="#{@company.logo}" class="sub_logo")
         - else
           .brand
             = link_to root_path do

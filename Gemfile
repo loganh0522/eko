@@ -51,7 +51,7 @@ gem 'jcrop-rails-v2'
 gem 'remotipart', '~> 1.2'
 gem 'jquery-fileupload-rails'
 
-
+gem 'wicked'
 gem "font-awesome-rails"
 
 gem 'elasticsearch-model'

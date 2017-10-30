@@ -46,6 +46,9 @@ class Candidate < ActiveRecord::Base
   accepts_nested_attributes_for :resumes, 
     allow_destroy: true,
     reject_if: proc { |a| a[:name].blank? }
+    
+  has_many :question_answers, dependent: :destroy
+  accepts_nested_attributes_for :question_answers, allow_destroy: true
 
   def manually_created?
     manually_created.present? && manually_created == true

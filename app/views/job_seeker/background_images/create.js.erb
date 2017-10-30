@@ -1,0 +1,5 @@
+<% if @background.new_record? %>
+  alert("Failed to upload painting: <%= j @background.errors.full_messages.join(', ').html_safe %>");
+<% else %>
+  $(".job-seeker-topper").html("<%= j render 'job_seeker/background_images/background', background: @background %>");
+<% end %>

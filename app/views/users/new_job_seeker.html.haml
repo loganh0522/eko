@@ -1,47 +1,49 @@
 .job-seeker-homepage
-  .details-container 
-    .feature
-      .img
-        %img(src="/tmp/overview-candidate-profile.png")
-      .des
-        %h4 Build your Profile 
-        .body Your profile acts as your resume and CV. Take your time to build out your profile as it acts as your resume when you apply to a job.
-    .feature
-      .img
-        %img(src="/tmp/click-cursor.png")
-      .des
-        %h4 Apply to Jobs 
-        .body Once you have completed your profile, you can apply to jobs directly from Talentwiz. When you apply to a job from TalentWiz your profile will be submitted as your resume. Any additional information the company has asked for will also be submitted as a part of your profile.
-    .feature
-      .img
-        %img(src="/tmp/overview-user.png")
-      .des
-        %h4 Track your Progress
-        .body Track all your applications directly from the platform. Receive messages, interviews, and assessments directly to your profile. Making it easier to manage all your applications.
-    .feature
-      .img
-        %img(src="/tmp/domain-registration.png")
-      .des
-        %h4 Company Job Boards
-        .body When you are applying to a job via a company's website, look for the "TalentWiz" logo. If  you see this, sign-in using your e-mail and password for Talentwiz. Your profile will be automatically loaded to the companies career portal, and you can quickly apply to jobs.
-
-
+  / .details-container 
+  /   .feature
+  /     .img
+  /       %img(src="/tmp/overview-candidate-profile.png")
+  /     .des
+  /       %h4 Build your Profile 
+  /       .body Your profile acts as your resume and CV. Take your time to build out your profile as it acts as your resume when you apply to a job.
+  /   .feature
+  /     .img
+  /       %img(src="/tmp/click-cursor.png")
+  /     .des
+  /       %h4 Apply to Jobs 
+  /       .body Once you have completed your profile, you can apply to jobs directly from Talentwiz. When you apply to a job from TalentWiz your profile will be submitted as your resume. Any additional information the company has asked for will also be submitted as a part of your profile.
+  /   .feature
+  /     .des
+  /       %h4 Track your Progress
+  /       .body Track all your applications directly from the platform. Receive messages, interviews, and assessments directly to your profile. Making it easier to manage all your applications.
+  /   .feature
+  /     .img
+  /       %img(src="/tmp/domain-registration.png")
+  /     .des
+  /       %h4 Company Job Boards
+  /       .body When you are applying to a job via a company's website, look for the "TalentWiz" logo. If  you see this, sign-in using your e-mail and password for Talentwiz. Your profile will be automatically loaded to the companies career portal, and you can quickly apply to jobs.
 
   .job-seeker-registration
-    = bootstrap_form_for @user do |f|
+    = form_for @user do |f|
       .header
         %h2 Sign Up Today
-        %p It's Free for Job Seekers
       .body
-        = f.text_field :first_name, placeholder: "First Name", hide_label: true, class: 'first_name'
-        = f.text_field :last_name, placeholder: "Last Name", hide_label: true, class: 'last_name'
+        .row 
+          .col-md-6
+            = f.text_field :first_name, placeholder: "First Name", hide_label: true, class: 'first_name'
+            = show_errors(@user, :first_name) 
+          .col-md-6
+            = f.text_field :last_name, placeholder: "Last Name", hide_label: true, class: 'last_name'
+            = show_errors(@user, :last_name)
         = f.email_field :email, placeholder: "Email Address", hide_label: true
+        = show_errors(@user, :email) 
         = f.text_field :phone, placeholder: "Phone Number", hide_label: true
-        = f.text_field :location, class: "form-control", id: "geocomplete", autocomplete: "off", hide_label: true
+        = f.text_field :location, id: "geocomplete", autocomplete: "off", hide_label: true
         = f.password_field :password, placeholder: "Password", hide_label: true
+        = show_errors(@user, :password) 
         = f.password_field :password_confirmation, placeholder: "Confirm Password", hide_label: true
         = f.hidden_field :kind, :value => 'job seeker'
-        = f.submit "Sign me up", class: "btn button-submit"
+        = f.submit "Sign me up", class: "btn submit-button"
 
 
 

@@ -25,7 +25,8 @@
       .apply 
         - if current_user.present?
           - if @job.questions.present? 
-            = link_to "Apply to this Job", new_job_seeker_job_application_path(@job.id), :class => "btn btn-primary app-btn"
+            / = link_to "Apply to this Job", new_job_seeker_job_application_path(@job.id), :class => "btn btn-primary app-btn"
+            = link_to "Apply to this Job", new_job_seeker_job_candidate_path(@job.id), :class => "btn btn-primary app-btn"
           - else
             = bootstrap_form_for [:job_seeker, @application] do |f|
               .fieldset

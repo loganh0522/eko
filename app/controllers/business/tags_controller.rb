@@ -7,8 +7,7 @@ class Business::TagsController < ApplicationController
   before_filter :company_deactivated?
   
   def index
-    @tags = current_company.tags.order(:name).where("name ILIKE ?", "%#{params[:term]}%") 
-    render :json => @tags.to_json 
+    @tags = current_company.tags
   end
 
   def new
@@ -22,26 +21,41 @@ class Business::TagsController < ApplicationController
 
   def create 
     @company_tags = current_company.tags   
-    
-    if params[:applicant_ids].present?
-      add_tag_to_multiple
-    else
-      add_to_single_app
-    end
-
     respond_to do |format|
-      format.js
+      if params[:applicant_ids].present?
+        add_tag_to_multiple
+        format.js
+      elsif params[:tag][:candidate_id].present?
+        add_to_single_app
+        format.js
+      else 
+        @tag = Tag.new(tag_params)
+        if @tag.save
+          @tags = current_company.tags
+          format.js
+        end
+      end
     end 
   end
 
   def destroy
-    @tagging = Tagging.where(candidate_id: params[:candidate_id], tag_id: params[:id]).first
-    @tag = Tag.find(params[:id])
-    @tagging.destroy
+    if params[:candidate_id].present? 
+      @tagging = Tagging.where(candidate_id: params[:candidate_id], tag_id: params[:id]).first
+      @tag = Tag.find(params[:id])
+      @tagging.destroy
+    else
+      @tag = Tag.find(params[:id])
+      @tag.destroy
+    end
 
     respond_to do |format|
       format.js
     end
+  end
+
+  def autocomplete
+    @tags = current_company.tags.order(:name).where("name ILIKE ?", "%#{params[:term]}%") 
+    render :json => @tags.to_json 
   end
 
   private

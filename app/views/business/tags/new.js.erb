@@ -1,6 +1,12 @@
 <% if params[:candidate_id].present? %>
   $('<%= j render "business/tags/form" %>').insertBefore("#add_tag");
   $('#add_tag').hide();
+
+<% elsif params[:tag] == "company" %>
+  $('.multi-form').find('form').remove()
+  $('.multi-form').find('.modal-title').html('<%= j "Add Tag" %>');
+  $('.multi-form').find('.modal-header').after('<%= j render "business/tags/company_form" %>');
+  $('.multi-form').modal("toggle");
 <% else %>
   $('.multi-form').find('form').remove()
   $('.multi-form').find('.modal-title').html('<%= j "Add Tags" %>');

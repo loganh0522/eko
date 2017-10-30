@@ -3,7 +3,7 @@
     %img.logo(src="/tmp/logo.jpg")
     %h2 Sign Up Today
   .body
-    = bootstrap_form_for @user do |f|
+    = form_for @user do |f|
       %fieldset
         = f.text_field :first_name, placeholder: "First Name", hide_label: true
         = f.text_field :last_name, placeholder: "Last Name", hide_label: true

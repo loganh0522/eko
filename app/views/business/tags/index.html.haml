@@ -1,0 +1,21 @@
+.company-settings
+  .side-container
+    = render 'business/shared/admin_sidebar'
+  .main-container
+    .standard-header
+      %h2 Company Tags
+      = link_to "Add Tag", new_business_tag_path(tag: "company"), class: "btn border-button2", :data => {:remote => true } 
+    .tag-container
+      .tags
+        - @tags.each do |tag|
+          %div{id: "tag_#{tag.id}", class: "tag"}
+            .name= "#" + tag.name
+            = link_to business_tag_path(tag), remote: true, :method => :delete do 
+              .delete-can-tag &times
+
+.modal.multi-form
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title

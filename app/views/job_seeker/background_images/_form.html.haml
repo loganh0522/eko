@@ -1,0 +1,4 @@
+= form_for [:job_seeker, @background], :html => {id: "job-seeker-background-up"} do |q| 
+  = q.hidden_field :user_id, value: current_user.id
+  = q.file_field :file, class: "btn user_avatar_image inputfile"
+  = q.label :file, "Add Background Photo", class: "btn white-border-button" 

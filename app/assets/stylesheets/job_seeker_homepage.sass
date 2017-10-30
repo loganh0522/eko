@@ -19,30 +19,47 @@
         margin-left: 5%
         h4
           margin-top: 0
-
+  .job-seeker-registration
+    width: 40%
+    background: #ffffff
+    box-shadow: 0px 1px 8px 1px rgba(199,197,199,1)
+    border-radius: 3px
+    padding: 20px 0
+    float: left
+    margin: 10px 3% 10px 0px
+    text-align: center
+    .header
+      border-bottom: 1px solid rgba(0,0,0,0.1)
+    .body
+      padding: 0 5%
+      .first_name
+        width: 49%
+        float: left
+        margin-right: 2%
+      .last_name
+        width: 49%
+        float: left
+    h2 
+      margin-top: 0px
+      
 .job-board-header
-  background-size: contain
-  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1) 
+  background: url("/tmp/people-coffee-tea-meeting.jpg") center no-repeat
+  background-size: cover
   height: 300px
-  
+  position: relative
   @media screen and (max-width: 800px)
     width: 100%
     margin: 0 0 
-  .header-container
-    margin: 0 auto
-    padding: 50px 5%
-    height: 400px
-    background: rgba(0,0,0,0.5)
-    .content
   .intro-message
     color: #ffffff
-    padding: 70px 0
+    position: absolute
     text-align: center
-    width: 90%
+    width: 100%
     margin: 0 auto
-    height: auto
+    height: 200px
+    background: rgba(0,0,0,0.4)
     .header 
-      margin-bottom: 20px
+      margin-top: 50px
       font-size: 44px
       font-weight: 300
       height: auto
@@ -51,6 +68,31 @@
       font-weight: 300
       margin-bottom: 30px
       height: auto
+  .header-container
+    margin: 0 auto
+    padding: 25px 0
+    height: 100px
+    position: absolute
+    background: rgba(0, 0, 0, 0.6)
+    bottom: 0
+    width: 100%
+    .contain
+      width: 100%
+      max-width: 1280px
+      overflow: hidden
+      margin: 0 10%
+      #job-search
+        width: 50%
+        float: left
+        height: 45px
+        margin: 0 0
+        margin-left: 10px
+      #geocomplete
+        width: 30%
+        float: left
+        height: 45px
+        margin: 0 0
+  
 .job-board
   width: 100%
   max-width: 1280px
@@ -58,26 +100,29 @@
   .filters
     float: left
     width: 22%
-    margin: 50px 2% 0 2%
+    margin: 20px 1% 0 2%
     height: 200px
     .header 
       font-size: 24px
       font-weight: 100
-    .job-function
+    .filter
       background: white
-      border: 1px solid rgba(0, 0, 0, 0.1)
+      margin: 10px 0
+      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
       .title
-        height: 50px
-        padding: 15px 0 0 20px
-        font-weight: 800
+        height: 40px
+        padding: 10px 0 0 20px
+        font-weight: 400
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1)
       .body
-        height: 275px 
+        background: #ffffff
+        height: 100px 
         overflow-y: auto
-        display: none      
+    
   .jobs
     float: right
     width: 70%
-    margin: 50px 2% 0 2%
+    margin: 65px 2% 0 1%
     .job-posting
       width: 100%
       margin-bottom: 20px
@@ -122,28 +167,7 @@
           img
             margin: 0 5px 0 10px
 
-    .job-seeker-registration
-      width: 40%
-      background: #ffffff
-      box-shadow: 0px 1px 8px 1px rgba(199,197,199,1)
-      border-radius: 3px
-      padding: 20px 0
-      float: left
-      margin: 10px 3% 10px 0px
-      text-align: center
-      .header
-        border-bottom: 1px solid rgba(0,0,0,0.1)
-      .body
-        padding: 0 5%
-        .first_name
-          width: 49%
-          float: left
-          margin-right: 2%
-        .last_name
-          width: 49%
-          float: left
-      h2 
-        margin-top: 0px
+    
 
 
 .main-row-container
@@ -199,40 +223,29 @@
           font-size: 16px
           font-weight: 500
 
-    .application-form
-      width: 65%
-      margin: 0 auto
-      h1
-        color: black
-      .application-header
-        border-bottom: 1px solid rgba(0,0,0,0.1)
-        width: 100%
-      .application-body
-        width: 100%
-        .question
-          margin-top: 15px
-          .question-title
-            font-weight: 600
-            color: rgba(0,0,0,0.7)
-      .application-footer
-        .app-btn
-          width: 70%
-          margin: 30px 15%
-          font-size: 18px
-          padding: 12px
-          border-radius: 3px 
-          text-align: center 
-          color: #ffffff
+.application-form
+  width: 90%
+  margin: 0 auto
+  h1
+    color: black
+  .application-header
+    border-bottom: 1px solid rgba(0,0,0,0.1)
+    width: 100%
+  .application-body
+    margin-top: 15px
+    width: 100%
+    .question
+      margin-top: 15px
+      .question-title
+        font-weight: 600
+        color: rgba(0,0,0,0.7)
+      .answer
+        ul
+          list-style: none
+          margin-left: 10px
+          padding: 0 0 
+  .application-footer
 
-.apply
-  a
-    text-decoration: none
-  .app-btn
-    width: 70%
-    margin: 30px 15%
-    font-size: 18px
-    padding: 12px
-    border-radius: 3px 
-    text-align: center 
-    color: #ffffff
+
+
 
