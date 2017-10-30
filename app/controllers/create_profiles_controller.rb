@@ -16,6 +16,4 @@ class CreateProfilesController < ApplicationController
     @user.attributes = params[:user]
     render_wizard @user
   end
-
-  def
 end
