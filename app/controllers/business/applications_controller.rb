@@ -91,7 +91,6 @@ class Business::ApplicationsController < ApplicationController
       @candidate = Candidate.find(params[:application_id])
       @job = Job.find(params[:job_id])
       @questions = @job.questions
-
     end
 
     respond_to do |format| 
