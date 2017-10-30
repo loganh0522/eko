@@ -9,58 +9,60 @@
   .row 
     .col-md-6
       = f.label "First Name *"
-      = f.text_field :first_name, placeholder: "First Name"
+      = f.text_field :first_name, placeholder: "First Name", id: "first_name_Block", :required => true
+      %span#first_name_msgBlock
     .col-md-6
       = f.label "Last Name *"
-      = f.text_field :last_name, placeholder: "Last Name"
+      = f.text_field :last_name, placeholder: "Last Name", id: "last_name_Block", :required => true
+      %span#last_name_msgBlock
   = f.label "E-mail Address *"
-  = f.email_field :email, placeholder: "Email Address", hide_label: true
+  = f.email_field :email, placeholder: "Email Address", hide_label: true, id: "email_Block", :required => true
+  %span#email_msgBlock
   
   = f.fields_for :resumes, Resume.new do |q|
     = q.label "Resume *", class: "file-container"
-    = q.file_field :name, class: "file-container"
-
-  - if @questions.present?
-    - @questions.each do |question|
-      .question
-        - if question.required == 1
-          .question-title= "#{question.body} *"
+    = q.file_field :name, class: "file-container", :required => true
+  %span#resume_msgBlock
+  - @questions.each do |question|
+    .question
+      - if question.required == 1
+        .question-title= "#{question.body} *"
+      - else 
+        .question-title= question.body
+      .answer
+        - if question.kind == 'Checkbox'
+          %ul 
+            - question.question_options.each do |option|
+              = f.fields_for :question_answers, QuestionAnswer.new do |q| 
+                %li
+                  = q.hidden_field :question_id, value: question.id
+                  = q.hidden_field  :job_id, value: @job.id
+                  = q.check_box :question_option_id, {}, option.id, nil
+                  = option.body
         - else 
-          .question-title= question.body
-        .answer
-          - if question.kind == 'Checkbox'
-            %ul 
-              - question.question_options.each do |option|
-                = f.fields_for :question_answers, QuestionAnswer.new do |q| 
+          = f.fields_for :question_answers, QuestionAnswer.new do |q|
+            - if question.kind == 'Text' 
+              = q.hidden_field  :question_id, value: question.id
+              = q.hidden_field  :job_id, value: @job.id
+              - if question.required == 1 
+                = q.text_field :body, hide_label: true, :required => true
+              - else
+                = q.text_field :body, hide_label: true
+            - elsif question.kind == 'Paragraph'
+              = q.hidden_field  :question_id, value: question.id
+              = q.hidden_field  :job_id, value: @job.id
+              - if question.required == 1
+                = q.text_area :body, hide_label: true, :required => true, rows: 5
+              - else
+                = q.text_area :body, hide_label: true, rows: 5 
+            - elsif question.kind == 'Multiple Choice'
+              %ul
+                - question.question_options.each do |option|
                   %li
-                    = q.hidden_field :question_id, value: question.id
+                    = q.hidden_field  :question_id, value: question.id
                     = q.hidden_field  :job_id, value: @job.id
-                    = q.check_box :question_option_id, {}, option.id, nil
+                    = q.radio_button :question_option_id, option.id
                     = option.body
-          - else 
-            = f.fields_for :question_answers, QuestionAnswer.new do |q|
-              - if question.kind == 'Text' 
-                = q.hidden_field  :question_id, value: question.id
-                = q.hidden_field  :job_id, value: @job.id
-                - if question.required == 1 
-                  = q.text_field :body, hide_label: true, :required => true
-                - else
-                  = q.text_field :body, hide_label: true
-              - elsif question.kind == 'Paragraph'
-                = q.hidden_field  :question_id, value: question.id
-                = q.hidden_field  :job_id, value: @job.id
-                - if question.required == 1
-                  = q.text_area :body, hide_label: true, :required => true, rows: 5
-                - else
-                  = q.text_area :body, hide_label: true, rows: 5 
-              - elsif question.kind == 'Multiple Choice'
-                %ul
-                  - question.question_options.each do |option|
-                    %li
-                      = q.hidden_field  :question_id, value: question.id
-                      = q.hidden_field  :job_id, value: @job.id
-                      = q.radio_button :question_option_id, option.id
-                      = option.body
   .apply
     = f.hidden_field :job_id, value: @job.id
     = f.hidden_field :company_id, value: @job.company.id

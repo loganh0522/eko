@@ -15,7 +15,7 @@
   = link_to business_job_application_comments_path(@job, @application), remote: true do
     %li.change#notes Notes
 
-  = link_to business_job_application_application_form_path(@job, @application), remote: true do
+  = link_to business_job_application_application_form_path(@job, @candidate), remote: true do
     %li.change#assessments Assessments
   
   = link_to business_job_application_application_scorecards_path(@job, @application), remote: true do
@@ -23,6 +23,7 @@
   
   = link_to business_job_application_activities_path(@job, @application), remote: true do
     %li.change#activity Activity
+
 .bottom-row
   = link_to new_business_application_comment_path(@application), id: "add-note", remote: true do
     + Note

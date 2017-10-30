@@ -14,7 +14,7 @@ class Candidate < ActiveRecord::Base
   has_many :jobs, through: :applications
   has_one :conversation, :dependent => :destroy
   has_many :interviews
-  
+  has_many :question_answers
   has_many :invited_candidates
   has_many :interview_invitations, through: :invited_candidates
   has_many :resumes, :dependent => :destroy
@@ -32,6 +32,7 @@ class Candidate < ActiveRecord::Base
   has_many :tasks, -> {order("created_at DESC")}, as: :taskable, :dependent => :destroy
 
   validates_presence_of :first_name, :last_name, :email, :if => :manually_created?
+
   validates_associated :social_links, :work_experiences, :educations, :resumes
   
   accepts_nested_attributes_for :social_links, 

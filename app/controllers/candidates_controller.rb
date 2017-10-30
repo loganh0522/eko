@@ -21,11 +21,12 @@ class CandidatesController < ApplicationController
       flash[:success] = "Your application has been submitted"
       redirect_to root_path
     else
-      redirect_to :back
       flash[:error] = "Something went wrong please try again"
-      respond_to do |format| 
-        format.js
-      end
+      @user = User.new
+      @candidate = Candidate.new(candidate_params)
+      @questions = @job.questions
+      @candidate.question_answers.build
+      render :new
     end
   end
 
@@ -38,4 +39,10 @@ class CandidatesController < ApplicationController
       question_answers_attributes: [:id, :body, :job_id, :question_id, :question_option_id])
   end
 
+  def render_errors(candidate)
+    @errors = []
+    candidate.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end  
+  end
 end

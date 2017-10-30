@@ -93,12 +93,12 @@ module ApplicationHelper
     end
   end
 
-  def question_answer(question, application)
-    if application.question_answers.count == 0
+  def question_answer(question, candidate, job)
+    if candidate.question_answers.count == 0
       return "There are currently no answers for this application"
     else
       if question.kind == 'Text' || question.kind == 'Paragraph'
-        @answers = QuestionAnswer.where(question: question, application: application).first 
+        @answers = QuestionAnswer.where(question: question, candidate: candidate, job_id: job.id).first 
         if @answers.present?
           @answer = @answers.body
         else 
