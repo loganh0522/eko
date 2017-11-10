@@ -14,15 +14,19 @@ class Business::OrdersController < ApplicationController
 
   def create
     order_item_total(params[:order][:order_items_attributes])
-
+    
+    binding.pry
+    
     charge = StripeWrapper::Charge.create(
       :customer_id => current_company.customer.stripe_customer_id,
       :amount => @totalPrice 
       )
     
+    binding.pry
+
     if charge.successful?
       @order = Order.new(order_params)
-      
+      binding.pry
       respond_to do |format| 
         if @order.save 
           format.js
@@ -55,7 +59,7 @@ class Business::OrdersController < ApplicationController
     items.each do |item| 
       item[1][:premium_board_id]
       @job_board = PremiumBoard.find(item[1][:premium_board_id])
-      totalPrice += (@job_board.price.to_f * 100).to_i
+      @totalPrice += (@job_board.price.to_f * 100).to_i
     end
     
     return @totalPrice

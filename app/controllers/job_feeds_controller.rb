@@ -24,7 +24,7 @@ class JobFeedsController < ApplicationController
     @jobs = Job.joins(:job_feed).where(status: "open", :job_feeds => {:juju => true})
   end
 
-  def adzuna
+  def rai
     @jobs = Job.joins(:job_feed).where(status: "open", :job_feeds => {:jobrapido => true})
   end
 

@@ -1,0 +1,9 @@
+<% if @errors.present? %>
+  <% @errors.each do |error| %>
+    $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+    $('.stage-form').find('#<%= error[0] %>_Block').addClass('has-error');
+  <% end %>
+<% else %>
+  $('#basic-form-modal').modal("hide");
+  $('#stages').html('<%= j render "default_stages", stages: @stages  %>');
+<% end %>

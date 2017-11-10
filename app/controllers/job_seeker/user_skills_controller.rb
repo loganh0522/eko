@@ -6,7 +6,7 @@ class JobSeeker::UserSkillsController < JobSeekersController
   def new
     @user_skill = UserSkill.new
     @work_experience = WorkExperience.find(params[:work_experience_id])
-    @profile = current_user.profile
+    @user = current_user
 
     respond_to do |format| 
       format.js
@@ -14,24 +14,22 @@ class JobSeeker::UserSkillsController < JobSeekersController
   end
 
   def create
+    @user = current_user
     @skill = Skill.find_or_create_skill(params[:name])
     @work_experience = WorkExperience.find(params[:work_experience_id])
-    @user_skill = UserSkill.new(skill_id: @skill.id, work_experience_id: params[:work_experience_id])
+    @user_skill = UserSkill.new(skill_id: @skill.id, work_experience_id: params[:work_experience_id], user_id: @user.id)
     @skills = @work_experience.skills
-    @profile = current_user.profile
-    
-    if @user_skill.save
-      respond_to do |format| 
+   
+    respond_to do |format| 
+      if @user_skill.save
+        format.js
+      else
         format.js
       end
-    else
-      flash[:danger] = "Something went wrong, please try again."
-      redirect_to job_seeker_profiles_path
     end
   end
 
   def destroy
-    # @user_skill = UserSkill.where(skill_id: params[:id], work_experience_id: params[:work_experience_id]).first
     @user_skill = UserSkill.find(params[:id])
     @user_skill.destroy
 
@@ -46,5 +44,4 @@ class JobSeeker::UserSkillsController < JobSeekersController
   def skill_params
     params.require(:user_skill).permit(:user_id)
   end
-
 end

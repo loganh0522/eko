@@ -4,7 +4,7 @@
       Create Scorecard 
     - if !@job.scorecard.present?
       = f.fields_for :scorecard_sections, ScorecardSection.new do |a|
-        .question-area 
+        .scorecard-area 
           .header
             = a.text_field :body, class: "form-control section-title questions", placeholder: "Section Name", id: "section-body", autocomplete: 'off'
             %span#sectionBodyBlock

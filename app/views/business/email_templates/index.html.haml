@@ -4,11 +4,10 @@
   .main-container
     .standard-header
       %h2 E-mail Templates
-      = link_to "+ Add E-mail Template", new_business_email_template_path, :data => {:remote => true }, class: "btn border-button2"
-    .templates-body
+      = link_to "+ Add E-mail Template", new_business_email_template_path, :data => {:remote => true }, class: "btn border-button"
+    .stages
       = render "business/email_templates/email_templates", email_templates: @email_templates
    
-
 
 .modal#basic-form-modal
   .modal-dialog

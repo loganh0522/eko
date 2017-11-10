@@ -25,6 +25,11 @@ describe Business::TasksController do
       let(:action) {xhr :get, :index}
     end
 
+    it "redirects the user to the sign in page if unauthenticated user" do
+      xhr :get, :edit, id: joe.id
+      expect(response).to redirect_to business_root_path
+    end
+
     context "@job in params renders job.comments" do 
       before do  
         set_current_user(alice)

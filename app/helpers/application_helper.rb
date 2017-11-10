@@ -19,7 +19,7 @@ module ApplicationHelper
       render(association.to_s.singularize + "_fields", f: builder, board: board)
     end
 
-    link_to(name, '#', class: "add_to_cart btn submit-button", data: {id: id, fields: fields.gsub("\n", ""), :board => board.name}, style: "display:#{name == "Add Answer" ? "none" : ""}" )
+    link_to(name, '#', class: "add_to_cart btn job-seeker-btn", data: {id: id, fields: fields.gsub("\n", ""), :board => board.name}, style: "display:#{name == "Add Answer" ? "none" : ""}" )
   end
 
   

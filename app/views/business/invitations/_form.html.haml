@@ -1,14 +1,14 @@
-.invitation-form
-  = form_for [:business, @invitation], remote: true do |f| 
-    .modal-body   
-      = f.text_field :recipient_email, placeholder: "Email", id: ":recipient_email_Block"
-      = f.select :user_role, options_for_select(["Admin", "Hiring Manager", "Recruiter"])
-      = f.text_area :message, label: "Message", class: 'form-control', rows: '6', placeholder: "Please join this really cool app", id: 'message_Block'
-    .modal-footer
-      = f.hidden_field :job_id, value: @job.id if @job.present?
-      = f.hidden_field :user_id, value: current_user.id
-      = f.hidden_field :inviter_id, value: current_user.id
-      = f.hidden_field :company_id, value: current_company.id
-      = f.submit "Send Invitation", class: "btn submit-button"
-      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel   
+= form_for [:business, @invitation], remote: true do |f| 
+  .modal-body   
+    = f.text_field :recipient_email, placeholder: "Email", id: "recipient_email_Block"
+    %span#recipient_emailBlocks
+    = f.select :user_role, options_for_select(["Admin", "Hiring Manager", "Recruiter"])
+    = f.text_area :message, label: "Message", class: 'form-control', rows: '6', placeholder: "Please join this really cool app", id: 'message_Block'
+  .modal-footer
+    = f.hidden_field :job_id, value: @job.id if @job.present?
+    = f.hidden_field :user_id, value: current_user.id
+    = f.hidden_field :inviter_id, value: current_user.id
+    = f.hidden_field :company_id, value: current_company.id
+    = f.submit "Send Invitation", class: "btn submit-button"
+    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel   
     

@@ -32,7 +32,8 @@
 body 
   -moz-osx-font-smoothing: grayscale
   -webkit-font-smoothing: antialiased
-  background-color: #f7f8f9
+  background-color: #f7f8f9 
+  
 
   font-family: Open Sans, sans-serif, Helvetica, Arial, sans-serif
   font-weight: 500
@@ -45,11 +46,12 @@ body
     color: #ffffff
     font-weight: 300
     margin: 12px 0 10px 0
-
   h2
     font-weight: 300
     font-size: 26px
-
+  h3
+    font-weight: 300
+    font-size: 26px
   p 
     color: rgba(0, 0, 0, .85)
     font-family:  Open Sans, sans-serif, Helvetica, Arial, sans-serif
@@ -60,24 +62,35 @@ header
   width: 100%
 .field_with_errors 
   input
-    box-shadow: 0px 0px 1px .5px red
+    box-shadow: 0px 0px 1px .5px rgba(255, 0, 0, 0.5)
+  select
+    box-shadow: 0px 0px 1px .5px rgba(255, 0, 0, 0.5)
 #main-container
   overflow: hidden
   width: 100%
+#main-container-padding
+  margin: 0px 3% 100px 3%
+.side-container-right 
+  float: right
+  width: 24%   
+  margin: 0 0 200px 2%
+.main-container-left
+  float: left
+  width: 74%
+  margin-bottom: 100px
 .side-container 
   float: left  
   width: 24%   
   margin: 0 0 200px 2%
 .main-container
   float: right
-  padding: 0px 0px 15px 0px
-  padding-left: 2.5em
   width: 74%
   margin-bottom: 100px
+
 .standard-header
   overflow: hidden
-  border-bottom: 1px solid rgba(0,0,0,0.3)
-  padding-bottom: 10px
+  border-bottom: 1px solid rgba(0,0,0,0.1)
+  padding: 15px 15px
   margin-bottom: 10px
   h2
     float: left
@@ -87,7 +100,33 @@ header
     float: right
     width: auto
     margin-left: 10px
+.standard-body
+  overflow: hidden
+  padding: 15px 15px
+  .standard-body-header
+    overflow: hidden
+    border-bottom: 1px solid rgba(0,0,0,0.1)
+    padding-bottom: 10px
+    margin-bottom: 10px
+    h4
+      float: left
+      width: auto
+      padding: 0 0
+      margin-top: 15px
+    a 
+      float: right
+      width: auto
+      margin-left: 10px
+.container-footer
+  margin-top: 15px
+  border-top: 1px solid #ccc
+  height: auto 
+  padding: 15px 15px
+  overflow: hidden
+  .border-button
+    float: right
 
+ 
 .page-header
   margin-top: 60px
   width: 93%
@@ -116,10 +155,11 @@ trix-editor
 
 
 .not-present-container
-  width: 100%
+  width: 94%
   height: 200px 
   border: 2px dashed #c6c8ca
   padding: 50px 0
+  margin: 3% 3%
   border-radius: 5px
   text-align: center
   p 
@@ -152,9 +192,10 @@ trix-editor
 
 
 .job-seeker-btn
-  border: solid 1.5px #EF7B2B
+  border: solid 1.2px #EF7B2B
   padding: 10px 20px
   border-radius: 2px
+  background: #ffffff
 a.job-seeker-btn
   color: black
   font-size: 14px
@@ -169,7 +210,6 @@ a.job-seeker-btn
   padding: 10px 15px 13px 15px
   background: rgba(239, 122, 43, 0.9)
   color: white
-  
   &:hover
     color: white
     text-decoration: none
@@ -201,6 +241,30 @@ a.button
   padding: 10px 15px 13px 15px
   background: rgba(239, 122, 43, 0.4)
   color: white
+label
+  color: rgba(0,0,0,0.7)
+.border-button
+  display: block
+  max-height: 40px
+  border-radius: 2px
+  font-weight: 400
+  font-size: 14px 
+  text-align: center
+  padding: 9px 15px 
+  background: #ffffff
+  border: 1px solid rgba(239, 122, 43, 0.9)
+  color: rgba(239, 122, 43, 0.9)
+  &:hover
+    background-color: rgba(239, 122, 43, 0.1)
+    color: rgba(239, 122, 43, 0.9)
+    text-decoration: none
+a.button
+  text-decoration: none
+  color: white
+a:active, a:focus 
+  outline: 0
+  color: black
+  -moz-outline-style: none
 
 .border-button2
   display: block
@@ -314,11 +378,13 @@ ul.ui-autocomplete-input
 input[type=text]
   width: 100%
   padding: 8px 20px
-  margin: 8px 0
+  height: 35px
+  margin: 5px 0
   display: inline-block
   border: 1px solid #ccc
   border-radius: 2px
   box-sizing: border-box
+
 input[type=password]
   width: 100%
   padding: 8px 20px
@@ -327,32 +393,37 @@ input[type=password]
   border: 1px solid #ccc
   border-radius: 2px
   box-sizing: border-box
+
 input[type=email]
   width: 100%
   padding: 8px 20px
   margin: 8px 0
   display: inline-block
-  border: 1px solid #ccc
+  border: 1px solid #D1DCE4
   border-radius: 2px
   box-sizing: border-box
+
 select
   width: 100%
-  height: 40px
+  height: 35px
   background: #ffffff
-  margin: 8px 0
+  margin: 5px 0
   display: inline-block
-  border: 1px solid #ccc
-  border-radius: 4px
-  box-sizing: border-box
+  border: 1px solid #D1DCE4
+  border-radius: 0
+
+
 
 textarea
   width: 100%
   padding: 12px 20px
   margin: 8px 0
   display: inline-block
-  border: 1px solid #ccc
+  border: 1px solid #D1DCE4
   border-radius: 4px
   box-sizing: border-box
+
+
 .tags
   overflow: hidden
   .tag
@@ -373,6 +444,7 @@ textarea
       color: rgba(0,0,0,.7)
       &:hover
         cursor: pointer
+
 .user-tag
   width: fit-content
   float: left

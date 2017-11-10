@@ -22,6 +22,11 @@ describe Business::EmailTemplatesController do
       let(:action) {get :index}
     end
 
+    it_behaves_like "trial is over" do 
+      let(:action) {get :index}
+    end
+
+
     before do  
       set_current_user(alice)
       set_current_company(company)
@@ -65,6 +70,11 @@ describe Business::EmailTemplatesController do
       let(:action) {xhr :get, :new}
     end
 
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :get, :new}
+    end
+
+
     before do  
       set_current_user(alice)
       set_current_company(company)
@@ -93,6 +103,11 @@ describe Business::EmailTemplatesController do
     it_behaves_like "user does not belong to company" do 
       let(:action) {xhr :post, :create}
     end
+
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :post, :create}
+    end
+
 
     context "with valid inputs" do
       before do  
@@ -145,6 +160,10 @@ describe Business::EmailTemplatesController do
       let(:action) {xhr :get, :edit, id: etemp.id}
     end
 
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :get, :edit, id: etemp.id}
+    end
+
     it_behaves_like "user does not belong to company" do 
       let(:action) {xhr :get, :edit, id: etemp.id }
     end
@@ -169,6 +188,27 @@ describe Business::EmailTemplatesController do
   end
 
   describe "PUT update" do 
+    let(:company) {Fabricate(:company)}
+    let(:alice) {Fabricate(:user, company: company, role: "Admin")}
+    let(:joe) {Fabricate(:user, company: company)}
+    let(:etemp) {Fabricate(:email_template, company: company)}
+    
+    it_behaves_like "requires sign in" do
+      let(:action) {xhr :get, :edit, id: etemp.id}
+    end
+
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :get, :edit, id: etemp.id}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {xhr :get, :edit, id: etemp.id }
+    end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) {xhr :get, :edit, id: etemp.id}
+    end
+
     context "with valid inputs" do
       let(:company) {Fabricate(:company)}
       let(:alice) {Fabricate(:user, company: company, role: "Admin")}
@@ -230,6 +270,10 @@ describe Business::EmailTemplatesController do
 
     it_behaves_like "user does not belong to company" do 
       let(:action) {xhr :delete, :destroy, id: etemp.id}
+    end
+
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :get, :edit, id: etemp.id}
     end
 
     it "deletes the stage" do 

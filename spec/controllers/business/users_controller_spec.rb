@@ -10,6 +10,10 @@ describe Business::UsersController do
       let(:action) {get :index}
     end
 
+    it_behaves_like "trial is over" do 
+      let(:action) {get :index}
+    end
+
     let(:company) {Fabricate(:company)}
     let(:alice) {Fabricate(:user, company: company, role: "Admin")}
     let(:joe) {Fabricate(:user, company: company)}
@@ -32,11 +36,15 @@ describe Business::UsersController do
 
   describe "GET show" do 
     it_behaves_like "requires sign in" do
-      let(:action) {get :show}
+      let(:action) {get :show, id: alice.id}
     end
 
     it_behaves_like "user does not belong to company" do 
-      let(:action) {get :show}
+      let(:action) {get :show, id: alice.id}
+    end
+
+    it_behaves_like "trial is over" do 
+      let(:action) {get :show, id: alice.id}
     end
 
     let(:company) {Fabricate(:company)}
@@ -64,10 +72,10 @@ describe Business::UsersController do
       expect(response).to render_template :show
     end
 
-    it "redirects the user to the sign in page if unauthenticated user" do
-      get :show, id: joe.id
-      expect(response).to redirect_to business_root_path
-    end
+    # it "redirects the user to the sign in page if unauthenticated user" do
+    #   get :show, id: joe.id
+    #   expect(response).to redirect_to business_root_path
+    # end
   end
 
   describe "GET edit" do 
@@ -84,6 +92,10 @@ describe Business::UsersController do
       let(:action) {xhr :get, :edit, id: joe.id}
     end
     
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :get, :edit, id: joe.id}
+    end
+
     before do 
       set_current_company(company)
       set_current_user(alice)
@@ -97,11 +109,6 @@ describe Business::UsersController do
     it "expects the response to render edit template" do
       xhr :get, :edit, id: alice.id
       expect(response).to render_template :edit
-    end
-
-    it "redirects the user to the sign in page if unauthenticated user" do
-      xhr :get, :edit, id: joe.id
-      expect(response).to redirect_to business_root_path
     end
   end
 
@@ -119,14 +126,13 @@ describe Business::UsersController do
       let(:action) {xhr :put, :update, id: joe.id}
     end
 
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :put, :update, id: joe.id}
+    end
+
     before do 
       set_current_company(company)
       set_current_user(alice)
-    end
-
-    it "redirects the user to the sign in page if unauthenticated user" do
-      xhr :get, :edit, id: joe.id
-      expect(response).to redirect_to business_root_path
     end
 
     context "with valid inputs" do

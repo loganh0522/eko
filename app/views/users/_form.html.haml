@@ -1,0 +1,29 @@
+.modal-body   
+  / %p Build a career portfolio, than easily apply to jobs at the click of a button. Track your job applications with ease, and build job notifications to alert you when jobs are posted.
+  = form_for @user, remote: true do |f|
+    .row
+      .col-md-6
+        = f.text_field :first_name, placeholder: "First Name", hide_label: true, class: 'first_name', id: "first_name_Block"
+        %span#first_name_msgBlock
+      .col-md-6
+        = f.text_field :last_name, placeholder: "Last Name", hide_label: true, class: 'last_name', id: "last_name_Block"
+        %span#last_name_msgBlock
+    = f.email_field :email, placeholder: "Email Address", hide_label: true, id: "email_Block"
+    %span#email_msgBlock
+    = f.text_field :phone, placeholder: "Phone Number", hide_label: true, id: "phone_Block"
+    %span#phone_msgBlock
+    = f.text_field :location, id: "geocomplete", autocomplete: "off", hide_label: true
+    %span#location_msgBlock
+    = f.password_field :password, placeholder: "Password", hide_label: true, id: "password_Block"
+    %span#password_msgBlock
+    = f.password_field :password_confirmation, placeholder: "Confirm Password", hide_label: true
+    = f.hidden_field :kind, :value => 'job seeker'
+    = f.submit "Create Profile", class: "btn submit-button"
+  .have-account
+    Already have an account? 
+    = link_to "Sign In", login_path, remote: true
+
+.modal-footer
+  .power
+    .powered-by Powered by
+  %img(src="/tmp/logo.jpg")

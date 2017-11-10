@@ -2,20 +2,15 @@
   .side-container
     = render 'business/shared/admin_sidebar'
   .main-container
-    .body
-      .user-profile-header
-        = render 'business/user_avatars/user_avatar'
-        .user-info
-          %h3= current_user.full_name
-          = current_user.email
-        .profile-actions
-          .link1= link_to "Edit Profile", edit_business_user_path(@current_user),  class: "btn border-button2", :data => {remote: true}
-          .link2= link_to "Change Password", edit_business_user_path(@current_user, password: 'password'), :data => {remote: true}, class: "btn border-button2"
-
-      .e-mail-signature
-        %h4 E-mail Signature
-        = render 'business/email_signatures/signature'
-      
+    .user-profile-header
+      = render 'business/user_avatars/user_avatar'
+      .user-info
+        %h3= current_user.full_name
+        = current_user.email
+      .profile-actions
+        .link1= link_to "Edit Profile", edit_business_user_path(@current_user),  class: "btn border-button2", :data => {remote: true}
+        .link2= link_to "Change Password", edit_business_user_path(@current_user, password: 'password'), :data => {remote: true}, class: "btn border-button2"
+    .standard-body
       .sync-email
         %h4 Sync Outlook
         - if current_user.outlook_token.present? 
@@ -27,6 +22,13 @@
         %h4 Sync Gmail
         = link_to '/auth/google_oauth2' do 
           .sync-box Authenticate with Google!
-      
+    
+    .standard-body
+      .standard-body-header
+        %h4 E-mail Signature
+      .e-mail-signature
+        = render 'business/email_signatures/signature'
+    
+    
 = render 'business/users/right_modal'
 = render 'business/user_avatars/picture_modal'

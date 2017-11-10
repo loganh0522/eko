@@ -16,7 +16,7 @@
           = f.hidden_field :role, value: @invitation.user_role 
         - else 
           = f.hidden_field :role, value: "Admin"
-        = f.submit "Sign me up", class: "btn button-submit"
+        = f.submit "Sign me up", class: "btn submit-button"
     %p
       Already have an account? 
       = link_to 'Log In Here', '/login'

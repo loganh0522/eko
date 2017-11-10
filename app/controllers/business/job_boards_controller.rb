@@ -12,6 +12,18 @@ class Business::JobBoardsController < ApplicationController
     @section = JobBoardRow.new
     @job_board_header = @job_board.job_board_header
     @sections = @job_board.job_board_rows
+
+    if @job_board_header.background_image.present?
+      @background = @job_board_header.background_image
+    else
+      @background = BackgroundImage.new 
+    end
+
+    if current_company.logo.present?
+      @logo = current_company.logo
+    else
+      @logo = Logo.new
+    end
   end
 
   def edit

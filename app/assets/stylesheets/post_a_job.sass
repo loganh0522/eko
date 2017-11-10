@@ -1,14 +1,12 @@
-#post-a-job
-  margin: 0px 3% 100px 3%
+#main-container-padding
   .main-container
     float: left
     background: #ffffff
-    border-radius: 5px
+    border-radius: 0px
     box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-    padding: 10px 50px
     z-index: 0
     position: relative
-    min-height: 600px
+    height: fit-content
     #stage-header
       margin-bottom: 25px
       overflow: hidden
@@ -20,6 +18,7 @@
       a
         float: right
         margin-top: 5px
+  
   .side-container
     position: relative
     float: left
@@ -31,90 +30,77 @@
         list-style: none
         font-size: 16px 
         font-weight: 300
-        padding: 20px 15px 20px 15px
-        height: 65px
+        padding: 15px 15px 
+        height: auto
         color: black
       a
         text-decoration: none
         color: rgba(0,0,0,0.7)
       li.active
-        background: #ffffff
-        box-shadow: -1.7px 1px 4px 0px rgba(199,197,199,1)
-        border-radius: 5px 0 0 5px
-        width: 100%
+        background: rgba(239, 122, 43, 0.3)
+        box-shadow: -1.7px 1px 4px 0px rgba(239, 122, 43, 0.1)
+        border-radius: 5px 5px
+        width: 90%
         z-index: 10
 
-  #stage-header
-    .form 
-      float: right
-      width: 80%
-      #team_members
-        float: left
-        margin-left: 20%
-        width: 60%
-        margin-top: 0
-      .btn
-        float: right
-        width: 19%
-    .stage-form
-      float: right
-      width: auto
-      overflow: hidden
-      #stage_name 
-        width: 300px
-        float: left
-        margin: 0 0
-      #team_members
-        width: 300px
-        float: left
-        margin: 0 0 
-      .submit
-        float: left
-        border-radius: 5px
-        width: 150px
-        margin-left: 10px
+.stage-form
+  float: right
+  width: auto
+  overflow: hidden
+  #stage_name 
+    width: 300px
+    float: left
+    margin: 0 0
+  #team_members
+    width: 300px
+    float: left
+    margin: 0 0 
+  .submit
+    float: left
+    border-radius: 5px
+    width: 150px
   .invitation
     float: right
     margin-top: -10px
     margin-bottom: 15px
 
-  .create_stages
-    margin-top: 25px          
-    .stage   
-      border-radius: 5px
-      margin-bottom: 10px
-      color: rgba(0,0,0, .7) 
-      width: 100%
+.stages
+  padding: 15px 15px          
+  .stage   
+    border-radius: 5px
+    margin-bottom: 10px
+    color: rgba(0,0,0, .7) 
+    width: 100%
+    height: auto
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    .stage-header
+      background-color: rgba(0, 0, 0, 0.05) 
       height: auto
-      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-      .stage-header
-        background-color: rgba(0, 0, 0, 0.05) 
-        height: auto
-        overflow: hidden
-        padding: 10px 10px 
-        border-bottom: 1px solid rgba(0,0,0,.1)
-        .glyphicon.glyphicon-move
-          float: left
-          margin-right: 15px
+      overflow: hidden
+      padding: 10px 10px 
+      border-bottom: 1px solid rgba(0,0,0,.1)
+      .glyphicon.glyphicon-move
+        float: left
+        margin-right: 15px
+        color: rgba(0,0,0, .3)
+      .body
+        float: left
+      .icons
+        float: right
+        margin-right: 10px
+        margin-top: 2px
+        i  
           color: rgba(0,0,0, .3)
-        .body
-          float: left
-        .icons
-          float: right
-          margin-right: 10px
-          margin-top: 2px
-          i  
-            color: rgba(0,0,0, .3)
-            margin-left: 5px
-      &:hover
-        cursor: move
-      .stage-body
-        height: 100px
-      .actions
-        float: rights
+          margin-left: 5px
+    &:hover
+      cursor: move
+    .stage-body
+      height: 100px
+    .actions
+      float: rights
 
-        a:first-of-type
-          margin-right: 10px
+      a:first-of-type
+        margin-right: 10px
 
   .sections
     ul
@@ -176,8 +162,6 @@
       .option
         margin-top: 5px
 
-    
-
 #scorecard-form
   width: 100%
   background: #ffffff
@@ -188,7 +172,7 @@
     color: #EF7B2B 
   .form-header
     font-size: 20px
-  .question-area
+  .scorecard-area
     border-bottom: 1px solid rgba(0,0,0,0.1)  
     padding: 10px 5px
     .header
@@ -237,7 +221,8 @@
 
 
 
-#create-application-form
+.questions-container
+  padding: 15px 15px
   .questions
     margin-bottom: 25px
     ul

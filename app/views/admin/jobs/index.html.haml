@@ -3,6 +3,7 @@
     .top-info
       %h1= "Jobs"
   .home-page-body
+    = render 'filters'
     #main-container
       %table.table
         %thead
@@ -17,6 +18,9 @@
             - @jobs.each do |job| 
               %tr
                 %td
+                  #completed
+                    = link_to verified_admin_jobs_path(id: job.id), method: :post, remote: true do 
+                      .glyphicon.glyphicon-ok
                 %td
                   = link_to "#{job.title}", admin_job_path(job)
                 %td

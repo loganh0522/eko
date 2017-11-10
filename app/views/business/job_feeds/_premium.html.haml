@@ -1,11 +1,11 @@
-.change-containers-nav
-  %ul 
-    = link_to business_job_job_feeds_path(@job, type: 'free'), remote: true do 
-      %li.change#free Free
-    = link_to business_job_job_feeds_path(@job, type: 'paid-boards'), remote: true do 
-      %li.change#premium.activated Premium
-
-= render 'business/orders/form'
+.post-job-container
+  .change-containers-nav
+    %ul 
+      = link_to business_job_job_feeds_path(@job, type: 'free'), remote: true do 
+        %li.change#free Free Job Boards
+      = link_to business_job_job_feeds_path(@job, type: 'paid-boards'), remote: true do 
+        %li.change#premium.activated Premium Job Boards
+  = render 'business/orders/form'
         
 
 

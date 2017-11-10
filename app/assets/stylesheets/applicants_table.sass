@@ -43,9 +43,7 @@
     width: 73%
     margin: 20px 2px 50px 0
     box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-    .btn.border-button2
-      float: right
-      margin-bottom: 10px 
+
   #task-container
     background: none
     box-shadow: none
@@ -241,6 +239,9 @@
     color: white
   .name 
     margin: 10px 0 0 0 
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
     a
       color: #EF7B2B
       font-size: 14px
@@ -382,7 +383,9 @@ trix-editor
         .filter-title
           float: left
 
-#main-container
+.post-job-container
+  margin-bottom: 100px
+  overflow: hidden
   .change-containers-nav
     margin-left: 3%
     ul 
@@ -399,26 +402,9 @@ trix-editor
       .activated
         border-bottom: 4px solid #EF7B2B
         color: black
-  .job-feed-container
-    float: left
-    width: 200px
-    border: 1px solid rgba(0,0,0,.1)
-    margin-right: 15px
-    width: 250px
-    min-height: 200px
-    overflow: hidden
-    background: #ffffff
-    .header
-      border-bottom: 1px solid rgba(0,0,0,0.1)
-      height: 110px
-      padding: 25px 0
-      img 
-        align: center
-        width: 65%
-        margin: 0 17.5%
-    .body
-      height: auto
-      padding: 15px 25px
+  #free-boards
+    width: 95%
+    margin: 0 2.5% 
   #premium-boards
     float: left
     padding: 0 0
@@ -429,8 +415,9 @@ trix-editor
     min-width: 300px
     width: 20%
     height: auto
-    padding: 5px 10px 0 0
-    margin: 0 1% 0 0
+    padding: 5px 0px 10px 0
+    overflow: hidden
+    margin: 15px 1% 0 0
     background: #ffffff
     float: right
     border: 1px solid rgba(0,0,0,0.1)
@@ -485,7 +472,31 @@ trix-editor
         width: 80%
         margin: 30px auto 0 auto
 
-  #free-boards
-    width: 95%
-    margin: 0 2.5% 
+.job-feed-container
+  float: left
+  border: 1px solid rgba(0,0,0,.1)
+  margin-right: 15px
+  margin: 15px 15px 0 0 
+  width: 250px
+  min-height: 175px
+  overflow: hidden
+  background: #ffffff
+  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+  .header
+    border-bottom: 1px solid rgba(0,0,0,0.1)
+    height: 100px
+    img 
+      margin: 0px 25px 
+      align: center
+  .body
+    height: 125px
+    padding: 10px 0
+    .duration-name
+      padding: 5px 0 
+  .footer
+    height: auto
+    height: 15px
+
+
+
     

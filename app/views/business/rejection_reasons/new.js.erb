@@ -1,4 +1,4 @@
-$('#basic-form-modal').find('form').remove()
-$('#basic-form-modal').find('.modal-title').html('<%= j "Create Rejection Reason" %>');
-$('#basic-form-modal').find('.modal-header').after('<%= j render "business/rejection_reasons/form" %>');
-$('#basic-form-modal').modal("toggle");
+$('.multi-form').find('form').remove()
+$('.multi-form').find('.modal-title').html('<%= j "Create Rejection Reason" %>');
+$('.multi-form').find('.modal-header').after('<%= j render "business/rejection_reasons/form" %>');
+$('.multi-form').modal("toggle");

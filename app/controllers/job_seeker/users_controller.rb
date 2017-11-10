@@ -3,9 +3,12 @@ class JobSeeker::UsersController < JobSeekersController
   before_filter :require_user
   # before_filter :profile_sign_up_complete
 
-  
   def edit
     @user = User.find(params[:id])
+
+    respond_to do |format|
+      format.js 
+    end
   end
 
   def update
@@ -20,7 +23,7 @@ class JobSeeker::UsersController < JobSeekersController
   end
 
   def show 
-    @profile = current_user
+    @user = current_user
     @social_links = current_user.social_links
     @avatar = current_user.user_avatar
 
@@ -30,7 +33,7 @@ class JobSeeker::UsersController < JobSeekersController
       @background = BackgroundImage.new
     end
     
-    @work_experiences = @profile.organize_work_experiences
+    @work_experiences = @user.organize_work_experiences
   end
 
   private 

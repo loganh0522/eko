@@ -1,11 +1,12 @@
 .job-show-header
+
   .header
     .details
       %h1= @job.title
       .location= "#{@job.location}"
       .job-link
-        = link_to "http://" + @job.url, :target => "_blank", class: "link" do
-          .glyphicon.glyphicon-link
+        / = link_to "http://" + @job.url, :target => "_blank", class: "link" do
+        /   .glyphicon.glyphicon-link
   .change-containers-nav
     %ul 
       = link_to admin_job_path(@job), class: 'change-aj' do 

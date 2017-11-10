@@ -2,5 +2,5 @@
   .header#education-header
     .title Education
     .new_experience
-      = link_to "+ Add Education", new_job_seeker_user_education_path(@profile), :data => {:remote => true}, :html => {id: 'new_education_button'}
+      = link_to "+ Add Education", new_job_seeker_education_path(@user), :data => {:remote => true}, :html => {id: 'new_education_button'}
   = render 'job_seeker/educations/education_history'   

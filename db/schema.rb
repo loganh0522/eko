@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171026142630) do
+ActiveRecord::Schema.define(version: 20171107214708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,9 +182,10 @@ ActiveRecord::Schema.define(version: 20171026142630) do
     t.datetime "updated_at"
     t.string   "widget_key"
     t.string   "kind"
-    t.integer  "job_count",           default: 0,    null: false
-    t.integer  "max_jobs",            default: 3,    null: false
+    t.integer  "job_count",           default: 0,     null: false
+    t.integer  "max_jobs",            default: 3,     null: false
     t.string   "application_process"
+    t.boolean  "verified",            default: false
   end
 
   create_table "company_users", force: :cascade do |t|
@@ -463,23 +464,28 @@ ActiveRecord::Schema.define(version: 20171026142630) do
   end
 
   create_table "job_feeds", force: :cascade do |t|
-    t.integer "job_id"
-    t.boolean "adzuna"
-    t.boolean "jooble"
-    t.boolean "indeed"
-    t.boolean "trovit"
-    t.boolean "juju"
-    t.boolean "eluta"
-    t.boolean "monster"
-    t.boolean "glassdoor"
-    t.boolean "careerjet"
-    t.boolean "ziprecruiter"
-    t.boolean "neuvoo"
-    t.boolean "jobinventory"
-    t.boolean "recruitnet"
-    t.boolean "jobisjob"
-    t.boolean "jobrapido"
-    t.boolean "usjobs"
+    t.integer  "job_id"
+    t.boolean  "adzuna"
+    t.boolean  "jooble"
+    t.boolean  "indeed"
+    t.boolean  "trovit"
+    t.boolean  "juju"
+    t.boolean  "eluta"
+    t.boolean  "monster"
+    t.boolean  "glassdoor"
+    t.boolean  "careerjet"
+    t.boolean  "ziprecruiter"
+    t.boolean  "neuvoo"
+    t.boolean  "jobinventory"
+    t.boolean  "recruitnet"
+    t.boolean  "jobisjob"
+    t.boolean  "jobrapido"
+    t.boolean  "usjobs"
+    t.string   "ziprecruiter_boost"
+    t.string   "indeed_boost"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "juju_updated_at"
   end
 
   create_table "job_functions", force: :cascade do |t|
@@ -515,6 +521,9 @@ ActiveRecord::Schema.define(version: 20171026142630) do
     t.integer  "client_id"
     t.text     "recruiter_description"
     t.string   "token"
+    t.boolean  "verified",              default: false
+    t.string   "function"
+    t.string   "industry"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -538,6 +547,7 @@ ActiveRecord::Schema.define(version: 20171026142630) do
   create_table "media_photos", force: :cascade do |t|
     t.string  "file_name"
     t.integer "job_board_row_id"
+    t.integer "premium_board_id"
   end
 
   create_table "mentions", force: :cascade do |t|
@@ -624,6 +634,15 @@ ActiveRecord::Schema.define(version: 20171026142630) do
     t.string   "reference_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "posting_durations", force: :cascade do |t|
+    t.integer "premium_board_id"
+    t.string  "duration"
+    t.string  "kind"
+    t.integer "price"
+    t.decimal "real_price"
+    t.string  "name"
   end
 
   create_table "premium_boards", force: :cascade do |t|
@@ -865,6 +884,7 @@ ActiveRecord::Schema.define(version: 20171026142630) do
     t.string  "country"
     t.string  "email_signature"
     t.string  "full_name"
+    t.string  "profile_stage"
   end
 
   create_table "work_experiences", force: :cascade do |t|

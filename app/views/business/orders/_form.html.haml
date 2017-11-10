@@ -3,11 +3,22 @@
     - @job_feeds.each do |board| 
       .job-feed-container
         .header
-          %img(src="/tmp/adzuna_logo.png")
-          = "Price: $#{board.price}"
-        .body
-          = link_to_add_to_cart "Add to Cart", f, :order_items, board.id
-          / = link_to "In Cart", "#", class: "in-cart btn submit-button"
+          = image_tag board.logo.small_image if board.logo.present? 
+          / = "#{board.posting_durations.first.duration}"
+        .body 
+          .form-row-no-border
+            - if board.posting_durations.count > 1
+              - board.posting_durations.each do |duration|
+                .contain-50
+                  .duration-name= duration.name
+                  = link_to_add_to_cart "$ #{duration.price} ", f, :order_items, board.id
+            - else
+              - board.posting_durations.each do |duration|
+                = link_to_add_to_cart "$ #{duration.price} ", f, :order_items, board.id
+        .footer
+          .form-row-no-border
+            Details
+
   #cart 
     .header My Cart
     .body

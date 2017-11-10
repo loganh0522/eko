@@ -22,13 +22,9 @@
         color: rgba(0,0,0,0.7)      
   .main-container
     float: left
-    width: 80%
     background: #ffffff
-    border-radius: 5px
     box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-    padding: 10px 50px
-    min-height: 600px
-
+    height: fit-content
     .company-users
       h4
         float: left
@@ -40,295 +36,104 @@
         .submit
           margin: 9px 0 0 10px
           float: left
-    .sync-email
-      float: left
-      width: 300px
-      .sync-box
-        width: fit-content
-        padding: 20px 20px
-        border: 1px solid rgba(0,0,0,0.4)
-        color: rgba(0,0,0,0.7)
-        a
-          text-decoration: none
+.sync-email
+  padding: 0px 0px
+  float: left
+  width: 300px
+.sync-box
+  width: fit-content
+  padding: 20px 20px
+  border: 1px solid rgba(0,0,0,0.4)
+  color: rgba(0,0,0,0.7)
+  a
+    text-decoration: none    
 
-  .edit-career-portal
-    .change-containers-nav
-      ul 
-        list-style: none
-        text-decoration: none
-        margin-bottom: -1px
-        padding: 0
-        li
-          display: inline-block
-          padding: 15px 15px 10px 15px 
-          text-align: center 
-          font-size: 14px
-          cursor: pointer
-          color: black
-        .activated
-          z-index: 1
-          border-bottom: 3px solid #EF7B2B
-    #main-container
-      .showing
-        z-index: 0
-        background: #ffffff
-        padding: 10px 20px 50px 20px
-    .dropdown-toggle
-      float: right
-      margin-bottom: 15px
-    .dropdown-menu
-      position: relative
-      top: 40px
-      left: 83%
-    .float-container
-      margin-bottom: 40px
-      overflow: hidden
-      .header
-        float: left
-        width: 25%
-        margin-top: 15px
-        margin-right: 4%
-        font-size: 14px 
-        font-weight: 600
-      .body
-        float: left 
-        width: 70%
-        .btn-file
-          margin-top: 15px
-          float: left
-        .logo
-          width: auto
-          float: left
-          margin-top: 15px
-        input
-          width: 70%
-          float: left
-          margin-right: 5px
-        .domain
-          width: 25%
-          float: left
-          margin-top: 15px
-    
-    .color
+.edit-career-portal
+  .change-containers-nav
+    ul 
+      list-style: none
+      text-decoration: none
+      margin-bottom: -1px
+      padding: 0
+      li
+        display: inline-block
+        padding: 15px 15px 10px 15px 
+        text-align: center 
+        font-size: 14px
+        cursor: pointer
+        color: black
+      .activated
+        z-index: 1
+        border-bottom: 3px solid #EF7B2B
+  #main-container
+    .showing
+      z-index: 0
+      background: #ffffff
+      padding: 10px 20px 50px 20px
+  .dropdown-toggle
+    float: right
+    margin-bottom: 15px
+  .dropdown-menu
+    position: relative
+    top: 40px
+    left: 83%
+  .float-container
+    margin-bottom: 20px
+    overflow: hidden
+    .header
+      float: left
+      width: 25%
       margin-top: 15px
-      overflow: hidden
-      float: left
-      .color-container
-        clear: both
-        overflow: hidden
-        input
-          float: left
-          height: 35px
-          width: 100px
-          border-radius: 3px 0 0 3px
-          margin-right: 0
-        label
-          font-weight: 3s00
-        span
-          float: left
-          width: 25px
-          height: 35px
-          border: 1px solid rgba(0, 0, 0, 0.2)
-          margin-top: 8px
-          margin-right: 10px
-          border-radius: 0 5px 5px 0
-          border-left: none
-          padding: 8px 4px
-    .sections
-      clear: both
-      margin-top: 25px
-    
-    .stage   
-      border-radius: 5px
-      margin-bottom: 10px
-      color: rgba(0,0,0, .7) 
-      width: 100%
-      height: auto
-      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-      .stage-header
-        background-color: rgba(0, 0, 0, 0.05) 
-        height: auto
-        overflow: hidden
-        padding: 10px 10px 
-        border-bottom: 1px solid rgba(0,0,0,.1)
-        .glyphicon.glyphicon-move
-          float: left
-          margin-right: 15px
-          color: rgba(0,0,0, .3)
-        .body
-          float: left
-        .icons
-          float: right
-          margin-right: 10px
-          margin-top: 2px
-          i  
-            color: rgba(0,0,0, .3)
-            margin-left: 5px
-      &:hover
-        cursor: move
-      .stage-body
-        height: auto
-        padding: 15px 15px
-
-      .subdomain-field
-        width: 200px
-        float: left
-      .domain
-        float: left
-        margin: 13px 0 0 8px
-      .logo
-        margin: 15px
-        float: left
+      margin-right: 4%
+      font-size: 14px 
+      font-weight: 600
+    .body
+      float: left 
+      width: 70%
       .btn-file
-        margin: 15px
+        margin-top: 15px
         float: left
-
-.billing
-  .table
-    tr
-      padding: 20px 0
-    .plan 
-      margin-top: 5px
-      font-weight: 900
-      font-size: 16px
-    .open-jobs
-      margin-top: 5px
-      font-weight: 900
-      font-size: 16px
-    .select-cost
-      margin-top: 5px
-      float: left
-      margin-right: 10px   
-    .cost
-      margin-top: 5px
-      float: left
-      font-weight: 900
-      font-size: 16px
-
-
-.user-list
-  margin-top: 50px
-  .user
-    border: 1px solid rgba(0,0,0,0.2)
-    padding: 10px 10px
+      .logo
+        width: auto
+        float: left
+        margin-top: 15px
+      input
+        width: 70%
+        float: left
+        margin-right: 5px
+      .domain
+        width: 25%
+        float: left
+        margin-top: 15px
+  
+  .color
+    margin-top: 15px
     overflow: hidden
-    margin-bottom: 10px
-    border-radius: 2px
-    select 
-      height: 35px
-    .circle
-      margin: 5px 5px 5px 5px
-      border-radius: 50%
-      width: 50px 
-      height: 50px
-      float: left
-    .circle-img
-      margin: 5px 5px 5px 5px
-      border-radius: 50%
-      width: 40px 
-      height: 40px
-      background: rgba(0,0,0,.1)
-      text-align: center
-      font-size: 22px
-      padding-top: 2px
-      color: white
-      float: left
-    .name
-      margin-top: 15px
-      margin-left: 15px
-      float: left
-    .email
-      font-size: 12px
-      color: #c2c2c
-      margin: 0
-    .permissions
-      float: right
-    i 
-      margin-left: 35px
-      padding-right: 10px
-      margin-top: 17px
-      color: rgba(0,0,0,0.5)
-      float: right
-
-
-.user-profile-header
-  overflow: hidden
-  height: auto
-  padding: 20px 0
-  border-bottom: 1px solid rgba(0,0,0,0.1)
-  .profile-picture
     float: left
-    margin-right: 50px
-    .circle
-      height: auto
-      img
-        border-radius: 50%
-        width: 100px 
-        height: 100px
-    .change-photo
+    .color-container
       clear: both
-  .user-info
-    margin-top: 0
-    float: left
-    margin-right: 50px
-  .profile-actions
-    margin-top: 20px
-    float: right
-    overflow: hidden
-    .link1
-      float: left
-      margin-right: 25px
-    .link2
-      float: left
-.e-mail-signature
-  .signature
-    .submit-button
-      width: 145px
-    .form-area
-      padding: 10px 10px
-      border: 1px solid rgba(0,0,0,0.1)
-      margin-bottom: 5px
-      background: rgba(0,0,0,0.05)
-
-
-
-
-.templates-body
-  .template  
-    border-radius: 5px
-    margin-bottom: 10px
-    color: rgba(0,0,0, .7) 
-    width: 100%
-    height: auto
-    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-    background-color: rgba(0, 0, 0, 0.05) 
-    overflow: hidden
-    padding: 10px 10px 
-    border-bottom: 1px solid rgba(0,0,0,.1)
-    .body
-      float: left
-    .icons
-      float: right
-      margin-right: 10px
-      margin-top: 2px
-      i  
-        color: rgba(0,0,0, .3)
-        margin-left: 5px
-  .email-container
-    min-height: 100px
-    margin-bottom: 10px
-    .subject
-      border: 1px solid rgba(0,0,0,0.2)
-      padding: 10px 10px
-      height: 40px
-    .body
-      border: 1px solid rgba(0,0,0,0.2)
-      border-top: none
-      padding: 10px 10px
-      min-height: 100px
-  .border-button2
-    float: right
-
+      overflow: hidden
+      input
+        float: left
+        height: 35px
+        width: 100px
+        border-radius: 3px 0 0 3px
+        margin-right: 0
+      label
+        font-weight: 3s00
+      span
+        float: left
+        width: 25px
+        height: 35px
+        border: 1px solid rgba(0, 0, 0, 0.2)
+        margin-top: 8px
+        margin-right: 10px
+        border-radius: 0 5px 5px 0
+        border-left: none
+        padding: 8px 4px
+  .sections
+    clear: both
+    margin-top: 25px
   .stage   
     border-radius: 5px
     margin-bottom: 10px
@@ -357,6 +162,177 @@
           margin-left: 5px
     &:hover
       cursor: move
+    .stage-body
+      height: auto
+      padding: 15px 15px
+
+    .subdomain-field
+      width: 200px
+      float: left
+    .domain
+      float: left
+      margin: 13px 0 0 8px
+    .logo
+      margin: 15px
+      float: left
+    .btn-file
+      margin: 15px
+      float: left
+
+.billing
+  .table
+    tr
+      padding: 20px 0
+    .plan 
+      margin-top: 5px
+      font-weight: 900
+      font-size: 16px
+    .open-jobs
+      margin-top: 5px
+      font-weight: 900
+      font-size: 16px
+    .select-cost
+      margin-top: 5px
+      float: left
+      margin-right: 10px   
+    .cost
+      margin-top: 5px
+      float: left
+      font-weight: 900
+      font-size: 16px
+
+.user-list
+  .user-header
+    border-top: 1px solid #D1DCE4
+    border-bottom: 1px solid #D1DCE4
+    overflow: hidden
+    padding: 10px 10px 5px 10px
+    font-weight: 600
+    .user-name
+      float: left
+    .role 
+      float: right
+      margin-right: 200px
+  .user
+    border-bottom: 1px solid #D1DCE4
+    width: 100%
+    padding: 10px 10px
+    overflow: hidden
+    background: #fdfdfe
+    border-radius: 2px
+    .name
+      text-align: center
+      float: left
+      margin: 15px 10px
+      color: #736D71
+    .circle
+      margin: 5px 5px 5px 5px
+      border-radius: 50%
+      width: 40px 
+      height: 40px
+      float: left
+    .circle-img
+      margin: 5px 5px 5px 5px
+      border-radius: 50%
+      width: 40px 
+      height: 40px
+      background: rgba(0,0,0,.1)
+      text-align: center
+      font-size: 22px
+      color: white
+      float: left
+    .email
+      font-size: 12px
+      color: #c2c2c
+      margin: 0
+    .permissions
+      float: right
+      margin: 5px 20px
+      #action-box
+        border: 1px solid #D1DCE4
+        padding: 10px 10px
+        color: #736D71
+        min-width: 150px
+        .caret
+          float: right
+          margin-top: 7px
+    i 
+      margin-left: 35px
+      padding-right: 10px
+      margin-top: 17px
+      color: #D1DCE4
+      float: right
+
+.user-profile-header
+  overflow: hidden
+  height: auto
+  padding: 20px 15px
+  border-bottom: 1px solid rgba(0,0,0,0.1)
+  .profile-picture
+    float: left
+    margin-right: 50px
+    .circle
+      height: auto
+      img
+        border-radius: 50%
+        width: 100px 
+        height: 100px
+    .change-photo
+      clear: both
+  .user-info
+    margin-top: 0
+    float: left
+    margin-right: 50px
+  .profile-actions
+    margin-top: 20px
+    float: right
+    overflow: hidden
+    .link1
+      float: left
+      margin-right: 25px
+    .link2
+      float: left
+
+
+
+
+
+
+.templates-body
+  .template  
+    border-radius: 5px
+    margin-bottom: 10px
+    color: rgba(0,0,0, .7) 
+    width: 100%
+    height: auto
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    background-color: rgba(0, 0, 0, 0.05) 
+    overflow: hidden
+    padding: 10px 10px 
+    border-bottom: 1px solid rgba(0,0,0,.1)
+    .body
+      float: left
+    .icons
+      float: right
+      margin-right: 10px
+      margin-top: 2px
+      i  
+        color: rgba(0,0,0, .3)
+        margin-left: 5px
+  .email-container
+    min-height: 100px
+    margin-bottom: 10px
+    background: #ffffff
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    .subject
+      border: 1px solid rgba(0,0,0,0.2)
+      padding: 10px 10px
+      height: 40px
+    .body
+      border: 1px solid rgba(0,0,0,0.2)
+      border-top: none
+      padding: 10px 10px
+      min-height: 100px
 
 .company-content-row
   margin-top: 20px
@@ -370,6 +346,16 @@
     .profile-actions
       float: right
 
+.e-mail-signature
+  clear: both
+  .signature
+    .submit-button
+      width: 145px
+    .form-area
+      padding: 10px 10px
+      border: 1px solid rgba(0,0,0,0.1)
+      margin-bottom: 5px
+      background: rgba(0,0,0,0.05)
 
 .rooms
   margin-top: 5px
@@ -389,4 +375,3 @@
     .action
       float: right
       width: auto
-

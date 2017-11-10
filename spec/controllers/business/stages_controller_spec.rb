@@ -115,7 +115,7 @@ describe Business::StagesController do
       let(:action) {xhr :get, :edit, job_id: job.id, id: stage.id}
     end
 
-     it "sets @job to the correct job posting" do 
+    it "sets @job to the correct job posting" do 
       expect(assigns(:job)).to eq(job)
     end
 

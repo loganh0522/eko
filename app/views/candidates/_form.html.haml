@@ -1,6 +1,9 @@
-= link_to "", :class => "apply-w-talentwiz", "data-toggle" => "modal", "data-target" => "#subNewUserModal" do 
+= link_to new_user_path, :class => "apply-w-talentwiz", remote: true do 
   %img.logo(src="/tmp/logo.jpg")
   .account Profile
+/ = link_to "", :class => "apply-w-talentwiz", "data-toggle" => "modal", "data-target" => "#subNewUserModal" do 
+/   %img.logo(src="/tmp/logo.jpg")
+/   .account Profile
 
 = render "/sessions/sub_login"
 = render "/users/sub_new_job_seeker"
@@ -9,7 +12,7 @@
   .row 
     .col-md-6
       = f.label "First Name *"
-      = f.text_field :first_name, placeholder: "First Name", id: "first_name_Block", :required => true
+      = f.text_field :first_name, placeholder: "First Name",  id: "first_name_Block", :required => true
       %span#first_name_msgBlock
     .col-md-6
       = f.label "Last Name *"

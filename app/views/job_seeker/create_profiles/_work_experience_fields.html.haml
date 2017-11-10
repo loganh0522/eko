@@ -1,9 +1,11 @@
-.fieldset.work-experience
+.work-experience
   .row
     .col-md-6
-      = f.text_field :title, class: "form-control", placeholder: "Job Title", hide_label: true
+      = f.text_field :title, placeholder: "Job Title", hide_label: true
+      %span#title_msgBlock
     .col-md-6
-      = f.text_field :company_name, class: "form-control", placeholder: "Company Name", hide_label: true
+      = f.text_field :company_name, placeholder: "Company Name", hide_label: true
+      %span#company_name_msgBlock
   .row
     .col-md-6
       = f.collection_select(:industry_ids, Industry.all, :id, :name, hide_label: true, prompt: "Select Industry")
@@ -11,18 +13,27 @@
       = f.collection_select(:function_ids, Function.all, :id, :name, hide_label: true, prompt: "Select Job Function")
   .row
     .col-md-3.col-xs-6.col-sm-6
+      = f.label "Start Date"
       = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
+      %span#start_month_Block.help-block
     .col-md-3.col-xs-6.col-sm-6
-      = f.text_field :start_year
+      = f.label "Year"
+      = f.select(:start_year, 1960..2020)
+      %span#start_year_Block.help-block
     .col-md-3.col-xs-6.col-sm-6
+      = f.label "End Date"
       = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
+      %span#end_year_Block.help-block
     .col-md-3.col-xs-6.col-sm-6
-      = f.text_field :end_year
+      = f.label  "Year"
+      = f.select(:end_year, 1960..2020)
+      %span#end_month_Block.help-block
   .row 
     .col-sm-6.col-md-offset-6
       = f.check_box :current_position, checked_value: 1, unchecked_value: 0
+      Current Position
   .row
     .col-md-12
-      = f.text_area :description, rows: 5, class: "form-control", hide_label: true, placeholder: "Description"
+      = f.text_area :description, rows: 3, hide_label: true, placeholder: "Description"
   .row
-    = link_to "Remove Experience", '#', class: "remove_fields btn border-button"
+    = link_to "Remove", '#', class: "remove_fields btn job-seeker-btn"

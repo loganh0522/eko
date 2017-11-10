@@ -9,7 +9,7 @@
       .img-preview
         = image_tag @user_avatar.image.url, :id => "preview"
   .modal-footer
-    = link_to job_seeker_user_user_avatar_path(current_user, @user_avatar), remote: true, :method => :delete, data:{:confirm => "Are You Sure? You can not undo this action."} do
+    = link_to business_user_user_avatar_path(current_user, @user_avatar), remote: true, :method => :delete, data:{:confirm => "Are You Sure? You can not undo this action."} do
       .glyphicon.glyphicon-trash
     = f.hidden_field :user_id, value: current_user.id
     = f.submit 'Crop and Save', class: "btn submit-button"

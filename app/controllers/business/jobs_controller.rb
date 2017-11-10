@@ -161,7 +161,7 @@ class Business::JobsController < ApplicationController
   def job_params
     params.require(:job).permit(:description, :recruiter_description, 
       :title, :location, :address, :benefits, :company_id,
-      :industry_ids, :function_ids, :client_id, :education_level, 
-      :kind, :career_level, :status, :user_ids)
+      :client_id, :education_level, :function, :industry,
+      :kind, :career_level, :status, :user_ids, :industry_ids, :function_ids)
   end
 end 

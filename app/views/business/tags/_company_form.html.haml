@@ -5,8 +5,8 @@
         .title
           %h4 Add Tag: 
         .stages-select
-          = f.text_field :name, :class => 'form-control', :placeholder => 'Tag', id: "tag_name", hide_label: true
-        %div#tag-results
+          = f.text_field :name, :class => 'form-control', :placeholder => 'Tag', id: "name_Block", hide_label: true
+          %span#name_msgBlock
   .modal-footer
     = f.hidden_field :company_id, value: current_company.id
     = f.submit "Add Tag", class: "btn submit-button"

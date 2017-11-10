@@ -1,9 +1,24 @@
-= form_for [:admin, @job_board], :html => { :multipart => true }, :remote => true do |f|
-  .modal-body     
-    = f.text_field :name, label: "Name", class: "form-control"
-    = f.text_field :description, label: "Description", class: "form-control"
-    = file_field_tag "images[]", type: :file, id: "inputFile"
-      %img#image_upload_preview 
-  .modal-footer
-    = f.submit "Add Job Boards", class: "btn submit-button"
-    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+.candidate-form
+  = bootstrap_form_for [:admin, @job_board] do |f|
+    .modal-body     
+      .row
+        .col-md-6
+          = f.text_field :name, label: "Name", class: "form-control"
+        .col-md-6
+          = f.text_field :website, label: "Website", class: "form-control"
+      .row
+        .col-md-12
+          = f.file_field :logo, label: "Logo", class: "form-control"
+      .row
+        .col-md-12
+          = f.text_area :description, label: "Description", class: "form-control"
+      
+    = f.fields_for :posting_durations do |a|
+      = render 'admin/premium_boards/posting_duration_fields', f: a
+    
+    = link_to_add_fields "+ Link", f, :posting_durations
+    .modal-footer
+      = f.submit "Add Job Boards", class: "btn submit-button"
+      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+
+

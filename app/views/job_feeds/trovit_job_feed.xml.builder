@@ -12,6 +12,7 @@ xml.publisherurl "https://www.talentwiz.ca"
           xml.title { xml.cdata!(job.title) }
           xml.content { xml.cdata!(job.description) }
           xml.city { xml.cdata! (job.city) }
+          xml.region { xml.cdata! (job.province) }
           xml.category { xml.cdata! (industries.first.name)}
           xml.contract { xml.cdata! (job.kind)}
           xml.date {xml.cdata!((job.created_at).to_s)}
@@ -20,3 +21,5 @@ xml.publisherurl "https://www.talentwiz.ca"
     end
   end
 end
+
+

@@ -60,30 +60,35 @@ Rails.application.routes.draw do
   resources :certifications
 
 
+  post 'create_profile', to: "users#create_job_seeker"
 
   namespace :job_seeker do 
+
     root to: "jobs#index"
+    get '/profile', to: 'users#show'
+    
     resources :create_profiles
     
     resources :jobs, only: [:index, :show] do
       resources :applications
       resources :candidates, only: [:index, :new, :create]
     end
-    get '/profile', to: 'users#show'
+    resources :question_answers 
+
+
+    resources :users
     resources :background_images
     resources :applications, only: [:create]
-    resources :question_answers  
-    resources :users do 
-      resources :user_avatars 
-      resources :user_certifications
-      resources :educations
-      resources :work_experiences do
-        resources :accomplishments
-        resources :user_skills
-        resources :references
-      end
-    end
-   
+      
+    resources :user_avatars 
+    resources :user_certifications
+    resources :educations
+    
+    resources :work_experiences do
+      resources :accomplishments
+      resources :user_skills
+      resources :references
+    end  
   end
 
   get "/auth/:provider/callback", to: 'business/users#edit'
@@ -366,6 +371,9 @@ Rails.application.routes.draw do
     resources :customers
 
     resources :jobs do 
+      collection do 
+        post :verified, to: "jobs#verified"
+      end
       resources :applications
       resources :candidates
       resources :comments

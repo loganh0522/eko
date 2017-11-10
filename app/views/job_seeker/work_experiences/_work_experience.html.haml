@@ -5,8 +5,8 @@
         .experience-header 
           .company= position.company_name
           .edit
-            = link_to "Edit", edit_job_seeker_user_work_experience_path(@profile, position.id), :data => {:remote => true}     
-            = link_to job_seeker_user_work_experience_path(@profile, position.id), remote: true, :method => :delete, data:{:confirm => "Are You Sure? You can not undo this action."}  do
+            = link_to "Edit", edit_job_seeker_work_experience_path(position.id), :data => {:remote => true}     
+            = link_to job_seeker_work_experience_path(position.id), remote: true, :method => :delete, data:{:confirm => "Are You Sure? You can not undo this action."}  do
               .glyphicon.glyphicon-trash  
         .experience-position
           .title= position.title 
@@ -31,9 +31,9 @@
     .actions
       %ul
         %li
-          = link_to "+ Add Accomplishment", new_job_seeker_user_work_experience_accomplishment_path(@profile, position.id), :data => {:remote => true}, class: 'add-accomplishment'
+          = link_to "+ Add Accomplishment", new_job_seeker_work_experience_accomplishment_path( position.id), :data => {:remote => true}, class: 'add-accomplishment'
         %li
-          = link_to "+ Add Skills", new_job_seeker_user_work_experience_user_skill_path(@profile, position.id), :data => {:remote => true}, class: 'add-accomplishment'
+          = link_to "+ Add Skills", new_job_seeker_work_experience_user_skill_path(position.id), :data => {:remote => true}, class: 'add-accomplishment'
         / %li
         /   = link_to "+ Get a Reference", new_job_seeker_work_experience_path, :data => {:toggle => "modal", :target => "#work-experience-modal"}
 

@@ -1,9 +1,4 @@
 class User < ActiveRecord::Base
-  # include Elasticsearch::Model 
-  # include Elasticsearch::Model::Callbacks 
-  # index_name ["talentwiz", Rails.env].join('_') 
-  #Business User Relationships
-
   validates_presence_of :first_name, :last_name, :email, :password, :on => [ :create ]
   validates_presence_of :first_name, :last_name, :email, :on => [ :update ]
   validates_uniqueness_of :email, :on => [ :create, :update ]
@@ -22,14 +17,12 @@ class User < ActiveRecord::Base
 
   has_many :hiring_teams
   has_many :jobs, through: :hiring_teams 
-  
   has_many :assigned_users
   has_many :tasks, through: :assigned_users, source: :assignable, source_type: "Task"
   has_many :interviews, through: :assigned_users, source: :assignable, source_type: "Interview"
   has_many :interview_invitations, through: :assigned_users, source: :assignable, source_type: "InterviewInvitation"
   has_many :orders
   has_many :event_ids
-  
   has_many :application_scorecards
   has_many :invitations
   has_many :messages
@@ -41,6 +34,7 @@ class User < ActiveRecord::Base
   has_many :mentions
   has_many :mentioned, :through => :mentions
   has_many :mentioned, :class_name => "Mention", :foreign_key => "mentioned_id"
+  
   has_many :email_templates
   has_one :google_token
   has_one :outlook_token

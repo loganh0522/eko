@@ -1,6 +1,5 @@
 class Business::UsersController < ApplicationController 
   layout "business"
-  # filter_resource_access
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -23,16 +22,11 @@ class Business::UsersController < ApplicationController
     end
   end
 
-  def create_subscription
-    OutlookWrapper::User.create_subscription(current_user)
-  end
-
   def show
     @user = current_user
     @signature = current_user.email_signature
     @login_url = get_login_url
     @user_avatar = current_user.user_avatar
-
 
     if request.env['omniauth.auth'].present? 
       @auth = request.env['omniauth.auth']['credentials']
@@ -54,20 +48,8 @@ class Business::UsersController < ApplicationController
     end
   end
 
-  def outlook_get_token
-    # OutlookWrapper::User.update_subscription(current_user)
-
-    token = get_token_from_code params[:code]
-
-    OutlookToken.create(
-      access_token: token.token,
-      refresh_token: token.refresh_token,
-      expires_at: Time.now + token.expires_in.to_i.seconds,
-      user_id: current_user.id
-      )
-
+  def create_subscription
     OutlookWrapper::User.create_subscription(current_user)
-    redirect_to business_user_path(current_user)
   end
 
   def edit
@@ -101,8 +83,28 @@ class Business::UsersController < ApplicationController
     end
   end
 
+  def outlook_get_token
+    # OutlookWrapper::User.update_subscription(current_user)
+
+    token = get_token_from_code params[:code]
+
+    OutlookToken.create(
+      access_token: token.token,
+      refresh_token: token.refresh_token,
+      expires_at: Time.now + token.expires_in.to_i.seconds,
+      user_id: current_user.id
+      )
+
+    OutlookWrapper::User.create_subscription(current_user)
+    redirect_to business_user_path(current_user)
+  end
+
   def destroy
 
+  end
+
+  def gmail_auth
+    @auth = request.env['omniauth.auth']['credentials']
   end
 
   def autocomplete
@@ -112,10 +114,6 @@ class Business::UsersController < ApplicationController
     respond_to do |format|
       format.json { render json: @users.as_json(only: [:first_name, :id, :last_name, :full_name], methods: [:avatar_url])}
     end
-  end
-
-  def gmail_auth
-    @auth = request.env['omniauth.auth']['credentials']
   end
 
   private

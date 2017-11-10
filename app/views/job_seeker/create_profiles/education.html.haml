@@ -2,14 +2,17 @@
   .create-profile-header
     %h1 Welcome to TalentWiz
     %p Your profile is submitted to the jobs that you apply for so that you do not have to compelete a new profile every time. So please take a few minutes to complete your profile.  
+  
   .create-profile-body
     = form_for [:job_seeker, @user], url: wizard_path do |f|
-      .experience-container
+        
+      .experience-container 
         .header
           .title Education
         = f.fields_for :educations do |q|
           = render "education_fields", f: q
         = link_to_add_fields "+ Add Education", f, :educations
       .footer
-        = link_to 'Previous', wizard_path(:personal)
-        = f.submit "Create Profile", class: "job-seeker-btn"
+        = link_to wizard_path(:personal), class: "previous-link" do 
+          &larr; Previous
+        = f.submit "Save & Continue", class: "job-seeker-btn"

@@ -1,27 +1,96 @@
 .create-profile-container
   margin: 60px auto 100px auto
-  padding: 25px 0 25px 0
+  padding-top: 20px
   width: 780px
   background: white
+  overflow: hidden
   box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
   @media screen and (max-width: 780px)
     width: 100%
+
   .create-profile-header
     h1
       color: black
       margin-top: 0
     border-bottom: 1px solid rgba(0,0,0,0.1)
     text-align: center
-    padding: 0 10% 25px 10%
+    padding: 0 10% 
+  .create-profile-body
+    #job-seeker-background-up
+      width: fit-content
+      position: relative
+      left: 75%
+      top: 90px
+      .inputfile 
+        width: 0.1px
+        height: 0.1px
+        opacity: 0
+        overflow: hidden
+        position: absolute
+        z-index: -1
+        float: left
+    .background
+      background: url("/tmp/user-background.png") center no-repeat
+      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1) 
+      margin: 10px 2%
+      background-size: cover
+      height: 250px  
+      @media screen and (max-width: 800px)
+        width: 100%
+        margin: 0 0 
+      .profile-header
+        overflow: hidden 
+        background: rgba(0,0,0,0.5)
+        font-weight: 400
+        color: #ffffff  
+        height: 250px 
+        @media screen and (max-width: 800px)
+          width: 100%
+          margin: 0 0 
+        .user-image
+          width: 150px
+          height: 150px  
+          margin: 0 auto
+          img  
+            padding: 4px
+            background: white
+            border: 1px solid #E4E5E9
+            width: 150px
+            height: 150px
+            border-radius: 50%
+          .glyphicon.glyphicon-pencil
+            font-size: 18px
+            float: right
+            margin: 10px -10px 0 0 
+            color: white   
+        .personal-details
+          margin: 25px auto
+          width: 350px
+          text-align: center
+          .glyphicon.glyphicon-pencil
+            margin-left: 70%
+            width: auto
+            color: white
+          .social-links
+            margin-top: 10px
+            a 
+              color: #ffffff
+              text-decoration: none
+            &:hover
+              cursor: pointer
+  .form-row
+    border: none
+    margin: 10px 2.5% 0px 2.5%
   .header 
     overflow: hidden  
-    margin: 10px 2.5% 0px 2.5%
     height: auto
     padding-bottom: 10px
+    padding-top: 10px
+    border-bottom: 1px solid rgba(0,0,0,0.1)
     .title
       float: left
       font-size: 24px
-      font-weight: 500    
+      font-weight: 300    
     .new_experience
       float: left
       margin: 6px 0 0 15px   
@@ -32,24 +101,29 @@
     border-radius: 0
     padding: 10px 10px
     background: #f7f8f9
-  
-
   .experience-container
     overflow: hidden
+    margin: 10px 2.5% 0px 2.5%
     .add_fields
       float: right
       color: #EF7B2B
       margin: 10px 25px 0 0
     .remove_fields
       float: right
-      border: 1px solid rgba(0,0,0,0.1)
+      color: #EF7B2B
       margin-right: 20px
       display: none
   .footer
-    padding: 15px 2.5% 0 0 
+    padding: 15px 2.5% 
     margin: 15px 0 0 0 
     border-top: 1px solid rgba(0,0,0,0.1)
+    height: fit-content
     overflow: hidden
+    .previous-link
+      color: #EF7B2B
+      margin-top: 11px
+      float: left
+      width: fit-content
     .job-seeker-btn
       float: right
       background: #ffffff

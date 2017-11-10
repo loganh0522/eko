@@ -1,14 +1,12 @@
 .page-header
   %h2 Create a Job
-#post-a-job
+#main-container-padding
   .side-container
     = render 'business/shared/post_job'
   .main-container
     .standard-header   
       %h2 Application Form
-      = link_to "+ Add Question", new_business_job_question_path(@job.id), :data => {:remote => true}, class: 'btn border-button2'
-    #create-application-form
+      = link_to "+ Add Question", new_business_job_question_path(@job.id), :data => {:remote => true}, class: 'btn border-button'
+    .questions-container
       = render 'business/questions/questions', questions: @questions
     
-      #create-app-form
-

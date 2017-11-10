@@ -1,2 +1,9 @@
-$('#basic-form-modal').modal("toggle");
-
+<% if @errors.present? %>
+  <% @errors.each do |error| %>
+    $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+    $('#<%= error[0] %>_Block').addClass('has-error');
+  <% end %>
+<% else %>
+  $('.tags').html('<%= j render "business/tags/company_tags", tags: @tags %>');
+  $('#basic-form-modal').modal("toggle");
+<% end %>

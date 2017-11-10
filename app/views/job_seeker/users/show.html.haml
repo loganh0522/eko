@@ -7,7 +7,7 @@
       .header#experience-header
         .title Experience
         .new_experience
-          = link_to "+ Add Experience", new_job_seeker_user_work_experience_path(@profile), :data => {:remote => true}, :html => {id: 'new_work_experience_button'}
+          = link_to "+ Add Experience", new_job_seeker_work_experience_path, remote: true, :html => {id: 'new_work_experience_button'}
       = render 'job_seeker/work_experiences/experience'
       
       
@@ -17,7 +17,7 @@
       .header#certification-header
         .title Certifications
         .new_experience
-          = link_to "+ Add Certification", new_job_seeker_user_user_certification_path(@profile), :data => {:remote => true}, :html => {id: 'new_user_certification_button'}
+          = link_to "+ Add Certification", new_job_seeker_user_certification_path, :data => {:remote => true}, :html => {id: 'new_user_certification_button'}
       = render 'job_seeker/user_certifications/certifications'    
 
                 

@@ -9,10 +9,12 @@ class Business::RejectionReasonsController < ApplicationController
   def index   
     @rejection_reasons = current_company.rejection_reasons
     @email = current_company.application_email
+    @tags = current_company.tags
   end
 
   def new
     @rejection_reason = RejectionReason.new
+
     respond_to do |format| 
       format.js
     end
@@ -20,12 +22,14 @@ class Business::RejectionReasonsController < ApplicationController
 
   def create
     @rejection_reason = RejectionReason.new(rejection_params)
-
-    if @rejection_reason.save
-      @rejection_reasons = current_company.rejection_reasons
-      respond_to do |format|
-        format.js
+    
+    respond_to do |format|
+      if @rejection_reason.save
+        @rejection_reasons = current_company.rejection_reasons
+      else
+        render_errors(@rejection_reason)
       end
+      format.js
     end
   end
 
@@ -35,11 +39,14 @@ class Business::RejectionReasonsController < ApplicationController
 
   def update
     @reason = RejectionReason.find(params[:id])
-
-    if @reason.update(rejection_params)
-      respond_to do |format|
-        format.js
+    
+    respond_to do |format|
+      if @rejection_reason.update(rejection_params)
+        @rejection_reasons = current_company.rejection_reasons
+      else
+        render_errors(@rejection_reason)
       end
+      format.js
     end
   end
 
@@ -57,5 +64,13 @@ class Business::RejectionReasonsController < ApplicationController
   
   def rejection_params
     params.require(:rejection_reason).permit(:body, :company_id)
+  end
+
+  def render_errors(reason)
+    @errors = []
+
+    reason.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end 
   end
 end

@@ -76,5 +76,4 @@ class Business::EmailTemplatesController < ApplicationController
       @errors.append([error[0].to_s, error[1][0]])
     end 
   end
-
 end

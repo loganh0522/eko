@@ -4,6 +4,8 @@ class Tag < ActiveRecord::Base
 
   before_create :titleize 
 
+  validates_presence_of :name
+
   def self.find_or_create_tag(name)
     name.titleize
     self.where(name: name, company: current_company).first_or_create

@@ -1,7 +1,9 @@
 xml.instruct!(:xml, :version=> "1.0", :encoding => "UTF-8")
-xml.source do 
+xml.positionfeed do 
 xml.source "TalentWiz"
+
 xml.sourceurl "https://www.talentwiz.ca"
+xml.feeddate {xml.cdata! (@jobs.last.juju_updated_at)}
   xml.jobs do
     @jobs.each do |job|
       if job.status == 'open'
@@ -16,7 +18,19 @@ xml.sourceurl "https://www.talentwiz.ca"
           xml.location do 
             xml.nation { xml.cdata! (job.country) }
             xml.city { xml.cdata! (job.city) }
-            xml.country { xml.cdata! (job.country) }
+            xml.state { xml.cdata! (job.province) }
+            xml.zip { xml.cdata! (job.postal_code) }
+          end
+
+          xml.salary do 
+            xml.period { xml.cdata! (job.min_salary)}
+            xml.min { xml.cdata! (job.min_salary)}
+            xml.max { xml.cdata! (job.max_salary)}
+          end
+
+          xml.experience do 
+            xml.min { xml.cdata! (job.min_exp) }
+            xml.max { xml.cdata! (job.max_exp) }
           end
 
           xml.jobtype { xml.cdata! (job.kind)}

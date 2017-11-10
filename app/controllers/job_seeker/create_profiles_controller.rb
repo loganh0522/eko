@@ -21,6 +21,7 @@ class JobSeeker::CreateProfilesController < ApplicationController
       else
         @background = BackgroundImage.new 
       end
+      @background = BackgroundImage.new
       render_wizard
     when :education
       if @user.educations.count == 0 
@@ -28,10 +29,12 @@ class JobSeeker::CreateProfilesController < ApplicationController
       end
       
       render_wizard
+    
     when :experience
       if @user.work_experiences.count == 0 
-        @user.work_experiences.build 
+        @user.work_experiences.new
       end
+      
       render_wizard
     end
 
@@ -48,7 +51,11 @@ class JobSeeker::CreateProfilesController < ApplicationController
     when :education
       render_wizard @user
     when :experience 
-      finish_wizard_path
+      if @user.errors.present?
+        render_wizard @user
+      else 
+        finish_wizard_path
+      end
     end
   end
 

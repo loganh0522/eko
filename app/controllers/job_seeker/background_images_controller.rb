@@ -13,6 +13,7 @@ class JobSeeker::BackgroundImagesController < ApplicationController
   def create
     @background = BackgroundImage.create(background_params)
     @social_links = current_user.social_links
+
     if current_user.user_avatar.present?
       @avatar = current_user.user_avatar 
     else 
@@ -41,6 +42,7 @@ class JobSeeker::BackgroundImagesController < ApplicationController
     else 
       @avatar = UserAvatar.new
     end
+    
     respond_to do |format|
       format.js
     end

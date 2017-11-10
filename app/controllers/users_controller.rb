@@ -1,20 +1,16 @@
 class UsersController < ApplicationController 
+  
   def new 
     @user = User.new
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def create
     @user = User.new(user_params)     
     if @user.save 
-      if @user.kind == 'job seeker'
-        session[:user_id] = @user.id 
-        if request.subdomain.present? 
-          redirect_to new_profile_path
-        else
-          # redirect_to new_job_seeker_profile_path
-          redirect_to job_seeker_create_profiles_path
-        end
-      else
         EmailSignature.create(user_id: @user.id, signature: "#{@user.first_name} #{@user.last_name}")      
         if params[:invitation_token].present?
           handle_invitation
@@ -22,18 +18,34 @@ class UsersController < ApplicationController
           session[:user_id] = @user.id 
           redirect_to new_company_path
         end
-      end
     else
-      if params[:user][:kind] == 'job seeker'
-        render template: 'users/new_job_seeker'
-      else
-        render :new
+      respond_to do |format| 
+        render_errors(@user)
+        format.js 
       end
     end
   end
 
   def new_job_seeker
     @user = User.new
+  end
+
+  def create_job_seeker
+    @user = User.new(user_params)   
+
+    if @user.save 
+      session[:user_id] = @user.id 
+      if request.subdomain.present? 
+        redirect_to new_profile_path
+      else
+        redirect_to job_seeker_create_profiles_path
+      end
+    else
+      respond_to do |format| 
+        render_errors(@user)
+        format.js 
+      end
+    end
   end
 
   def sub_new_job_seeker
@@ -60,7 +72,7 @@ class UsersController < ApplicationController
   private 
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :role, :password, :kind, :phone, :location)
+    params.require(:user).permit(:first_name, :last_name, :email, :role, :password, :password_confirmation, :kind, :phone, :location)
   end
 
   def handle_invitation
@@ -80,9 +92,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def render_errors(candidate)
+  def render_errors(user)
     @errors = []
-    candidate.errors.messages.each do |error| 
+    user.errors.messages.each do |error| 
       @errors.append([error[0].to_s, error[1][0]])
     end  
   end

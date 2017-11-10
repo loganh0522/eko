@@ -1,6 +1,6 @@
 .page-header
   %h2 Post a Job
-#post-a-job
+#main-container-padding
   .side-container
     %ul
       %li{:class => is_active?(new_business_job_path)} 
@@ -11,5 +11,7 @@
       %li Scorecard
       / %li Advertise Job 
   .main-container
+    .standard-header
+      %h2 Edit Job Details
     = render '/shared/errors', type: @job
     = render 'form'

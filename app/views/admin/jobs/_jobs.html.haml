@@ -1,0 +1,26 @@
+%table.table
+  %thead
+    %tr
+      %td(width="5%")
+      %th(width="25%") Title
+      %th(width="25%") Approved
+      %th(width="10%") Status
+      %th(width="10%") Candidates
+      %th(width="10%") Created At
+    %tbody
+      - @jobs.each do |job| 
+        %tr
+          %td
+            #completed
+              = link_to verified_admin_jobs_path(id: job.id), method: :post, remote: true do 
+                .glyphicon.glyphicon-ok
+          %td
+            = link_to "#{job.title}", admin_job_path(job)
+          %td
+            
+          %td
+            = job.status
+          %td
+            = job.candidates.count
+          %td
+            = job.created_at

@@ -14,15 +14,17 @@ class Business::InvitationsController < ApplicationController
       format.js
     end
   end
- 
-  def index
-    
-  end
     
   def create
-    create_invitation
-
-    respond_to do |format|
+   @invitation = Invitation.create(invitation_params) 
+    respond_to do |format|  
+      if @invitation.save 
+        AppMailer.send_invitation_email(@invitation, current_user, current_company).deliver
+        flash[:success] = "An invitaion has been sent to: {@invitation.recipient_email}"
+      else 
+        render_errors(@invitation)
+        binding.pry
+      end
       format.js
     end
   end
@@ -32,14 +34,16 @@ class Business::InvitationsController < ApplicationController
   def invitation_params 
     params.require(:invitation).permit(:user_id, :inviter_id, :company_id, :message, :user_role, :recipient_email, :job_id)
   end
+  
+  def render_errors(tag)
+    @errors = []
+    tag.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end  
+  end
+
 
   def create_invitation
-    @invitation = Invitation.create(invitation_params)   
-    if @invitation.save 
-      AppMailer.send_invitation_email(@invitation, current_user, current_company).deliver
-      flash[:success] = "An invitaion has been sent to: {@invitation.recipient_email}"
-    else 
-      flash[:error] = "You must enter a valid E-mail before sending an invitation."
-    end
+    
   end
 end

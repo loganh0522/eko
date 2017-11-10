@@ -3,10 +3,25 @@ class Admin::JobsController < ApplicationController
   before_filter :require_user
 
   def index
-    @jobs = Job.all
+    where = {}
+    if params[:query].present? 
+      query = params[:query] 
+    else 
+      query = "*"
+    end
+    where[:verified] = true
     
+    if params[:verified].present?
+      where[:verified] = params[:verified] 
+    end
+
+    where[:kind] = params[:kind] if params[:kind].present?
+
+    @jobs = Job.search(query, where: where, fields: [{title: :word_start}]).to_a
+
     respond_to do |format|
       format.html
+      format.js 
     end
   end
 
@@ -59,10 +74,17 @@ class Admin::JobsController < ApplicationController
     end
   end
 
+  def verified
+    @job = Job.find(params[:id])
+    @job.update_attributes(verified: true)
+    
+    respond_to do |format|
+      format.js
+    end
+  end
 
   def autocomplete
-    render :json => Job.search(params[:term], where: {company_id: current_company.id}, 
-      fields: [{title: :word_start}])
+    render :json => Job.search(params[:term], fields: [{title: :word_start}])
   end
 
   private 

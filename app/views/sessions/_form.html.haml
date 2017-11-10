@@ -1,0 +1,21 @@
+.modal-body
+  .new-user
+    %h3 First Time User
+    %p Create a career profile that you can re-use to apply to other jobs with ease. Build an extensive digital profile to increase your visibility to recruiters. You can also track the status of your applications from your profile.
+    
+    = link_to "Create Profile", "", "data-toggle" => "modal", "data-dismiss" => "modal", "data-target" => "#subNewUserModal", class: "btn submit-button", :style => "background-color: #{@job_board.brand_color}"
+  
+  .sign-in 
+    %h3 Already Have an Account? 
+    %p Please sign-in so you can apply to jobs, track the status of your applications and get Hired! 
+    = bootstrap_form_tag url: '/login' do |f|
+      %fieldset
+        = f.email_field :email, placeholder: "E-mail", hide_label: true
+        = f.password_field :password, placeholder: "Password", hide_label: true
+        %input(type="submit" value="Log In" class="btn submit-button" style = "background-color: #{@job_board.brand_color}")
+    .forgot-password
+      = link_to 'Forgot Password', '/forgot_password'
+.modal-footer
+  .power
+    .powered-by Powered by
+    %img(src="/tmp/logo.jpg")

@@ -5,10 +5,6 @@ class Business::UserAvatarsController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
-  
-  def index
-
-  end
 
   def new 
     @user_avatar = UserAvatar.new
@@ -31,6 +27,7 @@ class Business::UserAvatarsController < ApplicationController
   def edit 
     @user_avatar  = UserAvatar.find(params[:id])
     @new_avatar = UserAvatar.new
+
     respond_to do |format|
       format.js
     end
@@ -39,8 +36,8 @@ class Business::UserAvatarsController < ApplicationController
   def update
     @user_avatar = UserAvatar.find(params[:id])
     @user_avatar.update(avatar_params)
-
-    @user = @user_avatar.user
+    @user = current_user
+    
     respond_to do |format|
       format.js
     end

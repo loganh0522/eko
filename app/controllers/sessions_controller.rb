@@ -34,8 +34,11 @@ class SessionsController < ApplicationController
   end
 
   def subdomain_new
-    @job_board = JobBoard.find_by_subdomain!(request.subdomain)
-    @company = @job_board.company
+    respond_to do |format|
+      @job_board = JobBoard.find_by_subdomain!(request.subdomain)
+      @company = @job_board.company
+      format.js 
+    end
   end
 
   def destroy 

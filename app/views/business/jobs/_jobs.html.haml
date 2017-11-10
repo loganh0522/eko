@@ -1,9 +1,8 @@
-.main-container
-  .open-container.showing  
-    - if @jobs.count == 0
-      .not-present-container
-        %p You currently do not have any open jobs.
-    - else 
-      - @jobs.each do |job|
-        = render 'job_container', job: job
+.jobs-container
+  - if @jobs.count == 0
+    .not-present-container
+      %p You currently do not have any open jobs.
+  - else 
+    - @jobs.each do |job|
+      = render 'job_container', job: job
 

@@ -15,7 +15,7 @@
 - else    
   .not-present-container
     %p There currently are currently no questions for the application form. 
-    = link_to "+ Add Question", new_business_job_question_path(@job.id), :data => {:remote => true}
+    .add-object= link_to "+ Add Question", new_business_job_question_path(@job.id), class: "btn submit-button",  :data => {:remote => true}
 
 
          

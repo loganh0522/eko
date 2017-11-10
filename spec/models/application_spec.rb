@@ -7,15 +7,10 @@ describe Application do
 
   context "With multiple options submitted" do 
     it "should return an empty array if the title does not have a match" do 
-      logan = User.create(first_name: "Logan", last_name: "houston", )
-      bryan 
-
-
-
+      logan = User.create(first_name: "Logan", last_name: "houston")
       patriot = Application.create(title: "Patriot", description: "Movie about the American Revolution")
       star_wars = Video.create(title: "Star Wars", description: "Best Series Ever")
       expect(Video.search_by_title("Thor")).to eq([])
-
 
       it_behaves_like "requires sign in" do
         let(:action) {get :index}

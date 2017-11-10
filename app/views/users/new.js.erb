@@ -1,0 +1,6 @@
+$('#subNewUserModal').find('.modal-body').remove();
+$('#subNewUserModal').find('.modal-footer').remove();
+$('#subNewUserModal').find('.modal-title').html('<%= j "Create Profile" %>');
+$('#subNewUserModal').find('.modal-header').after('<%= j render "users/job_seeker_form"%>');
+$('#subNewUserModal').modal("toggle");
+

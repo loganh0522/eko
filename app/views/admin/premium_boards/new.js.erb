@@ -1,0 +1,4 @@
+$('#basic-form-modal').find('form').remove()
+$('#basic-form-modal').find('.modal-title').html('<%= j "Create Job Board" %>');
+$('#basic-form-modal').find('.modal-header').after('<%= j render "admin/premium_boards/form" %>');
+$('#basic-form-modal').modal("toggle");

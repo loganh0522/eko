@@ -1,15 +1,10 @@
 .add-user-skill
-  = form_for [:job_seeker, @profile, @work_experience, @user_skill], html: {remote: true, :class => 'skills_form'} do |f|      
+  = form_for [:job_seeker, @work_experience, @user_skill], html: {remote: true, :class => 'skills_form'} do |f|      
     = text_field_tag 'name', nil, :class => 'ui-autocomplete-input', :placeholder => 'Add Skill', id: "skills_name"
-    
     %div#skills-results
-    = f.hidden_field :user_id, value: current_user.id
+    
     = hidden_field_tag :skills_id
-
+    .close-form#new-form.btn.btn-default     
+      Close
     = f.submit "+ Add", class: "submit btn btn-primary", id: "submit_skills"
-    - if !@user_skill.new_record?
-      .close-form#edit-form.btn.btn-default     
-        Close
-    - else
-      .close-form#new-form.btn.btn-default     
-        Close
+    

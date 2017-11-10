@@ -5,23 +5,23 @@ class JobSeeker::EducationsController < JobSeekersController
   
   def index 
     @education = Education.new
-    @user_degrees = current_user.profile.educations
+    @user_degrees = current_user.educations
   end
 
   def new
-    @profile = current_user.profile
+    @user = current_user
     @education = Education.new
   end
 
   def create 
-    @education = Education.new(education_params.merge!(profile: current_user.profile))
-    @degrees = current_user.profile.educations
-    @profile = current_user.profile
+    @education = Education.new(education_params.merge!(user_id: current_user.id))
+    @degrees = current_user.educations
+    @user = current_user
     
     respond_to do |format|
       if @education.save
-        @degrees = current_user.profile.educations
-        @profile = current_user.profile
+        @degrees = current_user.educations
+        @profile = current_user
       else 
         render_errors(@education)
       end
@@ -30,18 +30,18 @@ class JobSeeker::EducationsController < JobSeekersController
   end
 
   def edit 
-    @profile = current_user.profile
+    @profile = current_user
     @education = Education.find(params[:id])
   end
 
   def update 
-    @profile = current_user.profile
+    @user = current_user
     @education = Education.find(params[:id])
     
     respond_to do |format|
       if @education.update(education_params)
-        @degrees = current_user.profile.educations
-        @profile = current_user.profile
+        @degrees = current_user.educations
+        @user = current_user
       else
         render_errors(@education)
       end

@@ -1,9 +1,9 @@
 .fieldset.work-experience
   .row
     .col-md-6
-      = f.text_field :school, class: "form-control", hide_label: true, placeholder: "School"
+      = f.text_field :school, class: "form-control", hide_label: true, placeholder: "School", autocomplete: 'off'
     .col-md-6
-      = f.text_field :degree, class: "form-control", hide_label: true, placeholder:"Degree"
+      = f.text_field :degree, class: "form-control", hide_label: true, placeholder: "Degree", autocomplete: 'off'
   .row
     .col-md-3.col-xs-6.col-sm-6
       = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December']
@@ -17,5 +17,5 @@
     .col-md-12
       = f.text_area :description, rows: 4, class: "form-control", hide_label: true, placeholder: "Description"
   .row
-    = link_to "Remove Education", '#', class: "remove_fields btn border-button"
+    = link_to "Remove", '#', class: "remove_fields btn job-seeker-btn"
 

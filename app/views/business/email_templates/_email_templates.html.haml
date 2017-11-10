@@ -1,11 +1,12 @@
 - email_templates.each do |template| 
-  .template
-    .body= template.title
-    .icons
-      = link_to edit_business_email_template_path(template.id), :data => {:remote => true } do
-        %i.glyphicon.glyphicon-pencil
-      = link_to business_email_template_path(template.id), remote: true, :method => :delete do
-        %i.glyphicon.glyphicon-remove
+  .stage
+    .stage-header
+      .body= template.title
+      .icons
+        = link_to edit_business_email_template_path(template.id), :data => {:remote => true } do
+          %i.glyphicon.glyphicon-pencil
+        = link_to business_email_template_path(template.id), remote: true, :method => :delete do
+          %i.glyphicon.glyphicon-remove
 
 
       

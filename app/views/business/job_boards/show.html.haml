@@ -4,13 +4,26 @@
   .main-container
     .edit-career-portal
       .change-containers-nav
-        %ul 
-          = link_to business_job_board_path(kind: 'advanced'), :method => :put, remote: true do 
-            %li.change.activated Advanced 
-          = link_to business_job_board_path(kind: 'basic'), :method => :put, remote: true do 
-            %li.change Basic
-      .career-portal-details
-        = render "sections"
+        - if @job_board.kind == "basic"
+          %ul 
+            = link_to business_job_board_path(kind: 'advanced'), :method => :put, remote: true do 
+              %li.change Advanced 
+            = link_to business_job_board_path(kind: 'basic'), :method => :put, remote: true do 
+              %li.change.activated Basic
+        - else 
+          %ul 
+            = link_to business_job_board_path(kind: 'advanced'), :method => :put, remote: true do 
+              %li.change.activated Advanced 
+            = link_to business_job_board_path(kind: 'basic'), :method => :put, remote: true do 
+              %li.change Basic
+        
+
+      - if @job_board.kind == "basic"
+        .career-portal-details
+          = render 'business/job_boards/form'
+      - else 
+        .career-portal-details
+          = render "sections"
 
 
   / %h4 Widget Details 

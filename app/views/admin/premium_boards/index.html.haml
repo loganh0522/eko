@@ -1,0 +1,28 @@
+.company-settings
+  .side-container
+    = render 'admin/shared/admin_sidebar'
+  .main-container
+    .standard-header
+      %h2 Premium Boards
+      = link_to "+ Job Board", new_admin_premium_board_path, :data => {:remote => true }, class: "btn border-button2"
+    .templates-body
+      - @job_boards.each do |board| 
+        = link_to "Edit", edit_admin_premium_board_path(board.id), :data => {:remote => true }
+        .job-feed-container
+          .header
+            = image_tag board.logo.small_image if board.logo.present? 
+          .body 
+            - board.posting_durations.each do |duration|
+              = duration.price
+
+
+.modal#basic-form-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title
+
+
+
+

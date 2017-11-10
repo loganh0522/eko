@@ -20,7 +20,8 @@ class Business::TagsController < ApplicationController
   end
 
   def create 
-    @company_tags = current_company.tags   
+    @company_tags = current_company.tags  
+     
     respond_to do |format|
       if params[:applicant_ids].present?
         add_tag_to_multiple
@@ -30,8 +31,12 @@ class Business::TagsController < ApplicationController
         format.js
       else 
         @tag = Tag.new(tag_params)
+        
         if @tag.save
           @tags = current_company.tags
+          format.js
+        else 
+          render_errors(@tag)
           format.js
         end
       end
@@ -80,6 +85,13 @@ class Business::TagsController < ApplicationController
         end
       end
     end 
+  end
+
+  def render_errors(tag)
+    @errors = []
+    tag.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end  
   end
 
   def add_tag_to_multiple

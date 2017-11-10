@@ -9,6 +9,7 @@ xml.publisherurl "https://www.talentwiz.ca"
           xml.id { xml.cdata!((job.id).to_s) }
           xml.referencenumber { xml.cdata!((job.id).to_s) }
           xml.company { xml.cdata! (job.company.name)}
+          xml.trafficboost {xml.cdata! (job.job_feed.ziprecruiter_boost)}
           xml.url { xml.cdata!(job.url) }
           xml.title { xml.cdata!(job.title) }
           xml.description { xml.cdata!(job.description) }

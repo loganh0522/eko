@@ -2,8 +2,7 @@
   .accomplishment-body
     = accomplishment.body
   .icons
-    = link_to edit_job_seeker_profile_work_experience_accomplishment_path(@profile, position.id, accomplishment.id), :data => {:remote => true} do
+    = link_to edit_job_seeker_work_experience_accomplishment_path(position.id, accomplishment.id), :data => {:remote => true} do
       %i.glyphicon.glyphicon-pencil
-    = link_to job_seeker_profile_work_experience_accomplishment_path(@profile, position.id, accomplishment.id), remote: true, :method => :delete do
+    = link_to job_seeker_work_experience_accomplishment_path(position.id, accomplishment.id), remote: true, :method => :delete do
       %i.glyphicon.glyphicon-remove
-  %br

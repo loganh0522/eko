@@ -17,34 +17,6 @@ jQuery ->
     $(this).before($(this).data('fields').replace(regexp, time))
     event.preventDefault()
 
-  $('#main-container').on 'click', '.add_to_cart', (event) ->
-    time = new Date().getTime()
-    regexp = new RegExp($(this).data('id'), 'g')
-    $('#cart').find('.body').append($(this).data('fields').replace(regexp, time))
-
-    totalAmount = 0
-
-    $('.unit-price').each -> 
-      totalAmount += Number($(this).val())
-
-    $('#cart-total').find('.amount').html("$" + totalAmount)
-    $('#order_total').val(totalAmount)
-    event.preventDefault()
-
-  $('#main-container').on 'click', '.remove_from_cart', (event) ->
-    $(this).next('input[type=hidden]').val('1')
-    id = $(this).parent().attr('id')
-    $(this).closest('fieldset').remove()
-
-    totalAmount = Number($('#cart-total').find('.amount').val())
-
-    $('.unit-price').each -> 
-      totalAmount += Number($(this).val())
-
-    $('#cart-total').find('.amount').html("$" + totalAmount)
-    $('#order_total').val(totalAmount)
-    event.preventDefault()
-
   $('.main-container').on 'change', '.answer-type', (event) -> 
     val = $(this).find('.question-type').val()
     if val == "Checkbox" || val == "Multiple Choice"  
@@ -82,12 +54,25 @@ jQuery ->
     $(this).parent().parent().remove()
     event.preventDefault()
 
-  $('.create-profile-container').on 'click', '.add_fields', (event) ->
+
+  $('.personal-social-links').on 'click', '.add_fields', (event) ->
+    time = new Date().getTime()
+    regexp = new RegExp($(this).data('id'), 'g')
+    $(this).after($(this).data('fields').replace(regexp, time))
+    $(this).prev().find('.remove_fields').show()
+    event.preventDefault()
+
+  $('.experience-container').on 'click', '.add_fields', (event) ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
     $(this).before($(this).data('fields').replace(regexp, time))
     $(this).prev().find('.remove_fields').show()
     event.preventDefault()
+
+  $(document).ready ->
+    if $('.work-experience').length >= 2 
+      $('.remove_fields:not(:first)').show()
+    
 
 ################ Create Application ###############
 
@@ -131,4 +116,31 @@ jQuery ->
     return
     event.preventDefault()
 
+################### Job Cart ####################
+  $('#main-container').on 'click', '.add_to_cart', (event) ->
+    time = new Date().getTime()
+    regexp = new RegExp($(this).data('id'), 'g')
+    $('#cart').find('.body').append($(this).data('fields').replace(regexp, time))
 
+    totalAmount = 0
+
+    $('.unit-price').each -> 
+      totalAmount += Number($(this).val())
+
+    $('#cart-total').find('.amount').html("$" + totalAmount)
+    $('#order_total').val(totalAmount)
+    event.preventDefault()
+
+  $('#main-container').on 'click', '.remove_from_cart', (event) ->
+    $(this).next('input[type=hidden]').val('1')
+    id = $(this).parent().attr('id')
+    $(this).closest('fieldset').remove()
+
+    totalAmount = Number($('#cart-total').find('.amount').val())
+
+    $('.unit-price').each -> 
+      totalAmount += Number($(this).val())
+
+    $('#cart-total').find('.amount').html("$" + totalAmount)
+    $('#order_total').val(totalAmount)
+    event.preventDefault()
