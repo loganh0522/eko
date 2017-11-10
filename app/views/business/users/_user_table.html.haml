@@ -1,0 +1,20 @@
+%table
+  %thead
+    %tr
+      %th(width="10%") Name 
+      %th(width="25%") 
+      %th(width="20%") Role
+      %th(width="25%") 
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td
+            - if user.user_avatar.present? 
+              = image_tag user.user_avatar.image.small_image, :class => 'circle', :size => "100x100" 
+            - else
+              .circle-img= user.first_name.first.capitalize
+          %td
+            .name= user.full_name
+          %td
+            .permissions= select_tag "user_role", options_for_select(["Admin", "Hiring Manager", "Recruiter"], user.role)
+          %td

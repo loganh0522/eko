@@ -99,10 +99,6 @@ class Business::UsersController < ApplicationController
     redirect_to business_user_path(current_user)
   end
 
-  def destroy
-
-  end
-
   def gmail_auth
     @auth = request.env['omniauth.auth']['credentials']
   end

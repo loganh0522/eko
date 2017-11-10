@@ -26,7 +26,6 @@ describe Business::EmailTemplatesController do
       let(:action) {get :index}
     end
 
-
     before do  
       set_current_user(alice)
       set_current_company(company)
@@ -41,14 +40,13 @@ describe Business::EmailTemplatesController do
         expect(assigns(:email_templates)).to eq([etemp, etemp2])
       end
 
-      it "expects to return the correct number of job postings" do 
+      it "expects to return the correct number of email templates" do 
         expect(company.email_templates.count).to eq(2)
       end
 
-      it "expects to return the correct number of job postings" do 
+      it "expects to return the correct number of email templates" do 
         expect(EmailTemplate.count).to eq(3)
       end
-
     end
   end 
 
@@ -73,7 +71,6 @@ describe Business::EmailTemplatesController do
     it_behaves_like "trial is over" do 
       let(:action) {xhr :get, :new}
     end
-
 
     before do  
       set_current_user(alice)
@@ -107,7 +104,6 @@ describe Business::EmailTemplatesController do
     it_behaves_like "trial is over" do 
       let(:action) {xhr :post, :create}
     end
-
 
     context "with valid inputs" do
       before do  

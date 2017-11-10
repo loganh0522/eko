@@ -4,31 +4,17 @@
   .main-container
     .standard-header
       %h2 Team Members 
-      = link_to "Invite User", new_business_invitation_path, remote: true, class: 'btn border-button2'
+      = link_to "Invite User", new_business_invitation_path, remote: true, class: 'btn border-button'
+    .change-containers-nav
+      %ul 
+        = link_to business_users_path, remote: true do 
+          %li.change All Users
+        = link_to business_invitations_path, remote: true do 
+          %li.change.activated Pending Invitations
     .search-form
       = form_tag business_users_path, :method => 'get', id: "search-form" do
         = text_field_tag "query", nil, placeholder: "Search Team Members", class: "search-field"
     .user-list
-      / %table
-      /   %thead
-      /     %tr
-      /       %th(width="10%") Name 
-      /       %th(width="25%") 
-      /       %th(width="20%") Role
-      /       %th(width="25%") 
-      /     %tbody
-      /       - @users.each do |user|
-      /         %tr
-      /           %td
-      /             - if user.user_avatar.present? 
-      /               = image_tag user.user_avatar.image.small_image, :class => 'circle', :size => "100x100" 
-      /             - else
-      /               .circle-img= user.first_name.first.capitalize
-      /           %td
-      /             .name= user.full_name
-      /           %td
-      /             .permissions= select_tag "user_role", options_for_select(["Admin", "Hiring Manager", "Recruiter"], user.role)
-      /           %td
       = render 'business/users/user_row'
 
           

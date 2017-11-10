@@ -2,6 +2,18 @@ require 'spec_helper'
 
 describe Business::EmailSignaturesController do 
   describe "GET edit" do 
+    it_behaves_like "requires sign in" do
+      let(:action) {xhr :get, :edit, user_id: alice.id, id: signature.id}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {xhr :get, :edit, user_id: alice.id, id: signature.id}
+    end
+
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :get, :edit, user_id: alice.id, id: signature.id}
+    end
+
     let(:company) {Fabricate(:company)}
     let(:alice) {Fabricate(:user, company: company, role: "Admin")}
     let(:signature) {Fabricate(:email_signature, user: alice)}
@@ -22,6 +34,18 @@ describe Business::EmailSignaturesController do
   end
 
   describe "PUT update" do 
+    it_behaves_like "requires sign in" do
+      let(:action) {xhr :put, :update, user_id: 1, id: 1, email_signature: {signature: "Thomas Johnson"}}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {xhr :put, :update, user_id: 1, id: 1, email_signature: {signature: "Thomas Johnson"}}
+    end
+
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :put, :update, user_id: 1, id: 1, email_signature: {signature: "Thomas Johnson"}}
+    end
+
     context "with valid inputs" do
       let(:company) {Fabricate(:company)}
       let(:alice) {Fabricate(:user, company: company, role: "Admin")}

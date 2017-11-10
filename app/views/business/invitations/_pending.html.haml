@@ -1,0 +1,13 @@
+- @invitations.each do |invitation|
+  .user{:id => "invitation_#{invitation.id}" }
+    .circle-img= invitation.recipient_email
+    %i.glyphicon.glyphicon-remove
+    .permissions
+      .show-hidden-search-box#action-box
+        = invitation.user_role
+        .caret
+      .hidden-search-box
+        .select-box
+          .select-item Admin
+          .select-item Hiring Manager
+          .select-item Recruiter

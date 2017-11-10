@@ -8,8 +8,8 @@
         %h3= current_user.full_name
         = current_user.email
       .profile-actions
-        .link1= link_to "Edit Profile", edit_business_user_path(@current_user),  class: "btn border-button2", :data => {remote: true}
-        .link2= link_to "Change Password", edit_business_user_path(@current_user, password: 'password'), :data => {remote: true}, class: "btn border-button2"
+        .link1= link_to "Edit Profile", edit_business_user_path(@current_user),  class: "btn border-button", :data => {remote: true}
+        .link2= link_to "Change Password", edit_business_user_path(@current_user, password: 'password'), :data => {remote: true}, class: "btn border-button"
     .standard-body
       .sync-email
         %h4 Sync Outlook

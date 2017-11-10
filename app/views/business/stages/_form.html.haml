@@ -1,12 +1,11 @@
-.stage-form
-  = form_for [:business, @job, @stage], html: {remote: true, class: 'invite'} do |f|
-    .modal-body
-      .email-area
-        .choose-stage
-          = f.text_field :name, id: "name_Block", class: "form-control", placeholder: "Name", autocomplete: 'off'
-          %span#name_msgBlock
-    .modal-footer
-      = f.hidden_field :job_id, value: @job.id
-      = f.hidden_field :position, value: 1
-      = f.submit @stage.new_record? ? "Create Stage" : "Update", class: "btn submit-button"
-      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel  
+= form_for [:business, @job, @stage], html: {remote: true, class: 'invite'} do |f|
+  .modal-body
+    .email-area
+      .choose-stage
+        = f.text_field :name, id: "name_Block", class: "form-control", placeholder: "Name", autocomplete: 'off'
+        %span#name_msgBlock
+  .modal-footer
+    = f.hidden_field :job_id, value: @job.id
+    = f.hidden_field :position, value: 1
+    = f.submit @stage.new_record? ? "Create Stage" : "Update", class: "btn submit-button"
+    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel  

@@ -1,5 +1,14 @@
 = form_for [:business, @invitation], remote: true do |f| 
   .modal-body   
+    .form-row-no-border
+      .contain-50
+        = f.label :first_name, "First Name"
+        = f.text_field :first_name, id: "first_name_Block", class: "form-control", placeholder: "First Name"
+        %span#first_name_msgBlock
+      .contain-50
+        = f.label :last_name, "Last Name"
+        = f.text_field :last_name, id: "last_name_Block", class: "form-control", placeholder: "Last Name"
+    = f.text_field :last_name, placeholder: "Last Name"
     = f.text_field :recipient_email, placeholder: "Email", id: "recipient_email_Block"
     %span#recipient_emailBlocks
     = f.select :user_role, options_for_select(["Admin", "Hiring Manager", "Recruiter"])
