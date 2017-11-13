@@ -6,16 +6,13 @@ class Business::StagesController < ApplicationController
   before_filter :trial_over
   before_filter :company_deactivated?
   
-
   def index 
     @job = Job.find(params[:job_id])
     @stages = @job.stages
-    @stage = Stage.new 
   end
 
   def new 
     @job = Job.find(params[:job_id])
-    @stages = @job.stages.order("position")
     @stage = Stage.new 
 
     respond_to do |format|

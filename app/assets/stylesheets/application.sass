@@ -86,10 +86,24 @@ header
   float: right
   width: 74%
   margin-bottom: 100px
-
+.change-containers-nav
+  ul 
+    list-style: none
+    text-decoration: none
+    padding-left: 0
+    li
+      display: inline-block
+      padding: 15px 15px 10px 15px 
+      text-align: center 
+      font-size: 14px
+      color: black
+      cursor: pointer
+    .activated
+      border-bottom: 4px solid #EF7B2B
+      color: black
 .standard-header
   overflow: hidden
-  border-bottom: 1px solid rgba(0,0,0,0.1)
+  border-bottom: 1px solid #D1DCE4
   padding: 15px 15px
   margin-bottom: 10px
   h2
@@ -119,7 +133,7 @@ header
       margin-left: 10px
 .container-footer
   margin-top: 15px
-  border-top: 1px solid #ccc
+  border-top: 1px solid #D1DCE4
   height: auto 
   padding: 15px 15px
   overflow: hidden
@@ -381,7 +395,7 @@ input[type=text]
   height: 35px
   margin: 5px 0
   display: inline-block
-  border: 1px solid #ccc
+  border: 1px solid #D1DCE4
   border-radius: 2px
   box-sizing: border-box
 
@@ -390,7 +404,7 @@ input[type=password]
   padding: 8px 20px
   margin: 8px 0
   display: inline-block
-  border: 1px solid #ccc
+  border: 1px solid #D1DCE4
   border-radius: 2px
   box-sizing: border-box
 
@@ -412,7 +426,8 @@ select
   border: 1px solid #D1DCE4
   border-radius: 0
 
-
+trix-editor
+  border: 1px solid #D1DCE4
 
 textarea
   width: 100%

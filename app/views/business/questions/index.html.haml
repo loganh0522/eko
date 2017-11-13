@@ -3,7 +3,7 @@
 #main-container-padding
   .side-container
     = render 'business/shared/post_job'
-  .main-container
+  .main-container#create-job-container
     .standard-header   
       %h2 Application Form
       = link_to "+ Add Question", new_business_job_question_path(@job.id), :data => {:remote => true}, class: 'btn border-button'

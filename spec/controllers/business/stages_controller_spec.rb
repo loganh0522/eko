@@ -1,6 +1,48 @@
 require 'spec_helper'
 
 describe Business::StagesController do 
+  describe "GET index" do 
+    let(:company) {Fabricate(:company)}
+    let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
+    let(:alice) {Fabricate(:user, company: company, role: "Admin")}
+    let(:job) {Fabricate(:job, company: company, user_ids: alice.id)}
+    let(:stage) {Fabricate(:stage, job_id: job.id)}
+    let(:stage2) {Fabricate(:stage, job_id: job.id)}
+    let(:stage3) {Fabricate(:stage)}
+    
+    it_behaves_like "requires sign in" do
+      let(:action) {get :index, job_id: job.id}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {get :index, job_id: job.id}
+    end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) {get :index, job_id: job.id}
+    end
+
+    it_behaves_like "trial is over" do 
+      let(:action) {get :index, job_id: job.id}
+    end
+
+    before do  
+      set_current_user(alice)
+      set_current_company(company)
+      job_board
+      get :index, job_id: job.id
+    end 
+
+    
+    it "sets the @job to the current instance of the job" do 
+      expect(assigns(:job)).to eq(job)
+    end
+
+    it "expects to return the correct number of stages" do 
+      expect(job.stages.count).to eq(6)
+    end
+  end 
+
   describe "GET new" do 
     let(:company) {Fabricate(:company)}
     let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
@@ -24,6 +66,10 @@ describe Business::StagesController do
     end
 
     it_behaves_like "company has been deactivated" do
+      let(:action) {xhr :get, :new, job_id: job.id}
+    end
+
+    it_behaves_like "trial is over" do 
       let(:action) {xhr :get, :new, job_id: job.id}
     end
 
@@ -53,6 +99,10 @@ describe Business::StagesController do
     end
 
     it_behaves_like "company has been deactivated" do
+      let(:action) {xhr :post, :create, job_id: job.id, stage: stage}
+    end
+
+    it_behaves_like "trial is over" do 
       let(:action) {xhr :post, :create, job_id: job.id, stage: stage}
     end
 
@@ -115,6 +165,10 @@ describe Business::StagesController do
       let(:action) {xhr :get, :edit, job_id: job.id, id: stage.id}
     end
 
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :get, :edit, job_id: job.id, id: stage.id}
+    end
+
     it "sets @job to the correct job posting" do 
       expect(assigns(:job)).to eq(job)
     end
@@ -150,6 +204,11 @@ describe Business::StagesController do
       let(:action) {xhr :put, :update, job_id: job.id, id: stage.id, stage: {job_id: job.id, name: "Screened"} }
     end
 
+
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :put, :update, job_id: job.id, id: stage.id, stage: {job_id: job.id, name: "Screened"} }
+    end
+
     it "save the updates made on the object" do 
       expect(Stage.last.name).to eq("Screened")
     end
@@ -175,6 +234,10 @@ describe Business::StagesController do
     end
 
     it_behaves_like "user does not belong to company" do 
+      let(:action) {xhr :delete, :destroy, job_id: job.id, id: stage.id}
+    end
+
+    it_behaves_like "trial is over" do 
       let(:action) {xhr :delete, :destroy, job_id: job.id, id: stage.id}
     end
 

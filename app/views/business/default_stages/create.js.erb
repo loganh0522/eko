@@ -5,5 +5,5 @@
   <% end %>
 <% else %>
   $('#basic-form-modal').modal("hide");
-  $('#stages').html('<%= j render "default_stages", stages: @stages  %>');
+  $('#default-stages').html('<%= j render "default_stages", stages: @stages  %>');
 <% end %>

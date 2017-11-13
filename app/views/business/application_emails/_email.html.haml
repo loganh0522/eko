@@ -2,6 +2,6 @@
   .subject
     = "Subject: #{@email.subject}"
   .body
-    = @email.body
+    = @email.body.html_safe
 
 

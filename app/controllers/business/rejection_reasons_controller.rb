@@ -41,10 +41,10 @@ class Business::RejectionReasonsController < ApplicationController
     @reason = RejectionReason.find(params[:id])
     
     respond_to do |format|
-      if @rejection_reason.update(rejection_params)
+      if @reason.update(rejection_params)
         @rejection_reasons = current_company.rejection_reasons
       else
-        render_errors(@rejection_reason)
+        render_errors(@reason)
       end
       format.js
     end

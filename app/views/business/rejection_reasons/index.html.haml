@@ -8,7 +8,7 @@
       .standard-body-header
         %h4 Application E-mail
         = link_to "Edit E-mail", edit_business_application_email_path(@email), :data => {:remote => true }, class: "btn border-button"
-      .templates-body
+      .templates-body#application_email
         = render "business/application_emails/email"
 
     .standard-body

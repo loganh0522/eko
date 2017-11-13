@@ -1,13 +1,18 @@
-- @invitations.each do |invitation|
-  .user{:id => "invitation_#{invitation.id}" }
-    .circle-img= invitation.recipient_email
-    %i.glyphicon.glyphicon-remove
-    .permissions
-      .show-hidden-search-box#action-box
-        = invitation.user_role
-        .caret
-      .hidden-search-box
-        .select-box
-          .select-item Admin
-          .select-item Hiring Manager
-          .select-item Recruiter
+- if @invitations.present? 
+  - @invitations.each do |invitation|
+    .user{:id => "invitation_#{invitation.id}" }
+      .circle-img= invitation.recipient_email
+      %i.glyphicon.glyphicon-remove
+      .permissions
+        .show-hidden-search-box#action-box
+          = invitation.user_role
+          .caret
+        .hidden-search-box
+          .select-box
+            .select-item Admin
+            .select-item Hiring Manager
+            .select-item Recruiter
+- else
+  .not-present-container
+    %p There are currently no pending invitations
+    .add-object= link_to "Invite User", new_business_invitation_path, remote: true, class: 'btn border-button'

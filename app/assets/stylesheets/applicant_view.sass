@@ -231,81 +231,81 @@
 .scorecards-container
   padding: 0 5px
   margin: 10px 0
-  .scorecard
+.scorecard
+  width: 100%
+  overflow: hidden
+  background: #ffffff
+  border-radius: 1px 
+  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+  table 
+    tbody
+      .title 
+        padding-top: 15px
+    tr
+      border-top: 1px solid rgba(0,0,0,0.1)
+  .header 
+    border-bottom: solid 1px rgba(0,0,0,0.1)
     width: 100%
     overflow: hidden
-    background: #ffffff
-    border-radius: 1px 
-    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-    table 
-      tbody
-        .title 
-          padding-top: 15px
-      tr
-        border-top: 1px solid rgba(0,0,0,0.1)
-    .header 
-      border-bottom: solid 1px rgba(0,0,0,0.1)
-      width: 100%
-      overflow: hidden
-      padding: 5px 15px 
-      h4
-        font-weight: 300
-        font-size: 20px
-        float: left
-        color: rgba(0,0,0,0.7)     
-      a
-        float: right
-        color: #EF7B2B
-        margin-top: 10px
-    .scorecard-details
-      width: 100%
-      .sections 
-        padding: 15px 15px 
-      .scorecard-results
-        float: right
-        .glyphicon
-          padding: 10px 10px
-          border-radius: 50%
-          border: 1px solid rgba(0,0,0,0.2)
-          color: rgba(0,0,0,0.2)
-          &:hover
-            cursor: pointer  
-        .glyphicon-remove
-          color: red
-          border-color: red
-        .glyphicon-thumbs-down
-          color: yellow
-          border-color: yellow
-        .glyphicon-thumbs-up
-          color: green
-          border-color: green
-        .glyphicon-star
-          color: gold
-          border-color: gold
-      .scorecard-inputs
-        float: right
-        .glyphicon
-          padding: 10px 10px
-          border-radius: 50%
-          border: 1px solid rgba(0,0,0,0.2)
-          color: rgba(0,0,0,0.2)
-          &:hover
-            cursor: pointer
-      .scorecard-inputs > input 
-        display: none
-      .scorecard-inputs input[type="radio"]:checked+label 
-        color: blue
-    .scorecard-footer
-      padding: 10px 10px 0 10px
-      border-top: 1px solid rgba(0,0,0,0.1)
-      background: rgba(0,0,0,0.05)
-      overflow: hidden
-      clear: both
-      .btn
-        float: right
-        margin-right: 10px
-      .submit-button
-        float: right
+    padding: 5px 15px 
+    h4
+      font-weight: 300
+      font-size: 20px
+      float: left
+      color: rgba(0,0,0,0.7)     
+    a
+      float: right
+      color: #EF7B2B
+      margin-top: 10px
+  .scorecard-details
+    width: 100%
+    .sections 
+      padding: 15px 15px 
+    .scorecard-results
+      float: right
+      .glyphicon
+        padding: 10px 10px
+        border-radius: 50%
+        border: 1px solid rgba(0,0,0,0.2)
+        color: rgba(0,0,0,0.2)
+        &:hover
+          cursor: pointer  
+      .glyphicon-remove
+        color: red
+        border-color: red
+      .glyphicon-thumbs-down
+        color: yellow
+        border-color: yellow
+      .glyphicon-thumbs-up
+        color: green
+        border-color: green
+      .glyphicon-star
+        color: gold
+        border-color: gold
+    .scorecard-inputs
+      float: right
+      .glyphicon
+        padding: 10px 10px
+        border-radius: 50%
+        border: 1px solid rgba(0,0,0,0.2)
+        color: rgba(0,0,0,0.2)
+        &:hover
+          cursor: pointer
+    .scorecard-inputs > input 
+      display: none
+    .scorecard-inputs input[type="radio"]:checked+label 
+      color: blue
+  .scorecard-footer
+    padding: 10px 10px 0 10px
+    border-top: 1px solid rgba(0,0,0,0.1)
+    background: rgba(0,0,0,0.05)
+    overflow: hidden
+    clear: both
+    .btn
+      float: right
+      margin-right: 10px
+    .submit-button
+      float: right
 
 .assessments-container 
   margin: 10px 0

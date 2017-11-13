@@ -3,20 +3,27 @@ jQuery ->
     $(this).next('input[type=hidden]').val('1')
     $(this).closest('fieldset').hide()
     event.preventDefault()
-
-  $('.job_scorecard').on 'click', '.remove_question', (event) ->
-    $(this).nextAll('input[type=hidden]').val('1')
-    $(this).closest('fieldset').hide()
-    $(this).parent().nextUntil('.questions').find('#destroy_fields').val('1')
-    $(this).parent().closest('.question-area').hide()
-    event.preventDefault()
-
   $('.main-container').on 'click', '.add_fields', (event) ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
     $(this).before($(this).data('fields').replace(regexp, time))
     event.preventDefault()
 
+#### Scorecard #### 
+
+  $('.main-container').on 'click', '.remove_question', (event) ->
+    console.log('clicked')
+    $(this).nextAll('input[type=hidden]').val('1')
+    $(this).closest('fieldset').hide()
+    $(this).parent().nextUntil('.questions').find('#destroy_fields').val('1')
+    $(this).parent().closest('.scorecard-area').hide()
+    event.preventDefault()
+
+  $(document).ready ->
+    if $('.scorecard-area').length >= 2 
+      $('.remove_question').show()
+
+#### ApplicationForm ####
   $('.main-container').on 'change', '.answer-type', (event) -> 
     val = $(this).find('.question-type').val()
     if val == "Checkbox" || val == "Multiple Choice"  
@@ -90,8 +97,7 @@ jQuery ->
       dateFormat: 'yy-mm-dd'
     $('#timepicker').timepicker()
 
-
-  $('#main-container').on 'click', '.remove_form', (event) ->
+  $('.main-container').on 'click', '#remove_form', (event) ->
     if $(this).closest('form').attr('class') == 'edit_comment'
       qid = $(this).closest('form').attr('id').slice(5)
       $("#" + "#{qid}").find('.activity-body-body').find('.comment-body').show()
@@ -104,6 +110,7 @@ jQuery ->
       qid = $(this).closest('form').attr('id').slice(5)
       $("#" + "#{qid}").show()
       $(this).closest('form').remove()
+      $('.container-footer').show()
     else if $(this).closest('form').attr('class') == 'edit_task'
       $(this).parent().parent().parent().parent().find('.task-details').show()
       $(this).closest('form').remove()    

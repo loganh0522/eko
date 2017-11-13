@@ -18,6 +18,10 @@ describe Business::DefaultStagesController do
       let(:action) {get :index}
     end
 
+    it_behaves_like "trial is over" do 
+      let(:action) {get :index}
+    end
+
     before do  
       set_current_user(alice)
       set_current_company(company)
@@ -25,11 +29,11 @@ describe Business::DefaultStagesController do
     end 
 
     context "user is an admin" do 
-      it "expects to return the correct number of job postings" do 
+      it "expects to return the correct number of stages" do 
         expect(company.default_stages.count).to eq(6)
       end
 
-      it "expects to return the correct number of job postings" do 
+      it "expects to return the correct stage first" do 
         expect(company.default_stages.first.name).to eq("Screen")
       end
     end
@@ -50,6 +54,10 @@ describe Business::DefaultStagesController do
     end
 
     it_behaves_like "company has been deactivated" do
+      let(:action) {xhr :get, :new}
+    end
+
+    it_behaves_like "trial is over" do 
       let(:action) {xhr :get, :new}
     end
 
@@ -86,6 +94,10 @@ describe Business::DefaultStagesController do
       let(:action) {xhr :post, :create}
     end
 
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :post, :create}
+    end
+
     context "with valid inputs" do
       before do  
         set_current_user(alice)
@@ -93,7 +105,7 @@ describe Business::DefaultStagesController do
         xhr :post, :create, default_stage: stage
       end
 
-      it "creates the email template" do
+      it "creates the default stage" do
         expect(DefaultStage.count).to eq(7)
       end
 
@@ -113,7 +125,7 @@ describe Business::DefaultStagesController do
         xhr :post, :create, default_stage: {name: nil}
       end
 
-      it "creates the email template" do
+      it "creates the default stages" do
         expect(DefaultStage.count).to eq(6)
       end
 
@@ -121,7 +133,7 @@ describe Business::DefaultStagesController do
         expect(response).to render_template :create
       end
 
-      it "associates the email template for current company" do 
+      it "associates the default stages for current company" do 
         expect(company.default_stages.count).to eq(6)
       end
     end
@@ -145,13 +157,17 @@ describe Business::DefaultStagesController do
       let(:action) {xhr :get, :edit, id: stage.id}
     end
 
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :get, :edit, id: stage.id}
+    end
+
     before do  
       set_current_user(alice)
       set_current_company(company)
       xhr :get, :edit, id: stage.id
     end
     
-    it "sets the @email_template to the correct template" do 
+    it "sets the @default_stage to the correct stage" do 
       expect(assigns(:stage)).to eq(stage)
     end
 
@@ -161,6 +177,22 @@ describe Business::DefaultStagesController do
   end
 
   describe "PUT update" do 
+    it_behaves_like "requires sign in" do
+      let(:action) {xhr :put, :update, id: 1, default_stage: {name: "Thomas Johnson"}}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {xhr :put, :update, id: 1, default_stage: {name: "Thomas Johnson"}}
+    end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) {xhr :put, :update, id: 1, default_stage: {name: "Thomas Johnson"}}
+    end
+
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :put, :update, id: 1, default_stage: {name: "Thomas Johnson"}}
+    end
+
     context "with valid inputs" do
       let(:company) {Fabricate(:company)}
       let(:alice) {Fabricate(:user, company: company, role: "Admin")}
@@ -222,6 +254,10 @@ describe Business::DefaultStagesController do
     end
 
     it_behaves_like "user does not belong to company" do 
+      let(:action) {xhr :delete, :destroy, id: stage.id}
+    end
+    
+    it_behaves_like "trial is over" do 
       let(:action) {xhr :delete, :destroy, id: stage.id}
     end
 

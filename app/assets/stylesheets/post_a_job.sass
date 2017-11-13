@@ -1,4 +1,6 @@
 #main-container-padding
+  #create-job-container
+    min-height: 300px
   .main-container
     float: left
     background: #ffffff
@@ -162,19 +164,41 @@
       .option
         margin-top: 5px
 
+
+.scorecard-container
+  .create-scorecard
+    width: 100%
+    overflow: hidden
+    background: #ffffff
+    border-radius: 1px 
+  .scorecard-details
+    width: 100%
+    .section:first-child
+      border: none
+    .section
+      border-top: 1px solid #D1DCE4
+      .section-header
+        padding: 0px 10px
+      .section-body
+        padding: 0px 20px 5px 20px
+        .criteria
+          margin: 0px 20px
 #scorecard-form
   width: 100%
   background: #ffffff
-  padding: 10px 15px
-  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+  padding: 10px 0
   margin-bottom: 10px
+  overflow: hidden
   .add_fields
     color: #EF7B2B 
+  #add-section
+    margin: 10px 10px
   .form-header
     font-size: 20px
+    padding: 0 25px
   .scorecard-area
-    border-bottom: 1px solid rgba(0,0,0,0.1)  
-    padding: 10px 5px
+    border-bottom: 1px solid #D1DCE4 
+    padding: 10px 25px
     .header
       overflow: hidden
       width: 100%
@@ -185,6 +209,7 @@
         float: right
         width: 19%
         margin-top: 17px
+        display: none
     .add_fields
       color: #EF7B2B 
       margin: 25px 0 10px 350px
@@ -206,18 +231,17 @@
         text-decoration: none 
   .footer
     margin-top: 15px
-    border-top: 1px solid rgba(0,0,0,0.1)
+    border-top: 1px solid #D1DCE4 
     overflow: hidden
     height: auto
     padding: 10px 10px
+    clear: both
     .submit-button
       float: right
       margin-left: 15px
-    .remove_form
+    .border-button
       float: right
-      background: rgba(0,0,0,0.01)
-      color: rgba(0,0,0,0.7)
-      border: 1px solid rgba(0,0,0,0.1)
+
 
 
 
@@ -311,11 +335,8 @@
     .submit-button
       float: right
       margin-left: 15px
-    .remove_form
+    .border-button
       float: right
-      background: rgba(0,0,0,0.01)
-      color: rgba(0,0,0,0.7)
-      border: 1px solid rgba(0,0,0,0.1)
   
 
 

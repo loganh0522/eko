@@ -1,1 +1,3 @@
 $('.user-list').html('<%= j render "business/invitations/pending" %>');
+$('.change-containers-nav').find('.activated').removeClass('activated');
+$('.change-containers-nav').find('#pending-users').addClass('activated');

@@ -1,7 +1,7 @@
 class Business::ApplicationEmailsController < ApplicationController
   layout "business"
-  filter_access_to :all
-  filter_access_to :filter_candidates, :require => :read
+  # filter_access_to :all
+  # filter_access_to :filter_candidates, :require => :read
 
   before_filter :require_user
   before_filter :belongs_to_company
@@ -20,7 +20,10 @@ class Business::ApplicationEmailsController < ApplicationController
     @email = ApplicationEmail.find(params[:id])
     
     respond_to do |format|
-      if @application_email.update(e_temp_params)
+      if @email.update(email_params)
+        format.js
+      else 
+        render_errors(@email)
         format.js
       end
     end
@@ -28,7 +31,14 @@ class Business::ApplicationEmailsController < ApplicationController
 
   private 
 
-  def application_email_params
+  def email_params
     params.require(:application_email).permit(:subject, :body, :company_id)
+  end
+
+  def render_errors(error)
+    @errors = []
+    error.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end  
   end
 end

@@ -8,15 +8,23 @@
       .contain-50
         = f.label :last_name, "Last Name"
         = f.text_field :last_name, id: "last_name_Block", class: "form-control", placeholder: "Last Name"
-    = f.text_field :last_name, placeholder: "Last Name"
-    = f.text_field :recipient_email, placeholder: "Email", id: "recipient_email_Block"
-    %span#recipient_emailBlocks
-    = f.select :user_role, options_for_select(["Admin", "Hiring Manager", "Recruiter"])
-    = f.text_area :message, label: "Message", class: 'form-control', rows: '6', placeholder: "Please join this really cool app", id: 'message_Block'
+        %span#last_name_msgBlock
+    .form-row-no-border
+      .contain-50
+        = f.label :email, "E-mail"
+        = f.text_field :recipient_email, placeholder: "Email", id: "recipient_email_Block"
+        %span#recipient_email_msgBlock
+      .contain-50
+        = f.label :user_role, "Role"
+        = f.select :user_role, options_for_select(["Admin", "Hiring Manager", "Recruiter"])
+    .form-row-no-border
+      = f.label :message, "Message"
+      = f.text_area :message, label: "Message", rows: '6', placeholder: "Please join this really cool app", id: 'message_Block'
+      %span#message_msgBlock
   .modal-footer
     = f.hidden_field :job_id, value: @job.id if @job.present?
     = f.hidden_field :user_id, value: current_user.id
-    = f.hidden_field :inviter_id, value: current_user.id
+    = f.hidden_field :user_id, value: current_user.id
     = f.hidden_field :company_id, value: current_company.id
     = f.submit "Send Invitation", class: "btn submit-button"
     .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel   

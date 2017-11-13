@@ -4,8 +4,7 @@
     %span#body_msgBlock
     .comment-area-footer
       = f.submit @comment.new_record? ? "+ Add Note" : "Update", class: "btn submit-button", id: "submit-comment-btn"
-      .btn.border-button2.remove_form Cancel
-
+      = link_to "Cancel", '#', class: "btn border-button", id: "remove_form"
       = f.hidden_field :user_id, value: current_user.id
       - if @job.present? 
         = f.hidden_field :job_id, value: @job.id

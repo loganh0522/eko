@@ -1,3 +1,0 @@
-Fabricator(:questionairre) do 
-
-end

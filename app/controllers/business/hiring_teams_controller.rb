@@ -20,7 +20,7 @@ class Business::HiringTeamsController < ApplicationController
   def new
     @hiring_team = HiringTeam.new 
     @job = Job.find(params[:job])
-    
+    @users = current_company.users
     respond_to do |format|
       format.js
     end

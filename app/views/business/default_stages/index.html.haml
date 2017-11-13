@@ -5,7 +5,7 @@
     .standard-header
       %h2 Default Hiring Pipeline
       = link_to "Create Stage", new_business_default_stage_path, class: "btn border-button", :data => {:remote => true } 
-    .stages#stages
+    .stages#default-stages
       = render "business/default_stages/default_stages", stages: @stages
 
 

@@ -1,7 +1,5 @@
-= form_for [:business, @job, @scorecard], remote: true do |f| 
-  #scorecard-form
-    .form-header 
-      Create Scorecard 
+#scorecard-form
+  = form_for [:business, @job, @scorecard], remote: true do |f| 
     - if !@job.scorecard.present?
       = f.fields_for :scorecard_sections, ScorecardSection.new do |a|
         .scorecard-area 
@@ -22,11 +20,11 @@
         
     = f.fields_for :scorecard_sections do |a|
       = render 'scorecard_section_fields', f: a
-    = link_to_add_fields "+ Add Section", f, :scorecard_sections 
+    #add-section= link_to_add_fields "+ Add Section", f, :scorecard_sections 
     
     .footer
       = f.hidden_field :job_id, value: @job.id
       = f.submit "Create Scorecard", class: "btn submit-button"
-      = link_to "Cancel", '#', class: "remove_form btn border-button2"
+      = link_to "Cancel", '#', class: "btn border-button", id: "remove_form" 
    
 

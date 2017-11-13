@@ -1,8 +1,11 @@
-.scorecard{:id => "scorecard_#{@scorecard.id}"}
-  - @scorecard.scorecard_sections.each do |section|
-    .scorecard-section
-      .title= section.body
-      .options
-        - section.section_options.each do |option|
-          .option= option.body
-  
+.create-scorecard{:id => "scorecard_#{@scorecard.id}"}
+  .scorecard-details
+    .sections
+      - @scorecard.scorecard_sections.each do |section|
+        .section
+          .section-header
+            %h4= section.body
+          .section-body
+            %h5 Criteria
+            - section.section_options.each do |criteria|
+              .criteria= criteria.body

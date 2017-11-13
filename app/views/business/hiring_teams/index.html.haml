@@ -3,11 +3,19 @@
 #main-container-padding
   .side-container
     = render 'business/shared/post_job'
-  .main-container 
+  .main-container#create-job-container
     .standard-header
       %h2 Hiring Team
-      = link_to "+ Invite New User", new_business_invitation_path(job: @job), class: 'btn border-button2', remote: true
-      = link_to "Add Team Member", new_business_hiring_team_path(job: @job), class: 'btn border-button2', remote: true
+      = link_to "+ Invite New User", new_business_invitation_path(job: @job), class: 'btn border-button', remote: true
+      = link_to "Add Team Member", new_business_hiring_team_path(job: @job), class: 'btn border-button', remote: true    
+      .hidden-search-box
+        = text_field_tag "", "", :class => 'ui-autocomplete-input users', :placeholder => 'Type a users name to assign', id: "autocomplete"
+        #search-results-users
+        / .users
+        /   - @users.each do |user|
+        /     .name= user.full_name
+
+
     .user-list
       = render "hiring_team"
 

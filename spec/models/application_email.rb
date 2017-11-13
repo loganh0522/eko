@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe WorkExperience do 
+describe ApplicationEmail do 
   it { should belong_to(:job) }
   it { should belong_to(:company) }
 

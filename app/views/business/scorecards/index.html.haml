@@ -3,18 +3,16 @@
 #main-container-padding
   .side-container
     = render 'business/shared/post_job'
-  .main-container
+  .main-container#create-job-container
     .standard-header   
       %h2 Candidate Scorecard    
-      - if @scorecard.present? 
-        = link_to "+ Edit Scorecard", edit_business_job_scorecard_path(@job, @scorecard), class: "btn border-button2", remote: true
-      - else 
-        = link_to "+ Create Scorecard", new_business_job_scorecard_path(@job), class: "btn border-button2", remote: true
-    .questions-container 
+    .scorecard-container
       - if @job.scorecard.present?  
         = render 'business/scorecards/scorecard'
       - else 
         .not-present-container
           %p There is currently no scorecard for this job. 
           .add-object= link_to "+ Create Scorecard", new_business_job_scorecard_path(@job), remote: true, class: 'btn border-button'
-        
+    - if @scorecard.present?
+      .container-footer
+        = link_to "+ Edit Scorecard", edit_business_job_scorecard_path(@job, @scorecard), class: "btn border-button", remote: true

@@ -8,9 +8,9 @@
     .change-containers-nav
       %ul 
         = link_to business_users_path, remote: true do 
-          %li.change All Users
+          %li#all-users.activated  All Users
         = link_to business_invitations_path, remote: true do 
-          %li.change.activated Pending Invitations
+          %li#pending-users Pending Invitations
     .search-form
       = form_tag business_users_path, :method => 'get', id: "search-form" do
         = text_field_tag "query", nil, placeholder: "Search Team Members", class: "search-field"

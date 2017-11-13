@@ -18,6 +18,10 @@ describe Business::RoomsController do
       let(:action) {xhr :get, :new}
     end
 
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :get, :new}
+    end
+
     before do  
       set_current_user(alice)
       set_current_company(company)
@@ -38,6 +42,22 @@ describe Business::RoomsController do
     let(:company) {Fabricate(:company)}
     let(:alice) {Fabricate(:user, company: company, role: "Admin")}
     let(:room) {Fabricate.attributes_for(:room, company: company)}
+
+    it_behaves_like "requires sign in" do
+      let(:action) {xhr :post, :create, room: room}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {xhr :post, :create, room: room}
+    end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) {xhr :post, :create, room: room}
+    end
+    
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :post, :create, room: room}
+    end
 
     context "with valid inputs" do
       before do  
@@ -98,6 +118,10 @@ describe Business::RoomsController do
       let(:action) {xhr :get, :edit, id: room.id}
     end
 
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :get, :edit, id: room.id}
+    end
+
     before do  
       set_current_user(alice)
       set_current_company(company)
@@ -114,11 +138,26 @@ describe Business::RoomsController do
   end
 
   describe "PUT update" do 
-    context "with valid inputs" do
-      let(:company) {Fabricate(:company)}
-      let(:alice) {Fabricate(:user, company: company, role: "Admin")}
-      let(:room) {Fabricate(:room, company: company)}
+    let(:company) {Fabricate(:company)}
+    let(:alice) {Fabricate(:user, company: company, role: "Admin")}
+    let(:room) {Fabricate(:room, company: company)}
+    it_behaves_like "requires sign in" do
+      let(:action) {xhr :put, :update, id: room.id, room: {name: "Thomas Johnson"}}
+    end
 
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {xhr :put, :update, id: room.id, room: {name: "Thomas Johnson"}}
+    end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) {xhr :put, :update, id: room.id, room: {name: "Thomas Johnson"}}
+    end
+
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :put, :update, id: room.id, room: {name: "Thomas Johnson"}}
+    end
+
+    context "with valid inputs" do
       before do 
         set_current_company(company)
         set_current_user(alice)
@@ -135,11 +174,7 @@ describe Business::RoomsController do
       end
     end
 
-    context "with invalid inputs" do
-      let(:company) {Fabricate(:company)}
-      let(:alice) {Fabricate(:user, company: company, role: "Admin")}
-      let(:room) {Fabricate(:room, company: company)}
-      
+    context "with invalid inputs" do  
       before do 
         set_current_company(company)
         set_current_user(alice)
@@ -181,6 +216,11 @@ describe Business::RoomsController do
     it_behaves_like "company has been deactivated" do
       let(:action) {xhr :delete, :destroy, id: room.id}
     end
+
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :delete, :destroy, id: room.id}
+    end
+    
 
     it "deletes the stage" do 
       expect(company.rooms.count).to eq(1)
