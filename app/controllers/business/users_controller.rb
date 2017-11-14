@@ -105,11 +105,20 @@ class Business::UsersController < ApplicationController
   end
 
   def autocomplete
-    @users = User.search(params[:term], where: {company_id: current_company.id}, 
+    if params[:query] == '' 
+      query = "*"
+    else
+      query = params[:query]
+    end
+
+    @users = User.search(params[:field], where: {company_id: current_company.id}, 
       fields: [{full_name: :word_start}])
-    
+
+    @job = Job.find(params[:job_id]) if params[:job_id].present?
+
     respond_to do |format|
       format.json { render json: @users.as_json(only: [:first_name, :id, :last_name, :full_name], methods: [:avatar_url])}
+      format.js {@users.to_a}
     end
   end
 

@@ -7,7 +7,7 @@
         .required-answer
           = f.check_box :required, checked_value: 1, unchecked_value: 0
           = f.label :required, "Required"       
-      = f.text_field :body, id: "body_Block", class: "form-control question", placeholder: "Add your Question", autocomplete: 'off'
+      = f.text_field :body, id: "body_Block", class: "question-field", placeholder: "Add your Question", autocomplete: 'off'
       %span#body_msgBlock
       = f.hidden_field :_destroy
       = f.hidden_field :job_id, value: @job.id

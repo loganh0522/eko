@@ -10,9 +10,6 @@
     .col-md-6
       = f.label :city, "Address"
       = f.text_field :address, class: "form-control", id: "geocomplete2", placeholder: "Enter the Address"
-
- 
-  
   - if current_company.kind == "recruiter"
     .form-row-no-border
       .form-group.col-md-12

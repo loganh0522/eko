@@ -27,7 +27,7 @@ class Business::JobsController < ApplicationController
     where[:kind] = params[:kind] if params[:kind].present?
 
     @jobs = Job.search(query, where: where, fields: [{title: :word_start}]).to_a
-    
+
     respond_to do |format|
       format.html
       format.js 

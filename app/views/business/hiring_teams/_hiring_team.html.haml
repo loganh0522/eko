@@ -1,4 +1,4 @@
-- @users.each do |member|
+- @team.each do |member|
   .user{:id => "user_#{member.id}" }
     - if member.user.user_avatar.present? 
       = image_tag member.user.user_avatar.image.small_image, :class => 'circle', :size => "50x50" 

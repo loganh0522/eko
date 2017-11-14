@@ -9,8 +9,8 @@ class Business::HiringTeamsController < ApplicationController
 
   def index
     @job = Job.find(params[:job_id])
-    @users = @job.hiring_teams 
-
+    @team = @job.hiring_teams 
+    @users = current_company.users
     respond_to do |format|
       format.html 
       format.js
@@ -20,17 +20,18 @@ class Business::HiringTeamsController < ApplicationController
   def new
     @hiring_team = HiringTeam.new 
     @job = Job.find(params[:job])
-    @users = current_company.users
+    
     respond_to do |format|
       format.js
     end
   end
 
   def create    
-    create_team 
+    @hiring_team = HiringTeam.create(user_id: params[:user_id], job_id: params[:job_id]) 
+    
     respond_to do |format| 
-      @job = Job.find(params[:hiring_team][:job_id])
-      @users = @job.hiring_teams
+      @job = Job.find(params[:job_id])
+      @team = @job.hiring_teams
       format.js 
     end  
   end 
@@ -48,6 +49,9 @@ class Business::HiringTeamsController < ApplicationController
     end
   end
 
+  def autocomplete
+
+  end
   private 
 
   def create_team 

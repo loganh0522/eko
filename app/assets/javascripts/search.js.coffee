@@ -3,7 +3,8 @@ jQuery ->
   debounceTimeout = null
   searchInput = $('.filter, input[name=\'owner\']')
   searchText = $('.search-field')
-  
+  searchAuto = $('.search-field-auto')
+
   searchEvents = -> 
     if (searchRequest)
       searchRequest.abort()
@@ -30,6 +31,17 @@ jQuery ->
       n.setAttribute('href', linkUrl + "?" + $("#search-form").serialize())
     $.get(action, $("#search-form").serialize(), null, "script")  
     history.pushState({}, "", "?" + $("#search-form").serialize())
+
+  searchFieldAuto = ->
+    if (searchRequest)
+      searchRequest.abort()
+    action = $("#search-form").attr('action')
+    $.get(action, $("#search-form").serialize(), null, "script") 
+
+  searchAuto.on 'change keyup', (event) ->
+    clearTimeout debounceTimeout
+    debounceTimeout = setTimeout(searchFieldAuto, 500)
+    return
 
   searchInput.on 'click', (event) ->
     clearTimeout debounceTimeout

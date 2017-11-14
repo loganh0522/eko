@@ -7,17 +7,19 @@
     .standard-header
       %h2 Hiring Team
       = link_to "+ Invite New User", new_business_invitation_path(job: @job), class: 'btn border-button', remote: true
-      = link_to "Add Team Member", new_business_hiring_team_path(job: @job), class: 'btn border-button', remote: true    
-      .hidden-search-box
-        = text_field_tag "", "", :class => 'ui-autocomplete-input users', :placeholder => 'Type a users name to assign', id: "autocomplete"
-        #search-results-users
-        / .users
-        /   - @users.each do |user|
-        /     .name= user.full_name
-
-
+      .add-team-member-search
+        .show-hidden-search-box  
+          = link_to "+ Team Member", "#", class: 'btn border-button'  
+        .hidden-search-box
+          = form_tag autocomplete_business_users_path, :method => 'get', id: "search-form" do
+            = text_field_tag "query", nil, placeholder: "Search Users", class: "search-field-auto", autocomplete: 'off'
+            = hidden_field_tag :job_id, @job.id
+          #search-results-users
+          .users
+            = render 'business/users/search_box_users'
     .user-list
       = render "hiring_team"
+      
 
 .modal#basic-form-modal
   .modal-dialog

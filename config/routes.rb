@@ -278,6 +278,7 @@ Rails.application.routes.draw do
       collection do 
         get :autocomplete
       end
+      
       resources :tasks, except: [:index, :show] do 
         collection do 
           post :completed, to: "tasks#completed"
@@ -308,7 +309,11 @@ Rails.application.routes.draw do
  
       get "/activities", to: 'activities#job_activity'
 
-      resources :hiring_teams
+      resources :hiring_teams do
+        collection do 
+          get :autocomplete
+        end
+      end
       resources :job_feeds 
       
       resources :applications do
