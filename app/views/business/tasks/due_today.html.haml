@@ -1,7 +1,7 @@
-#all-candidates
-  %h1 Tasks
+.page-header
+  %h2 Tasks
   .actions
-    = link_to "Create Task", new_business_task_path,  data: {:turbolinks => "false"}, remote: true, class: "btn border-button2"
+    = link_to "Create Task", new_business_task_path,  data: {:turbolinks => "false"}, remote: true, class: "btn border-button"
   / .change-containers-nav
   /   %ul  
   /     = link_to business_tasks_path, remote: true do 
@@ -10,7 +10,7 @@
   /       %li.change#closed-tasks My Tasks
 
 #main-container
-  #job-applicants
+  #padding
     .side-container
       = form_tag due_today_business_tasks_path, :method => 'get', id: "search-form" do
         = render 'filters'

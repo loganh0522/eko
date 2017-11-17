@@ -105,7 +105,7 @@ Rails.application.routes.draw do
     resources :media_photos
     resources :logos
     resources :background_images
-    
+    resources :analytics
     post "update_password", to: 'users#update_password'
     post 'create_subscription', to: 'users#create_subscription'
 
@@ -392,6 +392,20 @@ Rails.application.routes.draw do
       get 'jobs', to: "jobs#company_jobs"
     end
   end
+
+
+  get 'adzuna-job-feed', to: "job_feeds#adzuna_job_feed"
+  get 'eluta-job-feed', to: "job_feeds#eluta_job_feed"
+  get 'ziprecruiter-job-feed', to: "job_feeds#ziprecruiter_job_feed"
+  get 'trovit-job-feed', to: "job_feeds#trovit_job_feed"
+ 
+
+  get 'juju-job-feed', to: "job_feeds#juju_job_feed"
+
   
+
+  get '-job-feed', to: "job_feeds#jooble_job_feed"
+  get 'jooble-job-feed', to: "job_feeds#jooble_job_feed"
+  get 'jooble-job-feed', to: "job_feeds#jooble_job_feed"
   mount StripeEvent::Engine, at: '/stripe_events'
 end

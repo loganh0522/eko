@@ -5,7 +5,7 @@
       = form_tag business_job_tasks_path(@job), :method => 'get', id: "search-form" do
         = render 'business/tasks/job_filters'
     .main-container#task-container
-      = link_to "Create Task", new_business_job_task_path(@job),  data: {:turbolinks => "false"}, remote: true, class: "btn border-button2"
+      = link_to "Create Task", new_business_job_task_path(@job),  data: {:turbolinks => "false"}, remote: true, class: "btn border-button"
       = render 'business/tasks/tasks'
 
 .modal#basic-form-modal

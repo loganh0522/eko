@@ -74,8 +74,8 @@
     .modal-footer
       = f.submit  "+ Send Invite", class: "btn submit-button", id: "submit-comment-btn"
       - if @candidate.present? 
-        .btn.border-button2.remove_form Cancel
+        .btn.border-button.remove_form Cancel
       - else
-        .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+        .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
 
 

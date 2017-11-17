@@ -80,6 +80,9 @@ gem 'jquery-timepicker-rails'
 gem 'declarative_authorization'
 gem 'searchkick'
 
+gem 'chartkick'
+gem 'groupdate'
+
 
 group :development do
   gem "better_errors", "~> 2.2.0"

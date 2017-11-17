@@ -24,6 +24,8 @@
 //= require googledocviewer
 //= require trix
 //= require autocomplete-rails
+//= require Chart.bundle
+//= require chartkick
 //= require bootstrap-colorpicker
 //= require jquery.timepicker.js
 //= require_tree .

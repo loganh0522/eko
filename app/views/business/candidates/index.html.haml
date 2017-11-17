@@ -1,20 +1,15 @@
-#all-candidates
-  %h1= "All Candidates"
+.page-header
+  %h2 All Candidates
   .actions
-    / .search-field
-    /   = form_tag business_applications_path, method: :get do   
-    /     .form-group
-    /       = search_field_tag :query, params[:query], placeholder: "Advanced Text Search", class: "form-control"
     = render "business/candidates/app_new_modal"
-    = link_to 'Add Candidate', new_business_candidate_path, class: "btn border-button2", id: "move-applicants", remote: true
-
 #main-container
-  #job-applicants
-    = render 'business/candidates/candidate_table/actions'
+  #padding
     .side-container
       = render "business/candidates/candidate_table/candidate_filters"        
     .main-container
-      = render 'business/candidates/candidate_table/all_candidates_table'
+      = render 'business/candidates/candidate_table/actions'
+      .all-candidates-table
+        = render 'business/candidates/candidate_table/all_candidates_table'
 
   .modal#applicant-modal
     .modal-dialog
@@ -39,6 +34,8 @@
         .modal-body
 = render "business/comments/add_comment"
 = render "business/candidates/destroy"
+
+
 - if @candidate.present? 
   :javascript
     $('.names a:first').trigger("click");

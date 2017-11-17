@@ -9,10 +9,17 @@ class Business::CandidatesController < ApplicationController
   
   def index
     where = {}
-    fields = [:full_name, :work_titles, :work_description, :work_company, :education_description, :education_school]
-    query = params[:query].nil? || "*"
+    qcv_fields = [:work_titles, :work_description, :work_company, :education_description, :education_school]
+    fields = [:first_name, :last_name, :full_name, :email]
+    
+    if params[:query].present?
+      query = params[:query] 
+    else
+      query = "*"
+    end
+
     where[:company_id] = current_company.id 
-    where[:rating]
+    where[:rating] = params[:rating] if params[:rating].present?
     where[:job_title] = {all: params[:job_title]} if params[:job_title].present?
     where[:jobs] = {all: params[:jobs]} if params[:jobs].present?
     where[:job_status] = params[:status] if params[:status].present?
@@ -20,11 +27,10 @@ class Business::CandidatesController < ApplicationController
     where[:tags] = {all: params[:tags]} if params[:tags].present?
     where[:created_at] = {gte: params[:date_applied].to_time, lte: Time.now} if params[:date_applied].present?
 
-
     if params[:qcv].present?
-      @candidates = Candidate.search(params[:qcv], where: where, fields: fields, match: :word_start).to_a
+      @candidates = Candidate.search(params[:qcv], where: where, fields: qcv_fields, match: :word_start).to_a
     else
-      @candidates = Candidate.search("*", where: where).to_a
+      @candidates = Candidate.search(query, where: where, fields: fields, match: :word_start).to_a
     end
 
     @invitation = InterviewInvitation.new
@@ -40,6 +46,7 @@ class Business::CandidatesController < ApplicationController
     if params[:job].present?
       @job = Job.find(params[:job])
     end
+    
     @candidate = Candidate.new
     respond_to do |format|
       format.js

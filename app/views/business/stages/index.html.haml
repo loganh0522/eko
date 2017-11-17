@@ -1,9 +1,9 @@
 .page-header
   %h2 Create a Job
-#main-container-padding
-  .side-container
+#main-container#padding
+  .side-container#job-nav
     = render 'business/shared/post_job' 
-  .main-container
+  .main-container#main-border
     .standard-header
       %h2 Recruitment Process
       = link_to 'Add Stage', new_business_job_stage_path(@job), class: "btn border-button", remote: true

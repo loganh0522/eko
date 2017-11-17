@@ -33,8 +33,6 @@ body
   -moz-osx-font-smoothing: grayscale
   -webkit-font-smoothing: antialiased
   background-color: #f7f8f9 
-  
-
   font-family: Open Sans, sans-serif, Helvetica, Arial, sans-serif
   font-weight: 500
 
@@ -51,7 +49,7 @@ body
     font-size: 26px
   h3
     font-weight: 300
-    font-size: 26px
+    font-size: 24px
   p 
     color: rgba(0, 0, 0, .85)
     font-family:  Open Sans, sans-serif, Helvetica, Arial, sans-serif
@@ -68,8 +66,43 @@ header
 #main-container
   overflow: hidden
   width: 100%
-#main-container-padding
+  margin-top: 20px
+  .actions
+    float: right
+    margin-bottom: 20px
+#padding
   margin: 0px 3% 100px 3%
+
+#create-job-container
+  min-height: 300px
+
+#job-nav
+  ul 
+    padding: 0 0 
+    li
+      list-style: none
+      font-size: 16px 
+      font-weight: 300
+      padding: 15px 15px 
+      height: auto
+      color: black
+    a
+      text-decoration: none
+      color: rgba(0,0,0,0.7)
+    li.active
+      background: rgba(239, 122, 43, 0.3)
+      box-shadow: -1.7px 1px 4px 0px rgba(239, 122, 43, 0.1)
+      border-radius: 5px 5px
+      width: 90%
+      z-index: 10
+
+#main-border
+  background: #ffffff
+  border-radius: 0px
+  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+  z-index: 0
+  height: fit-content
+
 .side-container-right 
   float: right
   width: 24%   
@@ -81,8 +114,12 @@ header
 .side-container 
   float: left  
   width: 24%   
-  margin: 0 0 200px 2%
+  margin: 0 0 200px 0
 .main-container
+  float: right
+  width: 74%
+  margin-bottom: 100px
+.main-container-no-border
   float: right
   width: 74%
   margin-bottom: 100px
@@ -140,16 +177,20 @@ header
   .border-button
     float: right
 
- 
 .page-header
-  margin-top: 60px
-  width: 93%
-  margin: 60px 3% 20px 3%
-  padding: 25px 0 20px 0
+  height: 70px
+  margin: 60px 0 0 0
+  width: 100%
+  background: #ffffff
+  border-bottom: 1px solid #ddd
+  padding: 22px 3% 0 3%
+  overflow: hidden
   h2
-    margin: 0 0 
-    padding: 0 0
-  border-bottom: 1px solid rgba(0,0,0,0.3)
+    float: left
+    margin: 0 0
+    padding: 0 0 
+
+
 trix-editor
   .fluid-token
     background-color: #f0f0f0
@@ -265,7 +306,7 @@ label
   font-size: 14px 
   text-align: center
   padding: 9px 15px 
-  background: #ffffff
+  background: none
   border: 1px solid rgba(239, 122, 43, 0.9)
   color: rgba(239, 122, 43, 0.9)
   &:hover

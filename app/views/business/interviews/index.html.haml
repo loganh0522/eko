@@ -1,13 +1,15 @@
-#all-candidates
-  %h1 Schedule
-  .actions
-    = link_to "Send Invitation", new_business_interview_invitation_path,  data: {:turbolinks => "false"}, remote: true, class: "btn border-button2"
+.page-header
+  %h2 Calendar
+  
 #main-container
-  #calendar-container
+  #padding
     .side-container
       = render 'business/interviews/filters'
     .main-container
-      = render 'business/interviews/interviews'
+      .actions
+        = link_to "Send Invitation", new_business_interview_invitation_path,  data: {:turbolinks => "false"}, remote: true, class: "btn border-button"
+      #calendar-container
+        = render 'business/interviews/interviews'
 
 .modal#basic-form-modal
   .modal-dialog

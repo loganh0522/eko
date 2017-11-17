@@ -22,143 +22,122 @@
         border-radius: 2px
     .border-button2
       float: left   
-#job-applicants
-  margin: 0 2% 200px 2%
-  overflow: hidden
-  .side-container
-    float: left
-    width: 23%
-    height: auto
-    padding: 5px 10px 0 0
-    margin: 20px 1%
-    #filter-header
-      border-bottom: 1px solid rgba(0,0,0,0.2)
-      padding-bottom: 5px
-  .main-container
+
+#task-container
+  background: none
+  box-shadow: none
+  .btn.border-button2
     float: right
-    padding: 0 0 
-    border-radius: 1px
-    background: #ffffff
-    min-height: 375px
-    width: 73%
-    margin: 20px 2px 50px 0
-    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    margin-bottom: 10px  
+.job-stages
+  overflow: hidden
+  width: 99.5%
+  background: #ffffff
+  border-top: 1px solid rgba(0,0,0,0.1)
+  margin: 0 .25%
+  border-radius: 5px 
+  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+  .left_scroll
+    float: left
+    width: 4%
+    height: 100px
+    img
+      margin-top: 35px
+      margin-left: auto
+      margin-right: auto
+      display: block
+    &:hover 
+      background-color: rgba(0, 0, 0, .1)
+      cursor: pointer           
+  .right_scroll
+    float: left
+    width: 4%
+    height: 100px
+    border-left: 1px solid rgba(0, 0, 0, .1)
+    img
+      margin-top: 35px
+      margin-left: auto
+      margin-right: auto
+      display: block
+    &:hover 
+      background-color: rgba(0, 0, 0, .1)
+      cursor: pointer
+  .job-stage-area 
+    width: 92%
+    overflow: hidden 
+    margin: 0 0
+  .job-gallery
+    position: relative
 
-  #task-container
-    background: none
-    box-shadow: none
-    .btn.border-button2
-      float: right
-      margin-bottom: 10px  
-  .job-stages
-    overflow: hidden
-    width: 99.5%
-    background: #ffffff
-    border-top: 1px solid rgba(0,0,0,0.1)
-    margin: 0 .25%
-    border-radius: 5px 
-    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-    .left_scroll
+  ul.job-stage-area
+    list-style: none
+    text-decoration: none
+    float: left
+    padding: 0 0           
+    height: 100px 
+    font-weight: 300
+    li:last-child
+      border-right: 1px solid rgba(0,0,0,0.1)
+    li 
+      display: inline
       float: left
-      width: 4%
-      height: 100px
-      img
-        margin-top: 35px
-        margin-left: auto
-        margin-right: auto
-        display: block
-      &:hover 
-        background-color: rgba(0, 0, 0, .1)
-        cursor: pointer           
-    .right_scroll
-      float: left
-      width: 4%
-      height: 100px
-      border-left: 1px solid rgba(0, 0, 0, .1)
-      img
-        margin-top: 35px
-        margin-left: auto
-        margin-right: auto
-        display: block
-      &:hover 
-        background-color: rgba(0, 0, 0, .1)
-        cursor: pointer
-    .job-stage-area 
-      width: 92%
-      overflow: hidden 
-      margin: 0 0
-
-    .job-gallery
-      position: relative
-
-    ul.job-stage-area
-      list-style: none
-      text-decoration: none
-      float: left
-      padding: 0 0           
       height: 100px 
-      font-weight: 300
-      li:last-child
-        border-right: 1px solid rgba(0,0,0,0.1)
-      li 
-        display: inline
-        float: left
-        height: 100px 
-        width: 130px
-        text-align: center
-        border-left: 1px solid rgba(0,0,0,0.1)
-        background-color: white
-        &:hover 
-          background-color: rgba(0, 0, 0, .03)
-          cursor: pointer   
-        .number 
-          margin-top: 17px
-          font-size: 27px 
-        .name
-          font-size: 12px
-      li.activated
-        background: rgba(208, 208, 208, 0.4)
-        .number 
-          color: black
-        .name
-          color: black
-  .application-actions
-    margin-top: 15px
-    overflow: hidden
-    .border-button
-      float: right
-      min-width: 100px
-      height: 35px
-      margin-right: 10px
-      background: rgba(0,0,0,0.05)
-      color: rgba(0,0,0,0.7)
-      padding: 8px 15px 10px 15px
-      border: none
-      border-radius: 2px
-      font-weight: 300
-    .applicant-action-buttons
-      display: none
-    .active-application-button
-      float: right
-      min-width: 100px
-      height: 35px
-      margin-right: 10px
-      background: #EF7B2B
-      color: #ffffff
-      padding: 8px 15px 10px 15px
-      border: none
-      border-radius: 2px
-      font-weight: 300
-    #add-applicant
-      width: auto
-      float: right
-      height: 35px
-      padding: 8px 15px 10px 15px
-
-  
-
+      width: 130px
+      text-align: center
+      border-left: 1px solid rgba(0,0,0,0.1)
+      background-color: white
+      &:hover 
+        background-color: rgba(0, 0, 0, .03)
+        cursor: pointer   
+      .number 
+        margin-top: 17px
+        font-size: 27px 
+      .name
+        font-size: 12px
+    li.activated
+      background: rgba(208, 208, 208, 0.4)
+      .number 
+        color: black
+      .name
+        color: black
+.application-actions
+  overflow: hidden
+  .border-button
+    float: right
+    min-width: 100px
+    height: 35px
+    margin-right: 10px
+    background: rgba(0,0,0,0.05)
+    color: rgba(0,0,0,0.7)
+    padding: 8px 15px 10px 15px
+    border: none
+    border-radius: 2px
+    font-weight: 300
+  .applicant-action-buttons
+    display: none
+  .active-application-button
+    float: right
+    min-width: 100px
+    height: 35px
+    margin-right: 10px
+    background: #EF7B2B
+    color: #ffffff
+    padding: 8px 15px 10px 15px
+    border: none
+    border-radius: 2px
+    font-weight: 300
+  #add-applicant
+    width: auto
+    float: right
+    height: 35px
+    padding: 8px 15px 10px 15px
 
 .applicants 
+  border-radius: 1px
+  background: #ffffff
+  min-height: 375px
+  margin: 20px 2% 50px 2%
+  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
   .not-present-container
     display: none
   .header 

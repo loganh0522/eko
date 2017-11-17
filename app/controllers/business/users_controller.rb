@@ -111,7 +111,7 @@ class Business::UsersController < ApplicationController
       query = params[:query]
     end
 
-    @users = User.search(params[:field], where: {company_id: current_company.id}, 
+    @users = User.search(query, where: {company_id: current_company.id}, 
       fields: [{full_name: :word_start}])
 
     @job = Job.find(params[:job_id]) if params[:job_id].present?

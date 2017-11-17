@@ -20,16 +20,12 @@ xml.publisherurl "https://www.talentwiz.ca"
         xml.description { xml.cdata!(job.description) }
         xml.salary { xml.cdata!(job.salary) }
         
-
-        
-        
-        xml.category { xml.cdata! (job.industry)}
-        xml.jobtype { xml.cdata! (job.kind)}
+        xml.category {xml.cdata! (job.industry)}
+        xml.jobtype {xml.cdata! (job.kind)}
         xml.education {xml.cdata! (job.education_level)}
         xml.sponsored {xml.cdata! (job.job_feed.indeed_sponsored)} 
         xml.sponsored {xml.cdata! (job.job_feed.indeed_sponsored)} 
         xml.budget {xml.cdata! (job.job_feed.indeed_budget)} 
-        
       end
     end
   end

@@ -7,9 +7,9 @@
             #select_all= check_box_tag 'Select All', class: 'select_all_applicants'
           %th(width="10%")
           %th(width="25%") Name 
-          %th(width="20%") Applied To
+          %th(width="30%") Applied To
           %th(width="20%") Stage 
-          %th(width="25%") Rating
+          %th(width="15%") Rating
         %tbody
           .all_applicants_data
             - @candidates.each do |candidate|
