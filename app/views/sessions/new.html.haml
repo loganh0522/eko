@@ -3,7 +3,7 @@
     %img.logo(src="/tmp/logo.jpg")
     %h2 Login to TalentWiz
   .body
-    = bootstrap_form_tag url: '/login' do |f|
+    = form_tag url: '/login' do |f|
       %fieldset
         = f.email_field :email, placeholder: "E-mail", hide_label: true
         = f.password_field :password, placeholder: "Password", hide_label: true

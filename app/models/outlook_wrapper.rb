@@ -150,7 +150,6 @@ module OutlookWrapper
                                  cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                  &callback)
 
-      binding.pry
       # graph.service.delete('subscriptions/8e61ed0c-201f-48eb-8393-f45229416a0e')
       # @message = graph.me.mail_folders.find('inbox').messages.first.body.content
       # graph.me.messages.find(id)

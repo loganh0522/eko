@@ -8,7 +8,7 @@
   .sign-in 
     %h3 Already Have an Account? 
     %p Please sign-in so you can apply to jobs, track the status of your applications and get Hired! 
-    = bootstrap_form_tag url: '/login' do |f|
+    = form_tag url: '/login' do |f|
       %fieldset
         = f.email_field :email, placeholder: "E-mail", hide_label: true
         = f.password_field :password, placeholder: "Password", hide_label: true

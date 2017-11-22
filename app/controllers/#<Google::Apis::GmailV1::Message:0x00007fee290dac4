@@ -1,0 +1,137 @@
+#<Google::Apis::GmailV1::Message:0x00007fee290dac40
+ @history_id="319849",
+ @id="15fe1b4a163e4be7",
+ @internal_date="1511320231000",
+ @label_ids=["IMPORTANT", "CATEGORY_PERSONAL", "INBOX"],
+ @payload=
+  #<Google::Apis::GmailV1::MessagePart:0x00007fee290b97e8
+   @body=#<Google::Apis::GmailV1::MessagePartBody:0x00007fee290b3190 @size=0>,
+   @filename="",
+   @headers=
+    [#<Google::Apis::GmailV1::MessagePartHeader:0x00007fee290a92a8
+      @name="Delivered-To",
+      @value="houston@talentwiz.ca">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee290a1378
+      @name="Received",
+      @value="by 10.200.36.51 with SMTP id c48csp6003521qtc;        Tue, 21 Nov 2017 19:10:32 -0800 (PST)">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee29098318
+      @name="X-Received",
+      @value=
+       "by 10.157.4.65 with SMTP id 59mr11685524otc.364.1511320232080;        Tue, 21 Nov 2017 19:10:32 -0800 (PST)">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee29091680
+      @name="ARC-Seal",
+      @value=
+       "i=1; a=rsa-sha256; t=1511320232; cv=none;        d=google.com; s=arc-20160816;        b=xmo/0aoX0xudBIG427WkZ6LauMSY+dggGwmcwmgq9zlywwA760Ca4crNW0obV21s5T         O3Sf4mMoxtOfPb9hhu/GSJ3SxslahPKrLD42SiHAp6YCQ0f6m91Lu9eQTHYOcJlhA+zH         UQeEn6zWsahZQPIrGcN9Z9cP1N0I1tijY8EwGTN5JyVh8xZaqqpO1QHZ1+BVpoCc2FTZ         RYCjooncssBeHQsWObxpXxdeAPLfmqWH1sJjgczbkmAdkqphqC117y/5BRTEzZhrCPKt         8xO/lXgeqQyN6nstvM7oMoMqvUms3B15fdU/aiNeb7/faL/ZSX8khwzbevagHfnDEMFB         xnkA==">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee29089ca0
+      @name="ARC-Message-Signature",
+      @value=
+       "i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;        h=to:subject:message-id:date:from:references:in-reply-to:mime-version         :dkim-signature:arc-authentication-results;        bh=TyTbfBl3gnXxCt2KNGetbsu7J2zk2J96aRI5T1Mpahw=;        b=An3SomdEIrncSPHjzslHXflyk1xjYF7f20ZkxIo9ze1rh7WtmGcx+6FLJp8xD6e1xh         X7SqRff2kfHMcXc+h359cQjnf4RvVuICERhTpgU++Mwg+/cidKSCpAwFgYesWI45DOEK         dKEihtO19+RFl/VeSqyb09/su8vGlbT1XrsMKX4ooAb2ot7O4YtAlcb64hNGjXbO160f         9ogGH9K5S8hg4tckMmz6ooyNNWMntJvq6/Tafb6V9ljAiZRbZikbkAOXEbU9Gvw1RByN         i2MuC4Ep/LYOzym9RLab5h0vEA+kuZJBx07axYH6ac1Ftruix07ncBxrjTDzoiiJp9np         U2pw==">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee29081c30
+      @name="ARC-Authentication-Results",
+      @value=
+       "i=1; mx.google.com;       dkim=pass header.i=@gmail.com header.s=20161025 header.b=ucYRkFmz;       spf=pass (google.com: domain of loganh0522@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=loganh0522@gmail.com;       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=gmail.com">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee29078a18
+      @name="Return-Path",
+      @value="<loganh0522@gmail.com>">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee29071038
+      @name="Received",
+      @value=
+       "from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])        by mx.google.com with SMTPS id g42sor2459276ote.294.2017.11.21.19.10.31        for <houston@talentwiz.ca>        (Google Transport Security);        Tue, 21 Nov 2017 19:10:32 -0800 (PST)">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee29069608
+      @name="Received-SPF",
+      @value=
+       "pass (google.com: domain of loganh0522@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee29061340
+      @name="Authentication-Results",
+      @value=
+       "mx.google.com;       dkim=pass header.i=@gmail.com header.s=20161025 header.b=ucYRkFmz;       spf=pass (google.com: domain of loganh0522@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=loganh0522@gmail.com;       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=gmail.com">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee29052368
+      @name="DKIM-Signature",
+      @value=
+       "v=1; a=rsa-sha256; c=relaxed/relaxed;        d=gmail.com; s=20161025;        h=mime-version:in-reply-to:references:from:date:message-id:subject:to;        bh=TyTbfBl3gnXxCt2KNGetbsu7J2zk2J96aRI5T1Mpahw=;        b=ucYRkFmzMF5h0gG9Ra7HsPwsyKksA9j3o8RyhKCXvkDD8uW8hN927EYISQ+SYcmYWh         gaVV3LaPvadePjzRuY8FyVsjQ75N6OFbUWpKtvsWwonfr5ZUE6RgEzPRoidCa2OEnzsY         MuTNlQ8kv0F6ZYBTtBQ5dttyOEJa5cYjlvcGqXznKJ2VIFVhj9F15Md+0lVZ2Q5Lvkjo         xcBHRiIQK9bO4KdNBWP0LNYZvLxeToeXTifojihyWMlE+ez890IU+BOqULyEO1ys5gdR         0IPupZg3HfTs8GozzMYrZ88KClvI5GcaL73lS/znJCanHbmrYYsg34ttMisTKHIJX5Ud         K0KQ==">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee2904a348
+      @name="X-Google-DKIM-Signature",
+      @value=
+       "v=1; a=rsa-sha256; c=relaxed/relaxed;        d=1e100.net; s=20161025;        h=x-gm-message-state:mime-version:in-reply-to:references:from:date         :message-id:subject:to;        bh=TyTbfBl3gnXxCt2KNGetbsu7J2zk2J96aRI5T1Mpahw=;        b=Bqc8QBrwXqMjQeHs8MklFT/liSqa9AqLfiie85vYryCs3bnBypJvNwDlfRq+rpjDMS         gWV732VXEN/8xTCPWWeukFNnGJVKTyzqgmkqDHfAh/Dnq3GI+A+VPiCdcrTAEwP6NvWb         15vTHCu+t4KNzz82IjOQYKre1fTib7RJI5S9feGKfiIF7JT5MUoScLTVbdi1hsRYKxkp         BEpMLhjoEdYfSRuqwaJBR7VldtNZbp1g3T1vgYEQSmnXtK6Zg9siLwo3psRDQNac7zMz         OgewvgEbAFukTbRjfwkRyQip+TYRhySRbydv3Mo4z5ochk0rwXqYCc+5sSIr2PyEaGqN         9MKw==">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee290413d8
+      @name="X-Gm-Message-State",
+      @value=
+       "AJaThX5vBDctKy0PyVlWe/UsslND5DtsuDPctUWiEUw62J/eAG1UEq71 WgcESsI+2CaQ15sx+Ffls3C3yc0Ss4gbyBMnLrU=">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee29039ea8
+      @name="X-Google-Smtp-Source",
+      @value="AGs4zMbecwc+NmvFmSZIQDEr9xWnGeqjcVNoq80NlBUpf29aOE5rDYl6EgB8hW5WPxNfwWmFLvTixM/VsKC9efJnX+E=">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee29031668
+      @name="X-Received",
+      @value=
+       "by 10.157.32.98 with SMTP id n89mr13263341ota.1.1511320231484; Tue, 21 Nov 2017 19:10:31 -0800 (PST)">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee29029b70 @name="MIME-Version", @value="1.0">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee29022f00
+      @name="Received",
+      @value="by 10.74.154.17 with HTTP; Tue, 21 Nov 2017 19:10:31 -0800 (PST)">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee2901be80
+      @name="In-Reply-To",
+      @value="<CAEmxvwNT7HY1cqAx0-sNYNMQ5hReefd80jsM=qi9M=7THNnpJQ@mail.gmail.com>">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee29012858
+      @name="References",
+      @value="<CAEmxvwNT7HY1cqAx0-sNYNMQ5hReefd80jsM=qi9M=7THNnpJQ@mail.gmail.com>">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee290094b0
+      @name="From",
+      @value="Logan Houston <loganh0522@gmail.com>">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee287edb50
+      @name="Date",
+      @value="Tue, 21 Nov 2017 22:10:31 -0500">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee29002750
+      @name="Message-ID",
+      @value="<CA+FjCer_xPxJWVjPb+69Q3wYXMGhj4p2fpU5i+3neB+4pBkouA@mail.gmail.com>">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee26372c80 @name="Subject", @value="Re: Testing">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee287eac48
+      @name="To",
+      @value="Logan Houston <houston@talentwiz.ca>">,
+     #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee287e0ce8
+      @name="Content-Type",
+      @value="multipart/alternative; boundary=\"001a113cf3b48a22da055e89a962\"">],
+   @mime_type="multipart/alternative",
+   @part_id="",
+   @parts=
+    [#<Google::Apis::GmailV1::MessagePart:0x00007fee287d0ed8
+      @body=
+       #<Google::Apis::GmailV1::MessagePartBody:0x00007fee287ca718
+        @data=
+         "tesing 213\r\n" +
+         "\r\n" +
+         "On Tue, Nov 21, 2017 at 10:04 PM, <houston@talentwiz.ca> wrote:\r\n" +
+         "\r\n" +
+         "> Testing 123\r\n" +
+         ">\r\n",
+        @size=99>,
+      @filename="",
+      @headers=
+       [#<Google::Apis::GmailV1::MessagePartHeader:0x00007fee287c0bc8
+         @name="Content-Type",
+         @value="text/plain; charset=\"UTF-8\"">],
+      @mime_type="text/plain",
+      @part_id="0">,
+     #<Google::Apis::GmailV1::MessagePart:0x00007fee287b0980
+      @body=
+       #<Google::Apis::GmailV1::MessagePartBody:0x00007fee287a9c98
+        @data=
+         "<div dir=\"ltr\">tesing 213</div><div class=\"gmail_extra\"><br><div class=\"gmail_quote\">On Tue, Nov 21, 2017 at 10:04 PM,  <span dir=\"ltr\">&lt;<a href=\"mailto:houston@talentwiz.ca\" target=\"_blank\">houston@talentwiz.ca</a>&gt;</span> wrote:<br><blockquote class=\"gmail_quote\" style=\"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex\"><div>Testing 123</div>\r\n" +
+         "</blockquote></div><br></div>\r\n",
+        @size=397>,
+      @filename="",
+      @headers=
+       [#<Google::Apis::GmailV1::MessagePartHeader:0x00007fee28799c58
+         @name="Content-Type",
+         @value="text/html; charset=\"UTF-8\"">,
+        #<Google::Apis::GmailV1::MessagePartHeader:0x00007fee28791120
+         @name="Content-Transfer-Encoding",
+         @value="quoted-printable">],
+      @mime_type="text/html",
+      @part_id="1">]>,
+ @size_estimate=5577,
+ @snippet="tesing 213 On Tue, Nov 21, 2017 at 10:04 PM, &lt;houston@talentwiz.ca&gt; wrote: Testing 123",
+ @thread_id="15fe1af7bb76e0b2">
+
+
+@message.payload.parts.last
+@message.payload.parts.first
