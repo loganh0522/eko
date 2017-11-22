@@ -1,0 +1,8 @@
+<% if @member.new_record? %>
+  alert("Failed to upload painting: <%= j @painting.errors.full_messages.join(', ').html_safe %>");
+<% else %> 
+  $('.images-container').append("<%= j render 'business/team_members/member', member: @member %>")
+  photoIds = [$("#media_photo").val()]
+  photoIds.push('<%= @member.id %>')
+  $("#media_photo").val(photoIds)
+<% end %>

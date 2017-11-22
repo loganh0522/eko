@@ -1,9 +1,7 @@
-#all-candidates
-  %h1 Schedule
-  .actions
-    = link_to "Create Interview", new_business_interview_invitation_path,  data: {:turbolinks => "false"}, remote: true, class: "btn border-button"
+.page-header
+  %h2 Calendar
 #main-container
-  #calendar-container
+  #padding
     .side-container
       = form_tag business_interview_invitations_path, :method => 'get', id: "search-form" do
         = render 'filters'

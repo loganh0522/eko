@@ -19,12 +19,21 @@ class Business::TasksController < ApplicationController
       query = params[:query] 
     else 
       query = "*"
-    end   
+    end 
+
+    if params[:status].present? && params[:status] == 'today'
+      where[:due_date] = {gte: Time.now - 1.day, lte: Time.now + 1.day}
+    elsif params[:status].present? && params[:status] == 'overdue'
+      where[:due_date] = {lte: Time.now - 1.day}
+    elsif params[:status].present?
+      where[:status] = params[:status]
+    else
+      where[:status] = 'active' 
+    end  
 
     where[:job_id] = params[:job_id]
     where[:client_id] = params[:client_id] if params[:client_id].present?
     where[:company_id] = current_company.id
-    where[:status] = 'active'
     where[:users] = {all: [current_user.id]} if params[:owner] == "user"
     where[:users] = {all: [params[:assigned_to]]} if params[:assigned_to].present?
     where[:kind] = params[:kind] if params[:kind].present?
@@ -34,65 +43,6 @@ class Business::TasksController < ApplicationController
       format.js
       format.html
     end 
-  end
-
-  def job_complete
-    @job = Job.find(params[:job_id]) 
-    where = {}
-    
-    if params[:query].present? 
-      query = params[:query] 
-    else 
-      query = "*"
-    end
-
-    where[:company_id] = current_company.id
-    where[:status] = 'complete'
-    where[:job_id] = @job.id 
-    where[:users] = {all: [current_user.id]} if params[:owner] == "user"
-    where[:users] = {all: [params[:assigned_to]]} if params[:assigned_to].present?
-    where[:kind] = params[:kind] if params[:kind].present?
-
-    @tasks = Task.search(query, where: where).to_a
-  end
-
-  def job_due_today
-    @job = Job.find(params[:job_id]) 
-    where = {}
-    if params[:query].present? 
-      query = params[:query] 
-    else 
-      query = "*"
-    end   
-    where[:company_id] = current_company.id
-    where[:status] = 'active'
-    where[:job_id] = @job.id 
-    where[:due_date] = {gte: Time.now - 1.day, }
-    where[:kind] = params[:kind] if params[:kind].present?
-    where[:users] = {all: [current_user.id]} if params[:owner] == "user"
-    where[:users] = {all: [params[:assigned_to]]} if params[:assigned_to].present?
-    @tasks = Task.search(query, where: where).to_a
-  end
-
-  def job_overdue
-    @job = Job.find(params[:job_id]) 
-    where = {}
-    if params[:query].present? 
-      query = params[:query] 
-    else 
-      query = "*"
-    end 
-
-    where[:company_id] = current_company.id
-    where[:status] = 'active'
-    where[:job_id] = @job.id 
-    where[:due_date] = {lte: Time.now}
-    where[:users] = {all: [current_user.id]} if params[:owner] == "user"
-    where[:users] = {all: [params[:assigned_to]]} if params[:assigned_to].present?
-    where[:taskable_type] = params[:type] if params[:type].present?
-    where[:kind] = params[:kind] if params[:kind].present?
-
-    @tasks = Task.search(query, where: where).to_a
   end
 
   def index
@@ -103,7 +53,11 @@ class Business::TasksController < ApplicationController
       query = "*"
     end 
 
-    if params[:status].present?
+    if params[:status].present? && params[:status] == 'today'
+      where[:due_date] = {gte: Time.now - 1.day, lte: Time.now + 1.day}
+    elsif params[:status].present? && params[:status] == 'overdue'
+      where[:due_date] = {lte: Time.now - 1.day}
+    elsif params[:status].present?
       where[:status] = params[:status]
     else
       where[:status] = 'active' 
@@ -112,172 +66,26 @@ class Business::TasksController < ApplicationController
     where[:company_id] = current_company.id
     where[:users] = {all: [current_user.id]} if params[:owner] == "user"
     where[:users] = {all: [params[:assigned_to]]} if params[:assigned_to].present?
-    where[:job_id] = params[:job_id] if params[:job_id].present?
+    where[:job_id] = params[:job] if params[:job].present?
     where[:taskable_id] = params[:candidate_id] if params[:candidate_id].present? 
     where[:taskable_type] = params[:type] if params[:type].present?
     where[:client_id] = params[:client_id] if params[:client_id].present?
     where[:kind] = params[:kind] if params[:kind].present?
 
-
-    @job = Job.find(params[:job_id]) if params[:job_id].present?  
+    @job = Job.find(params[:job]) if params[:job].present?  
     @candidate = Candidate.find(params[:candidate_id]) if params[:candidate_id].present?
-
-
     @tasks = Task.search(query, where: where, order: {created_at: :desc}).to_a
 
-
     respond_to do |format|
       format.js
       format.html
     end 
-  end
-
-  def complete
-    # @tasks = @taskable.complete_tasks
-
-    where = {}
-    if params[:query].present? 
-      query = params[:query] 
-    else 
-      query = "*"
-    end 
-
-    where[:company_id] = current_company.id
-    where[:status] = 'complete'
-    where[:taskable_id] = params[:candidate_id] if params[:candidate_id].present?
-    where[:taskable_type] = params[:type] if params[:type].present?
-    where[:kind] = params[:kind] if params[:kind].present?
-    where[:users] = {all: [current_user.id]} if params[:owner] == "user"
-    where[:users] = {all: [params[:assigned_to]]} if params[:assigned_to].present?
-
-    @tasks = Task.search("*", where: where)
-  end
-
-  def overdue
-    where = {}
-    if params[:query].present? 
-      query = params[:query] 
-    else 
-      query = "*"
-    end 
-    where[:company_id] = current_company.id
-    where[:status] = 'active'
-    where[:due_date] = {lte: Time.now - 1.day}
-    where[:users] = {all: [current_user.id]} if params[:owner] == "user"
-    where[:taskable_type] = params[:type] if params[:type].present?
-    where[:client_id] = params[:client_id] if params[:client_id].present?
-    where[:kind] = params[:kind] if params[:kind].present?
-    
-    @tasks = Task.search(query, where: where).to_a
-  end
-
-  def tasks_due_today
-    where = {}
-
-    if params[:query].present? 
-      query = params[:query] 
-    else 
-      query = "*"
-    end 
-
-    where[:company_id] = current_company.id
-    where[:status] = 'active'
-    where[:due_date] = {gte: Time.now - 1.day, lte: Time.now + 1.day}
-    where[:users] = {all: params[:owner]} if params[:owner].present?
-    where[:taskable_type] = params[:type] if params[:type].present?
-    where[:client_id] = params[:client_id] if params[:client_id].present?
-    where[:kind] = params[:kind] if params[:kind].present?
-    @tasks = Task.search(query, where: where).to_a
-  end
-
-
-  def client_tasks
-    @client = Client.find(params[:client_id]) 
-
-    where = {}
-    if params[:query].present? 
-      query = params[:query] 
-    else 
-      query = "*"
-    end   
-
-    where[:taskable_type] = "Client" 
-    where[:taskable_id] = params[:client_id]
-    where[:company_id] = current_company.id
-    where[:status] = 'active'
-    where[:kind] = params[:kind] if params[:kind].present?
-    @tasks = Task.search(query, where: where).to_a
-
-    respond_to do |format|
-      format.js
-      format.html
-    end 
-  end
-
-  def client_complete
-    @client = Client.find(params[:client_id]) 
-    
-    where = {}
-    if params[:query].present? 
-      query = params[:query] 
-    else 
-      query = "*"
-    end   
-    
-    where[:company_id] = current_company.id
-    where[:status] = 'complete'
-    where[:taskable_type] = "Client" 
-    where[:taskable_id] = params[:client_id]
-    where[:kind] = params[:kind] if params[:kind].present?
-    where[:users] = params[:owner] if params[:owner].present?
-
-    @tasks = Task.search(query, where: where).to_a
-  end
-
-  def client_due_today
-    @client = Client.find(params[:client_id]) 
-    where = {}
-    if params[:query].present? 
-      query = params[:query] 
-    else 
-      query = "*"
-    end   
-    where[:company_id] = current_company.id
-    where[:status] = 'active'
-    where[:taskable_type] = "Client" 
-    where[:taskable_id] = params[:client_id]
-    where[:kind] = params[:kind] if params[:kind].present?
-    where[:users] = params[:owner] if params[:owner].present?
-
-    @tasks = Task.search(query, where: where).to_a
-  end
-
-  def client_overdue
-    @client = Client.find(params[:client_id]) 
-    where = {}
-    if params[:query].present? 
-      query = params[:query] 
-    else 
-      query = "*"
-    end 
-    where[:company_id] = current_company.id
-    where[:status] = 'active'
-    where[:taskable_type] = "Client" 
-    where[:taskable_id] = params[:client_id]
-    where[:due_date] = {lte: Time.now}
-    where[:users] = {all: [current_user.id]} if params[:owner] == "user"
-    where[:taskable_type] = params[:type] if params[:type].present?
-    where[:kind] = params[:kind] if params[:kind].present?
-    @tasks = Task.search(query, where: where).to_a
   end
 
   def new 
     @task = Task.new
+    @job = Job.find(params[:job]) if params[:job].present?
 
-    if @taskable.class == Application 
-      @job = @taskable.job
-      @taskable = @taskable.candidate
-    end
 
     respond_to do |format|
       format.js
@@ -329,10 +137,6 @@ class Business::TasksController < ApplicationController
     end
   end
 
-  def show 
-
-  end
-
   def new_multiple
     @task = Task.new
     @job = Job.find(params[:job]) if params[:job].present?
@@ -356,6 +160,29 @@ class Business::TasksController < ApplicationController
     respond_to do |format| 
       format.js
     end
+  end
+
+  def client_tasks
+    @client = Client.find(params[:client_id]) 
+
+    where = {}
+    if params[:query].present? 
+      query = params[:query] 
+    else 
+      query = "*"
+    end   
+
+    where[:taskable_type] = "Client" 
+    where[:taskable_id] = params[:client_id]
+    where[:company_id] = current_company.id
+    where[:status] = 'active'
+    where[:kind] = params[:kind] if params[:kind].present?
+    @tasks = Task.search(query, where: where).to_a
+
+    respond_to do |format|
+      format.js
+      format.html
+    end 
   end
 
   private 

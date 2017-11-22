@@ -15,7 +15,9 @@ class InboundEmailsController < ApplicationController
   end
 
   def gmail_webhook
+    head :no_content
 
+    # GoogleWrapper::Gmail.create_message(params[:message][:data])
   end
 
   def outlook_webhook

@@ -21,14 +21,10 @@ class Business::CommentsController < ApplicationController
   end
 
   def index
-    if params[:application_id].present?
-      @candidate = Application.find(params[:application_id]).candidate.id
-    else
-      @candidate = Candidate.find(params[:candidate_id]).id
-    end
+    @candidate = Candidate.find(params[:candidate_id]).id 
     
     where = {}
-    where[:job_id] = params[:job_id] if params[:job_id].present?
+    where[:job_id] = params[:job] if params[:job].present?
     where[:commentable_id] = @candidate
 
     @comments = Comment.search("*", where: where, order: {created_at: :desc} )
@@ -40,11 +36,7 @@ class Business::CommentsController < ApplicationController
 
   def new 
     @comment = Comment.new
-
-    if @commentable.class == Application 
-      @job = @commentable.job
-      @commentable = @commentable.candidate
-    end
+    @job = Job.find(params[:job]) if params[:job].present?
 
     respond_to do |format|
       format.js

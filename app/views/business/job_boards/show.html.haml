@@ -16,8 +16,6 @@
               %li.change.activated Advanced 
             = link_to business_job_board_path(kind: 'basic'), :method => :put, remote: true do 
               %li.change Basic
-        
-
       - if @job_board.kind == "basic"
         .career-portal-details
           = render 'business/job_boards/form'

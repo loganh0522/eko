@@ -18,13 +18,13 @@
           Sub-Header
         .body  
           = f.text_field :subheader, label: "Subheader", class: "form-control"
-    .job-board-form 
-      .images-container#variable-carousel
-        - @section.media_photos.each do |img| 
-          = image_tag img.file_name.xs_image 
-      = render "business/media_photos/multi_form"
+  .job-board-form 
+    .images-container#variable-carousel
+      - @section.media_photos.each do |img| 
+        = image_tag img.file_name.xs_image 
+    = render "business/media_photos/multi_form"
 
 .modal-footer
   %fieldset
     = submit_tag "Save Section", class: "btn submit-button", id: "submit-section"
-    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

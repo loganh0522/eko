@@ -1,0 +1,32 @@
+.modal-body  
+  = form_for [:business, @job_board, @section], :html => {id: "job-board-section" }, :remote => true do |f|    
+    = f.hidden_field :kind, value: 'Team'
+    = f.hidden_field :job_board_id, value: @job_board.id
+    .float-container
+      .header 
+        Header
+      .body
+        = f.text_field :header, class: "subdomain-field"
+    .float-container
+      .header 
+        Sub-Header
+      .body  
+        = f.text_field :subheader, label: "Subheader"
+
+      - if @section.new_record? 
+        .images-container 
+      - else 
+        .images-container 
+          = f.fields_for :team_members, @section.team_members do |f|
+            = render 'business/team_members/members', f: f    
+
+  = render "business/team_members/form"
+
+.modal-footer
+  %fieldset
+    - if @section.new_record? 
+      = submit_tag "Save Section", class: "btn submit-button", id: "submit-section"
+    - else
+      = submit_tag "Update", class: "btn submit-button", id: "submit-section"
+
+    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

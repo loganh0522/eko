@@ -1,20 +1,21 @@
-%tr{:id => "#{application_stage(application)}" }
+%tr{:id => "#{application_stage(candidate, @job)}" }
   %td
-    .applicant-checkbox{:data => {:id => application.candidate.id}}
-      = check_box_tag "applicant_ids[]", application.candidate.id
+    .applicant-checkbox{:data => {:id => candidate.id}}
+      = check_box_tag "applicant_ids[]", candidate.id
   %td
     .circle-img
       %img(src="/tmp/little-man.png")  
   %td.names
-    .name{:data => {:id =>  "#{application.candidate.full_name} "}}
-      = link_to "#{application.candidate.full_name}", business_job_application_path(application.job, application.id), remote: true
-    - if application.candidate.current_jobs.present?
-      .current-position= "#{application.candidate.current_jobs.first.title} - #{application.candidate.current_jobs.first.company_name}"
+    .name{:data => {:id =>  "#{candidate.full_name} "}}
+      = link_to "#{candidate.full_name}", business_job_application_path(@job, current_application(candidate, @job)), remote: true
+    
+    - if candidate.current_jobs.present?
+      .current-position= "#{candidate.current_jobs.first.title} - #{candidate.current_jobs.first.company_name}"
     - else
       .current-position No Experience Listed
   %td
-    .stage= application_stage(application)
+    .stage= application_stage(candidate, @job)
   %td
-    = render 'business/ratings/form', application: application
+    = render 'business/ratings/form', application: current_application(candidate, @job)
   %td
-    .stage= "#{time_ago_in_words(application.created_at)} ago"    
+    .stage= "#{time_ago_in_words(candidate.created_at)} ago"    

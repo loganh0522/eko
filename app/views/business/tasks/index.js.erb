@@ -1,6 +1,5 @@
 <% if @taskable.class == Company %>
   $('#task-container').html('<%= j render "business/tasks/tasks" %>');
-  
 <% elsif @taskable.class == Candidate %>
   <% if params[:status] == 'complete' %>
     $(".display-applicant-details").html('<%= j render "business/tasks/candidate_tasks", tasks: @tasks %>');

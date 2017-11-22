@@ -1,7 +1,6 @@
 jQuery ->
 
   $('#embedURL').gdocsViewer({width :'400',height : '500'})
-  $(document).find('.colorpicker').colorpicker()
   
   $('#main-container').on 'click', '.applicant-checkbox', (event) ->
     if $('.applicants').find('.applicant-checkbox :checked').size() > 0 
@@ -43,7 +42,7 @@ jQuery ->
     $('#timepicker').timepicker()
     $('#timepicker2').timepicker()
     $("#geocomplete2").geocomplete()
-    $('.colorpicker').colorpicker()
+
 
 ############ Move Applicant Stages ###############
 
@@ -247,8 +246,17 @@ jQuery ->
       $('#work_experience_end_month').show()
       $('#work_experience_end_year').show()
 
-############## Color Picker #################
-
+############## Show Tag Button #################
+  $('#main-container').on 'click', '#add-tag-button', (event) ->
+    tagName = $('#tag_name').val()
+    values =  $('#tags').val() + ',' + tagName 
+    
+    if $('#tags').val() == ''
+      $('#tags').val tagName
+    else
+      $('#tags').val values   
+    $('#tags_to_add').append('<div class="user-tag"> <div class="name">' + tagName  + '</div> <div class="delete-tag"> &times </div> </div>') 
+    $('#tag_name').val('')
 
 
 ################# JQuery File Upload ######################

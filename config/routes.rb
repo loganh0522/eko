@@ -52,7 +52,7 @@ Rails.application.routes.draw do
   match '/widgets/:action/:widget_key', via: [:get], :controller => 'widgets', :widget_key => /.*/
   
   post :incoming_email, to: "inbound_emails#create"
-  post '/#/publish/gmail-notifications', to: "inbound_emails#gmail_webhook"
+  post '/#/publish/google-pub-sub-messages', to: "inbound_emails#gmail_webhook"
   
   post '/api/watch/outlookNotification', to: "inbound_emails#outlook_webhook"
   
@@ -90,11 +90,6 @@ Rails.application.routes.draw do
       resources :references
     end  
   end
-
-  get "/auth/:provider/callback", to: 'business/users#edit'
-
-  get "/authorize", to: 'business/users#outlook_get_token'
-  get "/authorize_room", to: 'business/rooms#outlook_token'
   
   namespace :business do 
     root to: "jobs#index" 
@@ -103,6 +98,7 @@ Rails.application.routes.draw do
     resources :hiring_teams
     resources :rooms
     resources :media_photos
+    resources :team_members
     resources :logos
     resources :background_images
     resources :analytics
@@ -245,9 +241,6 @@ Rails.application.routes.draw do
     
     resources :applications do 
       resources :ratings
-      resources :comments
-      resources :tasks
-      resources :messages
       resources :resumes
       
       collection do 
@@ -275,6 +268,16 @@ Rails.application.routes.draw do
     end
     
     resources :jobs do 
+      resources :job_feeds 
+      get 'tasks', to: "tasks#job_tasks"
+      get 'comments', to: "comments#job_comments"
+      get "/activities", to: 'activities#job_activity'
+      get :promote, to: "jobs#promote"
+      get :close, to: "jobs#close_job"
+      get :archive, to: "jobs#archive_job"
+      get :publish, to: "jobs#publish_job"
+      get 'interviews', to: 'interviews#job_interviews'
+      get 'interview_invitations', to: 'interview_invitations#job_invitations'
       collection do 
         get :autocomplete
       end
@@ -288,70 +291,39 @@ Rails.application.routes.draw do
           post :create_multiple, to: "tasks#create_multiple"
         end
       end
-
-      get 'tasks', to: "tasks#job_tasks"
-
-      get :close, to: "jobs#close_job"
-      get :archive, to: "jobs#archive_job"
-      get :publish, to: "jobs#publish_job"
       
-
-      get :promote, to: "jobs#promote"
-      resources :questions
+      resources :comments, except: [:index]
       resources :interviews, except: [:index]
       resources :interview_invitations, except: [:index] 
+      resources :candidates
 
-      get 'interviews', to: 'interviews#job_interviews'
-      get 'interview_invitations', to: 'interview_invitations#job_invitations'
-
-      resources :comments, except: [:index]
-      get 'comments', to: "comments#job_comments"
- 
-      get "/activities", to: 'activities#job_activity'
-
-      resources :hiring_teams do
-        collection do 
-          get :autocomplete
-        end
-      end
-      resources :job_feeds 
-      
       resources :applications do
         get :application_form, to: "applications#application_form"
         get :application_activity, to: "activities#application_activity"
-        resources :activities
-        resources :messages
-        resources :comments
         resources :application_scorecards
         resources :assessments     
-        resources :tasks
-        resources :scorecards do 
-          collection do 
-            post :my_scorecard
-          end
-        end 
 
         get :move_stages        
         post :reject, to: "applications#reject"
       end
-      
-      resources :questionairres do 
-        resources :questions
-      end
 
-      resources :scorecards do
-        resources :scorecard_sections
-      end
-      
+      resources :hiring_teams 
+      resources :questions
+      resources :scorecards
       resources :stages do 
         collection do
           post :sort, to: "stages#sort"
         end 
       end
-    end   
+    end 
+
     get 'invite_user', to: 'invitations#new'
     get '/signout', to: 'sessions#destroy'
   end
+
+  get "/auth/:provider/callback", to: 'business/users#show'
+  get "/authorize", to: 'business/users#outlook_get_token'
+  get "/authorize_room", to: 'business/rooms#outlook_token'
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

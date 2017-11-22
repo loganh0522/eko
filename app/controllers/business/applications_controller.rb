@@ -8,9 +8,32 @@ class Business::ApplicationsController < ApplicationController
   before_filter :company_deactivated?
   
   def index
+    where = {}
+    qcv_fields = [:work_titles, :work_description, :work_company, :education_description, :education_school]
+    fields = [:first_name, :last_name, :full_name, :email]
+    
+    if params[:query].present?
+      query = params[:query] 
+    else
+      query = "*"
+    end
+
+    where[:company_id] = current_company.id 
+    where[:rating] = params[:rating] if params[:rating].present?
+    where[:jobs] = {all: [params[:job_id]]}
+    where[:tags] = {all: params[:tags]} if params[:tags].present?
+    where[:created_at] = {gte: params[:date_applied].to_time, lte: Time.now} if params[:date_applied].present?
+
+    if params[:qcv].present?
+      @applications = Candidate.search(params[:qcv], where: where, fields: qcv_fields, match: :word_start, per_page: 10, page: params[:page])
+    else
+      @applications = Candidate.search(query, where: where, fields: fields, match: :word_start, per_page: 10, page: params[:page])
+    end
+
+
     @job = Job.find(params[:job_id])
-    @applications = @job.applications
-    tags_present(@applications) 
+    # @applications = @job.applications.page(params[:page]).per_page(10)
+    tags_present(@job.applications) 
     
     respond_to do |format| 
       format.js
@@ -124,6 +147,7 @@ class Business::ApplicationsController < ApplicationController
   end
 
   private
+
 
   def tags_present(applications)
     @tags = []

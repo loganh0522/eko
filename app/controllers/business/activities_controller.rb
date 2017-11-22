@@ -13,17 +13,11 @@ class Business::ActivitiesController < ApplicationController
   end
   
   def index    
-    if params[:application_id].present?
-      @candidate = Application.find(params[:application_id]).candidate
-    elsif params[:candidate_id].present?
-      @candidate = Candidate.find(params[:candidate_id])
-    else
-      nil
-    end
+    @candidate = Candidate.find(params[:candidate_id]) if params[:candidate_id].present?
 
     where = {}
     where[:trackable_type] = {all: params[:kind]} if params[:kind].present?
-    where[:job_id] = params[:job_id] if params[:job_id].present?
+    where[:job_id] = params[:job] if params[:job].present?
     where[:candidate_id] = @candidate.id if @candidate.present?
     where[:company_id] = current_company.id
 

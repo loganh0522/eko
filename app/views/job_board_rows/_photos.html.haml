@@ -1,0 +1,14 @@
+.header-message
+  .header= section.header
+  .sub-header= section.subheader 
+.images-container.owl-carousel.owl-theme.owl-loaded
+  - section.media_photos.each do |img|
+    = image_tag img.file_name.medium_image 
+  .owl-controls
+    .owl-dots
+      .owl-dot.active
+        %span
+      .owl-dot
+        %span
+      .owl-dot
+        %span

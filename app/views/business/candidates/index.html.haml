@@ -2,38 +2,39 @@
   %h2 All Candidates
   .actions
     = render "business/candidates/app_new_modal"
+    = render 'business/candidates/candidate_table/actions'
 #main-container
   #padding
     .side-container
       = render "business/candidates/candidate_table/candidate_filters"        
     .main-container
-      = render 'business/candidates/candidate_table/actions'
       .all-candidates-table
         = render 'business/candidates/candidate_table/all_candidates_table'
-
-  .modal#applicant-modal
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        .modal-body
-
-  .modal#basic-form-modal
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-          %h4.modal-title
-  
-  .modal#add-to-jobModal
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-          %h4.modal-title Add to Job 
-        .modal-body
+        
 = render "business/comments/add_comment"
 = render "business/candidates/destroy"
+
+.modal#applicant-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+      .modal-body
+
+.modal#basic-form-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title
+
+.modal#add-to-jobModal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title Add to Job 
+      .modal-body
 
 
 - if @candidate.present? 

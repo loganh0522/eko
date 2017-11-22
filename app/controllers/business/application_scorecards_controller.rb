@@ -7,18 +7,18 @@ class Business::ApplicationScorecardsController < ApplicationController
   before_filter :company_deactivated?
 
   def index 
-    if params[:candidate_id].present?
+    if !params[:job].present?
       @candidate = Candidate.find(params[:candidate_id])
       @application = @candidate.applications.first
       @job = @application.job
-
       @scorecard = Scorecard.where(job_id: @job.id).first
       @sections = @scorecard.scorecard_sections
       @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
       @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first 
     else
-      @job = Job.find(params[:job_id])
-      @application = Application.find(params[:application_id])
+      @candidate = Candidate.find(params[:candidate_id])
+      @job = Job.find(params[:job])
+      @application = Application.where(job: @job, candidate: @candidate).first
       @scorecard = @job.scorecard
       @sections = @scorecard.scorecard_sections if @scorecard.present?
       @application_scorecards = ApplicationScorecard.where(application_id: @application.id)

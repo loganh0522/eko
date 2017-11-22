@@ -2,36 +2,30 @@
   = link_to business_job_application_path(@job, @application), remote: true do
     %li.change#profile.activated Profile
   
-  = link_to business_job_application_messages_path(@job, @application), remote: true do
+  = link_to business_candidate_messages_path(@candidate, job: @job), remote: true do
     %li.change#messages Messages 
 
-  / = link_to business_job_application_tasks_path(@job, @application, type: "Candidate"), remote: true do
-  /   %li.change#tasks Tasks
-
-  = link_to business_candidate_tasks_path(@candidate), remote: true do
+  = link_to business_candidate_tasks_path(@candidate, job: @job), remote: true do
     %li.change#tasks Tasks
     
-    
-  = link_to business_job_application_comments_path(@job, @application), remote: true do
+  = link_to business_candidate_comments_path(@candidate, job: @job), remote: true do
     %li.change#notes Notes
-
-  = link_to business_job_application_application_form_path(@job, @candidate), remote: true do
+  = link_to business_candidate_application_form_path(@candidate, job: @job), remote: true do
     %li.change#assessments Assessments
   
-  = link_to business_job_application_application_scorecards_path(@job, @application), remote: true do
+  = link_to business_candidate_application_scorecards_path(@candidate, job: @job), remote: true do
     %li.change#scorecards Scorecards
   
-  = link_to business_job_application_activities_path(@job, @application), remote: true do
+  = link_to business_candidate_activities_path(@candidate, job: @job), remote: true do
     %li.change#activity Activity
 
 .bottom-row
-  = link_to new_business_application_comment_path(@application), id: "add-note", remote: true do
+  = link_to new_business_candidate_comment_path(@candidate, job: @job), id: "add-note", remote: true do
     + Note
   = link_to new_business_candidate_message_path(@candidate), id: "add-message",  remote: true do 
     .glyphicon.glyphicon-envelope E-mail
-  = link_to new_business_application_task_path(@application), id: "add-task", remote: true do 
+  = link_to new_business_candidate_task_path(@candidate, job: @job), id: "add-task", remote: true do 
     + Task  
-
   = link_to new_business_candidate_interview_invitation_path(@candidate, application: @application.id), id: "add-invitation", remote: true do 
     .glyphicon.glyphicon-calendar Interview
 

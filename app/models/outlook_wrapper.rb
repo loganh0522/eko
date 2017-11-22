@@ -33,7 +33,6 @@ module OutlookWrapper
       outlook_token.update_attributes(room_id: @room.id)
     end
 
-
     def self.create_subscription(user)
       if user.outlook_token.expired?
         user.outlook_token.refresh!(user)

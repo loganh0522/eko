@@ -7,7 +7,20 @@
 
 = text_field_tag "query", nil, placeholder: "Search Tasks", class: "search-field", autocomplete: "off"
 
-= render 'job_links'
+#filter-links
+  %ul  
+    %li
+      = radio_button_tag "status", "open", false, class: 'filter', checked: true
+      = label_tag "status_open", "Open Tasks", :value => "my-tasks", class: 'filter'
+    %li
+      = radio_button_tag "status", "today", false, class: 'filter'
+      = label_tag "status_today", "Due Today", :value => "my-tasks", class: 'filter'
+    %li
+      = radio_button_tag "status", "overdue", false, class: 'filter'
+      = label_tag "status_overdue", "Overdue", :value => "my-tasks", class: 'filter'
+    %li
+      = radio_button_tag "status", "complete", false, class: 'filter'
+      = label_tag "status_complete", "Complete", :value => "my-tasks", class: 'filter'
 
 .filter-container
   .filter-header

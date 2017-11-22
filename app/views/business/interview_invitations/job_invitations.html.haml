@@ -1,13 +1,12 @@
 = render 'job_header'
 
 #main-container
-  #job-applicants
+  #padding
     .side-container
       = form_tag business_job_interview_invitations_path(@job), :method => 'get', id: "search-form" do
         = render 'job_filters'
     .main-container#task-container
       = link_to "Create Interview", new_business_interview_invitation_path,  data: {:turbolinks => "false"}, remote: true, class: "btn border-button"
-
       = render 'business/interviews/interviews'
 
 .modal#basic-form-modal

@@ -1,6 +1,6 @@
 = render 'business/applications/top_container'
 #main-container
-  #job-applicants
+  #padding
     .side-container
       = form_tag business_job_tasks_path(@job), :method => 'get', id: "search-form" do
         = render 'business/tasks/job_filters'

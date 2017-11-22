@@ -11,13 +11,15 @@
           %th(width="20%") Rating 
           %th(width="25%") Date Applied
         %tbody
-          - @applications.each do |application|
-            - if application.candidate.manually_created == true
-              = render 'business/shared/manual_application_rows', application: application
+          - @applications.each do |candidate|
+            - if candidate.manually_created == true
+              = render 'business/shared/manual_application_rows', candidate: candidate
             - else
-              = render 'business/shared/user_applications_table_rows', application: application
+              = render 'business/shared/user_applications_table_rows', candidate: candidate
     .not-present-container
       %p There are currently no applicants in this stage.
+
+= will_paginate @applications, previous_label: h("<"), next_label: h(">")
 
 .modal#applicant-modal
   .modal-dialog

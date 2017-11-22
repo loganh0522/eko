@@ -37,6 +37,8 @@ class Business::UsersController < ApplicationController
         expires_at: Time.at(@auth['expires_at']).to_datetime,
         user_id: current_user.id
         )
+      
+      GoogleWrapper::User.create_subscription(current_user)
     elsif params[:code].present? 
       token = get_token_from_code(params[:code])
       OutlookToken.create(
@@ -86,7 +88,6 @@ class Business::UsersController < ApplicationController
 
   def outlook_get_token
     # OutlookWrapper::User.update_subscription(current_user)
-
     token = get_token_from_code params[:code]
 
     OutlookToken.create(

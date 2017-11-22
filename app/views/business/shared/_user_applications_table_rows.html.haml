@@ -1,24 +1,24 @@
-%tr{:id => "#{application_stage(application)}" }
+%tr{:id => "#{application_stage(candidate, @job)}" }
   %td
-    .applicant-checkbox{:data => {:id => application.candidate.id}}
-      = check_box_tag "applicant_ids[]", application.candidate.id
+    .applicant-checkbox{:data => {:id => candidate.id}}
+      = check_box_tag "applicant_ids[]", candidate.id
   %td
-    - if application.candidate.user.user_avatar.present? 
+    - if candidate.user.user_avatar.present? 
       .circle
-        = image_tag application.candidate.user.user_avatar.image.small_image, :size => "50x50" 
+        = image_tag candidate.user.user_avatar.image.small_image, :size => "50x50" 
     - else
       .circle-img
         %img(src="/tmp/little-man.png")  
   %td.names
-    .name{:data => {:id =>  "#{application.candidate.user.full_name}"}}
-      = link_to "#{application.candidate.user.full_name}", business_job_application_path(application.job.id, application.id), remote: true
-    - if application.candidate.user.current_jobs.present?
-      .current-position= "#{application.candidate.user.current_jobs.first.title} - #{application.candidate.user.current_jobs.first.company_name} "
+    .name{:data => {:id =>  "#{candidate.user.full_name}"}}
+      = link_to "#{candidate.user.full_name}", business_job_application_path(@job, current_application(candidate, @job)), remote: true
+    - if candidate.user.current_jobs.present?
+      .current-position= "#{candidate.user.current_jobs.first.title} - #{candidate.user.current_jobs.first.company_name} "
     - else
       .current-position No Experience Listed
   %td
-    .stage= application_stage(application)
+    .stage= application_stage(candidate, @job)
   %td
-    = render 'business/ratings/form', application: application
+    = render 'business/ratings/form', application: current_application(candidate, @job)
   %td
-    .stage= "#{time_ago_in_words(application.created_at)} ago"        
+    .stage= "#{time_ago_in_words(candidate.created_at)} ago"        

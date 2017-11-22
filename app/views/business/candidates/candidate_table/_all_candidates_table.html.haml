@@ -11,6 +11,7 @@
           %th(width="20%") Stage 
           %th(width="15%") Rating
         %tbody
+          .spinner
           .all_applicants_data
             - @candidates.each do |candidate|
               - if candidate.applications.present? 
@@ -69,6 +70,8 @@
                       .no-application No Job Applications
                     %td
                       .no-application No Rating
+
+= will_paginate @candidates, previous_label: h("<"), next_label: h(">")
 
 
 

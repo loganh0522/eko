@@ -1,0 +1,8 @@
+= form_for [:business, @member], :html => {id: "media-photo-up", :multipart => true } do |q| 
+  .image-dropzone-container
+    %p Drag and Drop Photos, or click button.
+    = q.file_field :file, :multiple => true, name: "team_member[file]"
+    = q.label :file, "Add Photos", class: "btn border-button"
+    - if !@section.new_record?
+      = q.hidden_field :job_board_row_id, value: @section.id 
+ 

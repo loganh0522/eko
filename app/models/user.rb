@@ -96,7 +96,7 @@ class User < ActiveRecord::Base
       work_titles: work_experiences.map(&:title),
       work_description: work_experiences.map(&:description),
       work_company: work_experiences.map(&:company_name),
-      education_description: educations.map(&:degree),
+      education_degree: educations.map(&:degree),
       education_description: educations.map(&:description),
       education_school: educations.map(&:school)
     )

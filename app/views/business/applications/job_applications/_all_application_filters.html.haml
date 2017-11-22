@@ -1,6 +1,5 @@
-%h4#filter-header Filters
 = form_tag business_job_applications_path, :method => 'get', id: "search-form" do
-  = text_field_tag "query", nil, placeholder: "Search Candidates by Keyword", class: "search-field" 
+  = text_field_tag "query", nil, placeholder: "Search Candidates by Keyword", class: "search-field" , autocomplete: 'off'
   .applicant-filters
     .filter-container
       .filter-header

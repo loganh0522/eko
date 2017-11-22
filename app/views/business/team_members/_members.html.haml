@@ -1,0 +1,6 @@
+.team-member-contain
+  = image_tag f.object.file.xs_image
+  = f.text_field :name, autocomplete: 'off'
+  = f.text_field :position, autocomplete: 'off'
+  = f.text_area :details
+  = f.hidden_field :_destroy

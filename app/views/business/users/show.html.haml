@@ -12,17 +12,20 @@
         .link2= link_to "Change Password", edit_business_user_path(@current_user, password: 'password'), :data => {remote: true}, class: "btn border-button"
     .standard-body
       .sync-email
-        %h4 Sync Outlook
         - if current_user.outlook_token.present? 
-          .sync-box Synced To Outlook
+          .sync-box 
+            %img(src="/tmp/outlook_logo.jpeg")
+            Sync Outlook
         - else 
           = link_to "#{@login_url}" do
-            .sync-box Sync with Outlook
+            .sync-box 
+              %img(src="/tmp/outlook_logo.jpeg")
+              Sync Outlook
       .sync-email
-        %h4 Sync Gmail
         = link_to '/auth/google_oauth2' do 
-          .sync-box Authenticate with Google!
-    
+          .sync-box 
+            %img(src="/tmp/gmail_icon.png")
+            Sync Gmail    
     .standard-body
       .standard-body-header
         %h4 E-mail Signature

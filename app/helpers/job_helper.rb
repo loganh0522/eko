@@ -7,7 +7,9 @@ module JobHelper
     @job.applications.where(rejected: true).count
   end
 
-  def application_stage(application)
+  def application_stage(candidate, job)
+    application = Application.where(candidate: candidate, job: job).first
+
     if application.rejected == true
       ("Rejected").to_s
     elsif  application.stage.present?
@@ -17,4 +19,7 @@ module JobHelper
     end
   end
 
+  def current_application(candidate, job)
+    Application.where(candidate: candidate, job: job).first
+  end
 end

@@ -16,7 +16,7 @@ gem 'jquery-ui-rails'
 gem 'trix'
 gem 'googledocviewer'
 gem 'viewerjs-rails'
-
+gem 'spinjs-rails'
 gem 'responders', '~> 2.0'
 gem 'owlcarousel2'
 gem 'will_paginate', '~> 3.1.0'
@@ -27,8 +27,10 @@ gem 'haml-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'bootstrap_form'
-gem 'bootstrap-colorpicker-rails'
+# gem 'bootstrap_form'
+# gem 'bootstrap-colorpicker-rails'
+
+gem 'jquery-minicolors-rails'
 gem 'autoprefixer-rails'
 gem 'bcrypt'
 gem 'fabrication'

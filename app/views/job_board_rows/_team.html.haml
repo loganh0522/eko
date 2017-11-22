@@ -1,0 +1,11 @@
+.header-message
+  .header= section.header
+  .sub-header= section.subheader
+.team-members
+  - section.team_members.each do |member|
+    .team-member
+      .member-img= image_tag member.file.small_image
+      .name= member.name
+      .position= member.position
+      %br
+      .details= member.details

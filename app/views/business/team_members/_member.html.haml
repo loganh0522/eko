@@ -1,0 +1,7 @@
+.team-member-contain
+  = image_tag @member.file.xs_image
+  = fields_for "job_board_row[team_members_attributes]", @member do |f|
+    = f.text_field :name, autocomplete: 'off', name: "job_board_row[team_members_attributes][#{@member.id}][name]", id: "job_board_row_team_members_attributes_#{@member.id}_name"
+    = f.text_field :position, autocomplete: 'off', name: "job_board_row[team_members_attributes][#{@member.id}][position]", id: "job_board_row_team_members_attributes_#{@member.id}_position"
+    = f.text_area :details, name: "job_board_row[team_members_attributes][#{@member.id}][details]", id: "job_board_row_team_members_attributes_#{@member.id}_details"
+

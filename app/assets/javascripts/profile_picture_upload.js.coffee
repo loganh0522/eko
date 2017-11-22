@@ -4,8 +4,7 @@ jQuery ->
   $('#background-photo-up').fileupload()
   
   $('#job-seeker-background-up').fileupload()
-
-
+  
   $(".main-container").on 'click', "#submit-section", -> 
     $("#job-board-section").submit()
 

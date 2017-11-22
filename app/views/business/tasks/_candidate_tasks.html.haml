@@ -1,9 +1,9 @@
 .change-containers-nav
   %ul 
-    = link_to business_candidate_tasks_path(@candidate), remote: true do
+    = link_to business_candidate_tasks_path(@candidate, job: @job), remote: true do
       %li.change#tasks.activated Active
 
-    = link_to business_candidate_tasks_path(@candidate, status: "complete"), remote: true do
+    = link_to business_candidate_tasks_path(@candidate, status: "complete", job: @job), remote: true do
       %li.change#completed-tasks  Complete
     
 .tasks

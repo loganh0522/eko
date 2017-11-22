@@ -61,7 +61,6 @@ jQuery ->
     $(this).parent().parent().remove()
     event.preventDefault()
 
-
   $('.personal-social-links').on 'click', '.add_fields', (event) ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')

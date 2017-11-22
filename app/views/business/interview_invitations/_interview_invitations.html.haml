@@ -1,3 +1,5 @@
+.actions
+  = link_to "Create Interview", new_business_interview_invitation_path,  data: {:turbolinks => "false"}, remote: true, class: "btn border-button"
 .interview-container
   - if @interview_invitations.present?
     - @interview_invitations.each do |interview|
