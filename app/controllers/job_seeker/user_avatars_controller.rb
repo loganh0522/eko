@@ -2,7 +2,6 @@ class JobSeeker::UserAvatarsController < JobSeekersController
   layout "job_seeker"
   before_filter :require_user
   # before_filter :profile_sign_up_complete
-  
 
   def new 
     @user_avatar = UserAvatar.new
@@ -15,8 +14,8 @@ class JobSeeker::UserAvatarsController < JobSeekersController
   def create
     @avatar = UserAvatar.create(avatar_params)
     @user_avatar = current_user.user_avatar
-    @new_avatar = UserAvatar.new
-    
+    # @new_avatar = UserAvatar.new
+
     respond_to do |format| 
       format.js
     end
@@ -35,7 +34,7 @@ class JobSeeker::UserAvatarsController < JobSeekersController
     @avatar = UserAvatar.find(params[:id])
     @avatar.update(avatar_params)
 
-    redirect_to job_seeker_profiles_path(current_user)
+    redirect_to job_seeker_user_path(current_user)
   end
 
   def destroy
