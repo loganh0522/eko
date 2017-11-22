@@ -5,9 +5,12 @@
   .body
     = form_tag url: '/login' do |f|
       %fieldset
-        = f.email_field :email, placeholder: "E-mail", hide_label: true
-        = f.password_field :password, placeholder: "Password", hide_label: true
-        %input(type="submit" value="Log In" class="btn button-submit")
+        = label_tag "E-mail"
+        = email_field_tag :email
+        = label_tag "Password"
+        = password_field_tag :password 
+        = submit_tag "Sign In", class: "btn submit-button"
+
 
     %p 
       Forgot your password? 
