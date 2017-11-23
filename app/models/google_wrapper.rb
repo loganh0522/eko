@@ -78,10 +78,10 @@ require 'google/api_client/client_secrets.rb'
       
       service = Google::Apis::GmailV1::GmailService.new
       service.authorization = client
-
+      binding.pry
       message = Google::Apis::GmailV1::Message.new(raw: email.to_s, content_type: "text/html")
       @response = service.send_user_message('me', message)
-
+      binding.pry
       @message = Message.find(id)
       @message.update_attributes(email_id: @response.id, thread_id: @response.thread_id)
       # client_message.update(thread_id: @response.thread_id)
@@ -114,32 +114,34 @@ require 'google/api_client/client_secrets.rb'
       @messages = service.list_user_histories('me', start_history_id: historyId)
       # How many Messages have been created
       #Get Message
-      @messageId = service.list_user_histories('me', start_history_id: 323053).history.first.messages.first.id
+      @messageId = service.list_user_histories('me', start_history_id: 325036).history.first.messages.first.id
       @message = service.get_user_message('me', @messageId )
       #set email criteria 
       @user = current_user
       @company = current_user.company
       @threadId = @message.thread_id
-
       @subject = get_gmail_attribute(@message, "Subject")
-      @user_email = get_gmail_attribute(@message, "To")
+      
+      @reciever = get_gmail_attribute(@message, "To")
       @sender = get_gmail_attribute(@message, "From")
     
       # create message for Candidate
       if @sender == @user.email #sent from user
         @msg_present = Message.where(email_id: @messageId).first.present?
         if !@msg_present
-          @candidate = Candidate.where(company_id: @company.id, email: @user_email).first 
+          @candidate = Candidate.where(company_id: @company.id, email: @reciever).first 
           
           if @candidate.present? 
-            if @message.payload.parts.last.mime_type == "text/plain" 
-              @content =  @message.payload.parts.last.body.data.gsub("\r\n", "<br>")
+            if @message.payload.first.mime_type == "text/plain" 
+              @content =  @message.payload.parts.first.body.data.gsub("\r\n", "<br>")
               @content =  @content.gsub("<br><br><br>", "")
             elsif @message.payload.parts.last.mime_type "text/html"
               @content =  @message.payload.parts.last.body.data.gsub("\r\n", "")
-              @content =  @content.gsub(/\"/, "")
+              @content =  @content.gsub(/\"/, "".)
               @content = @content.split("<div dir=ltr>")[1]
               @content = @content.split("<div class=gmail_extra>")[0]
+
+              @content =  @message.payload.parts.body.data
               @msg = @content
             end
             @msg = @content
@@ -160,13 +162,12 @@ require 'google/api_client/client_secrets.rb'
         else
           return nil
         end
-
       else
         @candidate = Candidate.where(company_id: @company.id, email: @sender).first
         # Get Message Details
         if @candidate.present?
           if @message.payload.parts.last.mime_type == "text/plain" 
-            @content =  @message.payload.parts.last.body.data.gsub("\r\n", "<br>")
+            @content =  @message.payload.parts.first.body.data.gsub("\r\n", "<br>")
             @content =  @content.gsub("<br><br><br>", "")
           elsif @message.payload.parts.last.mime_type "text/html"
             @content =  @message.payload.parts.last.body.data.gsub("\r\n", "")
