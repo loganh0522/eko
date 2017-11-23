@@ -113,7 +113,6 @@ require 'google/api_client/client_secrets.rb'
       #Get the messages that have been created since the last update
       @messages = service.list_user_histories('me', start_history_id: historyId)
       # How many Messages have been created
-      @messages.history.first.messages_added.count
       #Get Message
       @messageId = service.list_user_histories('me', start_history_id: 323053).history.first.messages.first.id
       @message = service.get_user_message('me', @messageId )
