@@ -131,8 +131,7 @@ require 'google/api_client/client_secrets.rb'
       if @sender == @user.email #sent from user
         @msg_present = Message.where(email_id: @messageId).first.present?
         if !@msg_present
-          @recipient = @message.to_recipients.first.email_address.address
-          @candidate = Candidate.where(company_id: @company.id, email: @recipient).first 
+          @candidate = Candidate.where(company_id: @company.id, email: @user_email).first 
           
           if @candidate.present? 
             if @message.payload.parts.last.mime_type == "text/plain" 
