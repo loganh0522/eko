@@ -124,9 +124,7 @@ require 'google/api_client/client_secrets.rb'
       @subject = get_gmail_attribute(@message, "Subject")
       @user_email = get_gmail_attribute(@message, "To")
       @sender = get_gmail_attribute(@message, "From")
-      
-      #find Candidate
-      @candidate = Candidate.where(company_id: @company.id, email: @sender).first
+    
       # create message for Candidate
       if @sender == @user.email #sent from user
         @msg_present = Message.where(email_id: @messageId).first.present?
@@ -162,36 +160,40 @@ require 'google/api_client/client_secrets.rb'
         else
           return nil
         end
-      elsif @candidate.present?  
-        # Get Message Details
-        if @message.payload.parts.last.mime_type == "text/plain" 
-          @content =  @message.payload.parts.last.body.data.gsub("\r\n", "<br>")
-          @content =  @content.gsub("<br><br><br>", "")
-        elsif @message.payload.parts.last.mime_type "text/html"
-          @content =  @message.payload.parts.last.body.data.gsub("\r\n", "")
-          @content =  @content.gsub(/\"/, "")
-          @content = @content.split("<div dir=ltr>")[1]
-          @content = @content.split("<div class=gmail_extra>")[0]
-          @msg = @content
-          # if @content.include?("<div class=gmail_extra>")   
-          # else
-          #   @content = @content.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
-          #   @msg = @content
-          # end
-        end
-        if @candidate.conversation.present?
-          Message.create(conversation_id: @candidate.conversation.id, 
-            body: @msg, subject: @subject, email_id: @messageId, thread_id: @threadId, 
-            candidate_id: @candidate.id)
-        else 
-          Conversation.create(candidate_id: @candidate.id, company_id: @company.id)   
-          @conversation = Candidate.find(@candidate.id).conversation
-          Message.create(conversation_id: @conversation.id, 
-            body: @msg, subject: @subject, email_id: @messageId, thread_id: @threadId, 
-            candidate_id: @candidate.id)
-        end
+
       else
-        return nil
+        @candidate = Candidate.where(company_id: @company.id, email: @sender).first
+        # Get Message Details
+        if @candidate.present?
+          if @message.payload.parts.last.mime_type == "text/plain" 
+            @content =  @message.payload.parts.last.body.data.gsub("\r\n", "<br>")
+            @content =  @content.gsub("<br><br><br>", "")
+          elsif @message.payload.parts.last.mime_type "text/html"
+            @content =  @message.payload.parts.last.body.data.gsub("\r\n", "")
+            @content =  @content.gsub(/\"/, "")
+            @content = @content.split("<div dir=ltr>")[1]
+            @content = @content.split("<div class=gmail_extra>")[0]
+            @msg = @content
+            # if @content.include?("<div class=gmail_extra>")   
+            # else
+            #   @content = @content.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
+            #   @msg = @content
+            # end
+          end
+          if @candidate.conversation.present?
+            Message.create(conversation_id: @candidate.conversation.id, 
+              body: @msg, subject: @subject, email_id: @messageId, thread_id: @threadId, 
+              candidate_id: @candidate.id)
+          else 
+            Conversation.create(candidate_id: @candidate.id, company_id: @company.id)   
+            @conversation = Candidate.find(@candidate.id).conversation
+            Message.create(conversation_id: @conversation.id, 
+              body: @msg, subject: @subject, email_id: @messageId, thread_id: @threadId, 
+              candidate_id: @candidate.id)
+          end
+        else
+          return nil
+        end
       end
     end
 
