@@ -114,7 +114,7 @@ require 'google/api_client/client_secrets.rb'
       @messages = service.list_user_histories('me', start_history_id: historyId)
       # How many Messages have been created
       #Get Message
-      @messageId = service.list_user_histories('me', start_history_id: historyId).history.first.messages.first.id
+      @messageId = service.list_user_histories('me', start_history_id: "325122").history.first.messages.first.id
       @message = service.get_user_message('me', @messageId )
       #set email criteria 
       @user = current_user
