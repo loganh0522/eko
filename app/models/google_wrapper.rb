@@ -241,12 +241,4 @@ require 'google/api_client/client_secrets.rb'
     def self.update_event
     end
   end
-
-  private 
-   
-  def get_gmail_attribute(gmail_data, attribute)
-    headers = gmail_data['payload']['headers']
-    array = headers.reject { |hash| hash['name'] != attribute }
-    array.first['value']
-  end
 end
