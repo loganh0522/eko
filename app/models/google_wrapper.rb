@@ -57,7 +57,9 @@ require 'google/api_client/client_secrets.rb'
 
       service = Google::Apis::GmailV1::GmailService.new
       service.authorization = client
-      service.watch_user('me', watch_request)
+      @response = service.watch_user('me', watch_request)
+      
+      current_user.google_token.update_attributes(history_id: @response.history_id)
     end
 
     def self.send_message(email, id, current_user)
@@ -78,13 +80,13 @@ require 'google/api_client/client_secrets.rb'
       
       service = Google::Apis::GmailV1::GmailService.new
       service.authorization = client
-     
+
       message = Google::Apis::GmailV1::Message.new(raw: email.to_s, content_type: "text/html")
       @response = service.send_user_message('me', message)
 
+
       @message = Message.find(id)
       @message.update_attributes(email_id: @response.id, thread_id: @response.thread_id)
-      binding.pry
       # client_message.update(thread_id: @response.thread_id)
     end
     
@@ -94,7 +96,7 @@ require 'google/api_client/client_secrets.rb'
       array.first.value
     end
 
-    def self.create_message(historyId, current_user)
+    def self.create_message(historyId, current_user, current_id)
       token = current_user.google_token.access_token
       refresh_token = current_user.google_token.refresh_token
       
@@ -112,7 +114,7 @@ require 'google/api_client/client_secrets.rb'
       service.authorization = client
       
       #Get Message 
-      @messageId = service.list_user_histories('me', start_history_id: historyId).history.first.messages.first.id
+      @messageId = service.list_user_histories('me', start_history_id: current_id).history.first.messages.first.id
       @message = service.get_user_message('me', @messageId )
       #set email criteria 
       @user = current_user
@@ -193,6 +195,8 @@ require 'google/api_client/client_secrets.rb'
           return nil
         end
       end
+
+       @user.google_token.update_attributes(history_id: historyId)
     end
 
     def self.get_messages(current_user)

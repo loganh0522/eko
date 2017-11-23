@@ -19,8 +19,11 @@ class InboundEmailsController < ApplicationController
     @messageData = ActiveSupport::JSON.decode(Base64.decode64(params[:message][:data]))
     @user = User.where(email: @messageData["emailAddress"]).first
     @historyId = @messageData["historyId"]
+    @current_id = @user.google_token.history_id
 
-    # GoogleWrapper::Gmail.create_message(@historyId, @user)
+    if @historyId != @current_id
+      GoogleWrapper::Gmail.create_message(@historyId, @user, @current_id)
+    end
   end
 
   def outlook_webhook
