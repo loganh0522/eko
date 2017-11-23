@@ -92,7 +92,7 @@ require 'google/api_client/client_secrets.rb'
       array.first['value']
     end
 
-    def self.create_message(historyId, user)
+    def self.create_message(historyId, current_user)
       token = current_user.google_token.access_token
       refresh_token = current_user.google_token.refresh_token
       
