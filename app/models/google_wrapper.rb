@@ -60,7 +60,7 @@ require 'google/api_client/client_secrets.rb'
       service.watch_user('me', watch_request)
     end
 
-    def self.send_message(email, current_user)
+    def self.send_message(email, id, current_user)
       token = current_user.google_token.access_token
       refresh_token = current_user.google_token.refresh_token
       
@@ -78,18 +78,19 @@ require 'google/api_client/client_secrets.rb'
       
       service = Google::Apis::GmailV1::GmailService.new
       service.authorization = client
-      
-      binding.pry
 
       message = Google::Apis::GmailV1::Message.new(raw: email.to_s, content_type: "text/html")
       @response = service.send_user_message('me', message)
+
+      @message = Message.find(id)
+      @message.update_attributes(email_id: @response.id, thread_id: @response.thread_id)
       # client_message.update(thread_id: @response.thread_id)
     end
     
-    def get_gmail_attribute(gmail_data, attribute)
-      headers = gmail_data['payload']['headers']
-      array = headers.reject { |hash| hash['name'] != attribute }
-      array.first['value']
+    def self.get_gmail_attribute(gmail_data, attribute)
+      headers = gmail_data.payload.headers
+      array = headers.reject { |hash| hash.name != attribute }
+      array.first.value
     end
 
     def self.create_message(historyId, current_user)
@@ -113,28 +114,57 @@ require 'google/api_client/client_secrets.rb'
       @messages = service.list_user_histories('me', start_history_id: historyId)
       # How many Messages have been created
       @messages.history.first.messages_added.count
-      # What is the label of new message
-      # @messages.history.first.messages_added.first.message.label_ids == ["SENT"]
-
       #Get Message
       @messageId = service.list_user_histories('me', start_history_id: 323053).history.first.messages.first.id
       @message = service.get_user_message('me', @messageId )
-
       #set email criteria 
       @user = curent_user
       @company = current_user.company
+      @threadId = @message.thread_id
 
       @subject = get_gmail_attribute(@message, "Subject")
-      @threadId = @message.thread_id
-      @user_email = get_gmail_attribute(@message, "To").split('<')[1].split('>').first
-      @sender = get_gmail_attribute(@message, "From").split('<')[1].split('>').first
+      @user_email = get_gmail_attribute(@message, "To")
+      @sender = get_gmail_attribute(@message, "From")
       
       #find Candidate
       @candidate = Candidate.where(company_id: @company.id, email: @sender).first
-      #find Client
-
-      #create message for Canddiate
-      if @candidate.present?  
+      # create message for Candidate
+      if @sender == @user.email #sent from user
+        @msg_present = Message.where(email_id: @messageId).first.present?
+        if !@msg_present
+          @recipient = @message.to_recipients.first.email_address.address
+          @candidate = Candidate.where(company_id: @company.id, email: @recipient).first 
+          
+          if @candidate.present? 
+            if @message.payload.parts.last.mime_type == "text/plain" 
+              @content =  @message.payload.parts.last.body.data.gsub("\r\n", "<br>")
+              @content =  @content.gsub("<br><br><br>", "")
+            elsif @message.payload.parts.last.mime_type "text/html"
+              @content =  @message.payload.parts.last.body.data.gsub("\r\n", "")
+              @content =  @content.gsub(/\"/, "")
+              @content = @content.split("<div dir=ltr>")[1]
+              @content = @content.split("<div class=gmail_extra>")[0]
+              @msg = @content
+            end
+            @msg = @content
+            if @candidate.conversation.present?
+              Message.create(conversation_id: @candidate.conversation.id, 
+                body: @msg, subject: @subject, email_id: @messageId, thread_id: @threadId, 
+                user_id: @user.id)
+            else 
+              Conversation.create(candidate_id: @candidate.id, company_id: @company.id)   
+              @conversation = Candidate.find(@candidate.id).conversation
+              Message.create(conversation_id: @conversation.id, 
+                body: @msg, subject: @subject, email_id: @messageId, thread_id: @threadId, 
+                user_id: @user.id)
+            end
+          else
+            return nil
+          end
+        else
+          return nil
+        end
+      elsif @candidate.present?  
         # Get Message Details
         if @message.payload.parts.last.mime_type == "text/plain" 
           @content =  @message.payload.parts.last.body.data.gsub("\r\n", "<br>")
@@ -153,13 +183,13 @@ require 'google/api_client/client_secrets.rb'
         end
         if @candidate.conversation.present?
           Message.create(conversation_id: @candidate.conversation.id, 
-            body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
+            body: @msg, subject: @subject, email_id: @messageId, thread_id: @threadId, 
             candidate_id: @candidate.id)
         else 
           Conversation.create(candidate_id: @candidate.id, company_id: @company.id)   
           @conversation = Candidate.find(@candidate.id).conversation
           Message.create(conversation_id: @conversation.id, 
-            body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
+            body: @msg, subject: @subject, email_id: @messageId, thread_id: @threadId, 
             candidate_id: @candidate.id)
         end
       else

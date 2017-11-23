@@ -16,11 +16,11 @@ class InboundEmailsController < ApplicationController
 
   def gmail_webhook
     head :no_content
-    # @messageData = ActiveSupport::JSON.decode(Base64.decode64(params[:message][:data]))
-    # @user = User.where(email: @messageData["emailAddress"]).first
-    # @historyId = @messageData["historyId"]
+    @messageData = ActiveSupport::JSON.decode(Base64.decode64(params[:message][:data]))
+    @user = User.where(email: @messageData["emailAddress"]).first
+    @historyId = @messageData["historyId"]
 
-    # GoogleWrapper::Gmail.create_message(@historyId, @user)
+    GoogleWrapper::Gmail.create_message(@historyId, @user)
   end
 
   def outlook_webhook

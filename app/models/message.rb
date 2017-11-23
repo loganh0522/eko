@@ -14,7 +14,7 @@ class Message < ActiveRecord::Base
       @body = Liquid::Template.parse(self.body).render('recipient' => self.messageable, 'company' => self.messageable.company)
       @email = Mail.new(to: self.messageable.email, from: self.user.email, subject: self.subject, body: @body, content_type: "text/html")
       
-      GoogleWrapper::Gmail.send_message(@email, self.user)
+      GoogleWrapper::Gmail.send_message(@email, self.id, self.user)
 
     elsif self.user.outlook_token.present?
       @email = Liquid::Template.parse(self.body).render('recipient' => self.messageable, 'company' => self.messageable.company)

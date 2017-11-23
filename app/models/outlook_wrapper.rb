@@ -194,9 +194,7 @@ module OutlookWrapper
               @content = @content.gsub("\t", "")
               @content = @content.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
             end
-            
             @msg = @content
-
             if @candidate.conversation.present?
               Message.create(conversation_id: @candidate.conversation.id, 
                 body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
