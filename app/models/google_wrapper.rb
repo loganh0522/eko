@@ -114,14 +114,13 @@ require 'google/api_client/client_secrets.rb'
       @messages = service.list_user_histories('me', start_history_id: historyId)
       # How many Messages have been created
       #Get Message
-      @messageId = service.list_user_histories('me', start_history_id: 325036).history.first.messages.first.id
+      @messageId = service.list_user_histories('me', start_history_id: historyId).history.first.messages.first.id
       @message = service.get_user_message('me', @messageId )
       #set email criteria 
       @user = current_user
       @company = current_user.company
       @threadId = @message.thread_id
       @subject = get_gmail_attribute(@message, "Subject")
-      
       @reciever = get_gmail_attribute(@message, "To")
       @sender = get_gmail_attribute(@message, "From")
     
@@ -137,7 +136,7 @@ require 'google/api_client/client_secrets.rb'
               @content =  @content.gsub("<br><br><br>", "")
             elsif @message.payload.parts.last.mime_type "text/html"
               @content =  @message.payload.parts.last.body.data.gsub("\r\n", "")
-              @content =  @content.gsub(/\"/, "".)
+              @content =  @content.gsub(/\"/, "")
               @content = @content.split("<div dir=ltr>")[1]
               @content = @content.split("<div class=gmail_extra>")[0]
 
