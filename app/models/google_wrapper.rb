@@ -78,12 +78,13 @@ require 'google/api_client/client_secrets.rb'
       
       service = Google::Apis::GmailV1::GmailService.new
       service.authorization = client
-      binding.pry
+     
       message = Google::Apis::GmailV1::Message.new(raw: email.to_s, content_type: "text/html")
       @response = service.send_user_message('me', message)
-      binding.pry
+
       @message = Message.find(id)
       @message.update_attributes(email_id: @response.id, thread_id: @response.thread_id)
+      binding.pry
       # client_message.update(thread_id: @response.thread_id)
     end
     
@@ -110,11 +111,8 @@ require 'google/api_client/client_secrets.rb'
       service = Google::Apis::GmailV1::GmailService.new
       service.authorization = client
       
-      #Get the messages that have been created since the last update
-      @messages = service.list_user_histories('me', start_history_id: historyId)
-      # How many Messages have been created
-      #Get Message
-      @messageId = service.list_user_histories('me', start_history_id: "325122").history.first.messages.first.id
+      #Get Message 
+      @messageId = service.list_user_histories('me', start_history_id: historyId).history.first.messages.first.id
       @message = service.get_user_message('me', @messageId )
       #set email criteria 
       @user = current_user

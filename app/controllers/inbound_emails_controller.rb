@@ -20,7 +20,7 @@ class InboundEmailsController < ApplicationController
     @user = User.where(email: @messageData["emailAddress"]).first
     @historyId = @messageData["historyId"]
 
-    # GoogleWrapper::Gmail.create_message(@historyId, @user)
+    GoogleWrapper::Gmail.create_message(@historyId, @user)
   end
 
   def outlook_webhook
