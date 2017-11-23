@@ -1,18 +1,16 @@
-class JobSeeker::ProfilesController < JobSeekersController
+class JobSeeker::ProjectsController < JobSeekersController
   layout "job_seeker"
   before_filter :require_user
   # before_filter :profile_sign_up_complete, :only => [:index]
   
   def new
     @user = current_user
-    @profile = Profile.new
-    @profile.work_experiences.build
-    @profile.educations.build
+    @profile = Project.new
   end
 
   def create
     @user = current_user
-    @profile = Profile.new(profile_params)
+    @profile = Project.new(profile_params)
 
     if @profile.save 
       flash[:success] = "Your profile was successfully created!"

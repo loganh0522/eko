@@ -57,10 +57,7 @@ require 'google/api_client/client_secrets.rb'
 
       service = Google::Apis::GmailV1::GmailService.new
       service.authorization = client
-
       service.watch_user('me', watch_request)
-
-      
     end
 
     def self.send_message(email, current_user)
@@ -85,16 +82,20 @@ require 'google/api_client/client_secrets.rb'
       binding.pry
 
       message = Google::Apis::GmailV1::Message.new(raw: email.to_s, content_type: "text/html")
-      
       @response = service.send_user_message('me', message)
-
       # client_message.update(thread_id: @response.thread_id)
     end
     
+    def get_gmail_attribute(gmail_data, attribute)
+      headers = gmail_data['payload']['headers']
+      array = headers.reject { |hash| hash['name'] != attribute }
+      array.first['value']
+    end
 
-    def self.create_message(thread, current_user)
+    def self.create_message(historyId, user)
       token = current_user.google_token.access_token
       refresh_token = current_user.google_token.refresh_token
+      
       client = Signet::OAuth2::Client.new(access_token: token, 
         refresh_token: refresh_token, 
         token_credential_uri: 'https://accounts.google.com/o/oauth2/token', 
@@ -108,23 +109,23 @@ require 'google/api_client/client_secrets.rb'
       service = Google::Apis::GmailV1::GmailService.new
       service.authorization = client
       
-      
+      #Get the messages that have been created since the last update
+      @messages = service.list_user_histories('me', start_history_id: historyId)
+      # How many Messages have been created
+      @messages.history.first.messages_added.count
+      # What is the label of new message
+      # @messages.history.first.messages_added.first.message.label_ids == ["SENT"]
 
-      @message.payload.parts.last.body.data.gsub("\r\n", "").gsub(/\"/, "").gsub("\t", "").split('<div class=gmail_extra>')
-      
-
-
-      @history = service.list_user_histories('me', start_history_id: historyId, label_id: ['INBOX'])
-      @messageId = service.list_user_histories(
-        'me', start_history_id: historyId, label_id: "INBOX").history.first.messages.first.id
+      #Get Message
+      @messageId = service.list_user_histories('me', start_history_id: 323053).history.first.messages.first.id
       @message = service.get_user_message('me', @messageId )
 
-      #set email criteria
+      #set email criteria 
       @subject = get_gmail_attribute(@message, "Subject")
       @threadId = @message.thread_id
       @user_email = get_gmail_attribute(@message, "To").split('<')[1].split('>').first
-      @user = current_user
-      @company = @user.company
+      @user = user
+      @company = user.company
       @sender = get_gmail_attribute(@message, "From").split('<')[1].split('>').first
       
       #find Candidate
@@ -144,8 +145,7 @@ require 'google/api_client/client_secrets.rb'
           @content = @content.split("<div class=gmail_extra>")[0]
           @msg = @content
           
-          # if @content.include?("<div class=gmail_extra>") 
-            
+          # if @content.include?("<div class=gmail_extra>")   
           # else
           #   @content = @content.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
           #   @msg = @content

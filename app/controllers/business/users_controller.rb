@@ -38,7 +38,7 @@ class Business::UsersController < ApplicationController
         user_id: current_user.id
         )
       
-      GoogleWrapper::User.create_subscription(current_user)
+      GoogleWrapper::Gmail.watch_gmail(current_user)
     elsif params[:code].present? 
       token = get_token_from_code(params[:code])
       OutlookToken.create(

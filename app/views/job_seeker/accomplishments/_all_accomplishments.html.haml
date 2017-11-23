@@ -1,5 +1,3 @@
 - if position.accomplishments.present? 
-  .acc 
-    Accomplishments
   - position.accomplishments.each do |accomplishment|
     = render 'job_seeker/accomplishments/accomplishment', accomplishment: accomplishment, position: position

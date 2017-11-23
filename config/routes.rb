@@ -63,26 +63,25 @@ Rails.application.routes.draw do
   post 'create_profile', to: "users#create_job_seeker"
 
   namespace :job_seeker do 
-
     root to: "jobs#index"
     get '/profile', to: 'users#show'
     
     resources :create_profiles
-    
     resources :jobs, only: [:index, :show] do
       resources :applications
       resources :candidates, only: [:index, :new, :create]
     end
+
     resources :question_answers 
-
-
     resources :users
     resources :background_images
+
     resources :applications, only: [:create]
       
     resources :user_avatars 
     resources :user_certifications
     resources :educations
+    resources :projects
     
     resources :work_experiences do
       resources :accomplishments

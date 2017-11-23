@@ -1,16 +1,15 @@
-.add-accomplishment
-  = bootstrap_form_for [:job_seeker, @work_experience, @accomplishment], html: {remote: true, class: 'invite'} do |f|
-    .fieldset
-      .row 
-        .form-group.col-md-12
-          = f.text_area :body, class: "form-control", label: "Accomplishment"
-          %span#body_Block.help-block
-          = f.hidden_field :work_experience_id, value: @work_experience.id       
+= form_for [:job_seeker, @work_experience, @accomplishment], remote: true, class: "accomplishment-form" do |f|
+  .fieldset
+    .row 
+      .form-group.col-md-12
+        = f.text_area :body, class: "form-control", label: "Accomplishment"
+        %span#body_Block.help-block
+        = f.hidden_field :work_experience_id, value: @work_experience.id       
 
-    = f.submit "Add Accomplishment", class: "submit btn btn-primary"
-    - if !@accomplishment.new_record?
-      .close-form#edit-form.btn.btn-default     
-        Close
-    - else
-      .close-form#new-form.btn.btn-default     
-        Close
+  = f.submit "Create", class: "btn submit-button"
+  - if !@accomplishment.new_record?
+    .btn.border-button#remove_form
+      Close
+  - else
+    .btn.border-button#remove_form   
+      Close

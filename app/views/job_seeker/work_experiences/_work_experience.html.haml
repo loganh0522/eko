@@ -23,11 +23,22 @@
             = render 'job_seeker/user_skills/skills', position: position
     - if position.accomplishments.present?
       .job-position-body
+        .header
+          Accomplishments
         .job-position-body-content
           .experience-body 
             .accomplishments
               %div{id: "work_accomplishments_#{position.id}"}
                 = render "job_seeker/accomplishments/all_accomplishments", position: position
+    .job-position-body
+      .header 
+        Projects
+      .job-position-body-content
+        
+        = link_to new_job_seeker_project_path, remote: true do 
+          .add-project-container 
+            %i.fa.fa-plus.fa-3x
+   
     .actions
       %ul
         %li
