@@ -121,11 +121,12 @@ require 'google/api_client/client_secrets.rb'
       @message = service.get_user_message('me', @messageId )
 
       #set email criteria 
+      @user = curent_user
+      @company = current_user.company
+
       @subject = get_gmail_attribute(@message, "Subject")
       @threadId = @message.thread_id
       @user_email = get_gmail_attribute(@message, "To").split('<')[1].split('>').first
-      @user = user
-      @company = user.company
       @sender = get_gmail_attribute(@message, "From").split('<')[1].split('>').first
       
       #find Candidate
@@ -144,14 +145,12 @@ require 'google/api_client/client_secrets.rb'
           @content = @content.split("<div dir=ltr>")[1]
           @content = @content.split("<div class=gmail_extra>")[0]
           @msg = @content
-          
           # if @content.include?("<div class=gmail_extra>")   
           # else
           #   @content = @content.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
           #   @msg = @content
           # end
         end
-        
         if @candidate.conversation.present?
           Message.create(conversation_id: @candidate.conversation.id, 
             body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
