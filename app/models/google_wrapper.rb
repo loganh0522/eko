@@ -117,7 +117,7 @@ require 'google/api_client/client_secrets.rb'
       @messageId = service.list_user_histories('me', start_history_id: 323053).history.first.messages.first.id
       @message = service.get_user_message('me', @messageId )
       #set email criteria 
-      @user = curent_user
+      @user = current_user
       @company = current_user.company
       @threadId = @message.thread_id
 
