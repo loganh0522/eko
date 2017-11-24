@@ -48,7 +48,8 @@ Google::Apis::RequestOptions.default.retries = 5
         client_id: ENV['GOOGLE_CLIENT_ID'],
         client_secret: ENV['GOOGLE_CLIENT_SECRET'],
         scope: ['email', 
-          'https://www.googleapis.com/auth/gmail.compose'],
+          'https://www.googleapis.com/auth/gmail.compose',
+          'https://www.googleapis.com/auth/gmail.modify'],
         grant_type: 'authorization_code')
          
       watch_request = Google::Apis::GmailV1::WatchRequest.new
@@ -72,8 +73,7 @@ Google::Apis::RequestOptions.default.retries = 5
         authorization_uri: 'https://accounts.google.com/o/oauth2/auth', 
         client_id: ENV['GOOGLE_CLIENT_ID'],
         client_secret: ENV['GOOGLE_CLIENT_SECRET'],
-        scope: ['email', 
-          'https://www.googleapis.com/auth/gmail.send'],
+        scope: [],
         grant_type: 'authorization_code')
          
       
@@ -189,8 +189,8 @@ Google::Apis::RequestOptions.default.retries = 5
         authorization_uri: 'https://accounts.google.com/o/oauth2/auth', 
         client_id: ENV['GOOGLE_CLIENT_ID'],
         client_secret: ENV['GOOGLE_CLIENT_SECRET'],
-        scope: ['email', 
-          'https://www.googleapis.com/auth/gmail.compose'],
+        scope: [
+          'https://www.googleapis.com/auth/gmail.modify'],
         grant_type: 'authorization_code')
       service = Google::Apis::GmailV1::GmailService.new
       service.authorization = client
@@ -220,13 +220,13 @@ Google::Apis::RequestOptions.default.retries = 5
         authorization_uri: 'https://accounts.google.com/o/oauth2/auth', 
         client_id: ENV['GOOGLE_CLIENT_ID'],
         client_secret: ENV['GOOGLE_CLIENT_SECRET'],
-        scope: ['email', 
-          'https://www.googleapis.com/auth/gmail.compose'],
+        scope: [
+          'https://www.googleapis.com/auth/gmail.modify'],
         grant_type: 'authorization_code')
 
       service = Google::Apis::GmailV1::GmailService.new
       service.authorization = client
-    end
+
   end
 
   class Calendar
