@@ -37,8 +37,9 @@ class Business::UsersController < ApplicationController
         expires_at: Time.at(@auth['expires_at']).to_datetime,
         user_id: current_user.id
         )
-      
       GoogleWrapper::Gmail.watch_gmail(current_user)
+      
+      redirect_to business_user_path(current_user)
     elsif params[:code].present? 
       token = get_token_from_code(params[:code])
       OutlookToken.create(

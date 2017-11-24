@@ -213,8 +213,11 @@ Google::Apis::RequestOptions.default.retries = 5
           'https://www.googleapis.com/auth/gmail.compose',
           'https://www.googleapis.com/auth/gmail.modify'],
         grant_type: 'authorization_code')
+
+
       service = Google::Apis::GmailV1::GmailService.new
       service.authorization = client
+      service.get_user_message('me', "15fe98b062dd2013")
     end
   end
 
