@@ -48,8 +48,7 @@ Google::Apis::RequestOptions.default.retries = 5
         client_id: ENV['GOOGLE_CLIENT_ID'],
         client_secret: ENV['GOOGLE_CLIENT_SECRET'],
         scope: ['email', 
-          'https://www.googleapis.com/auth/gmail.compose',
-          'https://www.googleapis.com/auth/gmail.modify'],
+          'https://www.googleapis.com/auth/gmail.compose'],
         grant_type: 'authorization_code')
          
       watch_request = Google::Apis::GmailV1::WatchRequest.new
@@ -74,8 +73,7 @@ Google::Apis::RequestOptions.default.retries = 5
         client_id: ENV['GOOGLE_CLIENT_ID'],
         client_secret: ENV['GOOGLE_CLIENT_SECRET'],
         scope: ['email', 
-          'https://www.googleapis.com/auth/gmail.send',
-          'https://www.googleapis.com/auth/gmail.compose'],
+          'https://www.googleapis.com/auth/gmail.send'],
         grant_type: 'authorization_code')
          
       
@@ -161,25 +159,9 @@ Google::Apis::RequestOptions.default.retries = 5
       end
     end
 
-    def self.create_message(historyId, current_user, current_id)
-      token = current_user.google_token.access_token
-      refresh_token = current_user.google_token.refresh_token 
-      client = Signet::OAuth2::Client.new(access_token: token, 
-        refresh_token: refresh_token, 
-        token_credential_uri: 'https://accounts.google.com/o/oauth2/token', 
-        authorization_uri: 'https://accounts.google.com/o/oauth2/auth', 
-        client_id: ENV['GOOGLE_CLIENT_ID'],
-        client_secret: ENV['GOOGLE_CLIENT_SECRET'],
-        scope: ['email', 
-          'https://www.googleapis.com/auth/gmail.compose',
-          'https://www.googleapis.com/auth/gmail.modify'],
-        grant_type: 'authorization_code')
-      service = Google::Apis::GmailV1::GmailService.new
-      service.authorization = client
-      #Get Message 
-      @messages = service.list_user_histories('me', start_history_id: current_id).history
-      @messages.each do |message|
-        @messageId = message.first.messages.first.id
+    def self.parse_histories_for_messages(messages, service)
+      messages.each do |message| 
+        @messageId = message.id
         service.get_user_message('me', @messageId) do |res, err| 
           if err 
             nil
@@ -196,7 +178,36 @@ Google::Apis::RequestOptions.default.retries = 5
           end
         end
       end
-      @user.google_token.update_attributes(history_id: historyId)
+    end
+
+    def self.create_message(historyId, current_user, current_id)
+      token = current_user.google_token.access_token
+      refresh_token = current_user.google_token.refresh_token 
+      client = Signet::OAuth2::Client.new(access_token: token, 
+        refresh_token: refresh_token, 
+        token_credential_uri: 'https://accounts.google.com/o/oauth2/token', 
+        authorization_uri: 'https://accounts.google.com/o/oauth2/auth', 
+        client_id: ENV['GOOGLE_CLIENT_ID'],
+        client_secret: ENV['GOOGLE_CLIENT_SECRET'],
+        scope: ['email', 
+          'https://www.googleapis.com/auth/gmail.compose'],
+        grant_type: 'authorization_code')
+      service = Google::Apis::GmailV1::GmailService.new
+      service.authorization = client
+      #Get Message 
+      @histories = service.list_user_histories('me', start_history_id: current_id).history
+      
+      if @histories.count > 1 
+        @histories.each do |history|
+          @messages = history.messages
+          parse_histories_for_messages(@messages)
+        end
+      elsif @histories.count == 1  
+        @messages = @histories.messages
+        parse_histories_for_messages(@messages)
+      end
+      
+      current_user.google_token.update_attributes(history_id: historyId)
     end
 
     def self.get_messages(current_user)
@@ -210,14 +221,11 @@ Google::Apis::RequestOptions.default.retries = 5
         client_id: ENV['GOOGLE_CLIENT_ID'],
         client_secret: ENV['GOOGLE_CLIENT_SECRET'],
         scope: ['email', 
-          'https://www.googleapis.com/auth/gmail.compose',
-          'https://www.googleapis.com/auth/gmail.modify'],
+          'https://www.googleapis.com/auth/gmail.compose'],
         grant_type: 'authorization_code')
-
 
       service = Google::Apis::GmailV1::GmailService.new
       service.authorization = client
-      service.get_user_message('me', "15fe98b062dd2013")
     end
   end
 
