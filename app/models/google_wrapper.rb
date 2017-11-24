@@ -73,7 +73,9 @@ Google::Apis::RequestOptions.default.retries = 5
         authorization_uri: 'https://accounts.google.com/o/oauth2/auth', 
         client_id: ENV['GOOGLE_CLIENT_ID'],
         client_secret: ENV['GOOGLE_CLIENT_SECRET'],
-        scope: [],
+        scope: ['email', 
+          'https://www.googleapis.com/auth/gmail.send',
+          'https://www.googleapis.com/auth/gmail.compose'],
         grant_type: 'authorization_code')
          
       
@@ -189,7 +191,8 @@ Google::Apis::RequestOptions.default.retries = 5
         authorization_uri: 'https://accounts.google.com/o/oauth2/auth', 
         client_id: ENV['GOOGLE_CLIENT_ID'],
         client_secret: ENV['GOOGLE_CLIENT_SECRET'],
-        scope: [
+        scope: ['email', 
+          'https://www.googleapis.com/auth/gmail.compose',
           'https://www.googleapis.com/auth/gmail.modify'],
         grant_type: 'authorization_code')
       service = Google::Apis::GmailV1::GmailService.new
@@ -220,13 +223,14 @@ Google::Apis::RequestOptions.default.retries = 5
         authorization_uri: 'https://accounts.google.com/o/oauth2/auth', 
         client_id: ENV['GOOGLE_CLIENT_ID'],
         client_secret: ENV['GOOGLE_CLIENT_SECRET'],
-        scope: [
+        scope: ['email', 
+          'https://www.googleapis.com/auth/gmail.compose',
           'https://www.googleapis.com/auth/gmail.modify'],
         grant_type: 'authorization_code')
 
       service = Google::Apis::GmailV1::GmailService.new
       service.authorization = client
-
+    end
   end
 
   class Calendar
