@@ -63,7 +63,7 @@ gem 'googlecharts'
 
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-google-oauth2'
-gem 'google-api-client', '0.9'
+gem 'google-api-client', '~> 0.11'
 gem 'google-cloud-pubsub'
 gem 'signet', '~> 0.7.3'
 gem 'microsoft_graph', github: 'loganh0522/msgraph-sdk-ruby'
