@@ -22,7 +22,7 @@ class InboundEmailsController < ApplicationController
     @current_id = @user.google_token.history_id
 
     if @historyId != @current_id
-      GoogleWrapper::Gmail.create_message(@historyId, @user, @current_id)
+      # GoogleWrapper::Gmail.create_message(@historyId, @user, @current_id)
     end
   end
 
