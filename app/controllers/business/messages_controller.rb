@@ -11,20 +11,9 @@ class Business::MessagesController < ApplicationController
   # include AuthHelper
 
   def index
-    if params[:application_id].present?
-      @candidate = Application.find(params[:application_id]).candidate
-      @messages = @candidate.messages
-    elsif params[:candidate_id].present?
-      @candidate = Candidate.find(params[:candidate_id])
-      @conversation = @candidate.conversation if @candidate.conversation.present?
-      @messages = @conversation.messages if @conversation.present?
-      # @message = OutlookWrapper::Mail.get_messages(current_user)
-    else
-      # token = current_user.outlook_token.access_token
-      # email = current_user.email
-      # @messages = OutlookWrapper::Mail.get_messages(token, email)
-      # @messages = current_user.messages
-    end
+    @candidate = Candidate.find(params[:candidate_id])
+    @conversation = @candidate.conversation if @candidate.conversation.present?
+    @messages = @conversation.messages if @conversation.present?
 
     respond_to do |format| 
       format.js
@@ -34,8 +23,6 @@ class Business::MessagesController < ApplicationController
 
   def new
     @message = Message.new  
-    
-    GoogleWrapper::Gmail.get_messages(current_user)
 
     respond_to do |format|
       format.js
@@ -75,7 +62,6 @@ class Business::MessagesController < ApplicationController
 
   def multiple_messages   
     applicant_ids = params[:applicant_ids].split(',')
-    
     applicant_ids.each do |id| 
       @candidate = Candidate.find(id)
 
@@ -116,22 +102,11 @@ class Business::MessagesController < ApplicationController
     end  
   end
 
-  # def get_thread
-  #   service.get_user_thread('me', "15b4e83fccf315c4").messages.first.payload.body
-  # end
-
   def get_application_thread
     @messages.each do |message| 
       if message.thread_id.present? 
         @thread = GoogleWrapper::Gmail.get_message_thread(message.thread_id, current_user)
         @messages = @thread.messages
-
-        # @messages = []
-        # @thread_messages.each do |message|
-        #   @email = {}
-        #   @email[:body] = message.payload.body.data
-        #   message.payload.headers.each do |header| 
-        #     if header.name == "Date" || "From" || "To" || "Date" || 
       end
     end
   end
