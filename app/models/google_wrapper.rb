@@ -94,17 +94,16 @@ Google::Apis::RequestOptions.default.retries = 5
         @content =  @content.gsub("<br><br><br>", "")
         @msg = @content       
       elsif message.payload.parts.last.mime_type == "text/html"
-        @content =  message.payload.parts.last.body.data.gsub("\r\n", "")
-        @content =  @content.gsub(/\"/, "")
-        @content = @content.split("<div dir=ltr>")[1]
-        @content = @content.split("<div class=gmail_extra>")[0]
-        @content = @content.split("<div class=gmail_signature")[0]
+        @content = message.payload.parts.last.body.data.gsub("\r\n", "")
+        @content = @content.gsub(/\"/, "")
+        @content = @content.split("&lt;<a href=mailto:")[0] if @content.include?("&lt;<a href=mailto:")
+        @content = @content.split('</head>')[1] if @content.include?('</head>')
+        @content = @content.split('<br>Sent from my iPhone')[0] if @content.include?('<br>Sent from my iPhone')
+        @content = @content.split("<div dir=ltr>")[1] if @content.include?("<div dir=ltr>")
+        @content = @content.split("<div class=gmail_extra>")[0] if @content.include?("<div class=gmail_extra>")
+        @content = @content.split("<div class=gmail_signature")[0] if @content.include?("<div class=gmail_signature")
+        @content = @content.split("<div class=gmail_signature")[0] if @content.include?("<div class=gmail_signature")
         @msg = @content
-        # if @content.include?("<div class=gmail_extra>")   
-        # else
-        #   @content = @content.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
-        #   @msg = @content
-        # end
       end
     end
 
@@ -113,9 +112,11 @@ Google::Apis::RequestOptions.default.retries = 5
       if sender == user.google_token.email || sender == user.email
         @msg_present = Message.where(email_id: messageId).first.present?
         @candidate = Candidate.where(company_id: company.id, email: to).first      
+        
         if @candidate.present? && !@msg_present
           parse_message(message)
           if @candidate.conversation.present?
+            
             Message.create(conversation_id: @candidate.conversation.id, 
               body: @msg, subject: subject, email_id: messageId, thread_id: threadId, 
               user_id: user.id)
@@ -159,7 +160,7 @@ Google::Apis::RequestOptions.default.retries = 5
           if res.present?
             @message = res
             @threadId = @message.thread_id
-            @subject = get_gmail_attribute(@message, "Subject")
+            @subject = get_gmail_attribute(@message, "Subject") 
             if get_gmail_attribute(@message, "To").include?(" <")
               @to = get_gmail_attribute(@message, "To").split('<')[1].split('>')[0]
             else 
@@ -188,38 +189,26 @@ Google::Apis::RequestOptions.default.retries = 5
       service.authorization = @client
       #Get Message 
       @histories = service.list_user_histories('me', start_history_id: current_id).history
-      
       if @histories != nil
         if @histories.count > 1 
           @histories.each do |history|
             @messages = history.messages
-            parse_histories_for_messages(@messages)
+            parse_histories_for_messages(@messages, service, current_user)
           end
         elsif @histories.count == 1  
           @messages = @histories.messages
-          parse_histories_for_messages(@messages)
+          parse_histories_for_messages(@messages, service, current_user)
         end
-      end
-      
+      end  
       current_user.google_token.update_attributes(history_id: historyId)
     end
 
-    def self.get_messages(current_user)
+    def self.get_message(current_user, messageId)
       self.set_client(current_user)
       service = Google::Apis::GmailV1::GmailService.new
       service.authorization = @client
-      # @histories = service.list_user_histories('me', start_history_id: 329199).history
-      # @histories = service.list_user_histories('me', start_history_id: 330582).history
-      #   if @histories.count > 1 
-      #     @histories.each do |history|
-      #       @messages = history.messages
-      #       parse_histories_for_messages(@messages, service, current_user)
-      #     end
-      #   elsif @histories.count == 1  
-      #     @messages = @histories.messages
-      #     parse_histories_for_messages(@messages, service, current_user)
-      #   end
-      # end
+
+      @message = service.get_user_message('me', messageId)
     end
   end
 
@@ -252,7 +241,6 @@ Google::Apis::RequestOptions.default.retries = 5
     end
     
     def self.create_event
-
       calendar = Calendar::CalendarService.new
       calendar.authorization = user_credentials_for(Calendar::AUTH_CALENDAR)
 
@@ -271,12 +259,15 @@ Google::Apis::RequestOptions.default.retries = 5
       say "Created event '#{event.summary}' (#{event.id})"
     end
 
-    def schedule
+    def self.get_event
       
     end
 
 
     def self.update_event
+    end
+
+    def self.destroy_event
     end
   end
 end
