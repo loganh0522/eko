@@ -188,6 +188,7 @@ Google::Apis::RequestOptions.default.retries = 5
       service.authorization = @client
       #Get Message 
       @histories = service.list_user_histories('me', start_history_id: current_id).history
+      
       if @histories != nil
         if @histories.count > 1 
           @histories.each do |history|
