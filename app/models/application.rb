@@ -1,18 +1,8 @@
-class Application < ActiveRecord::Base
-  # include Elasticsearch::Model
-  # include Elasticsearch::Model::Callbacks 
-  # index_name ["talentwiz", Rails.env].join('_') 
-
-  # after_commit on: [:update] do
-  #   __elasticsearch__.update_document if self.published?
-  # end
-  
+class Application < ActiveRecord::Base  
   before_create :generate_token
-  
-  
   belongs_to :company
   belongs_to :stage, touch: true
-  belongs_to :candidate, touch: true
+  belongs_to :candidate
   belongs_to :job, touch: true
 
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy
@@ -23,9 +13,12 @@ class Application < ActiveRecord::Base
   has_many :application_scorecards
   
   has_many :question_answers, dependent: :destroy
-  
   accepts_nested_attributes_for :question_answers, allow_destroy: true
-  
+  after_commit :reindex_product
+
+  def reindex_product
+    Candidate.reindex 
+  end
 
   def generate_token
     self.token = SecureRandom.urlsafe_base64
@@ -78,6 +71,8 @@ class Application < ActiveRecord::Base
   def average_rating 
     self.ratings.average(:score).to_f.round(1) if ratings.any?
   end
+
+  
 
   # def current_position
   #   self.applicant.profile.current_position.title

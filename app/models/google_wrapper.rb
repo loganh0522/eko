@@ -103,6 +103,7 @@ Google::Apis::RequestOptions.default.retries = 5
         @content = @content.split("<div class=gmail_extra>")[0] if @content.include?("<div class=gmail_extra>")
         @content = @content.split("<div class=gmail_signature")[0] if @content.include?("<div class=gmail_signature")
         @content = @content.split("<div class=gmail_signature")[0] if @content.include?("<div class=gmail_signature")
+        @content = @content.gsub("<div>", "<br>").gsub('</div>', '')
         @msg = @content
       end
     end
@@ -161,6 +162,7 @@ Google::Apis::RequestOptions.default.retries = 5
             @message = res
             @threadId = @message.thread_id
             @subject = get_gmail_attribute(@message, "Subject") 
+
             if get_gmail_attribute(@message, "To").include?(" <")
               @to = get_gmail_attribute(@message, "To").split('<')[1].split('>')[0]
             else 

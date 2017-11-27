@@ -65,7 +65,7 @@ class Business::CandidatesController < ApplicationController
         elsif params[:job_ids]
           @job = Job.find(params[:job_ids])
           Application.create(candidate: @candidate, job_id: @job.id, company_id: current_company)
-          @applications = @job.applications
+          @candidates = Candidate.search("*", where: {jobs: {all: [@job.id]}}, per_page: 10)
         else
           @candidates = current_company.candidates
         end      
@@ -73,6 +73,7 @@ class Business::CandidatesController < ApplicationController
       else 
         render_errors(@candidate)
       end
+
       @tags = current_company.tags
       @tag = Tag.new
       format.js

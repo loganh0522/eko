@@ -37,7 +37,7 @@
   $('.main-container').html('<%= j render "business/candidates/candidate_table/all_candidates_table", candidates: @candidates %>');
 <% elsif params[:job_ids].present? %> 
   $('#basic-form-modal').modal('hide');
-  $('.main-container').html('<%= j render "business/applications/job_applications/applications_table", applications: @applications %>');
+  $('.main-container').html('<%= j render "business/applications/job_applications/applications_table", candidates: @candidates %>');
 <% else %>
   $('#basic-form-modal').modal('hide');
   $('.main-container').html('<%= j render "business/candidates/candidate_table/all_candidates_table", candidates: @candidates %>');

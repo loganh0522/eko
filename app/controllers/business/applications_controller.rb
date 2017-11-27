@@ -25,11 +25,10 @@ class Business::ApplicationsController < ApplicationController
     where[:created_at] = {gte: params[:date_applied].to_time, lte: Time.now} if params[:date_applied].present?
 
     if params[:qcv].present?
-      @applications = Candidate.search(params[:qcv], where: where, fields: qcv_fields, match: :word_start, per_page: 10, page: params[:page])
+      @candidates = Candidate.search(params[:qcv], where: where, fields: qcv_fields, match: :word_start, per_page: 10, page: params[:page])
     else
-      @applications = Candidate.search(query, where: where, fields: fields, match: :word_start, per_page: 10, page: params[:page])
+      @candidates = Candidate.search(query, where: where, fields: fields, match: :word_start, per_page: 10, page: params[:page])
     end
-
 
     @job = Job.find(params[:job_id])
     # @applications = @job.applications.page(params[:page]).per_page(10)
@@ -55,6 +54,7 @@ class Business::ApplicationsController < ApplicationController
 
     if @application.save
       track_activity @application, "create", params[:candidate_id], params[:application][:job_id]
+
       respond_to do |format|
         format.js
       end
@@ -97,7 +97,7 @@ class Business::ApplicationsController < ApplicationController
       end    
     end
 
-    @applications = @job.applications
+    @candidates = @job.candidates
     # track_activity(@application, "move_stage")
     respond_to do |format|
       format.js
