@@ -95,7 +95,9 @@ Google::Apis::RequestOptions.default.retries = 5
         @msg = @content       
       elsif message.payload.parts.last.mime_type == "text/html"
         @content = message.payload.parts.last.body.data.gsub("\r\n", "")
-        @content = @content.gsub(/\"/, "")
+        @content = @content.gsub(/\"/, "") 
+        @content = @content.gsub("\t", "")
+        @content = @content.split("<div id=Signature>")[0].split("<p>")[1..-1].join() if @content.include?("<div id=Signature>")
         @content = @content.split("&lt;<a href=mailto:")[0] if @content.include?("&lt;<a href=mailto:")
         @content = @content.split('</head>')[1] if @content.include?('</head>')
         @content = @content.split('<br>Sent from my iPhone')[0] if @content.include?('<br>Sent from my iPhone')
@@ -212,6 +214,7 @@ Google::Apis::RequestOptions.default.retries = 5
       service.authorization = @client
 
       @message = service.get_user_message('me', messageId)
+      binding.pry
     end
   end
 
