@@ -104,6 +104,7 @@ Google::Apis::RequestOptions.default.retries = 5
         @content = @content.split("<div class=gmail_signature")[0] if @content.include?("<div class=gmail_signature")
         @content = @content.split("<div class=gmail_signature")[0] if @content.include?("<div class=gmail_signature")
         @content = @content.gsub("<div>", "<br>").gsub('</div>', '')
+        @content = @content.gsub("<br><br><br>", " ") if @content.include?("<br><br><br>")
         @msg = @content
       end
     end
@@ -198,7 +199,7 @@ Google::Apis::RequestOptions.default.retries = 5
             parse_histories_for_messages(@messages, service, current_user)
           end
         elsif @histories.count == 1  
-          @messages = @histories.messages
+          @messages = @histories.first.messages
           parse_histories_for_messages(@messages, service, current_user)
         end
       end  
