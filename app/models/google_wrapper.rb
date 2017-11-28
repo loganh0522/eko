@@ -105,8 +105,8 @@ Google::Apis::RequestOptions.default.retries = 5
         @content = @content.split("<div class=gmail_extra>")[0] if @content.include?("<div class=gmail_extra>")
         @content = @content.split("<div class=gmail_signature")[0] if @content.include?("<div class=gmail_signature")
         @content = @content.split("<div class=gmail_signature")[0] if @content.include?("<div class=gmail_signature")
-        @content = @content.gsub("<div>", "<br>").gsub('</div>', '')
-        @content = @content.gsub("<br><br><br>", " ") if @content.include?("<br><br><br>")
+        @content = @content.gsub("<div>", "<br>").gsub('</div>', "<br>")
+        @content = @content.gsub("<br><br><br>", "") if @content.include?("<br><br><br>")
         @msg = @content
       end
     end
@@ -180,7 +180,12 @@ Google::Apis::RequestOptions.default.retries = 5
 
             @user = current_user
             @company = current_user.company
-            save_message(@message, @messageId, @threadId, @subject, @to, @sender, @company, @user) 
+
+            if @message.label_ids.include?("DRAFT")
+              return nil
+            else
+              save_message(@message, @messageId, @threadId, @subject, @to, @sender, @company, @user) 
+            end
           else
             nil
           end

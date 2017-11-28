@@ -23,6 +23,8 @@ class Business::MessagesController < ApplicationController
 
   def new
     @message = Message.new  
+
+    # GoogleWrapper::Gmail.get_message(current_user, "16003fe8a0356c28" )
     
     respond_to do |format|
       format.js
