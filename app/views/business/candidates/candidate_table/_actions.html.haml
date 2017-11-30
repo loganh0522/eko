@@ -1,4 +1,5 @@
 .application-actions
+  = link_to 'Add Candidate', new_business_candidate_path(:job => @job), class: "btn border-button2", id: "add-applicant", remote: true
   .no-action-buttons
     .btn.glyphicon.glyphicon-trash.border-button
     .btn.border-button Send E-mail

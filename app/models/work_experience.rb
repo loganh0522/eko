@@ -2,7 +2,6 @@
   belongs_to :user, touch: true
   belongs_to :profile, touch: true
   belongs_to :candidate, touch: true
-
   has_many :exp_industries
   has_many :industries, through: :exp_industries
   has_many :exp_functions

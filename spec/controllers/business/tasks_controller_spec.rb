@@ -53,7 +53,6 @@ describe Business::TasksController do
         expect(job.tasks.first).to eq(job_task)
       end
     end
-
     context "@candidate in params" do 
       before do  
         set_current_user(alice)
@@ -63,20 +62,17 @@ describe Business::TasksController do
         candidate
         candidate_task
         xhr :get, :index, candidate_id: candidate.id
-      end
-      
+      end 
       it "sets the @comments to the current Candidate" do 
         expect(candidate.tasks.count).to eq(1)
       end
       it "sets the @comments to the current Job" do 
         expect(candidate.tasks.first.title).to eq(candidate_task.title)
       end
-
       it "only renders candidates that belong to Candidate" do
         expect(candidate.tasks.first).to eq(candidate_task)
       end
     end
-
     context "@application in params" do 
       before do  
         set_current_user(alice)
@@ -95,7 +91,6 @@ describe Business::TasksController do
       it "sets the @tasks to the open_tasks for the Application" do 
         expect(application.tasks.first.title).to eq(application_task.title)
       end
-
       it "only renders tasks that belong to Application" do
         expect(application.tasks.first).to eq(application_task)
       end

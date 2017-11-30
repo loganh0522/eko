@@ -100,6 +100,17 @@ Rails.application.routes.draw do
     resources :logos
     resources :background_images
     resources :analytics
+    resources :orders
+    resources :order_items
+    resources :conversations
+    resources :rejection_reasons
+    resources :invitations
+    resources :locations 
+    resources :application_emails
+    resources :notifications
+    resources :interviews
+    resources :email_templates
+
     post "update_password", to: 'users#update_password'
     post 'create_subscription', to: 'users#create_subscription'
 
@@ -113,17 +124,6 @@ Rails.application.routes.draw do
         post :create_multiple, to: "tasks#create_multiple"
       end
     end
-
-    resources :orders
-    resources :order_items
-    resources :conversations
-    resources :rejection_reasons
-    resources :invitations
-    resources :locations 
-    resources :application_emails
-    resources :notifications
-    resources :interviews
-    resources :email_templates
 
     resources :companies do 
       resources :tasks
@@ -216,6 +216,7 @@ Rails.application.routes.draw do
       collection do 
         get :autocomplete
       end
+      
       resources :interview_invitations
       resources :work_experiences
       resources :interviews

@@ -2,8 +2,8 @@
 
 #main-container
   #padding
-    = render "business/candidates/app_new_modal"
     = render 'business/applications/job_applications/all_applications_table'
+
 
 = render "business/applications/move_stages"
 = render "business/comments/add_comment"
@@ -23,9 +23,3 @@
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
         %h4.modal-title
     
-.modal#right-modal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title

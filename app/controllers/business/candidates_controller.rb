@@ -32,10 +32,8 @@ class Business::CandidatesController < ApplicationController
     else
       @candidates = Candidate.search(query, where: where, fields: fields, match: :word_start, per_page: 10, page: params[:page])
     end
-
-    @invitation = InterviewInvitation.new
     @tags = current_company.tags
-
+    
     respond_to do |format|
       format.js
       format.html
@@ -61,13 +59,13 @@ class Business::CandidatesController < ApplicationController
         if params[:job_id].present? 
           @job = Job.find(params[:job_id])
           Application.create(candidate: @candidate, job_id: @job.id, company_id: current_company)
-          @candidates = current_company.candidates
+          @candidates = Candidate.search("*", per_page: 10)
         elsif params[:job_ids]
           @job = Job.find(params[:job_ids])
           Application.create(candidate: @candidate, job_id: @job.id, company_id: current_company)
           @candidates = Candidate.search("*", where: {jobs: {all: [@job.id]}}, per_page: 10)
         else
-          @candidates = current_company.candidates
+          @candidates = Candidate.search("*", per_page: 10) 
         end      
         add_tags(@candidate)
       else 
@@ -75,7 +73,6 @@ class Business::CandidatesController < ApplicationController
       end
 
       @tags = current_company.tags
-      @tag = Tag.new
       format.js
     end
   end
@@ -92,7 +89,6 @@ class Business::CandidatesController < ApplicationController
     respond_to do |format|
       format.html { 
         @candidates = current_company.candidates.where(id: params[:id])
-        @tag = Tag.new
         @tags = current_company.tags
         render action: :index 
       }
@@ -124,9 +120,10 @@ class Business::CandidatesController < ApplicationController
   def destroy
     @candidate = Candidate.find(params[:id])
     @candidate.destroy 
-    @candidates = current_company.candidates
+
+
+    @candidates = Candidate.search("*", per_page: 10, page: params[:page])
     @tags = current_company.tags
-    @tag = Tag.new
     
     respond_to do |format|
       format.js
@@ -135,15 +132,14 @@ class Business::CandidatesController < ApplicationController
 
   def destroy_multiple
     @ids = params[:applicant_ids].split(',')
-    
+
     @ids.each do |id| 
       candidate = Candidate.find(id)
       candidate.destroy
     end
-    
-    @candidates = current_company.candidates
+    @candidates = Candidate.search("*", where: {company_id: current_company.id}, per_page: 10)
     @tags = current_company.tags
-    @tag = Tag.new
+
     respond_to do |format|
       format.js
     end 
@@ -175,10 +171,8 @@ class Business::CandidatesController < ApplicationController
           end
         end 
       end
-      
     end
   end
-
 
   def render_errors(candidate)
     @errors = []

@@ -58,8 +58,6 @@ gem "font-awesome-rails"
 
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
-gem 'googlecharts'
-
 
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-google-oauth2'
@@ -81,7 +79,6 @@ gem "simple_calendar", "~> 2.0"
 gem 'jquery-timepicker-rails'
 gem 'declarative_authorization'
 gem 'searchkick'
-
 gem 'chartkick'
 gem 'groupdate'
 

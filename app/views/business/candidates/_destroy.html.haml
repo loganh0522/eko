@@ -3,8 +3,7 @@
     .modal-content
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title Delete Candidates
-      
+        %h4.modal-title Delete Candidates  
       = form_tag destroy_multiple_business_candidates_path, :method => "delete", remote: true do
         .modal-body
           .email-area
@@ -16,6 +15,6 @@
             = hidden_field_tag :applicant_ids      
         .modal-footer 
           = submit_tag "Delete All", class: "btn danger-btn"
-          .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+          .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
           
           

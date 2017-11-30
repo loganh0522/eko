@@ -2,7 +2,7 @@
   = form_for @task, :url => create_multiple_business_tasks_path, remote: true do |f|
     .email-area
       .to 
-        .title Tag:  
+        .title  
         .recipients 
     .form-row
       = f.text_field :title, id: "title_Block", placeholder: 'Enter Task Title', autocomplete: 'off', class: "no-border-input"

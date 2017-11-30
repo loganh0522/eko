@@ -6,8 +6,11 @@
   .application-actions
     = render 'business/applications/job_applications/application_actions'
   .main-container 
-    = render 'business/applications/job_applications/applications_table'
-  
+    .all-candidates-table
+      = render 'business/applications/job_applications/applications_table'    
+    .pagination-container
+      = render 'business/candidates/candidate_table/pagination'
+
 
 
 

@@ -20,8 +20,6 @@ jQuery ->
     
     $(this).addClass 'active-price'
     $(this).css background: 'rgb(239, 122, 43)'
-
-    console.log($targetContainer)
     changeContainer $targetContainer
     return
 

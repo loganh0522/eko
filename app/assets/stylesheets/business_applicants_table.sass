@@ -134,37 +134,40 @@
     float: right
     height: 35px
     padding: 8px 15px 10px 15px
-.pagination
-  margin: 0 30%
-  width: auto
-  height: 22px
-  a, span, em 
-    padding: 0.2em 0.5em
-    display: block
-    float: left
-    margin-right: 1px
-  a 
-    text-decoration: none
-    color: #EF7B2B
-    &:hover, &:focus 
+.pagination-container
+  width: 100%
+  .pagination
+    margin: 0 auto
+    width: fit-content
+    display: inherit
+    height: 22px
+    a, span, em 
+      padding: 0.2em 0.5em
+      display: block
+      float: left
+      margin-right: 1px
+    a 
+      text-decoration: none
+      color: #EF7B2B
+      &:hover, &:focus 
+        background: rgba(239, 122, 43, 0.3)
+    .disabled 
+      display: none
+    .current
+      font-style: normal
+      font-weight: bold
       background: rgba(239, 122, 43, 0.3)
-  .disabled 
-    display: none
-  .current
-    font-style: normal
-    font-weight: bold
-    background: rgba(239, 122, 43, 0.3)
-    color: #EF7B2B
-  .page_info 
-    color: #EF7B2B
-    padding: 0.4em 0.6em
-    width: 22em
-    margin-bottom: 0.3em
-    text-align: center
-    b 
-      color: #000033
-      background: #2e6ab1 + 60
-      padding: 0.1em 0.25em
+      color: #EF7B2B
+    .page_info 
+      color: #EF7B2B
+      padding: 0.4em 0.6em
+      width: 22em
+      margin-bottom: 0.3em
+      text-align: center
+      b 
+        color: #000033
+        background: #2e6ab1 + 60
+        padding: 0.1em 0.25em
 
  
 .applicants 

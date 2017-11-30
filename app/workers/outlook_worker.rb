@@ -1,7 +1,7 @@
 class OutlookWorker 
   include Sidekiq::Worker 
 
-
-  def perform
+  def perform(user)
+    
   end
 end

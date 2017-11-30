@@ -173,7 +173,6 @@ GEM
       multi_json (~> 1.11)
       os (~> 0.9)
       signet (~> 0.7)
-    googlecharts (1.6.12)
     googledocviewer (1.7.5)
       jquery-rails
     groupdate (3.2.0)
@@ -223,7 +222,7 @@ GEM
       railties (>= 3.1.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
-    json (1.8.6)
+    json (2.0.4)
     jwt (1.5.6)
     launchy (2.4.3)
       addressable (~> 2.3)
@@ -451,7 +450,6 @@ DEPENDENCIES
   geocomplete_rails
   google-api-client (~> 0.11)
   google-cloud-pubsub
-  googlecharts
   googledocviewer
   groupdate
   haml-rails
