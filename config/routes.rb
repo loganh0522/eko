@@ -28,11 +28,9 @@ Rails.application.routes.draw do
 
   resources :contact_messages, only: [:new, :create]
   resources :demos, only: [:new, :create]
-
   resources :interview_invitations, only: [:show]
   resources :interviews
   get 'schedule_interview/:token', to: 'interviews#show', as: 'schedule_interview'
-
 
   resources :job_boards
   resources :jobs do 
@@ -43,23 +41,23 @@ Rails.application.routes.draw do
   resources :companies
   resources :users
   resources :profiles, only: [:index, :new, :create]
-  
+  resources :skills 
+  resources :certifications
 
   get 'login', to: "sessions#new"
-  get '/job_seekers/new', to: 'users#new_job_seeker'
+  get '/job_seeker_signup', to: 'users#new_job_seeker'
+  post '/job_seeker_signup', to: "users#create_job_seeker"
   get '/account/new', to: 'companies#new'
   
+
   match '/widgets/:action/:widget_key', via: [:get], :controller => 'widgets', :widget_key => /.*/
+  
   
   post :incoming_email, to: "inbound_emails#create"
   post '/publish/google-pub-sub-messages', to: "inbound_emails#gmail_webhook"
   post '/api/watch/outlookNotification', to: "inbound_emails#outlook_webhook"
   
-  resources :skills 
-  resources :certifications
-
-
-  post 'create_profile', to: "users#create_job_seeker"
+  
 
   namespace :job_seeker do 
     root to: "jobs#index"
@@ -70,7 +68,7 @@ Rails.application.routes.draw do
       resources :applications
       resources :candidates, only: [:index, :new, :create]
     end
-
+    resources :attachments
     resources :question_answers 
     resources :users
     resources :background_images

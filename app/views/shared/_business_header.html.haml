@@ -16,13 +16,13 @@
         - if permitted_to? :read, :business_clients
           %li
             = link_to business_interviews_path do
-              .glyphicon.glyphicon-calendar
+              %i.fa.fa-calendar
         %li
           = link_to business_conversations_path do
-            .glyphicon.glyphicon-envelope
+            %i.fa.fa-envelope-o
         %li
           = link_to business_analytics_path do
-            .glyphicon.glyphicon-signal
+            %i.fa.fa-line-chart
         / %li 
         /   = link_to business_notifications_path do
         /     .glyphicon.glyphicon-globe

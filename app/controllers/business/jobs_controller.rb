@@ -152,8 +152,19 @@ class Business::JobsController < ApplicationController
   end
 
   def autocomplete
-    render :json => Job.search(params[:term], where: {company_id: current_company.id}, 
-      fields: [{title: :word_start}])
+    if params[:query] == '' 
+      query = "*"
+    else
+      query = params[:query]
+    end
+    @jobs = Job.search(query, where: {status: "open", company_id: current_company.id}, 
+      fields: [{full_name: :word_start}])
+    @job = Job.find(params[:job_id]) if params[:job_id].present?
+
+    respond_to do |format|
+      format.json { render json: @jobs.as_json(only: [:title, :id])}
+      format.js {@jobs.to_a}
+    end
   end
 
   private 

@@ -1,54 +1,62 @@
-= form_for [:job_seeker, @work_experience], html: {remote: true, class: 'profile-form'} do |f|
+= form_for [:job_seeker, @work_experience], remote: true do |f|
   .modal-body
-    .fieldset
-      .row
-        .col-md-6
+    .column-6
+      .form-row-no-border
+        .contain-50
           = f.label "Title"
-          = f.text_field :title, id: "title_Block", class: "form-control", placeholder: "Job Title", hide_label: true
+          = f.text_field :title, id: "title_Block", placeholder: "Job Title", hide_label: true
           %span#title_msgBlock
-        .col-md-6
+        .contain-50
           = f.label "Company"
-          = f.text_field :company_name, id: "company_name_Block", class: "form-control", placeholder: "Company Name", hide_label: true
+          = f.text_field :company_name, id: "company_name_Block", placeholder: "Company Name", hide_label: true
           %span#company_name_msgBlock
-      .row
-        .col-md-6
+      .form-row-no-border
+        .contain-50
           = f.label "Industry"
           = f.collection_select(:industry_ids, Industry.all, :id, :name, hide_label: true, prompt: "Select Industry")
-          %span#industry_ids_Block.help-block
-        .col-md-6
+          %span#industry_ids_msgBlock
+        .contain-50
           = f.label "Job Function"
           = f.collection_select(:function_ids, Function.all, :id, :name, hide_label: true, prompt: "Select Job Function")
-          %span#function_ids_Block.help-block
-      .row
-        .col-md-3.col-xs-6.col-sm-6
+          %span#function_ids_msgBlock
+      .form-row-no-border
+        .contain-25
           = f.label "Start Date"
           = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
-          %span#start_month_Block.help-block
-        .col-md-3.col-xs-6.col-sm-6
+          %span#start_month_msgBlock
+        .contain-25
           = f.label "Year"
-          = f.select(:start_year, 1960..2020)
-          %span#start_year_Block.help-block
-        .col-md-3.col-xs-6.col-sm-6
-          = f.label "End Date"
+          = f.text_field :start_year
+          %span#start_year_msgBlock
+        .contain-25
+          = f.label :end_month, "End Date"
           = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
-          %span#end_year_Block.help-block
-        .col-md-3.col-xs-6.col-sm-6
-          = f.label  "Year"
-          = f.select(:end_year, 1960..2020)
-          %span#end_month_Block.help-block
-
-      .row 
-        .col-sm-6.col-md-offset-6
+          %span#end_year_msgBlock
+        .contain-25
+          = f.label :end_year, "Year"
+          = f.text_field :end_year
+          %span#end_month_msgBlock
           = f.check_box :current_position, checked_value: 1, unchecked_value: 0
-          = f.label "Current Position"
-          %span#current_position_Block.help-block
-      .row
-        .col-md-12
-          = f.label "Description"
-          = f.text_area :description, rows: 5, hide_label: true, placeholder: "Description"
-          %span#description_Block.help-block
+          = f.label :current_position, "Current Position"
+      .form-row-no-border
+        = f.label "Description"
+        = f.text_area :description, rows: 5, placeholder: "Description"
+        %span#description_Block
+    .column-4
+      .column-container
+        .title Accomplishments
+        = link_to_add_fields "+ Accomplishment", f, :accomplishments
+        = f.fields_for :accomplishments do |a|
+          = render 'accomplishment_fields', f: a 
+      .column-container
+        .title Skills Used
+        = text_field_tag '', '', :class => 'ui-autocomplete-input skills', :placeholder => 'Add a Skill', id: "tag_name", hide_label: true
+        #search-results-tags  
+        .btn#add-tag-button Add
+        = hidden_field_tag :skills
+
   .modal-footer
     = f.submit @work_experience.new_record? ? "Add Experience" : "Update", class: "btn submit-button"
-    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
 
 

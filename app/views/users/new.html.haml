@@ -1,22 +1,26 @@
 .business-registration
-  .header
-    %img.logo(src="/tmp/logo.jpg")
-    %h2 Sign Up Today
-  .body
-    = form_for @user do |f|
-      %fieldset
-        = f.text_field :first_name, placeholder: "First Name", hide_label: true
-        = f.text_field :last_name, placeholder: "Last Name", hide_label: true
-        = f.email_field :email, placeholder: "Email Address", hide_label: true
-        = f.password_field :password, placeholder: "Password", hide_label: true
-        = f.password_field :password_confirmation, placeholder: "Confirm Password", hide_label: true
-        = f.hidden_field :kind, :value => 'business'
-        - if @invitation.present?
-          = hidden_field_tag :invitation_token, @invitation_token 
-          = f.hidden_field :role, value: @invitation.user_role 
-        - else 
-          = f.hidden_field :role, value: "Admin"
-        = f.submit "Sign me up", class: "btn submit-button"
-    %p
-      Already have an account? 
-      = link_to 'Log In Here', '/login'
+  = form_for @user do |f|
+    .standard-header
+      %h2 Sign Up Today
+    .body
+      = f.text_field :first_name, placeholder: "First Name", hide_label: true
+      = show_errors(@user, :first_name) 
+      = f.text_field :last_name, placeholder: "Last Name", hide_label: true
+      = show_errors(@user, :last_name) 
+      = f.email_field :email, placeholder: "Email Address", hide_label: true
+      = show_errors(@user, :email) 
+      = f.password_field :password, placeholder: "Password", hide_label: true
+      = show_errors(@user, :password) 
+      
+      = f.hidden_field :kind, :value => 'business'
+      - if @invitation.present?
+        = hidden_field_tag :invitation_token, @invitation_token 
+        = f.hidden_field :role, value: @invitation.user_role 
+      - else 
+        = f.hidden_field :role, value: "Admin"
+    .container-footer  
+      .have-account
+        Already have an account? 
+        %br
+        = link_to "Sign In", login_path, remote: true
+      = f.submit "Sign me up", class: "btn submit-button"

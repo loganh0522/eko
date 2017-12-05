@@ -2,5 +2,7 @@
 - if position.user_skills.present?
   - position.user_skills.each do |skill|
     = render 'job_seeker/user_skills/skill', skill: skill, position: position
+  %br
+  .skill-form
 - else
   .name No skills listed

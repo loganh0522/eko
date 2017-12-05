@@ -1,0 +1,22 @@
+.project-container{id: "project_#{project.id}"}
+  - if project.attachments.first.file_type.start_with? 'image'
+    .project-image= image_tag project.attachments.first.file.small_image
+  - elsif project.attachments.first.file_image.present?
+    .project-image= image_tag project.attachments.first.file_image
+  - else 
+    .project-image= image_tag project.attachments.first.file.xs_images
+  .project-body
+    .project-header
+      .title= link_to "#{project.title}", job_seeker_project_path(project.id), remote: true
+      .dropdown
+        .dropdown-button
+          %i.fa.fa-ellipsis-h.fa-lg
+        .dropdown-content#myDropdown
+          = link_to edit_job_seeker_project_path(project.id), remote: true do
+            %i.fa.fa-pencil
+            .action Edit
+          = link_to job_seeker_project_path(project.id), remote: true, :method => :delete do  
+            %i.fa.fa-trash-o
+            .action Destroy     
+    .description= project.description
+ 

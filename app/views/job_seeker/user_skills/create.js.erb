@@ -1,4 +1,9 @@
-$('#new_user_skill').remove();
-$("#work_experience_<%= @work_experience.id %>").find('.skills').html('<%= j render "job_seeker/user_skills/skills", position: @work_experience %>')
-
-
+<% if @errors.present? %>
+  <% @errors.each do |error| %>
+    $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+    $('#skills_name').addClass('has-error');
+  <% end %>
+<% else %>
+  $('#new_user_skill').remove();
+  $("#work_experience_<%= @work_experience.id %>").find('.skills').html('<%= j render "job_seeker/user_skills/skills", position: @work_experience %>')
+<% end %>

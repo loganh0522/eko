@@ -1,0 +1,15 @@
+.attachment-container{id: "attachment_#{attachment.id}"}
+  .image
+    - if attachment.file_type.start_with? 'image'
+      = image_tag attachment.file.thumb
+    - elsif attachment.file_image.present?
+      = image_tag attachment.file_image
+    - else 
+      = image_tag attachment.file.xs_image
+
+  .title= attachment.title
+  .actions 
+    = link_to edit_job_seeker_attachment_path(attachment.id), remote: true do
+      %i.fa.fa-pencil
+    = link_to job_seeker_attachment_path(attachment.id), remote: true, :method => :delete do  
+      %i.fa.fa-trash-o

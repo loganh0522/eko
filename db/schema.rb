@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171125125101) do
+ActiveRecord::Schema.define(version: 20171203130045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,19 @@ ActiveRecord::Schema.define(version: 20171125125101) do
     t.integer "user_id"
     t.integer "assignable_id"
     t.string  "assignable_type"
+  end
+
+  create_table "attachments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.string   "link"
+    t.string   "file"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "file_type"
+    t.string   "file_image"
   end
 
   create_table "background_images", force: :cascade do |t|
@@ -663,6 +676,17 @@ ActiveRecord::Schema.define(version: 20171125125101) do
     t.integer "user_id"
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "work_experience_id"
+    t.integer "education_id"
+    t.string  "title"
+    t.text    "description"
+    t.text    "problem"
+    t.text    "solution"
+    t.text    "role"
+  end
+
   create_table "question_answers", force: :cascade do |t|
     t.text    "body"
     t.integer "question_id"
@@ -805,6 +829,7 @@ ActiveRecord::Schema.define(version: 20171125125101) do
     t.string  "name"
     t.integer "company_id"
     t.integer "candidate_id"
+    t.integer "project_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -868,6 +893,7 @@ ActiveRecord::Schema.define(version: 20171125125101) do
     t.integer "skill_id"
     t.integer "profile_id"
     t.integer "work_experience_id"
+    t.integer "project_id"
   end
 
   create_table "users", force: :cascade do |t|

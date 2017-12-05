@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  validates_presence_of :first_name, :last_name, :email, :password, :on => [ :create ]
+  validates_presence_of :first_name, :last_name, :email, :password, :phone, :on => [ :create ]
   validates_presence_of :first_name, :last_name, :email, :on => [ :update ]
   validates_uniqueness_of :email, :on => [ :create, :update ]
   validates_presence_of :password, :confirmation, :on => [:update_password]
@@ -54,6 +54,7 @@ class User < ActiveRecord::Base
   has_many :social_links
   has_many :user_skills
   has_many :skills, through: :user_skills
+  has_many :projects
 
   validates_associated :social_links
   validates_associated :work_experiences

@@ -1,11 +1,9 @@
-<% if @accomplishment.valid? %>
+<% if @errors.present? %>
+  <% @errors.each do |error| %>
+    $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+    $('#<%= error[0] %>_Block').addClass('has-error');
+  <% end %>
+<% else %>
   $('#new_accomplishment').remove();
   $("#work_experience_<%= @work_experience.id %>").find('.accomplishments').html('<%= j render "job_seeker/accomplishments/all_accomplishments", position: @work_experience %>');
-<% else %>
-  $(".notice").remove();
-  $('.form-group').removeClass('has-error');
-  <% if @errorBody[0] != nil %>
-    $("#body_Block").append('<div class="notice"><%= escape_javascript(@errorBody[0])%></div>')
-    $("#body_Block").parent().find('.form-group').addClass('has-error');
-  <%end%>
-<%end%>
+<% end %>

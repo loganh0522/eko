@@ -1,0 +1,4 @@
+- current_company.open_jobs.each do |job|
+  .user{:data => {id: job.id, kind: "user"}}
+    .name= job.title
+    .add-user-btn Add

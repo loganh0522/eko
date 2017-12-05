@@ -10,10 +10,12 @@
         = link_to "+ Invite New User", new_business_invitation_path(job: @job), class: 'btn border-button', remote: true
         .add-team-member-search
           .show-hidden-search-box  
-            = link_to "+ Team Member", "#", class: 'btn border-button'  
+            .btn.border-button + Team Member
           .hidden-search-box
             = form_tag autocomplete_business_users_path, :method => 'get', id: "search-form" do
-              = text_field_tag "query", nil, placeholder: "Search Users", class: "search-field-auto", autocomplete: 'off'
+              .search-area-content
+                %i.fa.fa-search.fa-stack-2x
+                = text_field_tag "query", nil, placeholder: "Search Users", class: "search-field-auto", autocomplete: 'off'
               = hidden_field_tag :job_id, @job.id
             #search-results-users
             .users

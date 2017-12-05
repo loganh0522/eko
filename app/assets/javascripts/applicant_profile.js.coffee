@@ -1,5 +1,5 @@
 jQuery ->
-
+  
   $('#embedURL').gdocsViewer({width :'400',height : '500'})
   
   $('#main-container').on 'click', '.applicant-checkbox', (event) ->
@@ -10,6 +10,11 @@ jQuery ->
       $('.applicant-action-buttons').hide()
       $('.no-action-buttons').show()
     return
+
+  $('#task_due_date2').datepicker
+      dateFormat: 'yy-mm-dd'
+  $('#timepicker').timepicker()
+
 
   $('#main-container').on 'click', '#Select_All', (event) ->
     if $('.applicants').find('#select_all :checked').size() > 0
@@ -27,21 +32,10 @@ jQuery ->
       $(this).css({'z-index':'1070'})
       $('.modal-backdrop').last().css({'z-index':'1060'})
         
-########### jquery selectmenu #######
-
-#########  #############
-  $('#task_due_date2').datepicker
-      dateFormat: 'yy-mm-dd'
-  $('#timepicker').timepicker()
-
 
 ######### Scorecard JS #########
   $(document).ajaxComplete ->   
-    $('#task_due_date').datepicker  
-      dateFormat: 'yy-mm-dd'
-    $('#timepicker').timepicker()
-    $('#timepicker2').timepicker()
-    $("#geocomplete2").geocomplete()
+    
 
 
 ############ Move Applicant Stages ###############
@@ -56,14 +50,8 @@ jQuery ->
 
   
 ###################### Insert Fluid Variable into E-mail #####################
- 
-
-
-#################### Select All & Show Button's on Select ###################
 
   
-
-
 #################### Add Applicants To Modal On Action Click #############################
   
   $('.multi-form').on 'shown.bs.modal', ->
@@ -150,27 +138,36 @@ jQuery ->
   
   $("#geocomplete2").geocomplete()
 
-
-  $(document).ajaxComplete ->
-    $('.work-experience').find('#geocomplete').geocomplete({
-      types: ['(cities)']
-    })
-    $('#geocomplete').geocomplete({
-      types: ['(cities)']
-    })
-    $("#geocomplete2").geocomplete()
-    return
-    
-    $("#geocomplete-address").geocomplete({
-      types: ['(address)']
-    })
-    
   $('#basic-form-modal').on 'shown.bs.modal', ->
     $('.event-form').find("#geocomplete2").geocomplete()
   
   $('#find').click ->
     $('input').trigger 'geocode'
     return
+
+  $(document).ajaxComplete ->
+    $('.work-experience').find('#geocomplete').geocomplete({
+      types: ['(cities)']
+    })
+    
+    $('#geocomplete').geocomplete({
+      types: ['(cities)']
+    })
+    
+    $("#geocomplete2").geocomplete()
+    return
+    
+    $("#geocomplete-address").geocomplete({
+      types: ['(address)']
+    })
+
+    $('#task_due_date').datepicker  
+      dateFormat: 'yy-mm-dd'
+    $('#timepicker').timepicker()
+    $('#timepicker2').timepicker()
+    $("#geocomplete2").geocomplete()
+    
+ 
 
 
 ################## Sort Stages ####################
@@ -196,7 +193,7 @@ jQuery ->
       $.post($(this).data('update-url'), $(this).sortable('serialize'))
   $("#stages").disableSelection()
 
-################# Close Form ######################
+################# CloseForm ######################
   
   $('#main-container').on 'click', '.close-form', (event) ->   
     if $(this).attr('id') == 'edit-form'
@@ -264,26 +261,10 @@ jQuery ->
       $('#work_experience_end_month').show()
       $('#work_experience_end_year').show()
 
-############## Show Tag Button #################
-  $('#main-container').on 'click', '#add-tag-button', (event) ->
-    tagName = $('#tag_name').val()
-    values =  $('#tags').val() + ',' + tagName 
-    
-    if $('#tags').val() == ''
-      $('#tags').val tagName
-    else
-      $('#tags').val values   
-    $('#tags_to_add').append('<div class="user-tag"> <div class="name">' + tagName  + '</div> <div class="delete-tag"> &times </div> </div>') 
-    $('#tag_name').val('')
 
 
-################# JQuery File Upload ######################
 
-  $('#userProfilePictureModal').on 'click', (event) -> 
-    $('#new_user_avatar').fileupload()
-
-
-################ Job Board Layout Modal ###############
+# Job Board Layout Modal 
   
   $('#jobBoardRowModal').on 'click', '#layout-form', (event) ->
     $('.job-board-form').hide()
@@ -297,13 +278,12 @@ jQuery ->
     $('#jobBoardRowModal').find('.active').removeClass('.active')
     $(this).addClass('.active')
 
-
   $(document).on 'keyup', '.number-only', (event) ->  
     if $.isNumeric($(this).val()) == false
       @value = @value.slice(0, -1)
     return
 
-########## Hidden Search Box #########
+############ HiddenSearch Box 
   $(document).on 'click', '.delete-tag', (event) -> 
     valId = $(this).parent().data('id').toString()
     
@@ -359,5 +339,13 @@ jQuery ->
     $(this).parent().parent().hide()
 
   
-  
+######## Dropdown
+  $(document).on 'click', '.dropdown-button', (e) ->
+    $(this).next('.dropdown-content').show()
+    e.stopPropagation()
+  $(document).on 'click', '.dropdown-content', (e) -> 
+    e.stopPropagation()
+  $(document).click (e) -> 
+    $('.dropdown-content').hide()
+    return
   

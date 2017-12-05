@@ -4,10 +4,17 @@
       .job-position-header-content
         .experience-header 
           .company= position.company_name
-          .edit
-            = link_to "Edit", edit_job_seeker_work_experience_path(position.id), :data => {:remote => true}     
-            = link_to job_seeker_work_experience_path(position.id), remote: true, :method => :delete, data:{:confirm => "Are You Sure? You can not undo this action."}  do
-              .glyphicon.glyphicon-trash  
+          .dropdown
+            .dropdown-button
+              %i.fa.fa-ellipsis-h.fa-lg
+            .dropdown-content#myDropdown
+              = link_to edit_job_seeker_work_experience_path(position.id), remote: true do
+                %i.fa.fa-pencil
+                .action Edit
+              = link_to job_seeker_work_experience_path(position.id), remote: true, :method => :delete, data:{:confirm => "Are You Sure? You can not undo this action."}  do  
+                %i.fa.fa-trash-o
+                .action Destroy
+
         .experience-position
           .title= position.title 
           - if position.current_position == 1

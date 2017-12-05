@@ -3,23 +3,27 @@ require 'spec_helper'
 describe JobSeeker::UserSkillsController do 
   describe "GET new" do 
     let(:alice){Fabricate(:user, kind: 'job seeker')}
+    let(:experience) {Fabricate(:work_experience, user: alice)}
+    let(:skill){Fabricate(:skill)}
     
+
     it_behaves_like "requires sign in" do
-      let(:action) {xhr :get, :new}
+      let(:action) {xhr :get, :new, {work_experience_id: experience.id}}
     end
 
     before do 
       set_current_user(alice)
-      xhr :get, :new
+      experience
+      xhr :get, :new, {work_experience_id: experience.id}
     end
 
     it "set @experience to be a new instance of WorkExperience" do
-      expect(assigns(:work_experience)).to be_new_record 
-      expect(assigns(:work_experience)).to be_instance_of WorkExperience
+      expect(assigns(:user_skill)).to be_new_record 
+      expect(assigns(:user_skill)).to be_instance_of UserSkill
     end
 
-    it "sets @user to be current_user" do
-      expect(assigns(:user)).to eq(alice)
+    it "sets work_experience to equal the related WorkExperience object" do
+      expect(assigns(:work_experience)).to eq(experience)
     end
 
     it "renders the new template" do
@@ -29,27 +33,31 @@ describe JobSeeker::UserSkillsController do
 
   describe 'POST create' do 
     let(:alice){Fabricate(:user, kind: 'job seeker')}
-    let(:experience) {Fabricate.attributes_for(:work_experience, user: alice)}
+    let(:experience) {Fabricate(:work_experience, user: alice)}
+    let(:skill){Fabricate(:skill)}
+    let(:user_skill){Fabricate.attributes_for(:user_skill, work_experience_id: experience.id, 
+      skill_id: skill.id, user_id: alice.id)}
     
     before do 
       set_current_user(alice)
+      experience
     end
 
     it_behaves_like "requires sign in" do
-      let(:action) {xhr :post, :create, work_experience: experience}
+      let(:action) {xhr :post, :create, {name: "Rails", work_experience_id: experience.id}}
     end
 
-    context "with valid inputs" do 
+    context "with valid inputs and skill DOES exists" do 
       before do 
-        xhr :post, :create, work_experience: experience
+        xhr :post, :create, {name: "Rails" , work_experience_id: experience.id}
       end
 
       it "should save the work experience" do 
-        expect(WorkExperience.count).to eq(1)
+        expect(UserSkill.count).to eq(1)
       end
 
       it "associates the work experience with the current_user" do
-        expect(WorkExperience.first.user).to eq(alice)
+        expect(UserSkill.first.work_experience).to eq(experience)
       end
 
       it "redirects to the profile index action" do 
@@ -57,12 +65,36 @@ describe JobSeeker::UserSkillsController do
       end
     end
 
-    context "with invalid inputs" do 
-      let(:alice){Fabricate(:user, kind: 'job seeker')}
-      
+    context "with valid inputs and skill DOES NOT exists" do 
+      before do 
+        xhr :post, :create, {name: "Rails", work_experience_id: experience.id}
+      end
+
+      it "should save the UserSkill" do 
+        expect(UserSkill.count).to eq(1)
+      end
+
+      it "associates the work experience with the current_user" do
+        expect(UserSkill.first.work_experience).to eq(experience)
+      end
+
+      it "associates the work experience with the current_user" do
+        expect(Skill.count).to eq(1)
+      end
+
+      it "associates the work experience with the current_user" do
+        expect(Skill.first.name).to eq('Rails')
+      end
+
+      it "redirects to the profile index action" do 
+        expect(response).to render_template :create
+      end
+    end
+
+    context "with invalid inputs" do    
       before do 
         set_current_user(alice)
-        xhr :post, :create, work_experience: {title: 'title'} 
+        xhr :post, :create, {name: '', work_experience_id: experience.id}
       end
 
       it "redirects to the profile index page" do 
@@ -75,65 +107,32 @@ describe JobSeeker::UserSkillsController do
     end
   end
 
-  describe "GET edit" do 
-    let(:alice){Fabricate(:user, kind: 'job seeker')}
-    let(:experience){Fabricate(:work_experience, user: alice)}
-    
-    it_behaves_like "requires sign in" do
-      let(:action) {xhr :get, :edit, id: experience.id}
-    end
-    
-    before do 
-      set_current_user(alice)
-      experience
-      xhr :get, :edit, id: experience.id
-    end
-
-    it "sets @experience to the correct work_experience" do 
-      expect(assigns(:work_experience)).to eq(experience)
-    end
-    
-    it "renders the edit template" do
-      expect(response).to render_template :edit
-    end
-  end
-
-  describe "PUT update" do 
-    let(:alice){Fabricate(:user, kind: 'job seeker')}
-    let(:experience){Fabricate(:work_experience, user: alice)}
-
-    it_behaves_like "requires sign in" do
-      let(:action) {xhr :put, :update, id: experience.id}
-    end
-
-    before do 
-      set_current_user(alice)
-      experience   
-      xhr :put, :update, id: experience.id, work_experience: {title: "Screened"}
-    end
-
-    it "save the updates made on the object" do 
-      expect(WorkExperience.last.title).to eq("Screened")
-    end
-  end
-
   describe "DELETE destroy" do 
     let(:alice){Fabricate(:user, kind: 'job seeker')}
     let(:experience) {Fabricate(:work_experience, user: alice)}
-    let(:experience2) {Fabricate(:work_experience, user: alice)}
+    let(:skill){Fabricate(:skill)}
+    let(:skill1){Fabricate(:skill)}
+    let(:user_skill){Fabricate(:user_skill, work_experience_id: experience.id, skill_id: skill.id, user_id: alice.id)}
+    let(:user_skill1){Fabricate(:user_skill, work_experience_id: experience.id, skill_id: skill1.id, user_id: alice.id)}
+    
     it_behaves_like "requires sign in" do
-      let(:action) {xhr :delete, :destroy, id: experience.id}
+      let(:action) {xhr :delete, :destroy, {id: user_skill.id, work_experience_id: experience.id}}
     end
     
     before do 
       set_current_user(alice)
-      experience
-      experience2
-      xhr :delete, :destroy, id: experience.id   
+      skill
+      user_skill1
+      user_skill
+      xhr :delete, :destroy, {id: user_skill.id, work_experience_id: experience.id}
     end
 
     it "deletes the experience" do 
-      expect(WorkExperience.count).to eq(1)
+      expect(UserSkill.count).to eq(1)
+    end
+
+    it "renders the destroy template" do
+      expect(response).to render_template :destroy
     end
   end
 end

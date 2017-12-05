@@ -15,10 +15,10 @@
       %h3 Job Details 
       .detail
         .type Industry
-        / .content= @job.industries.first.name
+        .content= @job.industry
       .detail
         .type Career Level 
-        / .content= @job.career_level
+        .content= @job.career_level
       .detail
         .type Posted
         .content= "#{time_ago_in_words(@job.created_at)} ago"
@@ -28,7 +28,7 @@
             / = link_to "Apply to this Job", new_job_seeker_job_application_path(@job.id), :class => "btn btn-primary app-btn"
             = link_to "Apply to this Job", new_job_seeker_job_candidate_path(@job.id), :class => "btn btn-primary app-btn"
           - else
-            = bootstrap_form_for [:job_seeker, @application] do |f|
+            = form_for [:job_seeker, @application] do |f|
               .fieldset
                 .form-group.col-md-12
                 = f.hidden_field :user_id, value: current_user.id
@@ -38,7 +38,6 @@
           = render "/users/sub_new_job_seeker"
           = render "/sessions/sub_login"
           .app-btn{:style => "background-color: #{@job_board.brand_color})"}= link_to "Apply To Job", "", :class => "btn btn-primary app-btn", "data-toggle" => "modal", "data-target" => "#SubLoginModal"
-        
           = link_to "Apply to Job", login_path, class: "btn btn-primary app-btn"
 
 

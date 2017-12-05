@@ -1,3 +1,4 @@
-- if position.accomplishments.present? 
-  - position.accomplishments.each do |accomplishment|
-    = render 'job_seeker/accomplishments/accomplishment', accomplishment: accomplishment, position: position
+.all-accomplishments
+  - if position.accomplishments.present? 
+    - position.accomplishments.each do |accomplishment|
+      = render 'job_seeker/accomplishments/accomplishment', accomplishment: accomplishment, position: position

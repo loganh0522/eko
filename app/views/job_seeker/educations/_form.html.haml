@@ -1,30 +1,36 @@
 = form_for [:job_seeker, @education], html: {remote: true, class: 'profile-form'} do |f|
   .modal-body
-    .row
-      .col-md-12
+    .form-row-no-border
+      .contain-50
+        = f.label "School"
         = f.text_field :school, id: "school_Block", class: "form-control", placeholder: "School"
         %span#school_msgBlock
-    .row
-      .col-md-12
+      .contain-50
+        = f.label "Degree"
         = f.text_field :degree, id: "degree_Block", class: "form-control", placeholder: "Degree"
         %span#degree_msgBlock
-    .row
-      .col-md-3.col-xs-6.col-sm-6
+    .form-row-no-border
+      .contain-25
+        = f.label "Start Date"
         = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
-        %span#start_month_Block.help-block
-      .col-md-3.col-xs-6.col-sm-6
-        = f.select(:start_year, 1960..2020)
-
-      .col-md-3.col-xs-6.col-sm-6
+        %span#start_month_msgBlock
+      .contain-25
+        = f.label "Year"
+        = f.text_field :start_year, placeholder: "Year"
+        %span#start_year_msgBlock
+      .contain-25
+        = f.label :end_month, "End Date"
         = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
-      .col-md-3.col-xs-6.col-sm-6
-        = f.select(:end_year, 1960..2020)
-    .row
-      .col-md-12
-        = f.text_area :description, rows: 6, class: "form-control", placeholder: "Description", hide_label: true
+        %span#end_year_msgBlock
+      .contain-25
+        = f.label :end_year, "Year"
+        = f.text_field :end_year, placeholder: "Year"
+        %span#end_month_msgBlock
+    .form-row-no-border
+      = f.text_area :description, rows: 6, class: "form-control", placeholder: "Description", hide_label: true
   .modal-footer 
     = f.submit @education.new_record? ? "Add Education" : "Update", class: "btn submit-button"
-    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
 
 
 

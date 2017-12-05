@@ -1,0 +1,12 @@
+.modal-body
+  .column-6
+    - @project.attachments.each do |attachment|
+      - if attachment.file_type.start_with? 'image'
+        .project-image= image_tag attachment.file.large_image
+      - elsif attachment.file_image.present?
+        %iframe{:allowFullScreen => "true", :frameborder => "0", :height => "430", :src => attachment.link, :title => "YouTube video player", :width => "500"}
+      - else 
+        .project-image= image_tag attachment.file.large_image
+  .column-4
+    .column-container
+      .title Skills Used

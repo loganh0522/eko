@@ -1,30 +1,36 @@
-.modal-body  
-  .job-board-form-nav
-    %ul
-      %li#content-form.active Content
-      %li#layout-form Layout
-  = form_for [:job_seeker, @project], :html => { :multipart => true }, :remote => true do |f|    
-    = f.hidden_field :kind, value: 'Photo'
-    = f.hidden_field :job_board_id, value: @job_board.id
-    = hidden_field_tag :media_photo
-    .job-board-form 
-      .float-container
-        .header 
-          Header
-        .body
-          = f.text_field :header, class: "form-control subdomain-field"
-      .float-container
-        .header 
-          Sub-Header
-        .body  
-          = f.text_field :subheader, label: "Subheader", class: "form-control"
-    .job-board-form 
-      .images-container#variable-carousel
-        - @section.media_photos.each do |img| 
-          = image_tag img.file_name.xs_image 
-      = render "business/media_photos/multi_form"
+= form_for [:job_seeker, @project], :remote => true do |f|    
+  .modal-body
+    .column-6
+      .form-row-no-border
+        = f.text_field :title, placeholder: "Project Title"
+        .attachments-container
+          - if @project.attachments.present? 
+            - @project.attachments.each do |attachment| 
+              = render "job_seeker/attachments/attachment", attachment: attachment
+              
+        = f.label :file, "Add a File (.pdf, .doc, .ppt, .xcl etc.)"
+        = file_field_tag :file, id: 'attachment-up', method: :post
 
-.modal-footer
-  %fieldset
-    = submit_tag "Save Section", class: "btn submit-button", id: "submit-section"
-    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+        = f.label :link, "Add a Link"
+        = text_field_tag :link, "", placeholder: "Add a link, we will do the rest", id: 'link-up', autocomplete: "off"
+        %p Upload content from Website, Youtube, Vimeo, Prezi, Blog etc. Learn More
+
+        = f.label :description, "Description / Problem"
+        = f.text_area :description
+        = f.label :solution, "Implemented Solution"
+        = f.text_area :solution
+        = f.label :role, "My Role in Project"
+        = f.text_area :role
+        = hidden_field_tag :attachment
+    .column-4
+      .column-container
+        .title Skills Used
+        = text_field_tag '', '', :class => 'ui-autocomplete-input skills', :placeholder => 'Add a Skill', id: "tag_name", hide_label: true
+        #search-results-tags  
+        .btn#add-tag-button Add
+        = hidden_field_tag :skills
+        = f.hidden_field :user_id, value: current_user.id
+  .modal-footer
+    %fieldset
+      = f.submit "Save Project", class: "btn submit-button", id: "submit-section"
+      .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

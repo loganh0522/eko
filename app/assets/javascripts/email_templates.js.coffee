@@ -18,4 +18,9 @@ jQuery ->
   $.map $("[data-behaviour= 'has-saved-templates']"), (elem) ->
     new HasEmailTemplates(elem)
 
+
+
+
+
+
   

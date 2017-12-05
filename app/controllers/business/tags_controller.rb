@@ -10,6 +10,11 @@ class Business::TagsController < ApplicationController
     @tags = current_company.tags
   end
 
+  def show 
+    @tags = current_company.tags.order(:name).where("name ILIKE ?", "%#{params[:term]}%") 
+    render :json => @tags.to_json 
+  end
+
   def new
     @candidate = Candidate.find(params[:candidate_id]) if params[:candidate_id].present?
     @tag = Tag.new

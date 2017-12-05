@@ -1,6 +1,35 @@
 require 'spec_helper'
 
 describe JobSeeker::WorkExperiencesController do 
+  describe 'GET index' do 
+    let(:alice){Fabricate(:user, kind: 'job seeker')}
+    let(:experience){Fabricate(:work_experience, user: alice)}
+    
+    it_behaves_like "requires sign in" do
+      let(:action) {xhr :get, :index}
+    end
+    
+    before do 
+      set_current_user(alice)
+      entrepreneur = experience
+      sales = experience
+      xhr :get, :index, id: experience.id
+    end
+
+    it "set @work_experiences to the objects that belong to user" do
+      expect(WorkExperience.count).to eq(2)
+      expect(assigns(:work_experiences)).to match_array([entrepreneur, sales])
+    end
+
+    it "associates the work experience with the current_user" do
+      expect(WorkExperience.first.user).to eq(alice)
+    end
+
+    it "renders the index template" do
+      expect(response).to render_template :index
+    end
+  end
+
   describe "GET new" do 
     let(:alice){Fabricate(:user, kind: 'job seeker')}
     

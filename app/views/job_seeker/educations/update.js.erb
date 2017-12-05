@@ -4,6 +4,6 @@
     $('#<%= error[0] %>_Block').addClass('has-error');
   <% end %>
 <%else %> 
-  $('#right-modal').modal("toggle");
+  $('#basic-form-modal').modal("toggle");
   $('#education_<%= @education.id %>').replaceWith('<%= j render (@education), degree: @education %>');
 <%end%>

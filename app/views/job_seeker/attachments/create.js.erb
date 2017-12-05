@@ -1,0 +1,9 @@
+<% if @attachment.new_record? %>
+  alert("Failed to upload painting: <%= j @painting.errors.full_messages.join(', ').html_safe %>");
+<% else %> 
+  $('.attachments-container').append("<%= j render 'job_seeker/attachments/attachment', attachment: @attachment %>")
+  attachmentIds = [$("#attachment").val()]
+  attachmentIds.push('<%= @attachment.id %>')
+  $("#attachment").val(attachmentIds)
+  $("#link-up").val('')
+<% end %>

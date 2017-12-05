@@ -1,26 +1,29 @@
 = form_for [:job_seeker, @profile, @user_certification], html: {remote: true, class: 'profile-form'} do |f|
   .modal-body
-    .row
-      .col-md-12
+    .form-row-no-border
+      .contain-50
         = f.text_field :name, :class => 'ui-autocomplete-input', :placeholder => 'Certification Name', id: "certification_name", hide_label: true
         %span#name_Block.help-block
-    .row
-      .col-md-12
+      .contain-50
         = f.text_field :agency, placeholder: "Agency", hide_label: true
         %span#agency_Block.help-block
-    .row
-      .col-md-3.col-xs-6.col-sm-6
+    .form-row-no-border
+      .contain-25
+        = f.label "Start Date"
         = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
-        %span#start_month_Block.help-block
-      .col-md-3.col-xs-6.col-sm-6
-        = f.select(:start_year, 1960..2020)
-        %span#start_year_Block.help-block
-      .col-md-3.col-xs-6.col-sm-6
+        %span#start_month_msgBlock
+      .contain-25
+        = f.label "Year"
+        = f.text_field :start_year, placeholder: "Year"
+        %span#start_year_msgBlock
+      .contain-25
+        = f.label :end_month, "Expiration Date"
         = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
-        %span#end_year_Block.help-block
-      .col-md-3.col-xs-6.col-sm-6
-        = f.select(:end_year, 1960..2020)
-        %span#end_month_Block.help-block
+        %span#end_year_msgBlock
+      .contain-25
+        = f.label :end_year, "Year"
+        = f.text_field :end_year, placeholder: "Year"
+        %span#end_month_msgBlock
     .row 
       .col-sm-6.col-md-offset-6
         = f.check_box :expires, checked_value: 1, unchecked_value: 0, label: "No expiration"
@@ -28,7 +31,7 @@
       .col-md-12
         = f.text_area :description, placeholder: "Description", hide_label: true, rows: 8
   .modal-footer
-    .close-form#edit-form.btn.btn-default{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
-    = f.submit @user_certification.new_record? ? "Add Certification" : "Update", class: "submit btn btn-primary"
+    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+    = f.submit @user_certification.new_record? ? "Add Certification" : "Update", class: "btn submit-button"
     
   

@@ -14,7 +14,7 @@ describe JobSeeker::ApplicationsController do
       let(:alice) {Fabricate(:user, kind: 'job seeker')}
       let(:company) {Fabricate(:company)}
       let(:job1) {Fabricate(:job, company: company)}
-      
+
       before do  
         set_current_user(alice)
         post :create, application: {user_id: alice.id, job_id: job1.id}

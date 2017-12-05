@@ -1,6 +1,6 @@
 = form_for [:job_seeker, current_user] do |f| 
   .modal-body
-    .form-row
+    .form-row-no-border
       .contain-50
         = f.label "First Name"
         = f.text_field :first_name, id: "first_name_Block", class: "form-control", placeholder: "First Name"
@@ -9,7 +9,7 @@
         = f.label "Last Name"
         = f.text_field :last_name, id: "last_name_Block", class: "form-control", placeholder:"Last Name"
         %span#last_name_msgBlock
-    .form-row
+    .form-row-no-border
       .contain-50
         = f.label "E-mail"
         = f.text_field :email, id: "email_Block", class: "form-control", placeholder: "E-mail"
@@ -17,7 +17,7 @@
       .contain-50
         = f.label "Cell Phone"
         = f.text_field :phone, class: "form-control", hide_label: true, placeholder: "Phone"
-    .form-row
+    .form-row-no-border
       = f.label "Location"
       = f.text_field :location, class: "form-control", id: "geocomplete", label: "Location", autocomplete: "off"
     .form-row

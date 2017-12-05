@@ -1,8 +1,8 @@
-= bootstrap_form_for [:business, @tag], html: {remote: true, class: 'tag_form'} do |f|
+= form_for [:business, @tag], remote: true do |f|
   .row
     .col-md-6
-      = f.text_field :name, :class => 'ui-autocomplete-input form-control', :placeholder => 'Tag', id: "tag_name", hide_label: true
-      %div#tag-results
+      = f.text_field :name, :class => 'ui-autocomplete-input tags', :placeholder => 'Tag', id: "tag_name", hide_label: true
+      #search-results-tags 
     .col-md-6
       = f.hidden_field :candidate_id, value: @candidate.id
       = f.hidden_field :company_id, value: current_company.id

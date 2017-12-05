@@ -16,6 +16,14 @@ jQuery ->
   searchInput = $('.filter, input[name=\'owner\']')
   searchText = $('.search-field')
   searchAuto = $('.search-field-auto')
+  autoComplete = $('.autocomplete')
+
+  autocomplete = ->
+    if (searchRequest)
+      searchRequest.abort()    
+    action = $(".autocomplete").attr('id')
+    $.get(action,  null, "script")  
+
 
   searchEvents = -> 
     if (searchRequest)
@@ -33,25 +41,22 @@ jQuery ->
   
   searchField = ->
     if (searchRequest)
-      searchRequest.abort()
-    
+      searchRequest.abort()    
     action = $("#search-form").attr('action')
     param = $(this).attr('name') + "=" 
     url = window.location
     links = $('.filter-link')
-    
     for n in links
       linkUrl = $(n).attr('href').split("?")[0]
       n.setAttribute('href', linkUrl + "?" + $("#search-form").serialize())
-    
     $.get(action, $("#search-form").serialize(), null, "script")  
     history.pushState({}, "", "?" + $("#search-form").serialize())
 
   searchFieldAuto = ->
     if (searchRequest)
       searchRequest.abort()
-    action = $("#search-form").attr('action')
-    $.get(action, $("#search-form").serialize(), null, "script") 
+    action = $('#dropdown-autocomplete').attr('action')
+    $.get(action, $('#dropdown-autocomplete').serialize(), null, "script") 
 
   searchAuto.on 'keyup', (event) ->
     clearTimeout debounceTimeout
@@ -64,7 +69,6 @@ jQuery ->
     return
 
   searchText.on 'keyup', (event) ->
-    console.log(searchText.val().length)
     clearTimeout debounceTimeout
     debounceTimeout = setTimeout(searchField, 500)
     return
@@ -87,3 +91,36 @@ jQuery ->
       $(this).hide()
       $(this).prev().show()
     return
+
+  submitLink = ->
+    if (searchRequest)
+      searchRequest.abort()
+    $.post('/job_seeker/attachments', {link: $('#link-up').val()}, null, "script")
+
+  $(document).on 'keyup', '#link-up', (event) ->
+    if $(this).val().length > 3
+      clearTimeout debounceTimeout
+      debounceTimeout = setTimeout(submitLink, 500)
+    return
+
+$(document).ajaxComplete ->
+  searchAuto = $('.search-field-auto')
+  linkUp = $('#link-up')
+  searchRequest = null  
+  debounceTimeout = null
+
+  searchFieldAuto = ->
+    if (searchRequest)
+      searchRequest.abort()
+    action = $('#dropdown-autocomplete').attr('action')
+    $.get(action, $('#dropdown-autocomplete').serialize(), null, "script") 
+
+  searchAuto.on 'keyup', (event) ->
+    clearTimeout debounceTimeout
+    debounceTimeout = setTimeout(searchFieldAuto, 500)
+    return
+
+  
+
+  
+

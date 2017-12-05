@@ -1,18 +1,17 @@
 .business-registration
-  .header
-    %img.logo(src="/tmp/logo.jpg")
-    %h2 Login to TalentWiz
-  .body
-    = form_tag url: '/login' do |f|
-      %fieldset
-        = label_tag "E-mail"
-        = email_field_tag :email
-        = label_tag "Password"
-        = password_field_tag :password 
-        = submit_tag "Sign In", class: "btn submit-button"
-
-
-    %p 
-      Forgot your password? 
-      = link_to 'Reset Password', '/forgot_password'
+  = form_tag url: '/login' do |f|
+    .header
+      %img.logo(src="/tmp/logo.jpg")
+      %h2 Login to TalentWiz
+    .body
+      = label_tag "E-mail"
+      = email_field_tag :email
+      = label_tag "Password"
+      = password_field_tag :password 
+    .container-footer
+      .have-account
+        Forgot your password? 
+        %br
+        = link_to 'Reset Password', '/forgot_password'
+      = submit_tag "Sign In", class: "btn submit-button"
 

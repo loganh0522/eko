@@ -1,15 +1,13 @@
-= form_for [:job_seeker, @work_experience, @accomplishment], remote: true, class: "accomplishment-form" do |f|
-  .fieldset
-    .row 
-      .form-group.col-md-12
-        = f.text_area :body, class: "form-control", label: "Accomplishment"
-        %span#body_Block.help-block
-        = f.hidden_field :work_experience_id, value: @work_experience.id       
-
-  = f.submit "Create", class: "btn submit-button"
-  - if !@accomplishment.new_record?
-    .btn.border-button#remove_form
-      Close
-  - else
-    .btn.border-button#remove_form   
-      Close
+= form_for [:job_seeker, @work_experience, @accomplishment], remote: true do |f|
+  .accomplishment-form
+    = f.label :body, "Add Accomplishment"
+    = f.text_area :body, id: "body_Block"
+    %span#body_msgBlock
+    = f.hidden_field :work_experience_id, value: @work_experience.id 
+    
+    - if @accomplishment.new_record? 
+      = f.submit "Create", class: "btn submit-button"
+    - else 
+      = f.submit "Update", class: "btn submit-button"
+    .btn.border-button#remove_form Close
+      

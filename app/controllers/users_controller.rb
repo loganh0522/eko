@@ -11,17 +11,17 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)     
     if @user.save 
-        EmailSignature.create(user_id: @user.id, signature: "#{@user.first_name} #{@user.last_name}")      
-        if params[:invitation_token].present?
-          handle_invitation
-        else
-          session[:user_id] = @user.id 
-          redirect_to new_company_path
-        end
+      EmailSignature.create(user_id: @user.id, signature: "#{@user.first_name} #{@user.last_name}")      
+      if params[:invitation_token].present?
+        handle_invitation
+      else
+        session[:user_id] = @user.id 
+        redirect_to new_company_path
+      end
     else
       respond_to do |format| 
-        render_errors(@user)
-        format.js 
+        format.js {render_errors(@user)}
+        format.html {render :new}
       end
     end
   end
@@ -41,10 +41,7 @@ class UsersController < ApplicationController
         redirect_to job_seeker_create_profiles_path
       end
     else
-      respond_to do |format| 
-        render_errors(@user)
-        format.js 
-      end
+      render :new_job_seeker
     end
   end
 

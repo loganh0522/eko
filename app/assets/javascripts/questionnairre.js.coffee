@@ -96,6 +96,9 @@ jQuery ->
       dateFormat: 'yy-mm-dd'
     $('#timepicker').timepicker()
 
+
+##########  RemoveForm ############
+
   $('.main-container').on 'click', '#remove_form', (event) ->
     if $(this).closest('form').attr('class') == 'edit_comment'
       qid = $(this).closest('form').attr('id').slice(5)
@@ -117,10 +120,15 @@ jQuery ->
       qid = $(this).closest('form').attr('id').slice(5)
       $("#" + "#{qid}").find('.activity-body-body').find('.comment-body').show()
       $(this).closest('form').remove()
+    else if $(this).closest('form').attr('class') == 'edit_accomplishment'
+      qid = $(this).closest('form').attr('id').slice(5)
+      $("#" + "#{qid}").show()
+      $(this).closest('form').remove()
     else
       $(this).closest('form').remove()
     return
     event.preventDefault()
+
 
 ################### Job Cart ####################
   $('#main-container').on 'click', '.add_to_cart', (event) ->

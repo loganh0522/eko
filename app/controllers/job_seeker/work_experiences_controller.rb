@@ -4,8 +4,15 @@ class JobSeeker::WorkExperiencesController < JobSeekersController
   before_filter :belongs_to_job_seeker, only: [:edit, :update, :destroy]
   # before_filter :profile_sign_up_complete
   
+  def index
+    @work_experiences = current_user.work_experiences.sort_by{|work| [work.start_year, work.end_year] }.reverse
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def new
-    @user = current_user
     @work_experience = WorkExperience.new
 
     respond_to do |format|
@@ -14,7 +21,6 @@ class JobSeeker::WorkExperiencesController < JobSeekersController
   end
   
   def create 
-    @user = current_user
     @work_experience = WorkExperience.new(position_params.merge!(user_id: current_user.id))
    
     respond_to do |format|
@@ -28,7 +34,6 @@ class JobSeeker::WorkExperiencesController < JobSeekersController
   end
 
   def edit 
-    @user = current_user
     @work_experience = WorkExperience.find(params[:id])
 
     respond_to do |format|
@@ -37,13 +42,10 @@ class JobSeeker::WorkExperiencesController < JobSeekersController
   end
 
   def update
-    @user = current_user
-    @positions = current_user.work_experiences
     @work_experience = WorkExperience.find(params[:id])   
     
     respond_to do |format|
       if @work_experience.update(position_params)
-        @user = current_user
         @work_experiences = current_user.work_experiences
       else 
         render_errors(@work_experience)

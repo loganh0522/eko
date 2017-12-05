@@ -2,9 +2,7 @@ class JobSeeker::AccomplishmentsController < JobSeekersController
   layout "job_seeker"
   before_filter :require_user
   # before_filter :profile_sign_up_complete
-  
   def new
-    @profile = current_user.profile
     @work_experience = WorkExperience.find(params[:work_experience_id])
     @accomplishment = Accomplishment.new
 
@@ -14,42 +12,33 @@ class JobSeeker::AccomplishmentsController < JobSeekersController
   end
   
   def create
-    @profile = current_user.profile
     @accomplishment = Accomplishment.new(accomplishment_params)  
-    @work_experience = WorkExperience.find(params[:accomplishment][:work_experience_id])
+    @work_experience = WorkExperience.find(params[:work_experience_id])
 
     respond_to do |format| 
-      @errorBody = []
       if @accomplishment.save
         format.js 
       else 
+        render_errors(@accomplishment)
         format.js
-        @profile = current_user.profile
-        validate_accomplishment(@accomplishment)
       end
     end
   end  
 
   def edit
-    @profile = current_user.profile
     @accomplishment = Accomplishment.find(params[:id])
     @work_experience = WorkExperience.find(@accomplishment.work_experience.id)
   end
 
   def update
-    @profile = current_user.profile
     @accomplishment = Accomplishment.find(params[:id])
-    @work_experience  = WorkExperience.find(@accomplishment.work_experience.id)
-
+    @work_experience = WorkExperience.find(params[:work_experience_id])
     respond_to do |format|
-      @errorBody = [] 
       if @accomplishment.update(accomplishment_params)
-        format.html {redirect_to job_seeker_profiles_path(current_user.id)}
         format.js
-      else 
+      else
+        render_errors(@accomplishment) 
         format.js
-        @profile = current_user.profile
-        validate_accomplishment(@accomplishment)
       end
     end
   end
@@ -65,10 +54,11 @@ class JobSeeker::AccomplishmentsController < JobSeekersController
   end
 
   private 
-
-  def validate_accomplishment(accomplishment)
-    if (accomplishment.errors["body"] != nil)
-      @errorBody.push(accomplishment.errors["body"][0])
+  
+  def render_errors(object)
+    @errors = []
+    object.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
     end  
   end
 
