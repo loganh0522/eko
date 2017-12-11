@@ -1,12 +1,4 @@
 class Job < ActiveRecord::Base
-  # include Elasticsearch::Model
-  # include Elasticsearch::Model::Callbacks 
-  # index_name ["talentwiz", Rails.env].join('_') 
-  
-  # # after_commit on: [:update] do
-  # #   __elasticsearch__.update_document 
-  # # end
-
   liquid_methods :title
   
   belongs_to :company
@@ -27,13 +19,7 @@ class Job < ActiveRecord::Base
   has_many :tasks, as: :taskable, :dependent => :destroy
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy 
 
-  has_many :job_industries, :dependent => :destroy
-  has_many :industries, through: :job_industries
 
-  has_many :job_functions, :dependent => :destroy
-  has_many :functions, through: :job_functions
-  
-  
   validates_presence_of :title, :description, :location, :address 
     
   # :education_level, :kind, :career_level
@@ -120,6 +106,7 @@ class Job < ActiveRecord::Base
     return @tasks
   end
 
+
   ############ Job Applications #################
 
   def tags_present(applications)
@@ -141,42 +128,4 @@ class Job < ActiveRecord::Base
       candidates: candidates.map(&:id)
     )
   end
-
-
-  # mapping _parent: { type: 'company'}, _routing: {type: 'company', required: true } do
-  #   indexes :company_id, type: 'integer'
-  #   indexes :title, type: 'string'
-  #   indexes :description, type: 'string'
-  #   indexes :status, type: 'string'
-  #   indexes :city, type: 'boolean'
-  #   indexes :country, type: "string"
-  #   indexes :location, type: "integer"
-  #   indexes :created_at, type: "date"
-  #   indexes :update_at, type: "date"
-  # end
-
-  # after_commit lambda { __elasticsearch__.index_document(parent: company_id, routing: company_id) }, on: :create
-  # after_commit lambda { __elasticsearch__.update_document(parent: company_id, routing: company_id) }, on: :update
-  # after_commit lambda { __elasticsearch__.delete_document(parent: company_id, routing: company_id) }, on: :destroy
-
-  # def as_indexed_json(options={})
-  #   as_json(
-  #     only: [:id, :title, :description, :status, :city, :country, :province,
-  #       :education_level, :career_level, :kind, :created_at, :updated_at, 
-  #       :start_salary, :end_salary, :location, :company_id]
-  #   )
-  # end
-
-  # def self.search(query, options={})
-  #   search_definition = {
-  #     query: {
-  #       multi_match: {
-  #         query: query,
-  #         fields: ["title", "status"]
-  #       }
-  #     }
-  #   }
-
-  #   __elasticsearch__.search(search_definition)
-  # end
 end

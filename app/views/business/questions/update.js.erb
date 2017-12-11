@@ -23,5 +23,5 @@
   <% end %>
 <% else %>
   $('form').remove();
-  $('#create-application-form').html('<%= j render "business/questions/questions", questions: @questions %>');
+  $('.questions-container').html('<%= j render "business/questions/questions", questions: @questions %>');
 <% end %>

@@ -1,4 +1,4 @@
-= form_tag business_candidates_path, :method => 'get', id: "search-form" do
+= form_tag search_business_candidates_path, :method => 'get', id: "search-form" do
   = text_field_tag "query", nil, placeholder: "Search Candidates by Keyword", class: "search-field", autocomplete: 'off'
   .applicant-filters
     .filter-container

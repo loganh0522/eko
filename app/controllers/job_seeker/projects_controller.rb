@@ -33,6 +33,7 @@ class JobSeeker::ProjectsController < JobSeekersController
     respond_to do |format|
       if @project.save 
         update_attachments(@project)
+        add_skills(@project) 
         @projects = current_user.projects
         format.js
       else
@@ -48,10 +49,10 @@ class JobSeeker::ProjectsController < JobSeekersController
   def update
     @project = Project.find(params[:id])
     @project.update(project_params)
-
     respond_to do |format|
       if @project.save 
         update_attachments(@project)
+        add_skills(@project) 
         @projects = current_user.projects
         format.js
       else
@@ -78,6 +79,21 @@ class JobSeeker::ProjectsController < JobSeekersController
     @attachments.each do |id|
       @attachment = Attachment.find(id.to_i)
       @attachment.update_attributes(project_id: project.id)
+    end
+  end
+
+  def add_skills(project)  
+    if params[:user_skills].present?
+      @skills = params[:user_skills].split(',')
+      @project_skills = @project.user_skills
+
+      @skills.each do |skill| 
+        @skill = Skill.find_or_create_skill(skill)
+
+        if !@project_skills.include?(UserSkill.where(skill_id: @skill.id, project_id: @project.id).first)
+          UserSkill.create(user_id: current_user.id, skill_id: @skill.id, project_id: @project.id)
+        end
+      end
     end
   end
 

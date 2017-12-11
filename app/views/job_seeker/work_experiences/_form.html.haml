@@ -49,11 +49,13 @@
         = f.fields_for :accomplishments do |a|
           = render 'accomplishment_fields', f: a 
       .column-container
-        .title Skills Used
-        = text_field_tag '', '', :class => 'ui-autocomplete-input skills', :placeholder => 'Add a Skill', id: "tag_name", hide_label: true
-        #search-results-tags  
-        .btn#add-tag-button Add
-        = hidden_field_tag :skills
+        .header
+          .title Skills Used
+          = text_field_tag '', '', :class => 'ui-autocomplete-input user_skills', :placeholder => 'Add a Skill', id: "skills", hide_label: true
+          #search-results-user_skills 
+          .btn.submit-button#add-tag-button Add
+        #add-tags
+          = render 'job_seeker/user_skills/project_skills', position: @work_experience
 
   .modal-footer
     = f.submit @work_experience.new_record? ? "Add Experience" : "Update", class: "btn submit-button"

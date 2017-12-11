@@ -4,24 +4,27 @@ class JobSeeker::EducationsController < JobSeekersController
   # before_filter :profile_sign_up_complete
   
   def index 
-    @education = Education.new
-    @user_degrees = current_user.educations
+    @educations = current_user.educations
+
+    respond_to do |format| 
+      format.js
+    end
   end
 
   def new
-    @user = current_user
     @education = Education.new
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def create 
     @education = Education.new(education_params.merge!(user_id: current_user.id))
-    @degrees = current_user.educations
-    @user = current_user
     
     respond_to do |format|
       if @education.save
-        @degrees = current_user.educations
-        @profile = current_user
+        @educations = current_user.educations
       else 
         render_errors(@education)
       end
@@ -30,18 +33,19 @@ class JobSeeker::EducationsController < JobSeekersController
   end
 
   def edit 
-    @profile = current_user
     @education = Education.find(params[:id])
+    
+    respond_to do |format|
+      format.js
+    end
   end
 
   def update 
-    @user = current_user
     @education = Education.find(params[:id])
     
     respond_to do |format|
       if @education.update(education_params)
-        @degrees = current_user.educations
-        @user = current_user
+        @educations = current_user.educations
       else
         render_errors(@education)
       end
@@ -61,7 +65,8 @@ class JobSeeker::EducationsController < JobSeekersController
   private 
 
   def education_params
-    params.require(:education).permit(:school, :degree, :description, :start_month, :start_year, :end_month, :end_year)
+    params.require(:education).permit(:school, :degree, :description, 
+      :start_month, :start_year, :end_month, :end_year)
   end
 
   def render_errors(education)

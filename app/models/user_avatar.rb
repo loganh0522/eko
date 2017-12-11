@@ -2,7 +2,6 @@ class UserAvatar < ActiveRecord::Base
   belongs_to :user 
   mount_uploader :image, AvatarUploader
 
-  
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
   
   after_update :crop_avatar

@@ -1,5 +1,5 @@
 class UserCertification < ActiveRecord::Base
-  belongs_to :profile
+  belongs_to :user
 
   validates_presence_of :name, :message => "Certification name can't be blank"
   validates_presence_of :agency, :message => "Agency can't be blank"

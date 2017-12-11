@@ -4,4 +4,7 @@ class Project < ActiveRecord::Base
   belongs_to :education
   has_many :attachments, :dependent => :destroy 
   has_many :user_skills
+
+  accepts_nested_attributes_for :attachments, 
+    allow_destroy: true
 end

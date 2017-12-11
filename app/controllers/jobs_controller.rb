@@ -10,8 +10,6 @@ class JobsController < ApplicationController
     @user = User.new
   end
 
-
-
   private
 
   def set_layout

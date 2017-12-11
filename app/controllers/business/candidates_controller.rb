@@ -7,45 +7,15 @@ class Business::CandidatesController < ApplicationController
   before_filter :trial_over
   before_filter :company_deactivated?
   
-  def index
-    where = {}
-    qcv_fields = [:work_titles, :work_description, :work_company, :education_description, :education_school]
-    fields = [:first_name, :last_name, :full_name, :email]
-    
-    if params[:query].present?
-      query = params[:query] 
-    else
-      query = "*"
-    end
-
-    where[:company_id] = current_company.id 
-    where[:rating] = params[:rating] if params[:rating].present?
-    where[:job_title] = {all: params[:job_title]} if params[:job_title].present?
-    where[:jobs] = {all: params[:jobs]} if params[:jobs].present?
-    where[:job_status] = params[:status] if params[:status].present?
-    where[:job_location] = params[:location] if params[:location].present?
-    where[:tags] = {all: params[:tags]} if params[:tags].present?
-    where[:created_at] = {gte: params[:date_applied].to_time, lte: Time.now} if params[:date_applied].present?
-
-    if params[:qcv].present?
-      @candidates = Candidate.search(params[:qcv], where: where, fields: qcv_fields, match: :word_start, per_page: 10, page: params[:page])
-    else
-      @candidates = Candidate.search(query, where: where, fields: fields, match: :word_start, per_page: 10, page: params[:page])
-    end
+  def index    
+    @candidates = current_company.candidates.paginate(page: params[:page], per_page: 10)
     @tags = current_company.tags
-    
-    respond_to do |format|
-      format.js
-      format.html
-    end  
   end
 
   def new
-    if params[:job].present?
-      @job = Job.find(params[:job])
-    end
-    
+    @job = Job.find(params[:job]) if params[:job].present?
     @candidate = Candidate.new
+
     respond_to do |format|
       format.js
     end
@@ -53,25 +23,20 @@ class Business::CandidatesController < ApplicationController
 
   def create 
     @candidate = Candidate.new(candidate_params)
-
+    
     respond_to do |format| 
       if @candidate.save
         if params[:job_id].present? 
           @job = Job.find(params[:job_id])
-          Application.create(candidate: @candidate, job_id: @job.id, company_id: current_company)
-          @candidates = Candidate.search("*", per_page: 10)
-        elsif params[:job_ids]
-          @job = Job.find(params[:job_ids])
-          Application.create(candidate: @candidate, job_id: @job.id, company_id: current_company)
-          @candidates = Candidate.search("*", where: {jobs: {all: [@job.id]}}, per_page: 10)
+          Application.create(candidate: @candidate, job_id: @job.id, company_id: current_company.id)
+          @candidates = @job.candidates.paginate(page: params[:page], per_page: 10)
         else
-          @candidates = Candidate.search("*", per_page: 10) 
-        end      
+          @candidates = current_company.candidates.paginate(page: params[:page], per_page: 10)
+        end 
         add_tags(@candidate)
       else 
         render_errors(@candidate)
       end
-
       @tags = current_company.tags
       format.js
     end
@@ -121,7 +86,6 @@ class Business::CandidatesController < ApplicationController
     @candidate = Candidate.find(params[:id])
     @candidate.destroy 
 
-
     @candidates = Candidate.search("*", per_page: 10, page: params[:page])
     @tags = current_company.tags
     
@@ -137,6 +101,7 @@ class Business::CandidatesController < ApplicationController
       candidate = Candidate.find(id)
       candidate.destroy
     end
+
     @candidates = Candidate.search("*", where: {company_id: current_company.id}, per_page: 10)
     @tags = current_company.tags
 
@@ -153,13 +118,43 @@ class Business::CandidatesController < ApplicationController
     end
   end
 
+  def search 
+    where = {}
+    qcv_fields = [:work_titles, :work_description, :work_company, :education_description, :education_school]
+    fields = [:first_name, :last_name, :full_name, :email]
+    
+    if params[:query].present?
+      query = params[:query] 
+    else
+      query = "*"
+    end
+
+    where[:company_id] = current_company.id 
+    where[:rating] = params[:rating] if params[:rating].present?
+    where[:job_title] = {all: params[:job_title]} if params[:job_title].present?
+    where[:jobs] = {all: params[:jobs]} if params[:jobs].present?
+    where[:job_status] = params[:status] if params[:status].present?
+    where[:job_location] = params[:location] if params[:location].present?
+    where[:tags] = {all: params[:tags]} if params[:tags].present?
+    where[:created_at] = {gte: params[:date_applied].to_time, lte: Time.now} if params[:date_applied].present?
+
+    if params[:qcv].present?
+      @candidates = Candidate.search(params[:qcv], where: where, fields: qcv_fields, match: :word_start, per_page: 10, page: params[:page])
+    else
+      @candidates = Candidate.search(query, where: where, fields: fields, match: :word_start, per_page: 10, page: params[:page])
+    end
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
   
   def add_tags(candidate)  
     if params[:tags].present?
       @tags = params[:tags].split(',')
       @company_tags = current_company.tags 
-      
       @tags.each do |tag| 
         @tag = Tag.where(name: (tag.titleize), company_id: current_company.id).first    
         if @company_tags.include?(@tag)
@@ -183,7 +178,7 @@ class Business::CandidatesController < ApplicationController
 
   def candidate_params
     params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :location, :company_id, :manually_created, :job_id,
-      work_experiences_attributes: [:id, :body, :_destroy, :title, :company_name, :description, :start_month, :start_year, :end_month, :end_year, :current_position, :industry_ids, :function_ids, :location],
+      work_experiences_attributes: [:id, :body, :_destroy, :title, :company_name, :description, :start_month, :start_year, :end_month, :end_year, :current_position, :industry, :function, :location],
       educations_attributes: [:id, :school, :degree, :description, :start_month, :start_year, :end_month, :end_year, :_destroy], 
       resumes_attributes: [:id, :name, :_destroy],
       social_links_attributes: [:id, :url, :kind, :_destroy])

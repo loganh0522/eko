@@ -4,9 +4,6 @@ jQuery ->
   $('#background-photo-up').fileupload()
   
   $('#job-seeker-background-up').fileupload()
-  
-  $(".main-container").on 'click', "#submit-section", -> 
-    $("#job-board-section").submit()
 
   $('#userProfilePictureModal').on 'click', (event) -> 
     $('#new_user_avatar').fileupload()
@@ -16,7 +13,6 @@ jQuery ->
     $('#media-photo-up').fileupload()
     $('#background-photo-up').fileupload()
 
-    
     $('#attachment-up').fileupload(
       type: 'POST'
       url: '/job_seeker/attachments'

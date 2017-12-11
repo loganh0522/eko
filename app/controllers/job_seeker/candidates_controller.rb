@@ -21,6 +21,7 @@ class JobSeeker::CandidatesController < ApplicationController
       redirect_to root_path
     else
       @candidate = Candidate.new(candidate_params)
+      
       if @candidate.save   
         @application = Application.create(candidate_id: @candidate.id, job_id: @job)   
         flash[:success] = "Your application has been submitted"

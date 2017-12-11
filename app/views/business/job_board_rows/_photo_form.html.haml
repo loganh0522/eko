@@ -23,7 +23,6 @@
       - @section.media_photos.each do |img| 
         = image_tag img.file_name.xs_image 
     = render "business/media_photos/multi_form"
-
 .modal-footer
   %fieldset
     = submit_tag "Save Section", class: "btn submit-button", id: "submit-section"

@@ -1,6 +1,6 @@
 class Business::QuestionsController < ApplicationController
   layout "business"
-  filter_access_to :all
+  # filter_access_to :all
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -74,7 +74,8 @@ class Business::QuestionsController < ApplicationController
   private
 
   def q_params 
-    params.require(:question).permit(:id, :job_id, :body, :required, :kind, question_options_attributes: [:id, :body, :_destroy])
+    params.require(:question).permit(:id, :job_id, :body, :required, :kind, 
+      question_options_attributes: [:id, :body, :_destroy])
   end
 
   def render_errors(question)

@@ -6,7 +6,7 @@ describe Business::JobsController do
     let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
     let(:alice) {Fabricate(:user, company: company, role: "Admin")}
     let(:bob) {Fabricate(:user, company: company, role: "Hiring Manager")} 
-    let(:job) {Fabricate(:job, company: company, user_ids: alice.id)}
+    let(:job) {Fabricate(:job, company: company, user_ids: alice.id, status: "open")}
     
     it_behaves_like "requires sign in" do
       let(:action) {get :index}
@@ -97,7 +97,7 @@ describe Business::JobsController do
       end
 
       it "redirects to the new Hiring team path" do   
-        expect(response).to redirect_to new_business_job_hiring_team_path(Job.first.id)
+        expect(response).to redirect_to business_job_hiring_teams_path(Job.first.id)
       end
       
       it "creates the job posting" do
@@ -106,10 +106,12 @@ describe Business::JobsController do
 
       it "creates a scorecard associated to the Job posting" do 
         expect(Scorecard.count).to eq(1)
+        expect(Job.first.scorecard.count).to eq(1)
       end
 
       it "creates the stages associated to the Job posting" do 
         expect(Stage.count).to eq(6)
+        expect(Job.first.stages.count).to eq(6)
       end
 
       it "associates the job posting with the current_company" do
@@ -136,6 +138,7 @@ describe Business::JobsController do
       let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
       let(:alice) {Fabricate(:user, company: company)}
       let(:job) {Fabricate.attributes_for(:job, company: company, user_ids: alice.id, title: "")}
+      
       before do      
         set_current_user(alice)
         set_current_company(company)
@@ -145,10 +148,6 @@ describe Business::JobsController do
 
       it "does not create a job posting" do     
         expect(Job.count).to eq(0)
-      end
-
-      it "does not create a questionairre for the job posting" do     
-        expect(Questionairre.count).to eq(0)
       end
 
       it "does not create a scorecard for the job posting" do     
@@ -205,6 +204,7 @@ describe Business::JobsController do
       let(:alice) {Fabricate(:user, company: company)}
       let(:job) {Fabricate(:job, company: company)}
       let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
+
       before do  
         set_current_user(alice)
         set_current_company(company)

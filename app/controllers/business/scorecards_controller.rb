@@ -1,9 +1,9 @@
 class Business::ScorecardsController < ApplicationController 
   layout "business"
-  filter_access_to :all  
+  # filter_access_to :all  
   before_filter :require_user
   before_filter :belongs_to_company
-  before_filter :has_a_scorecard, only: [:new, :create]
+  # before_filter :has_a_scorecard, only: [:new, :create]
   before_filter :trial_over
   before_filter :company_deactivated?
   
@@ -74,27 +74,6 @@ class Business::ScorecardsController < ApplicationController
     end
   end
 
-  # def my_scorecard
-  #   @job = Job.find(params[:job_id])
-  #   @application = Application.find(params[:application_id])
-  #   @rating = SectionOptionRating.new
-  #   @overall_rating = OverallRating.new
-  # end
-
-  # def applicant_scorecard
-  #   @application_scorecard = ApplicationScorecard.new
-  #   @overall_rating = OverallRating.new
-  #   @job = Job.find(params[:job_id])
-  #   @application = Application.find(params[:application_id])
-  #   @stage = @application.stage
-  #   @comment = Comment.new
-  #   @user = @application.applicant
-  #   @scorecard = Scorecard.where(job_id: params[:job_id]).first
-  #   @sections = @scorecard.scorecard_sections    
-  #   @application_scorecards = @application.application_scorecards
-  #   @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first
-  # end
-
   private
 
   def render_errors(question)
@@ -105,6 +84,8 @@ class Business::ScorecardsController < ApplicationController
   end
 
   def scorecard_params 
-    params.require(:scorecard).permit(:job_id, :_destroy, scorecard_sections_attributes: [:id, :body, :_destroy, section_options_attributes:[:id, :body, :_destroy]])
+    params.require(:scorecard).permit(:job_id, :_destroy, 
+      scorecard_sections_attributes: [:id, :body, :_destroy, 
+        section_options_attributes:[:id, :body, :_destroy]])
   end
 end

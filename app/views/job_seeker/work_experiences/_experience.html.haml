@@ -6,9 +6,8 @@
     %p You currently do not have any listed work experiences. 
     .add-object= link_to "+ Experience", new_job_seeker_work_experience_path, :data => {:remote => true}, class: "btn border-button"
 - else
-  %div{:id => "work_experiences"}
-    - @work_experiences.each do |position| 
-      = render "job_seeker/work_experiences/work_experience", position: position
+  - @work_experiences.each do |position| 
+    = render "job_seeker/work_experiences/work_experience", position: position
 
 
       

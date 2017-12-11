@@ -1,7 +1,7 @@
 .show-hidden-search-box  
   .plain-text Add to Job 
 .hidden-search-box
-  = form_tag autocomplete_business_jobs_path, :method => 'get', id: "search-form" do
+  = form_tag search_business_jobs_path, :method => 'get', id: "search-form" do
     .search-area-content
       %i.fa.fa-search.fa-stack-2x
       = text_field_tag "query", nil, placeholder: "Search Jobs", class: "search-field-auto", autocomplete: 'off' 

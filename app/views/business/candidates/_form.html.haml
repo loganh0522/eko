@@ -18,19 +18,18 @@
           = q.label "Add Resume"
           = q.file_field :name, class: "file-container"
       
-    - if !@job.present? 
-      .form-row
-        = render 'business/jobs/dropdown'
-          
+    / - if !@job.present? 
+    /   .form-row
+    /     = render 'business/jobs/dropdown'    
     .form-row
       .header
-        .title Tags  
-        #add-tags  
+        .title Tags 
+        #auto-search 
           = text_field_tag '', '', :class => 'ui-autocomplete-input tags', :placeholder => 'Add a Tag', id: "tag_name", hide_label: true
           #search-results-tags  
           .btn#add-tag-button Add
-          = hidden_field_tag :tags
-           
+          = hidden_field_tag :tags, '', id: "add-tags-value"
+      #add-tags  
     .form-row
       .header
         .title Social Media    
@@ -49,7 +48,7 @@
     = f.hidden_field :manually_created, value: true
     
     - if @job.present? 
-      = hidden_field_tag :job_ids, @job.id
+      = hidden_field_tag :job_id, @job.id
     - else
       = hidden_field_tag :job_id, nil, {:id => "job_ids"}
     - if @candidate.new_record? 

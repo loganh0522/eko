@@ -1,6 +1,6 @@
 class Business::HiringTeamsController < ApplicationController
   layout "business"
-  filter_access_to :all
+  # filter_access_to :all
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -11,17 +11,9 @@ class Business::HiringTeamsController < ApplicationController
     @job = Job.find(params[:job_id])
     @team = @job.hiring_teams 
     @users = current_company.users
+
     respond_to do |format|
       format.html 
-      format.js
-    end
-  end
-
-  def new
-    @hiring_team = HiringTeam.new 
-    @job = Job.find(params[:job])
-    
-    respond_to do |format|
       format.js
     end
   end
@@ -30,8 +22,12 @@ class Business::HiringTeamsController < ApplicationController
     @hiring_team = HiringTeam.create(user_id: params[:user_id], job_id: params[:job_id]) 
     
     respond_to do |format| 
-      @job = Job.find(params[:job_id])
-      @team = @job.hiring_teams
+      if @hiring_team.errors.present? 
+        render_errors(@hiring_team)
+      else
+        @job = Job.find(params[:job_id])
+        @team = @job.hiring_teams
+      end
       format.js 
     end  
   end 
@@ -49,17 +45,13 @@ class Business::HiringTeamsController < ApplicationController
     end
   end
 
-  def autocomplete
-
-  end
   private 
 
-  def create_team 
-    @user_ids = params[:user_ids].split(',')
-
-    @user_ids.each do |id|
-      @hiring_team = HiringTeam.create(user_id: id, job_id: params[:hiring_team][:job_id]) 
-    end
+  def render_errors(object)
+    @errors = []
+    object.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end 
   end
 
   def team_params

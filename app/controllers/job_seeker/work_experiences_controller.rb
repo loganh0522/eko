@@ -25,6 +25,7 @@ class JobSeeker::WorkExperiencesController < JobSeekersController
    
     respond_to do |format|
       if @work_experience.save
+        add_skills(@work_experience)
         @work_experiences = current_user.work_experiences.sort_by{|work| [work.start_year, work.end_year] }.reverse
       else 
         render_errors(@work_experience) 
@@ -46,6 +47,7 @@ class JobSeeker::WorkExperiencesController < JobSeekersController
     
     respond_to do |format|
       if @work_experience.update(position_params)
+        add_skills(@work_experience)
         @work_experiences = current_user.work_experiences
       else 
         render_errors(@work_experience)
@@ -66,7 +68,24 @@ class JobSeeker::WorkExperiencesController < JobSeekersController
   private 
   
   def position_params
-    params.require(:work_experience).permit(:user_id, :title, :company_name, :description, :start_month, :start_year, :end_month, :end_year, :current_position, :industry_ids, :function_ids, :location)
+    params.require(:work_experience).permit(:user_id, :title, :company_name, :description, 
+      :start_month, :start_year, :end_month, :end_year, :current_position, 
+      :industry, :function, :location)
+  end
+
+  def add_skills(project)  
+    if params[:user_skills].present?
+      @skills = params[:user_skills].split(',')
+      @project_skills = @project.user_skills
+
+      @skills.each do |skill| 
+        @skill = Skill.find_or_create_skill(skill)
+
+        if !@project_skills.include?(UserSkill.where(skill_id: @skill.id, project_id: @project.id).first)
+          UserSkill.create(user_id: current_user.id, skill_id: @skill.id, project_id: @project.id)
+        end
+      end
+    end
   end
 
   def render_errors(experience)

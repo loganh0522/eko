@@ -34,24 +34,28 @@ jQuery ->
 
 $(document).ajaxComplete ->
   $(document).on 'click', '#add-tag-button', (event) ->
-    tagName = $('#tag_name').val() 
-    $('#tag_name').val('')
-    
+    tagName = $('.ui-autocomplete-input').val() 
+    $('.ui-autocomplete-input').val('')
     if tagName == ''
       return 
     else
-      if $('#tags').val() == ''
-        $('#tags').val tagName
+      if $('#add-tags-value').val() == ''
+        $('#add-tags-value').val tagName
       else 
-        values =  $('#tags').val() + ',' + tagName 
-        $('#tags').val values 
+        values =  $('#add-tags-value').val() + ',' + tagName 
+        $('#add-tags-value').val values 
     $('#add-tags').append('<div class="user-tag"> <div class="name">' + tagName  + '</div> <div class="delete-tag"> &times </div> </div>') 
     event.stopImmediatePropagation()
 
-  $('form').on 'focus', '.ui-autocomplete-input', ->  
+  $('.ui-autocomplete-input').on 'focus', ->  
     controller = $(this).attr('class').split(' ').pop()
+    if window.location.href.split('/').includes('business')
+      route = 'business'
+    else if window.location.href.split('/').includes('job_seeker')
+      route = 'job_seeker'
+
     $(this).autocomplete( 
-      source: '/business/' + controller + '/autocomplete'
+      source: '/' + route + '/' + controller + '/autocomplete'
       appendTo: $('#search-results-' + controller)     
       focus: (event, ui) -> 
         $(this).val(ui.item.name)

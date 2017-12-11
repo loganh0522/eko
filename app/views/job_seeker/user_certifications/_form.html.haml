@@ -1,4 +1,4 @@
-= form_for [:job_seeker, @profile, @user_certification], html: {remote: true, class: 'profile-form'} do |f|
+= form_for [:job_seeker, @certification], html: {remote: true, class: 'profile-form'} do |f|
   .modal-body
     .form-row-no-border
       .contain-50
@@ -24,14 +24,11 @@
         = f.label :end_year, "Year"
         = f.text_field :end_year, placeholder: "Year"
         %span#end_month_msgBlock
-    .row 
-      .col-sm-6.col-md-offset-6
         = f.check_box :expires, checked_value: 1, unchecked_value: 0, label: "No expiration"
-    .row
-      .col-md-12
-        = f.text_area :description, placeholder: "Description", hide_label: true, rows: 8
+    .form-row-no-border
+      = f.text_area :description, placeholder: "Description", hide_label: true, rows: 8
   .modal-footer
+    = f.submit @certification.new_record? ? "Add Certification" : "Update", class: "btn submit-button"
     .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
-    = f.submit @user_certification.new_record? ? "Add Certification" : "Update", class: "btn submit-button"
     
   

@@ -285,20 +285,21 @@ jQuery ->
 
 ############ HiddenSearch Box 
   $(document).on 'click', '.delete-tag', (event) -> 
-    valId = $(this).parent().data('id').toString()
+    value = $(this).parent().find('.name').text()
+    values = $(document).find('#add-tags-value').val().split(',')
     
-    if $(this).parent().data('kind') == 'user'
-      arr = $('#user_ids').val().split(',')
-      indexId = arr.indexOf(valId)
-      arr.splice(indexId)
-      $('#user_ids').val(arr)
-      $(this).parent().remove()
-    
-    else if $(this).parent().data('kind') == 'candidate'
-      $('#candidate_ids').val($('#candidate_ids').val($('#candidate_ids').val().split(',').splice(valId)))
-      $(this).parent().remove()
+    if values.length == 1
+      $('#add-tags-value').val('')
     else
-      return
+      if $(document).find('#add-tags-value').val().includes(',' + value)
+        newValue = $(document).find('#add-tags-value').val().replace(',' + value, '')
+      else
+        newValue = $(document).find('#add-tags-value').val().replace(value, '')
+      $('#add-tags-value').val(newValue)
+    $(this).parent().remove()
+    return
+
+    
 
   $(document).on 'click', '.select-item', (e) -> 
     elementId = $(this).data('id')
@@ -338,7 +339,12 @@ jQuery ->
       element.editor.insertHTML("<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{company.name}} </span>")
     $(this).parent().parent().hide()
 
-  
+  $(document).on 'click', '#submit-section', ->
+    $(this).parent().prev().find('form').submit()
+
+  $(".main-container").on 'click', "#submit-section", -> 
+    $("#job-board-section").submit()
+
 ######## Dropdown
   $(document).on 'click', '.dropdown-button', (e) ->
     $(this).next('.dropdown-content').show()

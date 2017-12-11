@@ -12,13 +12,12 @@
   
   validates_presence_of :title, :message => "Job title can't be blank"
   validates_presence_of :company_name, :message => "Company can't be blank"
-  validates_presence_of :description, :message => "Description can't be blank"
-  validates_presence_of :start_month, :message => "Start Month can't be blank"
-  validates_presence_of :start_year, :message => "Start Year can't be blank"
-  # validates_presence_of :industry_ids, :message => "Industry can't be blank"
-  # validates_presence_of :function_ids, :message => "Function can't be blank"
-  validates_presence_of :end_month, :end_year, :unless => :current_position?
-  validates_presence_of :current_position, :unless => :end_year?
+  validates_presence_of :description, :message => "Description can't be blank", if: :is_job_seeker?
+  validates_presence_of :start_month, :message => "Start Month can't be blank", if: :is_job_seeker?
+  validates_presence_of :start_year, :message => "Start Year can't be blank", if: :is_job_seeker?
+  validates_presence_of :end_month, :end_year, :unless => :current_position?, if: :is_job_seeker?
+  validates_presence_of :current_position, :unless => :end_year?, if: :is_job_seeker?
+
 
   accepts_nested_attributes_for :skills, 
     allow_destroy: true
@@ -26,7 +25,9 @@
   accepts_nested_attributes_for :accomplishments, 
     allow_destroy: true
 
-
+  def is_job_seeker? 
+    self.user.present? 
+  end
   # def order_by_date
   #   order = []
   #   month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 

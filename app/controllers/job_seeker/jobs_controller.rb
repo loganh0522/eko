@@ -13,6 +13,5 @@ class JobSeeker::JobsController < JobSeekersController
     @job = Job.find(params[:id])
     @application = Application.new
     @avatar = current_user.user_avatar
-  end
-  
+  end 
 end

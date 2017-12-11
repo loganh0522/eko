@@ -5,6 +5,6 @@
   <% end %>
 <% else %>
   $('#basic-form-modal').modal("toggle");
-  $('#work_experiences').html('<%= j render "job_seeker/work_experiences/experience", work_experience: @work_experiences %>');
+  $('.experience-container').html('<%= j render "job_seeker/work_experiences/experience", work_experience: @work_experiences %>');
 <%end%>
 

@@ -38,6 +38,11 @@ class JobSeeker::UserSkillsController < JobSeekersController
     end
   end
 
+  def autocomplete
+    @skills = Skill.order(:name).where("name ILIKE ?", "%#{params[:term]}%")
+    render :json => @skills.to_json 
+  end
+
   private
 
   def render_errors(object)

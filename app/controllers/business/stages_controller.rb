@@ -59,8 +59,8 @@ class Business::StagesController < ApplicationController
     @stage.destroy
     @job = Job.find(params[:job_id])
     
-    @job.stages.each_with_index do |id, index| 
-      Stage.update(id, {position: index + 1})
+    @job.stages.each_with_index do |stage, index| 
+      stage.update_attributes(position: index + 1)
     end
 
     respond_to do |format|

@@ -37,7 +37,7 @@ class Candidate < ActiveRecord::Base
   
   accepts_nested_attributes_for :social_links, 
     allow_destroy: true
-
+    
   accepts_nested_attributes_for :work_experiences, 
     allow_destroy: true
 

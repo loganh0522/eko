@@ -28,7 +28,6 @@ jQuery ->
   searchEvents = -> 
     if (searchRequest)
       searchRequest.abort()
-    
     action = $("#search-form").attr('action')
     param = $(this).attr('name') + "=" + $(this).attr('value')
     url = window.location
@@ -53,6 +52,12 @@ jQuery ->
     history.pushState({}, "", "?" + $("#search-form").serialize())
 
   searchFieldAuto = ->
+    if (searchRequest)
+      searchRequest.abort()
+    action = $("#search-form").attr('action')
+    $.get(action, $("#search-form").serialize(), null, "script")  
+
+  searchFieldDropDown = ->
     if (searchRequest)
       searchRequest.abort()
     action = $('#dropdown-autocomplete').attr('action')
@@ -109,7 +114,7 @@ $(document).ajaxComplete ->
   searchRequest = null  
   debounceTimeout = null
 
-  searchFieldAuto = ->
+  searchFieldDropAuto = ->
     if (searchRequest)
       searchRequest.abort()
     action = $('#dropdown-autocomplete').attr('action')
@@ -117,7 +122,7 @@ $(document).ajaxComplete ->
 
   searchAuto.on 'keyup', (event) ->
     clearTimeout debounceTimeout
-    debounceTimeout = setTimeout(searchFieldAuto, 500)
+    debounceTimeout = setTimeout(searchFieldDropAuto, 500)
     return
 
   

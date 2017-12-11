@@ -219,7 +219,7 @@ describe Business::StagesController do
     let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
     let(:alice) {Fabricate(:user, company: company, role: "Admin")}
     let(:job) {Fabricate(:job, company: company, user_ids: alice.id)}
-    let(:stage) {Fabricate(:stage, job: job, name: "deleted")}
+    let(:stage) {Fabricate(:stage, job: job, name: "deleted", position: 6)}
     
     before do 
       set_current_user(alice)
@@ -247,6 +247,11 @@ describe Business::StagesController do
 
     it "deletes the stage" do 
       expect(job.stages.last.name).to eq("Hired")
+    end
+
+    it "adjusts the stages position" do 
+      expect(job.stages.last.position).to eq(6)
+      expect(job.stages.first.position).to eq(1)
     end
   end
 

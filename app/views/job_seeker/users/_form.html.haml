@@ -1,4 +1,4 @@
-= form_for [:job_seeker, current_user] do |f| 
+= form_for [:job_seeker, current_user], remote: true do |f| 
   .modal-body
     .form-row-no-border
       .contain-50
@@ -28,4 +28,4 @@
           = render 'social_link_fields', f: a
   .modal-footer
     = f.submit "Update", class: "btn submit-button"
-    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

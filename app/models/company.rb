@@ -2,6 +2,7 @@ class Company < ActiveRecord::Base
   before_create :generate_token
   # has_many :company_users
   # has_many :users, through: :company_users
+  
   has_many :users
   has_many :invitations
   has_many :rejection_reasons
@@ -29,7 +30,6 @@ class Company < ActiveRecord::Base
   has_many :subsidiaries
   has_many :locations
   has_one :background_image
-  
   has_one :logo
   validates_presence_of :name, :website
 

@@ -3,65 +3,60 @@ class JobSeeker::UserCertificationsController < JobSeekersController
   before_filter :require_user
   # before_filter :profile_sign_up_complete
   
+  def index
+    @certifications = current_user.user_certifications
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def new
-    @profile = current_user.profile 
-    @user_certification = UserCertification.new
+    @certification = UserCertification.new
+    
+    respond_to do |format|
+      format.js
+    end
   end
 
   def create
-    @profile = current_user.profile 
-    @user_certification = UserCertification.new(certification_params.merge!(profile: current_user.profile))
+    @certification = UserCertification.new(certification_params.merge!(user_id: current_user.id))
+    
     respond_to do |format|
-      @errorName = [] 
-      @errorAgency = [] 
-      @errorStartYear = []
-      @errorStartMonth = []
-      @errorEndMonth = []
-      @errorEndYear = [] 
-      if @user_certification.save
+      if @certification.save
+        @certifications = current_user.user_certifications
         format.js
       else
+        render_errors(@certification)
         format.js
-        @certifications = current_user.profile.user_certifications
-        @profile = current_user.profile
-        @user_certification.errors.any?
-        validate_certification(@user_certification)
       end
     end
   end
 
   def edit
-    @profile = current_user.profile
-    @user_certification = UserCertification.find(params[:id])
+    @certification = UserCertification.find(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def update
-    @profile = current_user.profile 
-    @certifications = current_user.profile.user_certifications
-    @user_certification = UserCertification.find(params[:id])   
+    @certification = UserCertification.find(params[:id])   
+    
     respond_to do |format|
-      @errorName = [] 
-      @errorAgency = [] 
-      @errorStartYear = []
-      @errorStartMonth = []
-      @errorEndMonth = []
-      @errorEndYear = [] 
-
-      if @user_certification.update(certification_params)
+      if @certification.update(certification_params)
         format.js
       else
+        render_errors(@certification)
         format.js
-        @certifications = current_user.profile.user_certifications
-        @profile = current_user.profile
-        @user_certification.errors.any?
-        validate_certification(@user_certification)
       end
     end
   end
 
   def destroy
-    @user_certification = UserCertification.find(params[:id]) 
-    @user_certification.destroy
+    @certification = UserCertification.find(params[:id]) 
+    @certification.destroy
 
     respond_to do |format|
       format.html{redirect_to job_seeker_profiles_path}
@@ -75,25 +70,10 @@ class JobSeeker::UserCertificationsController < JobSeekersController
     params.require(:user_certification).permit(:name, :agency, :description, :start_month, :start_year, :end_year, :end_month, :expires)
   end
 
-  def validate_certification(certification)
-    if (certification.errors["name"] != nil)
-      @errorName.push(certification.errors["name"][0])
+  def render_errors(object)
+    @errors = []
+    object.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
     end  
-    if (certification.errors["agency"] != nil)
-      @errorAgency.push(certification.errors["agency"][0])
-    end
-    if (certification.errors["start_year"] != nil)
-      @errorStartYear.push(certification.errors["start_year"][0])
-    end
-    if (certification.errors["start_month"] != nil)
-      @errorStartMonth.push(certification.errors["start_month"][0])
-    end
-    if (certification.errors["end_year"] != nil)
-      @errorEndYear.push(certification.errors["end_year"][0])
-    end
-    if (certification.errors["end_month"] != nil)
-      @errorEndMonth.push(certification.errors["end_month"][0])
-    end
   end
-
 end

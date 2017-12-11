@@ -57,11 +57,16 @@ section
   width: 100%
 header
   width: 100%
+
 .field_with_errors 
   input
-    box-shadow: 0px 0px 1px .5px rgba(255, 0, 0, 0.5)
+    box-shadow: 0px 0px 1px .5px rgba(255, 0, 0, 0.8)
   select
-    box-shadow: 0px 0px 1px .5px rgba(255, 0, 0, 0.5)
+    box-shadow: 0px 0px 1px .5px rgba(255, 0, 0, 0.8)
+  trix-editor
+    box-shadow: 0px 0px 1px .5px rgba(255, 0, 0, 0.8)
+
+    
 #main-container
   overflow: hidden
   width: 100%
@@ -502,8 +507,9 @@ textarea
 
 .user-tag
   width: fit-content
+  height: auto
   float: left
-  padding: 1px 2px
+  padding: 5px 5px
   margin: 5px 5px 0 0 
   overflow: hidden
   border: 1px solid rgba(239, 122, 43, 0.9)
@@ -514,12 +520,20 @@ textarea
   .name
     float: left
     width: auto
-    margin: 7px 0 0 5px
   .delete-tag 
     float: right
     width: auto
-    margin: 6px 5px 0 5px
-    font-size: 16px
+    margin-left: 5px
+    font-size: 14px
+    color: rgba(0,0,0,0.7)
+  &:hover
+    cursor: pointer
+  .delete
+    float: right
+    width: auto
+    margin-left: 5px
+    font-size: 14px
+    color: rgba(0,0,0,0.7)
   &:hover
     cursor: pointer
 
@@ -547,3 +561,34 @@ textarea
     .btn
       float: right
       margin-top: -15px
+
+.dropdown
+  position: relative
+  display: inline-block
+  .dropdown-button 
+    color: rgba(0,0,0, 0.3)
+    &:hover    
+      cursor: pointer
+  .dropdown-content
+    background: #ffffff
+    position: absolute
+    display: none
+    right: 1px
+    width: 150px
+    height: fit-content
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    a 
+      color: rgba(0,0,0,0.4)
+      text-decoraction: none
+      width: 100%
+      display: block
+      overflow: hidden
+      .fa
+        float: left
+        margin: 13px 10px
+      .action
+        float: left
+        margin: 10px 10px
+      &:hover
+        background: rgba(239,123,43, 0.3)
+        cursor: pointer

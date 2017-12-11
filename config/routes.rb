@@ -80,6 +80,12 @@ Rails.application.routes.draw do
     resources :educations
     resources :projects
     
+    resources :user_skills do 
+      collection do 
+        get :autocomplete
+      end
+    end
+
     resources :work_experiences do
       resources :accomplishments
       resources :user_skills
@@ -213,6 +219,7 @@ Rails.application.routes.draw do
     resources :candidates do
       collection do 
         get :autocomplete
+        get :search
       end
       
       resources :interview_invitations
@@ -265,6 +272,11 @@ Rails.application.routes.draw do
     end
     
     resources :jobs do 
+      collection do 
+        get :autocomplete
+        get :search
+      end
+
       resources :job_feeds 
       get 'tasks', to: "tasks#job_tasks"
       get 'comments', to: "comments#job_comments"
@@ -275,9 +287,6 @@ Rails.application.routes.draw do
       get :publish, to: "jobs#publish_job"
       get 'interviews', to: 'interviews#job_interviews'
       get 'interview_invitations', to: 'interview_invitations#job_invitations'
-      collection do 
-        get :autocomplete
-      end
       
       resources :tasks, except: [:index, :show] do 
         collection do 

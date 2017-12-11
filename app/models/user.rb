@@ -4,8 +4,6 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email, :on => [ :create, :update ]
   validates_presence_of :password, :confirmation, :on => [:update_password]
 
-  
-
   before_create :downcase_email, :set_full_name
   after_save :set_full_name
 
@@ -84,10 +82,19 @@ class User < ActiveRecord::Base
   def current_position
     self.work_experiences.where(current_position: 1).first
   end
-  
-  
-  
 
+  # def convert_location
+  #   location = params[:user][:location].split(',')
+  #   if location.count == 3
+  #     @user.update_column(:city, location[0])
+  #     @user.update_column(:province, location[1])
+  #     @user.update_column(:country, location[2])
+  #   else
+  #     @user.update_column(:city, location[0])
+  #     @user.update_column(:country, location[1])
+  #   end
+  # end
+  
   #Carrierwave uploader and minimagic for User Profile Pictures
   searchkick word_start: [:full_name]
 

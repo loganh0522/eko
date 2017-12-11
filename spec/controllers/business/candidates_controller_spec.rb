@@ -27,25 +27,21 @@ describe Business::CandidatesController do
       set_current_company(company)
       job_board
       @candidate = Fabricate(:candidate, company: company) 
-      @candidate_2 = Fabricate(:candidate) 
+      @candidate2 = Fabricate(:candidate) 
       @tag = Fabricate(:tag, company: company)
+      @tag1 = Fabricate(:tag)
       get :index
     end
 
-    it "sets the @candidates to the candidates that belong to the current company" do 
-      expect(assigns(:candidates)).to eq(company.candidates)
-    end
-
     it "only renders candidates that belong to company" do
-      expect(company.candidates.first).to eq(@candidate)
-    end
-
-    it "only renders candidates that belong to company" do
+      expect(company.candidates).to eq([@candidate])
+      expect(assigns(:candidates)).to eq([@candidate])
       expect(company.candidates.count).to eq(1)
     end
 
     it "sets @tags to the current_company tags" do 
       expect(company.tags.first).to eq(@tag)
+      expect(company.tags).to eq([@tag])
     end
 
     it "sets @tags to the correct number of tags" do
@@ -66,25 +62,64 @@ describe Business::CandidatesController do
       xhr :get, :show, id: candidate.id
     end
 
-    it "sets candidate to the instance of candidate" do 
-      expect(assigns(:candidate)).to eq(candidate)
+    it_behaves_like "requires sign in" do
+      let(:action) {get :index}
     end
 
-    it "expects the response to render show template" do
-      expect(response).to render_template :show
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {get :index}
+    end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) {get :index}
+    end
+
+    it_behaves_like "trial is over" do 
+      let(:action) {get :index}
+    end
+
+    context "candidate belongs to the company" do 
+      it "sets candidate to the instance of candidate" do 
+        expect(assigns(:candidate)).to eq(candidate)
+      end
+
+      it "expects the response to render show template" do
+        expect(response).to render_template :show
+      end
     end
   end
 
   describe "GET new" do 
+    let(:company) {Fabricate(:company)}
+    let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
+    let(:alice) {Fabricate(:user, company: company, role: "Admin")}
+    let(:job) {Fabricate(:job, company: company)}
+    
+    before do  
+      set_current_user(alice)
+      set_current_company(company)
+      job_board
+      job
+    end
+
+    it_behaves_like "requires sign in" do
+      let(:action) {get :index}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {get :index}
+    end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) {get :index}
+    end
+
+    it_behaves_like "trial is over" do 
+      let(:action) {get :index}
+    end
+
     context "Job not present" do 
-      let(:company) {Fabricate(:company)}
-      let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
-      let(:alice) {Fabricate(:user, company: company, role: "Admin")}
-      
       before do  
-        set_current_user(alice)
-        set_current_company(company)
-        job_board
         xhr :get, :new
       end
 
@@ -99,15 +134,7 @@ describe Business::CandidatesController do
     end
 
     context "Job present" do 
-      let(:company) {Fabricate(:company)}
-      let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
-      let(:alice) {Fabricate(:user, company: company, role: "Admin")}
-      let(:job) {Fabricate(:job, company: company)}
-      
       before do  
-        set_current_user(alice)
-        set_current_company(company)
-        job_board
         xhr :get, :new, job: job
       end
 
@@ -126,25 +153,107 @@ describe Business::CandidatesController do
     end
   end 
 
-  describe "POST create" do  
-    context "Create a candidate to add to the company" do 
-      let(:company) {Fabricate(:company)}
-      let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
-      let(:alice) {Fabricate(:user, company: company, role: "Admin")}
-      let(:candidate) {Fabricate.attributes_for(:candidate, company: company)}
-      
+  describe "POST create" do 
+    let(:company) {Fabricate(:company)}
+    let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
+    let(:alice) {Fabricate(:user, company: company, role: "Admin")}
+    let(:candidate) {Fabricate.attributes_for(:candidate, company: company)}
+    
+    before do  
+      set_current_user(alice)
+      set_current_company(company)
+      job_board
+      @candidate = Fabricate(:candidate, company: company) 
+      @candidate2 = Fabricate(:candidate) 
+    end
+
+    it_behaves_like "requires sign in" do
+      let(:action) {get :index}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {get :index}
+    end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) {get :index}
+    end
+
+    it_behaves_like "trial is over" do 
+      let(:action) {get :index}
+    end
+ 
+    context "Create a candidate with VALID inputs to the company" do 
       before do  
-        set_current_user(alice)
-        set_current_company(company)
-        job_board
         xhr :post, :create, candidate: candidate
       end
 
       it "creates the candidate" do
-        expect(Candidate.count).to eq(1)
+        expect(Candidate.count).to eq(3)
+      end 
+
+      it "only renders candidates that belong to company" do
+        expect(company.candidates.count).to eq(2)
+        expect(assigns(:candidates)).to eq([Candidate.last, @candidate])
       end
 
-      it "renders the new action" do 
+      it "renders the create action" do 
+        expect(response).to render_template :create
+      end
+    end
+
+    context "Does not create a candidate with INVALID input" do 
+      before do  
+        xhr :post, :create, candidate: Fabricate.attributes_for(:candidate, first_name: nil)
+      end
+
+      it "creates the candidate" do
+        expect(Candidate.count).to eq(2)
+      end 
+
+      it "sets @errors instance variable" do
+        expect(assigns(:errors)).to be_present
+      end
+
+      it "renders the create action" do 
+        expect(response).to render_template :create
+      end
+    end
+
+    context "Create a candidate with VALID work_experience, education, social link" do 
+      before do 
+        xhr :post, :create, tags: "Rails,Sales", job_id: "", candidate: {first_name: "Dave", last_name: "Goldfarb", email: "dgoldfarb@example.com", phone: "", social_links_attributes: {"0"=>{url:"linkedin", kind:"LinkedIn"}}, work_experiences_attributes: {"0"=>{title:"Sales", company_name:"Drugs",start_month:"", start_year:"", end_month: "", end_year:"", current_position: "0", description: ""}}, educations_attributes: {"0"=>{school:"Life", degree:"School", start_month:"January", start_year:"", end_month: "January", end_year: "", description:""}}, company: company, manually_created: "true"}
+      end
+
+      it "creates the candidate" do
+        expect(Candidate.count).to eq(3)
+      end 
+
+      it "creates the tags and associates them to the candidates" do
+        expect(Tag.count).to eq(2)
+        expect(Tagging.count).to eq(2)
+        expect(Candidate.last.tags.count).to eq(2)
+      end 
+
+      it "creates the education and associates them to the candidate" do
+        expect(Education.count).to eq(1)
+        expect(Candidate.last.educations.count).to eq(1)
+        expect(Candidate.last.educations.first.school).to eq("Life")
+      end 
+
+      it "creates the work_experience and associates them to the candidate" do
+        expect(WorkExperience.count).to eq(1)
+        expect(Candidate.last.work_experiences.count).to eq(1)
+        expect(Candidate.last.work_experiences.first.title).to eq("Sales")
+      end 
+
+      it "creates the social_link and associates them to the candidate" do
+        expect(SocialLink.count).to eq(1)
+        expect(Candidate.last.social_links.count).to eq(1)
+        expect(Candidate.last.social_links.first.url).to eq("https://linkedin")
+      end 
+
+      it "renders the create action" do 
         expect(response).to render_template :create
       end
     end
@@ -157,14 +266,11 @@ describe Business::CandidatesController do
       let(:candidate) {Fabricate.attributes_for(:candidate, company: company)}
       
       before do  
-        set_current_user(alice)
-        set_current_company(company)
-        job_board
         xhr :post, :create, job_id: job.id, candidate: candidate
       end
 
       it "creates the candidate" do
-        expect(Candidate.count).to eq(1)
+        expect(Candidate.count).to eq(3)
       end
 
       it "creates an application" do
@@ -172,7 +278,13 @@ describe Business::CandidatesController do
       end
 
       it "associations the candidate with the job" do
-        expect(Candidate.first.jobs.first).to eq(job)
+        expect(Candidate.last.jobs).to eq([job])
+      end
+
+      it "only renders candidates that belong to job" do
+        expect(job.candidates.count).to eq(1)
+        expect(assigns(:candidates)).to eq([Candidate.last])
+        expect(assigns(:candidates).count).to eq(1)
       end
 
       it "renders the new action" do 
@@ -187,6 +299,7 @@ describe Business::CandidatesController do
     let(:alice) {Fabricate(:user, company: company, role: "Admin")}
     let(:job) {Fabricate(:job, company: company)}
     let(:candidate) {Fabricate(:candidate, company: company)}    
+    
     before do  
       set_current_user(alice)
       set_current_company(company)

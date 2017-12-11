@@ -14,15 +14,33 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   end
 
   version :small_image, :if => :image?  do
-    resize_to_fill(300, 200)
+    resize_to_fit(300, 200)
   end
 
   version :xs_image, :if => :image?  do
-    resize_to_fill(100, 100)
+    resize_to_fit(100, 100)
   end
 
   version :thumb, :if => :image? do 
-    resize_to_fill(50, 50)
+    resize_to_fit(50, 50)
+  end
+
+  version :pdf_thumb, :if => :pdf? do
+    process :thumbnail_pdf
+    process :set_content_type_png
+
+    def full_filename (for_file = model.artifact.file)
+      super.chomp(File.extname(super)) + '.png'
+    end
+  end
+
+  def thumbnail_pdf
+    manipulate! do |img|
+      img.format("png", 1)
+      img.resize("150x150")
+      img = yield(img) if block_given?
+      img
+    end
   end
 
   protected

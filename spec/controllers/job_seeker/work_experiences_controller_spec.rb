@@ -3,7 +3,6 @@ require 'spec_helper'
 describe JobSeeker::WorkExperiencesController do 
   describe 'GET index' do 
     let(:alice){Fabricate(:user, kind: 'job seeker')}
-    let(:experience){Fabricate(:work_experience, user: alice)}
     
     it_behaves_like "requires sign in" do
       let(:action) {xhr :get, :index}
@@ -11,14 +10,14 @@ describe JobSeeker::WorkExperiencesController do
     
     before do 
       set_current_user(alice)
-      entrepreneur = experience
-      sales = experience
-      xhr :get, :index, id: experience.id
+      @entrepreneur = Fabricate(:work_experience, user: alice)
+      @sales = Fabricate(:work_experience, user: alice)
+      xhr :get, :index
     end
 
     it "set @work_experiences to the objects that belong to user" do
-      expect(WorkExperience.count).to eq(2)
-      expect(assigns(:work_experiences)).to match_array([entrepreneur, sales])
+      expect(alice.work_experiences.count).to eq(2)
+      expect(assigns(:work_experiences)).to match_array([@entrepreneur, @sales])
     end
 
     it "associates the work experience with the current_user" do
@@ -45,10 +44,6 @@ describe JobSeeker::WorkExperiencesController do
     it "set @experience to be a new instance of WorkExperience" do
       expect(assigns(:work_experience)).to be_new_record 
       expect(assigns(:work_experience)).to be_instance_of WorkExperience
-    end
-
-    it "sets @user to be current_user" do
-      expect(assigns(:user)).to eq(alice)
     end
 
     it "renders the new template" do
@@ -135,14 +130,42 @@ describe JobSeeker::WorkExperiencesController do
       let(:action) {xhr :put, :update, id: experience.id}
     end
 
-    before do 
-      set_current_user(alice)
-      experience   
-      xhr :put, :update, id: experience.id, work_experience: {title: "Screened"}
+    context "with valid inputs" do 
+      before do 
+        set_current_user(alice)
+        experience  
+        xhr :put, :update, id: experience.id, work_experience: {title: "Screened"}
+      end
+
+      it "save the updates made on the object" do 
+        expect(WorkExperience.last.title).to eq("Screened")
+      end
+
+      it "redirects to the profile index action" do 
+        expect(response).to render_template :update
+      end
     end
 
-    it "save the updates made on the object" do 
-      expect(WorkExperience.last.title).to eq("Screened")
+    context "with invalid inputs" do 
+      let(:alice){Fabricate(:user, kind: 'job seeker')}
+      let(:experience){Fabricate(:work_experience, user: alice, title: "title")}
+      before do 
+        set_current_user(alice)
+        experience  
+        xhr :put, :update, id: experience.id, work_experience: {title: nil}
+      end
+
+      it "does not update the work_experience" do 
+        expect(WorkExperience.last.title).to eq("title")
+      end
+      
+      it "renders to the update action page" do 
+        expect(response).to render_template :update
+      end
+
+      it "sets @errors instance variable" do
+        expect(assigns(:errors)).to be_present
+      end
     end
   end
 

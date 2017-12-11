@@ -2,9 +2,21 @@ class JobSeeker::UsersController < JobSeekersController
   layout "job_seeker"
   before_filter :require_user
   # before_filter :profile_sign_up_complete
+  def show 
+    @user = current_user
+    @social_links = current_user.social_links
+    @avatar = current_user.user_avatar
+    @work_experiences = @user.organize_work_experiences
+    
+    if current_user.background_image.present?
+      @background = current_user.background_image
+    else
+      @background = BackgroundImage.new
+    end 
+  end
 
   def edit
-    @user = User.find(params[:id])
+    @user = current_user
 
     respond_to do |format|
       format.js 
@@ -12,28 +24,17 @@ class JobSeeker::UsersController < JobSeekersController
   end
 
   def update
-    @user = User.find(params[:id])
-    
-    if @user.update(user_params)
-      convert_location
-      redirect_to job_seeker_profiles_path
-    else
-      redirect_to job_seeker_profiles_path
-    end
-  end
-
-  def show 
     @user = current_user
-    @social_links = current_user.social_links
-    @avatar = current_user.user_avatar
-
-    if current_user.background_image.present?
-      @background = current_user.background_image
-    else
-      @background = BackgroundImage.new
-    end
     
-    @work_experiences = @user.organize_work_experiences
+    respond_to do |format|
+      if @user.update(user_params)
+        convert_location 
+        format.js
+      else
+        render_errors(@user)
+        format.js
+      end
+    end
   end
 
   private 
@@ -41,6 +42,13 @@ class JobSeeker::UsersController < JobSeekersController
   def user_params
     params.require(:user).permit(:first_name, :last_name, :phone, :tag_line, :location,
       social_links_attributes: [:id, :url, :kind, :_destroy] )
+  end
+
+  def render_errors(experience)
+    @errors = []
+    experience.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end  
   end
 
   def convert_location

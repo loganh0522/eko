@@ -3,7 +3,7 @@ class Question < ActiveRecord::Base
   has_many :question_options, dependent: :destroy
   has_many :question_answers, dependent: :destroy
 
-  validates_presence_of :body
+  validates_presence_of :body, :kind
   validates_associated :question_options
 
   accepts_nested_attributes_for :question_options, 

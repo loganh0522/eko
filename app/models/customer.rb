@@ -1,7 +1,6 @@
 class Customer < ActiveRecord::Base
   belongs_to :company
   has_one :subscription
-
   after_create :convert_location
 
 

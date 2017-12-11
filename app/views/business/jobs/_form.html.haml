@@ -1,38 +1,35 @@
 = form_for [:business, @job] do |f|
   .form-row-no-border
-    .col-md-12
-      = f.label :title, "Job Title"
-      = f.text_field :title, class: "form-control", autocomplete: "off"
+    = f.label :title, "Job Title"
+    = f.text_field :title, autocomplete: "off"
+    = show_errors(@job, :title) 
   .form-row-no-border
-    .col-md-6
+    .contain-50
       = f.label :city, "City"
-      = f.text_field :location, class: "form-control", id: "geocomplete", placeholder: "City Name"
-    .col-md-6
+      = f.text_field :location, id: "geocomplete", placeholder: "City Name"
+      = show_errors(@job, :location) 
+    .contain-50
       = f.label :city, "Address"
-      = f.text_field :address, class: "form-control", id: "geocomplete2", placeholder: "Enter the Address"
+      = f.text_field :address, id: "geocomplete2", placeholder: "Enter the Address"
+      = show_errors(@job, :address) 
   - if current_company.kind == "recruiter"
     .form-row-no-border
-      .form-group.col-md-12
-        = f.label :description, "Internal Description"
-        = f.collection_select(:client_id, current_company.clients, :id, :company_name, label: "Client", :include_blank => true, :selected => @job.new_record? ? nil : @job.industries.first.id)
+      = f.label :description, "Internal Description"
+      = f.collection_select(:client_id, current_company.clients, :id, :company_name, label: "Client", :include_blank => true, :selected => @job.new_record? ? nil : @job.industries.first.id)
+    .form-row-no-border
+      = f.trix_editor :recruiter_description
   .form-row-no-border
-    .form-group.col-md-12
-      = f.label :description, "Job Description"
-      = f.trix_editor :description
-  - if current_company.kind == "recruiter"
-    .row
-      .form-group.col-md-12
-        = f.trix_editor :recruiter_description
-
+    = f.label :description, "Job Description"
+    = f.trix_editor :description
+    = show_errors(@job, :address) 
+  
   .form-row-no-border
     .col-md-4
-      / = f.collection_select(:industry_ids, Industry.all, :id, :name, label: "Industry", :include_blank => true, :selected => @job.new_record? ? nil : @job.industries.first.id )
       = f.label :description, "Industry"
       = f.collection_select(:industry, Industry.all, :name, :name, :include_blank => true, :selected => @job.new_record? ? nil : @job.industry )
     .col-md-4
       = f.label :description, "Job Function"
       = f.collection_select(:function, Function.all, :name, :name, :include_blank => true, :selected => @job.new_record? ? nil : @job.function)
-      / = f.collection_select(:function_ids, Function.all, :id, :name, label: "Job Function", :include_blank => true)
   .form-row-no-border
     .col-md-4
       = f.label "Education"
@@ -46,7 +43,5 @@
   .container-footer
     = f.hidden_field :user_ids, value: current_user.id
     = f.hidden_field :company_id, value: current_company.id
-    - if @job.new_record?
-      = f.hidden_field :status, value: "draft"
-    = f.submit @job.new_record? ? "Create Job Posting" : "Save and Continue", class: "btn border-button"
+    = f.submit @job.new_record? ? "Create Posting" : "Save and Continue", class: "btn border-button"
 

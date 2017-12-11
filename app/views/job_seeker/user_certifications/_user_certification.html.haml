@@ -1,14 +1,26 @@
 %div{:class => "work-experience", id: "user_certification_#{certification.id}"}
   .job-position
-    .experience-header 
-      .company= certification.name
-      .edit
-        = link_to "Edit", edit_job_seeker_profile_user_certification_path(@profile,certification.id), :data => {:remote => true} 
-    .experience-position
-      .title= certification.agency
-      - if certification.expires == 1
-        .date= "#{certification.start_month} #{certification.start_year} - Present"
-      - else    
-        .date= "#{certification.start_month} #{certification.start_year} - #{certification.end_month} #{certification.end_year}"    
-    .experience-body 
-      %p.description= certification.description
+    .job-position-header
+      .job-position-header-content
+        .experience-header  
+          .company= certification.name
+          .dropdown
+            .dropdown-button
+              %i.fa.fa-ellipsis-h.fa-lg
+            .dropdown-content#myDropdown
+              = link_to edit_job_seeker_user_certification_path(certification.id), remote: true do
+                %i.fa.fa-pencil
+                .action Edit
+              = link_to job_seeker_user_certification_path(certification.id), remote: true, :method => :delete, data:{:confirm => "Are You Sure? You can not undo this action."}  do  
+                %i.fa.fa-trash-o
+                .action Destroy
+        .experience-position
+          .title= certification.agency
+          - if certification.expires == 1
+            .date= "#{certification.start_month} #{certification.start_year} - Present"
+          - else    
+            .date= "#{certification.start_month} #{certification.start_year} - #{certification.end_month} #{certification.end_year}"    
+    .job-position-body
+      .job-position-body-content
+        .experience-body 
+          .description= certification.description

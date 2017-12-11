@@ -1,7 +1,7 @@
 class Education < ActiveRecord::Base
   belongs_to :user
   belongs_to :profile
-  belongs_to :candidate, dependent: :delete
+  belongs_to :candidate
   
   validates_presence_of :school, :message => "School title can't be blank"
   validates_presence_of :degree, :message => "Degree can't be blank"
