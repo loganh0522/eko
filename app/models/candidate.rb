@@ -1,6 +1,4 @@
 class Candidate < ActiveRecord::Base 
-  
-
   liquid_methods :first_name, :last_name, :full_name
   searchkick word_start: [:profile_w_titles, :work_titles, :work_description, :work_company, :education_description, :education_school, :full_name]
   # index_name ["talentwiz", Rails.env].join('_')
@@ -21,18 +19,14 @@ class Candidate < ActiveRecord::Base
   has_many :work_experiences, :dependent => :destroy
   has_many :educations, :dependent => :destroy
   has_many :social_links, :dependent => :destroy
-
   has_many :ratings
   has_many :taggings
   has_many :tags, through: :taggings
-  
   has_many :activities, -> {order("created_at DESC")}, :dependent => :destroy
   has_many :messages, -> {order("created_at DESC")}, as: :messageable, :dependent => :destroy
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy
   has_many :tasks, -> {order("created_at DESC")}, as: :taskable, :dependent => :destroy
-
   validates_presence_of :first_name, :last_name, :email, :if => :manually_created?
-
   validates_associated :social_links, :work_experiences, :educations, :resumes
   
   accepts_nested_attributes_for :social_links, 
@@ -85,6 +79,10 @@ class Candidate < ActiveRecord::Base
     self.token = SecureRandom.urlsafe_base64
   end
 
+  def job_comments(id)
+    self.comments.where(job_id: id)
+  end
+
   def notes
     @notes = []
     self.applications.each do |app|
@@ -114,6 +112,10 @@ class Candidate < ActiveRecord::Base
 
   def open_tasks
     self.tasks.where(status: 'active')
+  end
+
+  def open_job_tasks(job)
+    self.tasks.where(status: 'active', job_id: job.id)
   end
 
   def complete_tasks

@@ -5,6 +5,16 @@
       .add-button-search
         .glyphicon.glyphicon-plus
     .hidden-search-box
-      = text_field_tag "", "", :class => 'ui-autocomplete-input candidates', :placeholder => 'Type a users name to assign', id: "autocomplete"
+      .search-area-content
+        %i.fa.fa-search.fa-stack-2x
+        = text_field_tag "", "", :placeholder => 'Type a users name to assign', id: "autocomplete", autocomplete: "off"
       #search-results-candidates
-  .assigned-candidates
+      .users
+        - current_company.candidates.each do |user|
+          .user{:data => {id: current_user.id, kind: "user"}}
+            / - if user.user_avatar.present?
+            /   = image_tag user.user_avatar.image.small_image, class: 'img circle-img'
+            / - else 
+            /   .circle-img
+            /     %img(src="/tmp/little-man.png")
+            .name= user.full_name

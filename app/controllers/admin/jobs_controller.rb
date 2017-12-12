@@ -1,7 +1,7 @@
 class Admin::JobsController < ApplicationController
   layout "admin"
   before_filter :require_user
-
+  
   def index
     where = {}
     if params[:query].present? 

@@ -4,7 +4,7 @@ class Client < ActiveRecord::Base
   has_many :jobs, :dependent => :destroy
   has_many :comments, as: :commentable, :dependent => :destroy
   has_many :tasks, as: :taskable, :dependent => :destroy
-
+  
   validates_presence_of :company_name
   
   def all_tasks
@@ -25,6 +25,10 @@ class Client < ActiveRecord::Base
       end
     end
     return @tasks
+  end
+
+  def open_tasks
+    self.tasks.where(status: 'active')
   end
 
 end

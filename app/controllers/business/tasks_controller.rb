@@ -13,21 +13,25 @@ class Business::TasksController < ApplicationController
 
   def job_tasks
     @job = Job.find(params[:job_id]) 
-    search_terms(params)
-    @tasks = Task.search(@query, where: @where).to_a
+    @tasks = @job.open_tasks
+  end
 
-    respond_to do |format|
-      format.js
-      format.html
-    end 
+  def client_tasks
+    @client = Client.find(params[:client_id]) 
+    @tasks = @client.open_tasks
   end
 
   def index
-    search_terms(params)
-    @job = Job.find(params[:job]) if params[:job].present?  
-    
-    @candidate = Candidate.find(params[:candidate_id]) if params[:candidate_id].present?
-    @tasks = Task.search(@query, where: @where, order: {created_at: :desc}).to_a
+    if params[:job].present?
+      @candidate = Candidate.find(params[:candidate_id]) 
+      @job = Job.find(params[:job])
+      @tasks = @candidate.open_job_tasks(@job)
+    elsif params[:candidate_id].present?
+      @candidate = Candidate.find(params[:candidate_id]) 
+      @tasks = @candidate.open_tasks
+    else 
+      @tasks = current_company.open_tasks
+    end
 
     respond_to do |format|
       format.js
@@ -38,7 +42,6 @@ class Business::TasksController < ApplicationController
   def new 
     @task = Task.new
     @job = Job.find(params[:job]) if params[:job].present?
-
 
     respond_to do |format|
       format.js
@@ -72,7 +75,6 @@ class Business::TasksController < ApplicationController
   def completed
     @task = Task.find(params[:id])
     @task.update_attributes(status: "complete", completed_by_id: current_user.id)
-
     track_activity @task, "complete"
 
     respond_to do |format|
@@ -107,23 +109,42 @@ class Business::TasksController < ApplicationController
       @candidate = Candidate.find(id)
       @task = @candidate.tasks.build(task_params.merge!(user_ids: @user_ids))
       @task.save
+      # track_activity(@comment, "create")
     end
-    # track_activity(@comment, "create")
     
     respond_to do |format| 
       format.js
     end
   end
 
-  def client_tasks
-    @client = Client.find(params[:client_id]) 
-    search_terms(params)
-    @tasks = Task.search(@query, where: @where).to_a
-
-    respond_to do |format|
-      format.js
-      format.html
+  def search
+    where = {}
+    if params[:query].present? 
+      query = params[:query] 
+    else 
+      query = "*"
     end 
+
+    if params[:status].present? && params[:status] == 'today'
+      where[:due_date] = {gte: Time.now - 1.day, lte: Time.now + 1.day}
+    elsif params[:status].present? && params[:status] == 'overdue'
+      where[:due_date] = {lte: Time.now - 1.day}
+    elsif params[:status].present?
+      where[:status] = params[:status]
+    else
+      where[:status] = 'active' 
+    end
+
+    where[:company_id] = current_company.id
+    where[:users] = {all: [current_user.id]} if params[:owner] == "user"
+    where[:users] = {all: [params[:assigned_to]]} if params[:assigned_to].present?
+    where[:job_id] = params[:job_id] if params[:job_id].present?
+    where[:taskable_id] = params[:candidate_id] if params[:candidate_id].present? 
+    where[:taskable_type] = params[:type] if params[:type].present?
+    where[:client_id] = params[:client_id] if params[:client_id].present?
+    where[:kind] = params[:kind] if params[:kind].present?
+
+    @tasks = Task.search(query, where: where)
   end
 
   private 
@@ -163,6 +184,7 @@ class Business::TasksController < ApplicationController
   def create_tasks 
     respond_to do |format| 
       if @candidate_ids.length >= 1 && params[:task][:job_id].present?
+        
         @candidate_ids.each do |id| 
           @candidate = Candidate.find(id)
           @task = @candidate.tasks.build(task_params.merge!(user_ids: @user_ids)).save
@@ -172,16 +194,17 @@ class Business::TasksController < ApplicationController
         format.js
       else 
         @new_task = @taskable.tasks.build(task_params.merge!(user_ids: @user_ids))
-        if @new_task.save        
+        
+        if @new_task.save      
           if @taskable.class == Job
-            @tasks = Task.where(job_id: @taskable.id, status: "active") 
+            @tasks = @taskable.open_tasks
           elsif @taskable.class == Candidate && params[:task][:job_id].present?
             @job = Job.find(params[:task][:job_id])
-            @tasks = Task.where(job_id: params[:task][:job_id].to_i, 
-              taskable_type: "Candidate", taskable_id: @new_task.taskable_id, status: "active")
+            @tasks = @taskable.open_job_tasks(@job)
           elsif @taskable.class == Candidate
-            @tasks = Task.where(taskable_type: "Candidate", 
-              taskable_id: @new_task.taskable_id, status: "active")
+            @tasks = @taskable.open_tasks
+          elsif @taskable.class == Company
+            @tasks = current_company.open_tasks
           end
           format.js 
         else
@@ -190,34 +213,6 @@ class Business::TasksController < ApplicationController
         end
       end
     end
-  end
-
-  def search_terms(params)
-    @where = {}
-    if params[:query].present? 
-      @query = params[:query] 
-    else 
-      @query = "*"
-    end 
-
-    if params[:status].present? && params[:status] == 'today'
-      @where[:due_date] = {gte: Time.now - 1.day, lte: Time.now + 1.day}
-    elsif params[:status].present? && params[:status] == 'overdue'
-      @where[:due_date] = {lte: Time.now - 1.day}
-    elsif params[:status].present?
-      @where[:status] = params[:status]
-    else
-      @where[:status] = 'active' 
-    end
-
-    @where[:company_id] = current_company.id
-    @where[:users] = {all: [current_user.id]} if params[:owner] == "user"
-    @where[:users] = {all: [params[:assigned_to]]} if params[:assigned_to].present?
-    @where[:job_id] = params[:job_id] if params[:job_id].present?
-    @where[:taskable_id] = params[:candidate_id] if params[:candidate_id].present? 
-    @where[:taskable_type] = params[:type] if params[:type].present?
-    @where[:client_id] = params[:client_id] if params[:client_id].present?
-    @where[:kind] = params[:kind] if params[:kind].present?
   end
 end
 

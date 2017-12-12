@@ -1,7 +1,8 @@
 class Admin::UsersController < ApplicationController
   layout "admin"
   before_filter :require_user
-
+  
+  
   def index
     @users = User.all
     respond_to do |format|

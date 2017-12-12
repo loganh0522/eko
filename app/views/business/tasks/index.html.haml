@@ -3,7 +3,7 @@
 #main-container
   #padding
     .side-container
-      = form_tag business_tasks_path, :method => 'get', id: "search-form" do
+      = form_tag search_business_tasks_path, :method => 'get', id: "search-form" do
         = render 'filters'
     .main-container
       .actions

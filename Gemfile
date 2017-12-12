@@ -17,11 +17,13 @@ gem 'trix'
 gem 'googledocviewer'
 gem 'viewerjs-rails'
 gem 'spinjs-rails'
+
 gem 'responders', '~> 2.0'
 gem 'owlcarousel2'
+
 gem 'will_paginate', '~> 3.1.0'
 gem 'metainspector'
-
+gem 'rails4-autocomplete'
 # gem 'turbolinks', '~> 5.0.1'
 gem 'haml-rails'
 
@@ -30,6 +32,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 
 gem 'jquery-minicolors-rails'
+
 gem 'autoprefixer-rails'
 gem 'bcrypt'
 gem 'fabrication'
@@ -38,7 +41,7 @@ gem 'figaro'
 gem 'stripe'
 gem 'stripe_event'
 
-gem 'rails4-autocomplete'
+
 gem 'geocomplete_rails'
 
 gem 'mini_magick'
@@ -58,8 +61,8 @@ gem "font-awesome-rails"
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 
-gem 'omniauth', '~> 1.2.2'
-gem 'omniauth-google-oauth2'
+gem 'omniauth'
+gem 'omniauth-google-oauth2', '~> 0.5.2'
 gem 'google-api-client', '~> 0.11'
 gem 'google-cloud-pubsub'
 gem 'signet', '~> 0.7.3'

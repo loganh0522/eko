@@ -80,30 +80,11 @@ class Job < ActiveRecord::Base
   end
 
   def complete_tasks
-    @tasks = []
-    self.tasks.where(status: 'complete').each do |task|
-      @tasks.append(task) unless @tasks.include?(task)
-    end
-    self.applications.each do |application|
-      application.complete_tasks.each do |task|
-        @tasks.append(task) unless @tasks.include?(task)
-      end
-    end
-    return @tasks
+    self.tasks.where(status: 'complete')
   end
 
-   def open_tasks
-    @tasks = []
-    self.tasks.where(status: 'active').each do |task|
-      @tasks.append(task) unless @tasks.include?(task)
-    end
-    
-    self.applications.each do |application|
-      application.open_tasks.each do |task|
-        @tasks.append(task) unless @tasks.include?(task)
-      end
-    end
-    return @tasks
+  def open_tasks
+    Task.where(job_id: self.id, status: 'active')
   end
 
 

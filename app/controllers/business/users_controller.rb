@@ -53,7 +53,8 @@ class Business::UsersController < ApplicationController
   end
 
   def create_subscription
-    OutlookWrapper::User.create_subscription(current_user)
+    OutlookWrapper.peform_in(54.hours, current_user.id)
+    # OutlookWrapper::User.create_subscription(current_user)
   end
 
   def edit
@@ -97,8 +98,8 @@ class Business::UsersController < ApplicationController
       expires_at: Time.now + token.expires_in.to_i.seconds,
       user_id: current_user.id
       )
-
-    OutlookWrapper::User.create_subscription(current_user)
+    OutlookWorker.perform_in(54.hours, current_user.id)
+    # OutlookWrapper::User.create_subscription(current_user)
     redirect_to business_user_path(current_user)
   end
 

@@ -7,11 +7,54 @@ describe Business::TasksController do
   let(:job) {Fabricate(:job, company: company)}
   let(:candidate) {Fabricate(:candidate, company: company)}
   let(:application) {Fabricate(:application, candidate: candidate, job: job)}
+  let(:client){Fabricate(:client, company: company)}
   let(:task) {Fabricate(:task, taskable_type: "Company", taskable_id: company.id, company: company)}
-  let(:job_task) {Fabricate(:task, taskable_type: "Job", taskable_id: job.id, company: company)}
+  let(:job_task) {Fabricate(:task, taskable_type: "Job", taskable_id: job.id, company: company, job_id: job.id)}
   let(:candidate_task) {Fabricate(:task, taskable_type: "Candidate", taskable_id: candidate.id, company: company)}
-  let(:application_task) {Fabricate(:task, taskable_type: "Application", taskable_id: application.id, company: company)}
+  let(:client_task) {Fabricate(:task, taskable_type: "Client", taskable_id: client.id, company: company)}
+  let(:application_task) {Fabricate(:task, taskable_type: "Candidate", taskable_id: candidate.id, company_id:company.id, job_id: job.id)}
   
+  before do  
+    set_current_user(alice)
+    set_current_company(company)
+    job_board
+    job
+    candidate
+    task
+    candidate_task
+    job_task
+    client_task
+    application_task
+  end
+
+  describe "GET job_tasks" do 
+    context "@job in params renders job.comments" do 
+      before do  
+        xhr :get, :job_tasks, job_id: job.id
+      end
+
+      it "sets the @tasks to the current Job" do 
+        expect(job.open_tasks.count).to eq(2)
+        expect(job.tasks.first.title).to eq(job_task.title)
+        expect(assigns[:tasks]).to eq([job_task, application_task])
+      end
+    end
+  end
+
+  describe "GET client_tasks" do 
+    context "@job in params renders job.comments" do 
+      before do  
+        xhr :get, :job_tasks, job_id: job.id
+      end
+      
+      it "sets the @tasks to the current Job" do 
+        expect(job.open_tasks.count).to eq(2)
+        expect(job.tasks.first.title).to eq(job_task.title)
+        expect(assigns[:tasks]).to eq([job_task, application_task])
+      end
+    end
+  end
+
   describe "GET index" do 
     it_behaves_like "requires sign in" do
       let(:action) {xhr :get, :index}
@@ -25,87 +68,53 @@ describe Business::TasksController do
       let(:action) {xhr :get, :index}
     end
 
-    it "redirects the user to the sign in page if unauthenticated user" do
-      xhr :get, :edit, id: joe.id
-      expect(response).to redirect_to business_root_path
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :get, :index}
     end
 
-    context "@job in params renders job.comments" do 
+    context "main index of tasks page" do 
       before do  
-        set_current_user(alice)
-        set_current_company(company)
-        job_board
-        job
-        candidate
-        job_task
-        xhr :get, :index, job_id: job.id
-      end
-      
-      it "sets the @tasks to the current Job" do 
-        expect(job.tasks.count).to eq(1)
+        get :index
       end
 
-      it "sets the @tasks to the current Job" do 
-        expect(job.tasks.first.title).to eq(job_task.title)
-      end
-
-      it "only renders tasks that belong to Job" do
-        expect(job.tasks.first).to eq(job_task)
+      it "sets @tasks to the open tasks for current_company" do 
+        expect(company.tasks.count).to eq(5)
       end
     end
-    context "@candidate in params" do 
+
+    context "get APPLICATION tasks" do 
       before do  
-        set_current_user(alice)
-        set_current_company(company)
-        job_board
-        job
-        candidate
-        candidate_task
+        xhr :get, :index, job: job.id, candidate_id: candidate.id
+      end 
+
+      it "sets the @tasks to the current Candidate" do 
+        expect(assigns[:tasks]).to eq([application_task])
+        expect(assigns[:tasks].count).to eq(1)
+      end
+
+      it "expects the response to render index template" do
+        expect(response).to render_template :index
+      end
+    end
+
+    context "get CANDIDATE tasks" do 
+      before do  
         xhr :get, :index, candidate_id: candidate.id
       end 
-      it "sets the @comments to the current Candidate" do 
-        expect(candidate.tasks.count).to eq(1)
+
+      it "sets the @tasks to the current Candidate" do 
+        expect(assigns[:tasks]).to eq([application_task, candidate_task])
+        expect(assigns[:tasks].count).to eq(2)
+        expect(candidate.open_tasks.first).to eq(application_task)
       end
-      it "sets the @comments to the current Job" do 
-        expect(candidate.tasks.first.title).to eq(candidate_task.title)
-      end
-      it "only renders candidates that belong to Candidate" do
-        expect(candidate.tasks.first).to eq(candidate_task)
-      end
-    end
-    context "@application in params" do 
-      before do  
-        set_current_user(alice)
-        set_current_company(company)
-        job_board
-        job
-        candidate
-        application
-        application_task
-        xhr :get, :index, application_id: application.id
-      end
-      
-      it "sets the @tasks to the correct number of open_tasks" do 
-        expect(application.tasks.count).to eq(1)
-      end
-      it "sets the @tasks to the open_tasks for the Application" do 
-        expect(application.tasks.first.title).to eq(application_task.title)
-      end
-      it "only renders tasks that belong to Application" do
-        expect(application.tasks.first).to eq(application_task)
+
+      it "expects the response to render index template" do
+        expect(response).to render_template :index
       end
     end
   end
 
   describe "GET new" do 
-    let(:company) {Fabricate(:company)}
-    let(:alice) {Fabricate(:user, company: company, role: "Admin")}
-    let(:job) {Fabricate(:job, company: company)}
-    let(:candidate) {Fabricate(:candidate, company: company)}
-    let(:candidate1) {Fabricate(:candidate, company: company)}
-    let(:application){Fabricate(:application, job: job, candidate: candidate)}
-    let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
-
     it_behaves_like "requires sign in" do
       let(:action) {xhr :get, :new}
     end
@@ -118,47 +127,23 @@ describe Business::TasksController do
       let(:action) {xhr :get, :new}
     end
 
-    context "@job is in params" do
-      before do  
-        set_current_user(alice)
-        set_current_company(company)
-        job_board
-        job
-        candidate
-        xhr :get, :new, job_id: job.id
-      end
-      
-      it "sets @comment to be a new instance of comment" do 
-        expect(assigns(:task)).to be_new_record 
-        expect(assigns(:task)).to be_instance_of Comment
-      end
-
-      it "expects the response to render new template" do
-        expect(response).to render_template :new
-      end
-
-      it "sets @commentable to an instance of Job" do 
-        expect(assigns(:taskable)).to eq(job)
-      end
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :get, :index}
     end
-   
-    context "application_id in params" do
-      before do  
-        set_current_user(alice)
-        set_current_company(company)
-        job_board
-        job
-        candidate
-        xhr :get, :new, application_id: application.id
+
+
+    context "adding a task from index page" do 
+      before do 
+        xhr :get, :new
       end
 
-      it "sets @comment to be a new instance of comment" do 
+      it "sets @task to be a new instance of Task" do 
         expect(assigns(:task)).to be_new_record 
         expect(assigns(:task)).to be_instance_of Task
       end
 
-      it "sets @commentable to an instance of candidate" do 
-        expect(assigns(:taskable)).to eq(application)
+      it "sets @taskable to an instance of current company" do 
+        expect(assigns(:taskable)).to eq(company)
       end
 
       it "expects the response to render new template" do
@@ -166,23 +151,79 @@ describe Business::TasksController do
       end
     end
 
-    context "candidate_id in params" do
-      before do  
-        set_current_user(alice)
-        set_current_company(company)
-        job_board
-        job
-        candidate
+    context "adding a new JOB task" do 
+      before do 
+        xhr :get, :new, job_id: job.id
+      end
+
+      it "sets @task to be a new instance of Task" do 
+        expect(assigns(:task)).to be_new_record 
+        expect(assigns(:task)).to be_instance_of Task
+      end
+
+      it "sets @taskable to an instance of current company" do 
+        expect(assigns(:taskable)).to eq(job)
+      end
+
+      it "expects the response to render new template" do
+        expect(response).to render_template :new
+      end
+    end
+
+    context "adding a new APPLICATION task" do 
+      before do 
+        xhr :get, :new, job: job.id, candidate_id: candidate.id
+      end
+
+      it "sets @task to be a new instance of Task" do 
+        expect(assigns(:task)).to be_new_record 
+        expect(assigns(:task)).to be_instance_of Task
+      end
+
+      it "sets @taskable to an instance of current company" do 
+        expect(assigns(:taskable)).to eq(candidate)
+      end
+
+      it "sets @job to an instance of current company" do 
+        expect(assigns(:job)).to eq(job)
+      end
+
+      it "expects the response to render new template" do
+        expect(response).to render_template :new
+      end
+    end
+
+    context "adding a new CANDIDATE task" do 
+      before do 
         xhr :get, :new, candidate_id: candidate.id
       end
 
-      it "sets @comment to be a new instance of comment" do 
+      it "sets @task to be a new instance of Task" do 
         expect(assigns(:task)).to be_new_record 
         expect(assigns(:task)).to be_instance_of Task
       end
 
-      it "sets @commentable to an instance of candidate" do 
+      it "sets @taskable to an instance of current company" do 
         expect(assigns(:taskable)).to eq(candidate)
+      end
+
+      it "expects the response to render new template" do
+        expect(response).to render_template :new
+      end
+    end
+
+    context "adding a new CLIENT task" do 
+      before do 
+        xhr :get, :new, client_id: client.id
+      end
+
+      it "sets @task to be a new instance of Task" do 
+        expect(assigns(:task)).to be_new_record 
+        expect(assigns(:task)).to be_instance_of Task
+      end
+
+      it "sets @taskable to an instance of current company" do 
+        expect(assigns(:taskable)).to eq(client)
       end
 
       it "expects the response to render new template" do
@@ -191,253 +232,282 @@ describe Business::TasksController do
     end
   end
 
-  # describe "POST create" do  
-  #   let(:company) {Fabricate(:company)}
-  #   let(:alice) {Fabricate(:user, company: company, role: "Admin")}
-  #   let(:job) {Fabricate(:job, company: company)}
-  #   let(:candidate) {Fabricate(:candidate, company: company)}
-  #   let(:candidate1) {Fabricate(:candidate, company: company)}
-  #   let(:application){Fabricate(:application, job: job, candidate: candidate)}
-  #   let(:comment) {Fabricate.attributes_for(:comment, user: alice)}
-  #   let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
+  describe "POST create" do  
+    it_behaves_like "requires sign in" do
+      let(:action) {xhr :post, :create}
+    end
 
-  #   it_behaves_like "requires sign in" do
-  #     let(:action) {xhr :post, :create}
-  #   end
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {xhr :post, :create}
+    end
 
-  #   it_behaves_like "user does not belong to company" do 
-  #     let(:action) {xhr :post, :create}
-  #   end
+    it_behaves_like "company has been deactivated" do
+      let(:action) {xhr :post, :create}
+    end
 
-  #   it_behaves_like "company has been deactivated" do
-  #     let(:action) {xhr :post, :create}
-  #   end
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :get, :index}
+    end
 
-  #   context "@job is in params" do
-  #     before do  
-  #       set_current_user(alice)
-  #       set_current_company(company)
-  #       job_board
-  #       job
-  #       candidate
-  #       xhr :post, :create, comment: comment, job_id: job.id
-  #     end
+    context "creates COMPANY task" do
+      before do  
+        xhr :post, :create, task: Fabricate.attributes_for(:task, taskable_type: "Company", taskable_id: company.id, company: company, user_ids: alice.id, candidate_ids: '')
+      end
       
-  #     it "creates the comment" do
-  #       expect(Comment.count).to eq(1)
-  #     end
+      it "creates the task" do
+        expect(Task.count).to eq(6)
+      end
 
-  #     it "associates the comment to the correct records" do
-  #       expect(Comment.first.commentable).to eq(job)
-  #     end
+      it "associates the task to the correct records" do
+        expect(Task.last.company).to eq(company)
+        expect(company.tasks.count).to eq(6)
+        expect(assigns[:tasks].count).to eq(6)
+      end
 
-  #     it "renders the new action" do 
-  #       expect(response).to render_template :create
-  #     end
-  #   end
+      it "renders the new action" do 
+        expect(response).to render_template :create
+      end
+    end
 
-  #   context "@candidate is in params" do
-  #     before do  
-  #       set_current_user(alice)
-  #       set_current_company(company)
-  #       job_board
-  #       job
-  #       candidate
-  #       xhr :post, :create, comment: comment, candidate_id: candidate.id
-  #     end
+    context "creates a JOB task" do
+      before do  
+        xhr :post, :create, job_id: job.id, task: Fabricate.attributes_for(:task, taskable_type: "Job", taskable_id: job.id, company_id: company.id, user_ids: alice.id, candidate_ids: "", user_id: alice.id, job_id: job.id)
+      end
       
-  #     it "creates the comment" do
-  #       expect(Comment.count).to eq(1)
-  #     end
+      it "creates the task" do
+        expect(Task.count).to eq(6)
+      end
 
-  #     it "associates the comment to the correct records" do
-  #       expect(Comment.first.commentable).to eq(candidate)
-  #     end
+      it "associates the task to the correct records" do
+        expect(Task.last.taskable).to eq(job)
+        expect(job.open_tasks.count).to eq(3)
+      end
 
-  #     it "renders the new action" do 
-  #       expect(response).to render_template :create
-  #     end
-  #   end
+      it "assigns tasks to the correct tasks for application" do 
+        expect(assigns[:tasks]).to eq([job_task, application_task, Task.last] )
+        expect(assigns[:tasks].count).to eq(3)
+      end
 
-  #   context "@application is in params" do
-  #     before do  
-  #       set_current_user(alice)
-  #       set_current_company(company)
-  #       job_board
-  #       job
-  #       candidate
-  #       application
-  #       xhr :post, :create, comment: comment, application_id: application.id
-  #     end
+      it "renders the create action" do 
+        expect(response).to render_template :create
+      end
+    end
+
+    context "creates a CANDIDATE task" do
+      before do  
+        xhr :post, :create, candidate_id: candidate.id, task: Fabricate.attributes_for(:task, taskable_type: "Candidate", taskable_id: candidate.id, company_id: company.id, user_ids: alice.id, candidate_ids: "", user_id: alice.id)
+      end
       
-  #     it "creates the comment" do
-  #       expect(Comment.count).to eq(1)
-  #     end
+      it "creates the task" do
+        expect(Task.count).to eq(6)
+      end
 
-  #     it "associates the comment to the correct records" do
-  #       expect(Comment.first.commentable).to eq(application)
-  #     end
+      it "associates the task to the correct records" do
+        expect(Task.last.taskable).to eq(candidate)
+        expect(candidate.tasks.count).to eq(3)
+      end
 
-  #     it "renders the new action" do 
-  #       expect(response).to render_template :create
-  #     end
-  #   end
-  # end
+      it "assigns tasks to the correct tasks for application" do 
+        expect(assigns[:tasks].count).to eq(3)
+        expect(assigns[:tasks]).to eq([Task.last, application_task, candidate_task])
+      end
+
+      it "renders the new action" do 
+        expect(response).to render_template :create
+      end
+    end
+
+    context "creates an APPLICATION task" do
+      before do  
+        xhr :post, :create, candidate_id: candidate.id, task: Fabricate.attributes_for(:task, taskable_type: "Candidate", taskable_id: candidate.id, company_id: company.id, user_ids: alice.id, candidate_ids: "", user_id: alice.id, job_id: job.id)
+      end
+      
+      it "creates the task" do
+        expect(Task.count).to eq(6)
+      end
+
+      it "associates the task to the correct records" do
+        expect(Task.last.taskable).to eq(candidate)
+        expect(Task.last.job_id).to eq(job.id)
+      end
+
+      it "assigns tasks to the correct tasks for application" do 
+        expect(assigns[:tasks]).to eq([Task.last, application_task])
+        expect(assigns[:tasks].count).to eq(2)
+      end
+
+      it "renders the new action" do 
+        expect(response).to render_template :create
+      end
+    end
+
+    # context "creates an CLIENT task" do
+    #   before do  
+    #     xhr :post, :create, task: Fabricate.attributes_for(:task, taskable_type: "Candidate", taskable_id: candidate.id, company: company, job_id: job.id), user_id: alice.id
+    #   end
+      
+    #   it "creates the task" do
+    #     expect(Task.count).to eq(6)
+    #   end
+
+    #   it "associates the task to the correct records" do
+    #     expect(Task.last.taskable).to eq(client)
+    #   end
+
+    #   it "assigns tasks to the correct tasks for application" do 
+    #     expect(assigns[:tasks]).to eq([Task.last, client_task])
+    #     expect(assigns[:tasks].count).to eq(2)
+    #   end
+
+    #   it "renders the new action" do 
+    #     expect(response).to render_template :create
+    #   end
+    # end
+  end
   
-  # describe "GET edit" do 
-  #   let(:company) {Fabricate(:company)}
-  #   let(:alice) {Fabricate(:user, company: company, role: "Admin")}
-  #   let(:job) {Fabricate(:job, company: company)}
-  #   let(:candidate) {Fabricate(:candidate, company: company)}
-  #   let(:candidate1) {Fabricate(:candidate, company: company)}
-  #   let(:application){Fabricate(:application, job: job, candidate: candidate)}
-  #   let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
-  #   let(:application_comment) {Fabricate(:comment, commentable_type: "Application", commentable_id: application.id)}
-  #   let(:candidate_comment) {Fabricate(:comment, commentable_type: "Candidate", commentable_id: candidate.id)}
-  #   let(:job_comment) {Fabricate(:comment, commentable_type: "Job", commentable_id: job.id)}
-      
-  #   it_behaves_like "requires sign in" do
-  #     let(:action) {xhr :get, :edit, id: job_comment.id}
-  #   end
+  describe "GET edit" do     
+    it_behaves_like "requires sign in" do
+      let(:action) {xhr :get, :edit, id: task.id}
+    end
 
-  #   it_behaves_like "user does not belong to company" do 
-  #     let(:action) {xhr :get, :edit, id: job_comment.id }
-  #   end
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {xhr :get, :edit, id: task.id }
+    end
 
-  #   it_behaves_like "company has been deactivated" do
-  #     let(:action) {xhr :get, :edit, id: job_comment.id}
-  #   end
+    it_behaves_like "company has been deactivated" do
+      let(:action) {xhr :get, :edit, id: task.id}
+    end
 
-  #   before do  
-  #     set_current_user(alice)
-  #     set_current_company(company)
-  #     job_board
-  #     job
-  #     candidate
-  #     candidate_comment
-  #     application_comment
-  #     job_comment
-  #     xhr :get, :edit, id: job_comment.id
-  #   end
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :get, :edit, id: task.id}
+    end
     
-  #   it "sets @comment to the correct comment" do 
-  #     expect(assigns(:comment)).to eq(job_comment)
-  #   end
+    context "@task belongs to the company through taskable" do 
+      before do  
+        xhr :get, :edit, id: task.id
+      end
+      
+      it "sets @task to the correct task" do 
+        expect(assigns(:task)).to eq(task)
+      end
 
-  #   it "sets @commentable to the correct parent" do
-  #     expect(assigns(:commentable)).to eq(job)
-  #   end
+      it "sets @taskable to the correct parent" do
+        expect(assigns(:taskable)).to eq(company)
+      end
 
-  #   it "expects the response to render edit template" do
-  #     expect(response).to render_template :edit
-  #   end
-  # end
+      it "expects the response to render edit template" do
+        expect(response).to render_template :edit
+      end
+    end
+  end
 
-  # describe "PUT update" do 
-  #   context "with valid inputs" do
-  #     let(:company) {Fabricate(:company)}
-  #     let(:alice) {Fabricate(:user, company: company, role: "Admin")}
-  #     let(:job) {Fabricate(:job, company: company)}
-  #     let(:candidate) {Fabricate(:candidate, company: company)}
-  #     let(:candidate1) {Fabricate(:candidate, company: company)}
-  #     let(:application){Fabricate(:application, job: job, candidate: candidate)}
-  #     let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
-  #     let(:comment) {Fabricate(:comment, commentable_type: "Job", commentable_id: job.id)}
+  describe "PUT update" do 
+    it_behaves_like "requires sign in" do
+      let(:action) {xhr :put, :update, id: task.id}
+    end
 
-  #     before do 
-  #       set_current_user(alice)
-  #       set_current_company(company)
-  #       job_board
-  #       job
-  #       candidate
-  #       comment
-  #       xhr :put, :update, id: comment.id, comment: {body: "Thomas Johnson"}
-  #     end
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {xhr :put, :update, id: task.id}
+    end
 
-  #     it "updates the comment" do 
-  #       expect(Comment.last.body).to eq("Thomas Johnson")
-  #     end
+    it_behaves_like "company has been deactivated" do
+      let(:action) {xhr :put, :update, id: task.id}
+    end
 
-  #     it "expects the response to render edit template" do
-  #       expect(response).to render_template :update
-  #     end
-  #   end
+    it_behaves_like "trial is over" do 
+      let(:action) {xhr :put, :update, id: task.id}
+    end
 
-  #   context "with invalid inputs" do
-  #     let(:company) {Fabricate(:company)}
-  #     let(:alice) {Fabricate(:user, company: company, role: "Admin")}
-  #     let(:job) {Fabricate(:job, company: company)}
-  #     let(:candidate) {Fabricate(:candidate, company: company)}
-  #     let(:candidate1) {Fabricate(:candidate, company: company)}
-  #     let(:application){Fabricate(:application, job: job, candidate: candidate)}
-  #     let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
-  #     let(:comment) {Fabricate(:comment, commentable_type: "Job", commentable_id: job.id)}
+    context "with valid inputs" do
+      before do 
+        xhr :put, :update, id: task.id, task: {title: "Thomas Johnson"}
+      end
 
-  #     before do 
-  #       set_current_user(alice)
-  #       set_current_company(company)
-  #       job_board
-  #       job
-  #       comment
-  #       xhr :put, :update, id: comment.id, comment: {body: nil}
-  #     end
+      it "updates the task" do 
+        expect(Task.first.title).to eq("Thomas Johnson")
+      end
 
-  #     it "sets the @email_signature to the current_user" do 
-  #       expect(Comment.first.body).to eq(comment.body)
-  #     end
+      it "expects the response to render edit template" do
+        expect(response).to render_template :update
+      end
+    end
 
-  #     it "expects the response to render edit template" do
-  #       expect(response).to render_template :update
-  #     end
-  #   end
-  # end
+    context "with invalid inputs" do
+      before do 
+        xhr :put, :update, id: task.id, task: {title: nil}
+      end
 
-  # describe "DELETE destroy" do 
-  #   let(:company) {Fabricate(:company)}
-  #   let(:alice) {Fabricate(:user, company: company, role: "Admin")}
-  #   let(:job) {Fabricate(:job, company: company)}
-  #   let(:candidate) {Fabricate(:candidate, company: company)}
-  #   let(:candidate1) {Fabricate(:candidate, company: company)}
-  #   let(:application){Fabricate(:application, job: job, candidate: candidate)}
-  #   let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
-  #   let(:application_comment) {Fabricate(:comment, commentable_type: "Application", commentable_id: application.id)}
-  #   let(:candidate_comment) {Fabricate(:comment, commentable_type: "Candidate", commentable_id: candidate.id)}
-  #   let(:job_comment) {Fabricate(:comment, commentable_type: "Job", commentable_id: job.id)}
+      it "sets the @email_signature to the current_user" do 
+        expect(Task.first.title).to eq(task.title)
+      end
 
-  #   before do  
-  #     set_current_user(alice)
-  #     set_current_company(company)
-  #     job_board
-  #     job
-  #     candidate
-  #     candidate_comment
-  #     application_comment
-  #     job_comment
-  #     xhr :delete, :destroy, id: application_comment.id
-  #   end
+      it "expects the response to render edit template" do
+        expect(response).to render_template :update
+      end
+    end
+  end
 
-  #   it_behaves_like "requires sign in" do
-  #     let(:action) {xhr :delete, :destroy, id: application_comment.id}
-  #   end
+  describe "DELETE destroy" do 
+    before do  
+      xhr :delete, :destroy, id: task.id
+    end
 
-  #   it_behaves_like "user does not belong to company" do 
-  #     let(:action) { xhr :delete, :destroy, id: application_comment.id}
-  #   end
+    it_behaves_like "requires sign in" do
+      let(:action) {xhr :delete, :destroy, id: task.id}
+    end
 
-  #   it_behaves_like "company has been deactivated" do
-  #     let(:action) { xhr :delete, :destroy, id: application_comment.id}
-  #   end
+    it_behaves_like "user does not belong to company" do 
+      let(:action) { xhr :delete, :destroy, id: task.id}
+    end
 
-  #   it "destroys the correct instance of the candidate" do 
-  #     expect(Comment.count).to eq(2)
-  #   end
+    it_behaves_like "company has been deactivated" do
+      let(:action) { xhr :delete, :destroy, id: task.id}
+    end
 
-  #   it "destroys the correct instance of the candidate" do 
-  #     expect(Comment.all).to eq([candidate_comment, job_comment])
-  #   end
+    it "destroys the correct instance of the candidate" do 
+      expect(Task.count).to eq(4)
+    end
 
-  #   it "renders the destroy template" do 
-  #     expect(response).to render_template :destroy
-  #   end
-  # end
+    it "renders the destroy template" do 
+      expect(response).to render_template :destroy
+    end
+  end
+
+  describe "POST create multiple" do 
+    before do 
+      @candidate1 = Fabricate(:candidate, company: company)
+      @candidate2 = Fabricate(:candidate, company: company)
+      @candidate3 = Fabricate(:candidate, company: company)
+      xhr :post, :create_multiple, task: Fabricate.attributes_for(:task, company_id: company.id, user_ids: alice.id, candidate_ids: "", user_id: alice.id, job_id: job.id), applicant_ids: "#{@candidate1.id}, #{@candidate2.id}, #{@candidate3.id}"
+    end
+
+    it "creates the task" do
+      expect(Task.count).to eq(8)
+    end
+
+    it "associates the task to the correct records" do
+      expect(@candidate1.tasks.count).to eq(1)
+      expect(@candidate2.tasks.count).to eq(1)
+      expect(@candidate3.tasks.count).to eq(1)
+    end
+
+    it "renders the new action" do 
+      expect(response).to render_template :create_multiple
+    end
+  end
+
+  describe "POST completed" do 
+    before do 
+      xhr :post, :completed, id: task.id
+    end
+
+    it "destroys the correct instance of the candidate" do 
+      expect(Task.first.status).to eq('complete')
+      expect(Task.first.completed_by_id).to eq(alice.id)
+    end
+
+    it "renders the complete template" do 
+      expect(response).to render_template :completed
+    end
+  end
 end

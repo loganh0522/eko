@@ -1,7 +1,7 @@
 class Admin::CompaniesController < ApplicationController
   layout "admin"
   before_filter :require_user
-
+ 
   def index
     @companies = Company.all
     

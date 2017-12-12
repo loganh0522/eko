@@ -90,6 +90,8 @@ module OutlookWrapper
       @response = graph.service.patch(path, data.to_json)
 
       user.outlook_token.update_attributes(subscription_id: @response['id'],  subscription_expiration: @response["expiration_date_time"])
+      
+      OutlookWorker.perform_in(54.hours, user.id)
       true
     end
   end

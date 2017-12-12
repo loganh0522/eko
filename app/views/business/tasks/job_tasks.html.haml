@@ -4,8 +4,10 @@
     .side-container
       = form_tag business_job_tasks_path(@job), :method => 'get', id: "search-form" do
         = render 'business/tasks/job_filters'
-    .main-container#task-container
-      = link_to "Create Task", new_business_job_task_path(@job),  data: {:turbolinks => "false"}, remote: true, class: "btn border-button"
+    .main-container
+      .actions
+        = link_to "Create Task", new_business_job_task_path(@job),  data: {:turbolinks => "false"}, remote: true, class: "btn border-button"
+      #task-container
       = render 'business/tasks/tasks'
 
 .modal#basic-form-modal

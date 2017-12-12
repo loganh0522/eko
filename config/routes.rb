@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   post '/rate' => 'rater#create', :as => 'rate'
 
@@ -120,6 +122,7 @@ Rails.application.routes.draw do
 
     resources :tasks, except: [:show] do 
       collection do 
+        get :search
         get :new_multiple, to: "tasks#new_multiple"
         post :completed, to: "tasks#completed"
         get :complete, to: "tasks#complete"
@@ -278,6 +281,7 @@ Rails.application.routes.draw do
       end
 
       resources :job_feeds 
+      
       get 'tasks', to: "tasks#job_tasks"
       get 'comments', to: "comments#job_comments"
       get "/activities", to: 'activities#job_activity'
@@ -346,8 +350,9 @@ Rails.application.routes.draw do
   resources :password_resets, only: [:show, :create]
 
 
-  namespace :admin do 
+  namespace :admin, constraints: Constraint::AdminConstraint.new do 
     root to: "jobs#index" 
+    mount Sidekiq::Web, at: '/sidekiq'
     resources :premium_boards
     resources :users
     resources :candidates

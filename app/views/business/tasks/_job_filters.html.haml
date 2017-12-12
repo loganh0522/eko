@@ -10,8 +10,8 @@
 #filter-links
   %ul  
     %li
-      = radio_button_tag "status", "open", false, class: 'filter', checked: true
-      = label_tag "status_open", "Open Tasks", :value => "my-tasks", class: 'filter'
+      = radio_button_tag "status", "active", false, class: 'filter', checked: true
+      = label_tag "status_active", "Open Tasks", :value => "my-tasks", class: 'filter'
     %li
       = radio_button_tag "status", "today", false, class: 'filter'
       = label_tag "status_today", "Due Today", :value => "my-tasks", class: 'filter'

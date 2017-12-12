@@ -23,17 +23,13 @@ class Task < ActiveRecord::Base
     if self.taskable_type == "Job"
       Activity.create(action: "create", trackable_type: "Task", trackable_id: self.id, user_id: self.user_id,
       company_id: self.company_id, job_id: self.job_id)
-    
     elsif self.taskable_type == "Candidate" && self.job_id.present?
-
       Activity.create(action: "create", trackable_type: "Task", trackable_id: self.id, user_id: self.user_id,
       company_id: self.company_id, job_id: self.job_id, candidate_id: self.taskable_id)     
-    
     elsif self.taskable_type == "Candidate"
       Activity.create(action: "create", trackable_type: "Task", trackable_id: self.id, user_id: self.user_id,
       company_id: self.company_id, candidate_id: self.taskable_id)
     else 
-      
       Activity.create(action: "create", trackable_type: "Task", trackable_id: self.id, user_id: self.user_id,
       company_id: self.company_id)
     end
