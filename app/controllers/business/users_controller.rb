@@ -38,7 +38,6 @@ class Business::UsersController < ApplicationController
         user_id: current_user.id
         )
       GoogleWrapper::Gmail.watch_gmail(current_user)
-      
       redirect_to business_user_path(current_user)
     elsif params[:code].present? 
       token = get_token_from_code(params[:code])
@@ -50,11 +49,6 @@ class Business::UsersController < ApplicationController
         )
       redirect_to business_user_path(current_user)
     end
-  end
-
-  def create_subscription
-    OutlookWrapper.peform_in(54.hours, current_user.id)
-    # OutlookWrapper::User.create_subscription(current_user)
   end
 
   def edit
@@ -89,7 +83,6 @@ class Business::UsersController < ApplicationController
   end
 
   def outlook_get_token
-    # OutlookWrapper::User.update_subscription(current_user)
     token = get_token_from_code params[:code]
 
     OutlookToken.create(
@@ -98,8 +91,9 @@ class Business::UsersController < ApplicationController
       expires_at: Time.now + token.expires_in.to_i.seconds,
       user_id: current_user.id
       )
+
     OutlookWorker.perform_in(54.hours, current_user.id)
-    # OutlookWrapper::User.create_subscription(current_user)
+    OutlookWrapper::User.create_subscription(current_user)
     redirect_to business_user_path(current_user)
   end
 

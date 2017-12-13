@@ -53,17 +53,16 @@ Google::Apis::RequestOptions.default.retries = 5
     end
 
     def self.watch_gmail(current_user)
-      self.set_client(current_user)
-         
+      self.set_client(current_user)  
       watch_request = Google::Apis::GmailV1::WatchRequest.new
       watch_request.topic_name = 'projects/talentwiz-145409/topics/talentwiz-gcloud'
       watch_request.label_ids = ['INBOX']
-
       service = Google::Apis::GmailV1::GmailService.new
       service.authorization = @client
       @response = service.watch_user('me', watch_request)
-      
       current_user.google_token.update_attributes(history_id: @response.history_id)
+
+      GoogleWorker.perform_in(3.days, current_user.id)
     end
 
     def self.send_message(email, id, current_user)
