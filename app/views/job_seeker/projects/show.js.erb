@@ -1,5 +1,2 @@
-$('#project-modal').find('.modal-body').remove()
-$('#project-modal').find('form').remove()
-$('#project-modal').find('.modal-title').html('<%= @project.title %>');
-$('#project-modal').find('.modal-header').after('<%= j render "job_seeker/projects/show_project" %>');
-$('#project-modal').modal("toggle");
+$('#show-project-modal').find('.modal-body').html('<%= j render "job_seeker/projects/show_project" %>');
+$('#show-project-modal').modal("toggle");

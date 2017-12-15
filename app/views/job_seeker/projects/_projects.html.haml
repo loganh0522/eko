@@ -3,7 +3,8 @@
     %p You currently have no projects listed. 
     .add-object= link_to "+ Project", new_job_seeker_project_path, remote: true, class: "btn border-button"
 - else 
+  .add-project-container
+    .add-object= link_to "+ Project", new_job_seeker_project_path, remote: true, class: "btn border-button"
   - @projects.each do |project| 
     = render 'job_seeker/projects/project', project: project
-  .project-container.not-present-container
-    .add-object= link_to "+ Project", new_job_seeker_project_path, remote: true, class: "btn border-button"
+  

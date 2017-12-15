@@ -2,6 +2,7 @@ class Job < ActiveRecord::Base
   liquid_methods :title
   
   belongs_to :company
+  belongs_to :client
   has_many :questions, :dependent => :destroy
   has_one :scorecard, :dependent => :destroy
   has_one :job_feed

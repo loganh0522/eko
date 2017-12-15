@@ -23,6 +23,15 @@
       = render "apply_method"
     .extra-job-details
       %h3 Job Details 
+      = link_to "facebook", "https://www.facebook.com/sharer/sharer.php?u=" + @job.url, target: :blank, class: "popup"
+
+      = link_to "linkedin", "https://www.linkedin.com/shareArticle?mini=true&url=" + @job.url, :target => :blank, :popup => true 
+
+      = link_to "twitter", "https://www.twitter.com/intent/tweet" + @job.url, :target => :blank, :popup => true 
+
+      .detail
+        .type Share
+        = social_share_button_tag(@job.title)
       .detail
         .type Industry
         / .content= @job.industries.first.name

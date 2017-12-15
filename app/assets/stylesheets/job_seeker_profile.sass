@@ -304,10 +304,24 @@
     height: 150px
     border-radius: 50%
 
+.add-project-container
+  border: 2px dashed #c6c8ca
+  height: 300px
+  padding: 100px 0
+  width: 31%
+  max-width: 300px
+  min-width: 250px
+  margin: 10px 0px 10px 2.3%
+  float: left
+  .add-object
+    margin: 20px auto
+    color: #EF7B2B
+    width: 200px
 .project-container
   box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
   height: fit-content
   width: 31%
+  height: 300px
   max-width: 300px
   min-width: 250px
   float: left
@@ -335,6 +349,11 @@
     border-top: 1px solid #D1DCE4
     height: 30px
     background: #ffffff
+
+.project-attachments
+  margin: 10px 10px 
+  width: 100%
+  .carousel
 
 
 .attachments-container
@@ -380,9 +399,65 @@
 
 
 
+
+
+
+
+#show-project-modal
+  .modal-dialog
+    width: 90%
+    height: 90%
+  .modal-content
+    width: 100%
+    height: 100%
+  .modal-header
+    border-bottom: 1px solid #D1DCE4
+  .modal-body
+    height: auto
+    overflow: hidden
+    width: 100%
+    height: 100%
+  .column-container
+    min-height: 25%
+    border-top: 1px solid #D1DCE4
+    padding: 5px 5px
+
+  .column-6
+    float: left
+    width: 60%
+    height: 100%
+    min-height: 100% !important
+    border-right: 1px solid #D1DCE4
+    .form-row-no-border 
+      padding: 10px 15px
+    h3 
+      padding: 5px 0 10px 10px
+  .column-4
+    float: left
+    width: 40%
+    height: 100%
+  .slick-prev
+    top: 50%
+    position: absolute
+    width: 50px 
+    height: 50px
+    border-radius: 50%
+
+  .slick-list
+    width: 80%
+    margin: 0 10%
+  .slick-next
+    top: 50%
+    position: absolute
+    left: 90%
+    width: 50px 
+    height: 50px
+    border-radius: 50%
+
 #basic-form-modal,
 #project-modal
   .modal-body
+    overflow: hidden
   .modal-footer
     clear: both
   .column-7
@@ -398,6 +473,20 @@
     border-right: 1px solid #D1DCE4
     .form-row-no-border 
       padding: 10px 15px
+  .column-6-left
+    float: left
+    width: 60%
+    height: 100%
+    position: absolute
+    min-height: 100% !important
+    .form-row-no-border 
+      padding: 10px 15px
+  .column-4-right
+    float: left
+    margin-left: 60%
+    border-left: 1px solid #D1DCE4
+    min-height: 100% !important
+    width: 40%
   .column-5
     float: left
     width: 50%
@@ -435,9 +524,14 @@
       font-weight: 600
       float: left
     .header
+      .fieldset
+        clear: both
       .title 
         float: left
         margin: 11px 5px 0 5px
+      .add_fields 
+        float: right
+        font-color: #E4E5E9
       #skills
         float: left 
         width: 60%

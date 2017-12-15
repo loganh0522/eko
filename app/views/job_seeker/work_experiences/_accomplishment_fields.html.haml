@@ -1,6 +1,6 @@
-.add-accomplishment
-  = f.label :body, "Accomplishment"
-  = f.text_area :body, id: "body_Block"
-  %span#body_msgBlock
-  = link_to "Remove", '#', class: "remove_fields"
+.fieldset  
+  .add-accomplishment
+    = f.text_area :body, id: "body_Block"
+    %span#body_msgBlock
+    = link_to "Remove", '#', class: "remove_fields"
       

@@ -14,9 +14,10 @@
       = show_errors(@job, :address) 
   - if current_company.kind == "recruiter"
     .form-row-no-border
-      = f.label :description, "Internal Description"
-      = f.collection_select(:client_id, current_company.clients, :id, :company_name, label: "Client", :include_blank => true, :selected => @job.new_record? ? nil : @job.industries.first.id)
+      = f.label :description, "Client"
+      = f.collection_select(:client_id, current_company.clients, :id, :company_name, label: "Client", :include_blank => true, :selected => @job.new_record? ? nil : @job.client.id)
     .form-row-no-border
+      = f.label :recruiter_description, "Internal Description"
       = f.trix_editor :recruiter_description
   .form-row-no-border
     = f.label :description, "Job Description"

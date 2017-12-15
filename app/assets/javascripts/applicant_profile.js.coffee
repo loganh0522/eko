@@ -1,7 +1,10 @@
 jQuery ->
   
   $('#embedURL').gdocsViewer({width :'400',height : '500'})
-  
+  $('a[data-popup]').on 'click', (e) ->
+    window.open $(this).attr('href')
+    e.preventDefault()
+    return
   $('#main-container').on 'click', '.applicant-checkbox', (event) ->
     if $('.applicants').find('.applicant-checkbox :checked').size() > 0 
       $('.no-action-buttons').hide()
@@ -10,10 +13,10 @@ jQuery ->
       $('.applicant-action-buttons').hide()
       $('.no-action-buttons').show()
     return
-
-  $('#task_due_date2').datepicker
+  $(document).ajaxComplete ->
+    $('#dueDate').datepicker
       dateFormat: 'yy-mm-dd'
-  $('#timepicker').timepicker()
+    $('#timepicker').timepicker()
 
 
   $('#main-container').on 'click', '#Select_All', (event) ->
@@ -33,11 +36,6 @@ jQuery ->
       $('.modal-backdrop').last().css({'z-index':'1060'})
         
 
-######### Scorecard JS #########
-  $(document).ajaxComplete ->   
-    
-
-
 ############ Move Applicant Stages ###############
 
   $('#main-container').on 'change', '#move-applicant-stages', (event) ->
@@ -47,9 +45,6 @@ jQuery ->
       data:
         stage: $('#move-applicant-stages :selected').data('id')
         application_id: $('#move-applicant-stages :selected').data('application')
-
-  
-###################### Insert Fluid Variable into E-mail #####################
 
   
 #################### Add Applicants To Modal On Action Click #############################
@@ -160,13 +155,6 @@ jQuery ->
     $("#geocomplete-address").geocomplete({
       types: ['(address)']
     })
-
-    $('#task_due_date').datepicker  
-      dateFormat: 'yy-mm-dd'
-    $('#timepicker').timepicker()
-    $('#timepicker2').timepicker()
-    $("#geocomplete2").geocomplete()
-    
  
 
 

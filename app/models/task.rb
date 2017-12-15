@@ -8,9 +8,8 @@ class Task < ActiveRecord::Base
 
   has_many :assigned_candidates, as: :assignable
   has_many :candidates, through: :assigned_candidates
-  
-  has_one :activity, as: :trackable, :dependent => :destroy
 
+  has_one :activity, as: :trackable, :dependent => :destroy
   validates_presence_of :title, :kind, :status, :company_id
   
   after_save :create_activity

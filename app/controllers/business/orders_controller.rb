@@ -21,8 +21,6 @@ class Business::OrdersController < ApplicationController
       :customer_id => current_company.customer.stripe_customer_id,
       :amount => @totalPrice 
       )
-    
-    binding.pry
 
     if charge.successful?
       @order = Order.new(order_params)

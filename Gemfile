@@ -19,7 +19,7 @@ gem 'viewerjs-rails'
 gem 'spinjs-rails'
 
 gem 'responders', '~> 2.0'
-gem 'owlcarousel2'
+gem "jquery-slick-rails"
 
 gem 'will_paginate', '~> 3.1.0'
 gem 'metainspector'
@@ -32,7 +32,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 
 gem 'jquery-minicolors-rails'
-
 gem 'autoprefixer-rails'
 gem 'bcrypt'
 gem 'fabrication'

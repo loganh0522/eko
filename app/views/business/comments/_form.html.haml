@@ -2,9 +2,10 @@
   = form_for [:business, @commentable, @comment], remote: true do |f|
     = f.trix_editor :body, id: "body_Block", class: "comment-body", rows: 10, cols: 8, placeholder: "Add a Note"
     %span#body_msgBlock
+    = f.hidden_field :user_id, value: current_user.id
+    - if @job.present? 
+      = f.hidden_field :job_id, value: @job.id
     .comment-area-footer
       = f.submit @comment.new_record? ? "+ Add Note" : "Update", class: "btn submit-button", id: "submit-comment-btn"
-      = link_to "Cancel", '#', class: "btn border-button", id: "remove_form"
-      = f.hidden_field :user_id, value: current_user.id
-      - if @job.present? 
-        = f.hidden_field :job_id, value: @job.id
+      .btn.border-button#remove_form Cancel
+      

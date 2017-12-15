@@ -4,7 +4,7 @@ class Attachment < ActiveRecord::Base
   mount_uploader :file, AttachmentUploader
 
   before_create :get_meta_links, if: :is_link?
-  before_create :convert_pdf_to_image
+  # before_create :convert_pdf_to_image
   
   def get_meta_links
     page = MetaInspector.new(self.link)
@@ -15,10 +15,10 @@ class Attachment < ActiveRecord::Base
     self.description = page.meta_tags['property']['og:description'].first if page.meta_tags['property']['og:description'].present?
   end
 
-  def convert_pdf_to_image
-    pdf = Magick::ImageList.new(self.file)
-    pdf.write("myimage.jpeg")
-  end
+  # def convert_pdf_to_image
+  #   pdf = Magick::ImageList.new(self.file)
+  #   pdf.write("myimage.jpeg")
+  # end
 
   def is_link?
     link.present?

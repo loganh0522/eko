@@ -22,19 +22,19 @@
       .form-row-no-border
         .contain-25
           = f.label "Start Date"
-          = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
+          = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month", id: "start_month_Block"
           %span#start_month_msgBlock
         .contain-25
           = f.label "Year"
-          = f.text_field :start_year
+          = f.text_field :start_year, id: "start_year_Block"
           %span#start_year_msgBlock
         .contain-25
           = f.label :end_month, "End Date"
-          = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
+          = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month", id: "end_month_Block"
           %span#end_year_msgBlock
         .contain-25
           = f.label :end_year, "Year"
-          = f.text_field :end_year
+          = f.text_field :end_year, id: "end_year_Block"
           %span#end_month_msgBlock
           = f.check_box :current_position, checked_value: 1, unchecked_value: 0
           = f.label :current_position, "Current Position"
@@ -44,8 +44,9 @@
         %span#description_Block
     .column-4
       .column-container
-        .title Accomplishments
-        = link_to_add_fields "+ Accomplishment", f, :accomplishments
+        .header
+          .title Accomplishments
+          = link_to_add_fields "+ Add", f, :accomplishments
         = f.fields_for :accomplishments do |a|
           = render 'accomplishment_fields', f: a 
       .column-container

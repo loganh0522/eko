@@ -1,7 +1,7 @@
 <% if @errors.present? %>
   <% @errors.each do |error| %>
     $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
-    $('#<%= error[0] %>_Block').addClass('has-error');
+    $('trix-editor').addClass('has-error');
   <% end %>
 <% elsif @commentable.class == Job || @commentable.class == Client  %> 
   $('#job-action-container').html('<%= j render "business/comments/job_comments" %>');

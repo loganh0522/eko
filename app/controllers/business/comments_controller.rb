@@ -53,12 +53,17 @@ class Business::CommentsController < ApplicationController
         track_activity @new_comment, 'job_note', nil, params[:job_id]
       elsif @commentable.class != Job && params[:comment][:job_id].present?
         @comments = Comment.where(commentable_type: "Candidate", commentable_id: @commentable.id, job_id: params[:comment][:job_id])
-        track_activity @new_comment, 'create', current_company.id, @commentable.id, params[:comment][:job_id]   
-      else 
+        track_activity @new_comment, 'create', current_company.id, @commentable.id, params[:comment][:job_id] 
+      
+      elsif @commentable.class == Candidate && !params[:comment][:job_id].present?
+        @comments = @commentable.comments
+        track_activity @new_comment, 'create', current_company.id, @commentable.id, params[:comment][:job_id] 
+      elsif @commentable.class == Client
+        @comments = @commentable.comments
         track_activity @new_comment, 'create', current_company.id, @commentable.id
       end
     else
-      render_errors(@comment)
+      render_errors(@new_comment)
     end
 
     respond_to do |format| 
