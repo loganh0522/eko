@@ -1,16 +1,17 @@
-= bootstrap_form_for [:business, @client], remote: true do |f|
+= form_for [:business, @client], remote: true do |f|
   .modal-body
-    .fieldset
-      .form-group
-        = f.text_field :company_name, id: "company_name_Block", class: "form-control", label: "Company Name"
-        %span#company_name_msgBlock
-      .form-group
-        = f.text_field :website, class: "form-control", label: "Website"
-      .form-group
-        = f.text_field :address, class: "form-control", id: "geocomplete2", label: "Address", placeholder: "Enter the Address"
-  .modal-footer
-    %fieldset
+    .form-row-no-border
+      = f.label :company_name, "Company Name"
+      = f.text_field :company_name, id: "company_name_Block", placeholder: "Company Name"
+      %span#company_name_msgBlock
+    .form-row-no-border
+      = f.label :website, "Website"
+      = f.text_field :website, placeholder: "Website"
+    .form-row-no-border
+      = f.label :address, "Address"
+      = f.text_field :address, id: "geocomplete2", placeholder: "Enter the Address"
       = f.hidden_field :user_id, value: current_user.id
       = f.hidden_field :company_id, value: current_company.id
-      = f.submit "Save Client", class: "btn submit-button"
-      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+  .modal-footer
+    = f.submit "Save Client", class: "btn submit-button"
+    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

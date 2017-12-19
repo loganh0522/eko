@@ -8,15 +8,13 @@ class Business::ClientsController < ApplicationController
   before_filter :company_deactivated?
   
   def index
-    @client = Client.new
-    @clients = current_company.clients
+    @clients = current_company.clients.paginate(page: params[:page], per_page: 10)
+
   end
 
   def show
     @client = Client.find(params[:id])
-    @contact = ClientContact.new
     @contacts = @client.client_contacts
-    @jobs = @client.jobs
   end
 
   def new 
@@ -32,7 +30,7 @@ class Business::ClientsController < ApplicationController
 
     respond_to do |format|
       if @client.save
-        @clients = current_company.clients
+        @clients = current_company.clients.paginate(page: params[:page], per_page: 10)
         format.js
       else 
         render_errors(@client)
@@ -53,13 +51,25 @@ class Business::ClientsController < ApplicationController
     @client = Client.find(params[:id])
 
     respond_to do |format|
-      if @client.update(job_board_header_params)
+      if @client.update(client_params)
+        @clients = current_company.clients.paginate(page: params[:page], per_page: 10)
+      else 
+        render_errors(@client)
         format.js
       end
     end
   end
 
-  def destory
+  def destroy
+    @client = Client.find(params[:id])
+    @client.destroy
+
+    respond_to do |format| 
+      format.js
+    end
+  end
+
+  def search 
 
   end
 

@@ -42,7 +42,9 @@ class Business::TasksController < ApplicationController
   def new 
     @task = Task.new
     @job = Job.find(params[:job]) if params[:job].present?
-
+    @candidates = current_company.candidates.order(:created_at).limit(10)
+    @users = current_company.users.limit(10)
+    
     respond_to do |format|
       format.js
     end

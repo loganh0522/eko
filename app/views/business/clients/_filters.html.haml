@@ -1,0 +1,70 @@
+= form_tag search_business_clients_path, :method => 'get', id: "search-form" do
+  = text_field_tag "query", nil, placeholder: "Search Candidates by Keyword", class: "search-field", autocomplete: 'off'
+  .applicant-filters
+    .filter-container
+      .filter-header
+        %h4 Job Status
+        .glyphicon.glyphicon-minus
+        .glyphicon.glyphicon-plus
+      .filter-body
+        %ul
+          %li
+            = check_box_tag "status", "open", false, class: 'filter'
+            .filter-title Active
+          %li
+            = check_box_tag "status", "closed", false, class: 'filter'
+            .filter-title Closed
+          %li
+            = check_box_tag "status", "archived", false, class: 'filter'
+            .filter-title Archived 
+    .filter-container
+      .filter-header
+        %h4 Job Applied To:
+        .glyphicon.glyphicon-minus
+        .glyphicon.glyphicon-plus
+      .filter-body 
+        %ul
+          - current_company.company_jobs.each do |job| 
+            %li
+              = check_box_tag "job_title[]", "#{job}", false, class: 'filter'
+              .filter-title #{job}
+    .filter-container
+      .filter-header
+        %h4 Location Applied To
+        .glyphicon.glyphicon-minus
+        .glyphicon.glyphicon-plus
+      .filter-body 
+        %ul
+          - current_company.company_locations.each do |location| 
+            %li
+              = check_box_tag "location", "#{location}", false, class: 'filter'
+              .filter-title #{location}
+    .filter-container 
+      .filter-header
+        %h4 Date Applied
+        .glyphicon.glyphicon-minus
+        .glyphicon.glyphicon-plus
+      .filter-body
+        %ul
+          %li 
+            = check_box_tag "date_applied", "2 years", false, class: 'filter'
+            .filter-title All 
+          %li
+            = check_box_tag "date_applied", (Time.now - 2.weeks).strftime('%Y-%m-%d'), false, class: 'filter'
+            .filter-titleLast 2 weeks
+          %li 
+            = check_box_tag "date_applied", (Time.now - 1.month).strftime('%Y-%m-%d'), false, class: 'filter'
+            .filter-title Last Month
+          %li
+            = check_box_tag "date_applied", (Time.now - 3.months).strftime('%Y-%m-%d'), false, class: 'filter'
+            .filter-title Last 3 Months
+          %li 
+            = check_box_tag "date_applied", (Time.now - 1.year).strftime('%Y-%m-%d'), false, class: 'filter'
+            .filter-title Last Year
+    .filter-container 
+      .filter-header
+        %h4 Search CV
+        .glyphicon.glyphicon-minus
+        .glyphicon.glyphicon-plus
+      .filter-body
+        = text_field_tag "qcv", nil, placeholder: "Search CV", class: "search-field"

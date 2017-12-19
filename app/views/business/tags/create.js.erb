@@ -5,8 +5,6 @@
   $('.multi-form').find('#applicant_ids').val('');
 <% elsif params[:tag][:candidate_id].present? %>
   $('.tags').html('<%= j render "business/tags/tags", tags: @tags %>');
-  $('#add_tag').show();
-  $('.tag_form').hide();
 <% else %>
   <% if @errors.present? %>
     <% @errors.each do |error| %>

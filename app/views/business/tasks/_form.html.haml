@@ -30,13 +30,17 @@
                     .select-item{data: {:id => "#{item}"}}= item
                   = f.hidden_field :kind, id: "select-box-field", value: "To-do"
       .contain-2
-        = render 'business/users/users_autocomplete'
+        .assign-to-row
+          .title Assign to User 
+          = render 'business/users/single_auto'
         
 
     = f.text_area :notes, placeholder: "Notes", id: "comment-body"
     - if @taskable.class == Job 
       = render 'business/tasks/form_fields/job_fields'   
+    
     - elsif @taskable.class == Candidate && @job.present?  
+    
     - elsif @taskable.class == Candidate
       = render 'business/tasks/form_fields/applicant_fields', f: f     
     - else 

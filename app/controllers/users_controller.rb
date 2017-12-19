@@ -66,6 +66,7 @@ class UsersController < ApplicationController
     @auth = request.env['omniauth.auth']['credentials']
   end
 
+
   private 
 
   def user_params

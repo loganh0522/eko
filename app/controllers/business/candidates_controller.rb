@@ -44,6 +44,7 @@ class Business::CandidatesController < ApplicationController
 
   def show 
     @candidate = Candidate.find(params[:id])
+    @tag = Tag.new
     
     if @candidate.manually_created == true 
       @applicant = Candidate.find(params[:id])
@@ -53,7 +54,7 @@ class Business::CandidatesController < ApplicationController
     
     respond_to do |format|
       format.html { 
-        @candidates = current_company.candidates.where(id: params[:id])
+        @candidates = current_company.candidates.where(id: params[:id]).paginate(page: params[:page], per_page: 10)
         @tags = current_company.tags
         render action: :index 
       }
@@ -111,10 +112,15 @@ class Business::CandidatesController < ApplicationController
   end
 
   def autocomplete
-    @candidates = Candidate.search(params[:term], where: {company_id: current_company.id}, fields: [{full_name: :word_start}]).to_a
+    if params[:term] == ''
+      term = "*"
+    else 
+      term = params[:term]
+    end
+    @candidates = Candidate.search(term, where: {company_id: current_company.id}, fields: [{full_name: :word_start}]).to_a
 
     respond_to do |format|
-      format.json { render json: @candidates.as_json(only: [:first_name, :id, :last_name, :full_name], methods: [:avatar_url])}
+      format.js {@candidates}
     end
   end
 

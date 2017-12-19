@@ -1,35 +1,19 @@
-.home-page-header
-.applicant-view
-  .side-container
-    = render 'business/shared_manual_candidate/side_container'
-  .applicant-profile-information
-    .applicant-main-top
-      = render 'business/shared_candidate/candidate_nav'
-    .applicant-details#main-container
-      .profile-container.showing
-        .applicant-experience
-          = render 'business/applications/application_experience'
-        .applicant-experience    
-          = render 'business/applications/application_education'
+.page-header
+#main-container
+  .applicant-view
+    .applicant-side-container
+      .applicant-general-info
+        = render 'business/candidates/show_candidate/candidate_details'
+      = render 'business/candidates/show_candidate/side_container'
+    .applicant-main-container
+      .navigation-container
+        .applicant-nav
+          = render 'business/candidates/show_candidate/candidate_nav'
+        .action-area
+      .applicant-general
+        .display-applicant-details
+          = render 'business/candidates/show_candidate/candidate_profile'
 
-      .messages-container
-        .activity-feed
-          = render "business/shared_manual_candidate/messages"
-      .notes-container
-        .activity-feed
-          = render "business/shared_manual_candidate/candidate_notes"
-
-      / .assessments-container
-      /   .applicant-scorecard
-      /     = render "business/assessments/applicant_assessment"
-
-      / .scorecards-container
-      /   .applicant-scorecard
-      /     = render "business/application_scorecards/applicant_scorecard"
-
-      / .activity-container
-      /   .activity-feed        
-      /     = render "business/activities/application_activity", application: @application
 
   .modal#myModal
     .modal-dialog

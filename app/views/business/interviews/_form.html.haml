@@ -1,48 +1,50 @@
 .event-form
-  = form_for [:business, @candidate, @interview], html: {remote: true} do |f|
+  = form_for [:business, @interview], html: {remote: true} do |f|
     .modal-body
-      .form-row-2
-        = f.label "Type of Meeting"
-        = f.select :kind, options_for_select(["Phone Interview", "Skype", "In-person Interview"])
-      - if !@application.present?
-        .form-row-2
-          .contain-1
-            = f.label "Choose Job"
-            = f.collection_select(:job_id, @candidate.jobs, :id, :title, label: "Job", :include_blank => true)
-      .form-row-2
-        .contain-1
-          = f.label "Title"
-          = f.text_field :title, id: "half", placeholder: "Event Title", label: "Event Title"
-        .contain-2
-          = f.label "Location"
-          = f.text_field :location, id: "geocomplete2", label: "Address", autocomplete: "off", placeholder: "Enter the Address"
-        = f.text_area :notes, placeholder: "Add additional details for the candidate(ex. floor number)"
-      .form-row-3
-        .contain-1
-          = f.label "Date"
-          = f.text_field :date, id: "task_due_date", placeholder: "Date"
-        .contain-2
-          = f.label "Start Time"
-          = f.text_field :start_time, id: "timepicker", placeholder: "Start Time"
-        .contain-3
-          = f.label "End Time"
-          = f.text_field :end_time, id: "timepicker2", placeholder: "End Time"
-      = f.label "Interview"
-      .assign_to_row
-        .assign-user
-          .title Assign Users (Team)
-          = text_field_tag "", "", :class => 'ui-autocomplete-input', :placeholder => 'Type a users name to assign', id: "users-search"
-          %div#user-results
-        .assigned-users
-          .title Assigned Users: 
-          .user-tag
-            .name= current_user.full_name 
-            .delete-tag &times  
-      = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
-    .modal-footer
-      = f.submit @interview.new_record? ? "+ Create Interview" : "Update Interview", class: "btn submit-button", id: "submit-comment-btn"
-      = link_to "Cancel", "#", remote: true, class: 'btn border-button', id: 'cancel'
+      .column-6
+        .form-row-no-border 
+          .contain-3
+            = f.label "Title"
+            = f.text_field :title, id: "half", placeholder: "Event Title", label: "Event Title"
+          .contain-3
+            = f.label "Location"
+            = f.text_field :location, id: "geocomplete2", label: "Address", autocomplete: "off", placeholder: "Enter the Address"
+          .contain-3
+            = f.label "Type of Meeting"
+            = f.select :kind, options_for_select(["Phone Interview", "Skype", "In-person Interview"])
+        .form-row-no-border 
+          = f.text_area :notes, placeholder: "Add additional details for the candidate(ex. floor number)"
+        .form-row-no-border 
+          .contain-3
+            = f.label "Date"
+            = f.text_field :date, id: "dueDate", placeholder: "Date"
+          .contain-3
+            = f.label "Start Time"
+            = f.text_field :start_time, id: "timepicker", placeholder: "Start Time"
+          .contain-3
+            = f.label "End Time"
+            = f.text_field :end_time, id: "timepicker2", placeholder: "End Time"
+      .column-4
+        .form-row-no-border
+          = f.label :candidate, "Add Team Members"
+          = render 'business/users/users_autocomplete'
+          = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
+          
+        .form-row-no-border
+          = f.label :candidate, "Add Candidate"
+          = render 'business/candidates/single_auto'
+          - if @candidate.present?
+            = f.hidden_field :candidate_id, value: @candidate.id 
+          - else 
+            = f.hidden_field :candidate_id, value: '', id: 'candidate_id'
+
+      
       = f.hidden_field :company_id, value: current_company.id
-      = f.hidden_field :job_id, value: @application.job_id
-      = f.hidden_field :candidate_id, value: @candidate.id
+      = f.hidden_field :job_id, value: @job.id if @job.present?
+      
+    .modal-footer
+      = f.submit @interview.new_record? ? "Create" : "Update", class: "btn submit-button"
+      .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+      
+
 

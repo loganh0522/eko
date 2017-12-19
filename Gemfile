@@ -11,6 +11,10 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'coffee_routes'
 
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
+
+
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'trix'

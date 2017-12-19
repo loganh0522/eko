@@ -18,11 +18,7 @@ jQuery ->
   searchAuto = $('.search-field-auto')
   autoComplete = $('.autocomplete')
 
-  autocomplete = ->
-    if (searchRequest)
-      searchRequest.abort()    
-    action = $(".autocomplete").attr('id')
-    $.get(action,  null, "script")  
+
 
 
   searchEvents = -> 
@@ -108,11 +104,14 @@ jQuery ->
       debounceTimeout = setTimeout(submitLink, 500)
     return
 
+  
+
 $(document).ajaxComplete ->
   searchAuto = $('.search-field-auto')
   linkUp = $('#link-up')
   searchRequest = null  
   debounceTimeout = null
+  autocompleteCustom = $('.autocompleteCustom')
 
   searchFieldDropAuto = ->
     if (searchRequest)
@@ -120,12 +119,54 @@ $(document).ajaxComplete ->
     action = $('#dropdown-autocomplete').attr('action')
     $.get(action, $('#dropdown-autocomplete').serialize(), null, "script") 
 
+
   searchAuto.on 'keyup', (event) ->
     clearTimeout debounceTimeout
     debounceTimeout = setTimeout(searchFieldDropAuto, 500)
     return
 
+  customAutocomplete = (search) ->
+    if (searchRequest)
+      searchRequest.abort() 
+    action = search.attr('id')
+    $.get('/business/' + action + '/autocomplete', {term: search.val()}, null, "script")  
+
+  autocompleteCustom.on 'keyup', (event) -> 
+    clearTimeout debounceTimeout
+    search = $(this)
+    debounceTimeout = setTimeout(customAutocomplete, 500, search)
+    return
+
+
+
+  $('#add-single').on 'click', '.user', -> 
+    name = $(this).find('.name').text()
+    kind = $(this).data('kind')
+    $('#' + kind + '_id').val($(this).data('id'))
+    $('#single-obj').before('<div class="user-tag"> <div class="name">' + name + '</div> <div class="delete-tag" id="delete-single"> &times </div> </div>') 
+    console.log($(this).parent().parent().prev())
+    $(this).parent().parent().prev().find('.plain-text').hide()
+    $('.hidden-search-box').hide()
+    return
+
+  $('#add-multiple').on 'click', '.user', -> 
+    name = $(this).find('.name').text()
+    kind = $(this).data('kind')
+    value = $(this).data('id')
+
+    if $('#' + kind + '_ids').val() == ''
+      $('#' + kind + '_ids').val(value)
+    else 
+      values =  $('#' + kind + '_ids').val() + ',' + value
+      $('#' + kind + '_ids').val values 
+
+    $('#multiple-users').append('<div class="user-tag"> <div class="name">' + name + '</div> <div class="delete-tag" id="delete-multiple"> &times </div> </div>') 
+    $('.hidden-search-box').hide()
+    return
+
+
   
+    
 
   
 

@@ -1,4 +1,4 @@
-$('#right-modal').find('form').remove()
-$('#right-modal').find('.modal-title').html('<%= j "Edit Contact" %>');
-$('#right-modal').find('.modal-header').after('<%= j render "business/client_contacts/form" %>');
-$('#right-modal').modal("toggle")
+$('#basic-form-modal').find('form').remove()
+$('#basic-form-modal').find('.modal-title').html('<%= j "Edit Contact" %>');
+$('#basic-form-modal').find('.modal-header').after('<%= j render "business/client_contacts/form" %>');
+$('#basic-form-modal').modal("toggle")

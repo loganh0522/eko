@@ -1,7 +1,6 @@
 class Tag < ActiveRecord::Base
   has_many :taggings, :dependent => :destroy
   belongs_to :company
-  belongs_to :project
   before_create :titleize 
 
   validates_presence_of :name

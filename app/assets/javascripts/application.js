@@ -28,6 +28,8 @@
 //= require spin
 //= require chartkick
 //= require jquery.timepicker.js
+//= require moment 
+//= require fullcalendar
 //= require_tree .
 
 

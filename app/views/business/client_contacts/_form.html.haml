@@ -1,18 +1,26 @@
-= bootstrap_form_for [:business, @client, @contact], remote: true do |f|
+= form_for [:business, @client, @contact], remote: true do |f|
   .modal-body
-    .fieldset
-      .form-group
-        = f.text_field :first_name, id: "first_name_Block", class: "form-control", label: "First Name"
+    .form-row-no-border
+      .contain-50
+        = f.label :phone, "First Name"
+        = f.text_field :first_name, id: "first_name_Block"
         %span#first_name_msgBlock
-        = f.text_field :last_name, id: "last_name_Block", class: "form-control", label: "Last Name"
+      .contain-50
+        = f.label :phone, "Last Name"
+        = f.text_field :last_name, id: "last_name_Block"
         %span#last_name_msgBlock
-        = f.text_field :email, id: "email_Block", class: "form-control", label: "E-mail"
+    .form-row-no-border
+      .contain-50
+        = f.label :phone, "E-mail"
+        = f.text_field :email, id: "email_Block"
         %span#email_msgBlock
-        = f.text_field :phone, id: "phone_Block", class: "form-control", label: "Phone"
+      .contain-50
+        = f.label :phone, "Phone"
+        = f.text_field :phone, id: "phone_Block"
         %span#phone_msgBlock
   .modal-footer
     %fieldset
       = f.hidden_field :user_id, value: current_user.id
       = f.hidden_field :client_id, value: @client.id
       = f.submit "Save Client", class: "btn submit-button"
-      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+      .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

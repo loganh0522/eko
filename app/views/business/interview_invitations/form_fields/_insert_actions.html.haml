@@ -1,0 +1,20 @@
+.contain-50
+  .show-hidden-search-box
+    .plain-text
+      Insert-Token
+      .caret
+  .hidden-search-box
+    .insert-tokens
+      .insert-token#first-name Candidate First Name
+      .insert-token#last-name Candidate Last Name
+      .insert-token#full-name Candidate Full Name
+      .insert-token#company-name Company Name
+.contain-50
+  .show-hidden-search-box
+    .plain-text
+      Use E-mail Template
+      .caret
+  .hidden-search-box
+    .insert-tokens
+      - current_company.email_templates.each do |template|
+        .insert-template{data: {:body => template.body}}= template.title

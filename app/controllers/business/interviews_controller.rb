@@ -27,6 +27,8 @@ class Business::InterviewsController < ApplicationController
 
   def new
     @interview = Interview.new
+    @candidates = current_company.candidates.order(:created_at).limit(10)
+    @users = current_company.users.limit(10)
 
     respond_to do |format| 
       format.js 
@@ -34,12 +36,15 @@ class Business::InterviewsController < ApplicationController
   end
 
   def create
-    @interview = Interview.new(interview_params)
+    @user_ids = params[:interview][:user_ids].split(',') 
+    @interview = Interview.new(interview_params.merge!(user_ids: @user_ids))
+    
     respond_to do |format|  
       if @interview.save
+        @interviews = current_company.interviews
         format.js
       else
-
+        render_errors(@interview)
         format.js
       end
     end
@@ -53,6 +58,37 @@ class Business::InterviewsController < ApplicationController
 
 
   def edit 
+    @interview = Interview.find(params[:id])
+
+    respond_to do |format| 
+      format.js
+    end
+  end
+
+  def update
+    @interview = Interview.find(params[:id])
+
+    respond_to do |format|  
+      if @interview.update(interview_params)
+        @interviews = current_company.interviews
+        format.js
+      else
+        render_errors(@interview)
+        format.js
+      end
+    end
+  end
+
+  def destroy
+    @interview = Interview.find(params[:id])
+    @interview.destroy
+
+    respond_to do |format| 
+      format.js
+    end
+  end
+
+  def search 
 
   end
 
@@ -60,8 +96,15 @@ class Business::InterviewsController < ApplicationController
 
   def interview_params
     params.require(:interview).permit(:title, :notes, :location, :start_time, 
-      :end_time, :date, :kind, :user_ids, 
-      :job_id, :candidate_id, :company_id)
+      :end_time, :date, :kind, 
+      :job_id, :candidate_id, :company_id,
+      user_ids: [])
   end
 
+  def render_errors(interview)
+    @errors = []
+    interview.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end  
+  end
 end

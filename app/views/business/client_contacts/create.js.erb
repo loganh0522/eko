@@ -4,6 +4,7 @@
     $('#<%= error[0] %>_Block').addClass('has-error');
   <% end %>
 <% else %>
-  $('#main-container').html('<%= j render "business/client_contacts/contact_table", contacts: @contacts %>');
-  $('.modal').modal('hide');
+  $('.all-candidates-table').html('<%= j render "business/client_contacts/contacts_table/table", contacts: @contacts %>');
+  $('.pagination').html('<%= j render "business/client_contacts/contacts_table/pagination", contacts: @contacts %>');
+  $('#basic-form-modal').modal('hide');
 <% end %>

@@ -1,0 +1,37 @@
+.applicants
+  .applicant-table-body
+    %table.table
+      %thead
+        %tr
+          %th(width="1%")
+            #select_all= check_box_tag 'Select All', class: 'select_all_applicants'
+          %th(width="5%")
+          %th(width="20%") Name
+          %th(width="15%") Phone
+          %th(width="15%") E-mail 
+          %th(width="20%") Company
+          %th(width="20%") Created At
+        %tbody
+          - @contacts.each do |contact|
+            %tr
+              %td
+                .applicant-checkbox{:data => {:id => contact.id}}
+                  = check_box_tag "applicant_ids[]", contact.id
+              %td
+                .circle-img
+                  %img(src="/tmp/little-man.png") 
+              %td
+                .name= link_to "#{contact.first_name} #{contact.last_name}", business_client_contact_path(contact.id), remote: true
+              %td
+                .date-applied= contact.phone
+              %td
+                .date-applied= contact.email
+              %td
+                .date-applied= contact.client.company_name
+              %td
+                .date-applied= "#{time_ago_in_words(contact.created_at)} ago"
+
+.modal#applicant-modal
+  .modal-dialog
+    .modal-content
+      .modal-body

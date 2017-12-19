@@ -1,10 +1,10 @@
 .side-section
   .tag-container
-    .tags
+    .tag-header
       %h4 Tags
+      = render 'business/tags/form'
+    .tags
       = render "business/tags/tags"
-    .add_tag
-      = link_to "+ Add Tag", new_business_candidate_tag_path(@candidate), remote: true, id: 'add_tag'
 
 / .side-section
 /   %h4 Tasks 
@@ -20,6 +20,5 @@
       .application-container
         .title= application.job.title
         .location= application.job.location
-
     = link_to 'Add to Job', new_business_candidate_application_path(@candidate), remote: true
 

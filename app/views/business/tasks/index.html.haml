@@ -1,13 +1,13 @@
 .page-header
   %h2 Tasks
+  .actions
+    = link_to "Create Task", new_business_task_path,  data: {:turbolinks => "false"}, remote: true, class: "btn border-button", id: "client-action"
 #main-container
   #padding
     .side-container
       = form_tag search_business_tasks_path, :method => 'get', id: "search-form" do
         = render 'filters'
     .main-container
-      .actions
-        = link_to "Create Task", new_business_task_path,  data: {:turbolinks => "false"}, remote: true, class: "btn border-button"
       #task-container
         = render 'business/tasks/tasks'
 

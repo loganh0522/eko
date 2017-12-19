@@ -1,24 +1,16 @@
 .assign-to-row
-  .title Assign Users (Team)
   .assign-user#user_ids_Block
     .show-hidden-search-box
-      .plain-text 
-        = current_user.full_name
-        .caret
+      .add-button-search
+        .glyphicon.glyphicon-plus
+
+      #multiple-users
+        .user-tag
+          .name= current_user.full_name
+          .delete-tag#delete-multiple &times
     .hidden-search-box
       .search-area-content
         %i.fa.fa-search.fa-stack-2x
-        = text_field_tag "", "", :class => 'ui-autocomplete-input users', :placeholder => 'Type a users name to assign', id: "autocomplete"
-      #search-results-users
-      .assigned-users
-        .user-tag{:data => {id: current_user.id, kind: "user"}}
-          - if current_user.user_avatar.present?
-            = image_tag current_user.user_avatar.image.small_image, class: 'img circle-img'
-            .name= current_user.full_name
-            .delete-tag &times
-          - else 
-            .circle-img
-              %img(src="/tmp/little-man.png")
-            .name= current_user.full_name
-            .delete-tag &times
-
+        = text_field_tag "", "", :placeholder => 'Type a users name to assign', id: "users", autocomplete: "off", class: "autocompleteCustom"
+      .users#add-multiple
+        = render "business/users/users_auto"

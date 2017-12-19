@@ -1,20 +1,14 @@
 .assign-to-row
-  .title Add Candidates
   .assign-user#user_ids_Block
     .show-hidden-search-box
       .add-button-search
         .glyphicon.glyphicon-plus
+      #multiple-users
+
     .hidden-search-box
       .search-area-content
         %i.fa.fa-search.fa-stack-2x
-        = text_field_tag "", "", :placeholder => 'Type a users name to assign', id: "autocomplete", autocomplete: "off"
-      #search-results-candidates
-      .users
-        - current_company.candidates.each do |user|
-          .user{:data => {id: current_user.id, kind: "user"}}
-            / - if user.user_avatar.present?
-            /   = image_tag user.user_avatar.image.small_image, class: 'img circle-img'
-            / - else 
-            /   .circle-img
-            /     %img(src="/tmp/little-man.png")
-            .name= user.full_name
+        = text_field_tag "", "", :placeholder => 'Search Candidates', id: "candidates", autocomplete: "off", class: "autocompleteCustom"
+      .users#add-multiple
+        = render "business/candidates/candidates_auto"
+

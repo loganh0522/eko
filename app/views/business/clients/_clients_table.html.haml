@@ -1,20 +1,33 @@
-%table.table
-  %thead
-    %tr
-      %th(width="1%")
-      %th(width="25%") Company Name
-      %th(width="25%") Address 
-      %th(width="25%") Website
-      %th(width="20%") Open Jobs
-    %tbody
-      - @clients.each do |client|
-        %tr
-          %td
-            = check_box_tag " ", " "
-          %td
-            = link_to "#{client.company_name}", business_client_path(client.id)
-          %td
-            = client.address
-          %td
-            = client.website
-          %td
+.applicant-table-body
+  %table.table
+    %thead
+      %tr
+        %th(width="1%")
+          #select_all= check_box_tag 'Select All', class: 'select_all_applicants'
+        %th(width="10%")
+        %th(width="15%") Company Name
+        %th(width="10%") Open Jobs
+        %th(width="10%") Website 
+        %th(width="10%") Address 
+        %th(width="10%") Created At
+      %tbody
+        - @clients.each do |client|
+          %tr
+            %td
+              .applicant-checkbox{:data => {:id => client.id}}
+                = check_box_tag "applicant_ids[]", client.id
+            %td
+              .circle-img
+                %img(src="/tmp/little-man.png") 
+            %td
+              .name= link_to "#{client.company_name}", business_client_client_contacts_path(client.id)
+            %td
+              .date-applied= client.open_jobs
+            %td
+              .date-applied= client.website
+            %td
+              .date-applied= client.address
+            %td
+              .date-applied= "#{time_ago_in_words(client.created_at)} ago"
+
+

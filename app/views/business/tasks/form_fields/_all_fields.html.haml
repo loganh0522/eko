@@ -15,6 +15,8 @@
                 .select-item{data: {:id => job.id}}= job.title
               = f.hidden_field :job_id, id: "select-box-field"
   .contain-50
-    = render 'business/candidates/candidates_autocomplete'
+    .assign-to-row
+      .title Assign To Candidates
+      = render 'business/candidates/candidates_autocomplete'
 
 

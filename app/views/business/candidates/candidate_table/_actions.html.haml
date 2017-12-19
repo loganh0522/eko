@@ -1,12 +1,12 @@
 .application-actions
   = link_to 'Add Candidate', new_business_candidate_path(:job => @job), class: "btn border-button2", id: "add-applicant", remote: true
   .no-action-buttons
-    .btn.glyphicon.glyphicon-trash.border-button
-    .btn.border-button Send E-mail
-    .btn.border-button Add Note 
-    .btn.border-button Add Tag
-    .btn.border-button Create Task
-    .btn.border-button Interview Invitation
+    .btn.glyphicon.glyphicon-trash.inactive-button
+    .btn.inactive-button Send E-mail
+    .btn.inactive-button Add Note 
+    .btn.inactive-button Add Tag
+    .btn.inactive-button Create Task
+    .btn.inactive-button Interview Invitation
   .applicant-action-buttons
     = link_to '#', id: "destroy_candidates", class: "move-applicants", :data => {:toggle => "modal", :target => "#destroy_candidatesModal"} do
       .btn.active-application-button.glyphicon.glyphicon-trash

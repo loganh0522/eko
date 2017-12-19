@@ -1,7 +1,7 @@
 class Business::ClientContactsController < ApplicationController
   layout "business"
-  filter_access_to :all
-  filter_access_to :filter_candidates, :require => :read
+  # filter_access_to :all
+  # filter_access_to :filter_candidates, :require => :read
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -9,14 +9,12 @@ class Business::ClientContactsController < ApplicationController
   
   def index 
     @client = Client.find(params[:client_id])
-    @contact = ClientContact.new
-    @contacts = @client.client_contacts
+    @contacts = @client.client_contacts.paginate(page: params[:page], per_page: 10)
   end
   
   def show 
     @contact = ClientContact.find(params[:id])
-    @client = Client.find(params[:client_id])
- 
+     
     respond_to do |format|
       format.js
     end
@@ -37,7 +35,7 @@ class Business::ClientContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        @contacts = @client.client_contacts
+        @contacts = @client.client_contacts.paginate(page: params[:page], per_page: 10)
         format.js
       else 
         render_errors(@contact)
@@ -48,7 +46,7 @@ class Business::ClientContactsController < ApplicationController
 
   def edit
     @contact = ClientContact.find(params[:id])
-    
+
     respond_to do |format|
       format.js
     end
@@ -58,14 +56,22 @@ class Business::ClientContactsController < ApplicationController
     @contact = ClientContact.find(params[:id])
 
     respond_to do |format|
-      if @contact.update(job_board_header_params)
-        format.js
+      if @contact.update(client_params)
+        @contacts = @client.client_contacts.paginate(page: params[:page], per_page: 10)
+      else 
+        render_errors(@contact)
       end
+
+      format.js
     end
   end
 
   def destory
+    @contact = Contact.find(params[:id])
 
+    respond_to do |format| 
+      format.js
+    end
   end
 
   private

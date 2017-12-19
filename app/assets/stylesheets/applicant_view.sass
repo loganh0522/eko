@@ -139,6 +139,23 @@
             color: black
       .tag-container
         padding: 10px 20px
+        .tag-header
+          overflow: hidden
+          h4 
+            width: fit-content
+            float: left
+            margin-right: 10px
+          form
+            float: left
+            width: 80%
+            input[type='text']
+              width: 200px
+              float: left
+          .btn 
+            float: left
+            height: 35px
+            margin: 5px 0 0 10px
+            padding: 7px 10px
         .tags
           overflow: hidden
           .tag
@@ -159,18 +176,7 @@
               color: rgba(0,0,0,.7)
               &:hover
                 cursor: pointer       
-        .add_tag
-          margin-top: 10px        
-          .tag_form
-            margin-top: 10px
-            input
-              margin-top: 0
-              float: left    
-            .close-form
-              float: left
-              margin: 5px 0 0 10px
-              &:hover
-                cursor: pointer
+        
       .candidate-tasks
         overflow-y: scroll
         width: 100%

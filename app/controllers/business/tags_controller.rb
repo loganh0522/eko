@@ -6,17 +6,7 @@ class Business::TagsController < ApplicationController
   before_filter :trial_over
   before_filter :company_deactivated?
   
-  def index
-    @tags = current_company.tags
-  end
-
-  def show 
-    @tags = current_company.tags.order(:name).where("name ILIKE ?", "%#{params[:term]}%") 
-    render :json => @tags.to_json 
-  end
-
   def new
-    @candidate = Candidate.find(params[:candidate_id]) if params[:candidate_id].present?
     @tag = Tag.new
 
     respond_to do |format|
@@ -68,6 +58,11 @@ class Business::TagsController < ApplicationController
     render :json => @tags.to_json 
   end
 
+  def show
+    @tags = current_company.tags.order(:name).where("name ILIKE ?", "%#{params[:term]}%") 
+    render :json => @tags.to_json 
+  end
+
   private
 
   def tag_params
@@ -105,6 +100,7 @@ class Business::TagsController < ApplicationController
     
     @candidate_ids.each do |id|
       @candidate_tags = Candidate.find(id).tags
+      
       if !@candidate_tags.include?(@tag) 
         if @company_tags.include?(@tag) 
           Tagging.create(candidate_id: id, tag_id: @tag.id)

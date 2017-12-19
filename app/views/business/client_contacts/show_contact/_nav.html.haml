@@ -1,9 +1,20 @@
 %ul
-  = link_to business_client_client_contact_messages_path(@contact, @client), remote: true do
+  = link_to business_client_contact_messages_path(@contact), remote: true do
     %li#messages.activated Messages 
-  = link_to business_client_client_contact_comments_path(@contact, @client), remote: true do
+  = link_to business_client_contact_comments_path(@contact), remote: true do
     %li#notes Notes
-  = link_to business_client_client_contact_tasks_path(@contact, @client), remote: true do
+  = link_to business_client_contact_tasks_path(@contact), remote: true do
     %li#tasks Tasks
-  = link_to business_client_client_contact_activities_path(@contact, @client), remote: true do
+  = link_to business_client_contact_activities_path(@contact), remote: true do
     %li#activity Activity
+
+.bottom-row
+  = link_to new_business_client_contact_comment_path(@contact), remote: true do
+    #add-note + Add Note
+  = link_to new_business_client_contact_message_path(@contact), remote: true do 
+    #send-email Send E-mail 
+  / = link_to new_business_client_client_contact_task_path(@contact, @client), remote: true do
+  /   #add-task.btn-application-actions.inactive-button
+  /     Tasks
+  / #schedule-appt.btn-application-actions.inactive-button
+  /   Schedule Interview

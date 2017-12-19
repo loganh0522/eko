@@ -1,0 +1,4 @@
+- @candidates.each do |candidate|
+  .user{:data => {id: candidate.id, kind: "candidate"}}
+    = candidate_user_avatar(candidate)
+    .name= candidate.full_name

@@ -1,0 +1,15 @@
+= link_to 'Add Contact', new_business_client_client_contact_path(@client), class: "btn border-button2", id: "add-applicant", remote: true
+.no-action-buttons
+  .btn.border-button Send E-mail
+  .btn.border-button Add Note 
+  .btn.border-button Create Task
+  .btn.border-button Meeting Invite
+.applicant-action-buttons
+  = link_to 'Send E-mail', new_multiple_business_messages_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true
+  
+  = link_to 'Add Note', new_multiple_business_comments_path(client: @client), class: "btn active-application-button move-applicants", id: "add_comment", remote: true
+
+  = link_to "Create Task", new_multiple_business_tasks_path(client: @client), class: "btn active-application-button move-applicants", id: "create_task", remote: true
+
+  = link_to "Interview Invitation", new_business_interview_invitation_path(job: @client), class: "btn active-application-button move-applicants", id: "create_task", remote: true
+

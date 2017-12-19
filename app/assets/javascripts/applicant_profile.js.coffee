@@ -1,5 +1,6 @@
 jQuery ->
   
+  
   $('#embedURL').gdocsViewer({width :'400',height : '500'})
   $('a[data-popup]').on 'click', (e) ->
     window.open $(this).attr('href')
@@ -17,6 +18,7 @@ jQuery ->
     $('#dueDate').datepicker
       dateFormat: 'yy-mm-dd'
     $('#timepicker').timepicker()
+    $('#timepicker2').timepicker()
 
 
   $('#main-container').on 'click', '#Select_All', (event) ->
@@ -272,7 +274,7 @@ jQuery ->
     return
 
 ############ HiddenSearch Box 
-  $(document).on 'click', '.delete-tag', (event) -> 
+  $(document).on 'click', '#delete-multiple', (event) -> 
     value = $(this).parent().find('.name').text()
     values = $(document).find('#add-tags-value').val().split(',')
     
@@ -287,7 +289,11 @@ jQuery ->
     $(this).parent().remove()
     return
 
-    
+  $(document).on 'click', '#delete-single', ->
+    $('.plain-text').show()
+    $(this).parent().remove()
+    $('#candidate_id').val('')
+    return
 
   $(document).on 'click', '.select-item', (e) -> 
     elementId = $(this).data('id')
@@ -301,6 +307,9 @@ jQuery ->
     e.stopPropagation()
 
   $(document).on 'click', '.hidden-search-box', (e) -> 
+    e.stopPropagation()
+
+  $(document).on 'click', '#multiple-users', (e) -> 
     e.stopPropagation()
 
   $(document).click (e) -> 

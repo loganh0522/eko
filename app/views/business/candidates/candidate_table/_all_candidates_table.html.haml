@@ -29,16 +29,7 @@
                   .applicant-checkbox{:data => {:id => candidate.id}}
                     = check_box_tag "applicant_ids[]", candidate.id
                 %td
-                  - if candidate.manually_created == true 
-                    .circle-img
-                      %img(src="/tmp/little-man.png") 
-                  - else
-                    - if candidate.user.user_avatar.present? 
-                      .circle
-                        = image_tag candidate.user.user_avatar.image.small_image, :size => "50x50" 
-                    - else
-                      .circle-img
-                        %img(src="/tmp/little-man.png") 
+                  = candidate_user_avatar(candidate)
                 %td.names
                   - if candidate.manually_created == true 
                     .name{:data => {:id =>  "#{candidate.full_name} "}}
@@ -54,6 +45,7 @@
                       .current-position= "#{candidate.user.current_jobs.first.title} - #{candidate.user.current_jobs.first.company_name} "
                     - else
                       .current-position No Experience Listed
+                      
                   - if candidate.applications.present?
                     %td
                       .position= candidate.applications.first.job.title

@@ -1,0 +1,3 @@
+Fabricator(:tagging) do 
+
+end

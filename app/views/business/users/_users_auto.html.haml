@@ -1,0 +1,8 @@
+- @users.each do |user|
+  .user{:data => {id: user.id, kind: "user"}}
+    - if user.user_avatar.present?
+      = image_tag user.user_avatar.image.small_image, class: 'img circle-img'
+    - else 
+      .circle-img
+        %img(src="/tmp/little-man.png")
+    .name= user.full_name

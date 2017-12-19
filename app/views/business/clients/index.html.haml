@@ -1,16 +1,21 @@
-#all-candidates
-  %h1 Clients
-  .actions
-    .search-field
-      = form_tag business_applications_path, method: :get do   
-        .form-group
-          = search_field_tag :query, params[:query], placeholder: "Advanced Text Search", class: "form-control"
-    = link_to "Create Client", new_business_client_path, class: "btn border-button2", id: "move-applicants", remote: true
+.page-header
+  %h2 Clients
+  = link_to "Create Client", new_business_client_path, id: 'client-action', class: "btn border-button", remote: true
+   
+#main-container
+  #padding
+    .side-container
+      = render "filters"
+    .main-container
+      .applicants
+        = render 'clients_table'
+      .pagination-container
+        = render 'business/client_contacts/contacts_table/pagination'
 
-#job-applicants
-  = render 'modal'
-  .side-container
-  .main-container
-    .applicants
-      = render 'clients_table'
 
+.modal#basic-form-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
+        %h4.modal-title

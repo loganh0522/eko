@@ -85,14 +85,6 @@ module ApplicationHelper
     end
   end
 
-  def candidate_manual(activity)
-    if activity.trackable.commentable.candidate.manually_created?
-      return activity.trackable.commentable.candidate.user.full_name
-    else 
-      activity.trackable.commentable.candidate.full_name
-    end
-  end
-
   def question_answer(question, candidate, job)
     if candidate.question_answers.count == 0
       return "There are currently no answers for this application"

@@ -4,7 +4,7 @@
       %h1= @client.company_name
   .change-containers-nav
     %ul 
-      = link_to business_client_client_contacts_path(@client), remote: true do 
+      = link_to business_client_client_contacts_path(@client) do 
         %li Contacts
       = link_to business_client_jobs_path(@client) do 
         %li{:class => is_activated?(business_client_jobs_path(@client))} Jobs
@@ -16,7 +16,14 @@
         %li Activity
 
 #main-container
-  .all-client-contacts-container
-    = render 'business/client_contacts/contact_table'
-
+  #padding
+    .side-container
+      = render "filters"
+    .main-container
+      .all-candidates-table
+        = render 'business/client_contacts/contacts_table/table', contacts: @contacts
+      .pagination-container
+        / = render 'business/client_contacts/contacts_table/pagination'
+    
+  
 = render 'business/clients/modal'

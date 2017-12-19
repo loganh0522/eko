@@ -178,12 +178,19 @@ Rails.application.routes.draw do
     end
 
     resources :clients do 
+      collection do 
+        get :search
+        get :autocomplete
+      end
+
       resources :jobs, except: [:index, :show]
       get 'jobs', to: "jobs#client_jobs"
-
+      
       resources :activities
       resources :comments, except: [:index]
       get :comments, to: "comments#client_comments"
+      
+
       resources :tasks, except: [:index, :show] do 
         collection do 
           post :completed, to: "tasks#completed"

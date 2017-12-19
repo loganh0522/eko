@@ -1,5 +1,5 @@
 .email-area
-  = form_for [:business, @client, @contact, @message], html: {remote: true, class: 'invite', data: {behaviour: 'has-saved-templates'}} do |f|
+  = form_for [:business, @contact, @message], html: {remote: true, class: 'invite', data: {behaviour: 'has-saved-templates'}} do |f|
     .to 
       .title To:
       .sender= "#{@contact.first_name} (#{@contact.email})"       
