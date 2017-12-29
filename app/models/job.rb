@@ -1,8 +1,8 @@
 class Job < ActiveRecord::Base
   liquid_methods :title
-  
   belongs_to :company
   belongs_to :client
+
   has_many :questions, :dependent => :destroy
   has_one :scorecard, :dependent => :destroy
   has_one :job_feed
@@ -12,11 +12,9 @@ class Job < ActiveRecord::Base
   has_many :stages, -> {order(:position)}, :dependent => :destroy
   has_many :interviews, :dependent => :destroy
   has_many :interview_invitations, :dependent => :destroy
-  
   has_many :activities, -> {order("created_at DESC")}, :dependent => :destroy
   has_many :applications, :dependent => :destroy
   has_many :candidates, through: :applications
-
   has_many :tasks, as: :taskable, :dependent => :destroy
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy 
 

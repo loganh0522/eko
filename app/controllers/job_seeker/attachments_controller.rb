@@ -15,6 +15,7 @@ class JobSeeker::AttachmentsController < ApplicationController
   end
 
   def create   
+
     if params[:file].present?
       @attachment = Attachment.create(user_id: current_user.id, file: params[:file], 
         file_type: params[:file].content_type, title: params[:file].original_filename)

@@ -1,6 +1,7 @@
 = form_for [:job_seeker, @work_experience, @user_skill], html: {remote: true, :class => 'skills_form'} do |f|      
   .add-user-skill 
-    = text_field_tag 'name', nil, :class => 'ui-autocomplete-input', :placeholder => 'Add Skill', id: "skills_name"
+    = text_field_tag 'name', nil, :class => 'ui-autocomplete-input user_skills', :placeholder => 'Add a Skill', id: "skills", hide_label: true
+    / = text_field_tag 'name', nil, :class => 'ui-autocomplete-input', :placeholder => 'Add Skill', id: "skills_name"
     %div#skills-results
     = hidden_field_tag :skills_id
     .btn.border-button#remove_form Close

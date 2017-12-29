@@ -24,7 +24,7 @@ class Business::JobsController < ApplicationController
   def create 
     @job = Job.new(job_params)  
 
-    if @job.save && @job.company == current_company
+    if @job.save 
       redirect_to business_job_hiring_teams_path(@job)
     else
       render :new 
@@ -43,10 +43,22 @@ class Business::JobsController < ApplicationController
   def update
     @job = Job.find(params[:id])
 
-    if @job.update(job_params)
-      redirect_to business_job_hiring_teams_path(@job)
-    else
-      render :edit
+    respond_to do |format|
+      if params[:status].present? 
+        if @job.update(status: params[:status])
+          @job.reindex
+          format.js
+        else 
+          redirect_to :back
+          flash[:danger] = "Something went wrong, please try again."
+        end
+      else
+        if @job.update(job_params)
+          format.html {redirect_to business_job_hiring_teams_path(@job)}
+        else
+          render :edit
+        end
+      end
     end
   end
 
@@ -59,70 +71,9 @@ class Business::JobsController < ApplicationController
     end
   end
 
-  def close_job
-    @job = Job.find(params[:job_id])
-    @company = current_company
-
-    respond_to do |format|  
-      if @job.update_attributes(status: "closed") 
-        @company.job_count -= 1
-        @company.save
-        @jobs = @company.closed_jobs
-        @job.reindex
-        format.js
-      else
-        format.js 
-      end
-    end
-  end
-
-  def archive_job
-    @job = Job.find(params[:job_id])
-
-    if @job.update_attributes(status: "archived") 
-      
-    else
-      redirect_to :back
-    end
-    redirect_to business_jobs_path
-  end
-
-  def publish_job 
-    @job = Job.find(params[:job_id])
-    @company = current_company
-
-    respond_to do |format|  
-      if @company.max_jobs >=  @company.job_count
-        @job.update_attributes(status: 'open') 
-        @company.job_count += 1
-        @company.save
-        @jobs = @company.open_jobs
-        @job.reindex
-        format.js
-      else
-        @jobs = @company.open_jobs
-        format.js
-      end
-    end
-  end
-
   def client_jobs
-    where = {}
-    
-    if params[:query].present? 
-      query = params[:query] 
-    else 
-      query = "*"
-    end
-
-    where[:status] =  "open"
-    where[:client_id] = params[:client_id] 
-    where[:company_id] = current_company.id
-    where[:status] = params[:status] if params[:status].present?
-    where[:kind] = params[:kind] if params[:kind].present?
-
     @client = Client.find(params[:client_id])
-    @jobs = Job.search(query, where: where, fields: [:title]).to_a
+    @jobs = @client.open_jobs
     
     respond_to do |format|
       format.html
@@ -144,6 +95,7 @@ class Business::JobsController < ApplicationController
     end
     where[:company_id] = current_company.id
     where[:kind] = params[:kind] if params[:kind].present?
+    where[:client_id] = params[:client_id] if params[:client_id].present? 
 
     @jobs = Job.search(query, where: where, fields: [:title]).to_a
   end
@@ -154,6 +106,7 @@ class Business::JobsController < ApplicationController
     else
       query = params[:query]
     end
+
     @jobs = Job.search(query, where: {status: "open", company_id: current_company.id}, 
       fields: [{full_name: :word_start}])
     @job = Job.find(params[:job_id]) if params[:job_id].present?

@@ -7,33 +7,10 @@ class Business::ApplicationsController < ApplicationController
   before_filter :trial_over
   before_filter :company_deactivated?
   
-  def index
-    where = {}
-    qcv_fields = [:work_titles, :work_description, :work_company, :education_description, :education_school]
-    fields = [:first_name, :last_name, :full_name, :email]
-    
-    if params[:query].present?
-      query = params[:query] 
-    else
-      query = "*"
-    end
-
-    where[:company_id] = current_company.id 
-    where[:rating] = params[:rating] if params[:rating].present?
-    where[:jobs] = {all: [params[:job_id]]}
-    where[:tags] = {all: params[:tags]} if params[:tags].present?
-    where[:created_at] = {gte: params[:date_applied].to_time, lte: Time.now} if params[:date_applied].present?
-
-    if params[:qcv].present?
-      @candidates = Candidate.search(params[:qcv], where: where, fields: qcv_fields, match: :word_start, per_page: 10, page: params[:page])
-    else
-      @candidates = Candidate.search(query, where: where, fields: fields, match: :word_start, per_page: 10, page: params[:page])
-    end
-
+  def index  
     @job = Job.find(params[:job_id])
-    # @applications = @job.applications.page(params[:page]).per_page(10)
-    tags_present(@job.applications) 
-    
+    @candidates = Candidate.joins(:applications).where(:applications => {job_id: @job.id}).paginate(page: params[:page], per_page: 10)
+    tags_present(@candidates) 
     respond_to do |format| 
       format.js
       format.html
@@ -61,13 +38,37 @@ class Business::ApplicationsController < ApplicationController
     end
   end
 
-  def show 
-    @rejection_reasons = current_company.rejection_reasons
-    @application = Application.find(params[:id])  
-    @candidate = @application.candidate
-    @job = Job.find(params[:job_id])
-    @resume = @candidate.resumes.first
+  def new_multiple
+    @application = Application.new
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_multiple
+    applicant_ids = params[:applicant_ids].split(',')
     
+    applicant_ids.each do |id| 
+      @candidate = Candidate.find(id)
+      @application = Application.create(job_id: params[:application][:job_id], candidate_id: @candidate.id)
+      track_activity @application, "create", @candidate.id, params[:job_id]
+    end
+
+    @candidates = current_company.candidates.paginate(page: params[:page], per_page: 10)
+    
+    respond_to do |format| 
+      format.js
+    end
+  end
+
+  def show 
+    @application = Application.find(params[:id]) 
+    @candidate = @application.candidate
+    @job = Job.find(params[:job_id]) 
+    @rejection_reasons = current_company.rejection_reasons
+    @tag = Tag.new
+
     if @candidate.manually_created == true 
       @applicant = @candidate
     else
@@ -81,38 +82,26 @@ class Business::ApplicationsController < ApplicationController
   end
 
   def destroy
-  end
-
-  def move_stage
-    applicant_ids = params[:applicant_ids].split(',')
+    @application = Application.find(params[:id])
+    @application.destroy
     
-    applicant_ids.each do |id| 
-      @job = Job.find(params[:job])
-      @application = @job.applications.where(candidate_id: id).first
-      
-      if params[:stages] == "Rejected"
-        @application.update_attribute(:rejected, true)
-      else
-        @application.update_attribute(:stage_id, params[:stages])  
-      end    
-    end
-
-    @candidates = @job.candidates
-    # track_activity(@application, "move_stage")
-    respond_to do |format|
+    respond_to do |format| 
       format.js
     end
   end
 
   def application_form
-    if params[:candidate_id].present?
+    if !params[:job].present?
       @candidate = Candidate.find(params[:candidate_id])
-      @application = @candidate.applications.first
-      @job = @application.job
-      @questions = @job.questions
+      @application = @candidate.applications.first       
+      
+      if @application.present?
+        @job = @application.job 
+        @questions = @job.questions
+      end
     else
-      @candidate = Candidate.find(params[:application_id])
-      @job = Job.find(params[:job_id])
+      @candidate = Candidate.find(params[:candidate_id])
+      @job = Job.find(params[:job])
       @questions = @job.questions
     end
 
@@ -121,13 +110,15 @@ class Business::ApplicationsController < ApplicationController
     end
   end
 
-  def change_stage 
-    @app = Application.find(params[:application_id])
+  def move_stage    
     @stage = Stage.find(params[:stage])
-    @app.update_attribute(:stage, @stage)
 
-    track_activity @app, "move_stage", @app.candidate.id, @app.job.id, @stage.id
-
+    if params[:applicant_ids].present?
+      move_multiple_stages
+    else
+      move_stage_single
+    end
+    @candidates = Candidate.joins(:applications).where(:applications => {job_id: @job.id}).paginate(page: params[:page], per_page: 10)
     respond_to do |format|
       format.js
     end
@@ -136,6 +127,7 @@ class Business::ApplicationsController < ApplicationController
   def reject
     @application = Application.find(params[:application_id])
     @application.update_attributes(rejected: true, rejection_reason: params[:val])
+    @application.update_attribute(:rejected, true)
     @job = Job.find(params[:job_id])
     @applications = @job.applications
 
@@ -148,15 +140,31 @@ class Business::ApplicationsController < ApplicationController
 
   private
 
-
-  def tags_present(applications)
+  def tags_present(candidates)
     @tags = []
-    applications.each do |applicant|
-      if applicant.candidate.tags.present?
-        applicant.candidate.tags.each do |tag| 
+    candidates.each do |candidate|
+      if candidate.tags.present?
+        candidate.tags.each do |tag| 
           @tags.append(tag) unless @tags.include?(tag)
         end
       end
+    end
+  end
+
+  def move_stage_single
+    @job = @stage.job
+    @application = Application.find(params[:application_id])
+    @application.update_attribute(:stage, @stage)
+    track_activity @app, "move_stage", @application.candidate.id, @application.job.id, @stage.id
+  end
+
+  def move_multiple_stages
+    applicant_ids = params[:applicant_ids].split(',')
+    @job = Job.find(params[:job]) 
+    applicant_ids.each do |id| 
+      @application = @job.applications.where(candidate_id: id).first
+      @application.update_attribute(:stage_id, params[:stage])  
+      track_activity @app, "move_stage", @application.candidate.id, @application.job.id, @stage.id
     end
   end
 

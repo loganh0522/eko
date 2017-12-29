@@ -2,5 +2,7 @@
   .add-accomplishment
     = f.text_area :body, id: "body_Block"
     %span#body_msgBlock
+    = f.hidden_field :_destroy
+    
     = link_to "Remove", '#', class: "remove_fields"
       

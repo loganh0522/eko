@@ -9,4 +9,4 @@
       = label_tag "status_draft", "Draft", :value => "open", class: 'filter'
       = radio_button_tag "status", "archived", false, class: 'filter'
       = label_tag "status_archived", "Archived", :value => "company", class: 'filter'
-  = text_field_tag "query", nil, placeholder: "Search Jobs", class: "search-field"
+  = text_field_tag "query", nil, placeholder: "Search Jobs", class: "search-field", autocomplete: "off"

@@ -3,7 +3,7 @@
     = render 'business/shared/admin_sidebar'
   .main-container
     .standard-header
-      %h2= current_company.name
+      %h3= current_company.name
       .profile-actions
         .link1= link_to "Edit Company", edit_business_company_path(current_company), class: "btn border-button", :data => {remote: true}
     / .templates-header

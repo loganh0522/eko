@@ -13,12 +13,12 @@
       .form-row-no-border
         .contain-50
           = f.label "Industry"
-          = f.collection_select(:industry_ids, Industry.all, :id, :name, hide_label: true, prompt: "Select Industry")
-          %span#industry_ids_msgBlock
+          = f.collection_select(:industry, Industry.all, :id, :name, hide_label: true, prompt: "Select Industry", :selected => @work_experience.new_record? ? nil : @work_experience.industry)
+          %span#industry_msgBlock
         .contain-50
           = f.label "Job Function"
-          = f.collection_select(:function_ids, Function.all, :id, :name, hide_label: true, prompt: "Select Job Function")
-          %span#function_ids_msgBlock
+          = f.collection_select(:function, Function.all, :id, :name, hide_label: true, prompt: "Select Job Function", :selected => @work_experience.new_record? ? nil : @work_experience.function)
+          %span#function_msgBlock
       .form-row-no-border
         .contain-25
           = f.label "Start Date"
@@ -55,6 +55,7 @@
           = text_field_tag '', '', :class => 'ui-autocomplete-input user_skills', :placeholder => 'Add a Skill', id: "skills", hide_label: true
           #search-results-user_skills 
           .btn.submit-button#add-tag-button Add
+          = hidden_field_tag :user_skills,'', id: 'add-tags-value'
         #add-tags
           = render 'job_seeker/user_skills/project_skills', position: @work_experience
 

@@ -36,4 +36,11 @@ class Business::CompaniesController < ApplicationController
   def company_params
     params.require(:company).permit(:name, :website, :kind)
   end
+
+  def render_errors(error)
+    @errors = []
+    error.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end  
+  end
 end

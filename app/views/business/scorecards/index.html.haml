@@ -6,7 +6,7 @@
       = render 'business/shared/post_job'
     .main-container#main-border
       .standard-header   
-        %h2 Candidate Scorecard    
+        %h3 Candidate Scorecard    
       .scorecard-container
         - if @job.scorecard.present?  
           = render 'business/scorecards/scorecard'

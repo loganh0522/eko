@@ -10,15 +10,18 @@ class Business::ApplicationScorecardsController < ApplicationController
     if !params[:job].present?
       @candidate = Candidate.find(params[:candidate_id])
       @application = @candidate.applications.first
-      @job = @application.job
-      @scorecard = Scorecard.where(job_id: @job.id).first
-      @sections = @scorecard.scorecard_sections
-      @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
-      @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first 
+      if @application.present?
+        @job = @application.job
+        @scorecard = Scorecard.where(job_id: @job.id).first
+        @sections = @scorecard.scorecard_sections
+        @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
+        @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first 
+      end
     else
       @candidate = Candidate.find(params[:candidate_id])
       @job = Job.find(params[:job])
       @application = Application.where(job: @job, candidate: @candidate).first
+      
       @scorecard = @job.scorecard
       @sections = @scorecard.scorecard_sections if @scorecard.present?
       @application_scorecards = ApplicationScorecard.where(application_id: @application.id)

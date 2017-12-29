@@ -12,6 +12,12 @@ class Business::InterviewsController < ApplicationController
     @job = Job.find(params[:job_id])
     @interviews = @job.interviews
   end
+
+  def show 
+    @interview = Interview.find(params[:id])
+    @applicant = @interview.application.applicant
+    @team = @interview.users 
+  end
   
   def index
     @interviews = current_company.interviews
@@ -49,13 +55,6 @@ class Business::InterviewsController < ApplicationController
       end
     end
   end
-
-  def show 
-    @interview = Interview.find(params[:id])
-    @applicant = @interview.application.applicant
-    @team = @interview.users 
-  end
-
 
   def edit 
     @interview = Interview.find(params[:id])

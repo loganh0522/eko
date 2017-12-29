@@ -11,10 +11,10 @@
               - board.posting_durations.each do |duration|
                 .contain-50
                   .duration-name= duration.name
-                  = link_to_add_to_cart "$ #{duration.price} ", f, :order_items, board.id
+                  = link_to_add_to_cart "$ #{duration.price} ", f, :order_items, board.id, duration.id
             - else
               - board.posting_durations.each do |duration|
-                = link_to_add_to_cart "$ #{duration.price} ", f, :order_items, board.id
+                = link_to_add_to_cart "$ #{duration.price} ", f, :order_items, board.id, duration.id
         .footer
           .form-row-no-border
             Details

@@ -27,15 +27,13 @@ class Business::ClientsController < ApplicationController
 
   def create
     @client = Client.new(client_params)
-
     respond_to do |format|
       if @client.save
-        @clients = current_company.clients.paginate(page: params[:page], per_page: 10)
-        format.js
+        @clients = current_company.clients.paginate(page: params[:page], per_page: 10)       
       else 
         render_errors(@client)
-        format.js
       end
+      format.js
     end
   end
 
@@ -55,8 +53,8 @@ class Business::ClientsController < ApplicationController
         @clients = current_company.clients.paginate(page: params[:page], per_page: 10)
       else 
         render_errors(@client)
-        format.js
       end
+      format.js
     end
   end
 

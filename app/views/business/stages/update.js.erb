@@ -4,6 +4,6 @@
     $(".modal-body").find('#<%= error[0] %>_Block').addClass('has-error');
   <% end %>
 <% else %>
-  $('.modal').modal('toggle');
+  $('.newModal').hide();
   $('#stage_<%= @stage.id %>').replaceWith('<%= j render (@stage) %>');
 <% end %>

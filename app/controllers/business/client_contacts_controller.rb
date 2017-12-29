@@ -54,6 +54,7 @@ class Business::ClientContactsController < ApplicationController
 
   def update
     @contact = ClientContact.find(params[:id])
+    @client = @contact.client
 
     respond_to do |format|
       if @contact.update(client_params)
@@ -66,8 +67,9 @@ class Business::ClientContactsController < ApplicationController
     end
   end
 
-  def destory
-    @contact = Contact.find(params[:id])
+  def destroy
+    @contact = ClientContact.find(params[:id])
+    @contact.destroy
 
     respond_to do |format| 
       format.js

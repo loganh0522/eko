@@ -1,14 +1,10 @@
  class WorkExperience < ActiveRecord::Base
   belongs_to :user, touch: true
-  belongs_to :profile, touch: true
   belongs_to :candidate, touch: true
-  has_many :exp_industries
-  has_many :industries, through: :exp_industries
-  has_many :exp_functions
-  has_many :functions, through: :exp_functions
-  has_many :user_skills
+
+  has_many :user_skills, :dependent => :destroy
   has_many :skills, through: :user_skills
-  has_many :accomplishments
+  has_many :accomplishments, :dependent => :destroy
   
   validates_presence_of :title, :message => "Job title can't be blank"
   validates_presence_of :company_name, :message => "Company can't be blank"
@@ -17,7 +13,6 @@
   validates_presence_of :start_year, :message => "Start Year can't be blank", if: :is_job_seeker?
   validates_presence_of :end_month, :end_year, :unless => :current_position?, if: :is_job_seeker?
   validates_presence_of :current_position, :unless => :end_year?, if: :is_job_seeker?
-
 
   accepts_nested_attributes_for :skills, 
     allow_destroy: true
@@ -28,6 +23,7 @@
   def is_job_seeker? 
     self.user.present? 
   end
+  
   # def order_by_date
   #   order = []
   #   month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 

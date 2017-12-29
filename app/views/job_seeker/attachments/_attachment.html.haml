@@ -2,6 +2,10 @@
   .image
     - if attachment.file_type.start_with? 'image'
       = image_tag attachment.file.thumb
+
+    - elsif attachment.file_type.include?("pdf")
+      = image_tag attachment.file.pdf_thumb
+
     - elsif attachment.file_image.present?
       = image_tag attachment.file_image
     - else 

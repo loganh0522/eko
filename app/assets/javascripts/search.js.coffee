@@ -104,7 +104,6 @@ jQuery ->
       debounceTimeout = setTimeout(submitLink, 500)
     return
 
-  
 
 $(document).ajaxComplete ->
   searchAuto = $('.search-field-auto')
@@ -136,8 +135,6 @@ $(document).ajaxComplete ->
     search = $(this)
     debounceTimeout = setTimeout(customAutocomplete, 500, search)
     return
-
-
 
   $('#add-single').on 'click', '.user', -> 
     name = $(this).find('.name').text()

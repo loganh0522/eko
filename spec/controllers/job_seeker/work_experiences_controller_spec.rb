@@ -81,6 +81,37 @@ describe JobSeeker::WorkExperiencesController do
       end
     end
 
+    context "with valid inputs for accomplishments and user_skills" do 
+      before do 
+        xhr :post, :create, work_experience: {title: "CEO & Founder", company_name: "Talentwiz", industry: "", function: "", start_month: "August", start_year: "2015", end_month: "", end_year: "", current_position: "1", description: "This is what I do", accomplishments_attributes: {"0"=>{body: 
+          "This is an accomplishment"}}}, user_skills: 'Rails, jQuery'
+      end
+
+      it "should save the work experience" do 
+        expect(WorkExperience.count).to eq(1)
+      end
+
+      it "should create new skills and save UserSkills" do 
+        expect(Skill.count).to eq(2)
+        expect(UserSkill.count).to eq(2)
+        expect(WorkExperience.first.user_skills.count).to eq(2)
+      end
+
+
+      it "should save the accomplishment and associate it to work_experience" do
+        expect(WorkExperience.first.accomplishments.count).to eq(1)
+        expect(Accomplishment.count).to eq(1)
+      end
+
+      it "associates the work experience with the current_user" do
+        expect(WorkExperience.first.user).to eq(alice)
+      end
+
+      it "redirects to the profile index action" do 
+        expect(response).to render_template :create
+      end
+    end
+
     context "with invalid inputs" do 
       let(:alice){Fabricate(:user, kind: 'job seeker')}
       

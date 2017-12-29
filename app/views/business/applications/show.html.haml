@@ -1,56 +1,19 @@
 .applicant-view
   .home-page-header  
     %h2= "#{@job.title}"
+
+.main-container
+  .applicant-view
+    .applicant-main-container
+      .navigation-container
+        .applicant-nav
+          = render 'business/applications/show_application/applicant_nav'
+        .action-area
+      .applicant-general
+        .display-applicant-details
+          = render 'business/applications/show_application/application_cv'
+.side-container
+  .applicant-side-container
     .applicant-general-info
-      - if @application.candidate.manually_created == true
-        .user-image
-          .profile_picture
-            %img(src="/tmp/blank_profile_picture.png")
-        .applicant-details
-          .name= "#{@application.candidate.full_name.capitalize}"
-          = render 'business/ratings/form', application: @application
-        .contact-details
-          = "Email: #{@application.candidate.email}"
-          = "Phone: #{@application.candidate.phone}"
-          .location= "#{@application.candidate.location}"
-      - else
-        .user-image
-          .profile_picture
-            - if @application.applicant.user_avatar.present?
-              = image_tag @application.applicant.user_avatar.image.large_image 
-            - else 
-              %img(src="/tmp/blank_profile_picture.png")
-        .applicant-details
-          .name-rating
-            .name= "#{@application.candidate.user.full_name}"
-            = render 'business/ratings/form', application: @application
-          .current-position
-            - if @application.candidate.user.current_jobs.present?
-              = "#{@application.applicant.current_jobs.first.title}  #{@application.applicant.current_jobs.first.company_name} "
-          .contact-details
-            = "Email: #{@application.candidate.user.email}"
-            = "Phone: #{@application.candidate.user.phone}"
-          .location= "#{@application.candidate.user.location}"
-        
-
-  .side-container
-    = render 'business/applications/application_side_container'
-  .applicant-profile-information
-    .applicant-main-top
-      = render 'business/applications/application_navigation'
-    .applicant-details#main-container
-      .profile-container.showing
-        .applicant-experience
-          = render 'business/applications/application_experience'
-        .applicant-experience    
-          = render 'business/applications/application_education'
-          
-  .modal#myModal
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-          %h4.modal-title  
-        .modal-body
-.footer 
-
+      = render 'business/applications/show_application/applicant_details'
+    = render 'business/applications/show_application/side_container'

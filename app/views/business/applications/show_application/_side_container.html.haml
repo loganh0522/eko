@@ -1,12 +1,16 @@
 .side-section
   .tag-container
-    %h4 Tags
-    .add_tag
-      = link_to "+ Add Tag", new_business_candidate_tag_path(@candidate), remote: true, id: 'add_tag'
+    .tag-header
+      %h4 Stage
+    = render 'business/applications/show_application/header_actions'
+.side-section
+  .tag-container
+    .tag-header
+      %h4 Tags
+      = render 'business/tags/form'
     .tags
       = render "business/tags/tags"
-.side-section
-  
+
 
 
    

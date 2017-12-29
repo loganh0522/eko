@@ -18,4 +18,4 @@
 
     .footer
       = f.submit @question.new_record? ? "Create" : "Update", class: "btn submit-button"
-      = link_to "Cancel", '#', class: "btn border-button", id: "remove_form"
+      .btn.border-button#remove_form Cancel

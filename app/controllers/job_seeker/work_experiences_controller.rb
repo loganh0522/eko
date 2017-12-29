@@ -70,19 +70,19 @@ class JobSeeker::WorkExperiencesController < JobSeekersController
   def position_params
     params.require(:work_experience).permit(:user_id, :title, :company_name, :description, 
       :start_month, :start_year, :end_month, :end_year, :current_position, 
-      :industry, :function, :location)
+      :industry, :function, :location,
+      accomplishments_attributes: [:id, :body, :_destroy])
   end
 
   def add_skills(project)  
     if params[:user_skills].present?
       @skills = params[:user_skills].split(',')
-      @project_skills = @project.user_skills
+      @experience_skills = @work_experience.user_skills
 
       @skills.each do |skill| 
         @skill = Skill.find_or_create_skill(skill)
-
-        if !@project_skills.include?(UserSkill.where(skill_id: @skill.id, project_id: @project.id).first)
-          UserSkill.create(user_id: current_user.id, skill_id: @skill.id, project_id: @project.id)
+        if !@experience_skills.include?(UserSkill.where(skill_id: @skill.id, work_experience_id: @work_experience.id).first)
+          UserSkill.create(user_id: current_user.id, skill_id: @skill.id, work_experience_id: @work_experience.id)
         end
       end
     end

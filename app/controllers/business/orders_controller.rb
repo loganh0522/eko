@@ -19,7 +19,7 @@ class Business::OrdersController < ApplicationController
     
     charge = StripeWrapper::Charge.create(
       :customer_id => current_company.customer.stripe_customer_id,
-      :amount => @totalPrice 
+      :amount => @totalPrice.to_i
       )
 
     if charge.successful?
@@ -55,9 +55,12 @@ class Business::OrdersController < ApplicationController
     @totalPrice = 0 
 
     items.each do |item| 
-      item[1][:premium_board_id]
+      @duration = PostingDuration.find(item[1][:posting_duration_id])
       @job_board = PremiumBoard.find(item[1][:premium_board_id])
-      @totalPrice += (@job_board.price.to_f * 100).to_i
+      
+      if @duration.price == item[1][:unit_price].to_i && @duration.premium_board == @job_board
+        @totalPrice += @duration.real_price
+      end
     end
     
     return @totalPrice
@@ -67,6 +70,6 @@ class Business::OrdersController < ApplicationController
     params.require(:order).permit(:job_id, :user_id, :company_id,
       :total, :tax, 
       order_items_attributes: [:id, :premium_board_id, 
-        :_destroy, :total])
+        :_destroy, :unit_price, :posting_duration_id])
   end
 end

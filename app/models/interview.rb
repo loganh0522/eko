@@ -7,7 +7,7 @@ class Interview < ActiveRecord::Base
   has_many :assigned_users, as: :assignable, :dependent => :destroy
   has_many :users, through: :assigned_users, validate: false
   
-  validates_presence_of :title, :kind, :date, :start_time, :end_time, :notes, :candidate_id
+  validates_presence_of :title, :kind, :date, :start_time, :end_time, :candidate_id
   
   searchkick
 

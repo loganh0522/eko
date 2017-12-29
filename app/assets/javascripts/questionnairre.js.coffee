@@ -1,8 +1,9 @@
 jQuery ->
   $('.main-container').on 'click', '.remove_fields', (event) ->
     $(this).next('input[type=hidden]').val('1')
-    $(this).closest('fieldset').hide()
+    $(this).closest('fieldset').hide()  
     event.preventDefault()
+
   $('.main-container').on 'click', '.add_fields', (event) ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
@@ -12,7 +13,6 @@ jQuery ->
 #### Scorecard #### 
 
   $('.main-container').on 'click', '.remove_question', (event) ->
-    console.log('clicked')
     $(this).nextAll('input[type=hidden]').val('1')
     $(this).closest('fieldset').hide()
     $(this).parent().nextUntil('.questions').find('#destroy_fields').val('1')
@@ -81,9 +81,10 @@ jQuery ->
     
 
 ################ Create Application ###############
-
+  
   $('#basic-form-modal').on 'click', '.remove_fields', (event) ->
-    $(this).parent().parent().remove()
+    $(this).first().prev().val('1')
+    $(this).parent().parent().hide()
     event.preventDefault()
 
   $('#basic-form-modal').on 'click', '.add_fields', (event) ->
@@ -92,6 +93,7 @@ jQuery ->
     $(this).after($(this).data('fields').replace(regexp, time))
     $(this).prev().find('.remove_fields').show()
     event.preventDefault()
+
     $('#task_due_date').datepicker  
       dateFormat: 'yy-mm-dd'
     $('#timepicker').timepicker()
@@ -130,31 +132,3 @@ jQuery ->
     event.preventDefault()
 
 
-################### Job Cart ####################
-  $('#main-container').on 'click', '.add_to_cart', (event) ->
-    time = new Date().getTime()
-    regexp = new RegExp($(this).data('id'), 'g')
-    $('#cart').find('.body').append($(this).data('fields').replace(regexp, time))
-
-    totalAmount = 0
-
-    $('.unit-price').each -> 
-      totalAmount += Number($(this).val())
-
-    $('#cart-total').find('.amount').html("$" + totalAmount)
-    $('#order_total').val(totalAmount)
-    event.preventDefault()
-
-  $('#main-container').on 'click', '.remove_from_cart', (event) ->
-    $(this).next('input[type=hidden]').val('1')
-    id = $(this).parent().attr('id')
-    $(this).closest('fieldset').remove()
-
-    totalAmount = Number($('#cart-total').find('.amount').val())
-
-    $('.unit-price').each -> 
-      totalAmount += Number($(this).val())
-
-    $('#cart-total').find('.amount').html("$" + totalAmount)
-    $('#order_total').val(totalAmount)
-    event.preventDefault()

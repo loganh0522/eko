@@ -3,7 +3,7 @@
     = render 'admin/shared/admin_sidebar'
   .main-container
     .standard-header
-      %h2 Premium Boards
+      %h3 Premium Boards
       = link_to "+ Job Board", new_admin_premium_board_path, :data => {:remote => true }, class: "btn border-button2"
     .templates-body
       - @job_boards.each do |board| 

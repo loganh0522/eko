@@ -28,7 +28,7 @@ class Client < ActiveRecord::Base
   end
 
   def open_jobs
-    self.jobs.where(status: 'open').count
+    self.jobs.where(status: 'open')
   end
 
   def open_tasks

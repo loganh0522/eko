@@ -125,9 +125,6 @@ Rails.application.routes.draw do
         get :search
         get :new_multiple, to: "tasks#new_multiple"
         post :completed, to: "tasks#completed"
-        get :complete, to: "tasks#complete"
-        get :overdue, to: "tasks#overdue"
-        get :due_today, to: "tasks#due_today"
         post :create_multiple, to: "tasks#create_multiple"
       end
     end
@@ -182,24 +179,19 @@ Rails.application.routes.draw do
         get :search
         get :autocomplete
       end
-
       resources :jobs, except: [:index, :show]
       get 'jobs', to: "jobs#client_jobs"
-      
       resources :activities
       resources :comments, except: [:index]
       get :comments, to: "comments#client_comments"
       
-
       resources :tasks, except: [:index, :show] do 
         collection do 
           post :completed, to: "tasks#completed"
-          get :complete, to: "tasks#client_complete"
-          get :overdue, to: "tasks#client_overdue"
-          get :due_today, to: "tasks#client_due_today"
           post :create_multiple, to: "tasks#create_multiple"
         end
       end
+
       get "tasks", to: "tasks#client_tasks"
 
       resources :client_contacts do
@@ -231,7 +223,6 @@ Rails.application.routes.draw do
         get :autocomplete
         get :search
       end
-      
       resources :interview_invitations
       resources :work_experiences
       resources :interviews
@@ -254,22 +245,14 @@ Rails.application.routes.draw do
     end
     
     resources :applications do 
-      resources :ratings
-      resources :resumes
-      
       collection do 
         post :move_stages, to: "applications#move_stage"
-        post :change_stage, to: "applications#change_stage"
-        post :add_tag_multiple, to: "tags#add_tags_multiple_applications"
+        get :new_multiple, to: "applications#new_multiple" 
+        post :create_multiple, to: "applications#create_multiple"
       end
     end
 
-    post "candidates/filter_applicants", to: "candidates#filter_candidates"
-    get 'job_hiring_team', to: "hiring_teams#job_hiring_team"
-    post "applications/filter_applicants", to: "applications#filter_applicants"
-    get "mention_user", to: "applications#mention_user"
     get "plan", to: "customers#plan"
-
 
     resources :customers do
       collection do 
@@ -286,25 +269,17 @@ Rails.application.routes.draw do
         get :autocomplete
         get :search
       end
-
       resources :job_feeds 
       
       get 'tasks', to: "tasks#job_tasks"
       get 'comments', to: "comments#job_comments"
       get "/activities", to: 'activities#job_activity'
       get :promote, to: "jobs#promote"
-      get :close, to: "jobs#close_job"
-      get :archive, to: "jobs#archive_job"
-      get :publish, to: "jobs#publish_job"
       get 'interviews', to: 'interviews#job_interviews'
       get 'interview_invitations', to: 'interview_invitations#job_invitations'
       
       resources :tasks, except: [:index, :show] do 
         collection do 
-          post :completed, to: "tasks#completed"
-          get :complete, to: "tasks#job_complete"
-          get :overdue, to: "tasks#job_overdue"
-          get :due_today, to: "tasks#job_due_today"
           post :create_multiple, to: "tasks#create_multiple"
         end
       end
@@ -315,13 +290,8 @@ Rails.application.routes.draw do
       resources :candidates
 
       resources :applications do
-        get :application_form, to: "applications#application_form"
-        get :application_activity, to: "activities#application_activity"
-        resources :application_scorecards
-        resources :assessments     
-
-        get :move_stages        
         post :reject, to: "applications#reject"
+        resources :application_scorecards
       end
 
       resources :hiring_teams 

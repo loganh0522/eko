@@ -17,6 +17,20 @@
       - if @application.candidate.location.present?
         .glyphicon.glyphicon-map-marker
           = "#{@application.candidate.location}"
+  .actions
+    .dropdown
+      .dropdown-button.border-button
+        Actions
+        %i.fa.fa-ellipsis-h.fa-lg
+      .dropdown-content#myDropdown
+        = link_to edit_business_candidate_path(@application.candidate.id), remote: true do
+          %i.fa.fa-pencil
+          .action Edit
+        = link_to business_candidate_path(@application.candidate.id), remote: true, :method => :delete do  
+          %i.fa.fa-trash-o
+          .action Destroy 
+
+
 - else
   .user-image
     .profile_picture

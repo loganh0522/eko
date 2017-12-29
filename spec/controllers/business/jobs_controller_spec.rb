@@ -1,13 +1,23 @@
 require 'spec_helper' 
 
 describe Business::JobsController do 
+  let(:company) {Fabricate(:company)}
+  let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
+  let(:alice) {Fabricate(:user, company: company, role: "Admin")}
+  let(:bob) {Fabricate(:user, company: company, role: "Hiring Manager")} 
+  let(:job) {Fabricate(:job, company: company, user_ids: alice.id, status: "open")}
+  let(:job2) {Fabricate(:job, company: company, user_ids: alice.id, status: "open")}
+  let(:questionairre) {Fabricate(:questionairre, job_id: job1.id)}
+  let(:scorecard) {Fabricate(:scorecard, job_id: job1.id)}
+
+  before do 
+    set_current_user(alice)
+    set_current_company(company)
+    job_board
+    job
+    job2
+  end
   describe "GET index" do 
-    let(:company) {Fabricate(:company)}
-    let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
-    let(:alice) {Fabricate(:user, company: company, role: "Admin")}
-    let(:bob) {Fabricate(:user, company: company, role: "Hiring Manager")} 
-    let(:job) {Fabricate(:job, company: company, user_ids: alice.id, status: "open")}
-    
     it_behaves_like "requires sign in" do
       let(:action) {get :index}
     end
@@ -21,31 +31,22 @@ describe Business::JobsController do
     end
 
     before do 
-      set_current_user(alice)
-      set_current_company(company)
-      job_board
-      job
       get :index
     end
 
     context "when user belongs to current_company" do
       it "sets the @jobs to the job postings that belong to the current company" do    
-        expect(assigns(:jobs)).to eq([job])
+        expect(assigns(:jobs)).to eq([job, job2])
       end
 
       it "expects to return the correct number of job postings" do 
-        expect(Job.count).to eq(1)
+        expect(Job.count).to eq(2)
+        expect(company.jobs.count).to eq(2)
       end
     end
   end
 
   describe "GET new" do 
-    let(:company) {Fabricate(:company)}
-    let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
-    let(:alice) {Fabricate(:user, company: company, role: "Admin")}
-    let(:bob) {Fabricate(:user, company: company, role: "Hiring Manager")} 
-    let(:job) {Fabricate(:job, company: company, user: alice)}
-
     it_behaves_like "requires sign in" do
       let(:action) {get :new}
     end
@@ -59,12 +60,10 @@ describe Business::JobsController do
     end
 
     before do  
-      set_current_user(alice)
-      set_current_company(company)
       get :new
     end
 
-    it "sets the @job_posting instance" do 
+    it "sets the @job instance" do 
       expect(assigns(:job)).to be_instance_of Job 
       expect(assigns(:job)).to be_new_record 
     end
@@ -84,33 +83,26 @@ describe Business::JobsController do
     end
     
     context "with valid inputs" do 
-      let(:company) {Fabricate(:company)}
-      let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
-      let(:alice) {Fabricate(:user, company: company)}
-      let(:job) {Fabricate.attributes_for(:job, company: company, user_ids: alice.id)}
+      let(:new_job) {Fabricate.attributes_for(:job, company: company, user_ids: alice.id)}
 
       before do  
-        set_current_user(alice)
-        set_current_company(company)
-        job_board
-        post :create, job: job
+        post :create, job: new_job
       end
 
       it "redirects to the new Hiring team path" do   
-        expect(response).to redirect_to business_job_hiring_teams_path(Job.first.id)
+        expect(response).to redirect_to business_job_hiring_teams_path(Job.last.id)
       end
       
       it "creates the job posting" do
-        expect(Job.count).to eq(1)
+        expect(Job.count).to eq(3)
       end
 
-      it "creates a scorecard associated to the Job posting" do 
-        expect(Scorecard.count).to eq(1)
-        expect(Job.first.scorecard.count).to eq(1)
+      it "creates a job_Feed associated to the Job posting" do 
+        expect(Job.first.job_feed).to be_present
       end
 
       it "creates the stages associated to the Job posting" do 
-        expect(Stage.count).to eq(6)
+        expect(Stage.count).to eq(18)
         expect(Job.first.stages.count).to eq(6)
       end
 
@@ -123,7 +115,7 @@ describe Business::JobsController do
       end
 
       it "sets the job status as a draft" do 
-        expect(Job.first.status).to eq('draft')
+        expect(Job.last.status).to eq('draft')
       end
 
       it "sets the city, province, country attributes" do 
@@ -134,20 +126,14 @@ describe Business::JobsController do
     end
 
     context "with invalid inputs" do 
-      let(:company) {Fabricate(:company)}
-      let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
-      let(:alice) {Fabricate(:user, company: company)}
-      let(:job) {Fabricate.attributes_for(:job, company: company, user_ids: alice.id, title: "")}
+      let(:new_job) {Fabricate.attributes_for(:job, company: company, user_ids: alice.id, title: "")}
       
       before do      
-        set_current_user(alice)
-        set_current_company(company)
-        job_board
-        post :create, job: job
+        post :create, job: new_job
       end
 
       it "does not create a job posting" do     
-        expect(Job.count).to eq(0)
+        expect(Job.count).to eq(2)
       end
 
       it "does not create a scorecard for the job posting" do     
@@ -155,7 +141,7 @@ describe Business::JobsController do
       end
 
       it "does not create a stage for the job posting" do     
-        expect(Stage.count).to eq(0)
+        expect(Stage.count).to eq(12)
       end
 
       it "renders the new action" do 
@@ -164,65 +150,48 @@ describe Business::JobsController do
     end
   end
 
-  describe "GET edit" do 
-    let(:company) {Fabricate(:company)}
-    let(:alice) {Fabricate(:user, company: company)}
-    let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
-    let(:job1) {Fabricate(:job, company: company)}
-    let(:questionairre) {Fabricate(:questionairre, job_id: job1.id)}
-    let(:scorecard) {Fabricate(:scorecard, job_id: job1.id)}
-
+  describe "GET edit" do    
     it_behaves_like "requires sign in" do
-      let(:action) {get :edit, id: job1.id}
+      let(:action) {get :edit, id: job.id}
     end
 
     it_behaves_like "user does not belong to company" do 
-      let(:action) {get :edit, id: job1.id}
+      let(:action) {get :edit, id: job.id}
     end
 
     it_behaves_like "company has been deactivated" do
-      let(:action) {get :edit, id: job1.id}
+      let(:action) {get :edit, id: job.id}
     end
     
     before do      
-      set_current_user(alice)
-      set_current_company(company)  
-      job_board 
-      get :edit, id: job1.id   
+      get :edit, id: job.id   
     end
 
     it "sets @job to the correct job posting" do 
-      expect(assigns(:job)).to eq(job1)
+      expect(assigns(:job)).to eq(job)
+    end
+
+    it "renders the new action" do 
+      expect(response).to render_template :edit
     end
   end
 
   describe "PUT update" do 
+    it_behaves_like "requires sign in" do
+      let(:action) {put :update, id: job.id}
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) {put :update, id: job.id}
+    end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) {put :update, id: job.id}
+    end
+
     context "with valid inputs" do
-      let(:company) {Fabricate(:company)}
-      let(:alice) {Fabricate(:user, company: company)}
-      let(:company) {Fabricate(:company)}
-      let(:alice) {Fabricate(:user, company: company)}
-      let(:job) {Fabricate(:job, company: company)}
-      let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
-
       before do  
-        set_current_user(alice)
-        set_current_company(company)
-        job_board
-        job = Fabricate(:job, company: company)
-        put :update, id: job.id, job: Fabricate.attributes_for(:job, title: "new title")
-      end
-
-      it_behaves_like "requires sign in" do
-        let(:action) {put :update, id: job.id}
-      end
-
-      it_behaves_like "user does not belong to company" do 
-        let(:action) {put :update, id: job.id}
-      end
-
-      it_behaves_like "company has been deactivated" do
-        let(:action) {put :update, id: job.id}
+        put :update, id: job.id, job: {title: "new title"}
       end
 
       it "save the updates made on the object" do 
@@ -230,119 +199,64 @@ describe Business::JobsController do
       end
 
       it "render's the hiring team page" do 
-        expect(response).to redirect_to new_business_job_hiring_team_path(Job.first.id)
-      end
-
-      it "redirects_to the index page" do 
-        expect(flash[:notice]).to be_present
+        expect(response).to redirect_to business_job_hiring_teams_path(job.id)
       end
     end
 
     context "with invalid inputs" do
-      let(:company) {Fabricate(:company)}
-      let(:alice) {Fabricate(:user, company: company)}
-      let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
       before do  
-        set_current_user(alice)
-        set_current_company(company)
-        job_board
-        job1 = Fabricate(:job, title: "old title", company: company)
-        put :update, id: job1.id, job: Fabricate.attributes_for(:job, title: nil)
+        put :update, id: job.id, job: {title: nil}
       end
 
       it "doesn't save the updates if fields invalid" do
-        expect(Job.first.title).to eq("old title") 
+        expect(Job.first.title).to eq(job.title) 
       end
 
       it "renders the edit template" do
         expect(response).to render_template :edit
       end
     end
+
+    context "with params[:status] present && status == closed" do
+      before do  
+        xhr :put, :update, id: job.id, status: 'closed'
+      end
+
+      it "save the updates made on the object" do 
+        expect(Job.first.status).to eq('closed')
+      end
+
+      it "render's the hiring team page" do 
+        expect(response).to render_template :update
+      end
+    end
+
+    context "with params[:status] present && status == publish" do
+      before do  
+        xhr :put, :update, id: job.id, status: 'publish'
+      end
+
+      it "save the updates made on the object" do 
+        expect(Job.first.status).to eq('publish')
+      end
+
+      it "render's the hiring team page" do 
+        expect(response).to render_template :update
+      end
+    end
+
+    context "with params[:status] present && status == archive" do
+      before do  
+        xhr :put, :update, id: job.id, status: 'archive'
+      end
+
+      it "save the updates made on the object" do 
+        expect(Job.first.status).to eq('archive')
+      end
+
+      it "render's the hiring team page" do 
+        expect(response).to render_template :update
+      end
+    end
   end
-
-  # describe "POST publish job" do 
-  #   it_behaves_like "requires sign in" do
-  #     let(:action) {post :publish_job, job_id: 4}
-  #   end
-
-  #   it_behaves_like "user does not belong to company" do 
-  #     let(:action) {post :publish_job, job_id: 4}
-  #   end
-
-  #   it_behaves_like "company has been deactivated" do
-  #     let(:action) {post :publish_job, job_id: 4}
-  #   end
-
-  #   context "with less open jobs than paid for" do 
-  #     let(:company) {Fabricate(:company, subscription: 'basic', open_jobs: 1 )}
-  #     let(:alice) {Fabricate(:user, company: company)}
-  #     let(:job) {Fabricate(:job, status: 'draft', company: company)}
-    
-  #     before do 
-  #       set_current_user(alice)
-  #       set_current_company(company)
-  #       post :publish_job, job_id: job.id
-  #     end
-
-  #     it "sets the status of the job to open" do      
-  #       expect(Job.first.status).to eq('open')
-  #     end
-
-  #     it "increments a companies open_jobs by 1" do 
-  #       expect(Company.first.open_jobs).to eq(2)
-  #     end
-  #   end
-
-  #   context "with maximum number of open jobs" do 
-  #     let(:company) {Fabricate(:company, subscription: 'basic', open_jobs: 3 )}
-  #     let(:alice) {Fabricate(:user, company: company)}
-  #     let(:job) {Fabricate(:job, status: 'draft', company: company)}
-    
-  #     before do 
-  #       set_current_user(alice)
-  #       set_current_company(company)
-  #       post :publish_job, job_id: job.id
-  #     end
-
-  #     it "sets the flash message of the job to open" do
-  #       expect(flash[:danger]).to be_present
-  #     end
-
-  #     it "renders the edit template" do 
-  #       expect(response).to render_template :edit
-  #     end
-  #   end
-  # end
-
-  # describe "POST close job" do 
-  #   it_behaves_like "requires sign in" do
-  #     let(:action) {post :close_job, job_id: 4}
-  #   end
-
-  #   it_behaves_like "user does not belong to company" do 
-  #     let(:action) {post :close_job, job_id: 4}
-  #   end
-
-  #   it_behaves_like "company has been deactivated" do
-  #     let(:action) {post :close_job, job_id: 4}
-  #   end
-
-  #   let(:company) {Fabricate(:company, subscription: 'basic', open_jobs: 3 )}
-  #   let(:alice) {Fabricate(:user, company: company)}
-  #   let(:job) {Fabricate(:job, status: 'open', company: company)}
-  
-  #   before do 
-  #     set_current_user(alice)
-  #     set_current_company(company)
-  #     post :close_job, job_id: job.id
-  #   end
-
-  #   it "sets the status of the job to be closed3" do      
-  #     expect(Job.first.status).to eq('closed')
-  #   end
-
-  #   it "decreases a companies open_jobs by 1" do 
-  #     expect(Company.first.open_jobs).to eq(2)
-  #   end
-  # end
 end

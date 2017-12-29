@@ -3,8 +3,10 @@ class Attachment < ActiveRecord::Base
   
   mount_uploader :file, AttachmentUploader
 
-  before_create :get_meta_links, if: :is_link?
+
+  # before_create :get_meta_links, if: :is_link?
   # before_create :convert_pdf_to_image
+  before_destroy :clean_s3
   
   def get_meta_links
     page = MetaInspector.new(self.link)
@@ -19,6 +21,19 @@ class Attachment < ActiveRecord::Base
   #   pdf = Magick::ImageList.new(self.file)
   #   pdf.write("myimage.jpeg")
   # end
+
+  def clean_s3
+    file.remove!
+    file.thumb.remove! # if you have thumb version or any other version
+    file.large_image.remove!
+    file.medium_image.remove!
+    file.small_image.remove!
+    file.pdf_thumb.remove!
+    file.pdf_medium.remove!
+  rescue Excon::Errors::Error => error
+    puts "Something gone wrong"
+    false
+  end
 
   def is_link?
     link.present?

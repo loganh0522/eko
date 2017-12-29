@@ -53,27 +53,27 @@ describe JobSeeker::ProjectsController do
 
   describe 'POST create' do 
     let(:alice){Fabricate(:user, kind: 'job seeker')}
-    let(:experience) {Fabricate.attributes_for(:work_experience, user: alice)}
+    let(:project) {Fabricate.attributes_for(:project, user: alice)}
     
     before do 
       set_current_user(alice)
     end
 
     it_behaves_like "requires sign in" do
-      let(:action) {xhr :post, :create, work_experience: experience}
+      let(:action) {xhr :post, :create, project: project}
     end
 
     context "with valid inputs" do 
       before do 
-        xhr :post, :create, work_experience: experience
+        xhr :post, :create, project: project
       end
 
       it "should save the work experience" do 
-        expect(WorkExperience.count).to eq(1)
+        expect(Project.count).to eq(1)
       end
 
       it "associates the work experience with the current_user" do
-        expect(WorkExperience.first.user).to eq(alice)
+        expect(Project.first.user).to eq(alice)
       end
 
       it "redirects to the profile index action" do 
@@ -86,7 +86,7 @@ describe JobSeeker::ProjectsController do
       
       before do 
         set_current_user(alice)
-        xhr :post, :create, work_experience: {title: 'title'} 
+        xhr :post, :create, project: {title: 'title'} 
       end
 
       it "redirects to the profile index page" do 
@@ -101,20 +101,20 @@ describe JobSeeker::ProjectsController do
 
   describe "GET edit" do 
     let(:alice){Fabricate(:user, kind: 'job seeker')}
-    let(:experience){Fabricate(:work_experience, user: alice)}
+    let(:project){Fabricate(:project, user: alice)}
     
     it_behaves_like "requires sign in" do
-      let(:action) {xhr :get, :edit, id: experience.id}
+      let(:action) {xhr :get, :edit, id: project.id}
     end
     
     before do 
       set_current_user(alice)
       experience
-      xhr :get, :edit, id: experience.id
+      xhr :get, :edit, id: project.id
     end
 
-    it "sets @experience to the correct work_experience" do 
-      expect(assigns(:work_experience)).to eq(experience)
+    it "sets @project to the correct work_experience" do 
+      expect(assigns(:project)).to eq(project)
     end
     
     it "renders the edit template" do
@@ -124,21 +124,21 @@ describe JobSeeker::ProjectsController do
 
   describe "PUT update" do 
     let(:alice){Fabricate(:user, kind: 'job seeker')}
-    let(:experience){Fabricate(:work_experience, user: alice)}
+    let(:experience){Fabricate(:project, user: alice)}
 
     it_behaves_like "requires sign in" do
-      let(:action) {xhr :put, :update, id: experience.id}
+      let(:action) {xhr :put, :update, id: project.id}
     end
 
     context "with valid inputs" do 
       before do 
         set_current_user(alice)
         experience  
-        xhr :put, :update, id: experience.id, work_experience: {title: "Screened"}
+        xhr :put, :update, id: project.id, project: {title: "Screened"}
       end
 
       it "save the updates made on the object" do 
-        expect(WorkExperience.last.title).to eq("Screened")
+        expect(Project.last.title).to eq("Screened")
       end
 
       it "redirects to the profile index action" do 
@@ -146,13 +146,11 @@ describe JobSeeker::ProjectsController do
       end
     end
 
-    context "with invalid inputs" do 
-      let(:alice){Fabricate(:user, kind: 'job seeker')}
-      let(:experience){Fabricate(:work_experience, user: alice, title: "title")}
+     context "with INVALID inputs" do 
       before do 
         set_current_user(alice)
         experience  
-        xhr :put, :update, id: experience.id, work_experience: {title: nil}
+        xhr :put, :update, id: project.id, project: {title: nil}
       end
 
       it "does not update the work_experience" do 
@@ -170,21 +168,22 @@ describe JobSeeker::ProjectsController do
 
   describe "DELETE destroy" do 
     let(:alice){Fabricate(:user, kind: 'job seeker')}
-    let(:experience) {Fabricate(:work_experience, user: alice)}
-    let(:experience2) {Fabricate(:work_experience, user: alice)}
+    let(:project) {Fabricate(:project, user: alice)}
+    let(:project2) {Fabricate(:project, user: alice)}
+    
     it_behaves_like "requires sign in" do
       let(:action) {xhr :delete, :destroy, id: experience.id}
     end
     
     before do 
       set_current_user(alice)
-      experience
-      experience2
-      xhr :delete, :destroy, id: experience.id   
+      project
+      project2
+      xhr :delete, :destroy, id: project.id   
     end
 
     it "deletes the experience" do 
-      expect(WorkExperience.count).to eq(1)
+      expect(Project.count).to eq(1)
     end
   end
 end

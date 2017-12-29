@@ -1,5 +1,5 @@
-#scorecard-form
-  = form_for [:business, @job, @scorecard], remote: true do |f| 
+= form_for [:business, @job, @scorecard], remote: true do |f| 
+  #scorecard-form
     - if !@job.scorecard.present?
       = f.fields_for :scorecard_sections, ScorecardSection.new do |a|
         .scorecard-area 

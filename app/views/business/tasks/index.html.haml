@@ -9,7 +9,10 @@
         = render 'filters'
     .main-container
       #task-container
-        = render 'business/tasks/tasks'
+        / = render 'business/tasks/tasks'
+        = render 'business/tasks/table'
+      .pagination-container
+        = render 'business/tasks/pagination'
 
 .modal#basic-form-modal
   .modal-dialog

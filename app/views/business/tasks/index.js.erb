@@ -1,18 +1,22 @@
 <% if @taskable.class == Company %>
   $('#task-container').html('<%= j render "business/tasks/tasks" %>');
+  $('.pagination-container').html('<%= j render "business/tasks/pagination", tasks: @tasks %>')
 <% elsif @taskable.class == Candidate %>
   <% if params[:status] == 'complete' %>
     $(".display-applicant-details").html('<%= j render "business/tasks/candidate_tasks", tasks: @tasks %>');
     $('.change-containers-nav').find('.activated').removeClass('activated');
     $('.change-containers-nav').find('#completed-tasks').addClass('activated');
+    $('.pagination-container').html('<%= j render "business/tasks/pagination", tasks: @tasks %>')
   <% else %>
     $('.display-applicant-details').html('<%= j render "business/tasks/candidate_tasks", tasks: @tasks %>');
     $('.applicant-nav').find('.activated').removeClass('activated');
     $('.applicant-nav').find('#tasks').addClass('activated');
+    $('.pagination-container').html('<%= j render "business/tasks/pagination", tasks: @tasks %>')
   <% end %>
 <% else %> 
   $('#task-container').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
   $('.change-containers-nav').find('.activated').removeClass('activated');
   $('.change-containers-nav').find('#job-tasks').addClass('activated');
+  $('.pagination-container').html('<%= j render "business/tasks/pagination", tasks: @tasks %>')
 <% end %>
 

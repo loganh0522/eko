@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171218155923) do
+ActiveRecord::Schema.define(version: 20171228215519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -327,6 +327,16 @@ ActiveRecord::Schema.define(version: 20171218155923) do
     t.text "name"
   end
 
+  create_table "free_boards", force: :cascade do |t|
+    t.string   "logo"
+    t.text     "description"
+    t.string   "name"
+    t.string   "job_feed_name"
+    t.string   "website"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "functions", force: :cascade do |t|
     t.text "name"
   end
@@ -504,6 +514,7 @@ ActiveRecord::Schema.define(version: 20171218155923) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "juju_updated_at"
+    t.boolean  "nuevoo_premium"
   end
 
   create_table "job_functions", force: :cascade do |t|
@@ -609,23 +620,28 @@ ActiveRecord::Schema.define(version: 20171218155923) do
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.integer "cart_id"
-    t.integer "product_id"
-    t.integer "order_id"
-    t.integer "quantity"
-    t.decimal "total_price"
-    t.decimal "unit_price"
-    t.integer "premium_board_id"
+    t.integer  "cart_id"
+    t.integer  "product_id"
+    t.integer  "order_id"
+    t.integer  "quantity"
+    t.decimal  "total_price"
+    t.decimal  "unit_price"
+    t.integer  "premium_board_id"
+    t.integer  "posting_duration_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "company_id"
-    t.integer "job_id"
-    t.integer "user_id"
-    t.string  "status"
-    t.decimal "subtotal"
-    t.decimal "tax"
-    t.decimal "total"
+    t.integer  "company_id"
+    t.integer  "job_id"
+    t.integer  "user_id"
+    t.string   "status"
+    t.decimal  "subtotal"
+    t.decimal  "tax"
+    t.decimal  "total"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "outlook_tokens", force: :cascade do |t|

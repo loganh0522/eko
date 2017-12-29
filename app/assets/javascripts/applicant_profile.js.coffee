@@ -6,6 +6,7 @@ jQuery ->
     window.open $(this).attr('href')
     e.preventDefault()
     return
+  
   $('#main-container').on 'click', '.applicant-checkbox', (event) ->
     if $('.applicants').find('.applicant-checkbox :checked').size() > 0 
       $('.no-action-buttons').hide()
@@ -42,7 +43,7 @@ jQuery ->
 
   $('#main-container').on 'change', '#move-applicant-stages', (event) ->
     $.ajax
-      url : "/business/applications/change_stage"
+      url : "/business/applications/move_stages"
       type : "post"
       data:
         stage: $('#move-applicant-stages :selected').data('id')

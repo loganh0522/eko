@@ -22,4 +22,5 @@
     .col-md-12
       = f.text_area :description, rows: 5, class: "form-control", hide_label: true, placeholder: "Description"
   .row
+    = f.hidden_field :_destroy
     = link_to "Remove Experience", '#', class: "remove_fields btn border-button"

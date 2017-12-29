@@ -10,13 +10,15 @@ module ApplicationHelper
     link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", ""), :add_field => 'add_field'}, style: "display:#{name == "Add Answer" ? "none" : ""}" )
   end
 
-  def link_to_add_to_cart(name, f, association, params)   
+  def link_to_add_to_cart(name, f, association, params, duration)
+
     new_object = f.object.send(association).klass.new
     id = new_object.object_id
     board = PremiumBoard.find(params)
+    price = PostingDuration.find(duration)
     
     fields = f.fields_for(association, new_object, child_index: id) do |builder|
-      render(association.to_s.singularize + "_fields", f: builder, board: board)
+      render(association.to_s.singularize + "_fields", f: builder, board: board, price: price)
     end
 
     link_to(name, '#', class: "add_to_cart btn job-seeker-btn", data: {id: id, fields: fields.gsub("\n", ""), :board => board.name}, style: "display:#{name == "Add Answer" ? "none" : ""}" )

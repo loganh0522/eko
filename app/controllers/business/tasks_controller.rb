@@ -25,12 +25,12 @@ class Business::TasksController < ApplicationController
     if params[:job].present?
       @candidate = Candidate.find(params[:candidate_id]) 
       @job = Job.find(params[:job])
-      @tasks = @candidate.open_job_tasks(@job)
+      @tasks = @candidate.open_job_tasks(@job).paginate(page: params[:page], per_page: 10)
     elsif params[:candidate_id].present?
-      @candidate = Candidate.find(params[:candidate_id]) 
+      @candidate = Candidate.find(params[:candidate_id]) .paginate(page: params[:page], per_page: 10)
       @tasks = @candidate.open_tasks
     else 
-      @tasks = current_company.open_tasks
+      @tasks = current_company.open_tasks.paginate(page: params[:page], per_page: 10)
     end
 
     respond_to do |format|
@@ -59,7 +59,9 @@ class Business::TasksController < ApplicationController
   def edit 
     @taskable = @taskable.taskable
     @task = Task.find(params[:id])
-
+    @candidates = current_company.candidates.order(:created_at).limit(10)
+    @users = current_company.users.limit(10)
+    
     respond_to do |format| 
       format.js
     end

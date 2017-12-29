@@ -6,10 +6,6 @@ class Business::LogosController < ApplicationController
   before_filter :trial_over
   before_filter :company_deactivated?
   
-  def index
-
-  end
-
   def new 
     @logo = Logo.new
 

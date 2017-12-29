@@ -1,0 +1,13 @@
+= form_for @application, :url => create_multiple_business_applications_path, remote: true do |f|
+  .modal-body
+    .email-area
+      .to 
+        .title To:  
+        .recipients   
+      .stages-select
+        = f.collection_select(:job_id, current_company.open_jobs, :id, :title, label: "Move to Job", :include_blank => true)
+        = hidden_field_tag :applicant_ids
+  .modal-footer 
+    = f.submit "Add Note", class: "btn submit-button"
+    / .submit-button-deactivated Add Note
+    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

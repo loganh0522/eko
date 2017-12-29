@@ -1,0 +1,4 @@
+$('.multi-form').find('form').remove()
+$('.multi-form').find('.modal-title').html('<%= j "Add to Job" %>');
+$('.multi-form').find('.modal-header').after('<%= j render "business/applications/form_multiple" %>');
+$('.multi-form').modal("toggle");

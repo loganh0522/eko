@@ -1,24 +1,34 @@
 .application-actions
   = link_to 'Add Candidate', new_business_candidate_path(:job => @job), class: "btn border-button2", id: "add-applicant", remote: true
   .no-action-buttons
-    .btn.glyphicon.glyphicon-trash.inactive-button
-    .btn.inactive-button Send E-mail
-    .btn.inactive-button Add Note 
-    .btn.inactive-button Add Tag
-    .btn.inactive-button Create Task
-    .btn.inactive-button Interview Invitation
+    .inactive-button Send E-mail
+    .inactive-button Add Note 
+    .inactive-button Add Tag
+    .inactive-button Mass Actions
   .applicant-action-buttons
-    = link_to '#', id: "destroy_candidates", class: "move-applicants", :data => {:toggle => "modal", :target => "#destroy_candidatesModal"} do
-      .btn.active-application-button.glyphicon.glyphicon-trash
-  
     = link_to 'Send E-mail', new_multiple_business_messages_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true
     
     = link_to 'Add Note', new_multiple_business_comments_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true
 
     = link_to "Add Tag", new_business_tag_path, class: "btn active-application-button move-applicants", id: "addTags", remote: true
+    .dropdown
+      .dropdown-button.border-button
+        Mass Actions
+        %i.fa.fa-ellipsis-h.fa-lg
+      .dropdown-content#myDropdown
+        = link_to new_multiple_business_tasks_path, class: "move-applicants", id: "create_task", remote: true do
+          .action Create Task
 
-    = link_to "Create Task", new_multiple_business_tasks_path, class: "btn active-application-button move-applicants", id: "create_task", remote: true
+        = link_to new_business_interview_invitation_path, class: "move-applicants", id: "create_task", remote: true do 
+          .action Interview Invitation
 
-    = link_to "Interview Invitation", new_business_interview_invitation_path, class: "btn active-application-button move-applicants", id: "create_task", remote: true
+        = link_to new_multiple_business_applications_path, class: "move-applicants", id: "add_comment", remote: true do 
+          %i.fa.fa-pencil
+          .action Add to Job
+        
+        = link_to '#', id: "destroy_candidates", class: "move-applicants", :data => {:toggle => "modal", :target => "#destroy_candidatesModal"} do
+          %i.fa.fa-trash-o
+          .action Destroy
 
 
+      

@@ -19,5 +19,6 @@
     .col-md-12
       = f.text_area :description, rows: 4, class: "form-control", hide_label: true, placeholder: "Description"
   .row
+    = f.hidden_field :_destroy
     = link_to "Remove Education", '#', class: "remove_fields btn border-button"
 

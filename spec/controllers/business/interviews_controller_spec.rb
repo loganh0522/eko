@@ -6,8 +6,8 @@ describe Business::InterviewsController do
   let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
   let(:job) {Fabricate(:job, company: company)}
   let(:candidate) {Fabricate(:candidate, company: company)}
-  let(:interview) {Fabricate(:interview, company: company)}
-  let(:interview2) {Fabricate(:interview, company: company)}
+  let(:interview) {Fabricate(:interview, company: company, candidate: candidate)}
+  let(:interview2) {Fabricate(:interview, company: company, candidate: candidate, job_id: job.id)}
   
   before do  
     set_current_user(alice)
@@ -19,19 +19,19 @@ describe Business::InterviewsController do
     interview2
   end
 
-  # describe "GET job_interviews" do 
-  #   context "@job in params renders job.comments" do 
-  #     before do  
-  #       xhr :get, :job_interviews, job_id: job.id
-  #     end
+  describe "GET job_interviews" do 
+    context "@job in params renders job.comments" do 
+      before do  
+        xhr :get, :job_interviews, job_id: job.id
+      end
 
-  #     it "sets the @tasks to the current Job" do 
-  #       expect(job.open_tasks.count).to eq(2)
-  #       expect(job.tasks.first.title).to eq(job_task.title)
-  #       expect(assigns[:tasks]).to eq([job_task, application_task])
-  #     end
-  #   end
-  # end
+      it "sets the @interview to the current Job interviews" do 
+        expect(job.interviews.count).to eq(1)
+        expect(job.interviews.first.title).to eq(interview2.title)
+        expect(assigns[:interviews]).to eq([interview2])
+      end
+    end
+  end
 
   describe "GET index" do 
     it_behaves_like "requires sign in" do
@@ -54,7 +54,7 @@ describe Business::InterviewsController do
       get :index
     end
 
-    it "sets @tasks to the open tasks for current_company" do 
+    it "sets interviews to the interviews for current_company" do 
       expect(company.interviews.count).to eq(2)
     end
   end
@@ -73,7 +73,7 @@ describe Business::InterviewsController do
     end
 
     it_behaves_like "trial is over" do 
-      let(:action) {xhr :get, :index}
+      let(:action) {xhr :get, :new}
     end
 
     before do 
@@ -109,7 +109,7 @@ describe Business::InterviewsController do
 
     context "with VALID inputs" do 
       before do  
-        xhr :post, :create, interview: Fabricate.attributes_for(:interview, company: company)
+        xhr :post, :create, interview: Fabricate.attributes_for(:interview, company: company, candidate: candidate, user_ids: alice.id)
       end
       
       it "creates the task" do
@@ -120,6 +120,7 @@ describe Business::InterviewsController do
         expect(Interview.last.company).to eq(company)
         expect(company.interviews.count).to eq(3)
         expect(assigns[:interviews].count).to eq(3)
+        expect(Interview.last.candidate).to eq(candidate)
       end
 
       it "renders the new action" do 
@@ -129,7 +130,7 @@ describe Business::InterviewsController do
 
     context "with INVALID inputs" do 
       before do  
-        xhr :post, :create, interview: Fabricate.attributes_for(:interview, title: nil, company: company)
+        xhr :post, :create, interview: Fabricate.attributes_for(:interview, title: nil, company: company, user_ids: alice.id)
       end
       
       it "creates the task" do

@@ -15,13 +15,13 @@
               .title
                 %h4 Stage: 
               .stages-select
-                = select_tag "stages", options_for_select(@job.stages.collect{ |u| [u.name, u.id] } + ["Rejected"])
+                = select_tag "stage", options_for_select(@job.stages.collect{ |u| [u.name, u.id] } + ["Rejected"])
 
             = hidden_field_tag :applicant_ids
             = hidden_field_tag :job, @job.id
         .modal-footer
           = submit_tag "Move Stages", class: "btn submit-button"
-          .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+          .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
           
 
      

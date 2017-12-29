@@ -29,7 +29,6 @@ describe JobSeeker::EducationsController do
     end
   end
 
-
   describe "GET new" do 
     let(:alice){Fabricate(:user, kind: 'job seeker')}
     

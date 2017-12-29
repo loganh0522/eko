@@ -6,7 +6,6 @@ class Business::JobFeedsController < ApplicationController
   before_filter :trial_over
   before_filter :company_deactivated?
   before_filter :create_cart
-  include AuthHelper
 
   def index
     if current_company.customer.present?
@@ -35,7 +34,12 @@ class Business::JobFeedsController < ApplicationController
   end
 
   def premium
-
+    @job = Job.find(params[:job_id])
+    @job_feed = @job.job_feed
+    @job_feeds = PremiumBoard.all
+    @order_item = OrderItem.new
+    @order = Order.new
+    # @order_items = OrderItem.all
   end
 
   def update 
@@ -44,14 +48,6 @@ class Business::JobFeedsController < ApplicationController
     
     respond_to do |format| 
       @feed.update(feed_params)
-      format.js
-    end
-  end
-
-  def edit
-    @room = Room.find(params[:id])
-
-    respond_to do |format|
       format.js
     end
   end
@@ -70,6 +66,7 @@ class Business::JobFeedsController < ApplicationController
   end
 
   def feed_params
-    params.require(:job_feed).permit(:adzuna, :trovit, :ziprecruiter, :indeed, :jobinventory)
+    params.require(:job_feed).permit(:adzuna, :trovit, :ziprecruiter, 
+      :indeed, :jobinventory, :juju, :trovit, :jooble, :eluta)
   end
 end

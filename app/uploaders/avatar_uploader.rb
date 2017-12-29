@@ -9,17 +9,17 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   version :large_image do
     process :crop
-    resize_to_fill(150, 150)
+    resize_to_fit(150, 150)
   end
   
   version :medium_image do
     process :crop
-    resize_to_fill(100, 100)
+    resize_to_fit(100, 100)
   end
 
   version :small_image do
     process :crop
-    resize_to_fill(50, 50)
+    resize_to_fit(50, 50)
   end
 
 

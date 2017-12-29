@@ -1,6 +1,6 @@
 class PremiumBoard < ActiveRecord::Base
   has_many :order_items, :dependent => :destroy
-  has_many :posting_durations
+  has_many :posting_durations, :dependent => :destroy
 
   mount_uploader :logo, PremiumBoardLogoUploader
 

@@ -22,7 +22,7 @@
             %td
               .name= link_to "#{client.company_name}", business_client_client_contacts_path(client.id)
             %td
-              .date-applied= client.open_jobs
+              .date-applied= client.open_jobs.count
             %td
               .date-applied= client.website
             %td
