@@ -1,19 +1,14 @@
 .application-actions
   = link_to 'Add Candidate', new_business_candidate_path(:job => @job), class: "btn border-button2", id: "add-applicant", remote: true
   .no-action-buttons
-    .inactive-button Send E-mail
-    .inactive-button Add Note 
-    .inactive-button Add Tag
-    .inactive-button Mass Actions
+    .btn.inactive-button More Actions
+    .btn.inactive-button Send E-mail
+    .btn.inactive-button Add Note 
+    .btn.inactive-button Add Tag
   .applicant-action-buttons
-    = link_to 'Send E-mail', new_multiple_business_messages_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true
-    
-    = link_to 'Add Note', new_multiple_business_comments_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true
-
-    = link_to "Add Tag", new_business_tag_path, class: "btn active-application-button move-applicants", id: "addTags", remote: true
     .dropdown
-      .dropdown-button.border-button
-        Mass Actions
+      .dropdown-button.active-application-button
+        More Actions
         %i.fa.fa-ellipsis-h.fa-lg
       .dropdown-content#myDropdown
         = link_to new_multiple_business_tasks_path, class: "move-applicants", id: "create_task", remote: true do
@@ -29,6 +24,12 @@
         = link_to '#', id: "destroy_candidates", class: "move-applicants", :data => {:toggle => "modal", :target => "#destroy_candidatesModal"} do
           %i.fa.fa-trash-o
           .action Destroy
+    = link_to 'Send E-mail', new_multiple_business_messages_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true
+    
+    = link_to 'Add Note', new_multiple_business_comments_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true
+
+    = link_to "Add Tag", new_business_tag_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true
+    
 
 
       

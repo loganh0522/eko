@@ -33,6 +33,8 @@ module ApplicationHelper
     end
   end
 
+
+
   # def social_links(user)
   #   user.social_links.each do |link|
   #     link_to ("#", link.url, class: 'fa fa-linkedin fa-stack-1x', :target => "_blank")

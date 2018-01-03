@@ -4,39 +4,44 @@ class Company < ActiveRecord::Base
   # has_many :users, through: :company_users
   
   has_many :users
-  has_many :invitations
-  has_many :rejection_reasons
-  has_many :applications
+  has_many :invitations, :dependent => :destroy
+  has_many :rejection_reasons, :dependent => :destroy
+  has_many :applications, :dependent => :destroy
   has_many :applicants, through: :applications, class_name: "User", foreign_key: :user_id
-  has_many :candidates
-  has_many :tasks
-  has_many :jobs
-  has_many :interviews
-  has_many :interview_invitations
-  has_many :rooms
-  has_many :conversations  
-  has_one :customer
-  has_one :job_board
-  has_many :clients
-  has_many :orders
-  has_many :payments
-  has_many :activities, -> {order("created_at DESC")}
-  has_many :tags
-  has_many :email_templates
-  has_many :default_stages
-  has_one :application_email
-  has_many :tasks, as: :taskable, :dependent => :destroy
-  has_many :tasks
-  has_many :subsidiaries
-  has_many :locations
-  has_one :background_image
-  has_one :logo
-  validates_presence_of :name, :website
+  has_many :candidates, :dependent => :destroy
+  has_many :jobs, :dependent => :destroy
+  has_many :interviews, :dependent => :destroy
+  has_many :interview_invitations, :dependent => :destroy
+  has_many :rooms, :dependent => :destroy
+  has_many :conversations, :dependent => :destroy
+  has_one :customer, :dependent => :destroy
+  has_one :job_board, :dependent => :destroy
+  has_many :clients, :dependent => :destroy
+  has_many :orders, :dependent => :destroy
+  has_many :payments, :dependent => :destroy
+  has_many :activities, -> {order("created_at DESC")}, :dependent => :destroy
+  has_many :tags, :dependent => :destroy
+  has_many :email_templates, :dependent => :destroy
+  has_many :default_stages, :dependent => :destroy
+  has_one :application_email, :dependent => :destroy
+  has_many :tasks, :dependent => :destroy
+
+  has_many :subsidiaries, :dependent => :destroy
+  has_many :locations, :dependent => :destroy
+  has_one :background_image, :dependent => :destroy
+  has_one :logo, :dependent => :destroy
+  validates_presence_of :name, :website, :size, :location
+
+  accepts_nested_attributes_for :users, 
+    allow_destroy: true
+
 
   liquid_methods :name
 
-  after_create :create_rejection_reasons, :create_default_stages, :create_application_email
+  after_create :create_rejection_reasons, :create_default_stages, :create_application_email, :create_career_portal
   
+  
+
   def deactivate!
     update_column(:active, false)
   end
@@ -63,6 +68,17 @@ class Company < ActiveRecord::Base
     reasons.each do |reason| 
       RejectionReason.create(body: reason, company_id: self.id)
     end
+  end
+
+  def create_career_portal
+    @subdomain = self.name.parameterize("_")
+    JobBoard.create(company_id: self.id, subdomain: @subdomain)
+    create_job_board_header
+  end  
+
+  def create_job_board_header
+    JobBoardHeader.create(header: "Come Work With Our Team",
+      subheader: "We are hiring great people to help grow our company", job_board_id: self.job_board.id)
   end
 
   def create_application_email

@@ -1,0 +1,4 @@
+$('#mediumModal').find('form').remove()
+$('#mediumModal').find('.new-title').html('<%= j "Edit Task" %>');
+$('#mediumModal').find('.new-modal-header').after('<%= j render "business/tasks/form" %>');
+$('#mediumModal').show();

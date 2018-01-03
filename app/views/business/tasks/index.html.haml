@@ -1,7 +1,7 @@
 .page-header
   %h2 Tasks
   .actions
-    = link_to "Create Task", new_business_task_path,  data: {:turbolinks => "false"}, remote: true, class: "btn border-button", id: "client-action"
+    = render 'business/tasks/mass_actions'
 #main-container
   #padding
     .side-container
@@ -9,14 +9,7 @@
         = render 'filters'
     .main-container
       #task-container
-        / = render 'business/tasks/tasks'
         = render 'business/tasks/table'
       .pagination-container
         = render 'business/tasks/pagination'
 
-.modal#basic-form-modal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title

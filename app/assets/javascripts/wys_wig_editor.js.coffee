@@ -1,4 +1,4 @@
-jQuery -> 
+jQuery ->
   buttonAction = "x-attach"
   buttonSelector = "button[data-trix-action='#{buttonAction}']"
   buttonHTML = """<button type="button" class="attach" data-trix-action="#{buttonAction}">Attach Files</button>"""

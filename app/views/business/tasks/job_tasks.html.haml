@@ -1,4 +1,5 @@
 = render 'business/applications/top_container'
+
 #main-container
   #padding
     .side-container
@@ -6,13 +7,16 @@
         = render 'business/tasks/job_filters'
     .main-container
       .actions
-        = link_to "Create Task", new_business_job_task_path(@job),  data: {:turbolinks => "false"}, remote: true, class: "btn border-button"
-      #task-container
-      = render 'business/tasks/tasks'
+        .application-actions
+          = link_to "Create Task", new_business_job_task_path(@job),  data: {:turbolinks => "false"}, remote: true, class: "btn border-button"
 
-.modal#basic-form-modal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title
+          .toggle-actions 
+            = link_to business_tasks_path(view: "list"), remote: true do
+              .btn.border-button.toggle-show#list List
+            = link_to business_tasks_path(view: "table"), remote: true do 
+              .btn.border-button.toggle-show#table.toggle-showing Table 
+      #task-container
+        = render 'business/tasks/table'
+      .pagination-container
+        = render 'business/tasks/pagination'
+

@@ -1,0 +1,20 @@
+%tr{:id => "task_#{task.id}"}
+  %td
+    .applicant-checkbox{:data => {:id => task.id}}
+      = check_box_tag "task_id[]", task.id, false, class: 'checkbox'
+  %td
+    #completed
+      = link_to completed_business_tasks_path(id: task.id), method: :post, remote: true do 
+        %i.fa.fa-check
+  %td.names
+    = link_to "#{task.title}", business_task_path(task.id), remote: true
+  %td
+    = task.kind
+  %td
+    - task.users.each do |user|
+      .tag= user.full_name
+  %td
+    = task.due_date
+  %td
+    = "#{time_ago_in_words(task.created_at)} ago"
+

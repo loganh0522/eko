@@ -9,5 +9,5 @@
       .search-area-content
         %i.fa.fa-search.fa-stack-2x
         = text_field_tag "", "", :placeholder => 'Search Candidates', id: "candidates", autocomplete: "off", class: "autocompleteCustom"
-      .users#add-single
+      .auto-candidates#add-single
         = render "business/candidates/candidates_auto"

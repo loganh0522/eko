@@ -1,12 +1,11 @@
 jQuery ->
   
-  
   $('#embedURL').gdocsViewer({width :'400',height : '500'})
   $('a[data-popup]').on 'click', (e) ->
     window.open $(this).attr('href')
     e.preventDefault()
     return
-  
+
   $('#main-container').on 'click', '.applicant-checkbox', (event) ->
     if $('.applicants').find('.applicant-checkbox :checked').size() > 0 
       $('.no-action-buttons').hide()
@@ -15,6 +14,18 @@ jQuery ->
       $('.applicant-action-buttons').hide()
       $('.no-action-buttons').show()
     return
+  
+  $('#main-container').on 'click', '#Select_All', (event) ->
+    if $('#select_all :checked').size() > 0
+      $('.checkbox').prop("checked", true)
+      $('.no-action-buttons').hide()
+      $('.applicant-action-buttons').show()
+    else if $('#select_all :checked').size() == 0
+      $('.checkbox').prop("checked", false)
+      $('.applicant-action-buttons').hide()
+      $('.no-action-buttons').show()
+    return
+
   $(document).ajaxComplete ->
     $('#dueDate').datepicker
       dateFormat: 'yy-mm-dd'
@@ -22,16 +33,7 @@ jQuery ->
     $('#timepicker2').timepicker()
 
 
-  $('#main-container').on 'click', '#Select_All', (event) ->
-    if $('.applicants').find('#select_all :checked').size() > 0
-      $('.applicants').find('.applicant-checkbox').find('#applicant_ids_').prop("checked", true)
-      $('.no-action-buttons').hide()
-      $('.applicant-action-buttons').show()
-    else if $('.applicants').find('#select_all :checked').size() == 0
-      $('.applicants').find('.applicant-checkbox').find('#applicant_ids_').prop("checked", false)
-      $('.applicant-action-buttons').hide()
-      $('.no-action-buttons').show()
-    return
+  
 
   $(".modal").on "shown.bs.modal", ->  
     if $('.modal-backdrop').length == 2
@@ -51,24 +53,6 @@ jQuery ->
 
   
 #################### Add Applicants To Modal On Action Click #############################
-  
-  $('.multi-form').on 'shown.bs.modal', ->
-    checkbox = $('.applicant-checkbox')
-    $(this).find('#applicant_ids').val('')
-    applicant_ids = []
-    applicants = []
-    applicant_names = []  
-    
-    for n in checkbox   
-      if $(n).find('input').is(':checked') == true     
-        applicant = []
-        applicant_ids.push($(n).data('id')) unless applicant_ids.includes($(n).data('id'))    
-        applicant.push($(n).data('id')) unless applicant.includes($(n).data('id'))    
-        applicant.push($(n).parent().parent().find('.name').data('id')) unless applicant.includes($(n).parent().parent().find('.name').data('id')) 
-        applicants.push(applicant)
-    $(this).find('#applicant_ids').val(applicant_ids)
-    for n in applicants
-      $(this).find('.recipients').append('<div id="tag" data-id=' + n[0] + '> <div class="tag-name">' + n[1] + '</div> <div class="remove-recipient"> &times </div> </div>') 
 
   $('#destroy_candidatesModal').on 'shown.bs.modal', ->
     checkbox = $('.applicant-checkbox')
@@ -87,29 +71,6 @@ jQuery ->
     $(this).find('#applicant_ids').val(applicant_ids)
     for n in applicants
       $(this).find('.recipients').append('<div id="tag" data-id=' + n[0] + '> <div class="tag-name">' + n[1] + '</div> <div class="remove-recipient"> &times </div> </div>') 
-
-
-  $('#main-container').on 'click', '.move-applicants', (event) ->
-    modalType = $(this).attr('id')
-    checkbox = $('.applicant-checkbox')
-    $('#' + modalType + 'Modal').find('#applicant_ids').val('')
-    applicant_ids = []
-    applicants = []
-    applicant_names = []  
-    
-    for n in checkbox   
-      if $(n).find('input').is(':checked') == true     
-        applicant = []
-        applicant_ids.push($(n).data('id')) unless applicant_ids.includes($(n).data('id'))
-        applicant.push($(n).data('id')) unless applicant.includes($(n).data('id'))
-        
-        applicant.push($(n).parent().parent().find('.name').data('id')) unless applicant.includes($(n).parent().parent().find('.name').data('id'))
-        applicants.push(applicant)
-
-    $('#' + modalType + 'Modal').find('#applicant_ids').val(applicant_ids)
-
-    for n in applicants
-      $('#' + modalType + 'Modal').find('.recipients').append('<div id="tag" data-id=' + n[0] + '> <div class="tag-name">' + n[1] + '</div> <div class="remove-recipient"> &times </div> </div>') 
 
   $('#main-container').on 'click', '.remove-recipient', (event) -> 
     $('.modal').find('#applicant_ids').val('')
@@ -159,30 +120,6 @@ jQuery ->
       types: ['(address)']
     })
  
-
-
-################## Sort Stages ####################
-
-  $('#stages').sortable
-    axis: 'y'
-    cursor: 'move'
-    update: ->
-      $.post($(this).data('update-url'), $(this).sortable('serialize'))  
-  $("#stages").disableSelection()
-
-  $('#default-stages').sortable
-    axis: 'y'
-    cursor: 'move'
-    update: ->
-      $.post($(this).data('update-url'), $(this).sortable('serialize'))  
-  $("#default-stages").disableSelection()
-
-  $('#questions').sortable
-    axis: 'y'
-    cursor: 'move'
-    update: ->
-      $.post($(this).data('update-url'), $(this).sortable('serialize'))
-  $("#stages").disableSelection()
 
 ################# CloseForm ######################
   
@@ -251,9 +188,6 @@ jQuery ->
     else
       $('#work_experience_end_month').show()
       $('#work_experience_end_year').show()
-
-
-
 
 # Job Board Layout Modal 
   

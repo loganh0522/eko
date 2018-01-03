@@ -1,4 +1,4 @@
-.activity{:id => activity.action, :class => "#{activity.trackable_type} job_#{activity.job_id}"}    
+.activity{:id => activity.action, :class => "#{activity.trackable_type}"}    
   .glyphicon.glyphicon-list
   .activity-body
     .activity-body-header
@@ -10,14 +10,21 @@
             %img(src="/tmp/little-man.png") 
         .content 
           - if activity.trackable.taskable_type == "Candidate"
-            = "#{activity.user.first_name} #{activity.user.last_name} created the task #{activity.trackable.kind} on #{activity.trackable.taskable.full_name}" 
+            = "#{activity.user.first_name} #{activity.user.last_name} created the task #{activity.trackable.kind} for #{activity.trackable.taskable.full_name}" 
           - if activity.trackable.taskable_type == "Job"
-            = "#{activity.user.first_name} #{activity.user.last_name} created the task #{activity.trackable.kind} on #{activity.trackable.taskable.title}" 
+            = "#{activity.user.first_name} #{activity.user.last_name} created the task #{activity.trackable.kind} for #{activity.trackable.taskable.title}" 
+          - if  activity.trackable.taskable_type == nil
+            = "#{activity.user.first_name} #{activity.user.last_name} created the task #{activity.trackable.kind}" 
           %br
           .time= "#{time_ago_in_words(activity.created_at)} ago" 
     .task-body
-      = link_to completed_business_tasks_path(id: "#{activity.trackable.id}"), method: :post, remote: true do 
-        .glyphicon.glyphicon-ok 
+      - if activity.trackable.status == "complete"
+        #completed
+          = link_to completed_business_tasks_path(id: activity.trackable.id), method: :post, remote: true do 
+            .glyphicon.glyphicon-ok
+      - else
+        = link_to completed_business_tasks_path(id: activity.trackable.id), method: :post, remote: true do 
+          .glyphicon.glyphicon-ok 
       .details
         .title= "#{activity.trackable.title}"
         - if activity.trackable.due_date.present?

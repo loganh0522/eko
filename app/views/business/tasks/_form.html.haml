@@ -63,8 +63,8 @@
     .comment-area-footer
       = f.submit @task.new_record? ? "+ Create Task" : "Update Task", class: "btn submit-button"
       - if @taskable.class == Candidate || !@task.new_record?
-        .btn.border-button#remove_form Cancel
+        .btn.border-button#remove_form.close-modal Cancel
       - else
-        .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+        .btn.border-button.close-modal Cancel
 
 

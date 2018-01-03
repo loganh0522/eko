@@ -29,6 +29,7 @@
 #task-container
   background: none
   box-shadow: none
+  clear: both
   .btn.border-button2
     float: right
     margin-bottom: 10px  
@@ -106,6 +107,34 @@
 
 
 .application-actions
+  .toggle-actions
+    overflow: hidden
+    float: right
+    margin-right: 10px
+    .btn 
+      height: 30px
+    .border-button:last-child 
+      border-radius: 2px 0 0 2px
+      margin-right: 0
+    .border-button:first-child 
+      border-radius: 0 2px 2px 0
+    #list
+      border-left: none
+    .toggle-showing
+      background: rgba(115, 163, 198, 0.3)
+    .border-button
+      padding: 5px 15px
+      margin-top: 5px
+      border: 1px solid #73a3c6
+      color: #73a3c6
+      &:hover
+        background: rgba(115, 163, 198, 0.1)
+
+  
+  .dropdown
+    float: right
+    .fa-ellipsis-h
+      color: #fff
   .border-button
     float: right
     margin-right: 10px
@@ -138,8 +167,6 @@
     float: right
     height: 35px
     padding: 8px 15px 10px 15px
-
-
 
 .pagination-container
   width: 100%
@@ -176,7 +203,6 @@
         background: #2e6ab1 + 60
         padding: 0.1em 0.25em
 
- 
 .applicants 
   border-radius: 1px
   background: #ffffff
@@ -192,31 +218,6 @@
     margin: 15px 15px 10px 0
     overflow: hidden
     padding: 0px 15px 15px 15px
-    .border-button
-      float: right
-      width: 100px
-      height: auto
-      margin-left: 10px
-      background: rgba(0,0,0,0.05)
-      color: rgba(0,0,0,0.7)
-      padding: 5px 0
-      border: none
-      border-radius: 2px
-      font-weight: 300
-    .applicant-action-buttons
-      display: none
-    
-    .active-application-button
-      float: right
-      width: 100px
-      height: auto
-      margin-left: 10px
-      background: #EF7B2B
-      color: #ffffff
-      padding: 5px 0
-      border: none
-      border-radius: 2px
-      font-weight: 300
     #select_all
       float: left
       width: 100px
@@ -237,7 +238,7 @@
           checkbox
             margin: 0 0 0 10px
     .spinner
-      display: none
+      display: none 
     tbody
       background: #ffffff
       tr

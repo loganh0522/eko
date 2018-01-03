@@ -31,6 +31,7 @@
 body 
   -moz-osx-font-smoothing: grayscale
   -webkit-font-smoothing: antialiased
+  margin: 0 0
   background-color: #f7f8f9 
   font-family: Open Sans, sans-serif, Helvetica, Arial, sans-serif
   font-weight: 500
@@ -185,11 +186,11 @@ header
 
 .page-header
   height: 70px
-  margin: 60px 0 0 0
   width: 100%
+  margin: 0px
+  padding: 20px 3% 0 3%
   background: #ffffff
   border-bottom: 1px solid #ddd
-  padding: 22px 3% 0 3%
   h2
     float: left
     margin: 0 0
@@ -305,6 +306,7 @@ a.button
   color: white
 label
   color: rgba(0,0,0,0.7)
+
 .border-button
   display: block
   max-height: 40px
@@ -374,6 +376,10 @@ a:active, a:focus
 a.button
   text-decoration: none
   color: white
+
+  
+
+
 
 .white-border-button
   display: block
@@ -569,9 +575,10 @@ textarea
   position: relative
   display: inline-block
   .dropdown-button 
-    color: rgba(0,0,0, 0.3)
     &:hover    
       cursor: pointer
+  i
+    color: rgba(0,0,0, 0.3)
   .dropdown-content
     background: #ffffff
     position: absolute
@@ -594,4 +601,5 @@ textarea
         margin: 10px 10px
       &:hover
         background: rgba(239,123,43, 0.3)
+        text-decoraction: none
         cursor: pointer

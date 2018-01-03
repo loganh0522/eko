@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
         redirect_to admin_root_path
       end
     else 
-      flash[:error] = "Either your Username or Password is incorrect."
+      flash[:danger] = "Either your Username or Password is incorrect."
       redirect_to :back
     end
   end

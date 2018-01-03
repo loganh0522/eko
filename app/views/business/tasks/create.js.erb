@@ -3,6 +3,7 @@
     $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
     $('#<%= error[0] %>_Block').addClass('has-error');
   <% end %>
+
 <% elsif @taskable.class == Candidate %> 
   $('.applicant-nav').find('.activated').removeClass('activated');
   $('.applicant-nav').find('#tasks').addClass('activated');
@@ -10,11 +11,19 @@
   $('.active-button').removeClass('active-button');
   $(".display-applicant-details").find(".tasks").html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
 <% elsif @taskable.class == Job %> 
-  $('.tasks').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
-  $('#basic-form-modal').modal("toggle");
+  $('.tasks').html('<%= j render "business/tasks/table", tasks: @tasks %>');
+  $('#mediumModal').find('form').remove();
+  $('#mediumModal').hide();
 <% else %> 
-  $('#task-container').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
-  $('#basic-form-modal').modal("toggle");
+  $('#mediumModal').find('form').remove();
+  $('#mediumModal').hide();
+
+  if ($('.table1').is(":visible")) {
+    $('#task-container').html('<%= j render "business/tasks/table", tasks: @tasks %>');
+    $('.pagination-container').html('<%= j render "business/tasks/pagination", tasks: @tasks %>');
+  } else {
+    $('#task-container').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
+  }
 <% end %>
 
 

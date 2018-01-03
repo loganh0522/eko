@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)     
     if @user.save 
-      EmailSignature.create(user_id: @user.id, signature: "#{@user.first_name} #{@user.last_name}")      
+          
       if params[:invitation_token].present?
         handle_invitation
       else

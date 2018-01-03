@@ -1,6 +1,9 @@
 = form_for [:business, @candidate, @application], html: {remote: true} do |f|
   .modal-body 
     .email-area
+      .to
+        .title
+        .recipients
       .choose-stage
         .title
           %h4 Move to Job: 

@@ -1,4 +1,4 @@
-jQuery -> 
+jQuery ->
   $('#calendar').fullCalendar({
     header: 
       right: 'month, agendaWeek',

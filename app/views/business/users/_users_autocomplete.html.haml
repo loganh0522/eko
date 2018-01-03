@@ -3,7 +3,6 @@
     .show-hidden-search-box
       .add-button-search
         .glyphicon.glyphicon-plus
-
       #multiple-users
         .user-tag
           .name= current_user.full_name
@@ -12,5 +11,5 @@
       .search-area-content
         %i.fa.fa-search.fa-stack-2x
         = text_field_tag "", "", :placeholder => 'Type a users name to assign', id: "users", autocomplete: "off", class: "autocompleteCustom"
-      .users#add-multiple
+      .auto-users#add-multiple
         = render "business/users/users_auto"

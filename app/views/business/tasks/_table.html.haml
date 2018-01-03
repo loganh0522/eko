@@ -1,37 +1,34 @@
-.applicants
-  .applicant-table-body
-    %table.table
-      %thead
-        %tr
-          %th(width="1%")
-            #select_all= check_box_tag 'Select All', class: 'select_all_applicants'
-          %th(width="10%")
-          %th(width="20%") Title 
-          %th(width="20%") Kind
-          %th(width="20%") Assigned To
-          %th(width="15%") Task For
-          %th(width="14%") Due Date
-        %tbody
-          .spinner
-          .all_applicants_data
-            - @tasks.each do |task|
-              %tr
-                %td
-                  .applicant-checkbox{:data => {:id => task.id}}
-                    = check_box_tag "task_id[]", task.id
-                %td
-                  #completed
-                    = link_to completed_business_tasks_path(id: task.id), method: :post, remote: true do 
-                      .glyphicon.glyphicon-ok
-                %td.names
-                  = task.title 
-                %td
-                  = task.kind
-                %td
-                  - task.users.each do |user|
-                    .tag= user.full_name
-                %td
-                  = "#{time_ago_in_words(task.created_at)} ago"
-                %td
-                  = task.due_date
+.table1
+  %table
+    %thead
+      %tr
+        %th(width="1%")
+          #select_all= check_box_tag 'Select All', class: 'select_all_applicants'
+        %th(width="10%")
+        %th(width="25%") Title 
+        %th(width="16%") Kind
+        %th(width="16%") Assigned To
+        %th(width="16%") Due Date
+        %th(width="16%") Created 
+      %tbody
+        - @tasks.each do |task|
+          %tr{:id => "task_#{task.id}"}
+            %td
+              .applicant-checkbox{:data => {:id => task.id}}
+                = check_box_tag "task_id[]", task.id, false, class: 'checkbox'
+            %td
+              #completed
+                = link_to completed_business_tasks_path(id: task.id), method: :post, remote: true do 
+                  %i.fa.fa-check
+            %td.names
+              = link_to "#{task.title}", business_task_path(task.id), remote: true
+            %td
+              = task.kind
+            %td
+              - task.users.each do |user|
+                .tag= user.full_name
+            %td
+              = task.due_date
+            %td
+              = "#{time_ago_in_words(task.created_at)} ago"
 

@@ -1,11 +1,13 @@
 class User < ActiveRecord::Base
-  validates_presence_of :first_name, :last_name, :email, :password, :phone, :on => [ :create ]
+  validates_presence_of :first_name, :last_name, :email, :password, :on => [ :create ]
   validates_presence_of :first_name, :last_name, :email, :on => [ :update ]
   validates_uniqueness_of :email, :on => [ :create, :update ]
   validates_presence_of :password, :confirmation, :on => [:update_password]
 
   before_create :downcase_email, :set_full_name
   after_save :set_full_name
+
+  after_create :create_email_signature, if: :business_user
 
   liquid_methods :first_name, :last_name, :full_name
   
@@ -74,13 +76,8 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :social_links, 
     allow_destroy: true
 
-
-  def organize_work_experiences
-    self.work_experiences.sort_by{|work| [work.start_year, work.end_year] }.reverse
-  end
-
-  def current_position
-    self.work_experiences.where(current_position: 1).first
+  def business_user
+    self.kind == 'business'
   end
 
   # def convert_location
@@ -110,10 +107,6 @@ class User < ActiveRecord::Base
     )
   end
 
-  def all_tasks
-    self.tasks
-  end
-
   def access_token
     if self.outlook_token.present?
       access_token = self.outlook_token.access_token
@@ -123,14 +116,10 @@ class User < ActiveRecord::Base
     return access_token
   end
   
-  def open_tasks
-    self.tasks.where(status: 'active')
+  def create_email_signature
+    EmailSignature.create(user_id: self.id, signature: "#{self.first_name} #{self.last_name}")  
   end
 
-  def complete_tasks
-    self.tasks.where(status: 'complete')
-  end
-  
   def role_symbols
     if role == "Admin" 
       [:admin] 
@@ -139,16 +128,6 @@ class User < ActiveRecord::Base
     elsif role == "Recruiter"
       [:recruiter] 
     end
-  end
-
-  def as_indexed_json(options={})
-    as_json(
-      only: [:first_name, :last_name, :tag_line],
-      include: {
-        work_experiences: {only: [:title, :description, :company_name]}, 
-        applications: {only: [:created_at, :user_id, :job_id]}        
-        }        
-      )
   end
 
   def avatar_url

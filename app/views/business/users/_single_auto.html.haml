@@ -9,5 +9,5 @@
       .search-area-content
         %i.fa.fa-search.fa-stack-2x
         = text_field_tag "", "", :placeholder => 'Type a users name to assign', id: "users", autocomplete: "off", class: "autocompleteCustom"
-      .users#add-single
+      .auto-users#add-single
         = render "business/users/users_auto"

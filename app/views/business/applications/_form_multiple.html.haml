@@ -5,9 +5,9 @@
         .title To:  
         .recipients   
       .stages-select
+        = f.label :job_id, "Add To Job"
         = f.collection_select(:job_id, current_company.open_jobs, :id, :title, label: "Move to Job", :include_blank => true)
         = hidden_field_tag :applicant_ids
   .modal-footer 
-    = f.submit "Add Note", class: "btn submit-button"
-    / .submit-button-deactivated Add Note
-    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+    = f.submit "Add To Job", class: "btn submit-button"
+    .btn.border-button.close-modal Cancel

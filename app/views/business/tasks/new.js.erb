@@ -3,8 +3,8 @@
   $('.active-button').removeClass('active-button');
   $('#add-task').addClass('active-button');
 <% else %>
-  $('#basic-form-modal').find('form').remove()
-  $('#basic-form-modal').find('.modal-title').html('<%= j "Add Task" %>');
-  $('#basic-form-modal').find('.modal-header').after('<%= j render "business/tasks/form" %>');
-  $('#basic-form-modal').modal('toggle');
+  $('#mediumModal').find('form').remove()
+  $('#mediumModal').find('.new-title').html('<%= j "Add Task" %>');
+  $('#mediumModal').find('.new-modal-header').after('<%= j render "business/tasks/form" %>');
+  $('#mediumModal').show();
 <% end %>

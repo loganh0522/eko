@@ -84,6 +84,35 @@
         margin: 0px 0 0 10px
         .title
           font-weight: 600
+      #completed 
+        .glyphicon
+          float: left
+          width: 35px
+          height: 35px
+          margin-right: 5px
+          border: 1px solid green
+          border-radius: 50%
+          padding: 9px
+          background-color: rgba(0, 255, 0, 0.1)
+          color: green
+      .details
+        float: left
+        margin: 0px 0 0 10px
+        .title
+          font-weight: 600
+      .glyphicon
+        float: left
+        width: 35px
+        height: 35px
+        margin-right: 5px
+        border: 1px solid (rgba(0,0,0,0.4))
+        color: rgba(0,0,0,0.4)
+        border-radius: 50%
+        padding: 9px
+        &:hover
+          border-color: green
+          color: green
+          background-color: rgba(0, 255, 0, 0.1)
       .glyphicon-ok
         float: left
         width: 35px
@@ -202,22 +231,23 @@
     position: relative 
     .task-header
       font-size: 14px
-      overflow: hidden
-      padding: 10px 10px
-      padding-bottom: 10px
       border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-      .circle-img
-        margin-right: 10px
-      .content
-        float: left
-        .time
-          color: rgba(0,0,0,0.3)
-          font-size: 11px
-      .actions
-        float: right
-        a
-          color: #EF7B2B
+      .header-content
+        padding: 10px 10px
+        height: 50px
+        .circle-img
+          margin-right: 10px
+          float: left
+        .content
+          float: left
+          .time
+            color: rgba(0,0,0,0.3)
+            clear: both
+            font-size: 11px
+        .dropdown
+          float: right
     .body
+      clear: both
       overflow: hidden
       padding: 10px 10px
       #completed 

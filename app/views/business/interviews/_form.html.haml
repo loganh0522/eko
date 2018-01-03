@@ -32,10 +32,10 @@
           = f.text_area :notes, placeholder: "Add additional details for the candidate(ex. floor number)"
     .column-4
       .form-row-no-border
-        = f.label :candidate, "Add Team Members"
-        = render 'business/users/users_autocomplete'
-        = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
-        
+        .contain-100 
+          = f.label :candidate, "Add Team Members"
+          = render 'business/users/users_autocomplete'
+          = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
       .form-row-no-border
         = f.label :candidate, "Add Candidate"
         #candidate_id_Block

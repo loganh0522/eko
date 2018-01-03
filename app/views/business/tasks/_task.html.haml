@@ -1,14 +1,23 @@
 .task{:id => "task_#{task.id}"}
   .task-header
-    .circle-img
-      %img(src="/tmp/little-man.png") 
-    .content 
-      = "#{task.user.first_name} #{task.user.last_name} created the task for #{task.kind}."
-      %br
-      .time= "#{time_ago_in_words(task.created_at)} ago" 
-    .actions 
-      = link_to "Edit | ", edit_business_task_path(task), remote: true 
-      = link_to 'Delete', business_task_path(task.id), remote: true, :method => :delete
+    .header-content
+      .circle-img
+        %img(src="/tmp/little-man.png") 
+      .content 
+        = "#{task.user.first_name} #{task.user.last_name} created the task for #{task.kind}."
+        %br
+        .time= "#{time_ago_in_words(task.created_at)} ago" 
+      .dropdown
+        .dropdown-button
+          %i.fa.fa-ellipsis-h.fa-lg
+        .dropdown-content#myDropdown
+          = link_to edit_business_task_path(task), remote: true  do
+            %i.fa.fa-pencil
+            .action Edit
+          = link_to business_task_path(task.id), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do  
+            %i.fa.fa-trash-o
+            .action Destroy
+
   .task-details
     .body
       - if task.status == "complete"

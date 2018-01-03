@@ -102,10 +102,10 @@ class Business::UsersController < ApplicationController
   end
 
   def autocomplete
-    if params[:query] == '' 
+    if params[:term] == '' 
       query = "*"
     else
-      query = params[:query]
+      query = params[:term]
     end
 
     @users = User.search(query, where: {company_id: current_company.id}, 

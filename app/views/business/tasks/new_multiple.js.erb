@@ -1,5 +1,34 @@
-$('.multi-form').find('form').remove()
-$('.multi-form').find('.modal-title').html('<%= j "Create Task" %>');
-$('.multi-form').find('.modal-header').after('<%= j render "business/tasks/form_multiple" %>');
-$('.multi-form').modal("toggle");
+$('#mediumModal').find('form').remove()
+$('#mediumModal').find('.new-title').html('<%= j "Create Task"  %>');
+$('#mediumModal').find('.new-modal-header').after('<%= j render "business/tasks/form_multiple" %>');
+$('#mediumModal').show();
 
+checkbox = $('.applicant-checkbox');
+applicant_ids = [];
+applicants = [];
+applicant_names = [];
+
+for (i = 0, len = checkbox.length; i < len; i++) {
+  n = checkbox[i];
+  if ($(n).find('input').is(':checked') === true) {
+    applicant = [];
+    if (!applicant_ids.includes($(n).data('id'))) {
+      applicant_ids.push($(n).data('id'));
+    }
+    if (!applicant.includes($(n).data('id'))) {
+      applicant.push($(n).data('id'));
+    }
+    if (!applicant.includes($(n).parent().parent().find('.name').data('id'))) {
+      applicant.push($(n).parent().parent().find('.name').data('id'));
+    }
+    applicants.push(applicant);
+  }
+}
+$('.recipients').append('<div class="dropdown"> <div class="dropdown-button color="black">" 5 Candidates Selected</div> <div class="dropdown-content multiCandidates">')
+
+$('#mediumModal').find('#applicant_ids').val(applicant_ids)
+
+for (j = 0, len1 = applicants.length; j < len1; j++) {
+  n = applicants[j];
+  $('.multiCandidates').append('<div class="user-tag" data-id=' + n[0] + '> <div class="name">' + n[1] + '</div> <div class="delete-tag" id="delete-multiple"> &times </div> </div>');
+}

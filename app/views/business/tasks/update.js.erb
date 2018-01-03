@@ -1,2 +1,14 @@
-$('#task_<%= @task.id %>').replaceWith('<%= j render (@task) %>')
+$('#mediumModal').find('form').remove();
+$('#mediumModal').hide();
 
+
+
+
+if ($('.table1').is(":visible")) {
+  $('#task_<%= @task.id %>').replaceWith('<%= j render "business/tasks/task_row", task: @task %>');
+} else {
+  $('#task_<%= @task.id %>').replaceWith('<%= j render (@task) %>');
+}
+
+
+  

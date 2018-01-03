@@ -12,8 +12,9 @@
       .pagination-container
         = render 'business/candidates/candidate_table/pagination'
         
-/ = render "business/comments/add_comment"
-/ = render "business/candidates/destroy"
+= render "business/comments/add_comment"
+= render "business/candidates/destroy"
+= render 'business/shared/newModal'
 
 .modal#basic-form-modal
   .modal-dialog
@@ -22,7 +23,7 @@
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
         %h4.modal-title
 
-= render 'business/shared/newModal'
+
 - if @candidate.present? 
   :javascript
     $('.names a:first').trigger("click");

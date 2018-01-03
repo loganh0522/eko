@@ -1,18 +1,20 @@
 class CompaniesController < ApplicationController 
   def new 
     @company = Company.new
+    @user = @company.users.build
   end
 
   def create 
     @company = Company.new(company_params)
 
     if @company.save
-      set_user(@company)
-      create_career_portal(@company)
+      @user = @company.users.first
+      @user.update_attributes(role: "Admin", kind: "business")
       @company.update_attribute(:subscription, 'trial')
-      create_job_board_header(@company)
+      
+      EmailSignature.create(user_id: @user.id, signature: "#{@user.first_name} #{@user.last_name}") 
+      session[:user_id] = @user.id
       session[:company_id] = @company.id
-      flash[:notice] = "Thanks for joining #{@company.name}"
       redirect_to business_root_path
     else
       render :new
@@ -22,21 +24,15 @@ class CompaniesController < ApplicationController
   private
 
   def company_params 
-    params.require(:company).permit(:name, :website, :kind)
+    params.require(:company).permit(:name, :website, :kind, :size, :location,
+      users_attributes: [:id, :first_name, :last_name, :email, :password, :phone])
   end 
 
-  def set_user(company)
-    current_user.update_attribute(:company_id, company.id)
-  end
-
-  def create_career_portal(company)
-    @subdomain = company.name.parameterize("_")
-    JobBoard.create(company_id: company.id, subdomain: @subdomain)
-  end  
-
-  def create_job_board_header(company)
-    JobBoardHeader.create(header: "Come Work With Our Team",
-      subheader: "We are hiring great people to help grow our company", job_board_id: company.job_board.id)
+  def render_errors(candidate)
+    @errors = []
+    candidate.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end  
   end
 
 end

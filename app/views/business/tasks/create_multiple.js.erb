@@ -4,5 +4,6 @@
     $('#<%= error[0] %>_Block').addClass('has-error');
   <% end %>
 <% else %>
-  $('.multi-form').modal("toggle");
+  $('#mediumModal').hide();
+  $('#mediumModal').find('form').remove();
 <% end %>

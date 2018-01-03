@@ -40,7 +40,12 @@ Rails.application.routes.draw do
     resources :candidates, only: [:index, :new, :create]
   end
   
-  resources :companies
+  get '/company-signup', to: 'companies#new'
+  post '/company-signup', to: 'companies#create'
+
+  resources :companies, only: [:new, :create]
+
+
   resources :users
   resources :profiles, only: [:index, :new, :create]
   resources :skills 
@@ -49,7 +54,6 @@ Rails.application.routes.draw do
   get 'login', to: "sessions#new"
   get '/job_seeker_signup', to: 'users#new_job_seeker'
   post '/job_seeker_signup', to: "users#create_job_seeker"
-  get '/account/new', to: 'companies#new'
   
 
   match '/widgets/:action/:widget_key', via: [:get], :controller => 'widgets', :widget_key => /.*/
@@ -120,7 +124,7 @@ Rails.application.routes.draw do
     post "update_password", to: 'users#update_password'
     post 'create_subscription', to: 'users#create_subscription'
 
-    resources :tasks, except: [:show] do 
+    resources :tasks do 
       collection do 
         get :search
         get :new_multiple, to: "tasks#new_multiple"

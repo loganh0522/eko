@@ -12,12 +12,11 @@
       = f.password_field :password, placeholder: "Password", hide_label: true
       = show_errors(@user, :password) 
       
-      = f.hidden_field :kind, :value => 'business'
       - if @invitation.present?
+        = f.hidden_field :kind, :value => 'business'
         = hidden_field_tag :invitation_token, @invitation_token 
         = f.hidden_field :role, value: @invitation.user_role 
-      - else 
-        = f.hidden_field :role, value: "Admin"
+
     .container-footer  
       .have-account
         Already have an account? 

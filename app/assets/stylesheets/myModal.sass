@@ -9,6 +9,8 @@
   overflow: auto
   background-color: rgb(0,0,0)
   background-color: rgba(0,0,0,0.4)
+  .modal-body
+    padding: 0 0 
   .new-modal-header 
     background: #ff9633
     color: #f8f8f8
@@ -37,7 +39,14 @@
   border-radius: 5px 
   background-color: #fefefe
   margin: 5% auto /* 15% from the top and centered */
-  width: 40% /* Could be more or less, depending on screen size */
+
+#smallModal
+  .new-modal-content 
+    width: 40%
+
+#mediumModal
+  .new-modal-content 
+    width: 60%
 
 .new-close 
   color: #fff

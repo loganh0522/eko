@@ -1,4 +1,5 @@
-$('.multi-form').modal('hide');
+$('#smallModal').hide();
+$('#smallModal').find('form').remove();
 $('.all-candidates-table').html('<%= j render "business/candidates/candidate_table/all_candidates_table", candidates: @candidates %>');
 
 
