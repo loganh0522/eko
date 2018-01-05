@@ -23,6 +23,8 @@ class Business::InterviewInvitationsController < ApplicationController
     @candidate = Candidate.find(params[:candidate_id]) if params[:candidate_id].present?
     @job = Job.find(params[:job]) if params[:job].present?
     @invitation = InterviewInvitation.new
+    @users = current_company.users 
+    @candidates = current_company.candidates
 
     respond_to do |format| 
       format.js 
@@ -30,9 +32,11 @@ class Business::InterviewInvitationsController < ApplicationController
   end
 
   def create 
+    binding.pry
     @candidate_ids = params[:interview_invitation][:candidate_ids].split(',')  
-    @user_ids = params[:interview_invitation][:user_ids].split(',')  
+    @user_ids = params[:interview_invitation][:user_ids].split(',') 
     @interview_invite = InterviewInvitation.new(interview_invitation_params.merge!(candidate_ids: @candidate_ids, user_ids: @user_ids))
+
 
     respond_to do |format|
       if @interview_invite.save
@@ -93,11 +97,9 @@ class Business::InterviewInvitationsController < ApplicationController
         @email = user.email          
         
         @times.each do |time| 
-          @dateTime = DateTime.parse(time.date + " " + time.time).strftime("%Y-%m-%dT%H:%M:%S")
-          endTime = DateTime.parse(time.date + " " + time.time) + params[:minutes].to_i.minutes + params[:hours].to_i.hours
-          @endTime = endTime.strftime("%Y-%m-%dT%H:%M:%S")
-
-          OutlookWrapper::Calendar.create_event(user, @dateTime, @endTime, time)
+          @startTime = time.start_time.strftime("%Y-%m-%dT%H:%M:%S")
+          @endTime = time.end_time.strftime("%Y-%m-%dT%H:%M:%S")
+          OutlookWrapper::Calendar.create_event(user, @startTime, @endTime, time)
         end
       end
     end
@@ -111,10 +113,8 @@ class Business::InterviewInvitationsController < ApplicationController
       @email = @room.email          
       
       @times.each do |time| 
-        @dateTime = DateTime.parse(time.date + " " + time.time).strftime("%Y-%m-%dT%H:%M:%S")
-        endTime = DateTime.parse(time.date + " " + time.time) + params[:minutes].to_i.minutes + params[:hours].to_i.hours
-        @endTime = endTime.strftime("%Y-%m-%dT%H:%M:%S")
-
+        @startTime = time.start_time.strftime("%Y-%m-%dT%H:%M:%S")
+        @endTime = time.end_time.strftime("%Y-%m-%dT%H:%M:%S")
         OutlookWrapper::Calendar.create_event(@room, @dateTime, @endTime, time)
       end
     end
@@ -126,9 +126,8 @@ class Business::InterviewInvitationsController < ApplicationController
 
   def interview_invitation_params
     params.require(:interview_invitation).permit(:title, :notes, :location, 
-      :kind, :job_id, 
-      :subject, :message, :user_id, :company_id, :room_id,
-      user_ids: [],
-      interview_times_attributes: [:id, :time, :date, :_destroy])
+      :kind, :job_id, :subject, :message, :user_id, :company_id, :room_id,
+      :user_ids, :candidate_ids,
+      interview_times_attributes: [:id, :start_time, :end_time, :_destroy])
   end
 end

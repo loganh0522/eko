@@ -36,7 +36,7 @@
         
 
     = f.text_area :notes, placeholder: "Notes", id: "comment-body"
-    - if @taskable.class == Job 
+    - if @taskable.class == Job  || @task.job_id.present?
       = render 'business/tasks/form_fields/job_fields'   
     
     - elsif @taskable.class == Candidate && @job.present?  

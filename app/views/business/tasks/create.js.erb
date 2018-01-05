@@ -10,10 +10,6 @@
   $('.action-area').children().remove();
   $('.active-button').removeClass('active-button');
   $(".display-applicant-details").find(".tasks").html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
-<% elsif @taskable.class == Job %> 
-  $('.tasks').html('<%= j render "business/tasks/table", tasks: @tasks %>');
-  $('#mediumModal').find('form').remove();
-  $('#mediumModal').hide();
 <% else %> 
   $('#mediumModal').find('form').remove();
   $('#mediumModal').hide();

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180102142105) do
+ActiveRecord::Schema.define(version: 20180104114613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -391,18 +391,18 @@ ActiveRecord::Schema.define(version: 20180102142105) do
   end
 
   create_table "interview_times", force: :cascade do |t|
-    t.string  "date"
-    t.string  "time"
-    t.integer "interview_invitation_id"
-    t.integer "reschedule_event_id"
+    t.string   "date"
+    t.string   "time"
+    t.integer  "interview_invitation_id"
+    t.integer  "reschedule_event_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
 
   create_table "interviews", force: :cascade do |t|
     t.string   "notes"
     t.integer  "application_id"
     t.string   "kind"
-    t.string   "start_time"
-    t.string   "end_time"
     t.string   "location"
     t.string   "status"
     t.datetime "created_at"
@@ -416,6 +416,8 @@ ActiveRecord::Schema.define(version: 20180102142105) do
     t.string   "duration"
     t.integer  "room_id"
     t.text     "details"
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
 
   create_table "invitations", force: :cascade do |t|

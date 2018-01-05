@@ -209,26 +209,7 @@ jQuery ->
     return
 
 ############ HiddenSearch Box 
-  $(document).on 'click', '#delete-multiple', (event) -> 
-    value = $(this).parent().find('.name').text()
-    values = $(document).find('#add-tags-value').val().split(',')
-    
-    if values.length == 1
-      $('#add-tags-value').val('')
-    else
-      if $(document).find('#add-tags-value').val().includes(',' + value)
-        newValue = $(document).find('#add-tags-value').val().replace(',' + value, '')
-      else
-        newValue = $(document).find('#add-tags-value').val().replace(value, '')
-      $('#add-tags-value').val(newValue)
-    $(this).parent().remove()
-    return
-
-  $(document).on 'click', '#delete-single', ->
-    $('.plain-text').show()
-    $(this).parent().remove()
-    $('#candidate_id').val('')
-    return
+  
 
   $(document).on 'click', '.select-item', (e) -> 
     elementId = $(this).data('id')

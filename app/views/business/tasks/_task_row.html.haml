@@ -3,9 +3,14 @@
     .applicant-checkbox{:data => {:id => task.id}}
       = check_box_tag "task_id[]", task.id, false, class: 'checkbox'
   %td
-    #completed
-      = link_to completed_business_tasks_path(id: task.id), method: :post, remote: true do 
-        %i.fa.fa-check
+    - if task.status == "complete"
+      .complete#completed
+        = link_to completed_business_tasks_path(id: task.id), method: :post, remote: true do 
+          %i.fa.fa-check
+    - else
+      .complete
+        = link_to completed_business_tasks_path(id: task.id), method: :post, remote: true do 
+          %i.fa.fa-check
   %td.names
     = link_to "#{task.title}", business_task_path(task.id), remote: true
   %td

@@ -14,6 +14,11 @@ class Business::TasksController < ApplicationController
   def job_tasks
     @job = Job.find(params[:job_id]) 
     @tasks = @job.open_tasks.paginate(page: params[:page], per_page: 10)
+
+    respond_to do |format| 
+      format.js
+      format.html
+    end
   end
 
   def client_tasks
@@ -149,7 +154,7 @@ class Business::TasksController < ApplicationController
     where[:client_id] = params[:client_id] if params[:client_id].present?
     where[:kind] = params[:kind] if params[:kind].present?
 
-    @tasks = Task.search(query, where: where)
+    @tasks = Task.search(query, where: where, per_page: 10, page: params[:page])
   end
 
   private 
@@ -194,7 +199,7 @@ class Business::TasksController < ApplicationController
     elsif params[:candidate_id].present?
       @candidate = Candidate.find(params[:candidate_id])
       @tasks = @candidate.open_tasks
-    elsif params[:job_id].present
+    elsif params[:job_id].present?
       @job = Job.find(params[:job_id])
       @tasks = @job.open_jobs.paginate(page: params[:page], per_page: 10)
     else 
@@ -216,7 +221,8 @@ class Business::TasksController < ApplicationController
 
         if request.path.split('/')[1] == "business"  
           @tasks = current_company.open_tasks.paginate(page: params[:page], per_page: 10)
-        elsif params[:task][:job_id].present? 
+        elsif params[:job_id].present? 
+          @job = Job.find(params[:job_id])
           @tasks = Task.where(job_id: params[:task][:job_id], status: "active") 
         end
 
@@ -225,15 +231,15 @@ class Business::TasksController < ApplicationController
         @new_task = @taskable.tasks.build(task_params.merge!(user_ids: @user_ids))
         
         if @new_task.save      
-          if request.path.split('/')[1] == "business"  
-            @tasks = current_company.open_tasks.paginate(page: params[:page], per_page: 10)
-          elsif request.path.split('/')[2] == "job"  
-            @tasks = @taskable.open_tasks
+          if @taskable.class == Job
+            @tasks = @taskable.open_tasks.paginate(page: params[:page], per_page: 10)
           elsif @taskable.class == Candidate && params[:task][:job_id].present?
             @job = Job.find(params[:task][:job_id])
             @tasks = @taskable.open_job_tasks(@job).paginate(page: params[:page], per_page: 10)
           elsif @taskable.class == Candidate
             @tasks = @taskable.open_tasks.paginate(page: params[:page], per_page: 10)
+          elsif request.path.split('/')[1] == "business"  
+            @tasks = current_company.open_tasks.paginate(page: params[:page], per_page: 10)
           end
           format.js 
         else

@@ -1,37 +1,41 @@
 = form_for [:business, @invitation], html: {remote: true}  do |f|
   .column-6
-    #event-form
+    #interview-calendar
+
+  .column-4
+    .form-row
+      = f.label "Type of Meeting"
+      = f.select :kind, options_for_select(["Phone Interview", "Skype", "In-person Interview"]), :html => {id: "kind_Block", prompt: "Choose Type..."}
+      %span#kind_Block.help-block
+      = f.label "Location"
+      = f.text_field :location, id: "geocomplete2", label: "Address", autocomplete: "off", placeholder: "Enter the Address"
+    .form-row
+      = f.label :room_id, "Add Room"
+      .assign-user#user_ids_Block
+        .show-hidden-search-box
+          .plain-text 
+            No Room 
+            .caret
+        .hidden-search-box
+          .select-box
+            .select-item{data: {:id => ''}} No Room
+            - if current_company.rooms.present?
+              - current_company.rooms.each do |room|
+                .select-item{data: {:id => room.id}}= room.name
+              = f.hidden_field :room_id, id: "select-box-field"
+    .form-row
+      = f.label :users, "Add Team Members"
+      = render 'business/users/users_autocomplete'
+      = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
+
+    - if !@candidate.present?
       .form-row
-        .contain-3
-          = f.label "Type of Meeting"
-          = f.select :kind, options_for_select(["Phone Interview", "Skype", "In-person Interview"]), :html => {id: "kind_Block", prompt: "Choose Type..."}
-          %span#kind_Block.help-block
-        .contain-2
-          = f.label "Duration"
-          .duration
-            = text_field_tag :hours, nil,  class: "number-only", id: "hours", maxlength: "2", placeholder: '00', autocomplete: 'off'
-            .duration-title hrs
-            = text_field_tag :minutes, nil, class: "number-only", id: "minutes", maxlength:"2", placeholder: '00', autocomplete: 'off'
-            .duration-title mins
+        = f.label :users, "Add Candidates"
+        = render 'business/candidates/candidates_autocomplete'
+        = f.hidden_field :candidate_ids, id: "candidate_ids"
+    
     .form-row
-      / .contain-2
-      /   = render 'business/users/users_autocomplete', f: f
-      .contain-2
-        .assign-to-row
-          .title Add Room
-          .assign-user#user_ids_Block
-            .show-hidden-search-box
-              .plain-text 
-                No Room 
-                .caret
-            .hidden-search-box
-              .select-box
-                .select-item{data: {:id => ''}} No Room
-                - if current_company.rooms.present?
-                  - current_company.rooms.each do |room|
-                    .select-item{data: {:id => room.id}}= room.name
-                  = f.hidden_field :room_id, id: "select-box-field"
-    .form-row
+      = label_tag "E-mail Details"
       .email-area
         .subject
           .title Subject
@@ -40,17 +44,10 @@
           = render 'business/interview_invitations/form_fields/insert_actions'
         .email-content
           = f.trix_editor :message, rows: 9
-    / - if !@candidate.present?
-    /   .form-row
-    /     = render 'business/candidates/candidates_autocomplete', f: f
-  .column-4
-    .form-row-2
-      .header
-        .title Add Times    
-        = link_to_add_fields "+ Add Time", f, :interview_times 
-    
+    .times
+    / = f.fields_for :interview_times do |f|
+
     = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
-    = f.hidden_field :candidate_ids, id: "candidate_ids"
     = f.hidden_field :job_id, id: "job_ids"
     = f.hidden_field :user_id, value: current_user.id
     = f.hidden_field :company_id, value: current_company.id
@@ -59,6 +56,6 @@
     - if @candidate.present? 
       .btn.border-button.remove_form Cancel
     - else
-      .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+      .btn.border-button.close-modal Cancel
 
 

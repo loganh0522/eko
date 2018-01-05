@@ -22,11 +22,14 @@ class Business::InterviewsController < ApplicationController
   def index
     @interviews = current_company.interviews
 
+    # @events = OutlookWrapper::Calendar.get_events(current_user)
+
     # OutlookWrapper::Calendar.create_event(current_user, "2017-07-24T9:00pm", "2017-07-24T9:30pm")
     # @date = params[:date] ? Date.parse(params[:date]) : Date.today
     # @interviews_by_date = @interviews.group_by(&:start)
     respond_to do |format|
-      format.js
+      format.js 
+      format.json
       format.html
     end
   end

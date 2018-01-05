@@ -104,6 +104,29 @@ jQuery ->
       debounceTimeout = setTimeout(submitLink, 500)
     return
 
+  $(document).on 'click', '#delete-multiple', (event) -> 
+    value = $(this).parent().find('.name').text()
+
+    values = $(document).find('#add-tags-value').val().split(',')
+    
+    if values.length == 1
+      $('#add-tags-value').val('')
+    else
+      if $(document).find('#add-tags-value').val().includes(',' + value)
+        newValue = $(document).find('#add-tags-value').val().replace(',' + value, '')
+      else
+        newValue = $(document).find('#add-tags-value').val().replace(value, '')
+      $('#add-tags-value').val(newValue)
+    $(this).parent().remove()
+    return
+
+  $(document).on 'click', '#delete-single', ->
+    kind = $(this).parent().attr('id')
+    $('.plain-text').show()
+    $(this).parent().remove()
+    $('#candidate_id').val('')
+    return
+
   $(document).one 'click', '#client-action', (event) -> 
     searchAuto = $('.search-field-auto')
     linkUp = $('#link-up')
@@ -138,7 +161,8 @@ jQuery ->
       name = $(this).find('.name').text()
       kind = $(this).data('kind')
       value = $(this).data('id')
-      console.log($(this).parent().attr('id') == 'add-multiple')
+      appendTo = $(this).parent().parent().prev().find('#multiple-users')
+      
       if $(this).parent().attr('id') == 'add-multiple'
         if $('#' + kind + '_ids').val() == ''
           $('#' + kind + '_ids').val(value)
@@ -146,12 +170,13 @@ jQuery ->
           values =  $('#' + kind + '_ids').val() + ',' + value
           $('#' + kind + '_ids').val values 
 
-        $('#multiple-users').append('<div class="user-tag"> <div class="name">' + name + '</div> <div class="delete-tag" id="delete-multiple"> &times </div> </div>') 
+        $(appendTo).append('<div class="user-tag" id="' + kind + '"> <div class="name">' + name + '</div> <div class="delete-tag" id="delete-multiple"> &times </div> </div>') 
         $('.hidden-search-box').hide()
         return
+
       else if $(this).parent().attr('id') == 'add-single'
-        $('#' + kind + '_ids').val($(this).data('id'))
-        $('#single-obj').before('<div class="user-tag"> <div class="name">' + name + '</div> <div class="delete-tag" id="delete-single"> &times </div> </div>') 
+        $('#' + kind + '_id').val($(this).data('id'))   
+        $(this).parent().parent().prev().find('#single-obj').before('<div class="user-tag"> <div class="name">' + name + '</div> <div class="delete-tag" id="delete-single"> &times </div> </div>')
         $(this).parent().parent().prev().find('.plain-text').hide()
         $('.hidden-search-box').hide()
         return

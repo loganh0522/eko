@@ -1,36 +1,34 @@
-<% if @taskable.class == Company %>
+<% if @taskable.class == Candidate %>
+  <% if params[:status] == 'complete' %>
+    $(".display-applicant-details").html('<%= j render "business/tasks/candidate_tasks", tasks: @tasks %>');
+    $('.change-containers-nav').find('.activated').removeClass('activated');
+    $('.change-containers-nav').find('#completed-tasks').addClass('activated');   
+  <% else %>
+    $('.display-applicant-details').html('<%= j render "business/tasks/candidate_tasks", tasks: @tasks %>');
+    $('.applicant-nav').find('.activated').removeClass('activated');
+    $('.applicant-nav').find('#tasks').addClass('activated');
+  <% end %>
+<% else %> 
   <% if params[:view] === 'table' %>
     $('#task-container').html('<%= j render "business/tasks/table", tasks: @tasks %>');
     $('#task-container').find('.tasks').remove();   
     $('.pagination-container').html('<%= j render "business/tasks/pagination", tasks: @tasks %>');
     $('#list').removeClass('toggle-showing')
     $('#table').addClass('toggle-showing')
-  <% else %>
+  <% elsif params[:view] === 'list' %>
     $('#task-container').find('.table1').remove();
     $('#task-container').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
     $('#table').removeClass('toggle-showing')
     $('#list').addClass('toggle-showing')
-  <% end %>
-<% elsif @taskable.class == Candidate %>
-  <% if params[:status] == 'complete' %>
-    $(".display-applicant-details").html('<%= j render "business/tasks/candidate_tasks", tasks: @tasks %>');
-    $('.change-containers-nav').find('.activated').removeClass('activated');
-    $('.change-containers-nav').find('#completed-tasks').addClass('activated');
-    
+    $('.pagination-container').html('<%= j render "business/tasks/pagination", tasks: @tasks %>');
   <% else %>
-    $('.display-applicant-details').html('<%= j render "business/tasks/candidate_tasks", tasks: @tasks %>');
-    $('.applicant-nav').find('.activated').removeClass('activated');
-    $('.applicant-nav').find('#tasks').addClass('activated');
-    
-  <% end %>
-<% else %> 
-  <% if params[:view] == 'table' %>
-    $('#task-container').find('.tasks').remove()
-    $('#task-container').html('<%= j render "business/tasks/table", tasks: @tasks %>');
-    $('.pagination-container').html('<%= j render "business/tasks/pagination", tasks: @tasks %>')
-  <% else %>
-    $('#task-container').find('.tasks').remove()
-    $('#task-container').html('<%= j render "business/tasks/table", tasks: @tasks %>');
+    if ($('.table1').is(":visible")) {
+      $('#task-container').html('<%= j render "business/tasks/table", tasks: @tasks %>');
+      $('.pagination-container').html('<%= j render "business/tasks/pagination", tasks: @tasks %>');
+    } else {
+      $('#task-container').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
+      $('.pagination-container').html('<%= j render "business/tasks/pagination", tasks: @tasks %>');
+    }
   <% end %>
 <% end %>
 

@@ -14,18 +14,19 @@
           = f.select :kind, options_for_select(["Phone Interview", "Skype", "In-person Interview"]), id: "kind_Block"
           %span#kind_msgBlock.help-block
       .form-row-no-border 
-        .contain-3
-          = f.label "Date"
-          = f.text_field :date, id: "dueDate", placeholder: "Date"
-          %span#date_msgBlock.help-block
-        .contain-3
-          = f.label "Start Time"
-          = f.text_field :start_time, id: "timepicker", placeholder: "Start Time"
-          %span#start_time_msgBlock.help-block
-        .contain-3
-          = f.label "End Time"
-          = f.text_field :end_time, id: "timepicker2", placeholder: "End Time"
-          %span#end_time_msgBlock.help-block
+        .interview-date
+        / .contain-3
+        /   = f.label "Date"
+        /   = f.text_field :date, id: "dueDate", placeholder: "Date"
+        /   %span#date_msgBlock.help-block
+        / .contain-3
+        /   = f.label "Start Time"
+        /   = f.text_field :start_time, id: "timepicker", placeholder: "Start Time"
+        /   %span#start_time_msgBlock.help-block
+        / .contain-3
+        /   = f.label "End Time"
+        /   = f.text_field :end_time, id: "timepicker2", placeholder: "End Time"
+        /   %span#end_time_msgBlock.help-block
       .form-row-no-border 
         .contain-100
           = f.label "Notes"
@@ -40,19 +41,20 @@
         = f.label :candidate, "Add Candidate"
         #candidate_id_Block
           = render 'business/candidates/single_auto'
-          %span#candidate_id_msgBlock.help-block
-        - if @candidate.present?
-          = f.hidden_field :candidate_id, value: @candidate.id 
-        - else 
-          = f.hidden_field :candidate_id, value: '', id: 'candidate_id'
+          %span#candidate_id_msgBlock.help-block 
+          - if @candidate.present?
+            = f.hidden_field :candidate_id, value: @candidate.id 
+          - else 
+            = f.hidden_field :candidate_id, value: '', id: 'candidate_id'
 
     
     = f.hidden_field :company_id, value: current_company.id
     = f.hidden_field :job_id, value: @job.id if @job.present?
-    
+    = f.hidden_field :start_time
+    = f.hidden_field :end_time
   .modal-footer
     = f.submit @interview.new_record? ? "Create" : "Update", class: "btn submit-button"
-    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+    .btn.border-button.close-modal Cancel
     
 
 

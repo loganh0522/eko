@@ -373,73 +373,67 @@
 .job-comment-container
   width: 800px
   margin: 10px 0
-  .comment-container
+  .main-container
     padding: 0 0
-
-.comment-container
-  padding: 0 5px
-  margin: 10px 0
-  .comment
     width: 100%
-    background: white
-    border-radius: 1px
-    margin-bottom: 30px
-    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-    display: block
-    position: relative 
-    .comment-header   
-      font-size: 14px
-      overflow: hidden
-      padding: 15px 15px
-      padding-bottom: 10px
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-      .details
+    margin-top: 10px 
+
+
+.comment
+  width: 100%
+  background: white
+  border-radius: 1px
+  margin-bottom: 30px
+  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+  display: block
+  position: relative 
+  .comment-header   
+    font-size: 14px
+    padding: 10px 15px
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+    height: 60px
+    .details
+      float: left
+      width: 85%
+      .circle
+        border-radius: 50%
+        margin-right: 10px
+        width: 40px 
+        height: 40px
         float: left
-        width: 85%
-        .circle
-          border-radius: 50%
-          margin-right: 10px
-          width: 40px 
-          height: 40px
-          float: left
-        .circle-img
-          float: left
-          margin-right: 15px
-          border-radius: 50%
-          width: 40px 
-          height: 40px
-          background: rgba(0,0,0,0.1)
-          text-align: center
-          font-size: 18px
-          padding-top: 8px
-          color: white
-        .content
-          float: left
-        .time 
-          font-size: 12px
-          color: rgba(0, 0, 0, 0.3)
-      .actions
-        float: right
-        width: 14%
-        a
-          float: left
-          margin-right: 5px
-          color: #EF7B2B
-    .activity-body-body
-      .comment-body
-        padding: 20px 15px
-      .comment-area
-        background: #ffffff
-        border-radius:  0 0 5px 5px
-        margin-top: 0
-        textarea:focus
-          outline: none
-        #comment-body
-          width: 100%
-          height: 150px
-          padding: 5px 15px
-          border: none
-          margin: none
+      .circle-img
+        float: left
+        margin-right: 15px
+        border-radius: 50%
+        width: 40px 
+        height: 40px
+        background: rgba(0,0,0,0.1)
+        text-align: center
+        font-size: 18px
+        padding-top: 8px
+        color: white
+      .content
+        float: left
+      .time 
+        font-size: 12px
+        color: rgba(0, 0, 0, 0.3)
+    .dropdown
+      float: right
+  .activity-body-body
+    .comment-body
+      padding: 20px 15px
+    .comment-area
+      background: #ffffff
+      border-radius:  0 0 5px 5px
+      margin-top: 0
+      textarea:focus
+        outline: none
+      #comment-body
+        width: 100%
+        height: 150px
+        padding: 5px 15px
+        border: none
+        margin: none
 
 .interview-container
   clear: both

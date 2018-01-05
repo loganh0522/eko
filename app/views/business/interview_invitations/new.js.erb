@@ -8,9 +8,80 @@
   $('#basic-form-modal').find('.modal-header').after('<%= j render "business/interview_invitations/form_multiple" %>');
   $('#basic-form-modal').modal("toggle");
 <% else %>
-  $('#basic-form-modal').find('form').remove()
-  $('#basic-form-modal').find('.modal-title').html('<%= j "Schedule Event" %>');
-  $('#basic-form-modal').find('.modal-header').after('<%= j render "business/interview_invitations/form" %>');
-  $('#basic-form-modal').modal("toggle");
+  $('.largeModal').find('form').remove()
+  $('.largeModal').find('.new-title').html('<%= j "Schedule Meeting" %>');
+  $('.largeModal').find('.new-modal-header').after('<%= j render "business/interview_invitations/form" %>');
+  $('.largeModal').show();
 <% end %>
+
+$('#interview-calendar').fullCalendar({
+  defaultView: 'agendaWeek',
+  header: {
+    right: 'prev, next',
+    left: 'title'
+  },
+  views: {
+    agendaWeek: {
+      type: 'agenda',
+      duration: {
+        days: 7
+      },
+      buttonText: 'Week'
+    }
+  },
+  businessHours: {
+    dow: [1, 2, 3, 4, 5],
+    start: '8:00',
+    end: '18:00'
+  },
+  selectable: true,
+  selectHelper: true,
+  editable: true,
+  eventOverlap: false,
+  timezone: false,
+  'UTC': 'UTC',
+
+  
+
+  select: function(start, end) {
+    var newEvent;
+    newEvent = new Object();
+    newEvent.title = "Time Slot";
+    newEvent.start = moment(start).format('YYYY-MM-DD HH:mm');
+    newEvent.end = moment(end).format('YYYY-MM-DD HH:mm');
+    newEvent.allDay = false;
+    $('.times').empty()
+    $('#interview-calendar').fullCalendar('renderEvent', newEvent);
+    calendar.fullCalendar('unselect');
+  },
+
+  eventRender: function(event, element, view) {
+    element.find(".fc-bg").css("pointer-events","none");
+    element.append( "<span class='closeon'>X</span>" );
+    element.find(".closeon").click(function() {
+      $('.times').empty()
+      $('#interview-calendar').fullCalendar('removeEvents', event._id);
+      $('.time_' + event._id).remove()
+    });
+  },
+
+  eventResize: function(event, delta) {
+    $('.times').empty()
+  },
+  eventDrop: function(event, delta) {
+    $('.times').empty()
+  },
+
+  eventAfterRender: function(newEvent, element, view) {
+    var endTime, name, newAttr, startTime;
+    startTime = newEvent.start.format('YYYY-MM-DD HH:mm');
+    endTime = newEvent.end.format('YYYY-MM-DD HH:mm');
+    newAttr = new Date().getTime();
+    eventId = newEvent._id
+
+    startName = "interview_invitation[interview_times_attributes][" + newAttr + "][start_time]";
+    endName = "interview_invitation[interview_times_attributes][" + newAttr + "][end_time]";
+    $('.times').append('<div class="time_' + eventId +'"><input type="hidden" name="' + startName + '" value="' + startTime + '" /> <input type="hidden" name="' + endName + '"value="' + endTime + '" /></div>');
+  }, 
+});
 

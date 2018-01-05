@@ -1,6 +1,6 @@
 .job-comment-container
   = render 'business/comments/form'
-  .comment-container
+  .main-container
     - if @comments.present?
       - @comments.each do |comment|
         = render 'business/comments/comment', comment: comment

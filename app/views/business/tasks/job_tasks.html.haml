@@ -8,12 +8,12 @@
     .main-container
       .actions
         .application-actions
-          = link_to "Create Task", new_business_job_task_path(@job),  data: {:turbolinks => "false"}, remote: true, class: "btn border-button"
+          = link_to "Create Task", new_business_job_task_path(@job), data: {:turbolinks => "false"}, remote: true, class: "btn border-button"
 
           .toggle-actions 
-            = link_to business_tasks_path(view: "list"), remote: true do
+            = link_to business_job_tasks_path(@job, view: "list"), remote: true do
               .btn.border-button.toggle-show#list List
-            = link_to business_tasks_path(view: "table"), remote: true do 
+            = link_to business_job_tasks_path(@job, view: "table"), remote: true do 
               .btn.border-button.toggle-show#table.toggle-showing Table 
       #task-container
         = render 'business/tasks/table'
