@@ -5,5 +5,7 @@
   <% end %>
 <% else %> 
   $('#calendar-container').html('<%= j render "business/interviews/interviews", interviews: @interviews %>');
-  $('#basic-form-modal').modal("toggle");
+  $('#mediumModal').find('form').remove();
+  $('#mediumModal').hide();
 <% end %>
+

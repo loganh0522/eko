@@ -32,30 +32,19 @@ class Business::InterviewInvitationsController < ApplicationController
   end
 
   def create 
-    binding.pry
     @candidate_ids = params[:interview_invitation][:candidate_ids].split(',')  
     @user_ids = params[:interview_invitation][:user_ids].split(',') 
     @interview_invite = InterviewInvitation.new(interview_invitation_params.merge!(candidate_ids: @candidate_ids, user_ids: @user_ids))
 
-
     respond_to do |format|
       if @interview_invite.save
         send_invitations(@interview_invite)
-        schedule_in_calendar(@interview_invite)
-        
-        if params[:interview_invitation][:room_id].present?
-          schedule_room(@interview_invite)
-        end
-        
-        format.js
+        schedule_in_calendar(@interview_invite)    
+        schedule_room(@interview_invite) if params[:interview_invitation][:room_id].present? 
       else 
-        @errors = []
-        @interview_invite.errors.messages.each do |error| 
-          @errors.append([error[0].to_s, error[1][0]])
-        end
-
-        format.js
+        render_errors(@interview_invite)
       end 
+      format.js
     end
   end
 
@@ -129,5 +118,12 @@ class Business::InterviewInvitationsController < ApplicationController
       :kind, :job_id, :subject, :message, :user_id, :company_id, :room_id,
       :user_ids, :candidate_ids,
       interview_times_attributes: [:id, :start_time, :end_time, :_destroy])
+  end
+
+  def render_errors(interview)
+    @errors = []
+    interview.errors.messages.each do |error| 
+      @errors.append([error[0].to_s, error[1][0]])
+    end  
   end
 end

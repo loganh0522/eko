@@ -6,14 +6,8 @@
       = render 'job_filters'
     .main-container
       .actions
-        = link_to "Send Invitation", new_business_interview_invitation_path,  data: {:turbolinks => "false"}, remote: true, class: "btn border-button"
-        = link_to "+ Interview", new_business_interview_path, data: {:turbolinks => "false"}, remote: true, class: "btn border-button"
-      #calendar-container
-        = render 'business/interviews/interviews'
-
-.modal#basic-form-modal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title
+        = link_to "Send Invitation", new_business_interview_invitation_path,  data: {:turbolinks => "false"}, remote: true, class: "btn border-button", id: 'client-action'
+        = link_to "+ Interview", new_business_interview_path, data: {:turbolinks => "false"}, remote: true, class: "btn border-button", id: 'client-action'
+      #calendar
+      / #calendar-container
+      /   = render 'business/interviews/interviews'

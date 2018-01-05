@@ -1,8 +1,7 @@
 jQuery ->
-
   $('#calendar').fullCalendar({
     header: 
-      right: 'month, agendaWeek',
+      right: 'list, month, agendaWeek',
       center: 'title'
       left: 'today prev, next'
     views: 

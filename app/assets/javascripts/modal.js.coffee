@@ -1,5 +1,5 @@
 jQuery ->
-  modal = document.getElementById('newModal')
+  modal = document.getElementById('mediumModal')
 
   $(".close-modal").on 'click', (event) -> 
     $('.newModal').hide()

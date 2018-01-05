@@ -1,34 +1,18 @@
-.page-header
-  %h2 Messages
 #main-container
-  .messages-side-container
-    - if @conversations.present? 
-      - @conversations.each do |conversation| 
-        = link_to business_conversation_path(conversation.id), remote: true do 
-          .conversation-container{:id => "convo_#{conversation.id}"}
-            - if conversation.candidate.manually_created == true 
-              .circle-img
-                %img(src="/tmp/little-man.png") 
-            - else
-              - if conversation.candidate.user.user_avatar.present? 
-                .circle
-                  = image_tag conversation.candidate.user.user_avatar.image.small_image, :size => "50x50" 
-              - else
-                .circle-img
-                  %img(src="/tmp/little-man.png") 
-            .details
-              .header
-                .name= conversation.candidate.full_name
-              
-              .body
-                - if conversation.messages.first.candidate_id.present?
-                  .from= "#{conversation.candidate.first_name}: " 
-                  .mess= simple_format(conversation.messages.first.body)
-                - else 
-                  .from= "#{conversation.messages.first.user.first_name}: " 
-                  .mess= simple_format(conversation.messages.first.body)
-    - else
-      .not-present-container 
-        %p There are currently no conversations
-  .messages-main-container
+  #messages-container
+    #messages-side-container
+      - if @conversations.present? 
+        - @conversations.each do |conversation| 
+          = link_to business_conversation_path(conversation.id), remote: true do 
+            .conversation-container{:id => "convo_#{conversation.id}"}
+              = candidate_user_avatar(conversation.candidate)
+              .details
+                .header
+                  .name= conversation.candidate.full_name
+                .body
+                  .mess= simple_format(conversation.messages.last.body)
+      - else
+        .not-present-container 
+          %p There are currently no conversations
+    #messages-main-container
       

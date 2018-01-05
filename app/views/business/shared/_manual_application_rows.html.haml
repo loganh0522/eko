@@ -1,7 +1,7 @@
 %tr{:id => "#{application_stage(candidate, @job)}" }
   %td
     .applicant-checkbox{:data => {:id => candidate.id}}
-      = check_box_tag "applicant_ids[]", candidate.id
+      = check_box_tag "applicant_ids[]", candidate.id, false, class: "checkbox"
   %td
     .circle-img
       %img(src="/tmp/little-man.png")  
