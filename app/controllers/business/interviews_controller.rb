@@ -45,11 +45,14 @@ class Business::InterviewsController < ApplicationController
   end
 
   def create
+    @startTime = DateTime.parse(params[:interview][:date] + " " + params[:interview][:stime]).strftime("%Y-%m-%dT%H:%M:%S")
+    @endTime = DateTime.parse(params[:interview][:date] + " " + params[:interview][:etime]).strftime("%Y-%m-%dT%H:%M:%S")
     @user_ids = params[:interview][:user_ids].split(',') 
-    @interview = Interview.new(interview_params.merge!(user_ids: @user_ids))
-    
+    @interview = Interview.new(interview_params.merge!(user_ids: @user_ids, start_time: @startTime, end_time: @endTime))
+
     respond_to do |format|  
       if @interview.save
+        binding.pry
         @interviews = current_company.interviews
         format.js
       else
@@ -98,9 +101,14 @@ class Business::InterviewsController < ApplicationController
 
   def interview_params
     params.require(:interview).permit(:title, :notes, :location, :start_time, 
-      :end_time, :date, :kind, 
+      :end_time, :date, :kind, :send_request, :etime, :stime,
       :job_id, :candidate_id, :company_id,
       user_ids: [])
+  end
+
+  def send_invitation(e)
+    GoogleWrapper::Calendar.create_event(current_user, e.start_time, e.end_time, 
+      e.location, e.description, e.title, e.users, e.candidate)
   end
 
   def render_errors(interview)

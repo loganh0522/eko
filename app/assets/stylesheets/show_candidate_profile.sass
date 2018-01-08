@@ -1,0 +1,258 @@
+.show-applicant-view
+  height: inherit
+  .applicant-main-container
+    width: 65%
+    height: inherit 
+    overflow-y: scroll
+    float: right
+    padding: 5px 0 
+    background: #f7f8f9
+    .action-area
+      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    .navigation-container
+      padding: 0 10px
+      .applicant-nav
+        width: 100%
+        background: white
+        border-radius: 5px 5px 0 0
+        box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+        width: 100%
+        overflow: hidden
+        .change-containers
+          ul 
+            list-style: none
+            text-decoration: none
+            padding-left: 0
+            li
+              display: inline-block
+              padding: 15px 15px 10px 15px 
+              text-align: center 
+              font-size: 14px
+              color: black
+              cursor: pointer
+            .activated
+              border-bottom: 4px solid #EF7B2B
+              color: black
+        .bottom-row
+          border-top: 1px solid rgba(0,0,0,0.1)
+          padding: 10px 5px
+          overflow: hidden
+          .hide-can-form 
+            float: right
+            background: rgba(0,0,0,0.3)
+            padding: 5px 10px
+            border-radius: 8px
+            color: #ffffff
+          &:hover
+            cursor: pointer
+          a
+            float: left
+            margin-right: 5px
+            background: rgba(0,0,0,0.3)
+            padding: 5px 10px
+            border-radius: 8px
+            color: #ffffff
+            text-decoration: none
+          .active-button
+            background: #EF7B2B
+        ul 
+          list-style: none
+          text-decoration: none
+          padding: 0 
+          margin-bottom: 0
+          li
+            display: inline-block
+            padding: 10px 10px 
+            text-align: center 
+            color: black
+            cursor: pointer
+          .activated    
+            border-bottom: solid 3px #EF7B2B
+            color: black
+    .applicant-general
+      height: inherit
+      .display-applicant-details
+        padding: 0px 5px
+        .comment-container
+          padding: 10px 5px
+        .messages
+          padding: 10px 5px
+
+  .applicant-side-container
+    float: left
+    position: absolute
+    background: #fff
+    height: 100%
+    border-radius: 5px 5px
+    padding: 5px 0 
+    margin: 5px 0 
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    width: 30%
+    .applicant-general-info
+      overflow: hidden
+      float: left
+      width: 100%
+      background: #ffffff
+      padding: 15px
+      border-bottom: 1px solid rgba(0,0,0,0.1)
+      .user-image 
+        img
+          width: 125px 
+          height: 125px
+          float: left
+          margin: 0 auto
+          border-radius: 50%
+          border: 1px solid #fff
+          display: block
+      .applicant-details
+        vertical-align: top
+        text-align: center
+        margin: 0 auto
+        overflow: hidden
+        .name 
+          font-size: 24px
+        .glyphicon
+          color: rgba(0, 0, 0, 0.7)     
+        .new_rating
+          width: auto
+          margin: auto
+          margin-left: 25px
+          .rating 
+            font-size: 16px
+            margin-top: 2px
+        .current-position
+          clear: both
+    .side-section
+      overflow-y: scroll
+      max-height: 400px
+      background: #f7f8f9
+      width: 100%
+      top: 0
+      bottom: 0
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+      .applicant-stage
+        border: 1px solid rgba(0,0,0,0.1)
+        width: 100%
+        overflow: hidden
+        border-radius: 5px
+        background: #fff
+        box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+        .current-stage
+          padding: 10px 15px
+          font-size: 14px
+          float: left
+          width: 70%
+        .next-stage
+          color: rgba(0, 0, 0, 0.3)
+          padding: 10px 20px
+          font-size: 14px
+          float: left
+          border-left: 1px solid rgba(0,0,0,0.1)
+          width: 15%
+          &:hover
+            background: green
+            cursor: pointer
+        .reject-stage
+          padding: 10px 20px
+          font-size: 14px
+          width: 15%
+          float: left
+          border-left: 1px solid rgba(0,0,0,0.1)
+          &:hover
+            background: red
+            cursor: pointer
+
+      .tag-container
+        padding: 10px 20px
+        .tag-header
+          overflow: hidden
+          h4 
+            width: fit-content
+            float: left
+            margin-right: 10px
+          form
+            float: left
+            width: 80%
+            input[type='text']
+              width: 200px
+              float: left
+          .btn 
+            float: left
+            height: 35px
+            margin: 5px 0 0 10px
+            padding: 7px 10px
+        .tags
+          overflow: hidden
+          .tag
+            float: left
+            border-radius: 5px
+            border: 1px solid #EF7B2B
+            color: rgba(0,0,0,.7)
+            width: auto
+            margin: 2px 5px 0 0 
+            text-align: center
+            padding: 3px 5px 3px 8px
+            overflow: hidden
+            .name
+              float: left
+            .delete-can-tag
+              float: left
+              margin-left: 5px
+              color: rgba(0,0,0,.7)
+              &:hover
+                cursor: pointer       
+        
+      .candidate-tasks
+        overflow-y: scroll
+        width: 100%
+        padding: 20px 20px
+        .task
+          background: #ffffff
+          padding: 5px 5px
+          margin-top: 3px
+          width: 100%
+          overflow: hidden
+          border: 1px solid rgba(0,0,0,0.1)
+          .edit-delete-actions
+            float: right
+            .glyphicon-pencil
+              float: left
+              color: rgba(0,0,0,0.3)
+          .body
+            .title
+              float: left
+              margin: 5px 0 0 5px
+            .glyphicon
+              float: left
+              width: 30px
+              height: 30px
+              margin-right: 5px
+              border: 1px solid (rgba(0,0,0,0.4))
+              color: rgba(0,0,0,0.4)
+              border-radius: 50%
+              padding: 7px
+              &:hover
+                border-color: green
+                color: green
+    .all-applications
+      padding: 10px 20px
+      .application-container
+        background: #ffffff
+        margin: 3px 3px 
+        padding: 5px 5px
+        border: 1px solid rgba(0,0,0,0.1)
+        border-radius: 3px
+        &:hover
+          background: rgba(239,123,43,0.3)
+          cursor: pointer
+        .title
+          font-size: 14px
+          margin: 0 0 
+          padding: 0 0
+        .location
+          font-size: 12px
+          margin: 0 0 
+          padding: 0 0
+          color: rgba(0,0,0,0.7)
+    
+        

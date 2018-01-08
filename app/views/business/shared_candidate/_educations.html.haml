@@ -1,0 +1,18 @@
+- if @candidate.user.educations.present?
+  - @candidate.user.educations.each do |degree|
+    .work-experience
+      .job-position
+        .job-position-header
+          .job-position-header-content
+            .experience-header 
+              .company= degree.school 
+            .experience-position
+              .title= degree.degree
+              .date= "#{degree.start_month} #{degree.start_year} - #{degree.end_month} #{degree.end_year}"  
+        .job-position-body
+          .job-position-body-content   
+            .experience-body 
+              %p.description= degree.description
+- else  
+  .not-present-container
+    %p There are currently no educations listed for this candidate.

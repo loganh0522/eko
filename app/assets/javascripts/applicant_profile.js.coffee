@@ -1,6 +1,6 @@
 jQuery ->
-  
   $('#embedURL').gdocsViewer({width :'400',height : '500'})
+  
   $('a[data-popup]').on 'click', (e) ->
     window.open $(this).attr('href')
     e.preventDefault()
@@ -25,16 +25,7 @@ jQuery ->
       $('.applicant-action-buttons').hide()
       $('.no-action-buttons').show()
     return
-
-  $(document).ajaxComplete ->
-    $('#dueDate').datepicker
-      dateFormat: 'yy-mm-dd'
-    $('#timepicker').timepicker()
-    $('#timepicker2').timepicker()
-
-
-  
-
+    
   $(".modal").on "shown.bs.modal", ->  
     if $('.modal-backdrop').length == 2
       $(this).css({'z-index':'1070'})
@@ -208,29 +199,6 @@ jQuery ->
       @value = @value.slice(0, -1)
     return
 
-############ HiddenSearch Box 
-  
-
-  $(document).on 'click', '.select-item', (e) -> 
-    elementId = $(this).data('id')
-    $(this).nextAll('#select-box-field').val(elementId)
-    $(this).parent().parent().hide()
-    $(this).parent().parent().prev().find('.plain-text').html($(this).html() + '<span class="caret"></span>')
-    e.stopPropagation()
-
-  $(document).on 'click', '.show-hidden-search-box', (e) ->
-    $(this).next('.hidden-search-box').show()
-    e.stopPropagation()
-
-  $(document).on 'click', '.hidden-search-box', (e) -> 
-    e.stopPropagation()
-
-  $(document).on 'click', '#multiple-users', (e) -> 
-    e.stopPropagation()
-
-  $(document).click (e) -> 
-    $('.hidden-search-box').hide()
-    return
 
   $(document).on 'click', '.insert-template', (e) ->
     element = document.querySelector("trix-editor")
@@ -259,12 +227,5 @@ jQuery ->
     $("#job-board-section").submit()
 
 ######## Dropdown
-  $(document).on 'click', '.dropdown-button', (e) ->
-    $(this).next('.dropdown-content').show()
-    e.stopPropagation()
-  $(document).on 'click', '.dropdown-content', (e) -> 
-    e.stopPropagation()
-  $(document).click (e) -> 
-    $('.dropdown-content').hide()
-    return
+  
   

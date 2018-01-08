@@ -2,7 +2,14 @@
   .change-containers-nav
     %ul 
       = link_to business_job_application_path(@job, @application), remote: true do
-        %li.change#profile-link.activated Profile
+        %li.change#experience.activated Experience
+      = link_to business_candidate_path(@candidate, cv: 'projects'), remote: true do 
+        %li.change#projects Projects
+      = link_to business_candidate_path(@candidate, cv: 'education'), remote: true do 
+        %li.change#education Education
+      = link_to business_candidate_path(@candidate, cv: 'certification'), remote: true do 
+        %li.change#certification Certifications
+        
       - if @candidate.resumes.present?
         = link_to business_candidate_resume_path(@candidate.id, @candidate.resumes.first.id), remote: true do 
           %li.change#resume-link Resume
@@ -11,6 +18,5 @@
           %li.change#resume-link Resume
   .experience-container
     = render 'business/shared_manual_candidate/work_experience'
-    = render 'business/shared_manual_candidate/education'
 
     

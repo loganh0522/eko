@@ -1,4 +1,4 @@
-class OutlookWorker 
+class GoogleWorker 
   include Sidekiq::Worker 
 
   def perform(user_id)

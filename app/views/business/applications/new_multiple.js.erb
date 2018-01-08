@@ -3,10 +3,10 @@ applicant_ids = [];
 applicants = [];
 applicant_names = [];
 
-$('#smallModal').find('form').remove()
-$('#smallModal').find('.new-title').html('<%= j "Add to Job" %>');
-$('#smallModal').find('.new-modal-header').after('<%= j render "business/applications/form_multiple" %>');
-$('#smallModal').show();
+$('.smallModal').find('form').remove()
+$('.smallModal').find('.new-title').html('<%= j "Add to Job" %>');
+$('.smallModal').find('.new-modal-header').after('<%= j render "business/applications/form_multiple" %>');
+$('.smallModal').show();
 
 $('.recipients').append('<div class="dropdown"> <div class="dropdown-button color="black">" 5 Candidates Selected</div> <div class="dropdown-content multiCandidates">')
 

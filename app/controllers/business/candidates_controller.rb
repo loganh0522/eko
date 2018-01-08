@@ -83,6 +83,14 @@ class Business::CandidatesController < ApplicationController
     end
   end
 
+  def show_project
+    @project = Project.find(params[:project])
+
+    respond_to do |format| 
+      format.js
+    end
+  end
+
   def destroy
     @candidate = Candidate.find(params[:id])
     @candidate.destroy 

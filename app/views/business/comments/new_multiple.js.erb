@@ -1,7 +1,7 @@
-$('#smallModal').find('form').remove()
-$('#smallModal').find('.new-title').html('<%= j "Add Comment" %>');
-$('#smallModal').find('.new-modal-header').after('<%= j render "business/comments/form_multi" %>');
-$('#smallModal').show();
+$('.smallModal').find('form').remove()
+$('.smallModal').find('.new-title').html('<%= j "Add Comment" %>');
+$('.smallModal').find('.new-modal-header').after('<%= j render "business/comments/form_multi" %>');
+$('.smallModal').show();
 
 checkbox = $('.applicant-checkbox');
 applicant_ids = [];

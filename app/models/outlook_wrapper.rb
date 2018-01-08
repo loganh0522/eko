@@ -318,7 +318,10 @@ module OutlookWrapper
       @create = graph.me.events.create(subject: "Pending Interview", 
         body: {content: "Interview with Logan Once he finishes"},
         start: {dateTime: dateTime, timeZone: "America/New_York"}, end: {dateTime: endTime,  timeZone: "America/New_York"}, 
-        organizer: {emailAddress: {name: "Logan Houston", address: "houston@talentwiz.com"}},
+        organizer: {emailAddress: {name: user.full_name, address: user.email}},
+        attendees: [
+          { email: email, name:  } },
+          ],
         responseRequested: true, responseStatus: {"@odata.type" => "microsoft.graph.responseStatus"})
       
       if user.class == Room 

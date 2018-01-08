@@ -1,0 +1,10 @@
+#messages
+  - if @messages.present?
+    - @messages.each do |message|
+      - if message.candidate_id.present? 
+        = render 'business/messages/candidate_messages', message: message
+      - else 
+        = render 'business/messages/applicant_messages', message: message
+  - else
+    .not-present-container
+      %p There are currently no messages with this Candidate.

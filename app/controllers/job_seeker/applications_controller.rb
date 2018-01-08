@@ -5,23 +5,10 @@ class JobSeeker::ApplicationsController < JobSeekersController
   before_filter :ensure_job_seeker
   before_filter :has_applied?
   
-  def new
-    @application = Application.new
-    @job = Job.find(params[:job_id])
-    @questions = @job.questions if @job.questions.present?
-  end
+  def index
 
-  def create 
-    if !current_user_candidate?(params[:application][:company_id])
-      @candidate = Candidate.create(company_id: params[:application][:company_id], user_id: current_user.id, manually_created: false)
-      create_application
-    else
-      find_candidate(params[:application][:company_id])
-      create_application
-    end
-    redirect_to root_path
   end
-
+  
   private 
 
   def application_params 

@@ -1,11 +1,15 @@
-class JobSeeker::CandidatesController < ApplicationController 
+class JobSeeker::CandidatesController < JobSeekersController 
   layout "job_seeker"
   before_filter :require_user
+  before_filter :has_applied?
   # before_filter :profile_sign_up_complete
-
+  # before_filter :resume_application_denied
+  # before_filter :require_user
+  # # before_filter :profile_sign_up_complete
+  # before_filter :ensure_job_seeker
+  # before_filter :has_applied?
   def new
     @candidate = Candidate.new
-    @application = Candidate.new
     @job = Job.find(params[:job_id])
     @questions = @job.questions
   end
@@ -13,19 +17,19 @@ class JobSeeker::CandidatesController < ApplicationController
   def create 
     @job = Job.find(params[:job_id])  
     @company = @job.company
-    
-    if @company.candidates.where(email: params[:candidate][:email]).present?
-      @candidate = @company.candidates.where(email: params[:candidate][:email]).first
-      @application = Application.create(candidate_id: @candidate.id, job_id: @job) 
+
+    if current_user.candidates.where(company_id: @company.id).present?
+      @candidate = @company.candidates.where(user_id: current_user.id).first
+      @application = Application.create(candidate_id: @candidate.id, job_id: @job, user_id: current_user.id)
       track_activity @application, "create", @company.id, @candidate.id, params[:job_id]
       redirect_to root_path
     else
-      @candidate = Candidate.new(candidate_params)
+      @candidate = Candidate.new(candidate_params.merge(company_id: @company.id, user_id: current_user.id))
       
       if @candidate.save   
-        @application = Application.create(candidate_id: @candidate.id, job_id: @job)   
-        flash[:success] = "Your application has been submitted"
+        @application = Application.create(candidate_id: @candidate.id, job_id: @job.id, user_id: current_user.id)   
         track_activity @application, "create", @company.id, @candidate.id, params[:job_id]
+        flash[:success] = "Your application has been submitted"
         redirect_to root_path
       else
         render :new

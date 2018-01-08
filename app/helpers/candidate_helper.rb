@@ -7,6 +7,7 @@ module CandidateHelper
     end
   end
 
+  
   def candidate_user_avatar(candidate)
     if candidate.manually_created == true 
       content_tag(:div, image_tag("/tmp/little-man.png"), :class => 'circle-img' )  

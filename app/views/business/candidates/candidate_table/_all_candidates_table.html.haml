@@ -25,42 +25,40 @@
                 - stage = "No Job Apps"
               %tr
                 %td
-                  .applicant-checkbox{:data => {:id => candidate.id}}
-                    = check_box_tag "applicant_ids[]", candidate.id, false, class: "checkbox"
+                  .content
+                    .applicant-checkbox{:data => {:id => candidate.id}}
+                      = check_box_tag "applicant_ids[]", candidate.id, false, class: "checkbox"
                 %td
                   = candidate_user_avatar(candidate)
-                %td.names
-                  - if candidate.manually_created == true 
-                    .name{:data => {:id =>  "#{candidate.full_name} "}}
-                      = link_to "#{candidate.full_name}", business_candidate_path(candidate.id), remote: true
+                %td
+                  .content
+                    = link_to "#{candidate.full_name}", business_candidate_path(candidate.id), remote: true, class: "name", :data => {:id =>  "#{candidate.full_name} "}
                     - if candidate.current_jobs.present?
-                      .current-position= "#{candidate.current_jobs.first.title} - #{candidate.current_jobs.first.company_name}"
+                      .bottom-content= "#{candidate.current_jobs.first.title} - #{candidate.current_jobs.first.company_name}"
                     - else
-                      .current-position No Experience Listed
-                  - else
-                    .name{:data => {:id =>  "#{candidate.user.full_name}"}}
-                      = link_to "#{candidate.user.full_name}", business_candidate_path(candidate.id), remote: true
-                    - if candidate.user.current_jobs.present?
-                      .current-position= "#{candidate.user.current_jobs.first.title} - #{candidate.user.current_jobs.first.company_name} "
-                    - else
-                      .current-position No Experience Listed
-                      
+                      .bottom-content No Experience Listed
                   - if candidate.applications.present?
                     %td
-                      .position= candidate.applications.first.job.title
-                      .date-applied= candidate.applications.first.job.location
+                      .content
+                        .position= candidate.applications.first.job.title
+                        .bottom-content= candidate.applications.first.job.location
                     %td
-                      .position= stage
-                      .date-applied= "#{time_ago_in_words(candidate.created_at)} ago"
+                      .content
+                        .position= stage
+                        .bottom-content= "#{time_ago_in_words(candidate.created_at)} ago"
                     %td
-                      = render 'business/ratings/form', application: candidate.applications.first
+                      .content
+                        = render 'business/ratings/form', application: candidate.applications.first
                   - else
                     %td
-                      .no-application No Job Applications
+                      .no-content
+                        No Job Applications
                     %td
-                      .no-application No Job Applications
+                      .no-content
+                        No Job Applications
                     %td
-                      .no-application No Rating
+                      .no-content
+                        No Rating
 
 
 

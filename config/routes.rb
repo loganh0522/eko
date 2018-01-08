@@ -78,9 +78,7 @@ Rails.application.routes.draw do
     resources :question_answers 
     resources :users
     resources :background_images
-
     resources :applications, only: [:create]
-      
     resources :user_avatars 
     resources :user_certifications
     resources :educations
@@ -222,7 +220,10 @@ Rails.application.routes.draw do
    
     get 'templates', to: "email_templates#index"
     
+
+
     resources :candidates do
+      get 'show_project', to: "candidates#show_project"
       collection do 
         get :autocomplete
         get :search

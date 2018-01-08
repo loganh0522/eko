@@ -1,0 +1,31 @@
+- if @candidate.user.user_certifications.present?
+  - @candidate.user.user_certifications.each do |certification|
+    %div{:class => "work-experience", id: "user_certification_#{certification.id}"}
+      .job-position
+        .job-position-header
+          .job-position-header-content
+            .experience-header  
+              .company= certification.name
+              .dropdown
+                .dropdown-button
+                  %i.fa.fa-ellipsis-h.fa-lg
+                .dropdown-content#myDropdown
+                  = link_to edit_job_seeker_user_certification_path(certification.id), remote: true do
+                    %i.fa.fa-pencil
+                    .action Edit
+                  = link_to job_seeker_user_certification_path(certification.id), remote: true, :method => :delete, data:{:confirm => "Are You Sure? You can not undo this action."}  do  
+                    %i.fa.fa-trash-o
+                    .action Destroy
+            .experience-position
+              .title= certification.agency
+              - if certification.expires == 1
+                .date= "#{certification.start_month} #{certification.start_year} - Present"
+              - else    
+                .date= "#{certification.start_month} #{certification.start_year} - #{certification.end_month} #{certification.end_year}"    
+        .job-position-body
+          .job-position-body-content
+            .experience-body 
+              .description= certification.description
+- else  
+  .not-present-container
+    %p There are currently no certifications listed for this applicant.

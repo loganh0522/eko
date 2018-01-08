@@ -2,20 +2,20 @@
   $('<%= j render "business/tags/form" %>').insertBefore("#add_tag");
   $('#add_tag').hide();
 <% elsif params[:tag] == "company" %>
-  $('#smallModal').find('form').remove()
-  $('#smallModal').find('.new-title').html('<%= j "Add Tags" %>');
-  $('#smallModal').find('.new-modal-header').after('<%= j render "business/tags/form_multiple" %>');
-  $('#smallModal').show();
+  $('.smallModal').find('form').remove()
+  $('.smallModal').find('.new-title').html('<%= j "Add Tags" %>');
+  $('.smallModal').find('.new-modal-header').after('<%= j render "business/tags/form_multiple" %>');
+  $('.smallModal').show();
 <% else %>
   checkbox = $('.applicant-checkbox');
   applicant_ids = [];
   applicants = [];
   applicant_names = [];
 
-  $('#smallModal').find('form').remove()
-  $('#smallModal').find('.new-title').html('<%= j "Add Tags" %>');
-  $('#smallModal').find('.new-modal-header').after('<%= j render "business/tags/form_multiple" %>');
-  $('#smallModal').show();
+  $('.smallModal').find('form').remove()
+  $('.smallModal').find('.new-title').html('<%= j "Add Tags" %>');
+  $('.smallModal').find('.new-modal-header').after('<%= j render "business/tags/form_multiple" %>');
+  $('.smallModal').show();
   $('.recipients').append('<div class="dropdown"> <div class="dropdown-button color="black">" 5 Candidates Selected</div> <div class="dropdown-content multiCandidates">')
 
   for (i = 0, len = checkbox.length; i < len; i++) {

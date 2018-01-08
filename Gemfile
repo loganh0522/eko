@@ -14,7 +14,6 @@ gem 'coffee_routes'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
-
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'trix'

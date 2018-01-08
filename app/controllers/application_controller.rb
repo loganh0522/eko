@@ -123,7 +123,6 @@ class ApplicationController < ActionController::Base
     end
   end
  
-
   def has_a_scorecard
     @job = Job.find(params[:job_id])
     @scorecard = Scorecard.where(job_id: @job.id).first

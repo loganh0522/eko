@@ -1,26 +1,26 @@
 .modal-body
-  
   .column-6
-    %h3= @project.title
+    .project-header
+      .project-title= @project.title
+      .skills= render 'job_seeker/user_skills/skills', position: @project
     .slick-carousel
       - @project.attachments.each do |attachment|
         - if attachment.file_type.start_with? 'image'
           = image_tag attachment.file.large_image
         - elsif attachment.file_type == "application/pdf"
-          %iframe{:src => "#{attachment.file.url}", :width =>'500',  :height =>'450'}
+          %iframe{:src => "#{attachment.file.url}", :width =>'500',  :height =>'400'}
         - elsif attachment.file_image.present?
-          %iframe{:allowFullScreen => "true", :frameborder => "0", :height => "430", :src => attachment.link, :title => "YouTube video player", :width => "500", class: 'item'}
+          %iframe{:allowFullScreen => "true", :frameborder => "0", :height => "400", :src => attachment.link, :title => "YouTube video player", :width => "500", class: 'item'}
         - else 
           = image_tag attachment.file.large_image
   .column-4
     .column-container
-      %h4 Description
+      .title Description
       %p= @project.description
     .column-container
-      %h4 Solution
+      .title Solution
       %p= @project.solution
     .column-container
-      %h4 My Role
-      = @project.role
-    .column-container
-      %h4 Skills Used
+      .title My Role
+      %p= @project.role
+

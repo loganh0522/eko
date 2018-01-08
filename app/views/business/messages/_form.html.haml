@@ -9,9 +9,10 @@
     .to
       .title From: 
       .sender= "#{current_user.full_name} (#{current_user.email})"       
-    .subject
+    .subject.subject_Block
       .title Subject
-      .sender= f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false, class: "subject_Block"
+      .sender= f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false
+
     .email-variables
       .contain-2
         .show-hidden-search-box

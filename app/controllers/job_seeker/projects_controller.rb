@@ -98,6 +98,6 @@ class JobSeeker::ProjectsController < JobSeekersController
   end
 
   def project_params 
-    params.require(:project).permit(:user_id, :title, :description, :problem, :solution)
+    params.require(:project).permit(:user_id, :title, :description, :problem, :solution, :role)
   end
 end

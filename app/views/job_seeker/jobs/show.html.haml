@@ -2,7 +2,6 @@
   .intro-message
     .header= @job.title
     .sub-header= @job.location
-
 .main-row-container
   .inner-container
     .job-description
@@ -25,15 +24,11 @@
       .apply 
         - if current_user.present?
           - if @job.questions.present? 
-            / = link_to "Apply to this Job", new_job_seeker_job_application_path(@job.id), :class => "btn btn-primary app-btn"
             = link_to "Apply to this Job", new_job_seeker_job_candidate_path(@job.id), :class => "btn btn-primary app-btn"
           - else
-            = form_for [:job_seeker, @application] do |f|
+            = form_for [:job_seeker, @job, @candidate] do |f|
               .fieldset
-                .form-group.col-md-12
-                = f.hidden_field :user_id, value: current_user.id
-                = f.hidden_field :job_id, value: @job.id
-                = f.submit "Apply to Job", class: "btn btn-primary app-btn"
+                = f.submit "Apply to Job", class: "btn submit-button"
         - else 
           = render "/users/sub_new_job_seeker"
           = render "/sessions/sub_login"

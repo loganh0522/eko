@@ -1,18 +1,19 @@
 .page-header
 #main-container
-  .applicant-view
-    .applicant-side-container
-      .applicant-general-info
-        = render 'business/candidates/show_candidate/candidate_details'
-      = render 'business/candidates/show_candidate/side_container'
-    .applicant-main-container
-      .navigation-container
-        .applicant-nav
-          = render 'business/candidates/show_candidate/candidate_nav'
-        .action-area
-      .applicant-general
-        .display-applicant-details
-          = render 'business/candidates/show_candidate/candidate_profile'
+  .main-container
+    .applicant-view
+      .applicant-side-container
+        .applicant-general-info
+          = render 'business/candidates/show_candidate/candidate_details'
+        = render 'business/candidates/show_candidate/side_container'
+      .applicant-main-container
+        .navigation-container
+          .applicant-nav
+            = render 'business/candidates/show_candidate/candidate_nav'
+          .action-area
+        .applicant-general
+          .display-applicant-details
+            = render 'business/candidates/show_candidate/candidate_profile'
 
 
   .modal#myModal

@@ -7,9 +7,16 @@ class Interview < ActiveRecord::Base
   has_many :assigned_users, as: :assignable, :dependent => :destroy
   has_many :users, through: :assigned_users, validate: false
   
-  validates_presence_of :title, :kind, :date, :start_time, :end_time, :candidate_id
+  validates_presence_of :title, :kind, :date, :stime, :etime, :candidate_id
   
   searchkick
+
+  def send_invitation
+
+    
+    GoogleWrapper::Calendar.create_event(current_user, e.start_time, e.end_time, 
+      e.location, e.description, e.title, e.users, e.candidate)
+  end
 
   def month
     Date.parse(self.date).strftime("%B")

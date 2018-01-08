@@ -6,6 +6,8 @@ $('#basic-form-modal').find('.modal-header').after('<%= j render "job_seeker/pro
 $('#basic-form-modal').modal("toggle");
 
 
-
-
-
+$('#attachment-up').fileupload({
+  type: 'POST',
+  url: '/job_seeker/attachments',
+  autoUpload: true
+});

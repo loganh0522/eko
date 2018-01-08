@@ -67,13 +67,16 @@ class Business::InterviewInvitationsController < ApplicationController
     @message = interview_invite.message
     @subject = interview_invite.subject
     @token = interview_invite.token
-
-    # if current_user.outlook_token.present? 
+    
+    # if current_user.google_token.present? 
     #   @email = Mail.new(to: @recipient.email, from: current_user.email, subject: params[:message][:subject], body: params[:body], content_type: "text/html")
     #   GoogleWrapper::Gmail.send_message(@email, current_user, message)
-    # else 
-    
-    AppMailer.send_interview_invitation(@token, @message, @subject, @job, email, current_company).deliver_now
+    # else current_user.google_token.present? 
+    #   @email = Mail.new(to: @recipient.email, from: current_user.email, subject: params[:message][:subject], body: params[:body], content_type: "text/html")
+    #   GoogleWrapper::Gmail.send_message(@email, current_user, message)
+    # end
+
+    # AppMailer.send_interview_invitation(@token, @message, @subject, @job, email, current_company).deliver_now
     # end
   end
 
@@ -89,6 +92,16 @@ class Business::InterviewInvitationsController < ApplicationController
           @startTime = time.start_time.strftime("%Y-%m-%dT%H:%M:%S")
           @endTime = time.end_time.strftime("%Y-%m-%dT%H:%M:%S")
           OutlookWrapper::Calendar.create_event(user, @startTime, @endTime, time)
+        end
+      elsif user.google_token.present? 
+        @times = interview_invite.interview_times
+        @email = user.email   
+        @times.each do |time| 
+          @startTime = time.start_time.strftime("%Y-%m-%dT%H:%M:%S")
+          @endTime = time.end_time.strftime("%Y-%m-%dT%H:%M:%S")
+          @location = interview_invite.location
+          # @description = interview_invite.details
+          GoogleWrapper::Calendar.create_event(current_user, @startTime, @endTime, location)
         end
       end
     end

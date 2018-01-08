@@ -13,10 +13,5 @@ jQuery ->
     $('#media-photo-up').fileupload()
     $('#background-photo-up').fileupload()
 
-    $('#attachment-up').fileupload(
-      type: 'POST'
-      url: '/job_seeker/attachments'
-      autoUpload: true
-      )
-
+    
     

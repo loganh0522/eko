@@ -4,3 +4,10 @@ $('#basic-form-modal').find('form').remove()
 $('#basic-form-modal').find('.modal-title').html('<%= j "Edit Project" %>');
 $('#basic-form-modal').find('.modal-header').after('<%= j render "job_seeker/projects/form" %>');
 $('#basic-form-modal').modal("toggle");
+
+$('#attachment-up').fileupload({
+  type: 'POST',
+  url: '/job_seeker/attachments',
+  autoUpload: true
+});
+

@@ -1,0 +1,7 @@
+.title Skills Used: 
+- if position.user_skills.present?
+  - position.user_skills.each do |skill|
+    %div{:class => "user-tag"}
+      .name= skill.skill.name
+- else
+  .name No skills listed

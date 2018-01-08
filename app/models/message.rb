@@ -7,7 +7,7 @@ class Message < ActiveRecord::Base
   has_one :activity, as: :trackable, :dependent => :destroy
   
   validates_presence_of :subject, :body
-  # after_create :send_email, if: :email_id_present?
+  after_create :send_email, if: :email_id_present?
 
   def send_email
     if self.user.google_token.present? 

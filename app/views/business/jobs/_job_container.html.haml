@@ -17,7 +17,7 @@
             %a= link_to "Edit Job Posting", edit_business_job_path(job)   
           - if job.status == 'draft'
             %li
-              %a= link_to "Publish Job", business_job_path(job, status: 'publish'), method: :patch, remote: true  
+              %a= link_to "Publish Job", business_job_path(job, status: 'open'), method: :patch, remote: true  
           - elsif job.status == 'open'
             %li
               %a= link_to "Close Job", business_job_path(job, status: 'close'), method: :patch, remote: true

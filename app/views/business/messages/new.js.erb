@@ -2,11 +2,6 @@
   $('.action-area').html('<%= j render "business/messages/form" %>');
   $('.active-button').removeClass('active-button');
   $('#add-message').addClass('active-button');
-  
-  $('#mediumModal').find('form').remove()
-  $('#mediumModal').find('.new-title').html('<%= j "Send E-mail" %>');
-  $('#mediumModal').find('.new-modal-header').after('<%= j render "business/messages/form" %>');
-  $('.mediumModal').show();
 <% elsif params[:client_contact_id].present? %>
   $('.action-area').html('<%= j render "business/messages/client_contact_form" %>');
   $('.application-actions').find('.active-button').addClass('inactive-button');
@@ -14,8 +9,10 @@
   $('.application-actions').find('#add-note').addClass('active-button');
   $('.application-actions').find('#add-note').removeClass('inactive-button');
 <% else %>
-  $('.mediumModal').hide();
-  $('.mediumModal').find('form').remove();
+  $('#mediumModal').find('form').remove()
+  $('#mediumModal').find('.new-title').html('<%= j "Send E-mail" %>');
+  $('#mediumModal').find('.new-modal-header').after('<%= j render "business/messages/form" %>');
+  $('.mediumModal').show();
 <% end %>
 
 

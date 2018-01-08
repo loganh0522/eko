@@ -1,5 +1,6 @@
 $('#mediumModal').find('form').remove();
 $('#mediumModal').hide();
+$('#timepicker').timepicker()
 
 if ($('.table1').is(":visible")) {
   $('#task_<%= @task.id %>').replaceWith('<%= j render "business/tasks/task_row", task: @task %>');

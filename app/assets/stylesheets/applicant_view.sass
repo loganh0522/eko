@@ -72,7 +72,12 @@
     .applicant-general
       height: inherit
       .display-applicant-details
-        padding: 0 5px
+        padding: 0px 5px
+        .comment-container
+          padding: 10px 5px
+        .messages
+          padding: 10px 5px
+
   .applicant-side-container
     float: left
     position: absolute
@@ -85,12 +90,13 @@
       float: left
       width: 100%
       background: #ffffff
-      padding-top: 20px
+      padding: 20px
       border-bottom: 1px solid rgba(0,0,0,0.1)
       .user-image 
         img
           width: 125px 
           height: 125px
+          float: left
           margin: 0 auto
           border-radius: 50%
           border: 1px solid #fff
@@ -100,7 +106,6 @@
         text-align: center
         margin: 0 auto
         overflow: hidden
-        padding: 20px 20px
         .name 
           font-size: 24px
         .glyphicon

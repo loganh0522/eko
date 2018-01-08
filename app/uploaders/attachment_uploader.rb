@@ -10,18 +10,18 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   end
 
   version :large_image, :if => :image?  do
-    resize_to_fill(500, 500)
+    resize_to_fit(500, 500)
   end
   
   version :medium_image, :if => :image?, from_version: :large_image do
-    resize_to_fill(300, 300)
+    resize_to_fit(300, 300)
   end
 
   version :small_image, :if => :image?, from_version: :medium_image do
     resize_to_fill(200, 200)
   end
 
-  version :thumb, :if => :image? do 
+  version :thumb, :if => :image?, from_version: :small_image do 
     resize_to_fill(100, 100)
   end
 

@@ -12,10 +12,32 @@
           %th(width="25%") Date Applied
         %tbody
           - @candidates.each do |candidate|
-            - if candidate.manually_created == true
-              = render 'business/shared/manual_application_rows', candidate: candidate
-            - else
-              = render 'business/shared/user_applications_table_rows', candidate: candidate
+            %tr{:id => "#{application_stage(candidate, @job)}" }
+              %td
+                .applicant-checkbox{:data => {:id => candidate.id}}
+                  = check_box_tag "applicant_ids[]", candidate.id, false, class: "checkbox"
+              %td
+                = candidate_user_avatar(candidate)
+              %td
+                .content
+                  = link_to "#{candidate.full_name}", business_job_application_path(@job, current_application(candidate, @job)), class: "name", :data => {:id =>  "#{candidate.full_name}"}
+                  - if candidate.current_jobs.present?
+                    .bottom-content= "#{candidate.current_jobs.first.title} - #{candidate.current_jobs.first.company_name}"
+                  - else
+                    .bottom-content No Experience Listed
+              %td
+                .content
+                  .stage= application_stage(candidate, @job)
+              %td
+                .content
+                  = render 'business/ratings/form', application: current_application(candidate, @job)
+              %td
+                .content
+                  .stage= "#{time_ago_in_words(candidate.created_at)} ago"    
+              / = render 'business/shared/manual_application_rows', candidate: candidate
+
+              / = render 'business/shared/user_applications_table_rows', candidate: candidate
+
     .not-present-container
       %p There are currently no applicants in this stage.
 

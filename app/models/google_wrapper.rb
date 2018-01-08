@@ -1,6 +1,7 @@
 module GoogleWrapper 
 require 'signet/oauth_2/client'
 require 'google/apis/gmail_v1'
+require 'google/apis/calendar_v3'
 require 'google/api_client/client_secrets.rb'
 Google::Apis::RequestOptions.default.retries = 5
 
@@ -218,7 +219,6 @@ Google::Apis::RequestOptions.default.retries = 5
       service.authorization = @client
 
       @message = service.get_user_message('me', messageId)
-      binding.pry
     end
   end
 
@@ -234,39 +234,46 @@ Google::Apis::RequestOptions.default.retries = 5
       @client.authorization.client_id = ENV['GOOGLE_CLIENT_ID']
       @client.authorization.client_secret = ENV['GOOGLE_CLIENT_SECRET']
       @client.authorization.refresh!
-      @service = @client.discovered_api('gmail', 'v1')
+      @service = @client.discovered_api('calendar', 'v3')
     end
 
-    def self.set_client
-      client = Signet::OAuth2::Client.new(access_token: token, 
+    def self.set_client(current_user)
+      token = current_user.google_token.access_token
+      refresh_token = current_user.google_token.refresh_token
+
+      @client = Signet::OAuth2::Client.new(
+        access_token: token, 
         refresh_token: refresh_token, 
         token_credential_uri: 'https://accounts.google.com/o/oauth2/token', 
         authorization_uri: 'https://accounts.google.com/o/oauth2/auth', 
         client_id: ENV['GOOGLE_CLIENT_ID'],
         client_secret: ENV['GOOGLE_CLIENT_SECRET'],
-        scope: ['email', 
-          'https://www.googleapis.com/auth/gmail.compose',
-          'https://www.googleapis.com/auth/gmail.modify'],
+        scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
         grant_type: 'authorization_code')
     end
     
-    def self.create_event
-      calendar = Calendar::CalendarService.new
-      calendar.authorization = user_credentials_for(Calendar::AUTH_CALENDAR)
-
+    def self.create_event(current_user, startTime, endTime, location)
+      self.set_client(current_user)
+      service = Google::Apis::CalendarV3::CalendarService.new
+      service.authorization = @client
+    
       event = {
-        summary: options[:summary],
-        attendees: Array(options[:attendees]).map { |email| { email: email } },
+        # summary: options[:summary],
+        # summary: title
+        # description: description,
+        attendees: [{email: "loganh0522@gmail.com"}],
+        location: location,
         start: {
-          date_time: DateTime.parse(options[:start])
+          date_time: startTime,
+          time_zone: 'America/New_York'
         },
         end: {
-          date_time: DateTime.parse(options[:end])
-        }
+          date_time: endTime,
+          time_zone: 'America/New_York'
+        }, 
       }
 
-      event = calendar.insert_event('primary', event, send_notifications: true)
-      say "Created event '#{event.summary}' (#{event.id})"
+      @event = service.insert_event('primary', event, send_notifications: true)
     end
 
     def self.get_event

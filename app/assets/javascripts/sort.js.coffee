@@ -1,4 +1,4 @@
-jQuery ->  
+jQuery ->
   $('#stages').sortable
     axis: 'y'
     cursor: 'move'

@@ -1,19 +1,19 @@
-.applicant-view
-  .home-page-header  
-    %h2= "#{@job.title}"
+= render 'top_container'
 
-.main-container
-  .applicant-view
-    .applicant-main-container
-      .navigation-container
-        .applicant-nav
-          = render 'business/applications/show_application/applicant_nav'
-        .action-area
-      .applicant-general
-        .display-applicant-details
-          = render 'business/applications/show_application/application_cv'
-.side-container
-  .applicant-side-container
-    .applicant-general-info
-      = render 'business/applications/show_application/applicant_details'
-    = render 'business/applications/show_application/side_container'
+#main-container
+  #padding
+    = link_to business_job_applications_path(@job) do 
+      %i.fa.fa-arrow-left Back to Applicants
+    .show-applicant-view
+      .applicant-main-container
+        .navigation-container
+          .applicant-nav
+            = render 'business/applications/show_application/applicant_nav'
+          .action-area
+        .applicant-general
+          .display-applicant-details
+            = render 'business/applications/show_application/application_cv'
+      .applicant-side-container
+        .applicant-general-info
+          = render 'business/applications/show_application/applicant_details'
+        = render 'business/applications/show_application/side_container'

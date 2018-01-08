@@ -3,19 +3,13 @@
     .applicant-checkbox{:data => {:id => candidate.id}}
       = check_box_tag "applicant_ids[]", candidate.id, false, class: "checkbox"
   %td
-    - if candidate.user.user_avatar.present? 
-      .circle
-        = image_tag candidate.user.user_avatar.image.small_image, :size => "50x50" 
-    - else
-      .circle-img
-        %img(src="/tmp/little-man.png")  
+    = candidate_user_avatar(candidate)
   %td.names
-    .name{:data => {:id =>  "#{candidate.user.full_name}"}}
-      = link_to "#{candidate.user.full_name}", business_job_application_path(@job, current_application(candidate, @job)), remote: true
+    = link_to "#{candidate.full_name}", business_job_application_path(@job, current_application(candidate, @job)), class: "name", :data => {:id =>  "#{candidate.full_name}"}
     - if candidate.user.current_jobs.present?
-      .current-position= "#{candidate.user.current_jobs.first.title} - #{candidate.user.current_jobs.first.company_name} "
+      .bottom-content= "#{candidate.user.current_jobs.first.title} - #{candidate.user.current_jobs.first.company_name} "
     - else
-      .current-position No Experience Listed
+      .bottom-content No Experience Listed
   %td
     .stage= application_stage(candidate, @job)
   %td

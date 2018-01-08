@@ -1,32 +1,32 @@
-= link_to 'Add Candidate', new_business_candidate_path(:job => @job), class: "btn border-button", id: "add-applicant", remote: true
-.no-action-buttons
-  .btn.inactive-button More Actions
-  .btn.inactive-button Send E-mail
-  .btn.inactive-button Add Note 
-  .btn.inactive-button Add Tag
-.applicant-action-buttons
-  .dropdown
-    .dropdown-button.active-application-button
-      More Actions
-      %i.fa.fa-ellipsis-h.fa-lg
-    .dropdown-content#myDropdown
-      = link_to new_multiple_business_comments_path(job: @job), class: "move-applicants", id: "add_comment", remote: true do 
-        %i.fa.fa-pencil
-        .action Add Note
+.application-actions
+  = link_to 'Add Candidate', new_business_candidate_path(:job => @job), class: "btn border-button", id: "add-applicant", remote: true
+  .no-action-buttons
+    .btn.inactive-button More Actions
+    .btn.inactive-button Send E-mail
+    .btn.inactive-button Add Note 
+    .btn.inactive-button Add Tag
+  .applicant-action-buttons
+    .dropdown
+      .dropdown-button.active-application-button
+        More Actions
+        %i.fa.fa-ellipsis-h.fa-lg
+      .dropdown-content#myDropdown
+        = link_to new_multiple_business_comments_path(job: @job), remote: true do 
+          %i.fa.fa-pencil
+          .action Add Note
+        = link_to new_multiple_business_tasks_path(job: @job), remote: true do
+          .action Create Task
 
-      = link_to new_multiple_business_tasks_path(job: @job), class: "move-applicants", id: "create_task", remote: true do
-        .action Create Task
+        = link_to new_business_interview_invitation_path(job: @job), remote: true do 
+          .action Interview Invitation
 
-      = link_to new_business_interview_invitation_path(job: @job), class: "move-applicants", id: "create_task", remote: true do 
-        .action Interview Invitation
+        = link_to '#', id: "destroy_candidates", class: "move-applicants", :data => {:toggle => "modal", :target => "#destroy_candidatesModal"} do
+          %i.fa.fa-trash-o
+          .action Remove from Job
 
-      = link_to '#', id: "destroy_candidates", class: "move-applicants", :data => {:toggle => "modal", :target => "#destroy_candidatesModal"} do
-        %i.fa.fa-trash-o
-        .action Remove from Job
+    = link_to 'Send E-mail', new_multiple_business_messages_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true
+    
+    = link_to 'Move Stages', '#', class: "btn active-application-button move-applicants", id: "stage", :data => {:toggle => "modal", :target => "#stageModal"}
 
-  = link_to 'Send E-mail', new_multiple_business_messages_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true
-  
-  = link_to 'Move Stages', '#', class: "btn active-application-button move-applicants", id: "stage", :data => {:toggle => "modal", :target => "#stageModal"}
-
-  = link_to "Add Tag", new_business_tag_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true
+    = link_to "Add Tag", new_business_tag_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true
 

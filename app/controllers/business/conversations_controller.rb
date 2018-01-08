@@ -15,7 +15,7 @@ class Business::ConversationsController < ApplicationController
     @conversation = Conversation.find(params[:id])
     @messages = @conversation.messages
     @candidate = @conversation.candidate
-    # @messages = OutlookWrapper::User.create_subscription(current_user)
+    
 
     respond_to do |format|
       format.js

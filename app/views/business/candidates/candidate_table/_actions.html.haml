@@ -24,6 +24,7 @@
         = link_to '#', id: "destroy_candidates", class: "move-applicants", :data => {:toggle => "modal", :target => "#destroy_candidatesModal"} do
           %i.fa.fa-trash-o
           .action Destroy
+          
     = link_to 'Send E-mail', new_multiple_business_messages_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true
     
     = link_to 'Add Note', new_multiple_business_comments_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true

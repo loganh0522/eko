@@ -1,6 +1,6 @@
 <% if params[:applicant_ids].present? %>
-  $('#smallModal').hide();
-  $('#smallModal').find('form').remove();
+  $('.smallModal').hide();
+  $('.smallModal').find('form').remove();
 <% elsif params[:tag][:candidate_id].present? %>
   $('.tags').html('<%= j render "business/tags/tags", tags: @tags %>');
 <% else %>

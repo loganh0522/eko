@@ -3,18 +3,18 @@
     .applicant-checkbox{:data => {:id => candidate.id}}
       = check_box_tag "applicant_ids[]", candidate.id, false, class: "checkbox"
   %td
-    .circle-img
-      %img(src="/tmp/little-man.png")  
-  %td.names
-    .name{:data => {:id =>  "#{candidate.full_name} "}}
-      = link_to "#{candidate.full_name}", business_job_application_path(@job, current_application(candidate, @job)), remote: true
-    
-    - if candidate.current_jobs.present?
-      .current-position= "#{candidate.current_jobs.first.title} - #{candidate.current_jobs.first.company_name}"
-    - else
-      .current-position No Experience Listed
+    = candidate_user_avatar(candidate)
   %td
-    .stage= application_stage(candidate, @job)
+    .content
+      = link_to "#{candidate.full_name}", business_job_application_path(@job, current_application(candidate, @job)), class: "name", :data => {:id =>  "#{candidate.full_name}"}
+      
+      - if candidate.current_jobs.present?
+        .current-position= "#{candidate.current_jobs.first.title} - #{candidate.current_jobs.first.company_name}"
+      - else
+        .current-position No Experience Listed
+  %td
+    .content
+      .stage= application_stage(candidate, @job)
   %td
     = render 'business/ratings/form', application: current_application(candidate, @job)
   %td

@@ -1,4 +1,4 @@
-= form_for [@job, @candidate] do |f| 
+= form_for [:job_seeker, @job, @candidate] do |f| 
   - @questions.each do |question|
     .question
       - if question.required == 1
