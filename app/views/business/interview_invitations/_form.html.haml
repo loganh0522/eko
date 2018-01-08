@@ -5,7 +5,7 @@
   .column-4
     .form-row
       = f.label "Title"
-      = f.text_field :title, autocomplete: "off", id: "title_Block", placeholder: "Event Title", 
+      = f.text_field :title, autocomplete: "off", id: "title_Block", placeholder: "Event Title" 
       %span#title_msgBlock.help-block
       = f.label "Type of Meeting"
       = f.select :kind, options_for_select(["Phone Interview", "Skype", "In-person Interview"]), :html => {id: "kind_Block", prompt: "Choose Type..."}
