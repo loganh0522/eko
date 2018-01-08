@@ -14,7 +14,6 @@ class CandidatesController < ApplicationController
   def create 
     @job = Job.find(params[:job_id])  
     @company = @job.company
-    binding.pry
     if current_user.candidates.where(company_id: @company.id).present?
       @candidate = @company.candidates.where(email: params[:candidate][:email]).first
       @application = Application.create(candidate_id: @candidate.id, job_id: @job) 
@@ -32,24 +31,6 @@ class CandidatesController < ApplicationController
         render :new
         flash[:error] = "Something went wrong please try again"
       end
-    end
-    
-    @job = Job.find(params[:job_id])  
-    @company = @job.company
-    @candidate = Candidate.new(candidate_params)
-
-    if @company.candidates.where(email: params[:candidate][:email]).present?
-    if @candidate.save   
-      @application = Application.create(candidate_id: @candidate.id, job_id: @job.id)   
-      flash[:success] = "Your application has been submitted"
-      redirect_to root_path
-    else
-      flash[:error] = "Something went wrong please try again"
-      @user = User.new
-      @candidate = Candidate.new(candidate_params)
-      @questions = @job.questions
-      @candidate.question_answers.build
-      render :new
     end
   end
 
