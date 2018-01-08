@@ -12,27 +12,27 @@ class CandidatesController < ApplicationController
   end
 
   def create 
-    # @job = Job.find(params[:job_id])  
-    # @company = @job.company
-    # binding.pry
-    # if current_user.candidates.where(company_id: @company.id).present?
-    #   @candidate = @company.candidates.where(email: params[:candidate][:email]).first
-    #   @application = Application.create(candidate_id: @candidate.id, job_id: @job) 
-    #   track_activity @application, "create", @company.id, @candidate.id, params[:job_id]
-    #   redirect_to root_path
-    # else
-    #   @candidate = Candidate.new(candidate_params.merge(company_id: @company.id, user_id: current_user.id))
+    @job = Job.find(params[:job_id])  
+    @company = @job.company
+    binding.pry
+    if current_user.candidates.where(company_id: @company.id).present?
+      @candidate = @company.candidates.where(email: params[:candidate][:email]).first
+      @application = Application.create(candidate_id: @candidate.id, job_id: @job) 
+      track_activity @application, "create", @company.id, @candidate.id, params[:job_id]
+      redirect_to root_path
+    else
+      @candidate = Candidate.new(candidate_params.merge(company_id: @company.id, user_id: current_user.id))
       
-    #   if @candidate.save   
-    #     @application = Application.create(candidate_id: @candidate.id, job_id: @job)   
-    #     flash[:success] = "Your application has been submitted"
-    #     track_activity @application, "create", @company.id, @candidate.id, params[:job_id]
-    #     redirect_to root_path
-    #   else
-    #     render :new
-    #     flash[:error] = "Something went wrong please try again"
-    #   end
-    # end
+      if @candidate.save   
+        @application = Application.create(candidate_id: @candidate.id, job_id: @job)   
+        flash[:success] = "Your application has been submitted"
+        track_activity @application, "create", @company.id, @candidate.id, params[:job_id]
+        redirect_to root_path
+      else
+        render :new
+        flash[:error] = "Something went wrong please try again"
+      end
+    end
     
     @job = Job.find(params[:job_id])  
     @company = @job.company
