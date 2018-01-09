@@ -1,4 +1,4 @@
-$('#basic-form-modal').find('form').remove()
-$('#basic-form-modal').find('.modal-title').html('<%= j "Edit Candidate" %>');
-$('#basic-form-modal').find('.modal-header').after('<%= j render "business/candidates/form"  %>');
-$('#basic-form-modal').modal("toggle");
+$('.mediumModal').find('form').remove()
+$('.mediumModal').find('.new-title').html('<%= j "Edit Candidate" %>');
+$('.mediumModal').find('.new-modal-header').after('<%= j render "business/candidates/form"  %>');
+$('.mediumModal').show();

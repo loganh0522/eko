@@ -2,15 +2,19 @@
   .modal-body
     .form-row
       .contain-50
+        = f.label :first_name, "First Name"
         = f.text_field :first_name, id: "first_name_Block", hide_label: true, placeholder: "First Name", autocomplete: "off"
         %span#first_name_msgBlock
       .contain-50
+        = f.label :last_name, "Last Name"
         = f.text_field :last_name, id: "last_name_Block", hide_label: true, placeholder: "Last Name", autocomplete: "off"
         %span#last_name_msgBlock
       .contain-50
+        = f.label :email, "Email"
         = f.text_field :email, id: "email_Block", hide_label: true, placeholder: "E-mail", autocomplete: "off"
         %span#email_msgBlock
       .contain-50
+        = f.label :phone, "Phone"
         = f.text_field :phone, hide_label: true, placeholder: "Phone", autocomplete: "off"
     - if @candidate.new_record? 
       .form-row
@@ -55,6 +59,6 @@
       = f.submit "Save", class: "btn submit-button"
     - else 
       = f.submit "Update", class: "btn submit-button"
-    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+    .btn.border-button.close-modal Cancel
 
 
