@@ -1,8 +1,12 @@
 = form_for [:business, @tag], html: {remote: true, class: 'tag_form', id: "multiForm"} do |f|
-  .modal-body     
-    .recipients Add Tag To: 
-    = f.text_field :name, :class => 'ui-autocomplete-input tags', :placeholder => 'Add a Tag', id: "tag_name", hide_label: true
-    #search-results-tags  
+  .modal-body   
+    .email-area
+      .to  
+        .recipients 
+    .form-row-no-border
+      = f.label :name, "Add Tag"
+      = f.text_field :name, :class => 'ui-autocomplete-input tags', :placeholder => 'Add a Tag', id: "tag_name", hide_label: true
+      #search-results-tags  
   .modal-footer
     = hidden_field_tag :applicant_ids
     = hidden_field_tag :tag_id

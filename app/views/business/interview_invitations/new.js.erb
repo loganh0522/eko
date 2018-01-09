@@ -2,17 +2,42 @@
   $('.action-area').html('<%= j render "business/interview_invitations/form" %>');
   $('.active-button').removeClass('active-button');
   $('#add-invitation').addClass('active-button');
-<% elsif @job.present? %>
-  $('#basic-form-modal').find('form').remove()
-  $('#basic-form-modal').find('.modal-title').html('<%= j "Send E-mail" %>');
-  $('#basic-form-modal').find('.modal-header').after('<%= j render "business/interview_invitations/form_multiple" %>');
-  $('#basic-form-modal').modal("toggle");
-<% else %>
-  $('.largeModal').find('form').remove()
-  $('.largeModal').find('.new-title').html('<%= j "Schedule Meeting" %>');
-  $('.largeModal').find('.new-modal-header').after('<%= j render "business/interview_invitations/form" %>');
-  $('.largeModal').show();
+<% elsif @job.present?  %>
+  checkbox = $('.applicant-checkbox');
+  applicant_ids = [];
+  applicants = [];
+  applicant_names = [];
+
+  for (i = 0, len = checkbox.length; i < len; i++) {
+    n = checkbox[i];
+    if ($(n).find('input').is(':checked') === true) {
+      applicant = [];
+      if (!applicant_ids.includes($(n).data('id'))) {
+        applicant_ids.push($(n).data('id'));
+      }
+      if (!applicant.includes($(n).data('id'))) {
+        applicant.push($(n).data('id'));
+      }
+      if (!applicant.includes($(n).parent().parent().find('.name').data('id'))) {
+        applicant.push($(n).parent().parent().find('.name').data('id'));
+      }
+      applicants.push(applicant);
+    }
+  }
+
+  numApp = applicants.length
+  $('.assign-to-row').append('<div class="dropdown", id="addMultiDropDown"> <div class="dropdown-button color="black">' + numApp + ' Candidates Selected <div class="caret"></div> </div> <div class="dropdown-content multiCandidates">')
+  $('.newModal').find('#candidate_ids').val(applicant_ids)
+
+  for (j = 0, len1 = applicants.length; j < len1; j++) {
+    n = applicants[j];
+    $('.multiCandidates').append('<div class="multi-obj" data-id=' + n[0] + '> <div class="name">' + n[1] + '</div> <div class="candidate_ids" id="delete-tag"> &times </div> </div>');
+  }
 <% end %>
+$('.largeModal').find('form').remove()
+$('.largeModal').find('.new-title').html('<%= j "Schedule Meeting" %>');
+$('.largeModal').find('.new-modal-header').after('<%= j render "business/interview_invitations/form" %>');
+$('.largeModal').show();
 
 $('#interview-calendar').fullCalendar({
   defaultView: 'agendaWeek',

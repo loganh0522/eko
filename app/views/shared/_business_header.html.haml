@@ -32,17 +32,18 @@
         = image_tag current_user.user_avatar.image.small_image, :class => "img dropdown-img"
       - else
         .circle-img= current_user.first_name.first.capitalize
-      = current_user.first_name
-      %b.caret
+      .name
+        = current_user.first_name
+        %b.caret
     .dropdown-content#myDropdown
       - if permitted_to? :manage, @career_portal
-        %a= link_to "Career Portal", business_job_board_path(current_company.job_board.id)
-        %a= link_to "Team Members", business_users_path
-        %a= link_to "Company Details", business_company_path(current_company)
-        %a= link_to "Hiring Pipeline", business_default_stages_path
-        %a= link_to "Hiring Defaults", business_hiring_defaults_path
-        %a= link_to "Templates", business_templates_path
-        %a= link_to "Subscription", business_plan_path
-        %a= link_to "Billing", business_customers_path
-      %a= link_to "My Profile", business_user_path(current_user)
-      %a= link_to "Sign Out", signout_path
+        = link_to "Career Portal", business_job_board_path(current_company.job_board.id)
+        = link_to "Team Members", business_users_path
+        = link_to "Company Details", business_company_path(current_company)
+        = link_to "Hiring Pipeline", business_default_stages_path
+        = link_to "Hiring Defaults", business_hiring_defaults_path
+        = link_to "Templates", business_templates_path
+        = link_to "Subscription", business_plan_path
+        = link_to "Billing", business_customers_path
+      = link_to "My Profile", business_user_path(current_user)
+      = link_to "Sign Out", signout_path

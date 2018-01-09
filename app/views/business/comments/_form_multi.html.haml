@@ -3,8 +3,7 @@
     .modal-body
       .email-area
         .to
-          .title
-          .recipients Add to
+          .recipients 
       = f.text_area :body, id: "body_Block", class: "comment-body", rows: 10, cols: 8, placeholder: "Add a Note"
       = hidden_field_tag :applicant_ids    
       = f.hidden_field :user_id, value: current_user.id

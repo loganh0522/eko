@@ -8,8 +8,6 @@ applicant_ids = [];
 applicants = [];
 applicant_names = [];
 
-$('.recipients').append('<div class="dropdown"> <div class="dropdown-button color="black">" 5 Candidates Selected</div> <div class="dropdown-content multiCandidates">')
-
 for (i = 0, len = checkbox.length; i < len; i++) {
   n = checkbox[i];
   if ($(n).find('input').is(':checked') === true) {
@@ -27,9 +25,11 @@ for (i = 0, len = checkbox.length; i < len; i++) {
   }
 }
 
+numApp = applicants.length
+$('.recipients').append('<div class="dropdown", id="addMultiDropDown"> <div class="dropdown-button color="black">' + numApp + ' Candidates Selected <div class="caret"></div> </div> <div class="dropdown-content multiCandidates">')
 $('.newModal').find('#applicant_ids').val(applicant_ids)
 
 for (j = 0, len1 = applicants.length; j < len1; j++) {
   n = applicants[j];
-  $('.multiCandidates').append('<div class="user-tag" data-id=' + n[0] + '> <div class="name">' + n[1] + '</div> <div class="delete-tag" id="delete-multiple"> &times </div> </div>');
+  $('.multiCandidates').append('<div class="multi-obj" data-id=' + n[0] + '> <div class="name">' + n[1] + '</div> <div class="applicant_ids" id="delete-tag"> &times </div> </div>');
 }

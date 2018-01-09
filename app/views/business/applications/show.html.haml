@@ -2,8 +2,9 @@
 
 #main-container
   #padding
-    = link_to business_job_applications_path(@job) do 
-      %i.fa.fa-arrow-left Back to Applicants
+    = link_to business_job_applications_path(@job), class: "back-to-candidates" do 
+      %i.fa.fa-arrow-left 
+      Back to Applicants
     .show-applicant-view
       .applicant-main-container
         .navigation-container

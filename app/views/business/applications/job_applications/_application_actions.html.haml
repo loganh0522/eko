@@ -14,6 +14,7 @@
         = link_to new_multiple_business_comments_path(job: @job), remote: true do 
           %i.fa.fa-pencil
           .action Add Note
+        
         = link_to new_multiple_business_tasks_path(job: @job), remote: true do
           .action Create Task
 
@@ -24,9 +25,9 @@
           %i.fa.fa-trash-o
           .action Remove from Job
 
-    = link_to 'Send E-mail', new_multiple_business_messages_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true
+    = link_to 'Send E-mail', new_multiple_business_messages_path, class: "btn active-application-button", remote: true
     
-    = link_to 'Move Stages', '#', class: "btn active-application-button move-applicants", id: "stage", :data => {:toggle => "modal", :target => "#stageModal"}
+    = link_to 'Move Stages', multiple_change_stages_business_applications_path(job: @job), class: "btn active-application-button", remote: true
 
-    = link_to "Add Tag", new_business_tag_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true
+    = link_to "Add Tag", new_business_tag_path, class: "btn active-application-button", remote: true
 

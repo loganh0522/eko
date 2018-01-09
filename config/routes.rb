@@ -251,6 +251,7 @@ Rails.application.routes.draw do
     
     resources :applications do 
       collection do 
+        get :multiple_change_stages, to: "applications#multiple_change_stages"
         post :move_stages, to: "applications#move_stage"
         get :new_multiple, to: "applications#new_multiple" 
         post :create_multiple, to: "applications#create_multiple"

@@ -3,13 +3,13 @@
     .email-area
       .to 
         .title To:  
-        .recipients  
-      .to 
+        .recipients
+      .from 
         .title From:  
-        .from= current_user.email    
+        .sender= current_user.email    
       .subject
         .title Subject
-        .sender= f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false
+        = f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false
       .email-variables
         .show-hidden-search-box
           .plain-text

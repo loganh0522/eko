@@ -1,7 +1,8 @@
-$('#mediumModal').find('form').remove()
-$('#mediumModal').find('.new-title').html('<%= j "Create Task"  %>');
-$('#mediumModal').find('.new-modal-header').after('<%= j render "business/tasks/form_multiple" %>');
-$('#mediumModal').show();
+$('.smallModal').find('form').remove()
+$('.smallModal').find('.new-title').html('<%= j "Add to Job" %>');
+$('.smallModal').find('.new-modal-header').after('<%= j render "business/applications/move_stages_form" %>');
+$('.smallModal').show();
+
 
 checkbox = $('.applicant-checkbox');
 applicant_ids = [];

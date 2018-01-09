@@ -11,6 +11,22 @@
     .tags
       = render "business/tags/tags"
 
+.side-section
+  .tag-container
+    .tag-header
+      %h4 Contact Details
+    .tags
+      .contact-details
+        .glyphicon.glyphicon-earphone 
+          = "#{@candidate.phone}"
+        %br
+        .glyphicon.glyphicon-envelope
+          = "#{@application.candidate.email}"
+        %br
+        - if @application.candidate.location.present?
+          .glyphicon.glyphicon-map-marker
+            = "#{@application.candidate.location}"
+
 
 
    

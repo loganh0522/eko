@@ -110,6 +110,13 @@ class Business::ApplicationsController < ApplicationController
     end
   end
 
+  def multiple_change_stages
+    @job = Job.find(params[:job])
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def move_stage    
     @stage = Stage.find(params[:stage])
 

@@ -70,20 +70,6 @@
   width: 24%
   margin-right: 1%
 
-  
-
-.duration
-  width: 300px 
-  input
-    width: 50px
-    float: left
-    padding: 15px 
-  .duration-title
-    float: left
-    margin: 15px 
-
-
-
 .task-form
   background: #ffffff
   margin-top: 0
@@ -123,6 +109,52 @@
     .submit-button
       float: right
 
+#addMultiDropDown
+  .dropdown-content
+    background: #ffffff
+    position: absolute
+    width: fit-content
+    right: 1px
+    min-width: 200px
+    height: -webkit-fit-content
+    height: -moz-fit-content
+    height: fit-content
+    max-height: 250px
+    -webkit-box-shadow: 0px 1px 2px 1px #c7c5c7
+    box-shadow: 0px 1px 2px 1px #c7c5c7
+    overflow-y: scroll
+  .multiCandidates
+    .multi-obj
+      max-width: inherit
+      overflow: hidden
+      height: auto
+      text-overflow: ellipsis
+      float: left
+      padding: 6px 10px
+      margin: 0 0
+      width: 100%
+      overflow: hidden
+      border-bottom: 1px solid rgba(239, 122, 43, 0.9)
+      .name
+        float: left
+        width: auto
+        width: 80%
+        text-overflow: ellipsis
+        white-space: nowrap
+        overflow: hidden
+        margin-top: 3px
+      #delete-tag
+        float: right
+        width: auto
+        margin-left: 5px
+        font-size: 14px
+        color: rgba(0, 0, 0, 0.7)
+        padding: 3px 3px
+        &:hover
+          background: rgba(239, 122, 43, 0.3)
+          border-radius: 50%
+          cursor: pointer
+
 
 .email-area
   width: 100%
@@ -143,11 +175,20 @@
     .show-hidden-search-box
       float: left
       margin-right: 25px
-  .to 
-    height: auto
-    padding: 10px 10px
+  .from
+    height: 50px
+    padding: 15px 15px
     border-bottom: 1px solid rgba(0,0,0,0.1)
-    overflow: hidden
+    .title
+      float: left
+      width: 10%
+    .sender
+      float: left
+      width: 90%
+  .to 
+    height: 50px
+    padding: 15px 15px
+    border-bottom: 1px solid rgba(0,0,0,0.1)
     .title
       float: left
       width: 10%
@@ -158,23 +199,25 @@
       float: left
       width: 90%
   .subject
-    height: auto
+    height: 50px
+    clear: both
     border-bottom: 1px solid rgba(0,0,0,.1)
     overflow: hidden
-    padding: 0 0
+    padding: 15px 15px
     #message-subject
       float: left
       border: none
       width: 80%
       height: auto
-      margin: 0 0 
+      margin: -7px 0 
       padding-left: 0
       &:focus 
         outline: none
     .title
       float: left
-      width: fit-content
-      margin: 10px 10px 10px 10px   
+      width: 10%
+
+
   .email-content
     padding: 10px 10px
   .email-footer
@@ -186,6 +229,7 @@
       float: right
       margin-top: -15px
       margin-right: 10px
+
 
 .comment-area
   background: #ffffff
