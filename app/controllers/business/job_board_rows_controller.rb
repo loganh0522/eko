@@ -21,6 +21,7 @@ class Business::JobBoardRowsController < ApplicationController
   def create   
     @job_board = JobBoard.find(params[:job_board_id])
     @job_board_header = @job_board.job_board_header
+    
     if params[:job_board_row][:video_link].present? 
       video_parse_function
       @section = JobBoardRow.new(job_board_row_params.merge!(youtube_id: @video_id ))
@@ -72,10 +73,23 @@ class Business::JobBoardRowsController < ApplicationController
   end
 
   def update
-    binding.pry
     @section = JobBoardRow.find(params[:id])
     @job_board = JobBoard.find(params[:job_board_id])
     @job_board_header = @job_board.job_board_header
+
+    if params[:job_board_row][:video_link].present? 
+      video_parse_function
+      @section = JobBoardRow.new(job_board_row_params.merge!(youtube_id: @video_id ))
+    elsif params[:job_board_row][:kind] == 'Team'
+      update_team_members
+    elsif params[:job_board_row][:kind] == "Text" || params[:job_board_row][:kind] == "Photo"
+      @photos = params[:media_photo].split(',')
+      @photos.delete('')
+      @photos.each do |id|
+        photo = MediaPhoto.find(id).update_attributes(job_board_row_id: @section.id)
+      end
+    end
+
     respond_to do |format|
       if @section.update(job_board_row_params)
         @sections = @job_board.job_board_rows

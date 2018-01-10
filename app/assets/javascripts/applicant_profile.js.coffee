@@ -26,12 +26,6 @@ jQuery ->
       $('.no-action-buttons').show()
     return
     
-  $(".modal").on "shown.bs.modal", ->  
-    if $('.modal-backdrop').length == 2
-      $(this).css({'z-index':'1070'})
-      $('.modal-backdrop').last().css({'z-index':'1060'})
-        
-
 ############ Move Applicant Stages ###############
 
   $('#main-container').on 'change', '#move-applicant-stages', (event) ->
@@ -73,27 +67,13 @@ jQuery ->
       applicant_ids.push($(n).data('id')) unless applicant_ids.includes($(n).data('id'))
   
     $('.modal').find('form').find('#applicant_ids').val(applicant_ids)
-  
-  $('.modal').on 'hidden.bs.modal', ->
-    $('.recipients').children().remove() 
-    $('.modal').find('#applicant_ids').val('')
-    return
-
 
 ################  Google Places JavaScript API ####################
 
   $("#geocomplete").geocomplete({
     types: ['(cities)']
   })
-  
   $("#geocomplete2").geocomplete()
-
-  $('#basic-form-modal').on 'shown.bs.modal', ->
-    $('.event-form').find("#geocomplete2").geocomplete()
-  
-  $('#find').click ->
-    $('input').trigger 'geocode'
-    return
 
   $(document).ajaxComplete ->
     $('.work-experience').find('#geocomplete').geocomplete({
@@ -135,10 +115,6 @@ jQuery ->
       $("#" + "#{buttonobj}" + "_button").show()
       $(this).parent().parent().remove()
     return
-
-  $('#main-container').on 'click', '.close-form', (event) ->
-    $('#add_tag').show()
-    $('.tag_form').remove()
 
 ################ Star Rating ##################
   $('#main-container').on 'click', '.star', (event) ->  
@@ -220,12 +196,5 @@ jQuery ->
       element.editor.insertHTML("<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{company.name}} </span>")
     $(this).parent().parent().hide()
 
-  $(document).on 'click', '#submit-section', ->
-    $(this).parent().prev().find('form').submit()
-
-  $(".main-container").on 'click', "#submit-section", -> 
-    $("#job-board-section").submit()
-
-######## Dropdown
   
   

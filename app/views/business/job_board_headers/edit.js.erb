@@ -1,3 +1,11 @@
-$(".modal-body").html('<%= j render "business/job_board_headers/form" %>');
-$(".modal-title").html('<%= "Edit Header" %>');
-$('.modal').modal("toggle");
+$('.mediumModal').find('.modal-body').remove()
+$('.mediumModal').find('.modal-footer').remove()
+$('.mediumModal').find('form').remove()
+$(".mediumModal").find('.new-modal-header').after('<%= j render "business/job_board_headers/form" %>');
+$(".mediumModal").find('.new-title').html('<%= "Create Section" %>');
+$('.mediumModal').show();
+
+$(document).one('click', "#submit-section", function() {
+  return $("#job-board-section").submit();
+});
+

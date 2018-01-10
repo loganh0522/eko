@@ -1,22 +1,16 @@
-%a.dropdown-toggle.btn.btn-default{"data-toggle" => "dropdown", :href => "#"}
-  + Add Section
-%ul.dropdown-menu
-  %li
-    %a= link_to 'Text & Photo', new_business_job_board_job_board_row_path(@job_board, kind: "Text"), remote: true
-  %li
-    %a= link_to 'Video', new_business_job_board_job_board_row_path(@job_board, kind: "Video"), remote: true
-  %li
-    %a= link_to 'Photos', new_business_job_board_job_board_row_path(@job_board, kind: "Photo"), remote: true
-  %li
-    %a= link_to 'Team', new_business_job_board_job_board_row_path(@job_board, kind: "Team"), remote: true
-  / %li
-  /   %a= link_to 'Location / Map', '#', :data => {:toggle => "modal", :target => "#multimediaRowModal"}
-  / %li
-  /   %a= link_to 'Perks & Benefits', '#', :data => {:toggle => "modal", :target => "#multimediaRowModal"}
-= render 'business/job_board_rows/row_modal'
-  
 .sections
   .view-templates
     = render 'business/job_board_rows/sections'
-        
-
+  
+.dropdown
+  .dropdown-button.border-button
+    + Add Section
+  .dropdown-content
+    = link_to 'Text & Photo', new_business_job_board_job_board_row_path(@job_board, kind: "Text"), remote: true
+    = link_to 'Video', new_business_job_board_job_board_row_path(@job_board, kind: "Video"), remote: true
+    = link_to 'Photos', new_business_job_board_job_board_row_path(@job_board, kind: "Photo"), remote: true
+    = link_to 'Team', new_business_job_board_job_board_row_path(@job_board, kind: "Team"), remote: true
+    / %li
+    /   %a= link_to 'Location / Map', '#', :data => {:toggle => "modal", :target => "#multimediaRowModal"}
+    / %li
+    /   %a= link_to 'Perks & Benefits', '#', :data => {:toggle => "modal", :target => "#multimediaRowModal"}

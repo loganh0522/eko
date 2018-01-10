@@ -1,17 +1,28 @@
+$('.mediumModal').find('.modal-body').remove()
+$('.mediumModal').find('.modal-footer').remove()
+$('.mediumModal').find('form').remove()
 <% if @section_type == 'Text'  %>
-  $(".modal-body").html('<%= j render "business/job_board_rows/text_form" %>');
-  $(".modal-title").html('<%= "Edit Section" %>');
-  $('.modal').modal("toggle");
+  $(".mediumModal").find('.new-modal-header').after('<%= j render "business/job_board_rows/text_form" %>');
+  $(".mediumModal").find('.new-title').html('<%= "Edit Section" %>');
+  $('.mediumModal').show();
 <% elsif @section_type == 'Video' %>
-  $(".modal-body").html('<%= j render "business/job_board_rows/video_form" %>');
-  $(".modal-title").html('<%= "Edit Section" %>');
-  $('.modal').modal("toggle");
+  $('.mediumModal').find('form').remove()
+  $(".mediumModal").find('.new-modal-header').after('<%= j render "business/job_board_rows/video_form" %>');
+  $(".mediumModal").find('.new-title').html('<%= "Edit Section" %>');
+  $('.mediumModal').show();
 <% elsif @section_type == 'Photo' %>
-  $(".modal-body").html('<%= j render "business/job_board_rows/photo_form" %>');
-  $(".modal-title").html('<%= "Edit Section" %>');
-  $('.modal').modal("toggle");
+  $('.mediumModal').find('form').remove()
+  $(".mediumModal").find('.new-modal-header').after('<%= j render "business/job_board_rows/photo_form" %>');
+  $(".mediumModal").find('.new-title').html('<%= "Edit Section" %>');
+  $('.mediumModal').show();
 <% elsif @section_type == 'Team' %>
-  $(".modal-body").html('<%= j render "business/job_board_rows/team_form" %>');
-  $(".modal-title").html('<%= "Add Team Members" %>');
-  $('.modal').modal("toggle");
+  $('.mediumModal').find('form').remove()
+  $(".mediumModal").find('.new-modal-header').after('<%= j render "business/job_board_rows/team_form" %>');
+  $(".mediumModal").find('.new-title').html('<%= "Add Team Members" %>');
+  $('.mediumModal').show();
 <% end %>
+
+
+$(document).one('click', "#submit-section", function() {
+  return $("#job-board-section").submit();
+});

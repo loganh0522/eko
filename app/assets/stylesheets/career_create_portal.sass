@@ -1,0 +1,282 @@
+#create-portal
+  margin: 20px 4%
+  .side-container
+    width: 20%
+    margin-right: 5%
+    float: left
+    background #fff
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    padding: 10px 10px
+    .dropdown
+      margin: 0 auto
+    .stage   
+      border-radius: 5px
+      margin-bottom: 10px
+      color: rgba(0,0,0, .7) 
+      width: 100%
+      height: auto
+      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+      .stage-header
+        background-color: rgba(0, 0, 0, 0.05) 
+        height: auto
+        overflow: hidden
+        padding: 10px 10px 
+        border-bottom: 1px solid rgba(0,0,0,.1)
+        .glyphicon.glyphicon-move
+          float: left
+          margin-right: 15px
+          color: rgba(0,0,0, .3)
+        .body
+          float: left
+        .icons
+          float: right
+          margin-right: 10px
+          margin-top: 2px
+          i  
+            color: rgba(0,0,0, .3)
+            margin-left: 5px
+      &:hover
+        cursor: move
+  .main-container
+    min-height: 600px
+    background #fff
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    float: left
+    width: 70%
+  .jobs
+    width: 90%
+    max-width: 1200px
+    margin: 10px auto
+    h2 
+      margin: 0 0 30px 0
+      text-align: center
+    .description
+      margin-bottom: 30px
+      p
+        color: rgba(0,0,0,0.7)
+        line-height: 2
+    .job-posting
+      width: 30%
+      float: left
+      margin: 20px 1% 
+      background: #ffffff
+      border-radius: 2px
+      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+      .header 
+        width: 100%
+        height: 150px
+        .logo
+          float: left
+          margin-top: 10px
+          margin: -60px 35%
+          width: fit-content
+          padding: 10px 10px
+          border-radius: 50%
+          background: #fff
+          height: fit-content
+          border: 1px solid #D1DCE4
+          img
+            border-radius: 50%
+        .background
+          height: 100px 
+          width: 100%
+          background: red
+          border-bottom: 1px solid #D1DCE4
+      .header-info
+        overflow: hidden
+        margin-bottom: 10px
+        
+        .view-job
+          float: right
+          margin: 7px 25px 0 0
+          box-shadow: 1px 1px 2px 1px rgba(199,197,199,1)
+
+          a
+            color: white
+        .job-detail
+          float: left
+          margin: 10px 0 0 5px
+        
+          .title
+            font-size: 18px
+            font-weight: 500
+            a
+              color: black
+          .company  
+            color: rgba(0, 0, 0, 0.6)
+            font-weight: 500
+
+      .bottom-info
+        border-top: 1px solid rgba(0, 0, 0, 0.1)
+        padding-top: 10px
+        color: rgba(0, 0, 0, 0.6)
+        font-size: 12px
+        overflow: hidden
+        .left-side
+          float: left
+          img
+            margin: 0 5px 0 10px
+        .right-side
+          float: right
+          img
+            margin: 0 5px 0 10px
+  .change-containers-nav
+    ul 
+      list-style: none
+      text-decoration: none
+      margin-bottom: -1px
+      padding: 0
+      li
+        display: inline-block
+        padding: 15px 15px 10px 15px 
+        text-align: center 
+        font-size: 14px
+        cursor: pointer
+        color: black
+      .activated
+        z-index: 1
+        border-bottom: 3px solid #EF7B2B
+  #main-container
+    .showing
+      z-index: 0
+      background: #ffffff
+      padding: 10px 20px 50px 20px
+  .float-container
+    margin-bottom: 20px
+    overflow: hidden
+    .header
+      float: left
+      width: 25%
+      margin-top: 15px
+      margin-right: 4%
+      font-size: 14px 
+      font-weight: 600
+    .body
+      float: left 
+      width: 70%
+      .btn-file
+        margin-top: 15px
+        float: left
+      .logo
+        width: auto
+        float: left
+        margin-top: 15px
+      input
+        width: 70%
+        float: left
+        margin-right: 5px
+      .domain
+        width: 25%
+        float: left
+        margin-top: 15px
+  
+  .color
+    margin-top: 15px
+    overflow: hidden
+    float: left
+    .color-container
+      clear: both
+      overflow: hidden
+      input
+        float: left
+        height: 35px
+        width: 100px
+        border-radius: 3px 0 0 3px
+        margin-right: 0
+      label
+        font-weight: 3s00
+      span
+        float: left
+        width: 25px
+        height: 35px
+        border: 1px solid rgba(0, 0, 0, 0.2)
+        margin-top: 8px
+        margin-right: 10px
+        border-radius: 0 5px 5px 0
+        border-left: none
+        padding: 8px 4px
+  .sections
+    clear: both
+  .stage   
+    border-radius: 5px
+    margin-bottom: 10px
+    color: rgba(0,0,0, .7) 
+    width: 100%
+    height: auto
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    .stage-header
+      background-color: rgba(0, 0, 0, 0.05) 
+      height: auto
+      overflow: hidden
+      padding: 10px 10px 
+      border-bottom: 1px solid rgba(0,0,0,.1)
+      .glyphicon.glyphicon-move
+        float: left
+        margin-right: 15px
+        color: rgba(0,0,0, .3)
+      .body
+        float: left
+      .icons
+        float: right
+        margin-right: 10px
+        margin-top: 2px
+        i  
+          color: rgba(0,0,0, .3)
+          margin-left: 5px
+    &:hover
+      cursor: move
+    .stage-body
+      height: auto
+      padding: 15px 15px
+    .subdomain-field
+      width: 200px
+      float: left
+    .domain
+      float: left
+      margin: 13px 0 0 8px
+    .logo
+      margin: 15px
+      float: left
+    .btn-file
+      margin: 15px
+      float: left
+
+.job-card
+  width: 30%
+  float: left
+  margin: 20px 1% 
+  background: #ffffff
+  border-radius: 2px
+  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+  .header 
+    width: 100%
+    height: 150px
+    .logo
+      float: left
+      margin-top: 10px
+      margin: -60px 35%
+      width: fit-content
+      padding: 10px 10px
+      border-radius: 50%
+      background: #fff
+      height: fit-content
+      border: 1px solid #D1DCE4
+      img
+        border-radius: 50%
+    .background
+      height: 100px 
+      width: 100%
+      background: red
+      border-bottom: 1px solid #D1DCE4
+  .header-info
+    overflow: hidden
+    margin-bottom: 10px
+    .job-detail
+      float: left
+      margin: 10px 0 0 5px
+    
+      .title
+        font-size: 18px
+        font-weight: 500
+        a
+          color: black

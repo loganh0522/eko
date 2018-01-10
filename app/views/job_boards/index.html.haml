@@ -1,16 +1,5 @@
 - if @job_board.kind == 'advanced'
-  - if @job_board.job_board_header.background_image.present? 
-    .portal-header{:style => "background: url(#{@job_board.job_board_header.background_image.file.url}) no-repeat center center fixed; background-size: cover "}
-      .header-overlay{:style => "background: rgba(0,0,0,0.4)"}
-        .intro-message
-          .header= @job_board.job_board_header.header
-          .sub-header= @job_board.job_board_header.subheader  
-  - else
-    .portal-header{:style => "background-color: #EF7B2B"}
-      .header-overlay{:style => "background: rgba(0,0,0,0.5)"}
-        .intro-message
-          .header= @job_board.job_board_header.header
-          .sub-header= @job_board.job_board_header.subheader  
+  = render 'job_boards/advanced_portal/header'
 
 - if @job_board.kind != 'basic'
   - if @sections.count != 0

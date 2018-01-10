@@ -1,0 +1,46 @@
+.jobs
+  - current_company.jobs.each do |job|
+    .job-posting
+      .header
+        .background
+        .logo= image_tag @job_board.company.logo.file.medium_logo
+      .header-info
+        .job-detail
+          .title= link_to "#{job.title}", job_path(job)
+      .bottom-info
+        .left-side
+          %img(src="/tmp/small-location.png") 
+          = "#{job.location}"
+          %img(src="/tmp/small-clock.png") 
+          - if job.created_at.present?
+            = "#{time_ago_in_words(job.created_at)} ago"
+        
+
+
+
+    / .job-posting
+    /   .header
+    /     = image_tag @job_board.company.logo.file.medium_logo
+    /   .header-info
+    /     .job-detail
+    /       .title= link_to "#{job.title}", job_path(job)
+    /       .company= job.company.name
+    /     .view-job= link_to "View Job", job_path(job), class: "btn btn-primary"
+    /   .bottom-info
+    /     .left-side
+    /       %img(src="/tmp/small-location.png") 
+    /       = "#{job.location}"
+          
+    /       %img(src="/tmp/small-bar-chart.png") 
+    /       / = job.job_career_level.first.career_level.name
+    /     .right-side 
+    /       %img(src="/tmp/small-hammer.png") 
+    /       / = job.industries.first.name
+
+    /       %img(src="/tmp/small-briefcase.png") 
+    /       / = job.job_kind.first.name
+
+    /       %img(src="/tmp/small-clock.png") 
+    /       - if job.created_at.present?
+    /         = "#{time_ago_in_words(job.created_at)} ago"
+    / 

@@ -1,27 +1,33 @@
-.company-settings
+#create-portal
   .side-container
-    = render "sections"
-  .main-container
-    .edit-career-portal
-      .change-containers-nav
-        - if @job_board.kind == "basic"
-          %ul 
-            = link_to business_job_board_path(kind: 'advanced'), :method => :put, remote: true do 
-              %li.change Advanced 
-            = link_to business_job_board_path(kind: 'basic'), :method => :put, remote: true do 
-              %li.change.activated Basic
-        - else 
-          %ul 
-            = link_to business_job_board_path(kind: 'advanced'), :method => :put, remote: true do 
-              %li.change.activated Advanced 
-            = link_to business_job_board_path(kind: 'basic'), :method => :put, remote: true do 
-              %li.change Basic
+    .change-containers-nav
       - if @job_board.kind == "basic"
-        .career-portal-details
-          = render 'business/job_boards/form'
+        %ul 
+          = link_to  business_job_board_path(kind: 'advanced'), :method => :put, remote: true do 
+            %li Advanced 
+          = link_to business_job_board_path(kind: 'basic'), :method => :put, remote: true do 
+            %li.activated Basic
       - else 
-        .career-portal-details
-          
+        %ul 
+          = link_to business_job_board_path(kind: 'advanced'), :method => :put, remote: true do 
+            %li.activated Advanced 
+          = link_to business_job_board_path(kind: 'basic'), :method => :put, remote: true do 
+            %li Basic
+    = render "sections"
+    / .edit-career-portal
+    /   .change-containers-nav
+    /   - if @job_board.kind == "basic"
+    /     .career-portal-details
+    /       = render 'business/job_boards/form'
+    /   - else 
+    /     .career-portal-details
+
+  .main-container
+    = render 'business/job_boards/advanced_portal/header'
+    .sections
+      = render 'business/job_boards/advanced_portal/sections'
+    = render 'business/job_boards/advanced_portal/jobs'
+
 
 
   / %h4 Widget Details 

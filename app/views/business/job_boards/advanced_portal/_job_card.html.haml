@@ -1,0 +1,14 @@
+.job-card
+  .header
+    .background
+    .logo= image_tag @job_board.company.logo.file.medium_logo
+  .header-info
+    .job-detail
+      .title= link_to "#{job.title}", job_path(job)
+  .bottom-info
+    .left-side
+      %img(src="/tmp/small-location.png") 
+      = "#{job.location}"
+      %img(src="/tmp/small-clock.png") 
+      - if job.created_at.present?
+        = "#{time_ago_in_words(job.created_at)} ago"

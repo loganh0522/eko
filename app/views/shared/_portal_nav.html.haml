@@ -3,7 +3,7 @@
     .content
       - if @company.logo.present?
         = link_to root_path do
-          %img(src="#{@company.logo.file.medium_logo}" class="sub_logo")
+          %img(src="#{@company.logo.file.large_logo}" class="sub_logo")
       - else
         .brand
           = link_to root_path do
