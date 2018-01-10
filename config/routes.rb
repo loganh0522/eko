@@ -250,9 +250,14 @@ Rails.application.routes.draw do
     end
     
     resources :applications do 
+      member do 
+        post :reject, to: "applications#reject"
+        post :next_stage, to: "applications#next_stage"
+        post :move_stage, to: "applications#move_stage"
+      end
+
       collection do 
         get :multiple_change_stages, to: "applications#multiple_change_stages"
-        post :move_stages, to: "applications#move_stage"
         get :new_multiple, to: "applications#new_multiple" 
         post :create_multiple, to: "applications#create_multiple"
       end
@@ -261,6 +266,7 @@ Rails.application.routes.draw do
     get "plan", to: "customers#plan"
 
     resources :customers do
+
       collection do 
         get 'cancel', to: "customers#cancel"
         post "new_plan", to: "customers#new_plan"
@@ -296,7 +302,6 @@ Rails.application.routes.draw do
       resources :candidates
 
       resources :applications do
-        post :reject, to: "applications#reject"
         resources :application_scorecards
       end
 

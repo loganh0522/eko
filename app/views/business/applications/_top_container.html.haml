@@ -3,9 +3,16 @@
     .details
       %h1= @job.title
       .location= "#{@job.location}"
+      .dropdown
+        .dropdown-button
+          %i.fa.fa-share-alt
+        .dropdown-content
+          %li LinkedIn
+          %li Facebook
       .job-link
         = link_to "http://" + @job.url, :target => "_blank", class: "link" do
-          .glyphicon.glyphicon-link
+          %i.fa.fa-link
+      
   .change-containers-nav
     %ul 
       = link_to business_job_applications_path(@job), class: 'change-aj' do 

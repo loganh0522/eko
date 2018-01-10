@@ -92,6 +92,7 @@
   .applicant-side-container
     float: left
     position: absolute
+    overflow: hidden
     background: #fff
     height: 100%
     border-radius: 5px 5px
@@ -141,45 +142,60 @@
           display: block
 
     .side-section
-      overflow-y: scroll
       max-height: 400px
+      height: fit-content
       background: #f7f8f9
       width: 100%
+      clear: both
       top: 0
       bottom: 0
       border-bottom: 1px solid rgba(0, 0, 0, 0.1)
       .applicant-stage
         border: 1px solid rgba(0,0,0,0.1)
         width: 100%
-        overflow: hidden
+        height: 43px
         border-radius: 5px
         background: #fff
         box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+        .dropdown
+          display: block
+          .dropdown-content
+            top: 42px 
+        #current-stage-drop
+          left: 100px
         .current-stage
           padding: 10px 15px
+          background: #fff
           font-size: 14px
+          .caret
+            float: right
+            margin-top: 5px
+
           float: left
           width: 70%
         .next-stage
           color: rgba(0, 0, 0, 0.3)
           padding: 10px 20px
           font-size: 14px
+          background: #fff
           float: left
           border-left: 1px solid rgba(0,0,0,0.1)
           width: 15%
           &:hover
-            background: green
+            background: rgba(81, 216, 81, 0.3)
             cursor: pointer
         .reject-stage
           padding: 10px 20px
+          background: #fff
           font-size: 14px
           width: 15%
           float: left
           border-left: 1px solid rgba(0,0,0,0.1)
           &:hover
-            background: red
+            background: rgba(255, 0, 0, 0.3)
             cursor: pointer
-
+        #rejected
+          background: rgba(255, 0, 0, 0.3)
       .tag-container
         padding: 10px 20px
         .tag-header

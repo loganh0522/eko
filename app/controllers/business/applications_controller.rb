@@ -117,28 +117,47 @@ class Business::ApplicationsController < ApplicationController
     end
   end
 
+  def next_stage
+    @application = Application.find(params[:id])
+    @job = @application.job
+    @current_stage = @application.stage
+    @stage = @application.job.stages.where(position: @current_stage.position + 1).first
+    @rejection_reasons = current_company.rejection_reasons
+    @candidate = @application.candidate
+    @application.update_attribute(:stage_id, @stage.id)  
+    track_activity @application, "move_stage", @application.candidate.id, @job.id, @stage.id
+  end
+
   def move_stage    
     @stage = Stage.find(params[:stage])
+    @application = Application.find(params[:id]) 
+    @candidate = @application.candidate
+    @job = @stage.job
+    @rejection_reasons = current_company.rejection_reasons
 
     if params[:applicant_ids].present?
       move_multiple_stages
+      @candidates = Candidate.joins(:applications).where(:applications => {job_id: @job.id}).paginate(page: params[:page], per_page: 10)
     else
       move_stage_single
     end
-    @candidates = Candidate.joins(:applications).where(:applications => {job_id: @job.id}).paginate(page: params[:page], per_page: 10)
+
     respond_to do |format|
       format.js
     end
   end
   
   def reject
-    @application = Application.find(params[:application_id])
-    @application.update_attributes(rejected: true, rejection_reason: params[:val])
-    @application.update_attribute(:rejected, true)
-    @job = Job.find(params[:job_id])
-    @applications = @job.applications
-
-    track_activity @application, "rejected", @application.candidate.id, @job.id
+    @application = Application.find(params[:id])
+    @job = @application.job
+    
+    if params[:val] == 'requalify'
+      @application.update_attributes(rejected: nil, rejection_reason: nil)
+      track_activity @application, "requalified", @application.candidate.id, @job.id
+    else
+      @application.update_attributes(rejected: true, rejection_reason: params[:val])
+      track_activity @application, "rejected", @application.candidate.id, @job.id
+    end
 
     respond_to do |format|
       format.js
@@ -159,8 +178,8 @@ class Business::ApplicationsController < ApplicationController
   end
 
   def move_stage_single
+    @application = Application.find(params[:id])
     @job = @stage.job
-    @application = Application.find(params[:application_id])
     @application.update_attribute(:stage, @stage)
     track_activity @app, "move_stage", @application.candidate.id, @application.job.id, @stage.id
   end
@@ -171,7 +190,7 @@ class Business::ApplicationsController < ApplicationController
     applicant_ids.each do |id| 
       @application = @job.applications.where(candidate_id: id).first
       @application.update_attribute(:stage_id, params[:stage])  
-      track_activity @app, "move_stage", @application.candidate.id, @application.job.id, @stage.id
+      track_activity @application, "move_stage", @application.candidate.id, @application.job.id, @stage.id
     end
   end
 
