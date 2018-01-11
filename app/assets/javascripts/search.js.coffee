@@ -104,6 +104,7 @@ jQuery ->
     return
 
   $(document).one 'click', '#client-action', (event) -> 
+
     searchAuto = $('.search-field-auto')
     linkUp = $('#link-up')
     searchRequest = null  
@@ -133,29 +134,7 @@ jQuery ->
       debounceTimeout = setTimeout(customAutocomplete, 500, search)
       return
     
-    $(document).on 'click', '.user', (event) -> 
-      name = $(this).find('.name').text()
-      kind = $(this).data('kind')
-      value = $(this).data('id')
-      appendTo = $(this).parent().parent().prev().find('#multiple-users')
-      
-      if $(this).parent().attr('id') == 'add-multiple'
-        if $('#' + kind + '_ids').val() == ''
-          $('#' + kind + '_ids').val(value)
-        else 
-          values =  $('#' + kind + '_ids').val() + ',' + value
-          $('#' + kind + '_ids').val values 
-
-        $(appendTo).append('<div class="user-tag" id="' + kind + '"> <div class="name">' + name + '</div> <div class="delete-tag" id="delete-multiple"> &times </div> </div>') 
-        $('.hidden-search-box').hide()
-        return
-
-      else if $(this).parent().attr('id') == 'add-single'
-        $('#' + kind + '_id').val($(this).data('id'))   
-        $(this).parent().parent().prev().find('#single-obj').before('<div class="user-tag"> <div class="name">' + name + '</div> <div class="delete-tag" id="delete-single"> &times </div> </div>')
-        $(this).parent().parent().prev().find('.plain-text').hide()
-        $('.hidden-search-box').hide()
-        return
+    
 
 
 

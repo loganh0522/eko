@@ -1,14 +1,13 @@
 class ProfilesController < ApplicationController 
 
   before_filter :require_user
-  before_filter :profile_sign_up_complete, :only => [:index]
+  # before_filter :profile_sign_up_complete, :only => [:index]
 
   def index 
     @job_board = JobBoard.find_by_subdomain!(request.subdomain)
     @company = @job_board.company
     @avatar = current_user.user_avatar
-    @profile = current_user.profile
-    @work_experiences = @profile.organize_work_experiences
+    # @work_experiences = @profile.organize_work_experiences
   end
 
   def new

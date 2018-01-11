@@ -3,44 +3,24 @@
 - else 
   - if current_user.present?
     - if @job.questions.present?
-      - if @job_board.brand_color.present?
-        = link_to new_job_application_path(@job) do 
+      = link_to new_job_seeker_job_candidate_path(@job.id) do 
+        - if @job_board.brand_color.present?
           .btn.submit-button{:style => "background-color: #{@job_board.brand_color}"}
-            Apply to this Job 
-      - else   
-        = link_to new_job_application_path(@job) do 
+            Apply to this Job   
+        - else   
           .btn.submit-button{:style => "background-color: #EF7B2B"}
             Apply to this Job   
     - else  
-      = form_for [@job, @application] do |f|
+      = form_for [:job_seeker, @job, @candidate] do |f|
         .fieldset
           .form-group.col-md-12
           = f.hidden_field :user_id, value: current_user.id
           = f.hidden_field :job_id, value: @job.id
           = f.hidden_field :company_id, value: @company.id
           = f.submit "Apply to this Job", class: 'btn submit-button', :html => {:style => "background-color: #EF7B2B)"}
-          / - if @job_board.brand_color.present?
-          /   .app-btn{:style => "background-color: #{@job_board.brand_color})"}
-          /     = f.submit "Apply to Job", class: 'app-btn', :html => {:style => "background-color: #{@job_board.brand_color})"}
-          / - else
-          /   .app-btn{:style => "background-color: #{@job_board.brand_color})"}
   - else 
-    = render "/users/sub_new_job_seeker"
-    = render "/sessions/sub_login"
-
-    - if @job_board.brand_color.present?
-      = link_to "Apply To Job", "", "data-toggle" => "modal", "data-dismiss" => "modal", "data-target" => "#SubLoginModal", class: "btn submit-button", :style => "background-color: #{@job_board.brand_color}"
-      / .btn.app-btn{:style => "background-color: #EF7B2B)"}
-      / .btn.button-submit= link_to '#', "data-toggle" => "modal", "data-target" => "#SubLoginModal" do
-      /   Apply To Job
-   
-      / = link_to "#", "data-toggle" => "modal", "data-target" => "#SubLoginModal" do 
-      /   .app-btn{:style => "background-color: #{@job_board.brand_color}"}
-      /     Apply To Job 
-    - else  
-      = link_to "Apply To Job", "", "data-toggle" => "modal", "data-dismiss" => "modal", "data-target" => "#SubLoginModal", class: "btn submit-button", :style => "background-color: #EF7B2B"
-
-
+    = link_to "Apply To Job", login_path, class: "btn submit-button", :style => "background-color: #{@job_board.brand_color}", remote: true
+    
 
 
 

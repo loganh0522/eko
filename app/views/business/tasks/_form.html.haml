@@ -47,8 +47,8 @@
       = render 'business/tasks/form_fields/all_fields', f: f
       
 
-    = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
-    = f.hidden_field :candidate_ids, id: "candidate_ids"
+    = f.hidden_field :user_ids, value: current_user.id, id: "user_id"
+    = f.hidden_field :candidate_ids, id: "candidate_id"
 
     - if @taskable.class == Job
       = f.hidden_field :job_id, value: @taskable.id

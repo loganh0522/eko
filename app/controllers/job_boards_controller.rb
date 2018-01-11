@@ -1,5 +1,5 @@
 class JobBoardsController < ApplicationController 
-  before_filter :profile_sign_up_complete
+  # before_filter :profile_sign_up_complete
   layout :set_layout
 
   def index

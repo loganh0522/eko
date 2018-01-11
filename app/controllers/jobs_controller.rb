@@ -1,13 +1,12 @@
 class JobsController < ApplicationController 
-  before_filter :profile_sign_up_complete
+  # before_filter :profile_sign_up_complete
   layout :set_layout
   
   def show 
     @job_board = JobBoard.find_by_subdomain!(request.subdomain)
-    @company = @job_board.company
     @job = Job.find(params[:id])
-    @application = Application.new
-    @user = User.new
+    @company = @job.company
+    @candidate = Candidate.new
   end
 
   private

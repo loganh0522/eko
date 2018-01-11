@@ -118,6 +118,9 @@ class Candidate < ActiveRecord::Base
     self.tasks.where(status: 'active', job_id: job.id)
   end
 
+  def complete_job_tasks(job)
+    self.tasks.where(status: 'complete', job_id: job.id)
+  end
   def complete_tasks
     self.tasks.where(status: 'complete')
   end

@@ -20,7 +20,7 @@
               %a= link_to "Publish Job", business_job_path(job, status: 'open'), method: :patch, remote: true  
           - elsif job.status == 'open'
             %li
-              %a= link_to "Close Job", business_job_path(job, status: 'close'), method: :patch, remote: true
+              %a= link_to "Close Job", business_job_path(job, status: 'closed'), method: :patch, remote: true
           - elsif job.status == 'closed'
             %li
               %a= link_to "Publish Job", business_job_path(job, status: 'publish'), method: :patch, remote: true

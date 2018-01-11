@@ -1,6 +1,9 @@
-$('#subNewUserModal').modal('toggle');
-$('#SubLoginModal').find('.modal-body').remove();
-$('#SubLoginModal').find('.modal-footer').remove();
-$('#SubLoginModal').find('.modal-title').html('<%= j "Login" %>');
-$('#SubLoginModal').find('.modal-header').after('<%= j render "sessions/form"%>');
-$('#SubLoginModal').modal("toggle");
+$('.mediumModal').hide();
+$('.largeModal').find('.modal-body').remove()
+$('.largeModal').find('.modal-footer').remove()
+$('.largeModal').find('.new-title').html('<%= j "Sign In" %>');
+$('.largeModal').find('.new-modal-header').after('<%= j render "sessions/form" %>');
+$('.largeModal').show();
+
+
+

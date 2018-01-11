@@ -1,5 +1,5 @@
 class JobSeeker::UsersController < JobSeekersController 
-  layout "job_seeker"
+  layout :set_layout
   before_filter :require_user
   # before_filter :profile_sign_up_complete
   def show 
@@ -13,6 +13,7 @@ class JobSeeker::UsersController < JobSeekersController
     else
       @background = BackgroundImage.new
     end 
+    @job_board = JobBoard.find_by_subdomain!(request.subdomain) if request.subdomain.present?
   end
 
   def edit
@@ -49,6 +50,20 @@ class JobSeeker::UsersController < JobSeekersController
     experience.errors.messages.each do |error| 
       @errors.append([error[0].to_s, error[1][0]])
     end  
+  end
+
+  def set_layout
+    @job_board = JobBoard.find_by_subdomain!(request.subdomain)
+
+    if request.subdomain.present?
+      if @job_board.kind == "basic"
+        "career_portal_profile"
+      else
+       "career_portal_profile"
+      end
+    else
+      layout "job_seeker"
+    end
   end
 
   def convert_location

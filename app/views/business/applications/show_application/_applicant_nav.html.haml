@@ -24,7 +24,7 @@
     + Note
   = link_to new_business_candidate_message_path(@candidate), id: "add-message",  remote: true do 
     .glyphicon.glyphicon-envelope E-mail
-  = link_to new_business_candidate_task_path(@candidate, job: @job), id: "add-task", remote: true do 
+  = link_to new_business_candidate_task_path(@candidate, job: @job), id: "client-action", remote: true do 
     + Task  
   = link_to new_business_candidate_interview_invitation_path(@candidate, application: @application.id), id: "add-invitation", remote: true do 
     .glyphicon.glyphicon-calendar Interview

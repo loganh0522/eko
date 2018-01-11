@@ -7,5 +7,7 @@
   $('#mediumModal').find('.new-title').html('<%= j "Add Task" %>');
   $('#mediumModal').find('.new-modal-header').after('<%= j render "business/tasks/form" %>');
   $('#mediumModal').show();
-  $('#timepicker').timepicker()
 <% end %>
+
+$('#timepicker').timepicker();
+$('#dueDate').datepicker();

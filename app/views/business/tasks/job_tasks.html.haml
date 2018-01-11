@@ -3,12 +3,13 @@
 #main-container
   #padding
     .side-container
-      = form_tag business_job_tasks_path(@job), :method => 'get', id: "search-form" do
+      = form_tag search_business_tasks_path, :method => 'get', id: "search-form" do
+        = hidden_field_tag :job_id, @job.id
         = render 'business/tasks/job_filters'
     .main-container
       .actions
         .application-actions
-          = link_to "Create Task", new_business_job_task_path(@job), data: {:turbolinks => "false"}, remote: true, class: "btn border-button"
+          = link_to "Create Task", new_business_job_task_path(@job), data: {:turbolinks => "false"}, remote: true, class: "btn border-button", id: 'client-action'
           .toggle-actions 
             = link_to business_job_tasks_path(@job, view: "list"), remote: true do
               .btn.border-button.toggle-show#list List

@@ -2,11 +2,10 @@
     .header  
       %h1 Build Your Profile
     .body
-      .
-        = form_for [@user] do |f|
-          = f.fields_for :work_experience, WorkExperience.new do |q| 
-            = render "/job_seeker/work_experience_fields", f: q        
-          = link_to_add_fields "+ Add Work Experience", f, :work_experience  
+      = form_for [@user] do |f|
+        = f.fields_for :work_experience, WorkExperience.new do |q| 
+          = render "/job_seeker/work_experience_fields", f: q        
+        = link_to_add_fields "+ Add Work Experience", f, :work_experience  
 
 
 

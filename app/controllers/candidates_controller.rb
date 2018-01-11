@@ -49,4 +49,32 @@ class CandidatesController < ApplicationController
       @errors.append([error[0].to_s, error[1][0]])
     end  
   end
+
+  def create_application
+    @job = Job.find(params[:application][:job_id])  
+    @application = Application.new(application_params.merge!(candidate_id: @candidate.id))
+      
+    if @application.save
+      flash[:success] = "Your application has been submitted"
+      track_activity @application, "applied", @job.company.id, @candidate.id, @job.id
+    else
+      render :new
+      flash[:error] = "Something went wrong please try again"
+    end
+  end
+
+  def current_user_candidate?(company)
+    @user = User.find(params[:application][:user_id])
+    @user.candidates.map(&:company_id).include?(company.to_i)
+  end
+
+  def find_candidate
+    @user = User.find(params[:application][:user_id])
+    @company = Company.find(params[:application][:company_id])
+    @candidate = Candidate.where(company_id: @company.id, user_id: @user.id).first
+  end
+
+  def current_user_applied?(job)
+    current_user.applications.map(&:job_id).include?(job.id)
+  end
 end

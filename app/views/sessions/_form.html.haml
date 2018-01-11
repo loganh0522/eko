@@ -1,20 +1,27 @@
 .modal-body
-  .new-user
-    %h3 First Time User
-    %p Create a career profile that you can re-use to apply to other jobs with ease. Build an extensive digital profile to increase your visibility to recruiters. You can also track the status of your applications from your profile.
+  .form-row-no-border
+    .new-user
+      %h3 First Time User
+      %br
+      %p 1. Create a re-usable Career Portfolio 
+      %p 2. Apply to Job 
+      %p 3. Track Applications 
+      %p 4. Get Hired 
+
+      
+      = link_to "Create Profile", new_user_path, class: "btn submit-button", :style => "background-color: #{@job_board.brand_color}", remote: true
     
-    = link_to "Create Profile", "", "data-toggle" => "modal", "data-dismiss" => "modal", "data-target" => "#subNewUserModal", class: "btn submit-button", :style => "background-color: #{@job_board.brand_color}"
-  
-  .sign-in 
-    %h3 Already Have an Account? 
-    %p Please sign-in so you can apply to jobs, track the status of your applications and get Hired! 
-    = form_tag url: '/login' do |f|
-      %fieldset
-        = f.email_field :email, placeholder: "E-mail", hide_label: true
-        = f.password_field :password, placeholder: "Password", hide_label: true
-        %input(type="submit" value="Log In" class="btn submit-button" style = "background-color: #{@job_board.brand_color}")
-    .forgot-password
-      = link_to 'Forgot Password', '/forgot_password'
+    .sign-in 
+      %h3 Already Have an Account? 
+      %br
+      = form_tag url: '/login' do |f|
+        %fieldset
+          = email_field_tag :email, '', placeholder: "E-mail", hide_label: true
+          = password_field_tag :password, '', placeholder: "Password", hide_label: true
+          
+          %input(type="submit" value="Log In" class="btn submit-button" style = "background-color: #{@job_board.brand_color}")
+      .forgot-password
+        = link_to 'Forgot Password', '/forgot_password'
 .modal-footer
   .power
     .powered-by Powered by

@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   
   def new 
     @user = User.new
+    
     respond_to do |format|
       format.js
       format.html
@@ -35,13 +36,10 @@ class UsersController < ApplicationController
 
     if @user.save 
       session[:user_id] = @user.id 
-      if request.subdomain.present? 
-        redirect_to new_profile_path
-      else
-        redirect_to job_seeker_create_profiles_path
-      end
+      format.js redirect_to job_seeker_create_profiles_path(@user)
     else
-      render :new_job_seeker
+      render_errors(@user)
+      format.js
     end
   end
 
@@ -58,6 +56,7 @@ class UsersController < ApplicationController
       @invitation_token = @invitation.token
       render :new
     else
+
       redirect_to expired_token_path
     end
   end

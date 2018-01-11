@@ -1,7 +1,6 @@
-- if @job_board.kind == 'advanced'
-  = render 'job_boards/advanced_portal/header'
+= render 'job_boards/advanced_portal/header'
 
-- if @job_board.kind != 'basic'
+- if @job_board.kind == 'advanced'
   - if @sections.count != 0
     .job-board-sections
       - @sections.each do |section|
@@ -42,27 +41,15 @@
       - @jobs.each do |job|
         .job-posting
           .header-info
-            %img(src="#{job.company.job_board.logo}" class="logo") 
             .job-detail
               .title= link_to "#{job.title}", job_path(job)
-              .company= job.company.name
             .view-job= link_to "View Job", job_path(job), class: "btn btn-primary"
           .bottom-info
             .left-side
-              %img(src="/tmp/small-location.png") 
               = "#{job.location}"
-              
-              %img(src="/tmp/small-bar-chart.png") 
-              / = job.job_career_level.first.career_level.name
             .right-side 
-              %img(src="/tmp/small-hammer.png") 
               / = job.industries.first.name
-
-              %img(src="/tmp/small-briefcase.png") 
               / = job.job_kind.first.name
-
-              %img(src="/tmp/small-clock.png") 
-              - if job.created_at.present?
-                = "#{time_ago_in_words(job.created_at)} ago"
+              = "#{time_ago_in_words(job.created_at)} ago"
     
 .footer

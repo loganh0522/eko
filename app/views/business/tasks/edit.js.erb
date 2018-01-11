@@ -1,2 +1,4 @@
 $('#task_<%= @task.id %>').find('.task-details').hide();
 $('#task_<%= @task.id %>').append('<%= j render "business/tasks/form" %>');
+$('#timepicker').timepicker();
+$('#dueDate').datepicker();

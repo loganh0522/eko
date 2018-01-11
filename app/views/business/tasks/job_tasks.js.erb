@@ -10,13 +10,5 @@
   $('#table').removeClass('toggle-showing')
   $('#list').addClass('toggle-showing')
   $('.pagination-container').html('<%= j render "business/tasks/pagination", tasks: @tasks %>');
-<% else %>
-  if ($('.table1').is(":visible")) {
-    $('#task-container').html('<%= j render "business/tasks/table", tasks: @tasks %>');
-    $('.pagination-container').html('<%= j render "business/tasks/pagination", tasks: @tasks %>');
-  } else {
-    $('#task-container').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
-    $('.pagination-container').html('<%= j render "business/tasks/pagination", tasks: @tasks %>');
-  }
 <% end %>
 

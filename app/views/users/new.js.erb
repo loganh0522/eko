@@ -1,6 +1,6 @@
-$('#subNewUserModal').find('.modal-body').remove();
-$('#subNewUserModal').find('.modal-footer').remove();
-$('#subNewUserModal').find('.modal-title').html('<%= j "Create Profile" %>');
-$('#subNewUserModal').find('.modal-header').after('<%= j render "users/job_seeker_form"%>');
-$('#subNewUserModal').modal("toggle");
-
+$('.largeModal').hide();
+$('.mediumModal').find('.modal-body').remove()
+$('.mediumModal').find('.modal-footer').remove()
+$('.mediumModal').find('.new-title').html('<%= j "Create Profile" %>');
+$('.mediumModal').find('.new-modal-header').after('<%= j render "users/job_seeker_form" %>');
+$('.mediumModal').show();
