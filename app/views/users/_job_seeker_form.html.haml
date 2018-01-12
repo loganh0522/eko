@@ -1,6 +1,6 @@
 .modal-body   
   / %p Build a career portfolio, than easily apply to jobs at the click of a button. Track your job applications with ease, and build job notifications to alert you when jobs are posted.
-  = form_for @user, url: '/job_seeker_signup', remote: true do |f|
+  = form_for @user, url: '/job_seeker_signup'do |f|
     .form-row-no-border
       .contain-50
         = f.label :first_name, "First Name"

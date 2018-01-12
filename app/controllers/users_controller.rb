@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 
     if @user.save 
       session[:user_id] = @user.id 
-      format.js redirect_to job_seeker_create_profiles_path(@user)
+      format.js
     else
       render_errors(@user)
       format.js
