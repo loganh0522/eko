@@ -1,13 +1,13 @@
 .modal-body   
   / %p Build a career portfolio, than easily apply to jobs at the click of a button. Track your job applications with ease, and build job notifications to alert you when jobs are posted.
-  = form_for @user, url: '/job_seeker_signup'do |f|
+  = form_for @user, url: '/job_seeker_signup' do |f|
     .form-row-no-border
       .contain-50
         = f.label :first_name, "First Name"
         = f.text_field :first_name, placeholder: "First Name", id: "first_name_Block"
         %span#first_name_msgBlock
       .contain-50
-        = f.label :first_name, "First Name"
+        = f.label :last_name, "Last Name"
         = f.text_field :last_name, placeholder: "Last Name", id: "last_name_Block"
         %span#last_name_msgBlock
     .form-row-no-border

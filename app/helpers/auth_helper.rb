@@ -5,8 +5,7 @@ module AuthHelper
              'User.Read',
              'Mail.ReadWrite',
              'Mail.Send',
-             'Calendars.ReadWrite',
-             'Calendars.ReadWrite.Shared']
+             'Calendars.ReadWrite']
 
   def get_login_url
     client = OAuth2::Client.new(ENV['OUTLOOK_API_ID'],
