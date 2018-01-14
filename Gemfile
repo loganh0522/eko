@@ -71,7 +71,6 @@ gem 'microsoft_graph', github: 'loganh0522/msgraph-sdk-ruby'
 gem 'oauth2'
 gem 'activerecord-session_store'
 
-
 gem 'liquid', '~> 3.0', '>= 3.0.6'
 gem 'sidekiq'
 gem 'newrelic_rpm'

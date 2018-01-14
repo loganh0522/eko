@@ -22,7 +22,7 @@ class Business::JobsController < ApplicationController
   end
 
   def create 
-    @job = Job.new(job_params)  
+    @job = Job.new(job_params.merge!(status: 'open'))  
 
     if @job.save 
       redirect_to business_job_hiring_teams_path(@job)

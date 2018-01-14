@@ -14,29 +14,21 @@
           .spinner
           .all_applicants_data
             - @candidates.each do |candidate|
-              - if candidate.applications.present? 
-                - if candidate.applications.first.stage.present?
-                  - stage = candidate.applications.first.stage.name
-                - elsif candidate.applications.first.rejected == true
-                  - stage = "Rejected"
-                - else 
-                  - stage = "Applied"
-              - else 
-                - stage = "No Job Apps"
               %tr
                 %td
-                  .content
-                    .applicant-checkbox{:data => {:id => candidate.id}}
-                      = check_box_tag "applicant_ids[]", candidate.id, false, class: "checkbox"
+                  .applicant-checkbox{:data => {:id => candidate.id}}
+                    = check_box_tag "applicant_ids[]", candidate.id, false, class: "checkbox"
                 %td
                   = candidate_user_avatar(candidate)
                 %td
                   .content
-                    = link_to "#{candidate.full_name}", business_candidate_path(candidate.id), remote: true, class: "name", :data => {:id =>  "#{candidate.full_name} "}
+                    = link_to "#{candidate.full_name}", business_candidate_path(candidate.id), class: "name", :data => {:id =>  "#{candidate.full_name} "}
+                    
                     - if candidate.current_jobs.present?
                       .bottom-content= "#{candidate.current_jobs.first.title} - #{candidate.current_jobs.first.company_name}"
                     - else
                       .bottom-content No Experience Listed
+                  
                   - if candidate.applications.present?
                     %td
                       .content
@@ -44,11 +36,12 @@
                         .bottom-content= candidate.applications.first.job.location
                     %td
                       .content
-                        .position= stage
+                        .position= application_stage(candidate, candidate.applications.first.job)
                         .bottom-content= "#{time_ago_in_words(candidate.created_at)} ago"
                     %td
                       .content
                         = render 'business/ratings/form', application: candidate.applications.first
+                  
                   - else
                     %td
                       .no-content

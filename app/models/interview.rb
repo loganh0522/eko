@@ -12,8 +12,6 @@ class Interview < ActiveRecord::Base
   searchkick
 
   def send_invitation
-
-    
     GoogleWrapper::Calendar.create_event(current_user, e.start_time, e.end_time, 
       e.location, e.description, e.title, e.users, e.candidate)
   end

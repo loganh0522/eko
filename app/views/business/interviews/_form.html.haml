@@ -16,7 +16,7 @@
         .interview-date
       .contain-3
         = f.label "Date"
-        = f.text_field :date, id: "dueDate", placeholder: "Date"
+        = text_field_tag :date, "", id: "dueDate", placeholder: "Date"
         %span#date_msgBlock
       .contain-3
         = f.label "Start Time"

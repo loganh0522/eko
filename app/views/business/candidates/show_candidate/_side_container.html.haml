@@ -5,7 +5,19 @@
       = render 'business/tags/form'
     .tags
       = render "business/tags/tags"
-
+.side-section
+  .tag-container
+    .tag-header
+      %h4 Contact Details
+    .contac-detailss
+      .glyphicon.glyphicon-earphone 
+        = "#{@candidate.phone}"
+      %br
+      .glyphicon.glyphicon-envelope
+        = "#{@candidate.email}"
+      %br
+      .glyphicon.glyphicon-map-marker
+        = "#{@candidate.location}"
 / .side-section
 /   %h4 Tasks 
 /   = link_to 'Open Tasks', business_application_tasks_path(@application), remote: true

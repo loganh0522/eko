@@ -1,11 +1,9 @@
-.page-header
 #main-container
-  .main-container
-    .applicant-view
-      .applicant-side-container
-        .applicant-general-info
-          = render 'business/candidates/show_candidate/candidate_details'
-        = render 'business/candidates/show_candidate/side_container'
+  #padding
+    = link_to business_candidates_path, class: "back-to-candidates" do 
+      %i.fa.fa-arrow-left 
+      Back to Candidates
+    .show-applicant-view
       .applicant-main-container
         .navigation-container
           .applicant-nav
@@ -14,13 +12,8 @@
         .applicant-general
           .display-applicant-details
             = render 'business/candidates/show_candidate/candidate_profile'
-
-
-  .modal#myModal
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-          %h4.modal-title  
-        .modal-body
+      .applicant-side-container
+        .applicant-general-info
+          = render 'business/candidates/show_candidate/candidate_details'
+        = render 'business/candidates/show_candidate/side_container'
 .footer

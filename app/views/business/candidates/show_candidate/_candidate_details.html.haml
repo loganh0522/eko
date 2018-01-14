@@ -5,21 +5,21 @@
   .applicant-details
     .name-rating
       .name= "#{@candidate.full_name.capitalize}"
-      = link_to edit_business_candidate_path(@candidate), remote: true do 
-        .glyphicon.glyphicon-pencil
       / = render 'business/ratings/form', application: @candidate.applications.first
     .current-position
-      - if @candidate.current_jobs.present?
-        = "#{@candidate.current_jobs.first.title}  #{@candidate.current_jobs.first.company_name} "
-    .contact-details
-      .glyphicon.glyphicon-earphone 
-        = "#{@candidate.phone}"
-      %br
-      .glyphicon.glyphicon-envelope
-        = "#{@candidate.email}"
-      %br
-      .glyphicon.glyphicon-map-marker
-        = "#{@candidate.location}"
+  .actions
+    .dropdown
+      .dropdown-button.border-button
+        Actions
+        .caret
+      .dropdown-content#myDropdown
+        = link_to edit_business_candidate_path(@candidate), remote: true do
+          %i.fa.fa-pencil
+          .action Edit
+        = link_to business_candidate_path(@candidate), remote: true, :method => :delete do  
+          %i.fa.fa-trash-o
+          .action Destroy 
+     
 - else
   .user-image
     .profile_picture
@@ -36,6 +36,20 @@
     .current-position
       - if @candidate.user.current_jobs.present?
         = "#{@candidate.user.current_jobs.first.title}  #{@candidate.user.current_jobs.first.company_name} "
+  .actions
+    .dropdown
+      .dropdown-button.border-button
+        Actions
+        .caret
+      .dropdown-content#myDropdown
+        = link_to edit_business_candidate_path(@candidate), remote: true do
+          %i.fa.fa-pencil
+          .action Edit
+        = link_to business_candidate_path(@candidate), remote: true, :method => :delete do  
+          %i.fa.fa-trash-o
+          .action Destroy 
+
+
     .contact-details
       .glyphicon.glyphicon-earphone 
         = "#{@candidate.user.phone}"

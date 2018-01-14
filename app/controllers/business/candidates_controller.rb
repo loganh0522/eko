@@ -54,9 +54,9 @@ class Business::CandidatesController < ApplicationController
     
     respond_to do |format|
       format.html { 
-        @candidates = current_company.candidates.where(id: params[:id]).paginate(page: params[:page], per_page: 10)
-        @tags = current_company.tags
-        render action: :index 
+        # @candidates = current_company.candidates.where(id: params[:id]).paginate(page: params[:page], per_page: 10)
+        # @tags = current_company.tags
+        # render action: :index 
       }
       format.js
     end  

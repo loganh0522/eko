@@ -21,6 +21,7 @@
               %td
                 .content
                   = link_to "#{candidate.full_name}", business_job_application_path(@job, current_application(candidate, @job)), class: "name", :data => {:id =>  "#{candidate.full_name}"}
+                  
                   - if candidate.current_jobs.present?
                     .bottom-content= "#{candidate.current_jobs.first.title} - #{candidate.current_jobs.first.company_name}"
                   - else
@@ -34,10 +35,6 @@
               %td
                 .content
                   .stage= "#{time_ago_in_words(candidate.created_at)} ago"    
-              / = render 'business/shared/manual_application_rows', candidate: candidate
-
-              / = render 'business/shared/user_applications_table_rows', candidate: candidate
-
     .not-present-container
       %p There are currently no applicants in this stage.
 

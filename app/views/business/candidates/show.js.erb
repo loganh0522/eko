@@ -11,11 +11,15 @@
   $('.change-containers-nav').find('.activated').removeClass('activated');
   $('.change-containers-nav').find('#certification').addClass('activated'); 
 <% elsif params[:cv] == 'experience' %>
-  $('.experience-container').html('<%= j render "business/applications/show_application/application_cv" %>')
+  $('.experience-container').html('<%= j render "business/shared_manual_candidate/work_experience" %>')
   $('.change-containers-nav').find('.activated').removeClass('activated');
   $('.change-containers-nav').find('#experience').addClass('activated'); 
-<% else %>
+<% elsif params[:cv] == 'modal' %>
   $('#applicant-modal').modal('show')
   $('#applicant-modal').find('.modal-body').html('<%= j render "business/candidates/show_candidate/show_candidate" %>')
+<% else %>
+  $('.display-applicant-details').html('<%= j render "business/candidates/show_candidate/candidate_profile" %>')
+  $('.applicant-nav').find('.activated').removeClass('activated');
+  $('.applicant-nav').find('#profile').addClass('activated');  
 <% end %>
 

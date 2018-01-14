@@ -63,10 +63,8 @@ $('#interview-calendar').fullCalendar({
   selectHelper: true,
   editable: true,
   eventOverlap: false,
-  timezone: false,
-  'UTC': 'UTC',
-
-  
+  timezone: "America/NewYork",
+  events: '/business/interviews.json',
 
   select: function(start, end) {
     var newEvent;
@@ -78,6 +76,9 @@ $('#interview-calendar').fullCalendar({
     $('.times').empty()
     $('#interview-calendar').fullCalendar('renderEvent', newEvent);
     calendar.fullCalendar('unselect');
+  },
+
+  loading: function (bool) {
   },
 
   eventRender: function(event, element, view) {

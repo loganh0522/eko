@@ -17,10 +17,9 @@ jQuery ->
     selectHelper: true
     editable: true
     eventLimit: true
-    events: '/business/interviews.json'
-    timezone: false, 'UTC'
+    events: '/business/interviews'
+    
     select: (start, end) ->
-
       $.getScript '/business/interviews/new', ->
         $('#event_date_range').val moment(start).format('MM/DD/YYYY HH:mm') + ' - ' + moment(end).format('MM/DD/YYYY HH:mm')
         date_range_picker()

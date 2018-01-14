@@ -18,6 +18,7 @@ for (i = 0, len = checkbox.length; i < len; i++) {
     if (!applicant.includes($(n).data('id'))) {
       applicant.push($(n).data('id'));
     }
+    
     if (!applicant.includes($(n).parent().parent().find('.name').data('id'))) {
       applicant.push($(n).parent().parent().find('.name').data('id'));
     }
