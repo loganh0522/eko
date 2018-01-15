@@ -120,6 +120,18 @@ class Business::UsersController < ApplicationController
     end
   end
 
+  def get_availability
+    @events = []
+    @user = User.find(params[:id])
+
+    @e = OutlookWrapper::Calendar.get_events(@user)
+    @e.each do |event| 
+      @events << {:id => event.id, :title => event.subject, :start => DateTime.parse(event.start.date_time).strftime("%Y-%m-%dT%H:%M:%S%Z").in_time_zone("America/New_York"), :end => DateTime.parse(event.end.date_time).strftime("%Y-%m-%dT%H:%M:%S%Z").in_time_zone("America/New_York"), :editable => false}
+    end
+
+    render :text => @events.to_json
+  end
+
   private
 
   def render_errors(comment)

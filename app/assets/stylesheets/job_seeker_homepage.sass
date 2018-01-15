@@ -177,51 +177,68 @@
     width: 100%
     max-width: 1280px
     margin: 0 auto
-    padding: 25px 3%
+    padding: 25px 4%
     overflow: hidden
     .job-description
+      width: 80%
+      margin: 0 auto
+      padding: 0 25px 100px 25px
       h1
         color: black
         margin-bottom: 2px
-      width: 63%
-      padding: 0 25px 100px 25px
-      float: left
       .job-header
         padding-bottom: 10px
         margin-bottom: 20px
         border-bottom: 1px solid rgba(0, 0, 0, .3)
-        h1 
-          margin-top: 0
+        overflow: hidden
+        .details
+          h2
+            margin-top: 0
+          float: left
+        .actions
+          float: right
+          .share-job-details
+            float: left
+            padding: 10px 10px
+            margin-top: 10px
+            border: 1px solid rgba(0,0,0,0.2)
+            border-radius: 5px
+            .type
+              float: left
+              margin: 5px 10px 0 0 
+              font-size: 15px
+            .fa
+              position: unset
+              float: left
+            a
+              float: left
+              margin-right: 10px
+            .fa-facebook-square
+              color: #3b5998
+            .fa-linkedin-square
+              color: #0e76a8
+            .fa-twitter-square
+              color: #55acee
+            .fa-stack-2x
+              position: unset
+          .apply
+            float: left
+            a
+              text-decoration: none
+            .app-btn
+              width: 100%
+              margin: 0 0
+              font-size: 18px
+              padding: 11px
+              border-radius: 3px 
+              text-align: center
+              font-decoration: none
+          
       .job-body
-        font-size: 16spx
-    .extra-job-details
-      width: 33%
-      float: left
-      margin-left: 2%
-      padding: 0 30px 20px 30px
-      h3
-        margin-top: 10px
-      .apply
-        a
-          text-decoration: none
-        .app-btn
-          width: 100%
-          margin: 0 0
-          font-size: 18px
-          padding: 11px
-          border-radius: 3px 
-          text-align: center
-          font-decoration: none
-      .detail
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-        margin-bottom: 10px
-        margin-top: 10px
-        padding-bottom: 10px
-        .type
-          color: rgba(0, 0, 0, 0.5)
-        .content
-          font-size: 16px
-          font-weight: 500
+        font-size: 16px  
+   
+
+
 
 .application-form
   width: 90%

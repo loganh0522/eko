@@ -1,7 +1,6 @@
 = form_for [:business, @invitation], html: {remote: true}  do |f|
   .column-6
     #interview-calendar
-
   .column-4
     .form-row
       = f.label "Title"
@@ -14,6 +13,7 @@
       = f.text_field :location, id: "geocomplete2", autocomplete: "off", placeholder: "Enter the Address"
       / = f.label :body "Details"
       / = f.text_area :body, autocomplete: "off", placeholder: "Add the details for the meeting. This will be e-mailed to user once meeting confirmed"
+    
     .form-row
       = f.label :room_id, "Add Room"
       .assign-user#user_ids_Block
@@ -23,11 +23,12 @@
             .caret
         .hidden-search-box
           .select-box
-            .select-item{data: {:id => ''}} No Room
+            .select-item.add-calendar-events{data: {:id => ''}} No Room
             - if current_company.rooms.present?
               - current_company.rooms.each do |room|
-                .select-item{data: {:id => room.id}}= room.name
+                .select-item.add-calendar-events{data: {:id => room.id}}= room.name
               = f.hidden_field :room_id, id: "select-box-field"
+    
     .form-row
       = f.label :users, "Add Team Members"
       = render 'business/users/users_autocomplete'
@@ -49,18 +50,13 @@
           = render 'business/interview_invitations/form_fields/insert_actions'
         .email-content
           = f.trix_editor :message, rows: 9
-    .times
-    / = f.fields_for :interview_times do |f|
 
-    = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
     = f.hidden_field :job_id, id: "job_ids"
     = f.hidden_field :user_id, value: current_user.id
     = f.hidden_field :company_id, value: current_company.id
+  
   .modal-footer
     = f.submit  "+ Send Invite", class: "btn submit-button"
-    - if @candidate.present? 
-      .btn.border-button.remove_form Cancel
-    - else
-      .btn.border-button.close-modal Cancel
+    .btn.border-button.close-modal Cancel
 
 

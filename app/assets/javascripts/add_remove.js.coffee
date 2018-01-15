@@ -24,12 +24,12 @@ jQuery ->
     $('#candidate_id').val('')
     return
 
-
   $(document).one 'click', '#client-action', (event) -> 
-    $(document).on 'click', '.user', (event) -> 
+    $(document).on 'click', '.user, .candidate', (event) -> 
       name = $(this).find('.name').text()
       kind = $(this).data('kind')
       value = $(this).data('id')
+      uType = kind + "_" + value
       appendTo = $(this).parent().parent().prev().find('#multiple-users')
       
       if $(this).parent().attr('id') == 'add-multiple'
@@ -39,7 +39,7 @@ jQuery ->
           values =  $('#' + kind + '_ids').val() + ',' + value
           $('#' + kind + '_ids').val values 
 
-        $(appendTo).append('<div class="user-tag" id="' + kind + '"> <div class="name">' + name + '</div> <div class="delete-tag" id="delete-multiple"> &times </div> </div>') 
+        $(appendTo).append('<div class="user-tag" id="' + uType + '"> <div class="name">' + name + '</div> <div class="delete-tag" id="delete-multiple"> &times </div> </div>') 
         $('.hidden-search-box').hide()
         return
 
@@ -49,3 +49,25 @@ jQuery ->
         $(this).parent().parent().prev().find('.plain-text').hide()
         $('.hidden-search-box').hide()
         return
+
+    $(document).on 'click', '#delete-multiple', ->
+      kind = $(this).parent().attr('id').split('_')[0]
+      value = $(this).parent().attr('id').split('_')[1]
+      console.log(kind)
+      values = $('#' + kind + '_ids').val().split(',')
+      console.log(values)
+      index = values.indexOf(value)
+      values.splice(index, 1)
+
+      $('#' + kind + '_ids').val(values)
+      $(this).parent().remove()
+      return   
+
+    $(document).on 'click', '#delete-single', ->
+      kind = $(this).parent().attr('id')
+      $('.plain-text').show()
+      $(this).parent().remove()
+      $('#candidate_id').val('')
+      return
+
+

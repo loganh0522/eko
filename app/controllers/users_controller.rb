@@ -33,12 +33,14 @@ class UsersController < ApplicationController
   def create_job_seeker
     @user = User.new(user_params)   
 
-    if @user.save 
-      session[:user_id] = @user.id 
-      format.js
-    else
-      render_errors(@user)
-      format.js
+    respond_to do |format|
+      if @user.save 
+        session[:user_id] = @user.id 
+        format.js
+      else
+        render_errors(@user)
+        format.js
+      end
     end
   end
 

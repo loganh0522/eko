@@ -39,6 +39,31 @@ $('.largeModal').find('.new-title').html('<%= j "Schedule Meeting" %>');
 $('.largeModal').find('.new-modal-header').after('<%= j render "business/interview_invitations/form" %>');
 $('.largeModal').show();
 
+$(".add-calendar-events").on("click", function() {
+  var roomId = $(this).data('id')
+  var currentId = $('#select-box-field').val()
+  $('#interview-calendar').fullCalendar('removeEventSource', 'rooms/availability/' + currentId)
+  
+  $('#interview-calendar').fullCalendar('addEventSource', {
+    url: 'rooms/availability/' + roomId,
+    color: 'red'
+  })
+});
+
+$("#delete-multiple").on("click", function() {
+  var userId = $(this).parent().attr('id').split('_')[1]
+  $('#interview-calendar').fullCalendar('removeEventSource', 'users/availability/' + userId)
+});
+
+$(".user").on("click", function() {
+  var userId = $(this).data('id')
+  
+  $('#interview-calendar').fullCalendar('addEventSource', {
+    url: 'users/availability/' + userId,
+  })
+});
+
+
 $('#interview-calendar').fullCalendar({
   defaultView: 'agendaWeek',
   header: {
@@ -64,8 +89,11 @@ $('#interview-calendar').fullCalendar({
   editable: true,
   eventOverlap: false,
   timezone: "America/NewYork",
-  events: '/business/interviews.json',
-
+  
+  eventSources: [{
+    url: 'users/availability/<%= current_user.id %>'
+  }],
+    
   select: function(start, end) {
     var newEvent;
     newEvent = new Object();
@@ -110,4 +138,6 @@ $('#interview-calendar').fullCalendar({
     $('.times').append('<div class="time_' + eventId +'"><input type="hidden" name="' + startName + '" value="' + startTime + '" /> <input type="hidden" name="' + endName + '"value="' + endTime + '" /></div>');
   }, 
 });
+
+
 

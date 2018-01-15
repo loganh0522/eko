@@ -27,10 +27,9 @@ module OutlookWrapper
                                 cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                 &callback)
 
+      
       email = graph.me.user_principal_name
-      binding.pry
       @room = Room.where(email: email).first
-      binding.pry
       outlook_token.update_attributes(room_id: @room.id)
     end
 

@@ -1,5 +1,5 @@
 class JobSeeker::CreateProfilesController < ApplicationController 
-  layout "job_seeker"
+  layout :set_layout
   before_filter :require_user
   include Wicked::Wizard
 
@@ -7,6 +7,8 @@ class JobSeeker::CreateProfilesController < ApplicationController
 
   def show
     @user = current_user
+    @job_board = JobBoard.find_by_subdomain!(request.subdomain) if request.subdomain.present?
+
     case step
     
     when :personal
@@ -34,15 +36,14 @@ class JobSeeker::CreateProfilesController < ApplicationController
       if @user.work_experiences.count == 0 
         @user.work_experiences.new
       end
-      
       render_wizard
     end
-
   end
   
   def update
     @user = current_user
     @user.update_attributes(user_params)
+    @job_board = JobBoard.find_by_subdomain!(request.subdomain) if request.subdomain.present?
 
     case step
 
@@ -79,5 +80,19 @@ class JobSeeker::CreateProfilesController < ApplicationController
 
   def finish_wizard_path
     redirect_to job_seeker_user_path(current_user)
+  end
+
+  def set_layout
+    @job_board = JobBoard.find_by_subdomain!(request.subdomain)
+
+    if request.subdomain.present?
+      if @job_board.kind == "basic"
+        "career_portal_profile"
+      else
+        "career_portal_profile"
+      end
+    else
+      layout "job_seeker"
+    end
   end
 end

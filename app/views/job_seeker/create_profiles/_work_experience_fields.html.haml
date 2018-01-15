@@ -7,11 +7,11 @@
       = f.text_field :company_name, placeholder: "Company Name", hide_label: true
       %span#company_name_msgBlock
   .row
-    .contain-50
+    .col-md-6
       = f.label "Industry"
       = f.collection_select(:industry, Industry.all, :id, :name, hide_label: true, prompt: "Select Industry")
       %span#industry_msgBlock
-    .contain-50
+    .col-md-6
       = f.label "Job Function"
       = f.collection_select(:function, Function.all, :id, :name, hide_label: true, prompt: "Select Job Function")
   .row

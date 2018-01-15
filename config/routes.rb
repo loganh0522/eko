@@ -20,8 +20,6 @@ Rails.application.routes.draw do
   get 'contact', to: "pages#contact"
   get 'demo', to: "pages#demo"
   get 'privacy', to: "pages#privacy"
-
-
   get 'features/plan-hiring-process', to: 'features#plan_hiring_process'
   get 'features/screen-applicants', to: 'features#screen_applicants'
   get 'features/source-applicants', to: 'features#source_applicants'
@@ -32,6 +30,7 @@ Rails.application.routes.draw do
   resources :demos, only: [:new, :create]
   resources :interview_invitations, only: [:show]
   resources :interviews
+  
   get 'schedule_interview/:token', to: 'interviews#show', as: 'schedule_interview'
 
   resources :job_boards
@@ -44,10 +43,7 @@ Rails.application.routes.draw do
   post '/company-signup', to: 'companies#create'
 
   resources :companies, only: [:new, :create]
-
-
-  resources :users
-  resources :profiles, only: [:index, :new, :create]
+  resources :users, only: [:new, :create]
   resources :skills 
   resources :certifications
 
@@ -102,7 +98,13 @@ Rails.application.routes.draw do
     get "hiring_defaults", to: 'rejection_reasons#index'
     resources :activities
     resources :hiring_teams
-    resources :rooms
+    
+    resources :rooms do 
+      collection do
+        get "availability/:id", to: "rooms#get_availability"
+      end
+    end
+
     resources :media_photos
     resources :team_members
     resources :logos
@@ -137,6 +139,7 @@ Rails.application.routes.draw do
 
     resources :interview_invitations do 
       collection do 
+        get :availability, to: "interview_invitations#get_availability"
         get :new_multiple, to: "interview_invitations#new_multiple" 
         post :multiple_messages, to: "interview_invitations#multiple_messages"
       end
@@ -162,7 +165,6 @@ Rails.application.routes.draw do
       end
     end
 
-
     resources :default_stages do 
       collection do
         post :sort, to: "default_stages#sort"
@@ -181,6 +183,7 @@ Rails.application.routes.draw do
         get :search
         get :autocomplete
       end
+
       resources :jobs, except: [:index, :show]
       get 'jobs', to: "jobs#client_jobs"
       resources :activities
@@ -209,6 +212,7 @@ Rails.application.routes.draw do
       resources :user_avatars
       
       collection do 
+        get "availability/:id", to: "users#get_availability"
         get :autocomplete
       end
     end
@@ -238,6 +242,7 @@ Rails.application.routes.draw do
       resources :resumes
       resources :tags
       resources :tasks 
+      
       get :application_form, to: "applications#application_form"
       get :application_activity, to: "activities#application_activity"
       
@@ -266,7 +271,6 @@ Rails.application.routes.draw do
     get "plan", to: "customers#plan"
 
     resources :customers do
-
       collection do 
         get 'cancel', to: "customers#cancel"
         post "new_plan", to: "customers#new_plan"

@@ -7,12 +7,19 @@
         .dropdown-button
           %i.fa.fa-share-alt
         .dropdown-content
-          %li LinkedIn
-          %li Facebook
+          = link_to "https://www.facebook.com/sharer/sharer.php?u=" + @job.url, target: :blank, class: "popup" do  
+            %i.fa.fa-facebook-square
+            .action Facebook
+          = link_to "https://www.linkedin.com/shareArticle?mini=true&url=" + @job.url, :target => :blank, :popup => true do 
+            %i.fa.fa-linkedin-square
+            .action LinkedIn
+          = link_to "https://www.twitter.com/intent/tweet" + @job.url, :target => :blank, :popup => true do
+            %i.fa.fa-twitter-square
+            .action Twitter
       .job-link
         = link_to "http://" + @job.url, :target => "_blank", class: "link" do
           %i.fa.fa-link
-      
+
   .change-containers-nav
     %ul 
       = link_to business_job_applications_path(@job), class: 'change-aj' do 

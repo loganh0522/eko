@@ -15,7 +15,7 @@
     = render 'shared/modals/large_modal'
   %body
     %header
-      .nav-container{:style => "position: absolute;"}
+      .nav-container
         .navigation
           - if @job_board.company.logo.present?
             = link_to root_path do

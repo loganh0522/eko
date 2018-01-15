@@ -21,18 +21,7 @@ class Business::InterviewsController < ApplicationController
   
   def index
     @interviews = current_company.interviews
-    @events = []
-    @room = Room.find(5)
-    @users = [current_user, @room]
 
-    @users.each do |user|
-      @e = OutlookWrapper::Calendar.get_events(user)
-      @e.each do |event| 
-        @events.push(event)
-      end
-    end
-
-    binding.pry
     # OutlookWrapper::Calendar.create_event(current_user, "2017-07-24T9:00pm", "2017-07-24T9:30pm")
     # @date = params[:date] ? Date.parse(params[:date]) : Date.today
     # @interviews_by_date = @interviews.group_by(&:start)
@@ -54,16 +43,13 @@ class Business::InterviewsController < ApplicationController
   end
 
   def create
-
     @startTime = DateTime.parse(params[:date] + " " + params[:interview][:stime]).strftime("%Y-%m-%dT%H:%M:%S")
     @endTime = DateTime.parse(params[:date] + " " + params[:interview][:etime]).strftime("%Y-%m-%dT%H:%M:%S")
     @user_ids = params[:interview][:user_ids].split(',') 
     @interview = Interview.new(interview_params.merge!(user_ids: @user_ids, start_time: @startTime, end_time: @endTime))
 
-
     respond_to do |format|  
       if @interview.save
-        binding.pry
         @interviews = current_company.interviews
         format.js
       else
@@ -125,9 +111,6 @@ class Business::InterviewsController < ApplicationController
       OutlookWrapper::Calendar.create_event_invite(e.users.first, e.start_time, e.end_time, e.candidate)
     end
   end
-
-
-
 
   def render_errors(interview)
     @errors = []

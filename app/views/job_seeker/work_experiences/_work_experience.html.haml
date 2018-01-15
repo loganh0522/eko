@@ -36,14 +36,14 @@
             .accomplishments
               %div{id: "work_accomplishments_#{position.id}"}
                 = render "job_seeker/accomplishments/all_accomplishments", position: position
-    .job-position-body
-      .header 
-        Projects
-      .job-position-body-content
+    / .job-position-body
+    /   .header 
+    /     Projects
+    /   .job-position-body-content
         
-        = link_to new_job_seeker_project_path, remote: true do 
-          .add-project-container 
-            %i.fa.fa-plus.fa-3x
+    /     = link_to new_job_seeker_project_path, remote: true do 
+    /       .add-project-container 
+    /         %i.fa.fa-plus.fa-3x
    
     .actions
       %ul

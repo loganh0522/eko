@@ -82,6 +82,21 @@ class JobSeeker::ProjectsController < JobSeekersController
     end
   end
 
+  def set_layout
+    @job_board = JobBoard.find_by_subdomain!(request.subdomain)
+
+    if request.subdomain.present?
+      if @job_board.kind == "basic"
+        "career_portal_profile"
+      else
+       "career_portal_profile"
+      end
+    else
+      layout "job_seeker"
+    end
+  end
+
+
   def add_skills(project)  
     if params[:user_skills].present?
       @skills = params[:user_skills].split(',')

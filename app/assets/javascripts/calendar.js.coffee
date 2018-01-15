@@ -30,5 +30,4 @@ jQuery ->
       return
   });
 
-
   

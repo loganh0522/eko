@@ -3,11 +3,13 @@
   = tag :meta, content: "Talentwiz:job", property: "og:type"
   = tag :meta, content: @job.title, property: "og:title"
   = tag :meta, content: @job.title, property: "og:description"
-  = tag :meta, content: @job.url, property: "og:url"
+  = tag :meta, content: "https://" + @job.url, property: "og:url"
   = tag :meta, content: @job_board.job_board_header.background_image.file.url, property: "og:image" 
   = tag :meta, property: "og:image:width", content: "450"
-  = tag :meta, property: "og:image:height", content: "298"
+  = tag :meta, property: "og:image:height", content: "298" 
   = tag :meta, property: "fb:app_id", content: "552813801728881"
+  = tag :meta, name: "twitter:card", conten: @job.title
+
 
 
 

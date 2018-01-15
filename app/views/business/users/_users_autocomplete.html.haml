@@ -4,7 +4,7 @@
       .add-button-search
         .glyphicon.glyphicon-plus
       #multiple-users
-        .user-tag
+        .user-tag{:id => 'user_' + current_user.id.to_s}
           .name= current_user.full_name
           .delete-tag#delete-multiple &times
     .hidden-search-box
