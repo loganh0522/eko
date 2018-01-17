@@ -55,8 +55,6 @@ class JobSeeker::CandidatesController < JobSeekersController
 
   def set_layout
     if request.subdomain.present? && request.subdomain != 'www'
-      "job_seeker"
-    else
       @job_board = JobBoard.find_by_subdomain!(request.subdomain)
 
       if @job_board.kind == "basic"
@@ -64,6 +62,8 @@ class JobSeeker::CandidatesController < JobSeekersController
       else
         "career_portal_profile"
       end
+    else
+      "job_seeker"
     end
   end
 
