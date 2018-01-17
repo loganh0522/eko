@@ -83,16 +83,15 @@ class JobSeeker::CreateProfilesController < ApplicationController
   end
 
   def set_layout
-    @job_board = JobBoard.find_by_subdomain!(request.subdomain)
-
-    if request.subdomain.present?
+    if request.subdomain.present? && r.subdomain != 'www'
+      @job_board = JobBoard.find_by_subdomain!(request.subdomain)
       if @job_board.kind == "basic"
         "career_portal_profile"
       else
         "career_portal_profile"
       end
     else
-      layout "job_seeker"
+      "job_seeker"
     end
   end
 end

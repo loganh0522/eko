@@ -54,7 +54,8 @@ class JobSeeker::CandidatesController < JobSeekersController
   end
 
   def set_layout
-    if request.subdomain.present?
+    if request.subdomain.present? && r.subdomain != 'www'
+      @job_board = JobBoard.find_by_subdomain!(request.subdomain)
       if @job_board.kind == "basic"
         "advanced_career_portal"
       else
