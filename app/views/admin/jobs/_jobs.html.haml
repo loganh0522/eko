@@ -1,26 +1,36 @@
-%table.table
-  %thead
-    %tr
-      %td(width="5%")
-      %th(width="25%") Title
-      %th(width="25%") Approved
-      %th(width="10%") Status
-      %th(width="10%") Candidates
-      %th(width="10%") Created At
-    %tbody
-      - @jobs.each do |job| 
-        %tr
-          %td
-            #completed
-              = link_to verified_admin_jobs_path(id: job.id), method: :post, remote: true do 
-                .glyphicon.glyphicon-ok
-          %td
-            = link_to "#{job.title}", admin_job_path(job)
-          %td
-            
-          %td
-            = job.status
-          %td
-            = job.candidates.count
-          %td
-            = job.created_at
+.table1
+  %table
+    %thead
+      %tr
+        %th(width="1%")
+        %th(width="5%") 
+        %th(width="25%") Title
+        %th(width="25%") Company
+        %th(width="10%") 
+        %th(width="10%") Candidates
+        %th(width="10%") Created At
+      %tbody
+        - @jobs.each do |job| 
+          %tr
+            %td
+              .applicant-checkbox{:data => {:id => job.id}}
+                = check_box_tag "job_id[]", job.id, false, class: 'checkbox'
+            %td
+              - if job.verified == true
+                .complete#completed
+                  = link_to verified_admin_jobs_path(id: job.id), method: :post, remote: true do 
+                    %i.fa.fa-check
+              - else
+                .complete
+                  = link_to verified_admin_jobs_path(id: job.id), method: :post, remote: true do 
+                    %i.fa.fa-check
+            %td
+              = link_to "#{job.title}", admin_job_path(job)
+            %td
+              = job.company.name
+            %td
+              = job.status
+            %td
+              = job.candidates.count
+            %td
+              = job.created_at

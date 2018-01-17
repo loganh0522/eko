@@ -17,7 +17,7 @@ jQuery ->
     selectHelper: true
     editable: true
     eventLimit: true
-    events: '/business/interviews'
+    events: '/business/interviews.json'
     
     select: (start, end) ->
       $.getScript '/business/interviews/new', ->

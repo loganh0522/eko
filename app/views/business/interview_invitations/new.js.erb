@@ -50,7 +50,7 @@ $(".add-calendar-events").on("click", function() {
   })
 });
 
-$("#delete-multiple").on("click", function() {
+$(".delete-tag").on("click", function() {
   var userId = $(this).parent().attr('id').split('_')[1]
   $('#interview-calendar').fullCalendar('removeEventSource', 'users/availability/' + userId)
 });
@@ -127,15 +127,17 @@ $('#interview-calendar').fullCalendar({
   },
 
   eventAfterRender: function(newEvent, element, view) {
-    var endTime, name, newAttr, startTime;
-    startTime = newEvent.start.format('YYYY-MM-DD HH:mm');
-    endTime = newEvent.end.format('YYYY-MM-DD HH:mm');
-    newAttr = new Date().getTime();
-    eventId = newEvent._id
-
-    startName = "interview_invitation[interview_times_attributes][" + newAttr + "][start_time]";
-    endName = "interview_invitation[interview_times_attributes][" + newAttr + "][end_time]";
-    $('.times').append('<div class="time_' + eventId +'"><input type="hidden" name="' + startName + '" value="' + startTime + '" /> <input type="hidden" name="' + endName + '"value="' + endTime + '" /></div>');
+    console.log(newEvent.editable == false)
+    if (newEvent.editable !== false) {
+      var endTime, name, newAttr, startTime;
+      startTime = newEvent.start.format('YYYY-MM-DD HH:mm');
+      endTime = newEvent.end.format('YYYY-MM-DD HH:mm');
+      newAttr = new Date().getTime();
+      eventId = newEvent._id
+      startName = "interview_invitation[interview_times_attributes][" + newAttr + "][start_time]";
+      endName = "interview_invitation[interview_times_attributes][" + newAttr + "][end_time]";
+      $('.times').append('<div class="time_' + eventId +'"><input type="hidden" name="' + startName + '" value="' + startTime + '" /> <input type="hidden" name="' + endName + '"value="' + endTime + '" /></div>');
+    } 
   }, 
 });
 

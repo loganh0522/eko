@@ -1,7 +1,7 @@
-= form_for @interview do |f|
+= form_for @interview, url: '/schedule_interview/' + @invitation.token do |f|
   .standard-body
     = f.label :email, "E-mail"
-    = text_field_tag :email, "", placeholder: "E-mail"
+    = text_field_tag :email, "", placeholder: "E-mail", required: true
     - @times.each do |time|   
       = radio_button_tag "time", time.id, false, id: "time_#{time.id}"
       = label_tag "time_#{time.id}", "#{time.start_time.strftime('%A %B %e @ %I:%M %p')} - #{time.end_time.strftime('%I:%M %p')}", :value => "#{time.id}", class: 'dateTime time-container'
@@ -11,10 +11,7 @@
 
     = text_area_tag :response, "", placeholder: "Let us know some times that work."
     
-    = f.hidden_field :user_ids, value: @user_ids
     = f.hidden_field :company_id, value: @company.id
-    = f.hidden_field :kind, value: @invitation.kind
-    = f.hidden_field :location, value: @invitation.location
-    = f.hidden_field :title, value: @invitation.title
+
   .container-footer
-    = f.submit "Schedule", class: "btn submit-button"
+    = f.submit "Schedule", class: "btn border-button"

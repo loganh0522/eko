@@ -1,6 +1,7 @@
 .business-registration
   = form_for @user do |f|
     .standard-header
+      %img.logo(src="/tmp/logo.jpg")
       %h2 Sign Up Today
     .body
       = f.text_field :first_name, placeholder: "First Name", hide_label: true

@@ -11,8 +11,8 @@
       %span#kind_Block.help-block
       = f.label "Location"
       = f.text_field :location, id: "geocomplete2", autocomplete: "off", placeholder: "Enter the Address"
-      / = f.label :body "Details"
-      / = f.text_area :body, autocomplete: "off", placeholder: "Add the details for the meeting. This will be e-mailed to user once meeting confirmed"
+      = f.label :body, "Details"
+      = f.text_area :body, autocomplete: "off", placeholder: "Add the details for the meeting. This will be e-mailed to user once meeting confirmed. I.e Location, Phone Number, etc."
     
     .form-row
       = f.label :room_id, "Add Room"
@@ -50,7 +50,7 @@
           = render 'business/interview_invitations/form_fields/insert_actions'
         .email-content
           = f.trix_editor :message, rows: 9
-
+    .times
     = f.hidden_field :job_id, id: "job_ids"
     = f.hidden_field :user_id, value: current_user.id
     = f.hidden_field :company_id, value: current_company.id

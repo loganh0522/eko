@@ -31,7 +31,9 @@ Rails.application.routes.draw do
   resources :interview_invitations, only: [:show]
   resources :interviews
   
-  get 'schedule_interview/:token', to: 'interviews#show', as: 'schedule_interview'
+  get '/schedule_interview/:token', to: 'interviews#new', as: 'schedule_interview'
+  post '/schedule_interview/:token', to: 'interviews#create'
+  get '/booked', to: "interviews#show"
 
   resources :job_boards
   resources :jobs do 
@@ -118,7 +120,6 @@ Rails.application.routes.draw do
     resources :locations 
     resources :application_emails
     resources :notifications
-    resources :interviews
     resources :email_templates
 
     post "update_password", to: 'users#update_password'
@@ -130,6 +131,12 @@ Rails.application.routes.draw do
         get :new_multiple, to: "tasks#new_multiple"
         post :completed, to: "tasks#completed"
         post :create_multiple, to: "tasks#create_multiple"
+      end
+    end
+
+    resources :interviews do 
+      collection do 
+        get :search
       end
     end
 
@@ -234,7 +241,7 @@ Rails.application.routes.draw do
       end
       resources :interview_invitations
       resources :work_experiences
-      resources :interviews
+      resources :interviews 
       resources :activities
       resources :applications 
       resources :messages
@@ -365,6 +372,10 @@ Rails.application.routes.draw do
       resources :users
       resources :candidates
       get 'jobs', to: "jobs#company_jobs"
+
+      collection do 
+        post :verified, to: "companies#verified"
+      end
     end
   end
 
@@ -376,10 +387,9 @@ Rails.application.routes.draw do
  
 
   get 'juju-job-feed', to: "job_feeds#juju_job_feed"
-
   
 
-  get '-job-feed', to: "job_feeds#jooble_job_feed"
+  get 'neuvoo-job-feed', to: "job_feeds#neuvoo_job_feed"
   get 'jooble-job-feed', to: "job_feeds#jooble_job_feed"
   get 'jooble-job-feed', to: "job_feeds#jooble_job_feed"
   mount StripeEvent::Engine, at: '/stripe_events'

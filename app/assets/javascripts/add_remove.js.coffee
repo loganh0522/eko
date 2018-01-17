@@ -53,9 +53,7 @@ jQuery ->
     $(document).on 'click', '#delete-multiple', ->
       kind = $(this).parent().attr('id').split('_')[0]
       value = $(this).parent().attr('id').split('_')[1]
-      console.log(kind)
       values = $('#' + kind + '_ids').val().split(',')
-      console.log(values)
       index = values.indexOf(value)
       values.splice(index, 1)
 

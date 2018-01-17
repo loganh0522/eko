@@ -81,9 +81,18 @@ class Business::RoomsController < ApplicationController
     @events = []
     @room = Room.find(params[:id])
     
-    @e = OutlookWrapper::Calendar.get_events(@room)
+    if @room.outlook_token.present? 
+      @e = OutlookWrapper::Calendar.get_events(@room)
+    elsif @user.google_token.present?
+      @e = GoogleWrapper::Calendar.get_events(@room)
+    end
+
     @e.each do |event| 
-      @events << {:id => event.id, :title => event.subject, :start => DateTime.parse(event.start.date_time).strftime("%Y-%m-%dT%H:%M:%S%Z").in_time_zone("America/New_York"), :end => DateTime.parse(event.end.date_time).strftime("%Y-%m-%dT%H:%M:%S%Z").in_time_zone("America/New_York"), :editable => false}
+      if DateTime.parse(event.start.date_time).strftime("%Y-%m-%dT%H:%M:%S%Z").in_time_zone("America/New_York").dst? 
+        @events << {:id => event.id, :title => event.subject, :start => DateTime.parse(event.start.date_time).strftime("%Y-%m-%dT%H:%M:%S%Z").in_time_zone("America/New_York"), :end => DateTime.parse(event.end.date_time).strftime("%Y-%m-%dT%H:%M:%S%Z").in_time_zone("America/New_York"), :editable => false}
+      else
+        @events << {:id => event.id, :title => event.subject, :start => DateTime.parse(event.start.date_time).strftime("%Y-%m-%dT%H:%M:%S%Z").in_time_zone("America/New_York"), :end => DateTime.parse(event.end.date_time).strftime("%Y-%m-%dT%H:%M:%S%Z").in_time_zone("America/New_York"), :editable => false}
+      end
     end
 
     render :text => @events.to_json

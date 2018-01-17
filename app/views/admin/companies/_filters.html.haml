@@ -1,0 +1,8 @@
+= form_tag admin_companies_path, :method => 'get', id: "search-form" do
+  .filter-radios 
+    %ul  
+      = radio_button_tag "verified", "true", true, class: 'filter'
+      = label_tag "verified_true", "Verified", :value => "true", class: 'filter'
+      = radio_button_tag "verified", "false", false, class: 'filter'
+      = label_tag "verified_false", "Pending Verification", :value => "false", class: 'filter'
+  = text_field_tag "query", nil, placeholder: "Search Companies", class: "search-field"

@@ -11,27 +11,5 @@
         = link_to admin_company_jobs_path(@company), class: 'change-aj' do 
           %li{:class => is_activated?(admin_company_jobs_path(@company))} Jobs
 
-  #main-container
-    %table.table
-      %thead
-        %tr
-          %td(width="5%")
-          %th(width="25%") Title
-          %th(width="25%") Approved
-          %th(width="10%") Status
-          %th(width="10%") Candidates
-          %th(width="10%") Created At
-        %tbody
-          - @jobs.each do |job| 
-            %tr
-              %td
-              %td
-                = link_to "#{job.title}", admin_job_path(job)
-              %td
-                
-              %td
-                = job.status
-              %td
-                = job.candidates.count
-              %td
-                = job.created_at
+   #main-container
+    = render 'admin/jobs/jobs'

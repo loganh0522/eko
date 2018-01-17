@@ -1,0 +1,36 @@
+.table1
+  %table
+    %thead
+      %tr
+        %th(width="1%")
+        %th(width="5%") 
+        %th(width="25%") Title
+        %th(width="25%") Company
+        %th(width="10%") 
+        %th(width="10%") Candidates
+        %th(width="10%") Created At
+      %tbody
+        - @companies.each do |company| 
+          %tr
+            %td
+              .applicant-checkbox{:data => {:id => company.id}}
+                = check_box_tag "job_id[]", company.id, false, class: 'checkbox'
+            %td
+              - if company.verified == true
+                .complete#completed
+                  = link_to verified_admin_companies_path(id: company.id), method: :post, remote: true do 
+                    %i.fa.fa-check
+              - else
+                .complete
+                  = link_to verified_admin_companies_path(id: company.id), method: :post, remote: true do 
+                    %i.fa.fa-check
+            %td
+              = link_to "#{company.name}", admin_company_path(company)
+            %td
+              = company.location
+            %td
+              = company.size
+            %td
+              = company.jobs.count
+            %td
+              = company.open_jobs.count

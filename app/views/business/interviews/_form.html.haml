@@ -16,7 +16,7 @@
         .interview-date
       .contain-3
         = f.label "Date"
-        = text_field_tag :date, "", id: "dueDate", placeholder: "Date"
+        = f.text_field :date, id: "dueDate", placeholder: "Date"
         %span#date_msgBlock
       .contain-3
         = f.label "Start Time"
@@ -32,7 +32,7 @@
       .contain-100
         = f.label "Notes"
         = f.text_area :notes, placeholder: "Add additional details for the candidate(ex. floor number)"
-        = f.check_box :send_request, {}, false
+        = f.check_box :send_request, {}, true, false
         = f.label "Send Confirmation E-mail"
 
     .form-row-no-border

@@ -76,32 +76,30 @@ class Business::InterviewInvitationsController < ApplicationController
     #   GoogleWrapper::Gmail.send_message(@email, current_user, message)
     # end
 
-    # AppMailer.send_interview_invitation(@token, @message, @subject, @job, email, current_company).deliver_now
+    AppMailer.send_interview_invitation(@token, @message, @subject, @job, email, current_company).deliver_now
     # end
   end
 
-  def schedule_in_calendar(interview_invite)
-    @users = interview_invite.users
+  def schedule_in_calendar(event)
+    @users = event.users
     
     @users.each do |user| 
       if user.outlook_token.present?
-        @times = interview_invite.interview_times
+        @times = event.interview_times
         @email = user.email          
         
         @times.each do |time| 
           @startTime = time.start_time.strftime("%Y-%m-%dT%H:%M:%S")
           @endTime = time.end_time.strftime("%Y-%m-%dT%H:%M:%S")
-          OutlookWrapper::Calendar.create_event(user, @startTime, @endTime, time)
+          OutlookWrapper::Calendar.create_event(event, user, @startTime, @endTime, time)
         end
       elsif user.google_token.present? 
-        @times = interview_invite.interview_times
+        @times = event.interview_times
         @email = user.email   
         @times.each do |time| 
           @startTime = time.start_time.strftime("%Y-%m-%dT%H:%M:%S")
           @endTime = time.end_time.strftime("%Y-%m-%dT%H:%M:%S")
-          @location = interview_invite.location
-          # @description = interview_invite.details
-          GoogleWrapper::Calendar.create_event(current_user, @startTime, @endTime, location)
+          GoogleWrapper::Calendar.create_event(event, current_user, @startTime, @endTime, time)
         end
       end
     end
@@ -117,8 +115,9 @@ class Business::InterviewInvitationsController < ApplicationController
       @times.each do |time| 
         @startTime = time.start_time.strftime("%Y-%m-%dT%H:%M:%S")
         @endTime = time.end_time.strftime("%Y-%m-%dT%H:%M:%S")
-        OutlookWrapper::Calendar.create_event(@room, @dateTime, @endTime, time)
+        OutlookWrapper::Calendar.create_event(interview_invite, @room, @startTime, @endTime, time)
       end
+    elsif user.google_token.present? 
     end
   end
 

@@ -27,7 +27,7 @@ module OutlookWrapper
                                 cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                 &callback)
 
-      
+
       email = graph.me.user_principal_name
       @room = Room.where(email: email).first
       outlook_token.update_attributes(room_id: @room.id)
@@ -294,17 +294,14 @@ module OutlookWrapper
         r.headers['Authorization'] = "Bearer #{user.outlook_token.access_token}"
         r.headers['Content-type'] = 'application/json'
         r.headers['X-AnchorMailbox'] = user.email
-        r.headers['outlook.timezone'] = "Pacific Standard Time"
       end
 
-      graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0/',
-                                cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
-                                &callback)
+      graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0/', cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'), &callback)
 
       @events = graph.me.events.order_by('start/dateTime asc')
     end
 
-    def self.create_event(user, dateTime, endTime, time)   
+    def self.create_event(event, user, dateTime, endTime, time)   
       if user.outlook_token.expired?
         user.outlook_token.refresh!(user)
       end
@@ -318,21 +315,26 @@ module OutlookWrapper
       graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0/',
                                 cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                 &callback)
-
-      @create = graph.me.events.create(subject: "Pending Interview", 
-        body: {content: "Interview with Logan Once he finishes"},
-        start: {dateTime: dateTime, timeZone: "America/New_York"}, end: {dateTime: endTime,  timeZone: "America/New_York"}, 
-        organizer: {emailAddress: {name: user.full_name, address: user.email}},
-        responseRequested: true, responseStatus: {"@odata.type" => "microsoft.graph.responseStatus"})
-      
       if user.class == Room 
+        @create = graph.me.events.create(subject: "Pending Interview", 
+          body: {content: event.details},
+          start: {dateTime: dateTime, timeZone: "America/New_York"}, end: {dateTime: endTime,  timeZone: "America/New_York"}, 
+          organizer: {emailAddress: {address: user.email}},
+          responseRequested: true, responseStatus: {"@odata.type" => "microsoft.graph.responseStatus"})
+
         EventId.create(room_id: user.id, event_id: @create.id, interview_time_id: time.id) 
       else
+        @create = graph.me.events.create(subject: "Pending Interview", 
+          body: {content: event.details},
+          start: {dateTime: dateTime, timeZone: "America/New_York"}, end: {dateTime: endTime,  timeZone: "America/New_York"}, 
+          organizer: {emailAddress: {name: user.full_name, address: user.email}},
+          responseRequested: true, responseStatus: {"@odata.type" => "microsoft.graph.responseStatus"})
+        
         EventId.create(user_id: user.id, event_id: @create.id, interview_time_id: time.id) 
       end
     end
 
-    def self.create_event_invite(user, dateTime, endTime, time, attendee)   
+    def self.create_event_invite(interview, user, dateTime, endTime, attendee)   
       if user.outlook_token.expired?
         user.outlook_token.refresh!(user)
       end
@@ -347,12 +349,12 @@ module OutlookWrapper
                                 cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                 &callback)
 
-      @create = graph.me.events.create(subject: "Pending Interview", 
-        body: {content: "Interview with Logan Once he finishes"},
-        start: {dateTime: dateTime, timeZone: "America/New_York"}, end: {dateTime: endTime,  timeZone: "America/New_York"}, 
+      @create = graph.me.events.create(subject: interview.title, 
+        body: {content: interview.notes},
+        start: {dateTime: dateTime.strftime("%Y-%m-%dT%H:%M:%S"), timeZone: "America/New_York"}, end: {dateTime: endTime.strftime("%Y-%m-%dT%H:%M:%S"),  timeZone: "America/New_York"}, 
         organizer: {emailAddress: {name: user.full_name, address: user.email}},
         attendees: [{emailAddress: {address: attendee.email, name: attendee.full_name}, type: "required"}],
-        responseRequested: true, responseStatus: {"@odata.type" => "microsoft.graph.responseStatus"})
+        responseRequested: true)
     end
 
     def self.update_event(user, event, candidate)   

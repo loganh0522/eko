@@ -57,16 +57,6 @@ jQuery ->
     for n in applicants
       $(this).find('.recipients').append('<div id="tag" data-id=' + n[0] + '> <div class="tag-name">' + n[1] + '</div> <div class="remove-recipient"> &times </div> </div>') 
 
-  $('#main-container').on 'click', '.remove-recipient', (event) -> 
-    $('.modal').find('#applicant_ids').val('')
-    $(this).parent().remove()
-    new_recipients = $('.recipients').children()
-    applicant_ids = []
-    
-    for n in new_recipients
-      applicant_ids.push($(n).data('id')) unless applicant_ids.includes($(n).data('id'))
-  
-    $('.modal').find('form').find('#applicant_ids').val(applicant_ids)
 
 ################  Google Places JavaScript API ####################
 

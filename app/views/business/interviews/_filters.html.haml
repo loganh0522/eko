@@ -1,13 +1,10 @@
-= form_tag business_interviews_path, :method => 'get', id: "search-form" do
+= form_tag search_business_interviews_path, :method => 'get', id: "search-form" do
   .filter-radios 
     = radio_button_tag "owner", "company", true, class: 'filter'
     = label_tag "owner_company", "All", :value => "company", class: 'filter'
-    
-    
     = radio_button_tag "owner", "user", false, class: 'filter'
     = label_tag "owner_user", "My Interviews", :value => "my-tasks", class: 'filter'
 
-  = text_field_tag "query", nil, placeholder: "Search Candidates by Keyword", class: "search-field"
   = render 'filter_links'
   .filter-container
     .filter-header

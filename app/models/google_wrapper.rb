@@ -254,17 +254,16 @@ Google::Apis::RequestOptions.default.retries = 5
         grant_type: 'authorization_code')
     end
     
-    def self.create_event(current_user, startTime, endTime, location)
-      self.set_client(current_user)
+    def self.create_event(event, user, startTime, endTime, time)
+      self.set_client(user)
       service = Google::Apis::CalendarV3::CalendarService.new
       service.authorization = @client
-    
-      event = {
-        # summary: options[:summary],
-        # summary: title
-        # description: description,
-        attendees: [{email: "loganh0522@gmail.com"}],
-        location: location,
+
+      event = Google::Apis::CalendarV3::Event.new({
+        summary: 'Pending Interview',
+        description: event.details,
+        attendees: [{email: user.email}],
+        location: event.location,
         start: {
           date_time: startTime,
           time_zone: 'America/New_York'
@@ -273,17 +272,53 @@ Google::Apis::RequestOptions.default.retries = 5
           date_time: endTime,
           time_zone: 'America/New_York'
         }, 
-      }
+      })
+
+      @event = service.insert_event('primary', event)
+      EventId.create(user_id: user.id, event_id: @event.id, interview_time_id: time.id) 
+    end
+
+    def self.create_event_invite(current_user, startTime, endTime, location, time)
+      self.set_client(current_user)
+      service = Google::Apis::CalendarV3::CalendarService.new
+      service.authorization = @client
+      
+      event = Google::Apis::CalendarV3::Event.new({
+        summary: event.title,
+        description: event.details,
+        attendees: [{email: user.email}],
+        location: event.location,
+        start: {
+          date_time: startTime,
+          time_zone: 'America/New_York'
+        },
+        end: {
+          date_time: endTime,
+          time_zone: 'America/New_York'
+        }, 
+      })
 
       @event = service.insert_event('primary', event, send_notifications: true)
+      EventId.create(user_id: user.id, event_id: @event.id, interview_time_id: time.id) 
     end
 
-    def self.get_event
-      
+    def self.get_events(user)
+      self.set_client(user)
+      service = Google::Apis::CalendarV3::CalendarService.new
+      service.authorization = @client
+
+      @events = service.list_events('primary')
     end
+    
+    def self.update_event(user, event, candidate)   
+      self.set_client(user)
+      service = Google::Apis::CalendarV3::CalendarService.new
+      service.authorization = @client
 
+      event = service.get_event('primary', event.event_id)
+      event.summary = "Interview with #{candidate.full_name}"
 
-    def self.update_event
+      @event = service.update_event('primary', event.id, event)
     end
 
     def self.destroy_event

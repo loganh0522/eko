@@ -57,6 +57,15 @@ class Admin::CompaniesController < ApplicationController
 
   end
 
+  def verified
+    @company = Company.find(params[:id])
+    @company.update_attributes(verified: true)
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def autocomplete
     render :json => Job.search(params[:term], where: {company_id: current_company.id}, 
       fields: [{title: :word_start}])

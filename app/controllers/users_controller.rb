@@ -38,8 +38,8 @@ class UsersController < ApplicationController
         session[:user_id] = @user.id 
         format.js
       else
-        render_errors(@user)
-        format.js
+        format.js { render_errors(@user) }
+        format.html {render :new_job_seeker}
       end
     end
   end
