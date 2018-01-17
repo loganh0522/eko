@@ -57,7 +57,6 @@ class JobSeeker::UsersController < JobSeekersController
 
     if request.subdomain.present? && request.subdomain != 'www'
       @job_board = JobBoard.find_by_subdomain!(request.subdomain)
-
       if @job_board.kind == "basic"
         "career_portal_profile"
       else
