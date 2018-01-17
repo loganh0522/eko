@@ -13,7 +13,9 @@ class JobSeeker::ProjectsController < JobSeekersController
       @background = BackgroundImage.new
     end
 
-    @job_board = JobBoard.find_by_subdomain!(request.subdomain) if request.subdomain.present?
+    if request.subdomain.present? && request.subdomain != 'www'
+      @job_board = JobBoard.find_by_subdomain!(request.subdomain) 
+    end
   end
   
   def show

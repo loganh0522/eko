@@ -15,7 +15,7 @@ class JobSeeker::CandidatesController < JobSeekersController
     @questions = @job.questions
 
     if request.subdomain.present? && request.subdomain != 'www'
-      @job_board = JobBoard.find_by_subdomain!(request.subdomain) if request.subdomain.present?
+      @job_board = JobBoard.find_by_subdomain!(request.subdomain)
       render :portal_new
     else
       render :new
