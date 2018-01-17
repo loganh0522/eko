@@ -1,5 +1,5 @@
 class JobSeeker::ProjectsController < JobSeekersController
-  layout "job_seeker"
+  layout :set_layout
   before_filter :require_user
   # before_filter :profile_sign_up_complete, :only => [:index]
   def index
@@ -83,7 +83,8 @@ class JobSeeker::ProjectsController < JobSeekersController
   end
 
   def set_layout
-    if request.subdomain.present? && request.subdomain != 'www'
+    if request.subdomain != 'www'
+
       @job_board = JobBoard.find_by_subdomain!(request.subdomain)
       if @job_board.kind == "basic"
         "career_portal_profile"
