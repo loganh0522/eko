@@ -94,40 +94,39 @@
       margin-bottom: 30px
       height: auto
 
-     
-.slick-pervious
-  font-size: 0
-  line-height: 0
-  position: absolute
-  top: 50%
-  display: block
-  width: 20px
-  height: 20px
-  margin-top: -10px
-  padding: 0
-  cursor: pointer
-  color: transparent
-  border: none
-  outline: none
-  background: transparent
-  
-.slick-dots
-  margin: 0 auto
-  position: absolute
-  bottom: -45px
-  display: none
-  width: 100%
-  padding: 0
-  list-style: none
-  text-align: center
-  li 
-    position: relative
-    display: inline-block
-    width: 20px
-    height: 20px
-    margin: 0 5px
-    padding: 0
-    cursor: pointer
+.images-container 
+  .slick-prev
+    left: 0
+    top: 50%
+    margin: -25px 10px
+    position: absolute
+    width: 50px 
+    height: 50px
+    border-radius: 50%
+    z-index: 1
+    border: none
+    background: rgba(0,0,0,0.5)
+    .fa 
+      font-size: 35px
+      color: #fff
+  .slick-next
+    right: 0
+    top: 50%
+    margin: -25px 10px
+    position: absolute
+    width: 50px 
+    height: 50px
+    border-radius: 50%
+    z-index: 1
+    border: none
+    background: rgba(0,0,0,0.5)
+    .fa 
+      font-size: 35px
+      color: #fff
+  .slick-slide
+    max-height: 400px
+    img
+      max-height: 400px
 
 .job-board-sections
   text-align: center
@@ -137,15 +136,12 @@
   background: #ffffff
   .section
     border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-    .section-content
-      padding: 30px 0 
-      margin: 0 auto
-      width: 90%
-      max-width: 1200px
+    overflow: hidden
+    width: 100%   
     .header-message
       width: 90%
       max-width: 1200px
-      margin: 0 auto 50px auto
+      margin: 25px auto 50px auto
       height: auto
       color: rgba(0, 0, 0, 0.7)
       .header 
@@ -209,13 +205,30 @@
         float: right
 
   .description-right
-    .image-description
-      .description
-        float: right
-        margin-left: 2%
-      .image
-        float: left
-
+    .image-description 
+      float: right
+      width: 50%
+      padding: 20px 20px
+      .header 
+        font-size: 28px
+        font-weight: 400
+        height: auto
+      .sub-header
+        font-size: 18px
+        font-weight: 400
+        margin-bottom: 10px
+        height: autos
+      p
+        line-height: 1.5em
+        font-size: 15px
+    .image
+      width: 50% 
+      float: left
+      img
+        width: 100%
+        height: 100%
+        max-height: 400px
+        
   @media screen and (max-width: 1100px)
     .description-left
       .image-description 
@@ -235,21 +248,21 @@
             width: 100%
     .description-right
       .image-description 
+        float: right
+        width: 50%
+        padding: 20px 20px
         .description
           float: none
           width: 100%
           margin-top: 40px
-        .image
-          margin-bottom: 20px
-          float: none
-          margin: auto
-          height: 300px
-          width: 300px
-          img
-            border-radius: 50%
-            height: 100%
-            width: 100%
-
+      .image
+        width: 50% 
+        float: left
+        margin-bottom: 20px
+        float: none
+        margin: auto
+        height: 300px
+        width: 300px
 
 
 

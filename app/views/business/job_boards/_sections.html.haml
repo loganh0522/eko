@@ -3,7 +3,7 @@
     = render 'business/job_board_rows/sections'
   
 .dropdown
-  .dropdown-button.border-button
+  .dropdown-button.border-button#add-job-board-sections
     + Add Section
   .dropdown-content
     = link_to 'Text & Photo', new_business_job_board_job_board_row_path(@job_board, kind: "Text"), remote: true

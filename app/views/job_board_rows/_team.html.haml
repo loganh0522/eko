@@ -1,7 +1,7 @@
-.header-message
-  .header= section.header
-  .sub-header= section.subheader
 .team-members
+  .header-message
+    .header= section.header
+    .sub-header= section.subheader
   - section.team_members.each do |member|
     .team-member
       .member-img= image_tag member.file.small_image

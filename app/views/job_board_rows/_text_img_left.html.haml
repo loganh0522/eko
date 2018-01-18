@@ -1,8 +1,8 @@
 .description-right
-  .header-message
+  .image
+    = image_tag section.media_photos.first.file_name.medium_image
+  .image-description
     .header= section.header
     .sub-header= section.subheader
-  .image-description
-    .image= image_tag section.media_photos.first.file_name.medium_image
-    .description= section.description.html_safe
+    %p= section.description.html_safe
     

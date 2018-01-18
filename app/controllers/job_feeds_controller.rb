@@ -15,7 +15,6 @@ class JobFeedsController < ApplicationController
 
   def eluta_job_feed
     @jobs = Job.joins(:job_feed).where(status: "open", :job_feeds => {:eluta => true})
-    render 'job_feeds/adzuna_job_feed.xml.builder', formats: [:xml]
   end
 
   def trovit_job_feed
@@ -28,9 +27,9 @@ class JobFeedsController < ApplicationController
     render 'job_feeds/adzuna_job_feed.xml.builder', formats: [:xml]
   end
 
-  def jooble
-    @jobs = Job.joins(:job_feed).where(status: "open", :job_feeds => {:juju => true})
-    render 'job_feeds/adzuna_job_feed.xml.builder', formats: [:xml]
+  def jooble_job_feed
+    @jobs = Job.joins(:job_feed).where(status: "open", :job_feeds => {:jooble => true})
+
   end
 
   def jobrapido

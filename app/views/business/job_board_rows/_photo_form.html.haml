@@ -1,4 +1,4 @@
-.modal-body  
+.modal-body#jobBoardRowModal
   .job-board-form-nav
     %ul
       %li#content-form.active Content
@@ -19,11 +19,13 @@
         .body  
           = f.text_field :subheader, label: "Subheader", class: "form-control"
   .job-board-form 
-    .images-container#variable-carousel
+    .images-container
       - @section.media_photos.each do |img| 
-        = image_tag img.file_name.xs_image 
+        .media_photo
+          = link_to business_media_photo_path(img), remote: true, :method => :delete do  
+            %i.fa.fa-trash-o
+          = image_tag img.file_name.xs_image 
     = render "business/media_photos/multi_form"
 .modal-footer
-  %fieldset
-    = submit_tag "Save Section", class: "btn submit-button", id: "submit-section"
-    .btn.border-button.close-modal Cancel
+  = submit_tag "Save Section", class: "btn submit-button", id: "submit-section"
+  .btn.border-button.close-modal Cancel

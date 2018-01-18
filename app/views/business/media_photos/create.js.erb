@@ -6,6 +6,7 @@
   photoIds.push('<%= @photo.id %>')
   $("#media_photo").val(photoIds)
 <% else %>
+
   $("#image-form").html("<%= j render 'business/media_photos/single_form', photo: @photo %>");
   $("#media_photo").val('<%= @photo.id %>')
 <% end %>

@@ -11,16 +11,21 @@ xml.employer "https://www.talentwiz.ca"
         xml.id { xml.cdata!((job.id).to_s) }
         xml.jobref { xml.cdata!((job.id).to_s) }
         xml.company { xml.cdata! (job.company.name)}
-        xml.joburl { xml.cdata!(job.url) }       
+        xml.joburl { xml.cdata!(job.url) }     
         xml.title { xml.cdata!(job.title) }
         xml.description { xml.cdata!(job.description) }
+        
+        xml.occupationcategory { xml.cdata! (job.industry)} if job.industry.present?
         xml.jobaddress {xml.cdata!(job.address)}
-        xml.occupationcategory { xml.cdata! (industries.first.name)}
         xml.location { xml.cdata!(job.location) }
         xml.country { xml.cdata! (job.country) }
         xml.jobcity { xml.cdata! (job.city) }
         xml.jobprovince { xml.cdata! (job.province) }
-        xml.jobtype { xml.cdata! (job.kind)}
+        xml.jobtype { xml.cdata! (job.kind)} if job.kind.present?
+        xml.salarymin { xml.cdata! (job.start_salary)} if job.start_salary.present?
+        xml.salarymin { xml.cdata! (job.end_salary)} if job.end_salary.present?
+
+
         xml.postdate {xml.cdata!((job.created_at).to_s)}
         xml.expiration_date {xml.cdata!((job.created_at).to_s)}
       end

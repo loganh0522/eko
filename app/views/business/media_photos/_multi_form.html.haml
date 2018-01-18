@@ -3,5 +3,5 @@
     %p Drag and Drop Photos, or click button.
     = q.file_field :file_name, :multiple => true, name: "media_photo[file_name]"
     = hidden_field_tag :multiple_upload, nil, value: true
-    = q.label :image, "Add Photos", class: "btn submit-button"
+    = q.label :file_name, "Add Photos", class: "btn submit-button"
  

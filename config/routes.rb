@@ -69,8 +69,10 @@ Rails.application.routes.draw do
     
     resources :create_profiles
     resources :jobs, only: [:index, :show] do
-      resources :applications
-      resources :candidates, only: [:index, :new, :create]
+      resources :applications, only: [:index]
+      resources :candidates, only: [:create, :new]
+      get '/apply', to: 'candidates#new'
+      post '/apply', to: 'candidates#create'
     end
     resources :attachments
     resources :question_answers 
@@ -391,6 +393,6 @@ Rails.application.routes.draw do
 
   get 'neuvoo-job-feed', to: "job_feeds#neuvoo_job_feed"
   get 'jooble-job-feed', to: "job_feeds#jooble_job_feed"
-  get 'jooble-job-feed', to: "job_feeds#jooble_job_feed"
+
   mount StripeEvent::Engine, at: '/stripe_events'
 end

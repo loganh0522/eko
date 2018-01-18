@@ -1,22 +1,26 @@
+.nav-container
+  .navigation
+    - if @job_board.company.logo.present?
+      = link_to root_path do
+        %img(src="#{@job_board.company.logo.file.large_logo}" class="sub_logo")
+    - else
+      .brand
+        = link_to root_path do
+          = current_company.name
+    %ul#section-nav
+      %li Jobs
+    
+    %ul#portal-login
+      %li= link_to "Login", login_path, remote: true
+      %li= link_to "Sign Up", new_user_path, remote: true
+      
 - if @job_board.job_board_header.background_image.present? 
   .portal-header{:style => "background: url(#{@job_board.job_board_header.background_image.file.url}) no-repeat center center fixed; background-size: cover "}
     .header-overlay{:style => "background: rgba(0,0,0,0.4)"}
-      .navigation
-        - if @job_board.company.logo.present?
-          = link_to root_path do
-            %img(src="#{@job_board.company.logo.file.large_logo}" class="sub_logo")
-        - else
-          .brand
-            = link_to root_path do
-              = current_company.name
-        %ul#section-nav
-          %li Jobs
-        %ul#portal-login
-          %li= link_to "Profile", profile_path, :class => ".sub-register-btn", :style => "height: 30px; padding: 10px 20px; width: 40px; border-radius: 5px; border: 1px solid #{@job_board.brand_color}"
-          %li= link_to "Sign Out", signout_path, class: "sub-signin-btn"
       .intro-message
         .header= @job_board.job_board_header.header
         .sub-header= @job_board.job_board_header.subheader 
+
 - else
   .portal-header{:style => "background-color: #EF7B2B"}
     .header-overlay{:style => "background: rgba(0,0,0,0.5)"}
