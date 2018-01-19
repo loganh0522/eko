@@ -49,7 +49,7 @@ class Business::CandidatesController < ApplicationController
     if @candidate.manually_created == true 
       @applicant = Candidate.find(params[:id])
     else 
-      @applicant = @candidate.user.profile
+      @applicant = @candidate.user
     end
     
     respond_to do |format|
