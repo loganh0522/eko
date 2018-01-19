@@ -33,9 +33,9 @@
       = link_to edit_business_candidate_path(@candidate), remote: true do 
         .glyphicon.glyphicon-pencil
       / = render 'business/ratings/form', application: @candidate.applications.first
-    .current-position
-      - if @candidate.user.current_jobs.present?
-        = "#{@candidate.user.current_jobs.first.title}  #{@candidate.user.current_jobs.first.company_name} "
+    / .current-position
+    /   - if @candidate.user.current_jobs.present?
+    /     = "#{@candidate.user.current_jobs.first.title}  #{@candidate.user.current_jobs.first.company_name} "
   .actions
     .dropdown
       .dropdown-button.border-button

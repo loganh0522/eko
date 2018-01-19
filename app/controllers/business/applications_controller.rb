@@ -72,7 +72,7 @@ class Business::ApplicationsController < ApplicationController
     if @candidate.manually_created == true 
       @applicant = @candidate
     else
-      @applicant = @candidate.user.profile
+      @applicant = @candidate.user
     end
 
     respond_to do |format|
