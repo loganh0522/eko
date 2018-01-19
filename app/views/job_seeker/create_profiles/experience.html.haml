@@ -8,10 +8,11 @@
         .header
           .title Experience
         = f.fields_for :work_experiences do |q|
-          = render "work_experience_fields", f: q      
+          = render "work_experience_fields", f: q  
+              
         = link_to_add_fields "+ Add Work Experience", f, :work_experiences
       .footer
-        = f.hidden_field :profile_stage, value: "complete"
-        = link_to wizard_path(:education), class: "previous-link" do 
+        = link_to wizard_path(:personal), class: "previous-link" do 
           &larr; Previous
         = f.submit "Create Profile", class: "job-seeker-btn"
+

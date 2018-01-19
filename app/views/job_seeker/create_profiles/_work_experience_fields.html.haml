@@ -1,42 +1,113 @@
-.work-experience
-  .row
-    .col-md-6
-      = f.text_field :title, placeholder: "Job Title", hide_label: true
-      %span#title_msgBlock
-    .col-md-6
-      = f.text_field :company_name, placeholder: "Company Name", hide_label: true
-      %span#company_name_msgBlock
-  .row
-    .col-md-6
-      = f.label "Industry"
-      = f.collection_select(:industry, Industry.all, :id, :name, hide_label: true, prompt: "Select Industry")
-      %span#industry_msgBlock
-    .col-md-6
-      = f.label "Job Function"
-      = f.collection_select(:function, Function.all, :id, :name, hide_label: true, prompt: "Select Job Function")
-  .row
-    .col-md-3.col-xs-6.col-sm-6
-      = f.label "Start Date"
-      = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
-      %span#start_month_Block.help-block
-    .col-md-3.col-xs-6.col-sm-6
-      = f.label "Year"
-      = f.select(:start_year, 1960..2020)
-      %span#start_year_Block.help-block
-    .col-md-3.col-xs-6.col-sm-6
-      = f.label "End Date"
-      = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
-      %span#end_year_Block.help-block
-    .col-md-3.col-xs-6.col-sm-6
-      = f.label  "Year"
-      = f.select(:end_year, 1960..2020)
-      %span#end_month_Block.help-block
-  .row 
-    .col-sm-6.col-md-offset-6
+#add-work-experience-page
+  .column-6
+    .form-row-no-border
+      .contain-50
+        = f.label "Title"
+        = f.text_field :title, id: "title_Block", placeholder: "Job Title", hide_label: true
+        %span#title_msgBlock
+      .contain-50
+        = f.label "Company"
+        = f.text_field :company_name, id: "company_name_Block", placeholder: "Company Name", hide_label: true
+        %span#company_name_msgBlock
+    .form-row-no-border
+      .contain-50
+        = f.label "Industry"
+        = f.collection_select(:industry, Industry.all, :id, :name, hide_label: true, prompt: "Select Industry")
+        %span#industry_msgBlock
+      .contain-50
+        = f.label "Job Function"
+        = f.collection_select(:function, Function.all, :id, :name, hide_label: true, prompt: "Select Job Function")
+        %span#function_msgBlock
+    .form-row-no-border
+      .contain-25
+        = f.label "Start Date"
+        = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month", id: "start_month_Block"
+        %span#start_month_msgBlock
+      .contain-25
+        = f.label "Year"
+        = f.text_field :start_year, id: "start_year_Block"
+        %span#start_year_msgBlock
+      .contain-25
+        = f.label :end_month, "End Date"
+        = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month", id: "end_month_Block"
+        %span#end_year_msgBlock
+      .contain-25
+        = f.label :end_year, "Year"
+        = f.text_field :end_year, id: "end_year_Block"
+      %span#end_month_msgBlock
       = f.check_box :current_position, checked_value: 1, unchecked_value: 0
-      Current Position
-  .row
-    .col-md-12
-      = f.text_area :description, rows: 3, hide_label: true, placeholder: "Description"
-  .row
-    = link_to "Remove", '#', class: "remove_fields btn job-seeker-btn"
+      = f.label :current_position, "Current Position"
+    .form-row-no-border
+      = f.label "Description"
+      = f.text_area :description, rows: 5, placeholder: "Description"
+      %span#description_Block
+  .column-4
+    .column-container
+      .header
+        .title Accomplishments
+        = link_to_add_fields "+ Add", f, :accomplishments
+      = f.fields_for :accomplishments do |a|
+        = render 'accomplishment_fields', f: a 
+    .column-container
+      .header
+        .title Skills Used
+        = text_field_tag '', '', :class => 'ui-autocomplete-input user_skills', :placeholder => 'Add a Skill', id: "skills", hide_label: true
+        #search-results-user_skills 
+        .btn.submit-button#add-tag-button Add
+        = hidden_field_tag :user_skills,'', id: 'add-tags-value'
+
+
+/ .work-experience
+/   .row
+/     .col-md-6
+/       = f.text_field :title, placeholder: "Job Title", hide_label: true
+/       %span#title_msgBlock
+/     .col-md-6
+/       = f.text_field :company_name, placeholder: "Company Name", hide_label: true
+/       %span#company_name_msgBlock
+/   .row
+/     .col-md-6
+/       = f.label "Industry"
+/       = f.collection_select(:industry, Industry.all, :id, :name, hide_label: true, prompt: "Select Industry")
+/       %span#industry_msgBlock
+/     .col-md-6
+/       = f.label "Job Function"
+/       = f.collection_select(:function, Function.all, :id, :name, hide_label: true, prompt: "Select Job Function")
+/   .row
+/     .col-md-3.col-xs-6.col-sm-6
+/       = f.label "Start Date"
+/       = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
+/       %span#start_month_Block.help-block
+/     .col-md-3.col-xs-6.col-sm-6
+/       = f.label "Year"
+/       = f.select(:start_year, 1960..2020)
+/       %span#start_year_Block.help-block
+/     .col-md-3.col-xs-6.col-sm-6
+/       = f.label "End Date"
+/       = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
+/       %span#end_year_Block.help-block
+/     .col-md-3.col-xs-6.col-sm-6
+/       = f.label  "Year"
+/       = f.select(:end_year, 1960..2020)
+/       %span#end_month_Block.help-block
+/   .row 
+/     .col-sm-6.col-md-offset-6
+/       = f.check_box :current_position, checked_value: 1, unchecked_value: 0
+/       Current Position
+/   .row
+/     .col-md-12
+/       = f.text_area :description, rows: 3, hide_label: true, placeholder: "Description"
+/   .row
+/     .title Accomplishments
+/     = link_to_add_fields "+ Add", f, :accomplishments
+/     = f.fields_for :accomplishments do |a|
+/       = render 'accomplishment_fields', f: a 
+/   .row
+/     .header
+/       .title Skills Used
+/       = text_field_tag '', '', :class => 'ui-autocomplete-input user_skills', :placeholder => 'Add a Skill', id: "skills", hide_label: true
+/       #search-results-user_skills 
+/       .btn.submit-button#add-tag-button Add
+/       = hidden_field_tag :user_skills,'', id: 'add-tags-value'
+/   .row
+/     = link_to "Remove", '#', class: "remove_fields"

@@ -1,6 +1,8 @@
 .fieldset#add-social-link
   .row
-    = f.text_field :url, id: "url_Block", class: "form-control", placeholder: "Social Profile (ex. https://www.linkedin.com/in/Username/)", hide_label: true
+    = f.text_field :url, id: "url_Block", placeholder: "Social Profile (ex. www.linkedin.com/in/Username/)", hide_label: true, autocomplete: "off"
+
     = f.select :kind, options_for_select(["LinkedIn", "Facebook", "Twitter", "Google+", "Tumblr", "Dribbble", "GitHub", "BitBucket", "AngelList", "YouTube", "Medium", "Vimeo", "Pinterest", "Flickr", "Personal", "Other"]), :prompt => "Select Type..."
+
     = link_to "", '#', class: "remove_fields glyphicon glyphicon-remove" 
   %span#url_msgBlock

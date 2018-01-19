@@ -61,6 +61,6 @@
 
   .modal-footer
     = f.submit @work_experience.new_record? ? "Add Experience" : "Update", class: "btn submit-button"
-    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+    .btn.border-button.close-modal Cancel
 
 

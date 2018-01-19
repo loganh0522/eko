@@ -3,7 +3,7 @@ class JobSeeker::CreateProfilesController < ApplicationController
   before_filter :require_user
   include Wicked::Wizard
 
-  steps :personal, :education, :experience
+  steps :personal, :experience, :education
 
   def show
     @user = current_user
@@ -25,19 +25,20 @@ class JobSeeker::CreateProfilesController < ApplicationController
       else
         @background = BackgroundImage.new 
       end
+
       @background = BackgroundImage.new
       render_wizard
-    when :education
-      if @user.educations.count == 0 
-        @user.educations.new 
-      end
-      
-      render_wizard
-    
     when :experience
       if @user.work_experiences.count == 0 
         @user.work_experiences.new
       end
+      render_wizard
+    when :education
+
+      if @user.educations.count == 0 
+        @user.educations.new 
+      end
+  
       render_wizard
     end
   end
@@ -50,10 +51,12 @@ class JobSeeker::CreateProfilesController < ApplicationController
     case step
 
     when :personal
+      @background = BackgroundImage.new
+      render_wizard @user
+    when :experience 
       render_wizard @user
     when :education
       render_wizard @user
-    when :experience 
       if @user.errors.present?
         render_wizard @user
       else 
@@ -68,9 +71,17 @@ class JobSeeker::CreateProfilesController < ApplicationController
   def user_params
     params.require(:user).permit(:first_name, :last_name, :phone, :tag_line, :location,
       social_links_attributes: [:id, :url, :kind, :_destroy],
-      work_experiences_attributes: [:id, :body, :_destroy, :title, :company_name, :description, :start_month, :start_year, :end_month, :end_year, :current_position, :industry_ids, :function_ids, :location],
-      educations_attributes: [:id, :school, :degree, :description, :start_month, :start_year, :end_month, :end_year, :_destroy],
-      user_certifications_attributes: [:id, :name, :agency, :description, :start_month, :start_year, :end_year, :end_month, :expires])
+      
+      work_experiences_attributes: [:id, :body, :_destroy, :title, 
+        :company_name, :description, :start_month, :start_year, :end_month, :end_year, 
+        :current_position, :industry_ids, :function_ids, :location,
+        accomplishments_attributes: [:id, :body, :_destroy]],
+      
+      educations_attributes: [:id, :school, :degree, :description, :start_month, 
+        :start_year, :end_month, :end_year, :_destroy],
+      
+      user_certifications_attributes: [:id, :name, :agency, :description, 
+        :start_month, :start_year, :end_year, :end_month, :expires])
   end
 
   def experience_params

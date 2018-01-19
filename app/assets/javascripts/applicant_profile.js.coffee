@@ -6,6 +6,7 @@ jQuery ->
     e.preventDefault()
     return
 
+
   $('#main-container').on 'click', '.applicant-checkbox', (event) ->
     if $('.applicants').find('.applicant-checkbox :checked').size() > 0 
       $('.no-action-buttons').hide()
@@ -31,6 +32,7 @@ jQuery ->
   $("#geocomplete").geocomplete({
     types: ['(cities)']
   })
+  
   $("#geocomplete2").geocomplete()
 
   $(document).ajaxComplete ->
