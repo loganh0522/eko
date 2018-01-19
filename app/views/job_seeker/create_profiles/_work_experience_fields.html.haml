@@ -55,7 +55,8 @@
         #search-results-user_skills 
         .btn.submit-button#add-tag-button Add
         = hidden_field_tag :user_skills,'', id: 'add-tags-value'
-
+  .row
+    = link_to "Remove", '#', class: "remove_fields"
 
 / .work-experience
 /   .row
