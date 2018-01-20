@@ -53,11 +53,7 @@ class Business::CandidatesController < ApplicationController
     end
     
     respond_to do |format|
-      format.html { 
-        # @candidates = current_company.candidates.where(id: params[:id]).paginate(page: params[:page], per_page: 10)
-        # @tags = current_company.tags
-        # render action: :index 
-      }
+      format.html 
       format.js
     end  
   end
@@ -95,12 +91,15 @@ class Business::CandidatesController < ApplicationController
     @candidate = Candidate.find(params[:id])
     @candidate.destroy 
 
-    @candidates = Candidate.search("*", per_page: 10, page: params[:page])
-    @tags = current_company.tags
-    
     respond_to do |format|
       format.js
     end
+  end
+
+  def confirm_destroy
+    respond_to do |format|
+      format.js
+    end 
   end
 
   def destroy_multiple
@@ -111,12 +110,12 @@ class Business::CandidatesController < ApplicationController
       candidate.destroy
     end
 
-    @candidates = Candidate.search("*", where: {company_id: current_company.id}, per_page: 10)
+    @candidates = Candidate.search("*", per_page: 10, page: params[:page])
     @tags = current_company.tags
-
+    
     respond_to do |format|
       format.js
-    end 
+    end
   end
 
   def autocomplete
@@ -182,6 +181,8 @@ class Business::CandidatesController < ApplicationController
       end
     end
   end
+
+
 
   def render_errors(candidate)
     @errors = []

@@ -10,15 +10,17 @@
       .dropdown-button.active-application-button
         More Actions
         %i.fa.fa-ellipsis-h.fa-lg
-      .dropdown-content#myDropdown
+      .dropdown-content#action-dropdown
         = link_to new_multiple_business_comments_path(job: @job), remote: true do 
           %i.fa.fa-pencil
           .action Add Note
         
-        = link_to new_multiple_business_tasks_path(job: @job), remote: true do
+        = link_to new_multiple_business_tasks_path(job: @job), remote: true, id: 'client-action' do
+          %i.fa.fa-tasks 
           .action Create Task
 
         = link_to new_business_interview_invitation_path(job: @job), remote: true do 
+          %i.fa.fa-paper-plane-o
           .action Interview Invitation
 
         = link_to '#', id: "destroy_candidates", class: "move-applicants", :data => {:toggle => "modal", :target => "#destroy_candidatesModal"} do

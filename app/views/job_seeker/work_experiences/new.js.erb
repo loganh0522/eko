@@ -1,9 +1,5 @@
-// $('.largeModal').find('form').remove()
-// $('.largeModal').find('.new-modal-header').after('<%= j render "job_seeker/work_experiences/form" %>');
-// $('.largeModal').find('.new-title').html('<%= j "Add Work Experience" %>');
-// $('.largeModal').show();
+$('.largeModal').find('form').remove()
+$('.largeModal').find('.new-modal-header').after('<%= j render "job_seeker/work_experiences/form" %>');
+$('.largeModal').find('.new-title').html('<%= j "Add Work Experience" %>');
+$('.largeModal').show();
 
-$('#basic-form-modal').find('form').remove()
-$('#basic-form-modal').find('.modal-title').html('<%= j "Edit Experience" %>');
-$('#basic-form-modal').find('.modal-header').after('<%= j render "job_seeker/work_experiences/form" %>');
-$('#basic-form-modal').modal("toggle");

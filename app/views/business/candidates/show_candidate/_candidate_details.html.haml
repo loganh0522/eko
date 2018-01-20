@@ -16,7 +16,7 @@
         = link_to edit_business_candidate_path(@candidate), remote: true do
           %i.fa.fa-pencil
           .action Edit
-        = link_to business_candidate_path(@candidate), remote: true, :method => :delete do  
+        = link_to business_candidate_path(@candidate), remote: true, :method => :delete, data: { confirm: "Are you sure"} do  
           %i.fa.fa-trash-o
           .action Destroy 
      

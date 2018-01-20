@@ -1,20 +1,11 @@
-.modal#destroy_candidatesModal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title Delete Candidates  
-      = form_tag destroy_multiple_business_candidates_path, :method => "delete", remote: true do
-        .modal-body
-          .email-area
-            .to 
-              .title To:  
-              .recipients   
-          .warning
-            Are you sure you want to do delete the selected candidates? This action can not be undone.
-            = hidden_field_tag :applicant_ids      
-        .modal-footer 
-          = submit_tag "Delete All", class: "btn danger-btn"
-          .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
-          
-          
+= form_tag destroy_multiple_business_candidates_path, remote: true do 
+  .modal-body
+    .email-area
+      .to
+        .recipients 
+    .content
+      %h3 Are you sure? You can not undo this action.
+      = hidden_field_tag :applicant_ids  
+  .modal-footer
+    = button_tag "Destroy", class: "btn danger-btn", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Deleting..."}
+    .btn.border-button.close-modal Cancel

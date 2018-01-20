@@ -56,7 +56,7 @@
     = f.hidden_field :start_time
     = f.hidden_field :end_time
   .modal-footer
-    = f.submit @interview.new_record? ? "Create" : "Update", class: "btn submit-button"
+    = f.button @interview.new_record? ? "Create" : "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
     .btn.border-button.close-modal Cancel
     
 

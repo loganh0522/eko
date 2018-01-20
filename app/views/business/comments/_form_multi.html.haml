@@ -10,5 +10,5 @@
       - if @job.present? 
         = f.hidden_field :job_id, value: @job.id 
     .modal-footer 
-      = f.submit "Add Note", class: "btn submit-button"
+      = f.button "Add Note", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
       .btn.border-button.close-modal Cancel

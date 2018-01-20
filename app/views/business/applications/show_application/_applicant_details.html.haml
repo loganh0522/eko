@@ -12,13 +12,16 @@
       .dropdown-button.border-button
         Actions
         .caret
-      .dropdown-content#myDropdown
+      .dropdown-content#action-dropdown
         = link_to edit_business_candidate_path(@application.candidate.id), remote: true do
           %i.fa.fa-pencil
           .action Edit
+        = link_to business_application_path(@application.id), remote: true, :method => :delete do  
+          %i.fa.fa-reply
+          .action Remove From Job
         = link_to business_candidate_path(@application.candidate.id), remote: true, :method => :delete do  
           %i.fa.fa-trash-o
-          .action Destroy 
+          .action Destroy Candidate
 
 - else
   .user-image
@@ -30,7 +33,10 @@
   .applicant-details
     .name-rating
       .name= "#{@application.candidate.user.full_name}"
-
+      / = render 'business/ratings/form', application: @application
+      / .current-position
+      /   - if @application.candidate.user.current_jobs.present?
+      /     = "#{@application.candidate.user.current_jobs.first.title}  #{@application.candidate.user.current_jobs.first.company_name} "
   .actions
     .dropdown
       .dropdown-button.border-button

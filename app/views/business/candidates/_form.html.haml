@@ -50,15 +50,12 @@
   .modal-footer
     = f.hidden_field :company_id, value: current_company.id
     = f.hidden_field :manually_created, value: true
-    
     - if @job.present? 
       = hidden_field_tag :job_id, @job.id
     - else
       = hidden_field_tag :job_id, nil, {:id => "job_ids"}
-    - if @candidate.new_record? 
-      = f.submit "Save", class: "btn submit-button"
-    - else 
-      = f.submit "Update", class: "btn submit-button"
+
+    = f.button @candidate.new_record? ? "Create" : "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
     .btn.border-button.close-modal Cancel
 
 

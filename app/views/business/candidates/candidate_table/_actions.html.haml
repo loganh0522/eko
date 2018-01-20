@@ -10,18 +10,20 @@
       .dropdown-button.active-application-button
         More Actions
         %i.fa.fa-ellipsis-h.fa-lg
-      .dropdown-content#myDropdown
-        = link_to new_multiple_business_tasks_path, class: "move-applicants", id: "create_task", remote: true do
+      .dropdown-content#action-dropdown
+        = link_to new_multiple_business_tasks_path, id: 'client-action', remote: true do
+          %i.fa.fa-tasks 
           .action Create Task
 
-        = link_to new_business_interview_invitation_path, class: "move-applicants", id: "create_task", remote: true do 
+        = link_to new_business_interview_invitation_path, remote: true do 
+          %i.fa.fa-paper-plane-o
           .action Interview Invitation
 
-        = link_to new_multiple_business_applications_path, class: "move-applicants", id: "add_comment", remote: true do 
+        = link_to new_multiple_business_applications_path, remote: true do 
           %i.fa.fa-pencil
           .action Add to Job
         
-        = link_to '#', id: "destroy_candidates", class: "move-applicants", :data => {:toggle => "modal", :target => "#destroy_candidatesModal"} do
+        = link_to confirm_destroy_business_candidates_path, remote: true do
           %i.fa.fa-trash-o
           .action Destroy
           

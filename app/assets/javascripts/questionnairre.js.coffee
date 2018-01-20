@@ -68,12 +68,6 @@ jQuery ->
     $(this).prev().find('.remove_fields').show()
     event.preventDefault()
 
-  $('.experience-container').on 'click', '.add_fields', (event) ->
-    time = new Date().getTime()
-    regexp = new RegExp($(this).data('id'), 'g')
-    $(this).before($(this).data('fields').replace(regexp, time))
-    $(this).prev().find('.remove_fields').show()
-    event.preventDefault()
 
   $(document).ready ->
     if $('.work-experience').length >= 2 
@@ -87,7 +81,7 @@ jQuery ->
     $(this).parent().parent().hide()
     event.preventDefault()
 
-  $('#basic-form-modal').on 'click', '.add_fields', (event) ->
+  $('#add-work-experience-page').on 'click', '.add_fields', (event) ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
     $(this).after($(this).data('fields').replace(regexp, time))
@@ -97,7 +91,24 @@ jQuery ->
       dateFormat: 'yy-mm-dd'
     $('#timepicker').timepicker()
 
+  $('.add-experience').on 'click', '.add_fields', (event) ->
+    time = new Date().getTime()
+    regexp = new RegExp($(this).data('id'), 'g')
+    $(this).before($(this).data('fields').replace(regexp, time))
+    $(this).prev().find('.remove_fields').show()
+    event.preventDefault()
 
 
+  $('.mediumModal').on 'click', '.add_fields', (event) ->
+    console.log('clicked')
+    time = new Date().getTime()
+    regexp = new RegExp($(this).data('id'), 'g')
+    $(this).after($(this).data('fields').replace(regexp, time))
+    $(this).prev().find('.remove_fields').show()
+    event.preventDefault()
 
+  $('.mediumModal').on 'click', '.remove_fields', (event) ->
+    $(this).first().prev().val('1')
+    $(this).parent().parent().hide()
+    event.preventDefault()
 

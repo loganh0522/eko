@@ -46,6 +46,7 @@
       .header
         .title Accomplishments
         = link_to_add_fields "+ Add", f, :accomplishments
+
       = f.fields_for :accomplishments do |a|
         = render 'accomplishment_fields', f: a 
     .column-container
@@ -54,9 +55,9 @@
         = text_field_tag '', '', :class => 'ui-autocomplete-input user_skills', :placeholder => 'Add a Skill', id: "skills", hide_label: true
         #search-results-user_skills 
         .btn.submit-button#add-tag-button Add
-        = hidden_field_tag :user_skills,'', id: 'add-tags-value'
-  .row
-    = link_to "Remove", '#', class: "remove_fields"
+        = hidden_field_tag :user_skills, '', id: 'add-tags-value'
+  .form-row-no-border#clear-both
+    = link_to "Remove", '#', class: "remove_fields", id: "remove_experience"
 
 / .work-experience
 /   .row

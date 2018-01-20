@@ -237,10 +237,6 @@ Rails.application.routes.draw do
 
     resources :candidates do
       get 'show_project', to: "candidates#show_project"
-      collection do 
-        get :autocomplete
-        get :search
-      end
       resources :interview_invitations
       resources :work_experiences
       resources :interviews 
@@ -259,7 +255,10 @@ Rails.application.routes.draw do
       resources :assessments
 
       collection do 
-        delete :destroy_multiple, to: "candidates#destroy_multiple"
+        get :autocomplete
+        get :search
+        get :confirm_destroy, to: "candidates#confirm_destroy"
+        post :destroy_multiple, to: "candidates#destroy_multiple"
       end
     end
     
@@ -274,6 +273,7 @@ Rails.application.routes.draw do
         get :multiple_change_stages, to: "applications#multiple_change_stages"
         get :new_multiple, to: "applications#new_multiple" 
         post :create_multiple, to: "applications#create_multiple"
+        post :move_stage, to: "applications#move_stage"
       end
     end
 

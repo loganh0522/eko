@@ -1,4 +1,4 @@
-= form_tag move_stages_business_applications_path, remote: true do  
+= form_tag move_stage_business_applications_path, remote: true do  
   .modal-body 
     .email-area
       .to
@@ -10,7 +10,7 @@
       = hidden_field_tag :applicant_ids
       = hidden_field_tag :job, @job.id
   .modal-footer
-    = submit_tag "Move Stages", class: "btn submit-button"
+    = button_tag "Move Stages", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Adding..."}
     .btn.border-button.close-modal Cancel
     
 

@@ -6,6 +6,6 @@
     - if @job.present? 
       = f.hidden_field :job_id, value: @job.id
     .comment-area-footer
-      = f.submit @comment.new_record? ? "+ Add Note" : "Update", class: "btn submit-button", id: "submit-comment-btn"
+      = f.button @comment.new_record? ? "+ Add Note" : "Update", class: "btn submit-button", id: "submit-comment-btn", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
       .btn.border-button#remove_form Cancel
       

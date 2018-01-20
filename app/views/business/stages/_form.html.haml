@@ -6,5 +6,5 @@
   .modal-footer
     = f.hidden_field :job_id, value: @job.id
     = f.hidden_field :position, value: 1
-    = f.submit @stage.new_record? ? "Create Stage" : "Update", class: "btn submit-button"
+    = f.button @stage.new_record? ? "Create Stage" : "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
     .btn.border-button.close-modal Cancel  

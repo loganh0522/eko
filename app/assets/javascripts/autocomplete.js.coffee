@@ -1,4 +1,18 @@
 jQuery ->
+  $(document).on 'click', '#add-tag-button', (event) ->
+    tagName = $('.ui-autocomplete-input').val() 
+    $('.ui-autocomplete-input').val('')
+    if tagName == ''
+      return 
+    else
+      if $('#add-tags-value').val() == ''
+        $('#add-tags-value').val tagName
+      else 
+        values =  $('#add-tags-value').val() + ',' + tagName 
+        $('#add-tags-value').val values 
+    $('#add-tags').append('<div class="user-tag"> <div class="name">' + tagName  + '</div> <div class="delete-tag"> &times </div> </div>') 
+    event.stopImmediatePropagation()
+    
   $('form').on 'focus', '#autocomplete', ->  
     controller = $(this).attr('class').split(' ').pop()
     $(this).autocomplete( 
@@ -31,6 +45,8 @@ jQuery ->
         $('<li>').attr('ui-item-autocomplete', item.value).append("<a>" + item.full_name + "</a>").appendTo ul
     return
   return
+
+  
 
 $(document).ajaxComplete ->
   $(document).on 'click', '#add-tag-button', (event) ->

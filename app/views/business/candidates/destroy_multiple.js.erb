@@ -1,2 +1,3 @@
-$('#destroy_candidatesModal').modal('hide');
+$('#applicant-modal').modal('hide');
 $('.all-candidates-table').html('<%= j render "business/candidates/candidate_table/all_candidates_table", candidates: @candidates %>');
+$('.destroyModal').hide()

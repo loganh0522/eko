@@ -2,12 +2,11 @@
   .modal-body
     .email-area
       .to 
-        .title To:  
         .recipients   
-      .stages-select
+      .form-row-no-border
         = f.label :job_id, "Add To Job"
         = f.collection_select(:job_id, current_company.open_jobs, :id, :title, label: "Move to Job", :include_blank => true)
         = hidden_field_tag :applicant_ids
   .modal-footer 
-    = f.submit "Add To Job", class: "btn submit-button"
+    = f.button "Add To Job", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Adding..."}
     .btn.border-button.close-modal Cancel

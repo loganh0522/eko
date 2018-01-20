@@ -4,5 +4,5 @@
   = f.hidden_field :candidate_id, value: @candidate.id
   = f.hidden_field :company_id, value: current_company.id
   = hidden_field_tag :tag_id
-  = f.submit "Add", class: "btn submit-button"
+  = f.button "Add", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
 

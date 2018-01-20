@@ -83,6 +83,7 @@ class Business::ApplicationsController < ApplicationController
 
   def destroy
     @application = Application.find(params[:id])
+    @job = @application.job
     @application.destroy
     
     respond_to do |format| 
@@ -130,8 +131,6 @@ class Business::ApplicationsController < ApplicationController
 
   def move_stage    
     @stage = Stage.find(params[:stage])
-    @application = Application.find(params[:id]) 
-    @candidate = @application.candidate
     @job = @stage.job
     @rejection_reasons = current_company.rejection_reasons
 
@@ -149,6 +148,7 @@ class Business::ApplicationsController < ApplicationController
   
   def reject
     @application = Application.find(params[:id])
+    @candidate = @application.candidate
     @job = @application.job
     
     if params[:val] == 'requalify'
@@ -179,6 +179,7 @@ class Business::ApplicationsController < ApplicationController
 
   def move_stage_single
     @application = Application.find(params[:id])
+    @candidate = @application.candidate
     @job = @stage.job
     @application.update_attribute(:stage, @stage)
     track_activity @app, "move_stage", @application.candidate.id, @application.job.id, @stage.id

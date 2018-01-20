@@ -35,5 +35,5 @@
       = hidden_field_tag :applicant_ids
       = f.hidden_field :user_id, value: current_user.id
   .modal-footer
-    = f.submit "Send E-mail", class: "btn submit-button"
+    = f.button "Send E-mail", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Sending..."}
     .btn.border-button.close-modal Cancel

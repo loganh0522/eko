@@ -10,5 +10,5 @@
   .modal-footer
     = hidden_field_tag :applicant_ids
     = hidden_field_tag :tag_id
-    = f.submit "Add Tag", class: "btn submit-button"
+    = f.button "Add Tag".html_safe, class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
     .btn.border-button.close-modal Cancel

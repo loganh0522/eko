@@ -48,7 +48,7 @@
       - if @job.present?
         = f.hidden_field :job_id, value: @job.id
       
-      = f.submit "+ Create Task", class: "btn submit-button", id: "submit-comment-btn"
+      = f.button "+ Create Task", class: "btn submit-button", id: "submit-comment-btn", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
       .btn.border-button.close-modal Cancel
 
 
