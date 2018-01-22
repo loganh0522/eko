@@ -40,8 +40,8 @@
           = f.label :current_position, "Current Position"
       .form-row-no-border
         = f.label "Description"
-        = f.text_area :description, rows: 5, placeholder: "Description"
-        %span#description_Block
+        = f.text_area :description, rows: 5, placeholder: "Description", id: "description_Block"
+        %span#description_msgBlock
     .column-4
       .column-container
         .header
@@ -52,12 +52,12 @@
       .column-container
         .header
           .title Skills Used
-          = text_field_tag '', '', :class => 'ui-autocomplete-input user_skills', :placeholder => 'Add a Skill', id: "skills", hide_label: true
+        .body
+          = f.text_field :skill, class: 'ui-autocomplete-input user_skills', :placeholder => 'Add a Skill', id: "skills", hide_label: true
           #search-results-user_skills 
-          .btn.submit-button#add-tag-button Add
-          = hidden_field_tag :user_skills,'', id: 'add-tags-value'
-        #add-tags
-          = render 'job_seeker/user_skills/project_skills', position: @work_experience
+          .btn.submit-button#add-skill Add
+          #add-tags
+          / = render 'job_seeker/user_skills/project_skills', position: @work_experience
 
   .modal-footer
     = f.submit @work_experience.new_record? ? "Add Experience" : "Update", class: "btn submit-button"

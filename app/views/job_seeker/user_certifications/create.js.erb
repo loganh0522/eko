@@ -4,6 +4,6 @@
     $('#<%= error[0] %>_Block').addClass('has-error');
   <% end %>
 <% else %>
-  $('#basic-form-modal').modal("toggle");
+  $('.mediumModal').hide();
   $('.experience-container').html('<%= j render "job_seeker/user_certifications/certifications", certifications: @certifications %>');
 <%end%>

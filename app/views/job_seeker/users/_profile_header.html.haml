@@ -10,6 +10,6 @@
         %li{:class => is_active?(job_seeker_user_path(current_user))} Profile
       = link_to job_seeker_projects_path do
         %li{:class => is_active?(job_seeker_projects_path)} Portfolio
-      = link_to job_seeker_applications_path(current_user) do
-        %li{:class => is_active?(job_seeker_applications_path(current_user))} My Applications
-        
+      / = link_to job_seeker_applications_path(current_user) do
+      /   %li{:class => is_active?(job_seeker_applications_path(current_user))} My Applications
+      /   

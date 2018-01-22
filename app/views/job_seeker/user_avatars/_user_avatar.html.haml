@@ -1,9 +1,9 @@
 .user-image
   - if current_user.user_avatar.present? 
     = link_to edit_job_seeker_user_avatar_path(@avatar), :data => {remote: true} do
-      %i.glyphicon.glyphicon-pencil
+      %i.glyphicon.glyphicon-pencil#userProfilePictureModal
     = image_tag @avatar.image.large_image if @avatar.present?  
   - else      
     = link_to new_job_seeker_user_avatar_path, remote: true do
-      %i.glyphicon.glyphicon-pencil
+      %i.glyphicon.glyphicon-pencil#userProfilePictureModal
     %img(src="/tmp/blank_profile_picture.png")  

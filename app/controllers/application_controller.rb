@@ -76,10 +76,16 @@ class ApplicationController < ActionController::Base
 
   def profile_sign_up_complete
     if current_user.present? && current_user.kind == "job seeker"
-      if current_user
+      if current_user.profile_stage != "complete"
         redirect_to job_seeker_create_profiles_path
+        flash[:danger] = "Please complete your profile before you continue."
       end
-      flash[:danger] = "Please complete your profile before you continue."
+    end
+  end
+
+  def completed_sign_up
+    if current_user.profile_stage == "complete"
+      redirect_to job_seeker_profile_path
     end
   end
 

@@ -67,7 +67,8 @@ header
     box-shadow: 0px 0px 1px .5px rgba(255, 0, 0, 0.8)
   trix-editor
     box-shadow: 0px 0px 1px .5px rgba(255, 0, 0, 0.8)
-
+  textarea
+    box-shadow: 0px 0px 1px .5px rgba(255, 0, 0, 0.8)
 .turbolinks-progress-bar 
   visibility: hidden
 
@@ -374,6 +375,23 @@ a:active, a:focus
 a.button
   text-decoration: none
   color: white
+  
+.white-border-button
+  display: block
+  height: 40px
+  width: fit-content
+  border-radius: 2px
+  font-size: 14px 
+  text-align: center
+  padding: 10px 15px 13px 15px
+  border: 1px solid white
+  background: none
+  color: white
+  a
+    text-decoration: none
+  &:hover
+    color: #ffffff
+    text-decoration: none
 
 .button-job-actions
   display: block
@@ -499,6 +517,13 @@ textarea
   overflow: hidden
   border: 1px solid rgba(239, 122, 43, 0.9)
   border-radius: 5px
+  input[type=text]
+    border: none
+    background: #f7f8f9
+    width: 50px
+    height: 16px
+    padding: 0 0
+    margin: 0 0
   .circle-img
     float: left
     margin-right: 5px

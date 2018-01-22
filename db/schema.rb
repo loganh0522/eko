@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180112234443) do
+ActiveRecord::Schema.define(version: 20180122144911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -563,6 +563,7 @@ ActiveRecord::Schema.define(version: 20180112234443) do
     t.boolean  "verified",              default: false
     t.string   "function"
     t.string   "industry"
+    t.boolean  "is_active"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -921,6 +922,7 @@ ActiveRecord::Schema.define(version: 20180112234443) do
     t.integer "profile_id"
     t.integer "work_experience_id"
     t.integer "project_id"
+    t.string  "name"
   end
 
   create_table "users", force: :cascade do |t|
@@ -968,6 +970,7 @@ ActiveRecord::Schema.define(version: 20180112234443) do
     t.integer  "user_id"
     t.string   "function"
     t.string   "industry"
+    t.string   "skill"
   end
 
 end

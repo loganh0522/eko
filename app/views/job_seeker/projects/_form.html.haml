@@ -1,47 +1,48 @@
-.modal-body
-  .column-5
-    %h4 Project Attachments
-    .attachment-actions-container   
-      .file-attachment
-        = label_tag :file, "Add a File (.pdf, .doc, .ppt, .xcl etc.)"
-        = file_field_tag :file, id: 'attachment-up', method: :post
-      .link-attachment
-        = label_tag :link, "Add a Link"
-        = text_field_tag :link, "", placeholder: "Paste a Link. Website, Youtube, Prezi, Blog etc.", id: 'link-up', autocomplete: "off"
-    .attachments-container
-      - if @project.attachments.present? 
-        - @project.attachments.each do |attachment| 
-          = render "job_seeker/attachments/attachment", attachment: attachment
-      - else 
-        .not-present-container
-          %p Currently no attachments present
-    
-  .column-5-right
-    = form_for [:job_seeker, @project], :remote => true do |f|
-      %h4 Project Details
-      = f.text_field :title, placeholder: "Project Title"
+#project-modal
+  .modal-body
+    .column-5
+      %h4 Project Attachments
+      .attachment-actions-container   
+        .file-attachment
+          = label_tag :file, "Add a File (.pdf, .doc, .ppt, .xcl etc.)"
+          = file_field_tag :file, id: 'attachment-up', method: :post
+        .link-attachment
+          = label_tag :link, "Add a Link"
+          = text_field_tag :link, "", placeholder: "Paste a Link. Website, Youtube, Prezi, Blog etc.", id: 'link-up', autocomplete: "off"
+      .attachments-container
+        - if @project.attachments.present? 
+          - @project.attachments.each do |attachment| 
+            = render "job_seeker/attachments/attachment", attachment: attachment
+        - else 
+          .not-present-container
+            %p Currently no attachments present
+      
+    .column-5-right
+      = form_for [:job_seeker, @project], :remote => true do |f|
+        %h4 Project Details
+        = f.text_field :title, placeholder: "Project Title"
+        .column-container
+          = f.label :description, "Description / Problem"
+          = f.text_area :description, placeholder: "Start Typing...", id: 'no-border'
+        .column-container
+          = f.label :solution, "Implemented Solution"
+          = f.text_area :solution, placeholder: "Start Typing...", id: 'no-border'
+        .column-container
+          = f.label :role, "My Role in Project"
+          = f.text_area :role, placeholder: "Start Typing...", id: 'no-border'
+          = f.hidden_field :user_id, value: current_user.id
+          = hidden_field_tag :user_skills, '', id: 'add-tags-value'
+          = hidden_field_tag :attachment
       .column-container
-        = f.label :description, "Description / Problem"
-        = f.text_area :description, placeholder: "Start Typing...", id: 'no-border'
-      .column-container
-        = f.label :solution, "Implemented Solution"
-        = f.text_area :solution, placeholder: "Start Typing...", id: 'no-border'
-      .column-container
-        = f.label :role, "My Role in Project"
-        = f.text_area :role, placeholder: "Start Typing...", id: 'no-border'
-        = f.hidden_field :user_id, value: current_user.id
-        = hidden_field_tag :user_skills, '', id: 'add-tags-value'
-        = hidden_field_tag :attachment
-    .column-container
-      .header
-        .title Skills Used
-        = text_field_tag '', '', :class => 'ui-autocomplete-input user_skills', :placeholder => 'Add a Skill', id: "skills", hide_label: true
-        #search-results-user_skills 
-        .btn.submit-button#add-tag-button Add
-      #add-tags
-        = render 'job_seeker/user_skills/project_skills', position: @project
-            
-        
-.modal-footer
-  = submit_tag "Save Project", class: "btn submit-button", id: "submit-section"
-  .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+        .header
+          .title Skills Used
+          = text_field_tag '', '', :class => 'ui-autocomplete-input user_skills', :placeholder => 'Add a Skill', id: "skills", hide_label: true
+          #search-results-user_skills 
+          .btn.submit-button#add-tag-button Add
+        #add-tags
+          = render 'job_seeker/user_skills/project_skills', position: @project
+              
+          
+  .modal-footer
+    = submit_tag "Save Project", class: "btn submit-button", id: "submit-section"
+    .btn.border-button.close-modal Cancel

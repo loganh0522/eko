@@ -70,8 +70,9 @@ class JobSeeker::WorkExperiencesController < JobSeekersController
   def position_params
     params.require(:work_experience).permit(:user_id, :title, :company_name, :description, 
       :start_month, :start_year, :end_month, :end_year, :current_position, 
-      :industry, :function, :location,
-      accomplishments_attributes: [:id, :body, :_destroy])
+      :industry, :function, :location, :skill,
+      accomplishments_attributes: [:id, :body, :_destroy],
+      user_skills_attributes: [:id, :name, :_destroy])
   end
 
   def add_skills(project)  

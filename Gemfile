@@ -74,6 +74,8 @@ gem 'activerecord-session_store'
 gem 'liquid', '~> 3.0', '>= 3.0.6'
 gem 'sidekiq'
 gem 'newrelic_rpm'
+gem 'griddler'
+gem 'griddler-sendgrid'
 
 gem 'jquery-timepicker-rails'
 gem 'declarative_authorization'

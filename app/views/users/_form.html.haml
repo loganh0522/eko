@@ -18,7 +18,7 @@
     %span#password_msgBlock
     = f.password_field :password_confirmation, placeholder: "Confirm Password", hide_label: true
     = f.hidden_field :kind, :value => 'job seeker'
-    = f.submit "Create Profile", class: "btn submit-button"
+    = f.button "Create Profile", class: "btn submit-button", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Creating..."}
   .have-account
     Already have an account? 
     = link_to "Sign In", login_path, remote: true

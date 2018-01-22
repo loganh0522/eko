@@ -1,18 +1,38 @@
-jQuery ->
-  $(document).on 'click', '#add-tag-button', (event) ->
-    tagName = $('.ui-autocomplete-input').val() 
-    $('.ui-autocomplete-input').val('')
-    if tagName == ''
-      return 
-    else
-      if $('#add-tags-value').val() == ''
-        $('#add-tags-value').val tagName
-      else 
-        values =  $('#add-tags-value').val() + ',' + tagName 
-        $('#add-tags-value').val values 
-    $('#add-tags').append('<div class="user-tag"> <div class="name">' + tagName  + '</div> <div class="delete-tag"> &times </div> </div>') 
-    event.stopImmediatePropagation()
+jQuery ->  
+  $(document).on 'click', '#add-skill', (event) ->
+    tagName = $(this).parent().find('.ui-autocomplete-input').val() 
+    newAttr = new Date().getTime();
+    attrLength = $(this).parent().find('#skills').attr('name').length
+    attrName = $(this).parent().find('#skills').attr('name').substr(0, attrLength - 7);
+    startName = attrName + "[user_skills_attributes][" + newAttr + "][name]";
     
+    $('.ui-autocomplete-input').val('')
+    $(this).next('#add-tags').append('<div class="fieldset"><div class="user-tag"> <div class="name">' + tagName  + '</div> <div class="remove_fields"> &times </div> </div><input type="hidden" name="' + startName + '" value="' + tagName + '" /></div>');
+    event.stopImmediatePropagation()
+  return
+
+  $('.ui-autocomplete-input').on 'focus', ->  
+    controller = $(this).attr('class').split(' ').pop()
+    if window.location.href.split('/').includes('business')
+      route = 'business'
+    else if window.location.href.split('/').includes('job_seeker')
+      route = 'job_seeker'
+
+    $(this).autocomplete( 
+      source: '/' + route + '/' + controller + '/autocomplete'
+      appendTo: $('#search-results-' + controller)     
+      focus: (event, ui) -> 
+        $(this).val(ui.item.name)
+        false
+      select: (event, ui) ->
+        $(this).val(ui.item.name)
+        false
+    ).data('ui-autocomplete')._renderItem = (ul, item) ->
+      $('<li>').attr('ui-item-autocomplete' , item.name).append("<a>" + item.name + "</a>").appendTo ul 
+    return
+  return
+
+
   $('form').on 'focus', '#autocomplete', ->  
     controller = $(this).attr('class').split(' ').pop()
     $(this).autocomplete( 
@@ -46,6 +66,7 @@ jQuery ->
     return
   return
 
+
   
 
 $(document).ajaxComplete ->
@@ -62,6 +83,18 @@ $(document).ajaxComplete ->
         $('#add-tags-value').val values 
     $('#add-tags').append('<div class="user-tag"> <div class="name">' + tagName  + '</div> <div class="delete-tag"> &times </div> </div>') 
     event.stopImmediatePropagation()
+
+  $(document).on 'click', '#add-skill', (event) ->
+    tagName = $(this).parent().find('.ui-autocomplete-input').val() 
+    newAttr = new Date().getTime();
+    attrLength = $(this).parent().find('#skills').attr('name').length
+    attrName = $(this).parent().find('#skills').attr('name').substr(0, attrLength - 7);
+    startName = attrName + "[user_skills_attributes][" + newAttr + "][name]";
+    
+    $('.ui-autocomplete-input').val('')
+    $(this).next('#add-tags').append('<div class="fieldset"><div class="user-tag"> <div class="name">' + tagName  + '</div> <div class="remove_fields"> &times </div> </div><input type="hidden" name="' + startName + '" value="' + tagName + '" /></div>');
+    event.stopImmediatePropagation()
+  return
 
   $('.ui-autocomplete-input').on 'focus', ->  
     controller = $(this).attr('class').split(' ').pop()
@@ -84,6 +117,7 @@ $(document).ajaxComplete ->
     return
   return
 
+  
 
   
 

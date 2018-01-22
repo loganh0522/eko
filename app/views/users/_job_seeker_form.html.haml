@@ -27,7 +27,7 @@
       = f.password_field :password, placeholder: "Password", hide_label: true, id: "password_Block"
       %span#password_msgBlock
     .form-row-no-border
-      = f.submit "Create Profile", class: "btn submit-button"
+      = f.button "Create Profile", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Creating..."}
       .have-account
         Already have an account? 
         = link_to "Sign In", login_path, remote: true

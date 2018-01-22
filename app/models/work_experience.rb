@@ -14,7 +14,7 @@
   validates_presence_of :end_month, :end_year, :unless => :current_position?, if: :is_job_seeker?
   validates_presence_of :current_position, :unless => :end_year?, if: :is_job_seeker?
 
-  accepts_nested_attributes_for :skills, 
+  accepts_nested_attributes_for :user_skills, 
     allow_destroy: true
 
   accepts_nested_attributes_for :accomplishments, 

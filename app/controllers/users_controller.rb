@@ -11,7 +11,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)     
     if @user.save 
-          
       if params[:invitation_token].present?
         handle_invitation
       else
@@ -31,12 +30,13 @@ class UsersController < ApplicationController
   end
 
   def create_job_seeker
-    @user = User.new(user_params)   
+    @user = User.new(user_params.merge!(kind: 'job seeker'))   
 
     respond_to do |format|
       if @user.save 
         session[:user_id] = @user.id 
         format.js
+        format.html {redirect_to job_seeker_create_profiles_path}
       else
         format.js { render_errors(@user) }
         format.html {render :new_job_seeker}

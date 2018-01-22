@@ -1,7 +1,8 @@
 class JobSeeker::UsersController < JobSeekersController 
   layout :set_layout
   before_filter :require_user
-  # before_filter :profile_sign_up_complete
+  before_filter :profile_sign_up_complete
+  
   def show 
     @user = current_user
     @social_links = current_user.social_links
@@ -13,6 +14,7 @@ class JobSeeker::UsersController < JobSeekersController
     else
       @background = BackgroundImage.new
     end 
+    
     if request.subdomain.present? && request.subdomain != 'www'
       @job_board = JobBoard.find_by_subdomain!(request.subdomain) 
     end

@@ -1,4 +1,4 @@
-= form_for [:job_seeker, @user_avatar]  do |f| 
+= form_for [:job_seeker, @user_avatar], remote: true do |f| 
   .modal-body
     .crop-image
       - %w[x y w h].each do |attribute| 
@@ -13,7 +13,7 @@
     = link_to job_seeker_user_avatar_path(@user_avatar), remote: true, :method => :delete, data:{:confirm => "Are You Sure? You can not undo this action."} do
       .glyphicon.glyphicon-trash
     = f.submit 'Crop and Save', class: "btn submit-button"
-    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+    .btn.border-button.close-modal Cancel
 
 
 

@@ -4,6 +4,6 @@
     $('#<%= error[0] %>_Block').addClass('has-error');
   <% end %>
 <%else %> 
-  $('#basic-form-modal').modal("toggle");
+  $('.mediumModal').hide();
   $('#user_certification_<%= @certification.id %>').replaceWith('<%= j render (@certification), certification: @certification %>');
 <%end%>

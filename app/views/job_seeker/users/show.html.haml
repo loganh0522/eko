@@ -16,16 +16,6 @@
           / %li= link_to "Courses", job_seeker_educations_path, remote: true 
       .experience-container
         = render 'job_seeker/work_experiences/experience'
-     
 
-
-.modal#basic-form-modal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        .modal-title  
-      .modal-body
-= render 'job_seeker/user_avatars/picture_modal'  
 
 

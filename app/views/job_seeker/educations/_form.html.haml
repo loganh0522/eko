@@ -30,7 +30,7 @@
       = f.text_area :description, rows: 6, placeholder: "Description", hide_label: true
   .modal-footer 
     = f.submit @education.new_record? ? "Add Education" : "Update", class: "btn submit-button"
-    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+    .btn.border-button.close-modal Cancel
 
 
 

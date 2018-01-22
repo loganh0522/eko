@@ -1,0 +1,46 @@
+.modal-body#jobBoardRowModal
+  .job-board-form-nav
+    %ul
+      %li#content-form.active Content
+      %li#layout-form Layout
+  = form_for [:business, @job_board, @section], :html => {:multipart => true, id: "job-board-section"}, :remote => true do |f|   
+    = f.hidden_field :kind, value: 'Text'
+    = f.hidden_field :job_board_id, value: @job_board.id
+    = hidden_field_tag :media_photo, '', id: "media_photo"
+    .job-board-form 
+      .float-container
+        .header 
+          Header
+        .body
+          = f.text_field :header, class: "form-control subdomain-field"
+      .float-container
+        .header 
+          Sub-Header
+        .body  
+          = f.text_field :subheader, label: "Subheader", class: "form-control"
+      .float-container
+        .header 
+          Content
+        .body
+          = f.trix_editor :description
+    .job-board-layout
+      .float-left
+        = f.radio_button :layout, 'float-left', label: "Float Left", id: "float-left", checked: true
+        %label.float-left{:for => "float-left"}
+          %img#float-left-img(src="/tmp/layout-float-image-left.png") 
+      .float-center
+        = f.radio_button :layout, 'center', label: "Center", id: "float-center"
+        %label.float-left{:for => "float-center"}
+          %img#float-center-img(src="/tmp/layout-float-image-center.png")
+      .float-right
+        = f.radio_button :layout, 'float-right', label: "Float Right", id: "float-right"
+        %label.float-left{:for => "float-right"}
+          %img#float-right-img(src="/tmp/layout-float-image-right.png")
+  .job-board-form 
+    #image-form
+      = render 'business/media_photos/single_form'
+   
+.modal-footer
+  %fieldset
+    = submit_tag "Save Section", class: "btn submit-button", id: "submit-section"
+    .btn.border-button.close-modal Cancel

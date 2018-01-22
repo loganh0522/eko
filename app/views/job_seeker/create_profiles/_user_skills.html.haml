@@ -1,0 +1,6 @@
+.user-tag
+  .tag
+    = f.text_field :name, disabled: true
+    = f.hidden_field :_destroy
+    = link_to '', class: "remove_fields" do
+      .delete &times

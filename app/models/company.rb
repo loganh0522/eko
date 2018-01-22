@@ -71,7 +71,7 @@ class Company < ActiveRecord::Base
   end
 
   def create_career_portal
-    @subdomain = self.name.parameterize("_")
+    @subdomain = self.name.parameterize("")
     JobBoard.create(company_id: self.id, subdomain: @subdomain, kind: "advanced")
     create_job_board_header
   end  

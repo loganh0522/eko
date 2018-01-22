@@ -197,6 +197,11 @@ GEM
       signet (~> 0.7)
     googledocviewer (1.7.5)
       jquery-rails
+    griddler (1.4.0)
+      htmlentities
+      rails (>= 3.2.0)
+    griddler-sendgrid (1.0.1)
+      griddler
     groupdate (3.2.0)
       activesupport (>= 3)
     grpc (1.7.3)
@@ -222,6 +227,7 @@ GEM
       haml (>= 4.0, < 6)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
+    htmlentities (4.3.4)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     httpclient (2.8.3)
@@ -492,6 +498,8 @@ DEPENDENCIES
   google-api-client (~> 0.11)
   google-cloud-pubsub
   googledocviewer
+  griddler
+  griddler-sendgrid
   groupdate
   haml-rails
   jbuilder (~> 2.0)

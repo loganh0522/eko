@@ -19,7 +19,7 @@ $.rails.showConfirmationDialog = function(link){
   $('.destroyModal').find('.modal-footer').html('')
   $('.destroyModal').find('.new-title').html('Destroy')
   $('.destroyModal').find('.modal-body').html('<div class="content"><h3> Are you sure? You can not undo this action. </h3></div>')
-  $('.modal-footer').append('<a class="btn danger-btn confirm" data-remote="true" rel="nofollow" data-method="destroy" href="/business/candidates">Destroy</a>')
+  $('.modal-footer').append('<a class="btn danger-btn confirm">Destroy</a>')
   $('.modal-footer').append('<div class="btn border-button close-modal"> Cancel </div>')
 
   $(".close-modal").on('click', function(event) {

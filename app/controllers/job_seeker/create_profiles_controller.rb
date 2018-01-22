@@ -1,6 +1,7 @@
 class JobSeeker::CreateProfilesController < ApplicationController 
   layout :set_layout
   before_filter :require_user
+  before_filter :completed_sign_up
   include Wicked::Wizard
 
   steps :personal, :experience, :education
@@ -26,15 +27,14 @@ class JobSeeker::CreateProfilesController < ApplicationController
         @background = BackgroundImage.new 
       end
 
-      @background = BackgroundImage.new
       render_wizard
     when :experience
       if @user.work_experiences.count == 0 
         @user.work_experiences.new
       end
+
       render_wizard
     when :education
-
       if @user.educations.count == 0 
         @user.educations.new 
       end
@@ -55,11 +55,11 @@ class JobSeeker::CreateProfilesController < ApplicationController
       render_wizard @user
     when :experience 
       render_wizard @user
-    when :education
-      render_wizard @user
+    when :education    
       if @user.errors.present?
         render_wizard @user
       else 
+        @user.update_attributes(profile_stage: "complete")
         finish_wizard_path
       end
     end
@@ -73,7 +73,8 @@ class JobSeeker::CreateProfilesController < ApplicationController
       
       work_experiences_attributes: [:id, :body, :_destroy, :title, 
         :company_name, :description, :start_month, :start_year, :end_month, :end_year, 
-        :current_position, :industry_ids, :function_ids, :location,
+        :current_position, :industry, :function, :location, :skill,
+        user_skills_attributes: [:id, :name, :_destroy],
         accomplishments_attributes: [:id, :body, :_destroy]],
       
       educations_attributes: [:id, :school, :degree, :description, :start_month, 
@@ -83,12 +84,7 @@ class JobSeeker::CreateProfilesController < ApplicationController
         :start_month, :start_year, :end_year, :end_month, :expires])
   end
 
-  def experience_params
-    params.require(:profile).permit(:user_id, 
-      work_experiences_attributes: [:id, :body, :_destroy, :title, :company_name, :description, :start_month, :start_year, :end_month, :end_year, :current_position, :industry_ids, :function_ids, :location],
-      educations_attributes: [:id, :school, :degree, :description, :start_month, :start_year, :end_month, :end_year, :_destroy],
-      user_certifications_attributes: [:id, :name, :agency, :description, :start_month, :start_year, :end_year, :end_month, :expires])
-  end
+
 
   def finish_wizard_path
     redirect_to job_seeker_user_path(current_user)

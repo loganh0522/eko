@@ -22,10 +22,10 @@
       = f.text_field :location, class: "form-control", id: "geocomplete", label: "Location", autocomplete: "off"
     .form-row
       .header
-        .title Social Media    
+        .title Social Media / Websites 
         = link_to_add_fields "+ Link", f, :social_links
         = f.fields_for :social_links, class: "options" do |a|
           = render 'social_link_fields', f: a
   .modal-footer
     = f.submit "Update", class: "btn submit-button"
-    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+    .btn.border-button.close-modal Cancel

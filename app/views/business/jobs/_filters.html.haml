@@ -2,11 +2,13 @@
   .filter-radios 
     %ul  
       = radio_button_tag "status", "open", true, class: 'filter', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Signing in..."}
-      = label_tag "status_open", "Open", :value => "open", class: 'filter'
-      = radio_button_tag "status", "closed", false, class: 'filter'
-      = label_tag "status_closed", "Closed", :value => "open", class: 'filter'
-      = radio_button_tag "status", "draft", false, class: 'filter'
-      = label_tag "status_draft", "Draft", :value => "open", class: 'filter'
+      = label_tag "status_open", "Active", :value => "open", class: 'filter'
+      
+      / = radio_button_tag "status", "closed", false, class: 'filter'
+      / = label_tag "status_closed", "Closed", :value => "open", class: 'filter'
+      / = radio_button_tag "status", "draft", false, class: 'filter'
+      / = label_tag "status_draft", "Draft", :value => "open", class: 'filter'
+      
       = radio_button_tag "status", "archived", false, class: 'filter'
       = label_tag "status_archived", "Archived", :value => "company", class: 'filter'
   = text_field_tag "query", nil, placeholder: "Search Jobs", class: "search-field", autocomplete: "off"

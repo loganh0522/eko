@@ -1,9 +1,10 @@
-= form_for [:job_seeker, @user_avatar], remote: true do |f| 
-  .modal-body
-    .not-present-container
-      %p Add a photo and crop it to your liking.
-      = f.file_field :image, class: "btn user_avatar_image inputfile"
-      = f.label :image, "Add Profile Photo", class: "btn submit-button" 
-      = f.hidden_field :user_id, value: current_user.id
-  .modal-footer
-    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+#userProfilePictureModal
+  = form_for [:job_seeker, @user_avatar], remote: true do |f| 
+    .modal-body
+      .not-present-container
+        %p Add a photo and crop it to your liking.
+        = f.file_field :image, class: "btn user_avatar_image inputfile"
+        = f.label :image, "Add Profile Photo", class: "btn submit-button" 
+        = f.hidden_field :user_id, value: current_user.id
+    .modal-footer
+      .btn.border-button.close-modal Cancel

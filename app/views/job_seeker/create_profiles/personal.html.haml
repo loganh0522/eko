@@ -5,7 +5,7 @@
   .create-profile-body
     = render 'job_seeker/background_images/form'
     .job-seeker-topper
-      - if @background.new_record? 
+      - if !current_user.background_image.present?
         .background
           .profile-header
             .personal-details
@@ -15,6 +15,7 @@
           .profile-header
             .personal-details
               = render 'job_seeker/user_avatars/user_avatar'
+    
     = form_for [:job_seeker, @user], url: wizard_path do |f|
       .form-row
         .header 
@@ -49,18 +50,3 @@
       .footer
         = f.submit "Continue", class: "job-seeker-btn"
      
-
-.modal#basic-form-modal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        .modal-title
-      .modal-body
-
-.modal#userProfilePictureModal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title Edit Profile Picture

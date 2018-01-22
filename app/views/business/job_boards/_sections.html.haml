@@ -6,7 +6,8 @@
   .dropdown-button.border-button#add-job-board-sections
     + Add Section
   .dropdown-content
-    = link_to 'Text & Photo', new_business_job_board_job_board_row_path(@job_board, kind: "Text"), remote: true
+    = link_to 'Text', new_business_job_board_job_board_row_path(@job_board, kind: "Text"), remote: true
+    = link_to 'Text & Photo', new_business_job_board_job_board_row_path(@job_board, kind: "Text-Photo"), remote: true
     = link_to 'Video', new_business_job_board_job_board_row_path(@job_board, kind: "Video"), remote: true
     = link_to 'Photos', new_business_job_board_job_board_row_path(@job_board, kind: "Photo"), remote: true
     = link_to 'Team', new_business_job_board_job_board_row_path(@job_board, kind: "Team"), remote: true

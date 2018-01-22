@@ -1,6 +1,5 @@
-$('#basic-form-modal').find('form').remove()
-$('#basic-form-modal').find('.modal-title').html('<%= j "Add Education" %>');
-$('#basic-form-modal').find('.modal-header').after('<%= j render "job_seeker/educations/form" %>');
-$('#basic-form-modal').modal("toggle");
-
+$('.mediumModal').find('form').remove()
+$('.mediumModal').find('.new-modal-header').after('<%= j render "job_seeker/educations/form" %>');
+$('.mediumModal').find('.new-title').html('<%= j "Edit Education" %>');
+$('.mediumModal').show();
 
