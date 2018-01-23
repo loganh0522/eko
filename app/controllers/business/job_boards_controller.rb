@@ -9,7 +9,6 @@ class Business::JobBoardsController < ApplicationController
   
   def show
     @job_board = JobBoard.find(params[:id])
-    @section = JobBoardRow.new
     @job_board_header = @job_board.job_board_header
     @sections = @job_board.job_board_rows
 
@@ -28,8 +27,6 @@ class Business::JobBoardsController < ApplicationController
 
   def edit
     @job_board = JobBoard.find(params[:id])
-    @section = JobBoardRow.new
-    @job_board_header = @job_board.job_board_header
     @sections = @job_board.job_board_rows
 
     respond_to do |format|
@@ -44,12 +41,10 @@ class Business::JobBoardsController < ApplicationController
       @job_board.update_attributes(kind: params[:kind])
     end
 
-    if @job_board.update_attributes(job_params)
-      flash[:success] = "You have successfully updated your Career Portal"
-      redirect_to edit_business_job_board_path(@job_board)
-    else
-      flash[:error] = "Something went wrong. Please try again."
-      render :edit 
+    respond_to do |format| 
+      if @job_board.update_attributes(job_params)
+        format.js
+      end
     end
   end
 
@@ -57,7 +52,8 @@ class Business::JobBoardsController < ApplicationController
 
   def job_params
     params.require(:job_board).permit(:description, :logo, :subdomain, :header, :subheader, :cover_photo, 
-      :brand_color, :text_color, :sub_header_color)
+      :brand_color, :text_color, :sub_header_color,
+      header_links_attributes: [:id, :name, :job_board_row_id, :_destroy])
   end
 
 end

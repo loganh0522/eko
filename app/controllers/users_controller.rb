@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)     
+    
     if @user.save 
       if params[:invitation_token].present?
         handle_invitation

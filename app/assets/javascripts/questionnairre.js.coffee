@@ -66,7 +66,7 @@ jQuery ->
 
 
   $(document).ready ->
-    if $('.work-experience').length >= 2 
+    if $('.add-work-experience-page').length >= 2 
       $('.remove_fields:not(:first)').show()
     
 

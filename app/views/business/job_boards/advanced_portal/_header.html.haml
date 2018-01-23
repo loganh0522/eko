@@ -9,6 +9,8 @@
           = current_company.name
     %ul#section-nav
       %li Jobs
+      - @job_board.header_links.each do |f| 
+        %li= f.name
     
     %ul#portal-login
       %li= link_to "Login", login_path, remote: true

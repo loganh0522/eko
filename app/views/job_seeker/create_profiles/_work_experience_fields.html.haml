@@ -60,5 +60,6 @@
         = f.fields_for :user_skills do |a|
           = render 'user_skills', f: a
   .form-row-no-border#clear-both
-    = link_to "Remove", '#', class: "remove_fields", id: "remove_experience"
+    = f.hidden_field :_destroy
+    = link_to "Remove", '#', class: "remove_fields"
 

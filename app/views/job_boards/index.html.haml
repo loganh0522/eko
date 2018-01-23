@@ -4,7 +4,7 @@
   - if @sections.count != 0
     .job-board-sections
       - @sections.each do |section|
-        .section
+        .section{id: "board_row_#{section.id}"}
           - if section.kind == 'Text'
             - if "#{section.layout}" == 'float-left'
               = render 'job_board_rows/text_img_left', section: section
@@ -36,7 +36,7 @@
         .not-present-container
           %p Sorry, there are currently no open job postings. 
   - else 
-    .jobs
+    .jobs#jobs
       - @jobs.each do |job|
         .job-posting
           .header-info

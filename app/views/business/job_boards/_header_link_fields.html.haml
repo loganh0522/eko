@@ -1,0 +1,7 @@
+#add-header-link
+  .form-row-no-border
+    = f.text_field :name, id: "url_Block", placeholder: "Link Name", hide_label: true
+    = f.collection_select(:job_board_row_id, @job_board.job_board_rows, :id, :header)
+    = f.hidden_field :_destroy
+    = link_to "", '#', class: "remove_fields glyphicon glyphicon-remove" 
+  %span#url_msgBlock

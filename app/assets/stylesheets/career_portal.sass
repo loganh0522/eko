@@ -5,6 +5,16 @@
   height: 90px
   margin-top: -5px
   z-index: 1
+  .responsive-menu
+    float: right
+    margin: 30px 15px 0 0 
+    display: none
+    font-size: 25px
+    color: #666
+    &:hover
+      cursor: pointer
+    @media screen and (max-width: 780px)
+      display: block   
   .navigation
     margin: 5px auto
     font-size: 16px
@@ -13,6 +23,7 @@
     font-size: 16px
     max-width: 1280px
     color: #666
+    
     img 
       margin: 5px
       max-height: 80px
@@ -20,12 +31,16 @@
     #section-nav
       float: left
       margin-left: 30px
+      @media screen and (max-width: 780px)
+        display: none
       li
         &:hover
           cursor: pointer
     #portal-login
       float: right
       color: #fff
+      @media screen and (max-width: 780px)
+        display: none
       a
         color: #666
     ul 
@@ -38,6 +53,7 @@
         margin-right: 15px
         float: left
         a
+          color: #666
           font-size: 14px
           text-decoration: none
     .dropdown

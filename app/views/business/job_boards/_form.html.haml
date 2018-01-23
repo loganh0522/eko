@@ -1,37 +1,40 @@
 = form_for [:business, @job_board], remote: true do |f|  
-  .float-container
-    .header 
-      Career Portal address
-    .body
-      = f.text_field :subdomain, class: "form-control subdomain-field"
-      .domain .talentwiz.ca
-  .float-container
-    .header 
-      Career Portal Colors 
-    .body
-      .div.input-append.color
-        = f.label :brand_color, "Brand Color"
-        .color-container
-          = f.text_field :brand_color, class: "colorpicker"
-          %span.add-on
-            %i{:style => "background-color: #{@job_board.brand_color}"}
-      .div.input-append.color
-        = f.label :text_color, "Font Color"
-        .color-container
-          = f.text_field :text_color, class: "colorpicker"
-          %span.add-on
-            %i{:style => "background-color: rgb(255, 146, 180)"}           
-      .div.input-append.color
-        = f.label :sub_heading_color, "Sub-Header Color"
-        .color-container
-          = f.text_field :sub_heading_color, class: "colorpicker"
-          %span.add-on
-            %i{:style => "background-color: rgb(255, 146, 180)"}
+  .modal-body
+    .form-row
+      .header 
+        .title Career Portal Address
+        = f.text_field :subdomain, class: "form-control subdomain-field"
+        .domain .talentwiz.ca
+    .form-row
+      .header
+        .title Header Links    
+        = link_to_add_fields "+ Link", f, :header_links
+        = f.fields_for :header_links do |a|
+          = render 'header_link_fields', f: a
+    / .float-container
+    /   .header 
+    /     Career Portal Colors 
+    / .body
+    /   .div.input-append.color
+    /     = f.label :brand_color, "Brand Color"
+    /     .color-container
+    /       = f.text_field :brand_color, class: "colorpicker"
+    /       %span.add-on
+    /         %i{:style => "background-color: #{@job_board.brand_color}"}
+    /   .div.input-append.color
+    /     = f.label :text_color, "Font Color"
+    /     .color-container
+    /       = f.text_field :text_color, class: "colorpicker"
+    /       %span.add-on
+    /         %i{:style => "background-color: rgb(255, 146, 180)"}           
+    /   .div.input-append.color
+    /     = f.label :sub_heading_color, "Sub-Header Color"
+    /     .color-container
+    /       = f.text_field :sub_heading_color, class: "colorpicker"
+    /       %span.add-on
+    /         %i{:style => "background-color: rgb(255, 146, 180)"}
+  .modal-footer
+    = f.submit "Update Settings", class: "btn submit-button"
+    .btn.border-button.close-modal Cancel
 
-.job-board-form 
-  #logo-area
-    = render 'business/logos/form'
-.job-board-form
-  #background-area
-    = render 'business/background_images/form'
 

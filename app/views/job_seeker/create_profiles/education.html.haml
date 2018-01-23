@@ -10,7 +10,8 @@
           .title Education
         = f.fields_for :educations do |q|
           = render "education_fields", f: q
-        = link_to_add_fields "+ Add Education", f, :educations
+        .add-experience
+          = link_to_add_fields "+ Add Education", f, :educations
       .footer
         = f.hidden_field :profile_stage, value: "complete"
         = link_to wizard_path(:experience), class: "previous-link" do 

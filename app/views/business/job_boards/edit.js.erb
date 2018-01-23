@@ -1,6 +1,6 @@
 $('.mediumModal').find('.modal-body').remove()
 $('.mediumModal').find('.modal-footer').remove()
 $('.mediumModal').find('form').remove()
-$(".mediumModal").find('.new-modal-header').after('<%= j render "business/job_boards/settings_form" %>');
+$(".mediumModal").find('.new-modal-header').after('<%= j render "business/job_boards/form" %>');
 $(".mediumModal").find('.new-title').html('<%= "Create Section" %>');
 $('.mediumModal').show();
