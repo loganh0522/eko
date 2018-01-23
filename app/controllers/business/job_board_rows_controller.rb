@@ -31,7 +31,6 @@ class Business::JobBoardRowsController < ApplicationController
     
     respond_to do |format|
       if @section.save   
-        binding.pry
         if params[:job_board_row][:kind] == 'Team'
           update_team_members
         elsif params[:job_board_row][:kind] == "Text-Photo" || params[:job_board_row][:kind] == "Photo"
