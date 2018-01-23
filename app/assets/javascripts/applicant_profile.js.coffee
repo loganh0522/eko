@@ -78,7 +78,7 @@ jQuery ->
     
 
 ################ Responsive Menu ############### 
-  $(document).on 'click', '.responsive-menu', (event) ->
+  $(document).on 'click touchstart', '.responsive-menu', (event) ->
     if $('.responsive-menu-links').is(':visible')
       $('.responsive-menu-links').hide()
     else  
