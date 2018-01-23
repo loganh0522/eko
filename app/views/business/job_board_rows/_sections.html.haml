@@ -30,6 +30,6 @@
         = "#{section.kind} - #{section.header}"
       .icons
         = link_to edit_business_job_board_job_board_row_path(@job_board.id, section.id), :data => {:remote => true } do
-          %i.glyphicon.glyphicon-pencil
+          %i.glyphicon.glyphicon-pencil.add-job-board-sections
         = link_to business_job_board_job_board_row_path(@job_board.id, section.id), remote: true, :method => :delete do
           %i.glyphicon.glyphicon-remove

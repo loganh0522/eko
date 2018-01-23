@@ -15,7 +15,8 @@
             %li.activated Advanced 
           = link_to business_job_board_path(kind: 'basic'), :method => :put, remote: true do 
             %li Basic
-    = render "sections"
+    .side-sections
+      = render "sections"
     / .edit-career-portal
     /   .change-containers-nav
     /   - if @job_board.kind == "basic"
