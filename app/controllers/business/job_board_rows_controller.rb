@@ -25,20 +25,18 @@ class Business::JobBoardRowsController < ApplicationController
     if params[:job_board_row][:video_link].present? 
       video_parse_function
       @section = JobBoardRow.new(job_board_row_params.merge!(youtube_id: @video_id ))
-    elsif params[:job_board_row][:kind] == "Text" || params[:job_board_row][:kind] == "Photo"
-      @photos = params[:media_photo].split(',')
-      @photos.delete('')
-      @section = JobBoardRow.new(create_params)  
     else
       @section = JobBoardRow.new(create_params)  
     end
-
     
     respond_to do |format|
       if @section.save   
+        binding.pry
         if params[:job_board_row][:kind] == 'Team'
           update_team_members
-        elsif params[:job_board_row][:kind] == "Text" || params[:job_board_row][:kind] == "Photo"
+        elsif params[:job_board_row][:kind] == "Text-Photo" || params[:job_board_row][:kind] == "Photo"
+          @photos = params[:media_photo].split(',')
+          @photos.delete('')
           @photos.each do |id|
             photo = MediaPhoto.find(id).update_attributes(job_board_row_id: @section.id)
           end

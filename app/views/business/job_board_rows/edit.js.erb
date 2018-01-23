@@ -1,14 +1,19 @@
 $('.mediumModal').find('.modal-body').remove()
 $('.mediumModal').find('.modal-footer').remove()
 $('.mediumModal').find('form').remove()
-<% if @section_type == 'Text'  %>
-  $(".mediumModal").find('.new-modal-header').after('<%= j render "business/job_board_rows/text_form" %>');
+<% if @section_type == 'Text-Photo'  %>
+  $(".mediumModal").find('.new-modal-header').after('<%= j render "business/job_board_rows/text_photo_form" %>');
   $(".mediumModal").find('.new-title').html('<%= "Edit Section" %>');
   $('.mediumModal').show();
 <% elsif @section_type == 'Video' %>
   $('.mediumModal').find('form').remove()
   $(".mediumModal").find('.new-modal-header').after('<%= j render "business/job_board_rows/video_form" %>');
   $(".mediumModal").find('.new-title').html('<%= "Edit Section" %>');
+  $('.mediumModal').show();
+<% elsif @section_type == 'Text' %>
+  $('.mediumModal').find('form').remove()
+  $(".mediumModal").find('.new-modal-header').after('<%= j render "business/job_board_rows/text_form" %>');
+  $(".mediumModal").find('.new-title').html('<%= "Create Section" %>');
   $('.mediumModal').show();
 <% elsif @section_type == 'Photo' %>
   $('.mediumModal').find('form').remove()
@@ -22,7 +27,3 @@ $('.mediumModal').find('form').remove()
   $('.mediumModal').show();
 <% end %>
 
-
-$(document).one('click', "#submit-section", function() {
-  return $("#job-board-section").submit();
-});

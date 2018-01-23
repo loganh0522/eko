@@ -5,14 +5,15 @@
     .job-board-sections
       - @sections.each do |section|
         .section{id: "board_row_#{section.id}"}
-          - if section.kind == 'Text'
+          - if section.kind == 'Text-Photo'
             - if "#{section.layout}" == 'float-left'
               = render 'job_board_rows/text_img_left', section: section
             - elsif "#{section.layout}" == 'float-right'
               = render 'job_board_rows/text_img_right', section: section
             - elsif "#{section.layout}" == 'center'
               = render 'job_board_rows/text_img_center', section: section
-          
+          - elsif section.kind == 'Text'
+            = render 'job_board_rows/text', section: section
           - elsif section.kind == 'Video'
             = render 'job_board_rows/video_row', section: section
           - elsif section.kind == 'Team'
