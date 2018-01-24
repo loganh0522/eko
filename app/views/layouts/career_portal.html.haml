@@ -14,9 +14,8 @@
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'/>
     = render 'shared/modals/medium_modal'
     = render 'shared/modals/large_modal'
-  %body{:style => "background: url(#{@job_board.job_board_header.background_image.file.url}) no-repeat center center fixed; background-size: cover "}
-    %header
-      = render "/shared/portal_nav"   
+  %body
+    %header   
     %section
       = render "/shared/messages"
       = yield 

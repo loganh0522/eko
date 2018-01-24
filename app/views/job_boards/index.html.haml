@@ -1,6 +1,5 @@
-= render 'job_boards/advanced_portal/header'
-
 - if @job_board.kind == 'advanced'
+  = render 'job_boards/advanced_portal/header'
   - if @sections.count != 0
     .job-board-sections
       - @sections.each do |section|
