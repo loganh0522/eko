@@ -19,3 +19,11 @@ jQuery ->
     update: ->
       $.post($(this).data('update-url'), $(this).sortable('serialize'))
   $("#stages").disableSelection()
+
+
+  $('#board-sections').sortable
+    axis: 'y'
+    cursor: 'move'
+    update: ->
+      $.post($(this).data('update-url'), $(this).sortable('serialize'))
+  $("#board-sections").disableSelection()

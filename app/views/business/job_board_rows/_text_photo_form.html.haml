@@ -3,9 +3,8 @@
     %ul
       %li#content-form.active Content
       %li#layout-form Layout
-  = form_for [:business, @job_board, @section], :html => {:multipart => true, id: "job-board-section"}, :remote => true do |f|   
+  = form_for [:business, @section], :html => {:multipart => true, id: "job-board-section"}, :remote => true do |f|   
     = f.hidden_field :kind, value: 'Text-Photo'
-    = f.hidden_field :job_board_id, value: @job_board.id
     = hidden_field_tag :media_photo, '', id: "media_photo"
     .job-board-form 
       .float-container

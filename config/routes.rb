@@ -225,10 +225,14 @@ Rails.application.routes.draw do
         get :autocomplete
       end
     end
-  
+    resources :job_board_rows do 
+      collection do
+        post :sort, to: "job_board_rows#sort"
+      end 
+    end
     resources :job_boards do
       resources :job_board_headers
-      resources :job_board_rows
+      
     end
    
     get 'templates', to: "email_templates#index"

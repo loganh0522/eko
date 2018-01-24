@@ -1,1 +1,12 @@
 $('#media_photo_<%= @photo.id %>').remove();
+
+
+field = $(document).find('#media_photo');
+values = field.val().split(',');
+index = $.inArray('<%= @photo.id %>', values);
+values.splice(index, 1);
+field.val(values);
+
+
+
+  

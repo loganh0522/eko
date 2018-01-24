@@ -1,7 +1,7 @@
 class JobBoard < ActiveRecord::Base
   belongs_to :company 
   before_save :generate_subdomain!
-  has_many :job_board_rows
+  has_many :job_board_rows, -> {order(:position)}
   has_one :job_board_header
   has_many :header_links
   accepts_nested_attributes_for :header_links,

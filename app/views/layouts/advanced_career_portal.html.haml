@@ -47,19 +47,23 @@
         %img.responsive-menu(src="/tmp/menu.png")  
       .responsive-menu-links
         %ul
-          %li= link_to "Jobs", root_path(anchor: "jobs")
+          = link_to root_path(anchor: "jobs") do
+            %li Jobs 
           - @job_board.header_links.each do |f| 
-            %li= link_to "#{f.name}", root_path(anchor: "board_row_#{f.job_board_row.id}")
-          
+            = link_to root_path(anchor: "board_row_#{f.job_board_row.id}") do
+              %li= f.name
           - if current_user.present?
-            %li= link_to "Profile", job_seeker_user_path(current_user)
-            %li= link_to "Sign Out", signout_path
+            = link_to job_seeker_user_path(current_user) do 
+              %li Profile
+            = link_to signout_path do
+              %li Sign Out
           - else
-            %li= link_to "Login", login_path, remote: true
-            %li= link_to "Sign Up", new_user_path, remote: true
+            = link_to login_path, remote: true do
+              %li Login
+            = link_to new_user_path, remote: true do
+              %li Create Profile
 
             
-
     %section
       = render "/shared/messages"
       = yield 

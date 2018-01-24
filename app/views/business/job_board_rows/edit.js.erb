@@ -27,3 +27,8 @@ $('.mediumModal').find('form').remove()
   $('.mediumModal').show();
 <% end %>
 
+$('#media-photo-up').fileupload();
+
+$('.close-modal').on('click', function() {
+  return $('.mediumModal').hide();
+});

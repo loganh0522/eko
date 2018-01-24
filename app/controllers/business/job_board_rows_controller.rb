@@ -8,8 +8,6 @@ class Business::JobBoardRowsController < ApplicationController
 
   def new 
     @section = JobBoardRow.new
-    @job_board = JobBoard.find(params[:job_board_id])
-    @section_type = params[:kind]
     @photo = MediaPhoto.new
     @member = TeamMember.new
     
@@ -19,14 +17,13 @@ class Business::JobBoardRowsController < ApplicationController
   end
 
   def create   
-    @job_board = JobBoard.find(params[:job_board_id])
-    @job_board_header = @job_board.job_board_header
+    @job_board = current_company.job_board
     
     if params[:job_board_row][:video_link].present? 
       video_parse_function
-      @section = JobBoardRow.new(job_board_row_params.merge!(youtube_id: @video_id ))
+      @section = JobBoardRow.new(job_board_row_params.merge!(youtube_id: @video_id, job_board: @job_board, position: row_position))
     else
-      @section = JobBoardRow.new(create_params)  
+      @section = JobBoardRow.new(create_params.merge!(job_board: @job_board, position: row_position))  
     end
     
     respond_to do |format|
@@ -42,21 +39,19 @@ class Business::JobBoardRowsController < ApplicationController
         end
         
         @sections = @job_board.job_board_rows
+        @job_board_header = @job_board.job_board_header
+    
         format.js
       end
     end
   end
 
   def edit 
-    respond_to do |format|
-      @job_board = JobBoard.find(params[:job_board_id])
-      @section = JobBoardRow.find(params[:id])
-      
-      @job_board_header = @job_board.job_board_header
-      @section_type = @section.kind
-      
-      
+    @section = JobBoardRow.find(params[:id])
+    # @job_board_header = @job_board.job_board_header
+    @section_type = @section.kind
 
+    respond_to do |format|
       if @section.kind == 'Photo' || @section.kind == 'Text'
         @photo = MediaPhoto.new
       elsif @section.kind == 'Team'
@@ -71,8 +66,8 @@ class Business::JobBoardRowsController < ApplicationController
 
   def update
     @section = JobBoardRow.find(params[:id])
-    @job_board = JobBoard.find(params[:job_board_id])
-    @job_board_header = @job_board.job_board_header
+    @job_board = current_company.job_board
+    
 
     if params[:job_board_row][:video_link].present? 
       video_parse_function
@@ -89,6 +84,7 @@ class Business::JobBoardRowsController < ApplicationController
 
     respond_to do |format|
       if @section.update(job_board_row_params)
+        @job_board_header = @job_board.job_board_header
         @sections = @job_board.job_board_rows
         format.js
       end
@@ -103,12 +99,27 @@ class Business::JobBoardRowsController < ApplicationController
     end
   end
 
+  def sort
+    params[:section].each_with_index do |id, index|
+      JobBoardRow.update(id, {position: index + 1})
+    end
+
+    @job_board = current_company.job_board
+    @job_board_header = @job_board.job_board_header
+    @sections = @job_board.job_board_rows
+  end
+
+
   private
 
   def video_parse_function
     regex = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/
     link = params[:job_board_row][:video_link]
     @video_id = link.match(regex)[7]
+  end
+
+  def row_position    
+    current_company.job_board.job_board_rows.count + 1
   end
 
   def update_team_members

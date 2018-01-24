@@ -3,9 +3,8 @@
     %ul
       %li#content-form.active Content
       %li#layout-form Layout
-  = form_for [:business, @job_board, @section], :html => { :multipart => true, id: "job-board-section"}, :remote => true do |f|    
+  = form_for [:business, @section], :html => { :multipart => true, id: "job-board-section"}, :remote => true do |f|    
     = f.hidden_field :kind, value: 'Photo'
-    = f.hidden_field :job_board_id, value: @job_board.id
     = hidden_field_tag :media_photo
     .job-board-form 
       .float-container
@@ -21,7 +20,7 @@
   .job-board-form 
     .images-container
       - @section.media_photos.each do |img| 
-        .media_photo
+        .media_photo{id: "media_photo_#{img.id}"}
           = link_to business_media_photo_path(img), remote: true, :method => :delete do  
             %i.fa.fa-trash-o
           = image_tag img.file_name.xs_image 

@@ -5,7 +5,6 @@ jQuery ->
 
   $(document).ajaxComplete -> 
     $('#media-photo-up').fileupload();
-    $('#background-photo-up').fileupload();
     $('.new_resume').fileupload();
 
   

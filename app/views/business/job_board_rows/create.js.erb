@@ -1,3 +1,14 @@
 $('.mediumModal').hide();
 $('.side-container').find('.side-sections').html('<%= j render "business/job_boards/sections", sections: @sections %>');
 $('.main-container').find('.sections').html('<%= j render "business/job_boards/advanced_portal/sections", sections: @sections %>');
+
+
+$('#board-sections').sortable({
+  axis: 'y',
+  cursor: 'move',
+  update: function() {
+    return $.post($(this).data('update-url'), $(this).sortable('serialize'));
+  }
+});
+
+$("#board-sections").disableSelection();

@@ -5,10 +5,10 @@ class BackgroundUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
   
-  process :resize_to_fit => [1250, 800]
+  process :resize_to_fit => [1250, 500]
 
   version :large do 
-    process :resize_to_fit => [1250, 800]
+    process :resize_to_fit => [1250, 500]
   end
 
   version :medium do
