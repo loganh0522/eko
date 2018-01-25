@@ -69,7 +69,6 @@ Google::Apis::RequestOptions.default.retries = 5
         authorization_uri: 'https://accounts.google.com/o/oauth2/auth', 
         client_id: ENV['GOOGLE_CLIENT_ID'],
         client_secret: ENV['GOOGLE_CLIENT_SECRET'],
-        grant_type: 'authorization_code',
         scope: ['email', 
           'https://www.googleapis.com/auth/gmail.compose',
           'https://www.googleapis.com/auth/gmail.modify',

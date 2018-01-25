@@ -28,11 +28,10 @@ class InboundEmailsController < ApplicationController
 
   def outlook_webhook
     if params[:validationToken].present? 
-      render text: params[:validationToken]
       head 200
+      render text: params[:validationToken]
     else 
       head 200
-
       if params[:value].present? 
         @subId = params[:value].first[:subscriptionId]
         @msgId = params[:value].first[:resourceData][:id]
