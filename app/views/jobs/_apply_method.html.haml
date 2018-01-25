@@ -1,5 +1,6 @@
 - if @company.application_process == "resume-process"
-  = link_to "Apply To Job", new_job_candidate_path(@job),  class: "btn submit-button"
+  = link_to "Apply To Job", job_apply_path(@job),  class: "btn submit-button"
+  
 - else 
   - if current_user.present?
     - if @job.questions.present?
@@ -10,6 +11,8 @@
         - else   
           .btn.submit-button{:style => "background-color: #EF7B2B"}
             Apply to this Job   
+    
+
     - else  
       = form_for [:job_seeker, @job, @candidate] do |f|
         .fieldset
@@ -18,6 +21,8 @@
           = f.hidden_field :job_id, value: @job.id
           = f.hidden_field :company_id, value: @company.id
           = f.submit "Apply to this Job", class: 'btn submit-button', :html => {:style => "background-color: #EF7B2B)"}
+  
+
   - else 
     = link_to "Apply To Job", login_path, class: "btn submit-button", :style => "background-color: #{@job_board.brand_color}", remote: true
     

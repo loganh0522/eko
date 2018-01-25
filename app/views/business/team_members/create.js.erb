@@ -1,8 +1,14 @@
 <% if @member.new_record? %>
   alert("Failed to upload painting: <%= j @painting.errors.full_messages.join(', ').html_safe %>");
 <% else %> 
-  $('.images-container').append("<%= j render 'business/team_members/member', member: @member %>")
-  photoIds = [$("#media_photo").val()]
-  photoIds.push('<%= @member.id %>')
-  $("#media_photo").val(photoIds)
+  <% if params[:team_member][:job_board_row_id] %>
+    $('.modal-body').remove();
+    $('.modal-footer').remove();
+    $(".mediumModal").find('.new-modal-header').after('<%= j render "business/job_board_rows/team_form" %>');
+  <%else %>
+    $('.images-container').append("<%= j render 'business/team_members/member', member: @member %>")
+    photoIds = [$("#media_photo").val()]
+    photoIds.push('<%= @member.id %>')
+    $("#media_photo").val(photoIds)
+  <% end %>
 <% end %>

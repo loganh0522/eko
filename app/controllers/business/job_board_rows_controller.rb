@@ -68,12 +68,10 @@ class Business::JobBoardRowsController < ApplicationController
     @section = JobBoardRow.find(params[:id])
     @job_board = current_company.job_board
     
-
+    binding.pry
     if params[:job_board_row][:video_link].present? 
       video_parse_function
       @section = JobBoardRow.new(job_board_row_params.merge!(youtube_id: @video_id ))
-    elsif params[:job_board_row][:kind] == 'Team'
-      update_team_members
     elsif params[:job_board_row][:kind] == "Text" || params[:job_board_row][:kind] == "Photo"
       @photos = params[:media_photo].split(',')
       @photos.delete('')
@@ -94,6 +92,7 @@ class Business::JobBoardRowsController < ApplicationController
   def destroy
     @section = JobBoardRow.find(params[:id])
     @section.destroy
+
     respond_to do |format|
       format.js
     end
@@ -127,6 +126,7 @@ class Business::JobBoardRowsController < ApplicationController
       @member = TeamMember.find(member.first)
       @member.update_attributes(position: member.last[:position],
         name: member.last[:name], details: member.last[:details])
+      
       @section.team_members << @member
     end
   end

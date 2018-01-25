@@ -1,17 +1,12 @@
 .modal-body  
   = form_for [:business, @section], :html => {id: "job-board-section" }, :remote => true do |f|
     = f.hidden_field :kind, value: 'Team'
-    .float-container
-      .header 
-        Header
-      .body
-        = f.text_field :header, class: "subdomain-field"
-    .float-container
-      .header 
-        Sub-Header
-      .body  
-        = f.text_field :subheader, label: "Subheader"
-
+    .form-row-no-border
+      = f.label :header, "Header"
+      = f.text_field :header, class: "subdomain-field"
+      = f.label :subheader, "Sub-Header"
+      = f.text_field :subheader, label: "Subheader"
+      
       - if @section.new_record? 
         .images-container 
       - else 

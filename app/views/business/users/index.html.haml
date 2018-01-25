@@ -1,3 +1,11 @@
+.page-header
+  %h2 Admin 
+  .admin-nav
+    %ul
+      %li= link_to "Settings", "#"
+      %li= link_to "Templates", business_job_board_path(current_company.job_board)
+      %li= link_to "Career Portal", business_job_board_path(current_company.job_board)
+
 .company-settings
   .side-container
     = render 'business/shared/admin_sidebar'

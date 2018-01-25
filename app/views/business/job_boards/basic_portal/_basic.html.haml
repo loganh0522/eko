@@ -1,0 +1,13 @@
+.company-job-board 
+  - if current_company.logo.present?
+    .logo
+      = link_to root_path do
+        %img(src="#{current_company.logo.file.large_logo}")
+  .basic-jobs
+    %h2{style: "color: #67696C"} Current Job Openings
+    - if current_company.jobs.count != 0  
+      - current_company.jobs.each do |job|
+        .title= link_to "#{job.title}", "jobs/#{job.id}", {style: "color: #67696C"}
+    - else 
+      .not-present-container
+        %p Sorry, there are currently no open job postings. 

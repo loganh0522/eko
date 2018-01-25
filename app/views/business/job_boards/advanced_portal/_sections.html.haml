@@ -1,7 +1,7 @@
 - if @sections.count != 0
   .job-board-sections
     - @sections.each do |section|
-      .section
+      .section{id: "section_row_#{section.id}"}
         .section-content
           - if section.kind == 'Text-Photo'
             - if "#{section.layout}" == 'float-left'

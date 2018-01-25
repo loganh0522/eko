@@ -1,6 +1,6 @@
-.team-member-contain
+.team-member-contain{id: "team_member_#{f.object.id}"}
   = image_tag f.object.file.xs_image
   = f.text_field :name, autocomplete: 'off'
   = f.text_field :position, autocomplete: 'off'
   = f.text_area :details
-  = f.hidden_field :_destroy
+  = link_to "Destroy", business_team_member_path(f.object.id), method: :delete, remote: true

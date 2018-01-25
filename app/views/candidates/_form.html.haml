@@ -1,6 +1,8 @@
 = link_to new_user_path, :class => "apply-w-talentwiz", remote: true do 
   %img.logo(src="/tmp/logo.jpg")
   .account Profile
+
+
 / = link_to "", :class => "apply-w-talentwiz", "data-toggle" => "modal", "data-target" => "#subNewUserModal" do 
 /   %img.logo(src="/tmp/logo.jpg")
 /   .account Profile
@@ -64,7 +66,6 @@
                     = q.radio_button :question_option_id, option.id
                     = option.body
   .apply
-    = f.hidden_field :job_id, value: @job.id
     = f.hidden_field :company_id, value: @job.company.id
     = f.hidden_field :manually_created, value: true
     - if @job_board.brand_color.present? 

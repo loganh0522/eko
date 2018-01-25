@@ -2,11 +2,11 @@
   alert("Failed to upload painting: <%= j @painting.errors.full_messages.join(', ').html_safe %>");
 <% elsif params[:multiple_upload].present? %> 
   $('.images-container').append("<%= j render 'business/media_photos/photo', photo: @photo %>")
+
   photoIds = [$("#media_photo").val()]
   photoIds.push('<%= @photo.id %>')
   $("#media_photo").val(photoIds)
 <% else %>
-
   $("#image-form").html("<%= j render 'business/media_photos/single_form', photo: @photo %>");
   $("#media_photo").val('<%= @photo.id %>')
 <% end %>

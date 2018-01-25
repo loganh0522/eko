@@ -28,3 +28,13 @@
 .modal-footer
   = submit_tag "Save Section", class: "btn submit-button", id: "submit-section"
   .btn.border-button.close-modal Cancel
+
+  %script#template-upload{:type => "text/x-tmpl"}
+    :cdata
+      <div class="media-photo-load">
+        {%=o.name%}
+        <div>
+          <div class="bar" style="width: 0%"></div>
+        </div>
+      </div>
+

@@ -8,8 +8,8 @@ class Business::TeamMembersController < ApplicationController
 
   def create
     @member = TeamMember.create(member_params)
-    @section = JobBoardRow.new
-    # @job_board_header = @background.job_board_header if @background.job_board_header_id.present?
+    @section = JobBoardRow.find(params[:team_member][:job_board_row_id])
+    
     respond_to do |format| 
       format.js
     end
@@ -35,8 +35,6 @@ class Business::TeamMembersController < ApplicationController
   def destroy
     @member = TeamMember.find(params[:id])
     @member.destroy
-
-    @job_board_header = @member.job_board_header
 
     respond_to do |format|
       format.js

@@ -25,26 +25,8 @@
     /   - else 
     /     .career-portal-details
 
-  .main-container
-    / = render 'business/job_boards/advanced_portal/navbar'
-    = render 'business/job_boards/advanced_portal/header'
-    .sections
-      = render 'business/job_boards/advanced_portal/sections'
-    .jobs
-      - current_company.open_jobs.each do |job|
-        .job-posting
-          .header-info
-            .job-detail
-              .title= link_to "#{job.title}", job_path(job)
-            .view-job= link_to "View Job", job_path(job), class: "btn btn-primary"
-          .bottom-info
-            .left-side
-              = "#{job.location}"
-            .right-side 
-              / = job.industries.first.name
-              / = job.job_kind.first.name
-              = "#{time_ago_in_words(job.created_at)} ago"
-
+  .main-container{:style => "background: url(#{@job_board.job_board_header.background_image.file.large}) no-repeat center center fixed; background-size: cover "}
+    = render 'portal_container'
 
 
   / %h4 Widget Details 

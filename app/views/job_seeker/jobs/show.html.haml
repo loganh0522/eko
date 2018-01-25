@@ -28,11 +28,8 @@
           - else
             = form_for [:job_seeker, @job, @candidate] do |f|
               .fieldset
-                = f.submit "Apply to Job", class: "btn submit-button"
-        - else 
-          = render "/users/sub_new_job_seeker"
-          = render "/sessions/sub_login"
-          .app-btn{:style => "background-color: #{@job_board.brand_color})"}= link_to "Apply To Job", "", :class => "btn btn-primary app-btn", "data-toggle" => "modal", "data-target" => "#SubLoginModal"
+                = f.submit "Apply to Job", class: "btn submit-button" 
+        - else          
           = link_to "Apply to Job", login_path, class: "btn btn-primary app-btn"
 
 

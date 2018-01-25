@@ -1,1 +1,5 @@
-$('.mediumModal').hide();
+<% if params[:kind].present? %>
+  $('.main-container').html('<%= j render "business/job_boards/portal_container" %>');
+<% else %>
+  $('.mediumModal').hide();
+<% end %>

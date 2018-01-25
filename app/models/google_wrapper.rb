@@ -18,6 +18,7 @@ Google::Apis::RequestOptions.default.retries = 5
       @client.authorization.refresh_token = current_user.google_token.refresh_token
       @client.authorization.client_id = ENV['GOOGLE_CLIENT_ID']
       @client.authorization.client_secret = ENV['GOOGLE_CLIENT_SECRET']
+      @client.authorization.grant_type = 'refresh_token'
       @client.authorization.refresh!
       @service = @client.discovered_api('gmail', 'v1')
     end
@@ -25,9 +26,11 @@ Google::Apis::RequestOptions.default.retries = 5
     def self.set_client(current_user)
       token = current_user.google_token.access_token
       refresh_token = current_user.google_token.refresh_token
+      expires_at = (GoogleToken.last.expires_at - Time.now).to_s
       
       @client = Signet::OAuth2::Client.new(access_token: token, 
         refresh_token: refresh_token, 
+        expires_in: expires_at,
         token_credential_uri: 'https://accounts.google.com/o/oauth2/token', 
         authorization_uri: 'https://accounts.google.com/o/oauth2/auth', 
         client_id: ENV['GOOGLE_CLIENT_ID'],
@@ -35,7 +38,8 @@ Google::Apis::RequestOptions.default.retries = 5
         grant_type: 'authorization_code',
         scope: ['email', 
           'https://www.googleapis.com/auth/gmail.compose',
-          'https://www.googleapis.com/auth/gmail.modify']
+          'https://www.googleapis.com/auth/gmail.modify',
+          ]
         )
     end
 
@@ -56,12 +60,29 @@ Google::Apis::RequestOptions.default.retries = 5
     end
 
     def self.watch_gmail(current_user)
-      self.set_client(current_user)  
+      token = current_user.google_token.access_token
+      refresh_token = current_user.google_token.refresh_token
+      
+      @client = Signet::OAuth2::Client.new(access_token: token, 
+        refresh_token: refresh_token, 
+        token_credential_uri: 'https://accounts.google.com/o/oauth2/token', 
+        authorization_uri: 'https://accounts.google.com/o/oauth2/auth', 
+        client_id: ENV['GOOGLE_CLIENT_ID'],
+        client_secret: ENV['GOOGLE_CLIENT_SECRET'],
+        grant_type: 'authorization_code',
+        scope: ['email', 
+          'https://www.googleapis.com/auth/gmail.compose',
+          'https://www.googleapis.com/auth/gmail.modify',
+          ]
+        )
+
       watch_request = Google::Apis::GmailV1::WatchRequest.new
       watch_request.topic_name = 'projects/talentwiz-145409/topics/talentwiz-gcloud'
       watch_request.label_ids = ['INBOX']
+
       service = Google::Apis::GmailV1::GmailService.new
       service.authorization = @client
+
       @response = service.watch_user('me', watch_request)
       current_user.google_token.update_attributes(history_id: @response.history_id)
 
