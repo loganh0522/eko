@@ -339,7 +339,7 @@ Rails.application.routes.draw do
   end
 
   get "/auth/:provider/callback", to: 'business/users#show'
-  get "/authorize", to: 'business/users#outlook_get_token'
+  get "/authorize", to: 'business/users#show'
   get "/authorize_room", to: 'business/rooms#outlook_token'
 
   get '/login', to: 'sessions#new'
