@@ -1,6 +1,9 @@
 class OutlookToken < ActiveRecord::Base
   belongs_to :user
   belongs_to :room
+
+  after_create :subscribe
+
   def get_access_token
     token_hash = self.token
 
@@ -53,5 +56,9 @@ class OutlookToken < ActiveRecord::Base
   def fresh_token
     refresh! if expired?
     access_token
+  end
+
+  def subscribe
+    OutlookWrapper::User.create_subscription(self.user)
   end
 end

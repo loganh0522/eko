@@ -61,10 +61,9 @@ module OutlookWrapper
 
       @response = graph.service.post(path, data.to_json)
 
-      200 
-      binding.pry
       user.outlook_token.update_attributes(subscription_id: @response['id'],  subscription_expiration: @response["expiration_date_time"])
-      true
+      
+      OutlookWorker.perform_in(54.hours, current_user.id) 
     end
 
     def self.update_subscription(user)
@@ -79,7 +78,7 @@ module OutlookWrapper
         r.headers['Content-Type'] = 'application/json'
       end
 
-      path = 'subscriptions/9f6b01db-3d9c-4d51-bf77-34ee458f26b2'
+      path = 'subscriptions/'
       
       data = {
         expirationDateTime: Time.now + 4230.minutes,
