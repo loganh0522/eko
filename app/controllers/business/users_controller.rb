@@ -48,10 +48,7 @@ class Business::UsersController < ApplicationController
         refresh_token: token.refresh_token,
         expires_at: Time.now + token.expires_in.to_i.seconds,
         user_id: current_user.id
-        )
-
-      OutlookWrapper::User.create_subscription(current_user)
-      OutlookWorker.perform_in(54.hours, user.id)
+        )     
     end
   end
 
