@@ -1,8 +1,6 @@
 class OutlookToken < ActiveRecord::Base
   belongs_to :user
   belongs_to :room
-
-  after_create :subscribe
   
   def get_access_token
     token_hash = self.token
@@ -58,8 +56,8 @@ class OutlookToken < ActiveRecord::Base
     access_token
   end
 
-  def subscribe
-    OutlookWrapper::User.create_subscription(self.user)
-    OutlookWorker.perform_in(54.hours, user.id)
-  end
+  # def subscribe
+  #   OutlookWrapper::User.create_subscription(self.user)
+  #   OutlookWorker.perform_in(54.hours, user.id)
+  # end
 end
