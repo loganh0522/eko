@@ -29,7 +29,7 @@ class InboundEmailsController < ApplicationController
   def outlook_webhook
     if params[:validationToken].present? 
       head 200
-      render text: params[:validationToken]
+      params[:validationToken]
     else 
       head 200
       if params[:value].present? 

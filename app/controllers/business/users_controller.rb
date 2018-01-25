@@ -96,7 +96,6 @@ class Business::UsersController < ApplicationController
       user_id: current_user.id
       )
     
-    redirect_to business_user_path(current_user)
   end
 
   def gmail_auth
