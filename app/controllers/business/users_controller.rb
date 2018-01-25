@@ -50,7 +50,8 @@ class Business::UsersController < ApplicationController
         user_id: current_user.id
         )
 
-      redirect_to business_user_path(current_user)
+      OutlookWrapper::User.create_subscription(current_user)
+      OutlookWorker.perform_in(54.hours, user.id)
     end
   end
 

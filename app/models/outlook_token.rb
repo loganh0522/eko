@@ -2,8 +2,6 @@ class OutlookToken < ActiveRecord::Base
   belongs_to :user
   belongs_to :room
 
-  after_create :subscribe
-
   def get_access_token
     token_hash = self.token
 
