@@ -50,9 +50,9 @@ module OutlookWrapper
       data = {
         changeType: "created",
         notificationUrl: ENV['OUTLOOK_WEBHOOK'],
-        resource: "me/messages",
+        resource: "me/mailFolders('Inbox')/messages",
         expirationDateTime: Time.now + 4230.minutes,
-        clientState: "talentWiz-graph-state"
+        # clientState: "talentWiz-graph-state"
       }
       
       graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/beta/',
