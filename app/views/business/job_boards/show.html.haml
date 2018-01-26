@@ -1,5 +1,10 @@
 .page-header
-  %h2 Career Portal
+  %h2 Admin 
+  .admin-nav
+    %ul
+      %li= link_to "Career Portal", business_job_board_path, class: 'active'
+      %li= link_to "Templates", business_email_templates_path
+      %li= link_to "Settings", business_company_path(current_company)
 #create-portal
   .side-container
     .change-containers-nav
@@ -17,15 +22,8 @@
             %li Basic
     .side-sections
       = render "sections"
-    / .edit-career-portal
-    /   .change-containers-nav
-    /   - if @job_board.kind == "basic"
-    /     .career-portal-details
-    /       = render 'business/job_boards/form'
-    /   - else 
-    /     .career-portal-details
 
-  .main-container{:style => "background: url(#{@job_board.job_board_header.background_image.file.large}) no-repeat center center fixed; background-size: cover "}
+  .main-container    
     = render 'portal_container'
 
 

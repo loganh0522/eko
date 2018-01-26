@@ -4,6 +4,6 @@
     $('.stage-form').find('#<%= error[0] %>_Block').addClass('has-error');
   <% end %>
 <% else %>
-  $('#basic-form-modal').modal("hide");
+  $('.smallModal').hide();
   $('#default_stage_<%= @stage.id %>').replaceWith('<%= j render (@stage), stage: @stage %>');
 <% end %>

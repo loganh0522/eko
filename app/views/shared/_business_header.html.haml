@@ -38,12 +38,7 @@
     .dropdown-content#myDropdown
       - if permitted_to? :manage, @career_portal
         = link_to "Career Portal", business_job_board_path(current_company.job_board.id)
-        = link_to "Team Members", business_users_path
-        = link_to "Company Details", business_company_path(current_company)
-        = link_to "Hiring Pipeline", business_default_stages_path
-        = link_to "Hiring Defaults", business_hiring_defaults_path
-        = link_to "Templates", business_templates_path
-        = link_to "Subscription", business_plan_path
-        = link_to "Billing", business_customers_path
+        = link_to "Templates", business_job_templates_path
+        = link_to "Settings", business_company_path(current_company)
       = link_to "My Profile", business_user_path(current_user)
       = link_to "Sign Out", signout_path

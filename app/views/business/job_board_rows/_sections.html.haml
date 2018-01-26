@@ -1,36 +1,30 @@
-.stage
-  .stage-header
-    .body
-      Settings
-    .icons
+.templates
+  .row-details
+    .title Settings
+    .dropdown
       = link_to edit_business_job_board_path(@job_board), :data => {:remote => true} do
         %i.glyphicon.glyphicon-pencil
-
-.stage
-  .stage-header
-    .body
-      Header
-    .icons
+  .row-details
+    .title Header
+    .dropdown
       = link_to edit_business_job_board_job_board_header_path(@job_board.id, @job_board_header.id), :data => {:remote => true} do
         %i.glyphicon.glyphicon-pencil
-.stage
-  .stage-header
-    .glyphicon.glyphicon-move
-    .body
-      Jobs Container
-    .icons
-      = link_to "#{}", :data => {:remote => true } do
-        %i.glyphicon.glyphicon-pencil
 
-%div{:id => 'board-sections', :data => {:update_url => sort_business_job_board_rows_path}}
-  - @sections.each do |section| 
-    .stage{id: "section_#{section.id}"}
-      .stage-header
+  %div{:id => 'board-sections', :data => {:update_url => sort_business_job_board_rows_path}}
+    - @sections.each do |section| 
+      .row-details{id: "section_#{section.id}"}
         .glyphicon.glyphicon-move
-        .body
+        .title
           = "#{section.kind} - #{section.header}"
-        .icons
-          = link_to edit_business_job_board_row_path(section.id), :data => {:remote => true } do
-            %i.glyphicon.glyphicon-pencil.add-job-board-sections
-          = link_to business_job_board_row_path(section.id), remote: true, :method => :delete do
-            %i.glyphicon.glyphicon-remove
+        .dropdown
+          .dropdown-button
+            %i.fa.fa-ellipsis-h.fa-lg
+          .dropdown-content#myDropdown
+            = link_to edit_business_job_board_row_path(section.id), remote: true  do
+              %i.fa.fa-pencil
+              .action Edit
+            = link_to business_job_board_row_path(section.id), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do  
+              %i.fa.fa-trash-o
+              .action Destroy
+
+

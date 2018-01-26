@@ -1,0 +1,4 @@
+$('#mediumModal').find('form').remove()
+$('#mediumModal').find('.new-title').html('<%= j "Edit Job Template" %>');
+$('#mediumModal').find('.new-modal-header').after('<%= j render "business/job_templates/form" %>');
+$('#mediumModal').show();

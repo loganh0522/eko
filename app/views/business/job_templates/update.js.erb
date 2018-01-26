@@ -9,5 +9,5 @@
   <% end %>
 <% else %>
   $('#mediumModal').hide();
-  $('.templates').html('<%= j render "email_templates", email_templates: @email_templates%>');
+  $('.templates').html('<%= j render "business/job_templates/job_templates", job_templates: @job_templates %>');
 <% end %>

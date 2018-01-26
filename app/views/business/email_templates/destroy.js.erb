@@ -1,1 +1,1 @@
-$('.stages').html('<%= j render "email_templates", email_templates: @email_templates%>');
+$('#email_template_<%= @email_template.id %>').remove();

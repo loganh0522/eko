@@ -110,7 +110,7 @@ Rails.application.routes.draw do
         get "availability/:id", to: "rooms#get_availability"
       end
     end
-
+    resources :job_templates
     resources :media_photos
     resources :team_members
     resources :logos
@@ -237,9 +237,6 @@ Rails.application.routes.draw do
       
     end
    
-    get 'templates', to: "email_templates#index"
-    
-
 
     resources :candidates do
       get 'show_project', to: "candidates#show_project"
@@ -393,7 +390,7 @@ Rails.application.routes.draw do
   get 'ziprecruiter-job-feed', to: "job_feeds#ziprecruiter_job_feed"
   get 'trovit-job-feed', to: "job_feeds#trovit_job_feed"
  
-
+  get 'indeed-job-feed', to: "job_feeds#indeed_job_feed"
   get 'juju-job-feed', to: "job_feeds#juju_job_feed"
   
 

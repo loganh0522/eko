@@ -8,6 +8,6 @@
     <% end %>
   <% end %>
 <% else %>
-  $('.modal').modal('toggle');
-  $('.stages').html('<%= j render "email_templates", email_templates: @email_templates%>');
+  $('#mediumModal').hide();
+  $('.templates').html('<%= j render "email_templates", email_templates: @email_templates%>');
 <% end %>

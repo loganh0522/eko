@@ -1,5 +1,13 @@
+.page-header
+  %h2 Admin 
+  .admin-nav
+    %ul
+      %li= link_to "Career Portal", business_job_board_path(current_company.job_board.id)
+      %li= link_to "Templates", business_email_templates_path
+      %li= link_to "Settings", business_company_path(current_company), class: 'active'
+
 .company-settings
-  .side-container
+  .side-container#job_nav
     = render 'business/shared/admin_sidebar'
   .main-container
     .standard-header
@@ -10,7 +18,6 @@
     /   %h4 Widget Details 
     / = '<script type="text/javascript" src= "http://prod-talentwiz.heroku.com/widget/company_jobs/'"#{current_company.widget_key}"'></script> <style type="text/css">.customCSSclass a{text-decoration:none;} </style>'
     
-
     .standard-body
       .standard-body-header
         %h4 Meeting Rooms
@@ -21,13 +28,3 @@
         .not-present-container
           %p There are currently no meeting rooms listed.
 
-
-      
-
-
-.modal#basic-form-modal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title

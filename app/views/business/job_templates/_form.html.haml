@@ -1,0 +1,14 @@
+= form_for [:business, @job_template], remote: true do |f|
+  .modal-body
+    .form-row-no-border
+      = f.label :title, "Job Title"
+      = f.text_field :title, autocomplete: "off", class: "title_Block"
+      %span#title_msgBlock
+    .form-row-no-border
+      = f.label :description, "Job Description"
+      = f.trix_editor :description
+      %span#description_msgBlock
+  .modal-footer
+    = f.submit @job_template.new_record? ? "Create Stage" : "Update", class: "btn submit-button"
+    .btn.border-button.close-modal Cancel
+  

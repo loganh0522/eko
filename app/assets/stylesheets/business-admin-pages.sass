@@ -3,11 +3,14 @@
   overflow: hidden
   .side-container
     float: left
-    width: 15%
+    width: 20%
     margin-right: 2%
+    .nav-section 
+      margin-bottom: 10px
+      font-size: 20px
     ul 
       padding: 0 0
-      font-size: 16px 
+      font-size: 18px 
       li
         list-style: none
         font-size: 15px 
@@ -378,6 +381,43 @@
     .action
       float: right
       width: auto
+
+.templates
+  margin-top: -10px
+  .template
+    height: 60px
+    padding: 20px 20px
+    border-bottom: 1px solid #D1DCE4
+    .glyphicon.glyphicon-move
+      float: left
+      color: #666
+    .title
+      float: left
+      font-size: 14px
+      font-weight: bold
+    .dropdown
+      float: right
+
+  .row-details
+    height: 60px
+    padding: 20px 10px
+    border-bottom: 1px solid #D1DCE4
+    &:hover
+      cursor: move
+    .glyphicon.glyphicon-move
+      float: left
+      color: rgba(0, 0, 0, 0.3)
+      margin: 2px 10px 0 0
+    .title
+      float: left
+      font-size: 14px
+      font-weight: bold
+      max-width: 185px
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+    .dropdown
+      float: right
 
 .team-member-contain
   float: left

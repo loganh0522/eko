@@ -29,7 +29,10 @@ class JobFeedsController < ApplicationController
 
   def jooble_job_feed
     @jobs = Job.joins(:job_feed).where(status: "open", :job_feeds => {:jooble => true})
+  end
 
+  def indeed_job_feed
+    @jobs = Job.joins(:job_feed).where(status: "open", verified: true, :job_feeds => {:indeed => true})
   end
 
   def jobrapido

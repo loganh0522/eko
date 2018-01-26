@@ -6,12 +6,13 @@
         %th(width="5%") 
         %th(width="25%") Title
         %th(width="25%") Company
-        %th(width="10%") 
+        %th(width="10%") Status
         %th(width="10%") Candidates
         %th(width="10%") Created At
+        %th(width="10%") Actions
       %tbody
         - @jobs.each do |job| 
-          %tr
+          %tr{id: "job_#{job.id}"}
             %td
               .applicant-checkbox{:data => {:id => job.id}}
                 = check_box_tag "job_id[]", job.id, false, class: 'checkbox'
@@ -34,3 +35,14 @@
               = job.candidates.count
             %td
               = job.created_at
+            %td 
+              .dropdown
+                .dropdown-button
+                  %i.fa.fa-ellipsis-h.fa-lg
+                .dropdown-content#myDropdown
+                  = link_to edit_admin_job_path(job), remote: true  do
+                    %i.fa.fa-pencil
+                    .action Edit
+                  = link_to admin_job_path(job), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do  
+                    %i.fa.fa-trash-o
+                    .action Destroy

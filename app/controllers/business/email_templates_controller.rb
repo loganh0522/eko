@@ -20,7 +20,7 @@ class Business::EmailTemplatesController < ApplicationController
   end
 
   def create 
-    @email_template = EmailTemplate.new(e_temp_params) 
+    @email_template = EmailTemplate.new(e_temp_params.merge!(company: current_company, user: current_user)) 
 
     respond_to do |format|
       if @email_template.save

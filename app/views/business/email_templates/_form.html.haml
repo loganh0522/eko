@@ -1,4 +1,4 @@
-= form_for [:business, @email_template], html: {remote: true, class: 'invite'} do |f|
+= form_for [:business, @email_template], remote: true do |f|
   .email-area
     .modal-body  
       .subject
@@ -22,8 +22,6 @@
       .email-content
         = f.trix_editor :body
     .modal-footer
-      = f.hidden_field :user_id, value: current_user.id
-      = f.hidden_field :company_id, value: current_company.id
       = submit_tag "Save E-mail", class: "btn submit-button"
-      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+      .btn.border-button.close-modal Cancel
   

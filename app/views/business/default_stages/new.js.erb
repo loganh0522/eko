@@ -1,4 +1,4 @@
-$('#basic-form-modal').find('form').remove()
-$('#basic-form-modal').find('.modal-title').html('<%= j "Create Stage" %>');
-$('#basic-form-modal').find('.modal-header').after('<%= j render "business/default_stages/form" %>');
-$('#basic-form-modal').modal("toggle");
+$('.smallModal').find('form').remove();
+$('.smallModal').find('.new-title').html('<%= j "Create Stage" %>');
+$('.smallModal').find('.new-modal-header').after('<%= j render "business/default_stages/form" %>');
+$('.smallModal').show();

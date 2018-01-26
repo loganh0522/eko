@@ -25,7 +25,7 @@ class Company < ActiveRecord::Base
   has_many :default_stages, :dependent => :destroy
   has_one :application_email, :dependent => :destroy
   has_many :tasks, :dependent => :destroy
-
+  has_many :job_templates, :dependent => :destroy
   has_many :subsidiaries, :dependent => :destroy
   has_many :locations, :dependent => :destroy
   has_one :background_image, :dependent => :destroy

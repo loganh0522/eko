@@ -1,12 +1,23 @@
-- email_templates.each do |template| 
-  .stage
-    .stage-header
-      .body= template.title
-      .icons
-        = link_to edit_business_email_template_path(template.id), :data => {:remote => true } do
-          %i.glyphicon.glyphicon-pencil
-        = link_to business_email_template_path(template.id), remote: true, :method => :delete do
-          %i.glyphicon.glyphicon-remove
+- if @email_templates.present?
+  - @email_templates.each do |template| 
+    .template{id: "email_template_#{template.id}"}
+      .title= template.title
+      .dropdown
+        .dropdown-button
+          %i.fa.fa-ellipsis-h.fa-lg
+        .dropdown-content#myDropdown
+          = link_to edit_business_email_template_path(template), remote: true  do
+            %i.fa.fa-pencil
+            .action Edit
+          = link_to business_email_template_path(template), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do  
+            %i.fa.fa-trash-o
+            .action Destroy
+- else 
+  .not-present-container
+    %p You currently do not have any E-mail Templates
+    .add-object= link_to "+ Email Template", new_business_email_template_path, remote: true, class: 'btn border-button'
+      
+
 
 
       

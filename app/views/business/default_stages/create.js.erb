@@ -4,6 +4,6 @@
     $('#<%= error[0] %>_Block').addClass('has-error');
   <% end %>
 <% else %>
-  $('#basic-form-modal').modal("hide");
+  $('.smallModal').hide();
   $('#default-stages').html('<%= j render "default_stages", stages: @stages  %>');
 <% end %>
