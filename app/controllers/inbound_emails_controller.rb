@@ -27,7 +27,6 @@ class InboundEmailsController < ApplicationController
   end
 
   def outlook_webhook
-
     if params[:validationToken].present? 
       render plain: params[:validationToken]
       head 200 
