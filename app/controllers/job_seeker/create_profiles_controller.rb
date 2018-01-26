@@ -8,6 +8,7 @@ class JobSeeker::CreateProfilesController < ApplicationController
 
   def show
     @user = current_user
+
     if request.subdomain.present? && request.subdomain != 'www'
       @job_board = JobBoard.find_by_subdomain!(request.subdomain) 
     end
@@ -46,7 +47,7 @@ class JobSeeker::CreateProfilesController < ApplicationController
   def update
     @user = current_user
     @user.update_attributes(user_params)
-    @job_board = JobBoard.find_by_subdomain!(request.subdomain) if request.subdomain.present?
+    @job_board = JobBoard.find_by_subdomain!(request.subdomain) if request.subdomain.present? && request.subdomain != 'www'
 
     case step
 
