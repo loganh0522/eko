@@ -73,7 +73,7 @@ class Admin::JobsController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     @job = Job.find(params[:id])
     @job.destroy
@@ -85,7 +85,7 @@ class Admin::JobsController < ApplicationController
 
   def verified
     @job = Job.find(params[:id])
-    @job.update_attributes(verified: true)
+    @job.update(verified: true)
     
     respond_to do |format|
       format.js
