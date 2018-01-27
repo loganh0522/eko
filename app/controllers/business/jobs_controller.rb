@@ -10,7 +10,7 @@ class Business::JobsController < ApplicationController
   before_filter :owned_by_company, only: [:edit, :show, :update]
 
   def index
-    @jobs = current_company.open_jobs
+    @jobs = current_company.active_jobs
 
     respond_to do |format|
       format.html
@@ -22,7 +22,7 @@ class Business::JobsController < ApplicationController
   end
 
   def create 
-    @job = Job.new(job_params.merge!(status: 'open'))  
+    @job = Job.new(job_params.merge!(status: 'open', is_active: true))  
 
     if @job.save 
       redirect_to business_job_hiring_teams_path(@job)
@@ -83,21 +83,29 @@ class Business::JobsController < ApplicationController
 
   def search
     where = {}
+
     if params[:query].present? 
       query = params[:query] 
     else 
       query = "*"
     end
-    if params[:status].present?
-      where[:status] = params[:status] if params[:status].present?
-    else
-      where[:status] =  "open"
+
+    if params[:is_active].present?
+      if params[:is_active] == 'true'
+        where[:is_active] = true
+      else
+        where[:is_active] = false
+      end
+    else 
+      where[:is_active] = true
     end
+
+    where[:status] = params[:status] if params[:status].present?
     where[:company_id] = current_company.id
     where[:kind] = params[:kind] if params[:kind].present?
     where[:client_id] = params[:client_id] if params[:client_id].present? 
 
-    @jobs = Job.search(query, where: where, fields: [:title]).to_a
+    @jobs = Job.search(query, where: where, fields: [:title], match: :word_start).to_a
   end
 
   def autocomplete

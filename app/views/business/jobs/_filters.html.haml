@@ -1,14 +1,17 @@
 = form_tag search_business_jobs_path, :method => 'get', id: "search-form" do
   .filter-radios 
     %ul  
-      = radio_button_tag "status", "open", true, class: 'filter', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Signing in..."}
-      = label_tag "status_open", "Active", :value => "open", class: 'filter'
-      
-      / = radio_button_tag "status", "closed", false, class: 'filter'
-      / = label_tag "status_closed", "Closed", :value => "open", class: 'filter'
-      / = radio_button_tag "status", "draft", false, class: 'filter'
-      / = label_tag "status_draft", "Draft", :value => "open", class: 'filter'
-      
-      = radio_button_tag "status", "archived", false, class: 'filter'
-      = label_tag "status_archived", "Archived", :value => "company", class: 'filter'
-  = text_field_tag "query", nil, placeholder: "Search Jobs", class: "search-field", autocomplete: "off"
+      = radio_button_tag "is_active", true, true, class: 'filter'
+      = label_tag "is_active_true", "Active", :value => "open", class: 'filter'
+      = radio_button_tag "is_active", false, false, class: 'filter'
+      = label_tag "is_active_false", "Archived", :value => "company", class: 'filter'
+
+  .main-filters
+    .toggle-actions 
+      = link_to search_business_jobs_path, remote: true do 
+        .btn.border-button.toggle-show#all.toggle-showing All
+      = link_to search_business_jobs_path(status: "open"), remote: true do 
+        .btn.border-button.toggle-show#open Published
+      = link_to search_business_jobs_path(status: "closed"), remote: true do
+        .btn.border-button.toggle-show#closed Closed
+    = text_field_tag "query", nil, placeholder: "Search Jobs", class: "search-field", autocomplete: "off"

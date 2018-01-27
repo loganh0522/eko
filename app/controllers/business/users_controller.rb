@@ -50,12 +50,12 @@ class Business::UsersController < ApplicationController
         user_id: current_user.id
         )    
 
+      OutlookWrapper::User.create_subscription(current_user)
       redirect_to business_user_path(current_user)
     end
   end
 
   def edit
-    # OutlookWrapper::User.create_subscription(current_user)
     @user = current_user
     
     respond_to do |format| 

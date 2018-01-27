@@ -19,7 +19,7 @@ class Job < ActiveRecord::Base
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy 
 
 
-  validates_presence_of :title, :description, :location, :address 
+  validates_presence_of :title, :description, :location
     
   # :education_level, :kind, :career_level
   
@@ -28,7 +28,7 @@ class Job < ActiveRecord::Base
   after_validation :set_token, :convert_location, :job_url
   after_create :create_stages, :set_token, :create_job_feed
   
-  searchkick word_start: [:title], callbacks: :async
+  searchkick word_start: [:title]
 
   def create_stages
     @stages = self.company.default_stages
