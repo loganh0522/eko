@@ -51,7 +51,6 @@ class Business::UsersController < ApplicationController
         )    
 
       redirect_to business_user_path(current_user)
-      OutlookWrapper::User.create_subscription(current_user)
     end
   end
 
