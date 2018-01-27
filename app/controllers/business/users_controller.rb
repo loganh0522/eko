@@ -55,6 +55,7 @@ class Business::UsersController < ApplicationController
   end
 
   def edit
+    OutlookWrapper::User.create_subscription(current_user)
     @user = current_user
     
     respond_to do |format| 
