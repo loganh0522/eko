@@ -30,7 +30,6 @@ class InboundEmailsController < ApplicationController
     if params[:validationToken].present? 
       render plain: params[:validationToken]
       head 200 
-      return
     else 
       head 200
       if params[:value].present? 
@@ -43,4 +42,4 @@ class InboundEmailsController < ApplicationController
 
 end
 
-# https://prod-talentwiz.herokuapp.com/incoming_email
+
