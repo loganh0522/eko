@@ -5,7 +5,7 @@
   .applicant-details
     .name-rating
       .name= "#{@application.candidate.full_name.capitalize}"
-      / = render 'business/ratings/form', application: @application
+      
     .current-position
   .actions
     .dropdown
@@ -33,10 +33,7 @@
   .applicant-details
     .name-rating
       .name= "#{@application.candidate.user.full_name}"
-      / = render 'business/ratings/form', application: @application
-      / .current-position
-      /   - if @application.candidate.user.current_jobs.present?
-      /     = "#{@application.candidate.user.current_jobs.first.title}  #{@application.candidate.user.current_jobs.first.company_name} "
+    
   .actions
     .dropdown
       .dropdown-button.border-button
