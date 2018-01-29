@@ -3,7 +3,7 @@
     .email-area
       .choose-stage
         = f.text_field :name, class: "form-control", id: "name_Block", placeholder: "Name", autocomplete: 'off'
-        %span#name_msgBlock
+        %span.error#name_msgBlock
   .modal-footer
     = f.hidden_field :company_id, value: current_company.id
     = f.submit @stage.new_record? ? "Create Stage" : "Update", class: "btn submit-button"

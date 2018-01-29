@@ -1,5 +1,11 @@
 .business-job{:id => "job_#{job.id}"}
   .job-header 
+    - if job.is_active == true
+      - if job.status == 'open'
+        %i.fa.fa-circle{style: 'color: green'}
+      - elsif job.status == 'closed'
+        %i.fa.fa-circle{style: 'color: red'}
+
     .title 
       = link_to job.title, business_job_applications_path(job)
     .location= "#{job.location}"
@@ -7,25 +13,21 @@
   .job-body
     .btns
       .btn1
-        = link_to 'Advertise Job', '#', class: 'button-job-actions'
-      .dropdown.btn2
-        %a.button-job-actions.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-          Actions
-          %b.caret
-        %ul.dropdown-menu
-          %li
-            %a= link_to "Edit Job Posting", edit_business_job_path(job)   
-          - if job.status == 'draft'
-            %li
-              %a= link_to "Publish Job", business_job_path(job, status: 'open'), method: :patch, remote: true  
-          - elsif job.status == 'open'
-            %li
-              %a= link_to "Close Job", business_job_path(job, status: 'closed'), method: :patch, remote: true
+        = link_to 'Advertise Job', business_job_job_feeds_path(job, type: 'free'), class: 'button-job-actions'
+      .dropdown
+        .dropdown-button.btn2
+          .button-job-actions
+            Actions
+            %b.caret
+        .dropdown-content#myDropdown
+          = link_to "Edit Job", edit_business_job_path(job)   
+          - if job.status == 'open'
+            = link_to "Close Job", business_job_path(job, status: 'closed'), method: :patch, remote: true
+            = link_to "Archive Job", business_job_path(job, status: 'false'), method: :patch, remote: true
           - elsif job.status == 'closed'
-            %li
-              %a= link_to "Publish Job", business_job_path(job, status: 'publish'), method: :patch, remote: true
-            %li 
-              %a= link_to "Archive Job", business_job_path(job, status: 'archive'), method: :patch, remote: true
+            = link_to "Open Job", business_job_path(job, status: 'open'), method: :patch, remote: true
+            = link_to "Archive Job", business_job_path(job, status: 'false'), method: :patch, remote: true
+
 
     .left-scroll
       %img(src="/tmp/left_arrow.png")

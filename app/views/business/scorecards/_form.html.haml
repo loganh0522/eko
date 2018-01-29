@@ -1,25 +1,33 @@
 = form_for [:business, @job, @scorecard], remote: true do |f| 
   #scorecard-form
     - if !@job.scorecard.present?
+
       = f.fields_for :scorecard_sections, ScorecardSection.new do |a|
         .scorecard-area 
           .header
-            = a.text_field :body, class: "form-control section-title questions", placeholder: "Section Name", id: "section-body", autocomplete: 'off'
-            %span#sectionBodyBlock
-            = link_to "Remove", '#', class: "remove_question"
+            %h4 Section Title
+            = link_to "Remove", '', class: "remove_question"
             = a.hidden_field :_destroy
+            .section-title
+              .section-answer
+                = a.text_field :body, class: "form-control section-title questions", placeholder: "Section Name", id: "section-body", autocomplete: 'off'
+                %span#sectionBodyBlock 
           .body
             .criteria Criteria 
             = a.fields_for :section_options, SectionOption.new do |a|
-              %fieldset.answers  
-                = a.text_field :body, class: "form-control", id: "section-option",autocomplete: 'off'
-                %span#optionBodyBlock
-                = link_to "", '#', class: "remove_fields glyphicon glyphicon-remove" 
-                = a.hidden_field :_destroy
-            = link_to_add_fields("+ Add Criteria", a, :section_options)
+              .answers  
+                .answer
+                  = a.text_field :body, id: "section-option", class: 'section-answer', autocomplete: 'off'
+                  = link_to "", '#', class: "remove_fields glyphicon glyphicon-remove" 
+                  = a.hidden_field :_destroy
+                  %span#optionBodyBlock
+                
+            = link_to_add_fields("Add Criteria", a, :section_options)
         
     = f.fields_for :scorecard_sections do |a|
       = render 'scorecard_section_fields', f: a
+    
+
     #add-section= link_to_add_fields "+ Add Section", f, :scorecard_sections 
     
     .footer

@@ -1,16 +1,17 @@
 %ul
-  %li{:class => is_active?(edit_business_job_path(@job))}
-    = link_to "Job Details", edit_business_job_path(@job)
+  = link_to edit_business_job_path(@job) do
+    %li{:class => is_active?(edit_business_job_path(@job))} Job Details
     
-  %li{:class => is_active?(business_job_hiring_teams_path(@job))}
-    = link_to "Hiring Team", business_job_hiring_teams_path(@job)
+  = link_to business_job_hiring_teams_path(@job) do
+    %li{:class => is_active?(business_job_hiring_teams_path(@job))} Hiring Team
 
-  %li{:class => is_active?(business_job_stages_path(@job))}
-    = link_to "Recruitment Process", business_job_stages_path(@job) 
-
-  %li{:class => is_active?(business_job_questions_path(@job))}      
-    = link_to "Application Form", business_job_questions_path(@job)
+  = link_to business_job_stages_path(@job) do
+    %li{:class => is_active?(business_job_stages_path(@job))} Recruitment Process
   
-  %li{:class => is_active?(business_job_scorecards_path(@job))}  
-    = link_to "Scorecard", business_job_scorecards_path(@job)
+  = link_to business_job_questions_path(@job) do 
+    %li{:class => is_active?(business_job_questions_path(@job))} Application Form   
+    
+  = link_to business_job_scorecards_path(@job) do
+    %li{:class => is_active?(business_job_scorecards_path(@job))} Scorecard
+    
   

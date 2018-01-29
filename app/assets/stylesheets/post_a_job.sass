@@ -154,14 +154,22 @@
     .header
       overflow: hidden
       width: 100%
-      .section-title
-        width: 80%
+      h4 
         float: left
       .remove_question
         float: right
         width: 19%
         margin-top: 17px
-        display: none
+        color: #EF7B2B 
+      .section-title
+        padding-left: 2px
+        width: 90%
+        float: left
+        clear: both
+      span
+        float: left
+        clear: both
+
     .add_fields
       color: #EF7B2B 
       margin: 25px 0 10px 350px
@@ -170,17 +178,27 @@
       margin: 15px 0 0 25px
     .answers 
       width: 600px
-      margin: 5px 0 0 50px
-      .form-control
-        float: left
-        width: 400px
-        margin-bottom: 5px
-        margin-right: 10px   
-      .glyphicon
-        margin: 18px 0 0 10px
-        float: left
-        color: rgba(0,0,0,0.3)
-        text-decoration: none 
+      margin: 5px 0 0 25px
+      .answer
+        overflow: hidden
+        padding-left: 2px
+        .section-answer
+          float: left
+          width: 400px
+          margin-bottom: 5px
+          margin-right: 10px 
+        .notice
+          clear: both
+        .glyphicon
+          margin: 18px 0 0 10px
+          float: left
+          color: rgba(0,0,0,0.3)
+          text-decoration: none 
+        span 
+          clear: both  
+          float: left
+
+
   .footer
     margin-top: 15px
     border-top: 1px solid #D1DCE4 

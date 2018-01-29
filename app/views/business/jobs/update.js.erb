@@ -1,1 +1,5 @@
-$('#job_<%= @job.id %>').remove();
+<% if params[:status] == 'true' || params[:status] == 'false' %>
+  $('#job_<%= @job.id %>').remove();
+<% else %> 
+  $('#job_<%= @job.id %>').replaceWith('<%= j render "business/jobs/job_container", job: @job %>');
+<% end %>

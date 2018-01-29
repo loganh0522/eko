@@ -1,13 +1,10 @@
 = form_for [:business, @rejection_reason], remote: true do |f|
   .modal-body
-    .email-area
-      .choose-stage
-        .title
-          %h4 Rejection Reason
-        .stages-select
-          = f.text_field :body, placeholder: "Reason", autocomplete: "off", id: "body_Block"
-          %span#body_msgBlock
-          = f.hidden_field :company_id, value: current_company.id
+    .form-row-no-border
+      %h4 Rejection Reason
+      = f.text_field :body, placeholder: "Reason", autocomplete: "off", id: "body_Block"
+      %span.error#body_msgBlock
+      = f.hidden_field :company_id, value: current_company.id
   .modal-footer
     = f.submit "Save Reason", class: "btn submit-button"
-    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+    .btn.border-button.close-modal Cancel

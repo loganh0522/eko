@@ -45,8 +45,15 @@ class Business::JobsController < ApplicationController
 
     respond_to do |format|
       if params[:status].present? 
-        if @job.update(status: params[:status])
-          @job.reindex
+        if params[:status] == "open" || params[:status] == "closed"
+          @job.update(status: params[:status])
+          format.js
+        elsif params[:status] == "true" || params[:status] == "false"
+          if params[:status] == "true"
+            @job.update(is_active: true)
+          else
+            @job.update(is_active: false)
+          end
           format.js
         else 
           redirect_to :back
@@ -100,11 +107,11 @@ class Business::JobsController < ApplicationController
       where[:is_active] = true
     end
 
+
     where[:status] = params[:status] if params[:status].present?
     where[:company_id] = current_company.id
     where[:kind] = params[:kind] if params[:kind].present?
     where[:client_id] = params[:client_id] if params[:client_id].present? 
-
     @jobs = Job.search(query, where: where, fields: [:title], match: :word_start).to_a
   end
 

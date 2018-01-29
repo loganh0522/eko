@@ -1,10 +1,14 @@
-$('.jobs-container').html('<%= j render "business/jobs/jobs" %>');
+$('.all-main-job-container').html('<%= j render "business/jobs/jobs" %>');
 
 
 <% if params[:status] == 'closed' %>
   $('#all').removeClass('toggle-showing')
   $('#open').removeClass('toggle-showing')
   $('#closed').addClass('toggle-showing')
+<% elsif params[:all] == 'true' %> 
+  $('#closed').removeClass('toggle-showing')
+  $('#open').removeClass('toggle-showing')
+  $('#all').addClass('toggle-showing')
 <% else %>
   $('#all').removeClass('toggle-showing')
   $('#closed').removeClass('toggle-showing')

@@ -38,7 +38,9 @@ class Business::InvitationsController < ApplicationController
   private 
 
   def invitation_params 
-    params.require(:invitation).permit(:user_id, :inviter_id, :company_id, :message, :user_role, :recipient_email, :job_id)
+    params.require(:invitation).permit(:user_id, :inviter_id, 
+      :company_id, :message, :user_role, :recipient_email, :job_id,
+      :first_name, :last_name)
   end
   
   def render_errors(object)

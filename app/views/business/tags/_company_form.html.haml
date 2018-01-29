@@ -1,12 +1,9 @@
 = form_for [:business, @tag], html: {remote: true, class: 'tag_form'} do |f|
   .modal-body
-    .email-area
-      .choose-stage
-        .title
-          %h4 Add Tag: 
-        .stages-select
-          = f.text_field :name, :placeholder => 'Tag', id: "name_Block", hide_label: true
-          %span#name_msgBlock
+    .form-row-no-border
+      %h4 Add Tag: 
+      = f.text_field :name, :placeholder => 'Tag', id: "name_Block", hide_label: true
+      %span#name_msgBlock
   .modal-footer
     = f.hidden_field :company_id, value: current_company.id
     = f.submit "Add Tag", class: "btn submit-button"

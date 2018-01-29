@@ -8,7 +8,7 @@
 
   .main-filters
     .toggle-actions 
-      = link_to search_business_jobs_path, remote: true do 
+      = link_to search_business_jobs_path(all: "true"), remote: true do 
         .btn.border-button.toggle-show#all.toggle-showing All
       = link_to search_business_jobs_path(status: "open"), remote: true do 
         .btn.border-button.toggle-show#open Published

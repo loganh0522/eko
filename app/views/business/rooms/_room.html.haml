@@ -1,8 +1,27 @@
-.room{:id => "room_{room.id}"}
+.room{:id => "room_#{room.id}"}
   .title= room.name
   .content= room.email
   
+  .dropdown
+    .dropdown-button
+      %i.fa.fa-ellipsis-h.fa-lg
+    .dropdown-content#myDropdown
+      = link_to edit_business_room_path(room), remote: true  do
+        %i.fa.fa-pencil
+        .action Edit
+      = link_to business_room_path(room), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do  
+        %i.fa.fa-trash-o
+        .action Destroy
+
   - if room.outlook_token.present? 
     .action Synced with Outlook
   - else
-    .action= link_to "Sync with Outlook", "#{@login_url}"
+    = link_to "#{@login_url}" do
+      .sync-box 
+        %img(src="/tmp/outlook_logo.jpeg")
+        Sync Outlook
+
+    = link_to '/auth/google_oauth2' do 
+      .sync-box 
+        %img(src="/tmp/gmail_icon.png")
+        Sync Gmail    

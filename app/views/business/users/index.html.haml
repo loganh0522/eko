@@ -21,7 +21,9 @@
           %li#pending-users Pending Invitations
     .search-form
       = form_tag business_users_path, :method => 'get', id: "search-form" do
-        = text_field_tag "query", nil, placeholder: "Search Team Members", class: "search-field"
+        .search-area-content
+          %i.fa.fa-search.fa-stack-2x
+          = text_field_tag "query", nil, placeholder: "Search Team Members", class: "search-field"
     .user-list
       = render 'business/users/user_row'
 

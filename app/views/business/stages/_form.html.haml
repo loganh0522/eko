@@ -1,8 +1,9 @@
 = form_for [:business, @job, @stage], html: {remote: true, class: 'invite'} do |f|
   .modal-body
-    = f.label :name, "Stage Name"
-    = f.text_field :name, id: "name_Block", placeholder: "Stage Name", autocomplete: 'off'
-    %span#name_msgBlock
+    .form-row-no-border
+      = f.label :name, "Stage Name"
+      = f.text_field :name, id: "name_Block", placeholder: "Stage Name", autocomplete: 'off'
+      %span.error#name_msgBlock
   .modal-footer
     = f.hidden_field :job_id, value: @job.id
     = f.hidden_field :position, value: 1

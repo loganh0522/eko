@@ -1,22 +1,43 @@
-<% if @errors.present? %> 
+<% if @errors.present? %>   
   <% @errors.each do |error| %>
     <% if error[0] == "scorecard_sections.body" %>   
-      $('.question-area').find('#section-body').each(function(){
+      $('.scorecard-area').find('#section-body').each(function(){
         if ($(this).val().length === 0) {
-          $(this).addClass('has-error');
-        }  
+          if ($(this).hasClass('has-error')){
+            return
+          }
+          else {
+            $(this).addClass('has-error');
+            $(this).next('#sectionBodyBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+          }
+        }
+        else if ($(this).val().length > 0 ){
+          $(this).removeClass('has-error');
+          $(this).next('#sectionBodyBlock').hide();
+        }
       });
     <% elsif error[0] == "scorecard_sections.section_options.body" %> 
-      $('.question-area').find('.answers').find('#section-option').each(function(){
+      $('.scorecard-area').find('.answers').find('#section-option').each(function(){
         if ($(this).val().length === 0) {
-          $(this).addClass('has-error');
-        }  
+          if ($(this).hasClass('has-error')){
+            return
+          }
+          else {
+            $(this).addClass('has-error');
+            $(this).next().next().next().append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+          }
+        }
+        else if ($(this).val().length > 0 ){
+          $(this).removeClass('has-error');
+          $(this).next().next().next('#optionBodyBlock').hide();
+        }
       });
+
     <% else %>
       $('#<%= error[0] %>_Block').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
       $('form').find('#<%= error[0] %>_Block').addClass('has-error');
     <% end %>
   <% end %>
 <% else %>
-  $('.job_scorecard').html('<%= j render "business/scorecards/scorecard" %>');
+  $('.scorecard-container').html('<%= j render "business/scorecards/scorecard" %>');
 <% end %>

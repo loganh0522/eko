@@ -1,4 +1,4 @@
-$('.multi-form').find('form').remove()
-$('.multi-form').find('.modal-title').html('<%= j "Edit Rejection Reason" %>');
-$('.multi-form').find('.modal-header').after('<%= j render "business/rejection_reasons/form" %>');
-$('.multi-form').modal("toggle");
+$('.smallModal').find('form').remove();
+$('.smallModal').find('.new-title').html('<%= j "Edit Rejection Reason" %>');
+$('.smallModal').find('.new-modal-header').after('<%= j render "business/rejection_reasons/form" %>');
+$('.smallModal').show();
