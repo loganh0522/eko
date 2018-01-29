@@ -91,6 +91,7 @@ class Business::CandidatesController < ApplicationController
     @candidate = Candidate.find(params[:id])
     @candidate.destroy 
 
+
     respond_to do |format|
       format.js
     end
@@ -109,8 +110,8 @@ class Business::CandidatesController < ApplicationController
       candidate = Candidate.find(id)
       candidate.destroy
     end
-
-    @candidates = Candidate.search("*", per_page: 10, page: params[:page])
+    
+    @candidates = current_company.candidates.paginate(page: params[:page], per_page: 10)
     @tags = current_company.tags
     
     respond_to do |format|
