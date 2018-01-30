@@ -1,7 +1,7 @@
 class JobsController < ApplicationController 
   # before_filter :profile_sign_up_complete
-  layout :set_layout, only: [:show]
-  layout 'frontend_job_seeker', only: [:index]
+  layout :set_layout
+
 
   def index 
     @jobs = Job.search("*", where: {status: "open", verified: true})
