@@ -14,7 +14,7 @@ class JobFeedsController < ApplicationController
   end
 
   def eluta_job_feed
-    @jobs = Job.joins(:job_feed).where(status: "open", :job_feeds => {:eluta => true})
+    @companies = Company.all
   end
 
   def trovit_job_feed

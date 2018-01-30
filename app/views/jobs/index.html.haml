@@ -1,0 +1,86 @@
+.job-board-header 
+  .intro-message
+    .header Search for your next Job
+    .sub-header
+  .header-container
+    .contain
+      = form_tag job_seeker_jobs_path, :method => 'get', id: "search-form" do
+        = text_field_tag "location-query", nil, id: "geocomplete", autocomplete: "off", hide_label: true, class: "search-field"
+        = text_field_tag "query", nil, placeholder: "Job Title, Keywords, Company Name", class: "search-field", id: "job-search"
+
+.job-board
+  .filters
+    .header Filters
+    .filter
+      .title Job Function 
+      .body
+
+    .filter
+      .title Experience Level
+      .body
+        %ul
+          %li.activity 
+            .checkbox{:data => {:id => "comments"}}= check_box_tag "", true, true
+            Entry Level
+          %li.activity
+            .checkbox{:data => {:id => "scorecards"}}= check_box_tag "", true, true
+            Associate
+          %li.activity
+            .checkbox{:data => {:id => "messages"}}= check_box_tag "", true, true
+            Mid-Level
+          %li.activity
+            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
+            Director
+          %li.activity
+            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
+            Executive
+    .filter
+      .title Job Type
+      .body
+        %ul
+          %li.activity 
+            .checkbox{:data => {:id => "comments"}}= check_box_tag "", true, true
+            Full Time
+          %li.activity
+            .checkbox{:data => {:id => "scorecards"}}= check_box_tag "", true, true
+            Part Time
+          %li.activity
+            .checkbox{:data => {:id => "messages"}}= check_box_tag "", true, true
+            Contract
+          %li.activity
+            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
+            Temp
+          %li.activity
+            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
+            Internship
+
+
+  .jobs
+    - @jobs.each do |job|
+      .job-posting
+        .header-info
+          %img(src="#{job.company.job_board.logo}" class="logo") 
+          .job-detail
+            .title= link_to "#{job.title}", job_seeker_job_path(job)
+            .company= job.company.name
+          .view-job= link_to "View Job", job_seeker_job_path(job), class: "btn btn-primary"
+        .bottom-info
+          .left-side
+            %img(src="/tmp/small-location.png") 
+            = "#{job.location}"
+            
+            %img(src="/tmp/small-bar-chart.png") 
+            / = job.job_career_level.first.career_level.name
+          .right-side 
+            %img(src="/tmp/small-hammer.png") 
+            / = job.industries.first.name
+
+            %img(src="/tmp/small-briefcase.png") 
+            / = job.job_kind.first.name
+
+            %img(src="/tmp/small-clock.png") 
+            - if job.created_at.present?
+              = "#{time_ago_in_words(job.created_at)} ago"
+    - if @jobs.count == 0 
+      .not-present-container
+        %p Sorry, there are currently no jobs posted

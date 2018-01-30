@@ -91,6 +91,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def set_layout
+    @job_board = JobBoard.find_by_subdomain!(request.subdomain)
+    if @job_board.kind == "basic"
+      "career_portal"
+    else
+      "advanced_career_portal"
+    end
+  end
+
   def render_errors(user)
     @errors = []
     user.errors.messages.each do |error| 
