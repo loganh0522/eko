@@ -7,10 +7,10 @@ xml.trovit do
       xml.title { xml.cdata!(job.title) }
       xml.url { xml.cdata!(job.url) }
       xml.content { xml.cdata!(job.description) }
-      xml.company { xml.cdata! (job.company.name)}
-      xml.city { xml.cdata! (job.city) }
-      xml.region { xml.cdata! (job.province) }
-      xml.category { xml.cdata! (job.industry) if job.industry.present? }
+      xml.company { xml.cdata! (job.company.name)} 
+      xml.city { xml.cdata! (job.city) } if job.city.present?
+      xml.region { xml.cdata! (job.province) } if job.province.present?
+      xml.category { xml.cdata! (job.industry) } if job.industry.present? 
       xml.contract { xml.cdata! (job.kind) if job.kind.present?}
       xml.salary { xml.cdata! (job.start_salary) if job.start_salary.present?}
       xml.date {xml.cdata!((job.created_at).to_s)}

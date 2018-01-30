@@ -389,7 +389,10 @@ Rails.application.routes.draw do
   get 'eluta-job-feed', to: "job_feeds#eluta_job_feed"
   get 'ziprecruiter-job-feed', to: "job_feeds#ziprecruiter_job_feed"
   get 'trovit-job-feed', to: "job_feeds#trovit_job_feed"
- 
+  
+  get 'jobinventory-job-feed', to: "job_feeds#job_inventory_feed"
+
+
   get 'indeed-job-feed', to: "job_feeds#indeed_job_feed"
   get 'juju-job-feed', to: "job_feeds#juju_job_feed"
   

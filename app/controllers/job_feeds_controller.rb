@@ -22,13 +22,13 @@ class JobFeedsController < ApplicationController
     render 'job_feeds/trovit_job_feed.xml.builder', formats: [:xml]
   end
 
-  def job_inventory
-    @jobs = Job.joins(:job_feed).where(status: "open", :job_feeds => {:jobinventory => true})
+  def job_inventory_feed
+    @jobs = Job.joins(:job_feed).where(status: "open", is_active: true, verified: true, :job_feeds => {:jobinventory => true})
     render 'job_feeds/adzuna_job_feed.xml.builder', formats: [:xml]
   end
 
   def jooble_job_feed
-    @jobs = Job.joins(:job_feed).where(status: "open", :job_feeds => {:jooble => true})
+    @jobs = Job.joins(:job_feed).where(status: "open", is_active: true, verified: true, :job_feeds => {:jooble => true})
   end
 
   def indeed_job_feed
