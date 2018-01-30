@@ -19,14 +19,13 @@ xml.publisherurl "https://www.talentwiz.ca"
         end
 
         
-        xml.jobtype { xml.cdata!(job.kind) }
+        xml.jobtype { xml.cdata!(job.kind) } if job.kind.present?
         xml.salary { xml.cdata!(job.start_salary) } if job.start_salary.present?
 
 
 
         xml.pubdate {xml.cdata!((job.created_at).to_s)}
         xml.updated {xml.cdata!((job.updated_at).to_s)}
-        xml.expire {xml.cdata!((job.updated_at).to_s)}
       end
     end
   end
