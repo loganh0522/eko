@@ -44,5 +44,5 @@
   .container-footer
     = f.hidden_field :user_ids, value: current_user.id
     = f.hidden_field :company_id, value: current_company.id
-    = f.submit @job.new_record? ? "Create Posting" : "Save and Continue", class: "btn border-button"
+    = f.button @job.new_record? ? "Create Posting" : "Save and Continue", class: "btn border-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
 

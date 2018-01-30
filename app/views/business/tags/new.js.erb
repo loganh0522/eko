@@ -4,7 +4,7 @@
 <% elsif params[:tag] == "company" %>
   $('.smallModal').find('form').remove()
   $('.smallModal').find('.new-title').html('<%= j "Add Tags" %>');
-  $('.smallModal').find('.new-modal-header').after('<%= j render "business/tags/form_multiple" %>');
+  $('.smallModal').find('.new-modal-header').after('<%= j render "business/tags/company_form" %>');
   $('.smallModal').show();
 <% else %>
   $('.smallModal').find('form').remove()

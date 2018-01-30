@@ -110,7 +110,7 @@ class Business::UsersController < ApplicationController
     end
 
     @users = User.search(query, where: {company_id: current_company.id}, 
-      fields: [{full_name: :word_start}])
+      fields: [{full_name: :word_start}], match: :word_start)
 
     @job = Job.find(params[:job_id]) if params[:job_id].present?
 
@@ -147,6 +147,21 @@ class Business::UsersController < ApplicationController
     end
 
     render :text => @events.to_json
+  end
+
+  def search 
+    if params[:query] == '' 
+      query = "*"
+    else
+      query = params[:query]
+    end
+
+    @users = User.search(query, where: {company_id: current_company.id}, 
+      fields: [{full_name: :word_start}], match: :word_start)
+
+    respond_to do |format|
+      format.js 
+    end
   end
 
   private

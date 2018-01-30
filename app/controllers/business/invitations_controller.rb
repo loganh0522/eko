@@ -14,15 +14,15 @@ class Business::InvitationsController < ApplicationController
 
   def new
     @invitation = Invitation.new
-    
     @job = Job.find(params[:job]) if params[:job].present?
+    
     respond_to do |format|
       format.js
     end
   end
     
   def create
-    @invitation = Invitation.create(invitation_params) 
+    @invitation = Invitation.create(invitation_params.merge!(company: current_company, user: current_user)) 
     
     respond_to do |format|  
       if @invitation.save 
@@ -31,6 +31,15 @@ class Business::InvitationsController < ApplicationController
       else 
         render_errors(@invitation)
       end
+      format.js
+    end
+  end
+
+  def destroy
+    @invitation = Invitation.find(params[:id])
+    @invitation.destroy
+
+    respond_to do |format|
       format.js
     end
   end

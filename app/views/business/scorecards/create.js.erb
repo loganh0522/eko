@@ -1,22 +1,6 @@
 <% if @errors.present? %> 
   <% @errors.each do |error| %>
-    <% if error[0] == "scorecard_sections.body" %>   
-      $('.scorecard-area').find('#section-body').each(function(){
-        if ($(this).val().length === 0) {
-          if ($(this).hasClass('has-error')){
-            return
-          }
-          else {
-            $(this).addClass('has-error');
-            $(this).next('#sectionBodyBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
-          }
-        }
-        else if ($(this).val().length > 0 ){
-          $(this).removeClass('has-error');
-          $(this).next('#sectionBodyBlock').hide();
-        }
-      });
-    <% elsif error[0] == "scorecard_sections.section_options.body" %> 
+    <% if error[0] == "scorecard_sections.section_options.body" %> 
       $('.scorecard-area').find('.answers').find('#section-option').each(function(){
         if ($(this).val().length === 0) {
           if ($(this).hasClass('has-error')){
@@ -32,10 +16,23 @@
           $(this).next().next().next('#optionBodyBlock').hide();
         }
       });
+    <% else %>   
+      $('.scorecard-area').find('#section-body').each(function(){
+        if ($(this).val().length === 0) {
+          if ($(this).hasClass('has-error')){
+            return
+          }
+          else {
+            $(this).addClass('has-error');
+            $(this).next('#sectionBodyBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+          }
+        }
+        else if ($(this).val().length > 0 ){
+          $(this).removeClass('has-error');
+          $(this).next('#sectionBodyBlock').find('.notice').remove();
+        }
+      });
 
-    <% else %>
-      $('#<%= error[0] %>_Block').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
-      $('form').find('#<%= error[0] %>_Block').addClass('has-error');
     <% end %>
   <% end %>
 <% else %>

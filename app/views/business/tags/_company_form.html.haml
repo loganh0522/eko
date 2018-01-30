@@ -1,10 +1,10 @@
-= form_for [:business, @tag], html: {remote: true, class: 'tag_form'} do |f|
+= form_for [:business, @tag], remote: true do |f|
   .modal-body
     .form-row-no-border
       %h4 Add Tag: 
-      = f.text_field :name, :placeholder => 'Tag', id: "name_Block", hide_label: true
+      = f.text_field :name, :placeholder => 'Tag', id: "name_Block", hide_label: true, autocomplete: 'off'
       %span#name_msgBlock
   .modal-footer
     = f.hidden_field :company_id, value: current_company.id
-    = f.submit "Add Tag", class: "btn submit-button"
-    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+    = f.button "Add Tag", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
+    .btn.border-button.close-modal Cancel

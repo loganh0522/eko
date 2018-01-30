@@ -77,16 +77,17 @@ class UsersController < ApplicationController
   def handle_invitation
     @invitation = Invitation.where(token: params[:invitation_token]).first
     @user.update_attributes(company_id: @invitation.company_id, role: @invitation.user_role)
-    @invitation.update_attribute(:status, "complete")
     
     if @invitation.job_id.present? 
       HiringTeam.create(user_id: @user.id, job_id: @invitation.job_id)
       session[:user_id] = @user.id
       session[:company_id] = @user.company.id 
+      @invitation.destroy
       redirect_to business_root_path
     else
       session[:user_id] = @user.id 
       session[:company_id] = @user.company.id
+      @invitation.destroy
       redirect_to business_root_path
     end
   end

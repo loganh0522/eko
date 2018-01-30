@@ -17,8 +17,7 @@
     });
   <% end %>
 <% else %>
-  $('.tags').html('<%= j render "business/tags/company_tags", tags: @tags %>');
-  $('#basic-form-modal').modal("toggle");
+  $('.mediumModal').hide();
 <% end %>
 
 

@@ -7,6 +7,7 @@
         .required-answer
           = f.check_box :required, checked_value: 1, unchecked_value: 0
           = f.label :required, "Required"       
+      
       = f.text_field :body, id: "body_Block", class: "question-field", placeholder: "Add your Question", autocomplete: 'off'
       %span#body_msgBlock
       = f.hidden_field :_destroy
@@ -17,5 +18,5 @@
     = link_to_add_fields("+ Add Answer", f, :question_options)
 
     .footer
-      = f.submit @question.new_record? ? "Create" : "Update", class: "btn submit-button"
+      = f.button @question.new_record? ? "Create" : "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
       .btn.border-button#remove_form Cancel

@@ -20,19 +20,11 @@
         = link_to business_invitations_path, remote: true do 
           %li#pending-users Pending Invitations
     .search-form
-      = form_tag business_users_path, :method => 'get', id: "search-form" do
+      = form_tag search_business_users_path, :method => 'get', id: "search-form" do
         .search-area-content
           %i.fa.fa-search.fa-stack-2x
           = text_field_tag "query", nil, placeholder: "Search Team Members", class: "search-field"
     .user-list
       = render 'business/users/user_row'
 
-          
-
-
-.modal#basic-form-modal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title      
+             

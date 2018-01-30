@@ -8,17 +8,30 @@
           }
           else {
             $(this).addClass('has-error');
-            $(this).next('#questionBodyBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+            $(this).next().next().next().append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
           }
         }
         else if ($(this).val().length > 0 ){
           $(this).removeClass('has-error');
-          $(this).next('#questionBodyBlock').hide();
+          $(this).next().next().next().find('.notice').remove();
         }
       });
-    <% else %>
-      $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
-      $('form').find('#<%= error[0] %>_Block').addClass('has-error');
+    <% else %> 
+      $('.question-area').find('.question-field').each(function(){
+        if ($(this).val().length === 0) {
+          if ($(this).hasClass('has-error')){
+            return
+          }
+          else {
+            $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+            $('form').find('#<%= error[0] %>_Block').addClass('has-error');
+          }
+        }
+        else if ($(this).val().length > 0 ){
+          $(this).removeClass('has-error');
+          $(this).next().find('.notice').remove();
+        }
+      });
     <% end %>
   <% end %>
 <% else %>

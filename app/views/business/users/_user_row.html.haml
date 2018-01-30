@@ -9,8 +9,9 @@
     - else
       .circle-img= user.first_name.first.capitalize
     .name= "#{user.first_name} #{user.last_name}"
-    %i.glyphicon.glyphicon-remove
-
+    
+    = link_to business_users_path(user), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."} do 
+      %i.glyphicon.glyphicon-remove
     .permissions
       .show-hidden-search-box#action-box
         = user.role

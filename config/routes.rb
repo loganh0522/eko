@@ -225,6 +225,7 @@ Rails.application.routes.draw do
       collection do 
         get "availability/:id", to: "users#get_availability"
         get :autocomplete
+        get :search
       end
     end
     resources :job_board_rows do 

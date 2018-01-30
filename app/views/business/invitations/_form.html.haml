@@ -23,9 +23,6 @@
       %span.error#message_msgBlock
   .modal-footer
     = f.hidden_field :job_id, value: @job.id if @job.present?
-    = f.hidden_field :user_id, value: current_user.id
-    = f.hidden_field :user_id, value: current_user.id
-    = f.hidden_field :company_id, value: current_company.id
-    = f.submit "Send Invitation", class: "btn submit-button"
+    = f.button "Send Invitation", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
     .btn.border-button.remove-modal Cancel   
     

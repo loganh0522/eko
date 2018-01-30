@@ -48,6 +48,7 @@ class User < ActiveRecord::Base
   
   has_one :user_avatar
   has_one :background_image
+  
   has_many :work_experiences, -> {order("end_year DESC")} 
   has_many :educations
   has_many :user_certifications

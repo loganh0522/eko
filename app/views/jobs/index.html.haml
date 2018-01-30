@@ -9,61 +9,15 @@
         = text_field_tag "query", nil, placeholder: "Job Title, Keywords, Company Name", class: "search-field", id: "job-search"
 
 .job-board
-  .filters
-    .header Filters
-    .filter
-      .title Job Function 
-      .body
-
-    .filter
-      .title Experience Level
-      .body
-        %ul
-          %li.activity 
-            .checkbox{:data => {:id => "comments"}}= check_box_tag "", true, true
-            Entry Level
-          %li.activity
-            .checkbox{:data => {:id => "scorecards"}}= check_box_tag "", true, true
-            Associate
-          %li.activity
-            .checkbox{:data => {:id => "messages"}}= check_box_tag "", true, true
-            Mid-Level
-          %li.activity
-            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
-            Director
-          %li.activity
-            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
-            Executive
-    .filter
-      .title Job Type
-      .body
-        %ul
-          %li.activity 
-            .checkbox{:data => {:id => "comments"}}= check_box_tag "", true, true
-            Full Time
-          %li.activity
-            .checkbox{:data => {:id => "scorecards"}}= check_box_tag "", true, true
-            Part Time
-          %li.activity
-            .checkbox{:data => {:id => "messages"}}= check_box_tag "", true, true
-            Contract
-          %li.activity
-            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
-            Temp
-          %li.activity
-            .checkbox{:data => {:id => "move stages"}}= check_box_tag "", true, true
-            Internship
-
-
   .jobs
     - @jobs.each do |job|
       .job-posting
         .header-info
           %img(src="#{job.company.job_board.logo}" class="logo") 
           .job-detail
-            .title= link_to "#{job.title}", job_seeker_job_path(job)
+            .title= link_to "#{job.title}", job_path(job)
             .company= job.company.name
-          .view-job= link_to "View Job", job_seeker_job_path(job), class: "btn btn-primary"
+          .view-job= link_to "View Job", job_path(job), class: "btn btn-primary"
         .bottom-info
           .left-side
             %img(src="/tmp/small-location.png") 
