@@ -1,7 +1,7 @@
 class JobFeedsController < ApplicationController 
   
   def neuvoo_job_feed
-    @jobs = Job.where(status: "open", verified: true)
+    @jobs = Job.where(status: "open", is_active: true, verified: true)
   end
 
   def adzuna_job_feed
@@ -35,8 +35,11 @@ class JobFeedsController < ApplicationController
     @jobs = Job.joins(:job_feed).where(status: "open", verified: true, :job_feeds => {:indeed => true})
   end
 
+  def juju_job_feed
+    @jobs = Job.joins(:job_feed).where(status: "open", verified: true, :job_feeds => {:indeed => true})
+  end
+
   def jobrapido
     @jobs = Job.joins(:job_feed).where(status: "open", :job_feeds => {:jobrapido => true})
-    render 'job_feeds/adzuna_job_feed.xml.builder', formats: [:xml]
   end
 end
