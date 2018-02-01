@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   
   get '/schedule_interview/:token', to: 'interviews#new', as: 'schedule_interview'
   post '/schedule_interview/:token', to: 'interviews#create'
-  get '/booked', to: "interviews#show"
+  get '/booked/:id', to: "interviews#show"
 
   resources :job_boards
   resources :jobs do 
@@ -271,6 +271,7 @@ Rails.application.routes.draw do
         post :reject, to: "applications#reject"
         post :next_stage, to: "applications#next_stage"
         post :move_stage, to: "applications#move_stage"
+        post :ratings, to: "applications#ratings"
       end
 
       collection do 

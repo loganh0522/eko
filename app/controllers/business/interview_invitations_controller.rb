@@ -126,9 +126,9 @@ class Business::InterviewInvitationsController < ApplicationController
   end
 
   def interview_invitation_params
-    params.require(:interview_invitation).permit(:title, :notes, :location, 
-      :kind, :job_id, :subject, :message, :user_id, :company_id, :room_id,
-      :user_ids, :candidate_ids,
+    params.require(:interview_invitation).permit(:title, :location, 
+      :kind, :job_id, :subject, :message, :body,
+      :user_ids, :candidate_ids, :user_id, :company_id, :room_id,
       interview_times_attributes: [:id, :start_time, :end_time, :_destroy])
   end
 

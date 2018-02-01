@@ -6,5 +6,5 @@
       %span.error#body_msgBlock
       = f.hidden_field :company_id, value: current_company.id
   .modal-footer
-    = f.submit "Save Reason", class: "btn submit-button"
+    = f.button "Save Reason", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
     .btn.border-button.close-modal Cancel

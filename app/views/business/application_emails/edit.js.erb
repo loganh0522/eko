@@ -1,4 +1,4 @@
-$('#basic-form-modal').find('form').remove()
-$('#basic-form-modal').find('.modal-title').html('<%= j "Edit Application Email" %>');
-$('#basic-form-modal').find('.modal-header').after('<%= j render  "business/application_emails/form" %>');
-$('#basic-form-modal').modal("toggle");
+$('.mediumModal').find('form').remove()
+$('.mediumModal').find('.new-title').html('<%= j "Edit Application Email"  %>');
+$('.mediumModal').find('.new-modal-header').after('<%= j render "business/application_emails/form" %>');
+$('.mediumModal').show();

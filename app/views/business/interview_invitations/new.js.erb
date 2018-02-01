@@ -1,8 +1,4 @@
-<% if @candidate.present? %>  
-  $('.action-area').html('<%= j render "business/interview_invitations/form" %>');
-  $('.active-button').removeClass('active-button');
-  $('#add-invitation').addClass('active-button');
-<% elsif @job.present?  %>
+<% if @job.present?  %>
   checkbox = $('.applicant-checkbox');
   applicant_ids = [];
   applicants = [];
@@ -34,10 +30,26 @@
     $('.multiCandidates').append('<div class="multi-obj" data-id=' + n[0] + '> <div class="name">' + n[1] + '</div> <div class="candidate_ids" id="delete-tag"> &times </div> </div>');
   }
 <% end %>
+
+
 $('.largeModal').find('form').remove()
 $('.largeModal').find('.new-title').html('<%= j "Schedule Meeting" %>');
 $('.largeModal').find('.new-modal-header').after('<%= j render "business/interview_invitations/form" %>');
 $('.largeModal').show();
+
+$('.filter-radios').on('click', '.filter', function(event) {
+  if ($(this).attr('id') === 'invitation-details') {
+    $('.details-container').show();
+    $('.calendar-container').hide();
+    $('#invitation-times').removeClass('active');
+    $('#invitation-details').addClass('active');
+  } else {
+    $('.details-container').hide();
+    $('.calendar-container').show();
+    $('#invitation-details').removeClass('active');
+    $('#invitation-times').addClass('active');
+  }
+});
 
 $(".add-calendar-events").on("click", function() {
   var roomId = $(this).data('id')
@@ -101,6 +113,7 @@ $('#interview-calendar').fullCalendar({
     newEvent.start = moment(start).format('YYYY-MM-DD HH:mm');
     newEvent.end = moment(end).format('YYYY-MM-DD HH:mm');
     newEvent.allDay = false;
+    $('#invitation-times-container').empty()
     $('.times').empty()
     $('#interview-calendar').fullCalendar('renderEvent', newEvent);
     calendar.fullCalendar('unselect');
@@ -114,29 +127,44 @@ $('#interview-calendar').fullCalendar({
     element.append( "<span class='closeon'>X</span>" );
     element.find(".closeon").click(function() {
       $('.times').empty()
+      $('#invitation-times-container').empty()
       $('#interview-calendar').fullCalendar('removeEvents', event._id);
+
       $('.time_' + event._id).remove()
     });
   },
 
   eventResize: function(event, delta) {
+    $('#invitation-times-container').empty()
     $('.times').empty()
   },
   eventDrop: function(event, delta) {
+    $('#invitation-times-container').empty()
     $('.times').empty()
   },
 
   eventAfterRender: function(newEvent, element, view) {
-    console.log(newEvent.editable == false)
     if (newEvent.editable !== false) {
       var endTime, name, newAttr, startTime;
       startTime = newEvent.start.format('YYYY-MM-DD HH:mm');
       endTime = newEvent.end.format('YYYY-MM-DD HH:mm');
+      sTime = newEvent.start.format('ddd HH:mm');
+      eTime = newEvent.end.format('ddd HH:mm');
       newAttr = new Date().getTime();
       eventId = newEvent._id
       startName = "interview_invitation[interview_times_attributes][" + newAttr + "][start_time]";
       endName = "interview_invitation[interview_times_attributes][" + newAttr + "][end_time]";
+      $('.not-present-container').hide()
+      $('#invitation-times-container').append('<div id="time-con" class="time_' + eventId +'">' + sTime + ' - ' + eTime + '<i class="fa fa-times remove-time" ></i></div>')
       $('.times').append('<div class="time_' + eventId +'"><input type="hidden" name="' + startName + '" value="' + startTime + '" /> <input type="hidden" name="' + endName + '"value="' + endTime + '" /></div>');
+      
+      $(".remove-time").click(function() {
+        e = $(this).parent().attr('class').split('time_')[1].toString()
+        $('.times').empty()
+        $('#invitation-times-container').empty()
+        $('#interview-calendar').fullCalendar('removeEvents', e);
+        $(this).parent().remove();
+      });
     } 
   }, 
 });

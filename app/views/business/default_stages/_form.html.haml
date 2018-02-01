@@ -6,5 +6,5 @@
         %span.error#name_msgBlock
   .modal-footer
     = f.hidden_field :company_id, value: current_company.id
-    = f.submit @stage.new_record? ? "Create Stage" : "Update", class: "btn submit-button"
-    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+    = f.button @stage.new_record? ? "Create Stage" : "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
+    .btn.border-button.close-modal Cancel

@@ -1,5 +1,14 @@
 .schedule-interview-container
   .standard-header
-    %h3= "Book an #{(@interview.kind)} "
+    %h3= "#{(@interview.kind)} has been booked"
   .standard-body
-    
+    .detail
+      %i.fa.fa-clock-o
+      .date= "#{@interview.start_time.strftime('%A %B %e')}"
+      .time= "#{@interview.start_time.strftime('%I:%M %p')} - #{@interview.end_time.strftime('%I:%M %p')}"
+    .detail
+      %i.fa.fa-map-marker
+      = "#{@interview.location}"
+    .details
+      %i.fa.fa-
+      = "#{@interview.notes}"

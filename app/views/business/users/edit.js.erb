@@ -1,11 +1,11 @@
-$('#basic-form-modal').find('form').remove()
+$('.mediumModal').find('form').remove()
 
 <% if params[:password].present? %> 
-  $('#basic-form-modal').find('.modal-title').html('<%= j "Change Password" %>');
-  $('#basic-form-modal').find('.modal-header').after('<%= j render "business/users/change_password" %>'); 
+  $('.mediumModal').find(".new-title").html('<%= j "Change Password" %>');
+  $('.mediumModal').find('.new-modal-header').after('<%= j render "business/users/change_password" %>'); 
 <% else %> 
-  $('#basic-form-modal').find('.modal-title').html('<%= j "Update Profile" %>');
-  $('#basic-form-modal').find('.modal-header').after('<%= j render "business/users/form" %>');
+  $('.mediumModal').find(".new-title").html('<%= j "Update Profile" %>');
+  $('.mediumModal').find('.new-modal-header').after('<%= j render "business/users/form" %>');
 <% end %>
 
-$('#basic-form-modal').modal("toggle");
+$('.mediumModal').show()

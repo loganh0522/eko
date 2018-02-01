@@ -12,27 +12,29 @@
     .standard-header
       %h3 Hiring Defaults
     .standard-body
-      .standard-body-header
-        %h4 Application E-mail
-        = link_to "Edit E-mail", edit_business_application_email_path(@email), :data => {:remote => true }, class: "btn border-button"
-      .templates-body#application_email
-        = render "business/application_emails/email"
+      #padding
+        .standard-body-header
+          %h4 Application E-mail
+          = link_to "Edit E-mail", edit_business_application_email_path(@email), :data => {:remote => true }, class: "btn border-button"
+        .templates-body#application_email
+          = render "business/application_emails/email"
 
     .standard-body
-      .contain-45 
-        .standard-body-header
-          %h4 Rejection Reasons
-          = link_to "Create Reason", new_business_rejection_reason_path, :data => {:remote => true }, class: "btn border-button"
-        .templates-body#reasons
-          = render "business/rejection_reasons/rejection_reasons", rejection_reasons: @rejection_reasons
-      .contain-45-right
-        .standard-body-header
-          %h4 Tags
-          = link_to "Add Tag", new_business_tag_path(tag: "company"), class: "btn border-button", :data => {:remote => true }
-        .tags
-          - @tags.each do |tag|
-            %div{id: "tag_#{tag.id}", class: "tag"}
-              .name= "#" + tag.name
-              = link_to business_tag_path(tag), remote: true, :method => :delete do 
-                .delete-can-tag &times
+      #padding
+        .contain-45 
+          .standard-body-header
+            %h4 Rejection Reasons
+            = link_to "Create Reason", new_business_rejection_reason_path, :data => {:remote => true }, class: "btn border-button"
+          .templates-body#reasons
+            = render "business/rejection_reasons/rejection_reasons", rejection_reasons: @rejection_reasons
+        .contain-45-right
+          .standard-body-header
+            %h4 Tags
+            = link_to "Add Tag", new_business_tag_path(tag: "company"), class: "btn border-button", :data => {:remote => true }
+          .tags
+            - @tags.each do |tag|
+              %div{id: "tag_#{tag.id}", class: "tag"}
+                .name= "#" + tag.name
+                = link_to business_tag_path(tag), remote: true, :method => :delete do 
+                  .delete-can-tag &times
 

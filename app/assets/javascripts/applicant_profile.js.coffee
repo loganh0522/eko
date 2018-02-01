@@ -25,7 +25,9 @@ jQuery ->
       $('.applicant-action-buttons').hide()
       $('.no-action-buttons').show()
     return
+
   
+
 ################  Google Places JavaScript API ####################
 
   $("#geocomplete").geocomplete({

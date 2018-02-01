@@ -69,7 +69,10 @@
   float: left
   width: 24%
   margin-right: 1%
-
+.contain-75
+  float: left
+  width: 74%
+  margin-right: 1%
 .task-form
   background: #ffffff
   margin-top: 0
@@ -156,6 +159,7 @@
           cursor: pointer
 
 
+
 .email-area
   width: 100%
   z-index: 1000
@@ -199,11 +203,20 @@
       float: left
       width: 90%
   .subject
-    height: 50px
+    height: fit-content
     clear: both
     border-bottom: 1px solid rgba(0,0,0,.1)
     overflow: hidden
     padding: 15px 15px
+    #subject_Block  
+      float: left
+      border: none
+      width: 90%
+      height: auto
+      margin: -7px 0 
+      padding-left: 0
+      &:focus 
+        outline: none
     #message-subject
       float: left
       border: none
@@ -586,7 +599,27 @@
       color: black
       text-decoration: none
 
-      
+#new_interview_invitation
+  .filter-radios  
+    border-bottom: 1px solid rgba(0,0,0,0.1)
+    overflow: hidden
+    ul
+      padding-left: 0
+      margin-bottom: 0
+      list-style: none
+      li
+
+        padding: 15px 15px
+        float: left
+      .active
+        border-bottom: 4px solid #EF7B2B
+      .filter
+        margin-bottom: 0
+  .details-container
+    display: none      
+
+
+
 #single-photo-form
   margin-bottom: 20px
   input

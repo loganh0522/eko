@@ -9,7 +9,7 @@ jQuery ->
     $('.ui-autocomplete-input').val('')
     $(this).next('#add-tags').append('<div class="fieldset"><div class="user-tag"> <div class="name">' + tagName  + '</div> <div class="remove_fields"> &times </div> </div><input type="hidden" name="' + startName + '" value="' + tagName + '" /></div>');
     event.stopImmediatePropagation()
-  return
+    return
 
   $('.ui-autocomplete-input').on 'focus', ->  
     controller = $(this).attr('class').split(' ').pop()

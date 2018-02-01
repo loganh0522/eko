@@ -9,5 +9,5 @@
       %span.error#email_msgBlock
   .modal-footer
     = f.hidden_field :company_id, value: current_company.id
-    = f.submit "Create Room", class: "btn submit-button"
+    = f.button "Create Room", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
     .btn.border-button.close-modal Cancel

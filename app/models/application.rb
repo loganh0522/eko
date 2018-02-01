@@ -39,8 +39,8 @@ class Application < ActiveRecord::Base
     end
   end
 
-  def current_user_rating_present?(current_user)
-    self.ratings.each do |rating| 
+  def current_user_rating_present?(current_user, application)
+    application.ratings.each do |rating| 
       if rating.user == current_user
         return true   
       end

@@ -16,14 +16,8 @@
             .insert-token#full-name Candidate Full Name
             .insert-token#company-name Company Name
             .insert-token#job-title Job Title
-          / = select_tag "insert-fluid-variable", options_for_select([ "Applicant First Name", "Applicant Last Name", "Applicant Full Name", "Job Title", "Company Name" ] ), :prompt => "Insert Token..."
-      %fieldset
       .email-content
         = f.trix_editor :body
-        
-        / = text_area_tag :body, " ", :class => "tinymce", id: "message-body", cols: 20, data: {behaviour: 'comment-body'}
-        / = tinymce_assets        
-        / = tinymce 
     .modal-footer
-      = submit_tag "Save E-mail", class: "btn submit-button"
-      .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+      = f.button "Save E-mail", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
+      .btn.border-button.close-modal Cancel

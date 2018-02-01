@@ -1,7 +1,7 @@
 %ul
   - if permitted_to? :manage, @career_portal
     .nav-section Company 
-    %li{:class => is_active?(business_plan_path)}
+    %li{:class => is_active?(business_company_path(current_company))}
       = link_to "Company Details", business_company_path(current_company)
     
     %li{:class => is_active?(business_default_stages_path)}
@@ -22,5 +22,5 @@
 
   .nav-section My Profile
   %li{:class => is_active?(business_user_path(current_user))}
-    = link_to "Profile, E-mail & Calendar Sync, Notifications ",business_user_path(current_user)
+    = link_to "Profile, E-mail & Calendar Sync, Notifications ", business_user_path(current_user)
 

@@ -26,7 +26,6 @@ class Business::TagsController < ApplicationController
         format.js
       else 
         @tag = Tag.new(tag_params)
-        
         if @tag.save
           @tags = current_company.tags
           format.js

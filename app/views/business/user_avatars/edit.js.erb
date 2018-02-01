@@ -1,4 +1,4 @@
-$(".modal-title").html('<%= "Edit Profile Picture" %>');
-$('#userProfilePictureModal').find('form').remove()
-$('#userProfilePictureModal').find('.modal-header').after('<%= j render "business/user_avatars/crop", user_avatar: @user_avatar %>');
-$('#userProfilePictureModal').modal("toggle");
+$(".new-title").html('<%= "Edit Profile Picture" %>');
+$('.mediumModal').find('form').remove()
+$('.mediumModal').find('.new-modal-header').after('<%= j render "business/user_avatars/crop", user_avatar: @user_avatar %>');
+$('.mediumModal').show();

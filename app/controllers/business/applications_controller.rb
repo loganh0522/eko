@@ -145,6 +145,15 @@ class Business::ApplicationsController < ApplicationController
       format.js
     end
   end
+
+  def ratings
+    @application = Application.find(params[:application_id])
+
+    Rating.create(user_id: current_user.id, application: @application, score: params[:rating])
+    respond_to do |format|
+      format.js
+    end
+  end
   
   def reject
     @application = Application.find(params[:id])

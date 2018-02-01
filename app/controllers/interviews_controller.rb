@@ -22,7 +22,7 @@ class InterviewsController < ApplicationController
       @interview = Interview.new(interview_params.merge!(
         title: @invite.title, kind: @invite.kind, location: @invite.location,
         users: @invite.users, candidate_id: @candidate.id, job: @invite.job,
-        start_time: @time.start_time , end_time: @time.end_time,
+        start_time: @time.start_time , end_time: @time.end_time, notes: @invite.body,
         etime: 'n/a', stime: 'n/a', date: 'n/a'))
       
       if @interview.save
@@ -54,6 +54,7 @@ class InterviewsController < ApplicationController
   def show
     @interview = Interview.find(params[:id])
   end
+
 
   private 
 
