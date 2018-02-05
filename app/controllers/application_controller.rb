@@ -6,7 +6,9 @@ class ApplicationController < ActionController::Base
   helper_method :logged_in?, :current_user, :current_company, :current_kind, :user_logged_in, 
     :profile_sign_up_complete, :belongs_to_company
   
-  before_filter {|c| Authorization.current_user = c.current_user}
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to main_app.root_url, :alert => exception.message
+  end
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]

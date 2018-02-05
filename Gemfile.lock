@@ -84,6 +84,7 @@ GEM
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.3.0)
     builder (3.2.3)
+    cancancan (2.1.3)
     carrierwave (1.2.1)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
@@ -111,7 +112,6 @@ GEM
     debug_inspector (0.0.3)
     declarative (0.0.10)
     declarative-option (0.1.0)
-    declarative_authorization (0.5.7)
     diff-lcs (1.3)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
@@ -480,13 +480,13 @@ DEPENDENCIES
   better_errors (~> 2.2.0)
   binding_of_caller
   bootstrap-sass (~> 3.3.5.1)
+  cancancan (~> 2.0)
   carrierwave
   carrierwave-aws
   chartkick
   coffee-rails (~> 4.1.0)
   coffee_routes
   database_cleaner (= 1.2.0)
-  declarative_authorization
   elasticsearch-model
   elasticsearch-rails
   fabrication

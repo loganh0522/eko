@@ -3,9 +3,16 @@
     <% if error[0] == "body" %>  
       $('trix-editor').addClass('has-error')
     <% else %>
-      $('.<%= error[0] %>_Block').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+      $('.<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
       $('.<%= error[0] %>_Block').addClass('has-error');
     <% end %>
+  
+    $('form').find('.error').each(function(){
+      if ($(this).prev().val().length > 0 ){
+        $(this).prev().removeClass('has-error');
+        $(this).find('.notice').remove();
+      }
+    });
   <% end %>
 <% else %>
   $('#mediumModal').hide();

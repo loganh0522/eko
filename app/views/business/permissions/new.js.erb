@@ -1,0 +1,4 @@
+$('.smallModal').find('form').remove()
+$('.smallModal').find('.new-title').html('<%= j "Create Permission" %>');
+$('.smallModal').find('.new-modal-header').after('<%= j render "business/permissions/form" %>');
+$('.smallModal').show();

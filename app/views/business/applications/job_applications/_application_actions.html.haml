@@ -1,5 +1,6 @@
 .application-actions
-  = link_to 'Add Candidate', new_business_candidate_path(:job => @job), class: "btn border-button", id: "add-applicant", remote: true
+  - if can? :create, Candidate
+    = link_to 'Add Candidate', new_business_candidate_path(:job => @job), class: "btn border-button", id: "add-applicant", remote: true
   .no-action-buttons
     .btn.inactive-button More Actions
     .btn.inactive-button Send E-mail

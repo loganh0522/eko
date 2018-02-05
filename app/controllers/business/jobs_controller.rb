@@ -1,8 +1,6 @@
 class Business::JobsController < ApplicationController
   layout "business"
-  # filter_access_to :all
-  # filter_access_to [:close_job, :promote], :require => :read
-  # filter_access_to :publish_job, :require => :read
+  load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy]
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -10,7 +8,7 @@ class Business::JobsController < ApplicationController
   before_filter :owned_by_company, only: [:edit, :show, :update]
 
   def index
-    @jobs = current_company.active_jobs
+    @jobs = current_company.active_jobs.accessible_by(current_ability)
 
     respond_to do |format|
       format.html
@@ -18,7 +16,7 @@ class Business::JobsController < ApplicationController
   end
 
   def new
-    @job = Job.new
+    
   end
 
   def create 
@@ -112,7 +110,8 @@ class Business::JobsController < ApplicationController
     where[:company_id] = current_company.id
     where[:kind] = params[:kind] if params[:kind].present?
     where[:client_id] = params[:client_id] if params[:client_id].present? 
-    @jobs = Job.search(query, where: where, fields: [:title], match: :word_start).to_a
+
+    @jobs = Job.search(query, where: where, fields: [:title], match: :word_start).records.accessible_by(current_ability)
   end
 
   def autocomplete
@@ -124,6 +123,7 @@ class Business::JobsController < ApplicationController
 
     @jobs = Job.search(query, where: {status: "open", company_id: current_company.id}, 
       fields: [{full_name: :word_start}])
+    
     @job = Job.find(params[:job_id]) if params[:job_id].present?
 
     respond_to do |format|

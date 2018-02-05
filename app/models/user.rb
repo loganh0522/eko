@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   has_many :interview_invitations, through: :assigned_users, source: :assignable, source_type: "InterviewInvitation"
   has_many :orders
   has_many :event_ids
+  belongs_to :permission
   has_many :application_scorecards
   has_many :invitations
   has_many :messages
@@ -129,6 +130,10 @@ class User < ActiveRecord::Base
     elsif role == "Recruiter"
       [:recruiter] 
     end
+  end
+
+  def is_admin? 
+    self.role == "Admin"
   end
 
   def avatar_url

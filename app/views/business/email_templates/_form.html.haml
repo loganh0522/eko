@@ -3,11 +3,14 @@
     .modal-body  
       .subject
         .title Title
-        .sender= f.text_field :title, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false, class: "title_Block"
+        .sender
+          = f.text_field :title, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false, class: "title_Block"
+          %span.error#subject_msgBlock
       .subject
         .title Subject
-        .sender= f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false, class: "subject_Block"
-        %span#subject_msgBlock
+        .sender
+          = f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false, class: "subject_Block"
+          %span.error#subject_msgBlock
       .email-variables
         .show-hidden-search-box
           .plain-text
@@ -21,6 +24,7 @@
             .insert-token#job-title Job Title
       .email-content
         = f.trix_editor :body
+        %span.error
     .modal-footer
       = submit_tag "Save E-mail", class: "btn submit-button"
       .btn.border-button.close-modal Cancel

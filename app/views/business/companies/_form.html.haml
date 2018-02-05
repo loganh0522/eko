@@ -1,8 +1,10 @@
 = form_for [:business, @company], remote: true do |f|
   .modal-body
-    %fieldset
+    .form-row-no-border
+      = f.label :name, "Company Name"
       = f.text_field :name, label: "Company Name", id: "name_Block"
       %span#name_msgBlock
+      = f.label :name, "Company Name"
       = f.text_field :website, label: "Website"     
       .company-kind
         = f.radio_button :kind, "company", id: 'company', checked: true
@@ -12,4 +14,4 @@
         = f.label :kind, "Recruiter", :value => "recruiter", :for => 'recruiter'
   .modal-footer
     = f.submit "Update Company", class: "btn submit-button"
-    .btn.border-button2{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+    .btn.border-button.close-modal Cancel

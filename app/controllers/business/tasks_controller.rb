@@ -1,6 +1,9 @@
 class Business::TasksController < ApplicationController
   # filter_access_to :all
   layout "business"
+  load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy, :completed]
+  
+  
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -153,8 +156,8 @@ class Business::TasksController < ApplicationController
     where[:taskable_type] = params[:type] if params[:type].present?
     where[:client_id] = params[:client_id] if params[:client_id].present?
     where[:kind] = params[:kind] if params[:kind].present?
-
-    @tasks = Task.search(query, where: where, per_page: 10, page: params[:page])
+    
+    @tasks = Task.search(query, where: where).records.paginate(page: params[:page], per_page: 10).accessible_by(current_ability)
   end
 
   private 
@@ -197,22 +200,22 @@ class Business::TasksController < ApplicationController
       @job = Job.find(params[:job])
       
       if params[:status] == "complete"
-        @tasks = @candidate.complete_job_tasks(@job)
+        @tasks = @candidate.complete_job_tasks(@job).accessible_by(current_ability)
       else
-        @tasks = @candidate.open_job_tasks(@job)
+        @tasks = @candidate.open_job_tasks(@job).accessible_by(current_ability)
       end
     elsif params[:candidate_id].present?
       @candidate = Candidate.find(params[:candidate_id])
       if params[:status] == "complete"
         
       else
-        @tasks = @candidate.open_tasks
+        @tasks = @candidate.open_tasks.accessible_by(current_ability)
       end
     elsif params[:job_id].present?
       @job = Job.find(params[:job_id])
-      @tasks = @job.open_jobs.paginate(page: params[:page], per_page: 10)
+      @tasks = @job.open_jobs.paginate(page: params[:page], per_page: 10).accessible_by(current_ability)
     else 
-      @tasks = current_company.open_tasks.paginate(page: params[:page], per_page: 10)
+      @tasks = current_company.open_tasks.paginate(page: params[:page], per_page: 10).accessible_by(current_ability)
     end
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180126003602) do
+ActiveRecord::Schema.define(version: 20180205212454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -702,6 +702,33 @@ ActiveRecord::Schema.define(version: 20180126003602) do
     t.datetime "updated_at"
   end
 
+  create_table "permissions", force: :cascade do |t|
+    t.string  "name"
+    t.integer "company_id"
+    t.boolean "create_job",            default: true
+    t.boolean "view_all_jobs",         default: true
+    t.boolean "edit_job",              default: true
+    t.boolean "add_team_members",      default: true
+    t.boolean "create_candidates",     default: true
+    t.boolean "edit_candidates",       default: true
+    t.boolean "view_all_candidates",   default: true
+    t.boolean "move_candidates",       default: true
+    t.boolean "create_tasks",          default: true
+    t.boolean "view_all_tasks",        default: true
+    t.boolean "assign_tasks",          default: true
+    t.boolean "send_messages",         default: true
+    t.boolean "view_all_messages",     default: true
+    t.boolean "view_section_messages", default: true
+    t.boolean "create_event",          default: true
+    t.boolean "view_events",           default: true
+    t.boolean "send_event_invitation", default: true
+    t.boolean "view_all_events",       default: true
+    t.boolean "view_analytics",        default: true
+    t.boolean "edit_career_portal",    default: true
+    t.boolean "access_settings",       default: true
+    t.boolean "advertise_job",         default: true
+  end
+
   create_table "posting_durations", force: :cascade do |t|
     t.integer "premium_board_id"
     t.string  "duration"
@@ -967,7 +994,27 @@ ActiveRecord::Schema.define(version: 20180126003602) do
     t.string   "profile_stage"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.integer  "failed_attempts",        default: 0,  null: false
+    t.string   "unlock_token"
+    t.datetime "locked_at"
+    t.integer  "permission_id"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "work_experiences", force: :cascade do |t|
     t.string   "title"

@@ -49,12 +49,13 @@
       
       = link_to business_job_interviews_path(@job), class: 'change-aj' do 
         %li{:class => is_activated?(business_job_interviews_path(@job))} Interviews
-
-      = link_to business_job_job_feeds_path(@job, type: 'free'), class: 'change-aj' do 
-        %li{:class => is_activated?(business_job_job_feeds_path(@job))} Advertise 
-
-      = link_to edit_business_job_path(@job), class: 'change-aj' do 
-        %li{:class => is_activated?(edit_business_job_path(@job))} Job Details
+      
+      - if can? :manage, JobFeed
+        = link_to business_job_job_feeds_path(@job, type: 'free'), class: 'change-aj' do 
+          %li{:class => is_activated?(business_job_job_feeds_path(@job))} Advertise 
+      - if can? :update, Job
+        = link_to edit_business_job_path(@job), class: 'change-aj' do 
+          %li{:class => is_activated?(edit_business_job_path(@job))} Job Details
 
       
       

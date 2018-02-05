@@ -1,5 +1,7 @@
 .application-actions
-  = link_to 'Add Candidate', new_business_candidate_path(:job => @job), class: "btn border-button", id: "add-applicant", remote: true
+  - if can? :create, Candidate
+    = link_to 'Add Candidate', new_business_candidate_path(:job => @job), class: "btn border-button", id: "add-applicant", remote: true
+
   .no-action-buttons
     .btn.inactive-button More Actions
     .btn.inactive-button Send E-mail
@@ -11,13 +13,15 @@
         More Actions
         %i.fa.fa-ellipsis-h.fa-lg
       .dropdown-content#action-dropdown
-        = link_to new_multiple_business_tasks_path, id: 'client-action', remote: true do
-          %i.fa.fa-tasks 
-          .action Create Task
-
-        = link_to new_business_interview_invitation_path, remote: true do 
-          %i.fa.fa-paper-plane-o
-          .action Interview Invitation
+        - if can? :create, Task
+          = link_to new_multiple_business_tasks_path, id: 'client-action', remote: true do
+            %i.fa.fa-tasks 
+            .action Create Task
+            
+        - if can? :create, InterviewInvitation
+          = link_to new_business_interview_invitation_path, remote: true do 
+            %i.fa.fa-paper-plane-o
+            .action Interview Invitation
 
         = link_to new_multiple_business_applications_path, remote: true do 
           %i.fa.fa-pencil
@@ -26,9 +30,9 @@
         = link_to confirm_destroy_business_candidates_path, remote: true do
           %i.fa.fa-trash-o
           .action Destroy
-          
-    = link_to 'Send E-mail', new_multiple_business_messages_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true
-    
+    - if can? :create, Message
+      = link_to 'Send E-mail', new_multiple_business_messages_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true
+
     = link_to 'Add Note', new_multiple_business_comments_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true
 
     = link_to "Add Tag", new_business_tag_path, class: "btn active-application-button move-applicants", id: "add_comment", remote: true

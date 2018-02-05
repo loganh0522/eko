@@ -1,0 +1,17 @@
+.page-header
+  %h2 Admin 
+  .admin-nav
+    %ul
+      %li= link_to "Career Portal", business_job_board_path(current_company.job_board.id)
+      %li= link_to "Templates", business_email_templates_path
+      %li= link_to "Settings", business_company_path(current_company), class: 'active'
+
+.company-settings
+  .side-container#job-nav
+    = render 'business/shared/admin_sidebar'
+  .main-container
+    .standard-header
+      %h3 Permissions
+      = link_to "+ Permission", new_business_permission_path, remote: true, class: 'btn border-button'
+    .templates
+      = render "business/permissions/permissions", permissions: @permissions

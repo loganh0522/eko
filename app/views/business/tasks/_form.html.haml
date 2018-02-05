@@ -29,10 +29,11 @@
                   - array.each do |item|
                     .select-item{data: {:id => "#{item}"}}= item
                   = f.hidden_field :kind, id: "select-box-field", value: "To-do"
-      .contain-2
-        .assign-to-row
-          .title Assign to User 
-          = render 'business/users/single_auto'
+      - if current_user.permission.assign_tasks
+        .contain-2
+          .assign-to-row
+            .title Assign to User 
+            = render 'business/users/single_auto'
         
 
     = f.text_area :notes, placeholder: "Notes", id: "comment-body"

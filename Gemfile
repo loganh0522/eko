@@ -78,11 +78,10 @@ gem 'griddler'
 gem 'griddler-sendgrid'
 
 gem 'jquery-timepicker-rails'
-gem 'declarative_authorization'
 gem 'searchkick'
 gem 'chartkick'
 gem 'groupdate'
-
+gem 'cancancan', '~> 2.0'
 
 group :development do
   gem "better_errors", "~> 2.2.0"

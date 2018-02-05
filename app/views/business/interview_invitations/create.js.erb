@@ -3,6 +3,7 @@
     if (!$('#<%= error[0] %>_Block').hasClass('has-error'))
       $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
       $('#<%= error[0] %>_Block').addClass('has-error');
+      
       if (('<%= error[0] %>' == 'message'))
         $('trix-editor').addClass('has-error');
       

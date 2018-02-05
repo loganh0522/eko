@@ -28,6 +28,7 @@ class Company < ActiveRecord::Base
   has_many :job_templates, :dependent => :destroy
   has_many :subsidiaries, :dependent => :destroy
   has_many :locations, :dependent => :destroy
+  has_many :permissions, :dependent => :destroy
   has_one :background_image, :dependent => :destroy
   has_one :logo, :dependent => :destroy
   validates_presence_of :name, :website, :size, :location
@@ -83,6 +84,18 @@ class Company < ActiveRecord::Base
 
   def create_application_email
     ApplicationEmail.create(body: "We appreciate your application for the {{job.title}}, we will be in touch with you soon.", subject: "Thanks for Applying to {{job.title}}", company_id: self.id)
+  end
+
+  def create_permissions
+    Permission.create(company: self, name: "Hiring Manager",
+      view_all_jobs: false, edit_career_portal: false, access_settings: false)
+
+    Permission.create(company_id: self, name: "Recruiter",
+      view_all_jobs: false, create_job: false, edit_job: false, advertise_job: false,
+      add_team_members: false, assign_tasks: false, send_messages: false, view_all_messages: false,
+      create_event: false, send_event_invitation: false, view_all_events: false,
+      view_analytics: false, edit_career_portal: false, access_settings: false,
+      edit_career_portal: false, access_settings: false)
   end
 
   ##### Task Methods #####

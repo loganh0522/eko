@@ -1,24 +1,25 @@
 %ul
-  - if permitted_to? :manage, @career_portal
-    .nav-section Company 
-    %li{:class => is_active?(business_company_path(current_company))}
-      = link_to "Company Details", business_company_path(current_company)
-    
-    %li{:class => is_active?(business_default_stages_path)}
-      = link_to "Hiring Pipeline", business_default_stages_path
-    
-    %li{:class => is_active?(business_hiring_defaults_path)}
-      = link_to "Hiring Defaults", business_hiring_defaults_path
-    
-    %li{:class => is_active?(business_users_path)}
-      = link_to "Team Members", business_users_path
+  .nav-section Company 
+  %li{:class => is_active?(business_company_path(current_company))}
+    = link_to "Company Details", business_company_path(current_company)
+  
+  %li{:class => is_active?(business_default_stages_path)}
+    = link_to "Hiring Pipeline", business_default_stages_path
+  
+  %li{:class => is_active?(business_hiring_defaults_path)}
+    = link_to "Hiring Defaults", business_hiring_defaults_path
+  
+  %li{:class => is_active?(business_users_path)}
+    = link_to "Team Members", business_users_path
 
-  - if permitted_to? :manage, @career_portal
-    .nav-section Billing
-    %li{:class => is_active?(business_plan_path)}
-      = link_to "Subscription", business_plan_path   
-    %li{:class => is_active?(business_customers_path)}
-      = link_to "Billing", business_customers_path 
+  %li{:class => is_active?(business_permissions_path)}
+    = link_to "Permissions", business_permissions_path
+
+  .nav-section Billing
+  %li{:class => is_active?(business_plan_path)}
+    = link_to "Subscription", business_plan_path   
+  %li{:class => is_active?(business_customers_path)}
+    = link_to "Billing", business_customers_path 
 
   .nav-section My Profile
   %li{:class => is_active?(business_user_path(current_user))}

@@ -110,6 +110,8 @@ Rails.application.routes.draw do
         get "availability/:id", to: "rooms#get_availability"
       end
     end
+    
+    resources :permissions
     resources :job_templates
     resources :media_photos
     resources :team_members

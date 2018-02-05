@@ -1,14 +1,13 @@
 class Business::CandidatesController < ApplicationController
   layout "business"
-  # filter_access_to :all
-  # filter_access_to :filter_candidates, :require => :read
+  load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy]
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
   
   def index    
-    @candidates = current_company.candidates.paginate(page: params[:page], per_page: 10)
+    @candidates = current_company.candidates.paginate(page: params[:page], per_page: 10).accessible_by(current_ability)
     @tags = current_company.tags
   end
 
@@ -152,10 +151,10 @@ class Business::CandidatesController < ApplicationController
     where[:tags] = {all: params[:tags]} if params[:tags].present?
     where[:created_at] = {gte: params[:date_applied].to_time, lte: Time.now} if params[:date_applied].present?
 
-    if params[:qcv].present?
-      @candidates = Candidate.search(params[:qcv], where: where, fields: qcv_fields, match: :word_start, per_page: 10, page: params[:page])
+    if params[:qcv].present? 
+      @candidates = Candidate.search(params[:qcv], where: where, fields: qcv_fields, match: :word_start).records.paginate(page: params[:page], per_page: 10).accessible_by(current_ability)
     else
-      @candidates = Candidate.search(query, where: where, fields: fields, match: :word_start, per_page: 10, page: params[:page])
+      @candidates = Candidate.search(query, where: where, fields: fields, match: :word_start).records.paginate(page: params[:page], per_page: 10).accessible_by(current_ability)
     end
 
     respond_to do |format|

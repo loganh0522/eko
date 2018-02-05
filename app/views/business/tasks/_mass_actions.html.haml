@@ -1,12 +1,13 @@
 .application-actions
-  = link_to "Create Task", new_business_task_path,  data: {:turbolinks => "false"}, remote: true, class: "btn border-button", id: "client-action"
+  - if can? :create, Task
+    = link_to "Create Task", new_business_task_path,  data: {:turbolinks => "false"}, remote: true, class: "btn border-button", id: "client-action"
   .toggle-actions 
     = link_to business_tasks_path(view: "list"), remote: true do
       .btn.border-button.toggle-show#list List
     = link_to business_tasks_path(view: "table"), remote: true do 
       .btn.border-button.toggle-show#table.toggle-showing Table 
-  .applicant-action-buttons
-    = link_to '#', id: "destroy_candidates", class: "move-applicants", :data => {:toggle => "modal", :target => "#destroy_candidatesModal"} do
-      %i.fa.fa-trash-o
-      .action Destroy
-    = link_to "Mark All as Complete", completed_business_tasks_path, method: :post, remote: true 
+  / .applicant-action-buttons
+  /   = link_to '#', id: "destroy_candidates", class: "move-applicants", :data => {:toggle => "modal", :target => "#destroy_candidatesModal"} do
+  /     %i.fa.fa-trash-o
+  /     .action Destroy
+  /   = link_to "Mark All as Complete", completed_business_tasks_path, method: :post, remote: true 

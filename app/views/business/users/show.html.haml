@@ -21,26 +21,37 @@
     .standard-body
       .standard-body-header
         %h4 Sync E-mail
-        .sync-email
-          - if current_user.outlook_token.present? 
+        - if current_user.outlook_token.present? 
+          .sync-email
             .sync-box#synced
               %img(src="/tmp/outlook_logo.jpeg")
               Synced Outlook
-          - else 
+          .sync-email
+            .sync-box 
+              %img(src="/tmp/gmail_icon.png")
+              Sync Gmail  
+        - elsif current_user.google_token.present? 
+          .sync-email
+            .sync-box
+              %img(src="/tmp/outlook_logo.jpeg")
+              Sync Outlook
+          .sync-email
+            .sync-box#synced
+              %img(src="/tmp/gmail_icon.png")
+              Synced Gmail 
+        - else 
+          .sync-email
             = link_to "#{@login_url}" do
               .sync-box 
                 %img(src="/tmp/outlook_logo.jpeg")
                 Sync Outlook
-        .sync-email
-          - if current_user.outlook_token.present? 
-            .sync-box 
-              %img(src="/tmp/gmail_icon.png")
-              Sync Gmail    
-          - else
+          .sync-email
             = link_to '/auth/google_oauth2' do 
               .sync-box 
                 %img(src="/tmp/gmail_icon.png")
                 Sync Gmail    
+        
+            
         
       
     .standard-body

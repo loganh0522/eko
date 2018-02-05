@@ -1,7 +1,7 @@
 class Business::ApplicationsController < ApplicationController
   layout "business"
-  # filter_access_to :all
-  # filter_access_to [:filter_applicants, :application_form], :require => :read
+  load_and_authorize_resource :job
+  
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -11,6 +11,7 @@ class Business::ApplicationsController < ApplicationController
     @job = Job.find(params[:job_id])
     @candidates = Candidate.joins(:applications).where(:applications => {job_id: @job.id}).paginate(page: params[:page], per_page: 10)
     tags_present(@candidates) 
+
     respond_to do |format| 
       format.js
       format.html
