@@ -1,6 +1,6 @@
 class Business::ApplicationScorecardsController < ApplicationController
   layout "business"
-  filter_access_to :all
+
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
