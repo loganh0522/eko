@@ -1,5 +1,4 @@
 class Business::TasksController < ApplicationController
-  # filter_access_to :all
   layout "business"
   load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy, :completed]
   
