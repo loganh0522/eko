@@ -30,7 +30,9 @@ class InboundEmailsController < ApplicationController
     if params[:validationToken].present? 
       render plain: params[:validationToken]
     else 
-      head 200
+      head 202
+
+
       if params[:value].present? 
         @subId = params[:value].first[:subscriptionId]
         @msgId = params[:value].first[:resourceData][:id]

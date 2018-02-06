@@ -48,7 +48,7 @@ module OutlookWrapper
       path = 'subscriptions'
       
       data = {
-        changeType: "created",
+        changeType: "created, updated",
         notificationUrl: ENV['OUTLOOK_WEBHOOK'],
         resource: "me/messages",
         expirationDateTime: Time.now + 4230.minutes,
@@ -152,7 +152,12 @@ module OutlookWrapper
                                  cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                  &callback)
 
-      binding.pry
+      response = graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDwAAAEof28m476pIpdF3oXTde94AAACS2CwEAAAA")
+      if response.present? 
+
+      else
+        head 200
+      end
       # graph.service.delete('subscriptions/8e61ed0c-201f-48eb-8393-f45229416a0e')
       # @message = graph.me.mail_folders.find('inbox').messages.first.body.content
       # graph.me.messages.find(id)
@@ -174,6 +179,7 @@ module OutlookWrapper
                                  cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                  &callback)
       
+
       @message = graph.me.messages.find(msgId)
       if @message.present?
         @subject = @message.subject
