@@ -107,7 +107,7 @@ module OutlookWrapper
         r.headers['Content-Type'] = 'application/json'
       end
 
-      path = 'subscriptions/#{user.outlook_token.subscription_id}'
+      path = "subscriptions/#{user.outlook_token.subscription_id}"
       
       data = {
         expirationDateTime: Time.now + 4230.minutes,
