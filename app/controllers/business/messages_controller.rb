@@ -23,8 +23,8 @@ class Business::MessagesController < ApplicationController
 
   def new
     @message = Message.new  
-    # OutlookWrapper::Mail.get_messages(current_user)
     
+    # OutlookWrapper::Mail.get_messages(current_user) 
     # GoogleWrapper::Gmail.get_message(current_user, "16003fe8a0356c28" )
     
     respond_to do |format|
