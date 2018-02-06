@@ -19,7 +19,7 @@ jQuery ->
 
   $(document).on 'click', '#delete-single', ->
     kind = $(this).parent().attr('id')
-    $('.plain-text').show()
+    $(this).parent().prev().show()
     $(this).parent().remove()
     $('#candidate_id').val('')
     return
@@ -63,7 +63,7 @@ jQuery ->
 
     $(document).on 'click', '#delete-single', ->
       kind = $(this).parent().attr('id')
-      $('.plain-text').show()
+      $(this).parent().prev().show()
       $(this).parent().remove()
       $('#candidate_id').val('')
       return

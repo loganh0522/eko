@@ -30,8 +30,7 @@
             %td
               = task.kind
             %td
-              - task.users.each do |user|
-                .tag= user.full_name
+              .tag= task.user.full_name
             %td
               = task.due_date
             %td

@@ -182,8 +182,6 @@ class Business::CandidatesController < ApplicationController
     end
   end
 
-
-
   def render_errors(candidate)
     @errors = []
     candidate.errors.messages.each do |error| 

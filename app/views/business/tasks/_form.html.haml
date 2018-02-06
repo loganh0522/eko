@@ -29,27 +29,29 @@
                   - array.each do |item|
                     .select-item{data: {:id => "#{item}"}}= item
                   = f.hidden_field :kind, id: "select-box-field", value: "To-do"
-      - if current_user.permission.assign_tasks
+      - if current_user.is_admin?
+        .contain-2
+          .assign-to-row
+            .title Assign to User 
+            = render 'business/users/single_auto'
+      - elsif current_user.permission.assign_tasks
         .contain-2
           .assign-to-row
             .title Assign to User 
             = render 'business/users/single_auto'
         
+        
 
     = f.text_area :notes, placeholder: "Notes", id: "comment-body"
+
+
     - if @taskable.class == Job  || @task.job_id.present?
       = render 'business/tasks/form_fields/job_fields'   
-    
-    - elsif @taskable.class == Candidate && @job.present?  
-    
     - elsif @taskable.class == Candidate
       = render 'business/tasks/form_fields/applicant_fields', f: f     
     - else 
       = render 'business/tasks/form_fields/all_fields', f: f
       
-
-    = f.hidden_field :user_ids, value: current_user.id, id: "user_id"
-    = f.hidden_field :candidate_ids, id: "candidate_id"
 
     - if @taskable.class == Job
       = f.hidden_field :job_id, value: @taskable.id
@@ -58,7 +60,10 @@
     - else 
       = hidden_field_tag :job_id, nil, id: "job_ids"
     
-    = f.hidden_field :user_id, value: current_user.id
+
+    = f.hidden_field :user_id, value: current_user.id, id: "user_id"
+    = f.hidden_field :candidate_ids, id: "candidate_id"
+    = f.hidden_field :created_by, value: current_user.id
     = f.hidden_field :company_id, value: current_company.id
     = f.hidden_field :status, value: "active"
     .comment-area-footer

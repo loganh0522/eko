@@ -87,10 +87,10 @@ class Company < ActiveRecord::Base
   end
 
   def create_permissions
-    Permission.create(company: self, name: "Hiring Manager",
+    Permission.create(company_id: d.id, name: "Hiring Manager",
       view_all_jobs: false, edit_career_portal: false, access_settings: false)
 
-    Permission.create(company_id: self, name: "Recruiter",
+    Permission.create(company_id: d.id, name: "Recruiter",
       view_all_jobs: false, create_job: false, edit_job: false, advertise_job: false,
       add_team_members: false, assign_tasks: false, send_messages: false, view_all_messages: false,
       create_event: false, send_event_invitation: false, view_all_events: false,

@@ -147,10 +147,12 @@ module OutlookWrapper
         r.headers['Content-Type'] = 'application/json'
       end
 
+
       graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/beta/',
                                  cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                  &callback)
 
+      binding.pry
       # graph.service.delete('subscriptions/8e61ed0c-201f-48eb-8393-f45229416a0e')
       # @message = graph.me.mail_folders.find('inbox').messages.first.body.content
       # graph.me.messages.find(id)
@@ -173,84 +175,89 @@ module OutlookWrapper
                                  &callback)
       
       @message = graph.me.messages.find(msgId)
-      @subject = @message.subject
-      @threadId = @message.conversation_id
-      @user_email = graph.me.user_principal_name
-      @company = @user.company
-      @sender = @message.sender.email_address.address
-      
-      if @sender == @user_email #sent from user
-        @msg_present = Message.where(email_id: msgId).first.present?
-        if !@msg_present
-          @recipient = @message.to_recipients.first.email_address.address
-          @candidate = Candidate.where(company_id: @company.id, email: @recipient).first 
+      if @message.present?
+        @subject = @message.subject
+        @threadId = @message.conversation_id
+        @user_email = graph.me.user_principal_name
+        @company = @user.company
+        @sender = @message.sender.email_address.address
+        
+        if @sender == @user_email #sent from user
+          @msg_present = Message.where(email_id: msgId).first.present?
           
-          if @candidate.present? 
+          if !@msg_present
+            @recipient = @message.to_recipients.first.email_address.address
+            @candidate = Candidate.where(company_id: @company.id, email: @recipient).first 
+            
+            if @candidate.present? 
+              if @message.body.content_type == "text"
+                @content = @message.body.content.gsub("\r\n", "<br>")
+                @content = @message.body.content.gsub("<br><br><br>", "")
+              else
+                @content =  @message.body.content.gsub("\r\n", "")
+                @content = @content.gsub(/\"/, "")
+                @content = @content.gsub("\t", "")
+                @content = @content.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
+              end
+              
+              @msg = @content
+
+              if @candidate.conversation.present?
+                Message.create(conversation_id: @candidate.conversation.id, 
+                  body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
+                  user_id: @user.id)
+              else 
+                Conversation.create(candidate_id: @candidate.id, company_id: @company.id)   
+                @conversation = Candidate.find(@candidate.id).conversation
+                Message.create(conversation_id: @conversation.id, 
+                  body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
+                  user_id: @user.id)
+              end
+            else
+              return nil
+            end
+          else
+            return nil
+          end
+        else #sent from Candidate
+          @recipient = @message.sender.email_address.address
+          @candidate = Candidate.where(company_id: @company.id, email: @recipient).first
+          
+          if @candidate.present?  
             if @message.body.content_type == "text"
               @content = @message.body.content.gsub("\r\n", "<br>")
               @content = @message.body.content.gsub("<br><br><br>", "")
             else
               @content =  @message.body.content.gsub("\r\n", "")
               @content = @content.gsub(/\"/, "")
-              @content = @content.gsub("\t", "")
-              @content = @content.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
+              
+              if @content.include?("<div class=gmail_extra>") 
+                @content = @content.split("<div dir=ltr>")[1]
+                @content = @content.split("<div class=gmail_extra>")[0]
+                @msg = @content
+              else
+                @content = @content.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
+                @msg = @content
+              end
             end
             
-            @msg = @content
-
             if @candidate.conversation.present?
               Message.create(conversation_id: @candidate.conversation.id, 
                 body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
-                user_id: @user.id)
+                candidate_id: @candidate.id)
             else 
               Conversation.create(candidate_id: @candidate.id, company_id: @company.id)   
               @conversation = Candidate.find(@candidate.id).conversation
               Message.create(conversation_id: @conversation.id, 
                 body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
-                user_id: @user.id)
+                candidate_id: @candidate.id)
             end
           else
             return nil
           end
-        else
-          return nil
         end
-      else #sent from Candidate
-        @recipient = @message.sender.email_address.address
-        @candidate = Candidate.where(company_id: @company.id, email: @recipient).first
-        
-        if @candidate.present?  
-          if @message.body.content_type == "text"
-            @content = @message.body.content.gsub("\r\n", "<br>")
-            @content = @message.body.content.gsub("<br><br><br>", "")
-          else
-            @content =  @message.body.content.gsub("\r\n", "")
-            @content = @content.gsub(/\"/, "")
-            
-            if @content.include?("<div class=gmail_extra>") 
-              @content = @content.split("<div dir=ltr>")[1]
-              @content = @content.split("<div class=gmail_extra>")[0]
-              @msg = @content
-            else
-              @content = @content.split("<div id=Signature>")[0].split("<p>")[1..-1].join()
-              @msg = @content
-            end
-          end
-          
-          if @candidate.conversation.present?
-            Message.create(conversation_id: @candidate.conversation.id, 
-              body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
-              candidate_id: @candidate.id)
-          else 
-            Conversation.create(candidate_id: @candidate.id, company_id: @company.id)   
-            @conversation = Candidate.find(@candidate.id).conversation
-            Message.create(conversation_id: @conversation.id, 
-              body: @msg, subject: @subject, email_id: msgId, thread_id: @threadId, 
-              candidate_id: @candidate.id)
-          end
-        else
-          return nil
-        end
+      else
+        head 200
       end
     end
   end
