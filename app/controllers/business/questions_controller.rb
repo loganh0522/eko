@@ -1,6 +1,7 @@
 class Business::QuestionsController < ApplicationController
   layout "business"
-  # filter_access_to :all
+  load_and_authorize_resource :job
+  load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy]
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over

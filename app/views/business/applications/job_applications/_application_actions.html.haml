@@ -3,7 +3,8 @@
     = link_to 'Add Candidate', new_business_candidate_path(:job => @job), class: "btn border-button", id: "add-applicant", remote: true
   .no-action-buttons
     .btn.inactive-button More Actions
-    .btn.inactive-button Send E-mail
+    - if can? :create, Message
+      .btn.inactive-button Send E-mail
     .btn.inactive-button Move Stages 
     .btn.inactive-button Add Tag
   .applicant-action-buttons
@@ -16,19 +17,21 @@
           %i.fa.fa-pencil
           .action Add Note
         
-        = link_to new_multiple_business_tasks_path(job: @job), remote: true, id: 'client-action' do
-          %i.fa.fa-tasks 
-          .action Create Task
+        - if can? :create, Task
+          = link_to new_multiple_business_tasks_path(job: @job), remote: true, id: 'client-action' do
+            %i.fa.fa-tasks 
+            .action Create Task
 
-        = link_to new_business_interview_invitation_path(job: @job), remote: true do 
-          %i.fa.fa-paper-plane-o
-          .action Interview Invitation
-
-        = link_to '#', id: "destroy_candidates", class: "move-applicants", :data => {:toggle => "modal", :target => "#destroy_candidatesModal"} do
-          %i.fa.fa-trash-o
-          .action Remove from Job
-
-    = link_to 'Send E-mail', new_multiple_business_messages_path, class: "btn active-application-button", remote: true
+        - if can? :create, InterviewInvitation
+          = link_to new_business_interview_invitation_path(job: @job), remote: true do 
+            %i.fa.fa-paper-plane-o
+            .action Interview Invitation
+        - if can? :edit, Candidate
+          = link_to '#', id: "destroy_candidates", class: "move-applicants", :data => {:toggle => "modal", :target => "#destroy_candidatesModal"} do
+            %i.fa.fa-trash-o
+            .action Remove from Job
+    - if can? :create, Message
+      = link_to 'Send E-mail', new_multiple_business_messages_path, class: "btn active-application-button", remote: true
     
     = link_to 'Move Stages', multiple_change_stages_business_applications_path(job: @job), class: "btn active-application-button", remote: true
 

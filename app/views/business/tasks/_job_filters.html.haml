@@ -1,9 +1,10 @@
 .filter-radios 
-  = radio_button_tag "owner", "company", true, class: 'filter'
-  = label_tag "owner_company", "All Tasks", :value => "company", class: 'filter'
+  - if current_user.permission.view_all_tasks
+    = radio_button_tag "owner", "company", true, class: 'filter'
+    = label_tag "owner_company", "All Tasks", :value => "company", class: 'filter'
   
-  = radio_button_tag "owner", "user", false, class: 'filter'
-  = label_tag "owner_user", "My Tasks", :value => "my-tasks", class: 'filter'
+    = radio_button_tag "owner", "user", false, class: 'filter'
+    = label_tag "owner_user", "My Tasks", :value => "my-tasks", class: 'filter'
 
 = text_field_tag "query", nil, placeholder: "Search Tasks", class: "search-field", autocomplete: "off"
 
@@ -22,17 +23,18 @@
       = radio_button_tag "status", "complete", false, class: 'filter'
       = label_tag "status_complete", "Complete", :value => "my-tasks", class: 'filter'
 
-.filter-container
-  .filter-header
-    %h4 Assigned To
-    .glyphicon.glyphicon-minus
-    .glyphicon.glyphicon-plus
-  .filter-body
-    %ul
-      - @job.users.each do |user|
-        %li
-          = check_box_tag "assigned_to[]", "#{user.id}", false, class: 'filter'
-          .filter-title= user.full_name
+- if current_user.permission.view_all_tasks
+  .filter-container
+    .filter-header
+      %h4 Assigned To
+      .glyphicon.glyphicon-minus
+      .glyphicon.glyphicon-plus
+    .filter-body
+      %ul
+        - @job.users.each do |user|
+          %li
+            = check_box_tag "assigned_to[]", "#{user.id}", false, class: 'filter'
+            .filter-title= user.full_name
 
 .filter-container
   .filter-header

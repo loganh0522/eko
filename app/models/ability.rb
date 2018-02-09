@@ -12,14 +12,20 @@ class Ability
       # Job Permissions
       can :create, Job if user.permission.create_job
       can :manage, JobFeed if user.permission.advertise_job
-      # t.boolean :edit_job, default: true
-      # t.boolean :add_team_members, default: true
+
       if user.permission.view_all_jobs
-        can :manage, Job
+        can :view, Job
+        can :read, Job
+        can :update, Job
       else
         can :read, Job, users: {id: user.id}
         can :view, Job, users: {id: user.id}
         can :update, Job, users: {id: user.id} if user.permission.edit_job
+
+        can :manage, HiringTeam, job: {users: {id: user.id}} if user.permission.edit_job
+        can :manage, Stage, job: {users: {id: user.id}} if user.permission.edit_job
+        can :manage, Question, job: {users: {id: user.id}} if user.permission.edit_job
+        can :manage, Scorecard, job: {users: {id: user.id}} if user.permission.edit_job
       end
 
       #### Candidate
@@ -36,8 +42,8 @@ class Ability
       can :update, Candidate if user.permission.edit_candidates
       can :destroy, Candidate if user.permission.edit_candidates
 
-
       #### Tasks 
+      
       can :create, Task if user.permission.create_tasks
       can :assign_tasks, Task if user.permission.assign_tasks
       
@@ -51,38 +57,43 @@ class Ability
         can :destroy, Task, user_id: user.id
         can [:completed], Task, user_id: user.id
       else
-        can :manage, Task, user_id: user.id
+        can :read, Task, user_id: user.id
         can [:completed], Task, user_id: user.id
+        can :job_tasks, Task
       end
 
       #### Messages
-      can :create, Message if user.permission.send_messages
-      can :read, Message if user.permission.view_section_messages
+      
+      
 
       if user.permission.view_all_messages
         can :manage, Message
       else
         can :read, Message, users: {id: user.id}
+        can :create, Message if user.permission.send_messages
+        can :read, Message if user.permission.view_section_messages
       end
-      
+
       #### Calendar
+
       can :create, Interview if user.permission.create_event
-      can :read, Interview if user.permission.view_events
       can :create, InterviewInvitation if user.permission.send_event_invitation
       
       if user.permission.view_all_events && user.permission.view_all_jobs
         can :manage, Interview
         can :manage, InterviewInvitation
-      elsif user.permission.view_all_tasks 
+      elsif user.permission.view_all_events
         can :read, Interview, job: {users: {id: user.id}}
         can :read, InterviewInvitation, job: {users: {id: user.id}}
 
         can :edit, Interview, user_id: user.id
         can :read, Interview, user_id: user.id
+
         can :update, Interview, user_id: user.id
         can :destroy, Interview, user_id: user.id
       else
         can :read, Interview, users: {id: user.id}
+        cannot :read, InterviewInvitation
       end
 
       ### General Settings

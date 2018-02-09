@@ -1,6 +1,6 @@
 class Business::InterviewsController < ApplicationController
   layout "business"
-  
+  load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy, :completed]
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -10,7 +10,7 @@ class Business::InterviewsController < ApplicationController
   
   def job_interviews
     @job = Job.find(params[:job_id])
-    @interviews = @job.interviews
+    @interviews = @job.interviews.accessible_by(current_ability)
   end
 
   def show 
@@ -20,8 +20,8 @@ class Business::InterviewsController < ApplicationController
   end
   
   def index
-    @events = current_company.interviews
-
+    @events = current_company.interviews.accessible_by(current_ability)
+    
     respond_to do |format|
       format.js 
       format.json
@@ -108,9 +108,9 @@ class Business::InterviewsController < ApplicationController
     where[:created_at] = {gte: params[:date_applied].to_time, lte: Time.now} if params[:date_applied].present?
 
     if params[:qcv].present?
-      @candidates = Candidate.search(params[:qcv], where: where, fields: qcv_fields, match: :word_start, per_page: 10, page: params[:page])
+      @candidates = Candidate.search(params[:qcv], where: where, fields: qcv_fields, match: :word_start).records.paginate(page: params[:page], per_page: 10).accessible_by(current_ability)
     else
-      @candidates = Candidate.search(query, where: where, fields: fields, match: :word_start, per_page: 10, page: params[:page])
+      @candidates = Candidate.search(query, where: where, fields: fields, match: :word_start).records.paginate(page: params[:page], per_page: 10).accessible_by(current_ability)
     end
 
     @events = Interview.search("*")

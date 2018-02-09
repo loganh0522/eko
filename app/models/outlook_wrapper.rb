@@ -27,10 +27,14 @@ module OutlookWrapper
                                 cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
                                 &callback)
 
-
       email = graph.me.user_principal_name
       @room = Room.where(email: email).first
-      outlook_token.update_attributes(room_id: @room.id)
+      
+      if @room.present? 
+        outlook_token.update_attributes(room_id: @room.id)
+      else 
+        nil 
+      end
     end
 
     def self.create_subscription(user)
@@ -80,7 +84,7 @@ module OutlookWrapper
         r.headers['Content-Type'] = 'application/json'
       end
 
-      path = 'subscriptions/'
+      path = "subscriptions/#{user.outlook_token.subscription_id}"
       
       data = {
         expirationDateTime: Time.now + 4230.minutes,
@@ -156,10 +160,6 @@ module OutlookWrapper
       @response = graph.me.mail_folders.find('SentItems').messages.first
       @message = Message.find(msgId)
       @message.update_attributes(email_id: @response.id, thread_id: @response.conversation_id)
-
-
-      # graph.me.mail_folders.find('SentItems').messages.first
-      # graph.me.mail_folders.find('SentItems').messages.first.conversation_id
     end
 
     def self.get_messages(user)
@@ -350,16 +350,14 @@ module OutlookWrapper
         @create = graph.me.events.create(subject: "Pending Interview", 
           body: {content: event.details},
           start: {dateTime: dateTime, timeZone: "America/New_York"}, end: {dateTime: endTime,  timeZone: "America/New_York"}, 
-          organizer: {emailAddress: {address: user.email}},
-          responseRequested: true, responseStatus: {"@odata.type" => "microsoft.graph.responseStatus"})
+          organizer: {emailAddress: {address: user.email}})
 
         EventId.create(room_id: user.id, event_id: @create.id, interview_time_id: time.id) 
       else
         @create = graph.me.events.create(subject: "Pending Interview", 
           body: {content: event.details},
           start: {dateTime: dateTime, timeZone: "America/New_York"}, end: {dateTime: endTime,  timeZone: "America/New_York"}, 
-          organizer: {emailAddress: {name: user.full_name, address: user.email}},
-          responseRequested: true, responseStatus: {"@odata.type" => "microsoft.graph.responseStatus"})
+          organizer: {emailAddress: {name: user.full_name, address: user.email}})
         
         EventId.create(user_id: user.id, event_id: @create.id, interview_time_id: time.id) 
       end
@@ -385,10 +383,10 @@ module OutlookWrapper
         start: {dateTime: dateTime.strftime("%Y-%m-%dT%H:%M:%S"), timeZone: "America/New_York"}, end: {dateTime: endTime.strftime("%Y-%m-%dT%H:%M:%S"),  timeZone: "America/New_York"}, 
         organizer: {emailAddress: {name: user.full_name, address: user.email}},
         attendees: [{emailAddress: {address: attendee.email, name: attendee.full_name}, type: "required"}],
-        responseRequested: true)
+        responseRequested: interview.send_request)
     end
 
-    def self.update_event(user, event, candidate)   
+    def self.update_event(user, event, candidate, interview)   
       if user.outlook_token.expired?
         user.outlook_token.refresh!(user)
       end
@@ -400,7 +398,17 @@ module OutlookWrapper
       end
 
       path = 'me/events/' + event.event_id
-      data = {subject: "Interview with #{candidate.full_name}"}
+      data = {subject: "Interview with #{candidate.full_name}",
+              body: {content: interview.notes},
+              responseStatus: "Accepted",
+              attendees: [
+                { status: { response: "Accepted", time: Time.now},
+                emailAddress: { address: user.email, name: user.full_name }},
+                {status: {response: "Accepted", time: Time.now}, 
+                emailAddress: { address: candidate.email, name: candidate.full_name }}
+              ]}
+              
+
       
       graph = MicrosoftGraph.new(base_url: 'https://graph.microsoft.com/v1.0/',
                                 cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, 'metadata_v1.0.xml'),
@@ -547,6 +555,9 @@ end
 #     ]
 #   })
 
+
+# graph.me.mail_folders.find('SentItems').messages.first
+# graph.me.mail_folders.find('SentItems').messages.first.conversation_id
 # id1 graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH2AAAA").body.content.split("dir=\"ltr\">")[1].split('</div>')[0]
 # id2 graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH3AAAA").body.content.split("dir=\"ltr\">")[1].split('</div>')[0]
 # id3 graph.me.messages.find("AQMkADAwATM3ZmYAZS0wYTU1AC1hMjUwLTAwAi0wMAoARgAAAy908hwkDTxDkvZE3tUY1rAHAEof28m476pIpdF3oXTde94AAAIBDAAAAEof28m476pIpdF3oXTde94AAAA1rjH4AAAA").body.content.split("dir=\"ltr\">")[1].split('</div>')[0]

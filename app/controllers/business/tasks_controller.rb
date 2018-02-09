@@ -1,8 +1,6 @@
 class Business::TasksController < ApplicationController
   layout "business"
   load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy, :completed]
-  
-  
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -15,7 +13,8 @@ class Business::TasksController < ApplicationController
 
   def job_tasks
     @job = Job.find(params[:job_id]) 
-    @tasks = @job.open_tasks.paginate(page: params[:page], per_page: 10)
+    @tasks = @job.open_tasks.paginate(page: params[:page], per_page: 10).accessible_by(current_ability)
+
 
     respond_to do |format| 
       format.js
@@ -237,7 +236,6 @@ class Business::TasksController < ApplicationController
           @tasks = current_company.open_tasks.paginate(page: params[:page], per_page: 10)
         end
         format.js 
-
       else
         render_errors(@new_task)
         format.js 

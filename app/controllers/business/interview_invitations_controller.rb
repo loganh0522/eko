@@ -1,12 +1,14 @@
 class Business::InterviewInvitationsController < ApplicationController
   layout "business"
+  load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy]
+
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
 
   def index
-    @interview_invitations = current_company.interview_invitations
+    @interview_invitations = current_company.interview_invitations.accessible_by(current_ability)
 
     respond_to do |format|
       format.html
@@ -16,7 +18,7 @@ class Business::InterviewInvitationsController < ApplicationController
 
   def job_invitations
     @job = Job.find(params[:job_id])
-    @interview_invitations = current_company.interview_invitations
+    @interview_invitations = current_company.interview_invitations.accessible_by(current_ability)
   end
 
   def new
@@ -52,6 +54,7 @@ class Business::InterviewInvitationsController < ApplicationController
 
   def send_invitations(interview_invite)
     @candidates = @interview_invite.candidates    
+    
     @candidates.each do |candidate|
       if candidate.manually_created == true
         @email = candidate.email
@@ -64,20 +67,20 @@ class Business::InterviewInvitationsController < ApplicationController
 
   def send_invitation_email(interview_invite, candidate, email)
     @job = interview_invite.job if @interview_invite.job.present?
-    @message = interview_invite.message
+    @message = interview_invite.message +  "<p> <a href='www.talentwiz.ca/schedule_interview/#{interview_invite.token}'> Schedule Interview Link </a> </p>"
     @subject = interview_invite.subject
     @token = interview_invite.token
-    
-    # if current_user.google_token.present? 
-    #   @email = Mail.new(to: @recipient.email, from: current_user.email, subject: params[:message][:subject], body: params[:body], content_type: "text/html")
-    #   GoogleWrapper::Gmail.send_message(@email, current_user, message)
-    # else current_user.google_token.present? 
-    #   @email = Mail.new(to: @recipient.email, from: current_user.email, subject: params[:message][:subject], body: params[:body], content_type: "text/html")
-    #   GoogleWrapper::Gmail.send_message(@email, current_user, message)
-    # end
 
-    AppMailer.send_interview_invitation(@token, @message, @subject, @job, email, current_company).deliver_now
-    # end
+    if current_user.outlook_token.present? || current_user.google_token.present?   
+      if candidate.conversation.present? 
+        @message = candidate.messages.create(body: @message, subject: @subject, user: current_user, conversation_id: candidate.conversation.id)
+      else 
+        @conversation = Conversation.create(candidate_id: candidate.id, company_id: current_company.id)   
+        @message = candidate.messages.create(body: @message, subject: @subject, user: current_user, conversation_id: @conversation.id)
+      end   
+    else  
+      AppMailer.send_interview_invitation(@token, @message, @subject, @job, email, current_company).deliver_now
+    end
   end
 
   def schedule_in_calendar(event)

@@ -6,7 +6,7 @@
         = link_to "Send Invitation", new_business_interview_invitation_path,  data: {:turbolinks => "false"}, remote: true, class: "btn border-button", id: "client-action"
       
       - if can? :create, Interview
-        = link_to "+ Interview", new_business_interview_path, data: {:turbolinks => "false"}, remote: true, class: "btn border-button", id: "client-action"
+        = link_to "+ Interview", new_business_interview_path, data: {:turbolinks => "false"}, remote: true, class: "btn border-button interview-button", id: "client-action"
       
 #main-container
   #padding

@@ -14,4 +14,7 @@
         .btn.border-button.toggle-show#open Published
       = link_to search_business_jobs_path(status: "closed"), remote: true do
         .btn.border-button.toggle-show#closed Closed
-    = text_field_tag "query", nil, placeholder: "Search Jobs", class: "search-field", autocomplete: "off"
+    .search-form
+      .search-area-content
+        %i.fa.fa-search.fa-stack-2x
+        = text_field_tag "query", nil, placeholder: "Search Jobs", class: "search-field", autocomplete: "off"

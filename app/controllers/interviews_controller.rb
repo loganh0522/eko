@@ -26,8 +26,9 @@ class InterviewsController < ApplicationController
         etime: 'n/a', stime: 'n/a', date: 'n/a'))
       
       if @interview.save
-        update_user_calendar(@time, @candidate)  
+        update_user_calendar(@time, @candidate, @interview)  
         InvitedCandidate.where(candidate_id: @candidate.id, interview_invitation_id: @invite.id).first.destroy
+        
         @events.each do |event|
           event.update_attributes(interview_id: @interview.id, interview_time_id: nil)
         end
@@ -58,7 +59,7 @@ class InterviewsController < ApplicationController
 
   private 
 
-  def update_user_calendar(time, candidate)
+  def update_user_calendar(time, candidate, interview)
     @events = @time.event_ids
     @candidate = candidate 
    
@@ -70,7 +71,7 @@ class InterviewsController < ApplicationController
       end
       
       if @user.outlook_token.present?    
-        OutlookWrapper::Calendar.update_event(@user, event, candidate)
+        OutlookWrapper::Calendar.update_event(@user, event, candidate, interview)
       elsif @user.google_token.present?
         GoogleWrapper::Calendar.update_event(@user, event, candidate)
       end

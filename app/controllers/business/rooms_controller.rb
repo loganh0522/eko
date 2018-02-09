@@ -1,6 +1,6 @@
 class Business::RoomsController < ApplicationController
   layout "business"
-  # filter_resource_access
+
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -74,7 +74,16 @@ class Business::RoomsController < ApplicationController
       )
 
     OutlookWrapper::User.set_room_token(@outlookToken)
-    redirect_to business_company_path(current_company)
+
+    binding.pry
+    if @outlookToken.room.present?
+      flash[:success] = 'You have synced the Room'
+      redirect_to business_company_path(current_company)
+    else
+      @outlookToken.destroy
+      flash[:danger] = 'Something went wrong. Make sure the e-mail you are syncing is the same as the Room'
+      redirect_to business_company_path(current_company)
+    end
   end
 
   def get_availability

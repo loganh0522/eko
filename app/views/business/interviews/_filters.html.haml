@@ -1,9 +1,10 @@
 = form_tag search_business_interviews_path, :method => 'get', id: "search-form" do
-  .filter-radios 
-    = radio_button_tag "owner", "company", true, class: 'filter'
-    = label_tag "owner_company", "All", :value => "company", class: 'filter'
-    = radio_button_tag "owner", "user", false, class: 'filter'
-    = label_tag "owner_user", "My Interviews", :value => "my-tasks", class: 'filter'
+  - if current_user.is_admin? || current_user.permission.view_all_events
+    .filter-radios 
+      = radio_button_tag "owner", "company", true, class: 'filter'
+      = label_tag "owner_company", "All", :value => "company", class: 'filter'
+      = radio_button_tag "owner", "user", false, class: 'filter'
+      = label_tag "owner_user", "My Interviews", :value => "my-tasks", class: 'filter'
 
   = render 'filter_links'
   .filter-container
@@ -33,7 +34,7 @@
       .glyphicon.glyphicon-plus
     .filter-body 
       %ul
-        - current_company.company_jobs.each do |job| 
+        - current_company.open_jobs.each do |job| 
           %li
             = check_box_tag "job_title[]", "#{job}", false, class: 'filter'
             .filter-title #{job}
