@@ -7,7 +7,8 @@ class Ability
     if user.is_admin? 
       can :manage, [Job, Candidate, JobFeed, 
         Task, Message, Interview, InterviewInvitation, JobBoard, JobTemplate, 
-        User, Invitation, EmailTemplate, Company]
+        User, Invitation, EmailTemplate, Company, HiringTeam, Scorecard, Stage, 
+        Question, JobFeed]
     else
       # Job Permissions
       can :create, Job if user.permission.create_job
