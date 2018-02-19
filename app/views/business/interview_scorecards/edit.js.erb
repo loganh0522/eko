@@ -1,0 +1,4 @@
+$('#mediumModal').find('form').remove()
+$('#mediumModal').find('.new-title').html('<%= j "Create Interview Kit" %>');
+$('#mediumModal').find('.new-modal-header').after('<%= j render "business/interview_scorecards/form" %>');
+$('#mediumModal').show();

@@ -14,41 +14,46 @@ class InterviewsController < ApplicationController
   def create
     @time = InterviewTime.find_by(id: params[:time])  
     
-    if @time.present?
-      @invite =  @time.interview_invitation
-      @candidate = @invite.candidates.where(email: (params[:email]).downcase).first  
-      @events = @time.event_ids
-      
-      @interview = Interview.new(interview_params.merge!(
-        title: @invite.title, kind: @invite.kind, location: @invite.location,
-        users: @invite.users, candidate_id: @candidate.id, job: @invite.job,
-        start_time: @time.start_time , end_time: @time.end_time, notes: @invite.body,
-        etime: 'n/a', stime: 'n/a', date: 'n/a'))
-      
-      if @interview.save
-        update_user_calendar(@time, @candidate, @interview)  
-        InvitedCandidate.where(candidate_id: @candidate.id, interview_invitation_id: @invite.id).first.destroy
+    respond_to do |format|
+      if @time.present?
+        @invite =  @time.interview_invitation
+        @candidate = @invite.candidates.where(email: (params[:email]).downcase).first  
+        @events = @time.event_ids
         
-        @events.each do |event|
-          event.update_attributes(interview_id: @interview.id, interview_time_id: nil)
+        @interview = Interview.new(interview_params.merge!(
+          title: @invite.title, kind: @invite.kind, location: @invite.location,
+          users: @invite.users, candidate_id: @candidate.id, job: @invite.job,
+          start_time: @time.start_time , end_time: @time.end_time, notes: @invite.body,
+          etime: 'n/a', stime: 'n/a', date: 'n/a'))
+        
+        
+        if @interview.save
+          update_user_calendar(@time, @candidate, @interview)  
+          InvitedCandidate.where(candidate_id: @candidate.id, interview_invitation_id: @invite.id).first.destroy
+          
+          @events.each do |event|
+            event.update_attributes(interview_id: @interview.id, interview_time_id: nil)
+          end
+          @time.destroy
+          destroy_user_events
+          
+          format.js
+        else
+          @invitation = InterviewInvitation.where(token: params[:token]).first
+          @company = @invitation.company
+          @times = @invitation.interview_times
+          
+          format.js
         end
-        @time.destroy
-        destroy_user_events
-
-        redirect_to booked_path(@interview)
-      else
-        render :new
+      else 
+        @error = true
+        @interview = Interview.new
         @invitation = InterviewInvitation.where(token: params[:token]).first
         @company = @invitation.company
         @times = @invitation.interview_times
+
+        format.js
       end
-    else 
-      flash[:danger] = "Uh-oh, this time has already been booked. Please choose a different time."
-      @interview = Interview.new
-      @invitation = InterviewInvitation.where(token: params[:token]).first
-      @company = @invitation.company
-      @times = @invitation.interview_times
-      render :new
     end
   end
 

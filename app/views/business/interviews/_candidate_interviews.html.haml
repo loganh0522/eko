@@ -1,0 +1,27 @@
+- @interviews.each do |interview|
+  - if interview.start_time > Time.now
+    .candidate-interview
+      .title= interview.title
+      = interview.kind
+      .date-time
+        %i.fa.fa-clock-o
+        .date-time-container
+          .date= "#{interview.start_time.strftime('%A %B %e')}"
+          .time= "#{interview.start_time.strftime('%I:%M %p')} - #{interview.end_time.strftime('%I:%M %p')}"
+      .date-time
+        %i.fa.fa-map-marker
+        .date-time-container
+          .date= "#{interview.location}"
+          .time= "#{interview.room}" 
+
+      = link_to "Interview Kit", new_business_interview_scorecard_path(interview: interview), remote: true
+      
+      .details
+        .box-row
+          .title Interviewers:
+          .content
+            - interview.users.each do |user|   
+              .user-tag= user.full_name
+          
+      
+        

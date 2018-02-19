@@ -3,15 +3,42 @@
   margin: 100px 20% 
   box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
   background: white
+  padding: 10px 0 
+  .confirmation-circle
+    height: 100px 
+    width: 100px
+    border-radius: 50%
+    margin: 0 auto
+    border: 3px solid #EF7B2B
+    background: rgba(239,123,43, 0.2)
+    .fa-check
+      height: 40px
+      width: 40px
+      padding: 28px 30px
+      position: relative
+      color: #EF7B2B
+    .fa-stack-3x
+      font-size: 2.5em
+  .details 
+    margin: 20px auto
+    width: fit-content
+    text-align: center
+    .title
+      font-size: 18px
+      margin-bottom: 10px
+    .time
+      font-size: 16px
+    .detail
+      margin-top: 10px
   .logo 
     text-align: center
     width: auto
   .time-container
-    width: 100%
+    width: 80%
     border: 1px solid rgba(0,0,0,0.1) 
     border-radius: 3px
     padding: 15px 15px
-    margin-bottom: 15px
+    margin: 8px 10%
     background: #ffffff
     text-align: center
     input[radio]
@@ -19,6 +46,9 @@
       cursor: pointer
       background: rgba(239,123,43, 0.4)
 
+  .email-field
+    width: 80%
+    margin: 8px 10%
   input[type="radio"]:checked+label
     background: rgba(239,123,43, 0.4)
   input[type="radio"]

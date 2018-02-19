@@ -1,0 +1,40 @@
+.candidate-task{:id => "task_#{task.id}"}
+  .task-details
+    .body
+      .dropdown
+        .dropdown-button
+          %i.fa.fa-ellipsis-h.fa-lg
+        .dropdown-content#myDropdown
+          = link_to edit_business_task_path(task), remote: true  do
+            %i.fa.fa-pencil
+            .action Edit
+          = link_to business_task_path(task.id), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do  
+            %i.fa.fa-trash-o
+            .action Destroy
+
+      - if task.status == "complete"
+        #completed
+          = link_to completed_business_tasks_path(id: task.id), method: :post, remote: true do 
+            .glyphicon.glyphicon-ok
+      - else
+        = link_to completed_business_tasks_path(id: task.id), method: :post, remote: true do 
+          .glyphicon.glyphicon-ok 
+      .details
+        .title
+          = link_to "#{task.title}", business_task_path(task), remote: true
+        = "Assigned To: #{ task.user.full_name}"
+      
+
+    / .task-row
+    /   - if !task.notes.present?
+    /     .no-notes There are currently no notes for this task.
+    /   - else
+    /     = task.notes 
+    / .task-row
+    /   .detail
+    /     .assigned Assigned to: 
+    /     - task.users.each do |user|
+    /       .tag= user.full_name
+    /   .detail
+    /     .assigned Type
+    /     .tag= "#{task.kind}"

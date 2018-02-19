@@ -1,3 +1,5 @@
-$('#myModal .modal-title').html("<%= @interview.kind %> Interview");
-$('#myModal .modal-body').html('<%= j render "business/interviews/show_interview", interview: @interview %>');
-$('#myModal').modal("show");
+$('.smallModal').find('form').remove()
+$('.smallModal').find('.candidate-interview').remove();
+$('.smallModal').find('.new-title').html('"<%= @interview.title %> Interview"');
+$('.smallModal').find('.new-modal-header').after('<%= j render "business/interviews/show_interview", interview: @interview %>');
+$('.smallModal').show();

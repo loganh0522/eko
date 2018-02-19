@@ -1,0 +1,14 @@
+.confirmation-circle
+  %i.fa.fa-check.fa-stack-3x
+.details
+  .title= "#{(@interview.kind)} has been Scheduled"
+  %p= "An e-mail confirmation has been sent to you"
+  .time
+    .date= "#{@interview.start_time.strftime('%A %B %e')}"
+    .time= "#{@interview.start_time.strftime('%I:%M %p')} - #{@interview.end_time.strftime('%I:%M %p')}"
+  .detail
+    %i.fa.fa-map-marker
+    = "#{@interview.location}"
+  .detail
+    %i.fa.fa-pencil
+    = "#{@interview.notes}"

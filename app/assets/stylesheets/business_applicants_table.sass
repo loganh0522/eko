@@ -416,10 +416,12 @@ trix-editor
 .post-job-container
   margin-bottom: 100px
   overflow: hidden
+  padding: 0 20px 20px 10px
   .change-containers-nav
     margin-left: 3%
   #free-boards
     width: 95%
+    padding: 0 20px 20px 10px
     margin: 0 2.5% 
   #premium-boards
     float: left
@@ -493,22 +495,44 @@ trix-editor
   border: 1px solid rgba(0,0,0,.1)
   margin-right: 15px
   margin: 15px 15px 0 0 
-  width: 250px
+  width: 300px
   min-height: 175px
   overflow: hidden
   background: #ffffff
   box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
   .header
     border-bottom: 1px solid rgba(0,0,0,0.1)
-    height: 100px
+    height: fit-content
+    min-height: 80px
+    padding: 20px 45px
     img 
-      margin: 0px 25px 
+      width: 200px 
+      height: 80px
       align: center
   .body
-    height: 125px
-    padding: 10px 0
+    padding: 20px 20px
+    height: fit-content
+    min-height: 80px
     .duration-name
-      padding: 5px 0 
+      padding: 5px 0
+  
+  .premium-body
+    padding: 20px 0px
+    height: fit-content
+    min-height: 80px
+    .job-price
+      font-weight: bold
+      color: rgba(0,0,0,0.8)
+      font-size: 14px
+    .job-duration
+      font-size: 12px
+      color: rgba(0,0,0,0.8)
+
+
+  .add_to_cart
+    margin-right: 10px
+    height: fit-content
+
   .footer
     height: auto
     height: 15px

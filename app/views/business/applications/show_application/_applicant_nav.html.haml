@@ -1,7 +1,18 @@
+
+
 %ul
+  = link_to stage_business_application_path(@application), remote: true do
+    %li.change#process.activated Stage
+
   = link_to business_job_application_path(@job, @application), remote: true do
-    %li.change#profile.activated Profile
-  
+    %li.change#profile Profile
+
+  / = link_to business_candidate_interviews_path(@candidate, job: @job), remote: true do
+  /   %li.change#interviews Interviews
+
+  = link_to application_form_business_application_path(@application), remote: true do
+    %li.change#assessments Scorecards
+
   = link_to business_candidate_messages_path(@candidate, job: @job), remote: true do
     %li.change#messages Messages 
 
@@ -10,11 +21,13 @@
     
   = link_to business_candidate_comments_path(@candidate, job: @job), remote: true do
     %li.change#notes Notes
-  = link_to business_candidate_application_form_path(@candidate, job: @job), remote: true do
-    %li.change#assessments Assessments
+
+
+  / = link_to business_candidate_application_form_path(@candidate, job: @job), remote: true do
+  /   %li.change#assessments Assessments
   
-  = link_to business_candidate_application_scorecards_path(@candidate, job: @job), remote: true do
-    %li.change#scorecards Scorecards
+  / = link_to business_candidate_application_scorecards_path(@candidate, job: @job), remote: true do
+  /   %li.change#scorecards Scorecards
   
   = link_to business_candidate_activities_path(@candidate, job: @job), remote: true do
     %li.change#activity Activity

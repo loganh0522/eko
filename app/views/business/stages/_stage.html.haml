@@ -3,23 +3,23 @@
     .glyphicon.glyphicon-move
     .body
       = stage.name
-    .icons
-      = link_to edit_business_job_stage_path(@job.id, stage.id), :data => {:remote => true } do
-        %i.glyphicon.glyphicon-pencil
-      = link_to business_job_stage_path(@job.id, stage.id), remote: true, :method => :delete do
-        %i.glyphicon.glyphicon-remove
-      
+    .dropdown
+      .dropdown-button
+        %i.fa.fa-ellipsis-h.fa-lg
+      .dropdown-content#myDropdown      
+        = link_to edit_business_job_stage_path(@job.id, stage.id), :data => {:remote => true } do
+          %i.fa.fa-pencil
+          .action Edit
+        = link_to business_job_stage_path(@job.id, stage.id), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do
+          %i.fa.fa-trash-o 
+          .action Destroy
 
 
-    / .tasks
-    /   .task
-    /     Review the candidates application. 
-    /     = link_to "Assign Task", "#", :html => {:data => {:remote => true } }
-    /   .interview
-    /     Phone Interview
-    /     = link_to "+ Interview Kit", "#", :html => {:data => {:remote => true }}
-    /     = link_to "Assign Interview", "#", :html => {:data => {:remote => true } }
-    / .actions
-    /   = link_to "+ Add Task", "#", :html => {:data => {:remote => true } }
-    /   = link_to "+ Add Interview", "#", :html => {:data => {:remote => true } }
+  .stage-body 
+    = render 'business/stage_actions/actions', stage: stage
+  .stage-footer
+    = link_to "+ Add Interview", new_business_stage_action_path(stage: stage, kind: 'interview'), id: 'client-action', remote: true
+    = link_to "+ E-mail", new_business_stage_action_path(stage: stage, kind: 'email'), remote: true
+    = link_to "+ Add Task", new_business_stage_action_path(stage: stage, kind: 'task'), remote: true, id: 'client-action'
+    
         

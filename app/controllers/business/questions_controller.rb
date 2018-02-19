@@ -1,7 +1,7 @@
 class Business::QuestionsController < ApplicationController
   layout "business"
   load_and_authorize_resource :job
-  load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy]
+  load_and_authorize_resource only: [:new, :index, :edit]
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over

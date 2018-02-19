@@ -13,10 +13,6 @@
           .not-present-container
             %p There is currently no scorecard for this job. 
             .add-object= link_to "+ Create Scorecard", new_business_job_scorecard_path(@job), remote: true, class: 'btn border-button'
+      
       - if @scorecard.present?
-        .container-footer
-          = link_to "+ Edit Scorecard", edit_business_job_scorecard_path(@job, @scorecard), class: "btn border-button", remote: true
-          .destroy-action
-            = link_to business_job_scorecard_path(@job, @scorecard), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."} do 
-              %i.fa.fa-trash-o
-              Destroy
+        = render 'container_footer'

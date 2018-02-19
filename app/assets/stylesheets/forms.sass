@@ -5,6 +5,8 @@
   padding: 0 15px
   background: #FFFFFF
   overflow: hidden
+#no-padding
+  padding: 10px 0
 .form-row2
   overflow: hidden
   border-bottom: 1px solid rgba(0,0,0,0.1)
@@ -115,7 +117,16 @@
       margin-right: 10px
     .submit-button
       float: right
+#interview-location
+  display: none
 
+.nice-radios 
+  
+
+  border: 1px solid
+  border-radius: 5px
+
+  
 #addMultiDropDown
   .dropdown-content
     background: #ffffff
@@ -459,6 +470,33 @@
       width: fit-content
       margin: 11px 10px
       color: rgba(0,0,0,0.4)
+
+.interview-scorecard
+  .question
+    float: left
+    margin-top: 5px
+  .scorecard-inputs
+    float: right
+    label
+      padding: 10px 10px
+      border-left: 1px solid #D1DCE4
+      border-top: 1px solid #D1DCE4
+      border-bottom: 1px solid #D1DCE4
+      margin: 0 -2px 
+      height: 40px
+
+    label:first-of-type
+      border-radius: 5px 0px 0px 5px
+    
+    label:last-child
+      border-radius: 0px 5px 5px 0px
+      border-right:  1px solid #D1DCE4
+
+    input[type='radio']
+      display: none
+    input[type="radio"]:checked+label
+      background: #D1DCE4
+
 
 .hidden-search-box
   display: none

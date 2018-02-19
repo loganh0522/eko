@@ -15,13 +15,17 @@ class Business::InterviewsController < ApplicationController
 
   def show 
     @interview = Interview.find(params[:id])
-    @applicant = @interview.application.applicant
+    # @applicant = @interview.application.applicant
     @team = @interview.users 
   end
   
   def index
-    @events = current_company.interviews.accessible_by(current_ability)
-    
+    if params[:candidate_id].present?
+      @candidate = Candidate.find(params[:candidate_id])
+      @interviews = @candidate.interviews
+    else
+      @events = current_company.interviews.accessible_by(current_ability)
+    end
     respond_to do |format|
       format.js 
       format.json
@@ -34,6 +38,10 @@ class Business::InterviewsController < ApplicationController
     @candidates = current_company.candidates.order(:created_at).limit(10)
     @users = current_company.users.limit(10)
 
+    @stage_action = StageAction.find(params[:s_action]) if params[:s_action].present?
+    @application = Application.find(params[:application]) if params[:application].present?
+    @candidate = @application.candidate
+
     respond_to do |format| 
       format.js 
     end 
@@ -44,6 +52,7 @@ class Business::InterviewsController < ApplicationController
     @endTime = DateTime.parse(params[:interview][:date] + " " + params[:interview][:etime]).strftime("%Y-%m-%dT%H:%M:%S")
     @user_ids = params[:interview][:user_ids].split(',') 
     @interview = Interview.new(interview_params.merge!(user_ids: @user_ids, start_time: @startTime, end_time: @endTime))
+
 
     respond_to do |format|  
       if @interview.save
@@ -60,6 +69,8 @@ class Business::InterviewsController < ApplicationController
 
   def edit 
     @interview = Interview.find(params[:id])
+    @users = @interview.users
+    @candidate = @interview.candidate
 
     respond_to do |format| 
       format.js
@@ -120,8 +131,8 @@ class Business::InterviewsController < ApplicationController
 
   def interview_params
     params.require(:interview).permit(:title, :notes, :location, :start_time, 
-      :end_time, :kind, :send_request, :etime, :stime,
-      :job_id, :candidate_id, :company_id, :date,
+      :end_time, :kind, :send_request, :etime, :stime, :interview_kit_id,
+      :job_id, :candidate_id, :company_id, :date, :stage_action_id, :stage_id,
       user_ids: [])
   end
 

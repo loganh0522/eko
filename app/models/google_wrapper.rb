@@ -282,8 +282,10 @@ Google::Apis::RequestOptions.default.retries = 5
       event = Google::Apis::CalendarV3::Event.new({
         summary: 'Pending Interview',
         description: event.details,
-        attendees: [{email: user.email}],
         location: event.location,
+
+        attendees: [{email: user.email}],
+        
         start: {
           date_time: startTime,
           time_zone: 'America/New_York'
@@ -306,8 +308,9 @@ Google::Apis::RequestOptions.default.retries = 5
       event = Google::Apis::CalendarV3::Event.new({
         summary: event.title,
         description: event.details,
-        attendees: [{email: user.email}],
         location: event.location,
+        attendees: [{email: user.email}],
+        
         start: {
           date_time: startTime,
           time_zone: 'America/New_York'
@@ -334,7 +337,20 @@ Google::Apis::RequestOptions.default.retries = 5
       self.set_client(user)
       service = Google::Apis::CalendarV3::CalendarService.new
       service.authorization = @client
-
+      attendees: [
+          {
+            id: string,
+            email: candidate.email,
+            displayName: candidate.full_name,
+            organizer: boolean,
+            self: boolean,
+            resource: boolean,
+            optional: boolean,
+            responseStatus: "Accepted",
+            "comment": string,
+            "additionalGuests": integer
+          }
+        ],
       event = service.get_event('primary', event.event_id)
       event.summary = "Interview with #{candidate.full_name}"
 

@@ -67,6 +67,11 @@ class Business::ApplicationsController < ApplicationController
     @application = Application.find(params[:id]) 
     @candidate = @application.candidate
     @job = Job.find(params[:job_id]) 
+
+    @stages = @job.stages
+
+    @interviews = @candidate.interviews
+    @tasks = @candidate.open_job_tasks(@job).accessible_by(current_ability)
     @rejection_reasons = current_company.rejection_reasons
     @tag = Tag.new
 
@@ -94,13 +99,16 @@ class Business::ApplicationsController < ApplicationController
 
   def application_form
     if !params[:job].present?
-      @candidate = Candidate.find(params[:candidate_id])
-      @application = @candidate.applications.first       
-      
+      @application = Application.find(params[:id])      
+      @candidate = @application.candidate
+
       if @application.present?
         @job = @application.job 
         @questions = @job.questions
       end
+
+      render_scorecard
+      render_interview_scorcecard
     else
       @candidate = Candidate.find(params[:candidate_id])
       @job = Job.find(params[:job])
@@ -174,6 +182,16 @@ class Business::ApplicationsController < ApplicationController
     end
   end
 
+  def stage
+    @application = Application.find(params[:id])
+    @job = @application.job
+    @stages = @job.stages
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def tags_present(candidates)
@@ -185,6 +203,21 @@ class Business::ApplicationsController < ApplicationController
         end
       end
     end
+  end
+
+  def render_scorecard
+    @job = @application.job
+    @scorecard = Scorecard.where(job_id: @job.id).first
+    @sections = @scorecard.scorecard_sections
+    @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
+    @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first 
+  end
+
+  def render_interview_scorcecard
+    @interview_scorecard = InterviewScorecard.find(2).scorecard
+    @interview_sections = @interview_scorecard.scorecard_sections if @scorecard.present?
+    @interview_scorecards = InterviewScorecard.where(application_id: @application.id)
+    @current_user_interview_scorecard = InterviewScorecard.where(user_id: current_user.id, application_id: @application.id).first 
   end
 
   def move_stage_single

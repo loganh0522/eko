@@ -19,7 +19,7 @@ class Business::JobFeedsController < ApplicationController
       @job = Job.find(params[:job_id])
       @job_feed = @job.job_feed
 
-    elsif params[:type] == "premium-job-boards"
+    elsif params[:type] == "premium"
       @job = Job.find(params[:job_id])
       @job_feed = @job.job_feed
       @job_feeds = PremiumBoard.all

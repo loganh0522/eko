@@ -10,7 +10,7 @@
     %h5 Criteria
     = f.fields_for :section_options, class: "options" do |a|
       = render 'section_option_fields', f: a
-    - if !@job.scorecard.present?
+    - if @scorecard.new_record?
       = f.fields_for :section_options, SectionOption.new do |a|
         .answers  
           .answer

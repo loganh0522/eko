@@ -1,7 +1,6 @@
-= form_for [:business, @job, @scorecard], remote: true do |f| 
+= form_for [:business, @scorecard], remote: true do |f| 
   #scorecard-form
-    - if !@job.scorecard.present?
-
+    - if @scorecard.new_record?
       = f.fields_for :scorecard_sections, ScorecardSection.new do |a|
         .scorecard-area 
           .header
@@ -20,19 +19,17 @@
                   = a.text_field :body, id: "section-option", class: 'section-answer', autocomplete: 'off'
                   = link_to "", '#', class: "remove_fields glyphicon glyphicon-remove" 
                   = a.hidden_field :_destroy
-                  %span#optionBodyBlock
-                
+                  %span#optionBodyBlock           
             = link_to_add_fields("Add Criteria", a, :section_options)
         
     = f.fields_for :scorecard_sections do |a|
       = render 'scorecard_section_fields', f: a
-    
 
     #add-section= link_to_add_fields "+ Add Section", f, :scorecard_sections 
     
     .footer
       = f.hidden_field :job_id, value: @job.id
-      = f.submit "Create Scorecard", class: "btn submit-button"
+      = f.button "Create Scorecard", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
       .btn.border-button#remove_form Cancel
      
 

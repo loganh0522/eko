@@ -61,6 +61,8 @@ class Application < ActiveRecord::Base
     self.ratings.average(:score).to_f.round(1) if ratings.any?
   end
 
+ 
+
   # def current_position
   #   self.applicant.profile.current_position.title
   # end

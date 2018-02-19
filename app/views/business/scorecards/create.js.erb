@@ -32,9 +32,9 @@
           $(this).next('#sectionBodyBlock').find('.notice').remove();
         }
       });
-
     <% end %>
   <% end %>
 <% else %>
   $('.scorecard-container').html('<%= j render "business/scorecards/scorecard" %>');
+  $('.scorecard-container').after('<%= j render "business/scorecards/container_footer" %>');
 <% end %>

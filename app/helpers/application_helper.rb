@@ -10,7 +10,18 @@ module ApplicationHelper
     link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", ""), :add_field => 'add_field'}, style: "display:#{name == "Add Answer" ? "none" : ""}" )
   end
 
-  def link_to_add_to_cart(name, f, association, params, duration)
+  def link_to_add_fields_after(name, f, association)
+    new_object = f.object.send(association).klass.new
+    id = new_object.object_id
+
+    fields = f.fields_for(association, new_object, child_index: id) do |builder|
+      render(association.to_s.singularize + "_fields", f: builder)
+    end
+
+    link_to(name, '#', class: "add_fields_after", data: {id: id, fields: fields.gsub("\n", ""), :add_field => 'add_field'}, style: "display:#{name == "Add Answer" ? "none" : ""}" )
+  end
+
+  def link_to_add_to_cart(price, name, f, association, params, duration)
 
     new_object = f.object.send(association).klass.new
     id = new_object.object_id
@@ -20,8 +31,13 @@ module ApplicationHelper
     fields = f.fields_for(association, new_object, child_index: id) do |builder|
       render(association.to_s.singularize + "_fields", f: builder, board: board, price: price)
     end
-
-    link_to(name, '#', class: "add_to_cart btn job-seeker-btn", data: {id: id, fields: fields.gsub("\n", ""), :board => board.name}, style: "display:#{name == "Add Answer" ? "none" : ""}" )
+    
+    button = content_tag(:div) do 
+      concat(content_tag(:div, "$ #{price.price}", class: "job-price") )
+      concat(content_tag(:div, name, class: "job-duration"))
+      end
+     
+    link_to(button, '#', class: "add_to_cart btn", data: {id: id, fields: fields.gsub("\n", ""), :board => board.name}, style: "display:#{name == "Add Answer" ? "none" : ""}")
   end
 
   

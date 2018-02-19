@@ -1,0 +1,15 @@
+$('.smallModal').find('form').remove();
+$('.mediumModal').find('form').remove();
+<% if params[:kind] == "interview" %>
+  $('.smallModal').find('.new-title').html('<%= j "Add Interview" %>');
+  $('.smallModal').find('.new-modal-header').after('<%= j render "business/stage_actions/interview_form"%>');
+  $('.smallModal').show();
+<% elsif params[:kind] == "task" %>
+  $('.smallModal').find('.new-title').html('<%= j "Add Task" %>');
+  $('.smallModal').find('.new-modal-header').after('<%= j render "business/stage_actions/task_form"%>');
+  $('.smallModal').show();
+<% elsif params[:kind] == "email" %>
+  $('.mediumModal').find('.new-title').html('<%= j "Add E-mail" %>');
+  $('.mediumModal').find('.new-modal-header').after('<%= j render "business/stage_actions/email_form"%>');
+  $('.mediumModal').show();
+<% end%> 

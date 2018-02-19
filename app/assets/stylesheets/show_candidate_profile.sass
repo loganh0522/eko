@@ -7,129 +7,78 @@
     color: rgba(239, 122, 43, 0.9)
   .fa 
     margin-right: 20px
-
 .show-applicant-view
   height: inherit
   margin-top: 20px
-  .applicant-main-container
-    width: 65%
-    height: inherit 
-    overflow-y: scroll
-    float: right
-    padding: 5px 0 
-    background: #f7f8f9
-    .action-area
-      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-    .navigation-container
-      padding: 0 10px
-      .applicant-nav
-        width: 100%
-        background: white
-        border-radius: 5px 5px 0 0
-        box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-        width: 100%
-        overflow: hidden
-        .change-containers
-          ul 
-            list-style: none
-            text-decoration: none
-            padding-left: 0
-            li
-              display: inline-block
-              padding: 15px 15px 10px 15px 
-              text-align: center 
-              font-size: 14px
-              color: black
-              cursor: pointer
-            .activated
-              border-bottom: 4px solid #EF7B2B
-              color: black
-        .bottom-row
-          border-top: 1px solid rgba(0,0,0,0.1)
-          padding: 10px 5px
-          overflow: hidden
-          .hide-can-form 
-            float: right
-            background: rgba(0,0,0,0.3)
-            padding: 5px 10px
-            border-radius: 8px
-            color: #ffffff
-          &:hover
-            cursor: pointer
-          a
-            float: left
-            margin-right: 5px
-            background: rgba(0,0,0,0.3)
-            padding: 5px 10px
-            border-radius: 8px
-            color: #ffffff
-            text-decoration: none
-          .active-button
-            background: #EF7B2B
-        ul 
-          list-style: none
-          text-decoration: none
-          padding: 0 
-          margin-bottom: 0
-          li
-            display: inline-block
-            padding: 10px 10px 
-            text-align: center 
-            color: black
-            cursor: pointer
-          .activated    
-            border-bottom: solid 3px #EF7B2B
-            color: black
-    .applicant-general
-      height: inherit
-      .display-applicant-details
-        padding: 0px 5px
-        .comment-container
-          padding: 10px 5px
-        #messages
-          padding: 10px 5px
-
-  .applicant-side-container
+.applicant-main-container
+  width: 70%
+  height: inherit 
+  overflow-y: scroll
+  float: right
+  padding: 5px 0 
+  background: #f7f8f9
+  .applicant-general-info
     float: left
-    position: absolute
-    overflow: hidden
-    background: #fff
-    border-radius: 5px 5px
-    padding: 5px 0 
-    margin: 5px 0 
+    width: 99%
+    margin: 0 2px
+    background: #ffffff
+    padding: 15px 0 0 0
+    border-bottom: 1px solid rgba(0,0,0,0.1)
     box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-    width: 30%
-    .applicant-general-info
-      float: left
-      width: 100%
-      background: #ffffff
-      padding: 15px
-      border-bottom: 1px solid rgba(0,0,0,0.1)
+    .applicant-general-top
       .user-image 
+        width: 18%
+        overflow: hidden
+        float: left
         img
           width: 100px 
           height: 100px
           float: left
-          margin: 0 auto
+          margin: 0 15px
           border-radius: 50%
           border: 1px solid #fff
           display: block
       .applicant-details
-        vertical-align: top
-        text-align: center
-        margin: 20px auto
-        overflow: hidden
-        .name 
-          font-size: 24px
-        .glyphicon
-          color: rgba(0, 0, 0, 0.7)     
-        .new_rating
-          width: auto
-          margin: auto
-          margin-left: 25px
-          .rating 
-            font-size: 16px
-            margin-top: 2px
+        width: 82%
+        float: left
+        .name-rating
+          margin-top: 1px
+          .name 
+            font-size: 20px  
+            float: left
+          .dropdown
+            float: right
+            margin-right: 15px
+          .new_rating
+            float: left
+            width: auto
+            margin: auto
+            margin-left: 25px
+            .rating 
+              font-size: 14px
+              margin-top: 2px
+        .social-links
+          float: left
+          position: absolute
+          margin-top: 20px
+          .social-link
+            float: left 
+            margin-right: 10px
+            .fa
+              float: left
+              color: rgba(0,0,0,0.8)
+        .contact-details
+          float: left
+          position: absolute
+          margin-top: 20px
+          .contact-detail 
+            float: left 
+            margin-right: 15px
+            .fa
+              float: left
+              margin: 3px 5px 0 0 
+            .detail
+              float: left
         .current-position
           clear: both
       .actions
@@ -140,152 +89,240 @@
           margin: 20px auto 0px auto
           display: block
 
-    .side-section
-      max-height: 400px
-      height: fit-content
-      background: #f7f8f9
-      width: 100%
-      clear: both
-      top: 0
-      bottom: 0
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-      .applicant-stage
-        border: 1px solid rgba(0,0,0,0.1)
-        width: 100%
-        height: 43px
-        border-radius: 5px
-        background: #fff
-        box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-        .dropdown
-          display: block
-          .dropdown-content
-            top: 42px 
-        #current-stage-drop
-          left: 100px
-        .current-stage
-          padding: 10px 15px
-          background: #fff
+  .applicant-nav
+    width: 100%
+    background: white
+    margin-top: 20px
+    overflow: hidden
+    padding: 15px 0 0 0
+    .change-containers
+      ul 
+        list-style: none
+        text-decoration: none
+        padding-left: 0
+        li
+          display: inline-block
+          padding: 15px 15px 10px 15px 
+          text-align: center 
           font-size: 14px
-          .caret
-            float: right
-            margin-top: 5px
-
-          float: left
-          width: 70%
-        .next-stage
-          color: rgba(0, 0, 0, 0.3)
-          padding: 10px 20px
-          font-size: 14px
-          background: #fff
-          float: left
-          border-left: 1px solid rgba(0,0,0,0.1)
-          width: 15%
-          &:hover
-            background: rgba(81, 216, 81, 0.3)
-            cursor: pointer
-        .reject-stage
-          padding: 10px 20px
-          background: #fff
-          font-size: 14px
-          width: 15%
-          float: left
-          border-left: 1px solid rgba(0,0,0,0.1)
-          &:hover
-            background: rgba(255, 0, 0, 0.3)
-            cursor: pointer
-        #rejected
-          background: rgba(255, 0, 0, 0.3)
-      .tag-container
-        padding: 10px 20px
-        .tag-header
-          overflow: hidden
-          h4 
-            width: fit-content
-            float: left
-            margin-right: 10px
-          form
-            float: left
-            width: 80%
-            input[type='text']
-              width: 200px
-              float: left
-          .btn 
-            float: left
-            height: 35px
-            margin: 5px 0 0 10px
-            padding: 7px 10px
-        .tags
-          overflow: hidden
-          .tag
-            float: left
-            border-radius: 5px
-            border: 1px solid #EF7B2B
-            color: rgba(0,0,0,.7)
-            width: auto
-            margin: 2px 5px 0 0 
-            text-align: center
-            padding: 3px 5px 3px 8px
-            overflow: hidden
-            .name
-              float: left
-            .delete-can-tag
-              float: left
-              margin-left: 5px
-              color: rgba(0,0,0,.7)
-              &:hover
-                cursor: pointer       
-        
-      .candidate-tasks
-        overflow-y: scroll
-        width: 100%
-        padding: 20px 20px
-        .task
-          background: #ffffff
-          padding: 5px 5px
-          margin-top: 3px
-          width: 100%
-          overflow: hidden
-          border: 1px solid rgba(0,0,0,0.1)
-          .edit-delete-actions
-            float: right
-            .glyphicon-pencil
-              float: left
-              color: rgba(0,0,0,0.3)
-          .body
-            .title
-              float: left
-              margin: 5px 0 0 5px
-            .glyphicon
-              float: left
-              width: 30px
-              height: 30px
-              margin-right: 5px
-              border: 1px solid (rgba(0,0,0,0.4))
-              color: rgba(0,0,0,0.4)
-              border-radius: 50%
-              padding: 7px
-              &:hover
-                border-color: green
-                color: green
-    .all-applications
-      padding: 10px 20px
-      .application-container
-        background: #ffffff
-        margin: 3px 3px 
-        padding: 5px 5px
-        border: 1px solid rgba(0,0,0,0.1)
-        border-radius: 3px
-        &:hover
-          background: rgba(239,123,43,0.3)
+          color: black
           cursor: pointer
-        .title
-          font-size: 14px
-          margin: 0 0 
-          padding: 0 0
-        .location
-          font-size: 12px
-          margin: 0 0 
-          padding: 0 0
-          color: rgba(0,0,0,0.7)
+        .activated
+          border-bottom: 4px solid #EF7B2B
+          color: black
+    .bottom-row
+      border-top: 1px solid rgba(0,0,0,0.1)
+      padding: 10px 5px
+      overflow: hidden
+      .hide-can-form 
+        float: right
+        background: rgba(0,0,0,0.3)
+        padding: 5px 10px
+        border-radius: 8px
+        color: #ffffff
+      &:hover
+        cursor: pointer
+      a
+        float: left
+        margin-right: 5px
+        background: rgba(0,0,0,0.3)
+        padding: 5px 10px
+        border-radius: 8px
+        color: #ffffff
+        text-decoration: none
+      .active-button
+        background: #EF7B2B
+    ul 
+      list-style: none
+      text-decoration: none
+      padding: 0 
+      margin-bottom: 0
+      li
+        display: inline-block
+        padding: 10px 10px 
+        text-align: center 
+        color: black
+        cursor: pointer
+      .activated    
+        border-bottom: solid 3px #EF7B2B
+        color: black
+  .applicant-general
+    clear: both
+    margin: 0 2px
+    width: 99%
+    .display-applicant-details
+      padding: 0px 0px
+      
+
+.applicant-side-container
+  float: left
+  overflow: hidden
+  background: #fff
+  padding: 5px 0 
+  margin: 5px 0 20px 0 
+  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+  width: 29%
+  .side-section
+    max-height: 400px
+    overflow-y: scroll
+    height: fit-content
+    background: #ffffff
+    width: 100%
+    clear: both
+    top: 0
+    bottom: 0
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+    .applicant-stage
+      border: 1px solid rgba(0,0,0,0.1)
+      width: 100%
+      height: 43px
+      border-radius: 5px
+      background: #fff
+      box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+      .dropdown
+        display: block
+        .dropdown-content
+          top: 42px 
+      #current-stage-drop
+        left: 100px
+      .current-stage
+        padding: 10px 15px
+        background: #fff
+        font-size: 14px
+        .caret
+          float: right
+          margin-top: 8px
+        float: left
+        width: 70%
+      .next-stage
+        color: rgba(0, 0, 0, 0.3)
+        padding: 10px 20px
+        font-size: 14px
+        background: #fff
+        float: left
+        border-left: 1px solid rgba(0,0,0,0.1)
+        width: 15%
+        &:hover
+          background: rgba(81, 216, 81, 0.3)
+          cursor: pointer
+      .reject-stage
+        padding: 10px 20px
+        background: #fff
+        font-size: 14px
+        width: 15%
+        float: left
+        border-left: 1px solid rgba(0,0,0,0.1)
+        &:hover
+          background: rgba(255, 0, 0, 0.3)
+          cursor: pointer
+      #rejected
+        background: rgba(255, 0, 0, 0.3)
+    .tag-container
+      padding: 5px 5px
+      .tag-header
+        overflow: hidden
+        h4 
+          width: fit-content
+          float: left
+          margin-right: 10px
+        form
+          float: left
+          width: 80%
+          input[type='text']
+            width: 200px
+            float: left
+        .btn 
+          float: left
+          height: 35px
+          margin: 5px 0 0 10px
+          padding: 7px 10px
+    .candidate-tasks
+      overflow-y: scroll
+      width: 100%
+      padding: 20px 20px
+      .task
+        background: #ffffff
+        padding: 5px 5px
+        margin-top: 3px
+        width: 100%
+        overflow: hidden
+        border: 1px solid rgba(0,0,0,0.1)
+        .edit-delete-actions
+          float: right
+          .glyphicon-pencil
+            float: left
+            color: rgba(0,0,0,0.3)
+        .body
+          .title
+            float: left
+            margin: 5px 0 0 5px
+          .glyphicon
+            float: left
+            width: 30px
+            height: 30px
+            margin-right: 5px
+            border: 1px solid (rgba(0,0,0,0.4))
+            color: rgba(0,0,0,0.4)
+            border-radius: 50%
+            padding: 7px
+            &:hover
+              border-color: green
+              color: green
+  
+  .all-applications
+    padding: 10px 20px
+    .application-container
+      background: #ffffff
+      margin: 3px 3px 
+      padding: 5px 5px
+      border: 1px solid rgba(0,0,0,0.1)
+      border-radius: 3px
+      &:hover
+        background: rgba(239,123,43,0.3)
+        cursor: pointer
+      .title
+        font-size: 14px
+        margin: 0 0 
+        padding: 0 0
+      .location
+        font-size: 12px
+        margin: 0 0 
+        padding: 0 0
+        color: rgba(0,0,0,0.7)
+.candidate-interview
+  background: #ffffff
+  padding: 5px 5px
+  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+  margin-bottom: 5px
+  overflow: hidden
+  .title
+    font-weight: bold
+    font-size: 14px
+  .date-time
+    overflow: hidden
+    margin: 3px 
+
+    .fa 
+      float: left
+      margin: 2px 20px 0 0
+    .fa-clock-o 
+      margin-top: 5px
+
+    .date-time-container
+      float: left
+      overflow: hidden
+      .date
+        font-weight: bold
+        font-size: 12px
+      .time
+        font-size: 10px
     
-        
+
+
+
+#action-container-dropdown
+  width: 225px
+  margin-top: 0px
+  .fa
+    margin-top: 9px
+      

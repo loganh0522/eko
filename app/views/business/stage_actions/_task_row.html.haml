@@ -1,0 +1,16 @@
+.action-container{id: "stage_action_#{action.id}"}
+  %i.fa.fa-tasks
+  .kind Task:
+  .task= action.name
+  - if action.user.present?
+    .assigned= action.user.full_name
+  .dropdown
+    .dropdown-button
+      %i.fa.fa-ellipsis-h.fa-lg
+    .dropdown-content#myDropdown      
+      = link_to edit_business_stage_action_path(action, kind: "task"), remote: true, id: 'client-action' do
+        %i.fa.fa-pencil
+        .action Edit
+      = link_to business_stage_action_path(action), remote: true, :method => :delete do
+        %i.fa.fa-trash-o 
+        .action Destroy

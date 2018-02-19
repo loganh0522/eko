@@ -9,7 +9,7 @@
 .tasks
   - if @tasks.present? 
     - @tasks.each do |task| 
-      = render 'business/tasks/task', task: task
+      = render 'business/tasks/candidate_task', task: task
   - else 
     .not-present-container
       %p No Tasks Present

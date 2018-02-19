@@ -1,3 +1,4 @@
+.page-header
 .company-settings
   .side-container
     = render 'admin/shared/admin_sidebar'
@@ -7,12 +8,13 @@
       = link_to "+ Job Board", new_admin_premium_board_path, :data => {:remote => true }, class: "btn border-button2"
     .templates-body
       - @job_boards.each do |board| 
-        = link_to "Edit", edit_admin_premium_board_path(board.id), :data => {:remote => true }
         .job-feed-container
+          = link_to "Edit", edit_admin_premium_board_path(board.id), :data => {:remote => true }
           .header
             = image_tag board.logo.small_image if board.logo.present? 
           .body 
             - board.posting_durations.each do |duration|
+              .duration-name= duration.name
               = duration.price
 
 

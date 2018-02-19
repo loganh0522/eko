@@ -20,7 +20,7 @@
           %i.fa.fa-line-chart
       / %li 
       /   = link_to business_notifications_path do
-      /     .glyphicon.glyphicon-globe
+      /     %i.fa.fa-inbox
     - if can? :create, Job
       = link_to "Post a Job", new_business_job_path, class: "post-job-nav"
   .dropdown

@@ -1,4 +1,29 @@
 jQuery ->
+  $('#add-note').on 'click', (e) ->
+    
+
+    document.addEventListener 'trix-initialize', (event) ->
+      element = document.querySelector("trix-editor")
+      editor = element.editor
+      
+      event.target.addEventListener 'keypress', (e) ->
+        
+        if e.keyCode == 64
+          console.log(editor.getPosition())
+          console.log(editor.getDocument().toString())
+          console.log(editor.getClientRectAtPosition())
+
+
+
+        return
+
+    document.addEventListener 'trix-change', (e) ->
+      console.log(e.keycode)
+
+
+
+
+
   $('.applicant-profile-information').find('.user-comment').on 'keypress', (e)->
     if e.keyCode == 64
       $('.applicant-profile-information').find(".user-comment").autocomplete(

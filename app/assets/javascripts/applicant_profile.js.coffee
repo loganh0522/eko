@@ -26,6 +26,12 @@ jQuery ->
       $('.no-action-buttons').show()
     return
 
+
+  $(document).on 'click', '.interview-type', (event) ->
+    if $(this).attr('id') == 'in-person'
+      $('#interview-location').show()
+    else 
+      $('#interview-location').hide()
   
 
 ################  Google Places JavaScript API ####################
@@ -76,15 +82,23 @@ jQuery ->
       data:
         application_id: PostCode
         rating: Rating
-    
-
-################ Responsive Menu ############### 
   $(document).on 'click', '.responsive-menu', (event) ->
     if $('.responsive-menu-links').is(':visible')
       $('.responsive-menu-links').hide()
     else  
-      $('.responsive-menu-links').show()
+      $('.responsive-menu-links').show() 
 
+################ Responsive Menu ############### 
+  $(document).on 'click', '.toggle', (event) ->
+    if $(this).hasClass('fa-angle-down')
+      $(this).parent().next().show()
+      $(this).parent().append("<i class='fa fa-angle-up toggle'></i>")
+      $(this).remove()
+    else if $(this).hasClass('fa-angle-up')
+      $(this).parent().next().hide()
+      $(this).parent().append("<i class='fa fa-angle-down toggle'></i>")
+      $(this).remove()
+      
   $(window).on "resize", (event) -> 
     if $(this).width() > 780 
       $('.responsive-menu-links').hide()

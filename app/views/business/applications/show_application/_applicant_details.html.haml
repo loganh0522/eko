@@ -5,23 +5,41 @@
   .applicant-details
     .name-rating
       .name= "#{@application.candidate.full_name.capitalize}"
-      
-    .current-position
-  .actions
-    .dropdown
-      .dropdown-button.border-button
-        Actions
-        .caret
-      .dropdown-content#action-dropdown
-        = link_to edit_business_candidate_path(@application.candidate.id), remote: true do
-          %i.fa.fa-pencil
-          .action Edit
-        = link_to business_application_path(@application.id), remote: true, :method => :delete do  
-          %i.fa.fa-reply
-          .action Remove From Job
-        = link_to business_candidate_path(@application.candidate.id), remote: true, :method => :delete do  
-          %i.fa.fa-trash-o
-          .action Destroy Candidate
+      = render 'business/ratings/form', application: @application
+      .dropdown
+        .dropdown-button
+          %i.fa.fa-ellipsis-h.fa-lg
+        .dropdown-content#action-dropdown
+          = link_to edit_business_candidate_path(@application.candidate.id), remote: true do
+            %i.fa.fa-pencil
+            .action Edit
+          = link_to business_application_path(@application.id), remote: true, :method => :delete do  
+            %i.fa.fa-reply
+            .action Remove From Job
+          = link_to business_candidate_path(@application.candidate.id), remote: true, :method => :delete do  
+            %i.fa.fa-trash-o
+            .action Destroy Candidate
+    %br
+
+    .social-links
+      - @application.candidate.social_links.each do |link|
+        .social-link
+          = link_to link.url, target: :_blank do 
+            %i{class: "fa fa-#{link.kind.downcase}"}
+
+    %br
+    .contact-details
+      .contact-detail
+        %i.fa.fa-phone
+        .detail= "#{@candidate.phone}"
+      .contact-detail
+        %i.fa.fa-envelope-o
+        .detail= "#{@application.candidate.email}"
+      .contact-detail
+        %i.fa.fa-map-marker
+        .detail= "#{@application.candidate.location}"
+
+    
 
 - else
   .user-image
@@ -33,17 +51,35 @@
   .applicant-details
     .name-rating
       .name= "#{@application.candidate.user.full_name}"
+      = render 'business/ratings/form', application: @application
+      .dropdown
+        .dropdown-button
+          %i.fa.fa-ellipsis-h.fa-lg
+        .dropdown-content#myDropdown
+          = link_to edit_business_candidate_path(@application.candidate.id), remote: true do
+            %i.fa.fa-pencil
+            .action Edit
+          = link_to business_candidate_path(@application.candidate.id), remote: true, :method => :delete do  
+            %i.fa.fa-trash-o
+            .action Destroy  
+    %br
+
+    .social-links
+      - @application.candidate.social_links.each do |link|
+        .social-link
+          = link_to link.url, target: :_blank do 
+            %i{class: "fa fa-#{link.kind.downcase}"}
+
+    %br
+    .contact-details
+      .contact-detail
+        %i.fa.fa-phone
+        .detail= "#{@candidate.phone}"
+      .contact-detail
+        %i.fa.fa-envelope-o
+        .detail= "#{@application.candidate.email}"
+      .contact-detail
+        %i.fa.fa-map-marker
+        .detail= "#{@application.candidate.location}"
 
 
-  .actions
-    .dropdown
-      .dropdown-button.border-button
-        Actions
-        .caret
-      .dropdown-content#myDropdown
-        = link_to edit_business_candidate_path(@application.candidate.id), remote: true do
-          %i.fa.fa-pencil
-          .action Edit
-        = link_to business_candidate_path(@application.candidate.id), remote: true, :method => :delete do  
-          %i.fa.fa-trash-o
-          .action Destroy 

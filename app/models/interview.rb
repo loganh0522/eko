@@ -3,7 +3,10 @@ class Interview < ActiveRecord::Base
   belongs_to :job
   belongs_to :company
   has_many :event_ids, :dependent => :destroy
-  
+  belongs_to :room
+  belongs_to :stage_action
+  belongs_to :interview_kit
+  has_many :interview_scorecards
   has_many :assigned_users, as: :assignable, :dependent => :destroy
   has_many :users, through: :assigned_users, validate: false
   
@@ -14,6 +17,25 @@ class Interview < ActiveRecord::Base
   def send_invitation
     GoogleWrapper::Calendar.create_event(current_user, e.start_time, e.end_time, 
       e.location, e.description, e.title, e.users, e.candidate)
+  end
+
+  def pending_scorecards
+    @pending = []
+    
+    if self.interview_kit.present?
+      self.users.each do |user| 
+        if !InterviewScorecard.where(user: user, interview: self).present?
+          @pending << user
+        end
+      end
+    end
+
+    return @pending
+  end
+
+
+  def scorecards_completed?
+    self.interview_scorecards.count == self.users.count
   end
 
   def month

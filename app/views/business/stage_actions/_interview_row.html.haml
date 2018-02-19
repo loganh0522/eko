@@ -1,0 +1,15 @@
+.action-container{id: "stage_action_#{action.id}"}
+  %i.fa.fa-calendar  
+  .kind Interview:
+  .title= action.name
+
+  .dropdown
+    .dropdown-button
+      %i.fa.fa-ellipsis-h.fa-lg
+    .dropdown-content#myDropdown      
+      = link_to edit_business_stage_action_path(action, kind: "interview"), id: 'client-action', remote: true do
+        %i.fa.fa-pencil
+        .action Edit
+      = link_to business_stage_action_path(action), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do
+        %i.fa.fa-trash-o 
+        .action Destroy

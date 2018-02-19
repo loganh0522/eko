@@ -25,9 +25,12 @@
 
                   = q.radio_button :rating, 4, class: 'application-scorecard-rating', id: "rating_#{criteria.id}_4"
                   %label.glyphicon.glyphicon-star{:for => "rating_#{criteria.id}_4"}
+
+    = f.label :feedback, "Comments/Concerns"
+    = f.text_area :feedback
     = f.hidden_field :application_id, value: @application.id
     = f.hidden_field :user_id, value: current_user.id
     = f.hidden_field :scorecard_id, value: @scorecard.id
-  .scorecard-footer
-    = f.submit "Submit", class: "btn submit-button"
-    = link_to "Cancel", '#', class: "remove_form btn border-button2"
+  .container-footer
+    .btn.border-button#remove_form Cancel
+    = f.button "Submit", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}

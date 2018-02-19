@@ -100,6 +100,6 @@ class Business::ApplicationScorecardsController < ApplicationController
   private 
 
   def application_scorecard_params 
-    params.require(:application_scorecard).permit(:id, :application_id, :user_id, :scorecard_id, :job_id, :_destroy, scorecard_ratings_attributes: [:id, :section_option_id, :user_id, :rating, :_destroy])
+    params.require(:application_scorecard).permit(:id, :feedback, :application_id, :user_id, :scorecard_id, :job_id, :_destroy, scorecard_ratings_attributes: [:id, :section_option_id, :user_id, :rating, :_destroy])
   end
 end

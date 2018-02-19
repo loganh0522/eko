@@ -127,7 +127,11 @@ Rails.application.routes.draw do
     resources :application_emails
     resources :notifications
     resources :email_templates
-
+    resources :interview_kits
+    resources :scorecards
+    resources :stage_actions
+    resources :interview_scorecards
+    
     post "update_password", to: 'users#update_password'
     post 'create_subscription', to: 'users#create_subscription'
 
@@ -270,13 +274,16 @@ Rails.application.routes.draw do
     
     resources :applications do 
       member do 
+        get :stage, to: "applications#stage"
         post :reject, to: "applications#reject"
         post :next_stage, to: "applications#next_stage"
         post :move_stage, to: "applications#move_stage"
         post :ratings, to: "applications#ratings"
+        get :application_form, to: "applications#application_form"
       end
 
       collection do 
+
         get :multiple_change_stages, to: "applications#multiple_change_stages"
         get :new_multiple, to: "applications#new_multiple" 
         post :create_multiple, to: "applications#create_multiple"
@@ -303,10 +310,13 @@ Rails.application.routes.draw do
       end
       resources :job_feeds 
       
+      get :advertise, to: "job_feeds#index"
+
+      
       get 'tasks', to: "tasks#job_tasks"
       get 'comments', to: "comments#job_comments"
       get "/activities", to: 'activities#job_activity'
-      get :promote, to: "jobs#promote"
+      
       get 'interviews', to: 'interviews#job_interviews'
       get 'interview_invitations', to: 'interview_invitations#job_invitations'
       

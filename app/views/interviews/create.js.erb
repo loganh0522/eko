@@ -1,0 +1,5 @@
+<% if @error.present? %> 
+  $('.schedule-interview-container').html('<%= j render "interviews/form" %>')
+<% else %>
+  $('.schedule-interview-container').html('<%= j render "interviews/booked", interview: @interview%>');
+<% end %>

@@ -15,6 +15,7 @@ class Company < ActiveRecord::Base
   has_many :rooms, :dependent => :destroy
   has_many :conversations, :dependent => :destroy
   has_one :customer, :dependent => :destroy
+  has_many :interview_kits, :dependent => :destroy
   has_one :job_board, :dependent => :destroy
   has_many :clients, :dependent => :destroy
   has_many :orders, :dependent => :destroy
@@ -53,7 +54,7 @@ class Company < ActiveRecord::Base
   
   def create_default_stages
     stages = ["Screen", "Phone Interview", "Interview", 
-      "Group Interview", "Offer", "Hired"]
+      "Group Interview", "Offer"]
     @position = 1 
     
     stages.each do |stage| 

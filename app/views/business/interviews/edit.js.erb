@@ -1,5 +1,7 @@
-$('#basic-form-modal').find('form').remove()
-$('#basic-form-modal').find('.modal-title').html('<%= j "Schedule Meeting" %>');
-$('#basic-form-modal').find('.modal-header').after('<%= j render "business/interviews/form" %>');
-$('#basic-form-modal').modal("toggle");
-
+$('.mediumModal').find('form').remove()
+$('.mediumModal').find('.new-title').html('<%= j "Schedule Meeting" %>');
+$('.mediumModal').find('.new-modal-header').after('<%= j render "business/interviews/form" %>');
+$('.mediumModal').show();
+$('#timepicker').timepicker();
+$('#timepicker2').timepicker();
+$('#dueDate').datepicker({dateFormat: 'dd-mm-yy'});

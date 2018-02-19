@@ -22,7 +22,7 @@ module CandidateHelper
 
   def user_avatar(user)
     if user.user_avatar.present?
-      content_tag(:div, image_tag(user.user_avatar.image.small_image), :class => 'circle-img')
+      content_tag(:div, image_tag(user.user_avatar.image.small_image))
     else 
       content_tag(:div, image_tag("/tmp/little-man.png"), :class => 'circle-img' ) 
     end

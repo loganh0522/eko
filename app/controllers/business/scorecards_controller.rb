@@ -2,10 +2,8 @@ class Business::ScorecardsController < ApplicationController
   layout "business"
   load_and_authorize_resource :job
   load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy]
- 
   before_filter :require_user
   before_filter :belongs_to_company
-  # before_filter :has_a_scorecard, only: [:new, :create]
   before_filter :trial_over
   before_filter :company_deactivated?
   
@@ -30,8 +28,7 @@ class Business::ScorecardsController < ApplicationController
   end
 
   def create
-    @job = Job.find(params[:job_id])
-    @scorecard = Scorecard.new(scorecard_params)
+    @scorecard = Scorecard.new(scorecard_params.merge!(job_id: params[:scorecard][:job_id]))
 
     respond_to do |format|
       if @scorecard.save 
@@ -44,8 +41,8 @@ class Business::ScorecardsController < ApplicationController
   end
 
   def edit 
-    @job = Job.find(params[:job_id])
     @scorecard = Scorecard.find(params[:id])
+    @job = @scorecard.job
     
     respond_to do |format| 
       format.js
@@ -53,7 +50,6 @@ class Business::ScorecardsController < ApplicationController
   end
 
   def update
-    @job = Job.find(params[:job_id])
     @scorecard = Scorecard.find(params[:id])
     
     respond_to do |format| 
@@ -67,7 +63,6 @@ class Business::ScorecardsController < ApplicationController
   end
 
   def destroy
-    @job = Job.find(params[:job_id])
     @scorecard = Scorecard.find(params[:id])
     @scorecard.destroy
     

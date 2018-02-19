@@ -3,22 +3,22 @@
     - @job_feeds.each do |board| 
       .job-feed-container
         .header
-          = image_tag board.logo.small_image if board.logo.present? 
-          / = "#{board.posting_durations.first.duration}"
-        .body 
+          = image_tag board.logo.small_image if board.logo.present?
+        .premium-body 
+          .form-row-no-border
+            Details
           .form-row-no-border
             - if board.posting_durations.count > 1
               - board.posting_durations.each do |duration|
                 .contain-50
                   .duration-name= duration.name
-                  = link_to_add_to_cart "$ #{duration.price} ", f, :order_items, board.id, duration.id
+                  = link_to_add_to_cart "#{duration.price}", "#{duration.duration}", f, :order_items, board.id, duration.id
             - else
               - board.posting_durations.each do |duration|
-                = link_to_add_to_cart "$ #{duration.price} ", f, :order_items, board.id, duration.id
-        .footer
-          .form-row-no-border
-            Details
+                .duration-name= duration.name
+                = link_to_add_to_cart "$ #{duration.price} ", "#{duration.duration}", f, :order_items, board.id, duration.id
 
+        
   #cart 
     .header My Cart
     .body

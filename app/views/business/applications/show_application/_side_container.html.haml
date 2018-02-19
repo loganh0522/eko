@@ -11,20 +11,16 @@
 .side-section
   .tag-container
     .tag-header
-      %h4 Contact Details
-    .tags
-      .contact-details
-        .glyphicon.glyphicon-earphone 
-          = "#{@candidate.phone}"
-        %br
-        .glyphicon.glyphicon-envelope
-          = "#{@application.candidate.email}"
-        %br
-        - if @application.candidate.location.present?
-          .glyphicon.glyphicon-map-marker
-            = "#{@application.candidate.location}"
+      %h4 Tasks
+    = render 'business/tasks/candidate_tasks'
 
-
+.side-section
+  .tag-container
+    .tag-header
+      %h4 Schedule 
+    .tasks
+    = render 'business/interviews/candidate_interviews'
+      
 
    
 

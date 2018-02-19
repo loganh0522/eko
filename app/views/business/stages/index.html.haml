@@ -11,19 +11,31 @@
       .stages    
         .stage 
           .stage-header
-            All Applicants 
-
+            Applied
+          .stage-body
+          .stage-footer
+            = link_to "+ Add Interview", new_business_stage_action_path(kind: 'interview'), remote: true
+            = link_to "+ E-mail", new_business_stage_action_path(kind: 'email'), remote: true
+            = link_to "+ Add Task", new_business_stage_action_path(kind: 'task'), remote: true
         = render "stages", stages: @stages
-
+        
+        .stage 
+          .stage-header
+            Hired
+          .stage-body
+          .stage-footer
+            = link_to "+ Add Interview", new_business_stage_action_path(kind: 'interview'), remote: true
+            = link_to "+ E-mail", new_business_stage_action_path(kind: 'email'), remote: true
+            = link_to "+ Add Task", new_business_stage_action_path(kind: 'task'), remote: true
         .stage 
           .stage-header
             Rejected
+          .stage-body
+          .stage-footer
+            = link_to "+ Add Interview", new_business_stage_action_path(kind: 'interview'), remote: true
+            = link_to "+ E-mail", new_business_stage_action_path(kind: 'email'), remote: true
+            = link_to "+ Add Task", new_business_stage_action_path(kind: 'task'), remote: true
+            
+                
 
-.modal#basic-form-modal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title
 
-= render 'business/shared/newModal'

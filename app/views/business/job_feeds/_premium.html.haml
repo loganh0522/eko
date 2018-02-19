@@ -3,7 +3,7 @@
     %ul 
       = link_to business_job_job_feeds_path(@job, type: 'free'), remote: true do 
         %li.change#free Free Job Boards
-      = link_to business_job_job_feeds_path(@job, type: 'paid-boards'), remote: true do 
+      = link_to business_job_job_feeds_path(@job, type: 'premium'), remote: true do 
         %li.change#premium.activated Premium Job Boards
   = render 'business/orders/form'
         

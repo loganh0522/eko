@@ -10,6 +10,7 @@ class Business::StagesController < ApplicationController
   def index 
     @job = Job.find(params[:job_id])
     @stages = @job.stages
+    @users = @job.users
   end
 
   def new 

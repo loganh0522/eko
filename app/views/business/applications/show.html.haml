@@ -6,17 +6,18 @@
       %i.fa.fa-arrow-left 
       Back to Applicants
     .show-applicant-view
-      .applicant-main-container
-        .navigation-container
+      .applicant-main-container  
+        .applicant-general-info
+          .applicant-general-top
+            = render 'business/applications/show_application/applicant_details'
           .applicant-nav
             = render 'business/applications/show_application/applicant_nav'
           .action-area
         
         .applicant-general
           .display-applicant-details
-            = render 'business/applications/show_application/application_cv'
+            = render 'business/applications/show_application/process'
       
       .applicant-side-container
-        .applicant-general-info
-          = render 'business/applications/show_application/applicant_details'
+        
         = render 'business/applications/show_application/side_container'

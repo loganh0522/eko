@@ -1,0 +1,27 @@
+= form_for [:business, @stage_action], remote: true do |f|
+  .modal-body
+    .form-row-no-border
+      = f.label :name, "Interview Name"
+      = f.text_field :name, id: "name_Block", placeholder: "Interview Name", autocomplete: 'off'
+      %span.error#name_msgBlock
+      
+      = f.label :candidate, "Assign team members to Interview"
+      %p This will prompt your team members to schedule the interview, and add them to the interview, once it is scheduled with the candidate.
+      = render 'business/users/multi_user_auto'
+      = f.hidden_field :user_ids, value: "", id: "user_ids"
+    .form-row-no-border
+      = f.label :interview_kit_id, "Choose an Interview Kit"
+      = f.collection_select(:interview_kit_id, current_company.interview_kits, :id, :title, :include_blank => true)
+
+        
+
+
+  .modal-footer
+    = f.hidden_field :kind, value: "Interview"
+    = f.hidden_field :stage_id, value: @stage.id
+    = f.hidden_field :position, value: 1
+    = f.button @stage.new_record? ? "Create Stage" : "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
+    .btn.border-button.close-modal Cancel  
+
+
+ 

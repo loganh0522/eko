@@ -1,0 +1,7 @@
+- stage.stage_actions.each do |action| 
+  - if action.kind == 'Task'
+    = render 'business/stage_actions/task_row', action: action
+  - elsif action.kind == 'Interview'
+    = render 'business/stage_actions/interview_row', action: action
+  - elsif action.kind == 'Email'
+    = render 'business/stage_actions/email_row', action: action

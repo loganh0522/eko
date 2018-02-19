@@ -1,0 +1,19 @@
+= form_for [:business, @stage_action], remote: true do |f|
+  .modal-body
+    .form-row#how-this-works
+      %h4 How This Works
+      %p This will automatically create a task for the Candidate when they are moved into this stage. Assign the task to a member of the hiring team so they know it is their responsibility. 
+    .form-row-no-border
+      = f.label :name, "Task"
+      = f.text_field :name, id: "name_Block", placeholder: "Task Title", autocomplete: 'off'
+      %span.error#name_msgBlock
+      .assign-to-row
+        .title Assign to User 
+        = render 'business/users/single_auto'
+  .modal-footer
+    = f.hidden_field :kind, value: "Task"
+    = f.hidden_field :stage_id, value: @stage.id
+    = f.hidden_field :position, value: 1
+    = f.hidden_field :assigned_to, value: "", id: "user_id"
+    = f.button @stage_action.new_record? ? "Create Action" : "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
+    .btn.border-button.close-modal Cancel  

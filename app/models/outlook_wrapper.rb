@@ -400,7 +400,7 @@ module OutlookWrapper
       path = 'me/events/' + event.event_id
       data = {subject: "Interview with #{candidate.full_name}",
               body: {content: interview.notes},
-              responseStatus: "Accepted",
+              responseStatus: {response: "Accepted", time: Time.now},
               attendees: [
                 { status: { response: "Accepted", time: Time.now},
                 emailAddress: { address: user.email, name: user.full_name }},

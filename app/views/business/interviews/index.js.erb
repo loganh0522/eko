@@ -1,2 +1,8 @@
-$('.main-container').html('<%= j render "business/interviews/interviews" %>');
+<% if params[:candidate_id].present? %>
+  $('.display-applicant-details').html('<%= j render "business/interviews/candidate_interviews" %>');
+  $('.applicant-nav').find('.activated').removeClass('activated');
+  $('.applicant-nav').find('#interviews').addClass('activated');
+<% else %>
+  $('.main-container').html('<%= j render "business/interviews/interviews" %>');
+<% end %>
 

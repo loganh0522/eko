@@ -1,6 +1,13 @@
 .toggle-actions
   overflow: hidden
   margin-right: 10px
+  input[type="radio"]
+    display: none
+
+  input[type="radio"]:checked + label
+    background: rgba(115, 163, 198, 0.3)
+  .fa
+    margin-right: 5px
   .btn 
     height: 30px
   .border-button:first-child 
@@ -25,6 +32,10 @@
     &:hover
       background: rgba(115, 163, 198, 0.1)
       color: #73a3c6
+  
+
+
+
 .interview-button
   margin-right: 10px
 .border-button
@@ -35,6 +46,29 @@
   font-size: 14px 
   text-align: center
   padding: 9px 15px 
+  background: none
+  border: 1px solid rgba(239, 122, 43, 0.9)
+  color: rgba(239, 122, 43, 0.9)
+  &:hover
+    background-color: rgba(239, 122, 43, 0.1)
+    color: rgba(239, 122, 43, 0.9)
+    text-decoration: none
+a.button
+  text-decoration: none
+  color: white
+a:active, a:focus 
+  outline: 0
+  color: black
+  -moz-outline-style: none
+
+.add_to_cart
+  display: block
+  height: fit-content
+  border-radius: 2px
+  font-weight: 400
+  font-size: 12px 
+  text-align: center
+  padding: 5px 15px 
   background: none
   border: 1px solid rgba(239, 122, 43, 0.9)
   color: rgba(239, 122, 43, 0.9)
