@@ -333,29 +333,29 @@ Google::Apis::RequestOptions.default.retries = 5
       @events = service.list_events('primary')
     end
     
-    def self.update_event(user, event, candidate)   
-      self.set_client(user)
-      service = Google::Apis::CalendarV3::CalendarService.new
-      service.authorization = @client
-      attendees: [
-          {
-            id: string,
-            email: candidate.email,
-            displayName: candidate.full_name,
-            organizer: boolean,
-            self: boolean,
-            resource: boolean,
-            optional: boolean,
-            responseStatus: "Accepted",
-            "comment": string,
-            "additionalGuests": integer
-          }
-        ],
-      event = service.get_event('primary', event.event_id)
-      event.summary = "Interview with #{candidate.full_name}"
+    # def self.update_event(user, event, candidate)   
+    #   self.set_client(user)
+    #   service = Google::Apis::CalendarV3::CalendarService.new
+    #   service.authorization = @client
+    #   attendees: [
+    #       {
+    #         id: string,
+    #         email: candidate.email,
+    #         displayName: candidate.full_name,
+    #         organizer: boolean,
+    #         self: boolean,
+    #         resource: boolean,
+    #         optional: boolean,
+    #         responseStatus: "Accepted",
+    #         "comment": string,
+    #         "additionalGuests": integer
+    #       }
+    #     ],
+    #   event = service.get_event('primary', event.event_id)
+    #   event.summary = "Interview with #{candidate.full_name}"
 
-      @event = service.update_event('primary', event.id, event)
-    end
+    #   @event = service.update_event('primary', event.id, event)
+    # end
 
     def self.destroy_event
     end
