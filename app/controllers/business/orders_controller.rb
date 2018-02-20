@@ -1,6 +1,5 @@
 class Business::OrdersController < ApplicationController
   layout "business"
-
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -15,8 +14,6 @@ class Business::OrdersController < ApplicationController
   def create
     order_item_total(params[:order][:order_items_attributes])
     
-    binding.pry
-    
     charge = StripeWrapper::Charge.create(
       :customer_id => current_company.customer.stripe_customer_id,
       :amount => @totalPrice.to_i
@@ -24,16 +21,15 @@ class Business::OrdersController < ApplicationController
 
     if charge.successful?
       @order = Order.new(order_params)
-      binding.pry
-      respond_to do |format| 
+      
+      respond_to do |format|
         if @order.save 
           format.js
         else
+          render_errors(@order)
           format.js
         end
       end
-    else 
-      format.js
     end
   end
 
@@ -59,7 +55,7 @@ class Business::OrdersController < ApplicationController
       @job_board = PremiumBoard.find(item[1][:premium_board_id])
       
       if @duration.price == item[1][:unit_price].to_i && @duration.premium_board == @job_board
-        @totalPrice += @duration.real_price
+        @totalPrice += @duration.real_price * 100
       end
     end
     

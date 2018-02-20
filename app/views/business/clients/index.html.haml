@@ -7,15 +7,6 @@
     .side-container
       = render "filters"
     .main-container
-      .applicants
-        = render 'clients_table'
-      .pagination-container
-        = render 'business/client_contacts/contacts_table/pagination'
-
-
-.modal#basic-form-modal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title
+      = render 'clients_table'
+    .pagination-container
+      = render 'business/client_contacts/contacts_table/pagination'

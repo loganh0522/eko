@@ -33,7 +33,7 @@ class Business::CompaniesController < ApplicationController
   private 
 
   def company_params
-    params.require(:company).permit(:name, :website, :kind)
+    params.require(:company).permit(:name, :website, :kind, :address)
   end
 
   def render_errors(error)

@@ -8,18 +8,18 @@
 = text_field_tag "query", nil, placeholder: "Search Tasks", class: "search-field", autocomplete: "off"
 
 #filter-links
-  %ul  
-    = link_to business_client_tasks_path(@client), class: 'filter-link' do 
-      %li{:class => is_activated?(business_client_tasks_path(@client))} Open Tasks
+  / %ul  
+  /   = link_to business_client_tasks_path(@client), class: 'filter-link' do 
+  /     %li{:class => is_activated?(business_client_tasks_path(@client))} Open Tasks
     
-    = link_to due_today_business_client_tasks_path(@client), class: 'filter-link' do 
-      %li{:class => is_activated?(due_today_business_client_tasks_path(@client))}  Due Today
+  /   = link_to due_today_business_client_tasks_path(@client), class: 'filter-link' do 
+  /     %li{:class => is_activated?(due_today_business_client_tasks_path(@client))}  Due Today
     
-    = link_to overdue_business_client_tasks_path(@client), class: 'filter-link' do 
-      %li{:class => is_activated?(overdue_business_client_tasks_path(@client))}  Overdue Tasks
+  /   = link_to overdue_business_client_tasks_path(@client), class: 'filter-link' do 
+  /     %li{:class => is_activated?(overdue_business_client_tasks_path(@client))}  Overdue Tasks
     
-    = link_to complete_business_client_tasks_path(@client), class: 'filter-link' do 
-      %li{:class => is_activated?(complete_business_client_tasks_path(@client))}  Completed Tasks
+  /   = link_to complete_business_client_tasks_path(@client), class: 'filter-link' do 
+  /     %li{:class => is_activated?(complete_business_client_tasks_path(@client))}  Completed Tasks
 
 .filter-container
   .filter-header

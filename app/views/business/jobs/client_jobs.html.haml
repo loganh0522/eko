@@ -1,7 +1,9 @@
 = render 'business/clients/top_container'
 
-#main-container
-  = render 'filters'
-  = render 'business/jobs/jobs'       
-  .side-container
+#main-container.home-page-body
+  .side-container-right
     .container
+  .main-container-left
+    = render 'filters'
+    .all-main-job-container
+      = render 'business/jobs/jobs'  

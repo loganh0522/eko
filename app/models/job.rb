@@ -18,7 +18,9 @@ class Job < ActiveRecord::Base
   has_many :tasks
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy 
 
-
+  has_many :orders
+  has_many :order_items
+  
   validates_presence_of :title, :description, :location
     
   # :education_level, :kind, :career_level

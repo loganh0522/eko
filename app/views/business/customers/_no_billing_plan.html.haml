@@ -85,5 +85,7 @@
           .select-cost= radio_button_tag(:plan, "enterprise_year")
           .cost $3990 / year
         %td
-          %input(type="submit" value="Select Plan" class="btn btn-success")
+          = radio_button_tag :plan, "plus_year", id: 'plus_year', checked: true
+          = label_tag :plan, value: "plus_year" , for: "plus_year", class: 'border-button interview-type' do
+            $1990 / year
 

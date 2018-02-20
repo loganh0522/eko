@@ -1,17 +1,23 @@
 = render 'business/clients/top_container'
 
 #main-container
-  #job-applicants
+  #padding
     .side-container
       = form_tag business_client_tasks_path(@client), :method => 'get', id: "search-form" do
         = render 'business/tasks/client_filters'
-    .main-container#task-container
-      = link_to "Create Task", new_business_client_task_path(@client),  data: {:turbolinks => "false"}, remote: true, class: "btn border-button2"
-      = render 'business/tasks/tasks'
 
-.modal#basic-form-modal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title
+
+    .main-container
+      .actions
+        .application-actions
+          - if can? :create, Task
+            = link_to "Create Task", new_business_client_task_path(@client), data: {:turbolinks => "false"}, remote: true, class: "btn border-button", id: 'client-action'
+          .toggle-actions 
+            = link_to business_client_tasks_path(@client, view: "list"), remote: true do
+              .btn.border-button.toggle-show#list List
+            = link_to business_client_tasks_path(@client, view: "table"), remote: true do 
+              .btn.border-button.toggle-show#table.toggle-showing Table 
+      #task-container
+        = render 'business/tasks/table'
+      .pagination-container
+        = render 'business/tasks/pagination'

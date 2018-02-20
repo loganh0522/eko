@@ -3,6 +3,8 @@
     .form-row-no-border
       = f.label :name, "Company Name"
       = f.text_field :name, label: "Company Name", id: "name_Block"
+      = f.label :address, "Company Address"
+      = f.text_field :address, id: 'geocomplete2'
       %span#name_msgBlock
       = f.label :name, "Company Name"
       = f.text_field :website, label: "Website"     
@@ -13,5 +15,5 @@
         = f.radio_button :kind, 'recruiter', id: "recruiter"
         = f.label :kind, "Recruiter", :value => "recruiter", :for => 'recruiter'
   .modal-footer
-    = f.submit "Update Company", class: "btn submit-button"
+    = f.button "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
     .btn.border-button.close-modal Cancel

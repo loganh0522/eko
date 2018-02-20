@@ -7,57 +7,76 @@
         %th(width="20%") Open Positions
         %th(width="25%") Monthly Plan
         %th(width="25%") Yearly Plan
-        %th(width="10%") 
       %tr
         %td
           .plan Start-up
         %td
           .open-jobs 1 Active Jobs
         %td
-          .select-cost= radio_button_tag(:plan, "start_up_month")
-          .cost $19 / month
+          = radio_button_tag(:plan, "start_up_month")
+          = label_tag "plan_plus_year", value: "plus_year" , for: 'plan_plus_year', class: 'border-button interview-type' do
+            Basic
+            $19 / month
+            1 Active Jobs
         %td
-          .select-cost= radio_button_tag(:plan, "start_up_year")
-          .cost $190 / year
-        %td
-          %input(type="submit" value="Select Plan" class="btn btn-success")
+          = radio_button_tag(:plan, "start_up_year")
+          = label_tag "plan_plus_year", value: "plus_year" , for: 'plan_plus_year', class: 'border-button interview-type' do
+            Basic
+            $190 / year
+            1 Active Jobs
       %tr
         %td
           .plan Basic
         %td
           .open-jobs 5 Active Jobs
         %td
-          .select-cost= radio_button_tag(:plan, "basic_month")
-          .cost $49 / month
+          = radio_button_tag(:plan, "basic_month")
+          = label_tag "plan_plus_year", value: "plus_year" , for: 'plan_plus_year', class: 'border-button interview-type' do
+            Basic
+            $49 / month
+            5 Active Jobs
+        
         %td
-          .select-cost= radio_button_tag(:plan, "basic_year")
-          .cost $490 / year
-        %td
-          %input(type="submit" value="Select Plan" class="btn btn-success")
+          = radio_button_tag(:plan, "basic_year")
+          = label_tag "plan_plus_year", value: "plus_year" , for: 'plan_plus_year', class: 'border-button interview-type' do
+            Basic
+            $490 / year
+            5 Active Jobs
       %tr
         %td
           .plan Team
         %td
           .open-jobs 10 Active Jobs
         %td
-          .select-cost= radio_button_tag(:plan, "team_month")
-          .cost $99 / month
+          = radio_button_tag(:plan, "team_month")
+          = label_tag "plan_plus_year", value: "plus_year" , for: 'plan_plus_year', class: 'border-button interview-type' do
+            Team 
+            $99 / month
+            10 Active Jobs
         %td
-          .select-cost= radio_button_tag(:plan, "team_year")
-          .cost $990 / year
-        %td
-          %input(type="submit" value="Select Plan" class="btn btn-success")
+          = radio_button_tag(:plan, "team_year")
+          = label_tag "plan_plus_year", value: "plus_year" , for: 'plan_plus_year', class: 'border-button interview-type' do
+            Team
+            $990 / year
+            10 Active Jobs
       %tr
         %td
           .plan Plus
         %td
           .open-jobs 20 Active Jobs
         %td
-          .select-cost= radio_button_tag(:plan, "plus_month")
-          .cost $199 / month
+          = radio_button_tag(:plan, "plus_month")
+          = label_tag "plan_plus_year", value: "plus_year" , for: 'plan_plus_year', class: 'border-button interview-type' do
+            Plus
+            $199 / month
+            20 Active Jobs
         %td
-          .select-cost= radio_button_tag(:plan, "plus_year")
-          .cost $1990 / year
-        %td
-          %input(type="submit" value="Select Plan" class="btn btn-success")
+          = radio_button_tag(:plan, "plus_year")
+          = label_tag "plan_plus_year", value: "plus_year" , for: 'plan_plus_year', class: 'border-button interview-type' do
+            Plus
+            $1990 / year
+            20 Active Jobs
+
+.container-footer
+  = submit_tag "Select Plan", class: "btn submit-button"
       

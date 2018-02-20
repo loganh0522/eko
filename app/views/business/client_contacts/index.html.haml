@@ -1,32 +1,20 @@
 = render 'business/clients/top_container'
 
+
 #main-container
   #padding
     .side-container
       / = render "filters"
     .application-actions
+
       = render 'business/client_contacts/contacts_table/contact_actions'
     .main-container
-
-      .all-candidates-table
-        = render 'business/client_contacts/contacts_table/table', contacts: @contacts
-      .pagination-container
-        = render 'business/client_contacts/contacts_table/pagination'
-
-= render 'business/clients/modal'
+      .all-job-applicants-container
+        .all-candidates-table
+          = render 'business/client_contacts/contacts_table/table', contacts: @contacts
+        .pagination-container
+          = render 'business/client_contacts/contacts_table/pagination'
 
 
 
-.modal#basic-form-modal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title
 
-.modal.multi-form
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title 

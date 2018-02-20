@@ -1,0 +1,6 @@
+$('.mediumModal').find('form').remove()
+$('.mediumModal').find('.new-title').html('<%= j "Add Billing Information" %>');
+$('.mediumModal').find('.new-modal-header').after('<%= j render "business/customers/form" %>');
+$('.mediumModal').show();
+
+

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180219114148) do
+ActiveRecord::Schema.define(version: 20180220170350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -693,6 +693,7 @@ ActiveRecord::Schema.define(version: 20180219114148) do
     t.integer  "posting_duration_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "job_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -705,6 +706,8 @@ ActiveRecord::Schema.define(version: 20180219114148) do
     t.decimal  "total"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title"
+    t.string   "description"
   end
 
   create_table "outlook_tokens", force: :cascade do |t|
@@ -777,6 +780,9 @@ ActiveRecord::Schema.define(version: 20180219114148) do
     t.string  "website"
     t.string  "description"
     t.string  "kind"
+    t.string  "line_item_title"
+    t.boolean "email_to",        default: false
+    t.boolean "contact_email"
   end
 
   create_table "profiles", force: :cascade do |t|

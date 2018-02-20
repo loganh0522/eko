@@ -7,7 +7,6 @@
     %br
     = current_company.customer.postal_code
 
-
     %h4 Credit Card 
     %p= "xxxx xxxx xxxx #{current_company.customer.last_four}"
     %h4 Expires 
@@ -16,4 +15,12 @@
 - else
   .not-present-container
     %p There are currently no notes for this applicant. 
-    .add-object= link_to  "Add Billing Information", '#', class: "btn active-application-button move-applicants", id: "stage", :data => {:toggle => "modal", :target => "#createBillingDetails"}
+    / .add-object= link_to  "Add Billing Information", '#', class: "btn border-button", id: "stage", :data => {:toggle => "modal", :target => "#createBillingDetails"}
+    .add-object= link_to  "Add Billing Information", new_business_customer_path, class: "btn border-button", remote: true
+
+
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript">
+Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
+</script>
+= javascript_include_tag 'payment'

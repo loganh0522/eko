@@ -397,7 +397,10 @@ Rails.application.routes.draw do
       end
     end
   end
-
+  
+  namespace :association do
+    resources :job_board
+  end
 
   get 'adzuna-job-feed', to: "job_feeds#adzuna_job_feed"
   get 'eluta-job-feed', to: "job_feeds#eluta_job_feed"

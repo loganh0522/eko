@@ -12,19 +12,26 @@
   
   - elsif action.interview.present? && action.interview.start_time < Time.now
     
-    - if current_user.interviews.include?(action.interview)
-      .links
-        = link_to "Complete My Scorecard", new_business_interview_scorecard_path(interview: action.interview), remote: true
+
 
     .completed-scorecards
+      Completed Scorecards
       - action.interview.interview_scorecards.each do |scorecard|
-        .kind= scorecard.user.full_name
-        .links= link_to "View", business_interview_scorecard_path(scorecard), remote: true
-        .links= link_to "Edit", edit_business_interview_scorecard_path(scorecard), remote: true
-    .pending-scorecards
-      .pending Pending Interview Scorecard
+        .user-completed
+          .circle= user_avatar(scorecard.user)
+          .kind= scorecard.user.full_name
+
+          .links= link_to "View", business_interview_scorecard_path(scorecard), remote: true
+          
+          .links= link_to "Edit", edit_business_interview_scorecard_path(scorecard), remote: true
+    .completed-scorecards      
+      Pending Interview Scorecard
       - action.interview.pending_scorecards.each do |user|
-        .user-tag= user.full_name
+        .user-completed
+          .user= user_avatar(user)
+          .kind= user.full_name
+          .links= link_to "Finish Scorecard", new_business_interview_scorecard_path(interview: action.interview), remote: true
+      
 
   - else
     .links
@@ -38,6 +45,7 @@
           = link_to new_business_interview_invitation_path(s_action: action), remote: true, id: 'client-action' do 
             %i.fa.fa-paper-plane-o
             .action Send Invitation
+
 
 
 
