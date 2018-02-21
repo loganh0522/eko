@@ -63,6 +63,9 @@ Rails.application.routes.draw do
   post '/publish/google-pub-sub-messages', to: "inbound_emails#gmail_webhook"
   post '/api/watch/outlookNotification', to: "inbound_emails#outlook_webhook"
   
+
+  post '/inbound-can/ziprecruiter', to: "inbound_candidates#ziprecruiter_webhook"
+  post '/api/watch/outlookNotification', to: "inbound_emails#outlook_webhook"
   
 
   namespace :job_seeker do 

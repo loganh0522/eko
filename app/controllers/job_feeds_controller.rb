@@ -10,7 +10,7 @@ class JobFeedsController < ApplicationController
 
   def ziprecruiter_job_feed
     @jobs = Job.joins(:job_feed).where(status: "open", is_active: true, verified: true, :job_feeds => {:ziprecruiter => true})
-    render 'job_feeds/adzuna_job_feed.xml.builder', formats: [:xml]
+    render 'job_feeds/ziprecruiter_job_feed.xml.builder', formats: [:xml]
   end
 
   def eluta_job_feed
