@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180220170350) do
+ActiveRecord::Schema.define(version: 20180228165332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -398,6 +398,8 @@ ActiveRecord::Schema.define(version: 20180220170350) do
     t.string   "event_id"
     t.integer  "room_id"
     t.text     "details"
+    t.integer  "stage_action_id"
+    t.integer  "interview_kit_id"
   end
 
   create_table "interview_kits", force: :cascade do |t|
@@ -809,6 +811,7 @@ ActiveRecord::Schema.define(version: 20180220170350) do
     t.integer "job_id"
     t.integer "user_id"
     t.integer "interview_kit_id"
+    t.string  "file"
   end
 
   create_table "question_options", force: :cascade do |t|
@@ -824,10 +827,10 @@ ActiveRecord::Schema.define(version: 20180220170350) do
   create_table "questions", force: :cascade do |t|
     t.text    "body"
     t.text    "kind"
-    t.integer "required"
     t.integer "position"
     t.integer "job_id"
     t.integer "interview_kit_id"
+    t.boolean "required",         default: false
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -941,6 +944,8 @@ ActiveRecord::Schema.define(version: 20180220170350) do
     t.boolean  "is_scheduled",     default: false
     t.boolean  "sent_request",     default: false
     t.boolean  "is_complete",      default: false
+    t.string   "standard_stage"
+    t.integer  "job_id"
   end
 
   create_table "stages", force: :cascade do |t|

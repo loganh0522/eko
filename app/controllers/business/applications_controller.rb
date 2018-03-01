@@ -214,10 +214,13 @@ class Business::ApplicationsController < ApplicationController
   end
 
   def render_interview_scorcecard
-    @interview_scorecard = InterviewScorecard.find(2).scorecard
-    @interview_sections = @interview_scorecard.scorecard_sections if @scorecard.present?
-    @interview_scorecards = InterviewScorecard.where(application_id: @application.id)
-    @current_user_interview_scorecard = InterviewScorecard.where(user_id: current_user.id, application_id: @application.id).first 
+
+    # @interview_scorecard = InterviewScorecard.find(2).scorecard
+    @interview_scorecards = @application.interview_scorecards
+
+    # @interview_sections = @interview_scorecard.scorecard_sections if @scorecard.present?
+    # @interview_scorecards = InterviewScorecard.where(application_id: @application.id)
+    # @current_user_interview_scorecard = InterviewScorecard.where(user_id: current_user.id, application_id: @application.id).first 
   end
 
   def move_stage_single

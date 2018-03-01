@@ -1,8 +1,9 @@
 - @interviews.each do |interview|
   - if interview.start_time > Time.now
     .candidate-interview
-      .title= interview.title
-      = interview.kind
+      .header
+        .title= interview.title
+        .type= interview.kind
       .date-time
         %i.fa.fa-clock-o
         .date-time-container
@@ -14,14 +15,15 @@
           .date= "#{interview.location}"
           .time= "#{interview.room}" 
 
-      = link_to "Interview Kit", new_business_interview_scorecard_path(interview: interview), remote: true
-      
       .details
-        .box-row
-          .title Interviewers:
-          .content
-            - interview.users.each do |user|   
-              .user-tag= user.full_name
+        .contain-50
+          = link_to "Interview Kit", new_business_interview_scorecard_path(interview: interview), remote: true
+        .contain-50
+          .box-row
+            .title Interviewers:
+            .content
+              - interview.users.each do |user|   
+                .user-tag= user.full_name
           
       
         

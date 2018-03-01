@@ -9,4 +9,9 @@ class Question < ActiveRecord::Base
 
   accepts_nested_attributes_for :question_options, 
     allow_destroy: true
+  before_create :downcase
+
+  def downcase
+    self.kind = self.kind.downcase
+  end
 end

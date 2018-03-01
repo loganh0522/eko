@@ -22,7 +22,10 @@ class Business::InterviewInvitationsController < ApplicationController
   end
 
   def new
+
     @candidate = Candidate.find(params[:candidate_id]) if params[:candidate_id].present?
+    @stage_action = StageAction.find(params[:s_action]) if params[:s_action].present?
+  
     @job = Job.find(params[:job]) if params[:job].present?
     @invitation = InterviewInvitation.new
     @users = current_company.users 
@@ -130,7 +133,7 @@ class Business::InterviewInvitationsController < ApplicationController
 
   def interview_invitation_params
     params.require(:interview_invitation).permit(:title, :location, 
-      :kind, :job_id, :subject, :message, :body,
+      :kind, :job_id, :subject, :message, :body, :interview_kit_id, :stage_action_id, 
       :user_ids, :candidate_ids, :user_id, :company_id, :room_id,
       interview_times_attributes: [:id, :start_time, :end_time, :_destroy])
   end

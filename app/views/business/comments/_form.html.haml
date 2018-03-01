@@ -1,6 +1,8 @@
 .comment-area
   = form_for [:business, @commentable, @comment], remote: true do |f|
     = f.trix_editor :body, id: "body_Block", class: "comment-body", rows: 10, cols: 8, placeholder: "Add a Note"
+
+    / = f.text_area :body, id: "body_Block", class: "comment-body", rows: 8, cols: 8, placeholder: "Add a Note (@mention team members)"
     %span#body_msgBlock
     = f.hidden_field :user_id, value: current_user.id
     - if @job.present? 

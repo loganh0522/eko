@@ -10,7 +10,6 @@
           = f.label "Title"
           = f.text_field :title, id: "title_Block", placeholder: "Event Title", autocomplete: "off"
           %span#title_msgBlock.help-block
-      
       .contain-50
         = f.label "Interview Type"
         .toggle-actions
@@ -79,9 +78,9 @@
     .form-row-no-border 
       .contain-100
         = f.label :notes, "Notes / Details"
-        = f.text_area :notes, placeholder: "Add additional details for the candidate(ex. floor number)"
+        = f.text_area :notes, placeholder: "Add additional details for the candidate (ex. floor number, call in number)"
         = f.check_box :send_request, {}, true, false
-        = f.label "Send Confirmation E-mail"
+        = f.label :send_request, "Send Confirmation E-mail"
     .form-row-no-border
       .contain-100 
         = f.label :candidate, "Add Team Members"

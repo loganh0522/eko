@@ -153,4 +153,10 @@ class Business::CommentsController < ApplicationController
     resource, id = request.path.split('/')[-4..-2]
     @commentable = resource.singularize.classify.constantize.find(id)
   end
+
+  def mentions
+    regex = '/@([\w]+)'
+    matches = body.scan regex
+    User.where(username :matches)
+  end
 end

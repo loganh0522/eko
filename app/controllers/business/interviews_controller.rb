@@ -26,6 +26,7 @@ class Business::InterviewsController < ApplicationController
     else
       @events = current_company.interviews.accessible_by(current_ability)
     end
+    
     respond_to do |format|
       format.js 
       format.json
@@ -40,7 +41,7 @@ class Business::InterviewsController < ApplicationController
 
     @stage_action = StageAction.find(params[:s_action]) if params[:s_action].present?
     @application = Application.find(params[:application]) if params[:application].present?
-    @candidate = @application.candidate
+    @candidate = @application.candidate if @application.present?
 
     respond_to do |format| 
       format.js 

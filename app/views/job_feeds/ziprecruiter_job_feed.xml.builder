@@ -20,25 +20,26 @@ xml.publisherurl "https://www.talentwiz.ca"
         xml.compensation_min { xml.cdata!(job.start_salary) } if job.start_salary.present?
         xml.compensation_max { xml.cdata!(job.end_salary) } if job.end_salary.present?
 
-
-        xml.interview_json do
-          job.questions.each do |question|
-            @options = []   
-            if question.question_options.present?
-              question.question_options.each do |option|
-                @options << {value: option.id.to_s, label: option.body}
+        if job.questions.present?
+          xml.interview_json do
+            job.questions.each do |question|
+              @options = []   
+              if question.question_options.present?
+                question.question_options.each do |option|
+                  @options << {value: option.id.to_s, label: option.body}
+                end
               end
-            end
-            jsonInterview = "[{
-              :id => #{question.id.to_s},
-              :type => #{question.kind},
-              :question => #{question.body},
-              :options => #{@options}
-              }]"
+              jsonInterview = "[{
+                :id => #{question.id.to_s},
+                :type => #{question.kind},
+                :question => #{question.body},
+                :options => #{@options}
+                :required => #{question.required}
+                }]"
 
-            xml.cdata!(jsonInterview)
+              xml.cdata!(jsonInterview)
+            end
           end
-          
         end
       end
     end

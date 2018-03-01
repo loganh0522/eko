@@ -4,16 +4,15 @@
       %i.fa.fa-arrow-left 
       Back to Candidates
     .show-applicant-view
-      .applicant-main-container
-        .navigation-container
+      .applicant-main-container  
+        .applicant-general-info
+          .applicant-general-top
+            = render 'business/candidates/show_candidate/candidate_details'
           .applicant-nav
             = render 'business/candidates/show_candidate/candidate_nav'
           .action-area
         .applicant-general
           .display-applicant-details
             = render 'business/candidates/show_candidate/candidate_profile'
-      .applicant-side-container
-        .applicant-general-info
-          = render 'business/candidates/show_candidate/candidate_details'
+      .applicant-side-container  
         = render 'business/candidates/show_candidate/side_container'
-.footer

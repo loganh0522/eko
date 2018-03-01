@@ -18,6 +18,11 @@
   <% end %>
 <% else %>
   $('.smallModal').hide();
-  $('#stage_<%= @stage.id %>').children('.stage-body').html('<%= j render "business/stage_actions/actions", stage: @stage %>');
+  $('.mediumModal').hide();
+  <% if @stage.present? %>
+    $('#stage_<%= @stage.id %>').children('.stage-body').html('<%= j render "business/stage_actions/actions", stage: @stage %>');
+  <% else %> 
+    $('#<%= @standard_stage %>').children('.stage-body').html('<%= j render "business/stage_actions/standard_actions", type: @standard_stage %>');
+  <% end %>
 <% end %>
 

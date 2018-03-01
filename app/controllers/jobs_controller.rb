@@ -18,6 +18,8 @@ class JobsController < ApplicationController
     @candidate = Candidate.new
   end
 
+ 
+
   private
 
   def set_layout

@@ -1,8 +1,24 @@
 class InboundCandidatesController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:ziprecruiter_webhook]
 
-
   def ziprecruiter_webhook  
+    @job = Job.find(params[:job_id])
+    @company = @job.company
+
+    @candidate = Candidate.create(company: @company, first_name: params[:first_name], 
+      last_name: params[:last_name], email: params[:email], phone: params[:phone], 
+      manually_created: true, source: "ZipRecruiter")
+    
+    Resume.create(candidate: @candidate, name: params[:resume])
+    
+    params[:answers].each do |answer| 
+      QuestionAnswer.create(question_id: answer[:id], body: answer[:value], job_id: @job.id, candidate_id: @candidate.id)
+    end
+
+    @application = Application.create(candidate: @candidate, job: @job)
+  end
+
+  def indeed_webhook  
     details = JSON.parse params.first.first
     @job = Job.find(details["job_id"])
     @company = @job.company

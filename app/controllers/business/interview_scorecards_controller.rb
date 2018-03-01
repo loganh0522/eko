@@ -36,10 +36,9 @@ class Business::InterviewScorecardsController < ApplicationController
     @interview_scorecard = InterviewScorecard.new
     @scorecard_rating = ScorecardRating.new
     @interview = Interview.find(params[:interview])
-
     @candidate = @interview.candidate
-    @job = @interview.job
-    @application = Application.where(job: @job, candidate: @candidate).first
+    @application = Application.find(params[:application])
+    @job = @application.job
 
     @interview_kit = InterviewKit.find(@interview.interview_kit_id)
     @scorecard = @interview_kit.scorecard
@@ -74,8 +73,6 @@ class Business::InterviewScorecardsController < ApplicationController
     respond_to do |format|
       format.js
     end
-    
-
   end
 
   def update
@@ -93,6 +90,8 @@ class Business::InterviewScorecardsController < ApplicationController
   private 
 
   def interview_scorecard_params 
-    params.require(:interview_scorecard).permit(:feedback, :interview_id, :candidate_id, :scorecard_id, :job_id, scorecard_ratings_attributes: [:id, :section_option_id, :body, :user_id, :rating, :_destroy])
+    params.require(:interview_scorecard).permit(:feedback, :interview_id, 
+      :candidate_id, :scorecard_id, :job_id, :application_id,
+      scorecard_ratings_attributes: [:id, :section_option_id, :body, :user_id, :rating, :_destroy])
   end
 end

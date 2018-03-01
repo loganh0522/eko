@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   resources :jobs do 
     resources :applications, only: [:new, :create]
     resources :candidates, only: [:new, :create]
+    resources :questions, only: [:index]
     get '/apply', to: 'candidates#new'
     post '/apply', to: 'candidates#create'
   end
@@ -65,7 +66,8 @@ Rails.application.routes.draw do
   
 
   post '/inbound-can/ziprecruiter', to: "inbound_candidates#ziprecruiter_webhook"
-  post '/api/watch/outlookNotification', to: "inbound_emails#outlook_webhook"
+  post '/inbound-can/indeed', to: "inbound_candidates#indeed_webhook"
+  
   
 
   namespace :job_seeker do 
@@ -362,6 +364,7 @@ Rails.application.routes.draw do
   
   get 'register/:token', to: 'users#new_with_invitation_token', as: 'register_with_token'
   
+
   
 
   get 'forgot_password', to: 'forgot_passwords#new'

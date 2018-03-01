@@ -26,7 +26,7 @@ jQuery ->
 #### ApplicationForm ####
   $('.main-container').on 'change', '.answer-type', (event) -> 
     val = $(this).find('.question-type').val()
-    if val == "Checkbox" || val == "Multiple Choice"  
+    if val == "Select" || val == "Multiselect"  
       time = new Date().getTime()
       regexp = new RegExp($(this).data('id'), 'g')
       $(this).parent().after($(this).parent().next().data('fields'))

@@ -23,6 +23,21 @@ xml.publisherurl "https://www.talentwiz.ca"
         xml.education {xml.cdata! (job.education_level)} if job.education_level.present?
         xml.sponsored {xml.cdata! (job.job_feed.indeed_sponsored)} if job.indeed_sponsored.present?
         xml.budget {xml.cdata! (job.job_feed.indeed_budget)} if job.indeed_budget.present?
+
+
+        xml.indeed_apply_data do
+          URL.encode(job.title)
+          title = "indeed-apply-jobTitle=" + URI.encode(job.title) + "&"
+          name = "indeed-apply-jobname=firstlastname"
+          
+          companyName = "indeed-apply-apiCompanyName=" + URI.encode(job.company.name) + "&"
+          apiToken = "indeed-apply-apiToken=" + ENV['INDEED_TOKEN'] + "&"
+
+          jobId = "indeed-apply-resume=required"
+          jobId = "indeed-apply-jobTitle=#{job.id}"
+
+          xml.cdata!
+        end
       end
     end
   end

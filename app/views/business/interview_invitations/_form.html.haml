@@ -44,6 +44,13 @@
             = render 'business/candidates/candidates_autocomplete'
           = f.hidden_field :candidate_ids, id: "candidate_ids"
           %span.error#candidate_ids_msgBlock
+        - else 
+          = f.label :candidates, "Add Candidates"
+          #candidate_ids_block
+            .user-tag
+              .name= @candidate.full_name
+          = f.hidden_field :candidate_ids, value: @candidate.id
+
       .email-area
         = label_tag "E-mail"
         .subject
@@ -56,20 +63,50 @@
           = f.trix_editor :message, rows: 9, id: 'message_Block'
           %span.error#message_msgBlock
     .column-4
-      .form-row
+      .form-row-no-border
         = f.label "Title"
         = f.text_field :title, autocomplete: "off", id: "title_Block", placeholder: "Event Title" 
         %span.error#title_msgBlock.help-block
-        = f.label "Type of Meeting"
-        = f.select :kind, options_for_select(["Phone Interview", "Skype", "In-person Interview"]), :html => {id: "kind_Block", prompt: "Choose Type..."}
-        %span.error#kind_Block.help-block
-        = f.label "Location"
+        
+      
+      .form-row-no-border
+        = f.label :interview_kit_id, "Choose an Interview Kit"
+        - if @stage_action.present? && @stage_action.interview_kit.present?
+          %br
+          = @stage_action.interview_kit.title
+          = f.hidden_field :interview_kit_id, value: @stage_action.interview_kit.id
+        - else 
+          = f.collection_select(:interview_kit_id, current_company.interview_kits, :id, :title, :include_blank => true)
+
+      .form-row-no-border
+        = f.label "Interview Type"
+        .toggle-actions
+          .contain-3
+            = f.radio_button :kind, "phone", id: 'phone', checked: true
+            = f.label :kind, value: "Phone", for: "phone", class: 'border-button interview-type' do
+              %i.fa.fa-phone
+              Phone
+          .contain-3
+            = f.radio_button :kind, "video", id: 'video'
+            = f.label :kind, value: "Video", for: "video", class: 'border-button interview-type' do
+              %i.fa.fa-camera
+              Video
+          .contain-3
+            = f.radio_button :kind, "inperson", id: 'inperson'
+            = f.label :kind, value: "In Person", for: "inperson", class: 'border-button interview-type', id: 'in-person' do
+              %i.fa.fa-user
+              In person
+        
+      
+      .form-row-no-border#interview-location
+        = f.label "Address"
         = f.text_field :location, id: "geocomplete2", autocomplete: "off", placeholder: "Enter the Address"
+      .form-row-no-border
         = f.label :body, "Details"
-        = f.text_area :body, autocomplete: "off", placeholder: "Add the details for the meeting. This will be e-mailed to user once meeting confirmed. I.e Location, Phone Number, etc.", rows: 6, id: "details_Block"
+        = f.text_area :body, autocomplete: "off", placeholder: "Add the details for the meeting. This will be e-mailed to user once meeting confirmed. (I.e Location, Phone Number, etc.)", rows: 6, id: "details_Block"
         %span.error#body_msgBlock
       
-  
+  = f.hidden_field :stage_action_id, value: @stage_action.id if @stage_action.present?
   = f.hidden_field :job_id, id: "job_ids"
   = f.hidden_field :user_id, value: current_user.id
   = f.hidden_field :company_id, value: current_company.id

@@ -1,13 +1,10 @@
 .interview-scorecard
   .header
-    %h4= @interview_scorecard.interview_kit.title
+    %h4= scorecard.scorecard.interview_kit.title
     .my-scorecard
-      - if @current_user_interview_scorecard.present? 
-        = link_to "Edit My Scorecard", edit_business_interview_scorecard_path(@current_user_interview_scorecard), remote: true
-      - else 
-        = link_to "Create Scorecard", new_business_interview_scorecard_path(@interview_scorecard), remote: true 
+      = current_user_interview_scorecard(current_user, @application)
   .scorecard-details
-    - @interview_sections.each do |section|
+    - scorecard.scorecard.scorecard_sections.each do |section|
       %h4 Questions
       - section.section_options.each do |criteria|
         .form-row#no-padding

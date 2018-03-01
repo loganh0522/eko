@@ -22,4 +22,5 @@
           .action Destroy
   .activity-body-body
     .comment-body
-      = sanitize comment.body
+      / = sanitize comment.body
+      = simple_format(comment.body)

@@ -8,33 +8,40 @@
       .standard-header
         %h3 Recruitment Process
         = link_to 'Add Stage', new_business_job_stage_path(@job), class: "btn border-button", remote: true
+      
       .stages    
-        .stage 
+        .stage{:id => "applied"}
           .stage-header
             Applied
           .stage-body
+            = render 'business/stage_actions/standard_actions', type: 'applied'
           .stage-footer
-            = link_to "+ Add Interview", new_business_stage_action_path(kind: 'interview'), remote: true
-            = link_to "+ E-mail", new_business_stage_action_path(kind: 'email'), remote: true
-            = link_to "+ Add Task", new_business_stage_action_path(kind: 'task'), remote: true
+            = link_to "+ Add Interview", new_business_stage_action_path(kind: 'interview', standard: 'applied', job: @job), remote: true
+            = link_to "+ E-mail", new_business_stage_action_path(kind: 'email', standard: 'applied', job: @job), remote: true
+            = link_to "+ Add Task", new_business_stage_action_path(kind: 'task', standard: 'applied', job: @job), remote: true
+        
         = render "stages", stages: @stages
         
-        .stage 
+        .stage{:id => "hired"}
           .stage-header
             Hired
           .stage-body
+            = render 'business/stage_actions/standard_actions', type: 'hired'
           .stage-footer
-            = link_to "+ Add Interview", new_business_stage_action_path(kind: 'interview'), remote: true
-            = link_to "+ E-mail", new_business_stage_action_path(kind: 'email'), remote: true
-            = link_to "+ Add Task", new_business_stage_action_path(kind: 'task'), remote: true
-        .stage 
+            = link_to "+ Add Interview", new_business_stage_action_path(kind: 'interview', standard: 'hired', job: @job), remote: true
+            = link_to "+ E-mail", new_business_stage_action_path(kind: 'email', standard: 'hired', job: @job), remote: true
+            = link_to "+ Add Task", new_business_stage_action_path(kind: 'task', standard: 'hired', job: @job), remote: true
+        
+
+        .stage{:id => "rejected"}
           .stage-header
             Rejected
           .stage-body
+            = render 'business/stage_actions/standard_actions', type: 'rejected'
           .stage-footer
-            = link_to "+ Add Interview", new_business_stage_action_path(kind: 'interview'), remote: true
-            = link_to "+ E-mail", new_business_stage_action_path(kind: 'email'), remote: true
-            = link_to "+ Add Task", new_business_stage_action_path(kind: 'task'), remote: true
+            = link_to "+ Add Interview", new_business_stage_action_path(kind: 'interview', standard: 'rejected', job: @job), remote: true
+            = link_to "+ E-mail", new_business_stage_action_path(kind: 'email', standard: 'rejected', job: @job), remote: true
+            = link_to "+ Add Task", new_business_stage_action_path(kind: 'task', standard: 'rejected', job: @job), remote: true
             
                 
 

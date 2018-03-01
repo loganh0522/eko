@@ -23,7 +23,7 @@
             .action Create Task
 
         - if can? :create, InterviewInvitation
-          = link_to new_business_interview_invitation_path(job: @job), remote: true do 
+          = link_to new_business_interview_invitation_path(job: @job), remote: true, id: 'client-action' do 
             %i.fa.fa-paper-plane-o
             .action Interview Invitation
         - if can? :edit, Candidate

@@ -3,9 +3,9 @@
     .fieldset      
       .answer-type
         .title Question Type:
-        = f.select :kind, ['Text', 'Paragraph', 'Checkbox', 'Multiple Choice'],{}, {:class => 'question-type'}
+        = f.select :kind, ['Text', 'Select', 'Multiselect', 'File'],{}, {:class => 'question-type'}
         .required-answer
-          = f.check_box :required, checked_value: 1, unchecked_value: 0
+          = f.check_box :required, checked_value: true, unchecked_value: false
           = f.label :required, "Required"       
       
       = f.text_field :body, id: "body_Block", class: "question-field", placeholder: "Add your Question", autocomplete: 'off'

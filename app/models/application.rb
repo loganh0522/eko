@@ -4,7 +4,7 @@ class Application < ActiveRecord::Base
   belongs_to :stage
   belongs_to :candidate
   belongs_to :job
-
+  has_many :interview_scorecards
   has_many :ratings
   has_many :application_scorecards
   

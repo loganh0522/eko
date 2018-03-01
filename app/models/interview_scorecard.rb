@@ -4,6 +4,7 @@ class InterviewScorecard < ActiveRecord::Base
   belongs_to :application
   belongs_to :scorecard
   belongs_to :candidate
+  belongs_to :interview_kit
   belongs_to :interview
   belongs_to :stage_action
   belongs_to :user

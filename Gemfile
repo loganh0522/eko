@@ -42,6 +42,7 @@ gem 'figaro'
 gem 'stripe'
 gem 'stripe_event'
 
+gem 'jquery-atwho-rails'
 
 gem 'geocomplete_rails'
 

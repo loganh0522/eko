@@ -14,6 +14,8 @@ class Candidate < ActiveRecord::Base
   has_many :interviews
   has_many :question_answers
   has_many :invited_candidates
+
+  has_many :interview_scorecards
   has_many :interview_invitations, through: :invited_candidates
   has_many :resumes, :dependent => :destroy
   has_many :work_experiences, :dependent => :destroy

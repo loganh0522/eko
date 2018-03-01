@@ -17,6 +17,7 @@ class Business::UsersController < ApplicationController
       
       respond_to do |format| 
         format.html 
+        # format.json { render json: @users.as_json(only: [:full_name]) }
         format.json { render json: @users.where("first_name like ?", "%#{params[:q]}%")}
         format.js
       end

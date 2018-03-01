@@ -5,24 +5,35 @@
   .applicant-details
     .name-rating
       .name= "#{@candidate.full_name.capitalize}"
-      
-    .current-position
-  - if can? :update, Candidate
-    .actions
-      .dropdown
-        .dropdown-button.border-button
-          Actions
-          .caret
-        .dropdown-content#myDropdown
-          = link_to edit_business_candidate_path(@candidate), remote: true do
-            %i.fa.fa-pencil
-            .action Edit
-          = link_to business_candidate_path(@candidate), remote: true, :method => :delete, data: { confirm: "Are you sure"} do  
-            %i.fa.fa-trash-o
-            .action Destroy 
-     
+      - if can? :update, Candidate
+        .dropdown
+          .dropdown-button
+            %i.fa.fa-ellipsis-h.fa-lg
+          .dropdown-content#action-dropdown
+            = link_to edit_business_candidate_path(@candidate.id), remote: true do
+              %i.fa.fa-pencil
+              .action Edit
+            = link_to business_candidate_path(@candidate.id), remote: true, :method => :delete do  
+              %i.fa.fa-trash-o
+              .action Destroy Candidate
+    %br
+    .social-links
+      - @candidate.social_links.each do |link|
+        .social-link
+          = link_to link.url, target: :_blank do 
+            %i{class: "fa fa-#{link.kind.downcase}"}
+    %br
+    .contact-details
+      .contact-detail
+        %i.fa.fa-phone
+        .detail= "#{@candidate.phone}"
+      .contact-detail
+        %i.fa.fa-envelope-o
+        .detail= "#{@candidate.email}"
+      .contact-detail
+        %i.fa.fa-map-marker
+        .detail= "#{@candidate.location}"
 - else
-
   .user-image
     .profile_picture
       - if @candidate.user.user_avatar.present?
@@ -31,26 +42,33 @@
         %img(src="/tmp/blank_profile_picture.png")
   .applicant-details
     .name-rating
-      .name= "#{@candidate.user.full_name}"
-  - if can? :update, Candidate
-    .actions
-      .dropdown
-        .dropdown-button.border-button
-          Actions
-          .caret
-        .dropdown-content#myDropdown
-          = link_to edit_business_candidate_path(@candidate), remote: true do
-            %i.fa.fa-pencil
-            .action Edit
-          = link_to business_candidate_path(@candidate), remote: true, :method => :delete do  
-            %i.fa.fa-trash-o
-            .action Destroy 
+      .name= "#{@candidate.full_name.capitalize}"
+      - if can? :update, Candidate
+        .dropdown
+          .dropdown-button
+            %i.fa.fa-ellipsis-h.fa-lg
+          .dropdown-content#action-dropdown
+            = link_to edit_business_candidate_path(@candidate.id), remote: true do
+              %i.fa.fa-pencil
+              .action Edit
+            = link_to business_candidate_path(@candidate.id), remote: true, :method => :delete do  
+              %i.fa.fa-trash-o
+              .action Destroy Candidate
+    %br
+    .social-links
+      - @candidate.social_links.each do |link|
+        .social-link
+          = link_to link.url, target: :_blank do 
+            %i{class: "fa fa-#{link.kind.downcase}"}
+    %br
     .contact-details
-      .glyphicon.glyphicon-earphone 
-        = "#{@candidate.user.phone}"
-      %br
-      .glyphicon.glyphicon-envelope
-        = "#{@candidate.user.email}"
-      %br
-      .glyphicon.glyphicon-map-marker
-        = "#{@candidate.user.location}"
+      .contact-detail
+        %i.fa.fa-phone
+        .detail= "#{@candidate.phone}"
+      .contact-detail
+        %i.fa.fa-envelope-o
+        .detail= "#{@candidate.email}"
+      .contact-detail
+        %i.fa.fa-map-marker
+        .detail= "#{@candidate.location}"
+

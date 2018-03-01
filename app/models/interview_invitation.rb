@@ -1,6 +1,8 @@
 class InterviewInvitation < ActiveRecord::Base
   belongs_to :job
   belongs_to :company
+  belongs_to :stage_action
+  
   has_many :interview_times, :dependent => :destroy
 
   has_many :invited_candidates, :dependent => :destroy

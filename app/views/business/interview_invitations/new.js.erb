@@ -103,7 +103,7 @@ $('#interview-calendar').fullCalendar({
   timezone: "America/NewYork",
   
   eventSources: [{
-    url: 'users/availability/<%= current_user.id %>'
+    url: '/business/users/availability/<%= current_user.id %>'
   }],
     
   select: function(start, end) {

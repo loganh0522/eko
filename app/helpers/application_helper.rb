@@ -148,6 +148,14 @@ module ApplicationHelper
     end
   end
 
+  def current_user_interview_scorecard(user, application)
+    @scorecard = InterviewScorecard.where(user_id: user.id, application_id: application.id).first
+
+    if @scorecard.present? 
+      link_to "Edit My Scorecard", edit_business_interview_scorecard_path(@scorecard), remote: true
+    end
+  end
+
   def current_user_application_rating(application)
     if current_user.ratings.where(application_id: application.id).present?
       @rating = current_user.ratings.where(application_id: 1).first.score

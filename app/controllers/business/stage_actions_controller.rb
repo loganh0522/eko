@@ -12,8 +12,19 @@ class Business::StageActionsController < ApplicationController
   
   def new
     @stage_action = StageAction.new
-    @stage = Stage.find(params[:stage])
-    @users = @stage.job.users
+    
+    if params[:stage].present?
+      @stage = Stage.find(params[:stage]) 
+      @job = @stage.job
+      @users = @stage.job.users
+    else
+      @standard_stage = params[:standard] 
+      @job = Job.find(params[:job])
+      @users = @job.users
+    end
+
+    
+
     respond_to do |format|
       format.js 
     end
@@ -21,11 +32,17 @@ class Business::StageActionsController < ApplicationController
 
   def create
     @stage_action = StageAction.new(action_params)
-    @user_ids = params[:stage_action][:user_ids].split(',') 
+    @user_ids = params[:stage_action][:user_ids].split(',') if params[:stage_action][:user_ids].present?
 
     respond_to do |format| 
       if @stage_action.save
-        @stage = @stage_action.stage
+        
+        if @stage_action.standard_stage == nil
+          @stage = @stage_action.stage if @stage_action.stage.present?
+        else
+          @standard_stage = @stage_action.standard_stage 
+        end
+       
       else 
         render_errors(@stage_action)
       end
@@ -37,6 +54,7 @@ class Business::StageActionsController < ApplicationController
     @stage_action = StageAction.find(params[:id])
     @stage = @stage_action.stage
     @users = @stage_action.stage.job.users
+
     respond_to do |format|
       format.js 
     end
@@ -74,7 +92,7 @@ class Business::StageActionsController < ApplicationController
 
   def action_params 
     params.require(:stage_action).permit(:stage_id, :interview_kit_id, :automate, :kind,
-      :message, :subject, :name, :assigned_to,
+      :message, :subject, :name, :assigned_to, :position, :standard_stage, :job_id,
       user_ids: [])
   end
 

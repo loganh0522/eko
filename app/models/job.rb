@@ -10,6 +10,7 @@ class Job < ActiveRecord::Base
   has_many :users, through: :hiring_teams
   
   has_many :stages, -> {order(:position)}, :dependent => :destroy
+  has_many :stage_actions, :dependent => :destroy
   has_many :interviews, :dependent => :destroy
   has_many :interview_invitations, :dependent => :destroy
   has_many :activities, -> {order("created_at DESC")}, :dependent => :destroy

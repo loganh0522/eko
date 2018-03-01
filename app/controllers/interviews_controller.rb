@@ -7,7 +7,7 @@ class InterviewsController < ApplicationController
       @company = @invitation.company
       @times = @invitation.interview_times
     else
-      redirect_to 
+
     end
   end
 
@@ -21,7 +21,8 @@ class InterviewsController < ApplicationController
         @events = @time.event_ids
         
         @interview = Interview.new(interview_params.merge!(
-          title: @invite.title, kind: @invite.kind, location: @invite.location,
+          title: @invite.title, kind: @invite.kind, location: @invite.location, stage_action_id: @invite.stage_action_id,
+          interview_kit_id: @invite.interview_kit_id,
           users: @invite.users, candidate_id: @candidate.id, job: @invite.job,
           start_time: @time.start_time , end_time: @time.end_time, notes: @invite.body,
           etime: 'n/a', stime: 'n/a', date: 'n/a'))

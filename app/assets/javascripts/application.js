@@ -18,6 +18,8 @@
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
 //= require jquery.Jcrop
+//= require jquery
+//= require jquery.atwho
 //= require bootstrap-sprockets
 //= require geocomplete
 //= require googledocviewer
