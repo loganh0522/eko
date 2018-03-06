@@ -151,6 +151,24 @@ class Candidate < ActiveRecord::Base
     end
   end
 
+  def current_user_rating_present?(current_user, candidate)
+    candidate.ratings.each do |rating| 
+      if rating.user == current_user
+        return true   
+      end
+    end
+    return false
+  end
+
+  def current_user_rating(current_user)
+    self.ratings.each do |rating| 
+      if rating.user == current_user
+        return rating.score 
+      end
+    end
+    return false
+  end
+
   def search_data
     attributes.merge(
       comments: comments.map(&:id),

@@ -10,8 +10,8 @@
     .form-row
       .subject.subject_Block
         .title Subject
-        .sender= f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false
-
+        = f.text_field :subject, id: "subject_Block", placeholder: "Type Subject Here", autocomplete: false
+        %span.error#subject_msgBlock
       .email-variables
         .contain-2
           .show-hidden-search-box
@@ -23,12 +23,15 @@
               - current_company.email_templates.each do |template|
                 .insert-template{data: {:body => template.body}}= template.title
       .email-content
-        = f.trix_editor :message, rows: 8, data: {behaviour: 'comment-body'}, id: "body_Block"
+        = f.trix_editor :message, rows: 8, data: {behaviour: 'comment-body'}, id: "message_Block"
 
 
   .modal-footer
     = f.hidden_field :kind, value: "Email"
-    = f.hidden_field :stage_id, value: @stage.id
+    = f.hidden_field :stage_id, value: @stage.id if @stage.present?
+    = f.hidden_field :standard_stage, value: @standard_stage if @standard_stage.present?
+    = f.hidden_field :job_id, value: @job.id
     = f.hidden_field :position, value: 1
-    = f.button @stage.new_record? ? "Create Stage" : "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
+    = f.hidden_field :assigned_to, value: "", id: "user_id"
+    = f.button @stage_action.new_record? ? "Create Stage" : "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
     .btn.border-button.close-modal Cancel  

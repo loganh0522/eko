@@ -1,25 +1,26 @@
-.side-section#applicant-stage
-  = render 'business/applications/show_application/application_stage'
-.side-section
-  .tag-container
-    .tag-header
-      %h4 Tags
-      = render 'business/tags/form'
-    .tags
-      = render "business/tags/tags"
+= render 'business/applications/show_application/application_stage'
 
-.side-section
-  .tag-container
-    .tag-header
-      %h4 Tasks
-    = render 'business/tasks/candidate_tasks'
+.side-sections
+  .side-section
+    .tag-container
+      .tag-header
+        %h4 Tags
+        = render 'business/tags/form'
+      .tags
+        = render "business/tags/tags"
 
-.side-section
-  .tag-container
-    .tag-header
-      %h4 Schedule 
-    = render 'business/interviews/candidate_interviews'
-      
+  .side-section
+    .tag-container
+      .tag-header
+        %h4 Tasks
+      = render 'business/tasks/candidate_tasks'
 
-   
+  .side-section
+    .tag-container
+      .tag-header
+        %h4 Schedule 
+      = render 'business/interviews/candidate_interviews'
+        
+
+     
 

@@ -17,5 +17,6 @@
     = f.hidden_field :job_id, value: @job.id
     = f.hidden_field :position, value: 1
     = f.hidden_field :assigned_to, value: "", id: "user_id"
+    
     = f.button @stage_action.new_record? ? "Create Action" : "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
     .btn.border-button.close-modal Cancel  

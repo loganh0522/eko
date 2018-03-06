@@ -7,6 +7,10 @@ module JobHelper
     @job.applications.where(rejected: true).count
   end
 
+  def hired_applications_count
+    @job.applications.where(hired: true).count
+  end
+
   def application_stage(candidate, job)
     application = Application.where(candidate: candidate, job: job).first
 

@@ -1,34 +1,36 @@
 .interview-scorecard
   .header
     %h4= scorecard.scorecard.interview_kit.title
-    .my-scorecard
-      = current_user_interview_scorecard(current_user, @application)
+    / .my-scorecard
+    /   = current_user_interview_scorecard(current_user, @application)
   .scorecard-details
     - scorecard.scorecard.scorecard_sections.each do |section|
-      %h4 Questions
       - section.section_options.each do |criteria|
         .form-row#no-padding
           .question-header
             .question= criteria.body 
             - criteria.scorecard_ratings.each do |rating|
-              - if rating.rating == 1 
+              - if rating.rating == 1 && rating.user == scorecard.user
                 .scorecard-inputs
                   %i.glyphicon.glyphicon-remove
-              - elsif rating.rating == 2 
+              - elsif rating.rating == 2 && rating.user == scorecard.user
                 .scorecard-inputs
                   %i.glyphicon.glyphicon-thumbs-down
-              - elsif rating.rating == 3 
+              - elsif rating.rating == 3 && rating.user == scorecard.user
                 .scorecard-inputs
                   %i.glyphicon.glyphicon-thumbs-up
-              - elsif rating.rating == 4 
+
+              - elsif rating.rating == 4 && rating.user == scorecard.user
                 .scorecard-inputs
                   %i.glyphicon.glyphicon-star
-          .rating-comments
-            %p Show comments 
-            .comments
-              - criteria.scorecard_ratings.each do |rating|
-                .rating-comment
-                  = user_avatar(rating.user) 
-                  .body
-                    .name= rating.user.full_name
-                    .content= rating.body
+              %br
+          .question-header
+            - criteria.scorecard_ratings.each do |rating|
+              - if rating.user == scorecard.user
+                .content= rating.body
+    
+    .form-row#no-padding
+      .question-header
+        .question Feedback
+        %br
+        .content= scorecard.feedback

@@ -87,6 +87,14 @@ class Business::InterviewScorecardsController < ApplicationController
     end
   end
 
+  def show 
+    @interview_scorecard = InterviewScorecard.find(params[:id])
+    
+    respond_to do |format| 
+      format.js
+    end
+  end
+
   private 
 
   def interview_scorecard_params 

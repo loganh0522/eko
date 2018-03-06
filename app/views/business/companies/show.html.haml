@@ -14,10 +14,18 @@
       %h3= current_company.name
       .profile-actions
         .link1= link_to "Edit Company", edit_business_company_path(current_company), class: "btn border-button", :data => {remote: true}
-    / .templates-header
-    /   %h4 Widget Details 
-    / = '<script type="text/javascript" src= "http://prod-talentwiz.heroku.com/widget/company_jobs/'"#{current_company.widget_key}"'></script> <style type="text/css">.customCSSclass a{text-decoration:none;} </style>'
-    
+
+    .standard-body
+      .standard-body-header
+        .templates-header
+          %h4 Widget Details 
+        = '<script type="text/javascript" src= "http://prod-talentwiz.heroku.com/widget/company_jobs/'"#{current_company.widget_key}"'></script> <style type="text/css">.customCSSclass a{text-decoration:none;} </style>'
+
+    .standard-body
+      .standard-body-header
+        .templates-header
+          %h4 Departments
+        
     .standard-body
       .standard-body-header
         %h4 Meeting Rooms

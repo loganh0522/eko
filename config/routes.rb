@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     match 'create-profile', to: "profiles#new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '6d4d48ec'}, via: [:get, :post, :put, :patch, :delete]
   end
 
+ 
+  match '/', to: 'blogs#index', constraints: { subdomain: 'www' }, via: [:get, :post, :put, :patch, :delete]
+  match '/', to: 'blogs#show', constraints: { subdomain: /.+/ }, via: [:get, :post, :put, :patch, :delete]
+
   root to: 'pages#home'
   
   get 'pricing', to: 'pages#pricing'
@@ -381,7 +385,8 @@ Rails.application.routes.draw do
     resources :users
     resources :candidates
     resources :customers
-
+    resources :blogs
+    
     resources :jobs do 
       collection do 
         post :verified, to: "jobs#verified"
@@ -406,7 +411,11 @@ Rails.application.routes.draw do
   
   namespace :association do
     resources :job_board
+    resources :jobs
+    resources :companies
+    resources :client_contacts 
   end
+
 
   get 'adzuna-job-feed', to: "job_feeds#adzuna_job_feed"
   get 'eluta-job-feed', to: "job_feeds#eluta_job_feed"

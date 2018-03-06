@@ -6,7 +6,7 @@
     .name-rating
       .name= "#{@application.candidate.full_name.capitalize}"
       = render 'business/ratings/form', application: @application
-      .dropdown
+      .dropdown#edit-candidate-drop
         .dropdown-button
           %i.fa.fa-ellipsis-h.fa-lg
         .dropdown-content#action-dropdown
@@ -19,7 +19,7 @@
           = link_to business_candidate_path(@application.candidate.id), remote: true, :method => :delete do  
             %i.fa.fa-trash-o
             .action Destroy Candidate
-    %br
+    
 
     .social-links
       - @application.candidate.social_links.each do |link|

@@ -1,0 +1,4 @@
+$('.smallModal').find('form').remove();
+$('.smallModal').find('.new-title').html('<%= j "Edit Default Stage" %>');
+$('.smallModal').find('.new-modal-header').after('<%= j render "business/default_stages/form" %>');
+$('.smallModal').show();

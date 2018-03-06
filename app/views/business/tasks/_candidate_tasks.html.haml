@@ -1,10 +1,10 @@
-.change-containers-nav
-  %ul 
-    = link_to business_candidate_tasks_path(@candidate, job: @job), remote: true do
-      %li.change#tasks.activated Active
+/ .change-containers-nav
+/   %ul 
+/     = link_to business_candidate_tasks_path(@candidate, job: @job), remote: true do
+/       %li.change#tasks.activated Active
 
-    = link_to business_candidate_tasks_path(@candidate, status: "complete", job: @job), remote: true do
-      %li.change#completed-tasks  Complete
+/     = link_to business_candidate_tasks_path(@candidate, status: "complete", job: @job), remote: true do
+/       %li.change#completed-tasks  Complete
     
 .tasks
   - if @tasks.present? 

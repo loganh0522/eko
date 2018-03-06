@@ -12,7 +12,6 @@ class Business::StageActionsController < ApplicationController
   
   def new
     @stage_action = StageAction.new
-    
     if params[:stage].present?
       @stage = Stage.find(params[:stage]) 
       @job = @stage.job
@@ -22,9 +21,6 @@ class Business::StageActionsController < ApplicationController
       @job = Job.find(params[:job])
       @users = @job.users
     end
-
-    
-
     respond_to do |format|
       format.js 
     end
@@ -36,13 +32,12 @@ class Business::StageActionsController < ApplicationController
 
     respond_to do |format| 
       if @stage_action.save
-        
         if @stage_action.standard_stage == nil
           @stage = @stage_action.stage if @stage_action.stage.present?
         else
           @standard_stage = @stage_action.standard_stage 
+          @job = @stage_action.job
         end
-       
       else 
         render_errors(@stage_action)
       end

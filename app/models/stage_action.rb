@@ -12,4 +12,11 @@ class StageAction < ActiveRecord::Base
 
   has_many :assigned_users, as: :assignable, :dependent => :destroy
   has_many :users, through: :assigned_users, validate: false
+
+  validates_presence_of :name
+  validates_presence_of :subject, :message, if: :is_email?
+
+  def is_email? 
+    kind == 'Email'
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180228165332) do
+ActiveRecord::Schema.define(version: 20180302213524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,17 @@ ActiveRecord::Schema.define(version: 20180228165332) do
     t.integer  "job_board_row_id"
     t.integer  "user_id"
     t.string   "file"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "blogs", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "body"
+    t.string   "title"
+    t.integer  "estimated_time"
+    t.boolean  "published",      default: false
+    t.datetime "published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -274,6 +285,17 @@ ActiveRecord::Schema.define(version: 20180228165332) do
     t.string "company_size"
     t.string "company_website"
     t.string "demo"
+  end
+
+  create_table "departments", force: :cascade do |t|
+    t.integer  "subsidiary_id"
+    t.integer  "location_id"
+    t.integer  "company_id"
+    t.string   "name"
+    t.string   "description"
+    t.string   "image"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "education_levels", force: :cascade do |t|
@@ -617,6 +639,9 @@ ActiveRecord::Schema.define(version: 20180228165332) do
     t.string   "function"
     t.string   "industry"
     t.boolean  "is_active"
+    t.integer  "department_id"
+    t.integer  "location_id"
+    t.integer  "subsidiary_id"
   end
 
   create_table "locations", force: :cascade do |t|

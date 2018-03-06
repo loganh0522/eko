@@ -1,0 +1,11 @@
+.stage{:id => "default_stage_#{stage.id}"}
+  .stage-header
+    .glyphicon.glyphicon-move
+    .body
+      = stage.name
+    .icons
+      = link_to edit_business_default_stage_path(stage.id), :data => {:remote => true } do
+        %i.glyphicon.glyphicon-pencil
+      = link_to business_default_stage_path(stage.id), remote: true, :method => :delete do
+        %i.glyphicon.glyphicon-remove
+      

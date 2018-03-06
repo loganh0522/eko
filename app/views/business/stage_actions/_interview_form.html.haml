@@ -13,14 +13,14 @@
       = f.label :interview_kit_id, "Choose an Interview Kit"
       = f.collection_select(:interview_kit_id, current_company.interview_kits, :id, :title, :include_blank => true)
 
-        
-
-
   .modal-footer
     = f.hidden_field :kind, value: "Interview"
-    = f.hidden_field :stage_id, value: @stage.id
+    = f.hidden_field :stage_id, value: @stage.id if @stage.present?
+    = f.hidden_field :standard_stage, value: @standard_stage if @standard_stage.present?
+    = f.hidden_field :job_id, value: @job.id
     = f.hidden_field :position, value: 1
-    = f.button @stage.new_record? ? "Create Stage" : "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
+    = f.hidden_field :assigned_to, value: "", id: "user_id"
+    = f.button @stage_action.new_record? ? "Create Stage" : "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
     .btn.border-button.close-modal Cancel  
 
 
