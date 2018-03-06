@@ -25,7 +25,7 @@
       = radio_button_tag "status", "complete", false, class: 'filter'
       = label_tag "status_complete", "Complete", :value => "my-tasks", class: 'filter'
 
-- if current_user.permission.view_all_tasks
+- if current_user.permission.view_all_tasks || current_user.is_admin?
   .filter-container
     .filter-header
       %h4 Assigned To
