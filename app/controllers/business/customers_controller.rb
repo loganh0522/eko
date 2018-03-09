@@ -27,10 +27,8 @@ class Business::CustomersController < ApplicationController
       :company => @company,
       :card => params[:stripeToken]
       )   
-    binding.pry
 
     if customer.successful?
-      binding.pry
       stripe_customer = JSON.parse customer.response.to_s
 
       Customer.create(company_id: current_company.id, 
@@ -104,7 +102,7 @@ class Business::CustomersController < ApplicationController
       subtotal = customer.response.items.data.first.plan.amount
       total = subtotal * 1.13
 
-      Order.create(company: current_company, subtotal: amount, total: total, title: plan)
+      Order.create(company: current_company, subtotal: subtotal, total: total, title: plan)
       
       redirect_to business_plan_path
       flash[:success] = "Your subscription was successful, the charge has been added to your card"  

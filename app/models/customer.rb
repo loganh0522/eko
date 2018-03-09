@@ -1,9 +1,9 @@
 class Customer < ActiveRecord::Base
   belongs_to :company
   has_one :subscription
-  after_create :convert_location
 
-  validates_presence_of :address, :full_name, :location
+
+
   
   def convert_location
     location = self.location.split(',')
