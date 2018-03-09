@@ -65,6 +65,7 @@ class Business::InterviewScorecardsController < ApplicationController
   def edit 
     @interview_scorecard = InterviewScorecard.find(params[:id])
     @interview = @interview_scorecard.interview
+    @application = @interview_scorecard.application
     @candidate = @interview_scorecard.candidate
     @scorecard = @interview_scorecard.scorecard
 

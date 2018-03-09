@@ -34,7 +34,8 @@ class Company < ActiveRecord::Base
   has_one :background_image, :dependent => :destroy
   has_one :logo, :dependent => :destroy
   validates_presence_of :name, :website, :size, :location
-
+  has_many :interview_kit_templates
+  
   accepts_nested_attributes_for :users, 
     allow_destroy: true
 

@@ -8,7 +8,6 @@
       %li= link_to "ACTIVITY", business_activities_path    
       %li= link_to "TASKS", business_tasks_path
       %li= link_to "CLIENTS", business_clients_path if current_company.kind == "recruiter" 
-      
       %li
         = link_to business_interviews_path do
           %i.fa.fa-calendar

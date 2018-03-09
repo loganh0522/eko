@@ -1,7 +1,6 @@
 class Business::ApplicationsController < ApplicationController
   layout "business"
   load_and_authorize_resource :job
-  
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -106,9 +105,6 @@ class Business::ApplicationsController < ApplicationController
         @job = @application.job 
         @questions = @job.questions
       end
-
-      render_scorecard
-      render_interview_scorcecard
     else
       @candidate = Candidate.find(params[:candidate_id])
       @job = Job.find(params[:job])
@@ -120,6 +116,22 @@ class Business::ApplicationsController < ApplicationController
     end
   end
 
+  def scorecards
+    if !params[:job].present?
+      @application = Application.find(params[:id])      
+      @candidate = @application.candidate
+      if @application.present?
+        @job = @application.job 
+      end
+    else
+      @candidate = Candidate.find(params[:candidate_id])
+      @job = Job.find(params[:job])
+    end
+    
+    render_scorecard
+    render_interview_scorcecard
+  end
+  
   def multiple_change_stages
     @job = Job.find(params[:job])
     respond_to do |format|
@@ -206,17 +218,18 @@ class Business::ApplicationsController < ApplicationController
   end
 
   def render_scorecard
-    @job = @application.job
-    @scorecard = Scorecard.where(job_id: @job.id).first
-    @sections = @scorecard.scorecard_sections
-    @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
-    @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first 
+    
+    # @job = @application.job
+    # @scorecard = Scorecard.where(job_id: @job.id).first
+    # @sections = @scorecard.scorecard_sections
+    # @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
+    # @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first 
   end
 
   def render_interview_scorcecard
 
     # @interview_scorecard = InterviewScorecard.find(2).scorecard
-    @interview_scorecards = @application.interview_scorecards
+    # @interview_scorecards = @application
 
     # @interview_sections = @interview_scorecard.scorecard_sections if @scorecard.present?
     # @interview_scorecards = InterviewScorecard.where(application_id: @application.id)

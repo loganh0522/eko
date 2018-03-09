@@ -3,7 +3,8 @@ class Customer < ActiveRecord::Base
   has_one :subscription
   after_create :convert_location
 
-
+  validates_presence_of :address, :full_name, :location
+  
   def convert_location
     location = self.location.split(',')
     if location.count == 3

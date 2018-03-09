@@ -1,6 +1,6 @@
 class InterviewScorecard < ActiveRecord::Base 
   has_many :scorecard_ratings, dependent: :destroy
-  # has_many :overall_ratings, dependent: :destroy
+
   belongs_to :application
   belongs_to :scorecard
   belongs_to :candidate

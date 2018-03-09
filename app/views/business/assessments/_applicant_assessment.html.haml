@@ -1,20 +1,17 @@
-.assessments-container
-  .assessment
-    - if @questions.nil? 
-      .not-present-container
-        %p No Assessments Available
-    - else 
-      .header
-        %h4 Application Form
-      .assessment-body
-        - @questions.each do |question|
-          .question-area
-            .question
-              = question.position
-              = question.body
-            .answer
-              = question_answer(question, @candidate, @job)
+.assessment
+  - if @questions.nil? 
+    .not-present-container
+      %p No Assessments Available
+  - else 
+    .header
+      %h4 Application Form
+    .assessment-body
+      - @questions.each do |question|
+        .question-area
+          .question
+            = question.position
+            = question.body
+          .answer
+            = question_answer(question, @candidate, @job)
 
-= render 'business/application_scorecards/applicant_scorecard'
 
-= render 'business/interview_scorecards/interview_scorecards'

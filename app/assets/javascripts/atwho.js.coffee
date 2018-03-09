@@ -6,8 +6,6 @@ jQuery ->
     'data': '/business/users'
 
   $('#add-note').on 'click', (e) ->
-    console.log('comment click')
-
     $(document).on 'keypress', '.comment-body', (e) ->
       if e.keyCode == 64
         $(document).find(".comment-body").autocomplete(

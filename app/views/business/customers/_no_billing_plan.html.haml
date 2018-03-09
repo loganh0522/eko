@@ -1,4 +1,4 @@
-= form_tag new_plan_business_customers_path, html: {id: "payment-form"}  do
+= form_tag new_plan_business_customers_path, html: {id: "payment-form"} do
   %span.payment-errors
   %table.table
     %thead
@@ -7,85 +7,57 @@
         %th(width="20%") Open Positions
         %th(width="25%") Monthly Plan
         %th(width="25%") Yearly Plan
-        %th(width="10%") 
       %tr
         %td
           .plan Start-up
         %td
           .open-jobs 1 Active Jobs
         %td
-          .select-cost= radio_button_tag(:plan, "start_up_month")
-          .cost $19 / month
+          = radio_button_tag(:plan, "start_up_month")
+          = label_tag "plan_start_up_month", value: "start_up_month" , for: 'plan_start_up_month', class: 'border-button interview-type' do
+            $19 / month
         %td
-          .select-cost= radio_button_tag(:plan, "start_up_year")
-          .cost $190 / year
-        %td
-          %input(type="submit" value="Select Plan" class="btn btn-success")
+          = radio_button_tag(:plan, "start_up_year") 
+          = label_tag "plan_start_up_year", value: "start_up_year" , for: 'plan_start_up_year', class: 'border-button interview-type' do
+            $199 / year   
       %tr
         %td
           .plan Basic
         %td
-          .open-jobs 3 Active Jobs
+          .open-jobs 5 Active Jobs
         %td
-          .select-cost= radio_button_tag(:plan, "basic_month")
-          .cost $39 / month
+          = radio_button_tag(:plan, "basic_month")
+          = label_tag "plan_basic_month", value: "basic_month" , for: 'plan_basic_month', class: 'border-button interview-type' do
+            $49 / month
         %td
-          .select-cost= radio_button_tag(:plan, "basic_year")
-          .cost $390 / year
-        %td
-          %input(type="submit" value="Select Plan" class="btn btn-success")
+          = radio_button_tag(:plan, "basic_year")
+          = label_tag "plan_basic_year", value: "basic_year" , for: 'plan_basic_year', class: 'border-button interview-type' do
+            $499 / year
       %tr
         %td
           .plan Team
         %td
-          .open-jobs 5 Active Jobs
+          .open-jobs 10 Active Jobs
         %td
-          .select-cost= radio_button_tag(:plan, "team_month")
-          .cost $99 / month
+          = radio_button_tag(:plan, "team_month")
+          = label_tag "plan_team_year", value: "team_month" , for: 'plan_team_month', class: 'border-button interview-type' do
+            $99 / month
         %td
-          .select-cost= radio_button_tag(:plan, "team_year")
-          .cost $990 / year
-        %td
-          %input(type="submit" value="Select Plan" class="btn btn-success")
+          = radio_button_tag(:plan, "team_year")
+          = label_tag "plan_team_year", value: "team_year" , for: 'plan_team_year', class: 'border-button interview-type' do
+            $999 / year 
       %tr
         %td
           .plan Plus
         %td
-          .open-jobs 10 Active Jobs
+          .open-jobs 20 Active Jobs
         %td
-          .select-cost= radio_button_tag(:plan, "plus_month")
-          .cost $199 / month
+          = radio_button_tag(:plan, "plus_month")
+          = label_tag "plan_plus_month", value: "plus_month" , for: 'plan_plus_month', class: 'border-button interview-type' do
+            $199 / Month
         %td
-          .select-cost= radio_button_tag(:plan, "plus_year")
-          .cost $1990 / year
-        %td
-          %input(type="submit" value="Select Plan" class="btn btn-success")
-      %tr
-        %td
-          .plan Growth
-        %td
-          .open-jobs 15 Active Jobs
-        %td
-          .select-cost= radio_button_tag(:plan, "growth_month")
-          .cost $299 / month
-        %td
-          .select-cost= radio_button_tag(:plan, "growth_year")
-          .cost $2990 / year
-        %td
-          %input(type="submit" value="Select Plan" class="btn btn-success")
-      %tr
-        %td
-          .plan Enterprise
-        %td
-          .open-jobs Unlimited
-        %td
-          .select-cost= radio_button_tag(:plan, "enterprise_month")
-          .cost $399 / month
-        %td
-          .select-cost= radio_button_tag(:plan, "enterprise_year")
-          .cost $3990 / year
-        %td
-          = radio_button_tag :plan, "plus_year", id: 'plus_year', checked: true
-          = label_tag :plan, value: "plus_year" , for: "plus_year", class: 'border-button interview-type' do
-            $1990 / year
-
+          = radio_button_tag(:plan, "plus_year")
+          = label_tag "plan_plus_year", value: "plus_year" , for: 'plan_plus_year', class: 'border-button interview-type' do
+            $1999 / year
+  .container-footer
+    =  link_to "Select Plan", business_customers_path, class: "btn border-button"

@@ -1,12 +1,14 @@
-.left_scroll
-  %img(src="/tmp/left_arrow.png") 
 %ul.job-stage-area
-  .job-gallery
+  .base-stages
     %li#all_applicants.activated.job_list_stage
       .number 
         = applied_applications_count
       .name All Applicants
-    
+    %li#all_applicants.job_list_stage
+      .number 
+        = hired_applications_count
+      .name New Applicants
+  .all-stages
     - @job.stages.each do |stage| 
       %li.job_list_stage{:id => "#{stage.name}"}
         .number= stage.applications.count
@@ -19,6 +21,4 @@
     %li.job_list_stage#Rejected
       .number 
         = hired_applications_count
-      .name Rejected
-.right_scroll
-  %img(src="/tmp/right_arrow.png")
+      .name Disqualified

@@ -4,35 +4,30 @@
   margin-top: 1px
   input[type="radio"]
     display: none
-
+  label 
+    float: left
+    display: inline-block
+    width: fit-content
+    min-width: 60px
+    background-color: none
+    color: rgba(0, 0, 0, 0.6)
+    font-size: 14px
+    font-weight: normal
+    text-align: center
+    text-shadow: none
+    padding: 6px 14px
+    border: 1px solid rgba(0, 0, 0, 0.2)
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1)
+    &:hover 
+      cursor: pointer 
+  label:first-of-type
+    border-radius: 5px 0 0 5px
+  label:last-child
+    border-radius: 0 5px 5px 0
   input[type="radio"]:checked + label
-    background: rgba(115, 163, 198, 0.3)
-  .fa
-    margin-right: 5px
-  .btn 
-    height: 30px
-  .border-button:first-child 
-    border-radius: 2px 0 0 2px
-    margin-right: 0
-  .border-button:last-child 
-    border-radius: 2px 0 0 2px
-    margin-right: 0
-  .border-button:first-child 
-    border-radius: 0 2px 2px 0
-  #list
-    border-left: none
-  #open
-    border-left: none
-  .toggle-showing
-    background: rgba(115, 163, 198, 0.3)
-  .border-button
-    padding: 5px 15px
-    margin-top: 5px
-    border: 1px solid #73a3c6
-    color: #73a3c6
-    &:hover
-      background: rgba(115, 163, 198, 0.1)
-      color: #73a3c6
+    background-color: rgba(239, 122, 43, 0.5)
+    box-shadow: none
+  
   
 
 

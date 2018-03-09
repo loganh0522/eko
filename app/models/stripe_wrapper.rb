@@ -49,10 +49,12 @@ module StripeWrapper
     def self.create(options={})
       begin
         Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+        
         response = Stripe::Customer.create(
           card: options[:card],
-          email: options[:company].name,
+          email: options[:company].name
         )
+
         new(response: response)
       rescue Stripe::CardError => e 
         new(error_message: e.message)
@@ -101,7 +103,9 @@ module StripeWrapper
         response = Stripe::Subscription.create(
           customer: options[:customer_id],
           plan: options[:plan],
+          tax_percent: 13,
           :metadata => {'action' => 'create_plan'}
+
         )
         new(response: response)
 

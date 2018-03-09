@@ -9,7 +9,7 @@
 .company-settings
   .side-container#job-nav
     = render 'business/shared/templates_sidebar'
-  .main-container{style: "min-height: 300px"}
+  .main-container
     .standard-header
       %h3 Job Templates
       = link_to "+ Job Template", new_business_job_template_path, :data => {:remote => true }, class: "btn border-button"

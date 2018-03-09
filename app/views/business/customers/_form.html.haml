@@ -1,9 +1,10 @@
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript">
-Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
-</script>
+/ <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+/ <script type="text/javascript">
+/ Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
+/ </script>
 
 = javascript_include_tag 'payment'
+
 
 .billing-form
   = form_for [:business, @customer], html: {id: "payment-form"} do |f|
@@ -16,7 +17,7 @@ Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
             = f.text_field :address, id: "geocomplete2", placeholder: "Address"
         .row
           .col-md-6
-            = f.text_field :city, id: "geocomplete", placeholder: "City"  
+            = f.text_field :location, id: "geocomplete", placeholder: "City"  
           .col-md-6
             = f.text_field :postal_code, placeholder: "Postal/Zip Code", autocomplete: "off"
         %br
@@ -26,18 +27,22 @@ Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
             = f.text_field :full_name, placeholder: "Cardholder Full Name", autocomplete: "off"
         .row
           .col-md-12
-            %label(for="credit-card-number") Credit Card Number
-            %input#credit-card-number(type="text" data-stripe="number")            
-        .row
-          .col-sm-4
-            %label Exp. Month
-            = select_month(Date.today, {add_month_numbers: true}, data: {stripe: "exp-month"})
-          .col-sm-4
-            %label Exp. Day
-            = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, data: {stripe: "exp-year"})
-          .col-sm-4
-            %label(for="security-code") CVC Number
-            %input#security-code(type="text" data-stripe="cvc")
+            %label(for="card-element") Credit Card Number
+            %div#card-element
+
+
+        /     %label(for="credit-card-number") Credit Card Number
+        /     %input#credit-card-number(type="text" data-stripe="number")            
+        / .row
+        /   .col-sm-4
+        /     %label Exp. Month
+        /     = select_month(Date.today, {add_month_numbers: true}, data: {stripe: "exp-month"})
+        /   .col-sm-4
+        /     %label Exp. Day
+        /     = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, data: {stripe: "exp-year"})
+        /   .col-sm-4
+        /     %label(for="security-code") CVC Number
+        /     %input#security-code(type="text" data-stripe="cvc")
     .modal-footer
       = f.submit current_company.customer.present? ? "Update Payment Details" : "Add Payment Details" , class: "btn submit-button"  
       .btn.border-button.close-modal Cancel

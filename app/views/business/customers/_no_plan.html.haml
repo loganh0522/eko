@@ -13,70 +13,52 @@
         %td
           .open-jobs 1 Active Jobs
         %td
-          = radio_button_tag(:plan, "start_up_month")
-          = label_tag "plan_plus_year", value: "plus_year" , for: 'plan_plus_year', class: 'border-button interview-type' do
-            Basic
+          = radio_button_tag(:plan, "start_up_month", (@customer.plan == 'start_up_month' ? {checked: true} : false))
+          = label_tag "plan_start_up_month", value: "start_up_month" , for: 'plan_start_up_month', class: 'border-button interview-type' do
             $19 / month
-            1 Active Jobs
         %td
-          = radio_button_tag(:plan, "start_up_year")
-          = label_tag "plan_plus_year", value: "plus_year" , for: 'plan_plus_year', class: 'border-button interview-type' do
-            Basic
-            $190 / year
-            1 Active Jobs
+          = radio_button_tag(:plan, "start_up_year", (@customer.plan == 'start_up_year' ? {checked: true} : false)) 
+          = label_tag "plan_start_up_year", value: "start_up_year" , for: 'plan_start_up_year', class: 'border-button interview-type' do
+            $199 / year   
       %tr
         %td
           .plan Basic
         %td
           .open-jobs 5 Active Jobs
         %td
-          = radio_button_tag(:plan, "basic_month")
-          = label_tag "plan_plus_year", value: "plus_year" , for: 'plan_plus_year', class: 'border-button interview-type' do
-            Basic
+          = radio_button_tag(:plan, "basic_month", (@customer.plan == 'basic_month' ? {checked: true} : false))
+          = label_tag "plan_basic_month", value: "basic_month" , for: 'plan_basic_month', class: 'border-button interview-type' do
             $49 / month
-            5 Active Jobs
-        
         %td
-          = radio_button_tag(:plan, "basic_year")
-          = label_tag "plan_plus_year", value: "plus_year" , for: 'plan_plus_year', class: 'border-button interview-type' do
-            Basic
-            $490 / year
-            5 Active Jobs
+          = radio_button_tag(:plan, "basic_year", (@customer.plan == 'basic_year' ? {checked: true} : false))
+          = label_tag "plan_basic_year", value: "basic_year" , for: 'plan_basic_year', class: 'border-button interview-type' do
+            $499 / year
       %tr
         %td
           .plan Team
         %td
           .open-jobs 10 Active Jobs
         %td
-          = radio_button_tag(:plan, "team_month")
-          = label_tag "plan_plus_year", value: "plus_year" , for: 'plan_plus_year', class: 'border-button interview-type' do
-            Team 
+          = radio_button_tag(:plan, "team_month", (@customer.plan == 'team_month' ? {checked: true} : false))
+          = label_tag "plan_team_year", value: "team_month" , for: 'plan_team_month', class: 'border-button interview-type' do
             $99 / month
-            10 Active Jobs
         %td
-          = radio_button_tag(:plan, "team_year")
-          = label_tag "plan_plus_year", value: "plus_year" , for: 'plan_plus_year', class: 'border-button interview-type' do
-            Team
-            $990 / year
-            10 Active Jobs
+          = radio_button_tag(:plan, "team_year", (@customer.plan == 'team_year' ? {checked: true} : false))
+          = label_tag "plan_team_year", value: "team_year" , for: 'plan_team_year', class: 'border-button interview-type' do
+            $999 / year 
       %tr
         %td
           .plan Plus
         %td
           .open-jobs 20 Active Jobs
         %td
-          = radio_button_tag(:plan, "plus_month")
-          = label_tag "plan_plus_year", value: "plus_year" , for: 'plan_plus_year', class: 'border-button interview-type' do
-            Plus
-            $199 / month
-            20 Active Jobs
+          = radio_button_tag(:plan, "plus_month", (@customer.plan == 'plus_month' ? {checked: true} : false))
+          = label_tag "plan_plus_month", value: "plus_month" , for: 'plan_plus_month', class: 'border-button interview-type' do
+            $199 / Month
         %td
-          = radio_button_tag(:plan, "plus_year")
+          = radio_button_tag(:plan, "plus_year", (@customer.plan == 'plus_year' ? {checked: true} : false))
           = label_tag "plan_plus_year", value: "plus_year" , for: 'plan_plus_year', class: 'border-button interview-type' do
-            Plus
-            $1990 / year
-            20 Active Jobs
-
-.container-footer
-  = submit_tag "Select Plan", class: "btn submit-button"
+            $1999 / year
+  .container-footer
+    = submit_tag "Select Plan", class: "btn border-button"
       

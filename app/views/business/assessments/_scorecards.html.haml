@@ -1,0 +1,14 @@
+.toggle-actions 
+  = radio_button_tag "scorecard", "summary", true, class: 'filter'
+  = label_tag "scorecard_summary", "Summary", :value => "all", class: 'filter'
+  
+  = radio_button_tag "scorecard", "all", false, class: 'filter'
+  = label_tag "scorecard_all", "All", :value => "open", class: 'filter'
+
+  = radio_button_tag "scorecard", "pending", false, class: 'filter'
+  = label_tag "scorecard_pending", "Pending", :value => "closed", class: 'filter'
+
+= render 'business/application_scorecards/applicant_scorecard'
+
+= render 'business/interview_scorecards/interview_scorecards'
+

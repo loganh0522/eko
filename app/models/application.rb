@@ -4,6 +4,7 @@ class Application < ActiveRecord::Base
   belongs_to :stage
   belongs_to :candidate
   belongs_to :job
+  
   has_many :interview_scorecards
   has_many :ratings
   has_many :application_scorecards
@@ -19,6 +20,11 @@ class Application < ActiveRecord::Base
   accepts_nested_attributes_for :question_answers, allow_destroy: true
   
   
+  def create_assessment
+    Assessment.create(name: "Application Assessment", application_id: self.id,
+      candidate_id: self.candidate.id)
+
+  end
 
   def generate_token
     self.token = SecureRandom.urlsafe_base64
@@ -61,6 +67,16 @@ class Application < ActiveRecord::Base
     self.ratings.average(:score).to_f.round(1) if ratings.any?
   end
 
+  def interview_assessments
+    @assessments = []
+
+    self.interviews.each do |interview| 
+      if interview.interview_kit.present? 
+        @assessments.append(interview)
+      end
+    end
+
+  end
  
 
   # def current_position

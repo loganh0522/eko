@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180302213524) do
+ActiveRecord::Schema.define(version: 20180309011949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,8 @@ ActiveRecord::Schema.define(version: 20180302213524) do
     t.integer "job_id"
     t.text    "feedback"
     t.integer "application_id"
+    t.integer "overall"
+    t.integer "assessment_id"
   end
 
   create_table "applications", force: :cascade do |t|
@@ -80,6 +82,17 @@ ActiveRecord::Schema.define(version: 20180302213524) do
     t.integer  "candidate_id"
     t.string   "rejection_reason"
     t.boolean  "hired",            default: false
+  end
+
+  create_table "assessments", force: :cascade do |t|
+    t.integer  "application_id"
+    t.integer  "candidate_id"
+    t.integer  "interview_id"
+    t.integer  "interview_kit_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "job_id"
   end
 
   create_table "assigned_candidates", force: :cascade do |t|
@@ -265,6 +278,7 @@ ActiveRecord::Schema.define(version: 20180302213524) do
     t.string   "country"
     t.string   "state"
     t.string   "location"
+    t.string   "card_brand"
   end
 
   create_table "default_stages", force: :cascade do |t|
@@ -424,6 +438,15 @@ ActiveRecord::Schema.define(version: 20180302213524) do
     t.integer  "interview_kit_id"
   end
 
+  create_table "interview_kit_templates", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "company_id"
+    t.text     "body"
+    t.text     "preperation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "interview_kits", force: :cascade do |t|
     t.integer "application_id"
     t.integer "candidate_id"
@@ -448,6 +471,7 @@ ActiveRecord::Schema.define(version: 20180302213524) do
     t.integer "scorecard_id"
     t.integer "stage_action_id"
     t.text    "concerns"
+    t.integer "assessment_id"
   end
 
   create_table "interview_times", force: :cascade do |t|
@@ -735,6 +759,8 @@ ActiveRecord::Schema.define(version: 20180302213524) do
     t.datetime "updated_at"
     t.string   "title"
     t.string   "description"
+    t.string   "last_four"
+    t.datetime "invoice_date"
   end
 
   create_table "outlook_tokens", force: :cascade do |t|
@@ -864,6 +890,7 @@ ActiveRecord::Schema.define(version: 20180302213524) do
     t.float    "score"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "candidate_id"
   end
 
   create_table "rejection_reasons", force: :cascade do |t|
@@ -903,6 +930,22 @@ ActiveRecord::Schema.define(version: 20180302213524) do
     t.datetime "updated_at"
   end
 
+  create_table "scorecard_answers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "assessment_id"
+    t.integer  "stage_action_id"
+    t.integer  "scorecard_id"
+    t.integer  "interview_id"
+    t.integer  "candidate_id"
+    t.integer  "application_id"
+    t.integer  "overall"
+    t.text     "feedback"
+    t.text     "candidate_feedback"
+    t.text     "concerns"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "scorecard_ratings", force: :cascade do |t|
     t.integer "section_option_id"
     t.integer "rating"
@@ -924,6 +967,8 @@ ActiveRecord::Schema.define(version: 20180302213524) do
     t.integer "interview_id"
     t.text    "comments"
     t.text    "concerns"
+    t.integer "interview_kit_template_id"
+    t.integer "assessment_id"
   end
 
   create_table "section_options", force: :cascade do |t|
@@ -966,11 +1011,12 @@ ActiveRecord::Schema.define(version: 20180302213524) do
     t.integer  "position"
     t.string   "title"
     t.datetime "due_date"
-    t.boolean  "is_scheduled",     default: false
-    t.boolean  "sent_request",     default: false
-    t.boolean  "is_complete",      default: false
+    t.boolean  "is_scheduled",              default: false
+    t.boolean  "sent_request",              default: false
+    t.boolean  "is_complete",               default: false
     t.string   "standard_stage"
     t.integer  "job_id"
+    t.integer  "interview_kit_template_id"
   end
 
   create_table "stages", force: :cascade do |t|

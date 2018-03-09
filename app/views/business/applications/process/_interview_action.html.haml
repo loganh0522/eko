@@ -5,11 +5,13 @@
     .title= action.name
     
   - if action.interview.present? && action.interview.start_time > Time.now && action.interview.candidate == @application.candidate
+    
     .scheduled
       Scheduled
       = link_to "(View Details)",  business_interview_path(action.interview), remote: true
     .links 
       = link_to "Interview Kit", new_business_interview_scorecard_path(interview: action.interview), remote: true
+
   - elsif action.interview.present? && action.interview.start_time < Time.now && action.interview.candidate == @application.candidate
     .completed-scorecards
       Completed Scorecards
@@ -23,7 +25,7 @@
           .links= link_to "Edit", edit_business_interview_scorecard_path(scorecard), remote: true
 
     .completed-scorecards      
-      Pending Interview Scorecard
+      Pending Interview Scorecard   
       - action.interview.pending_scorecards.each do |user|
         .user-completed
           .user= user_avatar(user)

@@ -84,6 +84,8 @@ gem 'chartkick'
 gem 'groupdate'
 gem 'cancancan', '~> 2.0'
 
+gem 'receipts'
+
 group :development do
   gem "better_errors", "~> 2.2.0"
   gem "binding_of_caller"

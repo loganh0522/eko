@@ -14,13 +14,7 @@
   
 - else
   .not-present-container
-    %p There are currently no notes for this applicant. 
-    / .add-object= link_to  "Add Billing Information", '#', class: "btn border-button", id: "stage", :data => {:toggle => "modal", :target => "#createBillingDetails"}
+    %p There is currently no credit card on record. 
     .add-object= link_to  "Add Billing Information", new_business_customer_path, class: "btn border-button", remote: true
 
 
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript">
-Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
-</script>
-= javascript_include_tag 'payment'

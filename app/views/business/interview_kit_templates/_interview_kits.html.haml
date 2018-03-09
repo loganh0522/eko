@@ -1,0 +1,23 @@
+- if @interview_kits.present?
+  - @interview_kits.each do |kit| 
+    .template{id: "interview_kit_#{kit.id}"}
+      .title= kit.title
+      .dropdown
+        .dropdown-button
+          %i.fa.fa-ellipsis-h.fa-lg
+        .dropdown-content#myDropdown
+          = link_to edit_business_interview_kit_template_path(kit), remote: true  do
+            %i.fa.fa-pencil
+            .action Edit
+          = link_to business_interview_kit_template_path(kit), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do  
+            %i.fa.fa-trash-o
+            .action Destroy
+- else 
+  .not-present-container
+    %p You currently do not have any Interview Kits
+    .add-object= link_to "+ Interview Kit", new_business_interview_kit_template_path, remote: true, class: 'btn border-button'
+      
+
+
+
+      

@@ -9,12 +9,15 @@
 
   .main-filters
     .toggle-actions 
-      = link_to search_business_jobs_path(all: "true"), remote: true do 
-        .btn.border-button.toggle-show#all.toggle-showing All
-      = link_to search_business_jobs_path(status: "open"), remote: true do 
-        .btn.border-button.toggle-show#open Published
-      = link_to search_business_jobs_path(status: "closed"), remote: true do
-        .btn.border-button.toggle-show#closed Closed
+      = radio_button_tag "job_status", "all", true, class: 'filter'
+      = label_tag "job_status_all", "All", :value => "all", class: 'filter'
+      
+      = radio_button_tag "job_status", "open", false, class: 'filter'
+      = label_tag "job_status_open", "Open", :value => "open", class: 'filter'
+
+      = radio_button_tag "job_status", "closed", false, class: 'filter'
+      = label_tag "job_status_closed", "Closed", :value => "closed", class: 'filter'
+
     .search-form
       .search-area-content
         %i.fa.fa-search.fa-stack-2x

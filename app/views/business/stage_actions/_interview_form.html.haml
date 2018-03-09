@@ -10,8 +10,8 @@
       = render 'business/users/multi_user_auto'
       = f.hidden_field :user_ids, value: "", id: "user_ids"
     .form-row-no-border
-      = f.label :interview_kit_id, "Choose an Interview Kit"
-      = f.collection_select(:interview_kit_id, current_company.interview_kits, :id, :title, :include_blank => true)
+      = f.label :interview_kit_id, "Use an Interview Kit Template"
+      = f.collection_select(:interview_kit_template_id, current_company.interview_kit_templates, :id, :title, :include_blank => true)
 
   .modal-footer
     = f.hidden_field :kind, value: "Interview"

@@ -134,10 +134,12 @@ Rails.application.routes.draw do
     resources :application_emails
     resources :notifications
     resources :email_templates
-    resources :interview_kits
     resources :scorecards
     resources :stage_actions
     resources :interview_scorecards
+    resources :interview_kit_templates
+    resources :interview_kits
+
     
     post "update_password", to: 'users#update_password'
     post 'create_subscription', to: 'users#create_subscription'
@@ -286,7 +288,8 @@ Rails.application.routes.draw do
         post :next_stage, to: "applications#next_stage"
         post :move_stage, to: "applications#move_stage"
         post :ratings, to: "applications#ratings"
-        get :application_form, to: "applications#application_form"
+        get :evaluations, to: "applications#application_form"
+        get :scorecards, to: "applications#scorecards"
       end
 
       collection do 

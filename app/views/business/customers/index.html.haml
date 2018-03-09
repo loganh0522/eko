@@ -12,28 +12,28 @@
   .main-container 
     .standard-header
       %h3 Billing Information
-    .contain-50
+    .standard-body
+      / = render 'business/customers/form'
       = render 'business/customers/cus_details'
-    .contain-50
-      %h4 Transactions
-      .orders
-        - current_company.orders.each do |order|
-          = order.created_at
-          = order.total.to_i
-
-          - order.order_items.each do |item|
-            .order-item
-              = item.premium_board.name
-              = item.unit_price.to_i
     - if current_company.customer.present?
       .container-footer
         = link_to 'Update Billing Information', edit_business_customer_path(current_company.customer.id), class: 'btn border-button', remote: true
 
+  .main-container
+    .standard-header
+      %h4 Transactions
+    .orders
+      - if current_company.orders.present?
+        - current_company.orders.each do |order|
+          = order.created_at
+          = order.total.to_i
+          - order.order_items.each do |item|
+            .order-item
+              = item.premium_board.name
+              = item.unit_price.to_i
+      - else 
+        .not-present-container
+          %p There are currently no transactions
 
 
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript">
-Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
-</script>
-= javascript_include_tag 'payment'
 

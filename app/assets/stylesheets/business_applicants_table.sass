@@ -32,78 +32,51 @@
   .btn.border-button2
     float: right
     margin-bottom: 10px  
+
 .job-stages
   overflow: hidden
-  width: 99.5%
-  background: #ffffff
-  border-top: 1px solid rgba(0,0,0,0.1)
-  margin: 0 .25%
-  border-radius: 5px 
-  box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
-  .left_scroll
-    float: left
-    width: 4%
-    height: 100px
-    img
-      margin-top: 35px
-      margin-left: auto
-      margin-right: auto
-      display: block
-    &:hover 
-      background-color: rgba(0, 0, 0, .1)
-      cursor: pointer           
-  .right_scroll
-    float: left
-    width: 4%
-    height: 100px
-    border-left: 1px solid rgba(0, 0, 0, .1)
-    img
-      margin-top: 35px
-      margin-left: auto
-      margin-right: auto
-      display: block
-    &:hover 
-      background-color: rgba(0, 0, 0, .1)
-      cursor: pointer
-  .job-stage-area 
-    width: 92%
-    overflow: hidden 
-    margin: 0 0
-  .job-gallery
-    position: relative
-
-  ul.job-stage-area
+  padding: 5px 5px
+  .job-stage-area
     list-style: none
     text-decoration: none
     float: left
-    padding: 0 0           
-    height: 100px 
+    padding: 0 0            
     font-weight: 300
-    li:last-child
+    .base-stages
+      overflow: hidden
+      padding: 5px 20px 5px 5px
+      float: left
       border-right: 1px solid rgba(0,0,0,0.1)
+    .all-stages
+      overflow: hidden
+      padding: 5px 20px
+      float: left
     li 
       display: inline
       float: left
-      height: 100px 
-      width: 130px
+      height: 75px 
+      width: 100px
+      margin-right: 10px
+      border-radius: 5px
       text-align: center
-      border-left: 1px solid rgba(0,0,0,0.1)
+      box-shadow: 0px 7px 18px 0px rgba(199,197,199,.1), 0px 1px 3px 0px rgba(199,197,199,1)
       background-color: white
       &:hover 
         background-color: rgba(0, 0, 0, .03)
         cursor: pointer   
       .number 
         margin-top: 17px
-        font-size: 27px 
+        font-size: 20px 
+        color: rgba(0,0,0,0.5)
       .name
         font-size: 12px
+    
     li.activated
       background: rgba(208, 208, 208, 0.4)
       .number 
         color: black
       .name
         color: black
-
 
 .application-actions
   .toggle-actions
@@ -187,7 +160,7 @@
   overflow: hidden
   overflow-y: scroll
   margin: 10px 0% 10px 2%
-  box-shadow: 0px 1px 3px 1.5px rgba(199,197,199,1)
+  box-shadow: 0px 7px 14px 0px rgba(199,197,199,.1), 0px 3px 9px 0px rgba(199,197,199,1)
   .not-present-container
     display: none
   .header 
