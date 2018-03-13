@@ -21,6 +21,8 @@ class InboundCandidatesController < ApplicationController
           QuestionAnswer.create(question_id: answer[:id], question_option_id: value)
         end
       elsif @question.kind == "file"
+        QuestionAnswer.create(question_id: answer[:id], file: answer[:filename], 
+          job_id: @job.id, candidate_id: @candidate.id)
       else
         QuestionAnswer.create(question_id: answer[:id], body: answer[:value], 
           job_id: @job.id, candidate_id: @candidate.id)
