@@ -61,7 +61,6 @@ class Business::InterviewsController < ApplicationController
         send_invitation(@interview) if @interview.send_request == true
         format.js
       else        
-        binding.pry
         render_errors(@interview)
         format.js
       end
@@ -132,8 +131,8 @@ class Business::InterviewsController < ApplicationController
 
   def interview_params
     params.require(:interview).permit(:title, :notes, :location, :start_time, 
-      :end_time, :kind, :send_request, :etime, :stime, :interview_kit_id,
-      :job_id, :candidate_id, :company_id, :date, :stage_action_id, :stage_id,
+      :end_time, :kind, :send_request, :etime, :stime, :interview_kit_id, :room_id,
+      :job_id, :candidate_id, :company_id, :date, :stage_action_id, :stage_id, :application_id, 
       user_ids: [])
   end
 

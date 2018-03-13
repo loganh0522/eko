@@ -1,0 +1,42 @@
+.association_nav
+  .content
+    = link_to association_jobs_path do
+      %img.logo(src="/tmp/logo.jpg")       
+    %ul
+      %li= link_to "JOBS", association_jobs_path   
+      %li= link_to "CANDIDATES", association_candidates_path   
+  /     %li= link_to "ACTIVITY", association_activities_path    
+  /     %li= link_to "TASKS", association_tasks_path
+  /     %li= link_to "CLIENTS", association_clients_path if current_company.kind == "recruiter" 
+      
+  /     %li
+  /       = link_to association_interviews_path do
+  /         %i.fa.fa-calendar
+  /     %li
+  /       = link_to association_conversations_path do
+  /         %i.fa.fa-envelope-o
+  /     %li
+  /       = link_to association_analytics_path do
+  /         %i.fa.fa-line-chart
+  /     / %li 
+  /     /   = link_to association_notifications_path do
+  /     /     %i.fa.fa-inbox
+  /   - if can? :create, Job
+  /     = link_to "Post a Job", new_association_job_path, class: "post-job-nav"
+  / .dropdown
+  /   .dropdown-button
+  /     - if current_user.user_avatar.present? 
+  /       = image_tag current_user.user_avatar.image.small_image, :class => "img dropdown-img"
+  /     - else
+  /       .circle-img= current_user.first_name.first.capitalize
+  /     .name
+  /       = current_user.first_name
+  /       %b.caret
+  /   .dropdown-content#myDropdown
+  /     - if can? :manage, JobBoard
+  /       = link_to "Career Portal", association_job_board_path(current_company.job_board.id)
+  /     - if can? :manage, JobTemplate
+  /       = link_to "Templates", association_job_templates_path
+  /     = link_to "Settings", association_company_path(current_company)
+  /     = link_to "My Profile", association_user_path(current_user)
+  /     = link_to "Sign Out", signout_path

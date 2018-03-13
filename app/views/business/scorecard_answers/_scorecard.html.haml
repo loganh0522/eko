@@ -1,38 +1,34 @@
 .interview-scorecard
   .header
-    %h4= "#{scorecard.user.full_name} - #{scorecard.scorecard.interview_kit.title} Scorecard"
-    / .my-scorecard
-    /   = current_user_interview_scorecard(current_user, @application)
-    %i.fa.fa-angle-up.toggle
-  
+    %h4= "#{@scorecard.user.full_name} - #{@assessment.name} Scorecard"
   .scorecard-details
-    - scorecard.scorecard.scorecard_sections.each do |section|
+    - @scorecard.scorecard.scorecard_sections.each do |section|
       - section.section_options.each do |criteria|
         .form-row#no-padding
           .question-header
             .question= criteria.body 
             - criteria.scorecard_ratings.each do |rating|
-              - if rating.rating == 1 && rating.user == scorecard.user
+              - if rating.rating == 1 && rating.scorecard_answer == @scorecard
                 .scorecard-inputs
                   %i.glyphicon.glyphicon-remove
-              - elsif rating.rating == 2 && rating.user == scorecard.user
+              - elsif rating.rating == 2 && rating.scorecard_answer == @scorecard
                 .scorecard-inputs
                   %i.glyphicon.glyphicon-thumbs-down
-              - elsif rating.rating == 3 && rating.user == scorecard.user
+              - elsif rating.rating == 3 && rating.scorecard_answer == @scorecard
                 .scorecard-inputs
                   %i.glyphicon.glyphicon-thumbs-up
 
-              - elsif rating.rating == 4 && rating.user == scorecard.user
+              - elsif rating.rating == 4 && rating.scorecard_answer == @scorecard
                 .scorecard-inputs
                   %i.glyphicon.glyphicon-star
               %br
           .question-header
             - criteria.scorecard_ratings.each do |rating|
-              - if rating.user == scorecard.user
+              - if rating.user == @scorecard.user
                 .content= rating.body
-    
     .form-row#no-padding
       .question-header
         .question Feedback
+        .content= @scorecard.overall
         %br
-        .content= scorecard.feedback
+        .content= @scorecard.feedback

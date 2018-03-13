@@ -59,6 +59,8 @@ jQuery ->
 
       $('#' + kind + '_ids').val(values)
       $(this).parent().remove()
+
+      console.log('clicked')
       return   
 
     $(document).on 'click', '#delete-single', ->

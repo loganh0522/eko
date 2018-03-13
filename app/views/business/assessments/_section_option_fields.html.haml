@@ -1,0 +1,6 @@
+.answers  
+  .answer
+    = f.text_field :body, id: "section-option", class: "section-answer", autocomplete: 'off', placeholder: "Question"
+    = link_to "", '#', class: "remove_fields glyphicon glyphicon-remove" 
+    = f.hidden_field :_destroy, id: "destroy_fields"
+    %span#optionBodyBlock

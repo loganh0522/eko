@@ -154,6 +154,10 @@ class User < ActiveRecord::Base
     self.full_name = "#{self.first_name.capitalize} #{self.last_name.capitalize}"
   end
 
+  def scorecard(assessment)
+    ScorecardAnswer.where(user: self, assessment_id: assessment.id).first 
+  end
+
   def current_jobs
     @current_jobs = self.profile.work_experiences.where(current_position: true)
     return @current_jobs

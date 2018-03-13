@@ -4,14 +4,15 @@ class Application < ActiveRecord::Base
   belongs_to :stage
   belongs_to :candidate
   belongs_to :job
-  
+
   has_many :interview_scorecards
   has_many :ratings
   has_many :application_scorecards
   
+  has_many :assessments
   has_many :question_answers, dependent: :destroy
 
-  after_create :reindex_candidate
+  after_create :reindex_candidate, :create_assessment
 
   def reindex_candidate
     Candidate.find(candidate.id).reindex
@@ -21,9 +22,10 @@ class Application < ActiveRecord::Base
   
   
   def create_assessment
-    Assessment.create(name: "Application Assessment", application_id: self.id,
+    @assessment = Assessment.create(name: "Application Assessment", application_id: self.id,
       candidate_id: self.candidate.id)
 
+    self.job.scorecard.duplicate_scorecard(@assessment)
   end
 
   def generate_token
@@ -51,6 +53,7 @@ class Application < ActiveRecord::Base
         return true   
       end
     end
+
     return false
   end
 
@@ -75,10 +78,8 @@ class Application < ActiveRecord::Base
         @assessments.append(interview)
       end
     end
-
   end
  
-
   # def current_position
   #   self.applicant.profile.current_position.title
   # end

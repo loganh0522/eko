@@ -18,18 +18,20 @@ class JobsController < ApplicationController
     @candidate = Candidate.new
   end
 
- 
-
   private
 
   def set_layout
     if request.subdomain.present? && request.subdomain != 'www'
       @job_board = JobBoard.find_by_subdomain!(request.subdomain)
-      if @job_board.kind == "basic"
+
+      if @job_board.kind == "association"
+        "association_portal"
+      elsif @job_board.kind == "basic"
         "career_portal"
       else
         "advanced_career_portal"
       end
+
     else
       'frontend_job_seeker'
     end

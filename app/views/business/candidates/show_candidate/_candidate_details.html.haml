@@ -5,6 +5,7 @@
   .applicant-details
     .name-rating
       .name= "#{@candidate.full_name.capitalize}"
+      = render 'business/ratings/form', application: @candidate
       - if can? :update, Candidate
         .dropdown
           .dropdown-button
@@ -43,6 +44,7 @@
   .applicant-details
     .name-rating
       .name= "#{@candidate.full_name.capitalize}"
+      = render 'business/ratings/form', application: @candidate
       - if can? :update, Candidate
         .dropdown
           .dropdown-button

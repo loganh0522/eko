@@ -29,8 +29,8 @@ class Business::StageActionsController < ApplicationController
   end
 
   def create
-    @stage_action = StageAction.new(action_params)
     @user_ids = params[:stage_action][:user_ids].split(',') if params[:stage_action][:user_ids].present?
+    @stage_action = StageAction.new(action_params.merge!(user_ids: @user_ids))
 
     respond_to do |format| 
       if @stage_action.save
@@ -51,18 +51,21 @@ class Business::StageActionsController < ApplicationController
     @stage_action = StageAction.find(params[:id])
     @stage = @stage_action.stage
     @users = @stage_action.stage.job.users
+    @job = @stage.job
 
+    
     respond_to do |format|
       format.js 
     end
   end
 
   def update
+    @user_ids = params[:stage_action][:user_ids].split(',') if params[:stage_action][:user_ids].present?
     @stage_action = StageAction.find(params[:id])
     @stage = @stage_action.stage
 
     respond_to do |format|
-      if @stage_action.update(action_params)
+      if @stage_action.update(action_params.merge!(user_ids: @user_ids))
         @stage_actions = @stage.stage_actions
       else
         render_errors(@stage_action)
@@ -88,8 +91,8 @@ class Business::StageActionsController < ApplicationController
   private
 
   def action_params 
-    params.require(:stage_action).permit(:stage_id, :interview_kit_id, :automate, :kind,
-      :message, :subject, :name, :assigned_to, :position, :standard_stage, :job_id,
+    params.require(:stage_action).permit(:stage_id, :automate, :kind,
+      :message, :subject, :name, :assigned_to, :position, :standard_stage, :job_id, :interview_kit_template_id,
       user_ids: [])
   end
   

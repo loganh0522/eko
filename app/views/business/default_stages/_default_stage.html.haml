@@ -3,9 +3,17 @@
     .glyphicon.glyphicon-move
     .body
       = stage.name
-    .icons
-      = link_to edit_business_default_stage_path(stage.id), :data => {:remote => true } do
-        %i.glyphicon.glyphicon-pencil
-      = link_to business_default_stage_path(stage.id), remote: true, :method => :delete do
-        %i.glyphicon.glyphicon-remove
+
+    .dropdown
+      .dropdown-button
+        %i.fa.fa-ellipsis-h.fa-lg
+      .dropdown-content#myDropdown      
+        = link_to edit_business_default_stage_path(stage.id), :data => {:remote => true } do
+          %i.fa.fa-pencil
+          .action Edit
+        = link_to business_default_stage_path(stage.id), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do
+          %i.fa.fa-trash-o 
+          .action Destroy
+
+
       

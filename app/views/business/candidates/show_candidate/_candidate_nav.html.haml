@@ -2,6 +2,12 @@
   %ul
     = link_to business_candidate_path(@candidate), remote: true do
       %li.change#profile.activated Profile
+    
+    = link_to scorecards_business_candidate_path(@candidate), remote: true do
+      %li.change#scorecards Scorecards
+
+    = link_to business_candidate_application_form_path(@candidate), remote: true do
+      %li.change#assessments Assessments
 
     = link_to business_candidate_messages_path(@candidate), remote: true do
       %li.change#messages Messages 
@@ -12,14 +18,8 @@
     = link_to business_candidate_comments_path(@candidate), remote: true do
       %li.change#notes Notes
 
-    = link_to business_candidate_application_form_path(@candidate), remote: true do
-      %li.change#assessments Assessments
-    
-    = link_to business_candidate_application_scorecards_path(@candidate), remote: true do
-      %li.change#scorecards Scorecards
-    
     = link_to business_candidate_activities_path(@candidate), remote: true do 
-      %li.change#activity Activities
+      %li.change#activity Activity
 
 .bottom-row
   = link_to new_business_candidate_task_path(@candidate), id: "add-task", remote: true do 

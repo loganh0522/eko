@@ -19,26 +19,29 @@
     .form-row-no-border
       = f.label :recruiter_description, "Internal Description"
       = f.trix_editor :recruiter_description
-  .form-row-no-border
+  .form-row
     = f.label :description, "Job Description"
     = f.trix_editor :description
     = show_errors(@job, :address) 
   
   .form-row-no-border
-    .col-md-4
+    .contain-100
+      %h3 Job Details
+  .form-row-no-border
+    .contain-50
       = f.label :description, "Industry"
       = f.collection_select(:industry, Industry.all, :name, :name, :include_blank => true, :selected => @job.new_record? ? nil : @job.industry )
-    .col-md-4
+    .contain-50
       = f.label :description, "Job Function"
       = f.collection_select(:function, Function.all, :name, :name, :include_blank => true, :selected => @job.new_record? ? nil : @job.function)
   .form-row-no-border
-    .col-md-4
+    .contain-3
       = f.label "Education"
       = f.select :education_level, options_for_select([ "High Scool", "Associate Degree", "Bachelor's Degree", "Masters", "Ph.D"], :selected => "#{@job.education_level}" ), :include_blank => true
-    .col-md-4
+    .contain-3
       = f.label "Career Level"
       = f.select :career_level, options_for_select([ "Entry Level", "Experience", "Manager", "Executive", "Senior Executive"], :selected => "#{@job.career_level}" ), :include_blank => true
-    .col-md-4
+    .contain-3
       = f.label "Employment Type"
       = f.select :kind, options_for_select([ "Full Time", "Part Time", "Contract", "Permanent", "Summer", "Internship" ], :selected => "#{@job.kind}"), :include_blank => true, label: "Job Type"
   .container-footer

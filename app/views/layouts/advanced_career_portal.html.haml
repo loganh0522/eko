@@ -23,7 +23,7 @@
           - else
             .brand
               = link_to root_path do
-                = current_company.name
+                = @job_board.company.name
           %ul#section-nav
             %li= link_to "Jobs", root_path(anchor: "jobs")
             - @job_board.header_links.each do |f| 

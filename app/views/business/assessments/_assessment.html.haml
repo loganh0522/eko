@@ -1,0 +1,44 @@
+.assessment
+  .header
+    %h4= "#{assessment.name} Scorecard"
+    .my-scorecard
+      - if !current_user.scorecard(assessment).present? 
+        = link_to "Create Scorecard", new_business_scorecard_answer_path(assessment: assessment), remote: true 
+  .body
+    - if assessment.scorecard.scorecard_answers.present? 
+      .scorecard-complete
+        - assessment.scorecard.scorecard_answers.each do |scorecard| 
+          = user_avatar(scorecard.user)
+          .details
+            .name= scorecard.user.full_name
+            .overall= card_overall_rating(scorecard.overall)
+            .links 
+              = link_to "edit", edit_business_scorecard_answer_path(scorecard), remote: true
+              = link_to "view", business_scorecard_answer_path(scorecard), remote: true
+    - else  
+      .not-present-container
+        %p There are no completed scorecards present.
+    
+    / .scorecard-details
+    /   .sections
+    /     - assessment.scorecard.scorecard_sections.each do |section|
+    /       %h4= section.body
+    /       %table.table
+    /         %tbody
+    /           - section.section_options.each do |criteria|
+    /             %tr
+    /               %td.title(width="30%")= criteria.body
+    /               %td(width="70%")
+    /                 .scorecard-results
+    /                   - assessment.scorecard.scorecard_answers.each do |scorecard| 
+    /                     - scorecard.scorecard_ratings.each do |rating|
+    /                       - if rating.rating == 1 && rating.section_option_id == criteria.id
+    /                         %i.glyphicon.glyphicon-remove
+    /                       - elsif rating.rating == 2 && rating.section_option_id == criteria.id
+    /                         %i.glyphicon.glyphicon-thumbs-down
+    /                       - elsif rating.rating == 3 && rating.section_option_id == criteria.id
+    /                         %i.glyphicon.glyphicon-thumbs-up
+    /                       - elsif rating.rating == 4 && rating.section_option_id == criteria.id
+    /                         %i.glyphicon.glyphicon-star
+
+    

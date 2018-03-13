@@ -36,5 +36,5 @@
 - else
   .not-present-container
     %p There are currently work experience listed for this applicant.
-    = link_to "+ Add Experience", new_business_candidate_work_experience_path(@applicant), remote: true
+    .add-object= link_to "+ Add Experience", new_business_candidate_work_experience_path(@applicant), remote: true, class: 'btn border-button'
 

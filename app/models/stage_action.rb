@@ -6,9 +6,8 @@ class StageAction < ActiveRecord::Base
   has_many :tasks
   has_one :interview
   has_one :interview_invitation
-  has_many :interview_scorecards
-  belongs_to :interview_kit
-
+  
+  belongs_to :interview_kit_template
 
   has_many :assigned_users, as: :assignable, :dependent => :destroy
   has_many :users, through: :assigned_users, validate: false

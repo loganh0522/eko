@@ -1,36 +1,37 @@
-.side-section
-  .tag-container
-    .tag-header
-      %h4 Tags
-      = render 'business/tags/form'
-    .tags
-      = render "business/tags/tags"
-.side-section
-  .tag-container
-    .tag-header
-      %h4 Contact Details
-    .contac-detailss
-      .glyphicon.glyphicon-earphone 
-        = "#{@candidate.phone}"
-      %br
-      .glyphicon.glyphicon-envelope
-        = "#{@candidate.email}"
-      %br
-      .glyphicon.glyphicon-map-marker
-        = "#{@candidate.location}"
-/ .side-section
-/   %h4 Tasks 
-/   = link_to 'Open Tasks', business_application_tasks_path(@application), remote: true
-/   = link_to 'Completed Tasks', business_application_tasks_path(@application, status: 'complete'), remote: true
-/   .tasks 
-/     = render 'business/tasks/application_tasks'
-    
-.side-section
-  .all-applications
-    %h4 All Applications
-    - @candidate.applications.each do |application| 
-      .application-container
-        .title= application.job.title
-        .location= application.job.location
-    = link_to 'Add to Job', new_business_candidate_application_path(@candidate), remote: true
+.side-sections
+  .side-section
+    .tag-container
+      .tag-header
+        %h4 Tags
+        = render 'business/tags/form'
+      .tags
+        = render "business/tags/tags"
+  .side-section
+    .tag-container
+      .tag-header
+        %h4 Contact Details
+      .contac-detailss
+        .glyphicon.glyphicon-earphone 
+          = "#{@candidate.phone}"
+        %br
+        .glyphicon.glyphicon-envelope
+          = "#{@candidate.email}"
+        %br
+        .glyphicon.glyphicon-map-marker
+          = "#{@candidate.location}"
+  / .side-section
+  /   %h4 Tasks 
+  /   = link_to 'Open Tasks', business_application_tasks_path(@application), remote: true
+  /   = link_to 'Completed Tasks', business_application_tasks_path(@application, status: 'complete'), remote: true
+  /   .tasks 
+  /     = render 'business/tasks/application_tasks'
+      
+  .side-section
+    .all-applications
+      %h4 All Applications
+      - @candidate.applications.each do |application| 
+        .application-container
+          .title= application.job.title
+          .location= application.job.location
+      = link_to 'Add to Job', new_business_candidate_application_path(@candidate), remote: true
 

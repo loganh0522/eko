@@ -1,0 +1,74 @@
+!!! 5
+%html
+  %head
+    %title Talentwiz
+    %meta(charset="UTF-8")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    = csrf_meta_tag
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application" 
+    = yield :head
+    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyABHyEmDvxwvbiHWIYaEDBFwxHmUjRiKic&libraries=places"></script>
+    
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'/>
+    = render 'shared/modals/medium_modal'
+    = render 'shared/modals/large_modal'
+  %body
+    %header
+      .nav-container
+        .navigation
+          - if @job_board.company.logo.present?
+            = link_to root_path do
+              %img(src="#{@job_board.company.logo.file.large_logo}" class="sub_logo")
+          - else
+            .brand
+              = link_to root_path do
+                = @job_board.company.name
+          %ul#section-nav
+            %li= link_to "Jobs", root_path(anchor: "jobs")
+            %li= link_to "Companies", companies_path
+            
+            - @job_board.header_links.each do |f| 
+              %li= link_to "#{f.name}", root_path(anchor: "board_row_#{f.job_board_row.id}")
+         
+          - if current_user.present? 
+            .dropdown
+              .dropdown-button
+                - if current_user.user_avatar.present? 
+                  = image_tag current_user.user_avatar.image.small_image, :class => "img dropdown-img"
+                - else
+                  .circle-img= current_user.first_name.first.capitalize
+                .name
+                  = current_user.first_name
+                  %b.caret
+              .dropdown-content#myDropdown
+                = link_to "Profile", job_seeker_user_path(current_user)
+                = link_to "Sign Out", signout_path
+          - else 
+            %ul#portal-login
+              %li= link_to "Login", login_path, remote: true
+              %li= link_to "Sign Up", new_user_path, remote: true
+        %img.responsive-menu(src="/tmp/menu.png")  
+      .responsive-menu-links
+        %ul
+          = link_to root_path(anchor: "jobs") do
+            %li Jobs 
+          - @job_board.header_links.each do |f| 
+            = link_to root_path(anchor: "board_row_#{f.job_board_row.id}") do
+              %li= f.name
+          - if current_user.present?
+            = link_to job_seeker_user_path(current_user) do 
+              %li Profile
+            = link_to signout_path do
+              %li Sign Out
+          - else
+            = link_to login_path, remote: true do
+              %li Login
+            = link_to new_user_path, remote: true do
+              %li Create Profile
+
+            
+    %section
+      = render "/shared/messages"
+      = yield 
+  %footer

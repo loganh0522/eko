@@ -13,21 +13,14 @@
       .contain-50
         = f.label "Interview Type"
         .toggle-actions
-          .contain-3
-            = f.radio_button :kind, "phone", id: 'phone', checked: true
-            = f.label :kind, value: "Phone" , for: "phone", class: 'border-button interview-type' do
-              %i.fa.fa-phone
-              Phone
-          .contain-3
-            = f.radio_button :kind, "video", id: 'video'
-            = f.label :kind, value: "Video" , for: "video", class: 'border-button interview-type' do
-              %i.fa.fa-camera
-              Video
-          .contain-3
-            = f.radio_button :kind, "inperson", id: 'inperson'
-            = f.label :kind, value: "In Person" , for: "inperson", class: 'border-button interview-type', id: 'in-person' do
-              %i.fa.fa-user
-              In person
+          = f.radio_button :kind, "phone", id: 'phone', checked: true
+          = f.label :kind, value: "Phone" , for: "phone", class: 'border-button interview-type' do
+            %i.fa.fa-phone
+            Phone
+          = f.radio_button :kind, "inperson", id: 'inperson'
+          = f.label :kind, value: "In Person" , for: "inperson", class: 'border-button interview-type', id: 'in-person' do
+            %i.fa.fa-user
+            In person
     .form-row-no-border#interview-location
       .contain-50
         - if current_company.address.present?
@@ -69,24 +62,36 @@
 
     .form-row-no-border
       = f.label :interview_kit_id, "Choose an Interview Kit"
-      - if @stage_action.present? && @stage_action.interview_kit.present?
+      - if @stage_action.present? && @stage_action.interview_kit_template.present?
         %br
-        = @stage_action.interview_kit.title
-        = f.hidden_field :interview_kit_id, value: @stage_action.interview_kit.id
+        = @stage_action.interview_kit_template.title
+        = f.hidden_field :interview_kit_template_id, value: @stage_action.interview_kit_template_id
       - else 
-        = f.collection_select(:interview_kit_id, current_company.interview_kits, :id, :title, :include_blank => true)
+        = f.collection_select(:interview_kit_template_id, current_company.interview_kits, :id, :title, :include_blank => true)
+    
     .form-row-no-border 
       .contain-100
         = f.label :notes, "Notes / Details"
         = f.text_area :notes, placeholder: "Add additional details for the candidate (ex. floor number, call in number)"
         = f.check_box :send_request, {}, true, false
         = f.label :send_request, "Send Confirmation E-mail"
-    .form-row-no-border
-      .contain-100 
-        = f.label :candidate, "Add Team Members"
-        = render 'business/users/users_autocomplete'
-        = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
     
+    .form-row-no-border
+      .contain-100
+        = f.label :candidate, "Add Team Members" 
+        - if @stage_action.present?
+          - @stage_action.users.each do |user| 
+            .user-tag{id: "user_#{user.id}"}
+              .name= user.full_name
+              .delete-tag#delete-multiple &times
+          = f.hidden_field :user_ids, value: @stage_action.users.first.id, id: "user_ids"
+        - else   
+          = render 'business/users/users_autocomplete'
+          = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"
+          
+
+    
+
     - if @candidate.present?
       .form-row-no-border
       = f.hidden_field :candidate_id, value: @candidate.id 
@@ -102,6 +107,7 @@
     = f.hidden_field :company_id, value: current_company.id
     = f.hidden_field :job_id, value: @job.id if @job.present?
     = f.hidden_field :stage_action_id, value: @stage_action.id if @stage_action.present?
+    = f.hidden_field :application_id, value: @application.id if @application.present?
     = f.hidden_field :start_time
     = f.hidden_field :end_time
   .modal-footer

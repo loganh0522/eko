@@ -4,12 +4,12 @@
       .subject
         .title Title
         .sender
-          = f.text_field :title, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false, class: "title_Block"
+          = f.text_field :title, id: "message-subject", placeholder: "Template Name", autocomplete: "off", class: "title_Block"
           %span.error#subject_msgBlock
       .subject
         .title Subject
         .sender
-          = f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: false, class: "subject_Block"
+          = f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: "off", class: "subject_Block"
           %span.error#subject_msgBlock
       .email-variables
         .show-hidden-search-box

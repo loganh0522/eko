@@ -9,13 +9,23 @@ class InboundCandidatesController < ApplicationController
       last_name: params[:last_name], email: params[:email], phone: params[:phone], 
       manually_created: true, source: "ZipRecruiter")
     
+    @application = Application.create(candidate: @candidate, job: @job)
+
     Resume.create(candidate: @candidate, name: params[:resume])
     
     params[:answers].each do |answer| 
-      QuestionAnswer.create(question_id: answer[:id], body: answer[:value], job_id: @job.id, candidate_id: @candidate.id)
-    end
+      @question = Question.find(answer[:id])
 
-    @application = Application.create(candidate: @candidate, job: @job)
+      if @question.kind == "Select" || @question.kind == "Multiselect"
+        answer.values.each do |value| 
+          QuestionAnswer.create(question_id: answer[:id], question_option_id: value)
+        end
+      elsif @question.kind == "file"
+      else
+        QuestionAnswer.create(question_id: answer[:id], body: answer[:value], 
+          job_id: @job.id, candidate_id: @candidate.id)
+      end
+    end
   end
 
   def indeed_webhook  

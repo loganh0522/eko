@@ -1,5 +1,5 @@
 = form_for [:business, @interview_scorecard], html: {remote: true} do |f|
-  .interview-scorecard
+  .interview-scorecard-form
     - @sections.each do |section|
       .form-row-no-border
       - section.section_options.each do |criteria|

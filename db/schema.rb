@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180309011949) do
+ActiveRecord::Schema.define(version: 20180313155535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -249,6 +249,20 @@ ActiveRecord::Schema.define(version: 20180309011949) do
     t.string "company"
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "full_name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "location"
+    t.integer  "client_id"
+    t.integer  "company_id"
+    t.integer  "association_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "conversations", force: :cascade do |t|
     t.integer  "company_id"
     t.integer  "user_id"
@@ -448,16 +462,18 @@ ActiveRecord::Schema.define(version: 20180309011949) do
   end
 
   create_table "interview_kits", force: :cascade do |t|
-    t.integer "application_id"
-    t.integer "candidate_id"
-    t.integer "stage_id"
-    t.integer "interview_id"
-    t.integer "rating"
-    t.text    "concerns"
-    t.text    "body"
-    t.text    "preperation"
-    t.integer "company_id"
-    t.string  "title"
+    t.integer  "application_id"
+    t.integer  "candidate_id"
+    t.integer  "stage_id"
+    t.integer  "interview_id"
+    t.integer  "rating"
+    t.text     "concerns"
+    t.text     "body"
+    t.text     "preperation"
+    t.integer  "company_id"
+    t.string   "title"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "interview_scorecards", force: :cascade do |t|
@@ -508,6 +524,7 @@ ActiveRecord::Schema.define(version: 20180309011949) do
     t.integer  "interview_kit_id"
     t.integer  "stage_action_id"
     t.integer  "stage_id"
+    t.integer  "interview_kit_template_id"
   end
 
   create_table "invitations", force: :cascade do |t|
@@ -612,6 +629,10 @@ ActiveRecord::Schema.define(version: 20180309011949) do
     t.datetime "updated_at"
     t.datetime "juju_updated_at"
     t.boolean  "nuevoo_premium"
+    t.integer  "indeed_budget"
+    t.boolean  "career_builder"
+    t.boolean  "dice"
+    t.boolean  "stackoverflow"
   end
 
   create_table "job_functions", force: :cascade do |t|
@@ -953,6 +974,7 @@ ActiveRecord::Schema.define(version: 20180309011949) do
     t.integer "application_scorecard_id"
     t.integer "interview_scorecard_id"
     t.text    "body"
+    t.integer "scorecard_answer_id"
   end
 
   create_table "scorecard_sections", force: :cascade do |t|
@@ -974,6 +996,7 @@ ActiveRecord::Schema.define(version: 20180309011949) do
   create_table "section_options", force: :cascade do |t|
     t.integer "scorecard_section_id"
     t.string  "body"
+    t.text    "quality_answer"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -995,6 +1018,13 @@ ActiveRecord::Schema.define(version: 20180309011949) do
     t.string  "kind"
     t.integer "user_id"
     t.integer "candidate_id"
+  end
+
+  create_table "stage_action_kits", force: :cascade do |t|
+    t.integer  "stage_action_id"
+    t.integer  "interview_kit_template_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "stage_actions", force: :cascade do |t|

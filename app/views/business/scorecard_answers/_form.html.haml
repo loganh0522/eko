@@ -1,12 +1,12 @@
-= form_for [:business, @scorecard_answers], html: {remote: true} do |f|
-  .interview-scorecard
+= form_for [:business, @scorecard_answer], html: {remote: true} do |f|
+  .interview-scorecard-form
     - @sections.each do |section|
       .form-row-no-border
       - section.section_options.each do |criteria|
         .form-row
           .question= criteria.body
           - criteria.scorecard_ratings.each do |rating|
-            - if rating.user == current_user && rating.interview_scorecard == @interview_scorecard
+            - if rating.user == current_user && rating.scorecard_answer == @scorecard_answer
               = f.fields_for :scorecard_ratings, rating do |q|
                 = q.hidden_field :section_option_id, value: criteria.id
                 = q.hidden_field :user_id, value: current_user.id
@@ -22,6 +22,7 @@
                   = q.radio_button :rating, 4, class: 'application-scorecard-rating', id: "rating_#{criteria.id}_4"
                   %label.glyphicon.glyphicon-star{:for => "rating_#{criteria.id}_4"}
                 = q.text_area :body
+      
       .form-row-no-border
         .question Overall Recommendation
         .scorecard-inputs
@@ -39,11 +40,7 @@
         = f.label :feedback, "Overall Feedback"
         = f.text_area :feedback
         
-    = f.hidden_field :application_id, value: @application.id
-    = f.hidden_field :interview_id, value: @interview.id
-    = f.hidden_field :candidate_id, value: @candidate.id
     = f.hidden_field :scorecard_id, value: @scorecard.id
-    = f.hidden_field :interview_kit_id, value: @interview.interview_kit.id
   .modal-footer
     = f.button "Save", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
     .btn.border-button.close-modal Cancel

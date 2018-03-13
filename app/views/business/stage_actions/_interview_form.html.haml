@@ -7,11 +7,29 @@
       
       = f.label :candidate, "Assign team members to Interview"
       %p This will prompt your team members to schedule the interview, and add them to the interview, once it is scheduled with the candidate.
-      = render 'business/users/multi_user_auto'
-      = f.hidden_field :user_ids, value: "", id: "user_ids"
+      .assign-to-row
+        .assign-user#user_ids_Block
+          .show-hidden-search-box
+            .add-button-search
+              .glyphicon.glyphicon-plus
+            #multiple-users
+              - @stage_action.users.each do |user| 
+                .user-tag{id: "user_#{user.id}"}
+                  .name= user.full_name
+                  .delete-tag#delete-multiple &times
+          .hidden-search-box
+            .search-area-content
+              %i.fa.fa-search.fa-stack-2x
+              = text_field_tag "", "", :placeholder => 'Type a users name to assign', id: "users", autocomplete: "off", class: "autocompleteCustom"
+            .auto-users#add-multiple
+              = render "business/users/users_auto"
+
+      / = render 'business/users/multi_user_auto'
+      
+      = f.hidden_field :user_ids,  id: "user_ids"
     .form-row-no-border
-      = f.label :interview_kit_id, "Use an Interview Kit Template"
-      = f.collection_select(:interview_kit_template_id, current_company.interview_kit_templates, :id, :title, :include_blank => true)
+      = f.label :interview_kit_template, "Use an Interview Kit Template"
+      = f.collection_select(:interview_kit_template_id, current_company.interview_kit_templates, :id, :title, :selected => @stage_action.new_record? ? nil : @stage_action.interview_kit_template_id, :include_blank => true)
 
   .modal-footer
     = f.hidden_field :kind, value: "Interview"

@@ -1,5 +1,5 @@
 $('#mediumModal').find('form').remove()
 $('#mediumModal').find('.interview-scorecard').remove()
 $('#mediumModal').find('.new-title').html('<%= j "Interview Scorecard" %>');
-$('#mediumModal').find('.new-modal-header').after('<%= j render "business/interview_scorecards/interview_scorecard", scorecard: @interview_scorecard %>');
+$('#mediumModal').find('.new-modal-header').after('<%= j render "business/scorecard_answers/scorecard" %>');
 $('#mediumModal').show();

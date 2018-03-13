@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     match 'register', to: "users#sub_new_job_seeker", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '6d4d48ec'}, via: [:get, :post, :put, :patch, :delete]
     match 'profile', to: "profiles#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '6d4d48ec'}, via: [:get, :post, :put, :patch, :delete]
     match 'create-profile', to: "profiles#new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '6d4d48ec'}, via: [:get, :post, :put, :patch, :delete]
+    match 'companies', to: "companies#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '6d4d48ec'}, via: [:get, :post, :put, :patch, :delete]
+    match 'companies/:id', to: "companies#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '6d4d48ec'}, via: [:get, :post, :put, :patch, :delete]
   end
 
  
@@ -109,15 +111,11 @@ Rails.application.routes.draw do
   namespace :business do 
     root to: "jobs#index" 
     get "hiring_defaults", to: 'rejection_reasons#index'
+    
+    resources :assessments
+    resources :scorecard_answers
     resources :activities
     resources :hiring_teams
-    
-    resources :rooms do 
-      collection do
-        get "availability/:id", to: "rooms#get_availability"
-      end
-    end
-    
     resources :permissions
     resources :job_templates
     resources :media_photos
@@ -140,7 +138,12 @@ Rails.application.routes.draw do
     resources :interview_kit_templates
     resources :interview_kits
 
-    
+    resources :rooms do 
+      collection do
+        get "availability/:id", to: "rooms#get_availability"
+      end
+    end
+
     post "update_password", to: 'users#update_password'
     post 'create_subscription', to: 'users#create_subscription'
 
@@ -253,8 +256,12 @@ Rails.application.routes.draw do
       
     end
    
-
     resources :candidates do
+      member do 
+        get :evaluations, to: "candidates#application_form"
+        get :scorecards, to: "candidates#scorecards"
+      end
+
       get 'show_project', to: "candidates#show_project"
       resources :interview_invitations
       resources :work_experiences
@@ -318,11 +325,17 @@ Rails.application.routes.draw do
         get :autocomplete
         get :search
       end
+      
       resources :job_feeds 
-      
-      get :advertise, to: "job_feeds#index"
+      resources :comments, except: [:index]
+      resources :interviews, except: [:index]
+      resources :interview_invitations, except: [:index] 
+      resources :candidates
+      resources :hiring_teams 
+      resources :questions
+      resources :scorecards
 
-      
+      get :advertise, to: "job_feeds#index"
       get 'tasks', to: "tasks#job_tasks"
       get 'comments', to: "comments#job_comments"
       get "/activities", to: 'activities#job_activity'
@@ -335,19 +348,11 @@ Rails.application.routes.draw do
           post :create_multiple, to: "tasks#create_multiple"
         end
       end
-      
-      resources :comments, except: [:index]
-      resources :interviews, except: [:index]
-      resources :interview_invitations, except: [:index] 
-      resources :candidates
 
       resources :applications do
         resources :application_scorecards
       end
 
-      resources :hiring_teams 
-      resources :questions
-      resources :scorecards
       resources :stages do 
         collection do
           post :sort, to: "stages#sort"
@@ -414,7 +419,8 @@ Rails.application.routes.draw do
     resources :job_board
     resources :jobs
     resources :companies
-    resources :client_contacts 
+    resources :candidates
+    resources :contacts 
   end
 
 
@@ -422,14 +428,9 @@ Rails.application.routes.draw do
   get 'eluta-job-feed', to: "job_feeds#eluta_job_feed"
   get 'ziprecruiter-job-feed', to: "job_feeds#ziprecruiter_job_feed"
   get 'trovit-job-feed', to: "job_feeds#trovit_job_feed"
-  
   get 'jobinventory-job-feed', to: "job_feeds#job_inventory_feed"
-
-
   get 'indeed-job-feed', to: "job_feeds#indeed_job_feed"
   get 'juju-job-feed', to: "job_feeds#juju_job_feed"
-  
-
   get 'neuvoo-job-feed', to: "job_feeds#neuvoo_job_feed"
   get 'jooble-job-feed', to: "job_feeds#jooble_job_feed"
 

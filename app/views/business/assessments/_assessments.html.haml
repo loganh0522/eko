@@ -8,7 +8,8 @@
   = radio_button_tag "scorecard", "pending", false, class: 'filter'
   = label_tag "scorecard_pending", "Pending", :value => "closed", class: 'filter'
 
-= render 'business/application_scorecards/applicant_scorecard'
+= link_to "+ Assessment", new_business_assessment_path, class: 'btn border-button', remote: true
 
-= render 'business/interview_scorecards/interview_scorecards'
 
+- @assessments.each do |assessment| 
+  = render 'business/assessments/assessment', assessment: assessment

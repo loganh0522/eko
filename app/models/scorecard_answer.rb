@@ -1,5 +1,8 @@
 class ScorecardAnswer < ActiveRecord::Base 
   has_many :scorecard_ratings, dependent: :destroy
+  
+
+
   belongs_to :application
   belongs_to :user
   belongs_to :application
@@ -12,6 +15,8 @@ class ScorecardAnswer < ActiveRecord::Base
 
   accepts_nested_attributes_for :scorecard_ratings, allow_destroy: :true, reject_if: :reject_rating
 
+
+  
 
   def reject_rating(attributes)
     attributes['rating'].blank?

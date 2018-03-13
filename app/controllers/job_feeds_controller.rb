@@ -33,6 +33,7 @@ class JobFeedsController < ApplicationController
 
   def indeed_job_feed
     @jobs = Job.joins(:job_feed).where(status: "open", verified: true, :job_feeds => {:indeed => true})
+    render 'job_feeds/indeed_job_feed.xml.builder', formats: [:xml]
   end
 
   def juju_job_feed

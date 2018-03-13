@@ -19,7 +19,7 @@
         = f.select :user_role, options_for_select(["Admin", "Hiring Manager", "Recruiter"])
     .form-row-no-border
       = f.label :message, "Message"
-      = f.text_area :message, label: "Message", rows: '6', placeholder: "Please join this really cool app", id: 'message_Block'
+      = f.text_area :message, label: "Message", rows: '6', placeholder: "i.e Please follow the link below to join the platform and help us hire.", id: 'message_Block'
       %span.error#message_msgBlock
   .modal-footer
     = f.hidden_field :job_id, value: @job.id if @job.present?

@@ -17,8 +17,9 @@ class JobBoardsController < ApplicationController
 
   def set_layout
     @job_board = JobBoard.find_by_subdomain!(request.subdomain)
-
-    if @job_board.kind == "basic"
+    if @job_board.kind == "association"
+      "association_portal"
+    elsif @job_board.kind == "basic"
       "career_portal"
     else
       "advanced_career_portal"

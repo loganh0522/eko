@@ -97,39 +97,21 @@ class Business::ApplicationsController < ApplicationController
   end
 
   def application_form
-    if !params[:job].present?
-      @application = Application.find(params[:id])      
-      @candidate = @application.candidate
-
-      if @application.present?
-        @job = @application.job 
-        @questions = @job.questions
-      end
-    else
-      @candidate = Candidate.find(params[:candidate_id])
-      @job = Job.find(params[:job])
-      @questions = @job.questions
-    end
-
+    @application = Application.find(params[:id])      
+    @candidate = @application.candidate
+    @job = @application.job 
+    @questions = @job.questions
+ 
     respond_to do |format| 
       format.js
     end
   end
 
   def scorecards
-    if !params[:job].present?
-      @application = Application.find(params[:id])      
-      @candidate = @application.candidate
-      if @application.present?
-        @job = @application.job 
-      end
-    else
-      @candidate = Candidate.find(params[:candidate_id])
-      @job = Job.find(params[:job])
-    end
-    
-    render_scorecard
-    render_interview_scorcecard
+    @application = Application.find(params[:id])      
+    @candidate = @application.candidate
+    @job = @application.job 
+    @assessments = @application.assessments
   end
   
   def multiple_change_stages
@@ -218,7 +200,7 @@ class Business::ApplicationsController < ApplicationController
   end
 
   def render_scorecard
-    
+
     # @job = @application.job
     # @scorecard = Scorecard.where(job_id: @job.id).first
     # @sections = @scorecard.scorecard_sections

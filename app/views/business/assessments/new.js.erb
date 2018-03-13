@@ -1,0 +1,4 @@
+$('#mediumModal').find('form').remove()
+$('#mediumModal').find('.new-title').html('<%= j "Create Assessment" %>');
+$('#mediumModal').find('.new-modal-header').after('<%= j render "business/assessments/form" %>');
+$('#mediumModal').show();
