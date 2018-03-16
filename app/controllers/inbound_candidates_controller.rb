@@ -9,8 +9,6 @@ class InboundCandidatesController < ApplicationController
       last_name: params[:last_name], email: params[:email], phone: params[:phone], 
       manually_created: true, source: "ZipRecruiter")
     
-    @application = Application.create(candidate: @candidate, job: @job)
-
     Resume.create(candidate: @candidate, name: params[:resume])
     
     params[:answers].each do |answer| 
@@ -28,6 +26,10 @@ class InboundCandidatesController < ApplicationController
           job_id: @job.id, candidate_id: @candidate.id)
       end
     end
+
+    @application = Application.create(candidate: @candidate, job: @job)
+
+    head 200
   end
 
   def indeed_webhook  
@@ -45,4 +47,7 @@ class InboundCandidatesController < ApplicationController
 
 end
 
-{"response_id": "a39bd9a", "job_id": "1000002", "name": "Tom Foolery", "first_name": "Tom", "last_name": "Foolery", "email": "tf@example.org", "phone": "555 5551942", "resume": "JVBERi0xLjUKJb/3ov4KMiAwIG9iago8PCAvTGluZWFyaXplZCAxIC9MIDE3ODA3IC9IIFsgNjg3IDEyNiBdIC9PIDYgL0UgMTc1MzIgL04gMSAvVCAjIxNgolJUVPRgo="}
+# {"response_id": "a39bd9a", "job_id": "1000002", "name": "Tom Foolery", "first_name": "Tom", "last_name": "Foolery", "email": "tf@example.org", 
+# "phone": "555 5551942", "resume": "JVBERi0xLjUKJb/3ov4KMiAwIG9iago8PCAvTGluZWFyaXplZCAxIC9MIDE3ODA3IC9IIFsgNjg3IDEyNiBdIC9PIDYgL0UgMTc1MzIgL04gMSAvVCAjIxNgolJUVPRgo="}
+
+

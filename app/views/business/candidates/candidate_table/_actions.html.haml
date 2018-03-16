@@ -1,6 +1,6 @@
 .application-actions
   - if can? :create, Candidate
-    = link_to 'Add Candidate', new_business_candidate_path(:job => @job), class: "btn border-button", id: "add-applicant", remote: true
+    = link_to 'Add Candidate', new_business_candidate_path(:job => @job), class: "btn hover-button", id: "add-applicant", remote: true
 
   .no-action-buttons
     .btn.inactive-button More Actions

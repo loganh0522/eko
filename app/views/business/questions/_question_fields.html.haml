@@ -2,7 +2,7 @@
   .fieldset      
     .answer-type
       .title Question Type:
-      = f.select :kind, ['Text', 'Paragraph', 'Checkbox', 'Multiple Choice'],{}, {:class => 'question-type'}
+      = f.select :kind, ['Text (150 Characters)', 'Text (500 Characters)', 'Select', 'Multiselect', 'File'], {}, {:class => 'question-type'}
       .required-answer
         = f.check_box :required, checked_value: 1, unchecked_value: 0
         = f.label :required, "Required"       

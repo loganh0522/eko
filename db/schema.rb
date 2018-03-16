@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180313155535) do
+ActiveRecord::Schema.define(version: 20180315192240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -903,6 +903,8 @@ ActiveRecord::Schema.define(version: 20180313155535) do
     t.integer "job_id"
     t.integer "interview_kit_id"
     t.boolean "required",         default: false
+    t.integer "scorecard_id"
+    t.text    "guidelines"
   end
 
   create_table "ratings", force: :cascade do |t|

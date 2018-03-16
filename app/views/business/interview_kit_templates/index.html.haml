@@ -13,6 +13,7 @@
     .standard-header
       %h3 Interview Kits
       = link_to "+ Inteview Kit", new_business_interview_kit_template_path, remote: true, class: "btn border-button"
-    .templates
-      = render "interview_kits"
-   
+    .standard-body
+      .templates
+        = render "interview_kits"
+     

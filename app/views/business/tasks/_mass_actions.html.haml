@@ -1,11 +1,20 @@
 .application-actions
   - if can? :create, Task
-    = link_to "Create Task", new_business_task_path,  data: {:turbolinks => "false"}, remote: true, class: "btn border-button", id: "client-action"
+    = link_to "Create Task", new_business_task_path,  data: {:turbolinks => "false"}, remote: true, class: "btn hover-button", id: "client-action"
   .toggle-actions 
-    = link_to business_tasks_path(view: "list"), remote: true do
-      .btn.border-button.toggle-show#list List
-    = link_to business_tasks_path(view: "table"), remote: true do 
-      .btn.border-button.toggle-show#table.toggle-showing Table 
+    = form_tag search_business_tasks_path, :method => 'get', id: "search-form" do 
+      = radio_button_tag "task", "all", true, class: 'filter'
+      = label_tag "task_all", "List", :value => "all", class: 'filter'
+      
+      = radio_button_tag "task", "complete", false, class: 'filter'
+      = label_tag "task_complete", "table", :value => "open", class: 'filter'
+
+
+
+    / = link_to business_tasks_path(view: "list"), remote: true do
+    /   .btn.border-button.toggle-show#list List
+    / = link_to business_tasks_path(view: "table"), remote: true do 
+    /   .btn.border-button.toggle-show#table.toggle-showing Table 
   / .applicant-action-buttons
   /   = link_to '#', id: "destroy_candidates", class: "move-applicants", :data => {:toggle => "modal", :target => "#destroy_candidatesModal"} do
   /     %i.fa.fa-trash-o

@@ -1,4 +1,4 @@
-- if !@interviews.present?
+- if @interviews.present? 
   - @interviews.each do |interview|
     - if interview.start_time > Time.now
       .candidate-interview
@@ -25,6 +25,9 @@
               .content
                 - interview.users.each do |user|   
                   .user-tag= user.full_name
+    - else
+      .not-present-container
+        %p No Events Scheduled
 - else
   .not-present-container
     %p No Events Scheduled

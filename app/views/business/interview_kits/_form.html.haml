@@ -4,34 +4,23 @@
       = f.label :title, "Interview Kit Name"
       = f.text_field :title, placeholder: "Interview Kit Name"
     = f.fields_for :scorecard, @scorecard do |s|
-      #scorecard-form
+      .form-row-no-border
         - if @interview_kit.new_record?
           = s.fields_for :scorecard_sections, ScorecardSection.new do |a|
-            .scorecard-area 
-              .header
-                %h4 Group Of Questions
-                = link_to "Remove", '', class: "remove_question"
+            %h4 Questions
+            = a.fields_for :section_options, SectionOption.new do |a|
+              .form-fields-container
+                = a.label :body, "Question"
+                = a.text_field :body, id: "section-option", class: 'section-answer', autocomplete: 'off', placeholder: "Question"
                 = a.hidden_field :_destroy
-                .section-title
-                  .section-answer
-                    = a.text_field :body, class: "form-control section-title questions", placeholder: "Section Name", id: "section-body", autocomplete: 'off' 
-                    %span#sectionBodyBlock 
-              .body
-                .criteria Questions
-                = a.fields_for :section_options, SectionOption.new do |a|
-                  .answers  
-                    .answer
-                      = a.text_field :body, id: "section-option", class: 'section-answer', autocomplete: 'off', placeholder: "Question"
-                      = link_to "", '#', class: "remove_fields glyphicon glyphicon-remove" 
-                      = a.hidden_field :_destroy
-                      %span#optionBodyBlock           
-                = link_to_add_fields_after("Add Criteria", a, :section_options)         
+                %span#optionBodyBlock   
+                = a.label :quality_answer, "Guidelines (Hint)"
+                = a.text_area :quality_answer, placeholder: "Provide the interviewer with some guidelines as to what they should be looking for in an answer"
+                = link_to "Remove", '#', class: "remove_fields"        
+            = link_to_add_fields_after("Add Question", a, :section_options)         
+          = s.fields_for :scorecard_sections do |a|
+            = render 'scorecard_section_fields', f: a
         
-        = s.fields_for :scorecard_sections do |a|
-          = render 'scorecard_section_fields', f: a
-        
-        #add-section= link_to_add_fields_after "+ Add Section", s, :scorecard_sections 
-      
   .modal-footer
     = f.submit "Create Scorecard", class: "btn submit-button"
     .btn.border-button.close-modal Cancel

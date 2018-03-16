@@ -9,7 +9,7 @@
           = s.fields_for :scorecard_sections, ScorecardSection.new do |a|
             .scorecard-area 
               .header
-                %h4 Group Of Questions
+                %h4 Questions
                 = link_to "Remove", '', class: "remove_question"
                 = a.hidden_field :_destroy
                 .section-title

@@ -1,6 +1,8 @@
-.answers  
-  .answer
-    = f.text_field :body, id: "section-option", class: "section-answer", autocomplete: 'off', placeholder: "Question"
-    = link_to "", '#', class: "remove_fields glyphicon glyphicon-remove" 
-    = f.hidden_field :_destroy, id: "destroy_fields"
-    %span#optionBodyBlock
+.form-fields-container
+  = f.label :body, "Question"
+  = f.text_field :body, id: "section-option", class: "section-answer", autocomplete: 'off', placeholder: "Question"
+  %span#optionBodyBlock
+  = f.label :quality_answer, "Guideline (hint)"
+  = f.text_area :quality_answer, placeholder: "Provide the interviewer with some guidelines as to what they should be looking for in an answer" , rows: 2
+  = f.hidden_field :_destroy, id: "destroy_fields"
+  = link_to "Remove", '#', class: "remove_fields" 

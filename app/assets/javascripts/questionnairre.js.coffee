@@ -99,22 +99,22 @@ jQuery ->
   $('.mediumModal, .largeModal').on 'click', '.add_fields', (event) ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
-    $(this).after($(this).data('fields').replace(regexp, time))
+    $(this).before($(this).data('fields').replace(regexp, time))
     $(this).prev().find('.remove_fields').show()
     event.preventDefault()
   
+  $('.mediumModal, .largeModal').on 'click', '.add_fields_after', (event) ->
+    time = new Date().getTime()
+    regexp = new RegExp($(this).data('id'), 'g')
+    $(this).after($(this).data('fields').replace(regexp, time))
+    $(this).prev().find('.remove_fields').show()
+    event.preventDefault()
+
   $('.mediumModal, .largeModal').on 'click', '.remove_question', (event) ->
     $(this).nextAll('input[type=hidden]').val('1')
     $(this).closest('fieldset').hide()
     $(this).parent().nextUntil('.questions').find('#destroy_fields').val('1')
     $(this).parent().closest('.scorecard-area').hide()
-    event.preventDefault()
-
-  $('.mediumModal, .largeModal').on 'click', '.add_fields_after', (event) ->
-    time = new Date().getTime()
-    regexp = new RegExp($(this).data('id'), 'g')
-    $(this).before($(this).data('fields').replace(regexp, time))
-    $(this).prev().find('.remove_fields').show()
     event.preventDefault()
 
   $('.mediumModal, .largeModal').on 'click', '.remove_fields', (event) ->

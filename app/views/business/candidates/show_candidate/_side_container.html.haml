@@ -1,37 +1,28 @@
 .side-sections
   .side-section
-    .tag-container
-      .tag-header
-        %h4 Tags
-        = render 'business/tags/form'
-      .tags
-        = render "business/tags/tags"
+    .header
+      %h4 Tasks
+      .toggle-actions
+        = form_tag search_business_tasks_path, :method => 'get', id: "search-form" do 
+          = radio_button_tag "task", "all", true, class: 'filter'
+          = label_tag "task_all", "Active", :value => "all", class: 'filter'
+          = radio_button_tag "task", "complete", false, class: 'filter'
+          = label_tag "task_complete", "Complete", :value => "open", class: 'filter'
+    = render 'business/tasks/candidate_tasks'
   .side-section
-    .tag-container
-      .tag-header
-        %h4 Contact Details
-      .contac-detailss
-        .glyphicon.glyphicon-earphone 
-          = "#{@candidate.phone}"
-        %br
-        .glyphicon.glyphicon-envelope
-          = "#{@candidate.email}"
-        %br
-        .glyphicon.glyphicon-map-marker
-          = "#{@candidate.location}"
-  / .side-section
-  /   %h4 Tasks 
-  /   = link_to 'Open Tasks', business_application_tasks_path(@application), remote: true
-  /   = link_to 'Completed Tasks', business_application_tasks_path(@application, status: 'complete'), remote: true
-  /   .tasks 
-  /     = render 'business/tasks/application_tasks'
-      
+    .header
+      %h4 Schedule 
+    / = render 'business/interviews/candidate_interviews'
   .side-section
-    .all-applications
+    .header
+      %h4 Tags
+      = render 'business/tags/form'
+    .tags
+      = render "business/tags/tags"   
+  .side-section
+    .header
       %h4 All Applications
-      - @candidate.applications.each do |application| 
-        .application-container
-          .title= application.job.title
-          .location= application.job.location
-      = link_to 'Add to Job', new_business_candidate_application_path(@candidate), remote: true
+    - @candidate.applications.each do |application| 
+      .title= application.job.title
+    = link_to 'Add to Job', new_business_candidate_application_path(@candidate), remote: true
 

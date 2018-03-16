@@ -9,7 +9,7 @@
       .dropdown#edit-candidate-drop
         .dropdown-button
           %i.fa.fa-ellipsis-h.fa-lg
-        .dropdown-content#action-dropdown
+        .dropdown-content
           = link_to edit_business_candidate_path(@application.candidate.id), remote: true do
             %i.fa.fa-pencil
             .action Edit

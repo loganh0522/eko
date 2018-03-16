@@ -116,7 +116,7 @@ module ApplicationHelper
         else 
           return "There are currently no answers for this application"
         end
-      elsif question.kind == 'Multiple Choice'
+      elsif question.kind == 'Multiselect'
         @answers = []
         question.question_answers.each do |answer| 
           @answers.push(answer.question_option_id)
@@ -130,7 +130,7 @@ module ApplicationHelper
             end
           end 
         end 
-      elsif question.kind == 'Checkbox'
+      elsif question.kind == 'Select'
         @answers = []
         question.question_answers.each do |answer| 
           @answers.push(answer.question_option_id)

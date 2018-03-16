@@ -14,8 +14,8 @@
   = link_to business_candidate_messages_path(@candidate, job: @job), remote: true do
     %li.change#messages Messages 
 
-  = link_to business_candidate_tasks_path(@candidate, job: @job), remote: true do
-    %li.change#tasks Tasks
+  / = link_to business_candidate_tasks_path(@candidate, job: @job), remote: true do
+  /   %li.change#tasks Tasks
     
   = link_to business_candidate_comments_path(@candidate, job: @job), remote: true do
     %li.change#notes Notes
