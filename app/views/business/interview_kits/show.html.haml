@@ -1,6 +1,5 @@
 .company-settings
-  %h4= "#{@interview_kit.title}"
-  %h6= "#{@interview_kit.interview.stage_action.job.title}"
+  %h4= "#{@interview_kit.title} - #{@interview_kit.interview.stage_action.job.title}"
   .main-container
     .form-radios
       %ul  
@@ -63,7 +62,7 @@
                         = q.label :body, "No"
 
 
-      .scorecard-container.hidden-container
+      .scorecard-container
         = f.fields_for :scorecard_answers, ScorecardAnswer.new do |q|
           .interview-scorecard-form
             - @scorecard.scorecard_sections.each do |section|
@@ -106,7 +105,8 @@
                 = q.text_area :feedback
                 
             = f.hidden_field :scorecard_id, value: @scorecard.id
-
+      .container-footer
+        = f.button "Save", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
   .side-container
 
 
