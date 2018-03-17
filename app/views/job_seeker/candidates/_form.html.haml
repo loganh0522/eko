@@ -6,7 +6,7 @@
       - else 
         .question-title= question.body
       .answer
-        - if question.kind == 'Checkbox'
+        - if question.kind == 'Select'
           %ul 
             - question.question_options.each do |option|
               = f.fields_for :question_answers, QuestionAnswer.new do |q| 
@@ -31,7 +31,7 @@
                 = q.text_area :body, hide_label: true, :required => true, rows: 5
               - else
                 = q.text_area :body, hide_label: true, rows: 5 
-            - elsif question.kind == 'Multiple Choice'
+            - elsif question.kind == 'Multiselect'
               %ul
                 - question.question_options.each do |option|
                   %li

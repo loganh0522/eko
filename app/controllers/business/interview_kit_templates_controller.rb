@@ -19,7 +19,7 @@ class Business::InterviewKitTemplatesController < ApplicationController
 
   def create 
     @interview_kit = InterviewKitTemplate.new(interview_kit_params.merge!(company: current_company)) 
-    # @interview_kit.build.scorecard
+
     respond_to do |format|
       if @interview_kit.save
         @interview_kits = current_company.interview_kit_templates
@@ -39,6 +39,7 @@ class Business::InterviewKitTemplatesController < ApplicationController
   end
 
   def update
+
     @interview_kit = InterviewKitTemplate.find(params[:id])
     
     respond_to do |format|
@@ -64,10 +65,13 @@ class Business::InterviewKitTemplatesController < ApplicationController
   private 
 
   def interview_kit_params 
-    params.require(:interview_kit_template).permit(:title,
+    params.require(:interview_kit_template).permit(:title, :preperation,
+      questions_attributes: [:id, :kind, :body, :guidelines, :required, :_destroy, 
+        question_options_attributes: [:id, :body, :_destroy]], 
+      
       scorecard_attributes: [:id,
         scorecard_sections_attributes: [:id, :body, :_destroy, 
-          section_options_attributes:[:id, :body, :_destroy]]])   
+          section_options_attributes:[:id, :body, :quality_answer, :_destroy]]])   
   end
 
 

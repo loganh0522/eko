@@ -5,6 +5,20 @@ class Business::InterviewKitsController < ApplicationController
   before_filter :trial_over
   before_filter :company_deactivated?
 
+  
+
+  def index 
+    @interview_kits = current_company.interview_kits
+
+  end
+
+  def show 
+    @interview_kit = InterviewKit.find(params[:id])
+    @questions = @interview_kit.questions
+    @scorecard = @interview_kit.scorecard
+    @assessment = Assessment.new
+  end
+
   def new
     @interview_kit = InterviewKit.new
     @scorecard = Scorecard.new
@@ -12,11 +26,6 @@ class Business::InterviewKitsController < ApplicationController
     respond_to do |format| 
       format.js
     end
-  end
-
-  def index 
-    @interview_kits = current_company.interview_kits
-
   end
 
   def create 

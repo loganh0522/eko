@@ -10,7 +10,7 @@
       Scheduled
       = link_to "(View Details)",  business_interview_path(action.interview), remote: true
     .links 
-      = link_to "Interview Kit", new_business_interview_scorecard_path(interview: action.interview), remote: true
+      = link_to "Interview Kit", business_interview_kit_path(action.interview.interview_kit), target: :_blank
 
   - elsif action.interview.present? && action.interview.start_time < Time.now && action.interview.candidate == @application.candidate
     .completed-scorecards

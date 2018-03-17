@@ -6,9 +6,7 @@ class StageAction < ActiveRecord::Base
   has_many :tasks
   has_one :interview
   has_one :interview_invitation
-  
   belongs_to :interview_kit_template
-
   has_many :assigned_users, as: :assignable, :dependent => :destroy
   has_many :users, through: :assigned_users, validate: false
 
@@ -18,4 +16,9 @@ class StageAction < ActiveRecord::Base
   def is_email? 
     kind == 'Email'
   end
+
+  def is_interview? 
+    kind == "Interview"
+  end
+
 end

@@ -1,23 +1,11 @@
-.scorecard-area  
-  .header
-    %h4 Group Of Questions
-    = link_to "Remove", '#', class: "remove_question"
-    = f.hidden_field :_destroy
-    .section-title
-      = f.text_field :body, class: "section-title questions", placeholder: "Section Name", id: "section-body", autocomplete: 'off'
-      %span#sectionBodyBlock.error
+.form-fields-container
+  / = link_to "Remove", '#', class: "remove_question"
+  / = f.hidden_field :_destroy
+  = f.text_field :body, class: "section-title questions", placeholder: "Section Name", id: "section-body", autocomplete: 'off'
+  %span#sectionBodyBlock.error
   .body
-    %h5 Questions
     = f.fields_for :section_options, class: "options" do |a|
       = render 'section_option_fields', f: a
-    - if @interview_kit.new_record?
-      = f.fields_for :section_options, SectionOption.new do |a|
-        .answers  
-          .answer
-            = a.text_field :body, id: "section-option", class: 'section-answer', autocomplete: 'off', placeholder: 'Question'
-            = link_to "", '#', class: "remove_fields glyphicon glyphicon-remove" 
-            = a.hidden_field :_destroy
-            %span#optionBodyBlock
-    = link_to_add_fields_after("+ Add Criteria", f, :section_options)
+    = link_to_add_fields("+ Add Criteria", f, :section_options)
     
-    
+

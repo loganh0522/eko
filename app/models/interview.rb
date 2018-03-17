@@ -32,13 +32,33 @@ class Interview < ActiveRecord::Base
     return @pending
   end
 
+  
   def create_interview_kit
-    @assessment = Assessment.create(interview: self, 
-      candidate: self.candidate, application_id: self.application_id, name: self.title)
+    @template = InterviewKitTemplate.find(self.interview_kit_template_id)
+    @kit = InterviewKit.create(@template.attributes.except('id'))
+    
 
-    @interview_kit = InterviewKit.create(InterviewKitTemplate.find(self.interview_kit_template_id).attributes)
+    # @kit = InterviewKit.create(title: @template.title,
+    #   preperation: @template.preperation, stage_action_id: @stage_action)
+    
+    @scorecard = Scorecard.create(interview_kit_id: @kit.id)
 
-    @interview_kit.scorecard.update_attributes(assessment: @assessment)
+    @template.questions.each do |question| 
+      @question = Question.create(question.attributes.except('id'))
+
+      @question.update_attributes(interview_kit_id: @kit.id)
+      question.question_options.each do |option|
+        QuestionOption.create(question_id: @question.id, body: option.body)
+      end
+    end
+
+    @template.scorecard.scorecard_sections.each do |section| 
+      @section = ScorecardSection.create(scorecard_id: @scorecard.id, body: section.body) 
+      
+      section.section_options.each do |option| 
+        SectionOption.create(scorecard_section: @section, body: option.body)
+      end
+    end
   end
 
   def scorecards_completed?

@@ -1,4 +1,35 @@
-$('#mediumModal').find('form').remove()
-$('#mediumModal').find('.new-title').html('<%= j "Edit Interview Kit" %>');
-$('#mediumModal').find('.new-modal-header').after('<%= j render "business/interview_kits/form" %>');
-$('#mediumModal').show();
+// $('#mediumModal').find('form').remove()
+// $('#mediumModal').find('.new-title').html('<%= j "Edit Interview Kit" %>');
+// $('#mediumModal').find('.new-modal-header').after('<%= j render "business/interview_kit_templates/form" %>');
+// $('#mediumModal').show();
+
+
+$('.tempaltes').hide();
+$('.standard-body').html('<%= j render "business/interview_kit_templates/form" %>');
+
+$('.form-radios').on('click', '.filter', function(event) {
+  if ($(this).attr('id') === 'questions') {
+    $('.questions-container').show();
+    $('.overview-container').hide();
+    $('.scorecard-container').hide();
+
+    $('#scorecard').removeClass('active');
+    $('#overview').removeClass('active');
+    $('#questions').addClass('active');
+  } else if ($(this).attr('id') === 'scorecard') {
+    $('.questions-container').hide();
+    $('.overview-container').hide();
+    $('.scorecard-container').show();
+    $('#overview').removeClass('active');
+    $('#questions').removeClass('active');
+    $('#scorecard').addClass('active');
+  } else {
+    $('.scorecard-container').hide();
+    $('.questions-container').hide();
+    $('.overview-container').show();
+
+    $('#scorecard').removeClass('active');
+    $('#questions').removeClass('active');
+    $('#overview').addClass('active');
+  }
+});

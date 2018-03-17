@@ -1,8 +1,9 @@
-= form_for [:business, @invitation], html: {remote: true}  do |f|
+= form_for [:business, @invitation], remote: true do |f|
   .filter-radios
     %ul  
       %li.filter#invitation-times.active Add Times 
       %li.filter#invitation-details Details
+  
   .calendar-container
     .column-7
       #interview-calendar

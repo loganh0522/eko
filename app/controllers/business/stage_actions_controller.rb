@@ -95,23 +95,6 @@ class Business::StageActionsController < ApplicationController
       :message, :subject, :name, :assigned_to, :position, :standard_stage, :job_id, :interview_kit_template_id,
       user_ids: [])
   end
-  
-  def create_interview_kit
-    @template = InterviewKitTemplate.find(params[:interview_kit_template_id])
-
-    @kit = InterviewKit.create(title: @template.title,
-      preperation: @template.preperation, stage_action_id: @stage_action)
-    
-    @scorecard = Scorecard.create(interview_kit: @kit.id)
-
-    @template.scorecard.scorecard_sections.each do |section| 
-      @section = ScorecardSection.create(scorecard_id: @scorecard.id, body: section.body) 
-      
-      section.section_options.each do |option| 
-        SectionOption.create(scorecard_section: @section, body: option.body)
-      end
-    end
-  end
 
   def render_errors(stage_action)
     @errors = []

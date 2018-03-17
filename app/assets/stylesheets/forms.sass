@@ -7,6 +7,9 @@
   overflow: hidden
 #no-padding
   padding: 10px 0
+
+.standard-padding
+  padding: 15px 15px
 .form-row2
   overflow: hidden
   border-bottom: 1px solid rgba(0,0,0,0.1)
@@ -488,10 +491,9 @@
       border-bottom: 1px solid #D1DCE4
       margin: 0 -2px 
       height: 40px
-
     label:first-of-type
       border-radius: 5px 0px 0px 5px
-    
+
     label:last-child
       border-radius: 0px 5px 5px 0px
       border-right:  1px solid #D1DCE4
@@ -671,7 +673,26 @@
   .details-container
     display: none      
 
+.hidden-container
+  display: none
 
+
+.form-radios  
+  border-bottom: 1px solid rgba(0,0,0,0.1)
+  overflow: hidden
+  ul
+    padding-left: 0
+    margin-bottom: 0
+    list-style: none
+    li
+      padding: 15px 15px
+      float: left
+    &:hover
+      cursor: pointer
+    .active
+      border-bottom: 4px solid #EF7B2B
+    .filter
+      margin-bottom: 0
 
 #single-photo-form
   margin-bottom: 20px
@@ -685,5 +706,26 @@
       font-size: 18px
   #photo
     clear: both
+
+
+.scorecard-criteria
+  width: 90%
+  margin: 10px 5%
+  overflow: hidden
+  background: #f3f7f9
+  box-shadow: 0px 1px 2px 1px #c7c5c7
+  border-radius: 5px 
+  padding: 5px
+  .fields
+    width: 90%
+    float: left
+  .remove-field
+    float: right
+  .fa-times
+    font-size: 20px
+    color: #D1DCE4
+  &:hover
+    cursor: pointer
+  
 
 

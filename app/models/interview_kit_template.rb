@@ -3,7 +3,7 @@ class InterviewKitTemplate < ActiveRecord::Base
   belongs_to :job
   belongs_to :application
   has_many :interviews
-  
+  has_many :questions
   has_many :interview_scorecards
   has_one :scorecard
 
@@ -13,5 +13,9 @@ class InterviewKitTemplate < ActiveRecord::Base
 
 
   accepts_nested_attributes_for :scorecard, 
+    allow_destroy: true
+
+
+  accepts_nested_attributes_for :questions, 
     allow_destroy: true
 end

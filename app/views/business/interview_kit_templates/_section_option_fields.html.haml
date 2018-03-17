@@ -1,8 +1,8 @@
-.form-fields-container
-  = f.label :body, "Question"
-  = f.text_field :body, id: "section-option", class: "section-answer", autocomplete: 'off', placeholder: "Question"
-  %span#optionBodyBlock
-  = f.label :quality_answer, "Guideline (hint)"
-  = f.text_area :quality_answer, placeholder: "Provide the interviewer with some guidelines as to what they should be looking for in an answer" , rows: 2
-  = f.hidden_field :_destroy, id: "destroy_fields"
-  = link_to "Remove", '#', class: "remove_fields" 
+.scorecard-criteria
+  .fields
+    = f.text_field :body, id: "section-option", class: "section-answer", autocomplete: 'off', placeholder: "Scorecard Criteria"
+    %span#optionBodyBlock
+    = f.text_field :quality_answer, placeholder: "Provide guideline / hints", rows: 2
+  .remove_field
+    %i.fa.fa-times.remove_fields
+    = f.hidden_field :_destroy, id: "destroy_fields"

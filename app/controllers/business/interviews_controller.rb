@@ -132,6 +132,7 @@ class Business::InterviewsController < ApplicationController
   def interview_params
     params.require(:interview).permit(:title, :notes, :location, :start_time, 
       :end_time, :kind, :send_request, :etime, :stime, :interview_kit_id, :room_id,
+      :interview_kit_template_id,
       :job_id, :candidate_id, :company_id, :date, :stage_action_id, :stage_id, :application_id, 
       user_ids: [])
   end
