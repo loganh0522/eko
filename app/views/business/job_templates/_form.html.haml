@@ -1,5 +1,7 @@
-= form_for [:business, @job_template], remote: true do |f|
-  .modal-body
+.main-form-container
+  .standard-header
+    %h4 Create Job Template
+  = form_for [:business, @job_template], remote: true do |f|
     .form-row-no-border
       = f.label :title, "Job Title"
       = f.text_field :title, autocomplete: "off", class: "title_Block"
@@ -8,7 +10,7 @@
       = f.label :description, "Job Description"
       = f.trix_editor :description
       %span.error#description_msgBlock
-  .modal-footer
-    = f.submit @job_template.new_record? ? "Create Stage" : "Update", class: "btn submit-button"
-    .btn.border-button.close-modal Cancel
-  
+    .container-footer
+      = f.submit @job_template.new_record? ? "Create Stage" : "Update", class: "btn submit-button"
+      .btn.border-button.remove-main-form Cancel
+    

@@ -1,6 +1,6 @@
 - if @questions.present? 
   .questions       
-    %ul{:id => 'stages'}
+    %ul{:id => 'questions', :data => {:update_url => sort_business_job_questions_path}}
       - questions.each do |question| 
         %li{:id => "question_#{question.id}"}
           .question

@@ -96,6 +96,23 @@ jQuery ->
     event.preventDefault()
 
 
+
+  
+  $(document).on 'click', '.add_fields', (event) ->
+    time = new Date().getTime()
+    regexp = new RegExp($(this).data('id'), 'g')
+    $(this).before($(this).data('fields').replace(regexp, time))
+    $(this).prev().find('.remove_fields').show()
+    event.preventDefault()
+
+  $(document).on 'click', '.remove_fields', (event) ->
+    $(this).nextAll('input[type=hidden]').val('1')
+    $(this).parent().parent().hide()
+    event.preventDefault()
+
+
+
+
   $('.mediumModal, .largeModal').on 'click', '.add_fields', (event) ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')

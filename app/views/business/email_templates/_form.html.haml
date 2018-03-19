@@ -1,31 +1,34 @@
-= form_for [:business, @email_template], remote: true do |f|
-  .email-area
-    .modal-body  
-      .subject
-        .title Title
-        .sender
-          = f.text_field :title, id: "message-subject", placeholder: "Template Name", autocomplete: "off", class: "title_Block"
-          %span.error#subject_msgBlock
-      .subject
-        .title Subject
-        .sender
-          = f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: "off", class: "subject_Block"
-          %span.error#subject_msgBlock
-      .email-variables
-        .show-hidden-search-box
-          .plain-text
-            Insert-Token
-        .hidden-search-box
-          .insert-tokens
-            .insert-token#first-name Candidate First Name
-            .insert-token#last-name Candidate Last Name
-            .insert-token#full-name Candidate Full Name
-            .insert-token#company-name Company Name
-            .insert-token#job-title Job Title
-      .email-content
-        = f.trix_editor :body
-        %span.error
-    .modal-footer
-      = submit_tag "Save E-mail", class: "btn submit-button"
-      .btn.border-button.close-modal Cancel
-  
+.main-form-container
+  .standard-header
+    %h4 Create E-mail Template
+  = form_for [:business, @email_template], remote: true do |f|
+    .email-area
+      .modal-body  
+        .subject
+          .title Title
+          .sender
+            = f.text_field :title, id: "message-subject", placeholder: "Template Name", autocomplete: "off", class: "title_Block"
+            %span.error#subject_msgBlock
+        .subject
+          .title Subject
+          .sender
+            = f.text_field :subject, id: "message-subject", placeholder: "Type Subject Here", autocomplete: "off", class: "subject_Block"
+            %span.error#subject_msgBlock
+        .email-variables
+          .show-hidden-search-box
+            .plain-text
+              Insert-Token
+          .hidden-search-box
+            .insert-tokens
+              .insert-token#first-name Candidate First Name
+              .insert-token#last-name Candidate Last Name
+              .insert-token#full-name Candidate Full Name
+              .insert-token#company-name Company Name
+              .insert-token#job-title Job Title
+        .email-content
+          = f.trix_editor :body
+          %span.error
+      .container-footer
+        = submit_tag "Save E-mail", class: "btn submit-button"
+        .btn.border-button.remove-main-form Cancel
+    

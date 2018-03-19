@@ -25,14 +25,14 @@
       .standard-body-header
         .templates-header
           %h4 Departments
-        
-    .standard-body
-      .standard-body-header
-        %h4 Meeting Rooms
-        = link_to "Create Room", new_business_room_path, class: "btn border-button", :data => {remote: true} 
-      - if @rooms.present? 
-        = render "business/rooms/rooms"
-      - else 
-        .not-present-container
-          %p There are currently no meeting rooms listed.
+  
+  .main-container
+    .standard-header
+      %h3 Meeting Rooms
+      = link_to "Create Room", new_business_room_path, class: "btn border-button", :data => {remote: true} 
+    - if @rooms.present? 
+      = render "business/rooms/rooms"
+    - else 
+      .not-present-container
+        %p There are currently no meeting rooms listed.
 

@@ -15,6 +15,7 @@
     });
   <% end %>
 <% else %>
-  $('#mediumModal').hide();
+  $('.main-form-container').remove();
+  $('.main-container').show()
   $('.templates').html('<%= j render "email_templates", email_templates: @email_templates%>');
 <% end %>

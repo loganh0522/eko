@@ -4,8 +4,9 @@
 // $('#mediumModal').show();
 
 
-$('.tempaltes').hide();
-$('.standard-body').html('<%= j render "business/interview_kit_templates/form" %>');
+
+$('.main-container').hide()
+$('.company-settings').append('<%= j render "business/interview_kit_templates/form" %>');
 
 $('.form-radios').on('click', '.filter', function(event) {
   if ($(this).attr('id') === 'questions') {

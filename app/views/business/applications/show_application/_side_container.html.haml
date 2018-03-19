@@ -11,7 +11,8 @@
           
           = radio_button_tag "task", "complete", false, class: 'filter'
           = label_tag "task_complete", "Complete", :value => "open", class: 'filter'
-    = render 'business/tasks/candidate_tasks'
+    .side-tasks
+      = render 'business/tasks/candidate_tasks'
   .side-section
     .header
       %h4 Schedule 

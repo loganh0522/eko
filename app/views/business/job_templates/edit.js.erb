@@ -1,4 +1,7 @@
-$('#mediumModal').find('form').remove()
-$('#mediumModal').find('.new-title').html('<%= j "Edit Job Template" %>');
-$('#mediumModal').find('.new-modal-header').after('<%= j render "business/job_templates/form" %>');
-$('#mediumModal').show();
+// $('#mediumModal').find('form').remove()
+// $('#mediumModal').find('.new-title').html('<%= j "Edit Job Template" %>');
+// $('#mediumModal').find('.new-modal-header').after('<%= j render "business/job_templates/form" %>');
+// $('#mediumModal').show();
+
+$('.main-container').hide()
+$('.company-settings').append('<%= j render "business/job_templates/form" %>');

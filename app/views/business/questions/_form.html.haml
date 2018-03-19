@@ -3,14 +3,13 @@
     .fieldset      
       .answer-type
         .title Question Type:
-        = f.select :kind, ['Text', 'Select', 'Multiselect', 'File'],{}, {:class => 'question-type'}
+        .question-type= f.select :kind, options_for_select(['Text (Short Answer)', 'Text (Long Answer)', 'Select (One)', 'Multiselect', 'File'], :selected => "#{f.object.kind}")
         .required-answer
           = f.check_box :required, checked_value: true, unchecked_value: false
           = f.label :required, "Required"       
       
       = f.text_field :body, id: "body_Block", class: "question-field", placeholder: "Add your Question", autocomplete: 'off'
       %span#body_msgBlock
-      = f.hidden_field :_destroy
       = f.hidden_field :job_id, value: @job.id
     
     = f.fields_for :question_options, class: "options" do |a|

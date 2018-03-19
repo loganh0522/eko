@@ -22,9 +22,9 @@ class Business::QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(q_params)
     @job = Job.find(params[:job_id])
-
+    @question = Question.new(q_params.merge(position: new_stage_position(@job)))
+    
     respond_to do |format| 
       if @question.save
         @questions = @job.questions 
@@ -72,10 +72,24 @@ class Business::QuestionsController < ApplicationController
     end
   end
 
+  def sort
+    @job = Job.find(params[:job_id])
+
+    params[:question].each_with_index do |id, index|
+      Question.update(id, {position: index + 1})
+    end
+
+    render nothing: true
+  end
+
   private
 
+  def new_stage_position(job)
+    job.questions.count + 1
+  end
+
   def q_params 
-    params.require(:question).permit(:id, :job_id, :body, :required, :kind, 
+    params.require(:question).permit(:id, :job_id, :body, :required, :kind, :position,
       question_options_attributes: [:id, :body, :_destroy])
   end
 

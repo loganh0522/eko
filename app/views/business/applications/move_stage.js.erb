@@ -6,6 +6,6 @@
   $('.smallModal').find('form').remove();
 <% else %> 
   $('#applicant-stage').html('<%= j render "business/applications/show_application/application_stage" %>');
-  
+  $('.side-tasks').html('<%= j render "business/tasks/candidate_tasks", tasks: @tasks %>')
 <% end %> 
 

@@ -3,9 +3,9 @@ class Job < ActiveRecord::Base
   belongs_to :company
   belongs_to :client
 
-  has_many :questions, :dependent => :destroy
+  has_many :questions, -> {order(:position)}, :dependent => :destroy
   has_one :scorecard, :dependent => :destroy
-  has_one :job_feed
+  has_one :job_feed, :dependent => :destroy
   has_many :hiring_teams
   has_many :users, through: :hiring_teams
   

@@ -137,6 +137,10 @@ class Company < ActiveRecord::Base
   def active_jobs
     self.jobs.where(is_active: true)
   end
+  
+  def published_jobs
+    self.jobs.where(is_active: true, status: "open")
+  end
 
   def open_jobs
     self.jobs.where(status: "open")

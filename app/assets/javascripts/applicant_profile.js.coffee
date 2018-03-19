@@ -147,5 +147,10 @@ jQuery ->
       element.editor.insertHTML("<span contentEditable= 'false' class='class_one'  style='background-color: #f0f0f0; color: black; width: 100px; border-radius: 5px; border: solid 1px #dadada; height: 16px; text-align: center;'> {{company.name}} </span>")
     $(this).parent().parent().hide()
 
-  
+
+
+# Remove MainForm Container
+  $(document).on 'click', '.remove-main-form', (e) -> 
+    $('.main-form-container').remove()
+    $('.main-container').show()
   

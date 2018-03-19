@@ -36,7 +36,7 @@ class Interview < ActiveRecord::Base
   def create_interview_kit
     @template = InterviewKitTemplate.find(self.interview_kit_template_id)
     @kit = InterviewKit.create(@template.attributes.except('id'))
-    
+    @kit.update_attributes(interview: self)
 
     # @kit = InterviewKit.create(title: @template.title,
     #   preperation: @template.preperation, stage_action_id: @stage_action)

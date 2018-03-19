@@ -13,6 +13,7 @@ class Application < ActiveRecord::Base
   has_many :question_answers, dependent: :destroy
 
   after_create :reindex_candidate, :create_assessment
+  after_update :reindex_candidate, :create_stage_actions
 
   def reindex_candidate
     Candidate.find(candidate.id).reindex
@@ -80,6 +81,16 @@ class Application < ActiveRecord::Base
     end
   end
  
+
+  def create_stage_actions
+    @stage_actions = self.stage.stage_actions
+    @stage_actions.each do |action| 
+      if action.kind == "Task"
+        Task.create(company: self.job.company, job: self.job, title: action.name, kind: "To-do", taskable_type: "Candidate", 
+          taskable_id: self.candidate.id, status: 'active', user_id: 1)
+      end
+    end
+  end
   # def current_position
   #   self.applicant.profile.current_position.title
   # end

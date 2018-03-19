@@ -109,7 +109,7 @@ module ApplicationHelper
     if candidate.question_answers.count == 0
       return "There are currently no answers for this application"
     else
-      if question.kind == 'Text' || question.kind == 'Paragraph'
+      if question.kind == 'Text (Short Answer)' || question.kind == 'Text (Long Answer)'
         @answers = QuestionAnswer.where(question: question, candidate: candidate, job_id: job.id).first 
         if @answers.present?
           @answer = @answers.body

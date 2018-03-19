@@ -332,7 +332,13 @@ Rails.application.routes.draw do
       resources :interview_invitations, except: [:index] 
       resources :candidates
       resources :hiring_teams 
-      resources :questions
+
+      resources :questions do 
+        collection do
+          post :sort, to: "questions#sort"
+        end 
+      end
+      
       resources :scorecards
 
       get :advertise, to: "job_feeds#index"

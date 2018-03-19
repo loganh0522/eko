@@ -6,7 +6,7 @@ class JobBoardsController < ApplicationController
     @job_board = JobBoard.find_by_subdomain!(request.subdomain)
     @company = @job_board.company
     @sections = @job_board.job_board_rows
-    @jobs = @company.jobs.where(status: 'open')
+    @jobs = @company.published_jobs
   end
 
   def show 

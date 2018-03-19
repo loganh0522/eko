@@ -1,4 +1,2 @@
-$('#mediumModal').find('form').remove()
-$('#mediumModal').find('.new-title').html('<%= j "Create E-mail Template" %>');
-$('#mediumModal').find('.new-modal-header').after('<%= j render "business/email_templates/form" %>');
-$('#mediumModal').show();
+$('.main-container').hide();
+$('.company-settings').append('<%= j render "business/email_templates/form" %>');

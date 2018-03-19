@@ -142,6 +142,7 @@ class Business::ApplicationsController < ApplicationController
       @candidates = Candidate.joins(:applications).where(:applications => {job_id: @job.id}).paginate(page: params[:page], per_page: 10)
     else
       move_stage_single
+      @tasks = @candidate.open_job_tasks(@job).accessible_by(current_ability)
     end
 
     respond_to do |format|
@@ -200,7 +201,6 @@ class Business::ApplicationsController < ApplicationController
   end
 
   def render_scorecard
-
     # @job = @application.job
     # @scorecard = Scorecard.where(job_id: @job.id).first
     # @sections = @scorecard.scorecard_sections
@@ -209,10 +209,8 @@ class Business::ApplicationsController < ApplicationController
   end
 
   def render_interview_scorcecard
-
     # @interview_scorecard = InterviewScorecard.find(2).scorecard
     # @interview_scorecards = @application
-
     # @interview_sections = @interview_scorecard.scorecard_sections if @scorecard.present?
     # @interview_scorecards = InterviewScorecard.where(application_id: @application.id)
     # @current_user_interview_scorecard = InterviewScorecard.where(user_id: current_user.id, application_id: @application.id).first 
@@ -223,6 +221,7 @@ class Business::ApplicationsController < ApplicationController
     @candidate = @application.candidate
     @job = @stage.job
     @application.update_attribute(:stage, @stage)
+
     track_activity @app, "move_stage", @application.candidate.id, @application.job.id, @stage.id
   end
 
