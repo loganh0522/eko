@@ -19,9 +19,13 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   version :small_image do
     process :crop
-    resize_to_fit(50, 50)
+    resize_to_fill(50, 50)
   end
 
+  version :thumb do
+    process :crop
+    resize_to_fill(33, 33)
+  end
 
   def filename
     "#{secure_token}.#{file.extension}" if original_filename.present?

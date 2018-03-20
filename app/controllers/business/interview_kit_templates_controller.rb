@@ -24,7 +24,9 @@ class Business::InterviewKitTemplatesController < ApplicationController
       if @interview_kit.save
         @interview_kits = current_company.interview_kit_templates
       else 
+
         render_errors(@interview_kit)
+
       end
       format.js
     end
@@ -47,6 +49,7 @@ class Business::InterviewKitTemplatesController < ApplicationController
         @interview_kits = current_company.interview_kit_templates
       else 
         render_errors(@interview_kit)  
+        binding.pry
       end
       format.js
     end
@@ -66,7 +69,7 @@ class Business::InterviewKitTemplatesController < ApplicationController
 
   def interview_kit_params 
     params.require(:interview_kit_template).permit(:title, :preperation,
-      questions_attributes: [:id, :kind, :body, :guidelines, :required, :_destroy, 
+      questions_attributes: [:id, :kind, :body, :guidelines, :required, :_destroy, :position,
         question_options_attributes: [:id, :body, :_destroy]], 
       
       scorecard_attributes: [:id,

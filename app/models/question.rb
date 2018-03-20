@@ -11,7 +11,7 @@ class Question < ActiveRecord::Base
   validates_presence_of :body, :kind
   validates_associated :question_options
 
-  validates_numericality_of :position, only_integer: true
+  # validates_numericality_of :position, only_integer: true
 
   accepts_nested_attributes_for :question_options, 
     allow_destroy: true
