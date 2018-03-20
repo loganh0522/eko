@@ -75,7 +75,7 @@
         - if @stage_action.present? && @stage_action.interview_kit_template.present?
           %br
           = @stage_action.interview_kit_template.title
-          = f.hidden_field :interview_kit_template_id, value: @stage_action.interview_kit.id
+          = f.hidden_field :interview_kit_template_id, value: @stage_action.interview_kit_template.id
         - else 
           = f.collection_select(:interview_kit_template_id, current_company.interview_kit_templates, :id, :title, :include_blank => true)
 
