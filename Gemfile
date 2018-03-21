@@ -51,6 +51,8 @@ gem 'rmagick', :require => 'RMagick'
 
 gem 'carrierwave'
 gem 'carrierwave-aws'
+gem 'carrierwave-base64'
+
 
 gem 'jcrop-rails-v2'
 

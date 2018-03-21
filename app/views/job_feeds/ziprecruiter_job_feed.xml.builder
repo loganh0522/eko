@@ -22,49 +22,47 @@ xml.publisherurl "https://www.talentwiz.ca"
 
         if job.questions.present?
           xml.interview_json do
+            @questions = []
             job.questions.each do |question|
               @options = []   
+              
               if question.question_options.present?
                 question.question_options.each do |option|
                   @options << {value: option.id.to_s, label: option.body}
                 end
               end
-              if question.kind == 'Multiselect'
-                jsonInterview = "[{
-                  :id => #{question.id.to_s},
-                  :type => multiselect,
-                  :questions => #{question.body},
-                  :options => #{@options}
-                  :required => #{question.required}
-                  }]"
-              elsif question.kind == 'Select (One)'
-                jsonInterview = "[{
-                  :id => #{question.id.to_s},
-                  :type => select,
-                  :question => #{question.body},
-                  :options => #{@options}
-                  :required => #{question.required}
-                  }]"
-              elsif question.kind == 'File'
-                jsonInterview = "[{
-                  :id => #{question.id.to_s},
-                  :type => upload,
-                  :question => #{question.body},
-                  :options => #{@options}
-                  :required => #{question.required}
-                  }]"
-              else
-                jsonInterview = "[{
-                  :id => #{question.id.to_s},
-                  :type => #{question.kind},
-                  :question => #{question.body},
-                  :options => #{@options}
-                  :required => #{question.required}
-                  }]"
-              end
 
-              xml.cdata!(jsonInterview)
+              if question.kind == 'Multiselect'
+                jsonInterview = {}
+                jsonInterview['id'] = question.id.to_s
+                jsonInterview['type'] = "select"
+                jsonInterview['questions'] = question.body
+                jsonInterview['options'] = @options
+                jsonInterview['required'] = question.required
+              elsif question.kind == 'Select (One)'
+                jsonInterview = {}
+                jsonInterview['id'] = question.id.to_s
+                jsonInterview['type'] = "select"
+                jsonInterview['question'] = question.body
+                jsonInterview['options'] = @options
+                jsonInterview['required'] = question.required
+              elsif question.kind == 'File'
+                jsonInterview = {}
+                jsonInterview['id'] = question.id.to_s
+                jsonInterview['type'] = "file"
+                jsonInterview['question'] = question.body
+                jsonInterview['required'] = question.required
+              else
+                jsonInterview = {}
+                jsonInterview['id'] = question.id.to_s
+                jsonInterview['type'] = 'text'
+                jsonInterview['question'] = question.body
+                jsonInterview['options'] = @options
+                jsonInterview['required'] = question.required
+              end
+              @questions.push(jsonInterview)
             end
+            xml.cdata!(@questions.to_json)
           end
         end
       end
