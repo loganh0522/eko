@@ -35,7 +35,7 @@ xml.publisherurl "https://www.talentwiz.ca"
               if question.kind == 'Multiselect'
                 jsonInterview = {}
                 jsonInterview['id'] = question.id.to_s
-                jsonInterview['type'] = "select"
+                jsonInterview['type'] = "multiselect"
                 jsonInterview['questions'] = question.body
                 jsonInterview['options'] = @options
                 jsonInterview['required'] = question.required
@@ -49,7 +49,7 @@ xml.publisherurl "https://www.talentwiz.ca"
               elsif question.kind == 'File'
                 jsonInterview = {}
                 jsonInterview['id'] = question.id.to_s
-                jsonInterview['type'] = "file"
+                jsonInterview['type'] = "upload"
                 jsonInterview['question'] = question.body
                 jsonInterview['required'] = question.required
               else
@@ -57,7 +57,6 @@ xml.publisherurl "https://www.talentwiz.ca"
                 jsonInterview['id'] = question.id.to_s
                 jsonInterview['type'] = 'text'
                 jsonInterview['question'] = question.body
-                jsonInterview['options'] = @options
                 jsonInterview['required'] = question.required
               end
               @questions.push(jsonInterview)
