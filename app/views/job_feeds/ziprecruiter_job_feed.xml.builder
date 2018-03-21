@@ -29,13 +29,39 @@ xml.publisherurl "https://www.talentwiz.ca"
                   @options << {value: option.id.to_s, label: option.body}
                 end
               end
-              jsonInterview = "[{
-                :id => #{question.id.to_s},
-                :type => #{question.kind},
-                :question => #{question.body},
-                :options => #{@options}
-                :required => #{question.required}
-                }]"
+              if question.kind == 'Multiselect'
+                jsonInterview = "[{
+                  :id => #{question.id.to_s},
+                  :type => multiselect,
+                  :questions => #{question.body},
+                  :options => #{@options}
+                  :required => #{question.required}
+                  }]"
+              elsif question.kind == 'Select (One)'
+                jsonInterview = "[{
+                  :id => #{question.id.to_s},
+                  :type => select,
+                  :questions => #{question.body},
+                  :options => #{@options}
+                  :required => #{question.required}
+                  }]"
+              elsif question.kind == 'File'
+                jsonInterview = "[{
+                  :id => #{question.id.to_s},
+                  :type => upload,
+                  :questions => #{question.body},
+                  :options => #{@options}
+                  :required => #{question.required}
+                  }]"
+              else
+                jsonInterview = "[{
+                  :id => #{question.id.to_s},
+                  :type => #{question.kind},
+                  :question => #{question.body},
+                  :options => #{@options}
+                  :required => #{question.required}
+                  }]"
+              end
 
               xml.cdata!(jsonInterview)
             end
