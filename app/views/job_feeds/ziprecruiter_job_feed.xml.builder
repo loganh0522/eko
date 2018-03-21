@@ -41,7 +41,7 @@ xml.publisherurl "https://www.talentwiz.ca"
                 jsonInterview = "[{
                   :id => #{question.id.to_s},
                   :type => select,
-                  :questions => #{question.body},
+                  :question => #{question.body},
                   :options => #{@options}
                   :required => #{question.required}
                   }]"
@@ -49,7 +49,7 @@ xml.publisherurl "https://www.talentwiz.ca"
                 jsonInterview = "[{
                   :id => #{question.id.to_s},
                   :type => upload,
-                  :questions => #{question.body},
+                  :question => #{question.body},
                   :options => #{@options}
                   :required => #{question.required}
                   }]"
