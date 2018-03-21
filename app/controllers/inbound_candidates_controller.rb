@@ -14,12 +14,12 @@ class InboundCandidatesController < ApplicationController
     params[:answers].each do |answer| 
       @question = Question.find(answer[:id])
 
-      if @question.kind == "Select" || @question.kind == "Multiselect"
+      if @question.kind == "Select (One)" || @question.kind == "Multiselect"
         answer.values.each do |value| 
           QuestionAnswer.create(question_id: answer[:id], question_option_id: value)
         end
-      elsif @question.kind == "file"
-        QuestionAnswer.create(question_id: answer[:id], file: answer[:filename], 
+      elsif @question.kind == "File"
+        QuestionAnswer.create(question_id: answer[:id], file: answer[:value], 
           job_id: @job.id, candidate_id: @candidate.id)
       else
         QuestionAnswer.create(question_id: answer[:id], body: answer[:value], 
