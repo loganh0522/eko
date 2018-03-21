@@ -9,7 +9,7 @@ class InboundCandidatesController < ApplicationController
       last_name: params[:last_name], email: params[:email], phone: params[:phone], 
       manually_created: true, source: "ZipRecruiter")
     
-    Resume.create(candidate: @candidate, name: params[:resume])
+    Resume.create(candidate_id: @candidate.id, name: params[:resume])
     
     params[:answers].each do |answer| 
       @question = Question.find(answer[:id])
