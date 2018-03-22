@@ -2,25 +2,25 @@ require 'spec_helper'
 
 describe InboundCandidatesController do 
   describe 'POST create' do
-    let(:image_data) { Base64.encode64(File.open(File.join(Rails.root, '/spec/support/files/avatar.gif'), &:read)) }
+    let(:file) { Base64.encode64(File.open(File.join(Rails.root, '/spec/support/files/avatar.gif'), &:read)) }
     let(:image) { "data:image/gif;base64,#{ image_data }" }
-
-    {"email":"talentwiz@ziptest2.com", "resume": "base64 here", 
-      "first_name":"talentwiz","job_id":"14",
-      "response_id":"55e9c2f1",
+    
+    let(:params) = {
+      "email": "talentwiz@ziptest2.com", 
+      "resume": file
+      "first_name": "talentwiz",
+      "job_id": "14",
+      "response_id": "55e9c2f1",
       "name": "talentwiz ziptest",
-      "last_name":"ziptest",
-      "phone":"+1 3101231234",
-      "answers": [{"value":"15","id":"19"}, {"id":"21","value": "more base64","filename": "Michael Jones - short.pdf"},
-        {"values":["22"],"id":"20"}, {"value":"yes","id":"18"}]}
+      "last_name": "ziptest",
+      "phone": "+1 3101231234"
+    }
+    
     context 'with valid params' do
       let(:params) { { photo: { image: image } } }
 
       before do
-        post :create,
-             params: params,
-             'Content-Type' => 'application/json',
-              format: :json
+        post :create, params: params, 'Content-Type' => 'application/json',format: :json
       end
 
       it 'returns photo object' do

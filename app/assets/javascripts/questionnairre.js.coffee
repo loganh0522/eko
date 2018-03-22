@@ -8,9 +8,13 @@ jQuery ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
     $(this).before($(this).data('fields').replace(regexp, time))
+
     event.preventDefault()
 
 #### Scorecard #### 
+  $(document).on 'click', '.remove_kit_question', (event) ->
+    $(this).nextAll('input[type=hidden]').val('1')
+    $(this).parent().parent().parent().hide()
 
   $('.main-container').on 'click', '.remove_question', (event) ->
     $(this).nextAll('input[type=hidden]').val('1')
@@ -24,28 +28,28 @@ jQuery ->
       $('.remove_question').show()
 
 #### ApplicationForm ####
-  $('.main-container').on 'change', '.answer-type', (event) -> 
-    val = $(this).find('.question-type').val()
-    if val == "Select" || val == "Multiselect"  
+  $(document).on 'change', '.question-type', (event) -> 
+    val = $(this).children().val()
+    console.log('changed')
+    if val == "Select (One)" || val == "Multiselect"  
       time = new Date().getTime()
       regexp = new RegExp($(this).data('id'), 'g')
-      $(this).parent().after($(this).parent().next().data('fields'))
-      $(this).parent().after($(this).parent().next().data('fields'))
-      $(this).parent().nextAll('.answers').show()
-      $(this).parent().nextAll('.answers').find('input[type=hidden]').val('0')
-      $(this).parent().nextAll('.add_fields').show()
-      event.preventDefault()
-    if val == "Text" || val == "Paragraph"
-      $(this).parent().nextAll('.answers').hide()
-      $(this).parent().nextAll('.answers').find('input[type=hidden]').val('1')
-      $(this).parent().nextAll('.add_fields').hide()
+      add_fields = $(this).parent().next().find('.add_fields')
+      add_fields.before(add_fields.data('fields'))
+      add_fields.before(add_fields.data('fields'))
+      add_fields.show()
+    else
+      answers = $(this).parent().next().find('.answers')
+      answers.hide()
+      answers.find('input[type=hidden]').val('1')
+      $(this).parent().next().find('.add_fields').hide()
 
   $(document).ready ->
     val = $('form').find('.answer-type').find('.question-type')
     len = val.length
     i = 0
     while i < len
-      if $(val[i]).val() == "Checkbox" || $(val[i]).val() == "Multiple Choice"  
+      if $(val[i]).val() == "Select" || $(val[i]).val() == "Multiselect"  
         time = new Date().getTime()
         regexp = new RegExp($(this).data('id'), 'g')
         $(val[i]).parent().parent().nextAll('.add_fields').show()
@@ -103,6 +107,8 @@ jQuery ->
     regexp = new RegExp($(this).data('id'), 'g')
     $(this).before($(this).data('fields').replace(regexp, time))
     $(this).prev().find('.remove_fields').show()
+    number = $('.question-area').length    
+    $(this).find('.position').val(number)
     event.preventDefault()
 
   $(document).on 'click', '.remove_fields', (event) ->

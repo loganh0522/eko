@@ -16,10 +16,10 @@
     
     .questions-container.hidden-container
       %h4 Questions
-
-      = f.fields_for :questions do |a|
-        = render 'question_fields', f: a
-      = link_to_add_fields("+ Add Question", f, :questions)
+      %ul#nested-attributes
+        = f.fields_for :questions do |a|
+          = render 'question_fields', f: a
+        = link_to_add_fields("+ Add Question", f, :questions)
     
     .scorecard-container.standard-padding.hidden-container
       %h4 Scorecard

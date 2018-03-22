@@ -18,7 +18,7 @@ jQuery ->
     cursor: 'move'
     update: ->
       $.post($(this).data('update-url'), $(this).sortable('serialize'))
-  $("#stages").disableSelection()
+  $("#questions").disableSelection()
 
 
   $('#board-sections').sortable
@@ -27,3 +27,15 @@ jQuery ->
     update: ->
       $.post($(this).data('update-url'), $(this).sortable('serialize'))
   $("#board-sections").disableSelection()
+
+  $(document).ajaxComplete ->
+    $('#nested-attributes').sortable
+      axis: 'y'
+      cursor: 'move'
+      stop: -> 
+        numberElems = $('.question-area').length;
+        $('.position').each (idx) ->
+          $(this).val idx + 1
+          return
+
+

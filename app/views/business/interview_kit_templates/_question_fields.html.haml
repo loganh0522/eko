@@ -1,23 +1,25 @@
-.question
-  %i.fa.fa-arrows
-  .question-area 
-    .fieldset      
-      .answer-type
-        .title Question Type:
-        .question-type= f.select :kind, options_for_select(['Text (Single Line)', 'Text (Multi-Line)', 'Yes / No', 'Select', 'Multiselect', 'File'], :selected => "#{f.object.kind}")
-        .required-answer
-          = f.check_box :required, checked_value: true, unchecked_value: false
-          = f.label :required, "Required"   
-        .remove
-          %i.fa.fa-trash.remove_question
-          = f.hidden_field :_destroy
-
+%li
+  .question-area   
+    .header
+      %i.fa.fa-arrows
+      .title Question Type:
+      .question-type
+        = f.select :kind, options_for_select(['Text (Short Answer)', 'Text (Long Answer)', 'Yes / No', 'Select (One)', 'Multiselect', 'File'], :selected => "#{f.object.kind}")
+      .required-answer
+        = f.check_box :required, checked_value: true, unchecked_value: false
+        = f.label :required, "Required"   
+      .remove
+        %i.fa.fa-trash.remove_kit_question
+        = f.hidden_field :_destroy
+    .body
       = f.text_field :body, id: "body_Block", class: "question-field", placeholder: "Add your Question", autocomplete: 'off'
       = f.text_area :guidelines, placeholder: "Guidelines as to what they should be looking for in an answer", class: "question-field"
       %span#body_msgBlock
+      = f.hidden_field :position, class: 'position'
+      
       = f.fields_for :question_options, class: "options" do |a|
         = render 'question_option_fields', f: a
-  
-    = link_to_add_fields("+ Add Answer", f, :question_options)
+
+      = link_to_add_fields("+ Add Answer", f, :question_options)
 
 
