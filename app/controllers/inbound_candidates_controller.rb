@@ -9,8 +9,9 @@ class InboundCandidatesController < ApplicationController
       last_name: params[:last_name], email: params[:email], phone: params[:phone], 
       manually_created: true, source: "ZipRecruiter")
     
-    Resume.create(candidate_id: @candidate.id, name: params[:resume])
-    
+    @encoded_resume = params[:resume]
+    Resume.create(candidate_id: @candidate.id, name: "data:application/pdf;base64,#{@encoded_resume}")
+
     params[:answers].each do |answer| 
       @question = Question.find(answer[:id])
 
@@ -21,7 +22,8 @@ class InboundCandidatesController < ApplicationController
       elsif @question.kind == "Multiselect"
         QuestionAnswer.create(question_id: answer[:id], question_option_id: value)
       elsif @question.kind == "File"
-        QuestionAnswer.create(question_id: answer[:id], file: answer[:value], 
+        @encoded_answer = answer[:value]
+        QuestionAnswer.create(question_id: answer[:id], file: "data:application/pdf;base64,#{@encoded_answer}", 
           job_id: @job.id, candidate_id: @candidate.id)
       else
         QuestionAnswer.create(question_id: answer[:id], body: answer[:value], 
