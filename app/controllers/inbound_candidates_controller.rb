@@ -8,19 +8,21 @@ class InboundCandidatesController < ApplicationController
     @candidate = Candidate.create(company: @company, first_name: params[:first_name], 
       last_name: params[:last_name], email: params[:email], phone: params[:phone], 
       manually_created: true, source: "ZipRecruiter")
+    @application = Application.create(candidate: @candidate, job: @job)
     
     @encoded_resume = params[:resume]
     Resume.create(candidate_id: @candidate.id, name: "data:application/pdf;base64,#{@encoded_resume}")
 
+    
     params[:answers].each do |answer| 
       @question = Question.find(answer[:id])
 
-      if @question.kind == "Select (One)"
+      if @question.kind == "Multiselect"
         answer.values.each do |value| 
           QuestionAnswer.create(question_id: answer[:id], question_option_id: value)
         end
-      elsif @question.kind == "Multiselect"
-        QuestionAnswer.create(question_id: answer[:id], question_option_id: value)
+      elsif @question.kind == "Select (One)"
+        QuestionAnswer.create(question_id: answer[:id], question_option_id: answer[:value])
       elsif @question.kind == "File"
         @encoded_answer = answer[:value]
         QuestionAnswer.create(question_id: answer[:id], file: "data:application/pdf;base64,#{@encoded_answer}", 
@@ -30,8 +32,6 @@ class InboundCandidatesController < ApplicationController
           job_id: @job.id, candidate_id: @candidate.id)
       end
     end
-
-    @application = Application.create(candidate: @candidate, job: @job)
 
     head 200
   end
