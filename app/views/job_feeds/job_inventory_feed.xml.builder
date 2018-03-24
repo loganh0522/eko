@@ -19,7 +19,7 @@ xml.publisherurl "https://www.talentwiz.ca"
 
         xml.company { xml.cdata! (job.company.name)}
         xml.url { xml.cdata!(job.url) }
-        xml.category { xml.cdata! (job.industy)} if job.industry.present?
+        xml.category { xml.cdata! (job.industry)} if job.industry.present?
         xml.jobtype { xml.cdata! (job.kind)} if job.kind.present?
         xml.education {xml.cdata! (job.education_level)} if job.education_level.present?
       end
