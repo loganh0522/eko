@@ -2,19 +2,19 @@
   .header
     %h4= "#{assessment.name} Scorecard"
     .my-scorecard
-      - if !current_user.scorecard(assessment).present? 
-        = link_to "Create Scorecard", new_business_scorecard_answer_path(assessment: assessment), remote: true 
+      - if !current_user.completed_assessments.present? 
+        = link_to "Create Scorecard", new_business_completed_assessment_path(assessment: assessment), remote: true 
   .body
-    - if assessment.scorecard.scorecard_answers.present? 
+    - if assessment.completed_assessments.present? 
       .scorecard-complete
-        - assessment.scorecard.scorecard_answers.each do |scorecard| 
-          = user_avatar(scorecard.user)
+        - assessment.completed_assessments.each do |assessment| 
+          = user_avatar(assessment.user)
           .details
-            .name= scorecard.user.full_name
-            .overall= card_overall_rating(scorecard.overall)
+            .name= assessment.user.full_name
+            .overall= card_overall_rating(assessment.overall)
             .links 
-              = link_to "edit", edit_business_scorecard_answer_path(scorecard), remote: true
-              = link_to "view", business_scorecard_answer_path(scorecard), remote: true
+              = link_to "edit", edit_business_completed_assessment_path(assessment), remote: true
+              = link_to "view", business_completed_assessment_path(assessment), remote: true
     - else  
       .not-present-container
         %p There are no completed scorecards present.

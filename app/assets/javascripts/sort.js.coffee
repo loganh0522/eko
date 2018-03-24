@@ -29,7 +29,7 @@ jQuery ->
   $("#board-sections").disableSelection()
 
   $(document).ajaxComplete ->
-    $('#nested-attributes').sortable
+    $('#nested-attributes, #scorecard-sections').sortable
       axis: 'y'
       cursor: 'move'
       stop: -> 

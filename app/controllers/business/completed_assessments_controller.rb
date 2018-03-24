@@ -1,4 +1,4 @@
-class Business::ScorecardAnswersController < ApplicationController
+class Business::CompletedAssessmentsController < ApplicationController
   layout "business"
   before_filter :require_user
   before_filter :belongs_to_company
@@ -42,9 +42,12 @@ class Business::ScorecardAnswersController < ApplicationController
   end
 
   def new
-    @scorecard_answer = ScorecardAnswer.new
-    @scorecard_rating = ScorecardRating.new
+    @completed_assessment = CompletedAssessment.new
     @assessment = Assessment.find(params[:assessment])
+    @questions = @assessment.questions
+    @answer = Answer.new
+    
+   
     @scorecard = @assessment.scorecard
     @sections = @scorecard.scorecard_sections
 
@@ -54,7 +57,7 @@ class Business::ScorecardAnswersController < ApplicationController
   end
 
   def create
-    @scorecard = ScorecardAnswer.new(scorecard_answer_params)
+    @assessment = CompletedAssessment.new(completed_assessment_params)
    
     respond_to do |format|
       if @scorecard.save
@@ -65,9 +68,11 @@ class Business::ScorecardAnswersController < ApplicationController
   end
 
   def edit 
-    @scorecard_answer = ScorecardAnswer.find(params[:id])
-    @scorecard = @scorecard_answer.scorecard
+    @completed_assessment = CompletedAssessment.find(params[:id])
+    @assessment = @completed_assessment.assessment
+    @scorecard = @assessment.scorecard
     @sections = @scorecard.scorecard_sections
+    @questions = @assessment.questions
 
     respond_to do |format| 
       format.js
@@ -99,6 +104,6 @@ class Business::ScorecardAnswersController < ApplicationController
   private 
 
   def scorecard_answer_params 
-    params.require(:scorecard_answer).permit(:id, :feedback, :overall, :assessment_id, :user_id, :scorecard_id, :job_id, scorecard_ratings_attributes: [:id, :section_option_id, :user_id, :rating, :_destroy])
+    params.require(:completed_assessment).permit(:id, :feedback, :overall, :assessment_id, :user_id, :scorecard_id, :job_id, answers_attributes: [:id, :section_option_id, :user_id, :rating, :_destroy])
   end
 end

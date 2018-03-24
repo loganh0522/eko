@@ -23,6 +23,7 @@
     
     .scorecard-container.standard-padding.hidden-container
       %h4 Scorecard
+
       = f.fields_for :scorecard, @scorecard do |s| 
         - if @interview_kit.new_record?
           .form-fields-container

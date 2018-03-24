@@ -2,47 +2,41 @@
   .top-row
     %i.fa.fa-calendar  
     .kind Interview:
-    .title= action.name
-    
+    .title= action.name   
   - if action.interview.present? && action.interview.start_time > Time.now && action.interview.candidate == @application.candidate
-    
     .scheduled
       Scheduled
-      = link_to "(View Details)",  business_interview_path(action.interview), remote: true
+      = link_to "(View Details)",  business_interview_path(action.interview.id), remote: true
     .links 
-      = link_to "Interview Kit", business_interview_kit_path(action.interview.interview_kit), target: :_blank
+      = link_to "Interview Kit", new_business_completed_assessment_path(assessment: action.interview.assessment), target: :_blank
 
   - elsif action.interview.present? && action.interview.start_time < Time.now && action.interview.candidate == @application.candidate
-    .completed-scorecards
-      Completed Scorecards
-      - action.interview.interview_scorecards.each do |scorecard|
-        .user-completed
-          .circle= user_avatar(scorecard.user)
-          .name= scorecard.user.full_name
-
-          .links= link_to "View", business_interview_scorecard_path(scorecard), remote: true
-          
-          .links= link_to "Edit", edit_business_interview_scorecard_path(scorecard), remote: true
-
-    .completed-scorecards      
-      Pending Interview Scorecard   
-      - action.interview.pending_scorecards.each do |user|
-        .user-completed
-          .user= user_avatar(user)
-          .name= user.full_name
-          - if user == current_user
-            .links
-              .name= link_to "Finish Scorecard", new_business_interview_scorecard_path(interview: action.interview, application: @application), remote: true
-          - else
-            .links
-              .name
-                Pending
-                = link_to "(Send Reminder)", new_business_interview_scorecard_path(interview: action.interview), remote: true
-
+    - if action.interview.has_completed_assessment?
+      .completed-scorecards
+        Completed Scorecards
+        - action.interview.assessment.completed_assessments.each do |assessment|
+          .user-completed
+            .circle= user_avatar(scorecard.user)
+            .name= scorecard.user.full_name
+            .links= link_to "View", business_completed_assessment_path(assessment), remote: true
+            .links= link_to "Edit", edit_business_completed_assessment_path(assessment), remote: true
+    - elsif action.interview.pending_scorecards.present?
+      .completed-scorecards      
+        Pending Interview Scorecard   
+        - action.interview.pending_scorecards.each do |user|
+          .user-completed
+            .user= user_avatar(user)
+            .name= user.full_name
+            - if user == current_user
+              .links
+                .name= link_to "Finish Scorecard", new_business_completed_assessment_path(assessment: action.interview.assessment), remote: true
+            - else
+              .links
+                .name
+                  Pending
+                  = link_to "(Send Reminder)", new_business_completed_assessment_path(), remote: true
   - elsif action.interview_invitation.present? && action.interview_invitation.candidates.include?(@application.candidate)
-    .links 
-      Invitation Sent (Pending)  
-
+    .links Invitation Sent (Pending)
   - else
     .links
       .dropdown

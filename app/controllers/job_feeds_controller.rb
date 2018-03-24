@@ -2,6 +2,7 @@ class JobFeedsController < ApplicationController
   
   def neuvoo_job_feed
     @jobs = Job.where(status: "open", is_active: true, verified: true)
+    render 'job_feeds/neuvoo_job_feed.xml.builder', formats: [:xml]
   end
 
   def adzuna_job_feed

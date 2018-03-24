@@ -48,8 +48,6 @@
           .title Education
           = link_to_add_fields "+ Education", f, :educations
   .modal-footer
-    = f.hidden_field :company_id, value: current_company.id
-    = f.hidden_field :manually_created, value: true
     - if @job.present? 
       = hidden_field_tag :job_id, @job.id
     - else

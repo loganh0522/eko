@@ -18,16 +18,14 @@
 
         .details
           .contain-50
-            = link_to "Interview Kit", new_business_interview_scorecard_path(interview: interview), remote: true
+            = link_to "Interview Kit", new_business_assessment_path(interview: interview), remote: true
           .contain-50
             .box-row
               .title Interviewers:
               .content
                 - interview.users.each do |user|   
                   .user-tag= user.full_name
-    - else
-      .not-present-container
-        %p No Events Scheduled
+
 - else
   .not-present-container
     %p No Events Scheduled

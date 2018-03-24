@@ -64,8 +64,9 @@
       = f.label :interview_kit_id, "Choose an Interview Kit"
       - if @stage_action.present? && @stage_action.interview_kit_template.present?
         %br
-        = @stage_action.interview_kit_template.title
-        = f.hidden_field :interview_kit_template_id, value: @stage_action.interview_kit_template_id
+        .toggle-actions
+          = f.label :interview_kit_id, "#{@stage_action.interview_kit_template.title}"
+          = f.hidden_field :interview_kit_template_id, value: @stage_action.interview_kit_template_id
       - else 
         = f.collection_select(:interview_kit_template_id, current_company.interview_kits, :id, :title, :include_blank => true)
     

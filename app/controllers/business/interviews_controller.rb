@@ -54,7 +54,6 @@ class Business::InterviewsController < ApplicationController
     @user_ids = params[:interview][:user_ids].split(',') 
     @interview = Interview.new(interview_params.merge!(user_ids: @user_ids, start_time: @startTime, end_time: @endTime))
 
-
     respond_to do |format|  
       if @interview.save
         @interviews = current_company.interviews

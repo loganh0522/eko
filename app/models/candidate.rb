@@ -4,7 +4,7 @@ class Candidate < ActiveRecord::Base
   # index_name ["talentwiz", Rails.env].join('_')
 
   before_create :generate_token, :downcase_email, if: :manually_created?
-  before_save :add_user_info_to_candidate, :generate_token, if: :not_manually_created?
+  before_create :add_user_info_to_candidate, :generate_token, if: :not_manually_created?
 
   belongs_to :company
   belongs_to :user
@@ -41,8 +41,7 @@ class Candidate < ActiveRecord::Base
     allow_destroy: true
 
   accepts_nested_attributes_for :resumes, 
-    allow_destroy: true,
-    reject_if: proc { |a| a[:name].blank? }
+    allow_destroy: true
     
   has_many :question_answers, dependent: :destroy
   accepts_nested_attributes_for :question_answers, allow_destroy: true

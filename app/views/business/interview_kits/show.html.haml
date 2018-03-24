@@ -9,7 +9,7 @@
     .overview-container
       = @interview_kit.preperation.html_safe
     = form_for [:business, @assessment] do |f|
-      .scorecard-container.hidden-container.standard-padding
+      .questions-container.hidden-container.standard-padding
         %h4 Questions
         - @questions.each do |question|
           .question
@@ -70,6 +70,7 @@
               - section.section_options.each do |criteria|
                 .form-row
                   .question= criteria.body
+                  
                   = f.fields_for :scorecard_ratings, ScorecardRating.new do |q|
                     = q.hidden_field :section_option_id, value: criteria.id
                     = q.hidden_field :user_id, value: current_user.id
@@ -85,6 +86,7 @@
 
                       = q.radio_button :rating, 4, class: 'application-scorecard-rating', id: "rating_#{criteria.id}_4"
                       %label.glyphicon.glyphicon-star{:for => "rating_#{criteria.id}_4"}
+                    
                     = q.text_area :body
             
               .form-row-no-border

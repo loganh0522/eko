@@ -1,0 +1,27 @@
+= form_for [:business, @completed_assessment], html: {remote: true} do |f|
+  .form-radios
+    %ul  
+      %li.filter#overview.active Overview
+      %li.filter#questions Questions
+      %li.filter#scorecard Scorecard
+  .overview-container
+
+  .questions-container.standard-padding
+    .interview-scorecard-form
+      = render 'questions_fields', f: f
+
+  .scorecard-container.hidden-container.standard-padding
+    .interview-scorecard-form
+      = render 'scorecard_fields', f: f
+      
+        
+        
+    = f.hidden_field :scorecard_id, value: @scorecard.id
+  .modal-footer
+    = f.button "Save", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
+    .btn.border-button.close-modal Cancel
+
+
+
+
+    

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180322132545) do
+ActiveRecord::Schema.define(version: 20180323225640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,22 @@ ActiveRecord::Schema.define(version: 20180322132545) do
     t.integer  "job_id"
     t.integer  "stage_id"
     t.integer  "candidate_id"
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.integer "section_option_id"
+    t.integer "rating"
+    t.integer "user_id"
+    t.integer "application_scorecard_id"
+    t.integer "interview_scorecard_id"
+    t.text    "body"
+    t.integer "scorecard_answer_id"
+    t.integer "question_id"
+    t.string  "answerable"
+    t.integer "answerable_id"
+    t.integer "completed_assessment_id"
+    t.string  "file"
+    t.integer "question_option_id"
   end
 
   create_table "applicant_contact_details", force: :cascade do |t|
@@ -93,6 +109,7 @@ ActiveRecord::Schema.define(version: 20180322132545) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "job_id"
+    t.text     "preperation"
   end
 
   create_table "assigned_candidates", force: :cascade do |t|
@@ -236,6 +253,22 @@ ActiveRecord::Schema.define(version: 20180322132545) do
   create_table "company_users", force: :cascade do |t|
     t.integer  "company_id"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "completed_assessments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "assessment_id"
+    t.integer  "stage_action_id"
+    t.integer  "scorecard_id"
+    t.integer  "interview_id"
+    t.integer  "candidate_id"
+    t.integer  "application_id"
+    t.integer  "overall"
+    t.text     "feedback"
+    t.text     "candidate_feedback"
+    t.text     "concerns"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -956,32 +989,6 @@ ActiveRecord::Schema.define(version: 20180322132545) do
     t.datetime "updated_at"
   end
 
-  create_table "scorecard_answers", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "assessment_id"
-    t.integer  "stage_action_id"
-    t.integer  "scorecard_id"
-    t.integer  "interview_id"
-    t.integer  "candidate_id"
-    t.integer  "application_id"
-    t.integer  "overall"
-    t.text     "feedback"
-    t.text     "candidate_feedback"
-    t.text     "concerns"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "scorecard_ratings", force: :cascade do |t|
-    t.integer "section_option_id"
-    t.integer "rating"
-    t.integer "user_id"
-    t.integer "application_scorecard_id"
-    t.integer "interview_scorecard_id"
-    t.text    "body"
-    t.integer "scorecard_answer_id"
-  end
-
   create_table "scorecard_sections", force: :cascade do |t|
     t.integer "scorecard_id"
     t.string  "body"
@@ -1002,6 +1009,7 @@ ActiveRecord::Schema.define(version: 20180322132545) do
     t.integer "scorecard_section_id"
     t.string  "body"
     t.text    "quality_answer"
+    t.integer "position"
   end
 
   create_table "sessions", force: :cascade do |t|

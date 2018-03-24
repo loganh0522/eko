@@ -1,0 +1,60 @@
+%h4 Questions
+- @questions.each do |question|
+  - if question.kind == 'select (one)' 
+    %ul 
+      - question.question_options.each do |option|
+        = f.fields_for :answers, Answer.new do |q| 
+          %li
+            = q.hidden_field :question_id, value: question.id
+            = q.check_box :question_option_id, {}, option.id, nil
+            = option.body
+  - else 
+    .question= "#{question.body}"
+    = f.fields_for :answers, Answer.new do |q|
+      .scorecard-inputs
+        = q.radio_button :rating, 1, class: 'application-scorecard-rating', id: "rating_#{question.id}_1"
+        %label.glyphicon.glyphicon-remove{:for => "rating_#{question.id}_1"}
+        = q.radio_button :rating, 2, class: 'application-scorecard-rating', id: "rating_#{question.id}_2"
+        %label.glyphicon.glyphicon-thumbs-down{:for => "rating_#{question.id}_2"}
+        = q.radio_button :rating, 3, class: 'application-scorecard-rating', id: "rating_#{question.id}_3"
+        %label.glyphicon.glyphicon-thumbs-up{:for => "rating_#{question.id}_3"}
+
+        = q.radio_button :rating, 4, class: 'application-scorecard-rating', id: "rating_#{question.id}_4"
+        %label.glyphicon.glyphicon-star{:for => "rating_#{question.id}_4"}
+      .guidlines= question.guidelines
+      - if question.kind == 'text (short answer)'
+        = q.hidden_field  :question_id, value: question.id 
+        - if question.required == 1 
+          = q.text_field :body, hide_label: true, :required => true
+        - else
+          = q.text_field :body, hide_label: true
+      - elsif question.kind == "text (long answer)"
+        = q.hidden_field  :question_id, value: question.id
+        - if question.required == 1
+          = q.text_area :body, hide_label: true, :required => true, rows: 5
+        - else
+          = q.text_area :body, hide_label: true, rows: 5 
+      - elsif question.kind == 'file'
+        = q.hidden_field  :question_id, value: question.id
+        = q.file_field :file 
+      - elsif question.kind == 'multiselect'
+        %ul
+          - question.question_options.each do |option|
+            %li
+              = q.hidden_field  :question_id, value: question.id
+              = q.radio_button :question_option_id, option.id
+              = option.body
+      - elsif question.kind == "yes / no"
+        %ul
+          = q.hidden_field  :question_id, value: question.id
+          %li 
+            = q.radio_button :body, "Yes"
+            = q.label :body, "Yes"
+          %li 
+            = q.radio_button :body, "No"
+            = q.label :body, "No"
+
+
+
+
+

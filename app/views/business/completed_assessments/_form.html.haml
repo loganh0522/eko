@@ -1,4 +1,4 @@
-= form_for [:business, @scorecard_answer], html: {remote: true} do |f|
+= form_for [:business, @completed_assessment], html: {remote: true} do |f|
   .interview-scorecard-form
     - @sections.each do |section|
       .form-row-no-border

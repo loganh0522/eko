@@ -1,51 +1,55 @@
-- if @application.candidate.manually_created == true
+- if @candidate.manually_created == true
   .user-image
     .profile_picture
       %img(src="/tmp/blank_profile_picture.png")
   .applicant-details
     .name-rating
-      .name= "#{@application.candidate.full_name.capitalize}"
+      .name= "#{@candidate.full_name.capitalize}"
       = render 'business/ratings/form', application: @application
       .dropdown#edit-candidate-drop
         .dropdown-button
           %i.fa.fa-ellipsis-h.fa-lg
         .dropdown-content
-          = link_to edit_business_candidate_path(@application.candidate.id), remote: true do
+          = link_to edit_business_candidate_path(@candidate), remote: true do
             %i.fa.fa-pencil
             .action Edit
-          = link_to business_application_path(@application.id), remote: true, :method => :delete do  
+          = link_to business_application_path(@application), remote: true, :method => :delete do  
             %i.fa.fa-reply
             .action Remove From Job
-          = link_to business_candidate_path(@application.candidate.id), remote: true, :method => :delete do  
+          = link_to business_candidate_path(@candidate), remote: true, :method => :delete do  
             %i.fa.fa-trash-o
             .action Destroy Candidate
-    
-
-    .social-links
-      - @application.candidate.social_links.each do |link|
-        .social-link
-          = link_to link.url, target: :_blank do 
-            %i{class: "fa fa-#{link.kind.downcase}"}
-
-    %br
     .contact-details
       .contact-detail
         %i.fa.fa-phone
         .detail= "#{@candidate.phone}"
       .contact-detail
         %i.fa.fa-envelope-o
-        .detail= "#{@application.candidate.email}"
+        .detail= "#{@candidate.email}"
       .contact-detail
         %i.fa.fa-map-marker
-        .detail= "#{@application.candidate.location}"
+        .detail= "#{@candidate.location}"
+    .contact-details
+      - if @candidate.social_links.present?
+        - @candidate.social_links.each do |link|
+          .social-link
+            = link_to link.url, target: :_blank do 
+              %i{class: "fa fa-#{link.kind.downcase}"}
+      - else 
+        = link_to edit_business_candidate_path(@candidate), remote: true do
+          .contact-detail
+            %i.fa.fa-pencil
+            .detail Add Social Link
+
+
 
     
 
 - else
   .user-image
     .profile_picture
-      - if @application.candidate.user.user_avatar.present?
-        = image_tag @application.candidate.user.user_avatar.image.large_image 
+      - if @candidate.user.user_avatar.present?
+        = image_tag @candidate.user.user_avatar.image.large_image 
       - else 
         %img(src="/tmp/blank_profile_picture.png")
   .applicant-details
@@ -56,30 +60,32 @@
         .dropdown-button
           %i.fa.fa-ellipsis-h.fa-lg
         .dropdown-content#myDropdown
-          = link_to edit_business_candidate_path(@application.candidate.id), remote: true do
+          = link_to edit_business_candidate_path(@candidate), remote: true do
             %i.fa.fa-pencil
             .action Edit
-          = link_to business_candidate_path(@application.candidate.id), remote: true, :method => :delete do  
+          = link_to business_candidate_path(@candidate), remote: true, :method => :delete do  
             %i.fa.fa-trash-o
             .action Destroy  
-    %br
 
-    .social-links
-      - @application.candidate.social_links.each do |link|
-        .social-link
-          = link_to link.url, target: :_blank do 
-            %i{class: "fa fa-#{link.kind.downcase}"}
-
-    %br
     .contact-details
       .contact-detail
         %i.fa.fa-phone
         .detail= "#{@candidate.phone}"
       .contact-detail
         %i.fa.fa-envelope-o
-        .detail= "#{@application.candidate.email}"
+        .detail= "#{@candidate.email}"
       .contact-detail
         %i.fa.fa-map-marker
-        .detail= "#{@application.candidate.location}"
+        .detail= "#{@candidate.location}"
 
-
+    .contact-details
+      - if @candidate.social_links.present?
+        - @candidate.social_links.each do |link|
+          .social-link
+            = link_to link.url, target: :_blank do 
+              %i{class: "fa fa-#{link.kind.downcase}"}
+      - else 
+        = link_to edit_business_candidate_path(@candidate), remote: true do
+          .contact-detail
+            %i.fa.fa-pencil
+            .detail Add Social Link

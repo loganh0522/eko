@@ -21,7 +21,8 @@ class Business::CandidatesController < ApplicationController
   end
 
   def create 
-    @candidate = Candidate.new(candidate_params)
+    @candidate = Candidate.new(candidate_params.merge!(manually_created: true, 
+      company: current_company))
     
     respond_to do |format| 
       if @candidate.save
@@ -73,6 +74,7 @@ class Business::CandidatesController < ApplicationController
         format.js
       else
         render_errors(@candidate)
+        binding.pry
         format.js
       end
     end

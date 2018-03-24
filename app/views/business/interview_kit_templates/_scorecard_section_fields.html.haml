@@ -1,11 +1,12 @@
-.form-fields-container
-  / = link_to "Remove", '#', class: "remove_question"
-  / = f.hidden_field :_destroy
-  = f.text_field :body, class: "section-title questions", placeholder: "Section Name", id: "section-body", autocomplete: 'off'
-  %span#sectionBodyBlock.error
-  .body
-    = f.fields_for :section_options, class: "options" do |a|
-      = render 'section_option_fields', f: a
-    = link_to_add_fields("+ Add Criteria", f, :section_options)
+/ = link_to "Remove", '#', class: "remove_question"
+/ = f.hidden_field :_destroy
+= f.text_field :body, class: "section-title questions", placeholder: "Section Name", id: "section-body", autocomplete: 'off'
+%span#sectionBodyBlock.error
+.body
+  #nested-sections
+    %ul#scorecard-sections
+      = f.fields_for :section_options, class: "options" do |a|
+        = render 'section_option_fields', f: a
+      = link_to_add_fields("+ Add Criteria", f, :section_options)
     
 

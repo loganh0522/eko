@@ -10,6 +10,11 @@
 
 = link_to "+ Assessment", new_business_assessment_path, class: 'btn hover-button', remote: true
 
-
-- @assessments.each do |assessment| 
-  = render 'business/assessments/assessment', assessment: assessment
+- if @assessments.present? 
+  - @assessments.each do |assessment| 
+    = render 'business/assessments/assessment', assessment: assessment
+- else 
+  .assessment
+    .not-present-container
+      %p No Scorecards have been added for the Candidate
+      .add-object= link_to "+ Assessment", new_business_assessment_path, class: 'btn hover-button', remote: true

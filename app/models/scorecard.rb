@@ -2,6 +2,7 @@ class Scorecard < ActiveRecord::Base
   belongs_to :job
   belongs_to :interview_kit
   belongs_to :assessment
+  
   has_many :questions, dependent: :destroy
   has_many :scorecard_sections, dependent: :destroy
   has_many :scorecard_answers, dependent: :destroy

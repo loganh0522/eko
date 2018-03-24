@@ -111,13 +111,18 @@ Rails.application.routes.draw do
   namespace :business do 
     root to: "jobs#index" 
     get "hiring_defaults", to: 'rejection_reasons#index'
-    
-    resources :assessments
-    resources :scorecard_answers
+    resources :notifications
     resources :activities
+
+
+    resources :assessments
+    resources :scorecards
+    resources :completed_assessments
+    resources :answers
+
     resources :hiring_teams
     resources :permissions
-    resources :job_templates
+    
     resources :media_photos
     resources :team_members
     resources :logos
@@ -130,13 +135,11 @@ Rails.application.routes.draw do
     resources :invitations
     resources :locations 
     resources :application_emails
-    resources :notifications
-    resources :email_templates
-    resources :scorecards
     resources :stage_actions
-    resources :interview_scorecards
+
     resources :interview_kit_templates
-    resources :interview_kits
+    resources :email_templates
+    resources :job_templates
 
     resources :rooms do 
       collection do

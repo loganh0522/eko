@@ -1,8 +1,11 @@
-.scorecard-criteria
-  .fields
-    = f.text_field :body, id: "section-option", class: "section-answer", autocomplete: 'off', placeholder: "Scorecard Criteria"
-    %span#optionBodyBlock
-    = f.text_field :quality_answer, placeholder: "Provide guideline / hints", rows: 2
-  .remove_field
-    %i.fa.fa-times.remove_fields
-    = f.hidden_field :_destroy, id: "destroy_fields"
+%li
+  %i.fa.fa-arrows
+  .scorecard-criteria
+    .fields
+      = f.text_field :body, id: "section-option", class: "section-answer", autocomplete: 'off', placeholder: "Scorecard Criteria"
+      %span#optionBodyBlock
+      = f.text_field :quality_answer, placeholder: "Provide guideline / hints", rows: 2
+      = f.hidden_field :position
+    .remove_field
+      %i.fa.fa-times.remove_fields
+      = f.hidden_field :_destroy, id: "destroy_fields"
