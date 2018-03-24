@@ -2,12 +2,9 @@ xml.instruct!(:xml, :version=> "1.0", :encoding => "UTF-8")
 xml.positionfeed do 
 xml.source "TalentWiz"
 
-xml.ns="http://www.juju.com/employers/positionfeed-namespace/"
-xml.ns:xsi "http://www.w3.org/2001/XMLSchema-instance"
-xsi.schemaLocation "http://www.juju.com/employers/positionfeed-namespace/ http://www.juju.com/employers/positionfeed.xsd" 
 
 xml.sourceurl "https://www.talentwiz.ca"
-xml.feeddate {xml.cdata! (@jobs.last.juju_updated_at)}
+xml.feeddate {xml.cdata! (@jobs.last.title)}
   xml.jobs do
     @jobs.each do |job|
       xml.job do
