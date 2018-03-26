@@ -4,6 +4,7 @@
 
   has_many :user_skills, :dependent => :destroy
   has_many :skills, through: :user_skills
+  
   has_many :accomplishments, :dependent => :destroy
   
   validates_presence_of :title, :message => "Job title can't be blank"

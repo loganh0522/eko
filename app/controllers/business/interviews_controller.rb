@@ -43,6 +43,16 @@ class Business::InterviewsController < ApplicationController
     @application = Application.find(params[:application]) if params[:application].present?
     @candidate = @application.candidate if @application.present?
 
+    if @stage_action.present?
+      @stage_users = []
+
+      @stage_action.users.each do |user|
+        @stage_users.append(user.id)
+      end
+      
+      @stage_action_users = @stage_users.to_s.gsub(/]/, '').gsub('[', '')
+    end
+
     respond_to do |format| 
       format.js 
     end 
@@ -54,8 +64,15 @@ class Business::InterviewsController < ApplicationController
     @user_ids = params[:interview][:user_ids].split(',') 
     @interview = Interview.new(interview_params.merge!(user_ids: @user_ids, start_time: @startTime, end_time: @endTime))
 
+
     respond_to do |format|  
       if @interview.save
+ 
+        if @interview.stage_action.present? 
+          @stage = @interview.stage_action.stage
+          @application = Application.find(@interview.application_id)
+        end
+        
         @interviews = current_company.interviews
         send_invitation(@interview) if @interview.send_request == true
         format.js

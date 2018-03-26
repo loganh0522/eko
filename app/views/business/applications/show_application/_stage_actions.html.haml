@@ -1,0 +1,6 @@
+- stage.stage_actions.each do |action| 
+  - if action.kind == 'Task'
+    = render 'business/applications/process/task_action', action: action
+  - elsif action.kind == 'Interview'
+    = render 'business/applications/process/interview_action', action: action
+    

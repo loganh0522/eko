@@ -26,15 +26,15 @@
 
       = f.fields_for :scorecard, @scorecard do |s| 
         - if @interview_kit.new_record?
-          .form-fields-container
-            = s.fields_for :scorecard_sections, ScorecardSection.new do |a|
-              = a.text_field :body, placeholder: "Section Name (i.e Technical Skills, Personality, Culture Fit)"
-              = a.fields_for :section_options, SectionOption.new do |a|
-                = render 'section_option_fields', f: a  
-              
-              = link_to_add_fields("+ Criteria", a, :section_options)  
+          = s.fields_for :scorecard_sections, ScorecardSection.new do |a|
+            = render 'scorecard_section_fields', f: a  
+          /   = a.text_field :body, placeholder: "Section Name (i.e Technical Skills, Personality, Culture Fit)"
+          /   = a.fields_for :section_options, SectionOption.new do |a|
+          /     = render 'section_option_fields', f: a  
+            
+          /   = link_to_add_fields("+ Criteria", a, :section_options)  
 
-          / = link_to_add_fields("+ Add Section", s, :scorecard_sections)           
+          / / = link_to_add_fields("+ Add Section", s, :scorecard_sections)           
         
         - else 
           = s.fields_for :scorecard_sections do |a|

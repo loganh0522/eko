@@ -8,14 +8,17 @@
 
   .questions-container.standard-padding
     .interview-scorecard-form
-      = render 'questions_fields', f: f
+      - if @completed_assessment.new_record? 
+        = render 'questions_fields', f: f
+      - else 
+        = render 'edit_question_fields', f: f
 
   .scorecard-container.hidden-container.standard-padding
     .interview-scorecard-form
       = render 'scorecard_fields', f: f
       
         
-        
+    = f.hidden_field :assessment_id, value: @assessment.id
     = f.hidden_field :scorecard_id, value: @scorecard.id
   .modal-footer
     = f.button "Save", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}

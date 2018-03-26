@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :interviews, through: :assigned_users, source: :assignable, source_type: "Interview"
   has_many :interview_invitations, through: :assigned_users, source: :assignable, source_type: "InterviewInvitation"
   has_many :interview_scorecards
+  
   has_many :orders
   has_many :event_ids
   belongs_to :permission
@@ -34,6 +35,7 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :activities
   has_many :notifications
+  has_many :answers
   has_many :ratings
   has_one  :email_signature
 

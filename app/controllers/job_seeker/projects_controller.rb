@@ -53,6 +53,9 @@ class JobSeeker::ProjectsController < JobSeekersController
   def update
     @project = Project.find(params[:id])
     @project.update(project_params)
+
+    binding.pry
+
     respond_to do |format|
       if @project.save 
         update_attachments(@project)
@@ -86,19 +89,6 @@ class JobSeeker::ProjectsController < JobSeekersController
     end
   end
 
-  def set_layout
-    if request.subdomain.present? && request.subdomain != 'www'
-      if @job_board.kind == "basic"
-        "career_portal_profile"
-      else
-        "career_portal_profile"
-      end
-    else
-      "job_seeker"
-    end
-  end
-
-
   def add_skills(project)  
     if params[:user_skills].present?
       @skills = params[:user_skills].split(',')
@@ -116,5 +106,17 @@ class JobSeeker::ProjectsController < JobSeekersController
 
   def project_params 
     params.require(:project).permit(:user_id, :title, :description, :problem, :solution, :role)
+  end
+
+  def set_layout
+    if request.subdomain.present? && request.subdomain != 'www'
+      if @job_board.kind == "basic"
+        "career_portal_profile"
+      else
+        "career_portal_profile"
+      end
+    else
+      "job_seeker"
+    end
   end
 end

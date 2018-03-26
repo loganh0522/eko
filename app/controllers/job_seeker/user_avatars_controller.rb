@@ -32,8 +32,10 @@ class JobSeeker::UserAvatarsController < JobSeekersController
 
   def update
     @avatar = UserAvatar.find(params[:id])
-    if @avatar.update(avatar_params)
 
+    if @avatar.update(avatar_params)
+      @avatar.save!
+      
       respond_to do |format|
         format.html {redirect_to job_seeker_user_path}
         format.js

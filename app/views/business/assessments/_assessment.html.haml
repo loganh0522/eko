@@ -4,10 +4,11 @@
     .my-scorecard
       - if !current_user.completed_assessments.present? 
         = link_to "Create Scorecard", new_business_completed_assessment_path(assessment: assessment), remote: true 
+  
   .body
     - if assessment.completed_assessments.present? 
-      .scorecard-complete
-        - assessment.completed_assessments.each do |assessment| 
+      - assessment.completed_assessments.each do |assessment| 
+        .scorecard-complete
           = user_avatar(assessment.user)
           .details
             .name= assessment.user.full_name
@@ -15,30 +16,24 @@
             .links 
               = link_to "edit", edit_business_completed_assessment_path(assessment), remote: true
               = link_to "view", business_completed_assessment_path(assessment), remote: true
+    
     - else  
-      .not-present-container
-        %p There are no completed scorecards present.
-    
-    / .scorecard-details
-    /   .sections
-    /     - assessment.scorecard.scorecard_sections.each do |section|
-    /       %h4= section.body
-    /       %table.table
-    /         %tbody
-    /           - section.section_options.each do |criteria|
-    /             %tr
-    /               %td.title(width="30%")= criteria.body
-    /               %td(width="70%")
-    /                 .scorecard-results
-    /                   - assessment.scorecard.scorecard_answers.each do |scorecard| 
-    /                     - scorecard.scorecard_ratings.each do |rating|
-    /                       - if rating.rating == 1 && rating.section_option_id == criteria.id
-    /                         %i.glyphicon.glyphicon-remove
-    /                       - elsif rating.rating == 2 && rating.section_option_id == criteria.id
-    /                         %i.glyphicon.glyphicon-thumbs-down
-    /                       - elsif rating.rating == 3 && rating.section_option_id == criteria.id
-    /                         %i.glyphicon.glyphicon-thumbs-up
-    /                       - elsif rating.rating == 4 && rating.section_option_id == criteria.id
-    /                         %i.glyphicon.glyphicon-star
+      - if assessment.interview.pending_scorecards.present?
+        .scorecard-complete     
+          Pending Interview Scorecard   
+          - assessment.interview.pending_scorecards.each do |user|
+            .user-completed
+              .user= user_avatar(user)
+              .name= user.full_name
+              - if user == current_user
+                .links
+                  .name= link_to "Finish Scorecard", new_business_completed_assessment_path(assessment: assessment.interview.assessment), remote: true
+              - else
+                .links
+                  .name
+                    Pending
+                    = link_to "(Send Reminder)", new_business_completed_assessment_path(), remote: true
 
-    
+
+
+      

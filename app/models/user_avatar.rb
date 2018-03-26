@@ -7,7 +7,7 @@ class UserAvatar < ActiveRecord::Base
   after_update :crop_avatar
   
   def crop_avatar
-    image.recreate_versions! if crop_x.present?
-    self.update_attribute(:image, image)
+    image.recreate_versions!(:thumb, :large_image, :medium_image, :small_image) if crop_x.present?
+    self.image = image
   end 
 end

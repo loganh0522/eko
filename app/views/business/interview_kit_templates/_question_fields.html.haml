@@ -20,6 +20,11 @@
       = f.fields_for :question_options, class: "options" do |a|
         = render 'question_option_fields', f: a
 
-      = link_to_add_fields("+ Add Answer", f, :question_options)
+      
+      - if f.object.kind == 'Multiselect' || f.object.kind == 'Select (One)' 
+        = link_to_add_fields("+ Add Answer", f, :question_options)
+      - elsif f.object.new_record?
+        .display-answer{:style => "display: none"}
+          = link_to_add_fields("+ Add Answer", f, :question_options)
 
 

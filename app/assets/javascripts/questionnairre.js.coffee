@@ -27,17 +27,24 @@ jQuery ->
     if $('.scorecard-area').length >= 2 
       $('.remove_question').show()
 
+#### Question Answers ####
+
+  $(document).on 'click', '.question-answer-checkbox', (event) -> 
+    if $(this).is(':checked')
+      $(this).next('input[type=hidden]').val('0')
+    else
+      $(this).next('input[type=hidden]').val('1')
+
 #### ApplicationForm ####
   $(document).on 'change', '.question-type', (event) -> 
     val = $(this).children().val()
-    console.log('changed')
     if val == "Select (One)" || val == "Multiselect"  
       time = new Date().getTime()
       regexp = new RegExp($(this).data('id'), 'g')
       add_fields = $(this).parent().next().find('.add_fields')
       add_fields.before(add_fields.data('fields'))
       add_fields.before(add_fields.data('fields'))
-      add_fields.show()
+      add_fields.parent().show()
     else
       answers = $(this).parent().next().find('.answers')
       answers.hide()

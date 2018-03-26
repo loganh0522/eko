@@ -29,6 +29,7 @@
 //= require Chart.bundle
 //= require spin
 //= require chartkick
+//= require ahoy
 //= require jquery.timepicker.js
 //= require moment 
 //= require fullcalendar

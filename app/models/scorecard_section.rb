@@ -1,6 +1,6 @@
 class ScorecardSection < ActiveRecord::Base
   belongs_to :scorecard
-  has_many :section_options, dependent: :destroy
+  has_many :section_options, -> {order(:position)}, dependent: :destroy 
   validates_presence_of :body
   validates_associated :section_options
   accepts_nested_attributes_for :section_options, 

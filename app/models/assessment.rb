@@ -13,4 +13,7 @@ class Assessment < ActiveRecord::Base
   def completed_scorecards(assessment)
     ScorecardAnswer.where(assessment_id: assessment.id)
   end
+
+
+
 end

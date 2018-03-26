@@ -81,11 +81,13 @@
       .contain-100
         = f.label :candidate, "Add Team Members" 
         - if @stage_action.present?
+          = stage_action_users(@stage_action)
           - @stage_action.users.each do |user| 
             .user-tag{id: "user_#{user.id}"}
               .name= user.full_name
               .delete-tag#delete-multiple &times
-          = f.hidden_field :user_ids, value: @stage_action.users.first.id, id: "user_ids"
+
+          = f.hidden_field :user_ids, value: @stage_action_users, id: "user_ids"
         - else   
           = render 'business/users/users_autocomplete'
           = f.hidden_field :user_ids, value: current_user.id, id: "user_ids"

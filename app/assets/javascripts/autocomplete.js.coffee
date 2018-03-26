@@ -11,6 +11,21 @@ jQuery ->
     event.stopImmediatePropagation()
     return
 
+  $(document).on 'click', '#add-skills', (event) ->
+    tagName = $(this).parent().find('.ui-autocomplete-input').val();
+    
+    if $('#user-skills-field').val() == ''
+      $('#user-skills-field').val(tagName)
+    else 
+      values =  $('#user-skills-field').val() + ',' + tagName
+      $('#user-skills-field').val values 
+    
+    $('.ui-autocomplete-input').val('')
+    $(this).next('#add-tags').append('<div class="fieldset"><div class="user-tag"> <div class="name">' + tagName  + '</div> <div class="remove_fields"> &times </div>');
+    
+    event.stopImmediatePropagation()
+    return
+
   $('.ui-autocomplete-input').on 'focus', ->  
     controller = $(this).attr('class').split(' ').pop()
     if window.location.href.split('/').includes('business')

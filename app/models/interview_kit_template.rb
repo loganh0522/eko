@@ -3,7 +3,7 @@ class InterviewKitTemplate < ActiveRecord::Base
   belongs_to :job
   belongs_to :application
   has_many :interviews
-  has_many :questions
+  has_many :questions, -> {order(:position)}, dependent: :destroy
   has_many :interview_scorecards
   has_one :scorecard
 

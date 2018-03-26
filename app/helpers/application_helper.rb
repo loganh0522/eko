@@ -147,6 +147,18 @@ module ApplicationHelper
       end
     end
   end
+  
+  def stage_action_users(stage_action)
+    content_tag(:ul) do
+      @stage_action.users.each do |user| 
+        content_tag(:div, class: 'user-tag', id: "user_#{user.id}") do
+          concat(content_tag(:i, user.full_name, class: '.name', id: "user_#{user.id}"))
+          concat(content_tag(:i, "times", class: '.delete-tag', id: "delete-multiple"))
+        end
+      end
+    end
+  end
+
 
   def current_user_interview_scorecard(user, application)
     @scorecard = InterviewScorecard.where(user_id: user.id, application_id: application.id).first

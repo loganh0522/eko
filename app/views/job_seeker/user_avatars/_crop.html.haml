@@ -3,11 +3,11 @@
     .crop-image
       - %w[x y w h].each do |attribute| 
         = f.hidden_field "crop_#{attribute}"     
-      = image_tag user_avatar.image.url, class: "blah", id: 'cropbox'
+      = image_tag user_avatar.image.original_image.url, class: "blah", id: 'cropbox'
     
     #img-preview-area
       .img-preview
-        = image_tag @user_avatar.image.url, :id => "preview"
+        = image_tag @user_avatar.image.original_image.url, :id => "preview"
 
   .modal-footer
     = link_to job_seeker_user_avatar_path(@user_avatar), remote: true, :method => :delete, data:{:confirm => "Are You Sure? You can not undo this action."} do

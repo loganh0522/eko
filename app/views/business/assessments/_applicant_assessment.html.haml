@@ -7,9 +7,8 @@
       %h4 Application Form
     .assessment-body
       - @questions.each do |question|
-        .question-area
+        .question-container
           .question
-            = question.position
             = question.body
           .answer
             = question_answer(question, @candidate, @job)

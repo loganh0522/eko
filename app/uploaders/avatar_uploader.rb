@@ -4,8 +4,12 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
-  process :crop
+
   resize_to_limit(300, 300)
+
+  version :original_image do 
+    resize_to_limit(300, 300)
+  end
 
   version :large_image do
     process :crop

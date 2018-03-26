@@ -1,0 +1,71 @@
+%h4 Questions
+- @questions.each do |question|
+  .question-container
+    .title= "#{question.body}"
+    .guidlines= question.guidelines
+
+    - if question.kind == 'Multiselect' 
+      %ul.answer
+        - question.question_options.each do |option|
+          - if option.answers.present? && option.answers.exists?(user: @completed_assessment.user)
+            = f.fields_for :answers, option.answers do |q|
+              - if q.object.user == @completed_assessment.user 
+                %li
+                  = q.hidden_field :question_id, value: question.id
+                  = q.check_box :question_option_id, {class: 'question-answer-checkbox'}, option.id, nil
+                  = q.hidden_field :_destroy
+                  = option.body
+          - else 
+            = f.fields_for :answers, Answer.new do |q|
+              %li
+                = q.hidden_field :question_id, value: question.id
+
+                = q.check_box :question_option_id, {class: 'question-answer-checkbox'}, option.id, nil
+                = q.hidden_field :_destroy
+                = option.body
+    - else 
+      = f.fields_for :answers, question.answers do |q|
+        - if q.object.user == @completed_assessment.user
+          - if question.kind == 'Text (Short Answer)'
+            = render 'question_rating', q: q, question: question
+            .answer
+              = q.hidden_field  :question_id, value: question.id   
+              - if question.required == 1 
+                = q.text_field :body, hide_label: true, :required => true
+              - else
+                = q.text_field :body, hide_label: true
+
+          - elsif question.kind == "Text (Long Answer)"
+            = render 'question_rating', q: q, question: question
+            .answer
+              = q.hidden_field  :question_id, value: question.id
+              - if question.required == 1
+                = q.text_area :body, hide_label: true, :required => true, rows: 5
+              - else
+                = q.text_area :body, hide_label: true, rows: 5 
+          
+          - elsif question.kind == 'File'
+            .answer
+              = q.hidden_field  :question_id, value: question.id
+              = q.file_field :file 
+          
+          - elsif question.kind == 'Select (One)'
+            .answer
+              %ul
+                - question.question_options.each do |option|
+                  %li
+                    = q.hidden_field  :question_id, value: question.id
+                    = q.radio_button :question_option_id, option.id
+                    = option.body
+          
+          - elsif question.kind == "Yes / No"
+            .answer
+              %ul
+                = q.hidden_field  :question_id, value: question.id
+                %li 
+                  = q.radio_button :body, "Yes"
+                  = q.label :body, "Yes"
+                %li 
+                  = q.radio_button :body, "No"
+                  = q.label :body, "No"
+

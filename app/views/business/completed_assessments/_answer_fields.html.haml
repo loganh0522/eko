@@ -1,0 +1,13 @@
+= q.hidden_field :section_option_id, value: criteria.id
+.scorecard-inputs
+  = q.radio_button :rating, 1, class: 'application-scorecard-rating', id: "rating_#{criteria.id}_1"
+  %label.glyphicon.glyphicon-remove{:for => "rating_#{criteria.id}_1"}
+  = q.radio_button :rating, 2, class: 'application-scorecard-rating', id: "rating_#{criteria.id}_2"
+  %label.glyphicon.glyphicon-thumbs-down{:for => "rating_#{criteria.id}_2"}
+
+  = q.radio_button :rating, 3, class: 'application-scorecard-rating', id: "rating_#{criteria.id}_3"
+  %label.glyphicon.glyphicon-thumbs-up{:for => "rating_#{criteria.id}_3"}
+
+  = q.radio_button :rating, 4, class: 'application-scorecard-rating', id: "rating_#{criteria.id}_4"
+  %label.glyphicon.glyphicon-star{:for => "rating_#{criteria.id}_4"}
+= q.text_area :body

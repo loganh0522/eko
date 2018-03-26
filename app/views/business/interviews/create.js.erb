@@ -3,8 +3,14 @@
     $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
     $('#<%= error[0] %>_Block').addClass('has-error');
   <% end %>
-<% else %> 
+<% elsif @stage.present? %> 
+  $('#stage_<%= @stage.id%>').find('.app-stage-body').html('<%= j render "business/applications/show_application/stage_actions", stage: @stage %>')
+  $('#stage_<%= @stage.id%>').find('.app-stage-body').html('<%= j render "business/applications/show_application/stage_actions", stage: @stage %>')
+  $('.mediumModal').find('form').remove();
+  $('.mediumModal').hide();
+<% else %>
   $('#calendar').fullCalendar('refetchEvents')
   $('.mediumModal').find('form').remove();
   $('.mediumModal').hide();
+
 <% end %>

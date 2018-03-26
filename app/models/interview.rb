@@ -2,9 +2,10 @@ class Interview < ActiveRecord::Base
   belongs_to :candidate
   belongs_to :job
   belongs_to :company
-  
+  belongs_to :stage
   belongs_to :room
   belongs_to :stage_action
+  
 
 
 
@@ -49,16 +50,11 @@ class Interview < ActiveRecord::Base
 
     @kit = Assessment.create(interview_id: self.id, application_id: self.application_id, 
       candidate_id: self.candidate.id, name: self.title, preperation: @template.preperation) 
-   
-
-    # @kit = InterviewKit.create(title: @template.title,
-    #   preperation: @template.preperation, stage_action_id: @stage_action)
     
     @scorecard = Scorecard.create(assessment: @kit)
 
     @template.questions.each do |question| 
-      @question = Question.create(question.attributes.except('id'))
-
+      @question = Question.create(question.attributes.except('id', 'interview_kit_template_id'))
       @question.update_attributes(assessment_id: @kit.id)
 
       question.question_options.each do |option|

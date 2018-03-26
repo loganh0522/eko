@@ -74,7 +74,7 @@ class Business::InterviewKitTemplatesController < ApplicationController
       
       scorecard_attributes: [:id,
         scorecard_sections_attributes: [:id, :body, :_destroy, 
-          section_options_attributes:[:id, :body, :quality_answer, :_destroy]]])   
+          section_options_attributes:[:id, :body, :position, :quality_answer, :_destroy]]])   
   end
 
 

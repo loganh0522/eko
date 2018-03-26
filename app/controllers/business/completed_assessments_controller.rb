@@ -44,6 +44,7 @@ class Business::CompletedAssessmentsController < ApplicationController
   def new
     @completed_assessment = CompletedAssessment.new
     @assessment = Assessment.find(params[:assessment])
+    
     @questions = @assessment.questions
     @answer = Answer.new
     
@@ -57,10 +58,10 @@ class Business::CompletedAssessmentsController < ApplicationController
   end
 
   def create
-    @assessment = CompletedAssessment.new(completed_assessment_params)
-   
+    @assessment = CompletedAssessment.new(completed_assessment_params.merge!(user_id: current_user.id))
+
     respond_to do |format|
-      if @scorecard.save
+      if @assessment.save
         # track_activity @application_scorecard, 'create', current_company.id, @application.candidate.id, @job.id   
         format.js
       end 
@@ -80,21 +81,21 @@ class Business::CompletedAssessmentsController < ApplicationController
   end
 
   def update
-    @scorecard_answer = ScorecardAnswer.find(params[:id])
+    @assessment = CompletedAssessment.find(params[:id])
     
     respond_to do |format| 
-      if @scorecard_answer.update(scorecard_answer_params)
+      if @assessment.update(completed_assessment_params)
         format.js
       else
-        render_errors(@scorecard_answer)
+        render_errors(@assessment)
         format.js
       end
     end
   end
 
   def destroy
-    @scorecard_answer = ScorecardAnswer.find(params[:id])
-    @scorecard_answer.destroy  
+    @assessment = CompletedAssessment.find(params[:id])
+    @assessment.destroy  
     
     respond_to do |format|  
       format.js
@@ -103,7 +104,15 @@ class Business::CompletedAssessmentsController < ApplicationController
 
   private 
 
-  def scorecard_answer_params 
-    params.require(:completed_assessment).permit(:id, :feedback, :overall, :assessment_id, :user_id, :scorecard_id, :job_id, answers_attributes: [:id, :section_option_id, :user_id, :rating, :_destroy])
+  def completed_assessment_params 
+    params.require(:completed_assessment).permit(:id, :feedback, :overall, :assessment_id, :user_id, 
+      :scorecard_id, :job_id, 
+      answers_attributes: [:id, :body, :question_id, :question_option_id, :section_option_id, 
+        :user_id, :rating, :_destroy])
   end
+
+
+
+
+
 end

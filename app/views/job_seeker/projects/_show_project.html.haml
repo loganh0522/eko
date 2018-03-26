@@ -4,15 +4,16 @@
       .project-title= @project.title
       .skills= render 'job_seeker/user_skills/skills', position: @project
     .slick-carousel
-      - @project.attachments.each do |attachment|
-        - if attachment.file_type.start_with? 'image'
-          = image_tag attachment.file.large_image
-        - elsif attachment.file_type == "application/pdf"
-          %iframe{:src => "#{attachment.file.url}", :width =>'500',  :height =>'400'}
-        - elsif attachment.file_image.present?
-          %iframe{:allowFullScreen => "true", :frameborder => "0", :height => "400", :src => attachment.link, :title => "YouTube video player", :width => "500", class: 'item'}
-        - else 
-          = image_tag attachment.file.large_image
+      - if @project.attachments.present?
+        - @project.attachments.each do |attachment|
+          - if attachment.file_type.start_with? 'image'
+            = image_tag attachment.file.large_image
+          - elsif attachment.file_type == "application/pdf"
+            %iframe{:src => "#{attachment.file.url}", :width =>'500',  :height =>'400'}
+          - elsif attachment.file_image.present?
+            %iframe{:allowFullScreen => "true", :frameborder => "0", :height => "400", :src => attachment.link, :title => "YouTube video player", :width => "500", class: 'item'}
+          - else 
+            = image_tag attachment.file.large_image
   .column-4
     .column-container
       .title Description

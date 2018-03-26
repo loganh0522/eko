@@ -83,6 +83,8 @@ gem 'griddler-sendgrid'
 gem 'jquery-timepicker-rails'
 gem 'searchkick'
 gem 'chartkick'
+gem 'ahoy_matey'
+
 gem 'groupdate'
 gem 'cancancan', '~> 2.0'
 

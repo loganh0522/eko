@@ -16,9 +16,8 @@
         - else 
           .not-present-container
             %p Currently no attachments present
-      
-    .column-5-right
-      = form_for [:job_seeker, @project], :remote => true do |f|
+    = form_for [:job_seeker, @project], :remote => true do |f|
+      .column-5-right
         %h4 Project Details
         = f.text_field :title, placeholder: "Project Title"
         .column-container
@@ -33,16 +32,26 @@
           = f.hidden_field :user_id, value: current_user.id
           = hidden_field_tag :user_skills, '', id: 'add-tags-value'
           = hidden_field_tag :attachment
-      .column-container
-        .header
-          .title Skills Used
-          = text_field_tag '', '', :class => 'ui-autocomplete-input user_skills', :placeholder => 'Add a Skill', id: "skills", hide_label: true
-          #search-results-user_skills 
-          .btn.submit-button#add-tag-button Add
-        #add-tags
-          = render 'job_seeker/user_skills/project_skills', position: @project
-              
-          
-  .modal-footer
-    = submit_tag "Save Project", class: "btn submit-button", id: "submit-section"
-    .btn.border-button.close-modal Cancel
+        .column-container
+          .header
+            .title Skills Used
+          .body
+            = text_field_tag '', '', :class => 'ui-autocomplete-input user_skills', :placeholder => 'Add a Skill', id: "skills", hide_label: true
+            #search-results-user_skills 
+            = hidden_field_tag :user_skills, '', id: 'user-skills-field'
+            .btn.submit-button#add-skills Add
+            #add-tags
+              = render 'job_seeker/user_skills/project_skills', position: @project
+          / .header
+          /   .title Skills Used
+          /   .body
+          /     .btn.submit-button#add-skill Add
+          /     = text_field_tag '', '', :class => 'ui-autocomplete-input user_skills', :placeholder => 'Add a Skill', id: "skills", hide_label: true
+          /     #search-results-user_skills   
+          /     #add-tags
+          /       = render 'job_seeker/user_skills/project_skills', position: @project
+                
+            
+      .modal-footer
+        = f.button "Save Project", class: "btn submit-button", id: "submit-section"
+        .btn.border-button.close-modal Cancel
