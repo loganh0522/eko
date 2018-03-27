@@ -34,12 +34,16 @@ class Business::UserAvatarsController < ApplicationController
   end
 
   def update
-    @user_avatar = UserAvatar.find(params[:id])
-    @user_avatar.update(avatar_params)
-    @user = current_user
-    
-    respond_to do |format|
-      format.js
+    @avatar = UserAvatar.find(params[:id])
+
+    if @avatar.update(avatar_params)
+      @avatar.save!
+      respond_to do |format|
+        format.html {redirect_to job_seeker_user_path}
+        format.js
+      end
+    else
+      render_errors(@avatar)
     end
   end
 

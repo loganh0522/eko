@@ -19,7 +19,7 @@
                 - if position.user_skills.present?
                   - position.user_skills.each do |skill|
                     %div{:class => "skill", id: "user_skill_#{skill.id}"}
-                      .name= skill.name
+                      .name= skill.skill.name
                 - else
                   .name No skills listed
               .exp-description= position.description

@@ -1,19 +1,19 @@
 <% if params[:cv] == 'projects' %>
   $('.experience-container').html('<%= j render "business/shared_candidate/projects" %>')
-  $('.change-containers-nav').find('.activated').removeClass('activated');
-  $('.change-containers-nav').find('#projects').addClass('activated'); 
+  $('.toggle-actions').find('.activated').removeClass('activated');
+  $('.toggle-actions').find('#projects').addClass('activated'); 
 <% elsif params[:cv] == 'education' %>
   $('.experience-container').html('<%= j render "business/shared_candidate/educations" %>')
-  $('.change-containers-nav').find('.activated').removeClass('activated');
-  $('.change-containers-nav').find('#education').addClass('activated'); 
+  $('.toggle-actions').find('.activated').removeClass('activated');
+  $('.toggle-actions').find('#education').addClass('activated'); 
 <% elsif params[:cv] == 'certification' %>
   $('.experience-container').html('<%= j render "business/shared_candidate/certifications" %>')
-  $('.change-containers-nav').find('.activated').removeClass('activated');
-  $('.change-containers-nav').find('#certification').addClass('activated'); 
+  $('.toggle-actions').find('.activated').removeClass('activated');
+  $('.toggle-actions').find('#certification').addClass('activated'); 
 <% elsif params[:cv] == 'experience' %>
   $('.experience-container').html('<%= j render "business/shared_manual_candidate/work_experience" %>')
-  $('.change-containers-nav').find('.activated').removeClass('activated');
-  $('.change-containers-nav').find('#experience').addClass('activated'); 
+  $('.toggle-actions').find('.activated').removeClass('activated');
+  $('.toggle-actions').find('#experience').addClass('activated'); 
 <% elsif params[:cv] == 'modal' %>
   $('#applicant-modal').modal('show')
   $('#applicant-modal').find('.modal-body').html('<%= j render "business/candidates/show_candidate/show_candidate" %>')

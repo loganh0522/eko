@@ -35,7 +35,6 @@ class JobSeeker::UserAvatarsController < JobSeekersController
 
     if @avatar.update(avatar_params)
       @avatar.save!
-      
       respond_to do |format|
         format.html {redirect_to job_seeker_user_path}
         format.js

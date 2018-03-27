@@ -13,6 +13,7 @@
 - if @assessments.present? 
   - @assessments.each do |assessment| 
     = render 'business/assessments/assessment', assessment: assessment
+
 - else 
   .assessment
     .not-present-container

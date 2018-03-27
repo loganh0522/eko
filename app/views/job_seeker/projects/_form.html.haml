@@ -42,14 +42,7 @@
             .btn.submit-button#add-skills Add
             #add-tags
               = render 'job_seeker/user_skills/project_skills', position: @project
-          / .header
-          /   .title Skills Used
-          /   .body
-          /     .btn.submit-button#add-skill Add
-          /     = text_field_tag '', '', :class => 'ui-autocomplete-input user_skills', :placeholder => 'Add a Skill', id: "skills", hide_label: true
-          /     #search-results-user_skills   
-          /     #add-tags
-          /       = render 'job_seeker/user_skills/project_skills', position: @project
+
                 
             
       .modal-footer

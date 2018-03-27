@@ -16,24 +16,27 @@
             .links 
               = link_to "edit", edit_business_completed_assessment_path(assessment), remote: true
               = link_to "view", business_completed_assessment_path(assessment), remote: true
+     
+    - elsif assessment.pending.present?    
+      Pending Interview Scorecard 
+      - assessment.pending.each do |user|
+        .scorecard-complete  
+          = user_avatar(user)
+          .details
+            .name= user.full_name
+            - if user == current_user
+              .links
+                = link_to "Finish Scorecard", new_business_completed_assessment_path(assessment: assessment.interview.assessment), remote: true
+            - else
+              .links
+                .name
+                  Pending
+                  = link_to "(Send Reminder)", new_business_completed_assessment_path(), remote: true
+    - else 
+      .not-present-container
+        %p No completed assessments 
+        .add-object= link_to "Complete Assessment", new_business_completed_assessment_path(assessment: assessment), class: 'btn hover-button', remote: true
+
+
+
     
-    - else  
-      - if assessment.interview.pending_scorecards.present?
-        .scorecard-complete     
-          Pending Interview Scorecard   
-          - assessment.interview.pending_scorecards.each do |user|
-            .user-completed
-              .user= user_avatar(user)
-              .name= user.full_name
-              - if user == current_user
-                .links
-                  .name= link_to "Finish Scorecard", new_business_completed_assessment_path(assessment: assessment.interview.assessment), remote: true
-              - else
-                .links
-                  .name
-                    Pending
-                    = link_to "(Send Reminder)", new_business_completed_assessment_path(), remote: true
-
-
-
-      
