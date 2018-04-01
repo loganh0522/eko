@@ -25,7 +25,18 @@
       .standard-body-header
         .templates-header
           %h4 Departments
-  
+
+    .standard-body
+      .standard-body-header
+        .templates-header
+          %h4 Subsidiaries
+          = link_to "Add Subsidiary", new_business_company_path, class: "btn border-button", :data => {remote: true}
+
+      - @company.subsidiaries.each do |subsidiary|
+        = subsidiary.subsidiary.name
+
+
+
   .main-container
     .standard-header
       %h3 Meeting Rooms

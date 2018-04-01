@@ -5,15 +5,22 @@
       = f.text_field :name, label: "Company Name", id: "name_Block"
       = f.label :address, "Company Address"
       = f.text_field :address, id: 'geocomplete2'
-      %span#name_msgBlock
-      = f.label :name, "Company Name"
-      = f.text_field :website, label: "Website"     
-      .company-kind
-        = f.radio_button :kind, "company", id: 'company', checked: true
-        = f.label :kind, "Company", :value => "company", :for => 'company'
+      .form-row-no-border
+        = f.label :location, "City (Head Office)"
+        .field
+          = f.text_field :location, id: "geocomplete", autocomplete: "off", hide_label: true
+          = show_errors(@company, :location)
+      .form-row-no-border 
+        = f.label :website, "Company Website"
+        .field
+          = f.text_field :website, label: false, placeholder: "Website"
+          = show_errors(@company, :website) 
+      .form-row-no-border
+        = f.label :size, "Company Size"
+        .field
+          = f.select :size, options_for_select(["1-20", "20-50", "51-200", "201-500", "501-1000", "1001-5000", "5001- 10,000", "10,000+"]), :prompt => "Choose Company Size" 
+          = show_errors(@company, :size)   
 
-        = f.radio_button :kind, 'recruiter', id: "recruiter"
-        = f.label :kind, "Recruiter", :value => "recruiter", :for => 'recruiter'
   .modal-footer
     = f.button "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
     .btn.border-button.close-modal Cancel

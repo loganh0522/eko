@@ -1,0 +1,18 @@
+.main-form-container
+  = form_for [:business, @scorecard], remote: true do |f|
+    .standard-header
+      %h4 Create Scorecard Template
+    #scorecard-form
+      #nested-sections
+        %ul#scorecard-sections
+          - if @assessment.new_record?
+            = s.fields_for :section_options, SectionOption.new do |a|
+              = render 'section_option_fields', f: a        
+          - else
+            = s.fields_for :section_options do |a|
+              = render 'section_option_fields', f: a      
+          = link_to_add_fields "+ Add Criteria", s, :section_options
+    
+    .container-footer
+      = f.submit "Save", class: "btn hover-button"
+      .btn.border-button.remove-main-form Cancel

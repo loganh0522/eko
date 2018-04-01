@@ -1,0 +1,4 @@
+$('.smallModal').find('form').remove();
+$('.smallModal').find('.new-title').html('<%= j "Add Company" %>');
+$('.smallModal').find('.new-modal-header').after('<%= j render "business/subsidiaries/form" %>');
+$('.smallModal').show();

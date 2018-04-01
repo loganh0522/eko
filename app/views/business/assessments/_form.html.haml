@@ -1,37 +1,22 @@
 = form_for [:business, @assessment], remote: true do |f|
   .modal-body
     .form-row-no-border
-      = f.label :name, "Assessment Name"
-      = f.text_field :name, placeholder: "Assessment Name"
+      = f.label :name, "Scorecard Name"
+      = f.text_field :name, placeholder: "Scorecard Name"
     = f.fields_for :scorecard, @scorecard do |s|
       #scorecard-form
-        - if @assessment.new_record?
-          = s.fields_for :scorecard_sections, ScorecardSection.new do |a|
-            .scorecard-area 
-              .header
-                %h4 Questions
-                = link_to "Remove", '', class: "remove_question"
-                = a.hidden_field :_destroy
-                .section-title
-                  .section-answer
-                    = a.text_field :body, class: "form-control section-title questions", placeholder: "Section Name", id: "section-body", autocomplete: 'off' 
-                    %span#sectionBodyBlock 
-              .body
-                .criteria Questions
-                = a.fields_for :section_options, SectionOption.new do |a|
-                  .answers  
-                    .answer
-                      = a.text_field :body, id: "section-option", class: 'section-answer', autocomplete: 'off', placeholder: "Question"
-                      = link_to "", '#', class: "remove_fields glyphicon glyphicon-remove" 
-                      = a.hidden_field :_destroy
-                      %span#optionBodyBlock           
-                = link_to_add_fields_after("Add Criteria", a, :section_options)         
-        
-        = s.fields_for :scorecard_sections do |a|
-          = render 'scorecard_section_fields', f: a
-        
-        #add-section= link_to_add_fields_after "+ Add Section", s, :scorecard_sections 
+        #nested-sections
+          %ul#scorecard-sections
+            - if @assessment.new_record?
+              = s.fields_for :section_options, SectionOption.new do |a|
+                = render 'section_option_fields', f: a        
+            - else
+              = s.fields_for :section_options do |a|
+                = render 'section_option_fields', f: a      
+            
+            = link_to_add_fields "+ Add Criteria", s, :section_options
       
   .modal-footer
+    = f.hidden_field :kind, value: "scorecard"
     = f.submit "Create Scorecard", class: "btn submit-button"
     .btn.border-button.close-modal Cancel

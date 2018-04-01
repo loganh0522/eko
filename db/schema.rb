@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180325183913) do
+ActiveRecord::Schema.define(version: 20180401205430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,6 +136,13 @@ ActiveRecord::Schema.define(version: 20180325183913) do
     t.boolean  "hired",            default: false
   end
 
+  create_table "assessment_templates", force: :cascade do |t|
+    t.integer  "company_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "assessments", force: :cascade do |t|
     t.integer  "application_id"
     t.integer  "candidate_id"
@@ -146,6 +153,7 @@ ActiveRecord::Schema.define(version: 20180325183913) do
     t.datetime "updated_at"
     t.integer  "job_id"
     t.text     "preperation"
+    t.string   "kind"
   end
 
   create_table "assigned_candidates", force: :cascade do |t|
@@ -284,6 +292,7 @@ ActiveRecord::Schema.define(version: 20180325183913) do
     t.string   "province"
     t.integer  "size"
     t.string   "address"
+    t.string   "company_number"
   end
 
   create_table "company_users", force: :cascade do |t|
@@ -977,6 +986,7 @@ ActiveRecord::Schema.define(version: 20180325183913) do
     t.text    "guidelines"
     t.integer "assessment_id"
     t.integer "interview_kit_template_id"
+    t.integer "assessment_template_id"
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -1030,6 +1040,13 @@ ActiveRecord::Schema.define(version: 20180325183913) do
     t.string  "body"
   end
 
+  create_table "scorecard_templates", force: :cascade do |t|
+    t.integer  "company_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "scorecards", force: :cascade do |t|
     t.integer "job_id"
     t.integer "application_id"
@@ -1046,6 +1063,8 @@ ActiveRecord::Schema.define(version: 20180325183913) do
     t.string  "body"
     t.text    "quality_answer"
     t.integer "position"
+    t.integer "scorecard_id"
+    t.integer "scorecard_templates_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -1114,6 +1133,7 @@ ActiveRecord::Schema.define(version: 20180325183913) do
   create_table "subsidiaries", force: :cascade do |t|
     t.string  "name"
     t.integer "company_id"
+    t.integer "subsidiary_id"
   end
 
   create_table "taggings", force: :cascade do |t|

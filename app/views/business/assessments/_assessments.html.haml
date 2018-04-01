@@ -8,7 +8,16 @@
   = radio_button_tag "scorecard", "pending", false, class: 'filter'
   = label_tag "scorecard_pending", "Pending", :value => "closed", class: 'filter'
 
-= link_to "+ Assessment", new_business_assessment_path, class: 'btn hover-button', remote: true
+
+
+.dropdown
+  .dropdown-button
+    .btn.hover-button + Scorecard
+  .dropdown-content#myDropdown
+    = link_to new_business_assessment_path, remote: true  do
+      .action Scorecard
+    = link_to new_business_assessment_path(kind: 'kit'), remote: true do  
+      .action Interview Kit
 
 - if @assessments.present? 
   - @assessments.each do |assessment| 

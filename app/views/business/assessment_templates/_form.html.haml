@@ -1,0 +1,19 @@
+.main-form-container
+  = form_for [:business, @assessment], remote: true do |f|
+    .standard-header
+      %h4 Create Assessment Template
+    .questions-container
+      = f.label :name, "Assessment Name"
+      = f.text_field :name, placeholder: "Assessment Name"
+      %ul#nested-attributes
+        - if @assessment.new_record?
+          = f.fields_for :questions, Question.new do |a|
+            = render 'question_fields', f: a
+        - else 
+          = f.fields_for :questions do |a|
+            = render 'question_fields', f: a
+        = link_to_add_fields("+ Add Question", f, :questions)
+
+    .container-footer
+      = f.submit "Save", class: "btn hover-button"
+      .btn.border-button.remove-main-form Cancel

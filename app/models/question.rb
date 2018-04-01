@@ -2,6 +2,7 @@ class Question < ActiveRecord::Base
   belongs_to :job
   belongs_to :interview_scorecard
   belongs_to :scorecard
+  belongs_to :assessment_template
   belongs_to :interview_kit_template
   belongs_to :interview_kit
   belongs_to :assessment

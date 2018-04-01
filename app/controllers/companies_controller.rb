@@ -1,4 +1,7 @@
 class CompaniesController < ApplicationController 
+  layout :set_layout
+  before_filter :get_subdomain_company, only: [:index, :show]
+
   def new 
     @company = Company.new
     @user = @company.users.build
@@ -21,6 +24,14 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def index 
+    @companies = @company.subsidiaries 
+  end
+
+  def show
+    @company = Company.find(params[:id])
+  end
+
   private
 
   def company_params 
@@ -35,4 +46,26 @@ class CompaniesController < ApplicationController
     end  
   end
 
+  def get_subdomain_company
+    if request.subdomain.present? && request.subdomain != 'www'
+      @job_board = JobBoard.find_by_subdomain!(request.subdomain) 
+      @company = @job_board.company
+    end
+  end
+
+  def set_layout
+    if request.subdomain.present? && request.subdomain != 'www'
+      @job_board = JobBoard.find_by_subdomain!(request.subdomain)
+
+      if @job_board.kind == "association"
+        "association_portal"
+      elsif @job_board.kind == "basic"
+        "career_portal"
+      else
+        "advanced_career_portal"
+      end
+    else
+      'frontend_job_seeker'
+    end
+  end
 end

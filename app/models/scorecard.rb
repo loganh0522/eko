@@ -6,11 +6,17 @@ class Scorecard < ActiveRecord::Base
   has_many :questions, dependent: :destroy
   has_many :scorecard_sections, dependent: :destroy
   has_many :scorecard_answers, dependent: :destroy
+  
+  has_many :section_options, dependent: :destroy
+
   validates_associated :scorecard_sections
   
   accepts_nested_attributes_for :scorecard_sections, 
     allow_destroy: true
 
+
+  accepts_nested_attributes_for :section_options, 
+    allow_destroy: true
 
 
   def duplicate_scorecard(assessment={}, interview={})

@@ -1,15 +1,4 @@
 jQuery ->
-  $('.main-container').on 'click', '.remove_fields', (event) ->
-    $(this).nextAll('input[type=hidden]').val('1')
-    $(this).parent().parent().hide()
-    event.preventDefault()
-
-  $('.main-container').on 'click', '.add_fields', (event) ->
-    time = new Date().getTime()
-    regexp = new RegExp($(this).data('id'), 'g')
-    $(this).before($(this).data('fields').replace(regexp, time))
-
-    event.preventDefault()
 
 #### Scorecard #### 
   $(document).on 'click', '.remove_kit_question', (event) ->
@@ -28,7 +17,6 @@ jQuery ->
       $('.remove_question').show()
 
 #### Question Answers ####
-
   $(document).on 'click', '.question-answer-checkbox', (event) -> 
     if $(this).is(':checked')
       $(this).next('input[type=hidden]').val('0')
@@ -67,48 +55,23 @@ jQuery ->
       i++
 
 ################## Create Profile ##################    
-
-  $('.personal-social-links').on 'click', '.add_fields', (event) ->
-    time = new Date().getTime()
-    regexp = new RegExp($(this).data('id'), 'g')
-    $(this).after($(this).data('fields').replace(regexp, time))
-    $(this).prev().find('.remove_fields').show()
-    event.preventDefault()
-
-
   $(document).ready ->
     if $('.add-work-experience-page').length >= 1
       $('.remove_fields:not(:first)').show()
     
 
 ################ Create Application ###############
+
+  $('.main-container').on 'click', '.remove_fields', (event) ->
+    $(this).nextAll('input[type=hidden]').val('1')
+    $(this).parent().parent().hide()
+    event.preventDefault()
   
   $('.create-profile-container').on 'click', '.remove_fields', (event) ->
     $(this).first().prev().val('1')
     $(this).parent().parent().hide()
     event.preventDefault()
 
-  $('.add-work-experience-page').on 'click', '.add_fields', (event) ->
-    time = new Date().getTime()
-    regexp = new RegExp($(this).data('id'), 'g')
-    $(this).after($(this).data('fields').replace(regexp, time))
-    $(this).prev().find('.remove_fields').show()
-    event.preventDefault()
-    
-    $('#task_due_date').datepicker  
-      dateFormat: 'yy-mm-dd'
-    $('#timepicker').timepicker()
-
-  $('.add-experience').on 'click', '.add_fields', (event) ->
-    time = new Date().getTime()
-    regexp = new RegExp($(this).data('id'), 'g')
-    $(this).before($(this).data('fields').replace(regexp, time))
-    $(this).prev().find('.remove_fields').show()
-    event.preventDefault()
-
-
-
-  
   $(document).on 'click', '.add_fields', (event) ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
@@ -121,16 +84,6 @@ jQuery ->
   $(document).on 'click', '.remove_fields', (event) ->
     $(this).nextAll('input[type=hidden]').val('1')
     $(this).parent().parent().hide()
-    event.preventDefault()
-
-
-
-
-  $('.mediumModal, .largeModal').on 'click', '.add_fields', (event) ->
-    time = new Date().getTime()
-    regexp = new RegExp($(this).data('id'), 'g')
-    $(this).before($(this).data('fields').replace(regexp, time))
-    $(this).prev().find('.remove_fields').show()
     event.preventDefault()
   
   $('.mediumModal, .largeModal').on 'click', '.add_fields_after', (event) ->

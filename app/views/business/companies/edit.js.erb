@@ -1,4 +1,4 @@
 $('.smallModal').find('form').remove();
 $('.smallModal').find('.new-title').html('<%= j "Edit Company" %>');
-$('.smallModal').find('.new-modal-header').after('<%= j render "business/companies/form"%>');
+$('.smallModal').find('.new-modal-header').after('<%= j render "business/companies/edit_form"%>');
 $('.smallModal').show();

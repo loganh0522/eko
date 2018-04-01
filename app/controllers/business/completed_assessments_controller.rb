@@ -33,8 +33,11 @@ class Business::CompletedAssessmentsController < ApplicationController
   end
 
   def show 
-    @scorecard = ScorecardAnswer.find(params[:id])
-    @assessment = @scorecard.assessment
+    @completed_assessment = CompletedAssessment.find(params[:id])
+    @assessment = @completed_assessment.assessment
+    @scorecard = @assessment.scorecard
+    @sections = @scorecard.scorecard_sections
+    @questions = @assessment.questions
 
     respond_to do |format|
       format.js

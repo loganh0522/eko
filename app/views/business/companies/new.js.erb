@@ -1,0 +1,4 @@
+$('.smallModal').find('form').remove();
+$('.smallModal').find('.new-title').html('<%= j "Create Subsidiary" %>');
+$('.smallModal').find('.new-modal-header').after('<%= j render "business/companies/form"%>');
+$('.smallModal').show();

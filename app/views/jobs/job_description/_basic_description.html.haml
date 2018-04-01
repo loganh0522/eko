@@ -1,0 +1,18 @@
+.job-description
+  .job-header
+    .details
+      %h2= @job.title
+    .actions
+      = render "apply_method"
+      .share-job-details
+        .type Share On
+        = link_to "https://www.facebook.com/sharer/sharer.php?u=" + @job.url, target: :blank, class: "popup" do 
+          %i.fa.fa-facebook-square.fa-stack-2x
+        = link_to "https://www.linkedin.com/shareArticle?mini=true&url=" + @job.url, :target => :blank, :popup => true do 
+          %i.fa.fa-linkedin-square.fa-stack-2x
+        = link_to "https://www.twitter.com/intent/tweet" + @job.url, :target => :blank, :popup => true do
+          %i.fa.fa-twitter-square.fa-stack-2x
+  .job-body
+    = @job.description.html_safe
+  .apply 
+    = render "apply_method"

@@ -18,4 +18,9 @@ class LogoUploader < CarrierWave::Uploader::Base
   version :small_logo do 
     process :resize_to_fit => [50, 100]
   end
+
+  version :thumb_nail do
+    process :resize_to_fit => [50, 50]
+  end
+
 end

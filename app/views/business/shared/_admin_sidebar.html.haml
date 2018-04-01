@@ -25,3 +25,8 @@
   %li{:class => is_active?(business_user_path(current_user))}
     = link_to "Profile, E-mail & Calendar Sync, Notifications ", business_user_path(current_user)
 
+  - if current_company.kind == "Association"
+    .nav-section Companies
+    %li{:class => is_active?(business_companies_path)}
+      = link_to "All Companies", business_companies_path
+

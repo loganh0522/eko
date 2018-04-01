@@ -1,0 +1,32 @@
+.company-profile
+  .background{:style => "background-image: url(#{@company.job_board.job_board_header.background_image.file})"}  
+
+  .logo{:style => "background: url(#{@company.logo.file.large_logo}); background-repeat: no-repeat; background-size: 100%; background-color: white; background-position: center"}
+  
+  .change-containers-nav
+    %ul
+      = link_to company_path(@company) do 
+        %li About
+      = link_to company_path(@company) do 
+        %li Our Team
+      = link_to company_jobs_path(@company) do
+        %li.active Jobs
+
+.company-profile-container
+  .side-container
+
+  .company-job-board  
+    .jobs#jobs
+      - @company.published_jobs.each do |job|
+        .job-posting
+          .header-info
+            .job-detail
+              .title= link_to "#{job.title}", job_path(job)
+            .view-job= link_to "View Job", job_path(job), class: "btn btn-primary"
+          .bottom-info
+            .left-side
+              = "#{job.location}"
+            .right-side 
+              / = job.industries.first.name
+              / = job.job_kind.first.name
+              = "#{time_ago_in_words(job.created_at)} ago"

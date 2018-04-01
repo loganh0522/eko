@@ -427,6 +427,201 @@
         font-size: 16px
         font-weight: 500
 
+
+.width-container
+  height: auto
+  overflow: hidden
+  border-bottom: 1px solid rgba(0,0,0,0.1)
+  width: 100%
+  .inner-container
+    width: 100%
+    max-width: 1280px
+    text-align: center
+    margin: 0 5%
+
+.company-card
+  overflow: hidden
+  padding: 20px 20px
+  width: 31.3%
+  float: left
+  a:hover
+    .body
+      text-decoration: none
+  .header
+    min-height: 175px
+  .card
+    border-radius: 5px
+    background: #fff
+    box-shadow: 0px 7px 14px 0px rgba(199,197,199,.1), 0px 3px 6px 0px rgba(199,197,199,1) 
+  .logo
+    padding: 5px 5px
+    box-shadow: 0px 7px 14px 0px rgba(199,197,199,.1), 0px 3px 6px 0px rgba(199,197,199,1) 
+    margin: -50px auto 0 auto
+    border-radius: 50px
+    height: 100px
+    width: 100px
+  .body 
+    max-height: 100px
+    overflow: hidden
+    text-overflow: ellipsis
+    color: rgba(0,0,0,0.7)
+  .card-footer
+    border-top: 1px solid rgba(0, 0, 0, 0.1)
+    padding: 5px 5px
+    margin-top: 15px
+    overflow: hidden
+    a
+      float: right
+
+
+
+.company-profile-container
+  width: 95%
+  max-width: 1120px
+  margin: 0 auto
+  overflow:hidden
+  .main-container
+    box-shadow: 0px 7px 14px 0px rgba(199,197,199,.1), 0px 3px 6px 0px rgba(199,197,199,1) 
+    float: right
+    border-radius: 5px
+    width: 70%
+
+  .other-jobs
+    float: left
+    min-height: 300px
+    box-shadow: 0px 7px 14px 0px rgba(199,197,199,.1), 0px 3px 6px 0px rgba(199,197,199,1) 
+    background: #fff
+    margin: 10px 0 10px 10px
+    border-radius: 5px
+    width: 26%
+    .header
+      padding: 20px 15px
+      border-bottom: 1px solid #D1DCE4
+    .job-container
+      padding: 20px 10px
+      overflow: hidden
+      border-bottom: 1px solid #D1DCE4
+      color: rgba(0,0,0,0.8)
+      a > div
+        text-decoration: none
+      a:hover
+        text-decoration: none
+      &:hover
+        cursor: pointer
+        background: #D1DCE4
+        a
+          text-decoration: none
+  .profile-job-description
+    width: 70%
+    float: right
+    box-shadow: 0px 7px 14px 0px rgba(199,197,199,.1), 0px 3px 6px 0px rgba(199,197,199,1) 
+    background: #fff
+    margin: 10px 10px 50px 10px
+    border-radius: 5px
+    
+    @media screen and (max-width: 780px)
+      width: 100%  
+    h1
+      color: black
+      margin-bottom: 2px
+    .job-header
+      padding: 20px 25px 
+      margin-bottom: 20px
+      border-bottom: 1px solid #D1DCE4
+      overflow: hidden
+      .details
+        h2
+          margin-top: 0
+        float: left
+      .actions
+        float: right
+        .share-job-details
+          float: left
+          padding: 10px 10px
+          margin-top: 10px
+          border: 1px solid rgba(0,0,0,0.2)
+          border-radius: 5px
+          .type
+            float: left
+            margin: 5px 10px 0 0 
+            font-size: 15px
+          .fa
+            position: unset
+            float: left
+          a
+            float: left
+            margin-right: 10px
+          .fa-facebook-square
+            color: #3b5998
+          .fa-linkedin-square
+            color: #0e76a8
+          .fa-twitter-square
+            color: #55acee
+          .fa-stack-2x
+            position: unset
+        .apply
+          float: left
+          a
+            text-decoration: none
+          .app-btn
+            width: 100%
+            margin: 0 0
+            font-size: 18px
+            padding: 11px
+            border-radius: 3px 
+            text-align: center
+            font-decoration: none  
+    .job-body
+      font-size: 16px  
+      padding: 10px 25px 25px 25px
+      .apply
+        width: 200px
+        margin: 25px auto
+      
+
+.company-profile
+  width: 100%
+  max-width: 1100px
+  margin: 10px auto
+  box-shadow: 0px 7px 14px 0px rgba(199,197,199,.1), 0px 3px 6px 0px rgba(199,197,199,1) 
+  .background
+    height: 350px
+  .logo
+    padding: 5px 5px
+    box-shadow: 0px 7px 14px 0px rgba(199,197,199,.1), 0px 3px 6px 0px rgba(199,197,199,1) 
+    margin: -125px auto 0 50px
+    border-radius: 10px
+    height: 175px
+    width: 175px
+    position: absolute
+  .change-containers-nav
+    background: white
+    border-top: 1px solid rgba(0,0,0,0.1)
+    height: 75px
+    clear: both
+    width: 100%
+    a
+      color: rgba(0,0,0,0.5)
+      text-decoration: none
+    ul 
+      width: 350px
+      list-style: none
+      text-decoration: none
+      margin: 0 250px
+      li
+        display: inline-block
+        height: 75px 
+        padding: 27px 20px
+        font-size: 14px
+        text-align: center
+        color: rgba(0,0,0,0.5) 
+        cursor: pointer      
+    @media screen and (max-width: 475px)
+      width: 100%
+    .active
+      border-bottom: solid 4px #EF7B2B
+
+
   
 .footer
   height: 100px

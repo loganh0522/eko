@@ -1,0 +1,10 @@
+= form_for [:business, @subsidiary], remote: true do |f|
+  .modal-body
+    .email-area
+      .choose-stage
+        = label_tag :company_number, "Company Number"
+        = text_field_tag :company_number, '', class: "form-control", id: "name_Block", placeholder: "Company Number", autocomplete: 'off'
+        %span.error#name_msgBlock
+  .modal-footer
+    = f.button "Add Company", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
+    .btn.border-button.close-modal Cancel

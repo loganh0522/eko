@@ -4,17 +4,40 @@ class JobsController < ApplicationController
   
 
   def index 
-    @jobs = Job.search("*", where: {status: "open", verified: true})
+    if params[:company_id].present? && request.subdomain.present?
+      @company = Company.find(params[:company_id])
+      @jobs = @company.published_jobs
+      @job_board = @company.job_board
+
+      render 'company_jobs'
+    else
+      @jobs = Job.search("*", where: {status: "open", verified: true})
+    end
+  end
+
+  
+  def association_jobs
+    @job_board = JobBoard.find_by_subdomain!(request.subdomain) 
+    @company = @job_board.company
+    @jobs = @company.subsidiary_jobs
+
+    
   end
 
   def show 
     if request.subdomain.present? && request.subdomain != 'www'
       @job_board = JobBoard.find_by_subdomain!(request.subdomain) 
     end
-
     @job = Job.find(params[:id])
-    @company = @job.company
-    @job_board = @company.job_board
+
+    if @job_board.kind == 'association'
+      @company = @job_board.company
+    else
+      @company = @job.company
+    end
+
+    
+
     @candidate = Candidate.new
   end
 
@@ -31,7 +54,6 @@ class JobsController < ApplicationController
       else
         "advanced_career_portal"
       end
-
     else
       'frontend_job_seeker'
     end

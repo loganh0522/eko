@@ -25,8 +25,10 @@
               = link_to root_path do
                 = @job_board.company.name
           %ul#section-nav
-            %li= link_to "Jobs", root_path(anchor: "jobs")
+            %li= link_to "VentureLab Jobs  |", root_path(anchor: "jobs")
+            %li= link_to "Jobs  |", job_opportunities_path
             %li= link_to "Companies", companies_path
+
             
             - @job_board.header_links.each do |f| 
               %li= link_to "#{f.name}", root_path(anchor: "board_row_#{f.job_board_row.id}")
@@ -44,10 +46,10 @@
               .dropdown-content#myDropdown
                 = link_to "Profile", job_seeker_user_path(current_user)
                 = link_to "Sign Out", signout_path
+                
           - else 
             %ul#portal-login
-              %li= link_to "Login", login_path, remote: true
-              %li= link_to "Sign Up", new_user_path, remote: true
+              = link_to "Join Our Talent Network", new_user_path, class: 'btn border-button', remote: true
         %img.responsive-menu(src="/tmp/menu.png")  
       .responsive-menu-links
         %ul

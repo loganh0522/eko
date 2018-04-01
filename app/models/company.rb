@@ -28,14 +28,22 @@ class Company < ActiveRecord::Base
   has_many :tasks, :dependent => :destroy
   has_many :job_templates, :dependent => :destroy
   has_many :departments, :dependent => :destroy
-  has_many :subsidiaries, :dependent => :destroy
   has_many :locations, :dependent => :destroy
   has_many :permissions, :dependent => :destroy
   has_one :background_image, :dependent => :destroy
   has_one :logo, :dependent => :destroy
   validates_presence_of :name, :website, :size, :location
   has_many :interview_kit_templates
+  has_many :assessment_templates
+  has_many :scorecard_templates
+
+  has_many :subsidiaries 
+  has_many :subsidiarys, :through => :subsidiaries, :foreign_key => :subsidiary_id
   
+
+
+  
+
   accepts_nested_attributes_for :users, 
     allow_destroy: true
 
@@ -52,6 +60,7 @@ class Company < ActiveRecord::Base
 
   def generate_token
     self.widget_key = SecureRandom.urlsafe_base64
+    self.company_number = SecureRandom.urlsafe_base64
   end
   
   def create_default_stages
@@ -161,4 +170,22 @@ class Company < ActiveRecord::Base
   def company_messages 
     self.candidates.messages
   end
+
+
+  def has_subsidiaries? 
+    self.subsidiaries.present?
+  end
+
+  def subsidiary_jobs
+    @jobs = []
+
+    self.subsidiaries.each do |subsidiary| 
+      subsidiary.subsidiary.published_jobs.each do |job|
+        @jobs.append(job)
+      end
+    end
+
+    return @jobs
+  end
+
 end

@@ -12,11 +12,10 @@ Rails.application.routes.draw do
     match 'profile', to: "profiles#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '6d4d48ec'}, via: [:get, :post, :put, :patch, :delete]
     match 'create-profile', to: "profiles#new", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '6d4d48ec'}, via: [:get, :post, :put, :patch, :delete]
     match 'companies', to: "companies#index", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '6d4d48ec'}, via: [:get, :post, :put, :patch, :delete]
-    match 'companies/:id', to: "companies#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '6d4d48ec'}, via: [:get, :post, :put, :patch, :delete]
+    match 'company/:id', to: "companies#show", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '6d4d48ec'}, via: [:get, :post, :put, :patch, :delete]
+    match 'job-opportunities', to: "jobs#association_jobs", constraints: lambda {|r| r.subdomain.present? && r.subdomain != 'www' && r.subdomain != 'prod-talentwiz' && r.subdomain != 'dev-talentwiz' && r.subdomain != 'staging-talentwiz' && r.subdomain != '6d4d48ec'}, via: [:get]
   end
 
- 
- 
   root to: 'pages#home'
   
   get 'pricing', to: 'pages#pricing'
@@ -51,7 +50,9 @@ Rails.application.routes.draw do
   get '/company-signup', to: 'companies#new'
   post '/company-signup', to: 'companies#create'
 
-  resources :companies, only: [:new, :create]
+  resources :companies do 
+    resources :jobs
+  end
   resources :users, only: [:new, :create]
   resources :skills 
   resources :certifications
@@ -71,7 +72,6 @@ Rails.application.routes.draw do
 
   post '/inbound-can/ziprecruiter', to: "inbound_candidates#ziprecruiter_webhook"
   post '/inbound-can/indeed', to: "inbound_candidates#indeed_webhook"
-  
   
 
   namespace :job_seeker do 
@@ -113,13 +113,12 @@ Rails.application.routes.draw do
     get "hiring_defaults", to: 'rejection_reasons#index'
     resources :notifications
     resources :activities
-
-
     resources :assessments
     resources :scorecards
     resources :completed_assessments
     resources :answers
-
+    resources :subsidiaries
+    
     resources :hiring_teams
     resources :permissions
     
@@ -137,15 +136,20 @@ Rails.application.routes.draw do
     resources :application_emails
     resources :stage_actions
 
-    resources :interview_kit_templates
-    resources :email_templates
+
     resources :job_templates
+    resources :interview_kit_templates
+    resources :assessment_templates
+    resources :email_templates
+    
 
     resources :rooms do 
       collection do
         get "availability/:id", to: "rooms#get_availability"
       end
     end
+
+
 
     post "update_password", to: 'users#update_password'
     post 'create_subscription', to: 'users#create_subscription'
@@ -424,15 +428,6 @@ Rails.application.routes.draw do
     end
   end
   
-  namespace :association do
-    resources :job_board
-    resources :jobs
-    resources :companies
-    resources :candidates
-    resources :contacts 
-  end
-
-
   get 'adzuna-job-feed', to: "job_feeds#adzuna_job_feed"
   get 'eluta-job-feed', to: "job_feeds#eluta_job_feed"
   get 'ziprecruiter-job-feed', to: "job_feeds#ziprecruiter_job_feed"

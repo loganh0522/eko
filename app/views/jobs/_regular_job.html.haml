@@ -1,32 +1,30 @@
-- if @job_board.job_board_header.background_image.present? 
+- if @job_board.kind == "association"
+  .company-profile
+    .background{:style => "background-image: url(#{@job.company.job_board.job_board_header.background_image.file})"}  
+
+    .logo{:style => "background: url(#{@job.company.logo.file.large_logo}); background-repeat: no-repeat; background-size: 100%; background-color: white; background-position: center"}
+    .change-containers-nav
+      %ul
+        %li About
+        %li Our Team 
+        %li.active Jobs
+  .company-profile-container
+    = render 'jobs/job_description/profile_description'
+
+- elsif @job_board.job_board_header.background_image.present? 
   .portal-header{:style => "background: url(#{@job_board.job_board_header.background_image.file.url}) no-repeat center center fixed; background-size: cover; height: 400px "}
     .header-overlay{:style => "background: rgba(0,0,0,0.4)"}
       .intro-message
         .header= @job.title
+  .main-row-container
+    .inner-container
+      = render 'jobs/job_description/basic_description'
 - else
   .portal-header{:style => "background-color: #EF7B2B"}
     .header-overlay{:style => "background: rgba(0,0,0,0.5)"}
       .intro-message
         .header= @job.title
-
-.main-row-container
-  .inner-container
-    .job-description
-      .job-header
-        .details
-          %h2= @job.title
-        .actions
-          = render "apply_method"
-          .share-job-details
-            .type Share On
-            = link_to "https://www.facebook.com/sharer/sharer.php?u=" + @job.url, target: :blank, class: "popup" do 
-              %i.fa.fa-facebook-square.fa-stack-2x
-            = link_to "https://www.linkedin.com/shareArticle?mini=true&url=" + @job.url, :target => :blank, :popup => true do 
-              %i.fa.fa-linkedin-square.fa-stack-2x
-            = link_to "https://www.twitter.com/intent/tweet" + @job.url, :target => :blank, :popup => true do
-              %i.fa.fa-twitter-square.fa-stack-2x
-      .job-body
-        = @job.description.html_safe
-      .apply 
-        = render "apply_method"
+  .main-row-container
+    .inner-container
+      = render 'jobs/job_description/basic_description'
 

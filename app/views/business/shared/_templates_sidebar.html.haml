@@ -1,12 +1,17 @@
 %ul
-  .nav-section Templates 
-  %li{:class => is_active?(business_email_templates_path)}
-    = link_to "E-mail Templates", business_email_templates_path
-  
+  .nav-section Templates
   %li{:class => is_active?(business_job_templates_path)}
     = link_to "Job Templates", business_job_templates_path
 
   %li{:class => is_active?(business_interview_kit_templates_path)}
     = link_to "Interview Kits", business_interview_kit_templates_path
+  
+  %li{:class => is_active?(business_assessment_templates_path)}
+    = link_to "Assessment Templates", business_assessment_templates_path
+      
+  %li{:class => is_active?(business_email_templates_path)}
+    = link_to "E-mail Templates", business_email_templates_path
+  
+  
 
   

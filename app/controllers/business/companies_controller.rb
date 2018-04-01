@@ -6,7 +6,32 @@ class Business::CompaniesController < ApplicationController
   before_filter :trial_over
   before_filter :company_deactivated?
   include AuthHelper
+  
+  def index
+    @company = current_company
+  end
 
+  def new
+    @company = Company.new
+
+    respond_to do |format| 
+      format.js
+    end
+  end
+
+  def create
+    @company = Company.new(company_params)
+    
+    respond_to do |format| 
+      if @company.save
+        @subsidiary = Subsidiary.create(subsidiary_id: @company.id, company_id: current_company.id )
+        format.js
+      else
+        render_errors(@company)
+        format.js
+      end
+    end
+  end
   def edit 
     @company = current_company
 
@@ -33,7 +58,7 @@ class Business::CompaniesController < ApplicationController
   private 
 
   def company_params
-    params.require(:company).permit(:name, :website, :kind, :address)
+    params.require(:company).permit(:name, :website, :kind, :address, :location, :size)
   end
 
   def render_errors(error)

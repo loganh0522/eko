@@ -1,4 +1,23 @@
-.header
-  .header-background
-  .header-nav
+.company-profile-container
+  .company-profile
+    .background{:style => "background-image: url(#{@company.job_board.job_board_header.background_image.file})"}  
+
+    .logo{:style => "background: url(#{@company.logo.file.large_logo}); background-repeat: no-repeat; background-size: 100%; background-color: white; background-position: center"}
+    
+    .change-containers-nav
+      %ul
+        %li.active= link_to "About", company_path, remote: true
+        %li= link_to "Our Team", company_path, remote: true
+        %li= link_to "Jobs", company_jobs_path(@company)
+
+.company-profile-container
+  .side-container#job-nav
+
+  .main-container
+    .standard-header
+      %h3 About Us
+    .standard-body
+      %p Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
   
+

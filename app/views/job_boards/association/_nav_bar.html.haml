@@ -1,0 +1,29 @@
+.nav-container
+  .navigation
+    - if @job_board.company.logo.present?
+      = link_to root_path do
+        %img(src="#{@job_board.company.logo.file.small_logo}" class="sub_logo")
+    - else
+      .brand
+        = link_to root_path do
+          = current_company.name
+    %ul#section-nav
+      %li Jobs
+    
+    - if current_user.present? 
+      .dropdown
+        .dropdown-button
+          - if current_user.user_avatar.present? 
+            = image_tag current_user.user_avatar.image.small_image, :class => "img dropdown-img"
+          - else
+            .circle-img= current_user.first_name.first.capitalize
+          .name
+            = current_user.first_name
+            %b.caret
+        .dropdown-content#myDropdown
+          = link_to "Profile", job_seeker_user_path(current_user)
+          = link_to "Sign Out", signout_path
+    - else 
+      %ul#portal-login
+        %li= link_to "Login", login_path, remote: true
+        %li= link_to "Sign Up", new_user_path, remote: true

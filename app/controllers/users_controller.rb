@@ -33,9 +33,22 @@ class UsersController < ApplicationController
   def create_job_seeker
     @user = User.new(user_params.merge!(kind: 'job seeker'))   
 
+
     respond_to do |format|
       if @user.save 
         session[:user_id] = @user.id 
+        
+        if request.subdomain.present? && request.subdomain != 'www'
+          @job_board = JobBoard.find_by_subdomain!(request.subdomain)
+          @company = @job_board.company
+          @candidate = Candidate.where(email: @user.email, company: @company).first
+
+          if !@candidate.present?
+            Candidate.create(first_name: @user.first_name, last_name: @user.last_name,
+              email: @user.email, user_id: @user.id, company_id: @company.id)
+          end
+        end
+
         format.js
         format.html {redirect_to job_seeker_create_profiles_path}
       else
