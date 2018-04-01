@@ -1,21 +1,21 @@
-- if @assessments.present?
-  - @assessments.each do |assessment| 
-    .template{id: "interview_kit_#{assessment.id}"}
-      .title= assessment.name
+- if @scorecards.present?
+  - @scorecards.each do |scorecard| 
+    .template{id: "scorecard_#{scorecard.id}"}
+      .title= scorecard.name
       .dropdown
         .dropdown-button
           %i.fa.fa-ellipsis-h.fa-lg
         .dropdown-content#myDropdown
-          = link_to edit_business_assessment_template_path(assessment), remote: true  do
+          = link_to edit_business_scorecard_template_path(scorecard), remote: true  do
             %i.fa.fa-pencil
             .action Edit
-          = link_to business_assessment_template_path(assessment), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do  
+          = link_to business_scorecard_template_path(scorecard), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do  
             %i.fa.fa-trash-o
             .action Destroy
 - else 
   .not-present-container
-    %p You currently do not have any Assessment Templates
-    .add-object= link_to "+ Assessment Template", new_business_assessment_template_path, remote: true, class: 'btn border-button'
+    %p You currently do not have any Scorecard Templates
+    .add-object= link_to "+ Scorecard Template", new_business_scorecard_template_path, remote: true, class: 'btn border-button'
       
 
 

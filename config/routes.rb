@@ -140,6 +140,7 @@ Rails.application.routes.draw do
     resources :job_templates
     resources :interview_kit_templates
     resources :assessment_templates
+    resources :scorecard_templates
     resources :email_templates
     
 

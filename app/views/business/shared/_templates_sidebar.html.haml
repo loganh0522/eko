@@ -8,7 +8,10 @@
   
   %li{:class => is_active?(business_assessment_templates_path)}
     = link_to "Assessment Templates", business_assessment_templates_path
-      
+  
+  %li{:class => is_active?(business_scorecard_templates_path)}
+    = link_to "Scorecard Templates", business_scorecard_templates_path
+
   %li{:class => is_active?(business_email_templates_path)}
     = link_to "E-mail Templates", business_email_templates_path
   

@@ -65,7 +65,7 @@ class Business::ScorecardTemplatesController < ApplicationController
 
   def scorecard_params 
     params.require(:scorecard_template).permit(:name,
-      section_options: [:id, :body, :guidelines, :required, :_destroy, :position)   
+      section_options: [:id, :body, :guidelines, :required, :_destroy, :position])   
   end
 
 
