@@ -1,6 +1,12 @@
 .side-sections
   .side-section
     .header
+      %h4 Tags
+      = render 'business/tags/form'
+    .tags
+      = render "business/tags/tags" 
+  .side-section
+    .header
       %h4 Tasks
       .toggle-actions
         = form_tag search_business_tasks_path, :method => 'get', id: "search-form" do 
@@ -12,13 +18,8 @@
   .side-section
     .header
       %h4 Schedule 
-    / = render 'business/interviews/candidate_interviews'
-  .side-section
-    .header
-      %h4 Tags
-      = render 'business/tags/form'
-    .tags
-      = render "business/tags/tags"   
+    = render 'business/interviews/candidate_interviews'
+    
   .side-section
     .header
       %h4 All Applications

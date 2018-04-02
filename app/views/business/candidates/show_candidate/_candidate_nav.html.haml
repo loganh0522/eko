@@ -11,9 +11,6 @@
 
     = link_to business_candidate_messages_path(@candidate), remote: true do
       %li.change#messages Messages 
-
-    = link_to business_candidate_tasks_path(@candidate), remote: true do
-      %li.change#tasks Tasks
       
     = link_to business_candidate_comments_path(@candidate), remote: true do
       %li.change#notes Notes
@@ -22,17 +19,26 @@
       %li.change#activity Activity
 
 .bottom-row
-  = link_to new_business_candidate_task_path(@candidate), id: "add-task", remote: true do 
-    .glyphicon Task
+  
 
-  = link_to new_business_candidate_comment_path(@candidate), id: "add-note", remote: true do
-    .glyphicon.glyphicon-pencil Note
+  = link_to new_business_candidate_comment_path(@candidate), class: 'can-action', id: "add-note", remote: true do
+    + Note
 
-  = link_to new_business_candidate_interview_invitation_path(@candidate), id: "add-invitation", remote: true do 
-    .glyphicon.glyphicon-calendar Schedule Interview
-
-  = link_to new_business_candidate_message_path(@candidate), id: "add-message", remote: true do 
+  = link_to new_business_candidate_message_path(@candidate), class: 'can-action', id: "add-message", remote: true do 
     .glyphicon.glyphicon-envelope E-mail
+
+  = link_to new_business_candidate_task_path(@candidate), class: 'can-action add-task', id: "client-action", remote: true do 
+    + Task
+  .dropdown.can-action
+    .dropdown-button
+      .glyphicon.glyphicon-calendar Interview
+    .dropdown-content
+      = link_to new_business_candidate_interview_path(@candidate), remote: true, id: 'client-action' do
+        %i.fa.fa-calendar
+        .action Schedule Interview
+      = link_to new_business_candidate_interview_invitation_path(@candidate), remote: true do 
+        %i.fa.fa-paper-plane-o
+        .action Interview Invitation
 
   .hide-can-form Hide
   / .stage

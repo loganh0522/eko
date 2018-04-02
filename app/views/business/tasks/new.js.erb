@@ -1,7 +1,7 @@
 <% if @taskable.class == Candidate %>  
   $('.action-area').html('<%= j render "business/tasks/form" %>');
   $('.active-button').removeClass('active-button');
-  $('#add-task').addClass('active-button');
+  $('.add-task').addClass('active-button');
 <% else %>
   $('#mediumModal').find('form').remove()
   $('#mediumModal').find('.new-title').html('<%= j "Add Task" %>');

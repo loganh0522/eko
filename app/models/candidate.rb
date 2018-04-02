@@ -150,6 +150,18 @@ class Candidate < ActiveRecord::Base
     end
   end
 
+  def upcoming_interviews
+    @interviews = []
+
+    self.interviews.each do |interview| 
+      if interview.start_time > Time.now
+        @interviews.append(interview)
+      end
+    end
+    
+    return @interviews
+  end
+
   def current_user_rating_present?(current_user, candidate)
     candidate.ratings.each do |rating| 
       if rating.user == current_user

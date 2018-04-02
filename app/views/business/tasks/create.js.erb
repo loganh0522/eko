@@ -9,7 +9,7 @@
   $('.applicant-nav').find('#tasks').addClass('activated');
   $('.action-area').children().remove();
   $('.active-button').removeClass('active-button');
-  $(".display-applicant-details").find(".tasks").html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
+  $('.side-tasks').html('<%= j render "business/tasks/candidate_tasks", tasks: @tasks %>')
 <% else %> 
   $('#mediumModal').find('form').remove();
   $('#mediumModal').hide();

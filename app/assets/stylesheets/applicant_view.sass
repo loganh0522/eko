@@ -374,7 +374,6 @@
   display: none
 
 .application-stages
-  padding: 1px 0
   border-radius: 5px
   background: #fff
   box-shadow: 0px 7px 40px 0px rgba(199,197,199,.1), 0px 3px 9px 0px rgba(199,197,199,1)
@@ -405,7 +404,6 @@
     height: fit-content
     background: #f3f7f9
     .action-container
-      padding: 10px 5px
       margin: 15px 2.5%
       height: fit-content
       background: #fff
@@ -413,6 +411,10 @@
       border-radius: 6px
       min-height: 40px
       box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+      .top-row
+        padding: 15px 10px
+        overflow: hidden
+        border-bottom: 1px solid #D1DCE4
       .completed-scorecards
         clear: both
         overflow: hidden
@@ -423,7 +425,6 @@
       .pending-scorecards
         clear: both
         overflow: hidden
-
         .pending
           float: left
           margin-top: 10px
@@ -439,6 +440,9 @@
         float: right
         margin-right: 15px
         color: rgba(239, 122, 43, 0.9)
+        a
+          margin-right: 5px
+          color: rgba(0,0,0,0.9)
       .name
         float: left
         font-weight: bold

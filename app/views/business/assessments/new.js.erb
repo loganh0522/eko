@@ -1,4 +1,30 @@
 $('#mediumModal').find('form').remove()
 $('#mediumModal').find('.new-title').html('<%= j "Create Assessment" %>');
-$('#mediumModal').find('.new-modal-header').after('<%= j render "business/assessments/form" %>');
+<% if params[:kind] == 'kit' %>
+  $('#mediumModal').find('.new-modal-header').after('<%= j render "business/assessments/interview_form" %>');
+  $('.form-radios').on('click', '.filter', function(event) {
+    if ($(this).attr('id') === 'questions') {
+      $('.questions-container').show();
+      $('.overview-container').hide();
+      $('.scorecard-container').hide();
+
+      $('.filter').removeClass('active');
+      $(this).addClass('active');
+    } else if ($(this).attr('id') === 'scorecard') {
+      $('.questions-container').hide();
+      $('.overview-container').hide();
+      $('.scorecard-container').show();
+      $('.filter').removeClass('active');
+      $(this).addClass('active');
+    } else {
+      $('.scorecard-container').hide();
+      $('.questions-container').hide();
+      $('.overview-container').show();
+      $('.filter').removeClass('active');
+      $(this).addClass('active');
+    }
+  });
+<% else %> 
+  $('#mediumModal').find('.new-modal-header').after('<%= j render "business/assessments/form" %>');
+<% end %>
 $('#mediumModal').show();

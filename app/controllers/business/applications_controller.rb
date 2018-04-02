@@ -69,7 +69,8 @@ class Business::ApplicationsController < ApplicationController
 
     @stages = @job.stages
 
-    @interviews = @candidate.interviews
+    @interviews = @candidate.upcoming_interviews
+
     @tasks = @candidate.open_job_tasks(@job).accessible_by(current_ability)
     @rejection_reasons = current_company.rejection_reasons
     @tag = Tag.new
