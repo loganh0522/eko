@@ -22,12 +22,6 @@ class Application < ActiveRecord::Base
   accepts_nested_attributes_for :question_answers, allow_destroy: true
   
   
-  def create_assessment
-    @assessment = Assessment.create(name: "Application Assessment", application_id: self.id,
-      candidate_id: self.candidate.id)
-
-    self.job.scorecard.duplicate_scorecard(@assessment)
-  end
 
   def generate_token
     self.token = SecureRandom.urlsafe_base64

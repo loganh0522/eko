@@ -1,0 +1,41 @@
+= form_for [:business, @interview_kit], remote: true do |f|
+  .standard-header
+    = f.label :title, "Interview Kit Name"
+    = f.text_field :title, placeholder: "Interview Kit Name"
+  .form-radios
+    %ul  
+      %li.filter#overview.active Overview
+      %li.filter#questions Questions
+      %li.filter#scorecard Scorecard   
+  .overview-container.standard-padding
+    %h4 Interview Prep Details
+    = f.label :preperation, "Interview Prep Details"
+    = f.trix_editor :preperation
+  
+  .questions-container.hidden-container
+    %h4 Questions
+    %ul#nested-attributes
+      = f.fields_for :questions do |a|
+        = render 'question_fields', f: a
+      = link_to_add_fields("+ Add Question", f, :questions)
+  
+  .scorecard-container.standard-padding.hidden-container
+    %h4 Scorecard
+    = f.fields_for :scorecard, @scorecard do |s| 
+      - if @interview_kit.new_record?
+        = s.fields_for :scorecard_sections, ScorecardSection.new do |a|
+          = render 'scorecard_section_fields', f: a  
+        /   = a.text_field :body, placeholder: "Section Name (i.e Technical Skills, Personality, Culture Fit)"
+        /   = a.fields_for :section_options, SectionOption.new do |a|
+        /     = render 'section_option_fields', f: a  
+          
+        /   = link_to_add_fields("+ Criteria", a, :section_options)  
+
+        / / = link_to_add_fields("+ Add Section", s, :scorecard_sections)           
+      
+      - else 
+        = s.fields_for :scorecard_sections do |a|
+          = render 'scorecard_section_fields', f: a    
+  .container-footer
+    = f.submit "Save", class: "btn hover-button"
+    .btn.border-button.remove-main-form Cancel

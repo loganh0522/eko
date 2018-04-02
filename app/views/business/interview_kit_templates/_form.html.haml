@@ -7,8 +7,7 @@
       %ul  
         %li.filter#overview.active Overview
         %li.filter#questions Questions
-        %li.filter#scorecard Scorecard
-    
+        %li.filter#scorecard Scorecard   
     .overview-container.standard-padding
       %h4 Interview Prep Details
       = f.label :preperation, "Interview Prep Details"
@@ -23,7 +22,6 @@
     
     .scorecard-container.standard-padding.hidden-container
       %h4 Scorecard
-
       = f.fields_for :scorecard, @scorecard do |s| 
         - if @interview_kit.new_record?
           = s.fields_for :scorecard_sections, ScorecardSection.new do |a|

@@ -8,6 +8,7 @@ class InboundCandidatesController < ApplicationController
     @candidate = Candidate.create(company: @company, first_name: params[:first_name], 
       last_name: params[:last_name], email: params[:email], phone: params[:phone], 
       manually_created: true, source: "ZipRecruiter")
+    
     @application = Application.create(candidate: @candidate, job: @job)
     
     @encoded_resume = params[:resume]

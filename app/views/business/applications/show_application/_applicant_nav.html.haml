@@ -32,7 +32,14 @@
   = link_to new_business_candidate_task_path(@candidate, job: @job), id: "client-action", remote: true do 
     + Task  
     
-  = link_to new_business_candidate_interview_invitation_path(@candidate, application: @application.id), id: "add-invitation", remote: true do 
-    .glyphicon.glyphicon-calendar Interview
+  .dropdown
+    .dropdown-button
+      .glyphicon.glyphicon-calendar + Interview
+    .dropdown-content
+      = link_to new_business_candidate_interview_invitation_path(@candidate, application: @application.id), remote: true do 
+        %i.fa.fa-paper-plane-o
+        .action Interview Invitation
+    
+
 
   .hide-can-form Hide 
