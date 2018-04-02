@@ -12,7 +12,7 @@ class Application < ActiveRecord::Base
   has_many :assessments
   has_many :question_answers, dependent: :destroy
 
-  after_create :reindex_candidate, :create_assessment
+  after_create :reindex_candidate
   after_update :reindex_candidate, :create_stage_actions
 
   def reindex_candidate
@@ -20,6 +20,7 @@ class Application < ActiveRecord::Base
   end
 
   accepts_nested_attributes_for :question_answers, allow_destroy: true
+  
   
   
 
@@ -78,6 +79,7 @@ class Application < ActiveRecord::Base
 
   def create_stage_actions
     @stage_actions = self.stage.stage_actions
+    
     @stage_actions.each do |action| 
       if action.kind == "Task"
         Task.create(company: self.job.company, job: self.job, title: action.name, kind: "To-do", taskable_type: "Candidate", 
