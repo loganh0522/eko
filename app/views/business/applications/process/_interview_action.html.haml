@@ -1,64 +1,22 @@
 .action-container{id: "stage_action_#{action.id}"}
-  .top-row
-    %i.fa.fa-calendar  
-    .kind Interview:
-    .title= action.name   
-  
   - if action.interview.present? && action.interview.start_time > Time.now && action.interview.candidate == @application.candidate
-    .scheduled
-      Scheduled
-      = link_to "(View Details)",  business_interview_path(action.interview.id), remote: true
-    .links 
-      = link_to "Interview Kit", new_business_completed_assessment_path(assessment: action.interview.assessment), target: :_blank
+    
+    = render 'business/applications/process/interview_action/pending_interview', action: action
+
 
   - elsif action.interview.present? && action.interview.start_time < Time.now && action.interview.candidate == @application.candidate
     
-    - if action.interview.has_completed_assessment?
-      .completed-scorecards
-        Completed Scorecards
-        - action.interview.assessment.completed_assessments.each do |assessment|
-          .user-completed
-            .user= user_avatar(assessment.user)
-            .name= assessment.user.full_name
-            .links
-              .name= link_to "View", business_completed_assessment_path(assessment), remote: true
-              .name= link_to "Edit", edit_business_completed_assessment_path(assessment), remote: true
+    = render 'business/applications/process/interview_action/interview_complete', action: action
+  
+  - elsif action.interview_invitation.present? && action.interview_invitation.candidates.include?(@application.candidate)   
+    = render 'business/applications/process/interview_action/invitation_sent', action: action
     
-    - if action.interview.pending_scorecards.present?
-      .completed-scorecards      
-        Pending Interview Scorecard   
-        - action.interview.pending_scorecards.each do |user|
-          .user-completed
-            .user= user_avatar(user)
-            .name= user.full_name
-            - if user == current_user
-              .links
-                .name= link_to "Finish Scorecard", new_business_completed_assessment_path(assessment: action.interview.assessment), remote: true
-            - else
-              .links
-                .name
-                  Pending
-                  = link_to "(Send Reminder)", new_business_completed_assessment_path(), remote: true
-  
-  - elsif action.interview_invitation.present? && action.interview_invitation.candidates.include?(@application.candidate)
-    .links Invitation Sent (Pending)
-  
   - else
-    .links
-      .dropdown
-        .dropdown-button
-          Schedule Interview
-        .dropdown-content#action-container-dropdown
-          = link_to new_business_interview_path(s_action: action, application: @application), remote: true, id: 'client-action' do
-            %i.fa.fa-calendar
-            .action Schedule Interview
-          = link_to new_business_interview_invitation_path(s_action: action, candidate_id: @application.candidate.id), remote: true, id: 'client-action' do 
-            %i.fa.fa-paper-plane-o
-            .action Send Invitation
+    = render 'business/applications/process/interview_action/schedule_interview', action: action
 
 
 
 
-    
+      
 
-    
+      

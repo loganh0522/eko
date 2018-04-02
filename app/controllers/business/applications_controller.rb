@@ -67,7 +67,7 @@ class Business::ApplicationsController < ApplicationController
     @candidate = @application.candidate
     @job = Job.find(params[:job_id]) 
 
-    @stages = @job.stages
+    @stages = @application.application_stages
 
     @interviews = @candidate.upcoming_interviews
 

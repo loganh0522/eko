@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180401205430) do
+ActiveRecord::Schema.define(version: 20180402134954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,19 @@ ActiveRecord::Schema.define(version: 20180401205430) do
     t.integer "application_id"
     t.integer "overall"
     t.integer "assessment_id"
+  end
+
+  create_table "application_stages", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "position"
+    t.integer  "job_id"
+    t.integer  "application_id"
+    t.datetime "added_on"
+    t.datetime "moved_from"
+    t.boolean  "last_stage",     default: false
+    t.boolean  "current_stage",  default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "applications", force: :cascade do |t|
@@ -1115,6 +1128,7 @@ ActiveRecord::Schema.define(version: 20180401205430) do
     t.string   "standard_stage"
     t.integer  "job_id"
     t.integer  "interview_kit_template_id"
+    t.integer  "application_stage_id"
   end
 
   create_table "stages", force: :cascade do |t|

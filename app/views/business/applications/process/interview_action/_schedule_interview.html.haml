@@ -1,0 +1,15 @@
+.top-row
+  %i.fa.fa-calendar  
+  .kind Interview:
+  .title= action.name
+  .links
+    .dropdown
+      .dropdown-button
+        Schedule Interview
+      .dropdown-content#action-container-dropdown
+        = link_to new_business_interview_path(s_action: action, application: @application), remote: true, id: 'client-action' do
+          %i.fa.fa-calendar
+          .action Schedule Interview
+        = link_to new_business_interview_invitation_path(s_action: action, candidate_id: @application.candidate.id), remote: true, id: 'client-action' do 
+          %i.fa.fa-paper-plane-o
+          .action Send Invitation

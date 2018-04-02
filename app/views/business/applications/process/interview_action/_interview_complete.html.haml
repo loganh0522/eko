@@ -1,0 +1,31 @@
+.header
+  %i.fa.fa-calendar  
+  .kind Interview:
+  .title= action.name
+
+- if action.interview.has_completed_assessment?
+  .completed-scorecards
+    Completed Scorecards
+    - action.interview.assessment.completed_assessments.each do |assessment|
+      .user-completed
+        .user= user_avatar(assessment.user)
+        .name= assessment.user.full_name
+        .links
+          .name= link_to "View", business_completed_assessment_path(assessment), remote: true
+          .name= link_to "Edit", edit_business_completed_assessment_path(assessment), remote: true
+
+- if action.interview.pending_scorecards.present?
+  .completed-scorecards      
+    Pending Interview Scorecard   
+    - action.interview.pending_scorecards.each do |user|
+      .user-completed
+        .user= user_avatar(user)
+        .name= user.full_name
+        - if user == current_user
+          .links
+            .name= link_to "Finish Scorecard", new_business_completed_assessment_path(assessment: action.interview.assessment), remote: true
+        - else
+          .links
+            .name
+              Pending
+              = link_to "(Send Reminder)", new_business_completed_assessment_path(), remote: true

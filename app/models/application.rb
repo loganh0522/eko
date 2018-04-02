@@ -5,6 +5,8 @@ class Application < ActiveRecord::Base
   belongs_to :candidate
   belongs_to :job
 
+  has_many :application_stages, dependent: :destroy
+
   has_many :interview_scorecards
   has_many :ratings
   has_many :application_scorecards
@@ -22,6 +24,17 @@ class Application < ActiveRecord::Base
   accepts_nested_attributes_for :question_answers, allow_destroy: true
   
   
+  def create_process
+    @job = self.job 
+
+    @job.stages.each do |stage| 
+      @stage = ApplicationStage.create(stage.attributes.except("id").merge!(application_id: self.id) )
+      
+      stage.stage_actions.each do |action| 
+        StageAction.create(action.attributes.except("id", "stage_id").merge!(application_stage_id: @stage.id))
+      end
+    end
+  end
   
 
   def generate_token
