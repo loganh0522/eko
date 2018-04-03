@@ -68,7 +68,6 @@ class Business::JobBoardRowsController < ApplicationController
     @section = JobBoardRow.find(params[:id])
     @job_board = current_company.job_board
     
-    binding.pry
     if params[:job_board_row][:video_link].present? 
       video_parse_function
       @section = JobBoardRow.new(job_board_row_params.merge!(youtube_id: @video_id ))
