@@ -19,36 +19,46 @@
             = render 'job_board_rows/team', section: section
           - elsif section.kind == 'Photo'
             = render 'job_board_rows/photos', section: section
+.job-board-sections
+  .section
+    .header-message
+      .header Our Job Opportunities
+    .company-job-board  
 
-
-.company-job-board  
-  - if @company.job_board.kind == "basic"
-    - if @company.logo.present?
-      .logo
-        = link_to root_path do
-          %img(src="#{@company.logo.file.large_logo}")
-    .basic-jobs
-      %h2{style: "color: #67696C"} Current Job Openings
-      - if @jobs.count != 0  
-        - @jobs.each do |job|
-          .title= link_to "#{job.title}", "jobs/#{job.id}", {style: "color: #67696C"}
+      - if @company.job_board.kind == "basic"
+        - if @company.logo.present?
+          .logo
+            = link_to root_path do
+              %img(src="#{@company.logo.file.large_logo}")
+        .basic-jobs
+          %h2{style: "color: #67696C"} Current Job Openings
+          - if @jobs.count != 0  
+            - @jobs.each do |job|
+              .title= link_to "#{job.title}", "jobs/#{job.id}", {style: "color: #67696C"}
+          - else 
+            .not-present-container
+              %p Sorry, there are currently no open job postings. 
       - else 
-        .not-present-container
-          %p Sorry, there are currently no open job postings. 
-  - else 
-    .jobs#jobs
-      - @jobs.each do |job|
-        .job-posting
-          .header-info
-            .job-detail
-              .title= link_to "#{job.title}", job_path(job)
-            .view-job= link_to "View Job", job_path(job), class: "btn btn-primary"
-          .bottom-info
-            .left-side
-              = "#{job.location}"
-            .right-side 
-              / = job.industries.first.name
-              / = job.job_kind.first.name
-              = "#{time_ago_in_words(job.created_at)} ago"
-    
-.footer
+        .jobs#jobs
+          - if @jobs.present?
+            - @jobs.each do |job|
+              .job-posting
+                .header-info
+                  .job-detail
+                    .title= link_to "#{job.title}", job_path(job)
+                  .view-job= link_to "View Job", job_path(job), class: "btn btn-primary"
+                .bottom-info
+                  .left-side
+                    = "#{job.location}"
+                  .right-side 
+                    / = job.industries.first.name
+                    / = job.job_kind.first.name
+                    = "#{time_ago_in_words(job.created_at)} ago"
+          - else
+            .not-present-container
+              %p There are currently no job opportunities available
+        
+.career-footer
+  .power
+    .powered-by Powered By
+    %img(src="/tmp/logo.jpg")

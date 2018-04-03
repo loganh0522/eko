@@ -31,7 +31,8 @@ class Application < ActiveRecord::Base
       @stage = ApplicationStage.create(stage.attributes.except("id").merge!(application_id: self.id) )
       
       stage.stage_actions.each do |action| 
-        StageAction.create(action.attributes.except("id", "stage_id").merge!(application_stage_id: @stage.id))
+        @action = StageAction.create(action.attributes.except("id", "stage_id").merge!(application_stage_id: @stage.id))
+        @action.users << action.users
       end
     end
   end

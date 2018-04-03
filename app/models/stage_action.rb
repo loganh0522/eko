@@ -21,4 +21,9 @@ class StageAction < ActiveRecord::Base
     kind == "Interview"
   end
 
+
+  def create_stage_action_for_application_stage
+    
+
+  end
 end

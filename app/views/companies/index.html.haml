@@ -3,7 +3,7 @@
 
 .width-container
   .inner-container
-    %h4 All Ventures
+    .header Our Ventures
     - @companies.each do |company| 
       .company-card
         = link_to company_path(company.subsidiary.id) do 
@@ -13,10 +13,14 @@
             - if company.subsidiary.logo.present?
               .logo{:style => "background: url(#{company.subsidiary.logo.file.large_logo}); background-repeat: no-repeat; background-size: 100%; background-color: white; background-position: center"}
             .body
-              = company.subsidiary.name
+              %h4= company.subsidiary.name
+              
               = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             .card-footer
               = link_to "View Profile", company_path(company.subsidiary.id)
 
 
-.footer
+.career-footer
+  .power
+    .powered-by Powered By
+    %img(src="/tmp/logo.jpg")
