@@ -30,6 +30,10 @@ $('.mediumModal').find('form').remove()
 
 $('#media-photo-up').fileupload()
 
+$('#submit-section').on('click', function(){
+  $('#job-board-section').submit();
+});
+
 $('.close-modal').on('click', function() {
   return $('.mediumModal').hide();
 });
