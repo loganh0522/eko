@@ -2,6 +2,7 @@ $('#mediumModal').find('form').remove()
 $('#mediumModal').find('.new-title').html('<%= j "Create Assessment" %>');
 <% if params[:kind] == 'kit' %>
   $('#mediumModal').find('.new-modal-header').after('<%= j render "business/assessments/interview_form" %>');
+  
   $('.form-radios').on('click', '.filter', function(event) {
     if ($(this).attr('id') === 'questions') {
       $('.questions-container').show();

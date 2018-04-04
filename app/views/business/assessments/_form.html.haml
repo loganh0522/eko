@@ -18,5 +18,7 @@
         
   .modal-footer
     = f.hidden_field :kind, value: "scorecard"
+    = f.hidden_field :application_id, value: @application.id if @application.present?
+    = f.hidden_field :candidate_id, value: @candidate.id
     = f.submit "Create Scorecard", class: "btn submit-button"
     .btn.border-button.close-modal Cancel

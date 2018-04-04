@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403120654) do
+ActiveRecord::Schema.define(version: 20180404141728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -204,6 +204,7 @@ ActiveRecord::Schema.define(version: 20180403120654) do
     t.string   "file"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "company_profile_id"
   end
 
   create_table "blogs", force: :cascade do |t|
@@ -307,6 +308,13 @@ ActiveRecord::Schema.define(version: 20180403120654) do
     t.integer  "size"
     t.string   "address"
     t.string   "company_number"
+  end
+
+  create_table "company_profiles", force: :cascade do |t|
+    t.text     "description"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "company_users", force: :cascade do |t|
@@ -672,6 +680,7 @@ ActiveRecord::Schema.define(version: 20180403120654) do
     t.string   "kind"
     t.string   "layout"
     t.string   "youtube_id"
+    t.integer  "company_profile_id"
   end
 
   create_table "job_boards", force: :cascade do |t|

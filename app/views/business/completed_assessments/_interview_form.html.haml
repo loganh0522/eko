@@ -4,9 +4,12 @@
       %li.filter#overview.active Overview
       %li.filter#questions Questions
       %li.filter#scorecard Scorecard
-  .overview-container
+  .overview-container.standard-padding
+    %h3 Interview Overview
+    .overview
+      = simple_format(@assessment.preperation)
 
-  .questions-container.standard-padding
+  .questions-container.standard-padding.hidden-container
     .interview-scorecard-form
       - if @completed_assessment.new_record? 
         = render 'questions_fields', f: f
@@ -20,11 +23,11 @@
         
     = f.hidden_field :assessment_id, value: @assessment.id
     = f.hidden_field :scorecard_id, value: @scorecard.id
-  .modal-footer
+  .container-footer
     = f.button "Save", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
     .btn.border-button.close-modal Cancel
 
 
 
 
-    
+  

@@ -1,6 +1,7 @@
 <% if @background.new_record? %>
   alert("Failed to upload painting: <%= j @background.errors.full_messages.join(', ').html_safe %>");
-<% elsif request.path == "/job_seeker/create_profiles/personal"
+<% elsif request.path == "/job_seeker/create_profiles/personal" %>
+  $(".job-seeker-topper").html("<%= j render 'job_seeker/background_images/background', background: @background %>");
 <% else %>
   $(".job-seeker-topper").html("<%= j render 'job_seeker/background_images/background', background: @background %>");
 <% end %>

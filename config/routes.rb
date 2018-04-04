@@ -281,7 +281,7 @@ Rails.application.routes.draw do
       resources :resumes
       resources :tags
       resources :tasks 
-      
+
       get :application_form, to: "applications#application_form"
       get :application_activity, to: "activities#application_activity"
       
@@ -306,7 +306,7 @@ Rails.application.routes.draw do
         get :evaluations, to: "applications#application_form"
         get :scorecards, to: "applications#scorecards"
       end
-
+      resources :assessments
       collection do 
 
         get :multiple_change_stages, to: "applications#multiple_change_stages"

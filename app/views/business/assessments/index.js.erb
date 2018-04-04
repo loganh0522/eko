@@ -1,1 +1,9 @@
-$('#main-container').html('<%= j render "business/comments/applicant_notes" %>')
+<% if @application.present? %>
+  $('.display-applicant-details').html('<%= j render "business/assessments/assessments" %>');
+  $('.applicant-nav').find('.activated').removeClass('activated');
+  $('.applicant-nav').find('#scorecards').addClass('activated');
+<% else %> 
+  $('.display-applicant-details').html('<%= j render "business/assessments/assessments" %>');
+  $('.applicant-nav').find('.activated').removeClass('activated');
+  $('.applicant-nav').find('#scorecards').addClass('activated');
+<% end %>

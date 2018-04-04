@@ -1,46 +1,11 @@
 = form_for [:business, @completed_assessment], html: {remote: true} do |f|
   .interview-scorecard-form
-    - @sections.each do |section|
-      .form-row-no-border
-      - section.section_options.each do |criteria|
-        .form-row
-          .question= criteria.body
-          - criteria.scorecard_ratings.each do |rating|
-            - if rating.user == current_user && rating.scorecard_answer == @scorecard_answer
-              = f.fields_for :scorecard_ratings, rating do |q|
-                = q.hidden_field :section_option_id, value: criteria.id
-                = q.hidden_field :user_id, value: current_user.id
-                .scorecard-inputs
-                  = q.radio_button :rating, 1, class: 'application-scorecard-rating', id: "rating_#{criteria.id}_1"
-                  %label.glyphicon.glyphicon-remove{:for => "rating_#{criteria.id}_1"}
-                  = q.radio_button :rating, 2, class: 'application-scorecard-rating', id: "rating_#{criteria.id}_2"
-                  %label.glyphicon.glyphicon-thumbs-down{:for => "rating_#{criteria.id}_2"}
-
-                  = q.radio_button :rating, 3, class: 'application-scorecard-rating', id: "rating_#{criteria.id}_3"
-                  %label.glyphicon.glyphicon-thumbs-up{:for => "rating_#{criteria.id}_3"}
-
-                  = q.radio_button :rating, 4, class: 'application-scorecard-rating', id: "rating_#{criteria.id}_4"
-                  %label.glyphicon.glyphicon-star{:for => "rating_#{criteria.id}_4"}
-                = q.text_area :body
-      
-      .form-row-no-border
-        .question Overall Recommendation
-        .scorecard-inputs
-          = f.radio_button :overall, 1, class: 'application-scorecard-rating', id: "overall_1"
-          %label.glyphicon.glyphicon-remove{:for => "overall_1"}
-          = f.radio_button :overall, 2, class: 'application-scorecard-rating', id: "overall_2"
-          %label.glyphicon.glyphicon-thumbs-down{:for => "overall_2"}
-
-          = f.radio_button :overall, 3, class: 'application-scorecard-rating', id: "overall_3"
-          %label.glyphicon.glyphicon-thumbs-up{:for => "overall_3"}
-
-          = f.radio_button :overall, 4, class: 'application-scorecard-rating', id: "overall_4"
-          %label.glyphicon.glyphicon-star{:for => "overall_4"}
-      .form-row-no-border
-        = f.label :feedback, "Overall Feedback"
-        = f.text_area :feedback
-        
+    .form-row-no-border
+      = render 'scorecard_fields', f: f   
+    
     = f.hidden_field :scorecard_id, value: @scorecard.id
+    = f.hidden_field :assessment_id, value: @assessment.id
+  
   .modal-footer
     = f.button "Save", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
     .btn.border-button.close-modal Cancel

@@ -1,7 +1,7 @@
 $('#mediumModal').find('form').remove()
 $('#mediumModal').find('.interview-scorecard').remove()
 $('#mediumModal').find('.new-title').html('<%= j "Create Interview Kit" %>');
-$('#mediumModal').find('.new-modal-header').after('<%= j render "business/completed_assessments/interview_form" %>');
+$('#mediumModal').find('.new-modal-header').after('<%= j render "business/completed_assessments/form" %>');
 $('#mediumModal').show();
 
 $('.form-radios').on('click', '.filter', function(event) {

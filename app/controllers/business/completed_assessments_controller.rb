@@ -51,12 +51,43 @@ class Business::CompletedAssessmentsController < ApplicationController
     @questions = @assessment.questions
     @answer = Answer.new
     
-   
     @scorecard = @assessment.scorecard
     @sections = @scorecard.scorecard_sections
 
+    @application = @assessment.application 
+    @candidate = @application.candidate
+    @job = @application.job
+
+    if @candidate.manually_created == true 
+      @applicant = @candidate
+    else
+      @applicant = @candidate.user
+    end
+
     respond_to do |format|
       format.js
+      format.html
+    end
+  end
+
+  def interview_kit
+    @completed_assessment = CompletedAssessment.new
+    @assessment = Assessment.find(params[:assessment])
+    
+    @questions = @assessment.questions
+    @answer = Answer.new
+    
+    @scorecard = @assessment.scorecard
+    @sections = @scorecard.scorecard_sections
+
+    @application = @assessment.application 
+    @candidate = @application.candidate
+    @job = @application.job
+
+    if @candidate.manually_created == true 
+      @applicant = @candidate
+    else
+      @applicant = @candidate.user
     end
   end
 
@@ -113,9 +144,5 @@ class Business::CompletedAssessmentsController < ApplicationController
       answers_attributes: [:id, :body, :question_id, :question_option_id, :section_option_id, 
         :user_id, :rating, :_destroy])
   end
-
-
-
-
 
 end

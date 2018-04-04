@@ -6,8 +6,12 @@
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
     = csrf_meta_tag
     = stylesheet_link_tag "application"
-    = javascript_include_tag "application" 
+    = javascript_include_tag "application", "https://js.stripe.com/v2/", "https://js.stripe.com/v3/"
+    
     = yield :head
+
+    = tag :meta, name: "stripe-public-key", content: ENV['STRIPE_PUBLISHABLE_KEY']
+    
     <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyABHyEmDvxwvbiHWIYaEDBFwxHmUjRiKic&libraries=places"></script>
     
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'/>
@@ -25,14 +29,24 @@
               = link_to root_path do
                 = @job_board.company.name
           %ul#section-nav
-            %li= link_to "VentureLab Jobs  |", root_path(anchor: "jobs")
-            %li= link_to "Jobs  |", job_opportunities_path
-            %li= link_to "Companies", companies_path
-
-            
             - @job_board.header_links.each do |f| 
               %li= link_to "#{f.name}", root_path(anchor: "board_row_#{f.job_board_row.id}")
-         
+            
+            %li= link_to "Companies", companies_path
+            
+            %li.dropdown
+              .dropdown-button 
+                Careers
+              .dropdown-content
+                = link_to root_path(anchor: "jobs") do
+                  .action Jobs at VentureLab
+                = link_to job_opportunities_path do
+                  .action Community Jobs
+            
+          
+
+            
+        
           - if current_user.present? 
             .dropdown
               .dropdown-button

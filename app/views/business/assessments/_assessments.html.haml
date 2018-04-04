@@ -14,9 +14,9 @@
   .dropdown-button
     .btn.hover-button + Scorecard
   .dropdown-content#myDropdown
-    = link_to new_business_assessment_path, remote: true  do
+    = link_to new_business_application_assessment_path(@application), remote: true  do
       .action Scorecard
-    = link_to new_business_assessment_path(kind: 'kit'), remote: true do  
+    = link_to new_business_application_assessment_path(@application, kind: 'kit'), remote: true do  
       .action Interview Kit
 
 - if @assessments.present? 

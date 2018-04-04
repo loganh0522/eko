@@ -1,27 +1,26 @@
 %h4 Scorecard
-- @sections.each do |section|
-  - section.section_options.each do |criteria|
-    .title= criteria.body
-    - if !f.object.new_record? 
-      = f.fields_for :answers, criteria.answers do |q|
-        - if q.object.user == @completed_assessment.user
-          = render 'answer_fields', q: q, criteria: criteria
-    - else 
-      = f.fields_for :answers, Answer.new do |q|
+- @scorecard.section_options.each do |criteria|
+  .title= criteria.body
+  - if !f.object.new_record? 
+    = f.fields_for :answers, criteria.answers do |q|
+      - if q.object.user == @completed_assessment.user
         = render 'answer_fields', q: q, criteria: criteria
+  - else 
+    = f.fields_for :answers, Answer.new do |q|
+      = render 'answer_fields', q: q, criteria: criteria
 
 
-  .title Overall Recommendation
-  .scorecard-inputs
-    = f.radio_button :overall, 1, class: 'application-scorecard-rating', id: "overall_1"
-    %label.glyphicon.glyphicon-remove{:for => "overall_1"}
-    = f.radio_button :overall, 2, class: 'application-scorecard-rating', id: "overall_2"
-    %label.glyphicon.glyphicon-thumbs-down{:for => "overall_2"}
+.title Overall Recommendation
+.scorecard-inputs
+  = f.radio_button :overall, 1, class: 'application-scorecard-rating', id: "overall_1"
+  %label.glyphicon.glyphicon-remove{:for => "overall_1"}
+  = f.radio_button :overall, 2, class: 'application-scorecard-rating', id: "overall_2"
+  %label.glyphicon.glyphicon-thumbs-down{:for => "overall_2"}
 
-    = f.radio_button :overall, 3, class: 'application-scorecard-rating', id: "overall_3"
-    %label.glyphicon.glyphicon-thumbs-up{:for => "overall_3"}
+  = f.radio_button :overall, 3, class: 'application-scorecard-rating', id: "overall_3"
+  %label.glyphicon.glyphicon-thumbs-up{:for => "overall_3"}
 
-    = f.radio_button :overall, 4, class: 'application-scorecard-rating', id: "overall_4"
-    %label.glyphicon.glyphicon-star{:for => "overall_4"}
+  = f.radio_button :overall, 4, class: 'application-scorecard-rating', id: "overall_4"
+  %label.glyphicon.glyphicon-star{:for => "overall_4"}
 
-  = f.text_area :feedback
+= f.text_area :feedback

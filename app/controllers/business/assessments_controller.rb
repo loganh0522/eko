@@ -6,24 +6,37 @@ class Business::AssessmentsController < ApplicationController
   before_filter :company_deactivated?
   
   def index   
-    @assessments = current_company.default_stages.order("position")
+    if params[:candidate_id].present?
+      @candidate = Candidate.find(params[:candidate_id])
+      @assessments = @candidate.assessments
+    elsif params[:application_id].present?
+      @application = Application.find(params[:application_id])
+      @assessments = @application.assessments
+    end 
+
   end
 
   def new
     @assessment = Assessment.new
     @scorecard = Scorecard.new
-    
+
+    if params[:application_id].present?
+      @application = Application.find(params[:application_id]) 
+      @candidate = @application.candidate
+    else
+      @candidate = Candidate.find(params[:candidate_id]) 
+    end
+
     respond_to do |format|
       format.js
     end
   end
 
   def create 
-    @assessment = Assessment.new(stage_params) 
+    @assessment = Assessment.new(assessment_params) 
 
     respond_to do |format| 
       if @assessment.save 
-        @assessments = current_company.assessments.order("position")
         format.js
       else
         render_errors(@assessment)
@@ -65,8 +78,10 @@ class Business::AssessmentsController < ApplicationController
 
   private
 
-  def stage_params
-    params.require(:default_stage).permit(:name, :position, :company_id)
+  def assessment_params
+    params.require(:assessment).permit(:name, :candidate_id, :application_id, :kind,
+      scorecard_attributes: [:id, :name,
+        section_options_attributes: [:id, :body, :quality_answer, :required, :_destroy, :position]])
   end
 
   def render_errors(default_stage)

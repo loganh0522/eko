@@ -73,7 +73,6 @@
   width: 74%
   margin-bottom: 100px
   border-radius: 5px
-
   .actions
     .border-button
       float: right
@@ -90,6 +89,7 @@
   float: right
   width: 74%
   margin-bottom: 100px
+
 .change-containers-nav
   ul 
     list-style: none
@@ -105,6 +105,40 @@
     .activated
       border-bottom: 4px solid #EF7B2B
       color: black
+
+.standard-container
+  height: auto
+  background: white
+  border-bottom: 1px solid rgba(0,0,0,0.1)
+  width: 100%
+  padding: 25px 0
+  .inner-container
+    text-align: center
+    width: 600px
+    margin: auto
+    .submit-button
+      width: 100%
+      font-weight: 400
+    @media screen and (max-width: 600px)
+      width: 90%
+
+.standard-container
+  padding: 50px 0
+  text-align: center
+  height: auto
+  background: white
+  border-bottom: 1px solid rgba(0,0,0,0.1)
+  .intro-message
+    .header 
+      margin-bottom: 20px
+      font-size: 32px
+      font-weight: 300
+      color: rgba(0,0,0,0.75)
+    .sub-header
+      font-size: 18px
+      font-weight: 300
+      margin-bottom: 30px
+
 
 
 .standard-header
@@ -148,10 +182,10 @@
   padding: 15px 15px
   overflow: hidden
   clear: both
+  .btn,
   .border-button
     float: right
   .destroy-action
-    
     margin-top: 10px
     .fa
       color: rgba(0, 0, 0, 0.5)
@@ -161,8 +195,11 @@
         text-decoration: none
 
 
-
-
+.primary-container
+  border-radius: 5px
+  box-shadow: 0px 7px 40px 0px rgba(199,197,199,.1), 0px 3px 9px 0px rgba(199,197,199,1)
+  background: #fff
+  margin-bottom: 15px
 
 .form-fields-container
   border-radius: 5px

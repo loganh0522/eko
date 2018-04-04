@@ -181,7 +181,7 @@ class Business::ApplicationsController < ApplicationController
   def stage
     @application = Application.find(params[:id])
     @job = @application.job
-    @stages = @job.stages
+    @stages = @application.application_stages
 
     respond_to do |format|
       format.js
@@ -199,22 +199,6 @@ class Business::ApplicationsController < ApplicationController
         end
       end
     end
-  end
-
-  def render_scorecard
-    # @job = @application.job
-    # @scorecard = Scorecard.where(job_id: @job.id).first
-    # @sections = @scorecard.scorecard_sections
-    # @application_scorecards = ApplicationScorecard.where(application_id: @application.id)
-    # @current_user_scorecard = ApplicationScorecard.where(user_id: current_user.id, application_id: @application.id).first 
-  end
-
-  def render_interview_scorcecard
-    # @interview_scorecard = InterviewScorecard.find(2).scorecard
-    # @interview_scorecards = @application
-    # @interview_sections = @interview_scorecard.scorecard_sections if @scorecard.present?
-    # @interview_scorecards = InterviewScorecard.where(application_id: @application.id)
-    # @current_user_interview_scorecard = InterviewScorecard.where(user_id: current_user.id, application_id: @application.id).first 
   end
 
   def move_stage_single
