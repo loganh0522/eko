@@ -1,19 +1,72 @@
 <% if @errors.present? %> 
   <% @errors.each do |error| %> 
-    <% if error[0] == "body" %>  
+    <% if error[0] == "scorecard.section_options.body" %> 
+      $('#scorecard-sections').find('.section-answer').each(function(){
+        if ($(this).val().length === 0) {
+          if ($(this).hasClass('has-error')){
+            return
+          }
+          else {
+            $(this).addClass('has-error');
+            $(this).next().append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+          }
+        }
+        else if ($(this).val().length > 0 ){
+          $(this).removeClass('has-error');
+          $(this).next('#optionBodyBlock').hide();
+        }
+      });
+    <% elsif error[0] == "questions.question_options.body" %>   
+      $('.question-area').find('.answers').find('.section-answer').each(function(){
+        if ($(this).val().length === 0) {
+          if ($(this).hasClass('has-error')){
+            return
+          }
+          else {
+            $(this).addClass('has-error');
+            $(this).parent().next('.error').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+          }
+        }
+        else if ($(this).val().length > 0 ){
+          $(this).removeClass('has-error');
+          $(this).next().next().next().find('.notice').remove();
+        }
+      });
+    <% elsif error[0] == "questions.body" %> 
+      $('.question-field').each(function(){
+        if ($(this).val().length === 0) {
+          if ($(this).hasClass('has-error')){
+            return
+          }
+          else {
+            $(this).addClass('has-error');
+            $(this).next().next().next().append('<div class="notice"><%= escape_javascript(error[1]) %></div>');  
+          }
+        }
+        else if ($(this).val().length > 0 ){
+          $(this).removeClass('has-error');
+          $(this).next().find('.notice').remove();
+        }
+      });
+    <% elsif error[0] == "preperation" %>  
       $('trix-editor').addClass('has-error')
-    <% else %>
-      $('.<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
-      $('.<%= error[0] %>_Block').addClass('has-error');
-    <% end %>
-  
-    $('form').find('.error').each(function(){
-      if ($(this).prev().val().length > 0 ){
-        $(this).prev().removeClass('has-error');
-        $(this).find('.notice').remove();
-      }
-    });
+      $('.fa-exclamation-circle').show()
+    <% else %> 
+      if (!$('#<%= error[0] %>_Block').hasClass('has-error'))
+        $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+        $('#<%= error[0] %>_Block').addClass('has-error');
+      <% end %>
   <% end %>
+
+  $('form').find('.error').each(function(){
+    if ($(this).prev().val().length > 0 ){
+      $(this).prev().removeClass('has-error');
+      $(this).find('.notice').remove();
+      if ($(this).parent().attr('id') == 'overview-container'){
+        $('#overview').find('.fa').hide()
+      }
+    }
+  });
 <% else %>
   $('.main-form-container').remove();
   $('.main-container').show()

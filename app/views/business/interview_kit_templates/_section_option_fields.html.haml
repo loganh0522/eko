@@ -3,7 +3,7 @@
   .scorecard-criteria
     .fields
       = f.text_field :body, id: "section-option", class: "section-answer", autocomplete: 'off', placeholder: "Scorecard Criteria"
-      %span#optionBodyBlock
+      %span.error#optionBodyBlock
       = f.text_field :quality_answer, placeholder: "Provide guideline / hints", rows: 2
       = f.hidden_field :position, class: 'position'
     .remove_field

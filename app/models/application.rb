@@ -101,6 +101,18 @@ class Application < ActiveRecord::Base
       end
     end
   end
+
+  def current_stage
+    if self.application_stages.where(current_stage: true).present?
+      @current_stage = self.application_stages.where(current_stage: true).first
+    elsif self.hired == true
+      @current_stage = 'Hired'
+    elsif self.rejected == true
+      @current_stage = 'Rejected'
+    else 
+      @current_stage = 'Applied'
+    end
+  end
   # def current_position
   #   self.applicant.profile.current_position.title
   # end

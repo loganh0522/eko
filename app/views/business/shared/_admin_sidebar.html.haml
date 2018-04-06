@@ -3,6 +3,9 @@
   %li{:class => is_active?(business_company_path(current_company))}
     = link_to "Company Details", business_company_path(current_company)
   
+  %li{:class => is_active?(business_rooms_path)}
+    = link_to "Meeting Rooms", business_rooms_path
+  
   %li{:class => is_active?(business_default_stages_path)}
     = link_to "Hiring Pipeline", business_default_stages_path
   

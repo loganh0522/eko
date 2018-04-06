@@ -19,7 +19,7 @@ class Business::AssessmentsController < ApplicationController
   def new
     @assessment = Assessment.new
     @scorecard = Scorecard.new
-
+    @users = current_company.users
     if params[:application_id].present?
       @application = Application.find(params[:application_id]) 
       @candidate = @application.candidate
@@ -33,7 +33,8 @@ class Business::AssessmentsController < ApplicationController
   end
 
   def create 
-    @assessment = Assessment.new(assessment_params) 
+    @user_ids = params[:assessment][:user_ids].split(',') if params[:assessment][:user_ids].present?
+    @assessment = Assessment.new(assessment_params.merge!(user_ids: @user_ids)) 
 
     respond_to do |format| 
       if @assessment.save 
@@ -79,9 +80,12 @@ class Business::AssessmentsController < ApplicationController
   private
 
   def assessment_params
-    params.require(:assessment).permit(:name, :candidate_id, :application_id, :kind,
+    params.require(:assessment).permit(:name, :candidate_id, :application_id, :kind, :preperation,
       scorecard_attributes: [:id, :name,
-        section_options_attributes: [:id, :body, :quality_answer, :required, :_destroy, :position]])
+        section_options_attributes: [:id, :body, :quality_answer, :required, :_destroy, :position]],
+      questions_attributes: [:id, :kind, :body, :guidelines, :required, :_destroy, :position,
+        question_options_attributes: [:id, :body, :_destroy]],
+      user_ids: [])
   end
 
   def render_errors(default_stage)

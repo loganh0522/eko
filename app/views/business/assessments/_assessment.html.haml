@@ -26,7 +26,7 @@
             .name= user.full_name
             - if user == current_user
               .links
-                = link_to "Finish Scorecard", new_business_completed_assessment_path(assessment: assessment.interview.assessment), remote: true
+                = link_to "Finish Scorecard", new_business_completed_assessment_path(assessment: assessment), remote: true
             - else
               .links
                 .name

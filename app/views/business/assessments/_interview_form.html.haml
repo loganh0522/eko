@@ -2,6 +2,19 @@
   .standard-header
     = f.label :name, "Interview Kit Name"
     = f.text_field :name, placeholder: "Interview Kit Name"
+  .assign-to-row
+    .assign-user#user_ids_Block
+      .show-hidden-search-box
+        .add-button-search
+          .glyphicon.glyphicon-plus
+        #multiple-users
+          
+      .hidden-search-box
+        .search-area-content
+          %i.fa.fa-search.fa-stack-2x
+          = text_field_tag "", "", :placeholder => 'Type a users name to assign', id: "users", autocomplete: "off", class: "autocompleteCustom"
+        .auto-users#add-multiple
+          = render "business/users/users_auto"
   .form-radios
     %ul  
       %li.filter#overview.active Overview
@@ -33,5 +46,9 @@
                 = render 'section_option_fields', f: a   
             = link_to_add_fields "+ Add Criteria", s, :section_options 
   .container-footer
+    = f.hidden_field :application_id, value: @application.id if @application.present?
+    = f.hidden_field :candidate_id, value: @candidate.id
+    = f.hidden_field :assigned_to, value: "", id: "user_id"
+    = f.hidden_field :user_ids,  id: "user_ids"
     = f.submit "Save", class: "btn hover-button"
     .btn.border-button.close-modal Cancel

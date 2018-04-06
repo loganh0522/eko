@@ -1,0 +1,12 @@
+.template{id: "job_template_#{template.id}"}
+  .title= template.title
+  .dropdown
+    .dropdown-button
+      %i.fa.fa-ellipsis-h.fa-lg
+    .dropdown-content#myDropdown
+      = link_to edit_business_job_template_path(template), remote: true  do
+        %i.fa.fa-pencil
+        .action Edit
+      = link_to business_job_template_path(template), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do  
+        %i.fa.fa-trash-o
+        .action Destroy

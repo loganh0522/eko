@@ -17,5 +17,5 @@
 <% else %>
   $('.main-form-container').remove();
   $('.main-container').show()
-  $('.templates').html('<%= j render "email_templates", email_templates: @email_templates%>');
+  $('#email_template_<%= @email_template.id%> ').replaceWith('<%= j render "email_template", template: @email_template %>');
 <% end %>

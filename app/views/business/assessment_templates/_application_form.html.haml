@@ -1,0 +1,12 @@
+.template{id: "application_form_#{assessment.id}"}
+  .title= assessment.name
+  .dropdown
+    .dropdown-button
+      %i.fa.fa-ellipsis-h.fa-lg
+    .dropdown-content#myDropdown
+      = link_to edit_business_assessment_template_path(assessment), remote: true  do
+        %i.fa.fa-pencil
+        .action Edit
+      = link_to business_assessment_template_path(assessment), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do  
+        %i.fa.fa-trash-o
+        .action Destroy

@@ -22,7 +22,7 @@ class Business::EmailTemplatesController < ApplicationController
 
     respond_to do |format|
       if @email_template.save
-        @email_templates = current_company.email_templates
+        format.js
       else 
         render_errors(@email_template)
       end
@@ -43,7 +43,7 @@ class Business::EmailTemplatesController < ApplicationController
     
     respond_to do |format|
       if @email_template.update(e_temp_params)
-        @email_templates = current_company.email_templates
+        format.js
       else 
         render_errors(@email_template)  
       end
@@ -56,7 +56,6 @@ class Business::EmailTemplatesController < ApplicationController
     @email_template.destroy
 
     respond_to do |format|
-      @email_templates = current_company.email_templates
       format.js
     end
   end

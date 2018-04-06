@@ -24,7 +24,7 @@ class Business::JobTemplatesController < ApplicationController
 
     respond_to do |format|
       if @job_template.save
-        @job_templates = current_company.job_templates
+        format.js
       else 
         render_errors(@job_template)
       end
@@ -45,7 +45,7 @@ class Business::JobTemplatesController < ApplicationController
     
     respond_to do |format|
       if @job_template.update(job_params)
-        @job_templates = current_company.job_templates
+        format.js
       else 
         render_errors(@job_template)  
       end

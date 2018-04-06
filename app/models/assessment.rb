@@ -11,7 +11,7 @@ class Assessment < ActiveRecord::Base
   has_many :users, through: :assigned_users
 
   accepts_nested_attributes_for :scorecard, allow_destroy: true
-
+  accepts_nested_attributes_for :questions, allow_destroy: true
 
   def completed_scorecards(assessment)
     ScorecardAnswer.where(assessment_id: assessment.id)

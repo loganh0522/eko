@@ -1,5 +1,8 @@
-= form_for [:business, @permission], remote: true do |f| 
-  .modal-body
+.main-form-container
+  = form_for [:business, @permission], remote: true do |f| 
+    .standard-header
+      %h4 Create Permission Type
+    
     = f.label :name, "Permission Name (ex. Admin, Hiring Manager)"
     = f.text_field :name, placeholder: "Permission Name"
     .permission-header
@@ -79,7 +82,7 @@
       = f.check_box :view_analytics
       = f.label :view_analytics, "Can View Reports for Company & Jobs"
       
-  .modal-footer
-    = f.hidden_field :company_id, value: current_company.id
-    = f.button @permission.new_record? ? "Create" : "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
-    .btn.border-button.close-modal Cancel
+    .container-footer
+      = f.hidden_field :company_id, value: current_company.id
+      = f.button @permission.new_record? ? "Create" : "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
+      .btn.border-button.remove-main-form Cancel

@@ -22,7 +22,7 @@ class Business::ScorecardTemplatesController < ApplicationController
 
     respond_to do |format|
       if @scorecard.save
-        @scorecards = current_company.scorecard_templates
+        format.js
       else 
         render_errors(@scorecard)
       end
@@ -43,7 +43,7 @@ class Business::ScorecardTemplatesController < ApplicationController
     
     respond_to do |format|
       if @scorecard.update(scorecard_params)
-        @scorecards = current_company.scorecard_templates
+        format.js
       else 
         render_errors(@scorecard)  
       end

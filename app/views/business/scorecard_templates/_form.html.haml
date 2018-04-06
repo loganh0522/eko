@@ -3,7 +3,9 @@
     .standard-header
       %h4 Create Scorecard Template
     #scorecard-form
-      = f.text_field :name, placeholder: "Template Name"
+      = f.text_field :name, placeholder: "Template Name", autocomplete: "off", id: "name_Block"
+      %span.error#name_msgBlock 
+      
       #nested-sections
         %ul#scorecard-sections
           - if @scorecard.new_record?

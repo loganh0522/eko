@@ -1,17 +1,6 @@
 - if @scorecards.present?
   - @scorecards.each do |scorecard| 
-    .template{id: "scorecard_#{scorecard.id}"}
-      .title= scorecard.name
-      .dropdown
-        .dropdown-button
-          %i.fa.fa-ellipsis-h.fa-lg
-        .dropdown-content#myDropdown
-          = link_to edit_business_scorecard_template_path(scorecard), remote: true  do
-            %i.fa.fa-pencil
-            .action Edit
-          = link_to business_scorecard_template_path(scorecard), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do  
-            %i.fa.fa-trash-o
-            .action Destroy
+    = render 'scorecard', scorecard: scorecard
 - else 
   .not-present-container
     %p You currently do not have any Scorecard Templates

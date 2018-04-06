@@ -13,8 +13,7 @@
         = f.hidden_field :_destroy
     .body
       = f.text_field :body, id: "body_Block", class: "question-field", placeholder: "Add your Question", autocomplete: 'off'
-      = f.text_area :guidelines, placeholder: "Guidelines as to what they should be looking for in an answer", class: "question-field"
-      %span#body_msgBlock
+      %span.error#body_msgBlock
       = f.hidden_field :position, class: 'position'
       
       = f.fields_for :question_options, class: "options" do |a|

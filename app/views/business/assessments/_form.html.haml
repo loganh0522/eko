@@ -1,5 +1,18 @@
 = form_for [:business, @assessment], remote: true do |f|
   .modal-body
+    .assign-to-row
+      .assign-user#user_ids_Block
+        .show-hidden-search-box
+          .add-button-search
+            .glyphicon.glyphicon-plus
+          #multiple-users
+            
+        .hidden-search-box
+          .search-area-content
+            %i.fa.fa-search.fa-stack-2x
+            = text_field_tag "", "", :placeholder => 'Type a users name to assign', id: "users", autocomplete: "off", class: "autocompleteCustom"
+          .auto-users#add-multiple
+            = render "business/users/users_auto"
     .scorecard-container.standard-padding
       = f.label :name, "Scorecard Name"
       = f.text_field :name, placeholder: "Scorecard Name"
@@ -15,10 +28,11 @@
                   = render 'section_option_fields', f: a      
               
               = link_to_add_fields "+ Add Criteria", s, :section_options
-        
+      
   .modal-footer
     = f.hidden_field :kind, value: "scorecard"
     = f.hidden_field :application_id, value: @application.id if @application.present?
     = f.hidden_field :candidate_id, value: @candidate.id
+    = f.hidden_field :user_ids,  id: "user_ids"
     = f.submit "Create Scorecard", class: "btn submit-button"
     .btn.border-button.close-modal Cancel

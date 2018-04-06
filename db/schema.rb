@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180404141728) do
+ActiveRecord::Schema.define(version: 20180406195041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(version: 20180404141728) do
     t.integer  "candidate_id"
     t.string   "rejection_reason"
     t.boolean  "hired",            default: false
+    t.boolean  "reviewed"
   end
 
   create_table "assessment_templates", force: :cascade do |t|
@@ -1087,7 +1088,7 @@ ActiveRecord::Schema.define(version: 20180404141728) do
     t.text    "quality_answer"
     t.integer "position"
     t.integer "scorecard_id"
-    t.integer "scorecard_templates_id"
+    t.integer "scorecard_template_id"
   end
 
   create_table "sessions", force: :cascade do |t|

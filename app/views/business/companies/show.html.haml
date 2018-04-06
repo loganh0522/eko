@@ -15,35 +15,27 @@
       .profile-actions
         .link1= link_to "Edit Company", edit_business_company_path(current_company), class: "btn border-button", :data => {remote: true}
 
-    .standard-body
-      .standard-body-header
-        .templates-header
-          %h4 Widget Details 
-        = '<script type="text/javascript" src= "http://prod-talentwiz.heroku.com/widget/company_jobs/'"#{current_company.widget_key}"'></script> <style type="text/css">.customCSSclass a{text-decoration:none;} </style>'
+    / .standard-body
+    /   .standard-body-header
+    /     .templates-header
+    /       %h4 Widget Details 
+    /     = '<script type="text/javascript" src= "http://prod-talentwiz.heroku.com/widget/company_jobs/'"#{current_company.widget_key}"'></script> <style type="text/css">.customCSSclass a{text-decoration:none;} </style>'
 
     .standard-body
       .standard-body-header
         .templates-header
           %h4 Departments
 
-    .standard-body
-      .standard-body-header
-        .templates-header
-          %h4 Subsidiaries
-          = link_to "Add Subsidiary", new_business_company_path, class: "btn border-button", :data => {remote: true}
+    
 
       - @company.subsidiaries.each do |subsidiary|
         = subsidiary.subsidiary.name
 
-
+  
+  
 
   .main-container
     .standard-header
-      %h3 Meeting Rooms
-      = link_to "Create Room", new_business_room_path, class: "btn border-button", :data => {remote: true} 
-    - if @rooms.present? 
-      = render "business/rooms/rooms"
-    - else 
-      .not-present-container
-        %p There are currently no meeting rooms listed.
+      %h3 Subsidiaries
+      = link_to "Add Subsidiary", new_business_company_path, class: "btn border-button", :data => {remote: true}
 

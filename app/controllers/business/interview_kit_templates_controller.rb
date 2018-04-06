@@ -8,6 +8,7 @@ class Business::InterviewKitTemplatesController < ApplicationController
   def new
     @interview_kit = InterviewKitTemplate.new
     @scorecard = Scorecard.new
+
     respond_to do |format| 
       format.js
     end
@@ -22,11 +23,10 @@ class Business::InterviewKitTemplatesController < ApplicationController
 
     respond_to do |format|
       if @interview_kit.save
-        @interview_kits = current_company.interview_kit_templates
+        format.js
       else 
-
         render_errors(@interview_kit)
-
+        binding.pry
       end
       format.js
     end
@@ -41,15 +41,13 @@ class Business::InterviewKitTemplatesController < ApplicationController
   end
 
   def update
-
     @interview_kit = InterviewKitTemplate.find(params[:id])
     
     respond_to do |format|
       if @interview_kit.update(interview_kit_params)
-        @interview_kits = current_company.interview_kit_templates
+        format.js
       else 
         render_errors(@interview_kit)  
-        binding.pry
       end
       format.js
     end
@@ -71,10 +69,8 @@ class Business::InterviewKitTemplatesController < ApplicationController
     params.require(:interview_kit_template).permit(:title, :preperation,
       questions_attributes: [:id, :kind, :body, :guidelines, :required, :_destroy, :position,
         question_options_attributes: [:id, :body, :_destroy]], 
-      
       scorecard_attributes: [:id,
-        scorecard_sections_attributes: [:id, :body, :_destroy, 
-          section_options_attributes:[:id, :body, :position, :quality_answer, :_destroy]]])   
+        section_options_attributes:[:id, :body, :position, :quality_answer, :_destroy]])   
   end
 
 

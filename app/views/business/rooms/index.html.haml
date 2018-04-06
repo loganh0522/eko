@@ -1,0 +1,20 @@
+.page-header
+  %h2 Admin 
+  .admin-nav
+    %ul
+      %li= link_to "Career Portal", business_job_board_path(current_company.job_board.id)
+      %li= link_to "Templates", business_email_templates_path
+      %li= link_to "Settings", business_company_path(current_company), class: 'active'
+
+.company-settings
+  .side-container#job-nav
+    = render 'business/shared/admin_sidebar'
+  .main-container
+    .standard-header   
+      %h3 Meeting Rooms
+      = link_to "Create Room", new_business_room_path, class: "btn border-button", :data => {remote: true} 
+    - if @rooms.present? 
+      = render "business/rooms/rooms"
+    - else 
+      .not-present-container
+        %p There are currently no meeting rooms listed.

@@ -1,21 +1,37 @@
 <% if @errors.present? %> 
   <% @errors.each do |error| %> 
-    <% if error[0] == "body" %>  
-      $('trix-editor').addClass('has-error')
-    <% else %>
-      $('.<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
-      $('.<%= error[0] %>_Block').addClass('has-error');
-    <% end %>
-  
-    $('form').find('.error').each(function(){
-      if ($(this).prev().val().length > 0 ){
-        $(this).prev().removeClass('has-error');
-        $(this).find('.notice').remove();
-      }
-    });
+    <% if error[0] == "section_options.body" %> 
+      $('#scorecard-sections').find('.section-answer').each(function(){
+        if ($(this).val().length === 0) {
+          if ($(this).hasClass('has-error')){
+            return
+          }
+          else {
+            $(this).addClass('has-error');
+            $(this).next().append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+          }
+        }
+        else if ($(this).val().length > 0 ){
+          $(this).removeClass('has-error');
+          $(this).next('#optionBodyBlock').hide();
+        }
+      });
+    <% else %> 
+      if (!$('#<%= error[0] %>_Block').hasClass('has-error'))
+        $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+        $('#<%= error[0] %>_Block').addClass('has-error');
+      <% end %>
   <% end %>
+
+  $('form').find('.error').each(function(){
+    if ($(this).prev().val().length > 0 ){
+      $(this).prev().removeClass('has-error');
+      $(this).find('.notice').remove();
+    }
+  });
 <% else %>
   $('.main-form-container').remove();
   $('.main-container').show()
-  $('.templates').html('<%= j render "assessments", assessments: @assessments %>');
+  $('.templates').append('<%= j render "scorecard", scorecard: @scorecard %>');
+  $('.not-present-container').hide()
 <% end %>

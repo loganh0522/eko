@@ -18,11 +18,11 @@ class Business::AssessmentTemplatesController < ApplicationController
   end
 
   def create 
-    @assessment = AssessmentTemplate.new(interview_kit_params.merge!(company: current_company)) 
+    @assessment = AssessmentTemplate.new(assessment_params.merge!(company: current_company)) 
 
     respond_to do |format|
-      if @interview_kit.save
-        @assessments = current_company.assessment_templates
+      if @assessment.save
+        format.js
       else 
         render_errors(@assessment)
       end
@@ -43,7 +43,7 @@ class Business::AssessmentTemplatesController < ApplicationController
     
     respond_to do |format|
       if @assessment.update(assessment_params)
-        @assessments = current_company.interview_kit_templates
+        format.js
       else 
         render_errors(@assessment)  
       end
@@ -56,7 +56,6 @@ class Business::AssessmentTemplatesController < ApplicationController
     @assessment.destroy
 
     respond_to do |format|
-      @assessments = current_company.assessment_templates
       format.js
     end
   end
@@ -64,7 +63,7 @@ class Business::AssessmentTemplatesController < ApplicationController
   private 
 
   def assessment_params 
-    params.require(:assessment_template).permit(:name, :preperation,
+    params.require(:assessment_template).permit(:name,
       questions_attributes: [:id, :kind, :body, :guidelines, :required, :_destroy, :position,
         question_options_attributes: [:id, :body, :_destroy]])   
   end
