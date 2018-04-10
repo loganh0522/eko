@@ -16,13 +16,14 @@
         %span.error#recipient_email_msgBlock
       .contain-50
         = f.label :user_role, "Role"
-        = f.select :user_role, options_for_select(["Admin", "Hiring Manager", "Recruiter"])
+        = f.select :permission_id, options_for_select(["Admin"] + @company.permissions.collect{ |u| [u.name, u.id] })
     .form-row-no-border
       = f.label :message, "Message"
       = f.text_area :message, label: "Message", rows: '6', placeholder: "i.e Please follow the link below to join the platform and help us hire.", id: 'message_Block'
       %span.error#message_msgBlock
   .modal-footer
     = f.hidden_field :job_id, value: @job.id if @job.present?
+    = hidden_field_tag :subsidiary, @subsidiary.id if @subsidiary.present?
     = f.button "Send Invitation", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
     .btn.border-button.close-modal Cancel   
     

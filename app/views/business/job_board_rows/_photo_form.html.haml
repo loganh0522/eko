@@ -6,6 +6,7 @@
   = form_for [:business, @section], :html => { :multipart => true, id: "job-board-section"}, :remote => true do |f|    
     = f.hidden_field :kind, value: 'Photo'
     = hidden_field_tag :media_photo
+    = hidden_field_tag :subsidiary, @subsidiary.id if @subsidiary.present?
     .job-board-form 
       .float-container
         .header 
@@ -26,6 +27,7 @@
           = image_tag img.file_name.xs_image 
     = render "business/media_photos/multi_form"
 .modal-footer
+  
   = submit_tag "Save Section", class: "btn submit-button", id: "submit-section"
   .btn.border-button.close-modal Cancel
 

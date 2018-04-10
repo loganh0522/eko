@@ -1,5 +1,11 @@
 .page-header
-  %h2 Admin 
+  .dropdown 
+    .dropdown
+      .dropdown-button
+        %h2= "#{current_company.name} Admin"
+      .dropdown-content#myDropdown
+        - current_company.subsidiaries.each do |subsidiary|
+          %li= subsidiary.subsidiary.name
   .admin-nav
     %ul
       %li= link_to "Career Portal", business_job_board_path(current_company.job_board.id)
@@ -21,15 +27,10 @@
     /       %h4 Widget Details 
     /     = '<script type="text/javascript" src= "http://prod-talentwiz.heroku.com/widget/company_jobs/'"#{current_company.widget_key}"'></script> <style type="text/css">.customCSSclass a{text-decoration:none;} </style>'
 
-    .standard-body
-      .standard-body-header
-        .templates-header
-          %h4 Departments
-
-    
-
-      - @company.subsidiaries.each do |subsidiary|
-        = subsidiary.subsidiary.name
+    / .standard-body
+    /   .standard-body-header
+    /     .templates-header
+    /       %h4 Departments
 
   
   
@@ -38,4 +39,4 @@
     .standard-header
       %h3 Subsidiaries
       = link_to "Add Subsidiary", new_business_company_path, class: "btn border-button", :data => {remote: true}
-
+    = render 'subsidiaries'

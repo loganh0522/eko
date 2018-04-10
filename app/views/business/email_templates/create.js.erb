@@ -16,6 +16,7 @@
   <% end %>
 <% else %>
   $('.main-form-container').remove();
+  $('.not-present-container').remove();
   $('.main-container').show()
   $('.templates').append('<%= j render "email_template", template: @email_template %>');
 <% end %>

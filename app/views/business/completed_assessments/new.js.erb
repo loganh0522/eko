@@ -1,11 +1,12 @@
+$('#mediumModal').find('.modal-body').remove()
+$('#mediumModal').find('form').remove()
+
 <% if @assessment.kind == 'scorecard' %> 
-  $('#mediumModal').find('form').remove()
   $('#mediumModal').find('.interview-scorecard').remove()
   $('#mediumModal').find('.new-title').html('<%= j "Create Interview Kit" %>');
   $('#mediumModal').find('.new-modal-header').after('<%= j render "business/completed_assessments/form" %>');
   $('#mediumModal').show();
 <% else %>
-  $('#mediumModal').find('form').remove()
   $('#mediumModal').find('.interview-scorecard').remove()
   $('#mediumModal').find('.new-title').html('<%= j "Create Interview Kit" %>');
   $('#mediumModal').find('.new-modal-header').after('<%= j render "business/completed_assessments/interview_form" %>');

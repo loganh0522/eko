@@ -40,6 +40,7 @@
           %img#float-right-img(src="/tmp/layout-float-image-right.png")
   .modal-footer
     %fieldset
+      = hidden_field_tag :subsidiary, @subsidiary.id if @subsidiary.present?
       = f.hidden_field :kind, value: 'Video'
       = f.submit "Save Section", class: "btn submit-button"
       .btn.border-button.close-modal Cancel

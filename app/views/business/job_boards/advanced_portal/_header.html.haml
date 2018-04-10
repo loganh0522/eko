@@ -6,7 +6,7 @@
     - else
       .brand
         = link_to root_path do
-          = current_company.name
+          = @company.name
     %ul#section-nav
       %li Jobs
       - @job_board.header_links.each do |f| 

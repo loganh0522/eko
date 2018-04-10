@@ -28,7 +28,7 @@ class Application < ActiveRecord::Base
     @job = self.job 
 
     @job.stages.each do |stage| 
-      @stage = ApplicationStage.create(stage.attributes.except("id").merge!(application_id: self.id) )
+      @stage = ApplicationStage.create(stage.attributes.except("id").merge!(application_id: self.id, stage_id: stage.id))
       
       stage.stage_actions.each do |action| 
         @action = StageAction.create(action.attributes.except("id", "stage_id").merge!(application_stage_id: @stage.id))

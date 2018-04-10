@@ -1,28 +1,39 @@
 $('#mediumModal').find('form').remove()
-$('#mediumModal').find('.interview-scorecard').remove()
-$('#mediumModal').find('.new-title').html('<%= j "Create Interview Kit" %>');
-$('#mediumModal').find('.new-modal-header').after('<%= j render "business/completed_assessments/form" %>');
-$('#mediumModal').show();
+$('#mediumModal').find('.modal-body').remove()
 
-$('.form-radios').on('click', '.filter', function(event) {
+
+<% if @assessment.kind == 'scorecard' %> 
+  $('#mediumModal').find('.interview-scorecard').remove()
+  $('#mediumModal').find('.new-title').html('<%= j "Create Interview Kit" %>');
+  $('#mediumModal').find('.new-modal-header').after('<%= j render "business/completed_assessments/form" %>');
+  $('#mediumModal').show();
+<% else %>
+  $('#mediumModal').find('.interview-scorecard').remove()
+  $('#mediumModal').find('.new-title').html('<%= j "Create Interview Kit" %>');
+  $('#mediumModal').find('.new-modal-header').after('<%= j render "business/completed_assessments/interview_form" %>');
+  $('#mediumModal').show();
+<% end %>
+
+
+$('.form-radios').on('click', '.interview-kit-filter', function(event) {
   if ($(this).attr('id') === 'questions') {
     $('.questions-container').show();
     $('.overview-container').hide();
     $('.scorecard-container').hide();
 
-    $('.filter').removeClass('active');
+    $('.interview-kit-filter').removeClass('active');
     $(this).addClass('active');
   } else if ($(this).attr('id') === 'scorecard') {
     $('.questions-container').hide();
     $('.overview-container').hide();
     $('.scorecard-container').show();
-    $('.filter').removeClass('active');
+    $('.interview-kit-filter').removeClass('active');
     $(this).addClass('active');
   } else {
     $('.scorecard-container').hide();
     $('.questions-container').hide();
     $('.overview-container').show();
-    $('.filter').removeClass('active');
+    $('.interview-kit-filter').removeClass('active');
     $(this).addClass('active');
   }
 });

@@ -12,21 +12,23 @@ class Business::JobBoardHeadersController < ApplicationController
   end
 
   def edit 
-    respond_to do |format|
-      @job_board_header = JobBoardHeader.find(params[:id])
-      @job_board = JobBoard.find(params[:job_board_id])
-      
-      if @job_board_header.background_image.present?
-        @background = @job_board_header.background_image
-      else
-        @background = BackgroundImage.new 
-      end
+    @job_board_header = JobBoardHeader.find(params[:id])
+    @job_board = JobBoard.find(params[:job_board_id])
+    @company = @job_board.company
+    
+    if @job_board_header.background_image.present?
+      @background = @job_board_header.background_image
+    else
+      @background = BackgroundImage.new 
+    end
 
-      if current_company.logo.present?
-        @logo = current_company.logo
-      else
-        @logo = Logo.new
-      end
+    if @company.logo.present?
+      @logo = current_company.logo
+    else
+      @logo = Logo.new
+    end
+
+    respond_to do |format|
       format.js
     end
   end

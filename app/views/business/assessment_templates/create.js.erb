@@ -47,5 +47,6 @@
 <% else %>
   $('.main-form-container').remove();
   $('.main-container').show()
+  $('.not-present-container').remove();
   $('.templates').append('<%= j render "application_form", assessment: @assessment %>');
 <% end %>

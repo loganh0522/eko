@@ -11,17 +11,27 @@ class Business::JobBoardRowsController < ApplicationController
     @photo = MediaPhoto.new
     @member = TeamMember.new
     
+    @subsidiary = Subsidiary.find(params[:subsidiary]) if params[:subsidiary].present?
+
     respond_to do |format|
       format.js
     end
   end
 
   def create   
-    @job_board = current_company.job_board
+    if params[:subsidiary].present? 
+      @company = Subsidiary.find(params[:subsidiary]).subsidiary
+    else 
+      @company = current_company
+    end
+
+    @job_board = @company.job_board
     
     if params[:job_board_row][:video_link].present? 
       video_parse_function
-      @section = JobBoardRow.new(job_board_row_params.merge!(youtube_id: @video_id, job_board: @job_board, position: row_position))
+      
+      @section = JobBoardRow.new(job_board_row_params.merge!(youtube_id: @video_id, 
+        job_board: @job_board, position: row_position))
     else
       @section = JobBoardRow.new(create_params.merge!(job_board: @job_board, position: row_position))  
     end

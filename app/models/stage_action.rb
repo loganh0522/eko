@@ -13,6 +13,8 @@ class StageAction < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :subject, :message, if: :is_email?
 
+  after_create :create_stage_action_for_application_stage 
+
   def is_email? 
     kind == 'Email'
   end
@@ -23,7 +25,11 @@ class StageAction < ActiveRecord::Base
 
 
   def create_stage_action_for_application_stage
-    
-
+    if self.stage_id.present?
+      self.stage.application_stages.each do |stage| 
+        @stage_action = StageAction.create(self.attributes.except("id", "stage_id").merge!(application_stage_id: stage.id))
+        @stage_action.users << self.users 
+      end
+    end
   end
 end

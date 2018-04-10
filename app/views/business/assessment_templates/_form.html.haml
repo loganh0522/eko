@@ -17,5 +17,6 @@
       = link_to_add_fields("+ Add Question", f, :questions)
 
     .container-footer
-      = f.submit "Save", class: "btn hover-button"
+      = hidden_field_tag :subsidiary, @subsidiary.id if @subsidiary.present?
+      = f.button @assessment.new_record? ? "Save" : "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
       .btn.border-button.remove-main-form Cancel

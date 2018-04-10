@@ -1,5 +1,34 @@
 $('#mediumModal').find('form').remove()
+$('#mediumModal').find('.modal-body').remove()
 $('#mediumModal').find('.interview-scorecard').remove()
 $('#mediumModal').find('.new-title').html('<%= j "Interview Scorecard" %>');
-$('#mediumModal').find('.new-modal-header').after('<%= j render "business/completed_assessments/show_assessment/show_scorecard" %>');
 $('#mediumModal').show();
+
+
+<% if @assessment.kind == 'scorecard' %>
+  $('#mediumModal').find('.new-modal-header').after('<%= j render "business/completed_assessments/show_assessment/show_scorecard" %>');
+<% else %>
+  $('#mediumModal').find('.new-modal-header').after('<%= j render "business/completed_assessments/show_assessment/interview_feedback" %>');
+<% end %>
+
+$('.form-radios').on('click', '.interview-kit-filter', function(event) {
+  if ($(this).attr('id') === 'questions') {
+    $('.questions-container').show();
+    $('.overview-container').hide();
+    $('.scorecard-container').hide();
+    $('.interview-kit-filter').removeClass('active');
+    $(this).addClass('active');
+  } else if ($(this).attr('id') === 'scorecard') {
+    $('.questions-container').hide();
+    $('.overview-container').hide();
+    $('.scorecard-container').show();
+    $('.interview-kit-filter').removeClass('active');
+    $(this).addClass('active');
+  } else {
+    $('.scorecard-container').hide();
+    $('.questions-container').hide();
+    $('.overview-container').show();
+    $('.interview-kit-filter').removeClass('active');
+    $(this).addClass('active');
+  }
+});

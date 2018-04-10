@@ -1,0 +1,8 @@
+.templates
+  - if current_company.subsidiaries.present?
+    - current_company.subsidiaries.each do |subsidiary|
+      = render 'subsidiary', subsidiary: subsidiary
+  - else 
+    .not-present-container
+      %p There are currently no subsidiaries present.
+      .add_object= link_to "Add Subsidiary", new_business_company_path, class: "btn border-button", :data => {remote: true}

@@ -66,12 +66,14 @@ class UsersController < ApplicationController
 
   def new_with_invitation_token
     @invitation = Invitation.where(token: params[:token]).first
+    
     if @invitation    
-      @user = User.new(email: @invitation.recipient_email)
+      @user = User.new(email: @invitation.recipient_email, first_name: @invitation.first_name,
+        last_name: @invitation.last_name)
       @invitation_token = @invitation.token
+
       render :new
     else
-
       redirect_to expired_token_path
     end
   end
@@ -89,8 +91,15 @@ class UsersController < ApplicationController
 
   def handle_invitation
     @invitation = Invitation.where(token: params[:invitation_token]).first
-    @user.update_attributes(company_id: @invitation.company_id, role: @invitation.user_role)
     
+    if @invitation.permission_id == 0 || !@invitation.permission_id.present?
+      @user.update_attributes(company_id: @invitation.company_id, 
+        role: "Admin")
+    else
+      @user.update_attributes(company_id: @invitation.company_id, 
+        permission_id: @invitation.permission_id)
+    end
+
     if @invitation.job_id.present? 
       HiringTeam.create(user_id: @user.id, job_id: @invitation.job_id)
       session[:user_id] = @user.id
@@ -100,6 +109,7 @@ class UsersController < ApplicationController
     else
       session[:user_id] = @user.id 
       session[:company_id] = @user.company.id
+
       @invitation.destroy
       redirect_to business_root_path
     end

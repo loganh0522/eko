@@ -1,5 +1,11 @@
 .page-header
-  %h2 Admin 
+  .dropdown 
+    .dropdown
+      .dropdown-button
+        %h2= "#{current_company.name} Admin"
+      .dropdown-content#myDropdown
+        - current_company.subsidiaries.each do |subsidiary|
+          = link_to "#{subsidiary.subsidiary.name}", business_email_templates_path(subsidiary: subsidiary.id) 
   .admin-nav
     %ul
       %li= link_to "Career Portal", business_job_board_path(current_company.job_board.id)
@@ -12,7 +18,7 @@
   .main-container
     .standard-header
       %h3 E-mail Templates
-      = link_to "+ Email Template", new_business_email_template_path, :data => {:remote => true }, class: "btn border-button"
+      = link_to "+ Email Template", new_business_email_template_path(subsidiary: @subsidiary), :data => {:remote => true }, class: "btn border-button"
     .templates
       = render "business/email_templates/email_templates", email_templates: @email_templates
    

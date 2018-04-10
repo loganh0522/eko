@@ -72,7 +72,7 @@ class Business::CompletedAssessmentsController < ApplicationController
 
   def interview_kit
     @completed_assessment = CompletedAssessment.new
-    @assessment = Assessment.find(params[:assessment])
+    @assessment = Assessment.find(params[:id])
     
     @questions = @assessment.questions
     @answer = Answer.new

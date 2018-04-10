@@ -8,8 +8,12 @@ class Business::InterviewKitsController < ApplicationController
   
 
   def index 
-    @interview_kits = current_company.interview_kits
-
+    if params[:subsidiary].present?
+      @subsidiary = Subsidiary.find(params[:subsidiary])
+      @interview_kits = @subsidiary.subsidiary.interview_kits
+    else
+      @interview_kits = current_company.interview_kits
+    end
   end
 
   def show 

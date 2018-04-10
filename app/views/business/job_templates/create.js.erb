@@ -17,5 +17,6 @@
 <% else %>
   $('.main-form-container').remove();
   $('.main-container').show();
+  $('.not-present-container').remove();
   $('.templates').append('<%= j render "job_template", template: @job_template %>');
 <% end %>

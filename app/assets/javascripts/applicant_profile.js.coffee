@@ -153,4 +153,24 @@ jQuery ->
   $(document).on 'click', '.remove-main-form', (e) -> 
     $('.main-form-container').remove()
     $('.main-container').show()
-  
+
+  $('.form-radios').on 'click', '.interview-kit-filter', (event) ->
+    if $(this).attr('id') == 'questions'
+      $('.questions-container').show()
+      $('.overview-container').hide()
+      $('.scorecard-container').hide()
+      $('.interview-kit-filter').removeClass 'active'
+      $(this).addClass 'active'
+    else if $(this).attr('id') == 'scorecard'
+      $('.questions-container').hide()
+      $('.overview-container').hide()
+      $('.scorecard-container').show()
+      $('.interview-kit-filter').removeClass 'active'
+      $(this).addClass 'active'
+    else
+      $('.scorecard-container').hide()
+      $('.questions-container').hide()
+      $('.overview-container').show()
+      $('.interview-kit-filter').removeClass 'active'
+      $(this).addClass 'active'
+    return

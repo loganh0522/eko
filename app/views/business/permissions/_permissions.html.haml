@@ -2,17 +2,6 @@
   .title Admin
 
 - @permissions.each do |permission| 
-  .template{id: "permission_#{permission.id}"}
-    .title= permission.name
-    .dropdown
-      .dropdown-button
-        %i.fa.fa-ellipsis-h.fa-lg
-      .dropdown-content#myDropdown
-        = link_to edit_business_permission_path(permission), remote: true  do
-          %i.fa.fa-pencil
-          .action Edit
-        = link_to business_permission_path(permission), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do  
-          %i.fa.fa-trash-o
-          .action Destroy
+  = render 'permission', permission: permission
 
     

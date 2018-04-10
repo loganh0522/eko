@@ -1,4 +1,2 @@
-$('.smallModal').find('form').remove()
-$('.smallModal').find('.new-title').html('<%= j "Edit Permission" %>');
-$('.smallModal').find('.new-modal-header').after('<%= j render "business/permissions/form" %>');
-$('.smallModal').show();
+$('.main-container').hide()
+$('.company-settings').append('<%= j render "business/permissions/form" %>');

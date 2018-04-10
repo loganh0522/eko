@@ -23,7 +23,6 @@ class Business::PermissionsController < ApplicationController
 
     respond_to do |format| 
       if @permission.save 
-        @permissions = current_company.permissions
         format.js
       else
         render_errors(@permission)

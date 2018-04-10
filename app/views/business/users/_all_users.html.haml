@@ -1,0 +1,9 @@
+.user-header
+  .user-name Name
+  .role Role
+- if @users.present?
+  - @users.each do |user|
+    = render 'user_row', user: user
+- else
+  .not-present-container
+    %p No users currently present.

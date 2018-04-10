@@ -1,12 +1,19 @@
 class Business::InvitationsController < ApplicationController
   layout "business"
-  
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
+  
+
   def index
-    @invitations = current_company.invitations
+    if params[:subsidiary].present?
+      @subsidiary = Subsidiary.find(params[:subsidiary])
+      @invitations = @subsidiary.subsidiary.invitations
+    else
+      @invitations = current_company.invitations
+    end
+
     respond_to do |format|
       format.js
     end
@@ -16,13 +23,25 @@ class Business::InvitationsController < ApplicationController
     @invitation = Invitation.new
     @job = Job.find(params[:job]) if params[:job].present?
     
+    if params[:subsidiary].present?
+      @subsidiary = Subsidiary.find(params[:subsidiary]) 
+      @company = @subsidiary.subsidiary
+    else
+      @company = current_company
+    end
+    
     respond_to do |format|
       format.js
     end
   end
     
   def create
-    @invitation = Invitation.create(invitation_params.merge!(company: current_company, user: current_user)) 
+    if params[:subsidiary].present?
+      @company = Subsidiary.find(params[:subsidiary]).subsidiary
+      @invitation = Invitation.create(invitation_params.merge!(company: @company, user: current_user)) 
+    else
+      @invitation = Invitation.create(invitation_params.merge!(company: current_company, user: current_user)) 
+    end
     
     respond_to do |format|  
       if @invitation.save 
@@ -47,8 +66,8 @@ class Business::InvitationsController < ApplicationController
   private 
 
   def invitation_params 
-    params.require(:invitation).permit(:user_id, :inviter_id, 
-      :company_id, :message, :user_role, :recipient_email, :job_id,
+    params.require(:invitation).permit(:user_id, :inviter_id, :permission_id,
+      :company_id, :message, :recipient_email, :job_id,
       :first_name, :last_name)
   end
   

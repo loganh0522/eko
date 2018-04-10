@@ -115,13 +115,11 @@ Rails.application.routes.draw do
     resources :activities
     resources :assessments
     resources :scorecards
-    resources :completed_assessments
+    
     resources :answers
     resources :subsidiaries
-    
     resources :hiring_teams
     resources :permissions
-    
     resources :media_photos
     resources :team_members
     resources :logos
@@ -136,21 +134,22 @@ Rails.application.routes.draw do
     resources :application_emails
     resources :stage_actions
 
-
     resources :job_templates
     resources :interview_kit_templates
     resources :assessment_templates
     resources :scorecard_templates
     resources :email_templates
     
+    get 'interview_kit/:id', to: "completed_assessments#interview_kit", as: 'interview_kit'
+    
+    resources :completed_assessments 
+
 
     resources :rooms do 
       collection do
         get "availability/:id", to: "rooms#get_availability"
       end
     end
-
-
 
     post "update_password", to: 'users#update_password'
     post 'create_subscription', to: 'users#create_subscription'

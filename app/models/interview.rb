@@ -48,8 +48,6 @@ class Interview < ActiveRecord::Base
     @kit = Assessment.create(interview_id: self.id, application_id: self.application_id, 
       candidate_id: self.candidate.id, name: self.title, preperation: @template.preperation) 
     
-    @scorecard = Scorecard.create(assessment: @kit)
-
     @template.questions.each do |question| 
       @question = Question.create(question.attributes.except('id', 'interview_kit_template_id'))
       @question.update_attributes(assessment_id: @kit.id)
@@ -59,13 +57,11 @@ class Interview < ActiveRecord::Base
       end
     end
 
-    if @template.scorecard.present?
-      @template.scorecard.scorecard_sections.each do |section| 
-        @section = ScorecardSection.create(scorecard_id: @scorecard.id, body: section.body) 
-        
-        section.section_options.each do |option| 
-          SectionOption.create(scorecard_section: @section, body: option.body)
-        end
+    @scorecard = Scorecard.create(assessment: @kit)
+
+    if @template.scorecard.present?  
+      @template.scorecard.section_options.each do |option| 
+        SectionOption.create(scorecard_id: @scorecard.id, body: option.body)
       end
     end
   end

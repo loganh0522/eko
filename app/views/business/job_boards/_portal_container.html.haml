@@ -5,16 +5,20 @@
   .sections
     = render 'business/job_boards/advanced_portal/sections'
   .jobs
-    - current_company.open_jobs.each do |job|
-      .job-posting
-        .header-info
-          .job-detail
-            .title= link_to "#{job.title}", job_path(job)
-          .view-job= link_to "View Job", job_path(job), class: "btn btn-primary"
-        .bottom-info
-          .left-side
-            = "#{job.location}"
-          .right-side 
-            / = job.industries.first.name
-            / = job.job_kind.first.name
-            = "#{time_ago_in_words(job.created_at)} ago"
+    - if @company.open_jobs.present?
+      - @company.open_jobs.each do |job|
+        .job-posting
+          .header-info
+            .job-detail
+              .title= link_to "#{job.title}", job_path(job)
+            .view-job= link_to "View Job", job_path(job), class: "btn btn-primary"
+          .bottom-info
+            .left-side
+              = "#{job.location}"
+            .right-side 
+              / = job.industries.first.name
+              / = job.job_kind.first.name
+              = "#{time_ago_in_words(job.created_at)} ago"
+    - else 
+      .not-present-container
+        %p No Jobs are currently posted.

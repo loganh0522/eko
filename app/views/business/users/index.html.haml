@@ -1,5 +1,11 @@
 .page-header
-  %h2 Admin 
+  .dropdown 
+    .dropdown
+      .dropdown-button
+        %h2= "#{current_company.name} Admin"
+      .dropdown-content#myDropdown
+        - current_company.subsidiaries.each do |subsidiary|
+          = link_to "#{subsidiary.subsidiary.name}", business_users_path(subsidiary: subsidiary.id)
   .admin-nav
     %ul
       %li= link_to "Career Portal", business_job_board_path(current_company.job_board.id)
@@ -12,19 +18,28 @@
   .main-container
     .standard-header
       %h3 Team Members 
-      = link_to "Invite User", new_business_invitation_path, remote: true, class: 'btn border-button'
-    .change-containers-nav
-      %ul 
-        = link_to business_users_path, remote: true do 
-          %li#all-users.activated  All Users
+      = link_to "Invite User", new_business_invitation_path(subsidiary: @subsidiary), remote: true, class: 'btn border-button'
+    .standard-padding#all-user-filters
+      .toggle-actions
+        = link_to business_users_path, remote: true do
+          .toggle-filter#all-users.activated All Users
         = link_to business_invitations_path, remote: true do 
-          %li#pending-users Pending Invitations
-    .search-form
-      = form_tag search_business_users_path, :method => 'get', id: "search-form" do
-        .search-area-content
-          %i.fa.fa-search.fa-stack-2x
-          = text_field_tag "query", nil, placeholder: "Search Team Members", class: "search-field"
+          .toggle-filter#pending-users Pending Invitations
+      .search-form
+        = form_tag search_business_users_path, :method => 'get', id: "search-form" do
+          .search-area-content
+            %i.fa.fa-search.fa-stack-2x
+            = text_field_tag "query", nil, placeholder: "Search Team Members", class: "search-field"
+    
+    / .toggle-actions
+    /   %ul 
+    /     = link_to business_users_path, remote: true do 
+    /       %li#all-users.activated  All Users
+    /     = link_to business_invitations_path, remote: true do 
+    /       %li#pending-users Pending Invitations
+
+   
     .user-list
-      = render 'business/users/user_row'
+      = render 'all_users'
 
              

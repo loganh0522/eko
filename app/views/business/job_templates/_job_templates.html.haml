@@ -5,4 +5,4 @@
 - else
   .not-present-container  
     %p You currently do not have any Job Template
-    .add-object= link_to "Add Template", new_business_job_template_path, remote: true, class: 'btn border-button'
+    .add-object= link_to "Add Template", new_business_job_template_path(subsidiary: @subsidiary), remote: true, class: 'btn border-button'

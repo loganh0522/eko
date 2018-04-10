@@ -2,7 +2,7 @@ class Invitation < ActiveRecord::Base
   belongs_to :user
   belongs_to :company
 
-  validates_presence_of :recipient_email, :message, :user_role, :first_name, :last_name
+  validates_presence_of :recipient_email, :message, :first_name, :last_name, :permission_id
 
   before_create :generate_token
   

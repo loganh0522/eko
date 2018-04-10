@@ -1,23 +1,18 @@
-.user-header
-  .user-name Name
-  .role Role
-
-- @users.each do |user|
-  .user{:id => "user_#{user.id}" }
-    - if user.user_avatar.present? 
-      = image_tag user.user_avatar.image.small_image, :class => 'circle', :size => "100x100" 
-    - else
-      .circle-img= user.first_name.first.capitalize
-    .name= "#{user.first_name} #{user.last_name}"
-    
-    = link_to business_users_path(user), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."} do 
-      %i.glyphicon.glyphicon-remove
-    .permissions
-      .show-hidden-search-box#action-box
-        = user.role
-        .caret
-      .hidden-search-box
-        .select-box
-          .select-item Admin
-          .select-item Hiring Manager
-          .select-item Recruiter
+.user{:id => "user_#{user.id}" }
+  - if user.user_avatar.present? 
+    = image_tag user.user_avatar.image.small_image, :class => 'circle', :size => "100x100" 
+  - else
+    .circle-img= user.first_name.first.capitalize
+  .name= "#{user.first_name} #{user.last_name}"
+  
+  = link_to business_user_path(user), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."} do 
+    %i.glyphicon.glyphicon-remove
+  .permissions
+    .show-hidden-search-box#action-box
+      = user.role
+      .caret
+    .hidden-search-box
+      .select-box
+        .select-item Admin
+        .select-item Hiring Manager
+        .select-item Recruiter

@@ -1,11 +1,7 @@
 <% if @errors.present? %> 
   <% @errors.each do |error| %> 
-    <% if error[0] == "body" %>  
-      $('trix-editor').addClass('has-error')
-    <% else %>
-      $('.<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
-      $('.<%= error[0] %>_Block').addClass('has-error');
-    <% end %>
+    $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
+    $('#<%= error[0] %>_Block').addClass('has-error');
   
     $('form').find('.error').each(function(){
       if ($(this).prev().val().length > 0 ){
@@ -15,6 +11,7 @@
     });
   <% end %>
 <% else %>
-  $('.smallModal').hide();
-  $('.templates').html('<%= j render "permissions", permissions: @permissions %>');
+  $('.main-form-container').remove();
+  $('.main-container').show()
+  $('#permission_<%= @permission.id %>').replaceWith('<%= j render "permission", permission: @permission %>');
 <% end %>

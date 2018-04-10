@@ -1,5 +1,11 @@
 .page-header
-  %h2 Admin 
+  .dropdown 
+    .dropdown
+      .dropdown-button
+        %h2= "#{current_company.name} Admin"
+      .dropdown-content#myDropdown
+        - current_company.subsidiaries.each do |subsidiary|
+          = link_to "#{subsidiary.subsidiary.name}", business_job_board_path(subsidiary_id: subsidiary.id)
   .admin-nav
     %ul
       %li= link_to "Career Portal", business_job_board_path, class: 'active'

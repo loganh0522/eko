@@ -4,21 +4,35 @@ class Business::EmailTemplatesController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
+  
+
+  def index 
+    if params[:subsidiary].present?
+      @subsidiary = Subsidiary.find(params[:subsidiary])
+      @email_templates = @subsidiary.subsidiary.email_templates
+    else
+      @email_templates = current_company.email_templates
+    end
+  end
 
   def new
     @email_template = EmailTemplate.new
-
+    @subsidiary = Subsidiary.find(params[:subsidiary]) if params[:subsidiary].present?
+    
     respond_to do |format| 
       format.js
     end
   end
 
-  def index 
-    @email_templates = current_company.email_templates
-  end
-
   def create 
-    @email_template = EmailTemplate.new(e_temp_params.merge!(company: current_company, user: current_user)) 
+    if params[:subsidiary].present?
+      @company = Subsidiary.find(params[:subsidiary]).subsidiary
+      @email_template = EmailTemplate.new(e_temp_params.merge!(company: @company, 
+        user: current_user)) 
+    else
+      @email_template = EmailTemplate.new(e_temp_params.merge!(company: current_company, 
+        user: current_user)) 
+    end
 
     respond_to do |format|
       if @email_template.save

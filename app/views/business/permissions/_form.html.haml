@@ -2,86 +2,89 @@
   = form_for [:business, @permission], remote: true do |f| 
     .standard-header
       %h4 Create Permission Type
-    
-    = f.label :name, "Permission Name (ex. Admin, Hiring Manager)"
-    = f.text_field :name, placeholder: "Permission Name"
-    .permission-header
-      Job Permissions
-    .form-row 
-      = f.check_box :create_job
-      = f.label :create_job, "Can Create & Edit Job Postings"
-    .form-row 
-      = f.check_box :view_all_jobs
-      = f.label :view_all_jobs, "Can View & Access all Job Postings"
-    .form-row 
-      = f.check_box :add_team_members
-      = f.label :add_team_members, "Can Add Team Members"
-    .form-row 
-      = f.check_box :advertise_job
-      = f.label :advertise_job, "Can Advertise Job on Job Boards"
-      
-    .permission-header
-      Candidate Permissions
-    .form-row 
-      = f.check_box :create_candidates
-      = f.label :create_candidates, "Can Create & Edit Candidates" 
-    .form-row 
-      = f.check_box :view_all_candidates
-      = f.label :view_all_candidates, "Can View All Candidates"
-    .form-row 
-      = f.check_box :move_candidates
-      = f.label :move_candidates, "Can Add Candidates to Jobs & Move Stages"
-    .permission-header
-      Task Permissions
-    .form-row 
-      = f.check_box :create_tasks
-      = f.label :create_tasks, "Can Create & Edit Tasks"  
-    .form-row 
-      = f.check_box :view_all_tasks
-      = f.label :view_all_tasks, "Can View All Tasks"
-    .form-row 
-      = f.check_box :assign_tasks
-      = f.label :assign_tasks, "Can Assign Tasks to other Users"
-    .permission-header
-      Message Permissions
-    .form-row 
-      = f.check_box :send_messages
-      = f.label :send_messages, "Send E-mails To Candidates"  
-    .form-row 
-      = f.check_box :view_all_messages
-      = f.label :view_all_messages, "Can View All Candidate Conversations"
-    .form-row
-      = f.check_box :create_job
-      = f.label :view_section_messages, "Can View Messages"
-    .permission-header
-      Calendar Permissions
-    .form-row 
-      = f.check_box :view_all_events
-      = f.label :view_all_events, "Can View All Scheduled Events"  
-    .form-row 
-      = f.check_box :view_all_events
-      = f.label :view_events, "Can View Calendar Section"
-    .form-row 
-      = f.check_box :create_event
-      = f.label :create_event, "Can Create Events"
-    .form-row 
-      = f.check_box :send_event_invitation
-      = f.label :send_event_invitation, "Can Send Interview Invitations (auto-scheduling)"
-      
-    .permission-header
-      General Permissions
-    .form-row 
-      = f.check_box :access_settings
-      = f.label :access_settings, "Can Access Company Settings (i.e templates, billing, permissions)"
-      
-    .form-row 
-      = f.check_box :edit_career_portal
-      = f.label :edit_career_portal, "Can Edit Career Portal"
-      
-    .form-row 
-      = f.check_box :view_analytics
-      = f.label :view_analytics, "Can View Reports for Company & Jobs"
-      
+    .standard-padding
+      = f.label :name, "Permission Name (ex. Admin, Hiring Manager)"
+      = f.text_field :name, placeholder: "Permission Name", id: "name_Block"
+      %span.error#name_msgBlock
+      .permission-container
+        .permission-header
+          Job Permissions
+        .form-row 
+          = f.check_box :create_job
+          = f.label :create_job, "Can Create & Edit Job Postings"
+        .form-row 
+          = f.check_box :view_all_jobs
+          = f.label :view_all_jobs, "Can View & Access all Job Postings"
+        .form-row 
+          = f.check_box :add_team_members
+          = f.label :add_team_members, "Can Add Team Members"
+        .form-row 
+          = f.check_box :advertise_job
+          = f.label :advertise_job, "Can Advertise Job on Job Boards"
+      .permission-container    
+        .permission-header
+          Candidate Permissions
+        .form-row 
+          = f.check_box :create_candidates
+          = f.label :create_candidates, "Can Create & Edit Candidates" 
+        .form-row 
+          = f.check_box :view_all_candidates
+          = f.label :view_all_candidates, "Can View All Candidates"
+        .form-row 
+          = f.check_box :move_candidates
+          = f.label :move_candidates, "Can Add Candidates to Jobs & Move Stages"
+      .permission-container
+        .permission-header
+          Task Permissions
+        .form-row 
+          = f.check_box :create_tasks
+          = f.label :create_tasks, "Can Create & Edit Tasks"  
+        .form-row 
+          = f.check_box :view_all_tasks
+          = f.label :view_all_tasks, "Can View All Tasks"
+        .form-row 
+          = f.check_box :assign_tasks
+          = f.label :assign_tasks, "Can Assign Tasks to other Users"
+      .permission-container
+        .permission-header
+          Message Permissions
+        .form-row 
+          = f.check_box :send_messages
+          = f.label :send_messages, "Send E-mails To Candidates"  
+        .form-row 
+          = f.check_box :view_all_messages
+          = f.label :view_all_messages, "Can View All Candidate Conversations"
+        .form-row
+          = f.check_box :create_job
+          = f.label :view_section_messages, "Can View Messages"
+      .permission-container
+        .permission-header
+          Calendar Permissions
+        .form-row 
+          = f.check_box :view_all_events
+          = f.label :view_all_events, "Can View All Scheduled Events"  
+        .form-row 
+          = f.check_box :view_all_events
+          = f.label :view_events, "Can View Calendar Section"
+        .form-row 
+          = f.check_box :create_event
+          = f.label :create_event, "Can Create Events"
+        .form-row 
+          = f.check_box :send_event_invitation
+          = f.label :send_event_invitation, "Can Send Interview Invitations (auto-scheduling)"
+      .permission-container
+        .permission-header
+          General Permissions
+        .form-row 
+          = f.check_box :access_settings
+          = f.label :access_settings, "Can Access Company Settings (i.e templates, billing, permissions)"
+        .form-row 
+          = f.check_box :edit_career_portal
+          = f.label :edit_career_portal, "Can Edit Career Portal"
+        .form-row 
+          = f.check_box :view_analytics
+          = f.label :view_analytics, "Can View Reports for Company & Jobs"
+          
     .container-footer
       = f.hidden_field :company_id, value: current_company.id
       = f.button @permission.new_record? ? "Create" : "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}

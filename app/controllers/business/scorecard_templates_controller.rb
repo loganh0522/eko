@@ -4,22 +4,33 @@ class Business::ScorecardTemplatesController < ApplicationController
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
-
+  
+  def index 
+    if params[:subsidiary].present?
+      @subsidiary = Subsidiary.find(params[:subsidiary])
+      @scorecards = @subsidiary.subsidiary.scorecard_templates
+    else
+      @scorecards = current_company.scorecard_templates
+    end
+  end
+  
   def new
     @scorecard = ScorecardTemplate.new
-
+    @subsidiary = Subsidiary.find(params[:subsidiary]) if params[:subsidiary].present?
+    
     respond_to do |format| 
       format.js
     end
   end
 
-  def index 
-    @scorecards = current_company.scorecard_templates
-  end
-
   def create 
-    @scorecard = ScorecardTemplate.new(scorecard_params.merge!(company: current_company)) 
-
+    if params[:subsidiary].present?
+      @company = Subsidiary.find(params[:subsidiary]).subsidiary
+      @scorecard = ScorecardTemplate.new(scorecard_params.merge!(company: @company))
+    else
+      @scorecard = ScorecardTemplate.new(scorecard_params.merge!(company: current_company)) 
+    end
+    
     respond_to do |format|
       if @scorecard.save
         format.js

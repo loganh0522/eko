@@ -6,4 +6,4 @@
     Scheduled
     = link_to "(View Details)",  business_interview_path(action.interview.id), remote: true
   .links 
-    = link_to "Interview Kit", new_business_completed_assessment_path(assessment: action.interview.assessment), target: :_blank
+    = link_to "Interview Kit", business_interview_kit_path(action.interview.assessment), target: :_blank

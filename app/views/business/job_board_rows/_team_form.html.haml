@@ -1,6 +1,7 @@
 .modal-body  
   = form_for [:business, @section], :html => {id: "job-board-section" }, :remote => true do |f|
     = f.hidden_field :kind, value: 'Team'
+    = hidden_field_tag :subsidiary, @subsidiary.id if @subsidiary.present?
     .form-row-no-border
       = f.label :header, "Header"
       = f.text_field :header, class: "subdomain-field"

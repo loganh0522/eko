@@ -6,11 +6,11 @@
     .dropdown-button.border-button.add-job-board-sections
       + Add Section
     .dropdown-content
-      = link_to 'Text', new_business_job_board_row_path(kind: "Text"), remote: true
-      = link_to 'Text & Photo', new_business_job_board_row_path(kind: "Text-Photo"), remote: true
-      = link_to 'Video', new_business_job_board_row_path(kind: "Video"), remote: true
-      = link_to 'Photos', new_business_job_board_row_path(kind: "Photo"), remote: true
-      = link_to 'Team', new_business_job_board_row_path(kind: "Team"), remote: true
+      = link_to 'Text', new_business_job_board_row_path(kind: "Text", subsidiary: @subsidiary), remote: true
+      = link_to 'Text & Photo', new_business_job_board_row_path(kind: "Text-Photo", subsidiary: @subsidiary), remote: true
+      = link_to 'Video', new_business_job_board_row_path(kind: "Video", subsidiary: @subsidiary), remote: true
+      = link_to 'Photos', new_business_job_board_row_path(kind: "Photo", subsidiary: @subsidiary), remote: true
+      = link_to 'Team', new_business_job_board_row_path(kind: "Team", subsidiary: @subsidiary), remote: true
       / %li
       /   %a= link_to 'Location / Map', '#', :data => {:toggle => "modal", :target => "#multimediaRowModal"}
       / %li

@@ -1,0 +1,12 @@
+.template{id: "interview_kit_#{kit.id}"}
+  .title= kit.title
+  .dropdown
+    .dropdown-button
+      %i.fa.fa-ellipsis-h.fa-lg
+    .dropdown-content#myDropdown
+      = link_to edit_business_interview_kit_template_path(kit), remote: true  do
+        %i.fa.fa-pencil
+        .action Edit
+      = link_to business_interview_kit_template_path(kit), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do  
+        %i.fa.fa-trash-o
+        .action Destroy

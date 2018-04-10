@@ -29,6 +29,7 @@
           = f.trix_editor :body
           %span.error
       .container-footer
-        = submit_tag "Save E-mail", class: "btn submit-button"
+        = hidden_field_tag :subsidiary, @subsidiary.id if @subsidiary.present?
+        = f.button @email_template.new_record? ? "Save" : "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
         .btn.border-button.remove-main-form Cancel
     

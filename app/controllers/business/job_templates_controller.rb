@@ -8,11 +8,17 @@ class Business::JobTemplatesController < ApplicationController
   
 
   def index 
-    @job_templates = current_company.job_templates
+    if params[:subsidiary].present?
+      @subsidiary = Subsidiary.find(params[:subsidiary])
+      @job_templates = @subsidiary.subsidiary.job_templates
+    else
+      @job_templates = current_company.job_templates
+    end
   end
 
   def new
     @job_template = JobTemplate.new
+    @subsidiary = Subsidiary.find(params[:subsidiary]) if params[:subsidiary].present?
 
     respond_to do |format| 
       format.js
@@ -20,7 +26,12 @@ class Business::JobTemplatesController < ApplicationController
   end
 
   def create 
-    @job_template = JobTemplate.new(job_params.merge!(company: current_company, user: current_user)) 
+    if params[:subsidiary].present?
+      @company = Subsidiary.find(params[:subsidiary]).subsidiary
+      @job_template = JobTemplate.new(job_params.merge!(company: @company, user: current_user)) 
+    else
+      @job_template = JobTemplate.new(job_params.merge!(company: current_company, user: current_user)) 
+    end
 
     respond_to do |format|
       if @job_template.save

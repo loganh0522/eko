@@ -17,5 +17,5 @@
 <% else %>
   $('.main-form-container').remove();
   $('.main-container').show()
-  $('.templates').html('<%= j render "interview_kits", interview_kits: @interview_kits%>');
+  $('#interview_kit_<%= @interview_kit.id %>').replaceWith('<%= j render "interview_kit", kit: @interview_kit %>');
 <% end %>

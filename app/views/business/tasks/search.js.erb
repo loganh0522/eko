@@ -1,6 +1,8 @@
 if ($('.table1').is(":visible")) {
   $('#task-container').html('<%= j render "business/tasks/table", tasks: @tasks %>');
   $('.pagination-container').html('<%= j render "business/tasks/pagination", tasks: @tasks %>');
+} else if ($('.side-tasks').length === 1) {
+  $('#task-container').html('<%= j render "business/tasks/candidate_tasks", tasks: @tasks %>');
 } else {
   $('#task-container').html('<%= j render "business/tasks/tasks", tasks: @tasks %>');
   $('.pagination-container').html('<%= j render "business/tasks/pagination", tasks: @tasks %>');

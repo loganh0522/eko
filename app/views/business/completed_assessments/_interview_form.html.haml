@@ -1,9 +1,9 @@
 = form_for [:business, @completed_assessment], html: {remote: true} do |f|
   .form-radios
     %ul  
-      %li.filter#overview.active Overview
-      %li.filter#questions Questions
-      %li.filter#scorecard Scorecard
+      %li.interview-kit-filter#overview.active Overview
+      %li.interview-kit-filter#questions Questions
+      %li.interview-kit-filter#scorecard Scorecard
   .overview-container.standard-padding
     %h3 Interview Overview
     .overview

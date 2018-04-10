@@ -147,6 +147,45 @@ module ApplicationHelper
       end
     end
   end
+
+  def question_answers(question, assessment)
+    if question.kind == 'Text (Short Answer)' || question.kind == 'Text (Long Answer)'
+      @answers = Answer.where(question: question, completed_assessment: assessment).first 
+      if @answers.present?
+        @answer = @answers.body
+      else 
+        return "There are currently no answers for this application"
+      end
+    elsif question.kind == 'Multiselect'
+      @answers = []
+      question.answers.each do |answer| 
+        @answers.push(answer.question_option_id)
+      end
+      content_tag(:ui, :class => "multi-answer") do 
+        question.question_options.each do |option| 
+          if @answers.include?(option.id)
+            concat content_tag(:li, option.body, :class => "bold")
+          else
+            concat content_tag(:li, option.body)
+          end
+        end 
+      end 
+    elsif question.kind == 'Select'
+      @answers = []
+      question.answers.each do |answer| 
+        @answers.push(answer.question_option_id)
+      end
+      content_tag(:ui, :class => "multi-answer") do 
+        question.question_options.each do |option| 
+          if @answers.include?(option.id)
+            concat content_tag(:li, option.body, :class => "bold")
+          else
+            concat content_tag(:li, option.body)
+          end
+        end 
+      end 
+    end
+  end
   
   def stage_action_users(stage_action)
     content_tag(:ul) do

@@ -8,9 +8,12 @@ class Business::UsersController < ApplicationController
   include AuthHelper
 
   def index 
-    if params[:term].present?
-      @company_users = current_company.users.order(:full_name).where("full_name ILIKE ?", "%#{params[:term]}%")
-      render :json => @company_users.to_json 
+    # if params[:term].present?
+    #   @company_users = current_company.users.order(:full_name).where("full_name ILIKE ?", "%#{params[:term]}%")
+    #   render :json => @company_users.to_json
+    if params[:subsidiary].present?
+      @subsidiary = Subsidiary.find(params[:subsidiary])
+      @users = @subsidiary.subsidiary.users
     else
       @users = current_company.users
       @job_board = current_company.job_board
@@ -74,6 +77,15 @@ class Business::UsersController < ApplicationController
         render_errors(@user)
         format.js
       end
+    end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    
+    respond_to do |format|
+      format.js
     end
   end
 

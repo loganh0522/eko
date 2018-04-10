@@ -1,28 +1,24 @@
 class Business::JobBoardsController < ApplicationController 
   layout "business"
-  
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
   before_filter :owned_by_company
-  
+
+
   def show
-    @job_board = JobBoard.find(params[:id])
+    if params[:subsidiary_id].present?
+      @subsidiary = Subsidiary.find(params[:subsidiary_id])
+      @company = @subsidiary.subsidiary
+      @job_board = @company.job_board
+    else
+      @company = current_company
+      @job_board = current_company.job_board  
+    end
+
     @job_board_header = @job_board.job_board_header
     @sections = @job_board.job_board_rows
-
-    if @job_board_header.background_image.present?
-      @background = @job_board_header.background_image
-    else
-      @background = BackgroundImage.new 
-    end
-
-    if current_company.logo.present?
-      @logo = current_company.logo
-    else
-      @logo = Logo.new
-    end
   end
 
   def edit

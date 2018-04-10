@@ -4,7 +4,7 @@
 - else 
   .not-present-container
     %p You currently do not have any Assessment Templates
-    .add-object= link_to "+ Assessment Template", new_business_assessment_template_path, remote: true, class: 'btn border-button'
+    .add-object= link_to "+ Assessment Template", new_business_assessment_template_path(subsidiary: @subsidiary), remote: true, class: 'btn border-button'
       
 
 

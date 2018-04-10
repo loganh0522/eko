@@ -32,6 +32,7 @@ class Business::CompaniesController < ApplicationController
       end
     end
   end
+  
   def edit 
     @company = current_company
 
