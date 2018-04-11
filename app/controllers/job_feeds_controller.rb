@@ -16,7 +16,7 @@ class JobFeedsController < ApplicationController
   end
 
   def ziprecruiter_premium_feed
-    @jobs = Job.joins(:ziprecruiter_premium_feeds)
+    @jobs = Job.joins(:ziprecruiter_premium_feed)
     render 'job_feeds/ziprecruiter_premium_feed.xml.builder', formats: [:xml]
   end
 

@@ -22,7 +22,7 @@ class Job < ActiveRecord::Base
   has_many :orders
   has_many :order_items
 
-  has_many :ziprecruiter_premium_feeds
+  has_one :ziprecruiter_premium_feed
   
   validates_presence_of :title, :description, :location
     

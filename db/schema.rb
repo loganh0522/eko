@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180411150211) do
+ActiveRecord::Schema.define(version: 20180411172450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1315,9 +1315,9 @@ ActiveRecord::Schema.define(version: 20180411150211) do
     t.integer  "job_id"
     t.integer  "premium_board_id"
     t.datetime "posted_at"
-    t.boolean  "zip_recruiter_boost"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "boost",            default: false
   end
 
 end
