@@ -14,7 +14,7 @@ class Application < ActiveRecord::Base
   has_many :assessments
   has_many :question_answers, dependent: :destroy
 
-  after_create :reindex_candidate
+  after_create :reindex_candidate, :create_process
   after_update :reindex_candidate, :create_stage_actions
 
   def reindex_candidate

@@ -1,0 +1,9 @@
+= render 'top'
+#main-container
+  .post-job-container
+    .toggle-actions 
+      = link_to business_job_job_feeds_path(@job) do 
+        .toggle-filter Free Job Boards
+      = link_to business_job_premium_boards_path(@job) do 
+        .toggle-filter.activated  Premium Job Boards
+    = render 'business/orders/form'

@@ -4,19 +4,37 @@ jQuery ->
     regexp = new RegExp($(this).data('id'), 'g')
     
     board = $(this).data('board')
+
     if $("#order_" + board).length == 0 
       $('#cart').find('.body').append($(this).data('fields').replace(regexp, time))
-      totalAmount = 0
+      
+      subTotal = 0
+      
       $('.unit-price').each -> 
-        totalAmount += Number($(this).val())
+        subTotal += Number($(this).val())
+      
+      taxAmount = Number(subTotal * 0.13).toFixed(2)
+      totalAmount = Number(subTotal) + Number(taxAmount)
+
+      $('#sub-total').find('.amount').html("$" + subTotal)
+      $('#tax-total').find('.amount').html("$" + taxAmount)
       $('#cart-total').find('.amount').html("$" + totalAmount)
+
       $('#order_total').val(totalAmount)
+    
     else if $("#order_" + board).length == 1 
       $("#order_" + board).remove()
       $('#cart').find('.body').append($(this).data('fields').replace(regexp, time))
-      totalAmount = 0
+      subTotal = 0
+      
       $('.unit-price').each -> 
-        totalAmount += Number($(this).val())
+        subTotal += Number($(this).val())
+
+      taxAmount = Number(subTotal * 0.13).toFixed(2)
+      totalAmount = Number(subTotal) + Number(taxAmount)
+
+      $('#sub-total').find('.amount').html("$" + subTotal)
+      $('#tax-total').find('.amount').html("$" + taxAmount)
       $('#cart-total').find('.amount').html("$" + totalAmount)
       $('#order_total').val(totalAmount)
 
@@ -27,11 +45,23 @@ jQuery ->
     id = $(this).parent().attr('id')
     $(this).closest('fieldset').remove()
 
-    totalAmount = Number($('#cart-total').find('.amount').val())
+    subTotal = Number($('#sub-total').find('.amount').val())
 
     $('.unit-price').each -> 
-      totalAmount += Number($(this).val())
+      subTotal += Number($(this).val())
 
+  
+    $('#sub-total').find('.amount').html("$" + subTotal)
+    
+    taxAmount = Number(subTotal * 0.13).toFixed(2)
+    totalAmount = Number(subTotal) + Number(taxAmount)
+
+    $('#tax-total').find('.amount').html("$" + taxAmount)
     $('#cart-total').find('.amount').html("$" + totalAmount)
     $('#order_total').val(totalAmount)
     event.preventDefault()
+
+
+
+
+

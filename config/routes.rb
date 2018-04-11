@@ -348,6 +348,7 @@ Rails.application.routes.draw do
       
       resources :scorecards
 
+      get :premium_boards, to: "job_feeds#premium_boards"
       get :advertise, to: "job_feeds#index"
       get 'tasks', to: "tasks#job_tasks"
       get 'comments', to: "comments#job_comments"
@@ -431,6 +432,7 @@ Rails.application.routes.draw do
   get 'adzuna-job-feed', to: "job_feeds#adzuna_job_feed"
   get 'eluta-job-feed', to: "job_feeds#eluta_job_feed"
   get 'ziprecruiter-job-feed', to: "job_feeds#ziprecruiter_job_feed"
+  get 'ziprecruiter-premium-feed', to: "job_feeds#ziprecruiter_premium_feed"
   get 'trovit-job-feed', to: "job_feeds#trovit_job_feed"
   get 'jobinventory-job-feed', to: "job_feeds#job_inventory_feed"
   get 'indeed-job-feed', to: "job_feeds#indeed_job_feed"

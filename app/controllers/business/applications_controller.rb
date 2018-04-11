@@ -130,6 +130,7 @@ class Business::ApplicationsController < ApplicationController
     @rejection_reasons = current_company.rejection_reasons
     @candidate = @application.candidate
     @application.update_attribute(:stage_id, @stage.id)  
+    
     track_activity @application, "move_stage", @application.candidate.id, @job.id, @stage.id
   end
 

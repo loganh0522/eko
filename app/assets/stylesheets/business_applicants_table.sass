@@ -387,10 +387,10 @@ trix-editor
           float: left
 
 .post-job-container
-  margin: -20px 0 100px 0
+  margin: 0 0 100px 0
   overflow: hidden
   padding: 0 20px 20px 10px
-  .change-containers-nav
+  .toggle-actions
     margin-left: 3%
   #free-boards
     width: 95%
@@ -451,7 +451,16 @@ trix-editor
     .footer
       padding: 10px 10px
       width: 100%
-      #cart-total
+      #tax-total,
+      #sub-total
+        font-size: 14px  
+        overflow: hidden
+        .total  
+          float: left
+        .amount 
+          float: right
+          margin-right: 30px
+      #cart-total 
         font-size: 18px  
         overflow: hidden
         .total  
@@ -488,6 +497,20 @@ trix-editor
     min-height: 80px
     .duration-name
       padding: 5px 0
+    .posted
+      padding: 10px 10px
+      border: 1px solid rgba(0,0,0,0.1)
+      border-radius: 5px 
+      width: 90%
+      overflow: hidden
+      margin: 0 auto
+      .fa 
+        float: left
+        font-size: 18px
+        color: green
+        margin: 2px 15px 0 0 
+      .title
+        float: left
   .premium-body
     padding: 20px 0px
     height: fit-content
@@ -499,6 +522,20 @@ trix-editor
     .job-duration
       font-size: 12px
       color: rgba(0,0,0,0.8)
+    .posted
+      padding: 10px 10px
+      border: 1px solid rgba(0,0,0,0.1)
+      border-radius: 5px 
+      width: 90%
+      overflow: hidden
+      margin: 10px auto 0 auto
+      .fa 
+        float: left
+        font-size: 18px
+        color: green
+        margin: 2px 15px 0 0 
+      .title
+        float: left
   .add_to_cart
     margin-right: 10px
     height: fit-content

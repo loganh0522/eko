@@ -9,5 +9,10 @@ class Order < ActiveRecord::Base
     allow_destroy: true
 
 
-  
+  def receipt
+    
+
+
+    
+  end
 end

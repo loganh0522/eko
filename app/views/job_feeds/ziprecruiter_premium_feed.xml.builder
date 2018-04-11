@@ -68,4 +68,3 @@ xml.publisherurl "https://www.talentwiz.ca"
     end
   end
 end
-

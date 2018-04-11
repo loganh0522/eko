@@ -15,18 +15,8 @@ class Business::JobFeedsController < ApplicationController
       @customer = Customer.new
     end
     
-    if params[:type] == "free"
-      @job = Job.find(params[:job_id])
-      @job_feed = @job.job_feed
-
-    elsif params[:type] == "premium"
-      @job = Job.find(params[:job_id])
-      @job_feed = @job.job_feed
-      @job_feeds = PremiumBoard.all
-      @order_item = OrderItem.new
-      @order = Order.new
-      # @order_items = OrderItem.all
-    end
+    @job = Job.find(params[:job_id])
+    @job_feed = @job.job_feed
 
     respond_to do |format| 
       format.js
@@ -34,7 +24,13 @@ class Business::JobFeedsController < ApplicationController
     end
   end
 
-  def premium
+  def premium_boards
+    if current_company.customer.present?
+      @customer = current_company.customer 
+    else 
+      @customer = Customer.new
+    end
+    
     @job = Job.find(params[:job_id])
     @job_feed = @job.job_feed
     @job_feeds = PremiumBoard.all

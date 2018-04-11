@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409130740) do
+ActiveRecord::Schema.define(version: 20180411150211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -233,6 +233,7 @@ ActiveRecord::Schema.define(version: 20180409130740) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "full_name"
+    t.string   "name"
   end
 
   add_index "candidates", ["company_id"], name: "index_candidates_on_company_id", using: :btree
@@ -1308,6 +1309,15 @@ ActiveRecord::Schema.define(version: 20180409130740) do
     t.string   "function"
     t.string   "industry"
     t.string   "skill"
+  end
+
+  create_table "ziprecruiter_premium_feeds", force: :cascade do |t|
+    t.integer  "job_id"
+    t.integer  "premium_board_id"
+    t.datetime "posted_at"
+    t.boolean  "zip_recruiter_boost"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

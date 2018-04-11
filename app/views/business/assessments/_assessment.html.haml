@@ -2,12 +2,13 @@
   .header
     %h4= "#{assessment.name} Scorecard"
     .my-scorecard
-    - if !current_user.completed_assessments.present? 
+    / - if !current_user.completed_assessments.present? 
+    .links
       - if assessment.kind == "scorecard"
         = link_to "Create Scorecard", new_business_completed_assessment_path(assessment: assessment), remote: true 
       - else
         = link_to "Interview Kit", business_interview_kit_path(assessment), target: :_blank
-  
+
   .body
     - if assessment.completed_assessments.present? 
       - assessment.completed_assessments.each do |assessment| 
@@ -20,16 +21,23 @@
               = link_to "edit", edit_business_completed_assessment_path(assessment), remote: true
               = link_to "view", business_completed_assessment_path(assessment), remote: true
      
-    - elsif assessment.pending.present?    
-      Pending Interview Scorecard 
+    - elsif assessment.pending.present?  
+      .standard-padding  
+        Pending Interview Scorecard 
       - assessment.pending.each do |user|
         .scorecard-complete  
           = user_avatar(user)
           .details
             .name= user.full_name
             - if user == current_user
-              .links
-                = link_to "Finish Scorecard", new_business_completed_assessment_path(assessment: assessment), remote: true
+              
+              - if assessment.kind == "scorecard"
+                .links
+                  = link_to "Finish Scorecard", new_business_completed_assessment_path(assessment: assessment), remote: true
+              - else
+                .links
+                  = link_to "Interview Kit", business_interview_kit_path(assessment), target: :_blank
+              
             - else
               .links
                 .name
@@ -38,8 +46,9 @@
     - else 
       .not-present-container
         %p No completed assessments 
-        .add-object= link_to "Complete Assessment", new_business_completed_assessment_path(assessment: assessment), class: 'btn hover-button', remote: true
-
-
+        - if assessment.kind == "scorecard"
+          .add-object= link_to "Complete Scorecard", new_business_completed_assessment_path(assessment: assessment), remote: true , class: 'btn hover-button'
+        - else
+          .add-object= link_to "Interview Kit", business_interview_kit_path(assessment), target: :_blank, class: 'btn hover-button'
 
     

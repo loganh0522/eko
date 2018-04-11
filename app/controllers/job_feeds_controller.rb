@@ -15,6 +15,11 @@ class JobFeedsController < ApplicationController
     render 'job_feeds/ziprecruiter_job_feed.xml.builder', formats: [:xml]
   end
 
+  def ziprecruiter_premium_feed
+    @jobs = Job.joins(:ziprecruiter_premium_feeds)
+    render 'job_feeds/ziprecruiter_premium_feed.xml.builder', formats: [:xml]
+  end
+
   def eluta_job_feed
     @companies = Company.all
     render 'job_feeds/eluta_job_feed.xml.builder', formats: [:xml]

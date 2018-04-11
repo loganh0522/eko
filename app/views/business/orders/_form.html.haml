@@ -8,37 +8,35 @@
           .form-row-no-border
             Details
           .form-row-no-border
-            - if board.posting_durations.count > 1  
-              - if board.order_items.present?  
-                - board.order_items.each do |item|
-
-                  - if item.job == @job && item.created_at < (Time.now - 30.days) 
-                    Posted
-                    .btn.border-button= "#{time_ago_in_words(item.created_at)} ago"
-                  - else 
-                    - board.posting_durations.each do |duration|
-                      .contain-50
-                        .duration-name= duration.name
-                        = link_to_add_to_cart "#{duration.price}", "#{duration.duration}", f, :order_items, board.id, duration.id
+            - if board.posting_durations.count > 1 
+              - if @job.ziprecruiter_premium_feeds.present? 
+                .posted 
+                  %i.fa.fa-check-circle
+                  .title Posted 
               - else
-                = link_to_add_to_cart "#{duration.price}", "#{duration.duration}", f, :order_items, board.id, duration.id
+                - board.posting_durations.each do |duration|
+                  .contain-50
+                    .duration-name= duration.name
+                    = link_to_add_to_cart "#{duration.price}", "#{duration.duration}", f, :order_items, board.id, duration.id
+                
+                
          
             - else
               - board.posting_durations.each do |duration|
                 .duration-name= duration.name
-                - if board.order_items.present? 
-                  - board.order_items.each do |item|
-                    - if item.job == @job && item.created_at > (Time.now - 30.days) 
-                      Posted
-                      .btn.border-button= "#{time_ago_in_words(item.created_at)} ago"
-                    - else
-                      = link_to_add_to_cart "$ #{duration.price} ", "#{duration.duration}", f, :order_items, board.id, duration.id
-                - else 
-                  = link_to_add_to_cart "$ #{duration.price} ", "#{duration.duration}", f, :order_items, board.id, duration.id
+                = link_to_add_to_cart "$ #{duration.price} ", "#{duration.duration}", f, :order_items, board.id, duration.id
+               
+                  
   #cart 
     .header My Cart
     .body
     .footer
+      #sub-total
+        .total Sub-total
+        .amount
+      #tax-total
+        .total Tax
+        .amount
       #cart-total 
         .total Total
         .amount= "0"

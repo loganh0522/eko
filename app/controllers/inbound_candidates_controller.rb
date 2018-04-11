@@ -5,9 +5,9 @@ class InboundCandidatesController < ApplicationController
     @job = Job.find(params[:job_id])
     @company = @job.company
 
-    @candidate = Candidate.create(company: @company, first_name: params[:first_name], 
+    @candidate = Candidate.create(company: @company, name: params[:name], first_name: params[:first_name], 
       last_name: params[:last_name], email: params[:email], phone: params[:phone], 
-      manually_created: true, source: "ZipRecruiter")
+      manually_created: false, source: "ZipRecruiter")
     
     @application = Application.create(candidate: @candidate, job: @job)
     
@@ -43,7 +43,7 @@ class InboundCandidatesController < ApplicationController
     @company = @job.company
 
     @candidate = Candidate.create(company: @company, first_name: details["first_name"], last_name: details["last_name"],
-      email: details["email"], email: details["phone"], manually_created: true)
+      email: details["email"], email: details["phone"], manually_created: false)
     @application = Application.create(candidate: @candidate, job: @job)
 
 
