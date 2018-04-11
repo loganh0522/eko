@@ -13,7 +13,11 @@ xml.publisherurl "https://www.talentwiz.ca"
         xml.city { xml.cdata! (job.city) }
         xml.state { xml.cdata! (job.province) }
         xml.company { xml.cdata! (job.company.name)}
-        xml.trafficboost {xml.cdata! (job.ziprecruiter_premium_feed.boost).to_s} 
+        if job.ziprecruiter_premium_feed.boost == true
+          xml.trafficboost {xml.cdata! ('double')} 
+        else
+          xml.trafficboost {xml.cdata! ('single')} 
+        end
         xml.category { xml.cdata!(job.industry) } if job.industry.present?
         xml.date {xml.cdata!((job.created_at).to_s)} 
         xml.job_type { xml.cdata!(job.kind) } if job.kind.present?
