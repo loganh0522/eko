@@ -8,7 +8,7 @@ end
 
 shared_examples "user is not a job seeker" do 
   let(:company){Fabricate(:company)}
-  let(:alice){Fabricate(:user, kind: 'business', company: company)}
+  let(:alice){Fabricate(:user, kind: 'business', company: company, role: "Admin")}
   
   it "redirects the user to the business_root_path if logged in" do 
     set_current_user(alice)
@@ -20,7 +20,7 @@ end
 
 shared_examples "trial is over" do 
   let(:company){Fabricate(:company, active: false, subscription: "trial")}
-  let(:alice){Fabricate(:user, kind: 'business', company: company)}
+  let(:alice){Fabricate(:user, kind: 'business', company: company, role: "Admin")}
   
   it "redirects the user to the business_plan_path" do 
     set_current_user(alice)
@@ -32,7 +32,7 @@ end
 
 shared_examples "user does not belong to company" do 
   let(:company) {Fabricate(:company)}
-  let(:alice) {Fabricate(:user, kind: 'business')}
+  let(:alice) {Fabricate(:user, kind: 'business', role: "Admin")}
   
   before do 
     set_current_user(alice)
@@ -64,7 +64,7 @@ end
 
 shared_examples "company has been deactivated" do 
   let(:company) {Fabricate(:company, active: false)}
-  let(:alice) {Fabricate(:user, kind: 'business', company: company)}
+  let(:alice) {Fabricate(:user, kind: 'business', company: company, role: "Admin")}
    
   before do 
     set_current_user(alice)

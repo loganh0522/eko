@@ -2,36 +2,40 @@ require 'spec_helper'
 
 describe InboundCandidatesController do 
   describe 'POST create' do
-    let(:file) { Base64.encode64(File.open(File.join(Rails.root, '/spec/support/files/avatar.gif'), &:read)) }
-    let(:image) { "data:image/gif;base64,#{ image_data }" }
+    let(:company) {Fabricate(:company)}
+    let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
+    let(:alice) {Fabricate(:user, company: company, role: "Admin")}
+    let(:job) {Fabricate(:job, company: company, user_ids: alice.id)}
+    let(:multichoice) {Fabricate(:question, kind: "Multiselect")}
+    let(:singlechoice) {Fabricate(:question, kind: "Select (One)")}
+    let(:question) {Fabricate(:question, job_id: job.id, kind: "Text (Long Answer)")}
     
-    let(:params) = {
-      "email": "talentwiz@ziptest2.com", 
-      "resume": file
-      "first_name": "talentwiz",
-      "job_id": "14",
-      "response_id": "55e9c2f1",
-      "name": "talentwiz ziptest",
-      "last_name": "ziptest",
-      "phone": "+1 3101231234"
-    }
-    
+    let(:option1) {Fabricate(:question_option, question_id: multichoice.id)}
+    let(:option2) {Fabricate(:question_option, question_id: multichoice.id)}
+    let(:option3) {Fabricate(:question_option, question_id: singlechoice.id)}
+    let(:option4) {Fabricate(:question_option, question_id: singlechoice.id)}
+
     context 'with valid params' do
-      let(:params) { { photo: { image: image } } }
-
       before do
-        post :create, params: params, 'Content-Type' => 'application/json',format: :json
+        multichoice
+        option1
+        option2
+        question
+        post :ziprecruiter_webhook, {name: "logan houston", first_name: "logan", last_name: "houston", job_id: job.id, 
+        email: 'houston@talentwiz.ca', resume: Base64.encode64(open("./spec/fixtures/file.pdf").to_a.join), 
+        answers: [{id: question.id, value: "yes"}, 
+          {id: multichoice.id, values: [option1.id, option2.id]}, 
+          {value: option3.id, id: singlechoice.id}]}
       end
 
-      it 'returns photo object' do
-        expect(parsed_response_body(response.body)[:image][:url]).not_to be_empty
+      it "creates the application" do 
+        expect(Application.count).to eq(1)
+        expect(Candidate.count).to eq(1)
+        expect(Candidate.first.name).to eq("logan houston")
       end
 
-      # be careful with the store_dir path!!!
-      # unless you have store_dir paths separated based on environment
-      # you may end up deleting production files too.
-      after do
-        FileUtils.rm_rf(File.join(Rails.root, user.photo.store_dir))
+      it "creates the Answers for each question" do 
+        expect(Application.last.question_answers.count).to eq(4)
       end
     end
   end

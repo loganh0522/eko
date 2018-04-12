@@ -2,10 +2,6 @@ class Candidate < ActiveRecord::Base
   liquid_methods :first_name, :last_name, :full_name
   searchkick word_start: [:profile_w_titles, :work_titles, :work_description, :work_company, :education_description, :education_school, :full_name]
   # index_name ["talentwiz", Rails.env].join('_')
-
-  before_create :generate_token, :downcase_email, if: :manually_created?
-  before_create :add_user_info_to_candidate, :generate_token, if: :not_manually_created?
-
   belongs_to :company
   belongs_to :user
   has_many :applications, :dependent => :destroy
@@ -28,8 +24,14 @@ class Candidate < ActiveRecord::Base
   has_many :messages, -> {order("created_at DESC")}, as: :messageable, :dependent => :destroy
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy
   has_many :tasks, -> {order("created_at DESC")}, as: :taskable, :dependent => :destroy
+
   validates_presence_of :first_name, :last_name, :email, :if => :manually_created?
   validates_associated :social_links, :work_experiences, :educations, :resumes
+  
+  before_create :generate_token, :downcase_email, if: :manually_created? 
+  before_create :generate_token, if: :not_manually_created?
+  
+  before_create :add_user_info_to_candidate, if: :user_present?
   
   accepts_nested_attributes_for :social_links, 
     allow_destroy: true
@@ -54,6 +56,14 @@ class Candidate < ActiveRecord::Base
     !manually_created.present? || manually_created == false
   end
 
+  def not_inbound_candidate?
+    self.source == nil 
+  end
+
+  def user_present? 
+    self.user.present?
+  end
+
   def add_user_info_to_candidate
     self.first_name = self.user.first_name 
     self.last_name = self.user.last_name
@@ -64,10 +74,10 @@ class Candidate < ActiveRecord::Base
   end
 
   def full_name
-    if self.manually_created
-      full_name = "#{self.first_name} #{self.last_name}"
-    else 
+    if self.user.present?
       full_name = "#{self.user.first_name} #{self.user.last_name}"
+    else 
+      full_name = "#{self.first_name} #{self.last_name}"   
     end
     return full_name
   end

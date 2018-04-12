@@ -8,29 +8,33 @@ class InboundCandidatesController < ApplicationController
     @candidate = Candidate.create(company: @company, name: params[:name], first_name: params[:first_name], 
       last_name: params[:last_name], email: params[:email], phone: params[:phone], 
       manually_created: false, source: "ZipRecruiter")
-    
-    @application = Application.create(candidate: @candidate, job: @job)
+
+    @application = Application.create(candidate_id: @candidate.id, job: @job)
     
     @encoded_resume = params[:resume]
+    
     Resume.create(candidate_id: @candidate.id, name: "data:application/pdf;base64,#{@encoded_resume}")
-
     
     params[:answers].each do |answer| 
       @question = Question.find(answer[:id])
 
       if @question.kind == "Multiselect"
         answer.values.each do |value| 
-          QuestionAnswer.create(question_id: answer[:id], question_option_id: value)
+          QuestionAnswer.create(question_id: answer[:id], question_option_id: value, 
+            candidate_id: @candidate.id, job_id: @job.id, application_id: @application.id)
         end
       elsif @question.kind == "Select (One)"
-        QuestionAnswer.create(question_id: answer[:id], question_option_id: answer[:value])
+        QuestionAnswer.create(question_id: answer[:id], question_option_id: answer[:value], 
+          candidate_id: @candidate.id, job_id: @job.id, application_id: @application.id)
       elsif @question.kind == "File"
         @encoded_answer = answer[:value]
-        QuestionAnswer.create(question_id: answer[:id], file: "data:application/pdf;base64,#{@encoded_answer}", 
-          job_id: @job.id, candidate_id: @candidate.id)
+        
+        QuestionAnswer.create(question_id: answer[:id], 
+          file: "data:application/pdf;base64,#{@encoded_answer}", 
+          job_id: @job.id, candidate_id: @candidate.id, application_id: @application.id)
       else
         QuestionAnswer.create(question_id: answer[:id], body: answer[:value], 
-          job_id: @job.id, candidate_id: @candidate.id)
+          job_id: @job.id, candidate_id: @candidate.id, application_id: @application.id)
       end
     end
 
@@ -51,8 +55,3 @@ class InboundCandidatesController < ApplicationController
   end
 
 end
-
-# {"response_id": "a39bd9a", "job_id": "1000002", "name": "Tom Foolery", "first_name": "Tom", "last_name": "Foolery", "email": "tf@example.org", 
-# "phone": "555 5551942", "resume": "JVBERi0xLjUKJb/3ov4KMiAwIG9iago8PCAvTGluZWFyaXplZCAxIC9MIDE3ODA3IC9IIFsgNjg3IDEyNiBdIC9PIDYgL0UgMTc1MzIgL04gMSAvVCAjIxNgolJUVPRgo="}
-
-
