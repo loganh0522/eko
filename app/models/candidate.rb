@@ -25,10 +25,11 @@ class Candidate < ActiveRecord::Base
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy
   has_many :tasks, -> {order("created_at DESC")}, as: :taskable, :dependent => :destroy
 
-  validates_presence_of :first_name, :last_name, :email, :if => :manually_created?
+  validates_presence_of :first_name, :last_name, :email, 
+    :if => :manually_created? && :not_inbound_candidate?
   validates_associated :social_links, :work_experiences, :educations, :resumes
   
-  before_create :generate_token, :downcase_email, if: :manually_created? 
+  before_create :generate_token, :downcase_email, :full_name, if: :manually_created? 
   before_create :generate_token, if: :not_manually_created?
   
   before_create :add_user_info_to_candidate, if: :user_present?
@@ -47,6 +48,23 @@ class Candidate < ActiveRecord::Base
     
   has_many :question_answers, dependent: :destroy
   accepts_nested_attributes_for :question_answers, allow_destroy: true
+
+  def full_name
+    if self.first_name == nil && self.last_name == nil
+      full_name = "#{self.name}"
+    else
+      full_name = "#{self.first_name} #{self.last_name}"   
+    end
+    return full_name.capitalize
+  end
+
+  def downcase_email
+    self.email = self.email.downcase
+  end
+  
+  def generate_token
+    self.token = SecureRandom.urlsafe_base64
+  end
 
   def manually_created?
     manually_created.present? && manually_created == true
@@ -71,23 +89,6 @@ class Candidate < ActiveRecord::Base
     self.email = self.user.email
     self.phone = self.user.phone
     self.location = self.user.location
-  end
-
-  def full_name
-    if self.user.present?
-      full_name = "#{self.user.first_name} #{self.user.last_name}"
-    else 
-      full_name = "#{self.first_name} #{self.last_name}"   
-    end
-    return full_name
-  end
-
-  def downcase_email
-    self.email = self.email.downcase
-  end
-  
-  def generate_token
-    self.token = SecureRandom.urlsafe_base64
   end
 
   def job_comments(id)
@@ -120,6 +121,7 @@ class Candidate < ActiveRecord::Base
     end
     return false
   end
+  ## Candidate Task Methods
 
   def open_tasks
     self.tasks.where(status: 'active')

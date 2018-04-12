@@ -15,7 +15,55 @@ describe InboundCandidatesController do
     let(:option3) {Fabricate(:question_option, question_id: singlechoice.id)}
     let(:option4) {Fabricate(:question_option, question_id: singlechoice.id)}
 
-    context 'with valid params' do
+    context 'with First name' do
+      before do
+        multichoice
+        option1
+        option2
+        question
+        post :ziprecruiter_webhook, {name: "logan houston", first_name: "logan", last_name: nil, job_id: job.id, 
+        email: 'houston@talentwiz.ca', resume: Base64.encode64(open("./spec/fixtures/file.pdf").to_a.join), 
+        answers: [{id: question.id, value: "yes"}, 
+          {id: multichoice.id, values: [option1.id, option2.id]}, 
+          {value: option3.id, id: singlechoice.id}]}
+      end
+
+      it "creates the application" do 
+        expect(Application.count).to eq(1)
+        expect(Candidate.count).to eq(1)
+        expect(Candidate.last.full_name).to eq("Logan ")
+      end
+
+      it "creates the Answers for each question" do 
+        expect(Application.last.question_answers.count).to eq(4)
+      end
+    end
+
+     context 'with only name' do
+      before do
+        multichoice
+        option1
+        option2
+        question
+        post :ziprecruiter_webhook, {name: "logan houston", first_name: nil, last_name: nil, job_id: job.id, 
+        email: 'houston@talentwiz.ca', resume: Base64.encode64(open("./spec/fixtures/file.pdf").to_a.join), 
+        answers: [{id: question.id, value: "yes"}, 
+          {id: multichoice.id, values: [option1.id, option2.id]}, 
+          {value: option3.id, id: singlechoice.id}]}
+      end
+
+      it "creates the application" do 
+        expect(Application.count).to eq(1)
+        expect(Candidate.count).to eq(1)
+        expect(Candidate.last.full_name).to eq("Logan houston")
+      end
+
+      it "creates the Answers for each question" do 
+        expect(Application.last.question_answers.count).to eq(4)
+      end
+    end
+
+    context 'with First & last name' do
       before do
         multichoice
         option1
@@ -31,7 +79,7 @@ describe InboundCandidatesController do
       it "creates the application" do 
         expect(Application.count).to eq(1)
         expect(Candidate.count).to eq(1)
-        expect(Candidate.first.name).to eq("logan houston")
+        expect(Candidate.last.full_name).to eq("Logan houston")
       end
 
       it "creates the Answers for each question" do 

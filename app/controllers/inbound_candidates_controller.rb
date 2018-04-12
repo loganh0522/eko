@@ -7,7 +7,7 @@ class InboundCandidatesController < ApplicationController
 
     @candidate = Candidate.create(company: @company, name: params[:name], first_name: params[:first_name], 
       last_name: params[:last_name], email: params[:email], phone: params[:phone], 
-      manually_created: false, source: "ZipRecruiter")
+      manually_created: true, source: "ZipRecruiter")
 
     @application = Application.create(candidate_id: @candidate.id, job: @job)
     

@@ -74,7 +74,6 @@ class Business::CandidatesController < ApplicationController
         format.js
       else
         render_errors(@candidate)
-        binding.pry
         format.js
       end
     end
