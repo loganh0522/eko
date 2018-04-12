@@ -130,7 +130,7 @@ module ApplicationHelper
             end
           end 
         end 
-      elsif question.kind == 'Select'
+      elsif question.kind == 'Select (One)'
         @answers = []
         question.question_answers.each do |answer| 
           @answers.push(answer.question_option_id)

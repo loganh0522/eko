@@ -22,7 +22,7 @@ class Business::CandidatesController < ApplicationController
 
   def create 
     @candidate = Candidate.new(candidate_params.merge!(manually_created: true, 
-      company: current_company))
+      company: current_company, source: "Internal"))
     
     respond_to do |format| 
       if @candidate.save

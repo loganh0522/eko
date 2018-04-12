@@ -50,7 +50,7 @@ class JobSeeker::CandidatesController < JobSeekersController
   def candidate_params
     params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :company_id,
       resumes_attributes: [:id, :name, :_destroy],
-      question_answers_attributes: [:id, :body, :job_id, :question_id, :question_option_id])
+      question_answers_attributes: [:id, :body, :job_id, :question_id, :question_option_id, :file])
   end
 
   def set_layout

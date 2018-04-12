@@ -25,8 +25,7 @@ class Candidate < ActiveRecord::Base
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy
   has_many :tasks, -> {order("created_at DESC")}, as: :taskable, :dependent => :destroy
 
-  validates_presence_of :first_name, :last_name, :email, 
-    :if => :manually_created? && :not_inbound_candidate?
+  validates_presence_of :first_name, :last_name, :email, :if => :manually_created? && :internal_candidate?
   validates_associated :social_links, :work_experiences, :educations, :resumes
   
   before_create :generate_token, :downcase_email, :full_name, if: :manually_created? 
@@ -74,8 +73,8 @@ class Candidate < ActiveRecord::Base
     !manually_created.present? || manually_created == false
   end
 
-  def not_inbound_candidate?
-    self.source == nil 
+  def internal_candidate?
+    self.source == "Internal"
   end
 
   def user_present? 
