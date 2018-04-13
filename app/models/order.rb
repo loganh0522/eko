@@ -33,15 +33,17 @@ class Order < ActiveRecord::Base
         ]
 
     items2 = []
-
-    if self.order_items.count > 1 
-      self.order_items.each do |item|
-        items2 << [item.premium_board.name, "$#{item.unit_price.to_i}.00"]
-      end   
-    else
-      self.order_items.each do |item|
-        items2 << [item.premium_board.name, "$#{item.unit_price.to_i}.00"]
-      end   
+    
+    if self.order_items.present?
+      if self.order_items.count > 1 
+        self.order_items.each do |item|
+          items2 << [item.premium_board.name, "$#{item.unit_price.to_i}.00"]
+        end   
+      else
+        self.order_items.each do |item|
+          items2 << [item.premium_board.name, "$#{item.unit_price.to_i}.00"]
+        end   
+      end
     end
 
     items = [
