@@ -2,12 +2,43 @@ require "stripe"
 
 Stripe.api_key = ENV['STRIPE_SECRET_KEY']
 
-StripeEvent.configure do |events|
-  events.subscribe 'charge.succeeded' do |event|
-    customer = Customer.where(stripe_customer_id: event.data.object.customer).first
-    company = customer.company
-    Payment.create(company_id: company.id, amount: event.data.object.amount, reference_id: event.data.object.id)
+class RecordCharges
+  def call(event)
+    charge = event.data.object
+    
+    if charge.invoice.present? 
+      invoice = Stripe::Invoice.retrieve(charge.invoice) 
+      plan_name = invoice.lines.data.first.plan.name
+
+      customer = Customer.find_by(stripe_customer_id: charge.customer)
+      company = customer.company
+    
+      c = company.orders.where(stripe_id: charge.id).first_or_create
+
+      c.update(
+        total: charge.amount,
+        title: plan_name,
+        tax_amount: invoice.tax,
+        tax_percentage: invoice.tax_percent,
+        subtotal: invoice.subtotal,
+        last_four: charge.source.last4, 
+        card_brand: charge.source.brand,
+        card_exp_month: charge.source.exp_month, 
+        card_exp_year: charge.source.exp_year
+      )
+    end
   end
+end
+
+
+Stripe::Invoice.retrieve("in_1C3mRtBDRuCwc6R2smgqrMJP")
+Stripe::Event.retrieve("evt_1C3mRuBDRuCwc6R2AKeXliMf")
+Stripe::Charge.retrieve("ch_1C3mRtBDRuCwc6R2C48ObFTc")
+Stripe::Event.retrieve("evt_1CGC9kBDRuCwc6R2AY0o8ymQ")
+
+
+StripeEvent.configure do |events|
+  events.subscribe 'charge.succeeded', RecordCharges.new
 
   events.subscribe 'charge.failed' do |event|
     customer = Customer.where(stripe_customer_id: event.data.object.customer).first

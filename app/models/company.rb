@@ -4,6 +4,8 @@ class Company < ActiveRecord::Base
   # has_many :users, through: :company_users
   
   has_many :users
+  has_many :orders, -> {order("created_at DESC")}
+
   has_many :invitations, :dependent => :destroy
   has_many :rejection_reasons, :dependent => :destroy
   has_many :applications, :dependent => :destroy
@@ -18,7 +20,6 @@ class Company < ActiveRecord::Base
   has_many :interview_kits, :dependent => :destroy
   has_one :job_board, :dependent => :destroy
   has_many :clients, :dependent => :destroy
-  has_many :orders, :dependent => :destroy
   has_many :payments, :dependent => :destroy
   has_many :activities, -> {order("created_at DESC")}, :dependent => :destroy
   has_many :tags, :dependent => :destroy

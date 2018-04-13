@@ -21,7 +21,20 @@ class Business::OrdersController < ApplicationController
       )
 
     if charge.successful?
-      @order = Order.new(order_params.merge!(total: @totalPrice, subtotal: @subTotal, tax: 0.13))
+      charge = charge.response    
+      
+      @order = Order.new(order_params.merge!(
+        stripe_id: charge.id,
+        title: "Job Advertising",
+        tax_amount: @taxAmount ,
+        tax_percentage: 0.13,
+        last_four: charge.source.last4, 
+        card_brand: charge.source.brand,
+        card_exp_month: charge.source.exp_month, 
+        card_exp_year: charge.source.exp_year,
+        total: @totalPrice, 
+        subtotal: @subTotal
+        ))
       
       respond_to do |format|
         if @order.save 
@@ -31,6 +44,20 @@ class Business::OrdersController < ApplicationController
           format.js
         end
       end
+    end
+  end
+
+  def show
+    respond_to do |format|
+      format.html
+      format.json  
+      format.pdf {
+        send_date(@charge.receipt.render,
+          filename: "#{@charge.created_at.strftime("%Y-%m-%d")}-gorails-receipt.pdf",
+          type: "application/pdf",
+          disposition: :inline
+          )
+      }
     end
   end
 
@@ -62,8 +89,9 @@ class Business::OrdersController < ApplicationController
     end
     
     @totalPrice = @subTotal * 1.13
+    @taxAmount = @subTotal * 0.13
 
-    return @totalPrice, @subTotal 
+    return @totalPrice, @subTotal, @taxAmount
   end
 
   def order_params 

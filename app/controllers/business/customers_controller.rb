@@ -9,6 +9,7 @@ class Business::CustomersController < ApplicationController
     else
       @customer = Customer.new
     end
+    @orders = current_company.orders.paginate(page: params[:page], per_page: 10)
   end
 
   def new
@@ -97,12 +98,6 @@ class Business::CustomersController < ApplicationController
       company_subscription(params[:plan])
       current_company.customer.update_attribute(:plan, stripe_customer['plan']['id'])  
       current_company.customer.update_attribute(:stripe_subscription_id, stripe_customer['id'])
-      
-      plan = customer.response.items.data.first.plan.name
-      subtotal = customer.response.items.data.first.plan.amount
-      total = subtotal * 1.13
-
-      Order.create(company: current_company, subtotal: subtotal, total: total, title: plan)
       
       redirect_to business_plan_path
       flash[:success] = "Your subscription was successful, the charge has been added to your card"  

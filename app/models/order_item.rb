@@ -11,12 +11,12 @@ class OrderItem < ActiveRecord::Base
 
   def create_job_feed
     if self.premium_board.name == "ZipRecruiter"
-      if self.posting_duration.name == 'ziprecruiter_boost'
+      if self.unit_price.to_i == 299
         ZiprecruiterPremiumFeed.create(job_id: self.order.job_id, 
-        zip_recruiter_boost: true, posted_at: Time.now, premium_board_id: self.premium_board.id)
+        boost: true, posted_at: Time.now, premium_board_id: self.premium_board.id)
       else
         ZiprecruiterPremiumFeed.create(job_id: self.order.job_id, 
-        zip_recruiter_boost: false, posted_at: Time.now, premium_board_id: self.premium_board.id)
+        boost: false, posted_at: Time.now, premium_board_id: self.premium_board.id)
       end
     end
   end

@@ -22,18 +22,27 @@
   .main-container
     .standard-header
       %h4 Transactions
-    .orders
-      - if current_company.orders.present?
-        - current_company.orders.each do |order|
-          = order.created_at
-          = order.total.to_i
-          - order.order_items.each do |item|
-            .order-item
-              = item.premium_board.name
-              = item.unit_price.to_i
-      - else 
-        .not-present-container
-          %p There are currently no transactions
+    .standard-body
+      %table.table
+        %thead
+          %tr
+            %th(width="25%") Name 
+            %th(width="15%") Amount
+            %th(width="25%") Card
+            %th(width="30%") Date Issued
+            %th(width="5%") Receipt
+        %tbody
+          - if @orders.present?
+            - @orders.each do |order|
+              %tr
+                %td= order.title
+                %td= number_to_currency(order.total / 100)
+                %td= "**** **** **** #{order.last_four}"
+                %td= order.created_at.strftime("%A, %B %e, %Y")
+                %td= order.id
+          - else 
+            .not-present-container
+              %p There are currently no transactions
 
 
 

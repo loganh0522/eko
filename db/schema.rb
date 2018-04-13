@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180411172450) do
+ActiveRecord::Schema.define(version: 20180413164310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -887,7 +887,18 @@ ActiveRecord::Schema.define(version: 20180411172450) do
     t.string   "description"
     t.string   "last_four"
     t.datetime "invoice_date"
+    t.string   "card_brand"
+    t.string   "card_exp_month"
+    t.string   "card_exp_year"
+    t.string   "charge_id"
+    t.integer  "amount_refunded"
+    t.boolean  "refunded"
+    t.string   "stripe_id"
+    t.integer  "tax_amount"
+    t.decimal  "tax_percentage"
   end
+
+  add_index "orders", ["stripe_id"], name: "index_orders_on_stripe_id", unique: true, using: :btree
 
   create_table "outlook_tokens", force: :cascade do |t|
     t.string   "access_token"
