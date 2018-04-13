@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180413164310) do
+ActiveRecord::Schema.define(version: 20180413214100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -894,7 +894,7 @@ ActiveRecord::Schema.define(version: 20180413164310) do
     t.integer  "amount_refunded"
     t.boolean  "refunded"
     t.string   "stripe_id"
-    t.integer  "tax_amount"
+    t.decimal  "tax_amount"
     t.decimal  "tax_percentage"
   end
 

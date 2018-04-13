@@ -48,12 +48,14 @@ class Business::OrdersController < ApplicationController
   end
 
   def show
+    @order = Order.find(params[:id])
+
     respond_to do |format|
       format.html
       format.json  
       format.pdf {
-        send_date(@charge.receipt.render,
-          filename: "#{@charge.created_at.strftime("%Y-%m-%d")}-gorails-receipt.pdf",
+        send_data(@order.receipt.render,
+          filename: "#{@order.created_at.strftime("%Y-%m-%d")}-talentwiz-receipt.pdf",
           type: "application/pdf",
           disposition: :inline
           )

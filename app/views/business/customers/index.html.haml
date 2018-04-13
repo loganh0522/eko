@@ -39,7 +39,7 @@
                 %td= number_to_currency(order.total / 100)
                 %td= "**** **** **** #{order.last_four}"
                 %td= order.created_at.strftime("%A, %B %e, %Y")
-                %td= order.id
+                %td= link_to "Download Receipt", business_order_path(order, format: :pdf), target: :_blank
           - else 
             .not-present-container
               %p There are currently no transactions

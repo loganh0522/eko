@@ -17,21 +17,41 @@ class Order < ActiveRecord::Base
         name: "Talentwiz Solutions Inc.",
         address: "58 Haddington Ave, \nToronto, On m5m 2p1",
         email: "houston@talentwiz.ca",
-        logo: Rails.root.join("/tmp/logo.jpg") 
+        logo: Rails.root.join("app/assets/images/logo_invoice.png") 
       },
-      line_items: [
-        ["Date",           created_at.to_s],
-        ["Account Billed", "#{user.name} (#{user.email})"],
-        ["Product",        "GoRails"],
-        ["Amount",         "$#{amount / 100}.00"],
-        ["Charged to",     "#{card_type} (**** **** **** #{card_last4})"],
-        ["Transaction ID", uuid]
-      ],
-      font: {
-        bold: Rails.root.join('app/assets/fonts/tradegothic/TradeGothic-Bold.ttf'),
-        normal: Rails.root.join('app/assets/fonts/tradegothic/TradeGothic.ttf'),
-      }
+      line_items: line_items
     )
   end
-end
+
+  def line_items
+    
+    items3 = [
+        ["Subtotal",        "$#{subtotal / 100}"],
+        ["Tax",            "$#{tax_amount / 100}"],
+        ["Total",          "$#{total / 100}"],
+        ["Charged to",     "#{card_brand} (**** **** **** #{last_four})"]
+        ]
+
+    items2 = []
+
+    if self.order_items.count > 1 
+      self.order_items.each do |item|
+        items2 << [item.premium_board.name, "$#{item.unit_price.to_i}.00"]
+      end   
+    else
+      self.order_items.each do |item|
+        items2 << [item.premium_board.name, "$#{item.unit_price.to_i}.00"]
+      end   
+    end
+
+    items = [
+        ["Date",           created_at.to_s],
+        ["Account Billed", company.name],
+        ["Product",        self.title]] + items2 + items3
+
+    items 
+
+  end
+
+
 end
