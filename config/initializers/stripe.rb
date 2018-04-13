@@ -31,12 +31,6 @@ class RecordCharges
 end
 
 
-Stripe::Invoice.retrieve("in_1C3mRtBDRuCwc6R2smgqrMJP")
-Stripe::Event.retrieve("evt_1C3mRuBDRuCwc6R2AKeXliMf")
-Stripe::Charge.retrieve("ch_1C3mRtBDRuCwc6R2C48ObFTc")
-Stripe::Event.retrieve("evt_1CGC9kBDRuCwc6R2AY0o8ymQ")
-
-
 StripeEvent.configure do |events|
   events.subscribe 'charge.succeeded', RecordCharges.new
 
