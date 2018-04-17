@@ -3,11 +3,10 @@
     $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
     $('#<%= error[0] %>_Block').addClass('has-error');
   <% end %>
-<% elsif request.path  %> 
+<% elsif @stages.present? %> 
   $('.display-applicant-details').html('<%= j render "business/applications/show_application/process" %>')
   $('.side-interviews').html('<%= j render "business/interviews/candidate_interviews", interviews: @interview %>')
   
-
   $('.mediumModal').find('form').remove();
   $('.mediumModal').hide();
 <% else %>
