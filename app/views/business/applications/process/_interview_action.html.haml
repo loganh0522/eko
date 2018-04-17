@@ -6,8 +6,9 @@
 
   - elsif action.interview.present? && action.interview.start_time < Time.now && action.interview.candidate == @application.candidate
     
-    = render 'business/applications/process/interview_action/interview_complete', action: action
-  
+    / = render 'business/applications/process/interview_action/interview_complete', action: action
+    = render 'business/applications/process/interview_action/pending_interview', action: action
+
   - elsif action.interview_invitation.present? && action.interview_invitation.candidates.include?(@application.candidate)   
     = render 'business/applications/process/interview_action/invitation_sent', action: action
     
