@@ -87,14 +87,33 @@ class Business::ApplicationsController < ApplicationController
     end
   end
 
+  def confirm_destroy
+    respond_to do |format|
+      format.js
+    end 
+  end
+
+  def destroy_multiple
+    @ids = params[:applicant_ids].split(',')
+
+    @ids.each do |id| 
+      @application = Application.find(id)
+      @application.destroy
+    end
+    
+    @candidates = Candidate.joins(:applications).where(:applications => {job_id: @job.id}).paginate(page: params[:page], per_page: 10)    
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def destroy
     @application = Application.find(params[:id])
     @job = @application.job
     @application.destroy
-    
-    respond_to do |format| 
-      format.js
-    end
+
+    redirect_to business_job_applications_path(@job)
   end
 
   def application_form
@@ -107,21 +126,7 @@ class Business::ApplicationsController < ApplicationController
       format.js
     end
   end
-
-  def scorecards
-    @application = Application.find(params[:id])      
-    @candidate = @application.candidate
-    @job = @application.job 
-    @assessments = @application.assessments
-  end
   
-  def multiple_change_stages
-    @job = Job.find(params[:job])
-    respond_to do |format|
-      format.js
-    end
-  end
-
   def next_stage
     @application = Application.find(params[:id])
     @job = @application.job
@@ -130,15 +135,24 @@ class Business::ApplicationsController < ApplicationController
     @rejection_reasons = current_company.rejection_reasons
     @candidate = @application.candidate
     @application.update_attribute(:stage_id, @stage.id)  
-    
+    @stages = @application.application_stages
     track_activity @application, "move_stage", @application.candidate.id, @job.id, @stage.id
+  end
+
+  def multiple_change_stages
+    @job = Job.find(params[:job])
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def move_stage    
     @stage = Stage.find(params[:stage])
     @job = @stage.job
     @rejection_reasons = current_company.rejection_reasons
-
+    
+    
     if params[:applicant_ids].present?
       move_multiple_stages
       @candidates = Candidate.joins(:applications).where(:applications => {job_id: @job.id}).paginate(page: params[:page], per_page: 10)
@@ -152,20 +166,12 @@ class Business::ApplicationsController < ApplicationController
     end
   end
 
-  def ratings
-    @application = Application.find(params[:application_id])
-
-    Rating.create(user_id: current_user.id, application: @application, score: params[:rating])
-    respond_to do |format|
-      format.js
-    end
-  end
-  
   def reject
     @application = Application.find(params[:id])
     @candidate = @application.candidate
     @job = @application.job
-    
+    @rejection_reasons = current_company.rejection_reasons
+
     if params[:val] == 'requalify'
       @application.update_attributes(rejected: nil, rejection_reason: nil)
       track_activity @application, "requalified", @application.candidate.id, @job.id
@@ -207,7 +213,7 @@ class Business::ApplicationsController < ApplicationController
     @candidate = @application.candidate
     @job = @stage.job
     @application.update_attribute(:stage, @stage)
-
+    @stages = @application.application_stages
     track_activity @app, "move_stage", @application.candidate.id, @application.job.id, @stage.id
   end
 

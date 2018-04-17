@@ -5,7 +5,7 @@
   .applicant-details
     .name-rating
       .name= "#{@candidate.full_name.capitalize}"
-      = render 'business/ratings/form', application: @application
+      = render 'business/ratings/form', application: @candidate
       .dropdown#edit-candidate-drop
         .dropdown-button
           %i.fa.fa-ellipsis-h.fa-lg
@@ -55,7 +55,7 @@
   .applicant-details
     .name-rating
       .name= "#{@application.candidate.user.full_name}"
-      = render 'business/ratings/form', application: @application
+      = render 'business/ratings/form', application: @candidate
       .dropdown
         .dropdown-button
           %i.fa.fa-ellipsis-h.fa-lg

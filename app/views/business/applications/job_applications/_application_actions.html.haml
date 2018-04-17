@@ -27,7 +27,7 @@
             %i.fa.fa-paper-plane-o
             .action Interview Invitation
         - if can? :edit, Candidate
-          = link_to '#', id: "destroy_candidates", class: "move-applicants", :data => {:toggle => "modal", :target => "#destroy_candidatesModal"} do
+          = link_to confirm_destroy_business_candidates_path, remote: true do
             %i.fa.fa-trash-o
             .action Remove from Job
     - if can? :create, Message

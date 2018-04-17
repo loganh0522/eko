@@ -24,7 +24,6 @@ class Order < ActiveRecord::Base
   end
 
   def line_items
-    
     items3 = [
         ["Subtotal",        "$#{subtotal / 100}"],
         ["Tax",            "$#{tax_amount / 100}"],

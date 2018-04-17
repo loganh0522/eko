@@ -9,7 +9,7 @@ class Business::CustomersController < ApplicationController
     else
       @customer = Customer.new
     end
-    @orders = current_company.orders.paginate(page: params[:page], per_page: 10)
+    @orders = current_company.orders.paginate(page: params[:page], per_page: 50)
   end
 
   def new

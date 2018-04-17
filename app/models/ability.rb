@@ -9,7 +9,7 @@ class Ability
         Task, Message, Interview, InterviewInvitation, JobBoard, JobTemplate, 
         User, Invitation, EmailTemplate, Company, HiringTeam, Scorecard, Stage, 
         Question, JobFeed]
-    else
+    elsif user.permission.present?
       # Job Permissions
       can :create, Job if user.permission.create_job
       can :manage, JobFeed if user.permission.advertise_job

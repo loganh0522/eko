@@ -62,19 +62,20 @@ class Business::InterviewsController < ApplicationController
     @startTime = DateTime.parse(params[:interview][:date] + " " + params[:interview][:stime]).strftime("%Y-%m-%dT%H:%M:%S")
     @endTime = DateTime.parse(params[:interview][:date] + " " + params[:interview][:etime]).strftime("%Y-%m-%dT%H:%M:%S")
     @user_ids = params[:interview][:user_ids].split(',') 
+
     @interview = Interview.new(interview_params.merge!(user_ids: @user_ids, start_time: @startTime, end_time: @endTime))
 
 
     respond_to do |format|  
       if @interview.save
- 
-        if @interview.stage_action.present? 
-          @stage = @interview.stage_action.stage
+        if @interview.stage_action.present?   
           @application = Application.find(@interview.application_id)
+          @stages = @application.application_stages
+          @interview = @application.candidate.upcoming_interviews
         end
         
         @interviews = current_company.interviews
-        send_invitation(@interview) if @interview.send_request == true
+        # send_invitation(@interview) if @interview.send_request == true
         format.js
       else        
         render_errors(@interview)
@@ -147,7 +148,7 @@ class Business::InterviewsController < ApplicationController
 
   def interview_params
     params.require(:interview).permit(:title, :notes, :location, :start_time, 
-      :end_time, :kind, :send_request, :etime, :stime, :interview_kit_id, :room_id,
+      :end_time, :kind, :send_request, :etime, :stime, :room_id,
       :interview_kit_template_id,
       :job_id, :candidate_id, :company_id, :date, :stage_action_id, :stage_id, :application_id, 
       user_ids: [])

@@ -18,7 +18,7 @@ class Business::EmailTemplatesController < ApplicationController
   def new
     @email_template = EmailTemplate.new
     @subsidiary = Subsidiary.find(params[:subsidiary]) if params[:subsidiary].present?
-    
+
     respond_to do |format| 
       format.js
     end

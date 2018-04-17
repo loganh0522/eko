@@ -32,7 +32,8 @@ end
 
 shared_examples "user does not belong to company" do 
   let(:company) {Fabricate(:company)}
-  let(:alice) {Fabricate(:user, kind: 'business', role: "Admin")}
+  let(:company2) {Fabricate(:company)}
+  let(:alice) {Fabricate(:user, kind: 'business', role: "Admin", company: company2)}
   
   before do 
     set_current_user(alice)

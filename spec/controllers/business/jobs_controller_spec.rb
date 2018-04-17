@@ -5,8 +5,8 @@ describe Business::JobsController do
   let(:job_board) {Fabricate(:job_board, subdomain: "talentwiz", company: company)}
   let(:alice) {Fabricate(:user, company: company, role: "Admin")}
   let(:bob) {Fabricate(:user, company: company, role: "Hiring Manager")} 
-  let(:job) {Fabricate(:job, company: company, user_ids: alice.id, status: "open")}
-  let(:job2) {Fabricate(:job, company: company, user_ids: alice.id, status: "open")}
+  let(:job) {Fabricate(:job, company: company, user_ids: alice.id, status: "open", is_active: true)}
+  let(:job2) {Fabricate(:job, company: company, user_ids: alice.id, status: "open", is_active: true)}
   let(:questionairre) {Fabricate(:questionairre, job_id: job1.id)}
   let(:scorecard) {Fabricate(:scorecard, job_id: job1.id)}
 
@@ -17,6 +17,7 @@ describe Business::JobsController do
     job
     job2
   end
+
   describe "GET index" do 
     it_behaves_like "requires sign in" do
       let(:action) {get :index}
@@ -71,15 +72,15 @@ describe Business::JobsController do
 
   describe "POST create" do 
     it_behaves_like "requires sign in" do
-      let(:action) {post :create}
+      let(:action) { post :create, job: Fabricate.attributes_for(:job, company: set_current_company, user_ids: set_current_user) }
     end
 
     it_behaves_like "user does not belong to company" do 
-      let(:action) {post :create}
+      let(:action) { post :create, job: Fabricate.attributes_for(:job, company: set_current_company, user_ids: set_current_user) }
     end
 
     it_behaves_like "company has been deactivated" do
-      let(:action) {post :create}
+      let(:action) { post :create, job: Fabricate.attributes_for(:job, company: set_current_company, user_ids: set_current_user) }
     end
     
     context "with valid inputs" do 
@@ -102,8 +103,8 @@ describe Business::JobsController do
       end
 
       it "creates the stages associated to the Job posting" do 
-        expect(Stage.count).to eq(18)
-        expect(Job.first.stages.count).to eq(6)
+        expect(Stage.count).to eq(15)
+        expect(Job.first.stages.count).to eq(5)
       end
 
       it "associates the job posting with the current_company" do
@@ -115,7 +116,7 @@ describe Business::JobsController do
       end
 
       it "sets the job status as a draft" do 
-        expect(Job.last.status).to eq('draft')
+        expect(Job.last.status).to eq('open')
       end
 
       it "sets the city, province, country attributes" do 
@@ -141,7 +142,7 @@ describe Business::JobsController do
       end
 
       it "does not create a stage for the job posting" do     
-        expect(Stage.count).to eq(12)
+        expect(Stage.count).to eq(10)
       end
 
       it "renders the new action" do 
@@ -191,7 +192,7 @@ describe Business::JobsController do
 
     context "with valid inputs" do
       before do  
-        put :update, id: job.id, job: {title: "new title"}
+        xhr :put, :update, id: job.id, job: {title: "new title"}
       end
 
       it "save the updates made on the object" do 
@@ -205,7 +206,7 @@ describe Business::JobsController do
 
     context "with invalid inputs" do
       before do  
-        put :update, id: job.id, job: {title: nil}
+        xhr :put, :update, id: job.id, job: {title: nil}
       end
 
       it "doesn't save the updates if fields invalid" do

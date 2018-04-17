@@ -13,7 +13,6 @@ class Business::AssessmentsController < ApplicationController
       @application = Application.find(params[:application_id])
       @assessments = @application.assessments
     end 
-
   end
 
   def new

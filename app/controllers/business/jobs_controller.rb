@@ -16,7 +16,7 @@ class Business::JobsController < ApplicationController
   end
 
   def new
-    
+    @job = Job.new
   end
 
   def create 
@@ -108,6 +108,7 @@ class Business::JobsController < ApplicationController
 
     where[:status] = params[:status] if params[:status].present?
     where[:company_id] = current_company.id
+    where[:users] = [current_user.id] if params[:owner] == "user"
     where[:kind] = params[:kind] if params[:kind].present?
     where[:client_id] = params[:client_id] if params[:client_id].present? 
 
@@ -136,8 +137,8 @@ class Business::JobsController < ApplicationController
 
   def job_params
     params.require(:job).permit(:description, :recruiter_description, 
-      :title, :location, :address, :benefits, :company_id,
-      :client_id, :education_level, :function, :industry,
+      :title, :location, :address, :benefits, :company_id, :is_active,
+      :client_id, :education_level, :function, :industry, :start_salaray, :end_salary,
       :kind, :career_level, :status, :user_ids)
   end
 end 

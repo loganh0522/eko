@@ -35,6 +35,7 @@ class InterviewsController < ApplicationController
           @events.each do |event|
             event.update_attributes(interview_id: @interview.id, interview_time_id: nil)
           end
+          
           @time.destroy
           destroy_user_events
           

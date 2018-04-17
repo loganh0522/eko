@@ -1,15 +1,12 @@
 .home-page-header
   .top-info
-    %h1= "Jobs at #{current_company.name}"
+    %h1= "Jobs"
   
 
 .home-page-body
-  .side-container-right
-
-  .main-container-left
-    = render 'filters'
-    .all-main-job-container
-      = render 'business/jobs/jobs'   
+  = render 'filters'
+  .all-main-job-container
+    = render 'business/jobs/jobs'   
                
 
 

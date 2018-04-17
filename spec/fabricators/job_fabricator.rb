@@ -8,4 +8,5 @@ Fabricator(:job) do
   description {Faker::Lorem.paragraph(2)}
   benefits {Faker::Lorem.paragraph(2)}
   status "draft"
+  is_active true
 end

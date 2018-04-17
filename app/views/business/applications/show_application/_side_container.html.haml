@@ -1,4 +1,5 @@
-= render 'business/applications/show_application/application_stage'
+#applicant-stage
+  = render 'business/applications/show_application/application_stage'
 
 .side-sections
   .side-section
@@ -25,8 +26,9 @@
       = render 'business/tasks/candidate_tasks'
   .side-section
     .header
-      %h4 Schedule 
-    = render 'business/interviews/candidate_interviews'
+      %h4 Schedule
+    .side-interviews 
+      = render 'business/interviews/candidate_interviews'
    
 
      

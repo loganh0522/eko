@@ -8,17 +8,39 @@
       = label_tag "is_active_false", "Archived", :value => "company", class: 'filter'
 
   .main-filters
-    .toggle-actions 
-      = radio_button_tag "job_status", "all", true, class: 'filter'
-      = label_tag "job_status_all", "All", :value => "all", class: 'filter'
+    / .toggle-actions 
+    /   = radio_button_tag "job_status", "all", true, class: 'filter'
+    /   = label_tag "job_status_all", "All", :value => "all", class: 'filter'
       
-      = radio_button_tag "job_status", "open", false, class: 'filter'
-      = label_tag "job_status_open", "Open", :value => "open", class: 'filter'
+    /   = radio_button_tag "job_status", "open", false, class: 'filter'
+    /   = label_tag "job_status_open", "Open", :value => "open", class: 'filter'
 
-      = radio_button_tag "job_status", "closed", false, class: 'filter'
-      = label_tag "job_status_closed", "Closed", :value => "closed", class: 'filter'
+    /   = radio_button_tag "job_status", "closed", false, class: 'filter'
+    /   = label_tag "job_status_closed", "Closed", :value => "closed", class: 'filter'
+    
+    .toggle-actions 
+      = radio_button_tag "owner", "company", true, class: 'filter'
+      = label_tag "owner_company", "All", :value => "all", class: 'filter'
+      
+      = radio_button_tag "owner", "user", false, class: 'filter'
+      = label_tag "owner_user", "My Jobs", :value => "open", class: 'filter'
+
+  
 
     .search-form
       .search-area-content
         %i.fa.fa-search.fa-stack-2x
         = text_field_tag "query", nil, placeholder: "Search Jobs", class: "search-field", autocomplete: "off"
+
+    - if current_company.subsidiaries.present?
+      .dropdown#subsidiary-dropdown
+        .dropdown-button
+          = "All Jobs"
+          %b.caret
+        .dropdown-content#myDropdown
+          = link_to "All Jobs", business_jobs_path, remote: true
+          = link_to "#{current_company.name}", business_jobs_path(company: current_company.id), remote: true
+          - current_company.subsidiaries.each do |subsidiary|
+            = link_to "#{subsidiary.subsidiary.name}", business_jobs_path(subsidiary: subsidiary.subsidiary.id), remote: true
+
+

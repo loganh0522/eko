@@ -5,6 +5,7 @@
         .recipients
       .form-row-no-border
         = label_tag "Move to Stage"
+        
         = select_tag "stage", options_for_select(@job.stages.collect{ |u| [u.name, u.id] } + ["Hired", "Rejected"])
 
       = hidden_field_tag :applicant_ids

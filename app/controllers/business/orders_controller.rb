@@ -22,11 +22,11 @@ class Business::OrdersController < ApplicationController
 
     if charge.successful?
       charge = charge.response    
-      
+
       @order = Order.new(order_params.merge!(
         stripe_id: charge.id,
         title: "Job Advertising",
-        tax_amount: @taxAmount ,
+        tax_amount: @taxAmount,
         tax_percentage: 0.13,
         last_four: charge.source.last4, 
         card_brand: charge.source.brand,
@@ -98,8 +98,12 @@ class Business::OrdersController < ApplicationController
 
   def order_params 
     params.require(:order).permit(:job_id, :user_id, :company_id,
-      :total, :tax, :subtotal,
+      :total, :tax, :subtotal, :stripe_id, :title, :tax_amount, :tax_percentage, :last_four, 
+      :card_brand, :card_exp_year, :card_exp_month,
       order_items_attributes: [:id, :premium_board_id, 
         :_destroy, :unit_price, :posting_duration_id])
   end
 end
+
+
+  

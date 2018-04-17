@@ -30,7 +30,6 @@ class RecordCharges
   end
 end
 
-
 StripeEvent.configure do |events|
   events.subscribe 'charge.succeeded', RecordCharges.new
 

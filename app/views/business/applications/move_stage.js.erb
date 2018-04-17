@@ -7,5 +7,6 @@
 <% else %> 
   $('#applicant-stage').html('<%= j render "business/applications/show_application/application_stage" %>');
   $('.side-tasks').html('<%= j render "business/tasks/candidate_tasks", tasks: @tasks %>')
+  $('.display-applicant-details').html('<%= j render "business/applications/show_application/process" %>')
 <% end %> 
 

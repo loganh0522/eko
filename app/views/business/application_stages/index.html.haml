@@ -9,9 +9,9 @@
 
   
   - @stages.each do |stage|
-    - if stage.stage == @application.stage
+    - if stage == @application.stage
       .app-stage.current-stage
-        .app-stage-header.current-stage-header
+        .app-stage-header
           .body
             = "#{stage.name}    (Current Stage) "
           %i.fa.fa-angle-up.toggle

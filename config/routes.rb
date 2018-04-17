@@ -306,8 +306,10 @@ Rails.application.routes.draw do
         get :scorecards, to: "applications#scorecards"
       end
       resources :assessments
+      
       collection do 
-
+        get :confirm_destroy, to: "candidates#confirm_destroy"
+        post :destroy_multiple, to: "candidates#destroy_multiple"
         get :multiple_change_stages, to: "applications#multiple_change_stages"
         get :new_multiple, to: "applications#new_multiple" 
         post :create_multiple, to: "applications#create_multiple"

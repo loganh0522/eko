@@ -39,7 +39,7 @@ describe Business::StagesController do
     end
 
     it "expects to return the correct number of stages" do 
-      expect(job.stages.count).to eq(6)
+      expect(job.stages.count).to eq(5)
     end
   end 
 
@@ -122,7 +122,7 @@ describe Business::StagesController do
       end
 
       it "creates the new stage" do 
-        expect(Stage.count).to eq(7)
+        expect(Stage.count).to eq(6)
       end
 
       it "creates the stage with proper name" do 
@@ -134,7 +134,7 @@ describe Business::StagesController do
       end
 
       it "adds a new stage last in the list" do 
-        expect(Stage.last.position).to eq(7)
+        expect(Stage.last.position).to eq(6)
       end
     end
   end
@@ -242,15 +242,15 @@ describe Business::StagesController do
     end
 
     it "deletes the stage" do 
-      expect(Stage.count).to eq(6)
+      expect(Stage.count).to eq(5)
     end
 
     it "deletes the stage" do 
-      expect(job.stages.last.name).to eq("Hired")
+      expect(job.stages.last.name).to eq("Offer")
     end
 
     it "adjusts the stages position" do 
-      expect(job.stages.last.position).to eq(6)
+      expect(job.stages.last.position).to eq(5)
       expect(job.stages.first.position).to eq(1)
     end
   end

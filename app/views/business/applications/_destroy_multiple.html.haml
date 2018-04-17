@@ -1,0 +1,11 @@
+= form_tag destroy_multiple_business_applications_path, remote: true do 
+  .modal-body
+    .email-area
+      .to
+        .recipients 
+    .content
+      %h3 Are you sure? You can not undo this action.
+      = hidden_field_tag :applicant_ids  
+  .modal-footer
+    = button_tag "Destroy", class: "btn danger-btn", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Deleting..."}
+    .btn.border-button.close-modal Cancel

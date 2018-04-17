@@ -14,13 +14,17 @@ class Interview < ActiveRecord::Base
   #Validations
 
   validates_presence_of :title, :kind, :date, :stime, :etime, :candidate_id
-  after_create :create_interview_kit
+  after_create :create_interview_kit, :if => :interview_kit_present?
   
   searchkick
 
   def send_invitation
     GoogleWrapper::Calendar.create_event(current_user, e.start_time, e.end_time, 
       e.location, e.description, e.title, e.users, e.candidate)
+  end
+
+  def interview_kit_present?
+    self.interview_kit_template_id.present?
   end
 
   def pending_scorecards

@@ -4,27 +4,32 @@
       .candidate-interview
         .header
           .title= interview.title
-          .type= interview.kind
-        .date-time
-          %i.fa.fa-clock-o
-          .date-time-container
-            .date= "#{interview.start_time.strftime('%A %B %e')}"
-            .time= "#{interview.start_time.strftime('%I:%M %p')} - #{interview.end_time.strftime('%I:%M %p')}"
-        .date-time
-          %i.fa.fa-map-marker
-          .date-time-container
-            .date= "#{interview.location}"
-            .time= "#{interview.room}" 
+          .date-time
+            %i.fa.fa-clock-o
+            .time= "#{interview.start_time.strftime('%A %B %e')}  @  #{interview.start_time.strftime('%I:%M %p')} - #{interview.end_time.strftime('%I:%M %p')}"
 
-        .details
-          .contain-50
-            = link_to "Interview Kit", new_business_completed_assessment_path(interview: interview)
-          .contain-50
-            .box-row
-              .title Interviewers:
-              .content
-                - interview.users.each do |user|   
-                  .user-tag= user.full_name
+
+        .body
+          .title Interviewers:
+          .content
+            - interview.users.each do |user|   
+              .user-tag= user.full_name
+
+        / 
+        /   .date-time-container
+        /     
+        
+        / .date-time
+        /   %i.fa.fa-map-marker
+        /   .date-time-container
+        /     .date= "#{interview.location}"
+        /     .time= "#{interview.room}" 
+        /   .type= interview.kind
+        / .details
+        /   .contain-50
+        /     = link_to "Interview Kit", new_business_completed_assessment_path(interview: interview)
+        /   .contain-50
+            
 - else
   .not-present-container
     %p No Events Scheduled

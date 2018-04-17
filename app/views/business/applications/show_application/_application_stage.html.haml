@@ -6,6 +6,7 @@
     .dropdown-content#current-stage-drop
       - @job.stages.each do |stage| 
         = link_to "#{stage.name}", move_stage_business_application_path(@application, stage: stage.id), remote: true, method: :post
+  
   = link_to next_stage_business_application_path(@application), remote: true, method: :post do
     .next-stage
       %i.fa.fa-arrow-right

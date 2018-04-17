@@ -1,9 +1,9 @@
-$('#mediumModal').find('form').remove()
-$('#mediumModal').find('.new-title').html('<%= j "Create Task"  %>');
-$('#mediumModal').find('.new-modal-header').after('<%= j render "business/tasks/form_multiple" %>');
-$('#mediumModal').show();
-$('#timepicker').timepicker();
-$('#dueDate').datepicker();
+$('.destroyModal').find('.modal-body').remove()
+$('.destroyModal').find('.modal-footer').remove()
+$('.destroyModal').find('.new-title').html('<%= j "Destroy Candidates" %>')
+$('.destroyModal').find('.new-modal-header').after('<%= j render "business/candidates/destroy"  %>');
+$('.destroyModal').show()
+
 
 checkbox = $('.applicant-checkbox');
 applicant_ids = [];
@@ -20,6 +20,7 @@ for (i = 0, len = checkbox.length; i < len; i++) {
     if (!applicant.includes($(n).data('id'))) {
       applicant.push($(n).data('id'));
     }
+    
     if (!applicant.includes($(n).parent().parent().find('.name').data('id'))) {
       applicant.push($(n).parent().parent().find('.name').data('id'));
     }

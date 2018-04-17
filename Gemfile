@@ -57,6 +57,7 @@ gem 'carrierwave-base64'
 gem 'jcrop-rails-v2'
 
 gem 'remotipart', '~> 1.2'
+
 gem 'jquery-fileupload-rails'
 
 gem 'wicked'
