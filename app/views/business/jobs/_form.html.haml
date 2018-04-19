@@ -1,21 +1,24 @@
 = form_for [:business, @job] do |f|
-  .form-row-no-border
+  .form-row-show-over
     .contain-50 
       = f.label :title, "Job Title"
       = f.text_field :title, autocomplete: "off"
       = show_errors(@job, :title) 
     .contain-50 
-      .dropdown
+      = f.label :job_template, "Job Templates"
+      %br
+      .dropdown#subsidiary-dropdown
         .dropdown-button
           Job Template
           %b.caret
         .dropdown-content
           - current_company.job_templates.each do |template|
-            .insert-template{data: {:body => template.description}}= template.title
+            .insert-job-template{data: {:title => template.title, :description => template.description}}= template.title
+
   .form-row-no-border
     .contain-50
-      = f.label :city, "City"
-      = f.text_field :location, id: "geocomplete", placeholder: "City Name"
+      = f.label :location, "City"
+      = f.text_field :location, id: "geocomplete", placeholder: "City"
       = show_errors(@job, :location) 
     .contain-50
       = f.label :city, "Address"

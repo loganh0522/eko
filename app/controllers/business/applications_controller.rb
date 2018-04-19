@@ -134,7 +134,7 @@ class Business::ApplicationsController < ApplicationController
     @stage = @application.job.stages.where(position: @current_stage.position + 1).first
     @rejection_reasons = current_company.rejection_reasons
     @candidate = @application.candidate
-    @application.update_attribute(:stage_id, @stage.id)  
+    @application.update_attributes(stage_id: @stage.id, reviewed: true)  
     @stages = @application.application_stages
     track_activity @application, "move_stage", @application.candidate.id, @job.id, @stage.id
   end
@@ -152,7 +152,7 @@ class Business::ApplicationsController < ApplicationController
     @job = @stage.job
     @rejection_reasons = current_company.rejection_reasons
     
-    
+
     if params[:applicant_ids].present?
       move_multiple_stages
       @candidates = Candidate.joins(:applications).where(:applications => {job_id: @job.id}).paginate(page: params[:page], per_page: 10)
@@ -173,10 +173,10 @@ class Business::ApplicationsController < ApplicationController
     @rejection_reasons = current_company.rejection_reasons
 
     if params[:val] == 'requalify'
-      @application.update_attributes(rejected: nil, rejection_reason: nil)
+      @application.update_attributes(rejected: nil, rejection_reason: nil, reviewed: true)
       track_activity @application, "requalified", @application.candidate.id, @job.id
     else
-      @application.update_attributes(rejected: true, rejection_reason: params[:val])
+      @application.update_attributes(rejected: true, rejection_reason: params[:val], reviewed: true)
       track_activity @application, "rejected", @application.candidate.id, @job.id
     end
 
@@ -189,6 +189,27 @@ class Business::ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     @job = @application.job
     @stages = @application.application_stages
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def quick_screen
+    @applications = @job.applications.where(reviewed: false).order(:created_at)
+    @candidate = @applications.first.candidate
+
+    @application = @applications.first
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def change_application
+    @application = Application.find(params[:id])
+    @candidate = @application.candidate
+    @job = Job.find(params[:job_id])
 
     respond_to do |format|
       format.js
@@ -212,7 +233,7 @@ class Business::ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     @candidate = @application.candidate
     @job = @stage.job
-    @application.update_attribute(:stage, @stage)
+    @application.update_attributes(stage: @stage, reviewed: true)
     @stages = @application.application_stages
     track_activity @app, "move_stage", @application.candidate.id, @application.job.id, @stage.id
   end

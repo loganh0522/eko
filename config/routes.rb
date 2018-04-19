@@ -115,7 +115,6 @@ Rails.application.routes.draw do
     resources :activities
     resources :assessments
     resources :scorecards
-    
     resources :answers
     resources :subsidiaries
     resources :hiring_teams
@@ -133,7 +132,6 @@ Rails.application.routes.draw do
     resources :locations 
     resources :application_emails
     resources :stage_actions
-
     resources :job_templates
     resources :interview_kit_templates
     resources :assessment_templates
@@ -221,6 +219,7 @@ Rails.application.routes.draw do
       end
 
       resources :jobs, except: [:index, :show]
+
       get 'jobs', to: "jobs#client_jobs"
       resources :activities
       resources :comments, except: [:index]
@@ -305,9 +304,11 @@ Rails.application.routes.draw do
         get :evaluations, to: "applications#application_form"
         get :scorecards, to: "applications#scorecards"
       end
+
       resources :assessments
       
       collection do 
+        get :quick_screen, to: "applications#quick_screen"
         get :confirm_destroy, to: "candidates#confirm_destroy"
         post :destroy_multiple, to: "candidates#destroy_multiple"
         get :multiple_change_stages, to: "applications#multiple_change_stages"
@@ -341,7 +342,15 @@ Rails.application.routes.draw do
       resources :interview_invitations, except: [:index] 
       resources :candidates
       resources :hiring_teams 
-
+      
+      resources :applications do 
+        collection do 
+          get :quick_screen, to: "applications#quick_screen"
+        end
+        member do 
+          get :change_application, to: "applications#change_application"
+        end
+      end
       resources :questions do 
         collection do
           post :sort, to: "questions#sort"

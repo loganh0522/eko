@@ -1,0 +1,9 @@
+.applicant-general-info
+  .applicant-general-top
+    = render 'business/applications/quick_screen/applicant_details', candidate: @candidate
+  .applicant-nav
+    = render 'business/applications/quick_screen/applicant_nav', candidate: @candidate
+  .action-area
+.applicant-general
+  .display-applicant-details
+    = render 'business/applications/quick_screen/application_cv', candidate: @candidate

@@ -2,6 +2,8 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'capybara/rails'
+require 'database_cleaner'
 require 'vcr'
 
 Shoulda::Matchers.configure do |config|
@@ -9,6 +11,10 @@ Shoulda::Matchers.configure do |config|
     with.test_framework :rspec
     with.library :rails
   end
+end
+
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -37,15 +43,24 @@ RSpec.configure do |config|
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
+  
+  # config.infer_base_class_for_anonymous_controllers = false
+  # config.order = "random"
 
-  config.infer_base_class_for_anonymous_controllers = false
-  config.order = "random"
+  # config.infer_spec_type_from_file_location!
+  config.include(JavascriptHelper, type: :feature)
 
   config.before(:suite) do
-    DatabaseCleaner.clean_with :truncation  # clean DB of any leftover data
-    DatabaseCleaner.strategy = :transaction # rollback transactions between each test
-    Rails.application.load_seed # (optional) seed DB
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, :js => true) do
+    DatabaseCleaner.strategy = :truncation
   end
 
   config.before(:each) do
@@ -53,8 +68,7 @@ RSpec.configure do |config|
   end
 
   config.after(:each) do
+    Capybara.reset_sessions!
     DatabaseCleaner.clean
   end
-
-  config.infer_spec_type_from_file_location!
 end

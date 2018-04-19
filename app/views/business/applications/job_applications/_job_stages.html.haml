@@ -2,23 +2,24 @@
   .base-stages
     %li#all_applicants.activated.job_list_stage
       .number 
-        = applied_applications_count
+        = applied_applications_count(@job)
       .name All Applicants
-    %li#all_applicants.job_list_stage
-      .number 
-        = hired_applications_count
-      .name New Applicants
+    = link_to quick_screen_business_job_applications_path(@job), remote: true do
+      %li#all_applicants.job_list_stage
+        .number 
+          = new_applications_count(@job)
+        .name New Applicants
   .all-stages
     - @job.stages.each do |stage| 
       %li.job_list_stage{:id => "#{stage.name}"}
-        .number= stage.applications.count
+        .number= stage_count(@job, stage)
         .name= stage.name 
          
     %li.job_list_stage#Rejected
       .number 
-        = hired_applications_count
+        = hired_applications_count(@job)
       .name Hired
     %li.job_list_stage#Rejected
       .number 
-        = hired_applications_count
+        = rejected_applications_count(@job)
       .name Disqualified

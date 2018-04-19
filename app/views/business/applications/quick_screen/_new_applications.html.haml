@@ -1,0 +1,12 @@
+#quickscreen-container
+  #quickscreen-side-container
+    - @applications.each do |application| 
+      = link_to change_application_business_job_application_path(@job, application), remote: true do 
+        .conversation-container{:id => "candidate_#{application.id}"}
+          = candidate_user_avatar(application.candidate)
+          .details
+            .header
+              .name= application.candidate.full_name
+  #quickscreen-main-container
+    = render 'business/applications/quick_screen/application'
+

@@ -21,7 +21,7 @@
       .dropdown-button.reject-stage
         %i.fa.fa-ban
       .dropdown-content
-        - @rejection_reasons.each do |reason| 
+        - current_company.rejection_reasons.each do |reason| 
           = link_to "#{reason.body}", reject_business_application_path(@application, val: reason.body), remote: true, method: :post 
         = link_to "Rejected", reject_business_application_path(@application, val: "rejected"), remote: true, method: :post 
 

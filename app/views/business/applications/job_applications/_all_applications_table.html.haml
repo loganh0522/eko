@@ -1,16 +1,18 @@
 .all-job-applicants-container
   .job-stages
     = render 'business/applications/job_applications/job_stages'
-  .side-container
-    = render 'business/applications/job_applications/all_application_filters'
-  .application-actions
-    = render 'business/applications/job_applications/application_actions'
- 
-  .main-container 
-    .all-candidates-table
-      = render 'business/applications/job_applications/applications_table'    
-    .pagination-container
-      = render 'business/candidates/candidate_table/pagination'
+  
+  .job-applicants-main
+    .side-container
+      = render 'business/applications/job_applications/all_application_filters'
+    .application-actions
+      = render 'business/applications/job_applications/application_actions'
+   
+    .main-container 
+      .all-candidates-table
+        = render 'business/applications/job_applications/applications_table'    
+      .pagination-container
+        = render 'business/candidates/candidate_table/pagination'
 
 
 

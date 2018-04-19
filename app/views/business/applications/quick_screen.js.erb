@@ -1,0 +1,3 @@
+$('.job-applicants-main').hide();
+$('#quickscreen-container').remove();
+$('.job-stages').after('<%= j render "business/applications/quick_screen/new_applications", candidate: @candidate %>')

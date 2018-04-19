@@ -48,7 +48,7 @@ class Business::CompletedAssessmentsController < ApplicationController
     @completed_assessment = CompletedAssessment.new
     @assessment = Assessment.find(params[:assessment])
     
-    @questions = @assessment.questions
+    @questions = @assessment.questions.order(:position)
     @answer = Answer.new
     
     @scorecard = @assessment.scorecard

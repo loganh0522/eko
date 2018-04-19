@@ -23,7 +23,7 @@ class Business::JobsController < ApplicationController
     @job = Job.new(job_params.merge!(status: 'open', is_active: true))  
 
     if @job.save 
-      redirect_to business_job_hiring_teams_path(@job)
+      redirect_to business_job_questions_path(@job)
     else
       render :new 
     end
@@ -59,7 +59,7 @@ class Business::JobsController < ApplicationController
         end
       else
         if @job.update(job_params)
-          format.html {redirect_to business_job_hiring_teams_path(@job)}
+          format.html {redirect_to business_job_questions_path(@job)}
         else
           render :edit
         end

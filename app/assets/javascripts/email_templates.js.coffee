@@ -19,6 +19,19 @@ jQuery ->
     new HasEmailTemplates(elem)
 
 
+$(document).on 'click', '.insert-template', (e) ->
+  element = document.querySelector("trix-editor")
+  txtBody = $(this).data('body')
+  element.editor.insertHTML(txtBody)
+  $('.hidden-search-box').hide()
+
+$(document).on 'click', '.insert-job-template', (e) ->
+  element = document.querySelector("trix-editor")
+  txtBody = $(this).data('description')
+  element.editor.insertHTML(txtBody)
+  $('#job_title').val($(this).data('title'))
+  $('.hidden-search-box').hide()
+
 
 
 

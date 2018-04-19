@@ -16,9 +16,9 @@
           .stage-body
             = render 'business/stage_actions/standard_actions', type: 'applied'
           .stage-footer
-            = link_to "+ Add Interview", new_business_stage_action_path(kind: 'interview', standard: 'applied', job: @job), remote: true
+            = link_to "+ Add Interview", new_business_stage_action_path(kind: 'interview', standard: 'applied', job: @job), id: "client-action", class: 'add-interview', remote: true
             = link_to "+ E-mail", new_business_stage_action_path(kind: 'email', standard: 'applied', job: @job), remote: true
-            = link_to "+ Add Task", new_business_stage_action_path(kind: 'task', standard: 'applied', job: @job), remote: true
+            = link_to "+ Add Task", new_business_stage_action_path(kind: 'task', standard: 'applied', job: @job), id: "client-action", class: 'add-task', remote: true
         
         = render "stages", stages: @stages
         
@@ -28,9 +28,9 @@
           .stage-body
             = render 'business/stage_actions/standard_actions', type: 'hired'
           .stage-footer
-            = link_to "+ Add Interview", new_business_stage_action_path(kind: 'interview', standard: 'hired', job: @job), remote: true
+            = link_to "+ Add Interview", new_business_stage_action_path(kind: 'interview', standard: 'hired', job: @job), id: "client-action", class: 'add-interview', remote: true
             = link_to "+ E-mail", new_business_stage_action_path(kind: 'email', standard: 'hired', job: @job), remote: true
-            = link_to "+ Add Task", new_business_stage_action_path(kind: 'task', standard: 'hired', job: @job), remote: true
+            = link_to "+ Add Task", new_business_stage_action_path(kind: 'task', standard: 'hired', job: @job), id: "client-action", class: 'add-task', remote: true
         
 
         .stage{:id => "rejected"}
@@ -39,9 +39,9 @@
           .stage-body
             = render 'business/stage_actions/standard_actions', type: 'rejected'
           .stage-footer
-            = link_to "+ Add Interview", new_business_stage_action_path(kind: 'interview', standard: 'rejected', job: @job), remote: true
+            = link_to "+ Add Interview", new_business_stage_action_path(kind: 'interview', standard: 'rejected', job: @job), id: "client-action", class: 'add-interview', remote: true
             = link_to "+ E-mail", new_business_stage_action_path(kind: 'email', standard: 'rejected', job: @job), remote: true
-            = link_to "+ Add Task", new_business_stage_action_path(kind: 'task', standard: 'rejected', job: @job), remote: true
+            = link_to "+ Add Task", new_business_stage_action_path(kind: 'task', standard: 'rejected', job: @job), id: "client-action", class: 'add-task', remote: true
             
                 
 

@@ -1,0 +1,227 @@
+#quickscreen-container
+  #quickscreen-side-container
+    float: left
+    width: 25%
+    background: #fff
+    height: 500px
+    border-radius: 5px
+    overflow: scroll
+    margin-bottom: 100px
+    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    .conversation-container
+      overflow: hidden
+      border-bottom: 1px solid rgba(0,0,0,0.1)
+      padding: 10px 10px
+      overflow-y: scroll
+      &:hover
+        background: rgba(0,0,0,0.1)
+      .circle-img
+        float: left
+        margin-right: 3px
+        height: 50px
+        width: 50px
+        padding: 5px
+      .details
+        float: left
+        width: 69%
+        text-decoration: none
+        color: rgba(0,0,0,0.7)
+        overflow: hidden
+        margin-left: 20px
+        .name 
+          float: left
+          font-size: 16px
+
+  #quickscreen-main-container
+    float: left
+    width: 68%
+    margin-left: 2%
+  .applicant-general-info
+    width: 99%
+    margin: 0 2px
+    background: #ffffff
+    overflow: hidden
+    padding: 15px 0 0 0
+    border-radius: 5px
+    border-bottom: 1px solid rgba(0,0,0,0.1)
+    box-shadow: 0px 7px 40px 0px rgba(199,197,199,.1), 0px 3px 9px 0px rgba(199,197,199,1)
+    .applicant-general-top
+      .user-image 
+        overflow: hidden
+        float: left
+        margin-right: 15px
+        img
+          width: 80px 
+          height: 80px
+          float: left
+          margin: 0 15px
+          border-radius: 50%
+          border: 1px solid #fff
+          display: block
+      .applicant-details
+        width: 82%
+        float: left
+        .name-rating
+          margin-top: 1px
+          .name 
+            font-size: 20px  
+            float: left
+          #edit-candidate-drop
+            float: right
+            margin-right: 15px
+          .dropdown-content
+            margin-top: 10px
+          .new_rating
+            float: left
+            width: auto
+            margin: auto
+            margin-left: 25px
+            .rating 
+              font-size: 14px
+              margin-top: 2px
+        .contact-details
+          float: left
+          clear: both
+          margin-bottom: 2px
+          overflow: hidden
+          .contact-detail 
+            float: left 
+            margin-right: 15px
+            .fa
+              float: left
+              margin: 3px 5px 0 0 
+            .detail
+              float: left
+        .current-position
+          clear: both
+      .actions
+        clear: both
+        width: 100%
+        .dropdown
+          width: 125px
+          margin: 20px auto 0px auto
+          display: block
+
+  .applicant-nav
+    width: 100%
+    background: white
+    margin-top: 20px
+    clear: both
+    padding: 15px 0 0 0
+    border-radius: 0 0 5px 5px
+    .change-containers
+      ul 
+        list-style: none
+        text-decoration: none
+        padding-left: 0
+        li
+          display: inline-block
+          padding: 15px 15px 10px 15px 
+          text-align: center 
+          font-size: 14px
+          color: black
+          cursor: pointer
+        .activated
+          border-bottom: 4px solid #EF7B2B
+          color: black
+    .bottom-row
+      border-top: 1px solid rgba(0,0,0,0.1)
+      padding: 10px 5px 20px 5px
+      height: 50px
+      .hide-can-form 
+        float: right
+        background: rgba(0,0,0,0.3)
+        padding: 5px 10px
+        border-radius: 8px
+        color: #ffffff
+      &:hover
+        cursor: pointer
+      .can-action
+        float: left
+        margin-right: 5px
+        background: rgba(0,0,0,0.3)
+        padding: 5px 10px
+        border-radius: 8px
+        color: #ffffff
+        text-decoration: none
+      .active-button
+        background: #EF7B2B
+    ul 
+      list-style: none
+      text-decoration: none
+      padding: 0 
+      margin-bottom: 0
+      li
+        display: inline-block
+        padding: 10px 10px 
+        text-align: center 
+        color: black
+        cursor: pointer
+      a
+        text-decoration: none
+      .activated    
+        border-bottom: solid 3px #EF7B2B
+        color: black
+    
+  .display-applicant-details
+    width: 99%
+    margin: 10px 2px
+    .dropdown
+      float: right
+      margin-top: 10px
+      .dropdown-content
+        top: 45px
+    .toggle-actions 
+      overflow: hidden
+      margin: 10px
+      float: left
+      a 
+        float: left
+        &:hover
+          text-decoration: none
+        
+#quick-applicant-stage
+  width: 252px 
+  float: left
+  margin: -5px 25px 10px 15px
+  .applicant-stage
+    border: 1px solid rgba(0,0,0,0.1)
+    width: 100%
+    height: 43px
+    margin: 0 5px
+    border-radius: 5px
+    background: #fff
+    .current-stage
+      padding: 10px 15px
+      border-radius: 5px 0 0 5px 
+      background: #fff
+      font-size: 14px
+      width: 150px
+      float: left
+      .caret
+        float: right
+        margin-top: 8px
+    .next-stage
+      color: rgba(0, 0, 0, 0.3)
+      padding: 10px 20px
+      font-size: 14px
+      background: #fff
+      float: left
+      border-left: 1px solid rgba(0,0,0,0.1)
+      width: 50px
+      &:hover
+        background: rgba(81, 216, 81, 0.3)
+        cursor: pointer
+    .reject-stage
+      padding: 10px 20px
+      background: #fff
+      border-radius: 0 5px 5px 0
+      font-size: 14px
+      width: 50px
+      float: left
+      border-left: 1px solid rgba(0,0,0,0.1)
+      &:hover
+        background: rgba(255, 0, 0, 0.3)
+        cursor: pointer
+    #rejected
+      background: rgba(255, 0, 0, 0.3)

@@ -8,9 +8,11 @@ class Business::TeamMembersController < ApplicationController
 
   def create
     @member = TeamMember.create(member_params)
+    
     if params[:team_member][:job_board_row_id].present?
       @section = JobBoardRow.find(params[:team_member][:job_board_row_id])
     end
+    
     respond_to do |format| 
       format.js
     end

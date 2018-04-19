@@ -1,0 +1,28 @@
+.applicant-stage
+  .current-stage
+    .dropdown
+      .dropdown-button
+        = application_stage(@candidate, @job)
+        .caret
+      .dropdown-content#current-stage-drop
+        - @job.stages.each do |stage| 
+          = link_to "#{stage.name}", move_stage_business_application_path(@application, stage: stage.id), remote: true, method: :post
+    
+
+  = link_to next_stage_business_application_path(@application), remote: true, method: :post do
+    .next-stage
+      %i.fa.fa-arrow-right
+  .reject-stage
+    .dropdown
+      - if @application.rejected 
+        .dropdown-button#rejected
+          %i.fa.fa-ban
+        .dropdown-content
+          = link_to "Re-Qualify", reject_business_application_path(@application, val: "requalify"), remote: true, method: :post 
+      - else
+        .dropdown-button
+          %i.fa.fa-ban
+        .dropdown-content
+          - current_company.rejection_reasons.each do |reason| 
+            = link_to "#{reason.body}", reject_business_application_path(@application, val: reason.body), remote: true, method: :post 
+          = link_to "Rejected", reject_business_application_path(@application, val: "rejected"), remote: true, method: :post 

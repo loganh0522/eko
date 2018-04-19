@@ -6,7 +6,7 @@
     .main-container#main-border
       .standard-header   
         %h3 Application Form
-        = link_to "+ Question", new_business_job_question_path(@job.id), :data => {:remote => true}, class: 'btn border-button'
+        = link_to "Add Question", new_business_job_question_path(@job.id), remote: true, class: 'btn border-button'
       .questions-container
         = render 'business/questions/questions', questions: @questions
       

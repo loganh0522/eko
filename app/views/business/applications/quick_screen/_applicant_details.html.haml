@@ -1,0 +1,56 @@
+- if candidate.manually_created == true
+  .user-image
+    .profile_picture
+      %img(src="/tmp/blank_profile_picture.png")
+- else
+  .user-image
+    .profile_picture
+      - if candidate.user.user_avatar.present?
+        = image_tag candidate.user.user_avatar.image.large_image 
+      - else 
+        %img(src="/tmp/blank_profile_picture.png")
+        
+.applicant-details
+  .name-rating
+    .name= "#{candidate.full_name.capitalize}"
+    = render 'business/ratings/form', application: candidate
+    #quick-applicant-stage
+      = render 'business/applications/quick_screen/applicant_stage'
+    .dropdown
+      .dropdown-button
+        %i.fa.fa-ellipsis-h.fa-lg
+      .dropdown-content
+        = link_to edit_business_candidate_path(candidate), remote: true do
+          %i.fa.fa-pencil
+          .action Edit
+        = link_to business_application_path(candidate), remote: true, :method => :delete do  
+          %i.fa.fa-reply
+          .action Remove From Job
+        = link_to business_candidate_path(candidate), remote: true, :method => :delete do  
+          %i.fa.fa-trash-o
+          .action Destroy Candidate
+  .contact-details
+    .contact-detail
+      %i.fa.fa-phone
+      .detail= "#{candidate.phone}"
+    .contact-detail
+      %i.fa.fa-envelope-o
+      .detail= "#{candidate.email}"
+    .contact-detail
+      %i.fa.fa-map-marker
+      .detail= "#{candidate.location}"
+  .contact-details
+    - if candidate.social_links.present?
+      - candidate.social_links.each do |link|
+        .social-link
+          = link_to link.url, target: :_blank do 
+            %i{class: "fa fa-#{link.kind.downcase}"}
+    - else 
+      = link_to edit_business_candidate_path(candidate), remote: true do
+        .contact-detail
+          %i.fa.fa-pencil
+          .detail Add Social Link
+
+
+
+  

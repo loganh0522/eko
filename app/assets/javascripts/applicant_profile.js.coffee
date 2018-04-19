@@ -127,12 +127,6 @@ jQuery ->
       @value = @value.slice(0, -1)
     return
 
-  $(document).on 'click', '.insert-template', (e) ->
-    element = document.querySelector("trix-editor")
-    txtBody = $(this).data('body')
-    element.editor.insertHTML(txtBody)
-    $('.hidden-search-box').hide()
-
   $(document).on 'click', '.insert-token', (event) ->
     element = document.querySelector("trix-editor")
     if $(this).attr('id') == "first-name"

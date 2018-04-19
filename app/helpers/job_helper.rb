@@ -1,15 +1,24 @@
 module JobHelper
-  def applied_applications_count
-    @job.applications.count
+  def applied_applications_count(job)
+    job.applications.count
   end
 
-  def rejected_applications_count
-    @job.applications.where(rejected: true).count
+  def rejected_applications_count(job)
+    job.applications.where(rejected: true).count
   end
 
-  def hired_applications_count
-    @job.applications.where(hired: true).count
+  def hired_applications_count(job)
+    job.applications.where(hired: true, rejected: nil).count
   end
+  
+  def new_applications_count(job)
+    job.applications.where(reviewed: false).count
+  end
+
+  def stage_count(job, stage)
+    job.applications.where(stage: stage, hired: false, rejected: false).count
+  end
+
 
   def application_stage(candidate, job)
     application = Application.where(candidate: candidate, job: job).first
