@@ -6,7 +6,7 @@ module JobHelper
   def rejected_applications_count(job)
     job.applications.where(rejected: true).count
   end
-
+  
   def hired_applications_count(job)
     job.applications.where(hired: true, rejected: nil).count
   end
