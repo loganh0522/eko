@@ -105,7 +105,7 @@ class Business::ApplicationsController < ApplicationController
     where[:rating] = params[:rating] if params[:rating].present?
     where[:jobs] = params[:job_id] if params[:job_id].present?
     where[:application_stage] = params[:stage_id] if params[:stage_id].present?
-    where[:application_rejected] = params[:rejected] if params[:rejected].present?
+    where[:application_rejected] = params[:rejected] || false 
     where[:application_hired] = params[:hired] if params[:hired].present?
     where[:tags] = {all: params[:tags]} if params[:tags].present?
     where[:created_at] = {gte: params[:date_applied].to_time, lte: Time.now} if params[:date_applied].present?

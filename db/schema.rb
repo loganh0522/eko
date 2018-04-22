@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180413214100) do
+ActiveRecord::Schema.define(version: 20180422151223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(version: 20180413214100) do
     t.integer  "stage_id"
     t.integer  "company_id"
     t.string   "token"
-    t.boolean  "rejected"
+    t.boolean  "rejected",         default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "manually_created"
@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(version: 20180413214100) do
     t.integer  "candidate_id"
     t.string   "rejection_reason"
     t.boolean  "hired",            default: false
-    t.boolean  "reviewed"
+    t.boolean  "reviewed",         default: false
   end
 
   create_table "assessment_templates", force: :cascade do |t|
