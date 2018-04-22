@@ -166,7 +166,6 @@ class Business::CandidatesController < ApplicationController
   def scorecards
     @candidate = Candidate.find(params[:id])
     @assessments = @candidate.assessments
-
   end
 
   private

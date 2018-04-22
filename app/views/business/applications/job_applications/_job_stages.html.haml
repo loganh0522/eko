@@ -1,6 +1,6 @@
 %ul.job-stage-area
   .base-stages
-    %li#all_applicants.activated.job_list_stage
+    %li.job_list_stage.activated{:data => {:job => "#{@job.id}"}}
       .number 
         = applied_applications_count(@job)
       .name All Applicants
@@ -11,15 +11,15 @@
         .name New Applicants
   .all-stages
     - @job.stages.each do |stage| 
-      %li.job_list_stage{:id => "#{stage.name}"}
+      %li.job_list_stage{:data => {:stage => "#{stage.id}", :job => "#{@job.id}"}}
         .number= stage_count(@job, stage)
         .name= stage.name 
          
-    %li.job_list_stage#Rejected
+    %li.job_list_stage{:data => {:hired => "true", :job => "#{@job.id}"}}
       .number 
         = hired_applications_count(@job)
       .name Hired
-    %li.job_list_stage#Rejected
+    %li.job_list_stage{:data => {:rejected => "true", :job => "#{@job.id}"}}
       .number 
         = rejected_applications_count(@job)
       .name Disqualified

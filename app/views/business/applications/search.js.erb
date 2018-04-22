@@ -1,0 +1,7 @@
+<% if @candidates.count == 0 %>
+  $('.all-candidates-table').html('<%= j render "business/applications/job_applications/applications_table", candidates: @candidates %>');
+  $('.not-present-container').show()
+<% else %>
+  $('.all-candidates-table').html('<%= j render "business/applications/job_applications/applications_table", candidates: @candidates %>');
+  $('.pagination').html('<%= j render "business/candidates/candidate_table/pagination" %>');
+<% end %>

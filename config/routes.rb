@@ -310,6 +310,7 @@ Rails.application.routes.draw do
       collection do 
         get :quick_screen, to: "applications#quick_screen"
         get :confirm_destroy, to: "candidates#confirm_destroy"
+        get :search, to: "applications#search"
         post :destroy_multiple, to: "candidates#destroy_multiple"
         get :multiple_change_stages, to: "applications#multiple_change_stages"
         get :new_multiple, to: "applications#new_multiple" 

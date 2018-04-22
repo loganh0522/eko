@@ -7,20 +7,23 @@ jQuery ->
     return
 
   $('.job-stages').on 'click', 'li', (event) -> 
-    val = $(this).attr('id')
-    $('.not-present-container').show()
-
     $('.job-stages').find('.activated').removeClass 'activated'
     $(this).addClass 'activated'
-      
-    $(".table>tbody>tr").each ->   
-      id = $(this).attr("id")    
-      if id == val || val == 'all_applicants'
-        $(this).show()
-        $('.not-present-container').hide()
-      else
-        $(this).hide()
-      return
+    stage = $(this).data('stage')
+    job = $(this).data('job')
+    rejected = $(this).data('rejected')
+    hired = $(this).data('hired')
+    $.ajax
+      url: '/business/applications/search'
+      type: 'GET'
+      data:
+        stage_id: stage
+        job_id: job
+        rejected: rejected
+        hired: hired
+
+
+
   
   totalWidth = 0 
 

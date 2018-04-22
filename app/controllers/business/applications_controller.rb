@@ -87,6 +87,40 @@ class Business::ApplicationsController < ApplicationController
     end
   end
 
+
+  def search 
+    where = {}
+    qcv_fields = [:work_titles, :work_description, :work_company, :education_description, :education_school]
+    fields = [:first_name, :last_name, :full_name, :email]
+    
+    if params[:query].present?
+      query = params[:query] 
+    else
+      query = "*"
+    end
+    
+    @job = Job.find(params[:job_id])
+
+    where[:company_id] = current_company.id 
+    where[:rating] = params[:rating] if params[:rating].present?
+    where[:jobs] = params[:job_id] if params[:job_id].present?
+    where[:application_stage] = params[:stage_id] if params[:stage_id].present?
+    where[:application_rejected] = params[:rejected] if params[:rejected].present?
+    where[:application_hired] = params[:hired] if params[:hired].present?
+    where[:tags] = {all: params[:tags]} if params[:tags].present?
+    where[:created_at] = {gte: params[:date_applied].to_time, lte: Time.now} if params[:date_applied].present?
+
+    if params[:qcv].present? 
+      @candidates = Candidate.search(params[:qcv], where: where, fields: qcv_fields, match: :word_start).records.paginate(page: params[:page], per_page: 10).accessible_by(current_ability)
+    else
+      @candidates = Candidate.search(query, where: where, fields: fields, match: :word_start).records.paginate(page: params[:page], per_page: 10).accessible_by(current_ability)
+    end
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def confirm_destroy
     respond_to do |format|
       format.js
