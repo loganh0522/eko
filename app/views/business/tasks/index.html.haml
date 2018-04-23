@@ -7,10 +7,10 @@
   #padding
     .side-container
       = form_tag search_business_tasks_path, :method => 'get', id: "search-form" do
-        = render 'filters'
+        = render 'business/tasks/all_tasks/filters'
     .main-container
       #task-container
-        = render 'business/tasks/table'
+        = render 'business/tasks/tasks'
       .pagination-container
         = render 'business/tasks/pagination'
 

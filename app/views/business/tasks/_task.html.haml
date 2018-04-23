@@ -1,48 +1,41 @@
-.task{:id => "task_#{task.id}"}
+.task{:id => "task_#{task.id}"}    
   .task-header
-    .header-content
-      .circle-img
-        %img(src="/tmp/little-man.png") 
-      .content 
-        = "#{task.user.first_name} #{task.user.last_name} created the task for #{task.kind}."
-        %br
-        .time= "#{time_ago_in_words(task.created_at)} ago" 
-      .dropdown
-        .dropdown-button
-          %i.fa.fa-ellipsis-h.fa-lg
-        .dropdown-content#myDropdown
-          = link_to edit_business_task_path(task), remote: true  do
-            %i.fa.fa-pencil
-            .action Edit
-          = link_to business_task_path(task.id), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do  
-            %i.fa.fa-trash-o
-            .action Destroy
-
-  .task-details
-    .body
-      - if task.status == "complete"
-        #completed
-          = link_to completed_business_tasks_path(id: task.id), method: :post, remote: true do 
-            .glyphicon.glyphicon-ok
-      - else
+    - if task.status == "complete"
+      #completed
         = link_to completed_business_tasks_path(id: task.id), method: :post, remote: true do 
-          .glyphicon.glyphicon-ok 
-      .details
-        .title= task.title
-        = "Due Date: #{ task.due_date}"
-      
-    .task-row
-      - if !task.notes.present?
-        .no-notes There are currently no notes for this task.
-      - else
-        = task.notes 
-    .task-row
-      .detail
-        .assigned Assigned to: 
-        - task.users.each do |user|
-          .tag= user.full_name
-      .detail
-        .assigned Type
-        .tag= "#{task.kind}"
+          .glyphicon.glyphicon-ok
+    - else
+      .glyphicon.glyphicon-ok 
+    .title= task.title
+   
+    .dropdown
+      .dropdown-button
+        %i.fa.fa-ellipsis-h.fa-lg
+      .dropdown-content#myDropdown
+        = link_to edit_business_task_path(task), remote: true  do
+          %i.fa.fa-pencil
+          .action Edit
+        = link_to business_task_path(task.id), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do  
+          %i.fa.fa-trash-o
+          .action Destroy
 
+  .task-row
+    .detail
+      %i.fa.fa-clock-o
+      - if task.due_date.present?
+        = task.due_date
+      - else 
+        No Due Date
+    .detail
+      %i.fa.fa-user-o
+      - task.users.each do |user|
+        = user.full_name
+    .detail
+      = "#{task.kind}"
+
+    .detail 
+      - if task.taskable_type == 'Candidate' && !task.job_id.present?
+        .title= link_to task.taskable.full_name, business_candidate_path(task.taskable) 
+      - elsif task.taskable_type == 'Job'
+        .title= link_to task.taskable.title, business_job_tasks_path(task.taskable)
 

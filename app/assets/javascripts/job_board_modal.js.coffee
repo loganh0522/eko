@@ -1,4 +1,4 @@
-jQuery -> 
+jQuery ->
   $(document).one 'click', '.add-job-board-sections', (event) ->
     $(document).on 'click', "#submit-section", (event) ->
       $("#job-board-section").submit();

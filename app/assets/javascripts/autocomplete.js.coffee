@@ -1,4 +1,4 @@
-jQuery ->  
+jQuery ->
   $(document).on 'click', '#add-skill', (event) ->
     tagName = $(this).parent().find('.ui-autocomplete-input').val() 
     newAttr = new Date().getTime();

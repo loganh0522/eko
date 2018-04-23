@@ -1,8 +1,8 @@
 class Company < ActiveRecord::Base
   before_create :generate_token
+  
   # has_many :company_users
   # has_many :users, through: :company_users
-  
   has_many :users
   has_many :orders, -> {order("created_at DESC")}
 
@@ -149,6 +149,20 @@ class Company < ActiveRecord::Base
   ### Job Methods ###
   def active_jobs
     self.jobs.where(is_active: true)
+  end
+
+  def active_subsidiary_jobs
+    @jobs = []
+    self.jobs.where(is_active: true).each do |j|
+      @jobs << j
+    end
+    
+    self.subsidiaries.each do |company| 
+      company.subsidiary.jobs.where(is_active: true).each do |j|
+        @jobs << j
+      end
+    end
+    return @jobs
   end
   
   def published_jobs

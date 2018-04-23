@@ -82,6 +82,7 @@ jQuery ->
       data:
         application_id: PostCode
         rating: Rating
+  
   $(document).on 'click', '.responsive-menu', (event) ->
     if $('.responsive-menu-links').is(':visible')
       $('.responsive-menu-links').hide()

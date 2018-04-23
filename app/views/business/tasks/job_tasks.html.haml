@@ -11,21 +11,15 @@
         .application-actions
           - if can? :create, Task
             = link_to "Create Task", new_business_job_task_path(@job), data: {:turbolinks => "false"}, remote: true, class: "btn hover-button", id: 'client-action'
-          .toggle-actions 
-            = form_tag search_business_tasks_path, :method => 'get', id: "search-form" do 
-              = radio_button_tag "task", "all", true, class: 'filter'
-              = label_tag "task_all", "List", :value => "all", class: 'filter'
-              
-              = radio_button_tag "task", "complete", false, class: 'filter'
-              = label_tag "task_complete", "table", :value => "open", class: 'filter'
-              
-            / = link_to business_job_tasks_path(@job, view: "list"), remote: true do
-            /   .filter.toggle-show#list List
-            / = link_to business_job_tasks_path(@job, view: "table"), remote: true do 
-            /   .filter.toggle-show#table.toggle-showing Table 
+          .toggle-actions#job-task-layout
+            = radio_button_tag "task", "list", true
+            = label_tag "task_list", "List", :value => "list", id: 'list'
             
+            = radio_button_tag "task", "table", false
+            = label_tag "task_table", "Table", :value => "table", id: 'table'
+                       
       #task-container
-        = render 'business/tasks/table'
+        = render 'business/tasks/tasks'
       .pagination-container
         = render 'business/tasks/pagination'
 

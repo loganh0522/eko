@@ -104,7 +104,6 @@ jQuery ->
     return
 
   $(document).one 'click', '#client-action', (event) -> 
-
     searchAuto = $('.search-field-auto')
     linkUp = $('#link-up')
     searchRequest = null  

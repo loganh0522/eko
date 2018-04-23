@@ -288,32 +288,16 @@
   .task
     width: 100%
     background: white
-    border-radius: 1px
+    border-radius: 5px
     margin-bottom: 30px
-    box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+    box-shadow: 0px 7px 40px 0px rgba(199,197,199,.1), 0px 3px 9px 0px rgba(199,197,199,1)
     display: block
     position: relative 
     .task-header
       font-size: 14px
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-      .header-content
-        padding: 10px 10px
-        height: 50px
-        .circle-img
-          margin-right: 10px
-          float: left
-        .content
-          float: left
-          .time
-            color: rgba(0,0,0,0.3)
-            clear: both
-            font-size: 11px
-        .dropdown
-          float: right
-    .body
-      clear: both
-      overflow: hidden
       padding: 10px 10px
+      .dropdown
+        float: right     
       #completed 
         .glyphicon
           float: left
@@ -325,11 +309,10 @@
           padding: 9px
           background-color: rgba(0, 255, 0, 0.1)
           color: green
-      .details
+      .title
         float: left
-        margin: 0px 0 0 10px
-        .title
-          font-weight: 600
+        margin: 5px 0 0 10px
+        font-weight: 600
       .glyphicon
         float: left
         width: 35px
@@ -342,12 +325,12 @@
         &:hover
           border-color: green
           color: green
+          cursor: pointer
           background-color: rgba(0, 255, 0, 0.1)
 
   .task-row
-    border-top: 1px solid rgba(0,0,0,0.1)
     overflow: hidden
-    padding: 10px 10px
+    padding: 5px 10px
     overflow: hidden
     width: 100%
     .no-notes
@@ -363,6 +346,7 @@
         float: left
         padding: 5px 5px
         border: 1px solid #EF7B2B
+        border-radius: 5px
       
 
      

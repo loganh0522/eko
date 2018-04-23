@@ -1,5 +1,4 @@
 jQuery ->
-
 #### Scorecard #### 
   $(document).on 'click', '.remove_kit_question', (event) ->
     $(this).nextAll('input[type=hidden]').val('1')
@@ -92,7 +91,6 @@ jQuery ->
     $(this).nextAll('input[type=hidden]').val('1')
     $(this).parent().parent().hide()
     event.preventDefault()
-
 
   $('.mediumModal, .largeModal').on 'click', '.remove_question', (event) ->
     $(this).nextAll('input[type=hidden]').val('1')

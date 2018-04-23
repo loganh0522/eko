@@ -7,7 +7,6 @@ class Business::InterviewsController < ApplicationController
   before_filter :company_deactivated?
   # include AuthHelper
   
-  
   def job_interviews
     @job = Job.find(params[:job_id])
     @interviews = @job.interviews.accessible_by(current_ability)

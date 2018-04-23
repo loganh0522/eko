@@ -1,4 +1,10 @@
 = form_for [:business, @job] do |f|
+  - if current_company.subsidiaries.present?
+    .form-row-no-border
+      = f.label :company_id, "Choose which Company"
+      = f.select(:company_id,  current_company.subsidiarys.collect {|p| [ p.name, p.id ] } + [[current_company.name, current_company.id]], {:include_blank => 'Please select a item'})
+  - else 
+    = f.hidden_field :company_id, value: current_company.id
   .form-row-show-over
     .contain-50 
       = f.label :title, "Job Title"
@@ -63,6 +69,5 @@
       = f.text_field :end_salary, placeholder: "Ending Salary"
   .container-footer
     = f.hidden_field :user_ids, value: current_user.id
-    = f.hidden_field :company_id, value: current_company.id
     = f.button @job.new_record? ? "Create Posting" : "Save and Continue", class: "btn border-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
 

@@ -1,4 +1,4 @@
-jQuery -> 
+jQuery ->
   $(document).on 'click', '#delete-tag', (event) -> 
     removeClass = $(this).attr('class')
     objId = $(this).parent().data('id')
@@ -7,7 +7,9 @@ jQuery ->
     index = $.inArray(objId, values)
     values.splice(index, 1)
     field.val(values)
+    
     $(this).parent().remove()
+    
     count = field.val().split(',').length
 
     if field.val() == ''
@@ -59,8 +61,6 @@ jQuery ->
 
       $('#' + kind + '_ids').val(values)
       $(this).parent().remove()
-
-      console.log('clicked')
       return   
 
     $(document).on 'click', '#delete-single', ->

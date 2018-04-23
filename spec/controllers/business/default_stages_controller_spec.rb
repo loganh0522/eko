@@ -6,6 +6,12 @@ describe Business::DefaultStagesController do
     let(:alice) {Fabricate(:user, company: company, role: "Admin")}
     let(:joe) {Fabricate(:user, company: company)}
     
+    before do  
+      set_current_user(alice)
+      set_current_company(company)
+      get :index
+    end 
+
     it_behaves_like "requires sign in" do
       let(:action) {get :index}
     end
@@ -22,15 +28,9 @@ describe Business::DefaultStagesController do
       let(:action) {get :index}
     end
 
-    before do  
-      set_current_user(alice)
-      set_current_company(company)
-      get :index
-    end 
-
     context "user is an admin" do 
       it "expects to return the correct number of stages" do 
-        expect(company.default_stages.count).to eq(6)
+        expect(company.default_stages.count).to eq(5)
       end
 
       it "expects to return the correct stage first" do 
@@ -45,6 +45,12 @@ describe Business::DefaultStagesController do
     let(:alice) {Fabricate(:user, company: company, role: "Admin")}
     let(:joe) {Fabricate(:user, company: company)}
 
+    before do  
+      set_current_user(alice)
+      set_current_company(company)
+      xhr :get, :new
+    end
+    
     it_behaves_like "requires sign in" do
       let(:action) {xhr :get, :new}
     end
@@ -61,12 +67,6 @@ describe Business::DefaultStagesController do
       let(:action) {xhr :get, :new}
     end
 
-    before do  
-      set_current_user(alice)
-      set_current_company(company)
-      xhr :get, :new
-    end
-    
     it "set @email_template to be a new instance of Tags" do
       expect(assigns(:stage)).to be_new_record 
       expect(assigns(:stage)).to be_instance_of DefaultStage
@@ -106,7 +106,7 @@ describe Business::DefaultStagesController do
       end
 
       it "creates the default stage" do
-        expect(DefaultStage.count).to eq(7)
+        expect(DefaultStage.count).to eq(6)
       end
 
       it "it renders the create action template" do 
@@ -114,7 +114,7 @@ describe Business::DefaultStagesController do
       end
 
       it "associates the default stage for current company" do 
-        expect(company.default_stages.count).to eq(7)
+        expect(company.default_stages.count).to eq(6)
       end
     end
 
@@ -126,7 +126,7 @@ describe Business::DefaultStagesController do
       end
 
       it "creates the default stages" do
-        expect(DefaultStage.count).to eq(6)
+        expect(DefaultStage.count).to eq(5)
       end
 
       it "it renders the create action template" do 
@@ -134,7 +134,7 @@ describe Business::DefaultStagesController do
       end
 
       it "associates the default stages for current company" do 
-        expect(company.default_stages.count).to eq(6)
+        expect(company.default_stages.count).to eq(5)
       end
     end
   end
@@ -145,6 +145,12 @@ describe Business::DefaultStagesController do
     let(:joe) {Fabricate(:user, company: company)}
     let(:stage) {Fabricate(:default_stage, company: company)}
     
+    before do  
+      set_current_user(alice)
+      set_current_company(company)
+      xhr :get, :edit, id: stage.id
+    end
+
     it_behaves_like "requires sign in" do
       let(:action) {xhr :get, :edit, id: stage.id}
     end
@@ -159,12 +165,6 @@ describe Business::DefaultStagesController do
 
     it_behaves_like "trial is over" do 
       let(:action) {xhr :get, :edit, id: stage.id}
-    end
-
-    before do  
-      set_current_user(alice)
-      set_current_company(company)
-      xhr :get, :edit, id: stage.id
     end
     
     it "sets the @default_stage to the correct stage" do 
@@ -262,7 +262,7 @@ describe Business::DefaultStagesController do
     end
 
     it "deletes the stage" do 
-      expect(company.default_stages.count).to eq(7)
+      expect(company.default_stages.count).to eq(6)
     end
 
     it "expects the response to render destroy template" do

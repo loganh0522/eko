@@ -22,9 +22,6 @@ jQuery ->
         rejected: rejected
         hired: hired
 
-
-
-  
   totalWidth = 0 
 
   $('.job_list_stage').each ->

@@ -8,7 +8,11 @@ class Business::JobsController < ApplicationController
   before_filter :owned_by_company, only: [:edit, :show, :update]
 
   def index
-    @jobs = current_company.active_jobs.accessible_by(current_ability)
+    if current_company.subsidiaries.present?
+      @jobs = current_company.active_subsidiary_jobs
+    else 
+      @jobs = current_company.active_jobs.accessible_by(current_ability)
+    end
 
     respond_to do |format|
       format.html
@@ -105,9 +109,8 @@ class Business::JobsController < ApplicationController
       where[:is_active] = true
     end
 
-
     where[:status] = params[:status] if params[:status].present?
-    where[:company_id] = current_company.id
+    where[:company_id] = current_company.id 
     where[:users] = [current_user.id] if params[:owner] == "user"
     where[:kind] = params[:kind] if params[:kind].present?
     where[:client_id] = params[:client_id] if params[:client_id].present? 

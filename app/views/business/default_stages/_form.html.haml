@@ -1,9 +1,10 @@
 = form_for [:business, @stage], remote: true do |f|
   .modal-body
-    .email-area
-      .choose-stage
-        = f.text_field :name, class: "form-control", id: "name_Block", placeholder: "Name", autocomplete: 'off'
-        %span.error#name_msgBlock
+    .form-row-no-border
+      = f.label :name, "Stage Name"
+      = f.text_field :name, class: "form-control", id: "name_Block", placeholder: "Stage Name", autocomplete: 'off'      
+      %span.error#name_msgBlock
+
   .modal-footer
     = f.hidden_field :company_id, value: current_company.id
     = f.button @stage.new_record? ? "Create Stage" : "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}

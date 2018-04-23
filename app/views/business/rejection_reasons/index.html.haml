@@ -13,14 +13,6 @@
       %h3 Hiring Defaults
     .standard-body
       #padding
-        .standard-body-header
-          %h4 Application E-mail
-          = link_to "Edit E-mail", edit_business_application_email_path(@email), :data => {:remote => true }, class: "btn border-button"
-        .templates-body#application_email
-          = render "business/application_emails/email"
-
-    .standard-body
-      #padding
         .contain-45 
           .standard-body-header
             %h4 Rejection Reasons

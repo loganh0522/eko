@@ -1,6 +1,5 @@
 class Business::DefaultStagesController < ApplicationController
   layout "business"
-
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -71,6 +70,7 @@ class Business::DefaultStagesController < ApplicationController
     params[:default_stage].each_with_index do |id, index|
       DefaultStage.update(id, {position: index + 1})
     end
+    
     render nothing: true
   end
 

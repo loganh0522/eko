@@ -36,8 +36,6 @@ class JobsController < ApplicationController
       @company = @job.company
     end
 
-    
-
     @candidate = Candidate.new
   end
 

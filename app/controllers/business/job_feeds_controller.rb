@@ -1,7 +1,6 @@
 class Business::JobFeedsController < ApplicationController
   layout "business"
   load_and_authorize_resource only: [:index]
- 
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
