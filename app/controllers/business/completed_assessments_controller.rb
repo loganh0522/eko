@@ -37,7 +37,7 @@ class Business::CompletedAssessmentsController < ApplicationController
     @assessment = @completed_assessment.assessment
     @scorecard = @assessment.scorecard
     @sections = @scorecard.scorecard_sections
-    @questions = @assessment.questions
+    @questions = @assessment.questions.order(:position)
 
     respond_to do |format|
       format.js

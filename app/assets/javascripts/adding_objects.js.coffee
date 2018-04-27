@@ -7,7 +7,6 @@ jQuery ->
     index = $.inArray(objId, values)
     values.splice(index, 1)
     field.val(values)
-    
     $(this).parent().remove()
     
     count = field.val().split(',').length
