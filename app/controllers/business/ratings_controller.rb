@@ -7,7 +7,8 @@ class Business::RatingsController < ApplicationController
   before_filter :company_deactivated?
 
   def create
-    @application = Application.find(params[:application_id])
+    @candidate = Application.find(params[:application_id]).candidate
+
     
     if @application.current_user_rating_present?(current_user)
       @rating = Rating.where(application_id: params[:application_id].to_i, 

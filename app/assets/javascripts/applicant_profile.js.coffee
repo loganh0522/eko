@@ -77,7 +77,7 @@ jQuery ->
     PostCode = $(this).parent().parent().attr('id')
     Rating = $(this).val()
     $.ajax
-      url : "/business/applications/"+PostCode+"/ratings"
+      url : "/business/candidates/"+PostCode+"/ratings"
       type : "post"
       data:
         application_id: PostCode

@@ -266,6 +266,7 @@ Rails.application.routes.draw do
       member do 
         get :evaluations, to: "candidates#application_form"
         get :scorecards, to: "candidates#scorecards"
+        post :ratings, to: "candidates#ratings"
       end
 
       get 'show_project', to: "candidates#show_project"
@@ -300,7 +301,7 @@ Rails.application.routes.draw do
         post :reject, to: "applications#reject"
         post :next_stage, to: "applications#next_stage"
         post :move_stage, to: "applications#move_stage"
-        post :ratings, to: "applications#ratings"
+        
         get :evaluations, to: "applications#application_form"
         get :scorecards, to: "applications#scorecards"
       end

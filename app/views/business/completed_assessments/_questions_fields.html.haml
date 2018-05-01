@@ -1,63 +1,82 @@
 %h4 Questions
 - @questions.each do |question|
   .question-container
-    .title= "#{question.body}"
-
     - if question.kind == 'Multiselect' 
-      .guidelines= question.guidelines
-      %ul.answer
-        - question.question_options.each do |option|
-          = f.fields_for :answers, Answer.new do |q| 
-            %li
-              = q.hidden_field :question_id, value: question.id
-              = q.check_box :question_option_id, {}, option.id, nil
-              = option.body
+      .header
+        .title= "#{question.body}"
+      .body
+        .guidelines= question.guidelines
+        %ul.answer
+          - question.question_options.each do |option|
+            = f.fields_for :answers, Answer.new do |q| 
+              %li
+                = q.hidden_field :question_id, value: question.id
+                = q.check_box :question_option_id, {}, option.id, nil
+                = option.body
     - else 
       = f.fields_for :answers, Answer.new do |q|
         - if question.kind == 'Text (Short Answer)'
-          = render 'question_rating', q: q, question: question
-          .guidelines= question.guidelines
-          .answer
-            = q.hidden_field  :question_id, value: question.id   
-            - if question.required == 1 
-              = q.text_field :body, hide_label: true, :required => true
-            - else
-              = q.text_field :body, hide_label: true
+          .header
+            .title= "#{question.body}"
+            = render 'question_rating', q: q, question: question
+          .body
+            .guidelines= question.guidelines
+            .answer
+              = q.hidden_field  :question_id, value: question.id   
+              - if question.required == 1 
+                = q.text_area :body, hide_label: true, :required => true
+              - else
+                = q.text_area :body, hide_label: true
 
         - elsif question.kind == "Text (Long Answer)"
-          = render 'question_rating', q: q, question: question
-          .guidelines= question.guidelines
-          .answer
-            = q.hidden_field  :question_id, value: question.id
-            - if question.required == 1
-              = q.text_area :body, hide_label: true, :required => true, rows: 5
-            - else
-              = q.text_area :body, hide_label: true, rows: 5 
-        - elsif question.kind == 'File'
-          .guidelines= question.guidelines
-          .answer
-            = q.hidden_field  :question_id, value: question.id
-            = q.file_field :file 
-        - elsif question.kind == 'Select (One)'
-          .guidelines= question.guidelines
-          .answer
-            %ul
-              - question.question_options.each do |option|
-                %li
-                  = q.hidden_field  :question_id, value: question.id
-                  = q.radio_button :question_option_id, option.id
-                  = option.body
-        - elsif question.kind == "Yes / No"
-          .guidelines= question.guidelines
-          .answer
-            %ul
+          .header
+            .title= "#{question.body}"
+            = render 'question_rating', q: q, question: question
+          .body
+            .guidelines= question.guidelines
+            .answer
               = q.hidden_field  :question_id, value: question.id
-              %li 
-                = q.radio_button :body, "Yes"
-                = q.label :body, "Yes"
-              %li 
-                = q.radio_button :body, "No"
-                = q.label :body, "No"
+              - if question.required == 1
+                = q.text_area :body, hide_label: true, :required => true, rows: 5
+              - else
+                = q.text_area :body, hide_label: true, rows: 5 
+        - elsif question.kind == 'File'
+          .header
+            .title= "#{question.body}"
+            = render 'question_rating', q: q, question: question
+          .body
+            .guidelines= question.guidelines
+            .answer
+              = q.hidden_field  :question_id, value: question.id
+              = q.file_field :file 
+        - elsif question.kind == 'Select (One)'
+          .header
+            .title= "#{question.body}"
+            = render 'question_rating', q: q, question: question
+          .body
+            .guidelines= question.guidelines
+            .answer
+              %ul
+                - question.question_options.each do |option|
+                  %li
+                    = q.hidden_field  :question_id, value: question.id
+                    = q.radio_button :question_option_id, option.id
+                    = option.body
+        - elsif question.kind == "Yes / No"
+          .header
+            .title= "#{question.body}"
+            = render 'question_rating', q: q, question: question
+          .body
+            .guidelines= question.guidelines
+            .answer
+              %ul
+                = q.hidden_field  :question_id, value: question.id
+                %li 
+                  = q.radio_button :body, "Yes"
+                  = q.label :body, "Yes"
+                %li 
+                  = q.radio_button :body, "No"
+                  = q.label :body, "No"
 
 
 

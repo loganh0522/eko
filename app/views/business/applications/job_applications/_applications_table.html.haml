@@ -31,7 +31,7 @@
                   .stage= application_stage(candidate, @job)
               %td
                 .content
-                  = render 'business/ratings/form', application: current_application(candidate, @job)
+                  = render 'business/ratings/form', application: candidate
               %td
                 .content
                   .stage= "#{time_ago_in_words(candidate.created_at)} ago"    

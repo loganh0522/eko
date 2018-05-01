@@ -7,7 +7,7 @@
   .overview-container.standard-padding
     %h3 Interview Overview
     .overview
-      = simple_format(@assessment.preperation)
+      .trix-content= @assessment.preperation.html_safe
 
   .questions-container.standard-padding.hidden-container
     .interview-scorecard-form
@@ -25,7 +25,8 @@
     = f.hidden_field :scorecard_id, value: @scorecard.id
   .container-footer
     = f.button "Save", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
-    .btn.border-button.close-modal Cancel
+    - if !@completed_assessment.new_record?
+      .btn.border-button.close-modal Cancel
 
 
 

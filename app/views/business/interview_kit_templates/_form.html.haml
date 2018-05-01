@@ -21,7 +21,7 @@
     .overview-container.standard-padding#overview-container
       %h4 Interview Prep Details
       = f.label :preperation, "Interview Prep Details"
-      = f.trix_editor :preperation
+      = f.trix_editor :preperation, class: 'trix-content'
       %span.error#title_msgBlock
     
     .questions-container.hidden-container#question-container
