@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   get '/booked/:id', to: "interviews#show"
 
   resources :job_boards
+  
   resources :jobs do 
     resources :applications, only: [:new, :create]
     resources :candidates, only: [:new, :create]

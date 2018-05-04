@@ -105,6 +105,7 @@ jQuery ->
       $('.responsive-menu-links').hide()
 
 ############### Current Position ##################
+
   $(document).on 'click', '#work_experience_current_position', (event) ->
     if $(this).is(':checked') == true  
       $('#work_experience_end_month').hide()
@@ -122,7 +123,6 @@ jQuery ->
       $('#work_experience_end_year').show()
 
 # Job Board Layout Modal 
-
   $(document).on 'keyup', '.number-only', (event) ->  
     if $.isNumeric($(this).val()) == false
       @value = @value.slice(0, -1)

@@ -1,6 +1,6 @@
 .applicant-stage
-  .dropdown
-    .dropdown-button.current-stage
+  .dropdown.current-stage
+    .dropdown-button
       = application_stage(@candidate, @job)
       .caret
     .dropdown-content#current-stage-drop
@@ -10,15 +10,14 @@
   = link_to next_stage_business_application_path(@application), remote: true, method: :post do
     .next-stage
       %i.fa.fa-arrow-right
-  
-  .dropdown
+  .dropdown.reject-stage
     - if @application.rejected 
-      .dropdown-button.reject-stage#rejected
+      .dropdown-button#rejected
         %i.fa.fa-ban
       .dropdown-content
         = link_to "Re-Qualify", reject_business_application_path(@application, val: "requalify"), remote: true, method: :post 
     - else
-      .dropdown-button.reject-stage
+      .dropdown-button
         %i.fa.fa-ban
       .dropdown-content
         - current_company.rejection_reasons.each do |reason| 

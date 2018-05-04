@@ -1,14 +1,20 @@
 json.array @questions do |question|
   json.id question.id
-  if question.kind == 'text'
+  
+  if question.kind == 'Multiselect'
+    json.type "multiselect"
+  elsif question.kind == 'Select (One)'
+    json.type "select"
+  elsif question.kind == 'File'
+    json.type "file"
+  elsif 'Text (Short Answer)'
+    json.type "text"
+  else
     json.type "textarea"
-  else 
-    json.type question.kind
   end
 
-
   json.question question.body
-  json.condition question.required
+  json.required question.required
 
   if question.question_options.present?
     json.array question.question_options do |option|

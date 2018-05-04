@@ -26,15 +26,15 @@ xml.publisherurl "https://www.talentwiz.ca"
 
 
         xml.indeed_apply_data do
-          
-          title = "indeed-apply-jobTitle=" + URI.encode(job.title) + "&"
-          name = "indeed-apply-jobname=firstlastname"
-          companyName = "indeed-apply-apiCompanyName=" + URI.encode(job.company.name) + "&"
+          jobTitle = "indeed-apply-jobTitle=" + URI.encode(job.title) + "&"
+          jobId = "indeed-apply-jobId=#{job.id}" + "&"
+          jobCompanyName = "indeed-apply-apiCompanyName=" + URI.encode(job.company.name) + "&"
           apiToken = "indeed-apply-apiToken=" + ENV['INDEED_TOKEN'] + "&"
-          jobId = "indeed-apply-resume=required"
-          jobId = "indeed-apply-jobTitle=#{job.id}"
-          postUrl = "indeed-apply-postUrl=" + "https://www.talentwiz.com/indeed-apply"
-          data = URI.encode(title)
+          name = "indeed-apply-jobname=firstlastname"
+          postUrl = "indeed-apply-postUrl=" + URI.encode('https://www.talentwiz.ca/indeed-apply', ": /")  
+          questions = "indeed-apply-questions" + URI.encode("https://www.talentwiz.ca/jobs/#{job.id}/questions", ": /") 
+          
+          data = jobTitle + jobId + jobCompanyName + name + apiToken + postUrl + questions
           xml.cdata! (data)
         end
       end

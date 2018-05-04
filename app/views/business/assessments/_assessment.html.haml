@@ -2,12 +2,9 @@
   .header
     %h4= "#{assessment.name} Scorecard"
     .my-scorecard
-    / - if !current_user.completed_assessments.present? 
     .links
       - if assessment.kind == "scorecard"
         = link_to "Create Scorecard", new_business_completed_assessment_path(assessment: assessment), remote: true 
-      - else
-        = link_to "Interview Kit", business_interview_kit_path(assessment), target: :_blank
 
   .body
     - if assessment.completed_assessments.present? 

@@ -2,6 +2,7 @@ class ContactMessagesController < ApplicationController
 
   def create
     @contact = ContactMessage.new(message_params)
+    
     if @contact.save
       AppMailer.send_contact_message(@contact).deliver
       redirect_to contact_path

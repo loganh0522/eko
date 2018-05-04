@@ -23,4 +23,9 @@ class Question < ActiveRecord::Base
   def downcase
     self.kind = self.kind.downcase
   end
+
+  def to_builder 
+    
+
+  end
 end

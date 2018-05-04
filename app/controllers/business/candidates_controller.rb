@@ -44,6 +44,8 @@ class Business::CandidatesController < ApplicationController
 
   def show 
     @candidate = Candidate.find(params[:id])
+    @interviews = @candidate.upcoming_interviews
+    @tasks = @candidate.open_tasks.accessible_by(current_ability)
     @tag = Tag.new
     
     if @candidate.manually_created == true 
