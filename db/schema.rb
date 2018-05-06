@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180422151223) do
+ActiveRecord::Schema.define(version: 20180505203139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -197,6 +197,17 @@ ActiveRecord::Schema.define(version: 20180422151223) do
     t.string   "video_url"
   end
 
+  create_table "awards", force: :cascade do |t|
+    t.integer  "candidate_id"
+    t.integer  "user_id"
+    t.string   "title"
+    t.string   "date_month"
+    t.string   "date_year"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "background_images", force: :cascade do |t|
     t.integer  "company_id"
     t.integer  "job_board_header_id"
@@ -215,6 +226,20 @@ ActiveRecord::Schema.define(version: 20180422151223) do
     t.integer  "estimated_time"
     t.boolean  "published",      default: false
     t.datetime "published_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "candidate_associations", force: :cascade do |t|
+    t.integer  "candidate_id"
+    t.integer  "user_id"
+    t.string   "title"
+    t.string   "start_month"
+    t.string   "start_year"
+    t.string   "end_month"
+    t.string   "end_year"
+    t.boolean  "current"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -252,6 +277,11 @@ ActiveRecord::Schema.define(version: 20180422151223) do
     t.string   "agency"
     t.string   "acronym"
     t.integer  "user_id"
+    t.text     "description"
+    t.string   "start_month"
+    t.string   "start_year"
+    t.string   "end_month"
+    t.string   "end_year"
   end
 
   create_table "client_contacts", force: :cascade do |t|
@@ -443,6 +473,8 @@ ActiveRecord::Schema.define(version: 20180422151223) do
     t.integer "profile_id"
     t.integer "candidate_id"
     t.integer "user_id"
+    t.string  "field"
+    t.string  "location"
   end
 
   create_table "email_signatures", force: :cascade do |t|
@@ -840,6 +872,23 @@ ActiveRecord::Schema.define(version: 20180422151223) do
     t.integer  "stage_action_id"
   end
 
+  create_table "military_services", force: :cascade do |t|
+    t.integer  "candidate_id"
+    t.integer  "user_id"
+    t.string   "rank"
+    t.string   "branch"
+    t.string   "service_country"
+    t.string   "start_month"
+    t.string   "start_year"
+    t.string   "end_month"
+    t.string   "end_year"
+    t.boolean  "current"
+    t.string   "commendations"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "my_interviews", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "interview_id"
@@ -919,6 +968,19 @@ ActiveRecord::Schema.define(version: 20180422151223) do
     t.integer "application_scorecard_id"
   end
 
+  create_table "patents", force: :cascade do |t|
+    t.integer  "candidate_id"
+    t.integer  "user_id"
+    t.string   "title"
+    t.string   "url"
+    t.string   "patent_number"
+    t.string   "date_month"
+    t.string   "date_year"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "payments", force: :cascade do |t|
     t.integer  "company_id"
     t.integer  "amount"
@@ -988,6 +1050,17 @@ ActiveRecord::Schema.define(version: 20180422151223) do
     t.text    "problem"
     t.text    "solution"
     t.text    "role"
+  end
+
+  create_table "publications", force: :cascade do |t|
+    t.integer  "candidate_id"
+    t.integer  "user_id"
+    t.string   "title"
+    t.string   "url"
+    t.datetime "date_published"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "question_answers", force: :cascade do |t|

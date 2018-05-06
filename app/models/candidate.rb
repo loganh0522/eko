@@ -15,8 +15,16 @@ class Candidate < ActiveRecord::Base
   has_many :interview_invitations, through: :invited_candidates
   has_many :resumes, :dependent => :destroy
   has_many :work_experiences, :dependent => :destroy
+  has_many :certifications, :dependent => :destroy
   has_many :educations, :dependent => :destroy
   has_many :social_links, :dependent => :destroy
+  has_many :publications, :dependent => :destroy
+  has_many :military_services, :dependent => :destroy
+  has_many :awards, :dependent => :destroy
+  has_many :patents, :dependent => :destroy
+  has_many :candidate_associations, :dependent => :destroy
+
+
   has_many :ratings
   has_many :taggings
   has_many :tags, through: :taggings
@@ -24,6 +32,7 @@ class Candidate < ActiveRecord::Base
   has_many :messages, -> {order("created_at DESC")}, as: :messageable, :dependent => :destroy
   has_many :comments, -> {order("created_at DESC")}, as: :commentable, :dependent => :destroy
   has_many :tasks, -> {order("created_at DESC")}, as: :taskable, :dependent => :destroy
+
 
   validates_presence_of :first_name, :last_name, :email, :if => :manually_created? && :internal_candidate?
   validates_associated :social_links, :work_experiences, :educations, :resumes

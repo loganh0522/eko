@@ -127,7 +127,7 @@ describe InboundCandidatesController do
       end
     end
 
-     context 'with only name' do
+    context 'with only name' do
       before do
         multichoice
         option1

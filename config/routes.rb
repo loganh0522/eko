@@ -72,7 +72,7 @@ Rails.application.routes.draw do
   
 
   post '/inbound-can/ziprecruiter', to: "inbound_candidates#ziprecruiter_webhook"
-  post '/inbound-can/indeed', to: "inbound_candidates#indeed_webhook"
+  post '/inbound-can/indeed-apply', to: "inbound_candidates#indeed_webhook"
   
 
   namespace :job_seeker do 
