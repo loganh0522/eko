@@ -1,5 +1,5 @@
 class InboundCandidatesController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:ziprecruiter_webhook]
+  skip_before_action :verify_authenticity_token, only: [:ziprecruiter_webhook, :indeed_webhook]
 
   def ziprecruiter_webhook  
     @job = Job.find(params[:job_id])
@@ -87,13 +87,13 @@ class InboundCandidatesController < ApplicationController
       end
     end
   end
-  
+
   def create_indeed_candidate(candidate)
     indeed_create_positions(candidate)
     indeed_create_educations(candidate)
     indeed_create_links(candidate)
     indeed_create_awards(candidate)
-    # indeed_create_certifications(candidate)
+    indeed_create_certifications(candidate)
     indeed_create_associations(candidate)
     indeed_create_patents(candidate)
     indeed_create_military_services(candidate)
