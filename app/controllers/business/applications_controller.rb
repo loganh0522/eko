@@ -115,7 +115,6 @@ class Business::ApplicationsController < ApplicationController
     else
       @candidates = Candidate.search(query, where: where, fields: fields, match: :word_start).records.paginate(page: params[:page], per_page: 10).accessible_by(current_ability)
     end
-
     respond_to do |format|
       format.js
     end
@@ -128,13 +127,14 @@ class Business::ApplicationsController < ApplicationController
   end
 
   def destroy_multiple
+    binding.pry
     @ids = params[:applicant_ids].split(',')
 
     @ids.each do |id| 
       @application = Application.find(id)
       @application.destroy
     end
-    
+
     @candidates = Candidate.joins(:applications).where(:applications => {job_id: @job.id}).paginate(page: params[:page], per_page: 10)    
     
     respond_to do |format|
@@ -181,6 +181,7 @@ class Business::ApplicationsController < ApplicationController
     end
   end
 
+
   def move_stage    
     @stage = Stage.find(params[:stage])
     @job = @stage.job
@@ -189,7 +190,7 @@ class Business::ApplicationsController < ApplicationController
 
     if params[:applicant_ids].present?
       move_multiple_stages
-      @candidates = Candidate.joins(:applications).where(:applications => {job_id: @job.id}).paginate(page: params[:page], per_page: 10)
+      @candidates = Candidate.search("*", where: {jobs: @job.id, application_stage: @stage.id }).records.paginate(page: params[:page], per_page: 10).accessible_by(current_ability)
     else
       move_stage_single
       @tasks = @candidate.open_job_tasks(@job).accessible_by(current_ability)

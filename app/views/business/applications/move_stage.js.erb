@@ -1,5 +1,5 @@
 <% if params[:applicant_ids].present? %>
-  $('.main-container').html('<%= j render "business/applications/job_applications/applications_table", applications: @candidates %>');
+  $('.all-candidates-table').html('<%= j render "business/applications/job_applications/applications_table", candidates: @candidates %>');
   $('.pagination-container').html('<%= j render "business/candidates/candidate_table/pagination", candidates: @candidates %>')
   $('.job-stages').html('<%= j render "business/applications/job_applications/job_stages", job: @job %>');
   $('.smallModal').hide();

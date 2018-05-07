@@ -69,7 +69,7 @@ class InboundCandidatesController < ApplicationController
       @question = Question.find(answer[:id])
       
       if @question.kind == "Multiselect"
-        answer.values.each do |value| 
+        answer[:values].each do |value| 
           QuestionAnswer.create(question_id: answer[:id], question_option_id: value, 
             candidate_id: @candidate.id, job_id: @job.id, application_id: @application.id)
         end
@@ -93,7 +93,7 @@ class InboundCandidatesController < ApplicationController
     indeed_create_educations(candidate)
     indeed_create_links(candidate)
     indeed_create_awards(candidate)
-    indeed_create_certifications(candidate)
+    # indeed_create_certifications(candidate)
     indeed_create_associations(candidate)
     indeed_create_patents(candidate)
     indeed_create_military_services(candidate)
