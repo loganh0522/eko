@@ -9,7 +9,7 @@
       .header
         %img(src="/tmp/ZipRecruiter_logo.png")
       .body
-        - if @job.job_feed.ziprecruiter == false
+        - if @job.job_feed.ziprecruiter == nil
           = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { ziprecruiter: true}), method: :put, remote: true, class: 'btn submit-button'
         - else 
           .posted 
@@ -19,7 +19,7 @@
       .header
         %img(src="/tmp/adzuna_logo.png")
       .body
-        - if @job.job_feed.adzuna == false
+        - if @job.job_feed.adzuna == nil
           = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { adzuna: true}), method: :put, remote: true, class: 'btn submit-button'
         - else 
           .posted 
@@ -29,7 +29,7 @@
       .header
         %img(src="/tmp/trovit_logo.png")
       .body
-        - if @job.job_feed.trovit == false 
+        - if @job.job_feed.trovit == nil 
           = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { trovit: true}), method: :put, remote: true, class: 'btn submit-button'
         - else 
           .posted 
@@ -39,7 +39,7 @@
       .header
         %img(src="/tmp/eluta_logo.gif")
       .body
-        - if @job.job_feed.eluta == false
+        - if @job.job_feed.eluta == nil 
           = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { eluta: true}), method: :put, remote: true, class: 'btn submit-button'
         - else 
           .posted 
@@ -49,7 +49,7 @@
       .header
         %img(src="/tmp/jooble_logo.jpg")
       .body
-        - if @job.job_feed.jooble == false
+        - if @job.job_feed.jooble == nil
           = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { jooble: true}), method: :put, remote: true, class: 'btn submit-button'
         - else 
           .posted 
@@ -59,7 +59,7 @@
       .header
         %img(src="/tmp/job_inventory_logo.jpg")
       .body
-        - if @job.job_feed.jobinventory == false
+        - if @job.job_feed.jobinventory == nil
           = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { jobinventory: true}), method: :put, remote: true, class: 'btn submit-button'
         - else 
           .posted 
@@ -69,7 +69,7 @@
       .header
         %img(src="/tmp/juju_logo.png")
       .body
-        - if @job.job_feed.juju == false
+        - if @job.job_feed.juju == nil
           = link_to "Post Job", business_job_job_feed_path(@job, @job_feed, job_feed: { juju: true}), method: :put, remote: true, class: 'btn submit-button'
         - else 
           .posted 
