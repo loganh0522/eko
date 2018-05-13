@@ -47,7 +47,7 @@
       .column-container
         .header
           .title Accomplishments
-          = link_to_add_fields_after "+ Add", f, :accomplishments
+        = link_to_add_fields_after "+ Add", f, :accomplishments
         = f.fields_for :accomplishments do |a|
           = render 'accomplishment_fields', f: a 
       .column-container

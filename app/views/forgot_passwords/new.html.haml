@@ -1,9 +1,14 @@
+
+
 .business-registration
-  .header
-    %img.logo(src="/tmp/logo.jpg")
-    %h2 Reset Password
-  .body
-    = bootstrap_form_tag url: '/forgot_passwords' do |f|
-      %fieldset
-        = f.email_field :email, placeholder: "E-mail", hide_label: true
-        %input(type="submit" value="Submit" class="btn button-submit")
+  = form_tag url: '/forgot_passwords' do |f|
+    .standard-header
+      %img.logo(src="/tmp/logo.jpg")
+      %h2 Reset Password
+    .body
+      .form-row-no-border
+        = label_tag "E-mail"
+        .field
+          = email_field_tag :email, "", placeholder: "E-mail"
+    .container-footer
+      = button_tag "Submit", class: "btn submit-button", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Signing In..."}
