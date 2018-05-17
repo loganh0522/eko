@@ -3,7 +3,7 @@
     %ul  
       %li.filter#invitation-times.active Add Times 
       %li.filter#invitation-details Details
-  
+    .recipients
   .calendar-container
     .column-7
       #interview-calendar
@@ -41,8 +41,8 @@
       .form-row-no-border
         - if !@candidate.present?
           = f.label :candidates, "Add Candidates"
-          #candidate_ids_Block
-            = render 'business/candidates/candidates_autocomplete'
+          / #candidate_ids_Block
+          /   = render 'business/candidates/candidates_autocomplete'
           = f.hidden_field :candidate_ids, id: "candidate_ids"
           %span.error#candidate_ids_msgBlock
         - else 

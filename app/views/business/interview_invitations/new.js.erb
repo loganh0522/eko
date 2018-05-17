@@ -1,36 +1,3 @@
-<% if @job.present?  %>
-  checkbox = $('.applicant-checkbox');
-  applicant_ids = [];
-  applicants = [];
-  applicant_names = [];
-
-  for (i = 0, len = checkbox.length; i < len; i++) {
-    n = checkbox[i];
-    if ($(n).find('input').is(':checked') === true) {
-      applicant = [];
-      if (!applicant_ids.includes($(n).data('id'))) {
-        applicant_ids.push($(n).data('id'));
-      }
-      if (!applicant.includes($(n).data('id'))) {
-        applicant.push($(n).data('id'));
-      }
-      if (!applicant.includes($(n).parent().parent().find('.name').data('id'))) {
-        applicant.push($(n).parent().parent().find('.name').data('id'));
-      }
-      applicants.push(applicant);
-    }
-  }
-
-  numApp = applicants.length
-  $('.assign-to-row').append('<div class="dropdown", id="addMultiDropDown"> <div class="dropdown-button color="black">' + numApp + ' Candidates Selected <div class="caret"></div> </div> <div class="dropdown-content multiCandidates">')
-  $('.newModal').find('#candidate_ids').val(applicant_ids)
-
-  for (j = 0, len1 = applicants.length; j < len1; j++) {
-    n = applicants[j];
-    $('.multiCandidates').append('<div class="multi-obj" data-id=' + n[0] + '> <div class="name">' + n[1] + '</div> <div class="candidate_ids" id="delete-tag"> &times </div> </div>');
-  }
-<% end %>
-
 
 $('.largeModal').find('form').remove()
 $('.largeModal').find('.new-title').html('<%= j "Schedule Meeting" %>');
@@ -170,4 +137,39 @@ $('#interview-calendar').fullCalendar({
 });
 
 
+
+
+
+
+<% if @job.present?  %>
+  checkbox = $('.applicant-checkbox');
+  applicant_ids = [];
+  applicants = [];
+  applicant_names = [];
+
+  for (i = 0, len = checkbox.length; i < len; i++) {
+    n = checkbox[i];
+    if ($(n).find('input').is(':checked') === true) {
+      applicant = [];
+      if (!applicant_ids.includes($(n).data('id'))) {
+        applicant_ids.push($(n).data('id'));
+      }
+      if (!applicant.includes($(n).data('id'))) {
+        applicant.push($(n).data('id'));
+      }
+      if (!applicant.includes($(n).parent().parent().find('.name').data('id'))) {
+        applicant.push($(n).parent().parent().find('.name').data('id'));
+      }
+      applicants.push(applicant);
+    }
+  }
+  numApp = applicants.length
+  $('.recipients').append('<div class="dropdown", id="addMultiDropDown"> <div class="dropdown-button color="black">' + numApp + ' Candidates Selected <div class="caret"></div> </div> <div class="dropdown-content multiCandidates">')
+  $('.newModal').find('#candidate_ids').val(applicant_ids)
+  console.log(applicant_ids)
+  for (j = 0, len1 = applicants.length; j < len1; j++) {
+    n = applicants[j];
+    $('.multiCandidates').append('<div class="multi-obj" data-id=' + n[0] + '> <div class="name">' + n[1] + '</div> <div class="applicant_ids" id="delete-tag"> &times </div> </div>');
+  }
+<% end %>
 

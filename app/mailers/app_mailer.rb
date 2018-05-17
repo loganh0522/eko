@@ -40,4 +40,8 @@ class AppMailer < ActionMailer::Base
     @user = user
     mail to: user.email, from: "no-reply@talentwiz.ca", subject: "Please reset your password"
   end
+
+  def send_job_posting_alert(order_item, posting_details)
+    mail to: "houston@talentwiz.ca", from: "no-reply@talentwiz.ca", subject: order_item.name  body: posting_details
+  end
 end

@@ -3,7 +3,7 @@
   $('.applicant-nav').find('.activated').removeClass('activated');
   $('.applicant-nav').find('#scorecards').addClass('activated');
 <% else %> 
-  $('.display-applicant-details').html('<%= j render "business/assessments/assessments" %>');
+  $('.display-applicant-details').html('<%= j render "business/assessments/candidate_assessments" %>');
   $('.applicant-nav').find('.activated').removeClass('activated');
   $('.applicant-nav').find('#scorecards').addClass('activated');
 <% end %>

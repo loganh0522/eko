@@ -27,6 +27,7 @@ class Business::JobsController < ApplicationController
     @job = Job.new(job_params.merge!(status: 'open', is_active: true))  
 
     if @job.save 
+      track_activity @job, 'create', current_company.id, nil, @job 
       redirect_to business_job_questions_path(@job)
     else
       render :new 
