@@ -42,6 +42,6 @@ class AppMailer < ActionMailer::Base
   end
 
   def send_job_posting_alert(order_item, posting_details)
-    mail to: "houston@talentwiz.ca", from: "no-reply@talentwiz.ca", subject: order_item.name  body: posting_details
+    mail to: "houston@talentwiz.ca", from: "no-reply@talentwiz.ca", subject: order_item.name,  body: posting_details
   end
 end

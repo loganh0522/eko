@@ -18,10 +18,12 @@ class OrderItem < ActiveRecord::Base
         ZiprecruiterPremiumFeed.create(job_id: self.order.job_id, 
         boost: false, posted_at: Time.now, premium_board_id: self.premium_board.id)
       end
-    elsif self.premium_board.name == "Neuvoo"
+    elsif self.premium_board.name == "Neuvoo" 
 
     elsif self.premium_board.name == "LinkedIn"
-
+    elsif self.premium_board.name == "CareerBuilder"
+    elsif self.premium_board.name == "Monster"
+    elsif self.premium_board.name == "CareerBuilder"
     end
   end
 
