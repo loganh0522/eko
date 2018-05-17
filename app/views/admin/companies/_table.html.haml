@@ -4,9 +4,10 @@
       %tr
         %th(width="1%")
         %th(width="5%") 
-        %th(width="25%") Title
-        %th(width="25%") Company
-        %th(width="10%") 
+        %th(width="20%") Company Name
+        %th(width="10%") Status
+        %th(width="10%") Open Jobs
+        %th(width="10%") Total Jobs
         %th(width="10%") Candidates
         %th(width="10%") Created At
       %tbody
@@ -27,10 +28,13 @@
             %td
               = link_to "#{company.name}", admin_company_path(company)
             %td
-              = company.location
+              = company.subscription
             %td
-              = company.size
+              = company.open_jobs.count       
             %td
               = company.jobs.count
             %td
-              = company.open_jobs.count
+              = company.size
+            %td 
+              = company.created_at
+              

@@ -1,0 +1,23 @@
+.table1
+  %table
+    %thead
+      %tr
+        %th(width="20%") Name
+        %th(width="10%") Email
+        %th(width="10%") Kind
+        %th(width="10%") Created At
+        %th(width="10%") Actions
+    %tbody
+      - @users.each do |user| 
+        %tr
+          %td
+            = link_to "#{user.full_name}", admin_user_path(user)
+          %td
+            = user.email
+          %td
+            = user.kind
+          %td
+            = user.created_at
+          %td
+           
+          %td

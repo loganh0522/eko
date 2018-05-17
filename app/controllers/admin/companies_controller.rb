@@ -57,6 +57,24 @@ class Admin::CompaniesController < ApplicationController
 
   end
 
+  def search
+    where = {}
+
+    query = "*"
+
+
+    where[:active] = true
+    where[:status] = params[:status] if params[:status].present?
+    where[:name] = current_company.id 
+    where[:users] = [current_user.id] if params[:owner] == "user"
+    where[:kind] = params[:kind] if params[:kind].present?
+    where[:client_id] = params[:client_id] if params[:client_id].present? 
+
+    @jobs = Job.search(query, where: where, fields: [:title], match: :word_start).records.accessible_by(current_ability)
+  end
+
+
+
   def verified
     @company = Company.find(params[:id])
     @company.update_attributes(verified: true)

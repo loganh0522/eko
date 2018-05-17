@@ -1,9 +1,13 @@
-.home-page-header
-  .top-info
-    %h1= "Companies"
-  
-.home-page-body
-  = render 'filters'
-  #main-container
-    #padding
-      = render 'admin/companies/table'
+
+.page-header
+  %h2 All Companies
+  .actions
+    / = render 'business/candidates/candidate_table/actions'
+#main-container
+  #padding
+    .side-container
+      = render 'filters'        
+    .main-container
+      .all-candidates-table
+        = render 'admin/companies/table'
+      .pagination-container

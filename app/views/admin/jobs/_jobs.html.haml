@@ -4,8 +4,8 @@
       %tr
         %th(width="1%")
         %th(width="5%") 
-        %th(width="25%") Title
-        %th(width="25%") Company
+        %th(width="20%") Title
+        %th(width="20%") Company
         %th(width="10%") Status
         %th(width="10%") Candidates
         %th(width="10%") Created At
@@ -28,7 +28,7 @@
             %td
               = link_to "#{job.title}", admin_job_path(job)
             %td
-              = job.company.name
+              = link_to "#{job.company.name}", admin_company_path(job.company)
             %td
               = job.status
             %td
