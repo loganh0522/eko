@@ -415,11 +415,13 @@ Rails.application.routes.draw do
   namespace :admin, constraints: Constraint::AdminConstraint.new do 
     root to: "jobs#index" 
     mount Sidekiq::Web, at: '/sidekiq'
-    resources :premium_boards
+
     resources :users
     resources :candidates
     resources :customers
     resources :blogs
+    resources :premium_boards
+    resources :free_boards
     
     resources :jobs do 
       collection do 

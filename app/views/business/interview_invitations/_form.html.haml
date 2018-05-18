@@ -82,21 +82,26 @@
       .form-row-no-border
         = f.label "Interview Type"
         .toggle-actions
-          .contain-3
-            = f.radio_button :kind, "phone", id: 'phone', checked: true
-            = f.label :kind, value: "Phone", for: "phone", class: 'border-button interview-type' do
-              %i.fa.fa-phone
-              Phone
-          .contain-3
-            = f.radio_button :kind, "video", id: 'video'
-            = f.label :kind, value: "Video", for: "video", class: 'border-button interview-type' do
-              %i.fa.fa-camera
-              Video
-          .contain-3
-            = f.radio_button :kind, "inperson", id: 'inperson'
-            = f.label :kind, value: "In Person", for: "inperson", class: 'border-button interview-type', id: 'in-person' do
-              %i.fa.fa-user
-              In person
+          = f.radio_button :kind, "phone", id: 'phone', checked: true
+          = f.label :kind, value: "Phone" , for: "phone", class: 'border-button interview-type' do
+            %i.fa.fa-phone
+            Phone
+          = f.radio_button :kind, "inperson", id: 'inperson'
+          = f.label :kind, value: "In Person" , for: "inperson", class: 'border-button interview-type', id: 'in-person' do
+            %i.fa.fa-user
+            In person
+            
+        / .toggle-actions
+        /   .contain-3
+        /     = f.radio_button :kind, "phone", id: 'phone', checked: true
+        /     = f.label :kind, value: "Phone", for: "phone", class: 'border-button interview-type' do
+        /       %i.fa.fa-phone
+        /       Phone
+        /   .contain-3
+        /     = f.radio_button :kind, "inperson", id: 'inperson'
+        /     = f.label :kind, value: "In Person", for: "inperson", class: 'border-button interview-type', id: 'in-person' do
+        /       %i.fa.fa-user
+        /       In person
         
       
       .form-row-no-border#interview-location

@@ -8,15 +8,9 @@ class Business::JobFeedsController < ApplicationController
   before_filter :create_cart
 
   def index
-    if current_company.customer.present?
-      @customer = current_company.customer 
-    else 
-      @customer = Customer.new
-    end
-    
     @job = Job.find(params[:job_id])
     @job_feed = @job.job_feed
-
+    @job_feeds = FreeBoard.all
     respond_to do |format| 
       format.js
       format.html

@@ -1,0 +1,18 @@
+= form_for [:admin, @job_board] do |f|
+  .modal-body     
+    .form-row-no-border
+      = f.label :name, "Name"
+      = f.text_field :name, label: "Name"
+    .form-row-no-border
+      = f.label :website, "Website"
+      = f.text_field :website, label: "Website"
+    .form-row-no-border
+      = f.label :logo, "Logo"
+      = f.file_field :logo, label: "Logo"
+    .form-row-no-border
+      = f.label :description, "Description"
+      = f.text_area :description, label: "Description"
+    
+  .modal-footer
+    = f.submit "+ Create", class: "btn submit-button"
+    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel

@@ -1,0 +1,18 @@
+.page-header
+.company-settings
+  .side-container
+    = render 'admin/shared/admin_sidebar'
+  .main-container
+    .standard-header
+      %h3 Free Boards
+      = link_to "+ Job Board", new_admin_free_board_path, :data => {:remote => true }, class: "btn border-button"
+    
+
+    #premium-boards
+      - @job_boards.each do |board| 
+        .job-feed-container
+          = link_to "Edit", edit_admin_free_board_path(board.id), :data => {:remote => true }
+          .header
+            = image_tag board.logo.small_image if board.logo.present? 
+          .body 
+            .btn.border-button Post Job

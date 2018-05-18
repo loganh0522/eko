@@ -6,7 +6,9 @@
     .standard-header
       %h3 Premium Boards
       = link_to "+ Job Board", new_admin_premium_board_path, :data => {:remote => true }, class: "btn border-button2"
-    .templates-body
+    
+
+    #premium-boards
       - @job_boards.each do |board| 
         .job-feed-container
           = link_to "Edit", edit_admin_premium_board_path(board.id), :data => {:remote => true }
@@ -18,12 +20,7 @@
               = duration.price
 
 
-.modal#basic-form-modal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times
-        %h4.modal-title
+
 
 
 

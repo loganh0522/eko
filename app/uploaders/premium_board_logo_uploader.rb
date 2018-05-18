@@ -6,14 +6,14 @@ class PremiumBoardLogoUploader < CarrierWave::Uploader::Base
   end
   
   version :large_image do
-    process :resize_to_fit => [400, 300]
+    process :resize_to_fill => [400, 300]
   end
   
   version :medium_image do
-    process :resize_to_fit => [300, 200]
+    process :resize_to_fill => [300, 200]
   end
 
   version :small_image do
-    process :resize_to_fit => [200, 100]
+    process :resize_to_fill => [200, 100]
   end
 end
