@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180518204234) do
+ActiveRecord::Schema.define(version: 20180522103928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1036,6 +1036,16 @@ ActiveRecord::Schema.define(version: 20180518204234) do
     t.string  "line_item_title"
     t.boolean "email_to",        default: false
     t.boolean "contact_email"
+  end
+
+  create_table "premium_feeds", force: :cascade do |t|
+    t.integer  "job_id"
+    t.integer  "premium_board_id"
+    t.boolean  "expired",          default: false
+    t.datetime "posted_at"
+    t.datetime "expiration_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "profiles", force: :cascade do |t|

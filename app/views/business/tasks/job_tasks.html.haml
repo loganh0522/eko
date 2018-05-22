@@ -13,10 +13,10 @@
             = link_to "Create Task", new_business_job_task_path(@job), data: {:turbolinks => "false"}, remote: true, class: "btn hover-button", id: 'client-action'
           .toggle-actions#job-task-layout
             = radio_button_tag "task", "list", true
-            = label_tag "task_list", "List", :value => "list", id: 'list'
+            = label_tag "task_list", "List", :value => "list", id: 'list', :data => {job: @job.id}
             
             = radio_button_tag "task", "table", false
-            = label_tag "task_table", "Table", :value => "table", id: 'table'
+            = label_tag "task_table", "Table", :value => "table", id: 'table', :data => {job: @job.id}
                        
       #task-container
         = render 'business/tasks/tasks'

@@ -22,7 +22,7 @@
               - board.posting_durations.each do |duration|
                 .duration-name= duration.name
                 = link_to_add_to_cart "$ #{duration.price} ", "#{duration.duration}", f, :order_items, board.id, duration.id
-                     
+                
   #cart 
     .header My Cart
     .body

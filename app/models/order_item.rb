@@ -19,8 +19,11 @@ class OrderItem < ActiveRecord::Base
         boost: false, posted_at: Time.now, premium_board_id: self.premium_board.id)
       end
     elsif self.premium_board.name == "Neuvoo" 
-
+      PremiumFeed.create(job_id: self.order.job_id, 
+        expired: false, posted_at: Time.now, premium_board_id: self.premium_board.id)
     elsif self.premium_board.name == "LinkedIn"
+      PremiumFeed.create(job_id: self.order.job_id, 
+        expired: false, posted_at: Time.now, premium_board_id: self.premium_board.id)
     elsif self.premium_board.name == "CareerBuilder"
     elsif self.premium_board.name == "Monster"
     elsif self.premium_board.name == "CareerBuilder"
