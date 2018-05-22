@@ -1,12 +1,12 @@
 class Business::JobsController < ApplicationController
   layout "business"
-  load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy]
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
   before_filter :owned_by_company, only: [:edit, :show, :update]
-
+  load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy]
+  
   def index
     if current_company.subsidiaries.present?
       @jobs = current_company.active_subsidiary_jobs

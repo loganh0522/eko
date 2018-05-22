@@ -5,7 +5,8 @@
         = link_to completed_business_tasks_path(id: task.id), method: :post, remote: true do 
           .glyphicon.glyphicon-ok
     - else
-      .glyphicon.glyphicon-ok 
+      = link_to completed_business_tasks_path(id: task.id), method: :post, remote: true do 
+        .glyphicon.glyphicon-ok
     .title= task.title
    
     .dropdown

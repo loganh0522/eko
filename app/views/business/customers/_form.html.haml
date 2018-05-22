@@ -14,7 +14,7 @@
         .row
           .col-md-12
             %label Billing Address
-            = f.text_field :address, id: "geocomplete2", placeholder: "Address"
+            = f.text_field :address, id: "geocomplete2", placeholder: "Address", autocomplete: 'off'
         .row
           .col-md-6
             = f.text_field :location, id: "geocomplete", placeholder: "City"  

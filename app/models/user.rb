@@ -6,9 +6,8 @@ class User < ActiveRecord::Base
 
   before_create :downcase_email, :set_full_name
   after_save :set_full_name
-
+  before_update :set_full_name
   after_create :create_email_signature, if: :business_user
-
   liquid_methods :first_name, :last_name, :full_name
   
   belongs_to :company

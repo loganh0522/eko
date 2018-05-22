@@ -18,5 +18,5 @@
         = f.text_field :phone, class: "form-control", hide_label: true, placeholder: "Phone"
   .modal-footer
     %fieldset
-      = f.submit "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
+      = f.button "Update", class: "btn submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
       .btn.border-button.close-modal Cancel

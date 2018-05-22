@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180505203139) do
+ActiveRecord::Schema.define(version: 20180518204234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -282,6 +282,7 @@ ActiveRecord::Schema.define(version: 20180505203139) do
     t.string   "start_year"
     t.string   "end_month"
     t.string   "end_year"
+    t.integer  "candidate_id"
   end
 
   create_table "client_contacts", force: :cascade do |t|
@@ -1402,6 +1403,7 @@ ActiveRecord::Schema.define(version: 20180505203139) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "boost",            default: false
+    t.boolean  "expired",          default: false
   end
 
 end

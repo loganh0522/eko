@@ -12,6 +12,8 @@ def create_data_for_business
   @eric = Fabricate(:user, company: @company, role: 'Admin', kind: 'business')
   @bryan = Fabricate(:user, company: @company, role: 'Admin', kind: 'business')
   @job = Fabricate(:job, company: @company, users: [@alice])
+  @candidate = Fabricate(:candidate, company: @company)
+  @application = Fabricate(:application, candidate: @candidate)
 end
 
 def sign_in_business

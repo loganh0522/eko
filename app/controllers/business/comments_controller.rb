@@ -1,6 +1,5 @@
 class Business::CommentsController < ApplicationController 
   layout "business"
-
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -50,14 +49,13 @@ class Business::CommentsController < ApplicationController
     if @new_comment.save 
       if @commentable.class == Job
         @comments = @commentable.comments
-        track_activity @new_comment, 'job_note', nil, params[:job_id]
+        track_activity @new_comment, 'create', current_company.id, @commentable.id, params[:comment][:job_id]
       elsif @commentable.class != Job && params[:comment][:job_id].present?
         @comments = Comment.where(commentable_type: "Candidate", commentable_id: @commentable.id, job_id: params[:comment][:job_id])
         track_activity @new_comment, 'create', current_company.id, @commentable.id, params[:comment][:job_id] 
-      
       elsif @commentable.class == Candidate && !params[:comment][:job_id].present?
         @comments = @commentable.comments
-        track_activity @new_comment, 'create', current_company.id, @commentable.id, params[:comment][:job_id] 
+        track_activity @new_comment, 'create', current_company.id, @commentable.id
       elsif @commentable.class == Client
         @comments = @commentable.comments
         track_activity @new_comment, 'create', current_company.id, @commentable.id
@@ -116,15 +114,15 @@ class Business::CommentsController < ApplicationController
     
     applicant_ids.each do |id| 
       @candidate = Candidate.find(id)
-      if params[:job_id].present?
-        @job = Job.find(params[:job_id])
+      if params[:comment][:job_id].present?
         @comment = @candidate.comments.build(comment_params)
+        track_activity @comment, 'create', current_company.id, @comment.commentable.id, params[:comment][:job_id] 
       else 
         @comment = @candidate.comments.build(comment_params)
+        track_activity @comment, 'create', current_company.id, @comment.commentable.id
       end
       @comment.save
     end
-    # track_activity(@comment, "create")
     
     respond_to do |format| 
       format.js

@@ -14,4 +14,4 @@
           .time= "#{time_ago_in_words(activity.created_at)} ago" 
     .activity-body-body
       .comment-body
-        = activity.trackable.body
+        = sanitize activity.trackable.body

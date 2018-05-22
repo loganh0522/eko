@@ -1,6 +1,5 @@
 class Business::TasksController < ApplicationController
   layout "business"
-  load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy, :completed]
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -10,6 +9,7 @@ class Business::TasksController < ApplicationController
     :client_complete, :client_overdue, :client_due_today, 
     :create_multiple, :completed, :update, :new_multiple]
   before_filter :new_taskable, only: [:new]
+  load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy, :completed]
 
   def job_tasks
     @job = Job.find(params[:job_id]) 
@@ -60,8 +60,6 @@ class Business::TasksController < ApplicationController
 
   def create 
     create_tasks
-
-
   end
 
   def edit 
@@ -122,7 +120,6 @@ class Business::TasksController < ApplicationController
       @candidate = Candidate.find(id)
       @task = @candidate.tasks.build(task_params.merge!(user_ids: @user_ids))
       @task.save
-      # track_activity(@comment, "create")
     end
     
     respond_to do |format| 

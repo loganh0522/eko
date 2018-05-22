@@ -13,6 +13,7 @@ describe Business::CommentsController do
   let(:candidate_comment) {Fabricate(:comment, commentable_type: "Candidate", commentable_id: candidate.id)}
   let(:job_comment) {Fabricate(:comment, commentable_type: "Job", commentable_id: job.id)}
   let(:client_comment) {Fabricate(:comment, commentable_type: "Client", commentable_id: client.id)}
+  
   before do  
     set_current_user(alice)
     set_current_company(company)
@@ -332,7 +333,7 @@ describe Business::CommentsController do
 
       it "creates an activity related to the comment" do 
         expect(Activity.count).to eq(1)
-        # expect(Comment.activity.last).to be_present
+        expect(Comment.last.activity).to be_present
       end
 
       it "renders the new action" do 
@@ -483,6 +484,7 @@ describe Business::CommentsController do
         expect(@candidate1.comments.count).to eq(1)
         expect(@candidate2.comments.count).to eq(1)
         expect(@candidate3.comments.count).to eq(1)
+        expect(Activity.count).to eq(3)
       end
 
       it "renders the new action" do 
@@ -506,6 +508,7 @@ describe Business::CommentsController do
         expect(@candidate1.comments.count).to eq(1)
         expect(@candidate2.comments.count).to eq(1)
         expect(@candidate3.comments.count).to eq(1)
+        expect(Activity.count).to eq(3)
       end
 
       it "renders the new action" do 

@@ -7,7 +7,7 @@ jQuery ->
 
     if $("#order_" + board).length == 0 
       $('#cart').find('.body').append($(this).data('fields').replace(regexp, time))
-      
+      $('.no-content').hide()
       subTotal = 0
       
       $('.unit-price').each -> 
@@ -24,6 +24,7 @@ jQuery ->
     
     else if $("#order_" + board).length == 1 
       $("#order_" + board).remove()
+      $('.no-content').hide()
       $('#cart').find('.body').append($(this).data('fields').replace(regexp, time))
       subTotal = 0
       
@@ -59,6 +60,8 @@ jQuery ->
     $('#tax-total').find('.amount').html("$" + taxAmount)
     $('#cart-total').find('.amount').html("$" + totalAmount)
     $('#order_total').val(totalAmount)
+    if totalAmount == 0 
+      $('.no-content').show()
     event.preventDefault()
 
 

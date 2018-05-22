@@ -23,16 +23,16 @@
     .standard-header
       %h4 Transactions
     .standard-body
-      %table.table
-        %thead
-          %tr
-            %th(width="25%") Name 
-            %th(width="15%") Amount
-            %th(width="25%") Card
-            %th(width="30%") Date Issued
-            %th(width="5%") Receipt
-        %tbody
-          - if @orders.present?
+      - if @orders.present?
+        %table.table
+          %thead
+            %tr
+              %th(width="25%") Name 
+              %th(width="15%") Amount
+              %th(width="25%") Card
+              %th(width="30%") Date Issued
+              %th(width="5%") Receipt
+          %tbody
             - @orders.each do |order|
               %tr
                 %td= order.title
@@ -40,9 +40,9 @@
                 %td= "**** **** **** #{order.last_four}"
                 %td= order.created_at.strftime("%A, %B %e, %Y")
                 %td= link_to "Download Receipt", business_order_path(order, format: :pdf), target: :_blank
-          - else 
-            .not-present-container
-              %p There are currently no transactions
+      - else 
+        .not-present-container
+          %p There are currently no transactions
 
 
 

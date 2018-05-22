@@ -13,11 +13,5 @@ jQuery ->
       data:
         view: $(this).attr('id')
 
-  $(document).on 'click', '.glyphicon-ok, .fa-check', -> 
-    taskId = $(this).parent().parent().attr('id').slice(5)
-    $.ajax
-      url: '/business/tasks/completed'
-      type: 'POST'
-      data:
-        id: taskId
+  
 

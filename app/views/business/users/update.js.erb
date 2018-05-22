@@ -12,5 +12,7 @@
     }
   });
 <% else %>
-  $('#basic-form-modal').modal('hide');
+  $('.mediumModal').find('form').remove()
+  $('.mediumModal').hide()
+  $('.user-details').html('<%= j render "user_details" %>')
 <% end %>

@@ -1,11 +1,14 @@
 $('.mediumModal').find('form').remove()
 
 <% if params[:password].present? %> 
-  $('.mediumModal').find(".new-title").html('<%= j "Change Password" %>');
-  $('.mediumModal').find('.new-modal-header').after('<%= j render "business/users/change_password" %>'); 
+  $('.smallModal').find('form').remove()
+  $('.smallModal').find(".new-title").html('<%= j "Change Password" %>');
+  $('.smallModal').find('.new-modal-header').after('<%= j render "business/users/change_password" %>'); 
+  $('.smallModal').show()
 <% else %> 
   $('.mediumModal').find(".new-title").html('<%= j "Update Profile" %>');
   $('.mediumModal').find('.new-modal-header').after('<%= j render "business/users/form" %>');
+  $('.mediumModal').show()
 <% end %>
 
-$('.mediumModal').show()
+

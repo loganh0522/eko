@@ -30,7 +30,7 @@ describe Business::TasksController do
   describe "GET job_tasks" do 
     context "@job in params renders job.comments" do 
       before do  
-        xhr :get, :job_tasks, job_id: job.id
+        get :job_tasks, job_id: job.id
       end
 
       it "sets the @tasks to the current Job" do 
@@ -57,19 +57,19 @@ describe Business::TasksController do
 
   describe "GET index" do 
     it_behaves_like "requires sign in" do
-      let(:action) {xhr :get, :index}
+      let(:action) {get :index}
     end
 
     it_behaves_like "user does not belong to company" do 
-      let(:action) {xhr :get, :index}
+      let(:action) {get :index}
     end
 
     it_behaves_like "company has been deactivated" do
-      let(:action) {xhr :get, :index}
+      let(:action) {get :index}
     end
 
     it_behaves_like "trial is over" do 
-      let(:action) {xhr :get, :index}
+      let(:action) {get :index}
     end
 
     context "main index of tasks page" do 
@@ -82,36 +82,36 @@ describe Business::TasksController do
       end
     end
 
-    context "get APPLICATION tasks" do 
-      before do  
-        xhr :get, :index, job: job.id, candidate_id: candidate.id
-      end 
+    # context "get APPLICATION tasks" do 
+    #   before do  
+    #     xhr :get, :index, job: job.id, candidate_id: candidate.id
+    #   end 
 
-      it "sets the @tasks to the current Candidate" do 
-        expect(assigns[:tasks]).to eq([application_task])
-        expect(assigns[:tasks].count).to eq(1)
-      end
+    #   it "sets the @tasks to the current Candidate" do 
+    #     expect(assigns[:tasks]).to eq([application_task])
+    #     expect(assigns[:tasks].count).to eq(1)
+    #   end
 
-      it "expects the response to render index template" do
-        expect(response).to render_template :index
-      end
-    end
+    #   it "expects the response to render index template" do
+    #     expect(response).to render_template :index
+    #   end
+    # end
 
-    context "get CANDIDATE tasks" do 
-      before do  
-        xhr :get, :index, candidate_id: candidate.id
-      end 
+    # context "get CANDIDATE tasks" do 
+    #   before do  
+    #     xhr :get, :index, candidate_id: candidate.id
+    #   end 
 
-      it "sets the @tasks to the current Candidate" do 
-        expect(assigns[:tasks]).to eq([application_task, candidate_task])
-        expect(assigns[:tasks].count).to eq(2)
-        expect(candidate.open_tasks.first).to eq(application_task)
-      end
+    #   it "sets the @tasks to the current Candidate" do 
+    #     expect(assigns[:tasks]).to eq([application_task, candidate_task])
+    #     expect(assigns[:tasks].count).to eq(2)
+    #     expect(candidate.open_tasks.first).to eq(application_task)
+    #   end
 
-      it "expects the response to render index template" do
-        expect(response).to render_template :index
-      end
-    end
+    #   it "expects the response to render index template" do
+    #     expect(response).to render_template :index
+    #   end
+    # end
   end
 
   describe "GET new" do 
@@ -234,19 +234,19 @@ describe Business::TasksController do
 
   describe "POST create" do  
     it_behaves_like "requires sign in" do
-      let(:action) {xhr :post, :create}
+      let(:action) {xhr :post, :create, task: Fabricate.attributes_for(:task)}
     end
 
     it_behaves_like "user does not belong to company" do 
-      let(:action) {xhr :post, :create}
+      let(:action) {xhr :post, :create, task: Fabricate.attributes_for(:task)}
     end
 
     it_behaves_like "company has been deactivated" do
-      let(:action) {xhr :post, :create}
+      let(:action) {xhr :post, :create, task: Fabricate.attributes_for(:task)}
     end
 
     it_behaves_like "trial is over" do 
-      let(:action) {xhr :get, :index}
+      let(:action) {xhr :post, :create, task: Fabricate.attributes_for(:task)}
     end
 
     context "creates COMPANY task" do
@@ -264,6 +264,11 @@ describe Business::TasksController do
         expect(assigns[:tasks].count).to eq(6)
       end
 
+      it "creates an activity related to the task" do 
+        expect(Activity.count).to eq(6)
+        expect(Task.last.activity).to be_present
+      end
+
       it "renders the new action" do 
         expect(response).to render_template :create
       end
@@ -279,7 +284,7 @@ describe Business::TasksController do
       end
 
       it "associates the task to the correct records" do
-        expect(Task.last.taskable).to eq(job)
+        expect(Task.last.job).to eq(job)
         expect(job.open_tasks.count).to eq(3)
       end
 
@@ -312,6 +317,11 @@ describe Business::TasksController do
         expect(assigns[:tasks]).to eq([Task.last, application_task, candidate_task])
       end
 
+      it "creates an activity related to the task" do 
+        expect(Activity.count).to eq(6)
+        expect(Task.last.activity).to be_present
+      end
+
       it "renders the new action" do 
         expect(response).to render_template :create
       end
@@ -329,6 +339,11 @@ describe Business::TasksController do
       it "associates the task to the correct records" do
         expect(Task.last.taskable).to eq(candidate)
         expect(Task.last.job_id).to eq(job.id)
+      end
+
+      it "creates an activity related to the task" do 
+        expect(Activity.count).to eq(6)
+        expect(Task.last.activity).to be_present
       end
 
       it "assigns tasks to the correct tasks for application" do 

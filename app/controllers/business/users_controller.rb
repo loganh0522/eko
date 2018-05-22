@@ -31,7 +31,7 @@ class Business::UsersController < ApplicationController
     @user = current_user
     @signature = current_user.email_signature
     @login_url = get_login_url
-    @user_avatar = current_user.user_avatar
+    @avatar = current_user.user_avatar
 
     if request.env['omniauth.auth'].present? 
       @auth = request.env['omniauth.auth']['credentials']
@@ -108,7 +108,6 @@ class Business::UsersController < ApplicationController
       expires_at: Time.now + token.expires_in.to_i.seconds,
       user_id: current_user.id
       )
-    
   end
 
   def gmail_auth
@@ -130,6 +129,21 @@ class Business::UsersController < ApplicationController
     respond_to do |format|
       format.json { render json: @users.as_json(only: [:first_name, :id, :last_name, :full_name], methods: [:avatar_url])}
       format.js {@users.to_a}
+    end
+  end
+
+  def search 
+    if params[:query] == '' 
+      query = "*"
+    else
+      query = params[:query]
+    end
+
+    @users = User.search(query, where: {company_id: current_company.id}, 
+      fields: [{full_name: :word_start}], match: :word_start)
+
+    respond_to do |format|
+      format.js 
     end
   end
 
@@ -162,20 +176,7 @@ class Business::UsersController < ApplicationController
     render :text => @events.to_json
   end
 
-  def search 
-    if params[:query] == '' 
-      query = "*"
-    else
-      query = params[:query]
-    end
-
-    @users = User.search(query, where: {company_id: current_company.id}, 
-      fields: [{full_name: :word_start}], match: :word_start)
-
-    respond_to do |format|
-      format.js 
-    end
-  end
+  
 
   private
 
