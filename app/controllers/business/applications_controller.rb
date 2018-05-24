@@ -208,10 +208,10 @@ class Business::ApplicationsController < ApplicationController
 
     if params[:val] == 'requalify'
       @application.update_attributes(rejected: nil, rejection_reason: nil, reviewed: true)
-      track_activity @application, "requalified", @application.candidate.id, @job.id
+      # track_activity @application, "requalified", @application.candidate.id, @job.id
     else
       @application.update_attributes(rejected: true, rejection_reason: params[:val], reviewed: true)
-      track_activity @application, "rejected", @application.candidate.id, @job.id
+      # track_activity @application, "rejected", @application.candidate.id, @job.id
     end
 
     respond_to do |format|
