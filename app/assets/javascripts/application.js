@@ -27,6 +27,7 @@
 //= require trix
 //= require autocomplete-rails
 //= require Chart.bundle
+//= require local-time
 //= require spin
 //= require chartkick
 //= require ahoy

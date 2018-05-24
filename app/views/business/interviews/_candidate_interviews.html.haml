@@ -1,14 +1,12 @@
 - if @interviews.present? 
   - @interviews.each do |interview|
-    - if interview.start_time > Time.now
+    - if local_time(interview.start_time) > local_time(Time.now)
       .candidate-interview
         .header
           .title= interview.title
           .date-time
             %i.fa.fa-clock-o
             .time= "#{interview.start_time.strftime('%A %B %e')}  @  #{interview.start_time.strftime('%I:%M %p')} - #{interview.end_time.strftime('%I:%M %p')}"
-
-
         .body
           .title Interviewers:
           .content

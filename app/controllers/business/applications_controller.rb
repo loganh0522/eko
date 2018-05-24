@@ -127,7 +127,6 @@ class Business::ApplicationsController < ApplicationController
   end
 
   def destroy_multiple
-    binding.pry
     @ids = params[:applicant_ids].split(',')
 
     @ids.each do |id| 

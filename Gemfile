@@ -13,6 +13,7 @@ gem 'coffee_routes'
 
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
+gem 'local_time'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

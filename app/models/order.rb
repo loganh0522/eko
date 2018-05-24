@@ -8,7 +8,6 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :order_items, 
     allow_destroy: true
 
-
   def receipt
     Receipts::Receipt.new(
       id: id,

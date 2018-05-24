@@ -61,7 +61,6 @@ class Business::InterviewsController < ApplicationController
     @startTime = DateTime.parse(params[:interview][:date] + " " + params[:interview][:stime]).strftime("%Y-%m-%dT%H:%M:%S")
     @endTime = DateTime.parse(params[:interview][:date] + " " + params[:interview][:etime]).strftime("%Y-%m-%dT%H:%M:%S")
     @user_ids = params[:interview][:user_ids].split(',') 
-
     @interview = Interview.new(interview_params.merge!(user_ids: @user_ids, start_time: @startTime, end_time: @endTime))
 
 
