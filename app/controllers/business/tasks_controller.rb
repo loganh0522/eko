@@ -15,7 +15,6 @@ class Business::TasksController < ApplicationController
     @job = Job.find(params[:job_id]) 
     @tasks = @job.open_tasks.paginate(page: params[:page], per_page: 10).accessible_by(current_ability)
 
-
     respond_to do |format| 
       format.js
       format.html
@@ -50,7 +49,13 @@ class Business::TasksController < ApplicationController
   def new 
     @task = Task.new
     @job = Job.find(params[:job]) if params[:job].present?
-    @candidates = current_company.candidates.order(:created_at).limit(10)
+    
+    if @job.present?
+      @candidates = @job.candidates
+    else
+      @candidates = current_company.candidates.order(:created_at).limit(10)
+    end
+
     @users = current_company.users.limit(10)
     
     respond_to do |format|
@@ -166,11 +171,14 @@ class Business::TasksController < ApplicationController
       )
   end
 
-  def load_taskable
+  def load_taskable 
     if request.path.split('/')[-3..-1][1] == "business" || request.path.split('/')[-3..-1][0] == "business"
       @taskable = current_company
+    elsif params[:job_id].present? && params[:task][:candidate_ids].present?
+      @taskable = Application.where(job_id: params[:job_id], candidate_id: params[:task][:candidate_id]).first
     else
       resource, id = request.path.split('/')[-3..-1]
+      binding.pry
       @taskable = resource.singularize.classify.constantize.find(id)
     end
   end
@@ -219,9 +227,8 @@ class Business::TasksController < ApplicationController
   def create_tasks 
     respond_to do |format| 
       @new_task = @taskable.tasks.build(task_params.merge!(user_ids: @user_ids))
-      
-      if @new_task.save      
 
+      if @new_task.save      
         if @taskable.class == Job
           @tasks = @taskable.open_tasks.paginate(page: params[:page], per_page: 10)
         elsif @taskable.class == Candidate && params[:task][:job_id].present?

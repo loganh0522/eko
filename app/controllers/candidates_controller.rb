@@ -1,6 +1,6 @@
 class CandidatesController < ApplicationController 
   # before_filter :resume_application_denied
-  layout 'career_portal'
+  layout :set_layout
   
   def new
     @user = User.new
@@ -50,6 +50,22 @@ class CandidatesController < ApplicationController
     candidate.errors.messages.each do |error| 
       @errors.append([error[0].to_s, error[1][0]])
     end  
+  end
+
+  def set_layout
+    if request.subdomain.present? && request.subdomain != 'www'
+      @job_board = JobBoard.find_by_subdomain!(request.subdomain)
+
+      if @job_board.kind == "association"
+        "association_portal"
+      elsif @job_board.kind == "basic"
+        "career_portal"
+      else
+        "advanced_career_portal"
+      end
+    else
+      'frontend_job_seeker'
+    end
   end
 
   def create_application

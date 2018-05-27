@@ -4,16 +4,15 @@ class Application < ActiveRecord::Base
   belongs_to :stage
   belongs_to :candidate
   belongs_to :job
-
+  
   has_many :application_stages, dependent: :destroy
-
   has_many :interview_scorecards
   has_many :ratings
   has_many :application_scorecards
-  
   has_many :assessments
   has_many :question_answers, dependent: :destroy
-
+  has_many :tasks, -> {order("created_at DESC")}, as: :taskable, dependent: :destroy
+  
   after_create :reindex_candidate, :create_process
   after_update :reindex_candidate, :create_stage_actions
 

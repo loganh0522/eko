@@ -14,18 +14,18 @@
 #create-portal
   .side-container
     .change-containers-nav
-      - if @job_board.kind == "basic"
-        %ul 
-          = link_to  business_job_board_path(kind: 'advanced'), :method => :put, remote: true do 
-            %li Advanced 
-          = link_to business_job_board_path(kind: 'basic'), :method => :put, remote: true do 
-            %li.activated Basic
-      - else 
-        %ul 
-          = link_to business_job_board_path(kind: 'advanced'), :method => :put, remote: true do 
-            %li.activated Advanced 
-          = link_to business_job_board_path(kind: 'basic'), :method => :put, remote: true do 
-            %li Basic
+      / - if @job_board.kind == "basic"
+      /   %ul 
+      /     = link_to  business_job_board_path(kind: 'advanced'), :method => :put, remote: true do 
+      /       %li Advanced 
+      /     = link_to business_job_board_path(kind: 'basic'), :method => :put, remote: true do 
+      /       %li.activated Basic
+      / - else 
+      /   %ul 
+      /     = link_to business_job_board_path(kind: 'advanced'), :method => :put, remote: true do 
+      /       %li.activated Advanced 
+      /     = link_to business_job_board_path(kind: 'basic'), :method => :put, remote: true do 
+      /       %li Basic
     .side-sections
       = render "sections"
 

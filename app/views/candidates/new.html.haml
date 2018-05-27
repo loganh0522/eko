@@ -1,14 +1,22 @@
-.company-job-board  
-  - if @company.logo.present?
-    .logo
-      = link_to root_path do
-        %img(src="#{@company.logo.file.large_logo}")
-  .basic-job-description
-    .application-form
-      .job-header
-        %h2= @job.title
-      .application-header
-        %h4 Application Form
-        %p Please finish the following questions to apply to this job.
-      .application-body
-        = render 'form'
+.portal-header{:style => "background: url(#{@job_board.job_board_header.background_image.file.url}) no-repeat center center fixed; background-size: cover; height: 350px "}
+  .header-overlay{:style => "background: rgba(0,0,0,0.4)"}
+    .intro-message{:style => "padding: 150px 0;"}
+      .header= @job.title
+      .sub-header= @job.location
+
+.main-row-container
+  .inner-container
+    .career-portal-job-container
+      .application-form
+        .job-header
+          %h2= @job.title
+        .application-header
+          %h4 Application Form
+          %p Please finish the following questions to apply to this job.
+        .application-body
+          = render 'form'
+
+.career-footer
+  .power
+    .powered-by Powered By
+    %img(src="/tmp/logo.jpg")

@@ -1,12 +1,10 @@
 class Business::InterviewInvitationsController < ApplicationController
   layout "business"
-  load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy]
-
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
-
+  load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy]
   def index
     @interview_invitations = current_company.interview_invitations.accessible_by(current_ability)
 
@@ -113,17 +111,21 @@ class Business::InterviewInvitationsController < ApplicationController
 
   def schedule_room(interview_invite)
     @room = Room.find(params[:interview_invitation][:room_id])
+    @times = interview_invite.interview_times
+    @email = @room.email 
     
     if @room.outlook_token.present?
-      @times = interview_invite.interview_times
-      @email = @room.email          
-      
       @times.each do |time| 
         @startTime = time.start_time.strftime("%Y-%m-%dT%H:%M:%S")
         @endTime = time.end_time.strftime("%Y-%m-%dT%H:%M:%S")
         OutlookWrapper::Calendar.create_event(interview_invite, @room, @startTime, @endTime, time)
       end
     elsif user.google_token.present? 
+      @times.each do |time| 
+        @startTime = time.start_time.strftime("%Y-%m-%dT%H:%M:%S")
+        @endTime = time.end_time.strftime("%Y-%m-%dT%H:%M:%S")
+        GoogleWrapper::Calendar.create_event(event, current_user, @startTime, @endTime, time)
+      end
     end
   end
 
@@ -133,7 +135,7 @@ class Business::InterviewInvitationsController < ApplicationController
 
   def interview_invitation_params
     params.require(:interview_invitation).permit(:title, :location, 
-      :kind, :job_id, :subject, :message, :body, :interview_kit_id, :stage_action_id, 
+      :kind, :job_id, :subject, :message, :body, :interview_kit_template_id, :stage_action_id, 
       :user_ids, :candidate_ids, :user_id, :company_id, :room_id,
       interview_times_attributes: [:id, :start_time, :end_time, :_destroy])
   end

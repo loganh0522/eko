@@ -121,14 +121,7 @@ class Candidate < ActiveRecord::Base
     return @current_jobs
   end
 
-  def current_user_rating_present?(current_user)
-    self.ratings.each do |rating| 
-      if rating.user == current_user
-        return true   
-      end
-    end
-    return false
-  end
+
   ## Candidate Task Methods
 
   def open_tasks
@@ -182,12 +175,13 @@ class Candidate < ActiveRecord::Base
     return @interviews
   end
 
-  def current_user_rating_present?(current_user, candidate)
-    candidate.ratings.each do |rating| 
+  def current_user_rating_present?(current_user)
+    self.ratings.each do |rating| 
       if rating.user == current_user
         return true   
       end
     end
+    
     return false
   end
 

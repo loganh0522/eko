@@ -3,16 +3,34 @@
     %h1 Welcome to TalentWiz
     %p Your profile is submitted to the jobs that you apply for so that you do not have to compelete a new profile every time. So please take a few minutes to complete your profile.  
   .create-profile-body
-    = form_for [:job_seeker, @user], url: wizard_path do |f|
-      .experience-container
-        .header
-          .title Experience
-        = f.fields_for :work_experiences do |q|
-          = render "work_experience_fields", f: q     
-        .add-experience 
-          = link_to_add_fields "+ Add Work Experience", f, :work_experiences
-      .footer
-        = link_to wizard_path(:personal), class: "previous-link" do 
-          &larr; Previous
-        = f.submit "Save & Continue", class: "job-seeker-btn"
+    .experience-container
+      .header
+        .title Experience
+      .experience
+        - if @user.work_experiences.present?
+          - @user.work_experiences.each do |ex| 
+            = render 'job_seeker/work_experiences/work_experience', position: ex
+        - else
+          .not-present-container
+            %p Please add your work experience before you continue.
+            .add-object= link_to "+ Experience", new_job_seeker_work_experience_path, remote: true, class: 'btn border-button'
+    .experience-container
+      .header
+        .title Education
+      .not-present-container
+        %p Please add your education before you continue.
+        .add-object= link_to "+ Experience", new_job_seeker_education_path, remote: true, class: 'btn border-button'
+
+    / = form_for [:job_seeker, @user], url: wizard_path do |f|
+    /   .experience-container
+    /     .header
+    /       .title Experience
+    /     = f.fields_for :work_experiences do |q|
+    /       = render "work_experience_fields", f: q     
+    /     .add-experience 
+    /       = link_to_add_fields "+ Add Work Experience", f, :work_experiences
+    /   .footer
+    /     = link_to wizard_path(:personal), class: "previous-link" do 
+    /       &larr; Previous
+    /     = f.submit "Save & Continue", class: "job-seeker-btn"
 

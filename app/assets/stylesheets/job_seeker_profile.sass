@@ -96,26 +96,6 @@
         width: 100%
       .active
         border-bottom: solid 4px #EF7B2B
-  .change-cv-profile-nav 
-    a
-      color: rgba(0,0,0,0.5)
-      text-decoration: none
-    ul 
-      list-style: none
-      text-decoration: none
-      padding: 0 0
-      li
-        display: inline-block
-        height: 54px 
-        padding: 18px 20px 0 20px
-        font-size: 14px
-        text-align: center
-        color: rgba(0,0,0,0.5) 
-        cursor: pointer      
-    @media screen and (max-width: 475px)
-      width: 100%
-    .active
-      border-bottom: solid 4px #EF7B2B 
 
   #job-seeker-container
     display: flex 
@@ -123,7 +103,7 @@
     .main-container
       margin-left: 1%
       float: left
-      width: 75%
+      width: 70%
       padding-left: 0
       @media screen and (max-width: 800px)
         width: 100%
@@ -145,7 +125,20 @@
     .side-container
       float: left
       min-width: 275px
+      width: 30%
       height: 200px 
+      .skill-container
+        box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
+        background: #fff
+        margin-bottom: 10px
+        .header
+          padding: 10px 10px
+          border-bottom: 1px solid rgba(0,0,0,0.1)
+          font-weight: bold
+          font-size: 16px
+        .body
+          padding: 10px 10px
+
 .work-experience-form
   width: 95%
   box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
@@ -240,7 +233,6 @@
         margin-right: 30px
         a
           color: #EF7B2B
-
   .accomplishment-form
     background: rgba(0,0,0,0.05)
     margin: 10px 0 

@@ -16,6 +16,18 @@ def create_data_for_business
   @application = Fabricate(:application, candidate: @candidate)
 end
 
+def create_company_and_jobs
+  @company = Fabricate(:company)
+  @alice = Fabricate(:user, company: @company, role: 'Admin', kind: 'business')
+  @job = Fabricate(:job, company: @company, users: [@alice])
+  @question1 = Fabricate(:question, kind: 'Select (One)', job: @job)
+  @question2 = Fabricate(:question, kind: 'Multiple Choice', job: @job)
+  @question3 = Fabricate(:question, kind: 'Short Answer', job: @job)
+  @question4 = Fabricate(:question, kind: '', job: @job)
+  @question5 = Fabricate(:question, kind: 'Select (One)', job: @job)
+end
+
+
 def sign_in_business
   create_data_for_business
   visit login_path

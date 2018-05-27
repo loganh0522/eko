@@ -4,16 +4,31 @@
     = render 'job_seeker/background_images/background'
   #job-seeker-container
     .side-container
+      .skill-container
+        .header 
+          Overview
+        .body
+          Current Position
+
+      .skill-container
+        .header 
+          Skills / Software
+          = link_to 
+        .body
+          - current_user.skills.each do |skill|
+            = skill.name
+
+
+
     .main-container
-      .change-cv-profile-nav 
-        %ul
-          = link_to job_seeker_work_experiences_path, remote: true do
-            %li#experience-link.active Experience
-          = link_to job_seeker_educations_path, remote: true do
-            %li#education-link Education
-          = link_to job_seeker_user_certifications_path, remote: true do
-            %li#certification-link Certifications
-          / %li= link_to "Courses", job_seeker_educations_path, remote: true 
+      .toggle-actions
+        = link_to job_seeker_work_experiences_path, remote: true do
+          .filter#experience.activated Experience
+        = link_to job_seeker_educations_path, remote: true do
+          .filter#education Education
+        = link_to job_seeker_user_certifications_path, remote: true do
+          .filter#education Certifications
+        / %li= link_to "Courses", job_seeker_educations_path, remote: true 
       .experience-container
         = render 'job_seeker/work_experiences/experience'
 

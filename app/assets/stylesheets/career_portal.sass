@@ -26,6 +26,15 @@
       margin: 5px
       max-height: 80px
       float: left
+    .dropdown
+      float: right
+      margin-top: 5px
+      img
+        border-radius: 50%
+        float: left
+      .name
+        float: left
+        margin-top: 15px
     #section-nav
       float: left
       margin-left: 30px
@@ -56,30 +65,7 @@
           color: #666
           font-size: 16px
           text-decoration: none
-    .user-image
-      margin-top: 25px
-      float: right
-      a
-        text-decoration: none
-      .dropdown-img
-        border-radius: 50px 
-        height: 45px 
-        width: 45px
-        margin-right: 5px
-      .circle-img
-        margin-right: 10px 
-        border-radius: 50%
-        width: 40px 
-        height: 40px
-        background: #EF7B2B
-        text-align: center
-        font-size: 18px
-        padding-top: 7px
-        color: white
-        float: left
-      .name
-        float: left
-        margin-top: 8px
+
 
 .portal-header
   height: 450px
@@ -642,14 +628,14 @@
 
   
 .career-footer
-  height: 100px
+  height: fit-content
   background: #fff
-  padding: 25px 0 
+  padding: 35px 0 
+  border-top: 1px solid rgba(0,0,0,0.1)
   .power
     text-align: center
     width: fit-content
     margin: 0 auto
-
 
 .job-seeker-career-portal-registration
   width: 40%
@@ -672,5 +658,117 @@
       float: left
   h2 
     margin-top: 0px
+
+.approach-container
+  margin: 0 3%
+  background-color: #fff
+  padding: 50px 0
+  width: 1000px
+  margin: 0px auto
+  display: -ms-flexbox
+  display: flex
+  -ms-flex-direction: row
+  -ms-flex-wrap: nowrap
+  -ms-flex-pack: justify
+  -ms-flex-align: center
+  align-items: center
+  -ms-flex-line-pack: stretch
+  .icon
+    order: 2
+    flex-grow: 2
+    width: 50%
+    img
+      width: 400px
+      height: auto
+  .copy
+    width: 50%
+    height: 100%
+    text-align: left
+    order: 1
+    margin-right: 8%
+    .header 
+      font-size: 26px
+      font-weight: 400
+      height: auto
+      color: rgba(0, 0, 0, 0.7)
+    .sub-header
+      font-size: 20px
+      font-weight: 400
+      margin-bottom: 10px
+      height: auto
+    .description
+      width: 100% 
+      font-size: 16px
+      margin-bottom: 10px
+
+.approach-container-right
+  margin: 0 3%
+  background-color: #fff
+  padding: 50px 0
+  width: 1000px
+  margin: 0px auto
+  display: -ms-flexbox
+  display: flex
+  -ms-flex-direction: row
+  -ms-flex-wrap: nowrap
+  -ms-flex-pack: justify
+  -ms-flex-align: center
+  align-items: center
+  -ms-flex-line-pack: stretch
+  .icon
+    order: 1
+    flex-grow: 1
+    width: 50%
+    direction: rtl
+    img
+      width: 600px
+      height: auto
+  @media screen and (max-width: 850px)
+    .icon
+      width: 100% 
+  .copy
+    width: 50%
+    height: 100%
+    text-align: left
+    order: 2
+    margin-left: 8%
+
+@media screen and (max-width: 850px)
+  .approach-container
+    flex-wrap: wrap
+    width: 90%
+    text-align: left
+    padding: 0 1rem
+    .icon
+      order: 2
+      direction: ltr 
+      width: 100%
+      img
+        width: 100%
+    .copy
+      order: 1
+      margin-right: 0
+      width: 100%
+
+@media screen and (max-width: 850px)
+  .approach-container-right
+    flex-wrap: wrap
+    width: 90%
+    text-align: left
+    padding: 0 1rem
+    .icon
+      order: 2
+      direction: ltr 
+      width: 100%
+      img
+        width: 100%
+    .copy
+      order: 1
+      margin-right: 0
+      width: 100%
+      margin-left: 0
+  
+    
+
 
 
