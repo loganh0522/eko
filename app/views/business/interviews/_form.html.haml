@@ -48,7 +48,7 @@
     .form-row-no-border 
       .contain-3
         = f.label "Date"
-        = f.text_field :date, id: "dueDate", placeholder: "Date"
+        = f.text_field :date, id: "dueDate", placeholder: "Date", autocomplete: "off"
         %span#date_msgBlock
       .contain-3
         = f.label "Start Time"
@@ -97,7 +97,11 @@
 
     - if @candidate.present?
       .form-row-no-border
-      = f.hidden_field :candidate_id, value: @candidate.id 
+        = f.label :candidate, "Candidate" 
+        #candidate_id_Block
+          .user-tag{id: "candidate_#{@candidate.id}"}
+            .name= @candidate.full_name
+        = f.hidden_field :candidate_id, value: @candidate.id 
     - else 
       .form-row-no-border
         = f.label :candidate, "Add Candidate"

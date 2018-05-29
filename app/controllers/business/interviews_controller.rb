@@ -1,10 +1,11 @@
 class Business::InterviewsController < ApplicationController
   layout "business"
-  load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy, :completed]
+  
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
+  load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy, :completed]
   # include AuthHelper
   
   def job_interviews
@@ -35,12 +36,21 @@ class Business::InterviewsController < ApplicationController
 
   def new
     @interview = Interview.new
-    @candidates = current_company.candidates.order(:created_at).limit(10)
     @users = current_company.users.limit(10)
-
     @stage_action = StageAction.find(params[:s_action]) if params[:s_action].present?
-    @application = Application.find(params[:application]) if params[:application].present?
-    @candidate = @application.candidate if @application.present?
+   
+    if params[:application].present?
+      @application = Application.find(params[:application]) 
+      @job = @application.job 
+      @candidate = @application.candidate
+    elsif params[:job_id].present?
+      @job = Job.find(params[:job_id]) 
+      @candidates = @job.candidates.order(:created_at).limit(10)
+    elsif params[:candidate_id].present?
+      @candidate = Candidate.find(params[:candidate_id])
+    else
+      @candidates = current_company.candidates.order(:created_at).limit(10)
+    end
 
     if @stage_action.present?
       @stage_users = []
@@ -48,7 +58,6 @@ class Business::InterviewsController < ApplicationController
       @stage_action.users.each do |user|
         @stage_users.append(user.id)
       end
-      
       @stage_action_users = @stage_users.to_s.gsub(/]/, '').gsub('[', '')
     end
 
@@ -96,7 +105,6 @@ class Business::InterviewsController < ApplicationController
 
     respond_to do |format|  
       if @interview.update(interview_params)
-        @interviews = current_company.interviews
         format.js
       else
         render_errors(@interview)

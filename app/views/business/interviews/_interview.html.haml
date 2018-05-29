@@ -1,16 +1,38 @@
-#interview
-  .date
-    .event-day= interview.day
-    .event-month= interview.month
-  .details
-    .box-row
-      .title= "#{interview.kind} with" #{interview.candidate.full_name} for"
-      .time= "#{interview.start_time} - #{interview.end_time}"
-    .box-row
-      .title Interviewers:
-      .content
+.interview{:id => "interview_#{interview.id}"}
+  .header
+    .title
+      = "#{interview.title} with"
+      = interview_link(interview)
+      
+      
+      - if interview.job.present?
+        = "for"
+        = link_to "#{interview.job.title}", business_job_interviews_path(interview.job)
+    .dropdown
+      .dropdown-button
+        %i.fa.fa-ellipsis-h.fa-lg
+      .dropdown-content#myDropdown
+        = link_to edit_business_interview_path(interview), remote: true  do
+          %i.fa.fa-pencil
+          .action Edit
+        = link_to business_interview_path(interview), remote: true, :method => :delete, data: {:confirm => "Are You Sure? You can not undo this action."}  do  
+          %i.fa.fa-trash-o
+          .action Destroy
+  .body
+    .date-time
+      %i.fa.fa-clock-o
+      .time= "#{interview.start_time.strftime('%A %B %e')}  @  #{interview.start_time.strftime('%I:%M %p')} - #{interview.end_time.strftime('%I:%M %p')}"
+    .date-time
+      %i.fa.fa-clipboard
+      .time
+        = link_to "Interview Kit", business_interview_kit_path(interview.assessment)
+    .date-time
+      %i.fa.fa-map-marker
+      .time= "#{interview.location}"  
+    .date-time
+      %i.fa.fa-user-o
+      .time
         - interview.users.each do |user|   
           .user-tag= user.full_name
-      
+  
     
-      

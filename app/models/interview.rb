@@ -5,7 +5,7 @@ class Interview < ActiveRecord::Base
   belongs_to :stage
   belongs_to :room
   belongs_to :stage_action
-  
+  has_one :interview_kit_template
   has_one :assessment
   has_many :assigned_users, as: :assignable, :dependent => :destroy
   has_many :users, through: :assigned_users, validate: false

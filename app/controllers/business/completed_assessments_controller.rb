@@ -79,10 +79,14 @@ class Business::CompletedAssessmentsController < ApplicationController
     
     @scorecard = @assessment.scorecard
     @sections = @scorecard.scorecard_sections
-
-    @application = @assessment.application 
-    @candidate = @application.candidate
-    @job = @application.job
+    
+    if @assessment.candidate_id.present?
+      @candidate = Candidate.find(@assessment.candidate_id)
+    else
+      @application = @assessment.application 
+      @candidate = @application.candidate
+      @job = @application.job
+    end
 
     if @candidate.manually_created == true 
       @applicant = @candidate

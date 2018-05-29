@@ -7,6 +7,15 @@
           .date-time
             %i.fa.fa-clock-o
             .time= "#{interview.start_time.strftime('%A %B %e')}  @  #{interview.start_time.strftime('%I:%M %p')} - #{interview.end_time.strftime('%I:%M %p')}"
+          .date-time
+            %i.fa.fa-clipboard
+            .time
+              - if interview.assessment.present?
+                = link_to "Interview Kit", business_interview_kit_path(interview.assessment)
+          .date-time
+            %i.fa.fa-map-marker
+            .time= "#{interview.location}"
+            
         .body
           .title Interviewers:
           .content

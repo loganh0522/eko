@@ -20,6 +20,44 @@ module CandidateHelper
     end
   end
 
+  def task_link(task)
+    if task.taskable.class == Candidate
+      if task.job_id.present?
+        app = Application.where(candidate_id: task.taskable_id, job_id: task.job_id).first
+        link_to task.taskable.full_name, business_job_application_path(task.job_id, app)
+      else
+        link_to task.taskable.full_name, business_candidate_path(task.taskable)
+      end
+    elsif task.taskable.class == Job
+      link_to "#{task.taskable.title}", business_job_path(task.taskable)
+    end
+  end
+
+  def interview_link(interview)
+    if interview.job_id.present? && interview.candidate_id.present?
+      app = Application.where(candidate_id: interview.candidate.id, job_id: interview.job_id).first
+      if app.present?
+        link_to interview.candidate.full_name, business_job_application_path(interview.job_id, app)
+      else
+        link_to interview.candidate.full_name, business_candidate_path(interview.candidate)
+      end
+    else
+      link_to interview.candidate.full_name, business_candidate_path(interview.candidate)
+    end
+  end
+
+  def taskable_link(task)
+    if task.taskable.class == Application
+      if task.taskable.candidate.manually_created?
+        @name = task.taskable.candidate.full_name
+      else
+        @name = task.taskable.candidate.user.full_name
+      end
+    end
+
+    link_to(@name, '', data: {remote: true})
+  end
+
   def card_overall_rating(overall)
     if overall == 1 
       content_tag(:div, "Definitely do not Recommend", :class => 'fa fa-times-circle')

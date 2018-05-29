@@ -30,8 +30,9 @@ class JobSeeker::CreateProfilesController < ApplicationController
 
       render_wizard
     when :experience
+      @user = current_user
       if @user.work_experiences.count == 0 
-        @user.work_experiences.new
+        
       end
 
       render_wizard

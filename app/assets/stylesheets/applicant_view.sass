@@ -211,7 +211,7 @@
   overflow: hidden
   background: #ffffff
   border-radius: 5px 
-  margin-bottom: 15px
+  margin: 15px 0 
   box-shadow: 0px 7px 40px 0px rgba(199,197,199,.1), 0px 3px 9px 0px rgba(199,197,199,1)
   .body
     padding: 10px 0
@@ -333,47 +333,44 @@
 .interview-container
   clear: both
   margin-top: 20px
-  #interview
+  .interview
     width: 100%
     background: white
-    border-radius: 1px
+    border-radius: 5px
     margin-bottom: 30px
     box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
     position: relative
-    overflow: hidden
     .header 
-      padding: 5px 10px 
-      overflow: hidden
+      padding: 10px 10px 
+      height: 45px
       width: 100%
-      height: auto
-      border-top: 1px solid rgba(0,0,0,0.1)
-      overflow: hidden
+      border-bottom: 1px solid rgba(0,0,0,0.1)
       .title
-        font-weight: bold
+        font-size: 18px
+        font-weight: 300
         float: left
-      .sent
-        float: left
-        margin-left: 20px
-    .date
-      width: 90px
-      text-align: center
-      background: #EF7B2B
-      color: #ffffff
-      padding: 15px
-      float: left
-      border-right: 1px solid rgba(0,0,0,0.1)
-      .event-day  
-        font-size: 20px
-      .event-month
-        font-size: 16px
-    .details
-      overflow: auto
-    .box-row
+      .dropdown
+        margin-top: 3px
+        float: right
+    .body
+      padding: 10px 20px
+      border-bottom: 1px solid rgba(0,0,0,0.1)
+      .date-time
+        overflow: hidden
+        margin-top: 5px 
+        font-size: 12px
+        .fa 
+          float: left
+          margin: 0px 20px 0 0
+        .fa-clock-o 
+          margin-top: 2px
+        .fa-user-o
+          margin-top: 13px
+    .footer
       padding: 5px 10px 
       overflow: hidden
       width: 100%
       height: auto
-      border-top: 1px solid rgba(0,0,0,0.1)
       .title
         float: left
         margin: 10px 10px 0 0 

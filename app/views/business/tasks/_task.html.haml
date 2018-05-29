@@ -8,11 +8,10 @@
       = link_to completed_business_tasks_path(id: task.id), method: :post, remote: true do 
         .glyphicon.glyphicon-ok
     
-    .title= task.title 
-    - if task.taskable.class == Candidate
-      = link_to "#{task.taskable.full_name}", business_candidate_path(task.taskable)
-    - elsif task.taskable.class == Job
-      = link_to "#{task.taskable.title}", business_job_path(task.taskable)
+    .title
+      = "#{task.title} for " 
+      = task_link(task)
+
     .dropdown
       .dropdown-button
         %i.fa.fa-ellipsis-h.fa-lg

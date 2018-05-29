@@ -174,11 +174,8 @@ class Business::TasksController < ApplicationController
   def load_taskable 
     if request.path.split('/')[-3..-1][1] == "business" || request.path.split('/')[-3..-1][0] == "business"
       @taskable = current_company
-    elsif params[:job_id].present? && params[:task][:candidate_ids].present?
-      @taskable = Application.where(job_id: params[:job_id], candidate_id: params[:task][:candidate_id]).first
     else
       resource, id = request.path.split('/')[-3..-1]
-      binding.pry
       @taskable = resource.singularize.classify.constantize.find(id)
     end
   end

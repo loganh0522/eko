@@ -9,7 +9,7 @@
         - if can? :create, InterviewInvitation
           = link_to "Send Invitation", new_business_interview_invitation_path,  data: {:turbolinks => "false"}, remote: true, class: "btn border-button", id: 'client-action'
         - if can? :create, Interview
-          = link_to "+ Interview", new_business_interview_path, data: {:turbolinks => "false"}, remote: true, class: "btn border-button interview-button", id: 'client-action'
-      #calendar
-      / #calendar-container
-      /   = render 'business/interviews/interviews'
+          = link_to "+ Interview", new_business_job_interview_path(@job), data: {:turbolinks => "false"}, remote: true, class: "btn border-button interview-button", id: 'client-action'
+      / #calendar
+      #calendar-container
+        = render 'business/interviews/interviews'

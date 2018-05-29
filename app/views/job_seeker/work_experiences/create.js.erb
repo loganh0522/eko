@@ -3,12 +3,13 @@
     $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
     $('#<%= error[0] %>_Block').addClass('has-error');
   <% end %>
-<% else  %>
-  $('.mediumModal').hide();
-  $('.not-present-container').hide()
-  $('.experience').append('<%= j render "job_seeker/work_experiences/experience", work_experience: @work_experience %>');
 <% else %>
-  $('.mediumModal').hide();
-  $('.experience-container').html('<%= j render "job_seeker/work_experiences/experience", work_experience: @work_experiences %>');
+  if $('#experience-not-present').present? 
+    $('.mediumModal').hide();
+    $('#experience-not-present').hide()
+    $('.experience').append('<%= j render "job_seeker/work_experiences/experience", work_experience: @work_experience %>');
+  else
+    $('.mediumModal').hide();
+    $('.experience-container').html('<%= j render "job_seeker/work_experiences/experience", work_experience: @work_experiences %>');
 <%end%>
 

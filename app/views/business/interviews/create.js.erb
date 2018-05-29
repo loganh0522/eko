@@ -3,13 +3,13 @@
     $('#<%= error[0] %>_msgBlock').append('<div class="notice"><%= escape_javascript(error[1]) %></div>');
     $('#<%= error[0] %>_Block').addClass('has-error');
   <% end %>
-<% elsif @stages.present? %> 
+<% elsif @stages.present? || @application.present? %> 
   $('.display-applicant-details').html('<%= j render "business/applications/show_application/process" %>')
   $('.side-interviews').html('<%= j render "business/interviews/candidate_interviews", interviews: @interview %>')
-  
   $('.mediumModal').find('form').remove();
   $('.mediumModal').hide();
 <% else %>
+  $('#calendar-container').html('<%= j render "business/interviews/interviews", interviews: @interviews %>')
   $('#calendar').fullCalendar('refetchEvents')
   $('.mediumModal').find('form').remove();
   $('.mediumModal').hide();

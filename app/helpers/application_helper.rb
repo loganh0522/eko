@@ -77,17 +77,6 @@ module ApplicationHelper
     end
   end
 
-  def taskable_link(task)
-    if task.taskable.class == Application
-      if task.taskable.candidate.manually_created?
-        @name = task.taskable.candidate.full_name
-      else
-        @name = task.taskable.candidate.user.full_name
-      end
-    end
-
-    link_to(@name, '', data: {remote: true})
-  end
   
   def is_activated?(link_path)
     current_page?(link_path) ? "activated" : ""

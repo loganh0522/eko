@@ -4,7 +4,7 @@
     $('#<%= error[0] %>_Block').addClass('has-error');
   <% end %>
 <% else %> 
-  $('#calendar-container').html('<%= j render "business/interviews/interviews", interviews: @interviews %>');
+  $('#interview_<%= @interview.id %>').replaceWith('<%= j render (@interview) %>')  
   $('#mediumModal').find('form').remove();
   $('#mediumModal').hide();
 <% end %>
