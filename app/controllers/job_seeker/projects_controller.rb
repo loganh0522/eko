@@ -1,5 +1,5 @@
 class JobSeeker::ProjectsController < JobSeekersController
-  layout :set_layout
+  layout :set_layout, :only => [:index]
   before_filter :require_user
   # before_filter :profile_sign_up_complete, :only => [:index]
   def index
