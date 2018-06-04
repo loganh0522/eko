@@ -3,8 +3,26 @@
   .job-seeker-topper
     = render 'job_seeker/background_images/background'
   #job-seeker-container
-    .projects
-      = render 'job_seeker/projects/projects'
+    .side-container
+      .skill-container
+        .header 
+          Overview
+        .body
+          Current Position
+
+      .skill-container
+        .header 
+          Skills / Software
+        .body
+          - if current_user.user_skills.present?
+            - current_user.user_skills.each do |skill|
+              = render 'job_seeker/users/skill', skill: skill
+          - else
+            .not-present-container
+              %p No Skills Listed
+    .main-container
+      .projects
+        = render 'job_seeker/projects/projects'
 
 
 

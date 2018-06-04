@@ -11,10 +11,14 @@
   .create-profile-header
     h1
       color: black
-      margin-top: 0
+      margin: 0px 0 20px 0
+    h4
+      margin: 20px 0
+    p 
+      width: 60%
+      margin: 20px 0
     border-bottom: 1px solid rgba(0,0,0,0.1)
-    text-align: center
-    padding: 0 10% 
+    padding: 20px 3% 
   .create-profile-body
     #job-seeker-background-up
       width: fit-content
@@ -78,9 +82,6 @@
               text-decoration: none
             &:hover
               cursor: pointer
-  .form-row
-    border: none
-    margin: 10px 2.5% 0px 2.5%
   .header 
     overflow: hidden  
     height: auto
@@ -90,24 +91,41 @@
       float: left
       font-size: 24px
       font-weight: 300    
-    .new_experience
-      float: left
-      margin: 6px 0 0 15px   
   .work-experience
     width: 95%
     margin: 10px auto
-  .add-work-experience-page
-    margin: 5px 0 
+  .add-work-experience
+    border-bottom: 1px solid #D1DCE4
+    
   .experience-container
-    overflow: hidden
-    margin: 0 15px
+    width: 95%
+    margin: 0 auto
+    .add_fields_after
+      color: #D1DCE4
+      margin: 10px 10px 0 10px
+      border: 1px solid #D1DCE4
+      padding: 5px 5px
+      font-size: 12px
+      border-radius: 5px
+      float: none
+      &:hover
+        cursor: pointer
+        background: rgba(209, 220, 228, 0.2)
+        text-decoration: none
     .add_fields
-      float: right
+      float: left
       color: #EF7B2B
-      margin: 10px 25px 0 0
+      border: 1px solid #EF7B2B
+      padding: 5px 10px
+      border-radius: 5px
+      margin: 10px 25px 15px 0
+      &:hover 
+        text-decoration: none
+  
   .footer
     padding: 15px 2.5% 
     margin: 15px 0 0 0 
+    clear: both
     border-top: 1px solid rgba(0,0,0,0.1)
     height: fit-content
     overflow: hidden

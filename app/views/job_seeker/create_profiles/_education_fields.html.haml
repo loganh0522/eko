@@ -1,22 +1,27 @@
-.add-work-experience-page
-  .form-row-no-border
+.add-work-experience
+  .form-row
+    = f.hidden_field :_destroy
+    %i.fa.fa-trash.remove_fields
+  .form-row
     .contain-50
       = f.label :school, "School"
       = f.text_field :school, placeholder: "School", autocomplete: 'off'
     .contain-50
       = f.label :school, "Degree"
       = f.text_field :degree,  placeholder: "Degree", autocomplete: 'off'
-  .form-row-no-border
+  .form-row
     .contain-50
       = f.label :start_year, "Start Year"
-      = f.select :start_year, (1960..Time.now.year).to_a
+      .custom-select
+        = f.select :start_year, options_for_select((1965..Time.now.year.to_i).to_a.reverse, selected: f.object.start_year), id: "start_year_Block",include_blank: "Year", autocomplete: "off"
+
     .contain-50
       = f.label :end_year, "Graduation Year (or Expected)"
-      = f.select :end_year, (1960..Time.now.year).to_a
-  .form-row-no-border
+      .custom-select
+        = f.select :end_year, options_for_select((1965..Time.now.year.to_i).to_a.reverse, selected: f.object.end_year), id: "start_year_Block",include_blank: "Year", autocomplete: "off"
+
+  .form-row
     = f.label :description, "Details"
     = f.text_area :description, rows: 4, class: "form-control", hide_label: true, placeholder: "Description"
-  .form-row-no-border#clear-both
-    = f.hidden_field :_destroy
-    = link_to "Remove", '#', class: "remove_fields"
+  
 

@@ -6,20 +6,25 @@
     .side-container
       .skill-container
         .header 
-          Overview
-        .body
-          Current Position
-
-      .skill-container
-        .header 
           Skills / Software
-          = link_to 
         .body
-          - current_user.skills.each do |skill|
-            = skill.name
-
-
-
+          - if current_user.user_skills.present?
+            - current_user.user_skills.each do |skill|
+              = render 'skill', skill: skill
+          - else
+            .not-present-container
+              %p No Skills Listed
+      / .skill-container
+      /   .header 
+      /     Availability
+      /   .body
+      /     - if current_user.user_skills.present?
+      /       - current_user.user_skills.each do |skill|
+      /         = render 'skill', skill: skill
+      /     - else
+      /       .not-present-container
+      /         %p No Skills Listed
+      
     .main-container
       .toggle-actions
         = link_to job_seeker_work_experiences_path, remote: true do
@@ -27,7 +32,7 @@
         = link_to job_seeker_educations_path, remote: true do
           .filter#education Education
         = link_to job_seeker_user_certifications_path, remote: true do
-          .filter#education Certifications
+          .filter#certification Certifications
         / %li= link_to "Courses", job_seeker_educations_path, remote: true 
       .experience-container
         = render 'job_seeker/work_experiences/experience'

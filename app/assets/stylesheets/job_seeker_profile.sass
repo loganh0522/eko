@@ -138,6 +138,7 @@
           font-size: 16px
         .body
           padding: 10px 10px
+          overflow: hidden
 
 .work-experience-form
   width: 95%
@@ -154,19 +155,8 @@
     .close-form
       float: right
 
-.add-work-experience
-  background: #F3F3F3
-  width: 100%
-  padding: 5px
-  border-radius: 3px
-  border-bottom: 1px solid rgba(0,0,0,0.1)
-  margin-top: 15px
-  overflow: hidden
-  .remove_fields
-    float: right
-    margin-right: 10px
-    color: #EF7B2B
-    
+
+  
 .work-experience
   box-shadow: 0px 1px 2px 1px rgba(199,197,199,1)
   background: white
@@ -322,8 +312,6 @@
   width: 100%
   margin: 0 0 50px 0
 
-    
-
 .add-project-container
   border: 2px dashed #c6c8ca
   height: 300px
@@ -387,7 +375,6 @@
   width: 100%
   .carousel
 
-
 .attachments-container
   overflow: hidden
   overflow-y: scroll
@@ -430,6 +417,84 @@
       margin-right: 5px
 
 
+
+ 
+.add-work-experience
+  margin: 0 10px
+  .user-tag
+    .remove_fields
+      display: block
+      float: right
+      font-size: 14px
+      border: none
+      padding: 0 0 
+      margin: 0 5px
+      color: black
+  .form-row
+    padding: 5px 0
+    border: none
+    overflow: block
+  .add-accomplishment
+    position: relative
+    .remove_fields
+      position: absolute
+      border: none
+      display: block
+      right: -10px
+      top: -30px
+      z-index: 10
+  .add_fields_after
+    float: none
+    color: #D1DCE4
+    margin: 10px 10px 0 10px
+    border: 1px solid #D1DCE4
+    padding: 5px 5px
+    font-size: 12px
+    border-radius: 5px
+    float: none
+    &:hover
+      cursor: pointer
+      background: rgba(209, 220, 228, 0.2)
+      text-decoration: none
+  .remove_fields
+    display: none
+    float: right
+    color: #D1DCE4
+    margin: 10px 10px 0 10px
+    border: 1px solid #D1DCE4
+    padding: 10px 10px
+    font-size: 14px
+    border-radius: 50%
+    &:hover
+      cursor: pointer
+      background: rgba(209, 220, 228, 0.2)
+  .clear-both
+    clear: both 
+  #skills
+    margin-top: 10px
+    label
+      float: left
+    .user_skills
+      width: 200px
+      float: left
+      margin: -9px 10px 
+      padding: 0 0 
+      border: none
+      border-bottom: 1px solid #D1DCE4
+      &:focus
+        outline: none
+    #add-skill
+      float: left
+      color: #D1DCE4
+      border: 1px solid #D1DCE4
+      font-size: 18px
+      padding: 1px 12px
+      margin-top: -8px
+      &:hover
+        background: rgba(209, 220, 228, 0.2)
+    #add-tags
+      clear: both
+      margin-top: 5px
 
 
 
@@ -504,20 +569,6 @@
     border-radius: 50%
   .slick-dots
     display: none
-
-.add-work-experience-page
-  overflow: hidden
-  background: #f7f8f9
-  margin: 5px 10px
-  .form-row-no-border
-    background: #f7f8f9
-  .remove_fields
-    display: none
-    float: right
-    color: #EF7B2B
-    margin: 0 10px
-  .clear-both
-    clear: both
 
 
 #project-modal,
@@ -622,7 +673,31 @@
     .add_fields
       float: right
       font-color: #E4E5E9
-
+  #skills
+    margin-top: 10px
+    label
+      float: left
+    .user_skills
+      width: 200px
+      float: left
+      margin: -9px 10px 
+      padding: 0 0 
+      border: none
+      border-bottom: 1px solid #D1DCE4
+      &:focus
+        outline: none
+    #add-skill
+      float: left
+      color: #D1DCE4
+      border: 1px solid #D1DCE4
+      font-size: 18px
+      padding: 1px 12px
+      margin-top: -8px
+      &:hover
+        background: rgba(209, 220, 228, 0.2)
+    #add-tags
+      clear: both
+      margin-top: 5px
 
 .change-cv-profille-nav 
   height: fit-content

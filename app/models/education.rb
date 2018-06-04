@@ -1,5 +1,5 @@
 class Education < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, touch: true
   belongs_to :profile
   belongs_to :candidate
   

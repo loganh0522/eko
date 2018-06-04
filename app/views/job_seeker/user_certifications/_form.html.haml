@@ -1,34 +1,41 @@
 = form_for [:job_seeker, @certification], html: {remote: true, class: 'profile-form'} do |f|
   .modal-body
-    .form-row-no-border
-      .contain-50
-        = f.text_field :name, :class => 'ui-autocomplete-input', :placeholder => 'Certification Name', id: "certification_name", hide_label: true
-        %span#name_Block.help-block
-      .contain-50
-        = f.text_field :agency, placeholder: "Agency", hide_label: true
-        %span#agency_Block.help-block
-    .form-row-no-border
-      .contain-25
-        = f.label "Start Date"
-        = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
-        %span#start_month_msgBlock
-      .contain-25
-        = f.label "Year"
-        = f.text_field :start_year, placeholder: "Year"
-        %span#start_year_msgBlock
-      .contain-25
-        = f.label :end_month, "Expiration Date"
-        = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
-        %span#end_year_msgBlock
-      .contain-25
-        = f.label :end_year, "Year"
-        = f.text_field :end_year, placeholder: "Year"
+    .add-work-experience
+      .form-row
+        .contain-50
+          = f.label :name
+          = f.text_field :name, :class => 'ui-autocomplete-input', :placeholder => 'Certification Name', id: "certification_name", hide_label: true
+          %span#name_Block.help-block
+        .contain-50
+          = f.label :agency, "Organization/Agency"
+          = f.text_field :agency, placeholder: "Agency", hide_label: true
+          %span#agency_Block.help-block
+      .form-row
+        .contain-25
+          = f.label :start_month, "Started"
+          .custom-select
+            = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month", id: "start_month_Block", autocomplete: "off"
+          %span#start_month_msgBlock
+        .contain-25
+          = f.label :start_year, ''
+          .custom-select
+            = f.select :start_year, options_for_select((1965..Time.now.year.to_i).to_a.reverse, selected: f.object.start_year), id: "start_year_Block",include_blank: "Year", autocomplete: "off"
+          %span#start_year_msgBlock
+        .contain-25
+          = f.label :end_month, "Expiration Date"
+          .custom-select
+            = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month", autocomplete: "off"
+          %span#end_year_msgBlock
+        .contain-25
+          = f.label :end_year, ''
+          .custom-select
+            = f.select :end_year, options_for_select((1965..Time.now.year.to_i).to_a.reverse, selected: f.object.end_year), id: "start_year_Block",include_blank: "Year", autocomplete: "off"
         %span#end_month_msgBlock
-        = f.check_box :expires, checked_value: 1, unchecked_value: 0, label: "No expiration"
-    .form-row-no-border
-      = f.text_area :description, placeholder: "Description", hide_label: true, rows: 8
-  .modal-footer
-    = f.submit @certification.new_record? ? "Add Certification" : "Update", class: "btn submit-button"
-    .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+        
+      .form-row
+        = f.text_area :description, placeholder: "Description", hide_label: true, rows: 8
+    .modal-footer
+      = f.submit @certification.new_record? ? "Add Certification" : "Update", class: "btn submit-button"
+      .btn.border-button{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Cancel
+      
     
-  

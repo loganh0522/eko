@@ -55,9 +55,9 @@ jQuery ->
 
 ################## Create Profile ##################    
   $(document).ready ->
-    if $('.add-work-experience-page').length >= 1
+    if $('.add-work-experience').length >= 1
       $('.remove_fields:not(:first)').show()
-    
+      
 
 ################ Create Application ###############
 
@@ -71,14 +71,7 @@ jQuery ->
     $(this).parent().parent().hide()
     event.preventDefault()
 
-  $(document).on 'click', '.add_fields', (event) ->
-    time = new Date().getTime()
-    regexp = new RegExp($(this).data('id'), 'g')
-    $(this).before($(this).data('fields').replace(regexp, time))
-    $(this).prev().find('.remove_fields').show()
-    number = $('.question-area').length    
-    $(this).find('.position').val(number)
-    event.preventDefault()
+
   
   $(document).on 'click', '.add_fields_after', (event) ->
     time = new Date().getTime()

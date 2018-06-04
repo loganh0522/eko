@@ -1,7 +1,8 @@
 .fieldset  
   .add-accomplishment
-    = f.text_area :body, id: "body_Block"
-    %span#body_msgBlock
     = f.hidden_field :_destroy
-    = link_to "Remove", '#', class: "remove_fields"
+    %i.fa.fa-trash.remove_fields
+    = f.text_area :body, id: "body_Block", autocomplete: "off", rows: 1
+    %span#body_msgBlock
+    
       

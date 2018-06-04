@@ -33,15 +33,14 @@
           = hidden_field_tag :user_skills, '', id: 'add-tags-value'
           = hidden_field_tag :attachment
         .column-container
-          .header
-            .title Skills Used
-          .body
-            = text_field_tag '', '', :class => 'ui-autocomplete-input user_skills', :placeholder => 'Add a Skill', id: "skills", hide_label: true
+          #skills
+            = f.label :skill, "Skills / Software Used"
+            = f.text_field :skill,  class: 'ui-autocomplete-input user_skills', :placeholder => 'Add a Skill', id: "skills", hide_label: true, value: nil
             #search-results-user_skills 
-            = hidden_field_tag :user_skills, '', id: 'user-skills-field'
-            .btn.submit-button#add-skills Add
+            .btn#add-skill +
             #add-tags
               = render 'job_seeker/user_skills/project_skills', position: @project
+
 
                 
             

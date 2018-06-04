@@ -12,10 +12,11 @@
           = image_tag current_user.user_avatar.image.small_image, :class => "img dropdown-img"
         - else
           .circle-img= current_user.first_name.first.capitalize
-        = current_user.first_name
-        %b.caret
+        .name
+          = current_user.first_name
+          %b.caret
       %ul.dropdown-menu.dropdown-menu-right
         %li
-          %a= link_to "Profile", job_seeker_user_path(current_user)
+          = link_to "Profile", job_seeker_user_path(current_user)
         %li
-          %a= link_to "Sign Out", signout_path
+          = link_to "Sign Out", signout_path

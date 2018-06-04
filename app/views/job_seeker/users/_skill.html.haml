@@ -1,0 +1,4 @@
+%div{:class => "user-tag", id: "user_skill_#{skill.id}"}
+  .name= skill.name
+  = link_to job_seeker_user_skill_path(skill.id), remote: true, :method => :delete do
+    .delete &times

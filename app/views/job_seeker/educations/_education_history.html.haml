@@ -1,6 +1,7 @@
 .header
   .new_experience
-    = link_to "+ Education", new_job_seeker_education_path, remote: true, :html => {id: 'new_work_experience_button'}
+    = link_to "+ Education", new_job_seeker_education_path, remote: true, :html => {id: 'new_work_experience_button'}, class: 'btn border-button'
+
 
 - if @educations.count == 0
   .not-present-container#education-not-present

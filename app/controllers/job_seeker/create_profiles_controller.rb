@@ -4,7 +4,7 @@ class JobSeeker::CreateProfilesController < ApplicationController
   before_filter :completed_sign_up
   include Wicked::Wizard
 
-  steps :personal, :experience, :education
+  steps :personal, :experience, :education, :certification
 
   def show
     @user = current_user
@@ -32,13 +32,21 @@ class JobSeeker::CreateProfilesController < ApplicationController
     when :experience
       @user = current_user
       if @user.work_experiences.count == 0 
-        
+        @user.work_experiences.new
       end
 
       render_wizard
     when :education
       if @user.educations.count == 0 
         @user.educations.new 
+      end
+  
+      render_wizard
+    when :certification
+      render_wizard
+    when :projects
+      if @user.educations.count == 0 
+        @user.certifications.new 
       end
   
       render_wizard
@@ -58,12 +66,12 @@ class JobSeeker::CreateProfilesController < ApplicationController
     when :experience 
       render_wizard @user
     when :education    
-      if @user.errors.present?
-        render_wizard @user
-      else 
-        @user.update_attributes(profile_stage: "complete")
-        finish_wizard_path
-      end
+      
+      render_wizard @user
+    when :certification
+      @user.update_attributes(profile_stage: "complete")
+      finish_wizard_path
+
     end
   end
 

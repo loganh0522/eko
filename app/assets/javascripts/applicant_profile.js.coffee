@@ -33,6 +33,10 @@ jQuery ->
     else 
       $('#interview-location').hide()
   
+####### Add Certifications For Create Profile ########
+
+  $('#add-certification').on 'click', '.add_fields', (event) -> 
+    $('.not-present-container').hide()
 
 ################  Google Places JavaScript API ####################
 

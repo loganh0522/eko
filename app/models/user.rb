@@ -26,8 +26,6 @@ class User < ActiveRecord::Base
   has_many :event_ids
   belongs_to :permission
   has_many :stage_actions
-
-
   has_many :completed_assessments
   
   has_many :invitations

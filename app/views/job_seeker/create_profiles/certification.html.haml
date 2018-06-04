@@ -1,19 +1,21 @@
 .create-profile-container 
   .create-profile-header
     %h1 Build your Career Portfolio 
-    %h4 Step 3 - Education 
+    %h4 Step 3 - Certifications 
     %p Your profile is submitted to the jobs that you apply for so that you do not have to compelete a new profile every time. So please take a few minutes to complete your profile.  
   
   .create-profile-body
     = form_for [:job_seeker, @user], url: wizard_path do |f|
-      .experience-container 
+      .experience-container#add-certification
         .header
-          .title Education
-        = f.fields_for :educations do |q|
-          = render "education_fields", f: q
-        .add-experience
-          = link_to_add_fields "+ Add Education", f, :educations
+          .title Certifications
+  
+        .not-present-container
+          %p Add Certifications to your profile.      
+        
+        = link_to_add_fields "+ Certification", f, :user_certifications
       .footer
+        = f.hidden_field :user, value: @user
         = link_to wizard_path(:experience), class: "previous-link" do 
           &larr; Previous
         = f.submit "Save & Continue", class: "job-seeker-btn"

@@ -1,33 +1,39 @@
 = form_for [:job_seeker, @education], html: {remote: true, class: 'profile-form'} do |f|
   .modal-body
-    .form-row-no-border
-      .contain-50
-        = f.label "School"
-        = f.text_field :school, id: "school_Block", class: "form-control", placeholder: "School"
-        %span#school_msgBlock
-      .contain-50
-        = f.label "Degree"
-        = f.text_field :degree, id: "degree_Block", class: "form-control", placeholder: "Degree"
-        %span#degree_msgBlock
-    .form-row-no-border
-      .contain-25
-        = f.label "Start Date"
-        = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
-        %span#start_month_msgBlock
-      .contain-25
-        = f.label "Year"
-        = f.text_field :start_year, placeholder: "Year"
-        %span#start_year_msgBlock
-      .contain-25
-        = f.label :end_month, "End Date"
-        = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month"
-        %span#end_year_msgBlock
-      .contain-25
-        = f.label :end_year, "Year"
-        = f.text_field :end_year, placeholder: "Year"
+    .add-work-experience
+      .form-row
+        .contain-50
+          = f.label "School"
+          = f.text_field :school, id: "school_Block", class: "form-control", placeholder: "School"
+          %span#school_msgBlock
+        .contain-50
+          = f.label "Degree"
+          = f.text_field :degree, id: "degree_Block", class: "form-control", placeholder: "Degree"
+          %span#degree_msgBlock
+      .form-row
+        .contain-25
+          = f.label :start_month, "Started"
+          .custom-select
+            = f.select :start_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month", id: "start_month_Block", autocomplete: "off"
+          %span#start_month_msgBlock
+        .contain-25
+          = f.label :start_year, ''
+          .custom-select
+            = f.select :start_year, options_for_select((1965..Time.now.year.to_i).to_a.reverse, selected: f.object.start_year), id: "start_year_Block",include_blank: "Year", autocomplete: "off"
+          %span#start_year_msgBlock
+        .contain-25
+          = f.label :end_month, "End Date"
+          .custom-select
+            = f.select :end_month, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'], include_blank: "Select a Month", autocomplete: "off"
+          %span#end_year_msgBlock
+        .contain-25
+          = f.label :end_year, ''
+          .custom-select
+            = f.select :end_year, options_for_select((1965..Time.now.year.to_i).to_a.reverse, selected: f.object.end_year), id: "start_year_Block",include_blank: "Year", autocomplete: "off"
         %span#end_month_msgBlock
-    .form-row-no-border
-      = f.text_area :description, rows: 6, placeholder: "Description", hide_label: true
+      .form-row
+        = f.label :description
+        = f.text_area :description, rows: 6, placeholder: "Description", hide_label: true
   .modal-footer 
     = f.submit @education.new_record? ? "Add Education" : "Update", class: "btn submit-button"
     .btn.border-button.close-modal Cancel
