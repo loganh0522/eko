@@ -148,7 +148,8 @@ class Candidate < ActiveRecord::Base
   end
 
   def average_rating 
-    self.ratings.average(:score).to_f.round(1) if ratings.any?
+    @rating = self.ratings.average(:score).to_f.round(1) if ratings.any?
+    return @rating
   end
 
   def avatar_url
@@ -198,6 +199,7 @@ class Candidate < ActiveRecord::Base
     attributes.merge(
       comments: comments.map(&:id),
       tags: tags.map(&:name),
+      rating: average_rating,
       full_name: full_name,
       application_stage: applications.map(&:stage_id),
       application_rejected: applications.map(&:rejected),

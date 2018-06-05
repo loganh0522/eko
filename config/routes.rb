@@ -253,6 +253,7 @@ Rails.application.routes.draw do
         get :search
       end
     end
+
     resources :job_board_rows do 
       collection do
         post :sort, to: "job_board_rows#sort"
@@ -348,6 +349,7 @@ Rails.application.routes.draw do
       
       resources :applications do 
         collection do 
+          get :search, to: "applications#search"
           get :quick_screen, to: "applications#quick_screen"
         end
         member do 

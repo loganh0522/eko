@@ -1,11 +1,11 @@
 class Business::ApplicationsController < ApplicationController
   layout "business"
-  load_and_authorize_resource :job
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
-  
+  load_and_authorize_resource :job
+
   def index  
     @job = Job.find(params[:job_id])
     @candidates = Candidate.joins(:applications).where(:applications => {job_id: @job.id}).paginate(page: params[:page], per_page: 10)
@@ -102,7 +102,7 @@ class Business::ApplicationsController < ApplicationController
     @job = Job.find(params[:job_id])
 
     where[:company_id] = current_company.id 
-    where[:rating] = params[:rating] if params[:rating].present?
+    where[:rating] = { gte: params[:rating_filter].to_i } if params[:rating_filter].present?
     where[:jobs] = params[:job_id] if params[:job_id].present?
     where[:application_stage] = params[:stage_id] if params[:stage_id].present?
     where[:application_rejected] = params[:rejected] || false 
@@ -179,7 +179,6 @@ class Business::ApplicationsController < ApplicationController
       format.js
     end
   end
-
 
   def move_stage    
     @stage = Stage.find(params[:stage])

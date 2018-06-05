@@ -1,33 +1,33 @@
 .new_rating
   %fieldset.rating.applicant-filter-checkbox#rating-filter
-    %input.filter-checkbox{:name => "rating_filter", :id => "rating_star5", :type => "radio", :value => "5"}
+    %input.filter{:name => "rating_filter", :id => "rating_star5", :type => "radio", :value => "5"}
     %label.full{:for => "rating_star5", :value => "5"}
 
-    %input.filter-checkbox{:name => "rating_filter", :id => "rating_star4half", :type => "radio", :value => "4.5"}
+    %input.filter{:name => "rating_filter", :id => "rating_star4half", :type => "radio", :value => "4.5"}
     %label.half{:for => "rating_star4half", :value => "4.5"}
     
-    %input.filter-checkbox{:name => "rating_filter", :id => "rating_star4",  :type => "radio", :value => "4"} 
+    %input.filter{:name => "rating_filter", :id => "rating_star4",  :type => "radio", :value => "4"} 
     %label.full{:for => "rating_star4", :value => "4"}
 
-    %input.filter-checkbox{:name => "rating_filter", :id => "rating_star3half", :type => "radio", :value => "3.5"}
+    %input.filter{:name => "rating_filter", :id => "rating_star3half", :type => "radio", :value => "3.5"}
     %label.half{:for => "rating_star3half", :value => "3.5"}
     
-    %input.filter-checkbox{:name => "rating_filter", :id => "rating_star3", :type => "radio", :value => "3"}
+    %input.filter{:name => "rating_filter", :id => "rating_star3", :type => "radio", :value => "3"}
     %label.full{:for => "rating_star3", :value => "3"}
     
-    %input.filter-checkbox{:name => "rating_filter",:id => "rating_star2half", :type => "radio", :value => "2.5"}
+    %input.filter{:name => "rating_filter",:id => "rating_star2half", :type => "radio", :value => "2.5"}
     %label.half{:for => "rating_star2half", :value => "2.5"}
      
-    %input.filter-checkbox{:name => "rating_filter",:id => "rating_star2", :type => "radio", :value => "2"}
+    %input.filter{:name => "rating_filter",:id => "rating_star2", :type => "radio", :value => "2"}
     %label.full{:for => "rating_star2", :value => "2"}
    
-    %input.filter-checkbox{:name => "rating_filter", :id => "rating_star1half", :type => "radio", :value => "1.5"}
+    %input.filter{:name => "rating_filter", :id => "rating_star1half", :type => "radio", :value => "1.5"}
     %label.half{:for => "rating_star1half", :value => "1.5"}
     
-    %input.filter-checkbox{:name => "rating_filter", :id => "rating_star1", :type => "radio", :value => "1"}
+    %input.filter{:name => "rating_filter", :id => "rating_star1", :type => "radio", :value => "1"}
     %label.full{:for => "rating_star1", :value => "1"}
     
-    %input.filter-checkbox{:name => "rating_filter", :id => "rating_starhalf", :type => "radio", :value => "0.5"}
+    %input.filter{:name => "rating_filter", :id => "rating_starhalf", :type => "radio", :value => "0.5"}
     %label.half{:for => "rating_starhalf", :value => "0.5"}
 
     / = hidden_field_tag :job_id, value: @job.id

@@ -7,7 +7,6 @@ class Application < ActiveRecord::Base
   
   has_many :application_stages, dependent: :destroy
   has_many :interview_scorecards
-  has_many :ratings
   has_many :application_scorecards
   has_many :assessments
   has_many :question_answers, dependent: :destroy
