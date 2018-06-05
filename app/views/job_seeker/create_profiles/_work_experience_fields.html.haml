@@ -20,7 +20,7 @@
   /     = f.label "Job Function"
   /     = f.collection_select(:function, Function.all, :id, :name, hide_label: true, prompt: "Select Job Function")
   /     %span#function_msgBlock
-  .form-row
+  .form-row-show-over
     .contain-25
       = f.label :start_month, "Started"
       .custom-select
