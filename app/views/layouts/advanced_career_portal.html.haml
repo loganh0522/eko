@@ -6,10 +6,10 @@
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
     = csrf_meta_tag
     = stylesheet_link_tag "application"
-    = javascript_include_tag "application", "https://js.stripe.com/v2/", "https://js.stripe.com/v3/" 
+   
     = yield :head
     = tag :meta, name: "stripe-public-key", content: ENV['STRIPE_PUBLISHABLE_KEY']
-    
+    = javascript_include_tag "application", "https://js.stripe.com/v2/", "https://js.stripe.com/v3/" 
     <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyABHyEmDvxwvbiHWIYaEDBFwxHmUjRiKic&libraries=places"></script>
     
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'/>
@@ -20,8 +20,9 @@
       .nav-container
         .navigation
           - if @job_board.company.logo.present?
-            = link_to root_path do
-              %img(src="#{@job_board.company.logo.file.large_logo}" class="sub_logo")
+            .brand
+              = link_to root_path do
+                %img(src="#{@job_board.company.logo.file.large_logo}" class="sub_logo")
           - else
             .brand
               = link_to root_path do
@@ -41,6 +42,7 @@
                   = current_user.first_name
                   %b.caret
               .dropdown-content#myDropdown
+                .dropdown-arrow{:style =>  "border-top-color: transparent; border-left-color: transparent; width: 20px; height: 20px; transform: rotate(-135deg); top: -10px; left: 80%"}
                 = link_to "Profile", job_seeker_user_path(current_user)
                 = link_to "Sign Out", signout_path
           - else 

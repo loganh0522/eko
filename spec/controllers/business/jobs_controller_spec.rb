@@ -72,15 +72,15 @@ describe Business::JobsController do
 
   describe "POST create" do 
     it_behaves_like "requires sign in" do
-      let(:action) { post :create, job: Fabricate.attributes_for(:job, company: set_current_company, user_ids: set_current_user) }
+      let(:action) { post :create, job: Fabricate.attributes_for(:job) }
     end
 
     it_behaves_like "user does not belong to company" do 
-      let(:action) { post :create, job: Fabricate.attributes_for(:job, company: set_current_company, user_ids: set_current_user) }
+      let(:action) { post :create, job: Fabricate.attributes_for(:job) }
     end
 
     it_behaves_like "company has been deactivated" do
-      let(:action) { post :create, job: Fabricate.attributes_for(:job, company: set_current_company, user_ids: set_current_user) }
+      let(:action) { post :create, job: Fabricate.attributes_for(:job) }
     end
     
     context "with valid inputs" do 
@@ -91,7 +91,7 @@ describe Business::JobsController do
       end
 
       it "redirects to the new Hiring team path" do   
-        expect(response).to redirect_to business_job_hiring_teams_path(Job.last.id)
+        expect(response).to redirect_to business_job_questions_path(Job.last.id)
       end
       
       it "creates the job posting" do
@@ -192,7 +192,7 @@ describe Business::JobsController do
 
     context "with valid inputs" do
       before do  
-        xhr :put, :update, id: job.id, job: {title: "new title"}
+        put :update, id: job.id, job: {title: "new title"}
       end
 
       it "save the updates made on the object" do 
@@ -200,13 +200,13 @@ describe Business::JobsController do
       end
 
       it "render's the hiring team page" do 
-        expect(response).to redirect_to business_job_hiring_teams_path(job.id)
+        expect(response).to redirect_to business_job_questions_path(job.id)
       end
     end
 
     context "with invalid inputs" do
       before do  
-        xhr :put, :update, id: job.id, job: {title: nil}
+        put :update, id: job.id, job: {title: nil}
       end
 
       it "doesn't save the updates if fields invalid" do
@@ -234,11 +234,11 @@ describe Business::JobsController do
 
     context "with params[:status] present && status == publish" do
       before do  
-        xhr :put, :update, id: job.id, status: 'publish'
+        xhr :put, :update, id: job.id, status: 'open'
       end
 
       it "save the updates made on the object" do 
-        expect(Job.first.status).to eq('publish')
+        expect(Job.first.status).to eq('open')
       end
 
       it "render's the hiring team page" do 
@@ -246,17 +246,57 @@ describe Business::JobsController do
       end
     end
 
-    context "with params[:status] present && status == archive" do
+    context "with params[:status] present && status == false" do
       before do  
-        xhr :put, :update, id: job.id, status: 'archive'
+        xhr :put, :update, id: job.id, status: 'false'
       end
 
       it "save the updates made on the object" do 
-        expect(Job.first.status).to eq('archive')
+        expect(Job.first.is_active).to eq(false)
       end
 
       it "render's the hiring team page" do 
         expect(response).to render_template :update
+      end
+    end
+
+    context "with params[:status] present && status == true" do
+      before do  
+        xhr :put, :update, id: job.id, status: 'true'
+      end
+
+      it "save the updates made on the object" do 
+        expect(Job.first.is_active).to eq(true)
+      end
+
+      it "render's the hiring team page" do 
+        expect(response).to render_template :update
+      end
+    end
+  end
+
+  describe "POST search" do 
+    it_behaves_like "requires sign in" do
+      let(:action) { post :search, job: Fabricate.attributes_for(:job) }
+    end
+
+    it_behaves_like "user does not belong to company" do 
+      let(:action) { post :search, job: Fabricate.attributes_for(:job) }
+    end
+
+    it_behaves_like "company has been deactivated" do
+      let(:action) { post :search, job: Fabricate.attributes_for(:job) }
+    end
+
+    context "Searching all jobs" do
+      before do  
+        sales = Fabricate(:job, title: "sales", company: company, user_ids: alice.id, status: "open", is_active: true)
+        engineering = Fabricate(:job, title: "engineering", company: company, user_ids: alice.id, status: "open", is_active: true)
+        xhr :post, :search, query: 'sal'
+      end
+
+      it "save the updates made on the object" do 
+        assigns(:jobs).to eq([sales])
       end
     end
   end

@@ -22,6 +22,7 @@
       /     %i.fa.fa-inbox
     - if can? :create, Job
       = link_to "Post a Job", new_business_job_path, class: "post-job-nav"
+  
   .dropdown
     .dropdown-button
       - if current_user.user_avatar.present? 
@@ -32,6 +33,7 @@
         = current_user.first_name
         %b.caret
     .dropdown-content#myDropdown
+      .dropdown-arrow{:style =>  "border-top-color: transparent; border-left-color: transparent; width: 20px; height: 20px; transform: rotate(-135deg); top: -10px; left: 80%"}
       - if can? :manage, JobBoard
         = link_to "Career Portal", business_job_board_path(current_company.job_board.id)
       - if can? :manage, JobTemplate

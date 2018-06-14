@@ -145,7 +145,7 @@ class Business::CandidatesController < ApplicationController
     end
 
     where[:company_id] = current_company.id 
-    where[:rating] = params[:rating] if params[:rating].present?
+    where[:rating] = {gte: params[:rating_filter]} if params[:rating_filter].present?
     where[:job_title] = {all: params[:job_title]} if params[:job_title].present?
     where[:jobs] = {all: params[:jobs]} if params[:jobs].present?
     where[:job_status] = params[:status] if params[:status].present?

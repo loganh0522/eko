@@ -20,12 +20,14 @@
             %b.caret
         .dropdown-content#myDropdown
           = link_to "Edit Job", edit_business_job_path(job)   
-          - if job.status == 'open'
+          - if job.status == 'open' && job.is_active
             = link_to "Close Job", business_job_path(job, status: 'closed'), method: :patch, remote: true
             = link_to "Archive Job", business_job_path(job, status: 'false'), method: :patch, remote: true
-          - elsif job.status == 'closed'
+          - elsif job.status == 'closed' && job.is_active
             = link_to "Open Job", business_job_path(job, status: 'open'), method: :patch, remote: true
             = link_to "Archive Job", business_job_path(job, status: 'false'), method: :patch, remote: true
+          - elsif job.is_active == false 
+            = link_to "Publish Job", business_job_path(job, status: 'true'), method: :patch, remote: true
 
     .left-scroll
       %img(src="/tmp/left_arrow.png")

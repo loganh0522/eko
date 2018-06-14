@@ -38,9 +38,6 @@
                       .content
                         .position= application_stage(candidate, candidate.applications.first.job)
                         .bottom-content= "#{time_ago_in_words(candidate.created_at)} ago"
-                    %td
-                      .content
-                        = render 'business/ratings/form', application: candidate.applications.first
                   
                   - else
                     %td
@@ -49,11 +46,9 @@
                     %td
                       .no-content
                         No Job Applications
-                    %td
-                      .no-content
-                        No Rating
-
-
+                  %td
+                    .content
+                      = render 'business/ratings/form', application: candidate
 
 
 
@@ -61,3 +56,4 @@
   .modal-dialog
     .modal-content
       .modal-body
+      

@@ -46,28 +46,26 @@ class Business::JobsController < ApplicationController
   def update
     @job = Job.find(params[:id])
 
-    respond_to do |format|
-      if params[:status].present? 
-        if params[:status] == "open" || params[:status] == "closed"
-          @job.update(status: params[:status])
-          format.js
-        elsif params[:status] == "true" || params[:status] == "false"
-          if params[:status] == "true"
-            @job.update(is_active: true)
-          else
-            @job.update(is_active: false)
-          end
-          format.js
-        else 
-          redirect_to :back
-          flash[:danger] = "Something went wrong, please try again."
-        end
-      else
-        if @job.update(job_params)
-          format.html {redirect_to business_job_questions_path(@job)}
+    
+    if params[:status].present? 
+      if params[:status] == "open" || params[:status] == "closed"
+        @job.update(status: params[:status])
+      
+      elsif params[:status] == "true" || params[:status] == "false"
+        if params[:status] == "true"
+          @job.update(is_active: true)
         else
-          render :edit
+          @job.update(is_active: false)
         end
+      end
+      respond_to do |format|
+        format.js
+      end
+    else
+      if @job.update(job_params)
+        redirect_to business_job_questions_path(@job)
+      else
+        render :edit
       end
     end
   end

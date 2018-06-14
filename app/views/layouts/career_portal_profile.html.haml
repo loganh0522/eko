@@ -20,8 +20,9 @@
       .nav-container{:style => "border-bottom: solid 1px #c6c8ca;"}
         .navigation
           - if @job_board.company.logo.present?
-            = link_to root_path do
-              %img(src="#{@job_board.company.logo.file.large_logo}" class="sub_logo")
+            .brand
+              = link_to root_path do
+                %img(src="#{@job_board.company.logo.file.large_logo}" class="sub_logo")
           - else
             .brand
               = link_to root_path do
@@ -40,6 +41,7 @@
                 = current_user.first_name
                 %b.caret
             .dropdown-content#myDropdown
+              .dropdown-arrow{:style =>  "border-top-color: transparent; border-left-color: transparent; width: 20px; height: 20px; transform: rotate(-135deg); top: -10px; left: 80%"}
               = link_to "Profile", job_seeker_user_path(current_user)
               = link_to "Sign Out", signout_path
     %section
