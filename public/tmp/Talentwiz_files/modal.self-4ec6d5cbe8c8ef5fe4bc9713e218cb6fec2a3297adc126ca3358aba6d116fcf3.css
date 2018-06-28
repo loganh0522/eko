@@ -1,0 +1,332 @@
+/* line 1, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.modal {
+  border-radius: 0px 0px 0px 0px;
+}
+/* line 3, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.modal .pac-container {
+  z-index: 9999;
+}
+/* line 5, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.modal .modal-header {
+  border-radius: 0px;
+  background-color: #f8f8f8;
+}
+/* line 8, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.modal .modal-header .modal-title {
+  color: rgba(0, 0, 0, 0.7);
+}
+/* line 10, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.modal .modal-header .close {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 24px;
+}
+/* line 13, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.modal .modal-body {
+  height: auto;
+  padding: 0 0 0 0;
+  background-color: #ffffff;
+}
+/* line 17, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.modal .modal-body .warning {
+  width: 60%;
+  margin: 30px auto;
+  font-size: 16px;
+}
+/* line 21, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.modal .modal-footer {
+  background: #f8f8f8;
+  overflow: hidden;
+}
+
+/* line 25, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.modal-backdrop {
+  z-index: 5;
+}
+
+/* line 27, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.modal-content {
+  border-radius: 0px;
+}
+
+/* line 31, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.billing-form .modal-body {
+  padding: 20px 40px;
+}
+
+/* line 35, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+#user-information .modal-body {
+  padding: 25px 25px;
+  width: auto;
+}
+/* line 38, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+#user-information .modal-body .row {
+  margin: 0 0;
+}
+
+/* line 42, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.new_resume .inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  float: left;
+}
+/* line 50, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.new_resume .inputfile + label {
+  float: left;
+}
+/* line 53, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.new_resume .not-present-container p {
+  margin-top: 20px;
+}
+/* line 55, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.new_resume .not-present-container .inputfile + label {
+  margin: 15px 0 0 40%;
+}
+
+/* line 60, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  float: left;
+}
+/* line 68, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .inputfile + label {
+  float: left;
+}
+/* line 71, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .not-present-container p {
+  margin-top: 20px;
+}
+/* line 73, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .not-present-container .inputfile + label {
+  margin: 15px 0 0 35%;
+}
+/* line 75, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .not-present-container .submit-button {
+  margin: 20px auto;
+  width: 200px;
+}
+/* line 78, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .jcrop-keymgr {
+  display: none;
+}
+/* line 80, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .modal-dialog {
+  width: 80%;
+}
+/* line 82, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .modal-body {
+  width: 100%;
+  padding: 20px 0;
+  padding: 25px 50px 25px 50px;
+}
+/* line 86, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .modal-body .crop-image {
+  float: left;
+  width: 40%;
+  margin: 0 5%;
+}
+/* line 90, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .modal-body #img-preview-area {
+  float: left;
+  width: 40%;
+  margin: 0 5%;
+}
+/* line 94, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .modal-body #img-preview-area .img-preview {
+  width: 150px;
+  height: 150px;
+  margin: 65px 25%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+/* line 100, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .modal-footer {
+  width: 100%;
+}
+/* line 102, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .modal-footer .glyphicon.glyphicon-trash {
+  float: left;
+  color: black;
+  border: 1px solid black;
+  font-size: 24px;
+}
+
+/* line 109, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .images-container {
+  width: 90%;
+  margin: 0 auto;
+  height: auto;
+  padding: 10px 10px;
+}
+/* line 114, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .images-container .media-photo-load {
+  width: 100px;
+  height: 100px;
+  background: rgba(0, 0, 0, 0.3);
+}
+/* line 118, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .images-container .media-photo-load #progress-bar {
+  width: 90%;
+}
+/* line 120, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .images-container .media-photo-load #progress-bar .bar {
+  height: 18px;
+  background: green;
+}
+/* line 123, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .images-container .media_photo {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  float: left;
+  margin: 5px 8px;
+}
+/* line 127, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .images-container .media_photo a {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background: #fff;
+  color: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+  margin: -20px 0 0 85px;
+  padding: 3px 3px;
+}
+/* line 136, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .images-container .media_photo a:hover {
+  cursor: pointer;
+}
+/* line 138, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .job-board-form-nav {
+  width: 20%;
+  float: left;
+  padding: 20px 20px 0px 20px;
+}
+/* line 142, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .job-board-form-nav ul {
+  list-style: none;
+  padding: 0 0;
+}
+/* line 145, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .job-board-form-nav ul li {
+  font-size: 16px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  border-left: 3px solid #ffffff;
+}
+/* line 150, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .job-board-form-nav ul:hover {
+  cursor: pointer;
+}
+/* line 152, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .job-board-form-nav ul .active {
+  border-left: 3px solid #EF7B2B;
+}
+/* line 154, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .job-board-form {
+  width: 80%;
+  padding: 20px 20px 0px 20px;
+  float: right;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* line 160, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .job-board-layout {
+  display: none;
+  overflow: hidden;
+  padding: 130px 0 0 0;
+  min-height: 400px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* line 166, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .job-board-layout .float-left {
+  float: left;
+  margin-left: 20px;
+}
+/* line 169, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .job-board-layout .float-left img {
+  opacity: 0.3;
+}
+/* line 171, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .job-board-layout .float-center {
+  float: left;
+  margin-left: 20px;
+}
+/* line 174, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .job-board-layout .float-center img {
+  opacity: 0.3;
+}
+/* line 176, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .job-board-layout .float-right {
+  float: left;
+  margin-left: 20px;
+}
+/* line 179, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .job-board-layout .float-right img {
+  opacity: 0.3;
+}
+/* line 182, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .job-board-layout input:checked ~ label img {
+  opacity: 1;
+}
+/* line 184, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .job-board-layout input {
+  display: none;
+}
+/* line 187, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .modal-footer .power {
+  float: right;
+  overflow: hidden;
+}
+/* line 190, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .modal-footer .power .powered-by {
+  margin-top: 15px;
+  float: left;
+}
+/* line 193, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.mediumModal .modal-footer .power img {
+  float: le;
+}
+
+/* line 197, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.largeModal .modal-header {
+  padding-left: 4%;
+  color: black;
+  font-size: 18px;
+}
+/* line 201, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.largeModal .modal-dialog {
+  width: 80%;
+}
+/* line 204, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.largeModal .modal-body .new-user {
+  float: left;
+  width: 45%;
+}
+/* line 207, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.largeModal .modal-body .sign-in {
+  float: left;
+  width: 45%;
+  margin-left: 9%;
+}
+/* line 212, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.largeModal .modal-footer .power {
+  float: right;
+  overflow: hidden;
+}
+/* line 215, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.largeModal .modal-footer .power .powered-by {
+  margin-top: 15px;
+  float: left;
+}
+/* line 218, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/modal.sass */
+.largeModal .modal-footer .power img {
+  float: left;
+}

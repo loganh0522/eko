@@ -1,0 +1,1218 @@
+/* line 1, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container {
+  border-bottom: solid 1px #c6c8ca;
+  background: #fff;
+  width: 100%;
+  min-height: 80px;
+  margin-top: -5px;
+  z-index: 1;
+}
+/* line 8, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .navigation {
+  margin: 5px auto;
+  font-size: 16px;
+  height: 80px;
+  padding: 0px 2%;
+  max-width: 1200px;
+  color: #666;
+}
+/* line 15, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .navigation .brand {
+  overflow: hidden;
+  float: left;
+  font-size: 24px;
+  line-height: 70px;
+}
+/* line 20, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .navigation .brand a {
+  color: black;
+  vertical-align: middle;
+}
+/* line 23, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .navigation .brand img {
+  vertical-align: middle;
+}
+/* line 25, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .navigation #section-nav {
+  float: left;
+  margin: 30px 30px;
+}
+@media screen and (max-width: 780px) {
+  /* line 25, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .nav-container .navigation #section-nav {
+    display: none;
+  }
+}
+/* line 31, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .navigation #section-nav li:hover {
+  cursor: pointer;
+}
+/* line 33, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .navigation .dropdown {
+  margin: 20px 2% 0 0;
+  right: 0px;
+  position: absolute;
+}
+/* line 37, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .navigation .dropdown .dropdown-content {
+  z-index: 10;
+  background: #ffffff;
+  position: fixed;
+  padding: 6px 0;
+  display: none;
+  margin-top: 5px;
+  right: 15px;
+  border: 1px solid #cbd6e2;
+  width: 200px;
+  border-radius: 3px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  -webkit-box-shadow: 0px 1px 24px 0px #c7c5c7;
+          box-shadow: 0px 1px 24px 0px #c7c5c7;
+}
+/* line 52, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .navigation .dropdown .dropdown-button {
+  overflow: hidden;
+}
+/* line 54, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .navigation .dropdown a {
+  text-decoration: none;
+}
+/* line 56, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .navigation .dropdown .dropdown-img {
+  border-radius: 50px;
+  height: 40px;
+  float: left;
+  width: 40px;
+  margin-right: 5px;
+}
+/* line 62, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .navigation .dropdown .circle-img {
+  margin-right: 10px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background: #EF7B2B;
+  text-align: center;
+  font-size: 18px;
+  padding-top: 7px;
+  color: white;
+  float: left;
+}
+/* line 73, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .navigation .dropdown .name {
+  float: left;
+  margin-top: 8px;
+}
+/* line 77, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .navigation ul {
+  display: inline-block;
+  float: right;
+  list-style: none;
+}
+/* line 81, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .navigation ul li {
+  margin-right: 30px;
+  float: left;
+}
+/* line 84, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .navigation ul li a {
+  color: #666;
+  font-size: 16px;
+  text-decoration: none;
+}
+/* line 88, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .navigation #portal-login {
+  float: right;
+  color: #fff;
+  margin: 30px 0;
+}
+@media screen and (max-width: 780px) {
+  /* line 88, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .nav-container .navigation #portal-login {
+    display: none;
+  }
+}
+/* line 94, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .navigation #portal-login a {
+  color: #666;
+}
+/* line 96, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .navigation .border-button {
+  margin-top: -8px;
+}
+/* line 99, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .responsive-menu {
+  float: right;
+  margin: 20px 15px 0 0;
+  display: none;
+  font-size: 25px;
+  color: #666;
+}
+/* line 105, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.nav-container .responsive-menu:hover {
+  cursor: pointer;
+}
+@media screen and (max-width: 780px) {
+  /* line 99, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .nav-container .responsive-menu {
+    display: block;
+  }
+}
+
+/* line 111, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.portal-header {
+  height: 450px;
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  z-index: -1;
+}
+@media screen and (max-width: 780px) {
+  /* line 111, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .portal-header {
+    height: 400px;
+  }
+}
+/* line 119, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.portal-header .header-overlay {
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+/* line 124, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.portal-header .intro-message {
+  color: #ffffff;
+  padding: 150px 0;
+  text-align: center;
+  width: 90%;
+  margin: 0 auto;
+  height: auto;
+}
+@media screen and (max-width: 780px) {
+  /* line 124, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .portal-header .intro-message {
+    width: 90%;
+    padding: 150px 0;
+  }
+}
+/* line 134, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.portal-header .intro-message .header {
+  margin-bottom: 20px;
+  font-size: 44px;
+  font-weight: 300;
+  height: auto;
+}
+/* line 139, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.portal-header .intro-message .sub-header {
+  font-size: 20px;
+  font-weight: 300;
+  margin-bottom: 30px;
+  height: auto;
+}
+
+/* line 146, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.images-container .slick-prev {
+  left: 0;
+  top: 50%;
+  margin: -25px 10px;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  z-index: 1;
+  border: none;
+  background: rgba(0, 0, 0, 0.5);
+}
+/* line 157, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.images-container .slick-prev .fa {
+  font-size: 35px;
+  color: #fff;
+}
+/* line 160, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.images-container .slick-next {
+  right: 0;
+  top: 50%;
+  margin: -25px 10px;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  z-index: 1;
+  border: none;
+  background: rgba(0, 0, 0, 0.5);
+}
+/* line 171, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.images-container .slick-next .fa {
+  font-size: 35px;
+  color: #fff;
+}
+/* line 174, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.images-container .slick-slide {
+  max-height: 400px;
+}
+/* line 176, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.images-container .slick-slide img {
+  max-height: 400px;
+}
+
+/* line 179, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections {
+  height: auto;
+  color: black;
+  overflow: hidden;
+  background: #ffffff;
+}
+/* line 184, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .section:last-child {
+  margin-bottom: 20px;
+}
+/* line 186, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .section {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+}
+/* line 190, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .section .header-message {
+  width: 90%;
+  max-width: 1100px;
+  margin: 25px auto 50px auto;
+  height: auto;
+  color: rgba(0, 0, 0, 0.7);
+}
+/* line 196, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .section .header-message .header {
+  font-size: 28px;
+  font-weight: 400;
+  height: auto;
+}
+/* line 200, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .section .header-message .sub-header {
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  height: auto;
+}
+/* line 206, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .team-members {
+  overflow: hidden;
+  text-align: center;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+/* line 211, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .team-members .sub-header {
+  max-width: 75%;
+  margin: 15px auto;
+}
+/* line 214, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .team-members .team-member {
+  width: 30%;
+  margin-left: 3%;
+  float: left;
+}
+/* line 218, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .team-members .team-member .member-img {
+  margin-bottom: 10px;
+}
+/* line 220, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .team-members .team-member .member-img img {
+  border-radius: 50%;
+}
+/* line 222, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .team-members .team-member .position {
+  font-size: 15px;
+  max-width: 200px;
+  margin: 10px auto;
+}
+/* line 226, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .team-members .team-member .name {
+  font-size: 24px;
+}
+/* line 229, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .description-center {
+  overflow: hidden;
+  margin: 0 auto;
+  height: auto;
+  max-width: 1280px;
+  text-align: center;
+  padding: 10px 5%;
+}
+/* line 236, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .description-center .header-message {
+  margin: 25px auto;
+}
+/* line 240, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .description-center .description {
+  width: 100%;
+  font-size: 16px;
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+/* line 247, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .description-left {
+  padding: 25px 25px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+/* line 251, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .description-left .image-description {
+  float: left;
+  width: 50%;
+  padding: 20px 20px;
+}
+/* line 255, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .description-left .image-description .header {
+  font-size: 28px;
+  font-weight: 400;
+  height: auto;
+  color: rgba(0, 0, 0, 0.7);
+}
+/* line 260, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .description-left .image-description .sub-header {
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  height: auto;
+}
+/* line 265, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .description-left .image {
+  width: 50%;
+  float: right;
+}
+/* line 268, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .description-left .image img {
+  min-width: 400px;
+}
+/* line 271, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .description-right {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+/* line 274, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .description-right .image-description {
+  float: right;
+  width: 50%;
+  padding: 20px 20px;
+}
+@media screen and (max-width: 780px) {
+  /* line 274, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .job-board-sections .description-right .image-description {
+    padding: 10px 5%;
+    float: none;
+    width: 100%;
+  }
+}
+/* line 282, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .description-right .image-description .header {
+  font-size: 28px;
+  font-weight: 400;
+  height: auto;
+  color: rgba(0, 0, 0, 0.7);
+}
+/* line 287, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .description-right .image-description .sub-header {
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  height: auto;
+}
+/* line 292, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .description-right .image-description .description {
+  width: 100%;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+/* line 296, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .description-right .image {
+  width: 50%;
+  float: left;
+}
+@media screen and (max-width: 780px) {
+  /* line 296, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .job-board-sections .description-right .image {
+    float: none;
+    width: 100%;
+  }
+}
+/* line 302, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-board-sections .description-right .image img {
+  display: block;
+  margin: 10px auto;
+  min-width: 400px;
+}
+
+/* Company Job Board CSS */
+/* line 313, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board {
+  margin: 30px 10% 0 10%;
+}
+@media screen and (max-width: 960px) {
+  /* line 313, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .company-job-board {
+    margin: 0px 5% 0 5%;
+  }
+}
+/* line 317, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .basic-job-description {
+  width: 65%;
+  margin: 0 17.5%;
+  max-width: 780px;
+}
+/* line 321, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .basic-job-description .job-header {
+  text-align: center;
+  padding: 10px 0;
+}
+/* line 324, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .basic-job-description .job-body {
+  margin-top: 10px;
+}
+/* line 326, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .basic-job-description .apply {
+  margin: 50px auto 100px auto;
+  width: 50%;
+}
+/* line 329, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .basic-job-description .apply .btn {
+  width: 100%;
+  font-size: 16px;
+  padding: 8px 15px 13px 15px;
+}
+@media screen and (max-width: 768px) {
+  /* line 317, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .company-job-board .basic-job-description {
+    width: 90%;
+    margin: 30px 5% 0 5%;
+  }
+}
+/* line 337, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .logo {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto;
+}
+/* line 341, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .basic-jobs {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+/* line 346, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .basic-jobs .title {
+  margin: 10px 0;
+}
+/* line 349, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .jobs {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+/* line 353, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .jobs h2 {
+  margin: 0 0 30px 0;
+  text-align: center;
+}
+/* line 356, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .jobs .description {
+  margin-bottom: 30px;
+}
+/* line 358, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .jobs .description p {
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 2;
+}
+/* line 361, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .jobs .job-posting {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px 10px 10px 10px;
+  background: #ffffff;
+  border-radius: 2px;
+  -webkit-box-shadow: 0px 1px 2px 1px #c7c5c7;
+          box-shadow: 0px 1px 2px 1px #c7c5c7;
+}
+/* line 368, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .jobs .job-posting .header-info {
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+/* line 371, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .jobs .job-posting .header-info .logo {
+  float: left;
+  margin-top: 10px;
+}
+/* line 374, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .jobs .job-posting .header-info .view-job {
+  float: right;
+  margin: 7px 25px 0 0;
+  -webkit-box-shadow: 1px 1px 2px 1px #c7c5c7;
+          box-shadow: 1px 1px 2px 1px #c7c5c7;
+}
+/* line 378, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .jobs .job-posting .header-info .view-job a {
+  color: white;
+}
+/* line 380, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .jobs .job-posting .header-info .job-detail {
+  float: left;
+  margin: 10px 0 0 5px;
+}
+/* line 383, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .jobs .job-posting .header-info .job-detail .title {
+  font-size: 18px;
+  font-weight: 500;
+}
+/* line 386, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .jobs .job-posting .header-info .job-detail .title a {
+  color: black;
+}
+/* line 388, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .jobs .job-posting .header-info .job-detail .company {
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 500;
+}
+/* line 392, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .jobs .job-posting .bottom-info {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 10px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  overflow: hidden;
+}
+/* line 398, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .jobs .job-posting .bottom-info .left-side {
+  float: left;
+}
+/* line 400, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .jobs .job-posting .bottom-info .left-side img {
+  margin: 0 5px 0 10px;
+}
+/* line 402, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .jobs .job-posting .bottom-info .right-side {
+  float: right;
+}
+/* line 404, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-job-board .jobs .job-posting .bottom-info .right-side img {
+  margin: 0 5px 0 10px;
+}
+
+/* Job Show Page */
+/* line 412, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.career-portal-job-container {
+  padding: 50px 5%;
+  overflow: hidden;
+}
+/* line 416, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.career-portal-job-container .apply a {
+  text-decoration: none;
+}
+/* line 418, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.career-portal-job-container .apply .app-btn {
+  width: 70%;
+  margin: 30px 15%;
+  font-size: 18px;
+  padding: 12px;
+  border-radius: 3px;
+  text-align: center;
+  color: #ffffff;
+}
+/* line 426, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.career-portal-job-container .job-description {
+  width: 63%;
+  padding: 0 25px 100px 25px;
+  float: left;
+}
+@media screen and (max-width: 780px) {
+  /* line 426, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .career-portal-job-container .job-description {
+    width: 100%;
+  }
+}
+/* line 434, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.career-portal-job-container .job-description h1 {
+  color: black;
+  margin-bottom: 2px;
+}
+/* line 437, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.career-portal-job-container .job-description .job-header {
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+/* line 441, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.career-portal-job-container .job-description .job-header h1 {
+  margin-top: 0;
+}
+/* line 443, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.career-portal-job-container .extra-job-details {
+  width: 33%;
+  float: left;
+  margin-left: 2%;
+  padding: 0 30px 20px 30px;
+}
+/* line 448, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.career-portal-job-container .extra-job-details h3 {
+  margin-top: 10px;
+}
+/* line 451, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.career-portal-job-container .extra-job-details .apply a {
+  text-decoration: none;
+}
+/* line 453, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.career-portal-job-container .extra-job-details .detail {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+/* line 458, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.career-portal-job-container .extra-job-details .detail .type {
+  color: rgba(0, 0, 0, 0.5);
+}
+/* line 460, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.career-portal-job-container .extra-job-details .detail .content {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* line 465, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.width-container {
+  height: auto;
+  overflow: hidden;
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+/* line 471, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.width-container .inner-container {
+  width: 100%;
+  max-width: 1280px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 25px 0;
+}
+/* line 477, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.width-container .inner-container .header {
+  font-size: 28px;
+  font-weight: 400;
+  height: auto;
+  margin-bottom: 25px;
+}
+
+/* line 484, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-card {
+  overflow: hidden;
+  padding: 20px 20px;
+  width: 33%;
+  float: left;
+}
+/* line 490, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-card a:hover .body {
+  text-decoration: none;
+}
+/* line 492, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-card .header {
+  min-height: 175px;
+}
+/* line 494, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-card .card {
+  border-radius: 5px;
+  background: #fff;
+  -webkit-box-shadow: 0px 7px 14px 0px rgba(199, 197, 199, 0.1), 0px 3px 6px 0px #c7c5c7;
+          box-shadow: 0px 7px 14px 0px rgba(199, 197, 199, 0.1), 0px 3px 6px 0px #c7c5c7;
+}
+/* line 498, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-card .logo {
+  padding: 5px 5px;
+  -webkit-box-shadow: 0px 7px 14px 0px rgba(199, 197, 199, 0.1), 0px 3px 6px 0px #c7c5c7;
+          box-shadow: 0px 7px 14px 0px rgba(199, 197, 199, 0.1), 0px 3px 6px 0px #c7c5c7;
+  margin: -80px auto 0 auto;
+  border-radius: 50px;
+  height: 100px;
+  width: 100px;
+}
+/* line 505, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-card .body {
+  max-height: 100px;
+  margin-top: 10px;
+  padding: 0 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: rgba(0, 0, 0, 0.7);
+}
+/* line 512, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-card .card-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 10px 5px;
+  margin-top: 15px;
+  overflow: hidden;
+}
+/* line 517, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-card .card-footer a {
+  float: right;
+  color: rgba(239, 122, 43, 0.9);
+}
+
+/* line 523, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container {
+  width: 95%;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+/* line 528, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .main-container {
+  -webkit-box-shadow: 0px 7px 14px 0px rgba(199, 197, 199, 0.1), 0px 3px 6px 0px #c7c5c7;
+          box-shadow: 0px 7px 14px 0px rgba(199, 197, 199, 0.1), 0px 3px 6px 0px #c7c5c7;
+  float: right;
+  border-radius: 5px;
+  width: 70%;
+}
+/* line 534, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .other-jobs {
+  float: left;
+  min-height: 300px;
+  -webkit-box-shadow: 0px 7px 14px 0px rgba(199, 197, 199, 0.1), 0px 3px 6px 0px #c7c5c7;
+          box-shadow: 0px 7px 14px 0px rgba(199, 197, 199, 0.1), 0px 3px 6px 0px #c7c5c7;
+  background: #fff;
+  margin: 10px 0 10px 10px;
+  border-radius: 5px;
+  width: 26%;
+}
+/* line 542, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .other-jobs .header {
+  padding: 20px 15px;
+  border-bottom: 1px solid #D1DCE4;
+}
+/* line 545, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .other-jobs .job-container {
+  padding: 20px 10px;
+  overflow: hidden;
+  border-bottom: 1px solid #D1DCE4;
+  color: rgba(0, 0, 0, 0.8);
+}
+/* line 550, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .other-jobs .job-container a > div {
+  text-decoration: none;
+}
+/* line 552, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .other-jobs .job-container a:hover {
+  text-decoration: none;
+}
+/* line 554, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .other-jobs .job-container:hover {
+  cursor: pointer;
+  background: #D1DCE4;
+}
+/* line 557, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .other-jobs .job-container:hover a {
+  text-decoration: none;
+}
+/* line 559, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .profile-job-description {
+  width: 70%;
+  float: right;
+  -webkit-box-shadow: 0px 7px 14px 0px rgba(199, 197, 199, 0.1), 0px 3px 6px 0px #c7c5c7;
+          box-shadow: 0px 7px 14px 0px rgba(199, 197, 199, 0.1), 0px 3px 6px 0px #c7c5c7;
+  background: #fff;
+  margin: 10px 10px 50px 10px;
+  border-radius: 5px;
+}
+@media screen and (max-width: 780px) {
+  /* line 559, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .company-profile-container .profile-job-description {
+    width: 100%;
+  }
+}
+/* line 569, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .profile-job-description h1 {
+  color: black;
+  margin-bottom: 2px;
+}
+/* line 572, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .profile-job-description .job-header {
+  padding: 20px 25px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #D1DCE4;
+  overflow: hidden;
+}
+/* line 577, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .profile-job-description .job-header .details {
+  float: left;
+}
+/* line 578, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .profile-job-description .job-header .details h2 {
+  margin-top: 0;
+}
+/* line 581, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .profile-job-description .job-header .actions {
+  float: right;
+}
+/* line 583, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .profile-job-description .job-header .actions .share-job-details {
+  float: left;
+  padding: 10px 10px;
+  margin-top: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+/* line 589, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .profile-job-description .job-header .actions .share-job-details .type {
+  float: left;
+  margin: 5px 10px 0 0;
+  font-size: 15px;
+}
+/* line 593, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .profile-job-description .job-header .actions .share-job-details .fa {
+  position: unset;
+  float: left;
+}
+/* line 596, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .profile-job-description .job-header .actions .share-job-details a {
+  float: left;
+  margin-right: 10px;
+}
+/* line 599, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .profile-job-description .job-header .actions .share-job-details .fa-facebook-square {
+  color: #3b5998;
+}
+/* line 601, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .profile-job-description .job-header .actions .share-job-details .fa-linkedin-square {
+  color: #0e76a8;
+}
+/* line 603, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .profile-job-description .job-header .actions .share-job-details .fa-twitter-square {
+  color: #55acee;
+}
+/* line 605, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .profile-job-description .job-header .actions .share-job-details .fa-stack-2x {
+  position: unset;
+}
+/* line 607, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .profile-job-description .job-header .actions .apply {
+  float: left;
+}
+/* line 609, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .profile-job-description .job-header .actions .apply a {
+  text-decoration: none;
+}
+/* line 611, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .profile-job-description .job-header .actions .apply .app-btn {
+  width: 100%;
+  margin: 0 0;
+  font-size: 18px;
+  padding: 11px;
+  border-radius: 3px;
+  text-align: center;
+  font-decoration: none;
+}
+/* line 619, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .profile-job-description .job-body {
+  font-size: 16px;
+  padding: 10px 25px 25px 25px;
+}
+/* line 622, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile-container .profile-job-description .job-body .apply {
+  width: 200px;
+  margin: 25px auto;
+}
+
+/* line 627, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile {
+  width: 100%;
+  max-width: 1100px;
+  margin: 10px auto;
+  -webkit-box-shadow: 0px 7px 14px 0px rgba(199, 197, 199, 0.1), 0px 3px 6px 0px #c7c5c7;
+          box-shadow: 0px 7px 14px 0px rgba(199, 197, 199, 0.1), 0px 3px 6px 0px #c7c5c7;
+}
+/* line 632, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile .background {
+  height: 350px;
+}
+/* line 634, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile .logo {
+  padding: 5px 5px;
+  -webkit-box-shadow: 0px 7px 14px 0px rgba(199, 197, 199, 0.1), 0px 3px 6px 0px #c7c5c7;
+          box-shadow: 0px 7px 14px 0px rgba(199, 197, 199, 0.1), 0px 3px 6px 0px #c7c5c7;
+  margin: -125px auto 0 50px;
+  border-radius: 10px;
+  height: 175px;
+  width: 175px;
+  position: absolute;
+}
+/* line 642, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile .change-containers-nav {
+  background: white;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  height: 75px;
+  clear: both;
+  width: 100%;
+}
+/* line 648, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile .change-containers-nav a {
+  color: rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+}
+/* line 651, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile .change-containers-nav ul {
+  width: 350px;
+  list-style: none;
+  text-decoration: none;
+  margin: 0 250px;
+}
+/* line 656, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile .change-containers-nav ul li {
+  display: inline-block;
+  height: 75px;
+  padding: 27px 20px;
+  font-size: 14px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+@media screen and (max-width: 475px) {
+  /* line 642, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .company-profile .change-containers-nav {
+    width: 100%;
+  }
+}
+/* line 666, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.company-profile .change-containers-nav .active {
+  border-bottom: solid 4px #EF7B2B;
+}
+
+/* line 671, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.career-footer {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background: #fff;
+  padding: 35px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* line 676, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.career-footer .power {
+  text-align: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+/* line 681, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-seeker-career-portal-registration {
+  width: 40%;
+  margin: 75px auto;
+  background: #ffffff;
+  -webkit-box-shadow: 0px 1px 8px 1px #c7c5c7;
+          box-shadow: 0px 1px 8px 1px #c7c5c7;
+  border-radius: 3px;
+  padding: 20px 0;
+  text-align: center;
+}
+/* line 689, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-seeker-career-portal-registration .header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* line 691, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-seeker-career-portal-registration .body {
+  padding: 0 5%;
+}
+/* line 693, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-seeker-career-portal-registration .body .first_name {
+  width: 49%;
+  float: left;
+  margin-right: 2%;
+}
+/* line 697, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-seeker-career-portal-registration .body .last_name {
+  width: 49%;
+  float: left;
+}
+/* line 700, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.job-seeker-career-portal-registration h2 {
+  margin-top: 0px;
+}
+
+/* line 703, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.approach-container {
+  margin: 0 3%;
+  background-color: #fff;
+  padding: 50px 0;
+  width: 1000px;
+  margin: 0px auto;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-direction: row;
+  -ms-flex-wrap: nowrap;
+  -ms-flex-pack: justify;
+  -ms-flex-align: center;
+  -webkit-box-align: center;
+          align-items: center;
+  -ms-flex-line-pack: stretch;
+}
+/* line 717, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.approach-container .icon {
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
+  -webkit-box-flex: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+  width: 50%;
+}
+/* line 721, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.approach-container .icon img {
+  width: 400px;
+  height: auto;
+}
+/* line 724, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.approach-container .copy {
+  width: 50%;
+  height: 100%;
+  text-align: left;
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+  margin-right: 8%;
+}
+/* line 730, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.approach-container .copy .header {
+  font-size: 26px;
+  font-weight: 400;
+  height: auto;
+  color: rgba(0, 0, 0, 0.7);
+}
+/* line 735, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.approach-container .copy .sub-header {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  height: auto;
+}
+/* line 740, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.approach-container .copy .description {
+  width: 100%;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* line 745, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.approach-container-right {
+  margin: 0 3%;
+  background-color: #fff;
+  padding: 50px 0;
+  width: 1000px;
+  margin: 0px auto;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-direction: row;
+  -ms-flex-wrap: nowrap;
+  -ms-flex-pack: justify;
+  -ms-flex-align: center;
+  -webkit-box-align: center;
+          align-items: center;
+  -ms-flex-line-pack: stretch;
+}
+/* line 759, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.approach-container-right .icon {
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  width: 50%;
+  direction: rtl;
+}
+/* line 764, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.approach-container-right .icon img {
+  width: 600px;
+  height: auto;
+}
+@media screen and (max-width: 850px) {
+  /* line 768, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .approach-container-right .icon {
+    width: 100%;
+  }
+}
+/* line 770, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+.approach-container-right .copy {
+  width: 50%;
+  height: 100%;
+  text-align: left;
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
+  margin-left: 8%;
+}
+
+@media screen and (max-width: 850px) {
+  /* line 778, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .approach-container {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    width: 90%;
+    text-align: left;
+    padding: 0 1rem;
+  }
+  /* line 783, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .approach-container .icon {
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+    direction: ltr;
+    width: 100%;
+  }
+  /* line 787, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .approach-container .icon img {
+    width: 100%;
+  }
+  /* line 789, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .approach-container .copy {
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+    margin-right: 0;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 850px) {
+  /* line 795, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .approach-container-right {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    width: 90%;
+    text-align: left;
+    padding: 0 1rem;
+  }
+  /* line 800, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .approach-container-right .icon {
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+    direction: ltr;
+    width: 100%;
+  }
+  /* line 804, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .approach-container-right .icon img {
+    width: 100%;
+  }
+  /* line 806, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/career_portal.sass */
+  .approach-container-right .copy {
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+    margin-right: 0;
+    width: 100%;
+    margin-left: 0;
+  }
+}

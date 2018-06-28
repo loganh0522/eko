@@ -1,0 +1,83 @@
+/* line 1, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/job_seeker_nav.sass */
+.job-seeker-nav {
+  background: white;
+  height: 60px;
+  border-bottom: solid 1px #c6c8ca;
+}
+/* line 5, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/job_seeker_nav.sass */
+.job-seeker-nav .navigation-actions {
+  width: 100%;
+  max-width: 1280px;
+  margin: auto;
+}
+/* line 9, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/job_seeker_nav.sass */
+.job-seeker-nav .navigation-actions .content {
+  margin-left: 3%;
+}
+/* line 11, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/job_seeker_nav.sass */
+.job-seeker-nav .navigation-actions .content .logo {
+  margin-top: -36px;
+  margin-left: -5px;
+}
+/* line 14, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/job_seeker_nav.sass */
+.job-seeker-nav .navigation-actions .content .post-job-nav {
+  float: right;
+  padding: 10px 20px;
+  color: #ffffff;
+  text-decoration: none;
+  background: #EF7B2B;
+  margin: 10px 15% 0 0;
+  border-radius: 5px;
+}
+/* line 22, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/job_seeker_nav.sass */
+.job-seeker-nav .navigation-actions .content ul {
+  display: inline-block;
+  list-style: none;
+  margin-top: 20px;
+}
+/* line 26, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/job_seeker_nav.sass */
+.job-seeker-nav .navigation-actions .content ul li {
+  margin-right: 30px;
+  float: left;
+}
+/* line 29, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/job_seeker_nav.sass */
+.job-seeker-nav .navigation-actions .content ul li a {
+  color: black;
+  font-size: 14px;
+  text-decoration: none;
+}
+/* line 33, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/job_seeker_nav.sass */
+.job-seeker-nav .navigation-actions .dropdown {
+  margin: -45px 5% 0 0;
+  float: right;
+}
+/* line 36, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/job_seeker_nav.sass */
+.job-seeker-nav .navigation-actions .dropdown .dropdown-toggle {
+  color: black;
+  text-decoration: none;
+}
+/* line 39, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/job_seeker_nav.sass */
+.job-seeker-nav .navigation-actions .dropdown .dropdown-img {
+  border-radius: 50px;
+  height: 40px;
+  width: 40px;
+  margin-right: 5px;
+}
+/* line 44, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/job_seeker_nav.sass */
+.job-seeker-nav .navigation-actions .dropdown .circle-img {
+  margin-right: 10px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background: #EF7B2B;
+  text-align: center;
+  font-size: 18px;
+  padding-top: 7px;
+  color: white;
+  float: left;
+}
+/* line 55, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/job_seeker_nav.sass */
+.job-seeker-nav .navigation-actions .dropdown .name {
+  float: left;
+  margin-top: 8px;
+}

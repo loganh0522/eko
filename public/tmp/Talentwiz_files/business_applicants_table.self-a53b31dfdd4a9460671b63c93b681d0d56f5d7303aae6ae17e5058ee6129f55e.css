@@ -1,0 +1,867 @@
+@charset "UTF-8";
+/* line 2, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.all-job-applicants-container .job-stages {
+  margin-bottom: 10px;
+}
+/* line 4, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.all-job-applicants-container .application-actions {
+  margin-bottom: 10px;
+}
+
+/* line 7, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+#all-candidates {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  margin: 100px 2% 0 3%;
+}
+/* line 11, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+#all-candidates h1 {
+  float: left;
+  color: black;
+  margin-top: 8px;
+}
+/* line 15, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+#all-candidates .actions {
+  float: right;
+  overflow: hidden;
+}
+/* line 18, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+#all-candidates .actions .search-field {
+  float: left;
+  margin: 0 20px 0 0;
+}
+/* line 21, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+#all-candidates .actions .search-field input {
+  width: 350px;
+  height: 40px;
+  padding: 10px 15px 13px 15px;
+  font-size: 14px;
+  border-radius: 2px;
+}
+
+/* line 28, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+#task-container {
+  background: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  clear: both;
+}
+/* line 32, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+#task-container .btn.border-button2 {
+  float: right;
+  margin-bottom: 10px;
+}
+
+/* line 36, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-stages {
+  overflow: hidden;
+  padding: 5px 5px;
+}
+/* line 39, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-stages .job-stage-area {
+  list-style: none;
+  text-decoration: none;
+  float: left;
+  padding: 0 0;
+  font-weight: 300;
+}
+/* line 45, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-stages .job-stage-area .base-stages {
+  overflow: hidden;
+  padding: 5px 20px 5px 5px;
+  float: left;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* line 50, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-stages .job-stage-area .all-stages {
+  overflow: hidden;
+  padding: 5px 20px;
+  float: left;
+}
+/* line 54, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-stages .job-stage-area li {
+  display: inline;
+  float: left;
+  height: 75px;
+  width: 100px;
+  margin-right: 10px;
+  border-radius: 5px;
+  text-align: center;
+  -webkit-box-shadow: 0px 7px 18px 0px rgba(199, 197, 199, 0.1), 0px 1px 3px 0px #c7c5c7;
+          box-shadow: 0px 7px 18px 0px rgba(199, 197, 199, 0.1), 0px 1px 3px 0px #c7c5c7;
+  background-color: white;
+}
+/* line 64, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-stages .job-stage-area li:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+}
+/* line 67, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-stages .job-stage-area li .number {
+  margin-top: 17px;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.5);
+}
+/* line 71, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-stages .job-stage-area li .name {
+  font-size: 12px;
+}
+/* line 74, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-stages .job-stage-area li.activated {
+  background: rgba(208, 208, 208, 0.4);
+}
+/* line 76, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-stages .job-stage-area li.activated .number {
+  color: black;
+}
+/* line 78, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-stages .job-stage-area li.activated .name {
+  color: black;
+}
+
+/* line 82, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.application-actions .toggle-actions {
+  float: right;
+}
+/* line 84, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.application-actions .dropdown {
+  float: right;
+}
+/* line 86, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.application-actions .dropdown .fa-ellipsis-h {
+  color: #fff;
+}
+/* line 88, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.application-actions .border-button {
+  float: right;
+}
+/* line 90, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.application-actions .inactive-button {
+  float: right;
+  min-width: 100px;
+  height: 35px;
+  margin-right: 10px;
+  background: rgba(0, 0, 0, 0.05);
+  color: rgba(0, 0, 0, 0.7);
+  padding: 8px 15px 10px 15px;
+  border: none;
+  border-radius: 2px;
+  font-weight: 300;
+}
+/* line 101, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.application-actions .applicant-action-buttons {
+  display: none;
+}
+/* line 103, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.application-actions .active-application-button {
+  float: right;
+  min-width: 100px;
+  height: 35px;
+  margin-right: 10px;
+  background: #EF7B2B;
+  color: #ffffff;
+  padding: 8px 15px 10px 15px;
+  border: none;
+  border-radius: 2px;
+  font-weight: 300;
+}
+/* line 114, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.application-actions #add-applicant {
+  width: auto;
+  float: right;
+  height: 35px;
+  padding: 8px 15px 10px 15px;
+}
+
+/* line 120, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.pagination-container {
+  width: 100%;
+}
+/* line 122, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.pagination-container .pagination {
+  margin: 0 auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: inherit;
+  height: 22px;
+}
+/* line 127, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.pagination-container .pagination a, .pagination-container .pagination span, .pagination-container .pagination em {
+  padding: 0.2em 0.5em;
+  display: block;
+  float: left;
+  margin-right: 1px;
+}
+/* line 132, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.pagination-container .pagination a {
+  text-decoration: none;
+  color: #EF7B2B;
+}
+/* line 135, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.pagination-container .pagination a:hover, .pagination-container .pagination a:focus {
+  background: rgba(239, 122, 43, 0.3);
+}
+/* line 137, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.pagination-container .pagination .disabled {
+  display: none;
+}
+/* line 139, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.pagination-container .pagination .current {
+  font-style: normal;
+  font-weight: bold;
+  background: rgba(239, 122, 43, 0.3);
+  color: #EF7B2B;
+}
+/* line 144, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.pagination-container .pagination .page_info {
+  color: #EF7B2B;
+  padding: 0.4em 0.6em;
+  width: 22em;
+  margin-bottom: 0.3em;
+  text-align: center;
+}
+/* line 150, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.pagination-container .pagination .page_info b {
+  color: #000033;
+  background: #6aa6ed;
+  padding: 0.1em 0.25em;
+}
+
+/* line 155, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants {
+  border-radius: 5px;
+  background: #ffffff;
+  min-height: 450px;
+  max-height: 450px;
+  overflow: hidden;
+  overflow-y: scroll;
+  margin: 10px 0% 10px 2%;
+  -webkit-box-shadow: 0px 7px 14px 0px rgba(199, 197, 199, 0.1), 0px 3px 9px 0px #c7c5c7;
+          box-shadow: 0px 7px 14px 0px rgba(199, 197, 199, 0.1), 0px 3px 9px 0px #c7c5c7;
+}
+/* line 164, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .not-present-container {
+  display: none;
+}
+/* line 166, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .header {
+  margin: 15px 15px 10px 0;
+  overflow: hidden;
+  padding: 0px 15px 15px 15px;
+}
+/* line 170, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .header #select_all {
+  float: left;
+  width: 100px;
+  height: auto;
+  color: rgba(0, 0, 0, 0.7);
+  padding: 5px 5px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 300;
+}
+/* line 179, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .table {
+  padding: 5px;
+}
+/* line 181, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .table thead {
+  display: table-header-group;
+}
+/* line 184, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .table thead tr th {
+  border-bottom: 1px solid #ddd;
+}
+/* line 186, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .table thead tr th checkbox {
+  margin: 0 0 0 10px;
+}
+/* line 188, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .table .spinner {
+  display: none;
+}
+/* line 190, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .table tbody {
+  background: #ffffff;
+}
+/* line 192, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .table tbody tr {
+  overflow: hidden;
+  padding: 10px 8px;
+  border-bottom: 1px solid #ddd;
+}
+/* line 196, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .table tbody tr td {
+  border-top: none;
+  max-width: 200px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+/* line 202, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .table tbody tr td .applicant-checkbox {
+  margin: 15px 0 0 10px;
+}
+/* line 204, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants #select_all {
+  margin: 0 0 0 10px;
+}
+/* line 207, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .circle img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+/* line 211, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .circle-img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 22px;
+  padding: 8px 8px;
+  color: white;
+}
+/* line 220, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .content {
+  padding: 5px 0;
+}
+/* line 222, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .name {
+  margin: 10px 0 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #EF7B2B;
+  font-size: 14px;
+}
+/* line 229, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .name:hover {
+  cursor: pointer;
+}
+/* line 231, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .position {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.8);
+  max-width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+/* line 238, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .bottom-content {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.8);
+}
+/* line 241, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .no-content {
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 14px;
+  padding-top: 13px;
+}
+/* line 245, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .stage {
+  font-size: 14px;
+  margin: 9px 0 0 0;
+}
+/* line 248, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.applicants .rating {
+  margin: 5px 0 0 0;
+}
+
+/****** Style Star Rating Widget **** */
+/* line 252, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+fieldset label {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 256, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.new_rating {
+  position: relative;
+  height: auto;
+  /***** CSS Magic to Highlight Stars on Hover **** */
+}
+/* line 259, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.new_rating .rating {
+  border: none;
+  float: left;
+}
+/* line 262, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.new_rating .rating > input {
+  display: none;
+}
+/* line 264, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.new_rating .rating > label:before {
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "";
+}
+/* line 269, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.new_rating .rating > .half:before {
+  content: "";
+  position: absolute;
+}
+/* line 272, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.new_rating .rating > label {
+  color: #ddd;
+  float: right;
+}
+/* line 276, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.new_rating .rating > input:checked ~ label {
+  color: #FFD700;
+}
+/* line 278, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.new_rating .rating:not(:checked) > label:hover {
+  cursor: pointer;
+}
+/* line 280, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.new_rating .rating:not(:checked) > label:hover ~ label {
+  color: #FFD700;
+  cursor: pointer;
+}
+/* line 283, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.new_rating .rating > input:checked + label:hover {
+  color: #FFD700;
+}
+/* line 285, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.new_rating .rating > input:checked ~ label:hover {
+  color: #FFD700;
+}
+/* line 287, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.new_rating .rating > label:hover ~ input:checked ~ label {
+  color: #FFD700;
+}
+/* line 289, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.new_rating .rating > input:checked ~ label:hover ~ label {
+  color: #FFED85;
+}
+
+/* line 293, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.filter-radios label {
+  display: inline-block;
+  padding: 0px 15px 10px 15px;
+  text-align: center;
+  font-size: 16px;
+  color: black;
+  cursor: pointer;
+  font-weight: normal;
+}
+/* line 301, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.filter-radios:hover {
+  cursor: pointer;
+}
+/* line 304, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.filter-radios input[type="radio"]:checked + label {
+  border-bottom: 4px solid #EF7B2B;
+  color: black;
+}
+/* line 307, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.filter-radios input[type="radio"] {
+  display: none;
+}
+
+/* line 309, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+trix-editor {
+  min-height: 150px;
+}
+
+/* line 313, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+#filter-links ul {
+  list-style: none;
+  padding: 0 0;
+  margin: 0 0;
+}
+/* line 317, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+#filter-links ul a {
+  text-decoration: none;
+}
+/* line 319, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+#filter-links ul li {
+  width: 100%;
+  height: 100%;
+  padding: 10px 5px;
+  border-radius: 5px;
+  color: rgba(0, 0, 0, 0.7);
+}
+/* line 325, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+#filter-links ul li:hover {
+  background: rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+}
+/* line 329, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+#filter-links ul .activated {
+  background: rgba(239, 122, 43, 0.3);
+  color: black;
+}
+
+/* line 334, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+#filter-radio-nav ul {
+  list-style: none;
+  padding: 0 0;
+  margin: 0 0;
+}
+/* line 338, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+#filter-radio-nav ul input[type='radio'] {
+  display: none;
+}
+/* line 340, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+#filter-radio-nav ul label {
+  width: 100%;
+  height: 100%;
+  padding: 10px 5px;
+  border-radius: 5px;
+  color: rgba(0, 0, 0, 0.7);
+}
+/* line 346, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+#filter-radio-nav ul label:hover {
+  background: rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+}
+/* line 349, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+#filter-radio-nav ul input[type="radio"]:checked + label {
+  background: rgba(239, 122, 43, 0.3);
+  color: black;
+}
+/* line 352, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+#filter-radio-nav ul .activated {
+  background: rgba(239, 122, 43, 0.3);
+  color: black;
+}
+
+/* line 357, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.filter-container .filter-header {
+  overflow: hidden;
+}
+/* line 359, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.filter-container .filter-header h4 {
+  float: left;
+}
+/* line 361, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.filter-container .filter-header .glyphicon {
+  margin-top: 10px;
+  float: right;
+  color: #EF7B2B;
+}
+/* line 365, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.filter-container .filter-header:hover {
+  cursor: pointer;
+}
+/* line 367, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.filter-container .filter-header .glyphicon-minus {
+  display: none;
+  color: #EF7B2B;
+}
+/* line 370, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.filter-container .filter-body {
+  display: none;
+  padding: 10px 5px;
+  margin: 5px 5px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+/* line 377, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.filter-container .filter-body ul {
+  list-style: none;
+  padding: 0 15px;
+}
+/* line 380, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.filter-container .filter-body ul li {
+  text-decoration: none;
+  clear: both;
+}
+/* line 383, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.filter-container .filter-body ul li input[type="checkbox"] {
+  float: left;
+  margin-right: 10px;
+}
+/* line 386, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.filter-container .filter-body ul li .filter-title {
+  float: left;
+}
+
+/* line 389, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container {
+  margin: 0 0 100px 0;
+  overflow: hidden;
+  padding: 0 20px 20px 10px;
+}
+/* line 393, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container .toggle-actions {
+  margin-left: 3%;
+}
+/* line 395, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #free-boards {
+  width: 100%;
+  padding: 0 20px 20px 10px;
+  margin: 0 2.5%;
+}
+/* line 399, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #premium-boards {
+  float: left;
+  padding: 0 0;
+  min-height: 375px;
+  width: 65%;
+  margin: 0 0 50px 3%;
+}
+/* line 405, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart {
+  width: 30%;
+  height: auto;
+  padding: 5px 0px 10px 0;
+  overflow: hidden;
+  border-radius: 5px;
+  margin: 15px 1% 0 0;
+  background: #ffffff;
+  float: right;
+  -webkit-box-shadow: 0px 7px 18px 0px rgba(199, 197, 199, 0.1), 0px 1px 3px 0px #c7c5c7;
+          box-shadow: 0px 7px 18px 0px rgba(199, 197, 199, 0.1), 0px 1px 3px 0px #c7c5c7;
+}
+/* line 415, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart .header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 15px 15px;
+  font-size: 18px;
+}
+/* line 419, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart .body {
+  min-height: 50px;
+}
+/* line 421, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart .body .no-content {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 18px;
+  margin: 50px auto;
+  width: 80%;
+  display: block;
+  text-align: center;
+}
+/* line 428, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart .body .order-item {
+  padding: 5px 10px 10px 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* line 431, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart .body .order-item .toprow {
+  overflow: hidden;
+}
+/* line 433, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart .body .order-item .toprow .name {
+  float: left;
+  width: 60%;
+  font-size: 16px;
+  margin-top: 4px;
+}
+/* line 438, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart .body .order-item .toprow .price {
+  float: left;
+  width: 40%;
+  font-size: 16px;
+}
+/* line 442, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart .body .order-item .toprow .price .cost {
+  margin-top: 5px;
+  float: left;
+}
+/* line 445, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart .body .order-item .toprow .price .remove_from_cart {
+  width: 20px;
+  height: 20px;
+  padding: 4px 4px;
+  margin-top: 4px;
+  border-radius: 50%;
+  background: #EF7B2B;
+  color: white;
+  float: right;
+}
+/* line 454, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart .body .order-item .toprow .price .glyphicon-remove {
+  font-size: 12px;
+}
+/* line 456, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart .body .order-item .bottom {
+  margin-top: 5px;
+  color: rgba(0, 0, 0, 0.3);
+}
+/* line 459, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart .footer {
+  padding: 10px 10px;
+  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* line 463, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart .footer #tax-total,
+.post-job-container #cart .footer #sub-total {
+  font-size: 14px;
+  overflow: hidden;
+}
+/* line 467, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart .footer #tax-total .total,
+.post-job-container #cart .footer #sub-total .total {
+  float: left;
+}
+/* line 469, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart .footer #tax-total .amount,
+.post-job-container #cart .footer #sub-total .amount {
+  float: right;
+  margin-right: 30px;
+}
+/* line 472, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart .footer #cart-total {
+  font-size: 18px;
+  overflow: hidden;
+}
+/* line 475, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart .footer #cart-total .total {
+  float: left;
+}
+/* line 477, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart .footer #cart-total .amount {
+  float: right;
+  margin-right: 30px;
+}
+/* line 480, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.post-job-container #cart .footer .submit-button {
+  width: 80%;
+  margin: 30px auto 0 auto;
+}
+
+/* line 484, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.free-job-feed-container {
+  float: left;
+  margin-right: 15px;
+  margin: 15px 15px 0 0;
+  border-radius: 5px;
+  width: 31%;
+  min-height: 175px;
+  overflow: hidden;
+  background: #ffffff;
+  -webkit-box-shadow: 0px 7px 18px 0px rgba(199, 197, 199, 0.1), 0px 1px 3px 0px #c7c5c7;
+          box-shadow: 0px 7px 18px 0px rgba(199, 197, 199, 0.1), 0px 1px 3px 0px #c7c5c7;
+}
+/* line 494, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.free-job-feed-container .header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  min-height: 120px;
+}
+/* line 498, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.free-job-feed-container .header img {
+  display: block;
+  margin: 30px auto;
+}
+/* line 501, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.free-job-feed-container .body {
+  padding: 30px 20px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  min-height: 120px;
+}
+/* line 505, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.free-job-feed-container .body .duration-name {
+  padding: 5px 0;
+}
+/* line 507, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.free-job-feed-container .body .posted {
+  padding: 10px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 90%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+/* line 514, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.free-job-feed-container .body .posted .fa {
+  float: left;
+  font-size: 18px;
+  color: green;
+  margin: 2px 15px 0 0;
+}
+/* line 519, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.free-job-feed-container .body .posted .title {
+  float: left;
+}
+
+/* line 521, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-feed-container {
+  float: left;
+  margin-right: 15px;
+  margin: 15px 15px 0 0;
+  border-radius: 5px;
+  width: 47%;
+  min-height: 175px;
+  overflow: hidden;
+  background: #ffffff;
+  -webkit-box-shadow: 0px 7px 18px 0px rgba(199, 197, 199, 0.1), 0px 1px 3px 0px #c7c5c7;
+          box-shadow: 0px 7px 18px 0px rgba(199, 197, 199, 0.1), 0px 1px 3px 0px #c7c5c7;
+}
+/* line 531, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-feed-container .header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+/* line 534, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-feed-container .header img {
+  display: block;
+  margin: 30px auto;
+}
+/* line 537, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-feed-container .premium-body {
+  padding: 20px 0px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  min-height: 130px;
+}
+/* line 541, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-feed-container .premium-body .job-price {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 14px;
+}
+/* line 545, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-feed-container .premium-body .job-duration {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.8);
+}
+/* line 548, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-feed-container .premium-body .posted {
+  padding: 10px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 90%;
+  overflow: hidden;
+  margin: 10px auto 0 auto;
+}
+/* line 555, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-feed-container .premium-body .posted .fa {
+  float: left;
+  font-size: 18px;
+  color: green;
+  margin: 2px 15px 0 0;
+}
+/* line 560, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-feed-container .premium-body .posted .title {
+  float: left;
+}
+/* line 562, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-feed-container .add_to_cart {
+  margin-right: 10px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+/* line 565, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/business_applicants_table.sass */
+.job-feed-container .footer {
+  height: auto;
+  height: 15px;
+}

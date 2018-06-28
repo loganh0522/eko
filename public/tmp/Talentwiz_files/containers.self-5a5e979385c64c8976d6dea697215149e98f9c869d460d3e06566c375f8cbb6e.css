@@ -1,0 +1,315 @@
+/* line 1, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+#main-container {
+  overflow: hidden;
+  width: 100%;
+  margin-top: 20px;
+}
+/* line 5, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+#main-container .actions {
+  float: right;
+  margin-bottom: 10px;
+}
+
+/* line 9, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+#padding {
+  margin: 0px 3% 100px 3%;
+}
+
+/* line 13, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+#create-job-container {
+  min-height: 300px;
+}
+
+/* line 17, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+#job-nav ul {
+  padding: 0 0;
+}
+/* line 19, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+#job-nav ul li {
+  list-style: none;
+  font-size: 16px;
+  font-weight: 300;
+  padding: 10px 15px;
+  height: auto;
+  color: black;
+}
+/* line 26, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+#job-nav ul a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.7);
+}
+/* line 29, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+#job-nav ul li.active {
+  background: rgba(239, 122, 43, 0.3);
+  -webkit-box-shadow: -1.7px 1px 4px 0px rgba(239, 122, 43, 0.1);
+          box-shadow: -1.7px 1px 4px 0px rgba(239, 122, 43, 0.1);
+  border-radius: 5px 5px;
+  width: 90%;
+  z-index: 10;
+}
+
+/* line 36, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+#main-border {
+  background: #ffffff;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 7px 40px 0px rgba(199, 197, 199, 0.1), 0px 3px 9px 0px #c7c5c7;
+          box-shadow: 0px 7px 40px 0px rgba(199, 197, 199, 0.1), 0px 3px 9px 0px #c7c5c7;
+  z-index: 0;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  min-height: 350px;
+}
+
+/* line 44, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.side-container-right {
+  float: right;
+  width: 24%;
+  margin: 0 0 200px 2%;
+}
+
+/* line 48, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.main-container-left {
+  float: left;
+  width: 74%;
+  margin-top: 15px;
+  margin-bottom: 100px;
+}
+
+/* line 53, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.side-container {
+  float: left;
+  width: 24%;
+  margin: 0 0 200px 0;
+}
+
+/* line 58, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.main-form-container {
+  float: right;
+  width: 74%;
+  background: #fff;
+  margin-bottom: 100px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 7px 40px 0px rgba(199, 197, 199, 0.1), 0px 3px 9px 0px #c7c5c7;
+          box-shadow: 0px 7px 40px 0px rgba(199, 197, 199, 0.1), 0px 3px 9px 0px #c7c5c7;
+  border-radius: 5px;
+  float: left;
+}
+/* line 68, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.main-form-container .actions .border-button {
+  float: right;
+}
+
+/* line 71, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.main-container {
+  float: right;
+  width: 74%;
+  margin-bottom: 100px;
+  border-radius: 5px;
+}
+/* line 77, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.main-container .actions .border-button {
+  float: right;
+}
+/* line 79, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.main-container #calendar {
+  clear: both;
+  background: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 7px 40px 0px rgba(199, 197, 199, 0.1), 0px 3px 9px 0px #c7c5c7;
+          box-shadow: 0px 7px 40px 0px rgba(199, 197, 199, 0.1), 0px 3px 9px 0px #c7c5c7;
+}
+
+/* line 88, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.main-container-no-border {
+  float: right;
+  width: 74%;
+  margin-bottom: 100px;
+}
+
+/* line 94, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.change-containers-nav ul {
+  list-style: none;
+  text-decoration: none;
+  padding-left: 0;
+}
+/* line 98, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.change-containers-nav ul li {
+  display: inline-block;
+  padding: 15px 15px 10px 15px;
+  text-align: center;
+  font-size: 14px;
+  color: black;
+  cursor: pointer;
+}
+/* line 105, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.change-containers-nav ul .activated {
+  border-bottom: 4px solid #EF7B2B;
+  color: black;
+}
+
+/* line 109, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.standard-container {
+  height: auto;
+  background: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding: 25px 0;
+}
+/* line 115, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.standard-container .inner-container {
+  text-align: center;
+  width: 600px;
+  margin: auto;
+}
+/* line 119, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.standard-container .inner-container .submit-button {
+  width: 100%;
+  font-weight: 400;
+}
+@media screen and (max-width: 600px) {
+  /* line 115, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+  .standard-container .inner-container {
+    width: 90%;
+  }
+}
+
+/* line 125, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.standard-container {
+  padding: 50px 0;
+  text-align: center;
+  height: auto;
+  background: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* line 132, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.standard-container .intro-message .header {
+  margin-bottom: 20px;
+  font-size: 32px;
+  font-weight: 300;
+  color: rgba(0, 0, 0, 0.75);
+}
+/* line 137, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.standard-container .intro-message .sub-header {
+  font-size: 18px;
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+/* line 144, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.standard-header {
+  overflow: hidden;
+  border-bottom: 1px solid #D1DCE4;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+}
+/* line 149, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.standard-header h3 {
+  float: left;
+  width: auto;
+  margin: 6px 0px;
+}
+/* line 153, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.standard-header a {
+  float: right;
+  width: auto;
+  margin-left: 10px;
+}
+
+/* line 158, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.standard-body {
+  clear: both;
+}
+/* line 160, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.standard-body #standard-padding {
+  padding: 10px 10px;
+}
+/* line 162, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.standard-body .standard-body-header {
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0 15px 10px 15px;
+  margin-bottom: 10px;
+}
+/* line 167, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.standard-body .standard-body-header h4 {
+  float: left;
+  width: auto;
+  padding: 0 0;
+  margin-top: 15px;
+}
+/* line 172, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.standard-body .standard-body-header a {
+  float: right;
+  width: auto;
+  margin-left: 10px;
+}
+
+/* line 177, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.container-footer {
+  margin-top: 15px;
+  border-top: 1px solid #D1DCE4;
+  height: auto;
+  padding: 15px 15px;
+  overflow: hidden;
+  clear: both;
+}
+/* line 184, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.container-footer .btn,
+.container-footer .border-button {
+  float: right;
+}
+/* line 187, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.container-footer .destroy-action {
+  margin-top: 10px;
+}
+/* line 189, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.container-footer .destroy-action .fa {
+  color: rgba(0, 0, 0, 0.5);
+}
+/* line 191, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.container-footer .destroy-action a {
+  color: rgba(0, 0, 0, 0.5);
+}
+/* line 193, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.container-footer .destroy-action a:hover {
+  text-decoration: none;
+}
+
+/* line 197, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.primary-container {
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 7px 40px 0px rgba(199, 197, 199, 0.1), 0px 3px 9px 0px #c7c5c7;
+          box-shadow: 0px 7px 40px 0px rgba(199, 197, 199, 0.1), 0px 3px 9px 0px #c7c5c7;
+  background: #fff;
+  margin-bottom: 15px;
+}
+
+/* line 203, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.form-fields-container {
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 10px 10px;
+  -webkit-box-shadow: 0px 7px 40px 0px rgba(199, 197, 199, 0.1), 0px 3px 9px 0px #c7c5c7;
+          box-shadow: 0px 7px 40px 0px rgba(199, 197, 199, 0.1), 0px 3px 9px 0px #c7c5c7;
+}
+/* line 208, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.form-fields-container .remove_fields {
+  float: right;
+}
+/* line 210, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.form-fields-container .header {
+  overflow: hidden;
+  border-bottom: 1px solid #D1DCE4;
+  padding: 10px 10px;
+}
+/* line 214, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.form-fields-container .body {
+  padding: 10px 10px;
+}
+/* line 216, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/containers.sass */
+.form-fields-container .section-footer {
+  width: 90%;
+  margin: 10px 0 0 5%;
+}

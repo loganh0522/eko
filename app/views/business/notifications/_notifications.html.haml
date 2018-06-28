@@ -1,0 +1,2 @@
+- @notifications.each do |notification|         
+  = render "business/notifications/#{notification.notifiable_type.underscore}/#{notification.action}", notification: notification

@@ -1,0 +1,219 @@
+/* line 1, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container {
+  margin: 60px auto 100px auto;
+  padding-top: 20px;
+  width: 70%;
+  max-width: 900px;
+  background: white;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 1px 2px 1px #c7c5c7;
+          box-shadow: 0px 1px 2px 1px #c7c5c7;
+}
+@media screen and (max-width: 780px) {
+  /* line 1, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+  .create-profile-container {
+    width: 100%;
+  }
+}
+/* line 11, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .create-profile-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 20px 3%;
+}
+/* line 12, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .create-profile-header h1 {
+  color: black;
+  margin: 0px 0 20px 0;
+}
+/* line 15, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .create-profile-header h4 {
+  margin: 20px 0;
+}
+/* line 17, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .create-profile-header p {
+  width: 60%;
+  margin: 20px 0;
+}
+/* line 23, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .create-profile-body #job-seeker-background-up {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  position: relative;
+  left: 75%;
+  top: 90px;
+}
+/* line 28, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .create-profile-body #job-seeker-background-up .inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  float: left;
+}
+/* line 36, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .create-profile-body .background {
+  background: url("/tmp/user-background.png") center no-repeat;
+  -webkit-box-shadow: 0px 1px 2px 1px #c7c5c7;
+          box-shadow: 0px 1px 2px 1px #c7c5c7;
+  margin: 10px 2%;
+  background-size: cover;
+  height: 250px;
+}
+@media screen and (max-width: 800px) {
+  /* line 36, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+  .create-profile-container .create-profile-body .background {
+    width: 100%;
+    margin: 0 0;
+  }
+}
+/* line 45, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .create-profile-body .background .profile-header {
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.5);
+  font-weight: 400;
+  color: #ffffff;
+  height: 250px;
+}
+@media screen and (max-width: 800px) {
+  /* line 45, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+  .create-profile-container .create-profile-body .background .profile-header {
+    width: 100%;
+    margin: 0 0;
+  }
+}
+/* line 54, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .create-profile-body .background .profile-header .user-image {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+}
+/* line 58, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .create-profile-body .background .profile-header .user-image img {
+  padding: 4px;
+  background: white;
+  border: 1px solid #E4E5E9;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+/* line 65, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .create-profile-body .background .profile-header .user-image .glyphicon.glyphicon-pencil {
+  font-size: 18px;
+  float: right;
+  margin: 10px -10px 0 0;
+  color: white;
+}
+/* line 70, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .create-profile-body .background .profile-header .personal-details {
+  margin: 25px auto;
+  width: 350px;
+  text-align: center;
+}
+/* line 74, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .create-profile-body .background .profile-header .personal-details .glyphicon.glyphicon-pencil {
+  margin-left: 70%;
+  width: auto;
+  color: white;
+}
+/* line 78, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .create-profile-body .background .profile-header .personal-details .social-links {
+  margin-top: 10px;
+}
+/* line 80, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .create-profile-body .background .profile-header .personal-details .social-links a {
+  color: #ffffff;
+  text-decoration: none;
+}
+/* line 83, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .create-profile-body .background .profile-header .personal-details .social-links:hover {
+  cursor: pointer;
+}
+/* line 85, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .header {
+  overflow: hidden;
+  height: auto;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+/* line 90, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .header .title {
+  float: left;
+  font-size: 24px;
+  font-weight: 300;
+}
+/* line 94, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .work-experience {
+  width: 95%;
+  margin: 10px auto;
+}
+/* line 97, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .add-work-experience {
+  border-bottom: 1px solid #D1DCE4;
+}
+/* line 100, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .experience-container {
+  width: 95%;
+  margin: 0 auto;
+}
+/* line 103, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .experience-container .add_fields_after {
+  color: #D1DCE4;
+  margin: 10px 10px 0 10px;
+  border: 1px solid #D1DCE4;
+  padding: 5px 5px;
+  font-size: 12px;
+  border-radius: 5px;
+  float: none;
+}
+/* line 111, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .experience-container .add_fields_after:hover {
+  cursor: pointer;
+  background: rgba(209, 220, 228, 0.2);
+  text-decoration: none;
+}
+/* line 115, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .experience-container .add_fields {
+  float: left;
+  color: #EF7B2B;
+  border: 1px solid #EF7B2B;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 10px 25px 15px 0;
+}
+/* line 122, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .experience-container .add_fields:hover {
+  text-decoration: none;
+}
+/* line 125, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .footer {
+  padding: 15px 2.5%;
+  margin: 15px 0 0 0;
+  clear: both;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  overflow: hidden;
+}
+/* line 132, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .footer .previous-link {
+  color: #EF7B2B;
+  margin-top: 11px;
+  float: left;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+/* line 137, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .footer .job-seeker-btn {
+  float: right;
+  background: #ffffff;
+}
+/* line 140, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/user_profile.sass */
+.create-profile-container .footer .job-seeker-btn:hover {
+  background: #EF7B2B;
+  color: #ffffff;
+}

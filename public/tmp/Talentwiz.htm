@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<!-- saved from url=(0035)http://localhost:3000/business/jobs -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css" data-tag-name="trix-editor">trix-editor:empty:not(:focus)::before {
+  content: attr(placeholder);
+  color: graytext;
+}
+
+trix-editor a[contenteditable=false] {
+  cursor: text;
+}
+
+trix-editor img {
+  max-width: 100%;
+  height: auto;
+}
+
+trix-editor [data-trix-attachment] figcaption textarea {
+  resize: none;
+}
+
+trix-editor [data-trix-attachment] figcaption textarea.trix-autoresize-clone {
+  position: absolute;
+  left: -9999px;
+  max-height: 0px;
+}
+
+trix-editor [data-trix-attachment] figcaption[data-trix-placeholder]:empty::before {
+  content: attr(data-trix-placeholder);
+  color: graytext;
+}
+
+trix-editor [data-trix-cursor-target] {
+  display: inline-block !important;
+  width: 1px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+trix-editor [data-trix-cursor-target=left] {
+  vertical-align: top !important;
+  margin-left: -1px !important;
+}
+
+trix-editor [data-trix-cursor-target=right] {
+  vertical-align: bottom !important;
+  margin-right: -1px !important;
+}
+trix-editor { display: block; }</style><style type="text/css" data-tag-name="trix-toolbar">trix-toolbar {
+  white-space: nowrap;
+}
+
+trix-toolbar [data-trix-dialog] {
+  display: none;
+}
+
+trix-toolbar [data-trix-dialog][data-trix-active] {
+  display: block;
+}
+
+trix-toolbar [data-trix-dialog] [data-trix-validate]:invalid {
+  background-color: #ffdddd;
+}
+trix-toolbar { display: block; }</style>
+<title>Talentwiz</title>
+
+<script type="text/javascript" src="./Talentwiz_files/2a391867fa"></script><script src="./Talentwiz_files/nr-1071.min.js"></script><script src="./Talentwiz_files/2655934.js" type="text/javascript" id="hs-analytics"></script><script src="./Talentwiz_files/messageswidgetshell.js" type="text/javascript" id="hubspot-messages-loader" data-loader="hs-scriptloader" data-hsjs-portal="2655934" data-hsjs-env="prod"></script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"2a391867fa","applicationID":"73992294","transactionName":"cwxfREZWDwlURRlTE0MKX1VHSkwPXlVFHg9eB1RI","queueTime":0,"applicationTime":4801,"agent":""}</script>
+<script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,t,n){function r(n){if(!t[n]){var o=t[n]={exports:{}};e[n][0].call(o.exports,function(t){var o=e[n][1][t];return r(o||t)},o,o.exports)}return t[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({1:[function(e,t,n){function r(){}function o(e,t,n){return function(){return i(e,[f.now()].concat(u(arguments)),t?null:this,n),t?void 0:this}}var i=e("handle"),a=e(2),u=e(3),c=e("ee").get("tracer"),f=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,t){s[t]=o(d+t,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),t.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,t){var n={},r=this,o="function"==typeof t;return i(l+"tracer",[f.now(),e,n],r),function(){if(c.emit((o?"":"no-")+"fn-start",[f.now(),r,o],n),o)try{return t.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],n),e}finally{c.emit("fn-end",[f.now()],n)}}}};a("setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,t){m[t]=o(l+t)}),newrelic.noticeError=function(e){"string"==typeof e&&(e=new Error(e)),i("err",[e,f.now()])}},{}],2:[function(e,t,n){function r(e,t){var n=[],r="",i=0;for(r in e)o.call(e,r)&&(n[i]=t(r,e[r]),i+=1);return n}var o=Object.prototype.hasOwnProperty;t.exports=r},{}],3:[function(e,t,n){function r(e,t,n){t||(t=0),"undefined"==typeof n&&(n=e?e.length:0);for(var r=-1,o=n-t||0,i=Array(o<0?0:o);++r<o;)i[r]=e[t+r];return i}t.exports=r},{}],4:[function(e,t,n){t.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,t,n){function r(){}function o(e){function t(e){return e&&e instanceof r?e:e?c(e,u,i):i()}function n(n,r,o,i){if(!d.aborted||i){e&&e(n,r,o);for(var a=t(o),u=m(n),c=u.length,f=0;f<c;f++)u[f].apply(a,r);var p=s[y[n]];return p&&p.push([b,n,r,a]),a}}function l(e,t){v[e]=m(e).concat(t)}function m(e){return v[e]||[]}function w(e){return p[e]=p[e]||o(n)}function g(e,t){f(e,function(e,n){t=t||"feature",y[n]=t,t in s||(s[t]=[])})}var v={},y={},b={on:l,emit:n,get:w,listeners:m,context:t,buffer:g,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",c=e("gos"),f=e(2),s={},p={},d=t.exports=o();d.backlog=s},{}],gos:[function(e,t,n){function r(e,t,n){if(o.call(e,t))return e[t];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,t,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[t]=r,r}var o=Object.prototype.hasOwnProperty;t.exports=r},{}],handle:[function(e,t,n){function r(e,t,n,r){o.buffer([e],r),o.emit(e,t,n)}var o=e("ee").get("handle");t.exports=r,r.ee=o},{}],id:[function(e,t,n){function r(e){var t=typeof e;return!e||"object"!==t&&"function"!==t?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");t.exports=r},{}],loader:[function(e,t,n){function r(){if(!x++){var e=h.info=NREUM.info,t=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&t))return s.abort();f(y,function(t,n){e[t]||(e[t]=n)}),c("mark",["onload",a()+h.offset],null,"api");var n=d.createElement("script");n.src="https://"+e.agent,t.parentNode.insertBefore(n,t)}}function o(){"complete"===d.readyState&&i()}function i(){c("mark",["domContent",a()+h.offset],null,"api")}function a(){return E.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-h.offset}var u=(new Date).getTime(),c=e("handle"),f=e(2),s=e("ee"),p=window,d=p.document,l="addEventListener",m="attachEvent",w=p.XMLHttpRequest,g=w&&w.prototype;NREUM.o={ST:setTimeout,SI:p.setImmediate,CT:clearTimeout,XHR:w,REQ:p.Request,EV:p.Event,PR:p.Promise,MO:p.MutationObserver};var v=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1071.min.js"},b=w&&g&&g[l]&&!/CriOS/.test(navigator.userAgent),h=t.exports={offset:u,now:a,origin:v,features:{},xhrWrappable:b};e(1),d[l]?(d[l]("DOMContentLoaded",i,!1),p[l]("load",r,!1)):(d[m]("onreadystatechange",o),p[m]("onload",r)),c("mark",["firstbyte",u],null,"api");var x=0,E=e(4)},{}]},{},["loader"]);</script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="JUI3opG8gqtOkTD1wOYPBnU+NcRU5d52qtXmV473jtsS0Hu1E75cNvRwYc30u4Tbrww1ing9be3cRlPyJsry3g==">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/application.self-0f0ff52ecae0d820b2b46b3cf3aea55b674863a44fbe8df38269492b69e388a8.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/theme.self-b34bde0493c336a9f78130474b56ae3f0fb32ebf38969bc686d0ebcb4a58c5b1.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/core.self-e4bdefd3813c8a715955a6c65b9e730846dcae6a0576618563d635ff0b18a3ca.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/accordion.self-aa0730fc025317fed4feff2aa5fc07cba5a545dfc5c913a2984ba6f8695b29fb.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/autocomplete.self-f0b810a4a7bb8c90994675d7c5bfe636d615a5785cf81cae3340aa5e6adc55ca.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/button.self-19273424de9d7f08469ae98482ac7a003075de432bddf5b0bc5984014344595b.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/checkboxradio.self-779d8751b9de88d543381bfe31655919921893a4312076d9d220f94864924ed8.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/controlgroup.self-dea84da349c96f54beb340a2998790345b688f43c916cbf71f72bf41846efea6.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/datepicker.self-3047420a03ae2233615bf455c1e7804ce8804db93879fcdcd757f73ce60ebec1.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/dialog.self-cfc405a38e0296def8d55cc92cac53d0a2006709b2376a36a31d2f31e5fa839d.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/draggable.self-37c2539362d9d0af129d37fb409f6c33f35d75492c61c05a8dc4f278a0d9057f.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/menu.self-5bc653bb1a86d1ac2565267f7c29a590fb1b07b9abc75d696d18408c376fa1e1.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/progressbar.self-1b6f4c0b705f8fa475f566643777a7a62dc3bcad5e8d8c8b7a643226827a35f7.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/resizable.self-664ac62d66e39e618f230faeba7e4745104a6217009c0f02a5ef78d00146c9b8.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/selectable.self-19c99ff0e762c31563133c19f00eaea0c6901bc26757751c8eef675ef117a977.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/selectmenu.self-4c64fa52068bb0ab5ab7beee995fb73714c5cfb571e1a9878ae67d4221ba62ad.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/sortable.self-cfd0c3e3334e30aac7be47a8577778f43a41d737fd78981dca9f2ebc05351c31.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/slider.self-71bd0e5f4e0b26a0a88dac627eb8eb398d5fdb9c71922ce280aec65ca1e6be7b.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/spinner.self-7031500c1e002a164c88716bc7e947a35bf63ac016274357338097bf35cab77d.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/tabs.self-d3e3dd1ce30228648f314c5c5bb8c40cb8aecdad4bbda8d1b1eb8eb496cda303.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/tooltip.self-a7e58af2915ed216ce5a397dbe7db194a5c1d51e8876136cae3903d9ae41c6d9.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/base.self-76599afe9b7687b8479ce5344363edbf948b417613a3beec7a7a74bacb0cc1c8.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/all.self-131cc322272828d76a6354d061a4660293e55426159aa19231ad578926b73f4a.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/jquery-ui.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/jquery.Jcrop.self-7171895ede783d1ffa5663d527c1c33a5f63cef671d327b7ec2df6dacb7b14c5.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/font-awesome.self-407fb3615be540a148636cc5d171903af160c86d0eaf12321feadbd280e334c3.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/jquery.fileupload.self-167cd6717c6cb34829a150f314ba873d21c5e7de91bfd4460d0ac869c7409830.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/jquery.fileupload-ui.self-ab462ec4e3a482097aef28bc5b38a293fa10bf321e78f25e5aaf08b7e6f15609.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/jquery.timepicker.self-df1975ea5ee551ecdcbd6cfbf5a17cd3d964d0f9aa1f84be5fbc4b1f49fbd183.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/jquery.atwho.self-5fe49f7ed1be478d3e0baa309d0f26ac58c7a76b68652af471b4d3e2d2829c65.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/trix.self-c6d18b313fc8b7d66ad1e0f6962cde297339c371f1cd294b3acc1283700ead3b.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/slick.self-989629562d60db036f5773aab204fd392cb89f0c16ef71d782b64a2c8b1ce5df.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/fullcalendar.self-f8592f97052aa20f5d8be93ecffffad51d1ebade6b977c49f1818fb2560105ac.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/activity_feed.self-7cbe29a814ef0707baa4f754f46401e9e3bf42a32de8eb2dcbb4985b817eb379.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/applicant_view.self-961971705d4fd6792a2e5e7ce48125ea32a658046ec545a7616803321c7fa1e7.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/association_career_portal.self-3c7f79dace4cd295655d48bbddd12af0ba5d07e75fac0c17c882e06bc11119bd.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/business-admin-pages.self-585d7e557a7914a13250d317c4630b743c3a0b5f8b4b47fb7eedc48d8a22a413.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/business_applicants_table.self-a53b31dfdd4a9460671b63c93b681d0d56f5d7303aae6ae17e5058ee6129f55e.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/business_homepage.self-8a6658a7694a0042af1f2f0065f8a741adb78f742bc4f70ef48fe1e7a46b600a.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/business_nav.self-fee59ea5bef95f59c5ff6f0789eb69fb9f180f15ac41fb4f1769c4ba5e9037b7.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/buttons.self-7b49503f4677f3ed5fc78bfcfc7e47be5ac5f3dd19f6fd6f9ce73dd69f7280f2.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/calendar_page.self-95bf3cba67f4d3b81536a7767f3bf73fa20c84d8e71a8d04f4f84ad6da297893.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/career_create_portal.self-985f5737ff08399960abf02bd6d55373e684de7847e32c9350fd1a2645515c7b.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/career_portal.self-b0b3cf4d91922a945f556e71cef42cda75e5614cfe5f2337d0f201509c4f6873.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/containers.self-5a5e979385c64c8976d6dea697215149e98f9c869d460d3e06566c375f8cbb6e.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/custom_select.self-e90a0abfc3faf07e50b6665ed0f2c2e4706eac682ca5822ac8ab68ee92e58d1d.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/forms.self-c0b2d3729dcc0ad8639ab9762393db3b14ac7de82148bef972a7e5678352dcc3.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/home_page.self-81470b81ac761da5ef442e29aff9064655d2cdfa6673fcf49cbb2d940d4eec09.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/job_seeker_homepage.self-abe229a65aee525a29bbedf3de8697c3fc17aa3f13ca85026a1beba661589693.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/job_seeker_nav.self-609177ac046ddc9ceb214a718148c536dd876be423c326a408363f3decce8ff6.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/job_seeker_profile.self-aabefe83f69fe0d67c67d27aec18d58a3cc0ed8e59473de3eef83c8baa26cee2.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/job_users_show.self-4e9db73ca93bb5f113b201d12ac3a330e030645000c707e7e703301313e2888c.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/messages.self-fe342fc9a6b951d64b336973d469cce8ed10e5631037cad7edcb3dffb9c80ddf.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/modal.self-4ec6d5cbe8c8ef5fe4bc9713e218cb6fec2a3297adc126ca3358aba6d116fcf3.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/myModal.self-b4de85866b38b8d295a3048437eca552bbe030067d2d736392270f04b190f5ea.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/post_a_job.self-d4b19c14b800700a08f05d2ec5ff29d94283283d6fe2fb0cae5e69c86279245e.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/quick_screen.self-24ccb368dfdbfa0b9aa6d80617eb78cf2054396f75e3a4f9f9bddf1f4ea5a1f5.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/show_candidate_profile.self-609f64c6d0854199e6716c3c435c09366d37d8dfe3e6fd0c5e19dfe0649dbf33.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/table.self-e1fc76adb1324906ec34616620a26f59f748adac04665db2019a67b71182b1cb.css">
+<link rel="stylesheet" media="screen" href="./Talentwiz_files/user_profile.self-0980f2dc9e03e66de08b33fa636eba131a4f73eb41cb9605e8c662fefbc8bd35.css">
+<script src="./Talentwiz_files/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js"></script>
+<script src="./Talentwiz_files/version.self-c8e3d1203da26ea7efdf83c1eabb3f0ba55cb68e463f5ccf0d77bd15ce6a8e61.js"></script>
+<script src="./Talentwiz_files/data.self-2067c82e6fe39a9cba5623206a5dc28d5c60d26b95cd100855b78cacf72865b8.js"></script>
+<script src="./Talentwiz_files/disable-selection.self-5675f71f2fbbc6857ea700ba843af748b50dbc0150cc87932a7d05ec016bb659.js"></script>
+<script src="./Talentwiz_files/focusable.self-426e99e67d1f1bd4cb444fd878ee63a6de1f5d1d61451e43022c86214b9eec64.js"></script>
+<script src="./Talentwiz_files/form.self-711978b53107be2d9ef1b7369beb151b229cefa8c1405a056d3c34262d5b477e.js"></script>
+<script src="./Talentwiz_files/ie.self-163eb039dcb1e0c3471b7d91386eabb8753da6906e84824c019f9ff56bdb83a6.js"></script>
+<script src="./Talentwiz_files/keycode.self-ad63cd20acf49dd333bbbc537454d7d475bd610eb5b88de0dca009f0c3d314b1.js"></script>
+<script src="./Talentwiz_files/escape-selector.self-43e4d61501e4ffb1ecba387affbae1eb3e1c863ab0b0e71897851cddd246e50e.js"></script>
+<script src="./Talentwiz_files/labels.self-c0448a3cb597a9a9429be814ab0e9ed2a14d85604555b4cff897adf3f0415f38.js"></script>
+<script src="./Talentwiz_files/jquery-1-7.self-22c197e38fc01a29431530c4c5c7263e26d2b611994b1f9c5c8c900a97b4bc44.js"></script>
+<script src="./Talentwiz_files/plugin.self-d8f576c8e073ca51f095505f47bd09d306b875404cd90afcbb6338287cfb0247.js"></script>
+<script src="./Talentwiz_files/safe-active-element.self-a1f1a1a7dae3269ce03f6fffb2dcc9b4a7490f5d546c65d54417bec3be24b668.js"></script>
+<script src="./Talentwiz_files/safe-blur.self-2cc24c46132d51c7724f6371154241b0a81c9bae5d5681d8f62b01ce46236726.js"></script>
+<script src="./Talentwiz_files/scroll-parent.self-38e26a71a450a29fb63425e8f589a7046862f927eb0a1dbf6a6c44da05196d2e.js"></script>
+<script src="./Talentwiz_files/tabbable.self-f3f62ceed772d3a325cebd6a03221f8a8cb02c6150f4feba738c6525a2953690.js"></script>
+<script src="./Talentwiz_files/unique-id.self-66e85ac85cd0b6b8b1bb89369fc65f608f716869dc0930862a8d421a57a9580a.js"></script>
+<script src="./Talentwiz_files/core.self-886760af898381620a8980841c646ae70e894b5292c3138e6dfd75b6904deffb.js"></script>
+<script src="./Talentwiz_files/effect.self-776455da1682afff3a4974146aa96ca840597b879ed3797af0604063527443c6.js"></script>
+<script src="./Talentwiz_files/form-reset-mixin.self-3a447942586b5719fdd7f1d1a3ac0da9e757a0eb8f4a7cb145f6deb820d2dc54.js"></script>
+<script src="./Talentwiz_files/position.self-1b49c8c521e67a4a88bfdad6b4d944d33686d25009a0e40a1e170acdd7b6962a.js"></script>
+<script src="./Talentwiz_files/widget.self-fca20bcec06d192f97cffa6e734e24360e227237b8ae7d7e7e60754df7d5444f.js"></script>
+<script src="./Talentwiz_files/effect-blind.self-2f8923f5c3073717dad35ac1f9bd4dbc13d2f9c8128f7dbea9819921338271f4.js"></script>
+<script src="./Talentwiz_files/effect-bounce.self-ca3686abc7c667b5380422af36b618923c2fc8e901b3eb2ff627f1cdef60486a.js"></script>
+<script src="./Talentwiz_files/effect-clip.self-9e606afd1b0d1679f42b1ce5c2ad29f242ed98a9b1a473a9ef8a8bf10df2afe4.js"></script>
+<script src="./Talentwiz_files/effect-drop.self-481600061a28b5621b1d78187468e63f057665ce6af6401db851f9b79e345965.js"></script>
+<script src="./Talentwiz_files/effect-explode.self-b5f68a634df4bc19111474eb15bcd99597dc19c721b33647fbb04f2bb6d52ca3.js"></script>
+<script src="./Talentwiz_files/effect-fade.self-60febf4d2a1f6f013852a42da59c74d840f205715162a2b11e734fd4dd73a519.js"></script>
+<script src="./Talentwiz_files/effect-fold.self-78adc6cc7f2d8dac25e8c82164ae61cc3160bb5280ed3d24dd96a576e37a6e46.js"></script>
+<script src="./Talentwiz_files/effect-highlight.self-842a0db414abed8fbccb48908bd933b32c93c6b9d725160c85dc2bde708fa753.js"></script>
+<script src="./Talentwiz_files/effect-size.self-2094878ac7ba38dcd4539cd4595fa4d6ed7182be8bb6f03785684a5e470a293d.js"></script>
+<script src="./Talentwiz_files/effect-scale.self-88872e591cdbf30b3d09946e82e96e25bcd99b03857ead844a503301e6de71f3.js"></script>
+<script src="./Talentwiz_files/effect-puff.self-be0ba8a98762bf10054deb4e8bdf92c44de0d570714624d16c396f1ffe3a82d6.js"></script>
+<script src="./Talentwiz_files/effect-pulsate.self-bf83d1979be265f242fceb95cc3cfeca5467e4aab9cdea27ebb6f2e17bdaae2e.js"></script>
+<script src="./Talentwiz_files/effect-shake.self-867270f4e72f7895d38b10fdf9a6ba20f22bee88ac4d79654a9227c14141e1ca.js"></script>
+<script src="./Talentwiz_files/effect-slide.self-b59b0b36df7b3e5e4f4190ab51e5c212744d2b34d5ed14c96bfe9c8a3096c00b.js"></script>
+<script src="./Talentwiz_files/effect-transfer.self-5ab6d30ecb0b73e2b9a528f6d66c0732ba43a93a5326d88dae547f0c7c759e79.js"></script>
+<script src="./Talentwiz_files/accordion.self-267aabfe487e53fce0399a77f9030a87b9d8a409eb30c4c85c5637da9ac35429.js"></script>
+<script src="./Talentwiz_files/menu.self-0730fe713007bd93e6db569352a20ed92448299505ff6f525bc0dc6dd488254e.js"></script>
+<script src="./Talentwiz_files/autocomplete.self-6a89d7a43741ec810ef95de143a7c0297e2e4368ebecff64493ebb7a9ac3a524.js"></script>
+<script src="./Talentwiz_files/controlgroup.self-0b7409f97114a33de116bd5429e9df199cbdea3f276d8bd725c4c2c60f244711.js"></script>
+<script src="./Talentwiz_files/checkboxradio.self-60f68cb16012ef210c931076ada2d65d54a8c74a2dc71ce383af758460f8b686.js"></script>
+<script src="./Talentwiz_files/button.self-659b51f6fb5303f90ed8cf551509063770a50168a15795ba834b08f8bf2e0ce0.js"></script>
+<script src="./Talentwiz_files/datepicker.self-2af0dec09da99d687c31fc224e940687a4eb3694e7b38b0871bba475cad86120.js"></script>
+<script src="./Talentwiz_files/mouse.self-f0790a202dcf54fab051e71b042335d5346f9cceb0f645223c1dab93f349a04b.js"></script>
+<script src="./Talentwiz_files/draggable.self-42c3eda0b49f105628cea7580fe38c7ed77467cee384bb2c4e095a2bd0a172e6.js"></script>
+<script src="./Talentwiz_files/resizable.self-1a46c2f5b876918e02bf979080e56f57846590cd880721bca5058e84f7f60bae.js"></script>
+<script src="./Talentwiz_files/dialog.self-2bd687f9580c0be4213c50b4bb1211c28ceedb045eba954e63d40bfbb4d1affd.js"></script>
+<script src="./Talentwiz_files/droppable.self-4e3be0d7524dd1852e3b37ae00cd0c351c6178bcad39b17315cca941ddd44148.js"></script>
+<script src="./Talentwiz_files/progressbar.self-3bf965ce4e8ade2f07336ae5ffce7fe58897333238561761ffcb16f31af673fc.js"></script>
+<script src="./Talentwiz_files/selectable.self-a364da09c555890f5bb64704711594a88e94988edb285735bda59431a749226e.js"></script>
+<script src="./Talentwiz_files/selectmenu.self-43e0fc6b5fba037933a7d89a5b2a7127aa9c7494cc605c2dcd3146265e2d3d35.js"></script>
+<script src="./Talentwiz_files/slider.self-f166e8b345d6a2376ab8f43b05ab7629016706df83f2d96113cf5d8905c3d028.js"></script>
+<script src="./Talentwiz_files/sortable.self-6e5e1f07a29b5a89ec1d359363d2800904e3ae548a38ab2f8eded36746d1adbe.js"></script>
+<script src="./Talentwiz_files/spinner.self-2769386b6b06e175a13ccdcd6d2d0cd40c45cec19607bcb818cee0704c165557.js"></script>
+<script src="./Talentwiz_files/tabs.self-b7f60535e992224ca66c3f11dc943eba9ef42a9605241e27b9dba24c7efb287e.js"></script>
+<script src="./Talentwiz_files/tooltip.self-50ae9488af573c99a78b60209bce5c7a4affc4e175fef523942acb163dd8deb8.js"></script>
+<script src="./Talentwiz_files/jquery-ui.self-d4c1ae19d9b853ec1c8c83784fa979bbe4075a84932a080bbd7d7706240410e1.js"></script>
+<script src="./Talentwiz_files/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js"></script>
+<script src="./Talentwiz_files/jquery.iframe-transport.self-b58640d2146e10a028d4aec4f1c6e624305f8b5edd02cbb5ca77f7fb56b4d976.js"></script>
+<script src="./Talentwiz_files/jquery.remotipart.self-1660679e325ee534ce863e680eb6ad0bc9739d262594dc1337a2171e5c19c939.js"></script>
+<script src="./Talentwiz_files/jquery.ui.widget.self-92c37a41e67e528eecf100716907331b4b9aa4f546bf75ef2e0529c8c03a562d.js"></script>
+<script src="./Talentwiz_files/jquery.iframe-transport.self-e461f7ff2a60ee89459106a6f3e349cf79b7f56066b3c8cbc73389b30e1eb592.js"></script>
+<script src="./Talentwiz_files/jquery.fileupload.self-79c952fc273d5a8955a6093f4f489dcd509c5a2cefb2b9a049d3cdb2710ec8d3.js"></script>
+<script src="./Talentwiz_files/basic.self-6a3cf5192354f71615ac51034b3e97c20eda99643fcaf5bbe6d41ad59bd12167.js"></script>
+<script src="./Talentwiz_files/tmpl.self-c2108a63ad9ae9ab4a723bcf0104f6a92a63eb917331ff69fad6f02fe7219488.js"></script>
+<script src="./Talentwiz_files/jquery.Jcrop.self-28692b98864ea8f381f818a5a3f82c8c9f0142417691809077cee319c588d2e9.js"></script>
+<script src="./Talentwiz_files/jquery.caret.self-f2adb546c3ef1e7a417795b9fa14713b71615687c811ed59460153ad71d3a641.js"></script>
+<script src="./Talentwiz_files/jquery.atwho.self-be73bcf571ca2ca395851627d0abd74d4ca4d87ecbf2760f79d783c5a9758a54.js"></script>
+<script src="./Talentwiz_files/index.self-75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070.js"></script>
+<script src="./Talentwiz_files/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js"></script>
+<script src="./Talentwiz_files/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js"></script>
+<script src="./Talentwiz_files/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js"></script>
+<script src="./Talentwiz_files/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js"></script>
+<script src="./Talentwiz_files/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js"></script>
+<script src="./Talentwiz_files/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js"></script>
+<script src="./Talentwiz_files/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js"></script>
+<script src="./Talentwiz_files/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js"></script>
+<script src="./Talentwiz_files/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js"></script>
+<script src="./Talentwiz_files/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js"></script>
+<script src="./Talentwiz_files/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js"></script>
+<script src="./Talentwiz_files/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js"></script>
+<script src="./Talentwiz_files/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js"></script>
+<script src="./Talentwiz_files/geocomplete.self-e215815e534d87d4aa3437c84999304642a559cc5bd69c50358b003d70a918ab.js"></script>
+<script src="./Talentwiz_files/jquery.gdocsviewer.min.self-bfef792b4fe90ec36fe2ddf4b73a8b29201837487a8e70cf1a1b845b5c207832.js"></script>
+<script src="./Talentwiz_files/googledocviewer.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js"></script>
+<script src="./Talentwiz_files/jquery.slick.self-96d384ee82b872f06bfd1de14b197c64f1cb7c51ce078246bbf0f3bd5cb54057.js"></script>
+<script src="./Talentwiz_files/trix.self-f009107779c31333909b5f0706cb51e9ae0e8da0c708d755f356337095b6d08a.js"></script>
+<script src="./Talentwiz_files/froala_editor.min.self-01f40baaaadacd48a4d51ddc3ed3c2e4480217935fd0c9459476c2e7e3522cc6.js"></script>
+<script src="./Talentwiz_files/autocomplete-rails.self-5d8d93a5f6e19ab6e682b9dd9999592b61ff3c3d69ea242a830a8556158001fa.js"></script>
+<script src="./Talentwiz_files/Chart.bundle.self-65c30b911cb7aa1c65fc9eb69b953a7b7843e5f23fe75d927a6723184b44778a.js"></script><style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style>
+<script src="./Talentwiz_files/local-time.self-c3a12a871bc43652802cc35f930bbdd17797dccb9c2cd6c9eb1d6d4068a7036a.js"></script>
+<script src="./Talentwiz_files/spin.self-19fb9878ccf9d60dcfc6fef6bf96ee36120c9ff9220afb853f243d717b72d3db.js"></script><style type="text/css"></style>
+<script src="./Talentwiz_files/chartkick.self-af6cb83b5d62f268fd69dd61295df83a56603150692a28182cdb8934b77a70b2.js"></script>
+<script src="./Talentwiz_files/ahoy.self-a593f1211be048a021361c20baa570e8ad2fab008b1aaa447cdd198845075bc9.js"></script>
+<script src="./Talentwiz_files/jquery.timepicker.self-2598837dabf1f6ab028aaf37d1385abbb440107f436ced3a1bc4dece016cb011.js"></script>
+<script src="./Talentwiz_files/moment.self-34da66f0997d145341cfb3fc71c794ea32b4c6affa3ff5d9e7e5107170125d1c.js"></script>
+<script src="./Talentwiz_files/fullcalendar.self-35629a5215b80ed8ba104e06e593a9423e2bdc35a230b02072514551311f520c.js"></script>
+<script src="./Talentwiz_files/adding_objects.self-cf9b941a9bcf0ceb1d9f2e1c08d4c031001d4de4c443a1786c27f51d872fc663.js"></script>
+<script src="./Talentwiz_files/applicant_profile.self-bffb7eca52f5c9d1819f934a5a48c72397d027b42011b12211bb5d75d107202b.js"></script>
+<script src="./Talentwiz_files/atwho.self-8cde9e7edfddfefd17afc8b5d0d15abb5b7af307396ad5fc72866c623e6bebe4.js"></script>
+<script src="./Talentwiz_files/autocomplete.self-a8ab7ebf82e3812c4b741038781b4b2b7bcacc45ac95219b1c484dc91e51c9ef.js"></script>
+<script src="./Talentwiz_files/calendar.self-6dfcfec2e4676384f76fbe1d633fa1b3d138cefc4d79c3b3bfb5d5c693968ef5.js"></script>
+<script src="./Talentwiz_files/carousel.self-2c995000a1b645751f06f292506b47ce8bee33fd0608e6f9b8ea400f357262cb.js"></script>
+<script src="./Talentwiz_files/change_stages.self-f48194366ca5f544781b6f936f74ebd70c198f3fc7f3c63d344f412949f743d4.js"></script>
+<script src="./Talentwiz_files/confirm_destroy.self-a4a8c9dfac38d8f6bc1c3ae639198d27ade658e38804c2c8004b6e5e10922aa5.js"></script>
+<script src="./Talentwiz_files/dropdown.self-770eee959a0dcfd78180da14e264d523fdaffa4784838fd44cd95dd32e55e95f.js"></script>
+<script src="./Talentwiz_files/email_templates.self-003be97857f50c7a0d26315fa2fdba2b6c37bbdc1df26ce473e237d0286679a3.js"></script>
+<script src="./Talentwiz_files/forms.self-93b67d6e43c66ef902eac71dd9528bdc5808ebb7270365743eba0495258a96a6.js"></script>
+<script src="./Talentwiz_files/froala.self-91cf10e3cfa0b3a907a586ef3fb51f73a151ff4a3cb2e427f1796a81f0d07fc0.js"></script>
+<script src="./Talentwiz_files/home.self-423de9bb19f9c64e92e0da171b0dbfbb862ad0dbce83bb1d86059b7efe3f50f6.js"></script>
+<script src="./Talentwiz_files/image_crop.self-b8014cf15c3e7de720fb4afcab4b31d0e1a19d43f153fab77b3bf69ea3de55a3.js"></script>
+<script src="./Talentwiz_files/job_board_modal.self-9ca26e807493cc93e0ef7c16e8eb370552e5c133e0725b06a06629a2a429479b.js"></script>
+<script src="./Talentwiz_files/job_cart.self-f2470897344f2f03fe14bab2f54220469ec71a3b54441cbcff289d04b09c16ac.js"></script>
+<script src="./Talentwiz_files/modal.self-17ad38e358f608179d500a88e48f223c7f8ce8f16fb9f13c74c98f043c8c3257.js"></script>
+<script src="./Talentwiz_files/payment.self-70878673fed15d74c30d5b33a2067a7181cf0132f7c05f356f45f02ae8c3595a.js"></script>
+<script src="./Talentwiz_files/pricing.self-bb2f88de757ca2feb8aa989e96e67e1fcf3f6b5b5044fc14aa4f0f4f07feac40.js"></script>
+<script src="./Talentwiz_files/profile_picture_upload.self-16d77d56c29e07894eae401106f18440897d67131d4808c57da69d0364d6a7ca.js"></script>
+<script src="./Talentwiz_files/questionnairre.self-e711ac9d036555380897ba237bea5653544bd74e0c947ddb03a230ae21a493b6.js"></script>
+<script src="./Talentwiz_files/remove_form.self-4f2873541dc71994a3d1a443977ba25333fb9219749ee13325f04511851731e7.js"></script>
+<script src="./Talentwiz_files/search.self-4acee1599afb443dc9447794278290221ea8ce12d3d7d26ff9486122b0fd3825.js"></script>
+<script src="./Talentwiz_files/sort.self-f02d5ca240bf4243f60dd14c76a4ac0f7b6e1f905b93d5cb30c6fa9b04901dbc.js"></script>
+<script src="./Talentwiz_files/tasks.self-82ed99912911f4ea9e25bbc3a4dcec6532ea843639cfd7e0aa342c3533218fb8.js"></script>
+<script src="./Talentwiz_files/wys_wig_editor.self-78b3c0f24bb0b5d05659f1fee12b4e3161e07adc986043f22a61a33fa64ba850.js"></script>
+<script src="./Talentwiz_files/application.self-8e04150318960fa73fbdcd3dbbeb70a2f3801cf045918029a6617fa5ba908689.js"></script>
+<script src="./Talentwiz_files/saved_resource"></script>
+<script src="./Talentwiz_files/saved_resource(1)"></script>
+<script src="./Talentwiz_files/js"></script>
+<meta name="stripe-public-key" content="pk_test_6qlWdqWVS3sSQHiRmWqXMBW2">
+<link href="./Talentwiz_files/css" rel="stylesheet" type="text/css">
+<script type="text/javascript" charset="UTF-8" src="./Talentwiz_files/common.js"></script><script type="text/javascript" charset="UTF-8" src="./Talentwiz_files/util.js"></script><script type="text/javascript" charset="UTF-8" src="./Talentwiz_files/stats.js"></script></head><body><style type="text/css">html.hs-messages-widget-open.hs-messages-mobile,html.hs-messages-widget-open.hs-messages-mobile body{height:100%!important;overflow:hidden!important;position:relative!important}html.hs-messages-widget-open.hs-messages-mobile body{margin:0!important}#hubspot-messages-iframe-container{display:initial!important;z-index:2147483647;position:fixed!important;bottom:0!important;right:0!important}#hubspot-messages-iframe-container.internal{z-index:1016}#hubspot-messages-iframe-container.internal iframe{min-width:108px}#hubspot-messages-iframe-container .shadow{display:initial!important;z-index:-1;position:absolute;width:0;height:0;bottom:0;right:0;content:""}#hubspot-messages-iframe-container .shadow.active{width:400px;height:400px;background:radial-gradient(ellipse at bottom right,rgba(29,39,54,.16) 0,rgba(29,39,54,0) 72%)}#hubspot-messages-iframe-container iframe{display:initial!important;width:100%!important;height:100%!important;border:none!important;position:absolute!important;bottom:0!important;right:0!important;background:transparent!important}</style><div class="newModal smallModal" style="display: none;">
+<div class="new-modal-content">
+<div class="new-modal-header">
+<div class="new-title">Notifications</div>
+<div class="new-close close-modal">×</div>
+</div>
+</div>
+</div>
+
+<div class="newModal mediumModal" id="mediumModal" style="display: none;">
+<div class="new-modal-content">
+<div class="new-modal-header">
+<div class="new-title">Notifications</div>
+<div class="new-close close-modal">×</div>
+</div>
+</div>
+</div>
+
+<div class="newModal largeModal" id="newModal" style="display: none;">
+<div class="new-modal-content">
+<div class="new-modal-header">
+<div class="new-title">Notifications</div>
+<div class="new-close close-modal">×</div>
+</div>
+</div>
+</div>
+
+<div class="newModal sideModal" id="sideModal" style="display: none;">
+<div class="new-modal-content">
+<div class="new-modal-header">
+<div class="new-title">Activities</div>
+<div class="new-close close-modal">×</div>
+</div><div class="not-present-container">
+<p>There are currently no activities for this applicant.</p>
+</div>
+<div class="not-present-container">
+<p>There are currently no activities for this applicant.</p>
+</div>
+<div class="not-present-container">
+<p>There are currently no activities for this applicant.</p>
+</div>
+
+</div>
+</div>
+
+<div class="newModal destroyModal" id="mediumModal" style="display: none;">
+<div class="new-modal-content">
+<div class="new-modal-header">
+<div class="new-title">Notifications</div>
+<div class="new-close close-modal">×</div>
+</div>
+<div class="modal-body"></div>
+<div class="modal-footer"></div>
+</div>
+</div>
+
+
+
+<script type="text/javascript" id="hs-script-loader" async="" defer="" src="./Talentwiz_files/2655934(1).js"></script>
+<header>
+<div class="business_nav">
+<div class="content">
+<a href="http://localhost:3000/business/jobs"><img class="logo" src="./Talentwiz_files/logo.jpg">
+</a><ul>
+<li><a href="http://localhost:3000/business/jobs">JOBS</a></li>
+<li><a href="http://localhost:3000/business/candidates">CANDIDATES</a></li>
+<li><a href="http://localhost:3000/business/tasks">TASKS</a></li>
+<li></li>
+<li>
+<a href="http://localhost:3000/business/interviews"><i class="fa fa-calendar"></i>
+</a></li>
+<li>
+<a href="http://localhost:3000/business/conversations"><i class="fa fa-envelope-o"></i>
+</a></li>
+<li>
+<a href="http://localhost:3000/business/analytics"><i class="fa fa-line-chart"></i>
+</a></li>
+</ul>
+<ul class="post-job-nav">
+<a class="post-job" href="http://localhost:3000/business/jobs/new">Post a Job</a>
+<a data-remote="true" href="http://localhost:3000/business/activities"><i class="fa fa-bolt"></i>
+</a><a data-remote="true" href="http://localhost:3000/business/notifications"><i class="fa fa-bell"></i>
+</a></ul>
+</div>
+<div class="dropdown">
+<div class="dropdown-button">
+<div class="circle-img">LH</div>
+<div class="name">
+<b class="caret"></b>
+</div>
+</div>
+<div class="dropdown-content" id="myDropdown" style="display: none;">
+<div class="dropdown-arrow" style="border-top-color: transparent; border-left-color: transparent; width: 20px; height: 20px; transform: rotate(-135deg); top: -10px; left: 80%"></div>
+<a href="http://localhost:3000/business/job_boards/2">Career Portal</a>
+<a href="http://localhost:3000/business/job_templates">Templates</a>
+<a href="http://localhost:3000/business/companies/2">Settings</a>
+<a href="http://localhost:3000/business/users/2">My Profile</a>
+<a href="http://localhost:3000/signout">Sign Out</a>
+</div>
+</div>
+</div>
+
+</header>
+<section>
+<div class="contain">
+</div>
+
+<div class="home-page-header">
+<div class="top-info">
+<h1>Jobs</h1>
+</div>
+</div>
+<div class="home-page-body">
+<form id="search-form" action="http://localhost:3000/business/jobs/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+<div class="filter-radios">
+<ul>
+<input type="radio" name="is_active" id="is_active_true" value="true" class="filter" checked="checked">
+<label value="open" class="filter" for="is_active_true">Active</label>
+<input type="radio" name="is_active" id="is_active_false" value="false" class="filter">
+<label value="company" class="filter" for="is_active_false">Archived</label>
+</ul>
+</div>
+<div class="main-filters">
+<!-- .toggle-actions -->
+<!-- = radio_button_tag "job_status", "all", true, class: 'filter' -->
+<!-- = label_tag "job_status_all", "All", :value => "all", class: 'filter' -->
+<!-- = radio_button_tag "job_status", "open", false, class: 'filter' -->
+<!-- = label_tag "job_status_open", "Open", :value => "open", class: 'filter' -->
+<!-- = radio_button_tag "job_status", "closed", false, class: 'filter' -->
+<!-- = label_tag "job_status_closed", "Closed", :value => "closed", class: 'filter' -->
+<div class="toggle-actions">
+<input type="radio" name="owner" id="owner_company" value="company" class="filter" checked="checked">
+<label value="all" class="filter" for="owner_company">All</label>
+<input type="radio" name="owner" id="owner_user" value="user" class="filter">
+<label value="open" class="filter" for="owner_user">My Jobs</label>
+</div>
+<div class="search-form">
+<div class="search-area-content">
+<i class="fa fa-search fa-stack-2x"></i>
+<input type="text" name="query" id="query" placeholder="Search Jobs" class="search-field" autocomplete="off">
+</div>
+</div>
+</div>
+</form>
+
+
+<div class="all-main-job-container">
+<div class="jobs-container">
+<div class="business-job" id="job_1">
+<div class="job-header">
+<i class="fa fa-circle" style="color: green"></i>
+<div class="title">
+<a href="http://localhost:3000/business/jobs/1/applications">Sales Rep</a>
+</div>
+<div class="location">Toronto, ON, Canada</div>
+<div class="posted-time">16 days ago</div>
+</div>
+<div class="job-body">
+<div class="btns">
+<div class="btn1">
+<a class="button-job-actions" href="http://localhost:3000/business/jobs/1/job_feeds?type=free">Advertise Job</a>
+</div>
+<div class="dropdown">
+<div class="dropdown-button btn2">
+<div class="button-job-actions">
+Actions
+<b class="caret"></b>
+</div>
+</div>
+<div class="dropdown-content" id="myDropdown" style="display: none;">
+<a href="http://localhost:3000/business/jobs/1/edit">Edit Job</a>
+<a data-remote="true" rel="nofollow" data-method="patch" href="http://localhost:3000/business/jobs/1?status=closed">Close Job</a>
+<a data-remote="true" rel="nofollow" data-method="patch" href="http://localhost:3000/business/jobs/1?status=false">Archive Job</a>
+</div>
+</div>
+</div>
+<div class="left-scroll">
+<img src="./Talentwiz_files/left_arrow.png">
+</div>
+<ul class="job-stage-area">
+<div class="job-gallery" style="width: 1400px;">
+<li class="job_list_stage job_list_stage_active">
+<div class="number">
+2
+</div>
+<div class="name">All Applicants</div>
+</li>
+<li class="job_list_stage">
+<div class="number">
+0
+</div>
+<div class="name">
+Screen
+</div>
+</li>
+<li class="job_list_stage">
+<div class="number">
+0
+</div>
+<div class="name">
+Phone Interview
+</div>
+</li>
+<li class="job_list_stage">
+<div class="number">
+0
+</div>
+<div class="name">
+Interview
+</div>
+</li>
+<li class="job_list_stage">
+<div class="number">
+0
+</div>
+<div class="name">
+Group Interview
+</div>
+</li>
+<li class="job_list_stage">
+<div class="number">
+0
+</div>
+<div class="name">
+Offer
+</div>
+</li>
+<li class="job_list_stage">
+<div class="number">
+0
+</div>
+<div class="name">Rejected</div>
+</li>
+</div>
+</ul>
+<div class="right-scroll">
+<img src="./Talentwiz_files/right_arrow.png">
+</div>
+</div>
+</div>
+
+<div class="business-job" id="job_2">
+<div class="job-header">
+<i class="fa fa-circle" style="color: green"></i>
+<div class="title">
+<a href="http://localhost:3000/business/jobs/2/applications">New Job </a>
+</div>
+<div class="location">Toronto, ON, Canada</div>
+<div class="posted-time">13 days ago</div>
+</div>
+<div class="job-body">
+<div class="btns">
+<div class="btn1">
+<a class="button-job-actions" href="http://localhost:3000/business/jobs/2/job_feeds?type=free">Advertise Job</a>
+</div>
+<div class="dropdown">
+<div class="dropdown-button btn2">
+<div class="button-job-actions">
+Actions
+<b class="caret"></b>
+</div>
+</div>
+<div class="dropdown-content" id="myDropdown" style="display: none;">
+<a href="http://localhost:3000/business/jobs/2/edit">Edit Job</a>
+<a data-remote="true" rel="nofollow" data-method="patch" href="http://localhost:3000/business/jobs/2?status=closed">Close Job</a>
+<a data-remote="true" rel="nofollow" data-method="patch" href="http://localhost:3000/business/jobs/2?status=false">Archive Job</a>
+</div>
+</div>
+</div>
+<div class="left-scroll">
+<img src="./Talentwiz_files/left_arrow.png">
+</div>
+<ul class="job-stage-area">
+<div class="job-gallery" style="width: 1400px;">
+<li class="job_list_stage job_list_stage_active">
+<div class="number">
+0
+</div>
+<div class="name">All Applicants</div>
+</li>
+<li class="job_list_stage">
+<div class="number">
+0
+</div>
+<div class="name">
+Screen
+</div>
+</li>
+<li class="job_list_stage">
+<div class="number">
+0
+</div>
+<div class="name">
+Phone Interview
+</div>
+</li>
+<li class="job_list_stage">
+<div class="number">
+0
+</div>
+<div class="name">
+Interview
+</div>
+</li>
+<li class="job_list_stage">
+<div class="number">
+0
+</div>
+<div class="name">
+Group Interview
+</div>
+</li>
+<li class="job_list_stage">
+<div class="number">
+0
+</div>
+<div class="name">
+Offer
+</div>
+</li>
+<li class="job_list_stage">
+<div class="number">
+0
+</div>
+<div class="name">Rejected</div>
+</li>
+</div>
+</ul>
+<div class="right-scroll">
+<img src="./Talentwiz_files/right_arrow.png">
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</section>
+
+<footer></footer>
+
+<script type="text/javascript">( function(){ window.SIG_EXT = {}; } )()</script><iframe frameborder="0" allowtransparency="true" scrolling="no" name="__privateStripeController0" allowpaymentrequest="true" src="./Talentwiz_files/controller-8ea0043b00f6ca0a65cf9893ef428434.html" aria-hidden="true" tabindex="-1" style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important;"></iframe><iframe name="stripeXDM_default323914_provider" id="stripeXDM_default323914_provider" aria-hidden="true" src="./Talentwiz_files/channel.html" frameborder="0" style="position: absolute; top: -2000px; left: 0px;"></iframe><iframe frameborder="0" allowtransparency="true" scrolling="no" name="__privateStripeMetricsController4" allowpaymentrequest="true" src="./Talentwiz_files/outer.html" aria-hidden="true" tabindex="-1" style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important;"></iframe></body></html>

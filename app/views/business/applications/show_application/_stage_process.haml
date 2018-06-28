@@ -1,0 +1,39 @@
+.step-wizard 
+  - count = (100 / (@job.stages.count + 2)).to_s
+  %ul.progressbar
+    - if @application.rejected
+      %li.rejected{:style => "width: " + count + "%" } Applied
+      - @job.stages.each do |stage|  
+        - if stage.position <= @application.stage.position
+          %li.rejected{:style => "width: " + count + "%" }
+            = stage.name
+        - else
+          %li{:style => "width: " + count + "%" }
+            = stage.name
+      %li{:style => "width: " + count + "%" } Hired
+    - else
+      %li.active{:style => "width: " + count + "%" } Applied
+      - @job.stages.each do |stage|  
+        - if @application.stage.present? && stage.position <= @application.stage.position 
+          %li.active{:style => "width: " + count + "%" }
+            = link_to "#{stage.name}", move_stage_business_application_path(@application, stage: stage.id), remote: true, method: :post
+        - else
+          %li{:style => "width: " + count + "%" }
+            = link_to "#{stage.name}", move_stage_business_application_path(@application, stage: stage.id), remote: true, method: :post
+      %li{:style => "width: " + count + "%" } Hired
+
+
+  
+    - if @application.rejected 
+      .dropdown.disqualify
+        .dropdown-button
+          %i.fa.fa-ban Disqualified
+      = link_to "Re-Qualify", reject_business_application_path(@application, val: "requalify"), remote: true, method: :post 
+    - else
+      .dropdown.disqualify
+        .dropdown-button
+          %i.fa.fa-ban Disqualify
+        .dropdown-content
+          - current_company.rejection_reasons.each do |reason| 
+            = link_to "#{reason.body}", reject_business_application_path(@application, val: reason.body), remote: true, method: :post 
+          = link_to "Rejected", reject_business_application_path(@application, val: "rejected"), remote: true, method: :post 

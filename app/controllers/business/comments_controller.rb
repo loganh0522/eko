@@ -47,11 +47,14 @@ class Business::CommentsController < ApplicationController
     @comment = Comment.new
 
     if @new_comment.save 
+      mentions(@new_comment)
+
       if @commentable.class == Job
         @comments = @commentable.comments
         track_activity @new_comment, 'create', current_company.id, @commentable.id, params[:comment][:job_id]
       elsif @commentable.class != Job && params[:comment][:job_id].present?
-        @comments = Comment.where(commentable_type: "Candidate", commentable_id: @commentable.id, job_id: params[:comment][:job_id])
+        @comments = Comment.where(commentable_type: "Candidate", commentable_id: @commentable.id, 
+          job_id: params[:comment][:job_id])
         track_activity @new_comment, 'create', current_company.id, @commentable.id, params[:comment][:job_id] 
       elsif @commentable.class == Candidate && !params[:comment][:job_id].present?
         @comments = @commentable.comments
@@ -152,9 +155,28 @@ class Business::CommentsController < ApplicationController
     @commentable = resource.singularize.classify.constantize.find(id)
   end
 
-  def mentions
-    regex = '/@([\w]+)'
-    matches = body.scan regex
-    User.where(username :matches)
+  # def mentions
+  #   regex = '/@([\w]+)'
+  #   matches = body.scan regex
+  #   User.where(username :matches)
+  # end
+  private
+  
+  def mentions(comment)
+    regex = /@(\w+\s+\w+)/
+
+    matches = comment.body.scan(regex)
+
+    matches.map do |username| 
+      @user = User.find_by(full_name: username) 
+
+      if @user.present?
+
+        Notification.create(recipient_id: @user.id, actor: current_user, action: "mentioned", 
+          notifiable: comment, company_id: current_company.id)
+      end
+    end
   end
+
+
 end

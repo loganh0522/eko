@@ -1,0 +1,85 @@
+/* line 2, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/association_career_portal.sass */
+#all-association-jobs .portal-header {
+  height: 350px;
+}
+
+/* line 5, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/association_career_portal.sass */
+.association-job-board {
+  max-width: 1100px;
+  margin: 20px auto;
+}
+/* line 8, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/association_career_portal.sass */
+.association-job-board .jobs {
+  width: 100%;
+  margin: 65px 0;
+}
+/* line 11, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/association_career_portal.sass */
+.association-job-board .jobs .job-posting {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px 10px 10px 10px;
+  background: #ffffff;
+  border-radius: 2px;
+  -webkit-box-shadow: 0px 1px 2px 1px #c7c5c7;
+          box-shadow: 0px 1px 2px 1px #c7c5c7;
+}
+/* line 18, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/association_career_portal.sass */
+.association-job-board .jobs .job-posting .header-info {
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+/* line 21, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/association_career_portal.sass */
+.association-job-board .jobs .job-posting .header-info .logo {
+  float: left;
+  margin-top: 10px;
+}
+/* line 24, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/association_career_portal.sass */
+.association-job-board .jobs .job-posting .header-info .view-job {
+  float: right;
+  margin: 7px 25px 0 0;
+  -webkit-box-shadow: 1px 1px 2px 1px #c7c5c7;
+          box-shadow: 1px 1px 2px 1px #c7c5c7;
+}
+/* line 28, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/association_career_portal.sass */
+.association-job-board .jobs .job-posting .header-info .job-detail {
+  float: left;
+  margin-left: 30px;
+}
+/* line 32, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/association_career_portal.sass */
+.association-job-board .jobs .job-posting .header-info .job-detail .title {
+  font-size: 18px;
+  font-weight: 500;
+}
+/* line 35, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/association_career_portal.sass */
+.association-job-board .jobs .job-posting .header-info .job-detail .title a {
+  color: black;
+}
+/* line 37, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/association_career_portal.sass */
+.association-job-board .jobs .job-posting .header-info .job-detail .company {
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 500;
+}
+/* line 40, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/association_career_portal.sass */
+.association-job-board .jobs .job-posting .bottom-info {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 10px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  overflow: hidden;
+}
+/* line 46, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/association_career_portal.sass */
+.association-job-board .jobs .job-posting .bottom-info .left-side {
+  float: left;
+}
+/* line 48, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/association_career_portal.sass */
+.association-job-board .jobs .job-posting .bottom-info .left-side img {
+  margin: 0 5px 0 10px;
+}
+/* line 50, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/association_career_portal.sass */
+.association-job-board .jobs .job-posting .bottom-info .right-side {
+  float: right;
+}
+/* line 52, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/association_career_portal.sass */
+.association-job-board .jobs .job-posting .bottom-info .right-side img {
+  margin: 0 5px 0 10px;
+}

@@ -17,7 +17,11 @@ gem 'local_time'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+
 gem 'trix'
+gem "wysiwyg-rails"
+
+
 gem 'googledocviewer'
 gem 'viewerjs-rails'
 gem 'spinjs-rails'

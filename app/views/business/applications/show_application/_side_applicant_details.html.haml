@@ -1,0 +1,21 @@
+.side-applicant
+  - if @candidate.manually_created == true
+
+    .user-image
+      %img(src="/tmp/blank_profile_picture.png")
+    .name= "#{@candidate.full_name.capitalize}"
+   
+    = render 'business/ratings/form', application: @candidate
+
+  - else
+    
+    .user-image
+      - if @candidate.user.user_avatar.present?
+        = image_tag @candidate.user.user_avatar.image.large_image 
+      - else 
+        %img(src="/tmp/blank_profile_picture.png")
+    .name= "#{@application.candidate.user.full_name}"
+   
+     
+    = render 'business/ratings/form', application: @candidate
+    

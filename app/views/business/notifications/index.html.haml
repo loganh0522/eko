@@ -4,5 +4,4 @@
       %h1 Notifications
     .body
       .activity-feed
-        - @notifications.each do |notification|         
-          = render "business/notifications/#{notification.trackable_type.underscore}/#{notification.action}", notification: notification
+        

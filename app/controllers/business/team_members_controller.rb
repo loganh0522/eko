@@ -12,7 +12,7 @@ class Business::TeamMembersController < ApplicationController
     if params[:team_member][:job_board_row_id].present?
       @section = JobBoardRow.find(params[:team_member][:job_board_row_id])
     end
-    
+
     respond_to do |format| 
       format.js
     end
@@ -49,4 +49,5 @@ class Business::TeamMembersController < ApplicationController
   def member_params
     params.require(:team_member).permit(:file, :job_board_row_id)
   end
+
 end

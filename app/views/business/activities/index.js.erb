@@ -7,5 +7,10 @@
   $('.change-containers-nav').find('.activated').removeClass('activated');
   $('.change-containers-nav').find('#job-activity-feed').addClass('activated');
 <% else %>
-  
+  $('.sideModal').show()
+	$('.sideModal').find('.new-title').html('<%= j "Activities" %>');
+	$('.sideModal').find('.modalBody').html('<%= j render "business/activities/activities" %>');
 <% end %>
+
+
+

@@ -5,11 +5,13 @@
     = link_to business_job_applications_path(@job), class: "back-to-candidates" do 
       %i.fa.fa-arrow-left 
       Back to Applicants
+    .stage-process
+      = render 'business/applications/show_application/stage_process' 
     .show-applicant-view
       .applicant-main-container  
         .applicant-general-info
           .applicant-general-top
-            = render 'business/applications/show_application/applicant_details'
+            / = render 'business/applications/show_application/applicant_details'
           .applicant-nav
             = render 'business/applications/show_application/applicant_nav'
           .action-area

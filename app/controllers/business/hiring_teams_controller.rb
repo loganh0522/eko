@@ -2,6 +2,7 @@ class Business::HiringTeamsController < ApplicationController
   layout "business"
   load_and_authorize_resource :job
   load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy]
+  
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -28,6 +29,9 @@ class Business::HiringTeamsController < ApplicationController
       else
         @job = Job.find(params[:job_id])
         @team = @job.hiring_teams
+        @user = User.find(params[:user_id])
+    
+        create_notification(@user, @job)
       end
       format.js 
     end  
@@ -48,6 +52,10 @@ class Business::HiringTeamsController < ApplicationController
 
   private 
 
+  def team_params
+    params.require(:hiring_team).permit(:user_ids, :job_id)
+  end
+
   def render_errors(object)
     @errors = []
     object.errors.messages.each do |error| 
@@ -55,7 +63,8 @@ class Business::HiringTeamsController < ApplicationController
     end 
   end
 
-  def team_params
-    params.require(:hiring_team).permit(:user_ids, :job_id)
+  def create_notification(user, job)
+    Notification.create(recipient: user, actor: current_user, action: "added you to", notifiable: job, 
+      company_id: current_company.id)
   end
 end

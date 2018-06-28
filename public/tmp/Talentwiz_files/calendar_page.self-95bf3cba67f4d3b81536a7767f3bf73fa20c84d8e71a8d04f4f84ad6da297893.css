@@ -1,0 +1,84 @@
+/* line 1, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/calendar_page.sass */
+.schedule-interview-container {
+  width: 60%;
+  margin: 100px 20%;
+  -webkit-box-shadow: 0px 1px 2px 1px #c7c5c7;
+          box-shadow: 0px 1px 2px 1px #c7c5c7;
+  background: white;
+  padding: 10px 0;
+}
+/* line 7, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/calendar_page.sass */
+.schedule-interview-container .confirmation-circle {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  margin: 0 auto;
+  border: 3px solid #EF7B2B;
+  background: rgba(239, 123, 43, 0.2);
+}
+/* line 14, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/calendar_page.sass */
+.schedule-interview-container .confirmation-circle .fa-check {
+  height: 40px;
+  width: 40px;
+  padding: 28px 30px;
+  position: relative;
+  color: #EF7B2B;
+}
+/* line 20, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/calendar_page.sass */
+.schedule-interview-container .confirmation-circle .fa-stack-3x {
+  font-size: 2.5em;
+}
+/* line 22, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/calendar_page.sass */
+.schedule-interview-container .details {
+  margin: 20px auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  text-align: center;
+}
+/* line 26, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/calendar_page.sass */
+.schedule-interview-container .details .title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+/* line 29, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/calendar_page.sass */
+.schedule-interview-container .details .time {
+  font-size: 16px;
+}
+/* line 31, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/calendar_page.sass */
+.schedule-interview-container .details .detail {
+  margin-top: 10px;
+}
+/* line 33, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/calendar_page.sass */
+.schedule-interview-container .logo {
+  text-align: center;
+  width: auto;
+}
+/* line 36, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/calendar_page.sass */
+.schedule-interview-container .time-container {
+  width: 80%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  padding: 15px 15px;
+  margin: 8px 10%;
+  background: #ffffff;
+  text-align: center;
+}
+/* line 45, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/calendar_page.sass */
+.schedule-interview-container .time-container:hover {
+  cursor: pointer;
+  background: rgba(239, 123, 43, 0.4);
+}
+/* line 49, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/calendar_page.sass */
+.schedule-interview-container .email-field {
+  width: 80%;
+  margin: 8px 10%;
+}
+/* line 52, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/calendar_page.sass */
+.schedule-interview-container input[type="radio"]:checked + label {
+  background: rgba(239, 123, 43, 0.4);
+}
+/* line 54, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/calendar_page.sass */
+.schedule-interview-container input[type="radio"] {
+  display: none;
+}

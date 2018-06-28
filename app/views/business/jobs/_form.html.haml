@@ -40,6 +40,7 @@
   .form-row
     = f.label :description, "Job Description"
     = f.trix_editor :description
+    / = f.text_area :description, class: "froala-basic"
     = show_errors(@job, :address) 
   
   .form-row-no-border#job-details

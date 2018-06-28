@@ -29,7 +29,7 @@ xml.lastBuildDate ""
         jobCompanyName = "indeed-apply-apiCompanyName=" + URI.encode(job.company.name) + "&"
         apiToken = "indeed-apply-apiToken=" + ENV['INDEED_TOKEN'] + "&"
         name = "indeed-apply-jobname=firstlastname"
-        postUrl = "indeed-apply-postUrl=" + URI.encode('https://www.talentwiz.ca/indeed-apply', ": /")  
+        postUrl = "indeed-apply-postUrl=" + URI.encode('https://www.talentwiz.ca/inbound-can/indeed-apply', ": /")  
         questions = "indeed-apply-questions" + URI.encode("https://www.talentwiz.ca/jobs/#{job.id}/questions", ": /") 
         
         data = jobTitle + jobId + jobCompanyName + name + apiToken + postUrl + questions

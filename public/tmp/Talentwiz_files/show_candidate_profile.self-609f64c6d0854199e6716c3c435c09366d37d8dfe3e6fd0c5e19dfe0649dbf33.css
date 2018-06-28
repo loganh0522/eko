@@ -1,0 +1,579 @@
+/* line 1, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.back-to-candidates {
+  color: rgba(239, 122, 43, 0.9);
+  font-size: 16px;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+/* line 6, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.back-to-candidates:hover {
+  color: rgba(239, 122, 43, 0.9);
+}
+/* line 8, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.back-to-candidates .fa {
+  margin-right: 20px;
+}
+
+/* line 10, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.show-applicant-view {
+  height: inherit;
+  margin-top: 20px;
+}
+
+/* line 14, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container {
+  width: 62%;
+  min-width: 715px;
+  height: inherit;
+  overflow-y: scroll;
+  float: left;
+  margin-top: 5px;
+}
+/* line 21, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-general-info {
+  width: 99%;
+  margin: 0 2px;
+  background: #ffffff;
+  padding: 15px 0 0 0;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 7px 40px 0px rgba(199, 197, 199, 0.1), 0px 3px 9px 0px #c7c5c7;
+          box-shadow: 0px 7px 40px 0px rgba(199, 197, 199, 0.1), 0px 3px 9px 0px #c7c5c7;
+}
+/* line 29, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-general-info .applicant-general-top .user-image {
+  overflow: hidden;
+  float: left;
+  margin-right: 15px;
+}
+/* line 33, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-general-info .applicant-general-top .user-image img {
+  width: 80px;
+  height: 80px;
+  float: left;
+  margin: 0 15px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  display: block;
+}
+/* line 41, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-general-info .applicant-general-top .applicant-details {
+  width: 82%;
+  float: left;
+}
+/* line 44, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-general-info .applicant-general-top .applicant-details .name-rating {
+  margin-top: 1px;
+}
+/* line 46, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-general-info .applicant-general-top .applicant-details .name-rating .name {
+  font-size: 20px;
+  float: left;
+}
+/* line 49, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-general-info .applicant-general-top .applicant-details .name-rating .dropdown {
+  float: right;
+  margin-right: 15px;
+}
+/* line 52, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-general-info .applicant-general-top .applicant-details .name-rating .dropdown-content {
+  margin-top: 10px;
+}
+/* line 54, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-general-info .applicant-general-top .applicant-details .name-rating .new_rating {
+  float: left;
+  width: auto;
+  margin: auto;
+  margin-left: 25px;
+}
+/* line 59, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-general-info .applicant-general-top .applicant-details .name-rating .new_rating .rating {
+  font-size: 14px;
+  margin-top: 2px;
+}
+/* line 62, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-general-info .applicant-general-top .applicant-details .contact-details {
+  float: left;
+  clear: both;
+  margin-bottom: 2px;
+  overflow: hidden;
+}
+/* line 67, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-general-info .applicant-general-top .applicant-details .contact-details .contact-detail {
+  float: left;
+  margin-right: 15px;
+}
+/* line 70, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-general-info .applicant-general-top .applicant-details .contact-details .contact-detail .fa {
+  float: left;
+  margin: 3px 5px 0 0;
+}
+/* line 73, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-general-info .applicant-general-top .applicant-details .contact-details .contact-detail .detail {
+  float: left;
+}
+/* line 75, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-general-info .applicant-general-top .applicant-details .current-position {
+  clear: both;
+}
+/* line 77, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-general-info .applicant-general-top .actions {
+  clear: both;
+  width: 100%;
+}
+/* line 80, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-general-info .applicant-general-top .actions .dropdown {
+  width: 125px;
+  margin: 20px auto 0px auto;
+  display: block;
+}
+/* line 85, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-nav {
+  width: 100%;
+  background: white;
+  margin-top: 20px;
+  clear: both;
+  padding: 15px 0 0 0;
+  border-radius: 0 0 5px 5px;
+}
+/* line 93, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-nav .change-containers ul {
+  list-style: none;
+  text-decoration: none;
+  padding-left: 0;
+}
+/* line 97, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-nav .change-containers ul li {
+  display: inline-block;
+  padding: 15px 15px 10px 15px;
+  text-align: center;
+  font-size: 14px;
+  color: black;
+  cursor: pointer;
+}
+/* line 104, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-nav .change-containers ul .activated {
+  border-bottom: 4px solid #EF7B2B;
+  color: black;
+}
+/* line 107, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-nav .bottom-row {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 10px 5px 20px 5px;
+  height: 50px;
+}
+/* line 111, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-nav .bottom-row .hide-can-form {
+  float: right;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 5px 10px;
+  border-radius: 8px;
+  color: #ffffff;
+}
+/* line 117, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-nav .bottom-row:hover {
+  cursor: pointer;
+}
+/* line 119, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-nav .bottom-row .can-action {
+  float: left;
+  margin-right: 5px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 5px 10px;
+  border-radius: 8px;
+  color: #ffffff;
+  text-decoration: none;
+}
+/* line 127, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-nav .bottom-row .active-button {
+  background: #EF7B2B;
+}
+/* line 129, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-nav ul {
+  list-style: none;
+  text-decoration: none;
+  padding: 0;
+  margin-bottom: 0;
+}
+/* line 134, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-nav ul li {
+  display: inline-block;
+  padding: 10px 10px;
+  text-align: center;
+  color: black;
+  cursor: pointer;
+}
+/* line 140, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-nav ul a {
+  text-decoration: none;
+}
+/* line 142, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .applicant-nav ul .activated {
+  border-bottom: solid 3px #EF7B2B;
+  color: black;
+}
+/* line 146, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .display-applicant-details {
+  width: 99%;
+  margin: 10px 2px;
+}
+/* line 149, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .display-applicant-details .dropdown {
+  float: right;
+  margin: 10px 0;
+}
+/* line 152, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .display-applicant-details .dropdown .hover-button {
+  float: none;
+}
+/* line 154, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .display-applicant-details .toggle-actions {
+  overflow: hidden;
+  margin: 10px;
+  float: left;
+}
+/* line 158, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .display-applicant-details .toggle-actions a {
+  float: left;
+}
+/* line 160, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-main-container .display-applicant-details .toggle-actions a:hover {
+  text-decoration: none;
+}
+
+/* line 167, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container {
+  float: left;
+  width: 37%;
+  margin-top: 5px;
+}
+/* line 171, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .applicant-stage {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 43px;
+  margin: 0 5px;
+  border-radius: 5px;
+  background: #fff;
+  -webkit-box-shadow: 0px 7px 40px 0px rgba(199, 197, 199, 0.1), 0px 3px 9px 0px #c7c5c7;
+          box-shadow: 0px 7px 40px 0px rgba(199, 197, 199, 0.1), 0px 3px 9px 0px #c7c5c7;
+}
+/* line 179, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .applicant-stage #current-stage-drop {
+  left: 100px;
+}
+/* line 181, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .applicant-stage .current-stage {
+  padding: 10px 15px;
+  border-radius: 5px 0 0 5px;
+  background: #fff;
+  font-size: 14px;
+  float: left;
+  width: 70%;
+}
+/* line 188, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .applicant-stage .current-stage .caret {
+  float: right;
+  margin-top: 8px;
+}
+/* line 191, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .applicant-stage .next-stage {
+  color: rgba(0, 0, 0, 0.3);
+  padding: 10px 20px;
+  font-size: 14px;
+  background: #fff;
+  width: 15%;
+  float: left;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* line 199, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .applicant-stage .next-stage:hover {
+  background: rgba(81, 216, 81, 0.3);
+  cursor: pointer;
+}
+/* line 202, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .applicant-stage .reject-stage {
+  padding: 10px 20px;
+  background: #fff;
+  border-radius: 0 5px 5px 0;
+  font-size: 14px;
+  width: 15%;
+  float: left;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* line 210, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .applicant-stage .reject-stage:hover {
+  background: rgba(255, 0, 0, 0.3);
+  cursor: pointer;
+}
+/* line 213, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .applicant-stage #rejected {
+  background: rgba(255, 0, 0, 0.3);
+}
+/* line 216, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .side-sections {
+  margin: 10px 5px;
+  border-radius: 5px;
+  /* background: #fff */
+  width: 100%;
+  overflow: hidden;
+  /* box-shadow: 0px 7px 40px 0px rgba(199,197,199,.1), 0px 3px 9px 0px rgba(199,197,199,1) */
+}
+/* line 223, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .side-sections .side-section {
+  max-height: 400px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 100%;
+  padding: 10px 10px;
+  clear: both;
+  top: 0;
+  bottom: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* line 232, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .side-sections .side-section .header {
+  overflow: hidden;
+}
+/* line 234, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .side-sections .side-section .header h4 {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  float: left;
+  margin-right: 10px;
+}
+/* line 238, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .side-sections .side-section .header .toggle-actions {
+  float: right;
+}
+/* line 241, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .side-sections .side-section .header form input[type='text'] {
+  border: none;
+  height: 25px;
+  border-bottom: 1px solid #D1DCE4;
+  padding: 0 3px;
+  width: 150px;
+  float: left;
+  background: transparent;
+}
+/* line 249, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .side-sections .side-section .header .btn {
+  float: left;
+  height: 25px;
+  margin: 6px 0 0 10px;
+  padding: 2px 10px;
+}
+/* line 254, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .side-sections .side-section .not-present-container {
+  height: auto;
+  padding: 25px;
+}
+/* line 257, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .side-sections .side-section .not-present-container p {
+  font-size: 18px;
+}
+/* line 260, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .side-sections .side-section .candidate-tasks {
+  overflow-y: scroll;
+  width: 100%;
+  padding: 20px 20px;
+}
+/* line 264, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .side-sections .side-section .candidate-tasks .task {
+  background: #ffffff;
+  padding: 5px 5px;
+  margin-top: 3px;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* line 271, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .side-sections .side-section .candidate-tasks .task .edit-delete-actions {
+  float: right;
+}
+/* line 273, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .side-sections .side-section .candidate-tasks .task .edit-delete-actions .glyphicon-pencil {
+  float: left;
+  color: rgba(0, 0, 0, 0.3);
+}
+/* line 277, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .side-sections .side-section .candidate-tasks .task .body .title {
+  float: left;
+  margin: 5px 0 0 5px;
+}
+/* line 280, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .side-sections .side-section .candidate-tasks .task .body .glyphicon {
+  float: left;
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  padding: 7px;
+}
+/* line 289, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .side-sections .side-section .candidate-tasks .task .body .glyphicon:hover {
+  border-color: green;
+  color: green;
+}
+/* line 293, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .all-applications {
+  padding: 10px 20px;
+}
+/* line 295, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .all-applications .application-container {
+  background: #ffffff;
+  margin: 3px 3px;
+  padding: 5px 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+/* line 301, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .all-applications .application-container:hover {
+  background: rgba(239, 123, 43, 0.3);
+  cursor: pointer;
+}
+/* line 304, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .all-applications .application-container .title {
+  font-size: 14px;
+  margin: 0 0;
+  padding: 0 0;
+}
+/* line 308, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.applicant-side-container .all-applications .application-container .location {
+  font-size: 12px;
+  margin: 0 0;
+  padding: 0 0;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/* line 315, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.candidate-interview {
+  background: #ffffff;
+  -webkit-box-shadow: 0px 1px 2px 1px #c7c5c7;
+          box-shadow: 0px 1px 2px 1px #c7c5c7;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+/* line 321, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.candidate-interview .header {
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 10px 15px;
+}
+/* line 325, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.candidate-interview .header .title {
+  font-size: 16px;
+}
+/* line 327, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.candidate-interview .header .date-time {
+  overflow: hidden;
+  margin-top: 5px;
+  font-size: 12px;
+}
+/* line 331, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.candidate-interview .header .date-time .fa {
+  float: left;
+  margin: 0px 20px 0 0;
+}
+/* line 334, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.candidate-interview .header .date-time .fa-clock-o {
+  margin-top: 2px;
+}
+/* line 336, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+.candidate-interview .body {
+  padding: 10px 15px;
+  clear: both;
+  overflow: hidden;
+}
+
+/* line 344, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+#action-container-dropdown {
+  width: 225px;
+  margin-top: 0px;
+}
+/* line 347, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+#action-container-dropdown .fa {
+  margin-top: 9px;
+}
+
+/* line 352, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+#applicant-stage {
+  width: 300px;
+  float: left;
+}
+/* line 355, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+#applicant-stage .applicant-stage {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 43px;
+  margin: 0 5px;
+  border-radius: 5px;
+  background: #fff;
+  -webkit-box-shadow: 0px 7px 40px 0px rgba(199, 197, 199, 0.1), 0px 3px 9px 0px #c7c5c7;
+          box-shadow: 0px 7px 40px 0px rgba(199, 197, 199, 0.1), 0px 3px 9px 0px #c7c5c7;
+}
+/* line 363, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+#applicant-stage .applicant-stage .dropdown {
+  display: block;
+  float: left;
+}
+/* line 366, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+#applicant-stage .applicant-stage .dropdown .dropdown-content {
+  top: 42px;
+}
+/* line 368, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+#applicant-stage .applicant-stage #current-stage-drop {
+  left: 100px;
+}
+/* line 370, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+#applicant-stage .applicant-stage .current-stage {
+  padding: 10px 15px;
+  border-radius: 5px 0 0 5px;
+  background: #fff;
+  font-size: 14px;
+  float: left;
+  width: 70%;
+}
+/* line 375, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+#applicant-stage .applicant-stage .current-stage .caret {
+  float: right;
+  margin-top: 8px;
+}
+/* line 380, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+#applicant-stage .applicant-stage .next-stage {
+  color: rgba(0, 0, 0, 0.3);
+  padding: 10px 20px;
+  font-size: 14px;
+  background: #fff;
+  float: left;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  width: 50px;
+}
+/* line 388, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+#applicant-stage .applicant-stage .next-stage:hover {
+  background: rgba(81, 216, 81, 0.3);
+  cursor: pointer;
+}
+/* line 391, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+#applicant-stage .applicant-stage .reject-stage {
+  padding: 10px 20px;
+  background: #fff;
+  border-radius: 0 5px 5px 0;
+  font-size: 14px;
+  width: 50px;
+  float: left;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* line 399, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+#applicant-stage .applicant-stage .reject-stage:hover {
+  background: rgba(255, 0, 0, 0.3);
+  cursor: pointer;
+}
+/* line 402, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/show_candidate_profile.sass */
+#applicant-stage .applicant-stage #rejected {
+  background: rgba(255, 0, 0, 0.3);
+}

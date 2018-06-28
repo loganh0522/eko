@@ -128,6 +128,7 @@ Rails.application.routes.draw do
     resources :orders
     resources :order_items
     resources :conversations
+    resources :notifications
     resources :rejection_reasons
     resources :invitations
     resources :locations 

@@ -1,8 +1,9 @@
 .nav-container
   .navigation
     - if @job_board.company.logo.present?
-      = link_to root_path do
-        %img(src="#{@job_board.company.logo.file.large_logo}" class="sub_logo")
+      .brand
+        = link_to root_path do
+          %img(src="#{@job_board.company.logo.file.large_logo}" class="sub_logo")
     - else
       .brand
         = link_to root_path do
@@ -24,7 +25,7 @@
         .sub-header= @job_board.job_board_header.subheader 
 
 - else
-  .portal-header{:style => "background-color: #EF7B2B"}
+  .portal-header{:style => "background: url(/tmp/background_career_portal.jpeg); background-size: cover "}
     .header-overlay{:style => "background: rgba(0,0,0,0.5)"}
       .intro-message
         .header= @job_board.job_board_header.header

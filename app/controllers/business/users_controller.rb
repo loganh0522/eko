@@ -16,12 +16,20 @@ class Business::UsersController < ApplicationController
       @users = @subsidiary.subsidiary.users
     else
       @users = current_company.users
+      
+      current_company.subsidiaries.each do |subsid| 
+        subsid.subsidiary.users.each do |user|
+          @users.append(user)
+        end 
+      end
+
       @job_board = current_company.job_board
       
       respond_to do |format| 
         format.html 
         # format.json { render json: @users.as_json(only: [:full_name]) }
-        format.json { render json: @users.where("first_name like ?", "%#{params[:q]}%")}
+        # format.json { render json: @users.where("full_name like ?", "%#{params[:q]}%")}
+        format.json
         format.js
       end
     end
@@ -128,7 +136,7 @@ class Business::UsersController < ApplicationController
 
     respond_to do |format|
       format.json { render json: @users.as_json(only: [:first_name, :id, :last_name, :full_name], methods: [:avatar_url])}
-      format.js {@users.to_a}
+      # format.js {@users.to_a}
     end
   end
 
@@ -175,8 +183,6 @@ class Business::UsersController < ApplicationController
 
     render :text => @events.to_json
   end
-
-  
 
   private
 

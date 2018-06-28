@@ -29,8 +29,8 @@
                 = @job_board.company.name
           %ul#section-nav
             %li= link_to "Jobs", root_path(anchor: "jobs")
-            - @job_board.header_links.each do |f| 
-              %li= link_to "#{f.name}", root_path(anchor: "board_row_#{f.job_board_row.id}")
+            / - @job_board.header_links.each do |f| 
+            /   %li= link_to "#{f.name}", root_path(anchor: "board_row_#{f.job_board_row.id}")
           - if current_user.present? 
             .dropdown
               .dropdown-button

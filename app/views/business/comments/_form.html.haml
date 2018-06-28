@@ -1,13 +1,13 @@
 .comment-area
   = form_for [:business, @commentable, @comment], remote: true do |f|
-    = f.trix_editor :body, id: "body_Block", class: "comment-body", rows: 10, cols: 8, placeholder: "Add a Note"
+    = f.text_area :body, id: "froala-editor", class: "comment-body", rows: 8, cols: 8, placeholder: "Add a Note (@mention team members)"
 
-    / = f.text_area :body, id: "body_Block", class: "comment-body", rows: 8, cols: 8, placeholder: "Add a Note (@mention team members)"
     %span#body_msgBlock
     = f.hidden_field :user_id, value: current_user.id
     - if @job.present? 
       = f.hidden_field :job_id, value: @job.id
     .comment-area-footer
       = f.button @comment.new_record? ? "+ Add Note" : "Update", class: "btn submit-button", id: "submit-comment-btn", data: {disable_with: "<i class='fa fa-spinner fa-spin'> </i> Saving..."}
-      .btn.border-button#remove_form Cancel
+      - if !@job.present? 
+        .btn.border-button#remove_form Cancel
       

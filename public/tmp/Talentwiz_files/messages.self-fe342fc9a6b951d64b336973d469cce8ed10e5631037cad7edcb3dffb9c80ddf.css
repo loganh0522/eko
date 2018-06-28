@@ -1,0 +1,117 @@
+/* line 1, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container {
+  width: 90%;
+  height: 500px;
+  margin: 0 5%;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+}
+/* line 9, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container #messages-side-container {
+  float: left;
+  width: 30%;
+  min-width: 280px;
+  height: 500px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* line 15, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container #messages-side-container .not-present-container {
+  border: none;
+}
+/* line 17, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container #messages-side-container .conversation-container {
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 10px 10px;
+  overflow-y: scroll;
+}
+/* line 22, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container #messages-side-container .conversation-container:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+/* line 24, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container #messages-side-container .conversation-container .circle-img {
+  float: left;
+  margin-right: 3px;
+  height: 50px;
+  width: 50px;
+  padding: 5px;
+}
+/* line 30, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container #messages-side-container .conversation-container .details {
+  float: left;
+  width: 69%;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  height: 65px;
+}
+/* line 37, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container #messages-side-container .conversation-container .details .name {
+  float: left;
+  width: 80%;
+  font-size: 16px;
+}
+/* line 41, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container #messages-side-container .conversation-container .details .date {
+  float: right;
+  width: 20%;
+}
+/* line 44, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container #messages-side-container .conversation-container .details .body {
+  clear: both;
+}
+/* line 46, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container #messages-side-container .conversation-container .details .body .from {
+  float: left;
+  width: auto;
+}
+/* line 49, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container #messages-side-container .conversation-container .details .body .mess {
+  float: left;
+  width: auto;
+}
+/* line 52, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container #messages-side-container .conversation-container .details .body .mess p {
+  margin: 0 0;
+  color: rgba(0, 0, 0, 0.7);
+}
+/* line 55, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container #messages-side-container .selected-conversation {
+  border-left: 2px solid rgba(239, 123, 43, 0.9);
+}
+/* line 57, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container #messages-main-container {
+  float: right;
+  height: inherit;
+  width: 70%;
+}
+/* line 62, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container #conversation-container #conversation-header {
+  padding: 10px 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+/* line 66, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container #conversation-container #conversation-header .btn {
+  float: right;
+}
+/* line 68, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container #conversation-container #conversation-header .circle,
+#messages-container #conversation-container #conversation-header .circle-img {
+  float: left;
+}
+/* line 71, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container #conversation-container #conversation-header .name {
+  font-size: 14px;
+  font-weight: 500;
+  float: left;
+}
+/* line 75, /Users/loganhouston/Projects/talentwiz/app/assets/stylesheets/messages.sass */
+#messages-container #conversation-container #messages {
+  overflow-y: scroll;
+  padding: 10px 5% 50px 5%;
+  height: 400px;
+}

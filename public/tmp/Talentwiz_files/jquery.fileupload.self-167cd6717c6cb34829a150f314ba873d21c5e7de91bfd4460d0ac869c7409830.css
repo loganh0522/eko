@@ -1,0 +1,39 @@
+/*
+ * jQuery File Upload Plugin CSS
+ * https://github.com/blueimp/jQuery-File-Upload
+ *
+ * Copyright 2013, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+/* line 14, /Users/loganhouston/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/jquery-fileupload-rails-0.4.7/app/assets/stylesheets/jquery.fileupload.scss */
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+/* line 19, /Users/loganhouston/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/jquery-fileupload-rails-0.4.7/app/assets/stylesheets/jquery.fileupload.scss */
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px !important;
+  direction: ltr;
+  cursor: pointer;
+}
+
+/* Fixes for IE < 8 */
+@media screen\9 {
+  /* line 33, /Users/loganhouston/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/jquery-fileupload-rails-0.4.7/app/assets/stylesheets/jquery.fileupload.scss */
+  .fileinput-button input {
+    filter: alpha(opacity=0);
+    font-size: 100%;
+    height: 100%;
+  }
+}

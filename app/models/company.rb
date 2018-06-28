@@ -44,7 +44,7 @@ class Company < ActiveRecord::Base
   has_many :parent_companies, :class_name => "Subsidiary", :foreign_key => "subsidiary_id"
   has_many :parent_company, :through => :parent_companies, :source => :company
   
-
+  has_many :notifications
 
   
 

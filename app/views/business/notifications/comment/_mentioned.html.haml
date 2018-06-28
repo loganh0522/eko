@@ -1,0 +1,14 @@
+.notification{:id => notification.action, :class => "#{notification.notifiable_type} "}      
+  .commenting-user
+    - if current_user.user_avatar.present?
+      = image_tag notification.actor.user_avatar.image.small_image, :class => 'circle', :size => "50x50"
+    - else
+      .circle-img= notification.actor.first_name.first.capitalize
+    .title
+      = "#{notification.actor.full_name} mentioned you in a comment on"
+      - if notification.notifiable.commentable.class == Job
+        = link_to "#{notification.notifiable.commentable.title}", business_job_applications_path(notification.notifiable.commentable)
+      - else
+        / = link_to "#{notification.notifiable.commentable.full_name}", business_job_application_path(notification.notifiable.commentable.applications.first)
+    .time= "#{time_ago_in_words(notification.created_at).gsub(/ mi.*/, 'm') .gsub(/ h.*/, 'h').gsub(/ d.*/, 'd').gsub(/ mo.*/, 'mo').gsub(/ y.*/, 'y')}" 
+    = simple_format(notification.notifiable.body)

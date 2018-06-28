@@ -1,7 +1,26 @@
-#app-stage
-  = render 'business/applications/show_application/application_stage'
+/ #app-stage
+/   = render 'business/applications/show_application/application_stage'
 
 .side-sections
+  = render 'business/applications/show_application/side_applicant_details'
+  .side-section
+    .applicant-filters
+      .filter-container
+        .filter-header
+          %h4 Contact Details
+          .glyphicon.glyphicon-minus
+          .glyphicon.glyphicon-plus
+        .filter-body 
+          .contact-details
+            .contact-detail
+              %i.fa.fa-phone
+              .detail= "#{@candidate.phone}"
+            .contact-detail
+              %i.fa.fa-envelope-o
+              .detail= "#{@candidate.email}"
+            .contact-detail
+              %i.fa.fa-map-marker
+              .detail= "#{@candidate.location}"
   .side-section
     .header
       %h4 Tags

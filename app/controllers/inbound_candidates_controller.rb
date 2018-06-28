@@ -56,9 +56,14 @@ class InboundCandidatesController < ApplicationController
       create_indeed_candidate(@candidate)
     end
 
-    if params[:questions][:answers].present?
+    # if params[:questions][:answers].present?
+    #   create_answers
+    # end
+
+    if params[:questions].present?
       create_answers
     end
+
     head 200
   end
 

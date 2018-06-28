@@ -10,5 +10,7 @@
   $('.display-applicant-details').html('<%= j render "business/applications/show_application/process" %>')
   $('#quickscreen-side-container').find('#candidate_<%= @application.id %>').remove()
   $('.job-stages').html('<%= j render "business/applications/job_applications/job_stages" %>')
+
+  $('.stage-process').html('<%= j render "business/applications/show_application/stage_process" %>')
 <% end %> 
 

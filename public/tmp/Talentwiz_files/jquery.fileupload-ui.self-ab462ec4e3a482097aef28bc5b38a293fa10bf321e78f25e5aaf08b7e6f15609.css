@@ -1,0 +1,72 @@
+/*
+ * jQuery File Upload UI Plugin CSS
+ * https://github.com/blueimp/jQuery-File-Upload
+ *
+ * Copyright 2010, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+/* line 14, /Users/loganhouston/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/jquery-fileupload-rails-0.4.7/app/assets/stylesheets/jquery.fileupload-ui.scss */
+.fileupload-buttonbar .btn,
+.fileupload-buttonbar .toggle {
+  margin-bottom: 5px;
+}
+
+/* line 18, /Users/loganhouston/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/jquery-fileupload-rails-0.4.7/app/assets/stylesheets/jquery.fileupload-ui.scss */
+.progress-animated .progress-bar,
+.progress-animated .bar {
+  background: url(/assets/progressbar-a45ab53b619988cefd45f49cfacc604dd499b93f53a96927cf7b2d965f421f48.gif) !important;
+  -webkit-filter: none;
+          filter: none;
+}
+
+/* line 23, /Users/loganhouston/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/jquery-fileupload-rails-0.4.7/app/assets/stylesheets/jquery.fileupload-ui.scss */
+.fileupload-process {
+  float: right;
+  display: none;
+}
+
+/* line 27, /Users/loganhouston/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/jquery-fileupload-rails-0.4.7/app/assets/stylesheets/jquery.fileupload-ui.scss */
+.fileupload-processing .fileupload-process,
+.files .processing .preview {
+  display: block;
+  width: 32px;
+  height: 32px;
+  background: url(/assets/loading-b84750cc5a395288fcfd0cf42e3a60d6135e2f14db83fce05e97e5abacc2f9b4.gif) center no-repeat;
+  background-size: contain;
+}
+
+/* line 35, /Users/loganhouston/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/jquery-fileupload-rails-0.4.7/app/assets/stylesheets/jquery.fileupload-ui.scss */
+.files audio,
+.files video {
+  max-width: 300px;
+}
+
+@media (max-width: 767px) {
+  /* line 41, /Users/loganhouston/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/jquery-fileupload-rails-0.4.7/app/assets/stylesheets/jquery.fileupload-ui.scss */
+  .fileupload-buttonbar .toggle,
+  .files .toggle,
+  .files .btn span {
+    display: none;
+  }
+
+  /* line 46, /Users/loganhouston/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/jquery-fileupload-rails-0.4.7/app/assets/stylesheets/jquery.fileupload-ui.scss */
+  .files .name {
+    width: 80px;
+    word-wrap: break-word;
+  }
+
+  /* line 50, /Users/loganhouston/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/jquery-fileupload-rails-0.4.7/app/assets/stylesheets/jquery.fileupload-ui.scss */
+  .files audio,
+  .files video {
+    max-width: 80px;
+  }
+
+  /* line 54, /Users/loganhouston/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/jquery-fileupload-rails-0.4.7/app/assets/stylesheets/jquery.fileupload-ui.scss */
+  .files img,
+  .files canvas {
+    max-width: 100%;
+  }
+}

@@ -19,7 +19,10 @@ module JobHelper
     job.applications.where(stage: stage, hired: false, rejected: false).count
   end
 
-
+  def application_stage(candidate, job)
+    application = Application.where(candidate: candidate, job: job).first
+  end
+  
   def application_stage(candidate, job)
     application = Application.where(candidate: candidate, job: job).first
 

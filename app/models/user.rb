@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   has_many :invitations
   has_many :messages
   has_many :activities
-  has_many :notifications
+  has_many :notifications, foreign_key: :recipient_id
   has_many :answers
   has_many :ratings
   has_one  :email_signature
