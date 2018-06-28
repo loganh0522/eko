@@ -25,7 +25,7 @@
     .date-time
       %i.fa.fa-clipboard
       .time
-        = link_to "Interview Kit", business_interview_kit_path(interview.assessment)
+        = link_to "Interview Kit", business_interview_kit_path(interview.assessment) if interview.assessment.present? 
     .date-time
       %i.fa.fa-map-marker
       .time= "#{interview.location}"  
