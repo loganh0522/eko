@@ -13,4 +13,11 @@ class Business::NotificationsController < ApplicationController
       format.html
     end
   end
+
+  def mark_as_read
+    @notification = Notification.where(recipient: current_user, company: current_company).unread
+    @notification.update_all(read_at: Time.zone.now)
+
+    render json: {success: true}
+  end
 end

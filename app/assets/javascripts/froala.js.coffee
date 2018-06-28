@@ -1,5 +1,6 @@
 jQuery -> 
 	$('#froala-editor').froalaEditor
+    key: '1ZSZGUSXYSMZb1JGZ=='
     toolbarButtons: [
       'bold'
       'italic'
