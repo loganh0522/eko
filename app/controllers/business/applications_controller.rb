@@ -111,9 +111,9 @@ class Business::ApplicationsController < ApplicationController
     where[:created_at] = {gte: params[:date_applied].to_time, lte: Time.now} if params[:date_applied].present?
 
     if params[:qcv].present? 
-      @candidates = Candidate.search(params[:qcv], where: where, fields: qcv_fields, match: :word_start).records.paginate(page: params[:page], per_page: 10).accessible_by(current_ability)
+      @candidates = Candidate.accessible_by(current_ability).search(params[:qcv], where: where, fields: qcv_fields, match: :word_start, page: params[:page], per_page: 10)
     else
-      @candidates = Candidate.search(query, where: where, fields: fields, match: :word_start).records.paginate(page: params[:page], per_page: 10).accessible_by(current_ability)
+      @candidates = Candidate.accessible_by(current_ability).search(query, where: where, fields: fields, match: :word_start, page: params[:page], per_page: 10)
     end
     respond_to do |format|
       format.js

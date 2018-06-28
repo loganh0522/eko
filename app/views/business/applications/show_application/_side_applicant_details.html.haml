@@ -14,7 +14,7 @@
         = image_tag @candidate.user.user_avatar.image.large_image 
       - else 
         %img(src="/tmp/blank_profile_picture.png")
-    .name= "#{@application.candidate.user.full_name}"
+    .name= "#{@candidate.user.full_name}"
    
      
     = render 'business/ratings/form', application: @candidate
