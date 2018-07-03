@@ -35,12 +35,14 @@ module CandidateHelper
 
   def interview_link(interview)
     if interview.job_id.present? && interview.candidate_id.present?
-      app = Application.where(candidate_id: interview.candidate.id, job_id: interview.job_id).first
+      app = Application.where(candidate_id: interview.candidate_id, job_id: interview.job_id).first
+      
       if app.present?
         link_to interview.candidate.full_name, business_job_application_path(interview.job_id, app)
       else
         link_to interview.candidate.full_name, business_candidate_path(interview.candidate)
       end
+
     else
       link_to interview.candidate.full_name, business_candidate_path(interview.candidate)
     end

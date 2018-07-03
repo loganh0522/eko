@@ -1,11 +1,7 @@
 .page-header
-  .dropdown 
-    .dropdown
-      .dropdown-button
-        %h2= "#{current_company.name} Admin"
-      .dropdown-content#myDropdown
-        - current_company.subsidiaries.each do |subsidiary|
-          = link_to "#{subsidiary.subsidiary.name}", business_job_templates_path(subsidiary: subsidiary.id) 
+  .custom-select#subsidiary-admin-select
+    = select_tag :start_month, options_for_select(current_company.subsidiaries.collect{ |u| [u.subsidiary.name, u.id] } + [current_company.name]), include_blank: "#{current_company.name}" 
+
   .admin-nav
     %ul
       %li= link_to "Career Portal", business_job_board_path(current_company.job_board.id)

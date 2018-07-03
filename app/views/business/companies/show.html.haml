@@ -1,4 +1,6 @@
 .page-header
+  .custom-select#subsidiary-admin-select
+    = select_tag :start_month, options_for_select(current_company.subsidiaries.collect{ |u| [u.subsidiary.name, u.id] } + [current_company.name]), include_blank: "#{current_company.name}"
   .dropdown 
     .dropdown
       .dropdown-button

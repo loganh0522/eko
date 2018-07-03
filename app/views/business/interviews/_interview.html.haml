@@ -4,10 +4,10 @@
       = "#{interview.title} with"
       = interview_link(interview)
       
-      
       - if interview.job.present?
         = "for"
         = link_to "#{interview.job.title}", business_job_interviews_path(interview.job)
+        
     .dropdown
       .dropdown-button
         %i.fa.fa-ellipsis-h.fa-lg

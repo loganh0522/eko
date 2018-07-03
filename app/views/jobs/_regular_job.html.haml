@@ -1,7 +1,6 @@
 - if @job_board.kind == "association"
   .company-profile
     .background{:style => "background-image: url(#{@job.company.job_board.job_board_header.background_image.file})"}  
-
     .logo{:style => "background: url(#{@job.company.logo.file.large_logo}); background-repeat: no-repeat; background-size: 100%; background-color: white; background-position: center"}
     .change-containers-nav
       %ul
@@ -19,8 +18,9 @@
   .main-row-container
     .inner-container
       = render 'jobs/job_description/basic_description'
+
 - else
-  .portal-header{:style => "background-color: #EF7B2B"}
+  .portal-header{:style => "background: url(/tmp/background_career_portal.jpeg)"}
     .header-overlay{:style => "background: rgba(0,0,0,0.5)"}
       .intro-message
         .header= @job.title

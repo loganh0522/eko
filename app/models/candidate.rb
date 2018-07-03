@@ -7,11 +7,11 @@ class Candidate < ActiveRecord::Base
   has_many :applications, :dependent => :destroy
   has_many :jobs, through: :applications
   has_one :conversation, :dependent => :destroy
-  has_many :interviews
-  has_many :question_answers
-  has_many :invited_candidates
-  has_many :assessments
-  has_many :interview_scorecards
+  has_many :interviews, :dependent => :destroy
+  has_many :question_answers, :dependent => :destroy
+  has_many :invited_candidates, :dependent => :destroy
+  has_many :assessments, :dependent => :destroy
+  has_many :interview_scorecards, :dependent => :destroy
   has_many :interview_invitations, through: :invited_candidates
   has_many :resumes, :dependent => :destroy
   has_many :work_experiences, :dependent => :destroy
@@ -25,8 +25,8 @@ class Candidate < ActiveRecord::Base
   has_many :candidate_associations, :dependent => :destroy
 
 
-  has_many :ratings
-  has_many :taggings
+  has_many :ratings, :dependent => :destroy
+  has_many :taggings, :dependent => :destroy
   has_many :tags, through: :taggings
   has_many :activities, -> {order("created_at DESC")}, :dependent => :destroy
   has_many :messages, -> {order("created_at DESC")}, as: :messageable, :dependent => :destroy
