@@ -154,7 +154,8 @@ class Business::ApplicationsController < ApplicationController
     @candidate = @application.candidate
     @job = @application.job 
     @questions = @job.questions
- 
+  
+
     respond_to do |format| 
       format.js
     end

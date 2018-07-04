@@ -30,7 +30,6 @@ jQuery ->
       regexp = new RegExp($(this).data('id'), 'g')
       add_fields = $(this).parent().next().find('.add_fields')
       add_fields.before(add_fields.data('fields'))
-      add_fields.before(add_fields.data('fields'))
       add_fields.parent().show()
     else
       answers = $(this).parent().next().find('.answers')

@@ -270,6 +270,7 @@ Rails.application.routes.draw do
         get :evaluations, to: "candidates#application_form"
         get :scorecards, to: "candidates#scorecards"
         post :ratings, to: "candidates#ratings"
+        get :evaluations, to: "applications#application_form"
       end
 
       get 'show_project', to: "candidates#show_project"
@@ -284,8 +285,8 @@ Rails.application.routes.draw do
       resources :tags
       resources :tasks 
 
-      get :application_form, to: "applications#application_form"
-      get :application_activity, to: "activities#application_activity"
+      get :application_form, to: "candidates#application_form"
+      # get :application_activity, to: "activities#application_activity"
       
       resources :application_scorecards
       resources :assessments

@@ -185,6 +185,18 @@ class Business::CandidatesController < ApplicationController
     head 200 
   end
 
+  def application_form
+    @candidate = Candidate.find(params[:id])
+    @applications = @candidate.applications
+    
+    @job = @application.job 
+    @questions = @job.questions
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
   
   def add_tags(candidate)  
