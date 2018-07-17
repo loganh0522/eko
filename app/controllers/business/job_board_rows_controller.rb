@@ -11,7 +11,7 @@ class Business::JobBoardRowsController < ApplicationController
     @photo = MediaPhoto.new
     @member = TeamMember.new
     
-    @subsidiary = Subsidiary.find(params[:subsidiary]) if params[:subsidiary].present?
+    @subsidiary = Company.find(params[:subsidiary]) if params[:subsidiary].present?
 
     respond_to do |format|
       format.js
@@ -20,7 +20,7 @@ class Business::JobBoardRowsController < ApplicationController
 
   def create   
     if params[:subsidiary].present? 
-      @company = Subsidiary.find(params[:subsidiary]).subsidiary
+      @company = Company.find(params[:subsidiary])
     else 
       @company = current_company
     end

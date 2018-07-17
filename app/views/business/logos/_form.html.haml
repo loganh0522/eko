@@ -2,7 +2,7 @@
   .float-container#single-photo-form
     .header 
       .title Company Logo
-      = q.hidden_field :company_id, value: current_company.id
+      = q.hidden_field :company_id, value: @company.id
       = q.file_field :file 
       = q.label :file, "Add Logo", class: "btn border-button" 
     #photo

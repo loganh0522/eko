@@ -15,7 +15,7 @@ class Business::JobBoardHeadersController < ApplicationController
     @job_board_header = JobBoardHeader.find(params[:id])
     @job_board = JobBoard.find(params[:job_board_id])
     @company = @job_board.company
-    
+
     if @job_board_header.background_image.present?
       @background = @job_board_header.background_image
     else
@@ -23,7 +23,7 @@ class Business::JobBoardHeadersController < ApplicationController
     end
 
     if @company.logo.present?
-      @logo = current_company.logo
+      @logo = @company.logo
     else
       @logo = Logo.new
     end
@@ -48,6 +48,6 @@ class Business::JobBoardHeadersController < ApplicationController
   private
 
   def job_board_header_params
-    params.require(:job_board_header).permit(:header, :subheader, :logo, :cover_photo, :job_board_id)
+    params.require(:job_board_header).permit(:header, :subheader, :cover_photo, :job_board_id)
   end
 end

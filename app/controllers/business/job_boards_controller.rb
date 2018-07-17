@@ -16,6 +16,7 @@ class Business::JobBoardsController < ApplicationController
       @job_board = current_company.job_board  
     end
 
+
     @job_board_header = @job_board.job_board_header
     @sections = @job_board.job_board_rows
 

@@ -16,6 +16,7 @@ class Business::LogosController < ApplicationController
 
   def create
     @logo = Logo.create(logo_params)
+    @company = @logo.company
 
     respond_to do |format| 
       format.js
@@ -33,7 +34,8 @@ class Business::LogosController < ApplicationController
   def update
     @logo  = Logo.find(params[:id])
     @logo.update(logo_params)
-
+    @company = @logo.company
+    
     respond_to do |format|
       format.js
     end
