@@ -41,7 +41,9 @@ closeAllSelect = (elmnt) ->
 createSelectMenu = (i, customSelects) ->
   while i < x.length
     selElmnt = x[i].getElementsByTagName('select')[0]
+    console.log(selElmnt)
     ###for each element, create a new DIV that will act as the selected item:###
+    
     if x[i].getElementsByClassName('select-items').length == 0
       a = document.createElement('DIV')
       a.setAttribute 'class', 'select-selected'
@@ -53,13 +55,20 @@ createSelectMenu = (i, customSelects) ->
       b = document.createElement('DIV')
       b.setAttribute 'class', 'select-items select-hide'
       j = 1
+      
       while j < selElmnt.length
         ###for each option in the original select element,
         create a new DIV that will act as an option item:
         ###
+       
 
-        c = document.createElement('DIV')
+        c = document.createElement('div')
         c.innerHTML = selElmnt.options[j].innerHTML
+        
+        c.setAttribute('data-id', selElmnt.options[j].value) if selElmnt.options[j].value.length > 0 
+        c.setAttribute('id', "change-subsidiary") if selElmnt.getAttribute('id') == 'subsidiary'
+        
+
         c.addEventListener 'click', (e) ->
           `var i`
 
@@ -75,6 +84,7 @@ createSelectMenu = (i, customSelects) ->
           s = @parentNode.parentNode.getElementsByTagName('select')[0]
           h = @parentNode.previousSibling
           i = 0
+          
           while i < s.length
             if s.options[i].innerHTML == @innerHTML
               s.selectedIndex = i
@@ -91,6 +101,7 @@ createSelectMenu = (i, customSelects) ->
           return
         b.appendChild c
         j++
+
       x[i].appendChild b
     
     a.addEventListener 'click', (e) ->
@@ -109,11 +120,18 @@ jQuery ->
   x = document.getElementsByClassName('custom-select')
   i = 0
   createSelectMenu(i, x)
-  $(document).ajaxComplete ->
-    createSelectMenu(i, x)
   
   document.addEventListener 'click', closeAllSelect
   
+  $('#subsidiary-admin-select').on 'click', '#change-subsidiary', -> 
+    path = window.location.pathname
+    $.ajax
+      url: path
+      type: 'GET'   
+      data:
+        subsidiary_id: $(this).attr('data-id')
+      createSelectMenu(i, x)
+
   $(document).on 'click', '.add_fields', (event) ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
@@ -123,3 +141,7 @@ jQuery ->
     $(this).find('.position').val(number)
     createSelectMenu(i, x)
     event.preventDefault()
+
+  $(document).ajaxComplete ->
+    createSelectMenu(i, x)
+

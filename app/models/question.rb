@@ -6,6 +6,8 @@ class Question < ActiveRecord::Base
   belongs_to :interview_kit_template
   belongs_to :interview_kit
   belongs_to :assessment
+  belongs_to :questionairre 
+  
   has_many :answers
   has_many :question_options, dependent: :destroy
   has_many :question_answers, dependent: :destroy

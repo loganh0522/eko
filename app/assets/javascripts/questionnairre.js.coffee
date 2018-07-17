@@ -69,8 +69,6 @@ jQuery ->
     $(this).first().prev().val('1')
     $(this).parent().parent().hide()
     event.preventDefault()
-
-
   
   $(document).on 'click', '.add_fields_after', (event) ->
     time = new Date().getTime()

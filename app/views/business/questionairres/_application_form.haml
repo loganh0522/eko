@@ -1,0 +1,16 @@
+- if @questionairres.nil?
+  .assessment
+    .not-present-container
+      %p No Assessments Available
+- else
+  - @questionairres.each do |questionairre|
+    .assessment 
+      .header
+        %h4 Application Form
+      .assessment-body
+        - questionairre.questions.each do |question|
+          .question-container
+            .question
+              = question.body
+            .answer
+              = answers(question)

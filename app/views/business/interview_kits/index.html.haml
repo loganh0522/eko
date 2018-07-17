@@ -11,8 +11,7 @@
     = render 'business/shared/templates_sidebar'
   .main-container
     .standard-header
-      %h3 Interview Kits
-      = link_to "+ Inteview Kit", new_business_interview_kit_path, remote: true, class: "btn border-button"
+      = render 'header'
     .templates
       = render "business/interview_kits/interview_kits"
    

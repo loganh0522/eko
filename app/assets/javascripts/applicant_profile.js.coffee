@@ -75,6 +75,7 @@ jQuery ->
       $("#" + "#{buttonobj}" + "_button").show()
       $(this).parent().parent().remove()
     return
+    
 
 ################ Star Rating ##################
   $('#main-container').on 'click', '.star', (event) ->  

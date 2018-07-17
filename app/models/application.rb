@@ -9,6 +9,8 @@ class Application < ActiveRecord::Base
   has_many :interview_scorecards
   has_many :application_scorecards
   has_many :assessments
+  has_many :questionairres, dependent: :destroy
+
   has_many :question_answers, dependent: :destroy
   has_many :tasks, -> {order("created_at DESC")}, as: :taskable, dependent: :destroy
   

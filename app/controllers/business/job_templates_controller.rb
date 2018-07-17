@@ -7,26 +7,32 @@ class Business::JobTemplatesController < ApplicationController
   
 
   def index 
-    if params[:subsidiary].present?
-      @subsidiary = Subsidiary.find(params[:subsidiary])
-      @job_templates = @subsidiary.subsidiary.job_templates
+    if params[:subsidiary_id].present?
+      @subsidiary = Company.find(params[:subsidiary_id])
+      @job_templates = @subsidiary.job_templates
     else
       @job_templates = current_company.job_templates
+    end
+
+    respond_to do |format|
+      format.js
+      format.html
     end
   end
 
   def new
     @job_template = JobTemplate.new
-    @subsidiary = Subsidiary.find(params[:subsidiary]) if params[:subsidiary].present?
+    @subsidiary = Company.find(params[:subsidiary]) if params[:subsidiary].present?
 
     respond_to do |format| 
       format.js
+      format.html
     end
   end
 
   def create 
     if params[:subsidiary].present?
-      @company = Subsidiary.find(params[:subsidiary]).subsidiary
+      @company = Company.find(params[:subsidiary])
       @job_template = JobTemplate.new(job_params.merge!(company: @company, user: current_user)) 
     else
       @job_template = JobTemplate.new(job_params.merge!(company: current_company, user: current_user)) 

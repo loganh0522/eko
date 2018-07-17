@@ -217,6 +217,20 @@ class Business::CandidatesController < ApplicationController
     end
   end
 
+  def create_application_form 
+    @questionairre = Questionairre.create(candidate_id: self.id, application_id: self.application_id) 
+    
+    @job.questions.each do |question| 
+      @question = Question.create(question.attributes.except('id', 'job_id'))
+      @question.update_attributes(questionairre_id: @questionairre.id)
+      
+      
+      question.question_options.each do |option|
+        QuestionOption.create(question_id: @question.id, body: option.body)
+      end
+    end
+  end
+
   def render_errors(candidate)
     @errors = []
     candidate.errors.messages.each do |error| 

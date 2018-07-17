@@ -8,7 +8,10 @@
   = link_to business_application_assessments_path(@application), remote: true do
     %li.change#scorecards Scorecards
 
-  = link_to evaluations_business_application_path(@application), remote: true do
+  / = link_to evaluations_business_application_path(@application), remote: true do
+  /   %li.change#assessments Assessments
+
+  = link_to business_application_questionairres_path(@application), remote: true do
     %li.change#assessments Assessments
 
   = link_to business_candidate_messages_path(@candidate, job: @job), remote: true do

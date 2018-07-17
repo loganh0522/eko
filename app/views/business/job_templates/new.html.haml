@@ -1,0 +1,15 @@
+.page-header
+  .custom-select#subsidiary-admin-select
+    = select_tag :subsidiary, options_for_select([[current_company.name, current_company.id]]) + options_for_select(current_company.subsidiaries.collect{ |u| [u.subsidiary.name, u.subsidiary.id]}), include_blank: "#{current_company.name}" 
+
+  .admin-nav
+    %ul
+      %li= link_to "Career Portal", business_job_board_path(current_company.job_board.id)
+      %li= link_to "Templates", business_email_templates_path, class: 'active'
+      %li= link_to "Settings", business_company_path(current_company)
+
+.company-settings
+  .side-container#job-nav
+    = render 'business/shared/templates_sidebar'
+  .main-container
+    = render 'form'

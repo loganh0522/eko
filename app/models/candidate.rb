@@ -10,7 +10,10 @@ class Candidate < ActiveRecord::Base
   has_many :interviews, :dependent => :destroy
   has_many :question_answers, :dependent => :destroy
   has_many :invited_candidates, :dependent => :destroy
+  
   has_many :assessments, :dependent => :destroy
+  has_many :questionairres, :dependent => :destroy
+
   has_many :interview_scorecards, :dependent => :destroy
   has_many :interview_invitations, through: :invited_candidates
   has_many :resumes, :dependent => :destroy

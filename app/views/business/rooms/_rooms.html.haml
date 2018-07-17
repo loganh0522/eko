@@ -1,3 +1,6 @@
-.rooms
+- if @rooms.present? 
   - @rooms.each do |room|
     = render "business/rooms/room", room: room
+- else 
+  .not-present-container
+    %p There are currently no meeting rooms listed.

@@ -6,18 +6,23 @@ class Business::InterviewKitTemplatesController < ApplicationController
   before_filter :company_deactivated?
   
   def index 
-    if params[:subsidiary].present?
-      @subsidiary = Subsidiary.find(params[:subsidiary])
-      @interview_kits = @subsidiary.subsidiary.interview_kit_templates
+    if params[:subsidiary_id].present?
+      @subsidiary = Company.find(params[:subsidiary_id])
+      @interview_kits = @subsidiary.interview_kit_templates
     else
       @interview_kits = current_company.interview_kit_templates
+    end
+
+    respond_to do |format|
+      format.js
+      format.html 
     end
   end
 
   def new
     @interview_kit = InterviewKitTemplate.new
     @scorecard = Scorecard.new
-    @subsidiary = Subsidiary.find(params[:subsidiary]) if params[:subsidiary].present?
+    @subsidiary = Company.find(params[:subsidiary]) if params[:subsidiary].present?
 
     respond_to do |format| 
       format.js
@@ -26,7 +31,7 @@ class Business::InterviewKitTemplatesController < ApplicationController
 
   def create 
     if params[:subsidiary].present?
-      @company = Subsidiary.find(params[:subsidiary]).subsidiary
+      @company = Company.find(params[:subsidiary])
       @interview_kit = InterviewKitTemplate.new(interview_kit_params.merge!(company: @company)) 
     else
       @interview_kit = InterviewKitTemplate.new(interview_kit_params.merge!(company: current_company)) 
@@ -37,8 +42,8 @@ class Business::InterviewKitTemplatesController < ApplicationController
         format.js
       else 
         render_errors(@interview_kit)
+        format.js
       end
-      format.js
     end
   end
 

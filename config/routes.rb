@@ -80,12 +80,14 @@ Rails.application.routes.draw do
     get '/profile', to: 'users#show'
     
     resources :create_profiles
+    
     resources :jobs, only: [:index, :show] do
       resources :applications, only: [:index]
       resources :candidates, only: [:create, :new]
       get '/apply', to: 'candidates#new'
       post '/apply', to: 'candidates#create'
     end
+
     resources :attachments
     resources :question_answers 
     resources :users
@@ -279,6 +281,7 @@ Rails.application.routes.draw do
       resources :interviews 
       resources :activities
       resources :applications 
+
       resources :messages
       resources :comments
       resources :resumes
@@ -290,6 +293,7 @@ Rails.application.routes.draw do
       
       resources :application_scorecards
       resources :assessments
+      resources :questionairres
 
       collection do 
         get :autocomplete
@@ -309,7 +313,8 @@ Rails.application.routes.draw do
         get :evaluations, to: "applications#application_form"
         get :scorecards, to: "applications#scorecards"
       end
-
+      
+      resources :questionairres
       resources :assessments
       
       collection do 

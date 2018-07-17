@@ -23,8 +23,8 @@
       %span#email_msgBlock
   
   = f.fields_for :resumes, Resume.new do |q|
-    = q.label "Resume *", class: "file-container"
-    = q.file_field :name, class: "file-container", :required => true
+    = q.label "Resume *", class: "upload-resume-container"
+    = q.file_field :name, class: "upload-resume-container", :required => true
   %span#resume_msgBlock
 
   %h2 Questions
@@ -37,8 +37,8 @@
       .answer
         - if question.kind == 'Select (One)'
           %ul 
-            - question.question_options.each do |option|
-              = f.fields_for :question_answers, QuestionAnswer.new do |q| 
+            = f.fields_for :question_answers, QuestionAnswer.new do |q|   
+              - question.question_options.each do |option|
                 %li
                   = q.hidden_field :question_id, value: question.id
                   = q.hidden_field  :job_id, value: @job.id

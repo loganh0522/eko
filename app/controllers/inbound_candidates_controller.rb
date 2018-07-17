@@ -8,29 +8,13 @@ class InboundCandidatesController < ApplicationController
     @candidate = Candidate.create(company: @company, name: params[:name], first_name: params[:first_name], 
       last_name: params[:last_name], email: params[:email], phone: params[:phone], 
       manually_created: true, source: "ZipRecruiter")
+
     @application = Application.create(candidate_id: @candidate.id, job: @job)
+    
     @encoded_resume = params[:resume]
     Resume.create(candidate_id: @candidate.id, name: "data:application/pdf;base64,#{@encoded_resume}")
-    params[:answers].each do |answer| 
-      @question = Question.find(answer[:id])
-      if @question.kind == "Multiselect"
-        answer.values.each do |value| 
-          QuestionAnswer.create(question_id: answer[:id], question_option_id: value, 
-            candidate_id: @candidate.id, job_id: @job.id, application_id: @application.id)
-        end
-      elsif @question.kind == "Select (One)"
-        QuestionAnswer.create(question_id: answer[:id], question_option_id: answer[:value], 
-          candidate_id: @candidate.id, job_id: @job.id, application_id: @application.id)
-      elsif @question.kind == "File"
-        @encoded_answer = answer[:value]
-        QuestionAnswer.create(question_id: answer[:id], 
-          file: "data:application/pdf;base64,#{@encoded_answer}", 
-          job_id: @job.id, candidate_id: @candidate.id, application_id: @application.id)
-      else
-        QuestionAnswer.create(question_id: answer[:id], body: answer[:value], 
-          job_id: @job.id, candidate_id: @candidate.id, application_id: @application.id)
-      end
-    end
+    
+    create_application_form(@job, @candidate, @application)
 
     head 200
   end
@@ -68,6 +52,43 @@ class InboundCandidatesController < ApplicationController
   end
 
   private
+  
+  def create_application_form(job, candidate, application)
+    @questionairre = Questionairre.create(candidate_id: candidate.id, application_id: application.id) 
+    
+    job.questions.each do |question| 
+      @question = Question.create(question.attributes.except('id', 'job_id'))
+      @question.update_attributes(questionairre_id: @questionairre.id)
+
+      if question.question_options.present?
+        question.question_options.each do |option|
+          @option = QuestionOption.create(question_id: @question.id, body: option.body)
+          
+          params[:answers].each do |answer| 
+            if @question.kind == "Multiselect" && answer[:id] == question.id.to_s 
+              answer[:values].each do |value| 
+                if value.to_i == option.id
+                  Answer.create(question_id: @question.id, question_option_id: @option.id)
+                end
+              end
+            elsif @question.kind == "Select (One)" && answer[:id] == question.id.to_s 
+              if answer[:value].to_i == option.id
+                Answer.create(question_id: @question.id, question_option_id: @option.id)
+              end
+            end
+          end
+        end
+
+      else
+        params[:answers].each do |answer|
+          if @question.kind == "Text (Long Answer)" && answer[:id] == question.id.to_s 
+            Answer.create(question_id: @question.id, body: answer[:value])
+          end
+        end
+      end
+    end
+  end
+
 
   def create_answers
     params[:questions][:answers].each do |answer| 
@@ -81,17 +102,21 @@ class InboundCandidatesController < ApplicationController
       elsif @question.kind == "Select (One)"
         QuestionAnswer.create(question_id: answer[:id], question_option_id: answer[:value], 
           candidate_id: @candidate.id, job_id: @job.id, application_id: @application.id)
+      
       elsif @question.kind == "File"
         @encoded_answer = answer[:value]
         QuestionAnswer.create(question_id: answer[:id], 
           file: "data:application/pdf;base64,#{@encoded_answer}", 
           job_id: @job.id, candidate_id: @candidate.id, application_id: @application.id)
+      
       else
         QuestionAnswer.create(question_id: answer[:id], body: answer[:value], 
           job_id: @job.id, candidate_id: @candidate.id, application_id: @application.id)
       end
     end
   end
+
+  
 
   def create_indeed_candidate(candidate)
     indeed_create_positions(candidate)

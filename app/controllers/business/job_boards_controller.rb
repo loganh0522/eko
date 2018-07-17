@@ -9,8 +9,7 @@ class Business::JobBoardsController < ApplicationController
 
   def show
     if params[:subsidiary_id].present?
-      @subsidiary = Subsidiary.find(params[:subsidiary_id])
-      @company = @subsidiary.subsidiary
+      @company = Company.find(params[:subsidiary_id])
       @job_board = @company.job_board
     else
       @company = current_company
@@ -19,6 +18,11 @@ class Business::JobBoardsController < ApplicationController
 
     @job_board_header = @job_board.job_board_header
     @sections = @job_board.job_board_rows
+
+    respond_to do |format| 
+      format.js
+      format.html
+    end
   end
 
   def edit

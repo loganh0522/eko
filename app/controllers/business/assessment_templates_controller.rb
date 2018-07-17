@@ -6,17 +6,21 @@ class Business::AssessmentTemplatesController < ApplicationController
   before_filter :company_deactivated?
   
   def index 
-    if params[:subsidiary].present?
-      @subsidiary = Subsidiary.find(params[:subsidiary])
-      @assessments = @subsidiary.subsidiary.assessment_templates
+    if params[:subsidiary_id].present?
+      @subsidiary = Company.find(params[:subsidiary_id])
+      @assessments = @subsidiary.assessment_templates
     else
       @assessments = current_company.assessment_templates
+    end
+    respond_to do |format|
+      format.js
+      format.html
     end
   end
 
   def new
     @assessment = AssessmentTemplate.new
-    @subsidiary = Subsidiary.find(params[:subsidiary]) if params[:subsidiary].present?
+    @subsidiary = Company.find(params[:subsidiary]) if params[:subsidiary].present?
     
     respond_to do |format| 
       format.js
@@ -25,7 +29,7 @@ class Business::AssessmentTemplatesController < ApplicationController
 
   def create 
     if params[:subsidiary].present?
-      @company = Subsidiary.find(params[:subsidiary]).subsidiary
+      @company = Company.find(params[:subsidiary])
       @assessment = AssessmentTemplate.new(assessment_params.merge!(company: @company)) 
     else
       @assessment = AssessmentTemplate.new(assessment_params.merge!(company: current_company)) 

@@ -20,12 +20,14 @@ class CandidatesController < ApplicationController
       @candidate = @company.candidates.where(email: params[:candidate][:email]).first
       @application = Application.create(candidate_id: @candidate.id, job: @job) 
       # track_activity @application, "create", @company.id, @candidate.id, params[:job_id]
+      create_application_form(@candidate, @application)
       redirect_to root_path
     else
       @candidate = Candidate.new(candidate_params.merge(company_id: @company.id))
       
       if @candidate.save   
         @application = Application.create(candidate_id: @candidate.id, job: @job)   
+        create_application_form(@candidate, @application)
         flash[:success] = "Your application has been submitted"
         # track_activity @application, "create", @company.id, @candidate.id, params[:job_id]
         redirect_to root_path
@@ -78,6 +80,19 @@ class CandidatesController < ApplicationController
     else
       render :new
       flash[:error] = "Something went wrong please try again"
+    end
+  end
+
+  def create_application_form(candidate, application)
+    @questionairre = Questionairre.create(candidate_id: candidate.id, application_id: application.id) 
+    
+    @job.questions.each do |question| 
+      @question = Question.create(question.attributes.except('id', 'job_id'))
+      @question.update_attributes(questionairre_id: @questionairre.id)
+
+      question.question_options.each do |option|
+        QuestionOption.create(question_id: @question.id, body: option.body)
+      end
     end
   end
 

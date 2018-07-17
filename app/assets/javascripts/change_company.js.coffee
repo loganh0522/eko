@@ -4,3 +4,5 @@ jQuery ->
     txtBody = $(this).data('body')
     element.editor.insertHTML(txtBody)
     $('.hidden-search-box').hide()
+
+  

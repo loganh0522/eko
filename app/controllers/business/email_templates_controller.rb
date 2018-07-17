@@ -7,17 +7,22 @@ class Business::EmailTemplatesController < ApplicationController
   
 
   def index 
-    if params[:subsidiary].present?
-      @subsidiary = Subsidiary.find(params[:subsidiary])
-      @email_templates = @subsidiary.subsidiary.email_templates
+    if params[:subsidiary_id].present?
+      @subsidiary = Company.find(params[:subsidiary_id])
+      @email_templates = @subsidiary.email_templates
     else
       @email_templates = current_company.email_templates
+    end
+
+    respond_to do |format|
+      format.js
+      format.html
     end
   end
 
   def new
     @email_template = EmailTemplate.new
-    @subsidiary = Subsidiary.find(params[:subsidiary]) if params[:subsidiary].present?
+    @subsidiary = Company.find(params[:subsidiary]) if params[:subsidiary].present?
 
     respond_to do |format| 
       format.js
@@ -26,7 +31,7 @@ class Business::EmailTemplatesController < ApplicationController
 
   def create 
     if params[:subsidiary].present?
-      @company = Subsidiary.find(params[:subsidiary]).subsidiary
+      @company = Company.find(params[:subsidiary])
       @email_template = EmailTemplate.new(e_temp_params.merge!(company: @company, 
         user: current_user)) 
     else

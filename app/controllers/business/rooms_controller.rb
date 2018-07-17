@@ -1,14 +1,29 @@
 class Business::RoomsController < ApplicationController
   layout "business"
-
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
   before_filter :company_deactivated?
   include AuthHelper
+  
+  def index
+    if params[:subsidiary_id].present?
+      @company = Company.find(params[:subsidiary_id])
+      @rooms = @company.rooms
+    else
+      @rooms = current_company.rooms
+    end
+
+    respond_to do |format| 
+      format.js
+      format.html
+    end
+  end
 
   def new
     @room = Room.new
+    @subsidiary = Company.find(params[:subsidiary]) if params[:subsidiary].present?
+
 
     respond_to do |format|
       format.js
@@ -16,15 +31,20 @@ class Business::RoomsController < ApplicationController
   end
 
   def create 
-    @room = Room.new(room_params)
+    if params[:subsidiary].present?
+      @company = Company.find(params[:subsidiary])
+      @room = Room.new(room_params.merge!(company: @company)) 
+    else
+      @room = Room.new(room_params.merge(company: current_company))
+    end
 
     respond_to do |format| 
       if @room.save
-        @rooms = current_company.rooms
+        format.js
       else
         render_errors(@room)
+        format.js
       end
-      format.js
     end
   end
 
@@ -75,7 +95,6 @@ class Business::RoomsController < ApplicationController
 
     OutlookWrapper::User.set_room_token(@outlookToken)
 
-    binding.pry
     if @outlookToken.room.present?
       flash[:success] = 'You have synced the Room'
       redirect_to business_company_path(current_company)

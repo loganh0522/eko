@@ -9,6 +9,7 @@ class Business::CompletedAssessmentsController < ApplicationController
     if !params[:job].present?
       @candidate = Candidate.find(params[:candidate_id])
       @application = @candidate.applications.first
+      
       if @application.present?
         @job = @application.job
         @scorecard = Scorecard.where(job_id: @job.id).first
