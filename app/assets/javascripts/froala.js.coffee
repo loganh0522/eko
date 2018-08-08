@@ -1,6 +1,7 @@
 jQuery -> 
 	$('#froala-editor').froalaEditor
     key: '1G4B2A6B5eF5C4B3D4E2C2B4D6D4A1xJCJWECHICe1JOZWJ=='
+    
     toolbarButtons: [
       'bold'
       'italic'
@@ -22,7 +23,7 @@ jQuery ->
     
   $(document).ajaxComplete ->
   	$('#froala-editor').froalaEditor
-      key: '1G4B2A6B5eF5C4B3D4E2C2B4D6D4A1xJCJWECHICe1JOZWJ=='
+      key: '1ZSZGUSXYSMZb1JGZ=='
       toolbarButtons: [
         'bold'
         'italic'
