@@ -17,10 +17,12 @@
       = f.label "E-mail Address *"
       = f.email_field :email, placeholder: "Email Address", hide_label: true, id: "email_Block", :required => true
       %span#email_msgBlock
+    
     .col-md-6
       = f.label "Phone Number *"
-      = f.email_field :phone, placeholder: "Email Address", hide_label: true, id: "email_Block", :required => true
-      %span#email_msgBlock
+      = f.text_field :phone, placeholder: "Phone Number", hide_label: true, id: "phone_Block", :required => true
+      %span#phone_msgBlock
+
   
   = f.fields_for :resumes, Resume.new do |q|
     = q.label "Resume *", class: "upload-resume-container"
@@ -44,6 +46,15 @@
                   = q.hidden_field  :job_id, value: @job.id
                   = q.radio_button :question_option_id, option.id
                   = option.body
+        - elsif question.kind == 'Multiselect'
+          %ul
+          - question.question_options.each do |option|
+            = f.fields_for :question_answers, QuestionAnswer.new do |q| 
+              %li
+                = q.hidden_field  :question_id, value: question.id
+                = q.hidden_field  :job_id, value: @job.id
+                = q.check_box :question_option_id, {}, option.id, nil
+                = option.body
         - else 
           = f.fields_for :question_answers, QuestionAnswer.new do |q|
             - if question.kind == 'Text (Short Answer)'
@@ -64,14 +75,7 @@
               = q.hidden_field  :question_id, value: question.id
               = q.hidden_field  :job_id, value: @job.id
               = q.file_field :file
-            - elsif question.kind == 'Multiselect'
-              %ul
-                - question.question_options.each do |option|
-                  %li
-                    = q.hidden_field  :question_id, value: question.id
-                    = q.hidden_field  :job_id, value: @job.id
-                    = q.check_box :question_option_id, {}, option.id, nil
-                    = option.body
+
   .apply
     = f.hidden_field :company_id, value: @job.company.id
     = f.hidden_field :manually_created, value: true

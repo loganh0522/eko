@@ -31,7 +31,7 @@ class Job < ActiveRecord::Base
   
   ########## Actions Taken After create ############ 
 
-  after_validation :set_token, :convert_location, :job_url
+  before_create :set_token, :convert_location, :job_url
   after_create :create_stages, :set_token, :create_job_feed
   
   searchkick word_start: [:title]

@@ -25,6 +25,10 @@ class PagesController < ApplicationController
 
   end
 
+  def association_portal
+    
+  end
+
   def demo
     @demo = Demo.new
   end

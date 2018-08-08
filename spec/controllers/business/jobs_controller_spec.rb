@@ -290,13 +290,14 @@ describe Business::JobsController do
 
     context "Searching all jobs" do
       before do  
-        sales = Fabricate(:job, title: "sales", company: company, user_ids: alice.id, status: "open", is_active: true)
+        @sales = Fabricate(:job, title: "sales", company: company, user_ids: alice.id, status: "open", is_active: true)
         engineering = Fabricate(:job, title: "engineering", company: company, user_ids: alice.id, status: "open", is_active: true)
+        Job.reindex
         xhr :post, :search, query: 'sal'
       end
 
-      it "save the updates made on the object" do 
-        assigns(:jobs).to eq([sales])
+      it "it only returns 1 result for the search" do 
+        assigns(:jobs).to eq([@sales])
       end
     end
   end

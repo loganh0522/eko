@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   get 'contact', to: "pages#contact"
   get 'demo', to: "pages#demo"
   get 'privacy', to: "pages#privacy"
+  get 'association_portal', to: "pages#association_portal"
+
   get 'features/plan-hiring-process', to: 'features#plan_hiring_process'
   get 'features/screen-applicants', to: 'features#screen_applicants'
   get 'features/source-applicants', to: 'features#source_applicants'

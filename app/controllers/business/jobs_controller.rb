@@ -1,5 +1,6 @@
 class Business::JobsController < ApplicationController
   layout "business"
+  include AmazonSignature
   before_filter :require_user
   before_filter :belongs_to_company
   before_filter :trial_over
@@ -7,6 +8,7 @@ class Business::JobsController < ApplicationController
   before_filter :owned_by_company, only: [:edit, :show, :update]
   load_and_authorize_resource only: [:new, :create, :edit, :update, :index, :show, :destroy]
   
+
   def index
     if current_company.subsidiaries.present?
       @jobs = current_company.active_subsidiary_jobs
@@ -21,13 +23,16 @@ class Business::JobsController < ApplicationController
 
   def new
     @job = Job.new
+
   end
 
   def create 
-    @job = Job.new(job_params.merge!(status: 'open', is_active: true))  
+    @job = Job.new(job_params.merge!(company: current_company, status: 'open', is_active: true))  
+    
 
     if @job.save 
       track_activity @job, 'create', current_company.id, nil, @job 
+
       redirect_to business_job_questions_path(@job)
     else
       render :new 
@@ -37,6 +42,18 @@ class Business::JobsController < ApplicationController
   def edit
     @job = Job.find(params[:id])
 
+    # aws_config = {
+    #   accessKey: ENV['AWS_ACCESS_KEY_ID'],
+    #   secretKey: ENV['AWS_SECRET_ACCESS_KEY'],
+    #   bucket: ENV['S3_BUCKET_NAME'],
+    #   region: ENV['AWS_REGION'],
+    #   acl:  'public-read',
+    #   key_start: 'uploads'
+    # }
+
+    # @aws_data = FroalaEditorSDK::S3.data_hash(aws_config)
+    # @hash = AmazonSignature::data_hash
+
     respond_to do |format|
       format.html
       format.js
@@ -45,7 +62,7 @@ class Business::JobsController < ApplicationController
 
   def update
     @job = Job.find(params[:id])
-
+    # @hash = AmazonSignature::data_hash
     
     if params[:status].present? 
       if params[:status] == "open" || params[:status] == "closed"
@@ -58,6 +75,7 @@ class Business::JobsController < ApplicationController
           @job.update(is_active: false)
         end
       end
+
       respond_to do |format|
         format.js
       end

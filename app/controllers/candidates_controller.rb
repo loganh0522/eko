@@ -90,8 +90,24 @@ class CandidatesController < ApplicationController
       @question = Question.create(question.attributes.except('id', 'job_id'))
       @question.update_attributes(questionairre_id: @questionairre.id)
 
-      question.question_options.each do |option|
-        QuestionOption.create(question_id: @question.id, body: option.body)
+      if question.question_options.present?
+        question.question_options.each do |option|
+          @option = QuestionOption.create(question_id: @question.id, body: option.body)
+
+          params[:candidate][:question_answers_attributes].each do |answer|
+
+            if answer[1][:question_id] == question.id.to_s && answer[1][:question_option_id] == option.id.to_s
+              Answer.create(question_id: @question.id, question_option_id: @option.id)
+            end
+          end
+
+        end
+      else
+        params[:candidate][:question_answers_attributes].each do |answer|
+          if answer[1][:question_id] == question.id.to_s 
+            Answer.create(question_id: @question.id, body: answer[1][:body])
+          end
+        end
       end
     end
   end

@@ -62,6 +62,7 @@ class JobSeeker::CandidatesController < JobSeekersController
 
       if question.question_options.present?
         question.question_options.each do |option|
+
           @option = QuestionOption.create(question_id: @question.id, body: option.body)
 
           params[:candidate][:question_answers_attributes].each do |answer|

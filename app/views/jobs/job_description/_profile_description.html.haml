@@ -22,7 +22,7 @@
       /   = link_to "https://www.twitter.com/intent/tweet" + @job.url, :target => :blank, :popup => true do
       /     %i.fa.fa-twitter-square.fa-stack-2x
   .job-body
-    = @job.description.html_safe
+    = simple_format(@job.description, {}, sanitize: false)
 
   = render "apply_method"
 

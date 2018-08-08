@@ -19,7 +19,9 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
 gem 'trix'
-gem "wysiwyg-rails"
+
+gem "wysiwyg-rails", '~> 2.6.0'
+gem 'froala-editor-sdk'
 
 
 gem 'googledocviewer'
@@ -51,7 +53,7 @@ gem 'jquery-atwho-rails'
 
 gem 'geocomplete_rails'
 
-gem 'mini_magick'
+gem 'mini_magick', '~> 4.5.0'
 gem 'rmagick', :require => 'RMagick'
 
 gem 'carrierwave'

@@ -41,7 +41,7 @@ closeAllSelect = (elmnt) ->
 createSelectMenu = (i, customSelects) ->
   while i < x.length
     selElmnt = x[i].getElementsByTagName('select')[0]
-    console.log(selElmnt)
+    
     ###for each element, create a new DIV that will act as the selected item:###
     
     if x[i].getElementsByClassName('select-items').length == 0

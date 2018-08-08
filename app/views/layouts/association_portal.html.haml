@@ -22,8 +22,9 @@
       .nav-container
         .navigation
           - if @job_board.company.logo.present?
-            = link_to root_path do
-              %img(src="#{@job_board.company.logo.file.large_logo}" class="sub_logo")
+            .brand
+              = link_to root_path do
+                %img(src="#{@job_board.company.logo.file.large_logo}" class="sub_logo")
           - else
             .brand
               = link_to root_path do
@@ -33,7 +34,6 @@
               %li= link_to "#{f.name}", root_path(anchor: "board_row_#{f.job_board_row.id}")
             
             %li= link_to "Companies", companies_path
-            
             %li.dropdown
               .dropdown-button 
                 Careers
@@ -42,11 +42,7 @@
                   .action Jobs at VentureLab
                 = link_to job_opportunities_path do
                   .action Community Jobs
-            
-          
-
-            
-        
+  
           - if current_user.present? 
             .dropdown
               .dropdown-button

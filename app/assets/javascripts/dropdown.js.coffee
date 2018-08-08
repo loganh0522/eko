@@ -30,3 +30,4 @@ jQuery ->
   $(document).click (e) -> 
     $('.hidden-search-box').hide()
     return
+

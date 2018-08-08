@@ -26,6 +26,7 @@
 //= require jquery.slick
 //= require trix
 //= require froala_editor.min.js
+//= require plugins/image.min.js
 //= require autocomplete-rails
 //= require Chart.bundle
 //= require local-time

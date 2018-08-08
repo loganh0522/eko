@@ -6,3 +6,6 @@ jQuery ->
     $('.hidden-search-box').hide()
 
   
+ 
+
+

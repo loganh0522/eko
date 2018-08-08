@@ -153,6 +153,7 @@ module ApplicationHelper
       question.answers.each do |answer| 
         @answers.push(answer.question_option_id)
       end
+
       content_tag(:ui, :class => "multi-answer") do 
         question.question_options.each do |option| 
           if @answers.include?(option.id)

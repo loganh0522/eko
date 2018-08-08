@@ -16,10 +16,9 @@ feature "creating a job posting" do
     expect(page).to have_content "Application Form"
   end
 
-  # scenario "posts a job with out errors" do
+  # scenario "posts a job with out ERRORS PRESENT" do
   #   sign_in_business
   #   page.should have_content @job.title
- 
   #   click_link('Post a Job')
   #   current_path == "business/jobs/new"
   #   click_button "Create Posting"
