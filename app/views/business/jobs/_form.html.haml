@@ -19,7 +19,7 @@
           %b.caret
         .dropdown-content
           - current_company.job_templates.each do |template|
-            .insert-job-template.action{data: {:title => template.title, :description => template.description}}= template.title
+            .insert-job-template.item{data: {:title => template.title, :description => template.description}}= template.title
 
   .form-row-no-border
     .contain-50
