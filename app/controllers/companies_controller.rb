@@ -20,6 +20,7 @@ class CompaniesController < ApplicationController
       session[:company_id] = @company.id
       redirect_to business_root_path
     else
+      binding.pry
       render :new
     end
   end

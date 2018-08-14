@@ -1,109 +1,110 @@
-/ .business-registration
-/   = form_for @company, url: '/company-signup' do |f|
-/     .standard-header
-/       %img.logo(src="/tmp/logo.jpg")
-/       %h2 Sign Up Today
-/     .body
-/       = f.fields_for :users, @user do |q|
-/         .form-row-no-border
-/           = q.label :first_name, "First Name"
-/           .field
-/             = q.text_field :first_name, placeholder: "First Name", hide_label: true
-/             = show_errors(@company, :"users.first_name")
-/         .form-row-no-border
-/           = q.label :last_name, "Last Name"
-/           .field
-/             = q.text_field :last_name, placeholder: "Last Name", hide_label: true
-/             = show_errors(@company, :"users.last_name") 
-/         .form-row-no-border
-/           = q.label :email, "E-mail"
-/           .field
-/             = q.email_field :email, placeholder: "Email Address", hide_label: true
-/             = show_errors(@company, :"users.email") 
-/         .form-row-no-border
-/           = q.label :password, "Password"
-/           .field
-/             = q.password_field :password, placeholder: "Password", hide_label: true
-/             = show_errors(@company, :"users.password") 
-/       .form-row-no-border
-/         = f.label :name, "Company Name"
-/         .field
-/           = f.text_field :name, label: false, placeholder: "Company Name"
-/           = show_errors(@company, :name) 
-/       .form-row-no-border
-/         = f.label :location, "City (Head Office)"
-/         .field
-/           = f.text_field :location, id: "geocomplete", autocomplete: "off", hide_label: true
-/           = show_errors(@company, :location)
-/       .form-row-no-border 
-/         = f.label :website, "Company Website"
-/         .field
-/           = f.text_field :website, label: false, placeholder: "Website"
-/           = show_errors(@company, :website) 
-/       .form-row-no-border
-/         = f.label :size, "Company Size"
-/         .field
-/           = f.select :size, options_for_select(["1-20", "20-50", "51-200", "201-500", "501-1000", "1001-5000", "5001- 10,000", "10,000+"]), :prompt => "Choose Company Size" 
-/           = show_errors(@company, :size)   
-/     .container-footer
-/       .have-account
-/         Already have an account? 
-/         %br
-/         = link_to "Sign In", login_path, remote: true
-/       = f.submit "Sign Up", class: "btn submit-button"
-
 .business-registration
-  = form_for @user do |f|
+  = form_for @company, url: '/company-signup' do |f|
     .standard-header
       %img.logo(src="/tmp/logo.jpg")
       %h2 Sign Up Today
     .body
-      .form-row-no-border
-        = f.label :first_name, "First Name"
-        .field
-          = f.text_field :first_name, placeholder: "First Name", hide_label: true
-          = show_errors(@company, :"users.first_name")
-      .form-row-no-border
-        = f.label :last_name, "Last Name"
-        .field
-          = f.text_field :last_name, placeholder: "Last Name", hide_label: true
-          = show_errors(@company, :"users.last_name") 
-      .form-row-no-border
-        = f.label :email, "E-mail"
-        .field
-          = f.email_field :email, placeholder: "Email Address", hide_label: true
-          = show_errors(@company, :"users.email") 
-      .form-row-no-border
-        = f.label :password, "Password"
-        .field
-          = f.password_field :password, placeholder: "Password", hide_label: true
-          = show_errors(@company, :"users.password") 
-    
-      = f.fields_for :company_users, @user.build.company_users do |q|
-        = q.fields_for :company, @user.build.company_users.build.company do |c|
+      = f.fields_for :company_users, @company.company_users.build do |u|
+        = u.fields_for :user, @company.company_users.build.build_user do |q|
           .form-row-no-border
-            = c.label :name, "Company Name"
+            = q.label :first_name, "First Name"
             .field
-              = c.text_field :name, label: false, placeholder: "Company Name"
-              = show_errors(@company, :name) 
+              = q.text_field :first_name, placeholder: "First Name", hide_label: true
+              = show_errors(@company, :"users.first_name")
           .form-row-no-border
-            = c.label :location, "City (Head Office)"
+            = q.label :last_name, "Last Name"
             .field
-              = c.text_field :location, id: "geocomplete", autocomplete: "off", hide_label: true
-              = show_errors(@company, :location)
-          .form-row-no-border 
-            = c.label :website, "Company Website"
-            .field
-              = c.text_field :website, label: false, placeholder: "Website"
-              = show_errors(@company, :website) 
+              = q.text_field :last_name, placeholder: "Last Name", hide_label: true
+              = show_errors(@company, :"users.last_name") 
           .form-row-no-border
-            = c.label :size, "Company Size"
+            = q.label :email, "E-mail"
             .field
-              = c.select :size, options_for_select(["1-20", "20-50", "51-200", "201-500", "501-1000", "1001-5000", "5001- 10,000", "10,000+"]), :prompt => "Choose Company Size" 
-              = show_errors(@company, :size)   
+              = q.email_field :email, placeholder: "Email Address", hide_label: true
+              = show_errors(@company, :"users.email") 
+          .form-row-no-border
+            = q.label :password, "Password"
+            .field
+              = q.password_field :password, placeholder: "Password", hide_label: true
+              = show_errors(@company, :"users.password") 
+      .form-row-no-border
+        = f.label :name, "Company Name"
+        .field
+          = f.text_field :name, label: false, placeholder: "Company Name"
+          = show_errors(@company, :name) 
+      .form-row-no-border
+        = f.label :location, "City (Head Office)"
+        .field
+          = f.text_field :location, id: "geocomplete", autocomplete: "off", hide_label: true
+          = show_errors(@company, :location)
+      .form-row-no-border 
+        = f.label :website, "Company Website"
+        .field
+          = f.text_field :website, label: false, placeholder: "Website"
+          = show_errors(@company, :website) 
+      .form-row-no-border
+        = f.label :size, "Company Size"
+        .field
+          = f.select :size, options_for_select(["1-20", "20-50", "51-200", "201-500", "501-1000", "1001-5000", "5001- 10,000", "10,000+"]), :prompt => "Choose Company Size" 
+          = show_errors(@company, :size)   
     .container-footer
       .have-account
         Already have an account? 
         %br
         = link_to "Sign In", login_path, remote: true
       = f.submit "Sign Up", class: "btn submit-button"
+
+/ .business-registration
+/   = form_for @user do |f|
+/     .standard-header
+/       %img.logo(src="/tmp/logo.jpg")
+/       %h2 Sign Up Today
+/     .body
+/       .form-row-no-border
+/         = f.label :first_name, "First Name"
+/         .field
+/           = f.text_field :first_name, placeholder: "First Name", hide_label: true
+/           = show_errors(@company, :"users.first_name")
+/       .form-row-no-border
+/         = f.label :last_name, "Last Name"
+/         .field
+/           = f.text_field :last_name, placeholder: "Last Name", hide_label: true
+/           = show_errors(@company, :"users.last_name") 
+/       .form-row-no-border
+/         = f.label :email, "E-mail"
+/         .field
+/           = f.email_field :email, placeholder: "Email Address", hide_label: true
+/           = show_errors(@company, :"users.email") 
+/       .form-row-no-border
+/         = f.label :password, "Password"
+/         .field
+/           = f.password_field :password, placeholder: "Password", hide_label: true
+/           = show_errors(@company, :"users.password") 
+
+/       = f.fields_for :company_users, @user.company_users.build do |q|
+/         = q.fields_for :company, @user.company_users.build.build_company do |c|
+/           .form-row-no-border
+/             = c.label :name, "Company Name"
+/             .field
+/               = c.text_field :name, label: false, placeholder: "Company Name"
+/               = show_errors(@company, :name) 
+/           .form-row-no-border
+/             = c.label :location, "City (Head Office)"
+/             .field
+/               = c.text_field :location, id: "geocomplete", autocomplete: "off", hide_label: true
+/               = show_errors(@company, :location)
+/           .form-row-no-border 
+/             = c.label :website, "Company Website"
+/             .field
+/               = c.text_field :website, label: false, placeholder: "Website"
+/               = show_errors(@company, :website) 
+/           .form-row-no-border
+/             = c.label :size, "Company Size"
+/             .field
+/               = c.select :size, options_for_select(["1-20", "20-50", "51-200", "201-500", "501-1000", "1001-5000", "5001- 10,000", "10,000+"]), :prompt => "Choose Company Size" 
+/               = show_errors(@company, :size)   
+/     .container-footer
+/       .have-account
+/         Already have an account? 
+/         %br
+/         = link_to "Sign In", login_path, remote: true
+/       = f.submit "Sign Up", class: "btn submit-button"

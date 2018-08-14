@@ -4,6 +4,7 @@ class CompanyUser < ActiveRecord::Base
 
   validates_presence_of :user_id, :company_id
 
+  validates
   # validates :user_id, 
   #   :uniqueness => {:scope => [:assignable_id, :assignable_type]}
 end
