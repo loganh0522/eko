@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   liquid_methods :first_name, :last_name, :full_name
   
   # belongs_to :company
-  has_many :company_users
+  has_many :company_users, :dependent => :destroy
   has_many :companies, through: :company_users
 
   has_many :hiring_teams

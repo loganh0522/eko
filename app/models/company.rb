@@ -1,8 +1,9 @@
 class Company < ActiveRecord::Base
   before_create :generate_token
   
-  has_many :company_users
+  has_many :company_users, :dependent => :destroy, :inverse_of => :user
   has_many :users, through: :company_users
+
   # has_many :users
   has_many :orders, -> {order("created_at DESC")}
 

@@ -87,7 +87,8 @@ class UsersController < ApplicationController
   private 
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :role, :password, :password_confirmation, :kind, :phone, :location)
+    params.require(:user).permit(:first_name, :last_name, :email, :role, :password, :password_confirmation, :kind, :phone, :location,
+      )
   end
 
   def handle_invitation
