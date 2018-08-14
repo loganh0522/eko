@@ -91,6 +91,13 @@ class UsersController < ApplicationController
       )
   end
 
+
+  def sign_up_params
+    params.require(:user).permit(:first_name, :last_name, 
+      :email, :password, :password_confirmation, :phone,
+      company_users_attributes: [ company_attributes: [ :id, :name, :location, :website, :size]])
+  end
+
   def handle_invitation
     @invitation = Invitation.where(token: params[:invitation_token]).first
     
