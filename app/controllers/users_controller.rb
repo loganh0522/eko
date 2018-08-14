@@ -18,6 +18,7 @@ class UsersController < ApplicationController
         session[:user_id] = @user.id 
         redirect_to new_company_path
       end
+      
     else
       respond_to do |format| 
         format.js {render_errors(@user)}

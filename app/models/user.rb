@@ -10,9 +10,9 @@ class User < ActiveRecord::Base
   after_create :create_email_signature, if: :business_user
   liquid_methods :first_name, :last_name, :full_name
   
-  belongs_to :company
-  # has_many :company_users
-  # has_many :companies, through: :company_users
+  # belongs_to :company
+  has_many :company_users
+  has_many :companies, through: :company_users
 
   has_many :hiring_teams
   has_many :jobs, through: :hiring_teams 

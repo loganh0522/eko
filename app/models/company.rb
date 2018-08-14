@@ -1,9 +1,9 @@
 class Company < ActiveRecord::Base
   before_create :generate_token
   
-  # has_many :company_users
-  # has_many :users, through: :company_users
-  has_many :users
+  has_many :company_users
+  has_many :users, through: :company_users
+  # has_many :users
   has_many :orders, -> {order("created_at DESC")}
 
   has_many :invitations, :dependent => :destroy
@@ -48,8 +48,8 @@ class Company < ActiveRecord::Base
 
   
 
-  accepts_nested_attributes_for :users, 
-    allow_destroy: true
+  # accepts_nested_attributes_for :users, 
+  #   allow_destroy: true
 
 
   liquid_methods :name
