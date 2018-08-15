@@ -62,6 +62,7 @@ Rails.application.routes.draw do
 
   get 'login', to: "sessions#new"
   get '/job_seeker_signup', to: 'users#new_job_seeker'
+  get '/company/sign_up', to: 'users#new_company'
   post '/job_seeker_signup', to: "users#create_job_seeker"
   
 
@@ -146,6 +147,7 @@ Rails.application.routes.draw do
     
     get 'interview_kit/:id', to: "completed_assessments#interview_kit", as: 'interview_kit'
     
+    get 'change_company/:id', to: "companies#change_current_company", as: 'change_company'
     resources :completed_assessments 
 
 

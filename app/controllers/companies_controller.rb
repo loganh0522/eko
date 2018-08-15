@@ -3,8 +3,7 @@ class CompaniesController < ApplicationController
   before_filter :get_subdomain_company, only: [:index, :show]
 
   def new 
-    @company = Company.new
-    @user = @company.users.build
+    @user = User.new
   end
 
   def create 
@@ -20,7 +19,7 @@ class CompaniesController < ApplicationController
       session[:company_id] = @company.id
       redirect_to business_root_path
     else
-      binding.pry
+
       render :new
     end
   end

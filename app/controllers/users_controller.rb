@@ -8,22 +8,48 @@ class UsersController < ApplicationController
     end
   end
 
-  def create
+  def new_company
+    @user = User.new
+  end
+
+  # def create
+  #   @user = User.new(user_params)     
+    
+  #   if @user.save 
+  #     if params[:invitation_token].present?
+  #       handle_invitation
+  #     else
+  #       session[:user_id] = @user.id 
+  #       redirect_to new_company_path
+  #     end
+  #   else
+  #     respond_to do |format| 
+  #       format.js {render_errors(@user)}
+  #       format.html {render :new}
+  #     end
+  #   end
+  # end
+
+  def create 
     @user = User.new(user_params)     
     
     if @user.save 
       if params[:invitation_token].present?
         handle_invitation
       else
-        session[:user_id] = @user.id 
-        redirect_to new_company_path
-      end
+        @company = @user.companies.first
+        @user.update_attributes(role: "Admin", kind: "business")
+        @company.update_attribute(:subscription, 'trial')
       
-    else
-      respond_to do |format| 
-        format.js {render_errors(@user)}
-        format.html {render :new}
+        EmailSignature.create(user_id: @user.id, signature: "#{@user.first_name} #{@user.last_name}") 
+        
+        session[:user_id] = @user.id
+        session[:company_id] = @company.id
+        redirect_to business_root_path
       end
+    else
+      binding.pry
+      render :new_company
     end
   end
 

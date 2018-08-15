@@ -68,7 +68,8 @@ class User < ActiveRecord::Base
   validates_associated :work_experiences
   validates_associated :educations
   validates_associated :user_certifications
-  
+  validates_associated :company_users
+
   accepts_nested_attributes_for :work_experiences, 
     allow_destroy: true
     # reject_if: :experience_validation
@@ -82,6 +83,9 @@ class User < ActiveRecord::Base
     # reject_if: proc { |a| a[:body].blank? }
 
   accepts_nested_attributes_for :social_links, 
+    allow_destroy: true
+
+  accepts_nested_attributes_for :company_users, 
     allow_destroy: true
 
   def business_user

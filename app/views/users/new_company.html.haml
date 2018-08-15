@@ -8,22 +8,22 @@
         = f.label :first_name, "First Name"
         .field
           = f.text_field :first_name, placeholder: "First Name", hide_label: true
-          = show_errors(@user, :"users.first_name")
+          = show_errors(@user, :"first_name")
       .form-row-no-border
         = f.label :last_name, "Last Name"
         .field
           = f.text_field :last_name, placeholder: "Last Name", hide_label: true
-          = show_errors(@user, :"users.last_name") 
+          = show_errors(@user, :"last_name") 
       .form-row-no-border
         = f.label :email, "E-mail"
         .field
           = f.email_field :email, placeholder: "Email Address", hide_label: true
-          = show_errors(@user, :"users.email") 
+          = show_errors(@user, :"email") 
       .form-row-no-border
         = f.label :password, "Password"
         .field
           = f.password_field :password, placeholder: "Password", hide_label: true
-          = show_errors(@user, :"users.password") 
+          = show_errors(@user, :"password") 
 
       = f.fields_for :company_users, @user.company_users.build do |q|
         = q.fields_for :company, @user.company_users.build.build_company do |c|

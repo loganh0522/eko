@@ -1,4 +1,6 @@
 class Company < ActiveRecord::Base
+  validates_presence_of :name, :website, :size, :location
+  
   before_create :generate_token
   
   has_many :company_users, :dependent => :destroy, :inverse_of => :user
@@ -34,7 +36,7 @@ class Company < ActiveRecord::Base
   has_many :permissions, :dependent => :destroy
   has_one :background_image, :dependent => :destroy
   has_one :logo, :dependent => :destroy
-  validates_presence_of :name, :website, :size, :location
+  
   has_many :interview_kit_templates
   has_many :assessment_templates
   has_many :scorecard_templates
