@@ -55,6 +55,12 @@ class Business::CompaniesController < ApplicationController
     @login_url = get_room_login_url
   end
 
+  def change_current_company
+    session[:company_id] = nil
+    session[:company_id] = params[:id]
+    redirect_to root_path
+  end
+
   private 
 
   def company_params
