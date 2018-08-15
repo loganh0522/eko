@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180706162041) do
+ActiveRecord::Schema.define(version: 20180815184053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1347,7 +1347,6 @@ ActiveRecord::Schema.define(version: 20180706162041) do
     t.string   "email"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "password_digest"
     t.integer  "company_id"
     t.string   "kind"
     t.string   "role"
@@ -1382,6 +1381,7 @@ ActiveRecord::Schema.define(version: 20180706162041) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.integer  "permission_id"
+    t.string   "password_digest"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

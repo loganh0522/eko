@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_secure_password 
+  
   validates_presence_of :first_name, :last_name, :email, :password, :on => [ :create ]
   validates_presence_of :first_name, :last_name, :email, :on => [ :update ]
   validates_uniqueness_of :email, :on => [ :create, :update ]
@@ -43,7 +45,7 @@ class User < ActiveRecord::Base
   has_many :email_templates
   has_one :google_token
   has_one :outlook_token
-  has_secure_password 
+  
 
   # Job Seeker User relationships 
   

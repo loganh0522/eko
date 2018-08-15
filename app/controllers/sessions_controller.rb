@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:password]) 
       if @user.kind == 'business'
         session[:user_id] = @user.id
-        session[:company_id] = @user.company.id
+        session[:company_id] = @user.companies.first.id
         redirect_to business_root_path
       elsif @user.kind == 'job seeker'    
         session[:user_id] = @user.id

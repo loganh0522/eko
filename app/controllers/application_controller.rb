@@ -96,19 +96,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def belongs_to_company
-    if current_user.company != current_company 
-      flash[:error] = "Sorry, you do not have permission to access that!"
-      redirect_to business_root_path
-    end
-  end
-
   # def belongs_to_company
-  #   if !current_user.companies.include?(current_company)
+  #   if current_user.company != current_company 
   #     flash[:error] = "Sorry, you do not have permission to access that!"
   #     redirect_to business_root_path
   #   end
   # end
+
+  def belongs_to_company
+    if !current_user.companies.include?(current_company)
+      flash[:error] = "Sorry, you do not have permission to access that!"
+      redirect_to business_root_path
+    end
+  end
 
   def resume_application_denied
     @job_board = JobBoard.find_by_subdomain!(request.subdomain)
