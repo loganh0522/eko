@@ -47,4 +47,4 @@
       = link_to "Sign Out", signout_path
 
       - current_user.companies.each do |company| 
-        = link_to "My Profile", business_user_path(current_user)
+        = link_to "#{company.name}", business_change_company_path(company.id)
