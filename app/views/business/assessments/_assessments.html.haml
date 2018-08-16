@@ -14,10 +14,11 @@
   .dropdown-button
     .btn.hover-button + Scorecard
   .dropdown-content#myDropdown
-    = link_to new_business_application_assessment_path(@application), remote: true  do
+    = link_to business_application_new_assessment_path(@application), remote: true do
       .action Scorecard
-    = link_to new_business_application_assessment_path(@application, kind: 'kit'), id: 'client-action', remote: true do  
+    = link_to business_application_new_assessment_path(@application, kind: 'kit'), remote: true do
       .action Interview Kit
+
 
 - if @assessments.present? 
   - @assessments.each do |assessment| 
@@ -27,4 +28,4 @@
   .assessment
     .not-present-container
       %p No Scorecards have been added for the Candidate
-      .add-object= link_to "+ Assessment", new_business_assessment_path, class: 'btn hover-button', remote: true
+      .add-object= link_to "+ Assessment", new_business_assessment_path, class: 'btn hover-button', remote: truer-button', remote: true
