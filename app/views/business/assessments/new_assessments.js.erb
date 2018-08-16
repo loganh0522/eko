@@ -1,0 +1,13 @@
+$('.smallModal').find('form').remove();
+$('.smallModal').find('.modal-body').remove();
+$('.smallModal').find('.modal-footer').remove();
+
+<% if params[:kind] == "kit" %>
+  $('.smallModal').find('.new-title').html('<%= j "Create Interview Kit" %>');
+  $('.smallModal').find('.new-modal-header').after('<%= j render "business/assessments/new_interview" %>');
+<% else %>
+  $('.smallModal').find('.new-title').html('<%= j "Create Assessment" %>');
+  $('.smallModal').find('.new-modal-header').after('<%= j render "business/assessments/new_scorecard" %>');
+<% end %>
+
+$('.smallModal').show();
