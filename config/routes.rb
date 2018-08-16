@@ -294,6 +294,9 @@ Rails.application.routes.draw do
 
       get :application_form, to: "candidates#application_form"
       # get :application_activity, to: "activities#application_activity"
+      get :new_assessment, to: "assessments#new_assessment"
+      post :create_from_template, to: "assessments#create_from_template"
+
       
       resources :application_scorecards
       resources :assessments
@@ -317,6 +320,9 @@ Rails.application.routes.draw do
         get :evaluations, to: "applications#application_form"
         get :scorecards, to: "applications#scorecards"
       end
+      get :new_assessment, to: "assessments#new_assessment"
+      post :create_from_template, to: "assessments#create_from_template"
+
       
       resources :questionairres
       resources :assessments
