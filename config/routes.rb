@@ -320,6 +320,8 @@ Rails.application.routes.draw do
         get :evaluations, to: "applications#application_form"
         get :scorecards, to: "applications#scorecards"
       end
+
+      
       get :new_assessment, to: "assessments#new_assessment"
       post :create_from_template, to: "assessments#create_from_template"
 
