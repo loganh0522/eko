@@ -15,10 +15,27 @@ class Business::AssessmentsController < ApplicationController
     end 
   end
 
+  def new_assessment
+    @application = Application.find(params[:application_id]) if params[:application_id].present?
+    
+    @candidate = Candidate.find(params[:candidate_id]) if params[:candidate_id].present?
+
+    if params[:kind].present? 
+      @templates = current_company.interview_kit_templates
+    else 
+      @templates = current_company.scorecard_templates
+    end
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def new
     @assessment = Assessment.new
     @scorecard = Scorecard.new
     @users = current_company.users
+    
     if params[:application_id].present?
       @application = Application.find(params[:application_id]) 
       @candidate = @application.candidate
@@ -26,6 +43,21 @@ class Business::AssessmentsController < ApplicationController
       @candidate = Candidate.find(params[:candidate_id]) 
     end
 
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_from_template
+    # @user_ids = params[:assessment][:user_ids].split(',') if params[:assessment][:user_ids].present?
+
+    if params[:kind] == "kit"
+      @template = InterviewKitTemplate.find(params[:template])
+      create_interview_kit(@template)
+    else 
+      @template = ScorecardTemplate.find(params[:template])
+      create_scorecard(@template)
+    end
     respond_to do |format|
       format.js
     end
@@ -93,5 +125,53 @@ class Business::AssessmentsController < ApplicationController
     default_stage.errors.messages.each do |error| 
       @errors.append([error[0].to_s, error[1][0]])
     end 
+  end
+
+  def create_interview_kit(template)
+    if params[:application_id].present?
+      @application = Application.find(params[:application_id]) if params[:application_id].present?
+      @kit = Assessment.create(application_id: params[:application_id], 
+        candidate: @application.candidate, name: template.title, preperation: template.preperation, kind: "interview") 
+    elsif params[:candidate_id].present?
+      @candidate = Candidate.find(params[:candidate_id]) if params[:candidate_id].present?
+      @kit = Assessment.create(candidate: @candidate, 
+        name: template.title, preperation: template.preperation, kind: "interview")
+    end
+
+    template.questions.each do |question| 
+      @question = Question.create(question.attributes.except('id', 'interview_kit_template_id'))
+      @question.update_attributes(assessment_id: @kit.id)
+
+      question.question_options.each do |option|
+        QuestionOption.create(question_id: @question.id, body: option.body)
+      end
+    end
+
+    @scorecard = Scorecard.create(assessment: @kit)
+
+    if template.scorecard.present?  
+      template.scorecard.section_options.each do |option| 
+        SectionOption.create(scorecard_id: @scorecard.id, body: option.body)
+      end
+    end
+  end
+
+  def create_scorecard(template)
+    if params[:application_id].present?
+      @application = Application.find(params[:application_id])
+      @kit = Assessment.create(application_id: params[:application_id], 
+        candidate: @application.candidate, name: template.name, kind: "scorecard") 
+
+    elsif params[:candidate_id].present?
+      @candidate = Candidate.find(params[:candidate_id]) if params[:candidate_id].present?
+
+      @kit = Assessment.create(candidate: @candidate, name: template.name, kind: "interview") 
+    end
+
+    @scorecard = Scorecard.create(assessment: @kit)
+
+    template.section_options.each do |option| 
+      SectionOption.create(scorecard_id: @scorecard.id, body: option.body)
+    end
   end
 end
