@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   # end
 
   def create 
-    @user = User.new(user_params)     
+    @user = User.new(sign_up_params)     
     
     if @user.save 
       if params[:invitation_token].present?
@@ -48,7 +48,6 @@ class UsersController < ApplicationController
         redirect_to business_root_path
       end
     else
-      binding.pry
       render :new_company
     end
   end

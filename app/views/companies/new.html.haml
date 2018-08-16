@@ -28,7 +28,7 @@
       = f.fields_for :company_users, @user.company_users.build do |q|
         = q.fields_for :company, @user.company_users.build.build_company do |c|
           .form-row-no-border
-            = c.label :name, "Company Name"
+            = c.label :name, "Company Name", name: "company_users.company.name"
             .field
               = c.text_field :name, label: false, placeholder: "Company Name"
               = show_errors(@user, :name) 

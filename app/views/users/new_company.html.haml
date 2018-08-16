@@ -8,22 +8,22 @@
         = f.label :first_name, "First Name"
         .field
           = f.text_field :first_name, placeholder: "First Name", hide_label: true
-          = show_errors(@user, :"first_name")
+          = show_errors(@user, :first_name)
       .form-row-no-border
         = f.label :last_name, "Last Name"
         .field
           = f.text_field :last_name, placeholder: "Last Name", hide_label: true
-          = show_errors(@user, :"last_name") 
+          = show_errors(@user, :last_name) 
       .form-row-no-border
         = f.label :email, "E-mail"
         .field
           = f.email_field :email, placeholder: "Email Address", hide_label: true
-          = show_errors(@user, :"email") 
+          = show_errors(@user, :email) 
       .form-row-no-border
         = f.label :password, "Password"
         .field
           = f.password_field :password, placeholder: "Password", hide_label: true
-          = show_errors(@user, :"password") 
+          = show_errors(@user, :password) 
 
       = f.fields_for :company_users, @user.company_users.build do |q|
         = q.fields_for :company, @user.company_users.build.build_company do |c|
@@ -31,22 +31,22 @@
             = c.label :name, "Company Name"
             .field
               = c.text_field :name, label: false, placeholder: "Company Name"
-              = show_errors(@user, :name) 
+              = show_errors(@user, :"company_users.company.name") 
           .form-row-no-border
             = c.label :location, "City (Head Office)"
             .field
               = c.text_field :location, id: "geocomplete", autocomplete: "off", hide_label: true
-              = show_errors(@user, :location)
+              = show_errors(@user, :"company_users.company.location")
           .form-row-no-border 
             = c.label :website, "Company Website"
             .field
               = c.text_field :website, label: false, placeholder: "Website"
-              = show_errors(@user, :website) 
+              = show_errors(@user, :"company_users.company.website") 
           .form-row-no-border
             = c.label :size, "Company Size"
             .field
               = c.select :size, options_for_select(["1-20", "20-50", "51-200", "201-500", "501-1000", "1001-5000", "5001- 10,000", "10,000+"]), :prompt => "Choose Company Size" 
-              = show_errors(@user, :size)   
+              = show_errors(@user, :"company_users.company.size")   
     .container-footer
       .have-account
         Already have an account? 

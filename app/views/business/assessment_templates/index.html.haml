@@ -1,6 +1,5 @@
 .page-header
-  .custom-select#subsidiary-admin-select
-    = select_tag :subsidiary, options_for_select([[current_company.name, current_company.id]]) + options_for_select(current_company.subsidiaries.collect{ |u| [u.subsidiary.name, u.subsidiary.id]}), include_blank: "#{current_company.name}" 
+  %h2 Admin
   .admin-nav
     %ul
       %li= link_to "Career Portal", business_job_board_path(current_company.job_board.id)
