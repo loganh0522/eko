@@ -1,14 +1,16 @@
 .modal-body
-  - if @application.present?
-    = link_to "Create from Scratch", new_business_application_assessment_path(@application, kind: "kit"), remote: true, class: "btn border-button"
-    - @templates.each do |template| 
-      = link_to "#{template.title}", business_application_create_from_template_path(template: template.id, kind: "kit"), class: "template-container", remote: true, method: :post
+  .use-template
+    - if @application.present?
+      = link_to "Create from Scratch", new_business_application_assessment_path(@application, kind: "kit"), remote: true, class: "btn border-button"
+      = label_tag "Use a Template"
+      - @templates.each do |template| 
+        = link_to "#{template.title}", business_application_create_from_template_path(template: template.id, kind: "kit"), class: "template-container", remote: true, method: :post
 
-  - else 
-    = link_to "Create from Scratch", new_business_candidate_assessment_path(@candidate, kind: "kit"), remote: true, class: "btn border-button"
-    
-    - @templates.each do |template| 
-      = link_to "#{template.title}", business_candidate_create_from_template_path(template: template.id, kind: "kit"), class: "template-container", remote: true, method: :post
+    - else 
+      = link_to "Create from Scratch", new_business_candidate_assessment_path(@candidate, kind: "kit"), remote: true, class: "btn border-button"
+      = label_tag "Use a Template"
+      - @templates.each do |template| 
+        = link_to "#{template.title}", business_candidate_create_from_template_path(template: template.id, kind: "kit"), class: "template-container", remote: true, method: :post
 
 .modal-footer
   .btn.border-button.close-modal Cancel

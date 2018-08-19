@@ -186,10 +186,9 @@ class Business::ApplicationsController < ApplicationController
     @job = @stage.job
     @rejection_reasons = current_company.rejection_reasons
     
-
     if params[:applicant_ids].present?
       move_multiple_stages
-      @candidates = Candidate.search("*", where: {jobs: @job.id, application_stage: @stage.id }).records.paginate(page: params[:page], per_page: 10).accessible_by(current_ability)
+      @candidates = Candidate.accessible_by(current_ability).search("*", where: {jobs: @job.id, application_stage: @stage.id }, page: params[:page], per_page: 10)
     else
       move_stage_single
       @tasks = @candidate.open_job_tasks(@job).accessible_by(current_ability)
